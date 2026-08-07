@@ -11,14 +11,13 @@ assign_sections(column_section="C50x50", beam_section="V30x50")
 ## Captura
 | Archivo | Vista | Estado |
 |---|---|---|
-| `01-material-h28.jpg` | Define > Materials > H28, propiedades | **PENDIENTE** |
-| `02-secciones.jpg` | Define > Section Properties > Frame Sections | **PENDIENTE** |
-| `03-modelo-extruido.jpg` | Vista 3D con Extrude View activo (se ven las secciones reales) | **PENDIENTE** |
-| `04-seccion-columna.jpg` | Clic en una columna, ventana de propiedades mostrando C50x50 | **PENDIENTE** |
-| `05-seccion-viga.jpg` | Clic en una viga, mostrando V30x50 | **PENDIENTE** |
+| `01-material-h28.jpg` | Define > Materials > H28, propiedades | **hecha** — `R03-materiales-secciones/01-material-h28.jpg` |
+| `02-secciones.jpg` | Define > Section Properties > Frame Sections | **hecha** — `R03-materiales-secciones/02-secciones.jpg` |
+| `03-modelo-extruido.jpg` | Vista 3D con Extrude View activo (se ven las secciones reales) | **hecha** — `R03-materiales-secciones/03-modelo-extruido.jpg` |
+| `04-seccion-columna.jpg` | Clic en una columna, ventana de propiedades mostrando C50x50 | **hecha** — `R03-materiales-secciones/04-seccion-columna.jpg` |
+| `05-seccion-viga.jpg` | Clic en una viga, mostrando V30x50 | **hecha** — `R03-materiales-secciones/05-seccion-viga.jpg` |
 
-Las cinco capturas quedan pendientes para una sesión con control de escritorio
-aprobado. Ninguna se ha tomado.
+Las cinco capturas se tomaron en la sesión de captura del 2026-08-08.
 
 ## Criterio de aceptación
 - E ≈ 24.87e6 kN/m² (4700·√28 MPa convertido). **Verifica la corrección de unidades.**

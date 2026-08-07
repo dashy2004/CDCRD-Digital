@@ -27,9 +27,14 @@ servidor-mcp/                 servidor MCP para ETABS (COM/OAPI), corregido y ve
 instalacion/INSTALACION.md    guia de instalacion battle-tested (cada aviso = un fallo real)
 ```
 
-El servidor MCP conecta Claude (u otro cliente MCP) con ETABS en vivo: lee y crea geometria
-hoy; materiales, cargas y analisis son la extension prevista. La capa machine de este repo es
-su complemento: los parametros del CDCRD listos para alimentar el modelo.
+El servidor MCP conecta Claude (u otro cliente MCP) con ETABS en vivo. **54 herramientas**
+que cubren geometria, materiales, secciones, apoyos, diafragmas, cargas, espectro sismico,
+combinaciones, ejecucion del analisis y lectura de resultados (derivas, reacciones, modales),
+mas introspeccion del typelib (`describe_oapi`) y acceso generico a tablas. La capa machine de
+este repo es su complemento: los parametros del CDCRD listos para alimentar el modelo.
+
+Probado de punta a punta contra ETABS 23.3.0 / OAPI 2.016 en `revision/` — 10 bloques con
+criterio de aceptacion previo y capturas de pantalla. Limitaciones conocidas en el README.
 
 ## Capa machine disponible
 

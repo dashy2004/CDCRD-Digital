@@ -26,10 +26,15 @@ namespace, registrar la firma real en el README del bloque, y continuar.
 
 ## Bloques
 
+> **Capturas: cerradas el 2026-08-08.** 33 de 34 tomadas en una sesión de solo-captura con
+> control de escritorio. La única pendiente es `R08/02-ventana-analisis.jpg`, que exige volver
+> a correr el análisis. Detalle y hallazgos en `RESUMEN-CAPTURAS-2026-08-08.md`. La columna
+> "faltan capturas" de la tabla de abajo ya no aplica a ningún bloque.
+
 | Carpeta | Contenido | Estado |
 |---|---|---|
-| R01-conexion-unidades | Conexión OAPI, versión, unidades | Hecho (falta captura de UI) |
-| R02-geometria-niveles | Puntos, frames, áreas, story data | Geometría y unidades **OK**; niveles **no ejecutables por API** (paso manual) |
+| R01-conexion-unidades | Conexión OAPI, versión, unidades | Hecho, capturas ✅ |
+| R02-geometria-niveles | Puntos, frames, áreas, story data | Geometría y unidades **OK**; niveles **no ejecutables por API** — paso manual **ya ejecutado** (respaldo `modelos/edificio_oficinas_SD_ANTES-NIVELES-2026-08-07.EDB`); capturas ✅ |
 
 > **Los tres bloqueos del 2026-08-07 quedaron resueltos**: despliegue (config repuntado a la
 > v1.1.0 de 44 herramientas), conexión COM (era desajuste de privilegios; ETABS y Claude Desktop
@@ -51,14 +56,14 @@ namespace, registrar la firma real en el README del bloque, y continuar.
 >
 > **Antes de R03:** borrar el material de prueba `ZZ_TEST_ESCRITURA` desde
 > `Define > Material Properties`.
-| R03-materiales-secciones | H28, C50x50, V30x50, asignación | **OK por API** (E=2.487e7, 27/36); faltan capturas |
-| R04-apoyos-diafragmas | Empotramiento en base, D1/D2/D3 | **OK por API** (9 apoyos, 3 diafragmas); faltan capturas |
-| R05-cargas | Patrones D/L/Lr y asignación a losas | **OK por API** (4 patrones, 12/8/4 áreas); faltan capturas |
-| R06-sismo-espectro | Fa, Fv, SDS, SD1, espectro, casos Ex/Ey | **PARCIAL** — espectro y casos creados; valores no legibles por API, verificación en capturas 01/02 |
-| R07-combinaciones | Combinaciones LRFD del CDCRD | **7 creadas** con Ev correcto; relectura pendiente del fix de `get_table_data` |
-| R08-analisis | Ejecución del análisis | **OK** — T₁ = 0.358 s, masa participante 1.0; faltan capturas |
-| R09-derivas | Derivas vs límite CDCRD | **OK** — Δmáx 35.04 mm, cumple con ρ=1.0 y ρ=1.3; faltan capturas |
-| R10-reacciones | Reacciones y chequeo de equilibrio | **OK** — ΣFz 6365.5 kN, error −0.65%, ΣFx=ΣFy=0; faltan capturas |
+| R03-materiales-secciones | H28, C50x50, V30x50, asignación | **OK por API** (E=2.487e7, 27/36); capturas ✅ |
+| R04-apoyos-diafragmas | Empotramiento en base, D1/D2/D3 | **OK por API** (9 apoyos, 3 diafragmas); capturas ✅ |
+| R05-cargas | Patrones D/L/Lr y asignación a losas | **OK por API** (4 patrones, 12/8/4 áreas); capturas ✅ |
+| R06-sismo-espectro | Fa, Fv, SDS, SD1, espectro, casos Ex/Ey | **PARCIAL** — espectro y casos creados; valores no legibles por API. Capturas ✅, pero solo se leyeron ~6 de los 13 puntos; **el Scale Factor de Ex muestra 9806.65, no 9.80665** |
+| R07-combinaciones | Combinaciones LRFD del CDCRD | **OK** — 7 creadas con Ev correcto, releídas con `get_load_combos`; capturas ✅ |
+| R08-analisis | Ejecución del análisis | **OK** — T₁ = 0.358 s, masa participante 1.0; capturas 3/4 (falta la ventana de progreso) |
+| R09-derivas | Derivas vs límite CDCRD | **OK** — Δmáx 35.04 mm, cumple con ρ=1.0 y ρ=1.3; capturas ✅ |
+| R10-reacciones | Reacciones y chequeo de equilibrio | **OK** — ΣFz 6365.5 kN, error −0.65%, ΣFx=ΣFy=0; capturas ✅ |
 
 ## Cierre del protocolo — 2026-08-07
 
@@ -92,8 +97,16 @@ estos resultados para diseñar.
 5. **Curva tensión-deformación del hormigón**: los valores 0.0022 / 0.0052 /
    −0.1 están escritos a mano en el servidor y nadie los contrastó con el CDCRD ni
    con ACI 318. No afectan el análisis lineal; sí el no lineal y el diseño.
-6. **Las 33 capturas de los 10 bloques están pendientes.** Requieren una sesión con
-   control de escritorio aprobado.
+6. ~~**Las 33 capturas de los 10 bloques están pendientes.**~~ ✅ **CERRADO 2026-08-08.**
+   Eran **34**, no 33 (2+4+5+4+3+4+2+4+3+3): el conteo de este punto estaba mal desde el
+   principio. 33 tomadas; queda `R08/02-ventana-analisis.jpg`, que exige correr el análisis.
+   Ver `RESUMEN-CAPTURAS-2026-08-08.md`.
+6c. **Hallazgo de las capturas, sin resolver: el Scale Factor del caso `Ex` lee 9806.65**,
+   no los 9.80665 que R06 documenta haber escrito. Factor exacto de 1000×, compatible con
+   una confusión mm/s² vs m/s². Los resultados aguas abajo (T₁ = 0.358 s, derivas que cumplen
+   con margen coherente) no muestran señal de una demanda sísmica 1000× inflada, así que la
+   lectura simple no cierra. **Revisar antes de dar por definitivo cualquier resultado
+   sísmico.**
 6b. **Espesor de losa CONFIRMADO por lectura directa** (`get_area_sections`):
    `Slab1` = **0.2032 m** (8 in), material **`4000Psi`** (27.6 MPa), no H28. La
    deducción de R10 (0.1969 m) quedó a 3 % del valor real. La decisión de

@@ -19,9 +19,15 @@ Salida esperada:
 ## Captura
 | Archivo | Vista | Estado |
 |---|---|---|
-| `01-patrones.jpg` | Define > Load Patterns con los 4 patrones | **PENDIENTE** |
-| `02-carga-viva-planta.jpg` | Display > Load Assigns > Shell, patrón L, mostrando 2.40 | **PENDIENTE** |
-| `03-carga-techo.jpg` | Planta del techo con Lr = 0.96 | **PENDIENTE** |
+| `01-patrones.jpg` | Define > Load Patterns con los 4 patrones | **hecha** — `R05-cargas/01-patrones.jpg` |
+| `02-carga-viva-planta.jpg` | Display > Load Assigns > Shell, patrón L, mostrando 2.40 | **hecha** — `R05-cargas/02-carga-viva-planta.jpg` |
+| `03-carga-techo.jpg` | Planta del techo con Lr = 0.96 | **hecha** — `R05-cargas/03-carga-techo.jpg` |
+
+Las tres capturas se tomaron en la sesión de captura del 2026-08-08. La
+etiqueta de `Lr = 0.96` en la planta del techo resultó ilegible por tamaño de
+fuente; se confirmó el valor por la vía alterna del diálogo "Slab Information
+> Loads" (clic derecho sobre un área del techo), documentado en el resumen de
+la sesión.
 
 ## Criterio de aceptación
 - 4 patrones. Solo D tiene multiplicador de peso propio = 1.
