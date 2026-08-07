@@ -1,0 +1,607 @@
+{
+ "titulo": 1,
+ "nombre": "Consideraciones Generales",
+ "version_codigo": "2026-07",
+ "clausulas": [
+  {
+   "id": "1.1.1",
+   "titulo_num": 1,
+   "capitulo": "1.1",
+   "encabezado": "PROPÓSITO Y ALCANCE",
+   "texto": "PROPÓSITO Y ALCANCE. El Código de Construcción de la República Dominicana  (), \nestablece los requerimientos mínimos para el análisis, diseño, y construcción de edificaciones que \nse erijan en el territorio nacional, de tal forma que su estructura se mantenga estable, garantizando \nprincipalmente la seguridad humana.",
+   "paginas": [
+    4
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.1.2",
+   "titulo_num": 1,
+   "capitulo": "1.1",
+   "encabezado": "DEFINICIÓN DE EDIFICACIÓN Y CRITERIOS GENERALES DE DISEÑO ESTRUCTURAL",
+   "texto": "DEFINICIÓN DE EDIFICACIÓN Y CRITERIOS GENERALES DE DISEÑO ESTRUCTURAL.  Se \nconoce como Edificación cualquier estructura que su uso final sea residencial, comercial, \nhospitalario, educacional, religioso, industrial, salud, o deportivo, y que esté sometida a cargas \ngravitacionales, tales como las cargas permanentes, el peso propio, sobrecargas; cargas laterales, \nsean estas  cargas de vientos, cargas sísmicas y de impacto, son mandatorios y los aspectos no \ncubiertos por ellas quedan a criterio del Ingeniero Responsable de Revisión de Planos y Cálculos de \nDiseño Estructural para cada proyecto en específico, y del Ministerio de la Vivienda, Hábitat y \nEdificaciones de la República Dominicana (MIVHED), y serán de su responsabilidad. T ambién puede \naceptarse usar criterios o métodos diferentes de los que aquí se presentan, pero requerirá la \naprobación expresa del MIVHED. En caso de mantenerse la discrepancia entre el MIVHED y el \ndiseñador, éste podrá solicitar un panel de expertos para la solución de las discrepancias. \nCAPÍTULO 1.2. VOLÚMENES Y TÍTULOS DEL CÓDIGO DE \nCONSTRUCCIÓN DE LA REPÚBLICA DOMINICANA.",
+   "paginas": [
+    4
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.2.1",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ESTRUCTURA Y ALCANCE",
+   "texto": "ESTRUCTURA Y ALCANCE. El Código de Construcción de la República Dominicana lo \nconforman los siguientes Volúmenes y Títulos, incluido este Título 1. T odo el contenido del Código \nde Construcción de la República Dominicana () será de aplicación obligatoria para la debida \nconcepción de los proyectos, así como para la ejecución, inspección y supervisión de las obras en \ncuestión; de igual modo, le serán aplicables los demás reglamentos vigentes necesarios para estos \nfines: \n• Volumen I. Análisis y Diseño Estructural de Edificaciones. \no Título 1: Consideraciones Generales. \no Título 2: Cargas Mínimas para Análisis y Diseño Estructural. \no Título 3: Procedimientos para la T ramitación de Planos, Inspección y Supervisión \nde Obras Privadas. \n\n\no Título 4: Suelos y Fundaciones. \no Título 5: Hormigón Armado. \no Título 6: Muros de Hormigón Armado de Ductilidad Limitada. \no Título 7: Aluminio. \no Título 8: Mampostería. \no Título 9: Acero. \no Título 10: Madera. \no Título 11: Vidrio y Acristalado. \n• Volumen II. Instalaciones Hidrosanitarias en Edificaciones. \n• Volumen III. Instalaciones Eléctricas en Edificaciones. \n• Volumen IV. Instalaciones Mecánicas en Edificaciones. \n• Volumen V. Diseño Arquitectónico de Edificaciones. \nCAPÍTULO 1.3. SANCIONES.",
+   "paginas": [
+    4,
+    5
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.3.1",
+   "titulo_num": 1,
+   "capitulo": "1.3",
+   "encabezado": "SANCIONES APLICABLES",
+   "texto": "SANCIONES APLICABLES. El no cumplimiento a las disposiciones establecidas en el Código \nde Construcción de la República Dominicana conllevará a la aplicación de las  sanciones instituidas \nen los capítulos V y VI, de la ley 687-82, de fecha 27 de julio del 1982, que crea un Sistema de \nReglamentación de I ngeniería, Arquitectura y ramas afines  y la Ley Núm.160 -21 que crea el \nMinisterio de la Vivienda, Hábitat y Edificaciones (MIVHED), de fecha 1ro de agosto de 2021,  sin \nperjuicio de otras responsabilidades civiles o penales en las cuales pueda incurrirse en virtud de su \nincumplimiento. \nCAPÍTULO 1.4. ABREVIATURAS COMUNES.",
+   "paginas": [
+    5
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.4.1",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "ACI: American Concrete Institute (Instituto Americano del Hormigón)",
+   "texto": "ACI: American Concrete Institute (Instituto Americano del Hormigón).",
+   "paginas": [
+    5
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.4.2",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "",
+   "texto": "AISC: American Institute of  Steel Construction (Instituto Americano de la Construcción de \nAcero, Inc).",
+   "paginas": [
+    5
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.4.3",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "AISI: American Iron and Steel Institute (Instituto Americano del Hierro y el Acero)",
+   "texto": "AISI: American Iron and Steel Institute (Instituto Americano del Hierro y el Acero).",
+   "paginas": [
+    5
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.4.4",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "",
+   "texto": "ANSI: American National Standards Institute  (Instituto Nacional Estadounidense de \nEstándares).",
+   "paginas": [
+    5,
+    6
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.4.5",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "ASCE: American Society of Civil Engineers (Sociedad Americana de Ingenieros Civiles)",
+   "texto": "ASCE: American Society of Civil Engineers (Sociedad Americana de Ingenieros Civiles).",
+   "paginas": [
+    6
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.4.6",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "",
+   "texto": "ASTM: American Society for T esting and Materials  (Sociedad Americana para Pruebas y \nMateriales).",
+   "paginas": [
+    6
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.4.7",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "AWS: American Welding Society (Sociedad Americana de Soldadura)",
+   "texto": "AWS: American Welding Society (Sociedad Americana de Soldadura).",
+   "paginas": [
+    6
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "AWS"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.4.8",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "DTTL:  Dirección de T ramitación, T asación y Licencias",
+   "texto": "DTTL:  Dirección de T ramitación, T asación y Licencias.",
+   "paginas": [
+    6
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.4.9",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "INDOCAL: Instituto Dominicano para la Calidad",
+   "texto": "INDOCAL: Instituto Dominicano para la Calidad.",
+   "paginas": [
+    6
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.4.10",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "MIVHED: Ministerio de la Vivienda, Hábitat y Edificaciones de la República Dominicana",
+   "texto": "MIVHED: Ministerio de la Vivienda, Hábitat y Edificaciones de la República Dominicana.",
+   "paginas": [
+    6
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.4.11",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "VNRT:  Viceministerio de Normas y Reglamentaciones",
+   "texto": "VNRT:  Viceministerio de Normas y Reglamentaciones. \nCAPÍTULO 1.5. DOCUMENTOS DEL PROYECTO \nESTRUCTURAL.",
+   "paginas": [
+    6
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.5.1",
+   "titulo_num": 1,
+   "capitulo": "1.5",
+   "encabezado": "MEMORIA DE CÁLCULOS",
+   "texto": "MEMORIA DE CÁLCULOS. En la memoria de cálculos se describirán, con el nivel de detalle \nsuficiente para que puedan ser evaluados por un especialista externo al proyecto, los criterios de \nanálisis y diseño estructural adoptados y los principales resultados del análisis y el dime nsionado \nde las secciones de hormigón armado. Se incluirá una justificación del diseño de la cimentación. \nDebe incluir, como mínimo, lo siguiente:\n \na. Descripción del sistema estructural. \nb. Cargas usadas. \nc. Características y resistencias de todos los materiales estructurales. \nd. Resultados de los análisis y los diseños de los elementos estructurales. \ne. Esquemas de las armaduras de refuerzo de todos los elementos estructurales. \nf. Detalles de armaduras especiales por requisitos de ductilidad en nudos, vigas y columnas. \ng. Diseño de las conexiones. \nh. Diseño de las fundaciones. \n\n\ni. Diseño de cubiertas y fachadas.",
+   "paginas": [
+    6,
+    7
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.5.2",
+   "titulo_num": 1,
+   "capitulo": "1.5",
+   "encabezado": "INFORME DE MECÁNICA DE SUELOS",
+   "texto": "INFORME DE MECÁNICA DE SUELOS.  El Informe de Mecánica de Suelos debe realizarse  \nsegún lo especificado en el Título 4 : Suelos y Fundaciones,  del Volumen I del Código de \nConstrucción de la República Dominicana. Debe incluir por lo menos: \na. El tipo de investigación realizada; \nb. El esfuerzo admisible del terreno; \nc. Las características físicas del terreno, necesarias para calcular los empujes sobre muros de \ncontención si fuese necesario; \nd. Incidencia de excavaciones en estructuras adyacentes existentes.",
+   "paginas": [
+    7
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.5.3",
+   "titulo_num": 1,
+   "capitulo": "1.5",
+   "encabezado": "PLANOS ESTRUCTURALES",
+   "texto": "PLANOS ESTRUCTURALES. Los planos estructurales debe rán incluir todos los detalles \nnecesarios para construir el edificio. Los planos de diseño deben mostrar un plano general en \nplanta, completa, dimensionado, y las elevaciones necesarias para mostrar todos los lados del \ndiseño, con las dimensiones, las seccion es y la situación relativa de todos los miembros, juntas y \nconexiones de la estructura.",
+   "paginas": [
+    7
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.5.3.1",
+   "titulo_num": 1,
+   "capitulo": "1.5",
+   "encabezado": "",
+   "texto": "Los niveles de piso, los centros de las columnas, y las excentricidades de sus ejes deben \nestar acotados. Los planos se dibujarán a una escala suficientemente grande para poder apreciar \nfácilmente los detalles del diseño, no menos de 1/100.",
+   "paginas": [
+    7
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.5.3.2",
+   "titulo_num": 1,
+   "capitulo": "1.5",
+   "encabezado": "",
+   "texto": "Cuando se requiera contraflechas en vigas y celosías, estas deberán precisarse en los \nplanos. Igualmente debe indicarse en los planos los requisitos para rigidizadores y \narriostramientos.  Además, se debe incluir la siguiente información: \na. Código usado para el diseño. \nb. Materiales y especificaciones para usar en cada uno de los elementos estructurales. \nc. Cargas vivas, muertas, criterio de diseño de viento, así como el criterio de diseño sísmico \nusados para el análisis y el diseño de los elementos estructurales. \nd. Esfuerzo admisible del terreno usado para el diseño de las cimentaciones. \ne. Detalles de armaduras especiales por requisitos de ductilidad en nudos, vigas y \ncolumnas. \n\n\nf. Detalles de conexiones (si aplica). \ng. Si la construcción compuesta es apuntalada o no (si aplica). \nh. Detalles de empalme de estructura de acero con base de hormigón (si aplica). \ni. Detalle de elementos cuyas longitudes no son transportables, tomando en \nconsideración su ejecución en campo y la seguridad en la obra (si aplica).",
+   "paginas": [
+    7,
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.5.4",
+   "titulo_num": 1,
+   "capitulo": "1.5",
+   "encabezado": "SISTEMAS DE UNIDADES",
+   "texto": "SISTEMAS DE UNIDADES.  T odos los documentos del proyecto estructural deberán ser \npreparados usando las unidades del Sistema Internacional (SI), pudiéndose  especificar entre \nparéntesis su equivalencia en el Sistema MKS.",
+   "paginas": [
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.5.5",
+   "titulo_num": 1,
+   "capitulo": "1.5",
+   "encabezado": "CARGA VIVA DEL ENTREPISO",
+   "texto": "CARGA VIVA DEL ENTREPISO . La carga viva del entrepiso uniformemente distribuida, \nconcentrada y de impacto utilizada en el diseño se indicará para las áreas del suelo. El uso de la \nreducción de la carga viva de acuerdo con el Título 2 se indicará para cada tipo de carga viva utilizada \nen el diseño.",
+   "paginas": [
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.5.6",
+   "titulo_num": 1,
+   "capitulo": "1.5",
+   "encabezado": "CARGA VIVA DEL TECHO",
+   "texto": "CARGA VIVA DEL TECHO. La carga viva del techo utilizada en el cálculo se indicará para las \nzonas de techo según el Título.",
+   "paginas": [
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.5.7",
+   "titulo_num": 1,
+   "capitulo": "1.5",
+   "encabezado": "DATOS DE DISEÑO DEL VIENTO",
+   "texto": "DATOS DE DISEÑO DEL VIENTO. Se mostrará la siguiente información relacionada con las \ncargas de viento, independientemente de si las cargas de viento rigen el diseño del sistema de \nresistencia de fuerzas laterales de la estructura: \na. Velocidad máxima del viento de diseño, 𝑉𝑉𝑢𝑢𝑢𝑢𝑢𝑢, (ráfaga de 3 segundos), en kilómetros por hora \n(km/h) y velocidad nominal del viento de diseño  (en km/h), 𝑉𝑉𝑎𝑎𝑎𝑎𝑎𝑎, determinada de acuerdo \ncon el Título 2: Cargas Mínimas para Análisis y Diseño Estructural, del Volumen 1. \nb. Categoría de riesgo, determinada de acuerdo con el Título 2: Cargas Mínimas para Análisis y \nDiseño Estructural, del Volumen 1. \nc. Exposición al viento. Dirección del viento aplicable si se utiliza más de una exposición al \nviento. \nd. Coeficientes de presión. \ne. Presiones de viento de diseño a utilizar para los componentes exteriores y materiales de \nrevestimiento no diseñados específicamente por el profesional de diseño registrado \nresponsable del diseño de la estructura, en kN/m\n2.",
+   "paginas": [
+    8
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.5.8",
+   "titulo_num": 1,
+   "capitulo": "1.5",
+   "encabezado": "DATOS DE DISEÑO SÍSMICO",
+   "texto": "DATOS DE DISEÑO SÍSMICO.  Se mostrará la siguiente información relacionada con las \ncargas sísmicas, independientemente de si las cargas sísmicas rigen el diseño del sistema de \nresistencia a fuerzas laterales de la estructura: \na. Categoría de riesgo. \nb. Factor de importancia sísmica, 𝐼𝐼𝑒𝑒. \nc. Parámetros de respuesta de aceleración espectral, 𝑆𝑆𝑎𝑎 y 𝑆𝑆1. \nd. Clase de sitio. \ne. Parámetros de respuesta de aceleración espectral de diseño, 𝑆𝑆𝐷𝐷𝐷𝐷 y 𝑆𝑆𝐷𝐷1. \nf. Categoría de diseño sísmico. \ng. Sistema(s) sismorresistente(s) básico(s). \nh. Esfuerzo base de diseño. \ni. Coeficiente(s) de respuesta sísmica, 𝐶𝐶𝑎𝑎. \nj. Coeficiente(s) de modificación de la respuesta, 𝑅𝑅. \nk. Procedimiento de análisis utilizado.",
+   "paginas": [
+    8,
+    9
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.5.9",
+   "titulo_num": 1,
+   "capitulo": "1.5",
+   "encabezado": "CARGAS ESPECIALES",
+   "texto": "CARGAS ESPECIALES. Las cargas especiales aplicables al diseño del edificio, estructura o \npartes de éste, incluyendo, pero sin limitarse a las cargas de la maquinaria o equipo, que sean de \nmayor magnitud que las cargas definidas en las cargas de piso y techo especificadas, se \nespecificarán mediante sus descripciones y ubicaciones.",
+   "paginas": [
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.5.10",
+   "titulo_num": 1,
+   "capitulo": "1.5",
+   "encabezado": "SISTEMAS DE PANELES FOTOVOL TAICOS",
+   "texto": "SISTEMAS DE PANELES FOTOVOL TAICOS. La carga muerta de los sistemas de paneles \nfotovoltaicos montados en la azotea, incluidos los sistemas de soporte de bastidores, se indicará \nen los documentos de construcción.",
+   "paginas": [
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  },
+  {
+   "id": "1.5.11",
+   "titulo_num": 1,
+   "capitulo": "1.5",
+   "encabezado": "DATOS DE LA CARGA DE LLUVIA DE TECHO",
+   "texto": "DATOS DE LA CARGA DE LLUVIA DE TECHO.  Se indicarán los siguientes parámetros de \ncarga de lluvia de la cubierta, independientemente de que las cargas de lluvia rijan el diseño: \na. Carga de lluvia \nb. Intensidad de la lluvia, 𝑖𝑖 (mm/h). \n\nTITULO 2: CARGAS MINIMAS PARA ANALISIS Y DISEÑO \nESTRUCTURAL. \n\nINDICE DE CONTENIDOS RESUMIDO. \nCAPÍTULO 2.1. TÉRMINOS Y DEFINICIONES. ........................................ 9 \nCAPÍTULO 2.2. OBJETIVO Y CAMPO DE APLICACIÓN. ..................... 15 \nCAPÍTULO 2.3. CRITERIOS GENERALES. ............................................. 22 \nCAPÍTULO 2.4. COMBINACIONES DE CARGAS. ................................. 24 \nCAPÍTULO 2.5. CLASIFICACIÓN DE LAS EDIFICACIONES Y OTRAS \nESTRUCTURAS. ........................................................................................ 27 \nCAPÍTULO 2.6. CARGAS MUERTAS. ..................................................... 29 \nCAPÍTULO 2.7. CARGAS VIVAS. ............................................................ 30 \nCAPÍTULO 2.8. CARGAS DE VIENTO. ................................................... 35 \nCAPÍTULO 2.9. DEMANDA SÍSMICA. .................................................... 37 \nCAPÍTULO 2.10. REQUERIMIENTOS PARA DISEÑO SÍSMICO DE \nEDIFICACIONES. ...................................................................................... 48 \n \n \n\n\nCAPÍTULO 2.1. TÉRMINOS Y DEFINICIONES.",
+   "paginas": [
+    9,
+    10,
+    11,
+    12
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 1
+  }
+ ]
+}

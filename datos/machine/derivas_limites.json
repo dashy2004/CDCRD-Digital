@@ -1,0 +1,49 @@
+{
+ "parametro": "derivas_admisibles",
+ "descripcion": "Tabla 19: Derivas de piso admisibles (Delta_a), en funcion de hpx (altura del piso bajo el nivel x)",
+ "fuente": {
+  "clausula": "2.10.11",
+  "tabla": "19",
+  "tomo": 1,
+  "paginas": [
+   95,
+   96
+  ],
+  "version_codigo": "2026-07",
+  "metodo": "vision_fable5",
+  "fecha_extraccion": "2026-08-06"
+ },
+ "notas": {
+  "a": "Divisiones y componentes no estructurales deben acomodar los desplazamientos, o aplicar limite 0.005*hpx.",
+  "2.10.11.1": "En CDS D/E/F con sistema exclusivamente de porticos a momento: dividir el limite entre el factor de redundancia rho.",
+  "2.10.11.2": "En CDS D/E/F con solo dos lineas de resistencia (portico un vano, arriostrado un vano, o muros Lm/hp>1): limitar a 0.010*hpx."
+ },
+ "valores": [
+  {
+   "tipo": "Estructuras <= 4 niveles, sin muros de mamposteria u hormigon, divisiones que acomodan desplazamientos",
+   "I_II": 0.02,
+   "III": 0.016,
+   "IV": 0.01
+  },
+  {
+   "tipo": "Estructuras basadas en muros de mamposteria en voladizo",
+   "I_II": 0.007,
+   "III": 0.007,
+   "IV": 0.007
+  },
+  {
+   "tipo": "Estructuras basadas en muros de hormigon armado de ductilidad limitada",
+   "I_II": 0.005,
+   "III": 0.005,
+   "IV": 0.005
+  },
+  {
+   "tipo": "Todas las demas estructuras",
+   "I_II": 0.016,
+   "III": 0.01,
+   "IV": 0.008,
+   "nota": "a"
+  }
+ ],
+ "multiplicador": "hpx"
+}

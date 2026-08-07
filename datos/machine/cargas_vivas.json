@@ -1,0 +1,307 @@
+{
+ "parametro": "cargas_vivas_minimas",
+ "descripcion": "Tabla 4: Cargas vivas minimas uniformemente distribuidas Lo y concentradas",
+ "fuente": {
+  "clausula": "2.7.2",
+  "tabla": "4",
+  "tomo": 1,
+  "paginas": [
+   34,
+   35,
+   36
+  ],
+  "version_codigo": "2026-07",
+  "metodo": "vision_fable5",
+  "fecha_extraccion": "2026-08-06"
+ },
+ "unidades": {
+  "uniforme": "kN/m2",
+  "concentrada": "kN"
+ },
+ "notas": {
+  "1": "Para hoteles aplicar las cargas del renglon de uso residencial.",
+  "2": "Vehiculos pesados: pesos reales con principios racionales aprobados por la Direccion de Normas del MIVHED.",
+  "3": "Reducible a 0.48 kN/m2 en techos ligeros de naves industriales con laminas de aluzinc o plasticas sobre correas de acero conformado en frio."
+ },
+ "valores": [
+  {
+   "grupo": "Uso residencial",
+   "uso": "Aticos no habitables sin almacenamiento",
+   "uniforme": 0.48,
+   "concentrada": null,
+   "nota": "1"
+  },
+  {
+   "grupo": "Uso residencial",
+   "uso": "Aticos no habitables con almacenamiento",
+   "uniforme": 0.96,
+   "concentrada": null,
+   "nota": "1"
+  },
+  {
+   "grupo": "Uso residencial",
+   "uso": "Aticos habitables y dormitorios",
+   "uniforme": 1.44,
+   "concentrada": null,
+   "nota": "1"
+  },
+  {
+   "grupo": "Uso residencial",
+   "uso": "Corredores y escaleras",
+   "uniforme": 4.79,
+   "concentrada": null,
+   "nota": "1"
+  },
+  {
+   "grupo": "Uso residencial",
+   "uso": "Todas las demas areas",
+   "uniforme": 1.92,
+   "concentrada": null,
+   "nota": "1"
+  },
+  {
+   "grupo": "Techos",
+   "uso": "Techos planos, inclinados y curvos",
+   "uniforme": 0.96,
+   "concentrada": null,
+   "nota": "3"
+  },
+  {
+   "grupo": "Techos",
+   "uso": "Techos usados para almacenamiento",
+   "uniforme": 4.79,
+   "concentrada": null
+  },
+  {
+   "grupo": "Techos",
+   "uso": "Techos no ocupables con jardinerias",
+   "uniforme": 0.96,
+   "concentrada": null
+  },
+  {
+   "grupo": "Techos",
+   "uso": "Techos para reuniones",
+   "uniforme": 4.79,
+   "concentrada": null
+  },
+  {
+   "grupo": "Edificios para oficinas",
+   "uso": "Recepcion, escaleras y corredores del primer piso",
+   "uniforme": 4.79,
+   "concentrada": 8.9
+  },
+  {
+   "grupo": "Edificios para oficinas",
+   "uso": "Oficinas",
+   "uniforme": 2.4,
+   "concentrada": 8.9
+  },
+  {
+   "grupo": "Edificios para oficinas",
+   "uso": "Corredores sobre el primer piso",
+   "uniforme": 3.83,
+   "concentrada": 8.9
+  },
+  {
+   "grupo": "Edificios para reuniones",
+   "uso": "Con asientos fijos al suelo",
+   "uniforme": 2.87,
+   "concentrada": null
+  },
+  {
+   "grupo": "Edificios para reuniones",
+   "uso": "Con asientos movibles",
+   "uniforme": 4.79,
+   "concentrada": null
+  },
+  {
+   "grupo": "Edificios para reuniones",
+   "uso": "Recepciones y plataformas",
+   "uniforme": 4.79,
+   "concentrada": null
+  },
+  {
+   "grupo": "Edificios para reuniones",
+   "uso": "Escenarios",
+   "uniforme": 7.18,
+   "concentrada": null
+  },
+  {
+   "grupo": "Edificios para reuniones",
+   "uso": "Estadios y arenas con asientos fijos",
+   "uniforme": 4.79,
+   "concentrada": null
+  },
+  {
+   "grupo": "Edificios para reuniones",
+   "uso": "Otros lugares de reunion",
+   "uniforme": 4.79,
+   "concentrada": null
+  },
+  {
+   "grupo": "Garajes y estacionamientos",
+   "uso": "Vehiculos livianos",
+   "uniforme": 1.92,
+   "concentrada": null
+  },
+  {
+   "grupo": "Garajes y estacionamientos",
+   "uso": "Vehiculos pesados",
+   "uniforme": 2.4,
+   "concentrada": null,
+   "nota": "2",
+   "regla": "AASHTO LRFD Bridge Design Specification; nunca menor a 2.40 kN/m2"
+  },
+  {
+   "grupo": "Comercios",
+   "uso": "Tiendas de venta al detalle (primer piso)",
+   "uniforme": 4.79,
+   "concentrada": 4.45
+  },
+  {
+   "grupo": "Comercios",
+   "uso": "Tiendas de venta al detalle (demas pisos)",
+   "uniforme": 3.59,
+   "concentrada": 4.45
+  },
+  {
+   "grupo": "Comercios",
+   "uso": "Tiendas de venta al por mayor",
+   "uniforme": 6.0,
+   "concentrada": 4.45
+  },
+  {
+   "grupo": "Escuelas y colegios",
+   "uso": "Aulas",
+   "uniforme": 1.92,
+   "concentrada": 4.45
+  },
+  {
+   "grupo": "Escuelas y colegios",
+   "uso": "Corredores y escaleras del primer piso",
+   "uniforme": 4.79,
+   "concentrada": 4.45
+  },
+  {
+   "grupo": "Escuelas y colegios",
+   "uso": "Corredores y escaleras de pisos superiores",
+   "uniforme": 3.83,
+   "concentrada": 4.45
+  },
+  {
+   "grupo": "Balcones y terrazas",
+   "uso": "Balcones y terrazas",
+   "uniforme": null,
+   "concentrada": null,
+   "regla": "1.5 veces la carga estipulada para el area a la que sirve el balcon o terraza"
+  },
+  {
+   "grupo": "Librerias y bibliotecas",
+   "uso": "Salones de lectura",
+   "uniforme": 2.87,
+   "concentrada": 4.45
+  },
+  {
+   "grupo": "Librerias y bibliotecas",
+   "uso": "Areas de almacenamiento (estanterias) de libros",
+   "uniforme": 7.18,
+   "concentrada": 4.45
+  },
+  {
+   "grupo": "Librerias y bibliotecas",
+   "uso": "Corredores y escaleras",
+   "uniforme": 3.83,
+   "concentrada": 4.45
+  },
+  {
+   "grupo": "Almacenamiento y manufactura",
+   "uso": "Ligero",
+   "uniforme": 6.0,
+   "concentrada": 8.9
+  },
+  {
+   "grupo": "Almacenamiento y manufactura",
+   "uso": "Pesado",
+   "uniforme": 11.97,
+   "concentrada": 13.35
+  },
+  {
+   "grupo": "Edificios de uso recreacional",
+   "uso": "Pistas y salones de baile",
+   "uniforme": 4.79,
+   "concentrada": null
+  },
+  {
+   "grupo": "Edificios de uso recreacional",
+   "uso": "Boleras, billares y usos similares",
+   "uniforme": 3.59,
+   "concentrada": null
+  },
+  {
+   "grupo": "Edificios de uso recreacional",
+   "uso": "Gimnasios",
+   "uniforme": 4.79,
+   "concentrada": null
+  },
+  {
+   "grupo": "Edificios de uso recreacional",
+   "uso": "Salas de proyeccion y control de cines",
+   "uniforme": 2.4,
+   "concentrada": null
+  },
+  {
+   "grupo": "Restaurantes y comedores",
+   "uso": "Restaurantes y comedores",
+   "uniforme": 4.79,
+   "concentrada": null
+  },
+  {
+   "grupo": "Instituciones penales",
+   "uso": "Bloques de celdas",
+   "uniforme": 1.92,
+   "concentrada": null
+  },
+  {
+   "grupo": "Instituciones penales",
+   "uso": "Corredores y escaleras",
+   "uniforme": 4.79,
+   "concentrada": null
+  },
+  {
+   "grupo": "Hospitales y clinicas",
+   "uso": "Salas de cirugia, laboratorios y areas similares",
+   "uniforme": 2.87,
+   "concentrada": 4.45
+  },
+  {
+   "grupo": "Hospitales y clinicas",
+   "uso": "Habitaciones para pacientes",
+   "uniforme": 1.92,
+   "concentrada": 4.45
+  },
+  {
+   "grupo": "Hospitales y clinicas",
+   "uso": "Corredores y escaleras",
+   "uniforme": 3.83,
+   "concentrada": 4.45
+  },
+  {
+   "grupo": "Aceras",
+   "uso": "Aceras sobre piso y plataformas elevadas",
+   "uniforme": 2.87,
+   "concentrada": null
+  },
+  {
+   "grupo": "Helipuertos",
+   "uso": "Helicopteros con peso de despegue <= 13.35 kN",
+   "uniforme": 1.92,
+   "concentrada": null
+  },
+  {
+   "grupo": "Helipuertos",
+   "uso": "Helicopteros con peso de despegue > 13.35 kN",
+   "uniforme": 2.87,
+   "concentrada": null
+  }
+ ]
+}

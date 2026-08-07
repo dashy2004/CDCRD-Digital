@@ -1,0 +1,75 @@
+{
+ "parametro": "combinaciones_de_carga",
+ "fuente": {
+  "clausulas": [
+   "2.4.2.1.1",
+   "2.4.2.1.2",
+   "2.4.2.1.3",
+   "2.4.2.1.4",
+   "2.4.3.1.1",
+   "2.4.3.1.2",
+   "2.4.3.1.3",
+   "2.4.3.1.4"
+  ],
+  "tomo": 1,
+  "paginas": [
+   28,
+   29
+  ],
+  "version_codigo": "2026-07",
+  "metodo": "vision_fable5",
+  "fecha_extraccion": "2026-08-06"
+ },
+ "simbolos": {
+  "D": "carga muerta",
+  "F": "carga de fluidos",
+  "L": "carga viva",
+  "Lr": "carga viva de techo",
+  "R": "carga de lluvia",
+  "W": "viento",
+  "Eh": "sismo horizontal",
+  "Ev": "sismo vertical",
+  "EOmega_h": "sismo horizontal con sobrerresistencia",
+  "H": "presion lateral de terreno"
+ },
+ "LRFD": {
+  "sin_sismo": [
+   "1.4(D+F)",
+   "1.2(D+F)+1.6L+(0.5Lr o 0.5R)",
+   "1.2(D+F)+(1.6Lr o 1.6R)+(L+0.5W)",
+   "1.2(D+F)+1.0W+L+(0.5Lr o 0.5R)",
+   "0.9D+1.0W"
+  ],
+  "con_sismo": [
+   "1.2(D+F)+L+(Eh+Ev)",
+   "0.9(D+F)+(Eh-Ev)"
+  ],
+  "con_sobrerresistencia": [
+   "1.2(D+F)+L+(EOmega_h+Ev)",
+   "0.9(D+F)+(EOmega_h-Ev)"
+  ],
+  "H": "sumar con factor 1.6 si desfavorable; 0.9 si contrarresta y es permanente; 0 en demas casos"
+ },
+ "ASD": {
+  "sin_sismo": [
+   "1.0(D+F)",
+   "1.0(D+F)+1.0L",
+   "1.0(D+F)+(1.0Lr o 1.0R)",
+   "1.0(D+F)+0.75L+0.75(Lr o R)",
+   "1.0(D+F)+0.6W",
+   "1.0(D+F)+0.75L+0.45W+0.75(Lr o R)",
+   "0.6D+0.6W"
+  ],
+  "con_sismo": [
+   "1.0(D+F)+0.7Eh+0.7Ev",
+   "1.0(D+F)+0.75L+0.525Eh+0.525Ev",
+   "0.6(D+F)+0.7Eh-0.7Ev"
+  ],
+  "con_sobrerresistencia": [
+   "1.0(D+F)+0.7EOmega_h+0.7Ev",
+   "1.0(D+F)+0.75L+0.525EOmega_h+0.525Ev",
+   "0.6(D+F)+0.7EOmega_h-0.7Ev"
+  ],
+  "H": "sumar con factor 1.0 si desfavorable; 0.6 si contrarresta y es permanente; 0 en demas casos"
+ }
+}

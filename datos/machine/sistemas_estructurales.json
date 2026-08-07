@@ -1,0 +1,641 @@
+{
+ "parametro": "sistemas_estructurales",
+ "descripcion": "Tabla 11: Coeficientes y factores de diseño para sistemas resistentes a fuerzas sismicas",
+ "estado": "COMPLETA - Tabla 11 integra (P, M, PA, D, PV): 46 sistemas",
+ "fuente": {
+  "clausula": "2.10.2",
+  "tabla": "11",
+  "tomo": 1,
+  "paginas": [
+   53,
+   54,
+   55,
+   56,
+   57,
+   58
+  ],
+  "version_codigo": "2026-07",
+  "metodo": "vision_fable5",
+  "fecha_extraccion": "2026-08-06"
+ },
+ "leyenda": {
+  "SL": "sin limite",
+  "NP": "no permitido",
+  "hn": "limite de altura sismica en m por categoria de diseño sismico",
+  "duales": "Sistemas duales: porticos especiales capaces de resistir al menos el 25% de las fuerzas sismicas de diseño",
+  "duales_intermedios": "D-12..D-15: sistemas duales con porticos intermedios capaces de resistir al menos el 25% de las fuerzas sismicas"
+ },
+ "valores": [
+  {
+   "id": "P-1",
+   "sistema": "Porticos especiales de acero a momento",
+   "detallado": "Titulo 9, Volumen 1",
+   "R": 6,
+   "Omega0": 3,
+   "Cd": 4.75,
+   "hn": {
+    "C": "SL",
+    "D": "SL",
+    "E": "SL",
+    "F": "SL"
+   }
+  },
+  {
+   "id": "P-2",
+   "sistema": "Porticos intermedios de acero a momento",
+   "detallado": "Titulo 9, Volumen 1",
+   "R": 4,
+   "Omega0": 3,
+   "Cd": 3.5,
+   "hn": {
+    "C": "SL",
+    "D": 12,
+    "E": "NP",
+    "F": "NP"
+   }
+  },
+  {
+   "id": "P-3",
+   "sistema": "Porticos ordinarios de acero a momento",
+   "detallado": "Titulo 9, Volumen 1",
+   "R": 2.5,
+   "Omega0": 3,
+   "Cd": 2.25,
+   "hn": {
+    "C": "SL",
+    "D": "NP",
+    "E": "NP",
+    "F": "NP"
+   }
+  },
+  {
+   "id": "P-4",
+   "sistema": "Porticos especiales de hormigon armado",
+   "detallado": "Titulo 5, Volumen 1",
+   "R": 6,
+   "Omega0": 3,
+   "Cd": 4.25,
+   "hn": {
+    "C": "SL",
+    "D": "SL",
+    "E": "SL",
+    "F": "SL"
+   }
+  },
+  {
+   "id": "P-5",
+   "sistema": "Porticos intermedios de hormigon armado",
+   "detallado": "Titulo 5, Volumen 1",
+   "R": 4.5,
+   "Omega0": 3,
+   "Cd": 4,
+   "hn": {
+    "C": "SL",
+    "D": "NP",
+    "E": "NP",
+    "F": "NP"
+   }
+  },
+  {
+   "id": "P-6",
+   "sistema": "Porticos ordinarios de hormigon armado",
+   "detallado": "Titulo 5, Volumen 1",
+   "R": 2.5,
+   "Omega0": 3,
+   "Cd": 2.25,
+   "hn": {
+    "C": "NP",
+    "D": "NP",
+    "E": "NP",
+    "F": "NP"
+   }
+  },
+  {
+   "id": "P-7",
+   "sistema": "Porticos especiales compuestos de hormigon armado y acero",
+   "detallado": "Titulo 9, Volumen 1",
+   "R": 6,
+   "Omega0": 3,
+   "Cd": 4.75,
+   "hn": {
+    "C": "SL",
+    "D": "SL",
+    "E": "SL",
+    "F": "SL"
+   }
+  },
+  {
+   "id": "P-8",
+   "sistema": "Porticos intermedios compuestos de hormigon armado y acero",
+   "detallado": "Titulo 9, Volumen 1",
+   "R": 4.5,
+   "Omega0": 3,
+   "Cd": 4,
+   "hn": {
+    "C": "SL",
+    "D": "NP",
+    "E": "NP",
+    "F": "NP"
+   }
+  },
+  {
+   "id": "M-1",
+   "sistema": "Muros especiales de hormigon armado",
+   "detallado": "Titulo 5, Volumen 1",
+   "R": 4.5,
+   "Omega0": 2.5,
+   "Cd": 4.5,
+   "hn": {
+    "C": "SL",
+    "D": 50,
+    "E": 50,
+    "F": 30
+   }
+  },
+  {
+   "id": "M-2",
+   "sistema": "Muros ordinarios de hormigon armado",
+   "detallado": "Titulo 5, Volumen 1",
+   "R": 3.5,
+   "Omega0": 2.5,
+   "Cd": 3.5,
+   "hn": {
+    "C": "SL",
+    "D": "NP",
+    "E": "NP",
+    "F": "NP"
+   }
+  },
+  {
+   "id": "M-3",
+   "sistema": "Muros acoplados ductiles de hormigon armado",
+   "detallado": "Titulo 5, Volumen 1",
+   "R": 6,
+   "Omega0": 2.5,
+   "Cd": 6,
+   "hn": {
+    "C": "SL",
+    "D": 50,
+    "E": 50,
+    "F": 30
+   }
+  },
+  {
+   "id": "M-4",
+   "sistema": "Muros de hormigon armado de ductilidad limitada (MHADL)",
+   "detallado": "ESPECIFICACIONES EN DESARROLLO",
+   "R": null,
+   "Omega0": null,
+   "Cd": null,
+   "hn": null
+  },
+  {
+   "id": "M-5",
+   "sistema": "Muros prefabricados intermedios de hormigon armado",
+   "detallado": "Titulo 5, Volumen 1",
+   "R": 3.5,
+   "Omega0": 2.5,
+   "Cd": 3.5,
+   "hn": {
+    "C": "SL",
+    "D": 12,
+    "E": 12,
+    "F": 12
+   }
+  },
+  {
+   "id": "M-6",
+   "sistema": "Muros prefabricados ordinarios de hormigon armado",
+   "detallado": "Titulo 5, Volumen 1",
+   "R": 2.5,
+   "Omega0": 2.5,
+   "Cd": 2.5,
+   "hn": {
+    "C": "NP",
+    "D": "NP",
+    "E": "NP",
+    "F": "NP"
+   }
+  },
+  {
+   "id": "M-7",
+   "sistema": "Muros especiales de mamposteria",
+   "detallado": "Titulo 8, Volumen 1",
+   "R": 3.5,
+   "Omega0": 2.5,
+   "Cd": 2.75,
+   "hn": {
+    "C": 18,
+    "D": 18,
+    "E": 12,
+    "F": 9
+   }
+  },
+  {
+   "id": "M-8",
+   "sistema": "Muros intermedios de mamposteria",
+   "detallado": "Titulo 8, Volumen 1",
+   "R": 2.5,
+   "Omega0": 2.5,
+   "Cd": 2,
+   "hn": {
+    "C": 12,
+    "D": "NP",
+    "E": "NP",
+    "F": "NP"
+   }
+  },
+  {
+   "id": "M-9",
+   "sistema": "Muros ordinarios de mamposteria",
+   "detallado": "Titulo 8, Volumen 1",
+   "R": 2,
+   "Omega0": 2.5,
+   "Cd": 1.75,
+   "hn": {
+    "C": "NP",
+    "D": "NP",
+    "E": "NP",
+    "F": "NP"
+   }
+  },
+  {
+   "id": "M-10",
+   "sistema": "Muros especiales de placa de acero",
+   "detallado": "Titulo 9, Volumen 1",
+   "R": 5.5,
+   "Omega0": 2,
+   "Cd": 5,
+   "hn": {
+    "C": "SL",
+    "D": 50,
+    "E": 50,
+    "F": 30
+   }
+  },
+  {
+   "id": "M-11",
+   "sistema": "Muros compuestos de placa de acero y concreto",
+   "detallado": "Titulo 9, Volumen 1",
+   "R": 5,
+   "Omega0": 2.5,
+   "Cd": 4.5,
+   "hn": {
+    "C": "SL",
+    "D": 50,
+    "E": 50,
+    "F": 30
+   }
+  },
+  {
+   "id": "M-12",
+   "sistema": "Muros especiales compuestos de acero y concreto",
+   "detallado": "Titulo 9, Volumen 1",
+   "R": 4.5,
+   "Omega0": 2.5,
+   "Cd": 4,
+   "hn": {
+    "C": "SL",
+    "D": 50,
+    "E": 50,
+    "F": 30
+   }
+  },
+  {
+   "id": "M-13",
+   "sistema": "Muros de corte de marcos ligeros de madera con paneles de madera o lamina de acero",
+   "detallado": "Titulo 10, Volumen 1",
+   "R": 5,
+   "Omega0": 3,
+   "Cd": 3,
+   "hn": {
+    "C": "SL",
+    "D": 18,
+    "E": 18,
+    "F": 18
+   }
+  },
+  {
+   "id": "M-14",
+   "sistema": "Muros de corte de marcos ligeros de acero conformado en frio con paneles de madera o lamina de acero",
+   "detallado": "Titulo 9, Volumen 1",
+   "R": 5,
+   "Omega0": 3,
+   "Cd": 3,
+   "hn": {
+    "C": "SL",
+    "D": 18,
+    "E": 18,
+    "F": 18
+   }
+  },
+  {
+   "id": "PA-1",
+   "sistema": "Porticos de acero con arriostramiento excentrico",
+   "detallado": "Titulo 9, Volumen 1",
+   "R": 6,
+   "Omega0": 2,
+   "Cd": 3.5,
+   "hn": {
+    "C": "SL",
+    "D": 50,
+    "E": 50,
+    "F": 30
+   }
+  },
+  {
+   "id": "PA-2",
+   "sistema": "Porticos especiales de acero con arriostramiento concentrico",
+   "detallado": "Titulo 9, Volumen 1",
+   "R": 5,
+   "Omega0": 2,
+   "Cd": 4,
+   "hn": {
+    "C": "SL",
+    "D": 50,
+    "E": 50,
+    "F": 30
+   }
+  },
+  {
+   "id": "PA-3",
+   "sistema": "Porticos ordinarios de acero con arriostramiento concentrico",
+   "detallado": "Titulo 9, Volumen 1",
+   "R": 3,
+   "Omega0": 2,
+   "Cd": 3,
+   "hn": {
+    "C": "SL",
+    "D": 10,
+    "E": 10,
+    "F": "NP"
+   }
+  },
+  {
+   "id": "PA-4",
+   "sistema": "Porticos de acero con arriostramientos de pandeo restringido",
+   "detallado": "Titulo 9, Volumen 1",
+   "R": 6,
+   "Omega0": 2.5,
+   "Cd": 4,
+   "hn": {
+    "C": "SL",
+    "D": 50,
+    "E": 50,
+    "F": 30
+   }
+  },
+  {
+   "id": "D-1",
+   "sistema": "DUAL: porticos de acero con arriostramiento excentrico",
+   "detallado": "Titulos 5 y/o 9, Volumen 1",
+   "R": 7,
+   "Omega0": 2.5,
+   "Cd": 3.5,
+   "hn": {
+    "C": "SL",
+    "D": "SL",
+    "E": "SL",
+    "F": "SL"
+   }
+  },
+  {
+   "id": "D-2",
+   "sistema": "DUAL: porticos especiales de acero con arriostramiento concentrico",
+   "detallado": "Titulos 5 y/o 9, Volumen 1",
+   "R": 6,
+   "Omega0": 2.5,
+   "Cd": 4.75,
+   "hn": {
+    "C": "SL",
+    "D": "SL",
+    "E": "SL",
+    "F": "SL"
+   }
+  },
+  {
+   "id": "D-3",
+   "sistema": "DUAL: porticos de acero con arriostramiento de pandeo restringido",
+   "detallado": "Titulos 5 y/o 9, Volumen 1",
+   "R": 7,
+   "Omega0": 2.5,
+   "Cd": 4.5,
+   "hn": {
+    "C": "SL",
+    "D": "SL",
+    "E": "SL",
+    "F": "SL"
+   }
+  },
+  {
+   "id": "D-4",
+   "sistema": "DUAL: muros especiales de hormigon armado",
+   "detallado": "Titulos 5 y/o 9, Volumen 1",
+   "R": 6,
+   "Omega0": 2.5,
+   "Cd": 4.75,
+   "hn": {
+    "C": "SL",
+    "D": "SL",
+    "E": "SL",
+    "F": "SL"
+   }
+  },
+  {
+   "id": "D-5",
+   "sistema": "DUAL: muros acoplados ductiles de hormigon armado",
+   "detallado": "Titulos 5 y/o 9, Volumen 1",
+   "R": 7,
+   "Omega0": 2.5,
+   "Cd": 7,
+   "hn": {
+    "C": "SL",
+    "D": "SL",
+    "E": "SL",
+    "F": "SL"
+   }
+  },
+  {
+   "id": "D-6",
+   "sistema": "DUAL: muros ordinarios de hormigon armado",
+   "detallado": "Titulos 5 y/o 9, Volumen 1",
+   "R": 4.5,
+   "Omega0": 2.5,
+   "Cd": 4,
+   "hn": {
+    "C": "SL",
+    "D": "NP",
+    "E": "NP",
+    "F": "NP"
+   }
+  },
+  {
+   "id": "D-7",
+   "sistema": "DUAL: muros especiales de mamposteria",
+   "detallado": "Titulos 8 y/o 9, Volumen 1",
+   "R": 4,
+   "Omega0": 3,
+   "Cd": 4,
+   "hn": {
+    "C": 18,
+    "D": 18,
+    "E": 12,
+    "F": 12
+   }
+  },
+  {
+   "id": "D-8",
+   "sistema": "DUAL: muros intermedios de mamposteria",
+   "detallado": "Titulos 8 y/o 9, Volumen 1",
+   "R": 3.5,
+   "Omega0": 3,
+   "Cd": 3,
+   "hn": {
+    "C": 12,
+    "D": "NP",
+    "E": "NP",
+    "F": "NP"
+   }
+  },
+  {
+   "id": "D-9",
+   "sistema": "DUAL: muros especiales de placa de acero",
+   "detallado": "Titulos 5 y/o 9, Volumen 1",
+   "R": 7,
+   "Omega0": 2.5,
+   "Cd": 5.5,
+   "hn": {
+    "C": "SL",
+    "D": "SL",
+    "E": "SL",
+    "F": "SL"
+   }
+  },
+  {
+   "id": "D-10",
+   "sistema": "DUAL: muros compuestos de placa de acero y concreto",
+   "detallado": "Titulos 5 y/o 9, Volumen 1",
+   "R": 6.5,
+   "Omega0": 2.5,
+   "Cd": 5,
+   "hn": {
+    "C": "SL",
+    "D": "SL",
+    "E": "SL",
+    "F": "SL"
+   }
+  },
+  {
+   "id": "D-11",
+   "sistema": "DUAL: muros especiales compuestos de acero y concreto",
+   "detallado": "Titulos 5 y/o 9, Volumen 1",
+   "R": 5.5,
+   "Omega0": 2.5,
+   "Cd": 5,
+   "hn": {
+    "C": "SL",
+    "D": "SL",
+    "E": "SL",
+    "F": "SL"
+   }
+  },
+  {
+   "id": "D-12",
+   "sistema": "DUAL-INTERMEDIO: porticos especiales de acero con arriostramiento concentrico",
+   "detallado": "Titulos 5, 8 y/o 9 segun aplique, Volumen 1",
+   "R": 5,
+   "Omega0": 2.5,
+   "Cd": 4,
+   "hn": {
+    "C": "SL",
+    "D": 10,
+    "E": "NP",
+    "F": "NP"
+   }
+  },
+  {
+   "id": "D-13",
+   "sistema": "DUAL-INTERMEDIO: muros especiales de hormigon armado",
+   "detallado": "Titulos 5, 8 y/o 9 segun aplique, Volumen 1",
+   "R": 5.5,
+   "Omega0": 2.5,
+   "Cd": 4,
+   "hn": {
+    "C": "SL",
+    "D": 50,
+    "E": 30,
+    "F": 30
+   }
+  },
+  {
+   "id": "D-14",
+   "sistema": "DUAL-INTERMEDIO: muros ordinarios de hormigon armado",
+   "detallado": "Titulos 5, 8 y/o 9 segun aplique, Volumen 1",
+   "R": 2.5,
+   "Omega0": 3,
+   "Cd": 4,
+   "hn": {
+    "C": "SL",
+    "D": "NP",
+    "E": "NP",
+    "F": "NP"
+   }
+  },
+  {
+   "id": "D-15",
+   "sistema": "DUAL-INTERMEDIO: muros intermedios de mamposteria",
+   "detallado": "Titulos 5, 8 y/o 9 segun aplique, Volumen 1",
+   "R": 2.5,
+   "Omega0": 3,
+   "Cd": 2.5,
+   "hn": {
+    "C": 18,
+    "D": "NP",
+    "E": "NP",
+    "F": "NP"
+   }
+  },
+  {
+   "id": "PV-1",
+   "sistema": "VOLADIZO: porticos especiales de acero de columnas en voladizo",
+   "detallado": "Titulo 9, Volumen 1",
+   "R": 2,
+   "Omega0": 2,
+   "Cd": 2,
+   "hn": {
+    "C": 10,
+    "D": 10,
+    "E": 10,
+    "F": 10
+   }
+  },
+  {
+   "id": "PV-2",
+   "sistema": "VOLADIZO: porticos ordinarios de acero de columnas en voladizo",
+   "detallado": "Titulo 9, Volumen 1",
+   "R": 1.25,
+   "Omega0": 1.25,
+   "Cd": 1.25,
+   "hn": {
+    "C": 10,
+    "D": "NP",
+    "E": "NP",
+    "F": "NP"
+   }
+  },
+  {
+   "id": "PV-3",
+   "sistema": "VOLADIZO: porticos especiales de concreto de columnas en voladizo",
+   "detallado": "Titulo 5, Volumen 1",
+   "R": 2,
+   "Omega0": 2,
+   "Cd": 2,
+   "hn": {
+    "C": 10,
+    "D": 10,
+    "E": 10,
+    "F": 10
+   }
+  }
+ ]
+}

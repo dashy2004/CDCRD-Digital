@@ -1,0 +1,3997 @@
+{
+ "titulo": 8,
+ "nombre": "Mamposteria",
+ "version_codigo": "2026-07",
+ "clausulas": [
+  {
+   "id": "8.1.1",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "OBJETIVOS",
+   "texto": "OBJETIVOS.",
+   "paginas": [
+    14
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.1.1",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "",
+   "texto": "El presente  Título t iene por objeto regular el diseño y construcción de ediﬁcios de \nmampostería, con la ﬁnalidad de garantizar la estabilidad y seguridad adecuada a este tipo de \nestructuras. En particular este Título ﬁja: \na. Los conceptos básicos y requisitos mínimos para el diseño de estructuras de muros de \nmampostería. \nb. Los requerimientos mínimos de calidad de los materiales de diseño. \nc. Los conceptos fundamentales para el diseño de estructuras de mampostería armada.",
+   "paginas": [
+    14
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.2",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "CAMPO DE APLICACIÓN",
+   "texto": "CAMPO DE APLICACIÓN.",
+   "paginas": [
+    14
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.2.1",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "",
+   "texto": "Este Título contiene los requisitos mínimos a aplicarse en el diseño y construcción de \nestructuras de mampostería de ediﬁcios multipisos, no mayor de seis (6) pisos, donde los \nelementos estructurales principales lo conforman muros de mampostería armada, dispuestos en \nambas direcciones principales de la estructura.",
+   "paginas": [
+    14
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.2.2",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "OTROS ESTANDARES",
+   "texto": "OTROS ESTANDARES. En los casos donde se exceda el alcance de este Título, o como \nmetodología de diseño alternativa, s e permit irá la aplicación de las especiﬁcaciones de los \ncapítulos 1 al 7  y del capítulo 9 del estándar TMS 402-22 ( “Building Code Requirements for \nMasonry Structures” ) para el diseño de estructuras basadas en los sistemas de muros de \nmampostería deﬁnidos en el Título 2.",
+   "paginas": [
+    14
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "TMS 402"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.3",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "SANCIONES",
+   "texto": "SANCIONES. \nEl no cumplimiento a las disposiciones establecidas en este Título conllevará a la aplicación de las \nsanciones instituidas en los capítulos V y VI de la ley 687.",
+   "paginas": [
+    14
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "DEFINICIONES",
+   "texto": "DEFINICIONES. \nLas siguientes definiciones corresponden a los términos más usados en el presente Título.",
+   "paginas": [
+    14
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.1",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "ACI",
+   "texto": "ACI. Instituto Americano del Concreto (American Concrete Institute).",
+   "paginas": [
+    14
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.2",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "AGREGADO",
+   "texto": "AGREGADO. Conjunto de partículas inertes, naturales o artiﬁciales, tales como arena, \ngravilla, grava, etc., que al mezclarse con el material cementante y el agua produce el hormigón.",
+   "paginas": [
+    14,
+    15
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.3",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "ANÁLISIS",
+   "texto": "ANÁLISIS. Procedimiento mediante el cual se calculan las fuerzas internas y \ndeformaciones en los elementos de una estructura sometida a la acción de las cargas externas.",
+   "paginas": [
+    15
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.4",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "ASENTAMIENTO",
+   "texto": "ASENTAMIENTO. Hundimiento o descenso del nivel de una estructura debido a la \ncompresión y deformación del suelo o roca de fundación.",
+   "paginas": [
+    15
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.5",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "ASTM",
+   "texto": "ASTM. Sociedad Americana para Pruebas y Materiales ( American Society for T esting and \nMaterials).",
+   "paginas": [
+    15
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.6",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "BARRA CORRUGADA",
+   "texto": "BARRA CORRUGADA. Barra con un núcleo de sección circular en cuya superﬁcie existen \nresaltes que tienen por objeto aumentar la adherencia entre el hormigón y el acero, que cumple \ncon las normas ASTM A 706, ASTM A 615 o NORDOM RTD 458.",
+   "paginas": [
+    15
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.7",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "BARRA LISA",
+   "texto": "BARRA LISA . Barra de sección transversal circular sin resaltes o nervios especiales, que \ncumple con la norma ASTM A 615.",
+   "paginas": [
+    15
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.8",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "CÁMARAS",
+   "texto": "CÁMARAS. Huecos del block.",
+   "paginas": [
+    15
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.9",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "CÁMARAS LLENAS",
+   "texto": "CÁMARAS LLENAS. Huecos del block llenos de hormigón.",
+   "paginas": [
+    15
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.10",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "CARGAS ÚLTIMAS O FACTORIZADAS",
+   "texto": "CARGAS ÚLTIMAS O FACTORIZADAS. Cargas que han sido afectadas por un factor de \nmayoración de carga, como se deﬁne en el Título 2.",
+   "paginas": [
+    15
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.11",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "CARGA MUERTA",
+   "texto": "CARGA MUERTA . Se considerarán como cargas muertas los pesos de todos los \nelementos constructivos, de los acabados y de todos los elementos que ocupan una posición \npermanente y tienen un peso que no cambia sustancialmente con el tiempo, incluyendo muros y \nparticiones divisorias de espacio y el peso de equipos permanentes.",
+   "paginas": [
+    15
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.12",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "CARGAS DE SERVICIO",
+   "texto": "CARGAS DE SERVICIO. T odas las cargas, permanentes o transitorias, que actúan sobre \nla estructura o parte de ésta, sin estar afectadas por ningún coeﬁciente de carga.",
+   "paginas": [
+    15
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.13",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "CARGA VIVA",
+   "texto": "CARGA VIVA. Carga debida al uso y ocupación del ediﬁcio, sin incluir viento, sismo o \ncarga muerta.",
+   "paginas": [
+    15
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.14",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "CEMENTO",
+   "texto": "CEMENTO. Material que cumple con las especiﬁcaciones ASTM, que tiene propiedades \ncementantes cuando se utiliza en la fabricación del hormigón, ya sea por sí mismo, como es el caso \n\n\ndel cemento hidráulico (Pórtland), el cemento adicionado, y el cemento expansivo; o cuando estos \núltimos obran en combinación con cenizas volantes, puzolanas, escoria siderúrgica y humo de \nsílice.",
+   "paginas": [
+    15,
+    16
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.15",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "CIMENTACIÓN",
+   "texto": "CIMENTACIÓN. Conjunto de los elementos estructurales destinados a transmitir las \ncargas de una estructura al suelo o roca de apoyo.",
+   "paginas": [
+    16
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.16",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "COLUMNA",
+   "texto": "COLUMNA. Elemento estructural cuya solicitación principal es la carga axial de \ncompresión, acompañada o no de momentos ﬂexores, torsión o fuerzas cortantes y con una \nrelación de longitud a su menor dimensión de la sección de 3 o más.",
+   "paginas": [
+    16
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.17",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "COLUMNA DE AMARRE",
+   "texto": "COLUMNA DE AMARRE. Es un elemento vertical que se considera unido íntegramente a \nla pared de mampostería y que debe cumplir con los requisitos de 8.6.2  del  CAPÍTULO 8.6.",
+   "paginas": [
+    16
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.18",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "CONCRETO",
+   "texto": "CONCRETO. Anglicismo por hormigón.",
+   "paginas": [
+    16
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.19",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "CURADO",
+   "texto": "CURADO. Proceso mediante el cual el concreto se mantiene a una temperatura estable \ny en condiciones de humedad por lo menos durante los primeros 7 días después del vaciado.",
+   "paginas": [
+    16
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.20",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "DADO DE APOYO",
+   "texto": "DADO DE APOYO. Elemento prismático de hormigón armado, que tiene como función, \ndistribuir las cargas concentradas en el plano del muro.",
+   "paginas": [
+    16
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.21",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "DISEÑO A LA ROTURA",
+   "texto": "DISEÑO A LA ROTURA . Método de diseño que consiste en demostrar que las \nsolicitaciones debidas a las cargas factorizadas son menores o iguales que las fuerzas nominales \nde rotura de la sección multiplicadas por el factor de reducción de resistencia Ø.",
+   "paginas": [
+    16
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.22",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "EFECTOS SÍSMICOS",
+   "texto": "EFECTOS SÍSMICOS . Las solicitaciones de ﬂexión, torsión, fuerzas cortantes, cargas \naxiales y deformaciones ocasionadas a los elementos estructurales por la acción de un temblor en \nuna estructura cualquiera.",
+   "paginas": [
+    16
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.23",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "ENCOFRADO",
+   "texto": "ENCOFRADO. Estructura provisional de madera o elementos metálicos, de forma, \ndimensiones y seguridad adecuadas para la colocación del refuerzo y el hormigón de un elemento \nestructural, y sostenerlos mientras el hormigón adquiere la resistencia adecuada.",
+   "paginas": [
+    16
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.24",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "ESFUERZO",
+   "texto": "ESFUERZO. Intensidad de fuerza por unidad de área.",
+   "paginas": [
+    16
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.25",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "ESTADO LÍMITE DE ROTURA",
+   "texto": "ESTADO LÍMITE DE ROTURA. Cualquier situación que corresponda al agotamiento de \nla capacidad de carga de la estructura o de cualesquiera de sus componentes, incluyendo la \n\n\ncimentación, o al hecho de que ocurran daños irreversibles que afecten signiﬁcativamente la \nresistencia ante nuevas aplicaciones de carga.",
+   "paginas": [
+    16,
+    17
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.26",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "ESTADO LÍMITE DE SERVICIO",
+   "texto": "ESTADO LÍMITE DE SERVICIO. La ocurrencia de desplazamientos, agrietamientos, \nvibraciones o daños que afecten el correcto funcionamiento de la ediﬁcación, que no perjudiquen \nsu capacidad para soportar cargas.",
+   "paginas": [
+    17
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.27",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "ESTRIBOS",
+   "texto": "ESTRIBOS. Elementos que corresponden a una forma de refuerzo transversal, utilizados \npara resistir fuerzas cortantes, torsión y para proveer conﬁnamiento al núcleo del elemento, \nconsistentes en barras corrugadas, barras lisas, alambres o malla electrosoldada , de una o varias \nramas, doblados en forma de L, U, C o rectangulares y colocados perpendicularmente al refuerzo \nlongitudinal o formando un ángulo con él.",
+   "paginas": [
+    17
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.28",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "FACTORES DE CARGA",
+   "texto": "FACTORES DE CARGA. Son los factores por los que deben multiplicarse las cargas de \nservicio para obtener las cargas factorizadas para el diseño a la rotura.",
+   "paginas": [
+    17
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.29",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "FACTOR DE REDUCCIÓN DE RESISTENCIA Ø",
+   "texto": "FACTOR DE REDUCCIÓN DE RESISTENCIA Ø. Coeﬁciente que multiplica la resistencia \nnominal para convertirla en resistencia de diseño.",
+   "paginas": [
+    17
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.30",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "FLEXIÓN COMPUESTA",
+   "texto": "FLEXIÓN COMPUESTA . Fuerza axial (tracción o compresión) simultánea con ﬂexión \nrespecto a uno de los ejes principales de inercia de una sección.",
+   "paginas": [
+    17
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.31",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "FLEXIÓN",
+   "texto": "FLEXIÓN. Flexión respecto a uno de los ejes principales de inercia de una sección.",
+   "paginas": [
+    17
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.32",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "FRAGUADO",
+   "texto": "FRAGUADO. Proceso químico por medio del cual el hormigón endurece y adquiere \nresistencia, una vez colocado en su posición ﬁnal.",
+   "paginas": [
+    17
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.33",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "FUERZA AXIAL",
+   "texto": "FUERZA AXIAL. Fuerza (tracción o compresión) que actúa en el centro de gravedad de \nuna sección, paralela al eje longitudinal del elemento.",
+   "paginas": [
+    17
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.34",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "FUERZA CORTANTE",
+   "texto": "FUERZA CORTANTE . Fuerza que actúa en el centro de gravedad de una sección, \nperpendicular eje longitudinal del elemento, en un plano que contiene uno de los ejes principales \nde la sección.",
+   "paginas": [
+    17
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.35",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "HORMIGÓN",
+   "texto": "HORMIGÓN. Material de construcción que se obtiene a partir de una mezcla homogénea \nde material cementante, agregados inertes y agua, con o sin aditivos.",
+   "paginas": [
+    17
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.36",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "HORMIGÓN ARMADO",
+   "texto": "HORMIGÓN ARMADO . Material constituido por hormigón que tiene un refuerzo de \nbarras de acero dispuestas convenientemente en su interior.",
+   "paginas": [
+    17
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.37",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "JUNTA DE CONSTRUCCIÓN",
+   "texto": "JUNTA DE CONSTRUCCIÓN . Interrupción de la colocación del hormigón, ya sea \ntemporal, de construcción, o permanente.",
+   "paginas": [
+    17,
+    18
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.38",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "JUNTA DE EXPANSIÓN",
+   "texto": "JUNTA DE EXPANSIÓN . Separación entre porciones adyacentes de la estructura, \nlocalizada en un lugar establecido durante el diseño de esta, de tal manera que no interﬁera en su \ncomportamiento y que al mismo tiempo permita movimientos en las direcciones apropiadas; y \nque impida la formación de ﬁsuras y grietas en otras partes de la estructura.",
+   "paginas": [
+    18
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.39",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "LONGITUD DE DESARROLLO",
+   "texto": "LONGITUD DE DESARROLLO . Es la longitud requerida que debe tener el refuerzo \nembebido en el hormigón requerida para desarrollar la resistencia de diseño del refuerzo en una \nsección crítica.",
+   "paginas": [
+    18
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.40",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "LOSA",
+   "texto": "LOSA. Elemento estructural horizontal o aproximadamente horizontal, macizo o con \nnervaduras, que trabaja en una o dos direcciones, de espesor pequeño en relación con sus otras \ndos dimensiones, y que resiste cargas que actúan en una dirección perpendicular a su plano medio.",
+   "paginas": [
+    18
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.41",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "MAMPOSTERÍA",
+   "texto": "MAMPOSTERÍA. Pared o muro hecho a base de elementos prefabricados con medidas \ndeﬁnidas (bloques) unidos mediante mortero de pega.",
+   "paginas": [
+    18
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.42",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "MEMORIA DE CÁLCULOS",
+   "texto": "MEMORIA DE CÁLCULOS . Justiﬁcación técnica de las dimensiones, refuerzos y \nespeciﬁcaciones de una estructura, tal como se presentan en los planos de construcción.",
+   "paginas": [
+    18
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.43",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "MÓDULO DE ELASTICIDAD",
+   "texto": "MÓDULO DE ELASTICIDAD. Relación entre el esfuerzo de tracción o de compresión y la \ndeformación unitaria producida por aquel, para esfuerzos inferiores al límite proporcional del \nmaterial.",
+   "paginas": [
+    18
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.44",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "MOMENTO POSITIVO",
+   "texto": "MOMENTO POSITIVO. El que produce esfuerzos de tracción en la cara inferior de vigas \ny losas.",
+   "paginas": [
+    18
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.45",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "MOMENTO NEGATIVO",
+   "texto": "MOMENTO NEGATIVO. El que produce esfuerzos de tracción en la cara superior de vigas \ny losas.",
+   "paginas": [
+    18
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.46",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "MURO",
+   "texto": "MURO. Elemento cuyo espesor es mucho menor en relación con sus otras dos \ndimensiones, usualmente vertical y que resiste cargas que actúan en una dirección paralela a su \nplano.",
+   "paginas": [
+    18
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.47",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "NUDO",
+   "texto": "NUDO. Intersección perpendicular entre muros.",
+   "paginas": [
+    18
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.48",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "RECUBRIMIENTO",
+   "texto": "RECUBRIMIENTO. La menor distancia entre la superﬁcie del refuerzo longitudinal o \ntransversal y la superﬁcie exterior de la sección de hormigón.",
+   "paginas": [
+    18,
+    19
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.49",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "REFUERZO",
+   "texto": "REFUERZO. Barras de acero colocadas en el hormigón para en conjunto con él resistir \nfuerzas de tracción, de compresión, de corte o de torsión.",
+   "paginas": [
+    19
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.50",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "REFUERZO LONGITUDINAL",
+   "texto": "REFUERZO LONGITUDINAL . Refuerzo que se coloca paralelo a la longitud mayor del \nelemento. Se destina para resistir fuerzas axiales y momentos ﬂexores.",
+   "paginas": [
+    19
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.51",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "REFUERZO NEGATIVO",
+   "texto": "REFUERZO NEGATIVO . El refuerzo destinado a resistir los efectos del momento \nnegativo.",
+   "paginas": [
+    19
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.52",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "REFUERZO POSITIVO",
+   "texto": "REFUERZO POSITIVO. El refuerzo destinado a resistir los efectos del momento positivo.",
+   "paginas": [
+    19
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.53",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "REFUERZO TRANSVERSAL",
+   "texto": "REFUERZO TRANSVERSAL . El refuerzo destinado a resistir los efectos de la fuerza \ncortante y torsión. Incluye, igualmente, el destinado a impedir el pandeo del refuerzo longitudinal \nen las columnas o en los elementos sometidos a fuerzas de compresión, y el que produce \nconﬁnamiento.",
+   "paginas": [
+    19
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.54",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "REFUERZO DE RETRACCIÓN Y TEMPERATURA",
+   "texto": "REFUERZO DE RETRACCIÓN Y TEMPERATURA . En losas armadas en una dirección, es \nel refuerzo perpendicular al refuerzo principal, destinado a resistir los esfuerzos causados por \nvariación de temperatura o por retracción de fraguado.",
+   "paginas": [
+    19
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.55",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "RESISTENCIA A LA FLUENCIA (𝒇𝒇𝒚𝒚)",
+   "texto": "RESISTENCIA A LA FLUENCIA (𝒇𝒇𝒚𝒚). Valor de la resistencia nominal a la ﬂuencia del acero \nde refuerzo que se utiliza en el diseño para determinar la resistencia nominal de los elementos de \nhormigón armado.",
+   "paginas": [
+    19
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.56",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "RESISTENCIA DEL HORMIGÓN A LA COMPRESIÓN  ( 𝒇𝒇𝒄𝒄′  )",
+   "texto": "RESISTENCIA DEL HORMIGÓN A LA COMPRESIÓN  ( 𝒇𝒇𝒄𝒄′  ).  Resistencia nominal \nespeciﬁcada a los 28 días, que se utiliza en el diseño para determinar la resistencia nominal de los \nelementos de hormigón armado.",
+   "paginas": [
+    19
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.57",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "RESISTENCIA DE DISEÑO O RESISTENCIA ÚL TIMA",
+   "texto": "RESISTENCIA DE DISEÑO O RESISTENCIA ÚL TIMA . Resistencia nominal de  un \nelemento, o sección de él, multiplicada por un factor de reducción de resistencia 𝜙𝜙.",
+   "paginas": [
+    19
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.58",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "RESISTENCIA NOMINAL",
+   "texto": "RESISTENCIA NOMINAL . Resistencia de un elemento, o sección de él, calculada \nanalíticamente de acuerdo con los requisitos y suposiciones del método de diseño a la rotura y sin \nincluir ningún coeﬁciente de reducción de resistencia.",
+   "paginas": [
+    19
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.59",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "SOLICITACIONES",
+   "texto": "SOLICITACIONES. Cargas a las que se encuentra sometido un miembro estructural.",
+   "paginas": [
+    19,
+    20
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.60",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "VIGA",
+   "texto": "VIGA. Elemento estructural, horizontal o aproximadamente horizontal, cuya dimensión \nlongitudinal es mayor que las otras dos y su solicitación principal es el momento de ﬂexión, \nacompañado o no de cargas axiales, fuerzas cortantes y torsiones.",
+   "paginas": [
+    20
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.4.61",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "VIGA DE AMARRE",
+   "texto": "VIGA DE AMARRE. Es un elemento horizontal que se considera unido íntegramente a la \npared de mampostería y que debe cumplir con los requisitos de 8.6.3 del CAPÍTULO 8.6.",
+   "paginas": [
+    20
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.5",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "REQUISITOS GENERALES DE APLICACIÓN",
+   "texto": "REQUISITOS GENERALES DE APLICACIÓN.  \nSe aplicará este Título cuando se cumplan los siguientes requisitos:",
+   "paginas": [
+    20
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.5.1",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "USO",
+   "texto": "USO. Estructuras en general en las que sus elementos resistentes a cargas gravitacionales \ny laterales sean muros de mampostería estructural armada.",
+   "paginas": [
+    20
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.5.2",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "NÚMERO DE PISOS",
+   "texto": "NÚMERO DE PISOS. Estructuras multipisos de no más de seis (6) niveles.",
+   "paginas": [
+    20
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.5.3",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "SISTEMA ESTRUCTURAL",
+   "texto": "SISTEMA ESTRUCTURAL . Muros de mampostería armada unidos por un diafragma de \nlosa.",
+   "paginas": [
+    20
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.5.4",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "ESBEL TEZ MÁXIMA",
+   "texto": "ESBEL TEZ MÁXIMA. La relación de esbeltez de muros ( 𝐻𝐻/𝑡𝑡𝑏𝑏) no será mayor de 30. Este \nlímite puede no cumplirse, si se justiﬁca por medio de un análisis de segundo orden.",
+   "paginas": [
+    20
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.5.5",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "APLICACIÓN TRANSITORIA",
+   "texto": "APLICACIÓN TRANSITORIA. El presente Título se ajustará a los requisitos del Título 2: \nCargas Mínimas, perteneciente al Volumen I: Análisis y Diseño Estructural de Ediﬁcaciones.",
+   "paginas": [
+    20
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.6",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "DOCUMENTOS DEL PROYECTO",
+   "texto": "DOCUMENTOS DEL PROYECTO.",
+   "paginas": [
+    20
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.6.1",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "MEMORIA DE CÁLCULOS",
+   "texto": "MEMORIA DE CÁLCULOS. En la memoria de cálculos se describirán, con el nivel de detalle \nsuﬁciente para que puedan ser evaluados por un especialista externo al proyecto, los criterios de \nconﬁguración de análisis y diseño estructurales adoptados y los principales resultados del análisis \ny el dimensionado de las secciones de hormigón armado. Se incluirá una justiﬁcación del diseño \nde la cimentación. \nDebe incluir, como mínimo, lo siguiente: \na. Conﬁguración estructural. \n\n\nb. Descripción del sistema estructural. \nc. Cargas usadas. \nd. Características y resistencias de todos los materiales estructurales. \ne. Resultados de los análisis y diseños de los elementos estructurales.",
+   "paginas": [
+    20,
+    21
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.6.2",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "INFORME DE MECÁNICA DE SUELOS",
+   "texto": "INFORME DE MECÁNICA DE SUELOS. \nEl Informe de Mecánica de Suelos debe incluir por lo menos: \na. El tipo de investigación realizada. \nb. El esfuerzo admisible del terreno. \nc. Las características físicas del terreno, necesarias para calcular los empujes sobre muros de \ncontención si fuese necesario.",
+   "paginas": [
+    21
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.6.3",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "PLANOS ESTRUCTURALES",
+   "texto": "PLANOS ESTRUCTURALES. \nLos planos estructurales deben incluir todos los detalles necesarios para construir la edificación. \nAdemás, se debe incluir la siguiente información: \na. Especiﬁcación de resistencia a compresión del block (𝑓𝑓𝑏𝑏\n′). \nb. Resistencia del mortero de pega (𝑓𝑓𝑗𝑗\n′). \nc. Resistencia a compresión a los 28 días del hormigón en cámara (𝑓𝑓𝑐𝑐𝑐𝑐′ ).  \nd. Esfuerzo de ﬂuencia (𝑓𝑓𝑦𝑦) del refuerzo a utilizar. \ne. Cargas vivas y muertas usadas para el análisis y diseño de los elementos estructurales. \nf. Esfuerzo admisible del terreno usado para el diseño de las cimentaciones. \ng. Detalles de refuerzo de todos los elementos que conforman el sistema estructural.",
+   "paginas": [
+    21
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.6.4",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "SISTEMAS DE UNIDADES",
+   "texto": "SISTEMAS DE UNIDADES. \nT odos los documentos del proyecto estructural deberán ser preparados usando las unidades del \nSistema Internacional (SI).",
+   "paginas": [
+    21
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.7",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "CLASIFICACION DE LA MAMPOSTERIA ESTRUCTURAL",
+   "texto": "CLASIFICACION DE LA MAMPOSTERIA ESTRUCTURAL.",
+   "paginas": [
+    21
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.7.1",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "MAMPOSTERÍA REFORZADA",
+   "texto": "MAMPOSTERÍA REFORZADA . Es la construcción con base de piezas y/o bloques \nmampuestos, de perforación vertical (cámara), unidas por medio de mortero, reforzadas \ninternamente con barras de refuerzo que cumple con los requisitos del CAPÍTULO 8.4  de este \nTítulo.",
+   "paginas": [
+    21,
+    22
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.1.8",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "NOTACIÓN",
+   "texto": "NOTACIÓN. \n A. Altura del bloque comprimido (cm). \n Ab. Área bruta evaluada con la longitud del muro y el espesor nominal (cm2). \n Ae. Área efectiva evaluada con la longitud del muro y el espesor equivalente (te) reducido por \nefectos de esbeltez (cm2). \n AC. Área de la sección transversal en columnas de amarre (cm2). \n Ap.  Área en planta de la estructura (cm2). \n Ash. Área del refuerzo horizontal distribuido uniformemente (cm2). \n AsI. Refuerzo concentrado en el extremo I del muro (cm2). \n AsJ Refuerzo concentrado en el extremo J del muro (cm2). \n AsT Refuerzo total vertical en el muro (cm2). \n Asv Área del refuerzo vertical distribuido uniformemente (cm2). \n AV Área de la sección transversal de vigas de amarre (cm2). \n bw. Ancho de apoyo de viga y/o dintel (cm). \n C. Distancia del eje neutro a la ﬁbra extrema en compresión (cm). \n D. Carga Muerta. \n db. Diámetro de barra de refuerzo (cm). \n E. Carga Sísmica. \n Em. Módulo de elasticidad longitudinal de la mampostería (kg/cm2). \n EV. Módulo de elasticidad transversal de la mampostería (kg/cm2). \n f´b. Resistencia característica a la compresión del block a los 28 días (kg/cm2). \n f´cm. Resistencia característica a la compresión del hormigón en cámara a los 28 días \n(kg/cm2). \n f´j. Resistencia característica a la compresión del mortero de junta a los 28 días (kg/cm2). \n f´m. Resistencia equivalente a la compresión de la mampostería (kg/cm2). \n\n\n F. Carga debido al peso de Fluidos. \n Fe. Factor de reducción del espesor equivalente por efectos de esbeltez. \n fsI. Esfuerzo del refuerzo concentrado en el extremo I del muro compatible con el régimen de \ndeformación (kg/cm2). \n fsJ. Esfuerzo del refuerzo concentrado en el extremo J del muro compatible con el régimen de \ndeformación (kg/cm2). \n fsv. Esfuerzo en el refuerzo vertical uniformemente distribuido en el muro compatible con el \nrégimen de deformación (kg/cm2). \n fy. Esfuerzo especiﬁcado de ﬂuencia del refuerzo (kg/cm2). \n H. Altura libre del muro para un entrepiso (cm). \n He. Cargas debidas a empuje de suelo o Presión Hidrostática. \n HT. Altura total del muro desde la fundación al techo (cm). \n KP. Coeﬁciente de Pandeo. \n LD. Longitud de dado de apoyo (cm). \n L. Longitud del muro en planta (cm). \n LL. Carga Viva. \n Lr. Carga Viva sobre la cubierta. \n Mu. Momento factorizado en la combinación considerada (kg·cm). \n Pa. Resistencia nominal al aplastamiento de la mampostería y/o dado de apoyo (kg). \n Pu. Carga axial factorizada en la combinación considerada (kg). \n Qm. Cuantía de muros estructurales en la dirección de análisis considerada. \n R. Carga debido a Lluvias. \n RN. Resistencia nominal interna a carga axial, ﬂexión o cortante. \n tb. Espesor nominal del block (cm). \n te. Espesor efectivo del block (cm). \n T. Fuerzas causadas por Expansión o Contracción de T emperatura, Retracción de Fraguado, \nFlujo Plástico, Cambio de Humedad y/o Asentamientos Diferenciales. \n U. Solicitación externa factorizada según el Reglamento de Cargas Mínimas. \n Vm. Resistencia al cortante proporcionada por la mampostería (kg). \n\n\n Vn. Resistencia nominal al cortante (kg). \n Vs. Resistencia al cortante proporcionada por el refuerzo (kg). \n Vu. Fuerza cortante factorizada en la combinación considerada. \n ysI. Distancia desde el centroide plástico del muro al centroide del refuerzo concentrado en el \nextremo I (cm). \n ysJ. Distancia desde el centroide plástico del muro al centroide del refuerzo concentrado en \nel extremo J (cm). \n ysv. Distancia desde el centroide plástico del muro al centro de las barras de refuerzo \nuniformemente distribuida en el muro (cm). \n W. Cargas debido a Viento. \n εs. Deformación del refuerzo. \n ϕ. Factor de reducción de resistencia \n ν. Poisson. \n ρh. Cuantía horizontal del refuerzo uniformemente distribuido en el muro. \n ρv. Cuantía vertical del refuerzo uniformemente distribuido en el muro. \nCAPÍTULO 8.2. REQUISITOS GENERALES DE DISEÑO.",
+   "paginas": [
+    22,
+    23,
+    24
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.1",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "FUNDAMENTOS DE DISEÑO",
+   "texto": "FUNDAMENTOS DE DISEÑO.  \nLos muros de bloques de hormigón deberán ser diseñados en todas las secciones, para que las \nacciones mínimas factorizadas sean menores o iguales que la resistencia nominal instalada en el \nelemento, disminuida por un factor de reducción de resistencia 𝜙𝜙. \n𝑈𝑈 ≤  𝜙𝜙𝑅𝑅𝑛𝑛",
+   "paginas": [
+    24
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.2",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "DIMENSIONES NOMINALES MÍNIMAS",
+   "texto": "DIMENSIONES NOMINALES MÍNIMAS.",
+   "paginas": [
+    24
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.2.1",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "",
+   "texto": "El espesor nominal en los muros de bloques de hormigón, usados como elementos \nestructurales sismo resistentes, no deberá ser menor de 0.20 m.",
+   "paginas": [
+    24
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.2.2",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "El requisito de la Sección 8",
+   "texto": "El requisito de la Sección 8.2.2.1no necesita aplicarse si se demuestra que la cuantía de \nmuros (Q m) en la dirección considerada no es menor de 2%. El espesor  nominal del muro no \ndeberá ser menor de 0.15 m.",
+   "paginas": [
+    24
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.2.3",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "",
+   "texto": "La cuantía de muros se calculará de acuerdo con las ecuaciones (1) y (2): \n(1) 𝑄𝑄𝑐𝑐𝑚𝑚 = Σ𝐿𝐿𝑚𝑚 . 𝑡𝑡𝑏𝑏\n𝐴𝐴𝑃𝑃\n \n(2) 𝑄𝑄𝑐𝑐𝑦𝑦 = Σ𝐿𝐿𝑦𝑦 . 𝑡𝑡𝑏𝑏\n𝐴𝐴𝑃𝑃",
+   "paginas": [
+    24,
+    25
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.3",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "FACTORES DE REDUCCION DE RESISTENCIA",
+   "texto": "FACTORES DE REDUCCION DE RESISTENCIA . Se deberán usar los siguientes factores de \nreducción de resistencia en la determinación de la resistencia de diseño de muros de mampostería.",
+   "paginas": [
+    25
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.3.1",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "El factor de reducción de resistencia a ﬂexión será de 𝝓𝝓 = 𝟎𝟎",
+   "texto": "El factor de reducción de resistencia a ﬂexión será de 𝝓𝝓 = 𝟎𝟎. 𝟖𝟖 𝟎𝟎.",
+   "paginas": [
+    25
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.3.2",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "El factor de reducción de resistencia a la compresión será de 𝝓𝝓 = 𝟎𝟎",
+   "texto": "El factor de reducción de resistencia a la compresión será de 𝝓𝝓 = 𝟎𝟎. 𝟔𝟔𝟔𝟔.",
+   "paginas": [
+    25
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.3.3",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "",
+   "texto": "El f actor de reducción de resistencia a combinación de ﬂexión y compresión será \ndeterminado mediante la siguiente expresión: \n(3) 𝜙𝜙 = 0.80 − � 0.15 ⋅ 𝑃𝑃𝑢𝑢\n0.10 ⋅ 𝑓𝑓’𝑐𝑐 𝐿𝐿 𝑡𝑡𝑏𝑏\n� > 0.65",
+   "paginas": [
+    25
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.3.4",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "El factor de reducción de resistencia a cortante será de 𝝓𝝓 = 𝟎𝟎",
+   "texto": "El factor de reducción de resistencia a cortante será de 𝝓𝝓 = 𝟎𝟎. 𝟔𝟔 𝟎𝟎.",
+   "paginas": [
+    25
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.3.5",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "El factor de reducción de resistencia al aplastamiento será de 𝝓𝝓 = 𝟎𝟎",
+   "texto": "El factor de reducción de resistencia al aplastamiento será de 𝝓𝝓 = 𝟎𝟎. 𝟔𝟔𝟔𝟔.",
+   "paginas": [
+    25
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.4",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "RESISTENCIA A LA COMPRESION",
+   "texto": "RESISTENCIA A LA COMPRESION.",
+   "paginas": [
+    25
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.4.1",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "RESISTENCIA A COMPRESIÓN DEL BLOCK ( 𝒇𝒇′𝒃𝒃)",
+   "texto": "RESISTENCIA A COMPRESIÓN DEL BLOCK ( 𝒇𝒇′𝒃𝒃). Este valor corresponde a la resistencia \ncaracterística a la compresión a los 28 días de la unidad básica con relación al área bruta del \nbloque, y se determinará sobre la de base de la información estadística existente sobre el producto. \nLa determinación de la resistencia a la compresión de la unidad podrá hacerse sobre la base de los \nvalores promedios indicados en la tabla siguiente: \nTabla 1: Resistencia a la compresión del bloque, 𝒇𝒇′𝒃𝒃. \nTIPO USO OBSERVACIÓN 𝒇𝒇′𝒃𝒃 \n(MPa) \nI Ediﬁcaciones de \nhasta dos niveles Bloques industrializados con control de \ncalidad muestreados y ensayados de \nacuerdo con ASTM C140. \n\nII Ediﬁcaciones de \nmás de dos niveles \n \n \n≥ 7",
+   "paginas": [
+    25
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.4.2",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "RESISTENCIA A LA COMPRESIÓN HORMIGÓN EN CÁMARA ( 𝒇𝒇′𝒎𝒎 )",
+   "texto": "RESISTENCIA A LA COMPRESIÓN HORMIGÓN EN CÁMARA ( 𝒇𝒇′𝒎𝒎 ). La resistencia \ncaracterística a compresión a los 28 días del hormigón en las cámaras no deberá ser menor de 12 \nMPa. El agregado máximo de este hormigón no deberá ser mayor de 13 mm.",
+   "paginas": [
+    25,
+    26
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.4.3",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "REVENIMIENTO DEL HORMIGÓN EN CÁMARA",
+   "texto": "REVENIMIENTO DEL HORMIGÓN EN CÁMARA . El hormigón en las cámaras de los \nmuros deberá ser de alto revenimiento (≥ 200 mm), que no requiera de equipos especializados \nde vibración para lograr la compacidad.",
+   "paginas": [
+    26
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.4.4",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "RESISTENCIA A COMPRESIÓN MORTERO DE LA JUNTA ( 𝒇𝒇′𝒋𝒋 )",
+   "texto": "RESISTENCIA A COMPRESIÓN MORTERO DE LA JUNTA ( 𝒇𝒇′𝒋𝒋 ) . La resistencia \ncaracterística a compresión a los 28 días del mortero de las juntas verticales y horizontales  no \ndeberá ser menor de 8 MPa ni requiere ser mayor de 12 MPa. Los morteros de juntas deben tener \nuna buena plasticidad, consistencia y ser capaces de retener el agua mínima para la hidratación \ndel cemento y, además, garantizar su adherencia con las unidades de bloques en la mampostería \npara desarrollar su acción ín tegra. La dosiﬁcación en el diseño de mezcla recomendada deberá \nbasarse en: una parte de cemento y tres partes de arena (1:3).",
+   "paginas": [
+    26
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.4.5",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "ESPESOR DE JUNTAS",
+   "texto": "ESPESOR DE JUNTAS. El mortero de las juntas cubrirá totalmente las caras horizontales \ny verticales de las piezas. Su espesor será el mínimo que permita una capa uniforme de mortero \ny la alineación de los bloques. El espesor de las juntas no deberá ser mayor 16 mm.",
+   "paginas": [
+    26
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.4.6",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "RESISTENCIA A COMPRESIÓN DE LA MAMPOSTERÍA ( 𝒇𝒇′𝒎𝒎 )",
+   "texto": "RESISTENCIA A COMPRESIÓN DE LA MAMPOSTERÍA ( 𝒇𝒇′𝒎𝒎 ) . La resistencia a \ncompresión calculada de la mampostería será deﬁnida en conformidad a la tabla siguiente. \nTabla 2: Resistencia a la compresión de la mampostería, 𝒇𝒇′𝒎𝒎. \nResistencia a \ncompresión del \nbloque 𝒇𝒇′𝒃𝒃 (MPa) \nResistencia del mortero, 𝒇𝒇′𝒋𝒋 = 𝟖𝟖 MPa \nValores de 𝒇𝒇′𝒎𝒎 (en MPa) \nÁREA BRUTA (Ab) ÁREA EFECTIVA (Ap) \n150 mm (6”) 200 mm (8”) 150 mm (6”) 200 mm (8”) \n6 2.4 2.4 4.1 4.9 \n7 2.7 2.7 4.8 5.7 \nEn los valores intermedios se permitirá la interpolación lineal. \nTabla 3: Resistencia a la compresión de la mampostería, 𝒇𝒇′𝒎𝒎. \nResistencia a \ncompresión del \nbloque 𝒇𝒇′𝒃𝒃 (MPa) \nResistencia del mortero, 𝒇𝒇′𝒋𝒋 = 𝟏𝟏𝟏𝟏 MPa \nValores de 𝒇𝒇′𝒎𝒎 (en MPa) \nÁREA BRUTA (Ab) ÁREA EFECTIVA (Ap) \n150 mm (6”) 200 mm (8”) 150 mm (6”) 200 mm (8”) \n6 3.3 3.3 5.8 6.9 \n7 3.8 3.8 6.8 7.9 \nEn los valores intermedios se permitirá la interpolación lineal.",
+   "paginas": [
+    26
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.5",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "MÓDULO DE ELASTICIDAD",
+   "texto": "MÓDULO DE ELASTICIDAD.",
+   "paginas": [
+    26,
+    27
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.5.1",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "MÓDULO ELÁSTICO DE LA MAMPOSTERÍA",
+   "texto": "MÓDULO ELÁSTICO DE LA MAMPOSTERÍA. \n(4) 𝐸𝐸𝑐𝑐 =  900 ∙ 𝑓𝑓’𝑐𝑐",
+   "paginas": [
+    27
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.2.5.2",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "MÓDULO DE CORTANTE DE LA MAMPOSTERÍA",
+   "texto": "MÓDULO DE CORTANTE DE LA MAMPOSTERÍA . Se determinará según la ecuación ( 5), \nen la cual el módulo de elasticidad se tomará igual al indicado en la ecuación  (4), y el módulo de \nPoisson se ﬁjará en 0.25. \n(5) 𝐸𝐸𝑣𝑣 =  𝐸𝐸𝑐𝑐\n2(1 + 𝑣𝑣) \nCAPÍTULO 8.3. ESPESOR   EQUIVALENTE. \nPara fines de la evaluación de la resistencia y el cálculo de las armaduras, se utilizará un espesor \nequivalente del muro por peso, el cual permitirá el análisis basado en un elemento macizo con un \nespesor reducido y de la misma longitud del muro. El espesor equivalente se tomará de \nconformidad a la Tabla 4. \nTabla 4: Espesor equivalente para muros de mampostería, 𝒇𝒇′𝒎𝒎. \nEspaciamiento de cámaras \nllenas de concreto \nEspesores equivalentes \nBloques de hormigón de \n200 mm \nBloques de hormigón de \n150 mm \n \n@ 200 mm 193 mm 142 mm  \n@ 400 mm 147 mm 114 mm  \n@ 600 mm 132 mm 104 mm  \n@ 800 mm 124 mm 79 mm  \nCAPÍTULO 8.4.  ESPECIFICACIONES SOBRE REFUERZO.",
+   "paginas": [
+    27
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.1",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "ESPECIFICACIONES GENERALES",
+   "texto": "ESPECIFICACIONES GENERALES.",
+   "paginas": [
+    27
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.1.1",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "",
+   "texto": "El refuerzo vertical para utilizarse  en el diseño de muros de mampostería consistirá en \nbarras redondas corrugadas de acero, y deberá estar embebido en el hormigón de la cámara.",
+   "paginas": [
+    27
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.1.2",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "",
+   "texto": "El refuerzo horizontal para utilizarse en el diseño por cortante de muros de mampostería \nconsistirá en barras redondas corrugadas  de acero . Estas  deberán disponerse en bloques \nespeciales con forma de U, tipo “viga-block”.",
+   "paginas": [
+    27,
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.1.3",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "",
+   "texto": "La armadura utilizada como refuerzo de muros deberá cumplir con las especiﬁcaciones de \ndobleces, solapes y cuantía mínima especiﬁcadas en este Título.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.1.4",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "El armado vertical deberá estar anclado con gancho estándar de 90˚ en su fundación",
+   "texto": "El armado vertical deberá estar anclado con gancho estándar de 90˚ en su fundación.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.1.5",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "",
+   "texto": "El refuerzo horizontal deberá estar anclado con gancho estándar de 90˚ en las \nintersecciones perpendiculares de muros, y con gancho estándar de 180˚ en los extremos libres de \nmuros.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.1.6",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "",
+   "texto": "Las intersecciones de muros y los extremos libres de los mismos deberán estar provistos \nde por lo menos una barra de diámetro de 9.5 mm (N10).",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.1.7",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "",
+   "texto": "Se permitirá una desviación horizontal del refuerzo siempre que no sea mayor de 25 mm \npor cada 150 mm de desarrollo vertical.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.2",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "RESISTENCIA A LA FLUENCIA DE REFUERZO",
+   "texto": "RESISTENCIA A LA FLUENCIA DE REFUERZO.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.2.1",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "El esfuerzo de ﬂuencia del refuerzo (𝑓𝑓𝑦𝑦), no se deberá ser mayor de 420 MPa",
+   "texto": "El esfuerzo de ﬂuencia del refuerzo (𝑓𝑓𝑦𝑦), no se deberá ser mayor de 420 MPa.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.3",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "DIÁMETRO MÍNIMO DE REFUERZO",
+   "texto": "DIÁMETRO MÍNIMO DE REFUERZO.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.3.1",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "El diámetro del refuerzo vertical uniformemente distribuido no será menor de 9",
+   "texto": "El diámetro del refuerzo vertical uniformemente distribuido no será menor de 9.5 mm \n(N10) ni mayor de 19 mm (N 19). Sin embargo,  no se permitirá diámetros mayores de 13 mm \n(N13) para muros de mampostería con espesores nominales menores de 200 mm.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.3.2",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "El diámetro de refuerzo horizontal uniformemente distribuido no será menor de 9",
+   "texto": "El diámetro de refuerzo horizontal uniformemente distribuido no será menor de 9.5 mm \n(N10) ni mayor de 13 mm (N13).",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.3.3",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "Para la evaluación de la resistencia fuera del plano, según el  CAPÍTULO 8",
+   "texto": "Para la evaluación de la resistencia fuera del plano, según el  CAPÍTULO 8.10, el refuerzo \nuniformemente distribuido, no será mayor de 13 mm (N13).",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.4",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "ESPACIAMIENTO MÁXIMO DE REFUERZO VERTICAL",
+   "texto": "ESPACIAMIENTO MÁXIMO DE REFUERZO VERTICAL.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.4.1",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "",
+   "texto": "El refuerzo para disponer  en las cámaras de los muros nunca tendrá un espaciamiento \nmayor de 1200 mm.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.5",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "EMPALME DEL REFUERZO",
+   "texto": "EMPALME DEL REFUERZO.",
+   "paginas": [
+    28,
+    29
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.5.1",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "",
+   "texto": "La longitud de empalme por traslapo  de las barras de refuerzos se tomará igual a la dada \npor la siguiente expresión, pero nunca deberá tomarse menor de 300 mm. \n(6) ℓ𝑑𝑑 =  1.57𝑑𝑑𝑏𝑏\n2𝑓𝑓𝑦𝑦\n𝐾𝐾�𝑓𝑓′𝑐𝑐\n \nEl valor de K no deberá exceder  el menor entre: el recubrimiento  libre mínimo especiﬁcado, el \nespaciamiento libre entre empalmes de barras adyacentes y 9𝑑𝑑𝑏𝑏.",
+   "paginas": [
+    29
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.4.6",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "GANCHOS PARA EL REFUERZO",
+   "texto": "GANCHOS PARA EL REFUERZO.  El doblado del refuerzo longitudinal y del refuerzo para \nestribos y grapas deberá estar de conformidad con las especiﬁcaciones de la T abla 5 y T abla 6. \nTabla 5: Geometría de ganchos estándar para barras de refuerzo. \nTipo de gancho \nestándar \nDenominación de \nla barra \nDiámetro interior \nmínimo de doblado, \nmm \nExtensión recta \ndel gancho, 𝓵𝓵𝒆𝒆𝒆𝒆𝒆𝒆, \nen mm \nGancho a 90º N10 a la N19 6𝑑𝑑𝑏𝑏 12𝑑𝑑𝑏𝑏 \nGancho a 180º N10 a la N25 6𝑑𝑑𝑏𝑏 El mayor entre \n4𝑑𝑑𝑏𝑏 y 65 mm \n \nTabla 6: Geometría de ganchos estándar para estribos y grapas. \nTipo de gancho \nestándar \nDenominación de \nla barra \nDiámetro interior \nmínimo de doblado, \nmm \nExtensión recta \ndel gancho, 𝒍𝒍𝒆𝒆𝒆𝒆𝒆𝒆, \nen mm \nGancho a 90º N10 a la N13 4𝑑𝑑𝑏𝑏 Mayor de 6𝑑𝑑𝑏𝑏 y \n75 mm \nGancho a 135º N10 a la N13 4𝑑𝑑𝑏𝑏 El mayor entre \n6𝑑𝑑𝑏𝑏 y 75 mm \nGancho a 180º N10 a la N13 4𝑑𝑑𝑏𝑏 El mayor entre \n4𝑑𝑑𝑏𝑏 y 65 mm \n \n\n\nFigura 1: Doblado de barras de refuerzo. \nCAPÍTULO 8.5. MUROS ARMADOS EN DOS \nDIRECCIONES.",
+   "paginas": [
+    29,
+    30
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.5.1",
+   "titulo_num": 8,
+   "capitulo": "8.5",
+   "encabezado": "REQUISITOS GENERALES",
+   "texto": "REQUISITOS GENERALES. Los muros diseñados como elementos resistentes a fuerzas \nlaterales deberán ser armados vertical y horizontalmente y además cumplir con las \nespeciﬁcaciones de 8.5.2 hasta 8.5.5. \nLos requisitos de las Secciones 8.5.1 a 8.5.4 del CAPÍTULO 8.5 se pueden ignorar, si se demuestra \nque el cortante  último (𝑉𝑉𝑢𝑢 ), no es mayor que el umbral de cortante definido por la siguiente \nexpresión: \n(7) 0.25 ∙ �𝑓𝑓’𝑐𝑐 ∙ 0.8𝐿𝐿 ∙ 𝑡𝑡𝑒𝑒",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.5.2",
+   "titulo_num": 8,
+   "capitulo": "8.5",
+   "encabezado": "CUANTÍA MÍNIMA VERTICAL",
+   "texto": "CUANTÍA MÍNIMA VERTICAL . La relación mínima del área de acero de refuerzo vertical \nuniformemente distribuido y referido al área bruta del muro,  deberá satisfacer la siguiente \nexpresión: \n(8)  𝜌𝜌𝑣𝑣 = ∑𝐴𝐴𝑠𝑠𝑣𝑣\n𝑡𝑡𝑏𝑏 ⋅ 𝐿𝐿 ≥ 0.0006",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.5.3",
+   "titulo_num": 8,
+   "capitulo": "8.5",
+   "encabezado": "CUANTÍA MÍNIMA HORIZONTAL",
+   "texto": "CUANTÍA MÍNIMA HORIZONTAL.  La relación mínima del área de acero de refuerzo \nhorizontal uniformemente distribuido y referido al área bruta del muro, deberá satisfacer la \nsiguiente expresión. \n(9)  𝜌𝜌ℎ = ∑𝐴𝐴𝑠𝑠𝑣𝑣\n𝑡𝑡𝑏𝑏 ⋅ 𝐿𝐿 ≥ 0.0006",
+   "paginas": [
+    30,
+    31
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.5.4",
+   "titulo_num": 8,
+   "capitulo": "8.5",
+   "encabezado": "CUANTÍA MÍNIMA COMBINADA",
+   "texto": "CUANTÍA MÍNIMA COMBINADA.  La cuantía de refuerzo combinada deberá satisfacer la \nsiguiente expresión: \n(10)  𝜌𝜌𝑣𝑣 = ∑𝐴𝐴𝑆𝑆𝑆𝑆\n𝑡𝑡𝑏𝑏 ⋅ 𝐿𝐿 ≥ 0.0006",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.5.5",
+   "titulo_num": 8,
+   "capitulo": "8.5",
+   "encabezado": "ESPACIAMIENTO MÁXIMO",
+   "texto": "ESPACIAMIENTO MÁXIMO.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.5.5.1",
+   "titulo_num": 8,
+   "capitulo": "8.5",
+   "encabezado": "El espaciamiento máximo para el refuerzo vertical no deberá ser mayor a 1200 mm",
+   "texto": "El espaciamiento máximo para el refuerzo vertical no deberá ser mayor a 1200 mm.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.5.5.2",
+   "titulo_num": 8,
+   "capitulo": "8.5",
+   "encabezado": "El espaciamiento máximo para el refuerzo horizontal no deberá ser mayor a 600 mm",
+   "texto": "El espaciamiento máximo para el refuerzo horizontal no deberá ser mayor a 600 mm. \nCAPÍTULO 8.6. ELEMENTOS DE AMARRE.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.1",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "ESPECIFICACIONES GENERALES",
+   "texto": "ESPECIFICACIONES GENERALES.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.1.1",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "",
+   "texto": "Se clasiﬁcarán como muros con elementos de amarre aquellos que se construyan \nrodeados de vigas y columnas, con el objetivo de aumentar su resistencia a carga axial, ﬂexión y \ncortante cuando las solicitaciones externas lo ameriten. La resistencia de muros con elementos de \namarre debe ser evaluada con acción íntegra y monolítica entre los elementos de columnas, vigas \ny mampostería.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.1.2",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "Los muros con elementos de amare no deberán tener un espesor menor de 15 cm (6”)",
+   "texto": "Los muros con elementos de amare no deberán tener un espesor menor de 15 cm (6”).",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.1.3",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "",
+   "texto": "La resistencia a la compresión del hormigón a los 28 días en los elementos de amarre no \nserá menor de 180 Kg/cm2.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.1.4",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "",
+   "texto": "Las vigas y columnas de amarre deberán cumplir con los requisitos del “ Título 5 sobre \nHormigón Armado, perteneciente al Volumen I: Análisis y Diseño Estructural de Ediﬁcaciones”.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.2",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "COLUMNAS COMO ELEMENTOS DE AMARRE",
+   "texto": "COLUMNAS COMO ELEMENTOS DE AMARRE.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.2.1",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "",
+   "texto": "Las columnas de amarre deberán ser continuas desde la cimentación hasta la parte \nsuperior del muro y deben ser vaciadas directamente contra éste. Para ﬁnes de diseño se podrá \nconsiderar como columna de amarre, todo refuerzo concentrado en las interseccion es extremas \nde los muros (nudos), siempre y cuando tengan más de tres barras en igual número de cámaras.",
+   "paginas": [
+    31,
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.2.2",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "",
+   "texto": "La dimensión mínima para las columnas de amarre no será menor que el espesor bruto \ndel muro.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.2.3",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "El área mínima de las columnas de amarre no deberá ser menor de 400 cm2",
+   "texto": "El área mínima de las columnas de amarre no deberá ser menor de 400 cm2.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.2.4",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "",
+   "texto": "Se recomienda colocar columnas de amarre en los siguientes lugares: \na. En los extremos de los muros estructurales. \nb. En las intersecciones con otros muros estructurales. \nc. En puntos intermedios de los muros a una separación no mayor de dos (2) veces su altura, \nni de 5 m.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.2.5",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "REFUERZO MÍNIMO",
+   "texto": "REFUERZO MÍNIMO.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.2.5.1",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "REFUERZO LONGITUDINAL",
+   "texto": "REFUERZO LONGITUDINAL. \nE l  r e f u e r z o  m í n i m o  e n  t o d a  l a  l o n g i t u d  d e l  e j e  d e  l a  c o l u m n a  s e r á  e l  v a l o r  m a y o r  d e  l a s  \ncondiciones siguientes: \na. Ecuación (9)0.01Ac                             \nb. El área asociada a 3 barras de diámetros mayores o iguales a 1/2” .",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.2.5.2",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "REFUERZO TRANSVERSAL",
+   "texto": "REFUERZO TRANSVERSAL. Para este tipo de refuerzo se utilizarán estribos cerrados \ncon las siguientes especiﬁcaciones: \na. El diámetro del estribo será mayor o igual a 1/4” . \n \nb. El espaciamiento del estribo no será mayor que 20 cm.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.3",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "VIGAS COMO ELEMENTOS DE AMARRE",
+   "texto": "VIGAS COMO ELEMENTOS DE AMARRE.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.3.1",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "",
+   "texto": "Las vigas de amarre deben ser vaciadas directamente sobre el muro en toda su longitud, \ny deberán anclarse en las columnas de amarre colocadas en los extremos del muro.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.3.2",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "",
+   "texto": "La dimensión mínima para las vigas de amarre nunca será menor que el espesor bruto \ndel muro.",
+   "paginas": [
+    32,
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.3.3",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "El área mínima de las vigas de amarre no podrá ser menor de 300 cm2",
+   "texto": "El área mínima de las vigas de amarre no podrá ser menor de 300 cm2.",
+   "paginas": [
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.3.4",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "La separación entre vigas de amarre no será mayor de 1",
+   "texto": "La separación entre vigas de amarre no será mayor de 1.50 m medida centro a centro.",
+   "paginas": [
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.3.5",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "REFUERZO MÍNIMO",
+   "texto": "REFUERZO MÍNIMO.",
+   "paginas": [
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.3.5.1",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "REFUERZO LONGITUDINAL",
+   "texto": "REFUERZO LONGITUDINAL. \nEl refuerzo mínimo en toda la longitud del eje de la viga será el valor mayor de las condiciones \nsiguientes: \na. Ecuación (𝟏𝟏𝟎𝟎)\n14𝐴𝐴𝑣𝑣\n𝑓𝑓𝑦𝑦\n \nb. El área asociada a 4 barras de diámetros mayores o iguales a 3/8” .",
+   "paginas": [
+    33
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.6.3.5.2",
+   "titulo_num": 8,
+   "capitulo": "8.6",
+   "encabezado": "REFUERZO TRANSVERSAL",
+   "texto": "REFUERZO TRANSVERSAL. \nPara este tipo de refuerzo se utilizarán estribos cerrados con las siguientes especiﬁcaciones: \na. El diámetro del estribo será mayor o igual a 1/4” . \nb. El espaciamiento del estribo no será mayor a 20 cm. \nCAPÍTULO 8.7. MAMPOSTERÍA A CARGA AXIAL Y \nFLEXIÓN. \nLas disposiciones del CAPÍTULO 8.7 se deben aplicar al diseño de muros de mampostería sujetos \na cargas axiales o de flexión o a una combinación de ambas contenidas en el plano del muro.",
+   "paginas": [
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.1",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "SUPOSICIONES DE DISEÑO",
+   "texto": "SUPOSICIONES DE DISEÑO. \nPara el diseño por resistencia de muros de mampostería sujetos a cargas axiales, de ﬂexión, o una \ncombinación de ambas deben satisfacerse las condiciones de equilibrio y compatibilidad de las \ndeformaciones.",
+   "paginas": [
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.1.1",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "Para los ﬁnes de diseño y evaluación de resistencia, se debe considerar la unión del block \ny el mortero monolítico, con un espesor equivalente al especiﬁcado en el CAPÍTULO 8.3  y \nreducido para tomar en cuenta los efectos de esbeltez según la Sección 8.7.2.",
+   "paginas": [
+    33,
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.1.2",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "Las deformaciones en el acero de refuerzo y la mampostería se deben suponer \ndirectamente proporcionales a la distancia desde el eje neutro.",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.1.3",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "La deformación de la mampostería de hormigón en la ﬁbra extrema en compresión no \nserá mayor que 0.0025",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.1.4",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "El esfuerzo en el refuerzo deberá tomarse Es veces la deformación (εs) del acero, pero el \nesfuerzo no podrá ser usado mayor al esfuerzo de ﬂuencia especiﬁcado (fy).",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.1.5",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "La resistencia a la tracción en muros de mampostería no será considerada en los cálculos \nde las armaduras.",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.1.6",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "El esfuerzo de compresión en la mampostería será tomado como un bloque rectangular \nde base igual a 0.85f’m y de altura a=0.85C medido desde la ﬁbra extrema en compresión del \nelemento.",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.2",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "CONSIDERACIONES DE ESBEL TEZ",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.2.1",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "En los muros cuya relación de esbeltez (H/t b) sea mayor a 28, se proveerán elementos \nrigidizadores perpendiculares al diafragma del muro, que actuarán como contrafuertes \nestabilizadores del pandeo, donde la separación de estos no puede ser mayor de 2 veces la altura \nlibre del muro y su longitud no será menor de 4 veces el espesor bruto (tb) del muro considerado.",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.2.2",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "El diseño de muros a compresión- ﬂexión o una combinación de ambos, se deberá \nrealizar tomando en cuenta los efectos de esbeltez en la dirección menor del elemento, por medio \nde factores de reducción para el área efectiva, evaluada de conformidad al espeso r equivalente, \ndescrito en el \nCAPÍTULO 8.3 de este Título. \nEcuación (𝟏𝟏𝟏𝟏)𝐴𝐴𝑒𝑒 = 𝐿𝐿 ∙ 𝑡𝑡𝑒𝑒 ∙ 𝐹𝐹𝑒𝑒 \nEcuación (𝟏𝟏𝟏𝟏)\n𝐾𝐾𝑝𝑝 ∙ 𝐻𝐻\n𝑡𝑡𝑏𝑏\n≤ 28   → 𝐹𝐹𝑒𝑒 = 1 − �\n𝐾𝐾𝑝𝑝 ∙ 𝐻𝐻\n40 ∙ 𝑡𝑡𝑏𝑏\n�\n\nEcuación (𝟏𝟏𝟏𝟏)\n𝐾𝐾𝑝𝑝 ∙ 𝐻𝐻\n𝑡𝑡𝑏𝑏\n> 28   →  𝐹𝐹𝑒𝑒 = �20 ∙ 𝑡𝑡𝑏𝑏\n𝐾𝐾𝑝𝑝 ∙ 𝐻𝐻�",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.2.3",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "Para la evaluación del coeﬁciente de pandeo (Kp) en las ecuaciones 11 y 13, se empleará \nel criterio establecido a continuación: \na. Para muros en ediﬁcios con losas de hormigón vaciadas sobre estos y donde el refuerzo \nvertical del muro cruza la entrecara de apoyo entre la mampostería y el hormigón, Kp = \n0.85. \nb. Para muros en ediﬁcios con losas prefabricadas, con entrepisos o techos de maderas o \nsistema de metal, etc., Kp = 1.0.",
+   "paginas": [
+    34,
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.3",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "RESISTENCIA A CARGA AXIAL Y DE FLEXIÓN",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.3.1",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "La resistencia nominal a carga axial, ﬂexión, o una combinación de ambos en muros de \nmampostería estructural, se debe determinar aplicando las Secciones 8.7.3.2 y 8.7.3.3.",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.3.2",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "La resistencia a compresión máxima de muros de mampostería sometidos a carga axial \ncéntrica será de acuerdo con la ecuación 14: \nEcuación (𝟏𝟏𝟏𝟏)𝜑𝜑𝑃𝑃𝑛𝑛𝑀𝑀𝐴𝐴𝑀𝑀 = 0.80 ∙ 𝜑𝜑 �0.85𝑓𝑓′𝑚𝑚(𝐴𝐴𝑒𝑒 − 𝐴𝐴𝑠𝑠𝑡𝑡) + �𝐴𝐴𝑠𝑠𝑡𝑡 ∙ 𝑓𝑓𝑦𝑦�� \nDonde \n𝐴𝐴𝑠𝑠𝑠𝑠 = � 𝐴𝐴𝑆𝑆𝑆𝑆 + 𝐴𝐴𝑆𝑆𝑆𝑆 + 𝐴𝐴𝑆𝑆𝑆𝑆",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.3.3",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "La resistencia a carga axial y de ﬂexión combinadas en muros de mampostería se tomará \nsegún las ecuaciones 15 y 16, donde ØP n y ØMn se obtienen tomando en cuenta la interacción \nentre momento y carga axial, de acuerdo a las hipótesis mencionadas en la Sección 8.7.1, las \ncuales permiten desarrollar un diagrama de interacción del muro, empleando el coeﬁciente de \nreducción de resistencia y de esbeltez según las Secciones 8.2.3 y 8.7.2. \nEcuación (𝟏𝟏𝟔𝟔)𝜑𝜑𝑃𝑃𝑛𝑛 = 𝜑𝜑 �0.85𝑓𝑓′𝑐𝑐 ∙ 𝑎𝑎 ∙ 𝒆𝒆𝒆𝒆 ∙ 𝑭𝑭𝒆𝒆 ± (𝐴𝐴𝑆𝑆𝑆𝑆𝑓𝑓𝑆𝑆𝑆𝑆) ± �𝐴𝐴𝑆𝑆𝑆𝑆𝑓𝑓𝑆𝑆𝑆𝑆� ± �(𝐴𝐴𝑆𝑆𝑆𝑆𝑓𝑓𝑆𝑆𝑆𝑆)� ≤ 𝜑𝜑𝑃𝑃𝑛𝑛𝑀𝑀𝐴𝐴𝑀𝑀 \nEcuación (𝟏𝟏𝟔𝟔)𝜑𝜑𝑀𝑀𝑛𝑛 = 𝜑𝜑 �0.85𝑓𝑓′𝑐𝑐 ∙ 𝑎𝑎 ∙ 𝒆𝒆𝒆𝒆 ∙ �𝐿𝐿\n2 − 𝑎𝑎\n2� ± (𝑨𝑨𝑆𝑆𝑆𝑆𝒇𝒇𝑆𝑆𝑆𝑆 ∙ 𝒀𝒀𝑆𝑆𝑆𝑆) ± �𝐴𝐴𝑆𝑆𝑆𝑆𝑓𝑓𝑆𝑆𝑆𝑆 ∙ 𝑌𝑌𝑆𝑆𝑆𝑆� ± �(𝐴𝐴𝑆𝑆𝑆𝑆𝑓𝑓𝑆𝑆𝑆𝑆 ∙ 𝑌𝑌𝑆𝑆𝑆𝑆)�",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.3.4",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "Se podrá emplear un método simpliﬁcado alternativo para la determinación de la \nresistencia a la ﬂexión: \na) Para Pu ≤ 0.10 ∙ f’m ∙Ab \n\n\nEcuación (𝟏𝟏𝟏𝟏)𝜑𝜑𝑀𝑀𝑛𝑛 = 𝜑𝜑 �0.85𝑓𝑓′𝑚𝑚 ∙ 𝑎𝑎 ∙ 𝑡𝑡𝑒𝑒 ∙ �0.8𝐿𝐿 − 𝑎𝑎\n2�� \nEcuación (𝟏𝟏 𝟖𝟖)𝑎𝑎 =\n𝐴𝐴𝑆𝑆 ∙ 𝑓𝑓𝑦𝑦\n0.85 ∙ 𝑓𝑓′𝑚𝑚 ∙ 𝑡𝑡𝑒𝑒 ∙ 𝐹𝐹𝑒𝑒\n \nDonde: \nAs = Min (ASI, ASJ) y no necesita ser mayor que la ecuación 19. \n \n \nb) Para Pu > 0.10∙f’m∙Ab la resistencia a ﬂexión será evaluada de acuerdo con la sección 8.7.3.3.",
+   "paginas": [
+    35,
+    36
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.7.3.5",
+   "titulo_num": 8,
+   "capitulo": "8.7",
+   "encabezado": "",
+   "texto": "El término te∙Fe expresado en las ecuaciones 11,15 ,16 a la 18, corresponden al espesor \nequivalente por esbeltez y pueden ser tomados en conformidad a los valores indicados en las \ntablas 5 y 6. \nTABLA 5 \nESPESORES EQUIVALENTES POR ESBEL TEZ EN MUROS de tb = 200 mm (8”) \nALTURA \nEFECTIVA DEL \nMURO Kp∙H(m) \nValores De Espesores Equivalentes por Esbeltez (te ∙ Fe) \nEspaciamiento De Cámaras Llenas de Concreto \n@ 0.20 m @ 0.40 m @ 0.60 m @ 0.80 m \n2.00 18.09 13.81 12.38 11.67 \n2.10 17.97 13.72 12.3 11.58 \n2.20 17.8 13.62 12.22 11.51 \n2.30 17.6 13.51 12.12 11.42 \n2.40 17.37 13.38 12.01 11.33 \n2.50 17.12 13.24 11.9 11.23 \n2.60 16.86 13.09 11.78 11.13 \n2.70 16.59 12.93 11.66 11.02 \n2.80 16.32 12.77 11.54 10.92 \n2.90 16.04 12.61 11.42 10.82 \n3.00 15.76 12.45 11.31 10.71 \n3.10 15.49 12.29 11.19 10.61 \n3.20 15.23 12.13 11.08 10.51 \nEcuación (𝟏𝟏𝟏𝟏)𝐴𝐴𝑆𝑆 ≤=\n𝑀𝑀𝑢𝑢\n∅∙𝑓𝑓𝑦𝑦∙0.8∙𝐿𝐿  \n\n\n3.30 14.97 11.97 10.97 10.41 \n3.40 14.72 11.81 10.86 10.32 \n3.50 14.48 11.65 10.76 10.22 \n3.60 14.25 11.5 10.65 10.13 \n3.70 15.03 11.35 10.55 10.04 \n3.80 14.59 11.41 10.23 9.64 \n \n \nTABLA 6 \nESPESORES EQUIVALENTES POR ESBEL TEZ EN MUROS de tb= 150 mm (6”) \nALTURA \nEFECTIVA DEL \nMURO Kp∙H \n(m) \nValores De Espesores Equivalentes por Esbeltez (te ∙ Fe) \nEspaciamiento De Cámaras Llenas de Concreto \n@ 0.20 m @ 0.40 m @ 0.60 m @ 0.80 m \n2.00 12.64 10.16 9.26 9.03 \n2.10 12.48 10.03 9.14 8.92 \n2.20 12.31 9.89 9.02 8.79 \n2.30 12.13 9.75 8.89 8.67 \n2.40 11.94 9.60 8.75 8.53 \n2.50 11.75 9.45 8.61 8.40 \n2.60 11.55 9.28 8.46 8.25 \n2.70 11.34 9.12 8.31 8.10 \n2.80 11.12 8.94 8.15 7.95 \n2.90 10.90 8.76 7.99 7.79 \n3.00 10.67 8.57 7.82 7.62 \n3.10 10.42 8.38 7.64 7.45 \n3.20 10.18 8.18 7.46 7.27 \n3.30 9.92 7.97 7.27 7.09 \n3.40 9.65 7.76 7.07 6.90 \n3.50 9.38 7.54 6.87 6.70 \n3.60 9.10 7.32 6.67 6.50 \n3.70 8.81 7.08 6.46 6.30 \n3.80 8.52 6.85 6.24 6.08 \n \n\n\nCAPÍTULO 8.8. MAMPOSTERÍA A ESFUERZO CORTANTE.",
+   "paginas": [
+    36,
+    37,
+    38
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.8.1",
+   "titulo_num": 8,
+   "capitulo": "8.8",
+   "encabezado": "",
+   "texto": "La resistencia nominal a fuerzas cortantes en muros de mampostería estructural se debe \ndeterminar aplicando las Secciones 8.8.2 a 8.8.4.",
+   "paginas": [
+    38
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.8.2",
+   "titulo_num": 8,
+   "capitulo": "8.8",
+   "encabezado": "",
+   "texto": "La resistencia nominal al cortante, V n, de muros estructurales, no debe exceder el valor \ncalculado mediante: \nEcuación (𝟏𝟏𝟎𝟎) 𝑉𝑉𝑛𝑛 = 𝑉𝑉𝑐𝑐 + 𝑉𝑉𝑠𝑠",
+   "paginas": [
+    38
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.8.3",
+   "titulo_num": 8,
+   "capitulo": "8.8",
+   "encabezado": "",
+   "texto": "La resistencia al cortante proporcionada por la mampostería, Vm, se debe calcular por medio \nde: \nEcuación (𝟏𝟏𝟏𝟏) 𝐻𝐻𝑇𝑇\n𝐿𝐿 ≥ 2 →  𝑉𝑉𝑐𝑐 = 0.60�𝑓𝑓′𝑐𝑐 ∙ 0.8𝐿𝐿 ∙ 𝑡𝑡𝑒𝑒 \nEcuación (𝟏𝟏𝟏𝟏)1.5 <\n𝐻𝐻𝑇𝑇\n𝐿𝐿\n< 2    →  𝑉𝑉𝑐𝑐 = 0.725�𝑓𝑓′𝑐𝑐 ∙ 0.8𝐿𝐿 ∙ 𝑡𝑡𝑒𝑒 \nEcuación (𝟏𝟏𝟏𝟏) 𝐻𝐻𝑇𝑇\n𝐿𝐿 ≤ 1.5   →  𝑉𝑉𝑐𝑐 = 0.85�𝑓𝑓′𝑐𝑐 ∙ 0.8𝐿𝐿 ∙ 𝑡𝑡𝑒𝑒",
+   "paginas": [
+    38
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.8.4",
+   "titulo_num": 8,
+   "capitulo": "8.8",
+   "encabezado": "",
+   "texto": "La resistencia al cortante proporcionada por el acero de refuerzo, V s, se debe calcular por \nmedio de: \nEcuación (𝟏𝟏𝟏𝟏)𝑉𝑉𝑆𝑆 = 𝐴𝐴𝑠𝑠ℎ ∙ 𝑓𝑓𝑦𝑦 ∙ 0.8𝐿𝐿\n𝑆𝑆  \n                 Donde \n𝑉𝑉𝑆𝑆 ≤ 2�𝑓𝑓′\n𝑐𝑐 ∙ 0.8𝐿𝐿 ∙ 𝑡𝑡𝑒𝑒 \nCAPÍTULO 8.9. MAMPOSTERÍA A FLEXIÓN FUERA DEL \nPLANO. \nLas disposiciones del CAPÍTULO 8.9 se deben aplicar al diseño de muros de mampostería sujetos \na cargas axiales o de ﬂexión o a una combinación de ambas contenidas fuera del plano del muro. \nEstas disposiciones deben cumplir con las suposiciones de diseño de la Sección 8.7.1 y las \nconsideraciones de esbeltez de la Sección 8.7.2.",
+   "paginas": [
+    38
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.9.1",
+   "titulo_num": 8,
+   "capitulo": "8.9",
+   "encabezado": "",
+   "texto": "La resistencia a compresión máxima de muros de mampostería sometidos a carga axial \ncéntrica será de acuerdo con la siguiente ecuación: \nEcuación (25) 𝜑𝜑𝑃𝑃𝑛𝑛𝑀𝑀𝐴𝐴𝑀𝑀 = 0.80 ∙ 𝜑𝜑�0.85𝑓𝑓′𝑚𝑚(𝐴𝐴𝑒𝑒 − 𝐴𝐴𝑠𝑠𝑡𝑡) + (𝐴𝐴𝑠𝑠𝑡𝑡 ∙ 𝑓𝑓𝑦𝑦)� \nDonde    \n 𝐴𝐴𝑠𝑠𝑠𝑠 = � 𝐴𝐴𝑆𝑆𝑆𝑆",
+   "paginas": [
+    38,
+    39
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.9.2",
+   "titulo_num": 8,
+   "capitulo": "8.9",
+   "encabezado": "",
+   "texto": "La resistencia a carga axial y de ﬂexión combinadas fuera del plano en muros de \nmampostería se tomará según las condiciones siguientes: \na. Para Pu ≤ 0.10·f’m·Ab  \nEcuación (26) 𝜑𝜑𝑀𝑀𝑛𝑛 = 𝜑𝜑 ∙ 0.85𝑓𝑓′𝑚𝑚 ∙ 𝑎𝑎 ∙ 𝐿𝐿 ∙ 𝐹𝐹𝑒𝑒 �𝑡𝑡𝑏𝑏\n2 − 𝑎𝑎\n2� \nEcuación (𝟏𝟏𝟏𝟏)𝑎𝑎 =\n∑ 𝐴𝐴𝑆𝑆𝑆𝑆 ∙ 𝑓𝑓𝑦𝑦\n0.85 ∙ 𝑓𝑓′𝑐𝑐 ∙ 𝐿𝐿 ∙ 𝐹𝐹𝑒𝑒\n \n \nb. Para Pu > 0.10·f’m·Ab  \nLa resistencia a carga axial y de ﬂexión combinadas en muros de mampostería se tomará según \nlas ecuaciones 28 y 29, donde ØPn y ØMn se obtienen tomando en cuenta la interacción entre \nmomento y carga axial, de acuerdo a las hipótesis mencionadas en la Sección 8.7.1, las cuales \npermiten desarrollar un diagrama de interacción del muro, empleando el coeﬁciente de \nreducción de resistencia y de esbeltez según las \nSecciones 8.2.3 y 8.7.2.                           \nEcuación (28) 𝜑𝜑𝑃𝑃𝑛𝑛 = 𝜑𝜑 �0.85𝑓𝑓′𝑚𝑚 ∙ 𝑎𝑎 ∙ 𝐿𝐿 ∙ 𝐹𝐹𝑒𝑒 ± ��𝐴𝐴𝑆𝑆𝑉𝑉𝑓𝑓𝑆𝑆𝑉𝑉�� ≤ 𝜑𝜑𝑃𝑃𝑛𝑛𝑀𝑀𝐴𝐴𝑀𝑀 \nEcuación (29) 𝜑𝜑𝑀𝑀𝑛𝑛 = 𝜑𝜑 �0.85𝑓𝑓′𝑚𝑚 ∙ 𝑎𝑎 ∙ 𝐿𝐿 ∙ 𝐹𝐹𝑒𝑒 �𝑡𝑡𝑏𝑏\n4 − 𝑎𝑎\n2� ± ��𝐴𝐴𝑆𝑆𝑉𝑉𝑓𝑓𝑆𝑆𝑉𝑉 ∙ 𝑌𝑌𝑆𝑆𝑉𝑉�� \nCAPÍTULO 8.10. CONSIDERACIONES DE \nAPLASTAMIENTO EN MAMPOSTERÍA.",
+   "paginas": [
+    39
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.10.1",
+   "titulo_num": 8,
+   "capitulo": "8.10",
+   "encabezado": "",
+   "texto": "Los apoyos de vigas y/o dinteles, directamente sobre la mampostería, requieren la \nveriﬁcación de la resistencia al aplastamiento según la Sección 8.10.2. Cuando los apoyos de vigas \ny/o dinteles no satisfacen los requisitos de resistencia de aplastamiento, se podrá usar dados de \napoyo, con el objeto de disminuir las presiones de aplastamiento entre el ancho apoyado (b w) y la \n\n\nmampostería, donde las especiﬁcaciones mínimas de los dados de apoyo serán  según las \nespeciﬁcaciones de las Secciones 8.10.3 y 8.10.4. Las cámaras que coincidan con el ancho apoyado \nde la viga y/o dintel, deben estar llenas de hormigón, según las especiﬁcaciones de la Sección \n8.2.5.3 y provistas de por los menos una varilla de 3/8” .",
+   "paginas": [
+    39,
+    40
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.10.2",
+   "titulo_num": 8,
+   "capitulo": "8.10",
+   "encabezado": "",
+   "texto": "Resistencia al aplastamiento de la mampostería se evaluará según la fórmula 30: \nEcuación (30) 𝜑𝜑𝑃𝑃𝑎𝑎 = 𝜑𝜑 ∙ 0.85 ∙ 𝑓𝑓′𝑚𝑚 ∙ 𝑡𝑡𝑏𝑏 ∙ 𝑏𝑏𝑤𝑤",
+   "paginas": [
+    40
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.10.3",
+   "titulo_num": 8,
+   "capitulo": "8.10",
+   "encabezado": "",
+   "texto": "Resistencia al aplastamiento del dado de apoyo se evaluará según la fórmula (31): \nEcuación (31) 𝜑𝜑𝑃𝑃𝑎𝑎 = 𝜑𝜑 ∙ 0.85 ∙ 𝑓𝑓′𝑚𝑚 ∙ 𝑡𝑡𝑏𝑏 ∙ 𝐿𝐿𝐷𝐷 \nDonde \nLD debe ser por lo menos dos veces el ancho de apoyo (2bw), pero no menor de 40 cm. Y su altura \ndebe ser no menor de 20 cm.",
+   "paginas": [
+    40
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.10.4",
+   "titulo_num": 8,
+   "capitulo": "8.10",
+   "encabezado": "",
+   "texto": "El dado de apoyo debe cumplir con las especiﬁcaciones mínimas de refuerzo de vigas de \namarre, especiﬁcado en la Sección 8.6.3.5.",
+   "paginas": [
+    40
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.10.5",
+   "titulo_num": 8,
+   "capitulo": "8.10",
+   "encabezado": "",
+   "texto": "El valor de la resistencia calculada de la mampostería (f’ m), en las ecuaciones 30 y 31, \ndeben ser tomadas con relación al área bruta de la pared. (Véase tablas 2 y 3). \nCAPÍTULO 8.11. MUROS DE CONTENCIÓN DE \nMAMPOSTERÍA.",
+   "paginas": [
+    40
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.11.1",
+   "titulo_num": 8,
+   "capitulo": "8.11",
+   "encabezado": "",
+   "texto": "Los muros de mampostería usados como muros contención y/o retención deberán \ncumplir con los requisitos mínimo-especiﬁcados en las Secciones 8.11.2 a la 8.11.8.",
+   "paginas": [
+    40
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.11.2",
+   "titulo_num": 8,
+   "capitulo": "8.11",
+   "encabezado": "",
+   "texto": "La evaluación de la resistencia a carga axial, a ﬂexión o una combinación de ambos, se \ndeberá calcular de acuerdo a las especiﬁcaciones del CAPÍTULO 8.9.",
+   "paginas": [
+    40
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.11.3",
+   "titulo_num": 8,
+   "capitulo": "8.11",
+   "encabezado": "El espesor bruto de muro no será menor de 8” (20 cm)",
+   "texto": "El espesor bruto de muro no será menor de 8” (20 cm).",
+   "paginas": [
+    40
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.11.4",
+   "titulo_num": 8,
+   "capitulo": "8.11",
+   "encabezado": "La altura libre del muro de retención no será mayor de 1",
+   "texto": "La altura libre del muro de retención no será mayor de 1.5 m.",
+   "paginas": [
+    40
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.11.5",
+   "titulo_num": 8,
+   "capitulo": "8.11",
+   "encabezado": "",
+   "texto": "El muro de contención y/o retención deberá tener todas sus cámaras llenas y provistas de \npor lo menos una varilla de 3/8” .",
+   "paginas": [
+    40,
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.11.6",
+   "titulo_num": 8,
+   "capitulo": "8.11",
+   "encabezado": "Se dispondrán de columnas de amarre a una separación no mayor de 3 m",
+   "texto": "Se dispondrán de columnas de amarre a una separación no mayor de 3 m. en toda la \nlongitud del muro, que cumplan con los requisitos de la Sección 8.6.2.",
+   "paginas": [
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.11.7",
+   "titulo_num": 8,
+   "capitulo": "8.11",
+   "encabezado": "",
+   "texto": "Se deberá proveer de una viga de amarre en el extremo libre del muro, que cumpla con los \nrequisitos de la Sección 8.6.3.",
+   "paginas": [
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.11.8",
+   "titulo_num": 8,
+   "capitulo": "8.11",
+   "encabezado": "La sobre cargas sobre el relleno del muro no podrá ser mayor de 500 kg/m2",
+   "texto": "La sobre cargas sobre el relleno del muro no podrá ser mayor de 500 kg/m2.",
+   "paginas": [
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.11.9",
+   "titulo_num": 8,
+   "capitulo": "8.11",
+   "encabezado": "Las especiﬁcaciones de las Secciones 8",
+   "texto": "Las especiﬁcaciones de las Secciones 8.11.1 a la 8.11.8 podrán no ser tomada en cuenta si \nse demuestra analíticamente que las secciones críticas del muro poseen suﬁciente resistencia para \ncumplir con el fundamento de diseño, especiﬁcado en la Sección 8.2.1. \nCAPÍTULO 8.12. CONSIDERACIONES DE HUECOS EN \nMAMPOSTERÍA.",
+   "paginas": [
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "8.12.1",
+   "titulo_num": 8,
+   "capitulo": "8.12",
+   "encabezado": "",
+   "texto": "En todo el perímetro de las aberturas de puertas y ventanas  se deberán colocar al menos  \ndos barras de 1/2” tanto vertical como horizontalmente, y cuya longitud debe ser tal que sobrepase \nla dimensión de la abertura al menos 30 cm a ambos lados. \nCCRD\n\nCódigo de Construcción de la República Dominicana CCRD\n9. Acero\n \n \n \nTITULO 9: ACERO \n\nINDICE DE CONTENIDOS RESUMIDO. \n \nINDICE DE CONTENIDOS RESUMIDO ....................................................... 38 \nCAPITULO 9.1. CONSIDERACIONES GENERALES. ................................. 39 \nCAPITULO 9.2. REQUERIMIENTOS BASICOS DE DISEÑO. ................... 57 \nCAPITULO 9.3. DISEÑO PARA ESTABILIDAD. ........................................ 65 \nCAPITULO 9.4. DISEÑO DE MIEMBROS A TRACCION. .......................... 69 \nCAPITULO 9.5. DISEÑO DE MIEMBROS EN COMPRESION. .................. 75 \nCAPITULO 9.6. DISEÑO DE MIEMBROS EN FLEXION. ........................... 86 \nCAPITULO 9.7. DISEÑO DE MIEMBROS PARA CORTANTE. ............... 108 \nCAPITULO 9.8. DISEÑO DE MIEMBROS PARA FUERZA AXIAL Y \nFLEXION COMBINADAS. ........................................................................... 114 \nCAPITULO 9.9. DISEÑO DE MIEMBROS PARA TORSION Y TORSION \nCOMBINADA CON OTRAS FUERZAS. ...................................................... 117 \nCAPITULO 9.10. DISEÑO DE ELEMENTOS COMPUESTOS. .................. 119 \nCAPITULO 9.11. DISEÑO DE CONEXIONES. ............................................ 145 \nCAPITULO 9.12. DISEÑO PARA SERVICIABILIDAD. .............................. 175 \nCAPITULO 9.13. FABRICACION Y MONTAJE. ........................................ 176 \nCAPITULO 9.14. CONTROL DE CALIDAD. .............................................. 180 \n \n  \n\n\nCAPITULO 9.1. CONSIDERACIONES GENERALES.",
+   "paginas": [
+    41,
+    42,
+    43,
+    44
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  }
+ ]
+}

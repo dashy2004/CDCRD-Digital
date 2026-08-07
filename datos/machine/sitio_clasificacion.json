@@ -1,0 +1,65 @@
+{
+ "parametro": "clasificacion_sitio",
+ "descripcion": "Tabla 6: Tipos de perfiles de suelo (propiedades promedio primeros 30 m)",
+ "fuente": {
+  "clausula": "2.9.1",
+  "tabla": "6",
+  "tomo": 1,
+  "paginas": [
+   40,
+   41
+  ],
+  "version_codigo": "2026-07",
+  "metodo": "vision_fable5",
+  "fecha_extraccion": "2026-08-06"
+ },
+ "unidades": {
+  "Vs": "m/s",
+  "N": "golpes (SPT, promedio)",
+  "Su": "kN/m2"
+ },
+ "valores": [
+  {
+   "clase": "A",
+   "designacion": "Roca dura, con presencia superficial y escasa meteorizacion",
+   "Vs_min": 1500,
+   "Vs_max": null,
+   "N": null,
+   "Su": null
+  },
+  {
+   "clase": "B",
+   "designacion": "Roca dura o suelos muy rigidos aglutinados con pequeña capa superior de suelo denso y/o roca meteorizada (<3 m)",
+   "Vs_min": 760,
+   "Vs_max": 1500,
+   "N": null,
+   "Su": null
+  },
+  {
+   "clase": "C",
+   "designacion": "Suelo muy denso y roca blanda; arenas o gravas muy densas o arcillas rigidas de decenas de metros; roca blanda o meteorizada que no cumple A o B",
+   "Vs_min": 360,
+   "Vs_max": 760,
+   "N_min": 50,
+   "Su_min": 98
+  },
+  {
+   "clase": "D",
+   "designacion": "Arenas o gravas densas o medianamente densas o arcillas rigidas de decenas a cientos de metros; suelo cohesivo consistente de baja plasticidad",
+   "Vs_min": 180,
+   "Vs_max": 360,
+   "N_min": 15,
+   "N_max": 50,
+   "Su_min": 49,
+   "Su_max": 98
+  },
+  {
+   "clase": "E",
+   "designacion": "Suelo blando; aluvion superficial con Vs30 similar a C o D y espesor 5-20 m sobre formacion mas rigida",
+   "Vs_min": null,
+   "Vs_max": 180,
+   "N_max": 15,
+   "Su_max": 49
+  }
+ ]
+}
