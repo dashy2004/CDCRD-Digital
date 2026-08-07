@@ -63,6 +63,89 @@ if config.feaName == "ETABS":
 
     create_objects_by_coordinates = mcp.tool()(etabs.create_objects_by_coordinates)
 
+    # Introspeccion: consultar firmas reales antes de suponerlas.
+    describe_oapi = mcp.tool()(etabs.describe_oapi)
+
+    # Edicion: borrar, mover, liberar extremos
+    delete_object = mcp.tool()(etabs.delete_object)
+    move_objects = mcp.tool()(etabs.move_objects)
+    set_frame_releases = mcp.tool()(etabs.set_frame_releases)
+
+    # Resortes
+    set_point_spring = mcp.tool()(etabs.set_point_spring)
+    set_base_springs = mcp.tool()(etabs.set_base_springs)
+
+    # Resultados dedicados
+    get_joint_reactions = mcp.tool()(etabs.get_joint_reactions)
+    get_frame_forces = mcp.tool()(etabs.get_frame_forces)
+
+    # Acero
+    define_steel_material = mcp.tool()(etabs.define_steel_material)
+    define_i_section = mcp.tool()(etabs.define_i_section)
+    define_pipe_section = mcp.tool()(etabs.define_pipe_section)
+    run_steel_design = mcp.tool()(etabs.run_steel_design)
+
+    # No lineal, P-Delta, time-history
+    add_pdelta_case = mcp.tool()(etabs.add_pdelta_case)
+    add_nonlinear_static_case = mcp.tool()(etabs.add_nonlinear_static_case)
+    add_time_history_case = mcp.tool()(etabs.add_time_history_case)
+
+    # Niveles
+    get_stories = mcp.tool()(etabs.get_stories)
+    set_stories = mcp.tool()(etabs.set_stories)
+
+    # Materiales y secciones
+    define_concrete_material = mcp.tool()(etabs.define_concrete_material)
+    define_rect_section = mcp.tool()(etabs.define_rect_section)
+    assign_sections = mcp.tool()(etabs.assign_sections)
+
+    # Apoyos
+    set_base_restraints = mcp.tool()(etabs.set_base_restraints)
+
+    # Cargas y combinaciones
+    add_load_pattern = mcp.tool()(etabs.add_load_pattern)
+    add_load_combo = mcp.tool()(etabs.add_load_combo)
+    assign_frame_distributed_load = mcp.tool()(etabs.assign_frame_distributed_load)
+
+    # Analisis y resultados
+    run_analysis = mcp.tool()(etabs.run_analysis)
+    get_story_drifts = mcp.tool()(etabs.get_story_drifts)
+
+    # Tablas interactivas: acceso generico a lo que no tiene metodo dedicado
+    # (grids en "Grid Definitions - Grid Lines", masa sismica, etc.)
+    list_tables = mcp.tool()(etabs.list_tables)
+    get_table_data = mcp.tool()(etabs.get_table_data)
+    set_table_data = mcp.tool()(etabs.set_table_data)
+
+    # Lectores de definiciones (PLAN-MEJORAS 1.4). Existen porque las tablas
+    # de definicion de casos/combos/funciones no devuelven filas por
+    # GetTableForDisplayArray y porque el eco de una herramienta de escritura
+    # no dice lo que YA habia en el modelo (Dead/Live de plantilla, Slab1).
+    get_load_patterns = mcp.tool()(etabs.get_load_patterns)
+    get_load_combos = mcp.tool()(etabs.get_load_combos)
+    get_spectrum = mcp.tool()(etabs.get_spectrum)
+    get_materials = mcp.tool()(etabs.get_materials)
+    get_frame_sections = mcp.tool()(etabs.get_frame_sections)
+    get_area_sections = mcp.tool()(etabs.get_area_sections)
+    get_diaphragms = mcp.tool()(etabs.get_diaphragms)
+    get_restraints = mcp.tool()(etabs.get_restraints)
+    get_modal_results = mcp.tool()(etabs.get_modal_results)
+
+    # Borrado de definiciones (PLAN-MEJORAS 1.2): complementa a delete_object,
+    # que solo cubre geometria.
+    delete_definition = mcp.tool()(etabs.delete_definition)
+
+    # Diafragmas y cargas en areas
+    set_rigid_diaphragm = mcp.tool()(etabs.set_rigid_diaphragm)
+    assign_area_uniform_load = mcp.tool()(etabs.assign_area_uniform_load)
+
+    # Sismo: espectro CDCRD y caso de espectro de respuesta
+    define_cdcrd_spectrum = mcp.tool()(etabs.define_cdcrd_spectrum)
+    add_response_spectrum_case = mcp.tool()(etabs.add_response_spectrum_case)
+
+    # Diseño
+    run_concrete_design = mcp.tool()(etabs.run_concrete_design)
+
     get_all_geometries = mcp.tool(name="get_all_geometries")(etabs.get_geometries)
     get_points = mcp.tool()(etabs.get_points)
     get_frames = mcp.tool()(etabs.get_frames)
