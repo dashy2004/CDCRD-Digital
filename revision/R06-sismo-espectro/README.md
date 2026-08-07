@@ -10,14 +10,28 @@ add_response_spectrum_case(name="Ey", spectrum="CDCRD-SD", direction="Y", scale=
 ## Captura
 | Archivo | Vista | Estado |
 |---|---|---|
-| `01-espectro-grafico.jpg` | Define > Functions > Response Spectrum > CDCRD-SD, con la gráfica | **PENDIENTE — crítica** |
-| `02-espectro-tabla.jpg` | Tabla de valores T vs Sa de la misma función | **PENDIENTE — crítica** |
-| `03-caso-ex.jpg` | Define > Load Cases > Ex, parámetros del caso | **PENDIENTE** |
-| `04-casos-lista.jpg` | Lista de casos mostrando Ex y Ey | **PENDIENTE** |
+| `01-espectro-grafico.jpg` | Define > Functions > Response Spectrum > CDCRD-SD, con la gráfica | **hecha** — `R06-sismo-espectro/01-espectro-grafico.jpg` |
+| `02-espectro-tabla.jpg` | Tabla de valores T vs Sa de la misma función | **hecha** — `R06-sismo-espectro/02-espectro-tabla.jpg` (mismo diálogo que 01; ver nota) |
+| `03-caso-ex.jpg` | Define > Load Cases > Ex, parámetros del caso | **hecha** — `R06-sismo-espectro/03-caso-ex.jpg` |
+| `04-casos-lista.jpg` | Lista de casos mostrando Ex y Ey | **hecha** — `R06-sismo-espectro/04-casos-lista.jpg` |
 
 Las dos primeras dejan de ser opcionales en este bloque: son el **único canal de
 verificación disponible** para los valores del espectro, porque las tablas de
 funciones no devuelven filas por API (ver más abajo).
+
+### Nota de la sesión de captura (2026-08-08)
+
+`02-espectro-tabla.jpg` reutiliza la misma captura que `01`: el diálogo
+"Response Spectrum Function Definition" muestra la gráfica y la lista de pares
+(T, Sa) en el mismo panel. Solo se leyeron con confianza los primeros ~6 de
+los 13 puntos definidos; al intentar hacer clic en una fila para desplazarse a
+las siguientes, el campo de periodo quedó en modo edición en línea (mostró
+"1.616" editable). Se presionó Escape y se cerraron ambos diálogos con
+Cancelar, sin guardar ningún cambio, para no arriesgar la definición del
+espectro `CDCRD-SD`. **También se detectó que el Scale Factor del caso `Ex`
+lee 9806.65, no 9.80665 como documenta este README (factor 1000×).** Ver el
+resumen de la sesión para el detalle — no se corrigió, por estar fuera de
+alcance de una sesión de solo-captura.
 
 ## Criterio de aceptación — verificar 3 puntos a mano sobre la gráfica
 - T = 0 → Sa = 0.4·SDS = 0.1951 g

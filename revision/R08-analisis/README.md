@@ -6,10 +6,10 @@
 ## Captura
 | Archivo | Vista | Estado |
 |---|---|---|
-| `01-antes-analisis.jpg` | Modelo completo antes de correr | **PENDIENTE** |
-| `02-ventana-analisis.jpg` | Ventana de progreso del análisis de ETABS | **PENDIENTE** |
-| `03-deformada.jpg` | Deformada bajo Ex (Display > Deformed Shape) | **PENDIENTE** |
-| `04-modos.jpg` | Primer modo de vibración con su periodo | **PENDIENTE** |
+| `01-antes-analisis.jpg` | Modelo completo antes de correr | **hecha** — `R08-analisis/01-antes-analisis.jpg` |
+| `02-ventana-analisis.jpg` | Ventana de progreso del análisis de ETABS | **PENDIENTE — fuera de alcance.** Requiere disparar `run_analysis()`/F5, explícitamente excluido de esta sesión de solo-captura (no se debía correr análisis). |
+| `03-deformada.jpg` | Deformada bajo Ex (Display > Deformed Shape) | **hecha** — `R08-analisis/03-deformada.jpg` |
+| `04-modos.jpg` | Primer modo de vibración con su periodo | **hecha** — `R08-analisis/04-modos.jpg` |
 
 ## Criterio de aceptación
 - El análisis termina sin errores ni advertencias de inestabilidad.

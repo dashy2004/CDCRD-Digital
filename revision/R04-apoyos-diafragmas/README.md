@@ -11,10 +11,12 @@ set_rigid_diaphragm(name="D3", elevation=9)
 ## Captura
 | Archivo | Vista | Estado |
 |---|---|---|
-| `01-apoyos-3d.jpg` | Vista 3D mostrando los símbolos de empotramiento en la base | **PENDIENTE** |
-| `02-apoyos-elevacion.jpg` | Elevación con los 9 apoyos visibles | **PENDIENTE** |
-| `03-diafragmas.jpg` | Define > Diaphragms, listando D1/D2/D3 | **PENDIENTE** |
-| `04-diafragma-planta.jpg` | Planta de un nivel con la asignación de diafragma visible | **PENDIENTE** |
+| `01-apoyos-3d.jpg` | Vista 3D mostrando los símbolos de empotramiento en la base | **hecha** — `R04-apoyos-diafragmas/01-apoyos-3d.jpg` |
+| `02-apoyos-elevacion.jpg` | Elevación con los 9 apoyos visibles | **hecha** — `R04-apoyos-diafragmas/02-apoyos-elevacion.jpg` |
+| `03-diafragmas.jpg` | Define > Diaphragms, listando D1/D2/D3 | **hecha** — `R04-apoyos-diafragmas/03-diafragmas.jpg` |
+| `04-diafragma-planta.jpg` | Planta de un nivel con la asignación de diafragma visible | **hecha** — `R04-apoyos-diafragmas/04-diafragma-planta.jpg` |
+
+Las cuatro capturas se tomaron en la sesión de captura del 2026-08-08.
 
 ## Criterio de aceptación
 - 9 puntos empotrados en Z=0 (los 9 de la base, no 36).

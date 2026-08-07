@@ -8,13 +8,35 @@
 ## Captura
 | Archivo | Vista | Estado |
 |---|---|---|
-| `01-vista-3d.jpg` | Vista 3D completa del modelo | **PENDIENTE** |
-| `02-planta-nivel1.jpg` | Planta del Nivel 1 (Ctrl+W o View > Set Plan View) | **PENDIENTE** |
-| `03-elevacion-eje1.jpg` | Elevación del eje 1 | **PENDIENTE** |
-| `04-story-data.jpg` | Define > Story Data, mostrando los 3 niveles | **PENDIENTE** |
+| `01-vista-3d.jpg` | Vista 3D completa del modelo | **hecha** — `R02-geometria-niveles/01-vista-3d.jpg` |
+| `02-planta-nivel1.jpg` | Planta del Nivel 1 (Ctrl+W o View > Set Plan View) | **hecha** — `R02-geometria-niveles/02-planta-nivel1.jpg` |
+| `03-elevacion-eje1.jpg` | Elevación del eje 1 | **hecha** — `R02-geometria-niveles/03-elevacion-eje1.jpg` |
+| `04-story-data.jpg` | Define > Story Data, mostrando los 3 niveles | **hecha** — `R02-geometria-niveles/04-story-data.jpg` |
 
-Las cuatro capturas quedan pendientes para una sesión con control de escritorio
-aprobado. Ninguna se ha tomado a la fecha.
+Las cuatro capturas se tomaron en la sesión de captura del 2026-08-08 (solo
+lectura, sin tocar el modelo).
+
+### ✅ El paso manual de niveles SE EJECUTÓ (2026-08-07)
+
+**Todo lo que este README dice más abajo sobre los niveles describe el estado
+ANTERIOR al 2026-08-07.** Se conserva porque el diagnóstico de por qué la OAPI
+no puede redefinir niveles sigue siendo válido y es el hallazgo del bloque.
+Pero el estado del modelo ya no es ese.
+
+La captura `04-story-data.jpg` (Edit > Stories and Grid System Data) muestra
+**3 niveles configurados correctamente**: `Story1/Story2/Story3`, 3 m cada uno,
+base en 0 — el criterio de aceptación de este bloque, cumplido.
+
+Evidencia de cuándo y cómo: el repo contiene
+`modelos/edificio_oficinas_SD_ANTES-NIVELES-2026-08-07.EDB`, respaldo tomado
+antes de la edición manual, commiteado en `af39f69` el 2026-08-07 03:18.
+
+Consecuencia para la tabla de verificación de abajo: la fila
+"Story Data (Nivel 1/2/3, 3 m, base 0) → **NO EJECUTABLE POR API**" sigue
+siendo cierta **sobre la API**, y falsa sobre el modelo. La API nunca pudo;
+la interfaz sí. Los nombres quedaron como `Story1/2/3`, no `Nivel 1/2/3` —
+diferencia cosmética que no afecta a R08–R10, cuyos resultados corresponden a
+cotas de 3/6/9 m.
 
 ## Criterio de aceptación
 - 36 puntos, 63 frames (27 columnas + 36 vigas), 12 áreas.

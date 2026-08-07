@@ -6,9 +6,9 @@
 ## Captura
 | Archivo | Vista | Estado |
 |---|---|---|
-| `01-tabla-derivas-etabs.jpg` | Display > Story Response Plots, o tabla de Story Drifts | **PENDIENTE** |
-| `02-grafico-derivas.jpg` | Gráfico de deriva por nivel | **PENDIENTE** |
-| `03-comparacion.jpg` | Captura de la respuesta de la API junto a la tabla de ETABS | **PENDIENTE** |
+| `01-tabla-derivas-etabs.jpg` | Display > Story Response Plots, o tabla de Story Drifts | **hecha** — `R09-derivas/01-tabla-derivas-etabs.jpg` |
+| `02-grafico-derivas.jpg` | Gráfico de deriva por nivel | **hecha** — `R09-derivas/02-grafico-derivas.jpg` (Story Response Plots, Display Type = Max story drifts, Case = Ex; máximo 0.002748 en Story2, coincide con la tabla de abajo) |
+| `03-comparacion.jpg` | Captura de la respuesta de la API junto a la tabla de ETABS | **hecha, con salvedad** — `R09-derivas/03-comparacion.jpg`. Reutiliza la captura de la tabla `Story Drifts` de ETABS (01); la conexión OAPI se perdió al abrir ETABS por escritorio en esta sesión (ver resumen), así que el lado "API" es el cotejo ya documentado más abajo (2026-08-07), no una llamada `get_story_drifts` fresca de esta noche. |
 
 ## Cálculo de verificación
 ```

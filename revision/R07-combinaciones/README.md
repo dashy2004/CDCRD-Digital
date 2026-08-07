@@ -22,8 +22,10 @@ Derivación de los factores sísmicos:
 ## Captura
 | Archivo | Vista | Estado |
 |---|---|---|
-| `01-lista-combos.jpg` | Define > Load Combinations, lista completa | **PENDIENTE** |
-| `02-combo-sismica.jpg` | Detalle de C4x mostrando los factores 1.2975 y 1.0 | **PENDIENTE** |
+| `01-lista-combos.jpg` | Define > Load Combinations, lista completa | **hecha** — `R07-combinaciones/01-lista-combos.jpg` |
+| `02-combo-sismica.jpg` | Detalle de C4x mostrando los factores 1.2975 y 1.0 | **hecha** — `R07-combinaciones/02-combo-sismica.jpg` |
+
+Las dos capturas se tomaron en la sesión de captura del 2026-08-08.
 
 ## Criterio de aceptación
 - 7 combinaciones creadas.

@@ -6,9 +6,9 @@
 ## Captura
 | Archivo | Vista | Estado |
 |---|---|---|
-| `01-reacciones-etabs.jpg` | Display > Joint Reactions bajo C2 | **PENDIENTE** |
-| `02-tabla-reacciones.jpg` | Tabla de reacciones de ETABS | **PENDIENTE** |
-| `03-suma-verificacion.jpg` | Respuesta de la API junto al total de ETABS | **PENDIENTE** |
+| `01-reacciones-etabs.jpg` | Display > Joint Reactions bajo C2 | **hecha** — `R10-reacciones/01-reacciones-etabs.jpg` (Display > Support/Spring Reactions, Combo C2, vista 3D) |
+| `02-tabla-reacciones.jpg` | Tabla de reacciones de ETABS | **hecha** — `R10-reacciones/02-tabla-reacciones.jpg` (tabla "Joint Design Reactions"; los valores de FZ bajo C2 coinciden exactamente con los de la tabla de abajo: esquinas 404.7065, bordes 786.1283) |
+| `03-suma-verificacion.jpg` | Respuesta de la API junto al total de ETABS | **hecha, con salvedad** — `R10-reacciones/03-suma-verificacion.jpg`. Reutiliza la misma captura de tabla (02); la conexión OAPI se perdió en esta sesión (ver resumen), así que no hubo una llamada `get_joint_reactions` fresca para yuxtaponer — el lado "API" es el ΣFz = 6365.522 kN ya documentado abajo (2026-08-07), verificado ahora contra la tabla de ETABS visible en la misma captura. |
 
 ## Chequeo de equilibrio
 ΣFz de las 9 reacciones debe cerrar con la carga total mayorada aplicada.
