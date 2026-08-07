@@ -1,0 +1,149 @@
+{
+ "parametro": "espectro_de_diseno",
+ "fuente": {
+  "clausulas": [
+   "2.9.4.1",
+   "2.9.4.2",
+   "2.9.4.3",
+   "2.9.4.4",
+   "2.9.4.4.1",
+   "2.9.4.5",
+   "2.9.5"
+  ],
+  "tablas": [
+   "9",
+   "10"
+  ],
+  "figuras": [
+   "3",
+   "4",
+   "5",
+   "7",
+   "8"
+  ],
+  "tomo": 1,
+  "paginas": [
+   45,
+   46,
+   47,
+   49,
+   50,
+   51
+  ],
+  "version_codigo": "2026-07",
+  "metodo": "vision_fable5",
+  "fecha_extraccion": "2026-08-06"
+ },
+ "referencia": {
+  "Ss_S1": "mapas de isoaceleraciones Figuras 4 y 5, retorno 2,475 años (2% en 50 años); tomar del mapa por ubicacion del proyecto",
+  "zonas": {
+   "I": "alta sismicidad, Ss > 0.95g",
+   "II": "mediana sismicidad, Ss <= 0.95g"
+  },
+  "campo_cercano": "emplazamientos a <= 5 km de la proyeccion superficial de las fallas de Figura 6"
+ },
+ "calculo": {
+  "SMS": "Fa * Ss",
+  "SM1": "Fv * S1",
+  "normal": {
+   "SDS": "(2/3) * SMS",
+   "SD1": "(2/3) * SM1",
+   "ecuaciones": [
+    "7",
+    "8"
+   ]
+  },
+  "campo_cercano": {
+   "SDS": "SMS",
+   "SD1": "SM1",
+   "ecuaciones": [
+    "9",
+    "10"
+   ]
+  },
+  "periodos": {
+   "T0": "0.2 * (SD1/SDS)",
+   "Ts": "SD1/SDS"
+  },
+  "forma_normal": [
+   {
+    "rango": "0 <= T <= T0",
+    "Sa": "SDS * (0.4 + 0.6*T/T0)"
+   },
+   {
+    "rango": "T0 < T <= Ts",
+    "Sa": "SDS"
+   },
+   {
+    "rango": "T > Ts",
+    "Sa": "SD1 / T"
+   }
+  ],
+  "forma_campo_cercano": [
+   {
+    "rango": "0 <= T <= Ts",
+    "Sa": "SDS"
+   },
+   {
+    "rango": "T > Ts",
+    "Sa": "SD1 / T"
+   }
+  ],
+  "nota_forma": "Figura 7 arranca en 0.4*SDS en T=0; Figura 8 (campo cercano) mantiene SDS desde T=0"
+ },
+ "categoria_diseno_sismico": {
+  "por_SDS": [
+   {
+    "SDS_max": 0.167,
+    "riesgo_I_II_III": "A",
+    "riesgo_IV": "A"
+   },
+   {
+    "SDS_min": 0.167,
+    "SDS_max": 0.33,
+    "riesgo_I_II_III": "B",
+    "riesgo_IV": "C"
+   },
+   {
+    "SDS_min": 0.33,
+    "SDS_max": 0.5,
+    "riesgo_I_II_III": "C",
+    "riesgo_IV": "D"
+   },
+   {
+    "SDS_min": 0.5,
+    "riesgo_I_II_III": "D",
+    "riesgo_IV": "D"
+   }
+  ],
+  "por_SD1": [
+   {
+    "SD1_max": 0.067,
+    "riesgo_I_II_III": "A",
+    "riesgo_IV": "A"
+   },
+   {
+    "SD1_min": 0.067,
+    "SD1_max": 0.133,
+    "riesgo_I_II_III": "B",
+    "riesgo_IV": "C"
+   },
+   {
+    "SD1_min": 0.133,
+    "SD1_max": 0.2,
+    "riesgo_I_II_III": "C",
+    "riesgo_IV": "D"
+   },
+   {
+    "SD1_min": 0.2,
+    "riesgo_I_II_III": "D",
+    "riesgo_IV": "D"
+   }
+  ],
+  "regla": "asignar la CDS mas severa de ambas tablas, independiente del periodo",
+  "excepciones": {
+   "2.9.5.1": "riesgo I/II/III con S1 >= 0.75 -> CDS E",
+   "2.9.5.2": "riesgo IV con S1 >= 0.75 -> CDS F"
+  }
+ }
+}

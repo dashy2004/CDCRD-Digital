@@ -1,0 +1,9 @@
+{
+    "server": { "name": "FEA MCP", "version": "1.1.0" },
+    "fea": {
+        "software": "ETABS",
+        "version": "23.0",
+        "auto_start": false,
+        "exe_path": ""
+    }
+}

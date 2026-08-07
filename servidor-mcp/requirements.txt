@@ -1,0 +1,18 @@
+# FEA MCP - fix
+#
+# IMPORTANTE: el pin de mcp<2 no es opcional.
+# El SDK 2.0.0 elimino el modulo mcp.server.fastmcp y lo reemplazo por
+# mcp.server.MCPServer. El requirements original decia "mcp>=0.1.0", asi que
+# hoy pip instala 2.0.0 y el servidor muere en el import con
+# ModuleNotFoundError: No module named 'mcp.server.fastmcp'.
+mcp>=1.10,<2
+
+# comtypes: Python puro, unica dependencia COM que el codigo importa.
+# Evitar 1.2.0 (regresion en la generacion de wrappers de typelib).
+comtypes>=1.4.0
+
+pydantic>=2.7
+
+# pywin32 NO es requerido por este codigo. Se omite a proposito porque no
+# siempre tiene wheels para las versiones mas recientes de Python.
+# Si lo necesita para otra cosa:  pip install pywin32

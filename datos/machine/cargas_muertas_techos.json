@@ -1,0 +1,44 @@
+{
+ "parametro": "cargas_muertas_techos_y_divisiones",
+ "fuente": {
+  "clausulas": [
+   "2.6.3",
+   "2.6.7"
+  ],
+  "tomo": 1,
+  "paginas": [
+   33
+  ],
+  "version_codigo": "2026-07",
+  "metodo": "vision_fable5",
+  "fecha_extraccion": "2026-08-06"
+ },
+ "unidades": "kN/m2",
+ "valores": [
+  {
+   "clausula": "2.6.3",
+   "material": "Tejas de barro",
+   "valor": 1.25
+  },
+  {
+   "clausula": "2.6.3",
+   "material": "Lona asfaltica de impermeabilizacion",
+   "valor": 0.2
+  },
+  {
+   "clausula": "2.6.3",
+   "material": "Lona asfaltica de impermeabilizacion recubierta con grava",
+   "valor": 0.5
+  },
+  {
+   "clausula": "2.6.3",
+   "material": "Capas de bitumen",
+   "valor": 0.1
+  },
+  {
+   "clausula": "2.6.7",
+   "material": "Divisiones movibles en oficinas (carga muerta minima)",
+   "valor": 0.74
+  }
+ ]
+}

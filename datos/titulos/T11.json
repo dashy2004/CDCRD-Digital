@@ -1,0 +1,99 @@
+{
+ "titulo": 11,
+ "nombre": "Vidrio y Acristalado",
+ "version_codigo": "2026-07",
+ "clausulas": [
+  {
+   "id": "11.6.3",
+   "titulo_num": 11,
+   "capitulo": "11.6",
+   "encabezado": "",
+   "texto": "Cada panel de vidrio templado, excepto el vidrio templado para tímpanos  deberá ser identificado \npermanentemente por el fabricante. La marca de identificación deberá estar grabada al ácido, con \nchorro de arena, cocida con cerámica, grabada con láser, grabada en relieve o de un tipo que, una vez \naplicada, no pueda ser retirada sin ser destruida. \nLos vidrios templados deberán estar provistos de una marca de papel removible por el fabricante. \n11.3.2 SOPORTES DE VIDRIO . Cuando uno o más lados de cualquier panel de vidrio no estén \nfirmemente apoyados, o estén sujetos a condiciones de cargas inusuales, los documentos de \nconstrucción detallados, los planos de taller detallados y los análisis o datos de prueba que garanticen \nun rendimiento seguro para la instalación específica serán preparados por un profesional de diseño \nregistrado. \n11.3.3 ENMARCADO. Para que se consideren firmemente apoyados, los elementos del armazón para \ncada cristal individual deben estar diseñados de manera que la deflexión del borde del cristal \n\n\nperpendicular al cristal no exceda de 1/175 de la longitud del borde del cristal o de 19 .1 mm, lo que \nsea menor, cuando se somete a la mayor de las cargas positivas o negativas cuando las cargas se \ncombinan como se especifica en la Sección 2.5. \n11.3.4 ZONAS INTERIORES ACRISTALADAS. Cuando el acristalamiento interior se instala junto a una \nsuperficie para caminar, la deflexión diferencial de dos bordes adyacentes no soportados no debe ser \nmayor que el espesor de los paneles cuando se aplica una fuerza de 730 N/ m horizontalmente a un \npanel en cualquier punto hasta 1,067mm por encima de la superficie para caminar. \n11.3.5 VENTANAS DE PERSIANA O CELOSÍAS . Los vidrios flotantes, alambrados y estampados en las \nventanas de persiana y celosías no serán más delgados que 4 .8 mm nominales y no serán más largos \nque 1,219 mm. Los bordes expuestos del vidrio deberán ser lisos. \n• En las ventanas de persiana o celosías no se utilizarán vidrios con alambres expuestos en sus bordes \nlongitudinales. \n• Cuando se utilicen otros tipos de vidrio, el diseño se presentará al funcionario de la construcción \npara su aprobación. \nCAPITULO 11.4.  VIENTO, NIEVE, SISMO Y CARGAS MUERTAS SOBRE \nEL VIDRIO \n11.4.1 VIDRIO VERTICAL. El vidrio con una inclinación de 15 grados (0. 26 rad) o menos respecto a la \nvertical en ventanas, muros cortina y ventanas, puertas y otras aplicaciones exteriores deberá estar \ndiseñado para resistir las cargas de viento debidas a la velocidad máxima del viento de diseño, V\nult, en \nla Sección 2.7 para componentes y revestimientos. El vidrio de los muros cortina acristalados, de los \nescaparates acristalados y de los tabiques acristalados deberá cumplir con los requisitos sísmicos del \nTítulo 2: Cargas Mínimas para Análisis y Diseño Estructural. La resistencia a la carga del vidrio bajo \ncarga uniforme se determinará de acuerdo con la norma ASTM E1300. \nEl diseño del acristalamiento vertical se basará en la ecuación 11-1. \n0.6𝐹𝐹𝑔𝑔𝑔𝑔  ≤ 𝐹𝐹𝑔𝑔𝑔𝑔           (Ecu.1) \nDonde: \nFgw = Carga de viento sobre el vidrio debida a la velocidad del viento de diseño final, V ult, calculada de \nacuerdo con la Sección 2.9. \nFga = Carga de corta duración sobre el vidrio, determinada según la norma ASTM E1300. \n11.4.2 VIDRIO INCLINADO . Los vidrios inclinados más de 15 grados (0. 26 rad) con respecto a la \nvertical en claraboyas, cuartos de sol, techos inclinados y otras aplicaciones exteriores deberán estar \ndiseñados para resistir las combinaciones más críticas de cargas determinadas por las ecuaciones 11-\n2, 11-3 y 11-4. \n𝐹𝐹𝑔𝑔 = 0.6𝑊𝑊𝑜𝑜 − 𝐷𝐷              (Ecu.2) \n𝐹𝐹𝑔𝑔 = 0.6𝑊𝑊𝑖𝑖 + 𝐷𝐷         `  (Ecu.3) \n𝐹𝐹𝑔𝑔 = 0.3𝑊𝑊𝑖𝑖 + 𝐷𝐷         (Ecu.4) \n\n\nDonde: \nD = Carga muerta del vidrio (kN/m2). \nPara vidrios con una inclinación de 30 grados (0.52 rad) o menos con respecto a la horizontal, \n= 13 tg (Para SI: 0.0245 tg) \nPara vidrios con una inclinación superior a 30 grados (0.52 rad) respecto a la horizontal, \n= 13 tg cos θ (Para SI: 0.0245 tg cos θ) \nFg = Carga total (kN/m2) sobre el vidrio. \nS = Carga de nieve (kN/m2) determinada en la sección 2.8. \nTg = Espesor total del vidrio, en mm de los cristales y las capas. \nWi = Fuerza del viento hacia adentro (kN/m2) debido a la velocidad del viento de diseño final, Vult, como \nse calcula en la Sección 2.9. \nWo = Fuerza del viento hacia el exterior (kN/m2) debida a la velocidad del viento de diseño final, V ult, \ncalculada en la sección 2.9. \nΘ = Ángulo de inclinación respecto a la horizontal. \nEXCEPCIÓN: El grado de rendimiento de los tragaluces unitarios y de los dispositivos tubulares de \niluminación natural se determinará de acuerdo con la sección 11.5.5. \nEl diseño del acristalamiento inclinado se basará en la ecuación 5. \n𝐹𝐹𝑔𝑔 ≤ 𝐹𝐹𝑔𝑔𝑔𝑔          (Ecu.5) \nDonde: \nFg = Carga total sobre el vidrio determinada por las ecuaciones 2, 3 y 4. \nFga = La resistencia a la carga de corta duración del vidrio, determinada de acuerdo con la norma ASTM \nE1300 para las ecuaciones 2 y 3; o la resistencia a la carga de larga duración del vidrio, determinada de \nacuerdo con la norma ASTM E1300 para la ecuación 11-4. \n11.4.3 VIDRIO ALAMBRADO, ESTAMPADO Y ARENADO. \n11.4.3.1 VIDRIO ALAMBRADO VERTICAL. El vidrio alambrado con una inclinación de 15 grados (0.26 \nrad) o menos con respecto a la vertical en ventanas, muros cortina y ventanas, puertas y otras \naplicaciones exteriores se diseñará para resistir las cargas de viento de la sección 2.9 para componentes \ny revestimientos de acuerdo con la siguiente ecuación: \n0.6𝐹𝐹𝑔𝑔𝑔𝑔  < 0.5𝐹𝐹𝑔𝑔𝑔𝑔          (Ecu. 6) \nDonde: \nFgw = Carga de viento sobre el vidrio debida a la velocidad del viento de diseño final, V ult, calculada de \nacuerdo con la Sección 2.7 de este Reglamento. \nFge = Carga no calculada a partir de la norma ASTM E1300 utilizando una designación de espesor para \nel vidrio monolítico que no es mayor que el espesor del vidrio alambrado. \n\n\n11.4.3.2 VIDRIO ALAMBRADO INCLINADO . Los vidrios al ambrados inclinados más de 15 grados \n(0.26 rad) con respecto a la vertical en claraboyas, espacios solares, techos inclinados y otras \naplicaciones exteriores deberán estar diseñados para resistir la más crítica de las combinaciones de \ncargas de la sección 11.4.2. \nPara las ecuaciones 2 y 3: \n𝐹𝐹𝑔𝑔 < 0.5𝐹𝐹𝑔𝑔𝑔𝑔           (Ecu.7) \nPara la ecuación 11-4: \n𝐹𝐹𝑔𝑔 < 0.3𝐹𝐹𝑔𝑔𝑔𝑔           (Ecu.8) \nDonde: \nFg = Carga total sobre el vidrio, determinada por las ecuaciones 2, 3 y 4. \nFge = Carga no factorizada de acuerdo con la norma ASTM E1300. El valor para el vidrio con patrón se \nbasará en la parte más delgada del vidrio. Se permitirá la interpolación entre las tablas de carga no \ncalculada de la norma ASTM E1300. \n11.4.3.3 VIDRIO CON PATRÓN VERTICAL.  Los vidrios con una inclinación de 15 grados (0. 26 rad) o \nmenos con respecto a la vertical en ventanas, muros cortina y ventanas, puertas y otras aplicaciones \nexteriores deben estar diseñados para resistir las cargas de viento de la Sección 2.7 para componentes \ny revestimientos de acuerdo con la Ecuación 9. \n 𝐹𝐹𝑔𝑔 < 1.0𝐹𝐹𝑔𝑔𝑔𝑔           (Ecu.9) \ndonde: \nFgw = Carga de viento sobre el vidrio debida a la velocidad del viento de diseño final, V ult, calculada de \nacuerdo con la Sección 2.7. \nFge = Carga no factorizada de acuerdo con la norma ASTM E1300. El valor para el vidrio con patrón se \nbasará en la parte más delgada del vidrio. Se permitirá la interpolación entre las tablas de carga no \ncalculada de la norma ASTM E1300. \n11.4.3.4 CRISTAL INCLINADO CON DISEÑO . Los vidrios con una inclinación superior a 15 grados \n(0.26 rad) con respecto a la vertical en las claraboyas, los espacios solares, los tejados inclinados y otras \naplicaciones exteriores deberán estar diseñados para resistir la más crítica de las combinaciones de \ncargas del apartado 11.4.2. \nPara las ecuaciones 2 y 3: \n𝐹𝐹𝑔𝑔 < 1.0𝐹𝐹𝑔𝑔𝑔𝑔           (Ecu.10) \nPara la ecuación 4: \n𝐹𝐹𝑔𝑔 < 0.6𝐹𝐹𝑔𝑔𝑔𝑔             (Ecu.11) \nDonde: \nFg = Carga total sobre el vidrio determinada por las ecuaciones 2, 3 y 4. \n\n\nFge = Carga no factorizada de acuerdo con la norma ASTM E1300. El valor para el vidrio con diseño \nse basará en la parte más delgada del vidrio. Se permitirá la interpolación entre las tablas de carga no \ncalculada de la norma ASTM E1300. \n11.4.3.5 VIDRIO ARENADO VERTICAL. El vidrio arenado con una inclinación de 15 grados (0.26 rad) o \nmenos con respecto a la vertical en ventanas, muros cortina y ventanas, puertas y otras aplicaciones \nexteriores, deberá estar diseñado para resistir las cargas de viento de la Sección 2.7 para componentes \ny revestimientos de acuerdo con la Ecuación 11-12. \n0.6𝐹𝐹𝑔𝑔𝑔𝑔 < 0.5𝐹𝐹𝑔𝑔𝑔𝑔          (Ecu.12) \nDonde: \nFg = Carga de viento sobre el vidrio debida a la velocidad del viento de diseño final, V ult, calculada de \nacuerdo con la Sección 2.9. \nFge = Carga no factorizada de acuerdo con la norma ASTM E1300. El valor para el vidrio arenado es para \nniveles moderados de arenado. \n11.4.3.6 OTROS DISEÑOS. En el caso de los diseños que queden fuera del ámbito de esta sección, un \nprofesional de diseño registrado deberá preparar un análisis o datos de prueba para la instalación \nespecífica. \nCAPITULO 11.5.  ACRISTALAMIENTO INCLINADO Y CLARABOYAS \n11.5.1 ALCANCE. Esta sección se aplica a la instalación de vidrio y otros materiales de acristalamiento \ntransparentes, translúcidos u opacos instalados con una inclinación superior a 15 grados (0 .26 rad) \ncon respecto al plano vertical, incluidos los materiales de acristalamiento en claraboyas, tejados y \nparedes inclinadas. \n11.5.2 MATERIALES DE ACRISTALAMIENTO ADMISIBLES Y LIMITACIONES . El acristalamiento \ninclinado deberá ser de cualquiera de los siguientes materiales, sujeto a las limitaciones enumeradas. \n1. En el caso de los sistemas de acristalamiento monolítico, el material de acristalamiento de la luz o \ncapa única será vidrio laminado con una capa intermedia de butiral de polivinilo (o equivalente) de 0.76 \nmm como mínimo, vidrio armado, materiales plásticos transmisores de luz que cumplan los requisitos \nde la Sección 11.7, vidrio reforzado con calor o vidrio totalmente templado. \n2. En el caso de los sistemas de acristalamiento de varias capas, cada luz o capa estará formada por \ncualquiera de los materiales de acristalamiento especificados en el punto 1 anterior. \nSe permite el uso de vidrio recocido según lo especificado en las excepciones 2 y 3 de la sección",
+   "paginas": [
+    298,
+    299,
+    300,
+    301,
+    302
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "11.5.3.3",
+   "titulo_num": 11,
+   "capitulo": "11.5",
+   "encabezado": "Para los requisitos adicionales para las claraboyas de plástico, véase la Sección 12",
+   "texto": "Para los requisitos adicionales para las claraboyas de plástico, véase la Sección 12.11. La construcción \nde bloques de vidrio debe cumplir con los requisitos de la Sección 7.11.1. \n11.5.3 CRIBADO. Las pantallas de retención de vidrios rotos, cuando se requieran, deberán: \n1. Ser capaz de soportar el doble del peso del acristalamiento; \n2. Estar firme y sustancialmente fijado a los miembros del marco; y \n\n\n3. Estar instalado a menos de 102 mm del vidrio. \nLas rejillas estarán construidas con un material incombustible no más fino que el calibre 12 B&S sobre \nuna malla no mayor de  25 mm por 25 mm . En una atmósfera corrosiva, se utilizarán materiales de \npantalla no corrosivos estructuralmente equivalentes. \n11.5.3.1 PANTALLAS BAJO ACRISTALAMIENTO MONOLÍTICO. Los vidrios termo endurecidos y los \nvidrios totalmente templados deberán tener pantallas instaladas por debajo de toda la superficie del \nmaterial de acristalamiento. \n11.5.3.2 PANTALLAS BAJO ACRISTALAMIENTO MULTICAPA . Los vidrios termo endurecidos, los \nvidrios totalmente templados y los vidrios alambrados utilizados como capa inferior de vidrio deberán \ntener pantallas instaladas por debajo de toda la superficie del material de acristalamiento. \n11.5.3.3 NO SE NECESITAN PANTALLAS. Para todos los demás tipos de acristalamiento que cumplan \ncon la Sección 11.5.2, no se requerirán pantallas de retención. \nEXCEPCIONES: En los sistemas de acristalamiento monolítico y multicapa inclinado, se aplica lo \nsiguiente: \n1. Se permitirá la instalación de vidrios totalmente templados sin pantallas de retención cuando \nse acristalen entre pisos intermedios con una inclinación de 30 grados (0.52 rad) o menos con respecto \nal plano vertical, y teniendo el punto más alto del vidrio a 3,048 mm o menos por encima de la superficie \nde paso. \n2. No se exigirán pantallas de retención debajo de ningún material de acristalamiento, incluido \nel vidrio recocido, cuando la superficie de paso por debajo del material de acristalamiento esté \npermanentemente protegida del riesgo de caída del vidrio o la zona por debajo del material de \nacristalamiento no sea una superficie de paso. \n3. No se exigirán pantallas de retención debajo de ningún material de acristalamiento, incluido \nel vidrio recocido, en los sistemas de acristalamiento inclinados de invernaderos comerciales o \nindependientes no combustibles utilizados exclusivamente para el cultivo de plantas y no abiertos al \npúblico, siempre que la altura del invernadero en la cumbrera no supere los 9, 144 mm sobre el nivel \ndel suelo. \n4. No se exigirán pantallas de retención en las unidades de vivienda individuales cuando se utilice \nvidrio totalmente templado como acristalamiento único o como ambos cristales en una unidad de \nvidrio aislante, y se cumplan todas las condiciones siguientes:",
+   "paginas": [
+    302,
+    303
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "11.5.5.2",
+   "titulo_num": 11,
+   "capitulo": "11.5",
+   "encabezado": "",
+   "texto": "Cuando la claraboya no esté clasificada por separado para presión positiva y negativa, la \nclasificación de grado de rendimiento que aparece en la etiqueta será la clasificación de grado de \nrendimiento determinada de acuerdo con AAMA/WDMA/CSA 101/I.S.2/A440 para la presión de \ndiseño positiva y negativa y la claraboya cumplirá con la Sección 11.5.5.1. \n11.5.5.1 TRAGALUCES CON EL MISMO GRADO DE RENDIMIENTO PARA LA PRESIÓN DE DISEÑO \nPOSITIVA Y NEGATIVA. El diseño de los tragaluces se basará en la ecuación 13. \n𝐹𝐹𝑔𝑔 ≤ 𝑃𝑃𝑃𝑃           (Ecu.13) \ndonde: \nFg = Carga máxima sobre el tragaluz determinada a partir de las ecuaciones 2 a 4 de la sección 11.4.2. \nPG = Grado de rendimiento de la claraboya. \n11.5.5.2 TRAGALUCES CLASIFICADOS PARA GRADOS DE DESEMPEÑO SEPARADOS PARA PRESIÓN \nDE DISEÑO POSITIVA Y NEGATIVA . El diseño de las claraboyas clasificadas para el grado de \nrendimiento tanto para presiones de diseño positivas como negativas se basará en las ecuaciones 14 y \n15. \n𝐹𝐹𝑔𝑔𝑖𝑖 ≤ 𝑃𝑃𝑃𝑃𝑝𝑝𝑜𝑜𝑝𝑝           (Ecu.14) \n\n\n𝐹𝐹𝑔𝑔𝑜𝑜 ≤ 𝑃𝑃𝑃𝑃𝑛𝑛𝑔𝑔𝑔𝑔                        (Ecu.15) \ndonde: \nPGpos = Grado de rendimiento de la claraboya bajo presión positiva de diseño; \nPGNeg = Grado de rendimiento de la claraboya bajo presión negativa de diseño; y \nFgi y Fgo se determinan de acuerdo con lo siguiente: \nPara 0.6𝑊𝑊𝑜𝑜 ≥ 𝐷𝐷, \nDonde: \nWo = Fuerza del viento hacia el exterior ( kN/m2) debida a la velocidad del viento de diseño final, V ult, \ncalculada en la sección 2.9. \nD = El peso propio del acristalamiento (kN/m 2) determinado en la sección 11.4.2 para el vidrio, o por \nel peso del plástico (kN/m2) para el acristalamiento plástico. \nFgi = Carga máxima sobre el tragaluz determinada a partir de las ecuaciones 11- 3 y 11-4 del apartado",
+   "paginas": [
+    304,
+    305
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "11.4.2",
+   "titulo_num": 11,
+   "capitulo": "11.4",
+   "encabezado": "Fgo= Carga máxima sobre el tragaluz determinada a partir de la ecuación 11-2",
+   "texto": "Fgo= Carga máxima sobre el tragaluz determinada a partir de la ecuación 11-2. \nPara 0.6𝑊𝑊𝑜𝑜 < 𝐷𝐷, \ndonde: \nWo = La fuerza del viento hacia el exterior (kN/m 2) debida a la velocidad del viento último de diseño, \nVult, tal como se calcula en la Sección 2.9. \nD = El peso propio del acristalamiento (kN/m2) determinado en la Sección 11. 4.2 para el vidrio, o por \nel peso del plástico para el acristalamiento plástico. \nFgi = Carga máxima sobre la claraboya determinada a partir de las ecuaciones 11-2 a 11-4 de la sección",
+   "paginas": [
+    305
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  }
+ ]
+}

@@ -1,0 +1,113 @@
+{
+ "parametro": "factores_de_sitio",
+ "fuente": {
+  "clausula": "2.9.2",
+  "tablas": [
+   "7",
+   "8"
+  ],
+  "tomo": 1,
+  "paginas": [
+   44
+  ],
+  "version_codigo": "2026-07",
+  "metodo": "vision_fable5",
+  "fecha_extraccion": "2026-08-06"
+ },
+ "notas": {
+  "a": "Se permite interpolacion lineal",
+  "b": "Clase F requiere evaluacion especifica del sitio"
+ },
+ "Fa": {
+  "indexado_por": "Ss",
+  "puntos_Ss": [
+   0.5,
+   0.6,
+   0.7,
+   0.8,
+   0.9
+  ],
+  "nota_ultimo_punto": ">=0.90",
+  "clases": {
+   "A": [
+    0.8,
+    0.8,
+    0.8,
+    0.8,
+    0.8
+   ],
+   "B": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "C": [
+    1.2,
+    1.2,
+    1.1,
+    1.0,
+    1.0
+   ],
+   "D": [
+    1.3,
+    1.3,
+    1.2,
+    1.2,
+    1.2
+   ],
+   "E": [
+    1.7,
+    1.5,
+    1.3,
+    1.1,
+    1.0
+   ],
+   "F": "evaluacion especifica (b)"
+  }
+ },
+ "Fv": {
+  "indexado_por": "S1",
+  "puntos_S1": [
+   0.2,
+   0.3,
+   0.4,
+   0.5
+  ],
+  "nota_ultimo_punto": ">=0.50",
+  "clases": {
+   "A": [
+    0.8,
+    0.8,
+    0.8,
+    0.8
+   ],
+   "B": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "C": [
+    1.6,
+    1.5,
+    1.4,
+    1.3
+   ],
+   "D": [
+    2.0,
+    1.8,
+    1.6,
+    1.5
+   ],
+   "E": [
+    3.2,
+    2.8,
+    2.4,
+    2.4
+   ],
+   "F": "evaluacion especifica (b)"
+  }
+ }
+}

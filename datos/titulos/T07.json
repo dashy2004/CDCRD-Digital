@@ -1,0 +1,1212 @@
+{
+ "titulo": 7,
+ "nombre": "Aluminio",
+ "version_codigo": "2026-07",
+ "clausulas": [
+  {
+   "id": "7.1.1",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "ÁMBITO DE APLICACIÓN",
+   "texto": "ÁMBITO DE APLICACIÓN. Este capítulo regula la calidad, el diseño, la fabricación y el montaje \ndel aluminio. La calidad, el diseño, la fabricación y el montaje del aluminio utilizado estructuralmente \nen las ediﬁcaciones o estructuras deben ajustarse a las buenas prácticas de ingeniería, a las \ndisposiciones de este capítulo y a otros requisitos aplicables de este Código. \nExcepción: Los ediﬁcios y estructuras situados en la zona de huracanes de alta velocidad deben cumplir \ncon las disposiciones del CAPITULO 7.3. \nCAPITULO 7.2. MATERIALES.",
+   "paginas": [
+    6
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.1",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. El aluminio utilizado para propósitos estructurales en ediﬁcios y estructuras \ndeberá cumplir con AA ASM 35 y AA ADM 1. Se permitirá el uso de aleaciones de aluminio que no \nﬁguren en el manual, siempre que su nivel de rendimiento no sea inferior al exigido en el manual y el \nrendimiento se justiﬁque a satisfacción del funcionario de la construcción.",
+   "paginas": [
+    6
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.2",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "DEFINICIONES",
+   "texto": "DEFINICIONES.",
+   "paginas": [
+    6
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.2.1",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "MIEMBRO PRIMARIO",
+   "texto": "MIEMBRO PRIMARIO.  Miembros estructurales que proveen soporte estructural a otros \nmiembros y/o superﬁcies de una estructura incluyendo, pero no limitado a vigas, postes, columnas, \nviguetas, canaletas estructurales, cabeceras, rieles de aleros, correas, riostras de techo.",
+   "paginas": [
+    6
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.2.2",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "MIEMBROS SECUNDARIOS",
+   "texto": "MIEMBROS SECUNDARIOS. Miembros de la estructura que no proporcionan un soporte \nbásico para toda la estructura, incluyendo generalmente, pero sin limitarse a ello, miembros tales como \nlos rieles de los patines, los rieles de las sillas, los paneles del techo o de la pared, las r iostras de la \npared.",
+   "paginas": [
+    6
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.2.3",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "MIEMBROS ESTRUCTURALES",
+   "texto": "MIEMBROS ESTRUCTURALES.  Miembros o secciones que proporcionan soporte a un \nconjunto y/o resisten las cargas aplicadas.",
+   "paginas": [
+    6,
+    7
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.3",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "CERRAMIENTOS DE PANTALLA",
+   "texto": "CERRAMIENTOS DE PANTALLA.",
+   "paginas": [
+    7
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.3.1",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "ESPESOR",
+   "texto": "ESPESOR. El espesor real de las paredes de los miembros de aluminio extruido no debe ser \ninferior a 1 mm.",
+   "paginas": [
+    7
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.3.2",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "PANELES DE VINILO, VIDRIO TEMPLADO Y ACRÍLICO",
+   "texto": "PANELES DE VINILO, VIDRIO TEMPLADO Y ACRÍLICO. Los paneles  de vinilo, vidrio templado \ny acrílico deben ser removibles. Los paneles desmontables se identiﬁcarán como desmontables \nmediante una calcomanía.  La calcomanía de identiﬁcación deberá indicar esencialmente \"e l panel \nremovible deberá ser removido cuando la velocidad del viento exceda los 34  m/s (75 mph)” . Las \ncalcomanías se colocarán de manera que sean visibles cuando el panel esté instalado.",
+   "paginas": [
+    7
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.4",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "CARGAS",
+   "texto": "CARGAS. Los miembros estructurales que soportan los cerramientos con pantalla deben ser \ndiseñados para el viento en dos direcciones ortogonales usando las presiones dadas en la T abla 2002.4 \ndel FBC 2023. Cada miembro primario también debe ser diseñado para una carga de 1.33 kN aplicada \nverticalmente hacia abajo a lo largo de 305 mm de cualquier miembro, que no ocurra simultáneamente \ncon la carga de viento. \nExcepción: Además de las presiones del viento, las correas deben ser diseñadas para una carga de 0.89 \nkN aplicada verticalmente hacia abajo a lo largo de cualquier 305 mm (1 pie) de cualquier miembro, \nque no ocurra simultáneamente con la carga del viento.",
+   "paginas": [
+    7
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.4.1",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "GUÍA DE DISEÑO",
+   "texto": "GUÍA DE DISEÑO. Se aceptará la Guía de la AAF para la Construcción con Aluminio en Zonas \nde Vientos Fuertes como conforme a las prácticas de ingeniería aceptadas.",
+   "paginas": [
+    7
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.5",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "PANELES DE PARED",
+   "texto": "PANELES DE PARED. El grosor mínimo de los paneles estructurales de pared de chapa de \naluminio conformada no será inferior a 0.6 mm, sujeto a las tolerancias aprobadas.",
+   "paginas": [
+    7
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.6",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "DISEÑO DE CUARTOS DE SOL",
+   "texto": "DISEÑO DE CUARTOS DE SOL.",
+   "paginas": [
+    7
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.6.1",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "Los cuartos de sol deben cumplir con la norma AAMA/NPEA/NSA 2100",
+   "texto": "Los cuartos de sol deben cumplir con la norma AAMA/NPEA/NSA 2100.",
+   "paginas": [
+    7
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.6.2",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "",
+   "texto": "A los efectos de aplicar los criterios de AAMA/NPEA/NSA 2100 en función del uso previsto, los \ncuartos de sol deberán ser identiﬁcados como una de las siguientes categorías por el solicitante del \npermiso, el profesional del diseño o el propietario o el agente del propietario en los documentos de \nconstrucción. Las presiones de los componentes y de los revestimientos se utilizarán para el diseño de \nlos elementos que no se caliﬁcan como sistemas principales de resistencia al viento. Las presiones del \nsistema principal de resistencia a la fuerza del viento se utilizarán para el diseño de los elementos \nasignados para proporcionar soporte y estabilidad para el cuarto de sol en general.",
+   "paginas": [
+    7
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.6.2.1",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "",
+   "texto": "CATEGORÍA I:  Una terraza acristalada aislada térmicamente con paredes abiertas o \ncerradas con mosquiteras o con una película de plástico de 0 .5 mm (20 mil) de grosor máximo. El \nespacio no es habitable y no está acondicionado.",
+   "paginas": [
+    7,
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.6.2.2",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "CATEGORÍA II:  Una terraza acristalada aislada térmicamente con paredes cerradas",
+   "texto": "CATEGORÍA II:  Una terraza acristalada aislada térmicamente con paredes cerradas. Las \naberturas están cerradas con plástico o vidrio translúcido o transparente. El espacio no es habitable ni \nestá acondicionado.",
+   "paginas": [
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.6.2.3",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "CATEGORÍA III:  Una terraza acristalada aislada térmicamente con paredes cerradas",
+   "texto": "CATEGORÍA III:  Una terraza acristalada aislada térmicamente con paredes cerradas. Las \naberturas están cerradas con plástico o vidrio translúcido o transparente. El cerramiento de la terraza \nacristalada cumple los requisitos adicionales de resistencia a la inﬁltración de aire y a la penetración de \nagua. El espacio se deﬁne como no habitable y no acondicionado.",
+   "paginas": [
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.6.2.4",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "CATEGORÍA IV:  Una terraza acristalada aislada térmicamente con paredes cerradas",
+   "texto": "CATEGORÍA IV:  Una terraza acristalada aislada térmicamente con paredes cerradas. La \nterraza acristalada está diseñada para ser calentada o refrigerada por un sistema de control de \ntemperatura independiente y está aislada térmicamente de la estructura principal. El cerramiento de la \nterraza acristalada cumple los requisitos adicionales de resistencia a la penetración de agua, resistencia \na la inﬁltración de aire y rendimiento térmico. El espacio no es habitable y está acondicionado.",
+   "paginas": [
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.2.6.2.5",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "CATEGORÍA V:  Una terraza acristalada con paredes cerradas",
+   "texto": "CATEGORÍA V:  Una terraza acristalada con paredes cerradas. La terraza acristalada está \ndiseñada para ser calentada o refrigerada y está abierta a la estructura principal. El cerramiento de la \nterraza acristalada cumple los requisitos adicionales de resistencia a la penetración de agua, resistencia \na la inﬁltración de aire y rendimiento térmico. El espacio es habitable y está acondicionado. \nCAPITULO 7.3. ZONAS DE HURACANES DE ALTA \nVELOCIDAD.",
+   "paginas": [
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.1",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "DISEÑO",
+   "texto": "DISEÑO. Los miembros de aluminio deberán ser diseñados por métodos que admitan un análisis \nracional de acuerdo con los principios establecidos de la mecánica.",
+   "paginas": [
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.2",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "NORMAS",
+   "texto": "NORMAS. El diseño, la fabricación y el montaje del aluminio estructural se ajustarán al Manual \nde Diseño del Aluminio.",
+   "paginas": [
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.3",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "EJECUCIÓN",
+   "texto": "EJECUCIÓN. La construcción de aluminio deberá estar en conformidad con las tolerancias, \ncalidad y métodos de construcción establecidos en la Sección 7.3.2 y el Código de Soldadura \nEstructural-Aluminio de la Sociedad Americana de Soldadura (D1.2).",
+   "paginas": [
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.4",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "TENSIONES UNITARIAS ADMISIBLES",
+   "texto": "TENSIONES UNITARIAS ADMISIBLES.",
+   "paginas": [
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.4.1",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "",
+   "texto": "El diseño, la fabricación y el ensamblaje de los elementos de aluminio para la construcción y \notras estructuras deben ser conformes a la norma establecida en la sección 7.3.2 y a lo que se establece \nen este documento.",
+   "paginas": [
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.4.2",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "",
+   "texto": "Los miembros de aluminio deben estar limitados por las deﬂexiones establecidas en el Título \n2: Cargas Mínimas para Análisis y Diseño Estructural.",
+   "paginas": [
+    8,
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.5",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "",
+   "texto": "El funcionario de la construcción puede exigir que cualquier estructura que utilice miembros \nprimarios o secundarios de aluminio sea diseñada por un ingeniero estructural.",
+   "paginas": [
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.5.1",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "",
+   "texto": "Además de los esfuerzos de ﬂexión y de corte, los factores críticos de pandeo, fatiga, elevadores \nde esfuerzos tales como muescas o agujeros o esquinas reentrantes de forma, deﬂexión y conexiones \ndeberán ser considerados y previstos por un diseño adecuado.",
+   "paginas": [
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.5.2",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "T odos los sistemas de cubiertas sólidas se diseñarán para una carga viva mínima de 1",
+   "texto": "T odos los sistemas de cubiertas sólidas se diseñarán para una carga viva mínima de 1.44 \nkN/m2.",
+   "paginas": [
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.5.3",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "T odos los ediﬁcios y estructuras deberán estar diseñados para resistir el levantamiento",
+   "texto": "T odos los ediﬁcios y estructuras deberán estar diseñados para resistir el levantamiento. En el \ncaso de la colocación sobre losas y cimientos existentes, el ingeniero profesional y/o el arquitecto \ndeberán proporcionar información y cálculos suﬁcientes para veriﬁcar la capacidad de la losa o los \ncimientos para resistir las cargas de levantamiento.",
+   "paginas": [
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.5.4",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "",
+   "texto": "T odos los dispositivos de conexión deberán ser caliﬁcados mediante pruebas de carga \nrealizadas por un laboratorio de pruebas aprobado.",
+   "paginas": [
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.5.4.1",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "",
+   "texto": "T odos los anclajes de expansión no deben instalarse a menos de 76 mm del borde de la losa \nde hormigón y/o de las zapatas. T odos los anclajes de expansión deberán desarrollar una fuerza de \nresistencia a la retirada ﬁnal igual a cuatro veces la carga impuesta, sin aumento de la tensión durante \nla duración de la carga",
+   "paginas": [
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "DETALLES DE FABRICACION Y CONSTRUCCION",
+   "texto": "DETALLES DE FABRICACION Y CONSTRUCCION.",
+   "paginas": [
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.1",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "CONEXIONES",
+   "texto": "CONEXIONES. Los elementos de aluminio se diseñarán según las normas de la sección 7.3.2.",
+   "paginas": [
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.1.1",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "SUJETADORES",
+   "texto": "SUJETADORES. Los pernos y otros elementos de ﬁjación deberán ser de aluminio, acero \ninoxidable, acero galvanizado en caliente o electro-galvanizado. T ambién se pueden utilizar pernos de \nacero con doble cadmio.",
+   "paginas": [
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.1.2",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "SOLDADURA",
+   "texto": "SOLDADURA. Las piezas de aluminio se soldarán con un proceso de soldadura por arco con \ngas inerte o por resistencia. No se utilizará ningún proceso de soldadura que requiera un ﬂujo de \nsoldadura. Se utilizarán aleaciones de relleno que cumplan los requisitos de la norma de este capítulo.",
+   "paginas": [
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.1.3",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "CALIFICACIÓN DEL SOLDADOR",
+   "texto": "CALIFICACIÓN DEL SOLDADOR.  T odas las soldaduras de miembros estructurales de \naluminio serán realizadas por soldadores certiﬁcados.",
+   "paginas": [
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.1.4",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "MONTAJE",
+   "texto": "MONTAJE. Durante el montaje, el aluminio estructural deberá estar adecuadamente \narriostrado y ﬁjado para resistir las cargas muertas, de viento y de montaje.",
+   "paginas": [
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.2",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "CUBIERTAS Y REVESTIMIENTOS DE ALUMINIO ESTRUCTURAL",
+   "texto": "CUBIERTAS Y REVESTIMIENTOS DE ALUMINIO ESTRUCTURAL.",
+   "paginas": [
+    9
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.2.1",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "",
+   "texto": "Las secciones de aluminio que se extienden entre los soportes deberán tener una luz \nlimitada para soportar satisfactoriamente las cargas positivas y negativas establecidas en el Capítulo \n16 (zonas de huracanes de alta velocidad) del FBC 2023. La deﬂexión de la cubierta no deberá exceder \nlo establecido en el Título 2: Cargas Mínimas para Análisis y Diseño Estructural.",
+   "paginas": [
+    9,
+    10
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.2.2",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "",
+   "texto": "La lámina de aluminio utilizada para las cubiertas o revestimientos de los tejados no deberá \ntener un grosor inferior a 0.8 mm.",
+   "paginas": [
+    10
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.2.3",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "",
+   "texto": "Las láminas de aluminio deben ﬁjarse a los soportes para resistir adecuadamente las cargas \npositivas y negativas. Las ﬁjaciones se harán a  intervalos que no excedan de 203 mm al centro y se  \nﬁjarán unas a otras en los solapes laterales a intervalos que requieran los análisis racionales y/o las \npruebas, pero no excederán de 305 mm al centro.",
+   "paginas": [
+    10
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.2.4",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "",
+   "texto": "Los elementos de ﬁjación deberán tener una cabeza y/o estar provistos de arandelas de un \ndiámetro no inferior a 13 mm (1/2 pulgada).",
+   "paginas": [
+    10
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.2.5",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "",
+   "texto": "Los sujetadores ubicados en los traslapos de los extremos deben colocarse a no más de 51 \nmm ni a menos de 25 mm del extremo de las láminas superpuestas.",
+   "paginas": [
+    10
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.2.6",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "",
+   "texto": "Cuando el revestimiento del techo o de la pared sea de aluminio, se debe proveer una \nmembrana aprobada para proteger contra la intrusión de agua en el interior o el revestimiento de \naluminio debe ser diseñado y construido con un borde continuo, solapado o costura para prevenir la \npenetración de agua.",
+   "paginas": [
+    10
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.3",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "REVESTIMIENTOS Y CUBIERTAS DE ALUMINIO NO ESTRUCTURALES",
+   "texto": "REVESTIMIENTOS Y CUBIERTAS DE ALUMINIO NO ESTRUCTURALES.",
+   "paginas": [
+    10
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.3.1",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "",
+   "texto": "Las láminas de aluminio no estructurales deberán estar respaldadas por un revestimiento \nsegún lo establecido en los Capítulos 23 y 24 del FBC 2023 (zonas de huracanes de alta velocidad).",
+   "paginas": [
+    10
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.3.2",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "Las láminas de aluminio no estructural deben tener un espesor mínimo de 0",
+   "texto": "Las láminas de aluminio no estructural deben tener un espesor mínimo de 0.8 mm.",
+   "paginas": [
+    10
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.6.3.3",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "Las cubiertas y los revestimientos no estructurales se ﬁjarán como se establece en 7",
+   "texto": "Las cubiertas y los revestimientos no estructurales se ﬁjarán como se establece en 7.3.6.3.2, \nexcepto que la ﬁjación de los revestimientos residenciales de aluminio se hará mediante análisis y/o \npruebas racionales utilizando clavos de aluminio de un diámetro mínimo de 3 mm de longitud \nsuﬁciente para penetrar en los montantes un mínimo de 51 mm.  Los clavos en los montantes de \nmadera deben ser los requeridos por el análisis racional y/o las pruebas, pero espaciados no más de \n610 mm en el centro horizontalmente y no más de 203 mm (8 pulgadas) en el centro verticalmente.",
+   "paginas": [
+    10
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.7",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "SALONES DE SOL",
+   "texto": "SALONES DE SOL.",
+   "paginas": [
+    10
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.7.1",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "CARGAS DE VIENTO",
+   "texto": "CARGAS DE VIENTO. La velocidad básica del viento en kilómetros por hora (kph) se \ndeterminará de acuerdo con el Título 2. Los cuartos de sol, incluyendo las estructuras expuestas, los \ncomponentes, el revestimiento y la cubierta del techo, deberán estar diseñados para resistir las cargas \nde viento establecidas en el Título 2.",
+   "paginas": [
+    10
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.7.2",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "CATEGORÍAS DE CUARTOS DE SOL",
+   "texto": "CATEGORÍAS DE CUARTOS DE SOL. El solicitante del permiso, el profesional del diseño o \nel propietario del lugar donde se construya el solárium deberá clasiﬁcarlo en una de las siguientes \ncategorías:",
+   "paginas": [
+    10,
+    11
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.7.2.1",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "CATEGORÍA I: T echo o cubierta de un espacio exterior",
+   "texto": "CATEGORÍA I: T echo o cubierta de un espacio exterior. Se permitirá que las aberturas se \ncierren con una malla anti -insectos o  c o n  u n a  p e l í c u l a  d e  p l á s t i c o  d e  0 . 5  m m  ( 2 0  m i l )  d e  g r o s o r  \nmáximo. El espacio se deﬁne como no habitable y no acondicionado.",
+   "paginas": [
+    11
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.7.2.2",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "CATEGORÍA II: Un techo o una cubierta de un espacio exterior con paredes cerradas",
+   "texto": "CATEGORÍA II: Un techo o una cubierta de un espacio exterior con paredes cerradas. Se \npermite que las aberturas estén cerradas con plástico o vidrio translúcido o transparente. El espacio se \ndeﬁne como no habitable y no acondicionado.",
+   "paginas": [
+    11
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.7.2.3",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "CATEGORÍA III: Un techo o una cubierta de un espacio exterior con paredes cerradas",
+   "texto": "CATEGORÍA III: Un techo o una cubierta de un espacio exterior con paredes cerradas. Se \npermite que las aberturas estén cerradas con plástico o vidrio translúcido o transparente. La terraza \nacristalada cumple los requisitos adicionales de resistencia a la entrada forzada, resistencia a las fugas \nde aire y resistencia a la penetración del agua. El espacio se deﬁne como no habitable y no \nacondicionado.",
+   "paginas": [
+    11
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.7.2.4",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "CATEGORÍA IV: Un techo o una cubierta de un espacio exterior con paredes cerradas",
+   "texto": "CATEGORÍA IV: Un techo o una cubierta de un espacio exterior con paredes cerradas. La \nterraza acristalada está diseñada para ser calentada y/o enfriada por un sistema de control de \ntemperatura independiente y está aislada térmicamente de la estructura principal. La terraza \nacristalada cumple con los requisitos adicionales de resistencia a la entrada forzada, resistencia a la \npenetración de agua, resistencia a las fugas de aire y rendimiento térmico. El espacio se deﬁne como \nhabitable y acondicionado.",
+   "paginas": [
+    11
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  },
+  {
+   "id": "7.3.7.2.5",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "CATEGORÍA V: T echo o cubierta de un espacio exterior con paredes cerradas",
+   "texto": "CATEGORÍA V: T echo o cubierta de un espacio exterior con paredes cerradas. La terraza \nacristalada está diseñada para ser calentada y/o refrigerada y está abierta a la estructura principal. La \nterraza acristalada cumple los requisitos adicionales de resistencia a la entrada forzada, resistencia a la \npenetración de agua, resistencia a las fugas de aire y rendimiento térmico. El espacio se deﬁne como \nhabitable y acondicionado. \nCódigo de Construcción de la República Dominicana 8. Mampostería\n \n \n \n \n \nTÍTULO 8: MAMPOSTERIA. \n\nINDICE DE CONTENIDOS RESUMIDO. \n \nCAPÍTULO 8.1. CONSIDERACIONES GENERALES. ............................ 10 \nCAPÍTULO 8.2. REQUISITOS GENERALES DE DISEÑO. ................... 20 \nCAPÍTULO 8.3. ESPESOR   EQUIVALENTE. ........................................ 23 \nCAPÍTULO 8.4. ESPECIFICACIONES SOBRE REFUERZO. ................ 23 \nCAPÍTULO 8.5. MUROS ARMADOS EN DOS DIRECCIONES. ........... 26 \nCAPÍTULO 8.6. ELEMENTOS DE AMARRE. ......................................... 27 \nCAPÍTULO 8.7. MAMPOSTERÍA A CARGA AXIAL Y FLEXIÓN. ........ 29 \nCAPÍTULO 8.8. MAMPOSTERÍA A ESFUERZO CORTANTE. ............. 34 \nCAPÍTULO 8.9. MAMPOSTERÍA A FLEXIÓN FUERA DEL PLANO. .. 34 \nCAPÍTULO 8.10. CONSIDERACIONES DE APLASTAMIENTO EN \nMAMPOSTERÍA. ....................................................................................... 35 \nCAPÍTULO 8.11. MUROS DE CONTENCIÓN DE MAMPOSTERÍA. ..... 36 \nCAPÍTULO 8.12. CONSIDERACIONES DE HUECOS EN \nMAMPOSTERÍA. ....................................................................................... 37 \n  \n\n\nCAPÍTULO 8.1. CONSIDERACIONES GENERALES.",
+   "paginas": [
+    11,
+    12,
+    13,
+    14
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "tomo": 2
+  }
+ ]
+}
