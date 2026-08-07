@@ -6,3 +6,9 @@ fea_mcp.log
 *.ico
 __pycache__/
 *.log
+modelos/*.K_*
+modelos/*.Y*
+modelos/*.OUT
+modelos/*.msh
+modelos/*.LOH
+modelos/*.LOG
