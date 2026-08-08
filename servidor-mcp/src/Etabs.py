@@ -18,6 +18,9 @@
 
 import logging
 import os
+import re
+import shutil
+import threading
 from typing import Any
 
 import comtypes
@@ -51,6 +54,77 @@ class GeomObject(BaseModel):
 
 class EtabsError(RuntimeError):
     """Fallo de conexion u operacion en ETABS. FastMCP lo convierte en isError."""
+
+
+def _descartar_modales_etabs(stop_event: threading.Event) -> None:
+    """Descarta dialogos modales (#32770) de ETABS durante un import de texto.
+
+    File.OpenFile sobre un .e2k/.$et puede levantar un modal ("System memory
+    error in dimensioning Array AnalysisModelInfo") que bloquea el hilo COM
+    para siempre (auditoria 7.6). Reproducido y verificado el 2026-08-07:
+    descartado el modal, el import termina bien (ret=0, modelo correcto).
+    Solo toca dialogos cuyo texto coincide con frases del importador; el
+    boton se presiona con WM_COMMAND y el ID real del control (BM_CLICK
+    posteado cross-thread no funciona; verificado). Cada descarte queda en
+    el log.
+    """
+    import ctypes
+    from ctypes import wintypes
+
+    u32 = ctypes.windll.user32
+    FRASES = ("error in dimensioning", "importing text file", "import log")
+    ENUM = ctypes.WINFUNCTYPE(wintypes.BOOL, wintypes.HWND, wintypes.LPARAM)
+    u32.EnumWindows.argtypes = (ENUM, wintypes.LPARAM)
+    u32.EnumChildWindows.argtypes = (wintypes.HWND, ENUM, wintypes.LPARAM)
+    u32.GetClassNameW.argtypes = (wintypes.HWND, ctypes.c_wchar_p, ctypes.c_int)
+    u32.IsWindowVisible.argtypes = (wintypes.HWND,)
+    u32.GetDlgCtrlID.argtypes = (wintypes.HWND,)
+    u32.PostMessageW.argtypes = (wintypes.HWND, ctypes.c_uint,
+                                 wintypes.WPARAM, wintypes.LPARAM)
+    u32.SendMessageTimeoutW.argtypes = (wintypes.HWND, ctypes.c_uint,
+                                        wintypes.WPARAM, ctypes.c_wchar_p,
+                                        ctypes.c_uint, ctypes.c_uint,
+                                        ctypes.POINTER(ctypes.c_size_t))
+
+    def txt(h: int) -> str:
+        buf = ctypes.create_unicode_buffer(1024)
+        res = ctypes.c_size_t(0)
+        # WM_GETTEXT via SendMessageTimeout: GetWindowText no lee controles
+        # de otro proceso. SMTO_ABORTIFHUNG=2, 300 ms.
+        u32.SendMessageTimeoutW(h, 0x000D, 1024, buf, 2, 300,
+                                ctypes.byref(res))
+        return buf.value
+
+    while not stop_event.wait(1.0):
+        tops: list[int] = []
+
+        def _top(h, _l):
+            cls = ctypes.create_unicode_buffer(64)
+            u32.GetClassNameW(h, cls, 64)
+            if cls.value == "#32770" and u32.IsWindowVisible(h):
+                tops.append(h)
+            return True
+
+        u32.EnumWindows(ENUM(_top), 0)
+        for dlg in tops:
+            hijos: list[int] = []
+
+            def _kid(h, _l):
+                hijos.append(h)
+                return True
+
+            u32.EnumChildWindows(dlg, ENUM(_kid), 0)
+            textos = " | ".join(txt(h) for h in hijos).lower()
+            if not any(f in textos for f in FRASES):
+                continue
+            boton = next(
+                (h for h in hijos if txt(h).strip().lstrip("&").upper()
+                 in ("OK", "ACEPTAR", "YES", "CLOSE", "CERRAR")), None)
+            if boton is not None:
+                u32.PostMessageW(dlg, 0x0111,
+                                 u32.GetDlgCtrlID(boton) & 0xFFFF, boton)
+                logger.warning("Modal de ETABS descartado durante import: "
+                               "%.200s", textos)
 
 
 class Etabs:
@@ -554,6 +628,17 @@ class Etabs:
         n = len(story_names)
         names = list(story_names)
         heights = [float(h) for h in story_heights]
+
+        if self._count_objects() > 0:
+            # SetStories_2 esta documentado "can only be used when no
+            # objects exist in the model" (CHM oficial v23) y la tabla
+            # Story Definitions es ImportType=1 (importable pero NO editable
+            # interactivamente), asi que en un modelo poblado ninguna de las
+            # rutas directas puede funcionar. Via verificada el 2026-08-07:
+            # round-trip del texto del modelo ($et/e2k).
+            return self._set_stories_via_texto(names, heights,
+                                               float(base_elevation))
+
         # Todos master, ninguno similar: la configuracion que ETABS nunca
         # puede rechazar (es la que genera al no declarar plantas repetidas).
         # Dos configuraciones anteriores fallaron con ret=1 silencioso:
@@ -568,8 +653,14 @@ class Etabs:
         splice_height = [0.0] * n
         color = [0] * n
 
-        # Elevacion (cota superior) de cada nivel, acumulada desde la base.
-        elevations: list[float] = []
+        # Elevaciones para el SetStories legado. El CHM exige longitud n+1
+        # con la elevacion de la Base COMO PRIMER ELEMENTO ("This array has
+        # length (Number of stories + 1). The first value in the array is
+        # the 'Base' elevation"). La version anterior pasaba solo los n
+        # topes, asi que el "no-op" de R02 nunca fue valido para ESTA
+        # variante (la conclusion del bloque sobrevive por SetStories_2,
+        # que no lleva elevaciones y tambien rechazo).
+        elevations: list[float] = [float(base_elevation)]
         acc = float(base_elevation)
         for h in heights:
             acc += h
@@ -640,6 +731,148 @@ class Etabs:
         total = sum(heights)
         return (f"{n} nivel(es) definidos desde elevacion {base_elevation:g}. "
                 f"Altura total: {total:g}.")
+
+    @com_call
+    def _count_objects(self) -> int:
+        model = self._model()
+        return (int(model.PointObj.Count()) + int(model.FrameObj.Count())
+                + int(model.AreaObj.Count()))
+
+    @com_call
+    def _set_stories_via_texto(self, names: list[str], heights: list[float],
+                               base_elevation: float) -> str:
+        """Redefine niveles en un modelo CON objetos via texto ($et/e2k).
+
+        File.Save regenera el .$et (formato e2k); se reescribe el bloque
+        $ STORIES y se renombran las referencias por token exacto; el
+        File.OpenFile del texto editado importa y remapea los objetos; se
+        verifica y se vuelve a guardar como .EDB. Verificado el 2026-08-07
+        sobre el respaldo ANTES de R02: 4 niveles -> 3 renombrados a
+        "Nivel 1/2/3" de 3 m, geometria intacta (36/63/12).
+
+        ATENCION: invalida resultados de analisis; el mapeo de nombres
+        viejo->nuevo es posicional de abajo hacia arriba; los niveles viejos
+        que sobren (se eliminan) deben estar vacios; las alturas se pasan en
+        las unidades ACTIVAS y se convierten a las del archivo (la linea
+        UNITS del $et), que pueden diferir.
+        """
+        model = self._model()
+        n = len(names)
+        edb = str(model.GetModelFilename() or "")
+        if not os.path.isfile(edb):
+            raise EtabsError("El modelo debe estar guardado en disco antes "
+                             "de redefinir niveles por texto.")
+
+        r = oapi.call(model.Story, [("GetStories_2", ())], "niveles actuales")
+        viejos = oapi.find_str_list(r) or []
+        if not viejos:
+            raise EtabsError("No se pudieron leer los niveles actuales.")
+
+        respaldo = os.path.splitext(edb)[0] + ".respaldo-niveles.EDB"
+        shutil.copy2(edb, respaldo)
+        oapi.call_checked(model.File, "Save", (edb,), "guardado previo")
+        et_path = os.path.splitext(edb)[0] + ".$et"
+        if not os.path.isfile(et_path):
+            raise EtabsError(f"ETABS no genero el texto del modelo: {et_path}")
+
+        with open(et_path, "r", encoding="latin-1") as f:
+            texto = f.read()
+
+        # Los largos del $et van en las unidades DEL ARCHIVO (linea UNITS),
+        # que pueden diferir de las activas (este modelo: LB/IN vs kN/m).
+        m = re.search(r'UNITS\s+"[^"]+"\s+"([^"]+)"', texto)
+        len_archivo = (m.group(1) if m else "m").strip().lower()
+        idx = model.GetPresentUnits()
+        _f, len_activa, _t = [s.strip()
+                              for s in PRESET_UNITS[idx - 1].split(",")]
+        try:
+            factor = (self._LENGTH_TO_MM[len_activa]
+                      / self._LENGTH_TO_MM[len_archivo])
+        except KeyError:
+            raise EtabsError(f"Unidad de longitud no reconocida: activa "
+                             f"'{len_activa}', archivo '{len_archivo}'.")
+
+        # 1) Reescribir el bloque $ STORIES (va de ARRIBA hacia abajo, con
+        #    la Base al final). Sin atributo MASTERSTORY los niveles quedan
+        #    todos independientes, igual que el modelo editado por GUI.
+        salida: list[str] = []
+        en_bloque = False
+        for ln in texto.splitlines():
+            s = ln.strip()
+            if s.startswith("$ STORIES"):
+                en_bloque = True
+                salida.append(ln)
+                # :.10g y no :.6g: con 6 cifras, 3 m -> 118.110 in ->
+                # 2.99999 m al releer. Reproducido en la prueba 2026-08-07.
+                for nm, h in zip(reversed(names), reversed(heights)):
+                    salida.append(f'  STORY "{nm}"  HEIGHT {h * factor:.10g} ')
+                salida.append(
+                    f'  STORY "Base"  ELEV {base_elevation * factor:.10g} ')
+                continue
+            if en_bloque:
+                if s.startswith("$"):
+                    en_bloque = False
+                    salida.append(ln)
+                continue
+            salida.append(ln)
+        nuevo = "\n".join(salida)
+
+        # 2) Renombrar referencias por token exacto entre comillas, en dos
+        #    fases para tolerar colisiones (p.ej. Story1 -> Story2).
+        pares = list(zip(viejos,
+                         list(names) + [None] * max(0, len(viejos) - n)))
+        for i, (viejo, _nv) in enumerate(pares):
+            nuevo = nuevo.replace(f'"{viejo}"', f'"\x00NV{i}\x00"')
+        for i, (viejo, nv) in enumerate(pares):
+            marca = f'"\x00NV{i}\x00"'
+            if nv is None:
+                if marca in nuevo:
+                    raise EtabsError(
+                        f"El nivel '{viejo}' se eliminaria pero tiene "
+                        f"objetos asignados; muevalos o borrelos primero. "
+                        f"Respaldo: {respaldo}")
+                continue
+            nuevo = nuevo.replace(marca, f'"{nv}"')
+
+        e2k = os.path.splitext(edb)[0] + ".niveles.e2k"
+        with open(e2k, "w", encoding="latin-1") as f:
+            f.write(nuevo)
+
+        # 3) Importar con vigilante de modales: el import puede levantar un
+        #    dialogo que bloquea el hilo COM (auditoria 7.6, reproducido el
+        #    2026-08-07); descartado, el import termina bien.
+        alto = threading.Event()
+        vigia = threading.Thread(target=_descartar_modales_etabs,
+                                 args=(alto,), daemon=True)
+        vigia.start()
+        try:
+            oapi.call_checked(model.File, "OpenFile", (e2k,),
+                              "import del texto del modelo")
+        finally:
+            alto.set()
+
+        # 4) Verificar y devolver la identidad del archivo al .EDB.
+        model.SetPresentUnits(idx)  # el import puede resetear las unidades
+        r = oapi.call(model.Story, [("GetStories_2", ())],
+                      "verificacion de niveles")
+        leidos = oapi.find_str_list(r) or []
+        if list(leidos) != list(names):
+            raise EtabsError(
+                f"Verificacion fallida: niveles leidos {leidos}, esperados "
+                f"{list(names)}. Respaldo: {respaldo}")
+        nums = oapi.find_num_lists(r, n)
+        if len(nums) >= 2:  # (elevaciones, alturas, ...) segun 0.3
+            alturas_leidas = nums[1]
+            for esp, leida in zip(heights, alturas_leidas):
+                if abs(leida - esp) > 1e-5 * max(1.0, abs(esp)):
+                    raise EtabsError(
+                        f"Verificacion fallida: alturas leidas "
+                        f"{[round(x, 6) for x in alturas_leidas]}, esperadas "
+                        f"{heights}. Respaldo: {respaldo}")
+        oapi.call_checked(model.File, "Save", (edb,), "guardado final")
+        return (f"{n} nivel(es) redefinidos via texto del modelo "
+                f"(geometria remapeada por ETABS). Respaldo: {respaldo}. "
+                f"Resultados de analisis invalidados.")
 
     # ------------------------------------------------------------------
     # Materiales y secciones
@@ -1633,28 +1866,33 @@ class Etabs:
     def get_spectrum(self, name: str) -> str:
         """Devuelve los puntos (T, Sa) de una funcion de espectro de respuesta.
 
-        Func.FuncRS.GetUser(Name) -> (NumberItems, Period[], Value[],
-        DampRatio, ret). Es la via de verificacion que falto en R06: la tabla
-        'Functions - Response Spectrum - User Defined' no devuelve filas.
+        Usa Func.GetValues, el lector GENERICO de funciones (documentado en
+        el CHM de ETABS y verificado en runtime el 2026-08-07 sobre
+        CDCRD-SD). FuncRS.GetUser/SetUser NO existen en la OAPI de ETABS:
+        pertenecen a la superficie unificada CSiAPIv1 (SAP2000) y ETABS los
+        stubbea con ret=-99 — ese era el "-99 de causa no determinada" de
+        R06. Los arrays de GetValues llegan con n+1 elementos y el [0] es
+        relleno. El amortiguamiento no viene en GetValues; esta en la tabla
+        'Functions - Response Spectrum - User Defined'.
         """
         model = self._model()
-        r = oapi.call(model.Func.FuncRS, [("GetUser", (name,))],
-                      f"lectura del espectro '{name}'")
+        r = oapi.call(model.Func, [("GetValues", (name,))],
+                      f"lectura de la funcion '{name}'")
         out = oapi.outs(r)
+        n = next((v for v in out
+                  if isinstance(v, int) and not isinstance(v, bool)), 0)
         num_lists = [list(v) for v in out
                      if isinstance(v, (tuple, list)) and v
                      and all(isinstance(x, (int, float)) and not isinstance(x, bool)
                              for x in v)]
         if len(num_lists) < 2:
-            return f"Espectro '{name}': sin puntos legibles ({out!r})."
+            return f"Funcion '{name}': sin puntos legibles ({out!r})."
         periods, values = num_lists[0], num_lists[1]
-        damp = next((v for v in out
-                     if isinstance(v, float) and not isinstance(v, bool)), None)
+        if n and len(periods) == n + 1:
+            periods, values = periods[1:], values[1:]
         lines = [f"T={t:<10.6f} Sa={a:.6f}" for t, a in zip(periods, values)]
-        head = f"Espectro '{name}': {len(periods)} punto(s)"
-        if damp is not None:
-            head += f", amortiguamiento {damp:g}"
-        return head + "\n" + "\n".join(lines)
+        return (f"Funcion '{name}': {len(periods)} punto(s)\n"
+                + "\n".join(lines))
 
     @com_call
     def get_materials(self) -> str:
@@ -2021,6 +2259,10 @@ class Etabs:
             raise EtabsError("SDS y SD1 deben ser positivos.")
         Ts = SD1 / SDS
         T0 = 0.2 * Ts
+        if Ts >= t_max:
+            raise EtabsError(
+                f"Ts={Ts:.4f}s >= t_max={t_max}s: el espectro quedaria sin "
+                f"rama descendente. Aumente t_max.")
 
         points: list[tuple[float, float]] = []
         if campo_cercano:
@@ -2035,17 +2277,77 @@ class Etabs:
             T = min(round(T * 1.25, 6), t_max)
             points.append((T, round(SD1 / T, 6)))
 
-        periods = [p for p, _ in points]
-        accels = [a for _, a in points]
         model = self._model()
-        oapi.call(
-            model.Func.FuncRS,
-            [
-                ("SetUser", (name, len(points), periods, accels, float(damping))),
-                ("SetUser_1", (name, len(points), periods, accels, float(damping))),
-            ],
-            f"definicion del espectro '{name}'",
-        )
+
+        # SetUser NO existe en la OAPI de ETABS: cFunctionRS (typelib
+        # ETABSv1 y CHM v23) solo tiene NTC2008/2018. El SetUser dispid 50
+        # que se invoco en R06 pertenece a la superficie unificada CSiAPIv1
+        # (SAP2000) y ETABS lo stubbea con ret=-99, igual que GetUser. La
+        # via soportada es la tabla interactiva (ImportType=2), la misma
+        # que funciono como rodeo en R06 — con verificacion al final.
+        key = "Functions - Response Spectrum - User Defined"
+
+        # La escritura reemplaza la tabla COMPLETA: conservar las filas de
+        # otras funciones usuario y descubrir el esquema real en runtime.
+        fields: list[str] = ["Name", "Period", "Value", "Damping"]
+        old_rows: list[list[str]] = []
+        try:
+            r0 = oapi.call(
+                model.DatabaseTables,
+                [("GetTableForEditingArray", (key, "", 0, [], 0, []))],
+                f"esquema de '{key}'")
+            out = oapi.outs(r0)
+            str_lists = [list(v) for v in out
+                         if isinstance(v, (tuple, list)) and v
+                         and all(isinstance(x, str) for x in v)]
+            ints = [v for v in out
+                    if isinstance(v, int) and not isinstance(v, bool)]
+            if len(str_lists) >= 2 and ints and ints[-1] > 0:
+                fields = str_lists[0]
+                data, n_rec = str_lists[-1], ints[-1]
+                if len(data) % n_rec == 0:
+                    ncols = len(data) // n_rec
+                    filas = [data[i * ncols:(i + 1) * ncols]
+                             for i in range(n_rec)]
+                    i_nm = next((i for i, f in enumerate(fields)
+                                 if "name" in f.lower()), 0)
+                    old_rows = [f for f in filas if f[i_nm] != name]
+        except Exception as e:
+            logger.info("Tabla '%s' sin contenido previo legible (%s).",
+                        key, e)
+
+        def _fila(t: float, a: float) -> list[str]:
+            # :.10g para no recortar el septimo digito significativo de los
+            # periodos (con :g, 1.034431 se escribia como 1.03443).
+            fila = []
+            for f in fields:
+                fl = f.lower()
+                if "name" in fl:
+                    fila.append(name)
+                elif "period" in fl:
+                    fila.append(f"{t:.10g}")
+                elif "damp" in fl:
+                    fila.append(f"{float(damping):.10g}")
+                elif "value" in fl or "accel" in fl:
+                    fila.append(f"{a:.10g}")
+                else:
+                    fila.append("")
+            return fila
+
+        self.set_table_data(key, list(fields),
+                            old_rows + [_fila(t, a) for t, a in points])
+
+        # Releer con el getter y comparar: la regla que dejo esta corrida
+        # ("el mensaje dice lo que la herramienta creo, no lo que hay en el
+        # modelo").
+        chk = oapi.call(model.Func, [("GetValues", (name,))],
+                        f"verificacion del espectro '{name}'")
+        n_chk = next((v for v in oapi.outs(chk)
+                      if isinstance(v, int) and not isinstance(v, bool)), -1)
+        if n_chk != len(points):
+            raise EtabsError(
+                f"El espectro '{name}' quedo con {n_chk} punto(s); se "
+                f"escribieron {len(points)}. Revise la tabla '{key}'.")
         return (f"Espectro '{name}' definido: {len(points)} puntos, "
                 f"T0={T0:.4f}s, Ts={Ts:.4f}s, meseta Sa={SDS:g}g"
                 f"{' (campo cercano)' if campo_cercano else ''}. "

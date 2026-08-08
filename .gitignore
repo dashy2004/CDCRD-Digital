@@ -12,3 +12,11 @@ modelos/*.OUT
 modelos/*.msh
 modelos/*.LOH
 modelos/*.LOG
+
+# fotos sueltas y modelos binarios de ETABS: no van al repo
+CLAUDE.jpg
+CLAUDE.png
+ETABS.png
+Edificio_3niveles_oficinas.*
+modelos/
+*.EDB

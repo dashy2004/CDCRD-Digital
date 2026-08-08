@@ -110,3 +110,5 @@ contar**, siempre. Por eso el servidor incluye lectores dedicados (`get_load_pat
 
 Como se construyo, como continuarlo y el contrato de datos: `docs/TECNICO.md` y
 `docs/ESQUEMA.md`. Guia de instalacion del servidor de ETABS: `instalacion/INSTALACION.md`.
+Gotchas verificados del API (semántica real de `set_table_data`, filtros por elevación,
+timeouts de `run_analysis`) con causa raíz y regla: `servidor-mcp/ERRORES.md`.
