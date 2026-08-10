@@ -1,0 +1,14 @@
+# SAFE MCP - mismas dependencias que servidor-mcp (comparten runtime).
+#
+# IMPORTANTE: el pin de mcp<2 no es opcional. El SDK 2.0.0 elimino el modulo
+# mcp.server.fastmcp; con "mcp>=0.1.0" pip instala 2.0.0 y el servidor muere
+# en el import.
+mcp>=1.10,<2
+
+# comtypes: unica dependencia COM que el codigo importa. Evitar 1.2.0
+# (regresion en la generacion de wrappers de typelib).
+comtypes>=1.4.0
+
+pydantic>=2.7
+
+# pywin32 NO es requerido por este codigo.

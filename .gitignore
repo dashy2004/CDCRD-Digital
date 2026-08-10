@@ -20,3 +20,6 @@ ETABS.png
 Edificio_3niveles_oficinas.*
 modelos/
 *.EDB
+
+# sondas de probe_file_types (tablas_caso.txt sola pesa ~2.9 GB)
+tmp-probe-efiletype/

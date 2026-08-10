@@ -1,0 +1,12 @@
+{
+  "server": {
+    "name": "SAFE MCP",
+    "version": "0.1.0"
+  },
+  "safe": {
+    "prog_id": "CSI.SAFE.API.ETABSObject",
+    "helper_prog_id": "",
+    "auto_start": false,
+    "exe_path": ""
+  }
+}
