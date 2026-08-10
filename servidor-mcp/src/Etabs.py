@@ -1502,10 +1502,43 @@ class Etabs:
 
     @com_call
     def run_analysis(self) -> str:
-        """Ejecuta el analisis del modelo. Requiere que el modelo este guardado."""
+        """Ejecuta el analisis del modelo. Requiere que el modelo este guardado.
+
+        LLAMADA BLOQUEANTE: en modelos grandes puede exceder el timeout del
+        cliente MCP. El timeout NO cancela el analisis, que sigue corriendo
+        dentro de ETABS (E-035). Tras un timeout, sondear con
+        get_analysis_status en vez de relanzar a ciegas.
+        """
         model = self._model()
         oapi.call(model.Analyze, [("RunAnalysis", ())], "ejecucion del analisis")
         return "Analisis ejecutado."
+
+    @com_call
+    def get_analysis_status(self) -> str:
+        """Estado por caso de carga: no corrido / no pudo / incompleto / listo.
+
+        Sondeo barato para despues de un timeout MCP en run_analysis: dice si
+        el analisis sigue pendiente, termino, o fallo, sin relanzar nada.
+
+        [Firma verificada en vivo 2026-08-10 (typelib SAFE 23.3.0, misma
+        arquitectura OAPI): Analyze.GetCaseStatus -> (NumberItems, CaseName,
+        Status, pRetVal). Codigos CSI: 1=Not run, 2=Could not start,
+        3=Not finished, 4=Finished.]
+        """
+        model = self._model()
+        (n, names, status, ret) = model.Analyze.GetCaseStatus(0, [], [])
+        if ret != 0:
+            raise EtabsError("GetCaseStatus fallo (ret != 0).")
+        if n == 0:
+            return "Sin casos de carga definidos."
+        etiquetas = {1: "no corrido", 2: "NO PUDO ARRANCAR",
+                     3: "INCOMPLETO (corriendo o interrumpido)", 4: "listo"}
+        lines = [f"{names[i]}: {etiquetas.get(status[i], status[i])}"
+                 for i in range(n)]
+        pendientes = sum(1 for i in range(n) if status[i] != 4)
+        resumen = ("todos los casos listos" if pendientes == 0
+                   else f"{pendientes} caso(s) sin terminar de {n}")
+        return f"Estado del analisis ({resumen}):\n" + "\n".join(lines)
 
     @com_call
     def get_story_drifts(self, cases: list[str] | None = None) -> str:
@@ -1593,13 +1626,21 @@ class Etabs:
         return f"{len(lines)} tabla(s):\n" + "\n".join(lines)
 
     @com_call
-    def get_table_data(self, table_key: str, max_rows: int = 100) -> str:
-        """Lee el contenido de una tabla del modelo.
+    def get_table_data(self, table_key: str, max_rows: int = 100,
+                       offset: int = 0) -> str:
+        """Lee el contenido de una tabla del modelo, con paginacion.
+
+        Para tablas de resultados grandes (miles de filas) pedir por
+        paginas: offset=0, luego offset=max_rows, etc. El encabezado y el
+        conteo total salen en cada pagina. La lectura COM trae la tabla
+        completa igual (la OAPI no pagina); lo que se recorta es la
+        respuesta, que es lo que revienta el limite de tokens del cliente.
 
         Args:
             table_key: clave exacta obtenida con list_tables,
                        ej. "Grid Definitions - Grid Lines".
-            max_rows: maximo de filas a mostrar.
+            max_rows: maximo de filas a mostrar en esta pagina.
+            offset: fila inicial (0 = primera).
         """
         model = self._model()
         # FieldKeyList vacio = "todos los campos". La version anterior pasaba
@@ -1674,12 +1715,20 @@ class Etabs:
                         f"campos no reconocible. Datos crudos: {data[:40]!r}...")
         ncols = len(fields)
         nrows = len(data) // ncols
-        shown = min(nrows, max_rows)
+        start = max(0, offset)
+        if start >= nrows and nrows > 0:
+            return (f"'{table_key}': {nrows} fila(s) x {ncols} campo(s); "
+                    f"offset {start} fuera de rango.")
+        end = min(nrows, start + max_rows)
         lines = [" | ".join(fields)]
-        for r in range(shown):
+        for r in range(start, end):
             lines.append(" | ".join(data[r * ncols:(r + 1) * ncols]))
-        suffix = "" if shown == nrows else f"\n... ({nrows - shown} fila(s) mas)"
-        return f"'{table_key}': {nrows} fila(s) x {ncols} campo(s)\n" + "\n".join(lines) + suffix
+        resto = nrows - end
+        suffix = "" if resto == 0 else (
+            f"\n... ({resto} fila(s) mas; siguiente pagina: offset={end})")
+        head = (f"'{table_key}': {nrows} fila(s) x {ncols} campo(s)"
+                + (f" [filas {start}..{end - 1}]" if start > 0 else ""))
+        return head + "\n" + "\n".join(lines) + suffix
 
     @com_call
     def set_table_data(self, table_key: str, fields: list[str],
@@ -2530,6 +2579,399 @@ class Etabs:
                   "diseño de hormigon")
         return ("Diseño de hormigon ejecutado"
                 + (f" con codigo '{code}'." if code else "."))
+
+    # ------------------------------------------------------------------
+    # Lectores de diseño de concreto (HUECOS-ETABS-SAFE.md H-1).
+    # Cierran el hueco registrado en la bitacora RESTAURANTE ("el diseño
+    # corre a ciegas"): las TABLAS de diseño no se leen (ret=1), pero los
+    # metodos directos de DesignConcrete si. Firmas transcritas de
+    # describe_oapi contra ETABS 23.3.0 / OAPI 2.016 el 2026-08-10.
+    # ------------------------------------------------------------------
+
+    @com_call
+    def get_concrete_design_beam(self, name: str = "", item_type: int = 2) -> str:
+        """Lee el resumen de diseño de vigas de concreto (acero sup/inf/corte).
+
+        Usa GetSummaryResultsBeam_2, que ademas del area de diseño devuelve
+        la requerida, la minima y la provista. Requiere run_concrete_design
+        previo.
+
+        Args:
+            name: nombre de frame o de grupo. "" con item_type=2 = todo lo
+                  seleccionado; seleccionar todo antes si se quiere el modelo
+                  completo.
+            item_type: 0=objeto, 1=grupo, 2=seleccion.
+        """
+        model = self._model()
+        (n, frame, loc, top_combo, top_area, top_req, top_min, top_prov,
+         bot_combo, bot_area, bot_req, bot_min, bot_prov,
+         v_combo, v_area, v_req, v_min, v_prov,
+         tl_combo, tl_area, tt_combo, tt_area,
+         err, warn, ret) = model.DesignConcrete.GetSummaryResultsBeam_2(
+            # 23 arrays [in,out] antes de ItemType (E-037: faltaba uno y
+            # item_type caia en WarningSummary -> len(int) en comtypes).
+            name, 0,
+            [], [],                  # FrameName, Location
+            [], [], [], [], [],      # Top: Combo, Area, Req, Min, Provided
+            [], [], [], [], [],      # Bot: Combo, Area, Req, Min, Provided
+            [], [], [], [], [],      # VMajor: Combo, Area, Req, Min, Provided
+            [], [], [], [],          # TLCombo, TLArea, TTCombo, TTArea
+            [], [],                  # ErrorSummary, WarningSummary
+            item_type)
+        if ret != 0:
+            raise EtabsError(
+                "GetSummaryResultsBeam_2 fallo. ¿Se corrio run_concrete_design? "
+                "Si name='' use item_type=2 con los frames seleccionados, o "
+                "pase un nombre de frame con item_type=0.")
+        if n == 0:
+            return "Sin resultados de diseño de vigas para esa seleccion."
+        rows = []
+        for i in range(n):
+            fila = (f"{frame[i]} @ {loc[i]:.2f}: "
+                    f"As_sup={top_area[i]:g} (req {top_req[i]:g}, min {top_min[i]:g}, "
+                    f"prov {top_prov[i]:g}, {top_combo[i]}); "
+                    f"As_inf={bot_area[i]:g} (req {bot_req[i]:g}, min {bot_min[i]:g}, "
+                    f"prov {bot_prov[i]:g}, {bot_combo[i]}); "
+                    f"Av={v_area[i]:g} ({v_combo[i]}); "
+                    f"Atl={tl_area[i]:g}, Att={tt_area[i]:g}")
+            if err[i]:
+                fila += f" | ERROR: {err[i]}"
+            if warn[i]:
+                fila += f" | AVISO: {warn[i]}"
+            rows.append(fila)
+        return f"{n} estacion(es) de viga:\n" + "\n".join(rows)
+
+    @com_call
+    def get_concrete_design_column(self, name: str = "",
+                                   item_type: int = 2) -> str:
+        """Lee el resumen de diseño de columnas: PMMRatio, acero, cortante.
+
+        Regla del SOP paso 26: si PMMRatio > 1.05 ('falla en flexion en mas
+        de un 5%'), aumentar el acero; el reporte lo marca. Requiere
+        run_concrete_design previo.
+
+        Args:
+            name: frame o grupo. "" con item_type=2 = seleccion actual.
+            item_type: 0=objeto, 1=grupo, 2=seleccion.
+        """
+        model = self._model()
+        (n, frame, my_option, loc, pmm_combo, pmm_area, pmm_ratio,
+         vmaj_combo, av_major, vmin_combo, av_minor,
+         err, warn, ret) = model.DesignConcrete.GetSummaryResultsColumn(
+            name, 0, [], [], [], [], [], [], [], [], [], [], [], [], item_type)
+        if ret != 0:
+            raise EtabsError(
+                "GetSummaryResultsColumn fallo. ¿Se corrio run_concrete_design?")
+        if n == 0:
+            return "Sin resultados de diseño de columnas para esa seleccion."
+        rows = []
+        for i in range(n):
+            # MyOption: 1 = check (armado dado, devuelve ratio);
+            # 2 = design (devuelve area requerida).
+            modo = {1: "check", 2: "design"}.get(my_option[i], str(my_option[i]))
+            fila = (f"{frame[i]} @ {loc[i]:.2f} [{modo}]: "
+                    f"PMM={pmm_ratio[i]:.3f} ({pmm_combo[i]}, As={pmm_area[i]:g}); "
+                    f"Av_maj={av_major[i]:g} ({vmaj_combo[i]}), "
+                    f"Av_min={av_minor[i]:g} ({vmin_combo[i]})")
+            if pmm_ratio[i] > 1.05:
+                fila += " | FALLA >5%: aumentar acero (SOP paso 26)"
+            elif pmm_ratio[i] > 1.0:
+                fila += " | excedido <=5%"
+            if err[i]:
+                fila += f" | ERROR: {err[i]}"
+            if warn[i]:
+                fila += f" | AVISO: {warn[i]}"
+            rows.append(fila)
+        return f"{n} estacion(es) de columna:\n" + "\n".join(rows)
+
+    @com_call
+    def get_concrete_design_joint(self, name: str = "",
+                                  item_type: int = 2,
+                                  top_story: str = "") -> str:
+        """Lee joint shear ratio y beam/column capacity ratio por columna.
+
+        Reglas del SOP paso 26 codificadas: si falla por joint, aumentar la
+        geometria de la seccion; las columnas del ultimo nivel que fallan por
+        joint se marcan como omitibles (sin continuidad, la rigidez es menor).
+        Requiere run_concrete_design previo.
+
+        Args:
+            name: frame o grupo. "" con item_type=2 = seleccion actual.
+            item_type: 0=objeto, 1=grupo, 2=seleccion.
+            top_story: nombre del nivel de techo; las fallas de joint en
+                       frames cuyo nombre/etiqueta contenga este texto se
+                       anotan como omitibles. Vacio = no marcar.
+        """
+        model = self._model()
+        (n, frame, lc_js_maj, js_maj, lc_js_min, js_min,
+         lc_bcc_maj, bcc_maj, lc_bcc_min, bcc_min,
+         err, warn, ret) = model.DesignConcrete.GetSummaryResultsJoint(
+            name, 0, [], [], [], [], [], [], [], [], [], [], [], item_type)
+        if ret != 0:
+            raise EtabsError(
+                "GetSummaryResultsJoint fallo. ¿Se corrio run_concrete_design? "
+                "El chequeo de joint solo aplica a sistemas Sway "
+                "Special/Intermediate.")
+        if n == 0:
+            return "Sin resultados de joint para esa seleccion."
+        rows = []
+        for i in range(n):
+            fila = (f"{frame[i]}: "
+                    f"JS_maj={js_maj[i]:.3f} ({lc_js_maj[i]}), "
+                    f"JS_min={js_min[i]:.3f} ({lc_js_min[i]}); "
+                    f"BCC_maj={bcc_maj[i]:.3f} ({lc_bcc_maj[i]}), "
+                    f"BCC_min={bcc_min[i]:.3f} ({lc_bcc_min[i]})")
+            js_falla = max(js_maj[i], js_min[i]) > 1.0
+            if js_falla:
+                if top_story and top_story.lower() in str(frame[i]).lower():
+                    fila += (" | joint>1 en nivel de techo: omitible "
+                             "(SOP paso 26, sin continuidad)")
+                else:
+                    fila += " | FALLA JOINT: aumentar geometria (SOP paso 26)"
+            if err[i]:
+                fila += f" | ERROR: {err[i]}"
+            if warn[i]:
+                fila += f" | AVISO: {warn[i]}"
+            rows.append(fila)
+        return f"{n} junta(s):\n" + "\n".join(rows)
+
+    # ------------------------------------------------------------------
+    # Modificadores de rigidez (H-2, SOP paso 5)
+    # ------------------------------------------------------------------
+
+    @com_call
+    def set_frame_modifiers(self, section: str, i22: float = 1.0,
+                            i33: float = 1.0, area: float = 1.0,
+                            shear2: float = 1.0, shear3: float = 1.0,
+                            torsion: float = 1.0, mass: float = 1.0,
+                            weight: float = 1.0) -> str:
+        """Fija los modificadores de rigidez de una seccion de frame.
+
+        SOP paso 5: columnas de HA i22=i33=0.80; vigas i22=i33=0.60.
+        Orden del array (OAPI CSI, 8 posiciones): area, corte 2, corte 3,
+        torsion, momento 2, momento 3, masa, peso.
+        PropFrame.SetModifiers(Name, Value[8]) verificado el 2026-08-10;
+        Value es [in,out] asi que la llamada devuelve (Value, ret).
+
+        Args:
+            section: nombre de la seccion de frame (no del objeto).
+            i22, i33: modificadores de momento de inercia en 2 y 3.
+        """
+        model = self._model()
+        value = [float(area), float(shear2), float(shear3), float(torsion),
+                 float(i22), float(i33), float(mass), float(weight)]
+        _value_eco, ret = model.PropFrame.SetModifiers(section, value)
+        if ret != 0:
+            raise EtabsError(f"SetModifiers fallo para la seccion '{section}'. "
+                             f"¿Existe? Ver get_frame_sections.")
+        return (f"Modificadores de '{section}': I22={i22:g}, I33={i33:g}, "
+                f"A={area:g}, V2={shear2:g}, V3={shear3:g}, T={torsion:g}.")
+
+    @com_call
+    def set_area_modifiers(self, section: str, m11: float = 1.0,
+                           m22: float = 1.0, m12: float = 1.0,
+                           f11: float = 1.0, f22: float = 1.0,
+                           f12: float = 1.0, v13: float = 1.0,
+                           v23: float = 1.0, mass: float = 1.0,
+                           weight: float = 1.0) -> str:
+        """Fija los modificadores de rigidez de una seccion de area (losa/muro).
+
+        SOP paso 5: muros de HA m11=m22=0.80; mamposteria m11=m22=0.60.
+        Orden del array (OAPI CSI, 10 posiciones): f11, f22, f12, m11, m22,
+        m12, v13, v23, masa, peso.
+        PropArea.SetModifiers(Name, Value[10]) verificado el 2026-08-10.
+
+        Args:
+            section: nombre de la seccion de area (no del objeto).
+            m11, m22: modificadores de flexion fuera del plano.
+        """
+        model = self._model()
+        value = [float(f11), float(f22), float(f12), float(m11), float(m22),
+                 float(m12), float(v13), float(v23), float(mass), float(weight)]
+        _value_eco, ret = model.PropArea.SetModifiers(section, value)
+        if ret != 0:
+            raise EtabsError(f"SetModifiers fallo para la seccion de area "
+                             f"'{section}'. ¿Existe? Ver get_area_sections.")
+        return (f"Modificadores de '{section}': m11={m11:g}, m22={m22:g}, "
+                f"f11={f11:g}, f22={f22:g}.")
+
+    # ------------------------------------------------------------------
+    # Masa modal (H-3, SOP paso 8)
+    # ------------------------------------------------------------------
+
+    @com_call
+    def set_mass_source(self, load_patterns: dict[str, float],
+                        name: str = "MsSrc1") -> str:
+        """Define la fuente de masa modal desde patrones de carga especificados.
+
+        SOP paso 8: SOLAMENTE specified load patterns (elementos y masas
+        adicionales en False), carga muerta con factor 1, vivas con el
+        coeficiente de la Tabla A-2 del R-001 (0.15 residencial, 0.20
+        oficinas/hoteles, 0.25 escuelas/almacenaje, 0.30 hospitales, 0.10
+        techos). El "no incluir masa vertical" del SOP se cumple por omision:
+        esta firma no tiene ese parametro.
+        SourceMass.SetMassSource verificado el 2026-08-10 (el namespace bajo
+        SapModel se llama SourceMass, no MassSource).
+
+        Args:
+            load_patterns: {patron: factor}, ej. {"Dead": 1.0, "Live": 0.15}.
+            name: nombre de la fuente de masa.
+        """
+        model = self._model()
+        pats = list(load_patterns.keys())
+        sfs = [float(v) for v in load_patterns.values()]
+        _pats_eco, _sfs_eco, ret = model.SourceMass.SetMassSource(
+            name, False, False, True, True, len(pats), pats, sfs)
+        if ret != 0:
+            raise EtabsError(
+                f"SetMassSource fallo. ¿Existen todos los patrones? "
+                f"Ver get_load_patterns. Patrones pedidos: {', '.join(pats)}")
+        detalle = ", ".join(f"{p}x{f:g}" for p, f in load_patterns.items())
+        return (f"Fuente de masa '{name}' definida (solo patrones "
+                f"especificados, default): {detalle}.")
+
+    # ------------------------------------------------------------------
+    # Panel zone (H-4, SOP paso 19)
+    # ------------------------------------------------------------------
+
+    @com_call
+    def set_panel_zone(self, point_ids: list[str], prop_type: int = 0,
+                       thickness: float = 0.0, k1: float = 0.0,
+                       k2: float = 0.0, link_prop: str = "",
+                       connectivity: int = 0, local_axis_from: int = 0,
+                       local_axis_angle: float = 0.0) -> str:
+        """Asigna panel zone a una lista de nodos (SOP paso 19).
+
+        PointObj.SetPanelZone(Name, PropType, Thickness, K1, K2, LinkProp,
+        Connectivity, LocalAxisFrom, LocalAxisAngle, ItemType) verificado el
+        2026-08-10. ADVERTENCIA: PropType es un enum sin nombres en el
+        typelib; el valor 0 corresponde al comportamiento por defecto
+        ("propiedades desde columna") segun la documentacion de CSI, pero NO
+        se ha confirmado en esta instalacion creando uno por interfaz y
+        leyendolo con GetPanelZone. Hacer esa verificacion la primera vez.
+
+        Args:
+            point_ids: nodos (de get_points) a los que asignar panel zone.
+            prop_type: 0=elastico desde columna (default del dialogo).
+        """
+        model = self._model()
+        errores = []
+        for pid in point_ids:
+            try:
+                ret = model.PointObj.SetPanelZone(
+                    pid, int(prop_type), float(thickness), float(k1),
+                    float(k2), link_prop, int(connectivity),
+                    int(local_axis_from), float(local_axis_angle), 0)
+                if isinstance(ret, (tuple, list)):
+                    ret = ret[-1]
+                if ret != 0:
+                    errores.append(f"{pid}: ret={ret}")
+            except Exception as e:
+                errores.append(f"{pid}: {e}")
+        ok = len(point_ids) - len(errores)
+        msg = f"Panel zone asignado a {ok} de {len(point_ids)} nodo(s)."
+        if errores:
+            msg += " Fallos: " + "; ".join(errores[:5])
+        return msg
+
+    # ------------------------------------------------------------------
+    # Muros de corte (H-5, SOP paso 27)
+    # ------------------------------------------------------------------
+
+    @com_call
+    def set_pier_label(self, area_ids: list[str], pier_name: str) -> str:
+        """Asigna una etiqueta de pier a una o mas areas de muro (SOP paso 27).
+
+        AreaObj.SetPier(Name, PierName, ItemType) verificado el 2026-08-10.
+        El pier debe existir como etiqueta; ETABS lo crea si no existe.
+
+        Args:
+            area_ids: IDs de area de muro (de get_areas).
+            pier_name: etiqueta de pier, ej. "P1".
+        """
+        model = self._model()
+        errores = []
+        for aid in area_ids:
+            try:
+                ret = model.AreaObj.SetPier(aid, pier_name, 0)
+                if isinstance(ret, (tuple, list)):
+                    ret = ret[-1]
+                if ret != 0:
+                    errores.append(f"{aid}: ret={ret}")
+            except Exception as e:
+                errores.append(f"{aid}: {e}")
+        ok = len(area_ids) - len(errores)
+        msg = f"Pier '{pier_name}' asignado a {ok} de {len(area_ids)} area(s)."
+        if errores:
+            msg += " Fallos: " + "; ".join(errores[:5])
+        return msg
+
+    @com_call
+    def get_shearwall_design(self) -> str:
+        """Lee el resumen de diseño de muros de corte (piers).
+
+        DesignShearWall.GetPierSummaryResults verificado el 2026-08-10:
+        devuelve 39 arreglos; aca se reportan los operativos (DCRatio,
+        refuerzo, zona de borde, mensajes). Requiere diseño de muros corrido
+        y pier labels asignados (set_pier_label).
+        """
+        model = self._model()
+        res = model.DesignShearWall.GetPierSummaryResults(
+            *([[]] * 39))
+        ret = res[-1]
+        if ret != 0:
+            raise EtabsError(
+                "GetPierSummaryResults fallo. ¿Hay pier labels asignados y "
+                "diseño de muros corrido? Ver set_pier_label.")
+        (story, pier, station, design_type, sec_type, edge_bar, end_bar,
+         bar_spacing, reinf_pct, curr_pct, dc_ratio, pier_leg) = res[:12]
+        bzone_len = res[36]
+        warn, err = res[37], res[38]
+        n = len(story)
+        if n == 0:
+            return "Sin resultados de pier. ¿Se asignaron pier labels?"
+        rows = []
+        for i in range(n):
+            fila = (f"{story[i]}/{pier[i]} ({station[i]}, {design_type[i]}): "
+                    f"DC={dc_ratio[i]:.3f}, refuerzo={reinf_pct[i]:.4f} "
+                    f"(actual {curr_pct[i]:.4f}), borde={edge_bar[i]}, "
+                    f"extremo={end_bar[i]} @ {bar_spacing[i]:g}, "
+                    f"zona_borde={bzone_len[i]:g}")
+            if dc_ratio[i] > 1.0:
+                fila += " | FALLA: DC>1"
+            if err[i]:
+                fila += f" | ERROR: {err[i]}"
+            if warn[i]:
+                fila += f" | AVISO: {warn[i]}"
+            rows.append(fila)
+        return f"{n} estacion(es) de pier:\n" + "\n".join(rows)
+
+    @com_call
+    def get_shearwall_rebar(self) -> str:
+        """Lee el despiece de refuerzo de muros (flexural + corte/confinamiento).
+
+        DesignShearWall.GetRebar verificado el 2026-08-10. Es el dato de
+        detallado que alimenta la vuelta a Revit (C6): por pierna de pier,
+        geometria, espesor, materiales y las cadenas de refuerzo.
+        """
+        model = self._model()
+        (area_obj, story, pier, station, leg_id, x1, y1, x2, y2,
+         length, thickness, fc, fy, fys, flexural, shear_conf,
+         ret) = model.DesignShearWall.GetRebar(
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [])
+        if ret != 0:
+            raise EtabsError("GetRebar fallo. ¿Diseño de muros corrido?")
+        n = len(area_obj)
+        if n == 0:
+            return "Sin refuerzo de muros. ¿Pier labels y diseño corridos?"
+        rows = []
+        for i in range(n):
+            rows.append(
+                f"{story[i]}/{pier[i]}/{leg_id[i]} (area {area_obj[i]}, "
+                f"{station[i]}): L={length[i]:g}, t={thickness[i]:g}, "
+                f"f'c={fc[i]:g}, fy={fy[i]:g} | flexural: {flexural[i]} | "
+                f"corte/confinamiento: {shear_conf[i]}")
+        return f"{n} pierna(s) de muro:\n" + "\n".join(rows)
 
     async def create_objects_by_coordinates(
         self,

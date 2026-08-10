@@ -109,6 +109,7 @@ if config.feaName == "ETABS":
 
     # Analisis y resultados
     run_analysis = mcp.tool()(etabs.run_analysis)
+    get_analysis_status = mcp.tool()(etabs.get_analysis_status)
     get_story_drifts = mcp.tool()(etabs.get_story_drifts)
 
     # Tablas interactivas: acceso generico a lo que no tiene metodo dedicado
@@ -145,6 +146,28 @@ if config.feaName == "ETABS":
 
     # Diseño
     run_concrete_design = mcp.tool()(etabs.run_concrete_design)
+
+    # Lectores de diseño (HUECOS-ETABS-SAFE.md H-1): cierran el hueco
+    # "run_concrete_design corre a ciegas" de la bitacora RESTAURANTE.
+    # Las tablas de diseño fallan (ret=1); los metodos directos funcionan.
+    get_concrete_design_beam = mcp.tool()(etabs.get_concrete_design_beam)
+    get_concrete_design_column = mcp.tool()(etabs.get_concrete_design_column)
+    get_concrete_design_joint = mcp.tool()(etabs.get_concrete_design_joint)
+
+    # Modificadores de rigidez (H-2, SOP paso 5)
+    set_frame_modifiers = mcp.tool()(etabs.set_frame_modifiers)
+    set_area_modifiers = mcp.tool()(etabs.set_area_modifiers)
+
+    # Masa modal (H-3, SOP paso 8)
+    set_mass_source = mcp.tool()(etabs.set_mass_source)
+
+    # Panel zone (H-4, SOP paso 19)
+    set_panel_zone = mcp.tool()(etabs.set_panel_zone)
+
+    # Muros de corte (H-5, SOP paso 27)
+    set_pier_label = mcp.tool()(etabs.set_pier_label)
+    get_shearwall_design = mcp.tool()(etabs.get_shearwall_design)
+    get_shearwall_rebar = mcp.tool()(etabs.get_shearwall_rebar)
 
     get_all_geometries = mcp.tool(name="get_all_geometries")(etabs.get_geometries)
     get_points = mcp.tool()(etabs.get_points)
