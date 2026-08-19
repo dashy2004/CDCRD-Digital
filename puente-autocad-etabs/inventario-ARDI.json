@@ -1,0 +1,501 @@
+{
+  "archivo": "00-Residencial Ardi I ... Arq Layout.dwg",
+  "dwg_version_tag": "AC1032",
+  "dxf_version_leida": "AC1032",
+  "convertido_con": "libredwg dwg2dxf (GPL-3.0), compilado desde fuente",
+  "header": {
+    "INSUNITS_declarado": 4,
+    "INSUNITS_significado": "4 = milimetros",
+    "unidad_real_medida": "metros (columna de 0.80x0.30 seria 0.8mm si fuera mm)",
+    "CONFLICTO": "la cabecera declara mm pero la geometria esta en metros",
+    "EXTMIN": [
+      -2471.585961485293,
+      -139770.2236838925,
+      -228.1503658894208
+    ],
+    "EXTMAX": [
+      1689422.625647207,
+      921511.9370386951,
+      439.058739520586
+    ]
+  },
+  "totales": {
+    "capas": 147,
+    "bloques_nombrados": 484,
+    "bloques_anonimos_dinamicos": 17,
+    "entidades_modelspace": 6072,
+    "layouts": 10
+  },
+  "columnas_detectadas_modelspace": [
+    {
+      "ancho_m": 0.8,
+      "alto_m": 0.3,
+      "centro": [
+        843100.834,
+        460005.76
+      ],
+      "vertices": [
+        [
+          843100.4345,
+          460005.9105
+        ],
+        [
+          843101.2345,
+          460005.9105
+        ],
+        [
+          843101.2345,
+          460005.6105
+        ],
+        [
+          843100.4345,
+          460005.6105
+        ]
+      ]
+    },
+    {
+      "ancho_m": 0.8,
+      "alto_m": 0.3,
+      "centro": [
+        843103.035,
+        460005.76
+      ],
+      "vertices": [
+        [
+          843102.6345,
+          460005.9105
+        ],
+        [
+          843103.4345,
+          460005.9105
+        ],
+        [
+          843103.4345,
+          460005.6105
+        ],
+        [
+          843102.6345,
+          460005.6105
+        ]
+      ]
+    },
+    {
+      "ancho_m": 0.8,
+      "alto_m": 0.3,
+      "centro": [
+        843100.834,
+        459995.86
+      ],
+      "vertices": [
+        [
+          843100.4345,
+          459996.0105
+        ],
+        [
+          843101.2345,
+          459996.0105
+        ],
+        [
+          843101.2345,
+          459995.7105
+        ],
+        [
+          843100.4345,
+          459995.7105
+        ]
+      ]
+    },
+    {
+      "ancho_m": 0.8,
+      "alto_m": 0.3,
+      "centro": [
+        843103.035,
+        459995.86
+      ],
+      "vertices": [
+        [
+          843102.6345,
+          459996.0105
+        ],
+        [
+          843103.4345,
+          459996.0105
+        ],
+        [
+          843103.4345,
+          459995.7105
+        ],
+        [
+          843102.6345,
+          459995.7105
+        ]
+      ]
+    },
+    {
+      "ancho_m": 0.8,
+      "alto_m": 0.3,
+      "centro": [
+        843100.834,
+        459945.436
+      ],
+      "vertices": [
+        [
+          843100.4345,
+          459945.5863
+        ],
+        [
+          843101.2345,
+          459945.5863
+        ],
+        [
+          843101.2345,
+          459945.2863
+        ],
+        [
+          843100.4345,
+          459945.2863
+        ]
+      ]
+    },
+    {
+      "ancho_m": 0.8,
+      "alto_m": 0.3,
+      "centro": [
+        843103.035,
+        459945.436
+      ],
+      "vertices": [
+        [
+          843102.6345,
+          459945.5863
+        ],
+        [
+          843103.4345,
+          459945.5863
+        ],
+        [
+          843103.4345,
+          459945.2863
+        ],
+        [
+          843102.6345,
+          459945.2863
+        ]
+      ]
+    },
+    {
+      "ancho_m": 0.8,
+      "alto_m": 0.3,
+      "centro": [
+        843100.834,
+        459935.536
+      ],
+      "vertices": [
+        [
+          843100.4345,
+          459935.6863
+        ],
+        [
+          843101.2345,
+          459935.6863
+        ],
+        [
+          843101.2345,
+          459935.3863
+        ],
+        [
+          843100.4345,
+          459935.3863
+        ]
+      ]
+    },
+    {
+      "ancho_m": 0.8,
+      "alto_m": 0.3,
+      "centro": [
+        843103.035,
+        459935.536
+      ],
+      "vertices": [
+        [
+          843102.6345,
+          459935.6863
+        ],
+        [
+          843103.4345,
+          459935.6863
+        ],
+        [
+          843103.4345,
+          459935.3863
+        ],
+        [
+          843102.6345,
+          459935.3863
+        ]
+      ]
+    }
+  ],
+  "capas_estructurales_presentes": [
+    "AARQ.LR III-NIDIA$0$Columnas",
+    "AARQ.LR III-NIDIA$0$Columnas Oliver 3-2-18",
+    "E-Columnas-Hormigon",
+    "E-Muros-Bloques",
+    "G-Hatch-Columna",
+    "est",
+    "Structural - Bearing",
+    "E-Muros-Hormigon"
+  ],
+  "capas_todas": [
+    "0",
+    "15",
+    "19-JARDINERIA",
+    "2",
+    "22-MUEBLES",
+    "29-AMBIENTACION",
+    "2H",
+    "3",
+    "63",
+    "9",
+    "A-Cierres-Puertas",
+    "A-Cierres-Ventanas",
+    "A-Dimensiones-Generales",
+    "A-Dimensiones-Linderos",
+    "A-Dimensiones-Terreno",
+    "A-Equipos-Aparatos Sanitarios",
+    "A-Equipos-Basura",
+    "A-Equipos-Bomba de Agua",
+    "A-Equipos-Cocinas",
+    "A-Equipos-Gas",
+    "A-Equipos-Lavado",
+    "A-Equipos-Mobiliario",
+    "A-Equipos-Planta Electrica",
+    "A-Muros-Bloques",
+    "A-Muros-Bloques Bajos",
+    "A-Muros-Madera",
+    "A-Muros-Plycem",
+    "A-Muros-Yeso",
+    "A-Recubrimientos-Pisos",
+    "A-Recubrimientos-Techos",
+    "A-Senializaciones- Transito",
+    "A-Site- Levantamiento de Solar",
+    "A-Site-Aceras",
+    "A-Site-Limite de Propiedad",
+    "A-Site-Paragomas",
+    "A-Site-Senializaciones",
+    "AARQ.LR III-NIDIA$0$Columnas",
+    "AARQ.LR III-NIDIA$0$Columnas Oliver 3-2-18",
+    "APARATOS",
+    "ARBOL",
+    "ARBOLES",
+    "AREAS",
+    "A_ParkingSymbols",
+    "Area Verde",
+    "Barandas",
+    "CONTORNO DE UBICACION",
+    "COTAS",
+    "Circu.Vertical-Escalera Principal",
+    "Circu.Vertical-Escalera de Emergencia",
+    "Corte",
+    "DET_BANOS_Y_COCINA",
+    "DIMENSIONES",
+    "Defpoints",
+    "E-Columnas-Hormigon",
+    "E-Muros-Bloques",
+    "E-Muros-Hormigon",
+    "EQUIPO",
+    "FIRMES",
+    "FURN",
+    "FURNITURE",
+    "G-Anotaciones- Ventanas",
+    "G-Anotaciones-Cortes de Secciones",
+    "G-Anotaciones-Indicadores",
+    "G-Anotaciones-NPT",
+    "G-Anotaciones-Notas",
+    "G-Cortes",
+    "G-Hatch-Columna",
+    "G-Hatch-Piso",
+    "G-Presentacion-Localizacion^Mapa",
+    "G-Presentacion-Marco 1-100",
+    "G-Presentacion-Marco 1-75",
+    "G-Presentacion-Tarjeta",
+    "G-Proyecciones-L1 (Edificio)",
+    "G-Proyecciones-L2 (Vuelos)",
+    "G-Texto-Area Cualitativa",
+    "G-Texto-Area Cuantitativa",
+    "G-Texto-Parqueos",
+    "G-Texto-Titulo^Escala^Nombre",
+    "GAS",
+    "GRAPHICS",
+    "Glass",
+    "Hatch",
+    "IE-Modulo de Contadores",
+    "IE-Registro",
+    "IE-Texto Tecnicos",
+    "IG-Lineas Oxigeno",
+    "IM-Acensores",
+    "JARDINERIA",
+    "LOCALIZACION",
+    "LT-ARVORES",
+    "Lineas",
+    "MB",
+    "MODULO DE CONTADORES",
+    "MOTOR",
+    "MOVILIARIO",
+    "MUROS",
+    "Mobiliario",
+    "Mueble",
+    "Muro",
+    "NPT",
+    "None",
+    "P-Arboles",
+    "PANDERETAS",
+    "PARED",
+    "PLANTS",
+    "PUERTA-VENT",
+    "Parqueo",
+    "Puerta",
+    "RAMAS",
+    "REGISTRO",
+    "RELLENO",
+    "ROTULACÓN",
+    "SANITAIRE",
+    "Structural - Bearing",
+    "TABLE3D",
+    "TARGETA",
+    "TARJETA",
+    "TBLK",
+    "TEXT",
+    "TEXT-CALLES",
+    "TEXTOS",
+    "TITULO",
+    "Textos Principal",
+    "URBANIZACIONES",
+    "VENTANA",
+    "Vuelo",
+    "Window - elevation",
+    "a Farallón",
+    "a Lugares de Interes",
+    "a Manzanas",
+    "a Puentes",
+    "a Puntos de Interés",
+    "a Rio",
+    "a Texto Barrios",
+    "a Texto avenidas s1",
+    "a Texto calles",
+    "a limites sectorial circ. 3",
+    "agua fria",
+    "est",
+    "indicadores",
+    "mar",
+    "muebles",
+    "proyecciones",
+    "puertas",
+    "simbologia",
+    "sombreado",
+    "ventana_arqui_01"
+  ],
+  "bloques_huerfanos_con_geometria_estructural": [
+    {
+      "bloque": "A$C37D656C8",
+      "entidades_estructurales": 5745
+    },
+    {
+      "bloque": "A$C1891f86d",
+      "entidades_estructurales": 4873
+    },
+    {
+      "bloque": "UIKJHN",
+      "entidades_estructurales": 4238
+    },
+    {
+      "bloque": "A$C79A04B81",
+      "entidades_estructurales": 836
+    },
+    {
+      "bloque": "A$C4AC661C3",
+      "entidades_estructurales": 836
+    },
+    {
+      "bloque": "A$C1F521417",
+      "entidades_estructurales": 828
+    },
+    {
+      "bloque": "A$C721D176E",
+      "entidades_estructurales": 828
+    },
+    {
+      "bloque": "sgdasd",
+      "entidades_estructurales": 824
+    },
+    {
+      "bloque": "dgf",
+      "entidades_estructurales": 824
+    },
+    {
+      "bloque": "A$C3C1F074C",
+      "entidades_estructurales": 824
+    },
+    {
+      "bloque": "A$C12DB469C",
+      "entidades_estructurales": 824
+    },
+    {
+      "bloque": "A$C43F322B8",
+      "entidades_estructurales": 820
+    },
+    {
+      "bloque": "A$C447D5106",
+      "entidades_estructurales": 820
+    },
+    {
+      "bloque": "A$C4150081B",
+      "entidades_estructurales": 820
+    },
+    {
+      "bloque": "A$C6F465AA8",
+      "entidades_estructurales": 811
+    },
+    {
+      "bloque": "A$C418876A5",
+      "entidades_estructurales": 800
+    },
+    {
+      "bloque": "A$C226f3583",
+      "entidades_estructurales": 800
+    },
+    {
+      "bloque": "A$C1FB0336E",
+      "entidades_estructurales": 728
+    },
+    {
+      "bloque": "A$C68616C43",
+      "entidades_estructurales": 723
+    },
+    {
+      "bloque": "A$C0F003357",
+      "entidades_estructurales": 723
+    },
+    {
+      "bloque": "A$C46512C5A",
+      "entidades_estructurales": 687
+    },
+    {
+      "bloque": "A$C67B52D15",
+      "entidades_estructurales": 687
+    },
+    {
+      "bloque": "A$Cd6b824c2",
+      "entidades_estructurales": 667
+    },
+    {
+      "bloque": "A$C45ccfed1",
+      "entidades_estructurales": 667
+    },
+    {
+      "bloque": "A$C324f2de4",
+      "entidades_estructurales": 659
+    }
+  ],
+  "n_bloques_huerfanos_estructurales": 52
+}

@@ -23,3 +23,7 @@ modelos/
 
 # sondas de probe_file_types (tablas_caso.txt sola pesa ~2.9 GB)
 tmp-probe-efiletype/
+
+# revit-mcp-write: salidas de corrida. Contienen ids, Marks y geometria
+# del modelo abierto al momento de la prueba -> no van al repo publico.
+revit-mcp-write/_log/

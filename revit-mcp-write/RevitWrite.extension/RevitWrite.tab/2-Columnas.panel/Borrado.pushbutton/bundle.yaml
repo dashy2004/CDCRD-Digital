@@ -1,0 +1,6 @@
+title: Borrado
+tooltip: >
+  IRREVERSIBLE. Borra las columnas W Shapes-Column y las de tipo '12 x 18'.
+  Correr SOLO despues de ejecutar Reemplazo y de verificar visualmente que
+  las columnas de hormigon quedaron bien ubicadas y con su acero.
+  Pide confirmacion mostrando cuantas va a borrar y cuantas protege.

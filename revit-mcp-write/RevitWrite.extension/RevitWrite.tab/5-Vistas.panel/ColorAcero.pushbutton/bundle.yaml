@@ -1,0 +1,7 @@
+title: ColorAcero
+tooltip: >
+  Colorea el acero en la vista 3D - ACERO: el TONO indica el diametro
+  (#3 rojo, #4 naranja, #6 verde, #8 azul, #11 marron...) y la SATURACION
+  indica la forma (rectas en tono pleno, estribos aclarados).
+  Solo afecta la vista. Idempotente: las barras nuevas exigen volver a
+  apretarlo.

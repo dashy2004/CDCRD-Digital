@@ -1,0 +1,6 @@
+title: Faltantes
+tooltip: >
+  Repone las 17 columnas que ocupaban las '12 x 18' borradas, con su acero.
+  Trabaja desde _log/faltantes.json (coordenadas exactas tomadas antes del
+  borrado). Idempotente: si la columna ya existe en ese nivel y posicion,
+  la saltea. Se puede apretar dos veces sin duplicar.

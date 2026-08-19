@@ -1,0 +1,7 @@
+title: ArmarZapatas
+tooltip: >
+  Crea parrilla INFERIOR (X e Y) en las zapatas cuyas dimensiones coincidan
+  con la tabla de armado. Identifica por dimensiones, no por nombre de tipo.
+  Recubrimiento 7.5 cm. Idempotente: borra su acero anterior y lo recrea.
+  Las combinadas 6x9 y 17x10 NO se arman: faltan datos (0.20/0.10 por
+  direccion y el detalle SZ7).

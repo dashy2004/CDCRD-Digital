@@ -1,0 +1,6 @@
+title: LosasMuros
+tooltip: >
+  SOLO LECTURA. Inventaria losas (tipo, espesor, nivel, area) y muros (tipo,
+  espesor, nivel base y superior, altura real, largo). Para los muros muestra
+  si cruzan varios pisos de una pieza. Paso previo a bovedillas, acero de
+  losa y division de muros por piso. No modifica nada.

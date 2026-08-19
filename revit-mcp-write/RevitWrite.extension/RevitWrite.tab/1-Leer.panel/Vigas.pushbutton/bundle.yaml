@@ -1,0 +1,5 @@
+title: Vigas
+tooltip: >
+  SOLO LECTURA. Inventaria las vigas (structural framing) con los extremos de
+  su curva, largo, seccion, nivel y acero hospedado. Paso previo al reemplazo
+  de vigas metalicas por vigas de hormigon. No modifica nada.

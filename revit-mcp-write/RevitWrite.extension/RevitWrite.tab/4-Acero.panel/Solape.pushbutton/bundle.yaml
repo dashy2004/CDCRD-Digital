@@ -1,0 +1,6 @@
+title: Solape
+tooltip: >
+  RECONSTRUYE las longitudinales de columna con empalme a media altura.
+  Las barras pierden sus constraints al anfitrion y quedan con geometria fija.
+  Pregunta si correr en modo PILOTO (una columna) o COMPLETO. Idempotente.
+  Correr DESPUES de que las columnas esten en su posicion final.

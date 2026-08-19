@@ -1,0 +1,5 @@
+title: VistaAcero
+tooltip: >
+  Crea (o reutiliza) la vista 3D "3D - ACERO": hormigon al 90% de
+  transparencia, acero solido y sin ocultar, nivel de detalle Fino.
+  Idempotente, se puede apretar varias veces.

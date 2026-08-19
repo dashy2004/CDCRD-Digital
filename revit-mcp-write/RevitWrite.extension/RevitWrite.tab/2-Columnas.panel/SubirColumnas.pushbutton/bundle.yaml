@@ -1,0 +1,6 @@
+title: SubirColumnas
+tooltip: >
+  Copia cada columna CON acero a todos los tramos de nivel superiores,
+  conservando su posicion en planta. El acero viaja y se readapta a la altura
+  de cada tramo. Offsets en 0. Idempotente: borra sus replicas anteriores y
+  las recrea, se puede apretar varias veces sin duplicar.

@@ -1,0 +1,6 @@
+title: TiposZapata
+tooltip: >
+  Corrige el espesor del tipo de zapata 17x10 (1.40 -> 1.50 m) y crea el
+  tipo Z3 (6.50 x 6.50 x 1.40). NO coloca instancias ni renombra tipos.
+  Foundation Thickness es parametro de TIPO: el script informa a cuantas
+  instancias afecta y pide confirmacion antes de aplicar. Relee y compara.

@@ -1,0 +1,6 @@
+title: SolapeDiag
+tooltip: >
+  SOLO LECTURA. Vuelca la geometria real de las barras longitudinales de una
+  muestra de columnas: curvas de eje, normal del plano, layout y constraints.
+  Paso previo obligatorio al solape: sin esto, recrear las barras seria
+  inventar como estaban puestas. No modifica nada.

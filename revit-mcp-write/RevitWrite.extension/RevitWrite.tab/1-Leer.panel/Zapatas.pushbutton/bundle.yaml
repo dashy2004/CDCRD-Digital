@@ -1,0 +1,6 @@
+title: Zapatas
+tooltip: >
+  SOLO LECTURA. Inventaria las cimentaciones (dimensiones reales, espesor,
+  posicion, acero) y vuelca la firma real de la API de creacion de Rebar
+  de esta instalacion, mas los tipos de barra, formas y ganchos cargados.
+  No modifica nada. Correr antes de disenar el armado de zapatas.

@@ -1,0 +1,6 @@
+title: MoverZapatas
+tooltip: >
+  Baja las zapatas Z1..Z4 a su cota de desplante (-0.30 m en las cuatro),
+  por el parametro Height Offset From Level. Verifica releyendo la cota real
+  y comprueba si el acero siguio al anfitrion; si no, lo mueve. NO toca las
+  ZC Perimetral ni la Foundation Slab: no hay dato de desplante para ellas.
