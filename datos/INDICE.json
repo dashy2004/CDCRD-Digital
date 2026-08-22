@@ -1,0 +1,711 @@
+{
+ "generado": "2026-08-22",
+ "total_clausulas": 6580,
+ "uso": "Buscar el Título por tema aquí; abrir SOLO el json o md de ese Título. Cada cláusula trae su página del PDF oficial.",
+ "volumenes": [
+  {
+   "volumen": 1,
+   "sigla": null,
+   "nombre": "Código de Construcción RD — Volumen I (Tomos 1-2)",
+   "titulos": [
+    {
+     "volumen": 1,
+     "titulo": 1,
+     "nombre": "Consideraciones Generales",
+     "json": "datos/titulos/T01.json",
+     "md": "md/vol-1/T01.md",
+     "clausulas": 28,
+     "paginas_pdf": [
+      4,
+      12
+     ],
+     "capitulos": null,
+     "fuente_pdf": null
+    },
+    {
+     "volumen": 1,
+     "titulo": 2,
+     "nombre": "Cargas Minimas para Analisis y Diseño Estructural",
+     "json": "datos/titulos/T02.json",
+     "md": "md/vol-1/T02.md",
+     "clausulas": 352,
+     "paginas_pdf": [
+      12,
+      169
+     ],
+     "capitulos": null,
+     "fuente_pdf": null
+    },
+    {
+     "volumen": 1,
+     "titulo": 3,
+     "nombre": "Procedimientos para la Tramitacion de Planos, Inspeccion y Supervision",
+     "json": "datos/titulos/T03.json",
+     "md": "md/vol-1/T03.md",
+     "clausulas": 434,
+     "paginas_pdf": [
+      103,
+      195
+     ],
+     "capitulos": null,
+     "fuente_pdf": null
+    },
+    {
+     "volumen": 1,
+     "titulo": 4,
+     "nombre": "Suelos y Fundaciones",
+     "json": "datos/titulos/T04.json",
+     "md": "md/vol-1/T04.md",
+     "clausulas": 424,
+     "paginas_pdf": [
+      195,
+      303
+     ],
+     "capitulos": null,
+     "fuente_pdf": null
+    },
+    {
+     "volumen": 1,
+     "titulo": 5,
+     "nombre": "Hormigon Armado",
+     "json": "datos/titulos/T05.json",
+     "md": "md/vol-1/T05.md",
+     "clausulas": 1236,
+     "paginas_pdf": [
+      293,
+      498
+     ],
+     "capitulos": null,
+     "fuente_pdf": null
+    },
+    {
+     "volumen": 1,
+     "titulo": 7,
+     "nombre": "Aluminio",
+     "json": "datos/titulos/T07.json",
+     "md": "md/vol-1/T07.md",
+     "clausulas": 57,
+     "paginas_pdf": [
+      6,
+      14
+     ],
+     "capitulos": null,
+     "fuente_pdf": null
+    },
+    {
+     "volumen": 1,
+     "titulo": 8,
+     "nombre": "Mamposteria",
+     "json": "datos/titulos/T08.json",
+     "md": "md/vol-1/T08.md",
+     "clausulas": 188,
+     "paginas_pdf": [
+      14,
+      44
+     ],
+     "capitulos": null,
+     "fuente_pdf": null
+    },
+    {
+     "volumen": 1,
+     "titulo": 9,
+     "nombre": "Acero",
+     "json": "datos/titulos/T09.json",
+     "md": "md/vol-1/T09.md",
+     "clausulas": 447,
+     "paginas_pdf": [
+      44,
+      198
+     ],
+     "capitulos": null,
+     "fuente_pdf": null
+    },
+    {
+     "volumen": 1,
+     "titulo": 10,
+     "nombre": "Madera",
+     "json": "datos/titulos/T10.json",
+     "md": "md/vol-1/T10.md",
+     "clausulas": 322,
+     "paginas_pdf": [
+      198,
+      298
+     ],
+     "capitulos": null,
+     "fuente_pdf": null
+    },
+    {
+     "volumen": 1,
+     "titulo": 11,
+     "nombre": "Vidrio y Acristalado",
+     "json": "datos/titulos/T11.json",
+     "md": "md/vol-1/T11.md",
+     "clausulas": 4,
+     "paginas_pdf": [
+      298,
+      305
+     ],
+     "capitulos": null,
+     "fuente_pdf": null
+    }
+   ]
+  },
+  {
+   "volumen": 2,
+   "sigla": "DIHE",
+   "nombre": "Instalaciones Hidrosanitarias en Edificaciones",
+   "titulos": [
+    {
+     "volumen": 2,
+     "titulo": 1,
+     "nombre": "Consideraciones Generales",
+     "json": "datos/vol-2/T01.json",
+     "md": "md/vol-2/T01.md",
+     "clausulas": 92,
+     "paginas_pdf": [
+      25,
+      42
+     ],
+     "capitulos": {
+      "1.1": "OBJETIVO Y CAMPO DE APLICACIÓN",
+      "1.2": "DEFINICIONES Y NOTACIONES",
+      "1.3": "PRESENTACIÓN DE PLANOS",
+      "1.4": "CONTENIDO DE LOS PLANOS",
+      "1.5": "CÁLCULOS HIDRÁULICOS",
+      "1.6": "CONSTRUCCIÓN, SUPERVISIÓN, INSPECCIÓN Y ESPECI-",
+      "2.1": "ASPECTOS GENERALES"
+     },
+     "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf"
+    },
+    {
+     "volumen": 2,
+     "titulo": 2,
+     "nombre": "Abastecimiento y Distribución de Agua en Edificios",
+     "json": "datos/vol-2/T02.json",
+     "md": "md/vol-2/T02.md",
+     "clausulas": 111,
+     "paginas_pdf": [
+      42,
+      79
+     ],
+     "capitulos": {
+      "2.10": "UNIDADES PARA EL TRATAMIENTO DE AGUA POTABLE",
+      "2.11": "SISTEMA CONTRA INCENDIO",
+      "2.2": "DOTACIONES",
+      "2.3": "ACOMETIDAS Y MEDIDORES",
+      "2.4": "SISTEMA DE DISTRIBUCIÓN",
+      "2.5": "DEPÓSITO DE ALMACENAMIENTO DE AGUA",
+      "2.6": "INSTALACIÓN DEL SISTEMA DE DISTRIBUCIÓN DE",
+      "2.7": "PROTECCIÓN DEL SUMINISTRO DE AGUA POTABLE",
+      "2.8": "INSTALACIONES SANITARIAS PARA CENTROS DE SALUD",
+      "2.9": "DESINFECCIÓN DEL SISTEMA DE AGUA POTABLE"
+     },
+     "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf"
+    },
+    {
+     "volumen": 2,
+     "titulo": 3,
+     "nombre": "Drenaje Pluvial",
+     "json": "datos/vol-2/T03.json",
+     "md": "md/vol-2/T03.md",
+     "clausulas": 18,
+     "paginas_pdf": [
+      79,
+      85
+     ],
+     "capitulos": {
+      "3.1": "REQUISITOS GENERALES",
+      "3.2": "DRENAJE DE TECHOS, PARQUEOS Y OTROS",
+      "3.3": "DIMENSIONAMIENTO DE LOS BAJANTES, COLECTORES",
+      "3.4": "DRENAJE DE SÓTANOS"
+     },
+     "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf"
+    },
+    {
+     "volumen": 2,
+     "titulo": 4,
+     "nombre": "Drenaje Sanitario",
+     "json": "datos/vol-2/T04.json",
+     "md": "md/vol-2/T04.md",
+     "clausulas": 29,
+     "paginas_pdf": [
+      85,
+      96
+     ],
+     "capitulos": {
+      "4.1": "REQUISITOS GENERALES",
+      "4.2": "CRITERIOS DE DISEÑO",
+      "4.3": "DISPOSITIVOS AUXILIARES",
+      "4.4": "JUNTAS",
+      "4.5": "PRUEBAS"
+     },
+     "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf"
+    },
+    {
+     "volumen": 2,
+     "titulo": 5,
+     "nombre": "Aparatos, Grifos y Accesorios Sanitarios",
+     "json": "datos/vol-2/T05.json",
+     "md": "md/vol-2/T05.md",
+     "clausulas": 39,
+     "paginas_pdf": [
+      96,
+      111
+     ],
+     "capitulos": {
+      "5.1": "GENERALIDADES",
+      "5.2": "CAUDALES Y PRESIONES REQUERIDOS",
+      "5.3": "APARATOS SANITARIOS",
+      "5.4": "REQUERIMIENTOS DE APARATOS SANITARIOS",
+      "5.5": "INSTALACIÓN APARATOS SANITARIOS",
+      "5.6": "APARATOS SANITARIOS Y EQUIPOS EN CENTROS DE SA-",
+      "5.7": "GRIFERÍA Y OTROS TIPOS DE CONECTORES",
+      "5.8": "DISPOSITIVOS DE DESCARGA"
+     },
+     "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf"
+    },
+    {
+     "volumen": 2,
+     "titulo": 6,
+     "nombre": "Disposición Individual de Aguas Residuales",
+     "json": "datos/vol-2/T06.json",
+     "md": "md/vol-2/T06.md",
+     "clausulas": 100,
+     "paginas_pdf": [
+      111,
+      143
+     ],
+     "capitulos": {
+      "6.1": "DISPOSICIONES GENERALES",
+      "6.10": "UNIDADES INDIVIDUALES DE TRATAMIENTO PRIMA-",
+      "6.11": "TANQUES DE ALMACENAMIENTO TEMPORAL DE",
+      "6.12": "TRAMPAS DE GRASAS",
+      "6.13": "OTROS SISTEMAS DE TRATAMIENTO",
+      "6.14": "INSPECCIONES",
+      "6.2": "EVALUACIÓN DEL SITIO",
+      "6.3": "EVALUACIÓN DE LA CAPACIDAD DE INFILTRACIÓN O",
+      "6.4": "VERIFICACIÓN DE LOS DATOS DE SUELO",
+      "6.5": "UBICACIÓN DEL SISTEMA DE ABSORCIÓN",
+      "6.6": "MATERIALES",
+      "6.7": "SISTEMAS DE ABSORCIÓN O INFILTRACIÓN EN SUELO",
+      "6.8": "INSTALACIÓN DE SISTEMAS CONVENCIONALES DE",
+      "6.9": "SISTEMAS DE DISTRIBUCIÓN A PRESIÓN"
+     },
+     "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf"
+    },
+    {
+     "volumen": 2,
+     "titulo": 7,
+     "nombre": "Sistemas de Proyectos Residenciales Tipo Urbanización",
+     "json": "datos/vol-2/T07.json",
+     "md": "md/vol-2/T07.md",
+     "clausulas": 74,
+     "paginas_pdf": [
+      143,
+      161
+     ],
+     "capitulos": {
+      "7.1": "ABASTECIMIENTO",
+      "7.2": "ELABORACIÓN DE PROYECTOS",
+      "7.3": "RED DE DISTRIBUCIÓN",
+      "7.4": "RED DE ALCANTARILLADO SANITARIO",
+      "7.5": "SISTEMA DE DRENAJE PLUVIAL"
+     },
+     "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf"
+    },
+    {
+     "volumen": 2,
+     "titulo": 8,
+     "nombre": "Disposiciones Finales",
+     "json": "datos/vol-2/T08.json",
+     "md": "md/vol-2/T08.md",
+     "clausulas": 2,
+     "paginas_pdf": [
+      161,
+      161
+     ],
+     "capitulos": null,
+     "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf"
+    }
+   ]
+  },
+  {
+   "volumen": 3,
+   "sigla": "IEL",
+   "nombre": "Instalaciones Eléctricas en Edificaciones",
+   "titulos": [
+    {
+     "volumen": 3,
+     "titulo": 1,
+     "nombre": "Electricidad",
+     "json": "datos/vol-3/T01.json",
+     "md": "md/vol-3/T01.md",
+     "clausulas": 497,
+     "paginas_pdf": [
+      27,
+      181
+     ],
+     "capitulos": {
+      "1.1": "GENERAL",
+      "1.10": "MÉTODOS DE ALAMBRADO",
+      "1.2": "SISTEMAS DE ENERGÍA DE EMERGENCIA Y DE RESERVA",
+      "1.3": "INSTALACIONES ELÉCTRICAS EN EDIFICACIONES",
+      "1.4": "CALCULO PARA CIRCUITO RAMALES Y PARA ALIMENTA-",
+      "1.5": "ACOMETIDAS",
+      "1.6": "PROTECCION CONTRA SOBRECORRIENTE",
+      "1.7": "CONEXIÓN “A TIERRA”",
+      "1.8": "MOTORES, CIRCUITOS Y CONTROLADORES DE MOTORES",
+      "1.9": "EQUIPOS DE AIRE ACONDICIONADO Y REFRIGERACIÓN"
+     },
+     "fuente_pdf": "MIVHED-Instalaciones-Electricas-en-Edificaciones-Vol-III.pdf"
+    }
+   ]
+  },
+  {
+   "volumen": 4,
+   "sigla": null,
+   "nombre": "Recomendaciones para Instalaciones Mecánicas en Edificaciones",
+   "titulos": [
+    {
+     "volumen": 4,
+     "titulo": 1,
+     "nombre": "Definiciones",
+     "json": "datos/vol-4/T01.json",
+     "md": "md/vol-4/T01.md",
+     "clausulas": 256,
+     "paginas_pdf": [
+      29,
+      69
+     ],
+     "capitulos": {
+      "1.1": "GENERALIDADES",
+      "1.2": "DEFINICIONES GENERALES"
+     },
+     "fuente_pdf": "MIVHED-Recomendaciones-para-Instalaciones-Mecanicas-en-Edificaciones-Vol-IV.pdf"
+    },
+    {
+     "volumen": 4,
+     "titulo": 2,
+     "nombre": "Normativa General",
+     "json": "datos/vol-4/T02.json",
+     "md": "md/vol-4/T02.md",
+     "clausulas": 105,
+     "paginas_pdf": [
+      69,
+      101
+     ],
+     "capitulos": {
+      "2.1": "GENERAL",
+      "2.10": "CONTROL DE EXPLOSIÓN",
+      "2.11": "SALIDAS DE HUMOS Y CALOR",
+      "2.12": "CÁLCULOS DE CARGA DE CALEFACCIÓN Y REFRIGERA-",
+      "2.2": "PROTECCIÓN DE LA ESTRUCTURA",
+      "2.3": "UBICACIÓN DE EQUIPOS Y ARTEFACTOS",
+      "2.4": "INSTALACIÓN",
+      "2.5": "SOPORTE DE TUBERÍAS",
+      "2.6": "ACCESO Y ESPACIO DE SERVICIO",
+      "2.7": "ELIMINACIÓN DE CONDENSADOS",
+      "2.8": "REDUCCIÓN DEL ESPACIO LIBRE",
+      "2.9": "CONTROL DE TEMPERATURA"
+     },
+     "fuente_pdf": "MIVHED-Recomendaciones-para-Instalaciones-Mecanicas-en-Edificaciones-Vol-IV.pdf"
+    },
+    {
+     "volumen": 4,
+     "titulo": 3,
+     "nombre": "Ventilación",
+     "json": "datos/vol-4/T03.json",
+     "md": "md/vol-4/T03.md",
+     "clausulas": 30,
+     "paginas_pdf": [
+      101,
+      118
+     ],
+     "capitulos": {
+      "3.1": "GENERAL",
+      "3.2": "VENTILACIÓN NATURAL",
+      "3.3": "VENTILACIÓN MECÁNICA",
+      "3.4": "ESTACIONAMIENTOS CERRADOS",
+      "3.5": "CONTROL DE SISTEMAS",
+      "3.6": "VENTILACIÓN DE ESPACIOS NO HABITADOS",
+      "3.7": "INSTALACIONES DE CUIDADOS AMBULATORIOS  Y"
+     },
+     "fuente_pdf": "MIVHED-Recomendaciones-para-Instalaciones-Mecanicas-en-Edificaciones-Vol-IV.pdf"
+    },
+    {
+     "volumen": 4,
+     "titulo": 4,
+     "nombre": "Sistemas de Escape",
+     "json": "datos/vol-4/T04.json",
+     "md": "md/vol-4/T04.md",
+     "clausulas": 317,
+     "paginas_pdf": [
+      118,
+      217
+     ],
+     "capitulos": {
+      "4.1": "GENERAL",
+      "4.10": "SISTEMAS DE ESCAPE PELIGROSOS",
+      "4.11": "SISTEMAS DE TRANSPORTE DE  POLVO, MATERIAL Y",
+      "4.12": "SISTEMAS DE EXTRACCIÓN DEL SUELO BAJO LA LOSA",
+      "4.13": "SISTEMAS DE CONTROL DE HUMOS",
+      "4.14": "SISTEMAS DE VENTILACIÓN CON RECUPERACIÓN DE",
+      "4.15": "RESPIRADERO DE ALIVIO DE MAUSOLEO",
+      "4.2": "SISTEMAS OBLIGATORIOS",
+      "4.3": "MOTORES Y VENTILADORES",
+      "4.4": "ESCAPE DE SECADORA DE ROPA",
+      "4.5": "EQUIPOS DE EXTRACCIÓN PARA COCINAS DOMÉSTICAS",
+      "4.7": "CAMPANAS DE COCINA COMERCIALES",
+      "4.8": "AIRE DE REPOSICIÓN DE COCINAS COMERCIALES",
+      "4.9": "SISTEMAS DE EXTINCIÓN DE INCENDIOS"
+     },
+     "fuente_pdf": "MIVHED-Recomendaciones-para-Instalaciones-Mecanicas-en-Edificaciones-Vol-IV.pdf"
+    },
+    {
+     "volumen": 4,
+     "titulo": 5,
+     "nombre": "Sistemas de Conductos",
+     "json": "datos/vol-4/T05.json",
+     "md": "md/vol-4/T05.md",
+     "clausulas": 123,
+     "paginas_pdf": [
+      217,
+      260
+     ],
+     "capitulos": {
+      "5.1": "GENERALIDADES",
+      "5.2": "PLÉNUMS",
+      "5.3": "CONSTRUCCIÓN E INSTALACIÓN DE CONDUCTOS",
+      "5.4": "AISLAMIENTO",
+      "5.5": "FILTROS DE AIRE",
+      "5.6": "CONTROL DE LOS SISTEMAS DE DETECCIÓN DE HUMOS",
+      "5.7": "CONDUCTOS Y ABERTURAS DE TRANSFERENCIA",
+      "5.8": "EQUILIBRIO"
+     },
+     "fuente_pdf": "MIVHED-Recomendaciones-para-Instalaciones-Mecanicas-en-Edificaciones-Vol-IV.pdf"
+    },
+    {
+     "volumen": 4,
+     "titulo": 6,
+     "nombre": "Calderas, Calentadores de Agua y Recipientes a Presión",
+     "json": "datos/vol-4/T06.json",
+     "md": "md/vol-4/T06.md",
+     "clausulas": 40,
+     "paginas_pdf": [
+      260,
+      271
+     ],
+     "capitulos": {
+      "6.1": "GENERALIDADES",
+      "6.10": "CALIBRES",
+      "6.2": "CALENTADORES DE AGUA",
+      "6.3": "RECIPIENTES A PRESIÓN",
+      "6.4": "CALDERAS",
+      "6.5": "CONEXIONES DE CALDERAS",
+      "6.6": "VÁLVULAS Y CONTROLES DE SEGURIDAD Y ALIVIO DE",
+      "6.7": "CORTE DE AGUA BAJA DE CALDERA",
+      "6.8": "VÁLVULA DE DESCARGA INFERIOR",
+      "6.9": "DEPÓSITO DE EXPANSIÓN DE LA CALDERA DE AGUA"
+     },
+     "fuente_pdf": "MIVHED-Recomendaciones-para-Instalaciones-Mecanicas-en-Edificaciones-Vol-IV.pdf"
+    },
+    {
+     "volumen": 4,
+     "titulo": 7,
+     "nombre": "Refrigeración",
+     "json": "datos/vol-4/T07.json",
+     "md": "md/vol-4/T07.md",
+     "clausulas": 83,
+     "paginas_pdf": [
+      271,
+      300
+     ],
+     "capitulos": {
+      "7.1": "GENERALIDADES",
+      "7.2": "REQUISITOS DEL SISTEMA",
+      "7.3": "CLASIFICACIÓN DE LOS SISTEMAS DE REFRIGERACIÓN",
+      "7.4": "REQUISITOS DE APLICACIÓN DEL SISTEMA",
+      "7.5": "SALA DE MÁQUINAS, REQUISITOS GENERALES",
+      "7.6": "SALA DE MÁQUINAS, REQUISITOS ESPECIALES",
+      "7.7": "TUBERÍAS DE REFRIGERANTE",
+      "7.8": "PRUEBA DE CAMPO",
+      "7.9": "PRUEBAS PERIÓDICAS"
+     },
+     "fuente_pdf": "MIVHED-Recomendaciones-para-Instalaciones-Mecanicas-en-Edificaciones-Vol-IV.pdf"
+    },
+    {
+     "volumen": 4,
+     "titulo": 8,
+     "nombre": "Sistemas Solares",
+     "json": "datos/vol-4/T08.json",
+     "md": "md/vol-4/T08.md",
+     "clausulas": 22,
+     "paginas_pdf": [
+      300,
+      305
+     ],
+     "capitulos": {
+      "8.1": "GENERAL",
+      "8.2": "INSTALACIÓN",
+      "8.3": "FLUIDOS CALOPORTADORES",
+      "8.4": "MATERIALES"
+     },
+     "fuente_pdf": "MIVHED-Recomendaciones-para-Instalaciones-Mecanicas-en-Edificaciones-Vol-IV.pdf"
+    }
+   ]
+  },
+  {
+   "volumen": 5,
+   "sigla": null,
+   "nombre": "Diseño Arquitectónico en Edificaciones",
+   "titulos": [
+    {
+     "volumen": 5,
+     "titulo": 1,
+     "nombre": "Espacios Mínimos en Viviendas Urbanas",
+     "json": "datos/vol-5/T01.json",
+     "md": "md/vol-5/T01.md",
+     "clausulas": 18,
+     "paginas_pdf": [
+      4,
+      56
+     ],
+     "capitulos": {
+      "1.1": "CONSIDERACIONES GENERALES",
+      "1.2": "DEFINICIONES",
+      "1.3": "ESPACIOS MÍNIMOS DE LA VIVIENDA URBANA",
+      "1.4": "EJEMPLOS DE RELACIÓN DE ÁREAS EN VIVIENDAS"
+     },
+     "fuente_pdf": "MIVHED-Diseno-Arquitectonico-en-Edificaciones-Vol-V.pdf"
+    },
+    {
+     "volumen": 5,
+     "titulo": 2,
+     "nombre": "Medios de Circulación Vertical en Edificaciones",
+     "json": "datos/vol-5/T02.json",
+     "md": "md/vol-5/T02.md",
+     "clausulas": 116,
+     "paginas_pdf": [
+      56,
+      93
+     ],
+     "capitulos": {
+      "2.1": "CONSIDERACIONES GENERALES. OBJETIVO Y CAMPO DE APLICACIÓN",
+      "2.10": "RAMPAS PEATONALES. ASPECTOS GENERALES",
+      "2.11": "REQUISITOS DE DISEÑO RAMPAS PEATONALES",
+      "2.12": "SANCIONES. DISPOSICIONES ADMINISTRATIVAS",
+      "2.2": "DEFINICIONES",
+      "2.3": "REQUISITOS GENERALES",
+      "2.4": "REQUISITOS GENERALES. ACCESO AL MEDIO DE CIRCULACION VERTICAL",
+      "2.5": "BARANDILLAS Y PASAMANOS",
+      "2.6": "ILUMINACIÓN Y VENTILACIÓN",
+      "2.7": "ESCALERAS. ASPECTOS GENERALES",
+      "2.8": "REQUISITOS A CUMPLIR SEGÚN TIPO DE ESCALERA",
+      "2.9": "DIMENSIONES MÍNIMAS DE LAS ESCALERAS"
+     },
+     "fuente_pdf": "MIVHED-Diseno-Arquitectonico-en-Edificaciones-Vol-V.pdf"
+    },
+    {
+     "volumen": 5,
+     "titulo": 3,
+     "nombre": "Diseño de Estacionamiento Vehicular en Edificaciones",
+     "json": "datos/vol-5/T03.json",
+     "md": "md/vol-5/T03.md",
+     "clausulas": 270,
+     "paginas_pdf": [
+      93,
+      160
+     ],
+     "capitulos": {
+      "3.1": "ASPECTOS GENERALES",
+      "3.10": "CANTIDAD MÍNIMA DE ESPACIOS DE ESTACIONAMIENTO REQUERIDA",
+      "3.11": "DIMENSIONAMIENTO DE ÁREAS ESPECÍFICAS PARA",
+      "3.12": "DIMENSIONES MÍNIMAS DE LOS ESPACIOS DE ESTACIONAMIENTO",
+      "3.13": "DIMENSIONES MÍNIMAS DE LAS ÁREAS DE ESTACIONAMIENTO",
+      "3.14": "EDIFICIOS PARA ESTACIONAMIENTO VEHICULAR",
+      "3.15": "ESTACIONAMIENTOS MECÁNICOS",
+      "3.16": "CONTROL DE ACCESOS",
+      "3.17": "DISPOSICIONES ADMINISTRATIVAS",
+      "3.2": "CONSIDERACIONES GENERALES DE APLICACIÓN",
+      "3.3": "REQUISITOS GENERALES DE DISEÑO DE ESTACIONAMIENTOS",
+      "3.4": "PERMISOS DE ÁREAS ESPECÍFICAS PARA ESTACIONAR Y CONTROL DE",
+      "3.5": "PLANOS DE ESTACIONAMIENTO VEHICULAR Y DE ACCESOS A LAS VÍAS",
+      "3.6": "CRITERIOS DE DISEÑO",
+      "3.7": "CONSIDERACIONES PARTICULARES",
+      "3.8": "CONSIDERACIONES PARTICULARES SEGÚN EL USO DE LA EDIFICACIÓN",
+      "3.9": "ESPACIOS DE ESTACIONAMIENTO SEGÚN EL USO DE LA EDIFICACIÓN"
+     },
+     "fuente_pdf": "MIVHED-Diseno-Arquitectonico-en-Edificaciones-Vol-V.pdf"
+    },
+    {
+     "volumen": 5,
+     "titulo": 4,
+     "nombre": "Ventilación Natural en Edificaciones",
+     "json": "datos/vol-5/T04.json",
+     "md": "md/vol-5/T04.md",
+     "clausulas": 18,
+     "paginas_pdf": [
+      160,
+      174
+     ],
+     "capitulos": {
+      "4.1": "ASPECTOS GENERALES",
+      "4.10": "ORIENTACIÓN DE LAS EDIFICACIONES",
+      "4.2": "VENTILACIÓN NATURAL",
+      "4.3": "DIMENSIONES DE ABERTURAS",
+      "4.4": "VELOCIDAD DEL AIRE",
+      "4.5": "RENDIMIENTO MÁXIMO DE VENTILACIÓN",
+      "4.6": "DIRECCIÓN DEL VIENTO",
+      "4.7": "ESPACIOS DE CIRCULACIÓN, DISTRIBUCIÓN Y DESAHOGO",
+      "4.8": "ABERTURAS EN EDIFICIOS MULTIPISOS",
+      "4.9": "DISPOSICIÓN DE LAS EDIFICACIONES CON RELACIÓN A SU ENTORNO"
+     },
+     "fuente_pdf": "MIVHED-Diseno-Arquitectonico-en-Edificaciones-Vol-V.pdf"
+    },
+    {
+     "volumen": 5,
+     "titulo": 5,
+     "nombre": "Seguridad y Protección contra Incendios",
+     "json": "datos/vol-5/T05.json",
+     "md": "md/vol-5/T05.md",
+     "clausulas": 578,
+     "paginas_pdf": [
+      178,
+      293
+     ],
+     "capitulos": {
+      "5.1": "DISPOSICIONES GENERALES",
+      "5.2": "Este Título",
+      "5.3": "Esta instalación deberá cubrir por completo a toda edificación y cumplir con",
+      "5.4": "MEDIOS DE EGRESO",
+      "5.5": "SISTEMAS DE DETECCIÓN Y ALARMA DE INCENDIOS",
+      "5.6": "Capítulo VI, de este Título. Se permite la instalación de hidrantes en",
+      "5.7": "DISPOSICIONES FINALES"
+     },
+     "fuente_pdf": "MIVHED-Diseno-Arquitectonico-en-Edificaciones-Vol-V.pdf"
+    },
+    {
+     "volumen": 5,
+     "titulo": 6,
+     "nombre": "Proyectar sin Barreras Arquitectónicas",
+     "json": "datos/vol-5/T06.json",
+     "md": "md/vol-5/T06.md",
+     "clausulas": 150,
+     "paginas_pdf": [
+      293,
+      348
+     ],
+     "capitulos": {
+      "6.1": "CONSIDERACIONES GENERALES",
+      "6.2": "SÍMBOLO DE SEGURIDAD",
+      "6.3": "MEDIOS DE DESPLAZAMIENTO",
+      "6.4": "ACCESIBILIDAD",
+      "6.5": "RECOMENDACIONES GENERALES SOBRE MOBILIARIO Y EQUIPOS",
+      "6.6": "CONSIDERACIONES GENERALES SOBRE URBANISMO"
+     },
+     "fuente_pdf": "MIVHED-Diseno-Arquitectonico-en-Edificaciones-Vol-V.pdf"
+    }
+   ]
+  }
+ ]
+}

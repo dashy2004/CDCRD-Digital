@@ -1,0 +1,676 @@
+{
+ "volumen": 2,
+ "sigla": "DIHE",
+ "nombre_volumen": "Instalaciones Hidrosanitarias en Edificaciones",
+ "titulo": 4,
+ "nombre": "Drenaje Sanitario",
+ "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "4.1": "REQUISITOS GENERALES",
+  "4.2": "CRITERIOS DE DISEÑO",
+  "4.3": "DISPOSITIVOS AUXILIARES",
+  "4.4": "JUNTAS",
+  "4.5": "PRUEBAS"
+ },
+ "clausulas": [
+  {
+   "id": "4.1.1",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "",
+   "texto": "REQUISITOS PARA EL DISEÑO Y CONSTRUCCIÓN DEL SISTEMA DE \nDESAGÜE. El sistema de desagüe deberá ser diseñado y construido de forma \ntal, que las aguas servidas sean evacuadas lo más rápidamente posible desde \ntodos los aparatos sanitarios, sumideros o cualquier otro punto de recolec-\nción, hasta el lugar de descarga, con velocidades que permitan el arrastre de \nlas excretas y materias en suspensión, evitando obstrucciones y depósitos de \nmateriales.",
+   "paginas": [
+    85
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.1.2",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "COMPOSICIÓN DEL SISTEMA DE DRENAJE DE AGUA RESIDUAL",
+   "texto": "COMPOSICIÓN DEL SISTEMA DE DRENAJE DE AGUA RESIDUAL. El \nsistema de drenaje de agua residual de toda edificación estará compuesto por \nla red de desagüe propiamente y la red de ventilación.",
+   "paginas": [
+    85
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.1.3",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "COMPONENTES DE LA RED DE DESAGÜE",
+   "texto": "COMPONENTES DE LA RED DE DESAGÜE. La red de desagüe estará \ncompuesta por derivaciones, columnas de descarga, tuberías colectoras y dis-\npositivos auxiliares.",
+   "paginas": [
+    85
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.1.4",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "COMPONENTES DE LA RED DE VENTILACIÓN",
+   "texto": "COMPONENTES DE LA RED DE VENTILACIÓN. La red de ventilación \nestará compuesta por las columnas de ventilación principal, secundaria e indi-\nvidual y el ramal de ventilación auxiliar.",
+   "paginas": [
+    85
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.1.5",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "TRATAMIENTO DE AGUAS RESIDUALES",
+   "texto": "TRATAMIENTO DE AGUAS RESIDUALES. T oda agua residual deberá \nser tratada con un método aprobado por la autoridad de acueducto y alcan-\ntarillado correspondiente, previamente a ser dispuesta a cumplir con los re-\nquerimientos establecidos en el Reglamento Sobre Control de la Explotación \ny Conservación de las Aguas Subterráneas, y de la Norma de Calidad de Aguas \nSubterráneas y de Descargas al Subsuelo del Ministerio de Medio Ambiente y \nRecursos Naturales, -MIMARENA. -",
+   "paginas": [
+    85,
+    86
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.1.6",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "DISPOSICIÓN DE EFLUENTES",
+   "texto": "DISPOSICIÓN DE EFLUENTES. T oda edificación deberá estar conectada \na través de una alcantarilla al sistema de alcantarillado público, si lo hay. Si no \nexiste alcantarillado o el existente no está en capacidad de recibir los efluentes \npor las características de éstos, se deberá construir un sistema individual aten-\ndiendo a las especificaciones dadas en el TÍTULO 6.",
+   "paginas": [
+    86
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.1.7",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "LEYENDAS SANITARIAS",
+   "texto": "LEYENDAS SANITARIAS. Para la representación de los diferentes apara-\ntos, equipos y demás elementos del sistema sanitario en los planos, se deberán \nutilizar las abreviaturas y los símbolos aprobadas por el MIVHED.",
+   "paginas": [
+    86
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.1.8",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "ESPECIFICACIONES",
+   "texto": "ESPECIFICACIONES. En los planos sanitarios de toda edificación se pre-\nsentará una tabla de especificaciones que indiquen de manera principal las ca-\nracterísticas de los materiales a usar (tuberías, aparatos sanitarios, equipos de \nbombeo, válvulas, etc.)",
+   "paginas": [
+    86
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.2.1",
+   "titulo_num": 4,
+   "capitulo": "4.2",
+   "encabezado": "",
+   "texto": "RED DE DRENAJE DE AGUAS RESIDUALES",
+   "paginas": [
+    86
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.2.1.1",
+   "titulo_num": 4,
+   "capitulo": "4.2",
+   "encabezado": "CRITERIOS DISEÑO A CUMPLIR",
+   "texto": "CRITERIOS DISEÑO A CUMPLIR. Se deberán cumplir los siguientes \ncriterios de diseño en la Red de Drenaje de Aguas Residuales:\na) La dirección del flujo en una tubería de derivación seguirá la distancia más \ncorta y en un solo sentido del flujo.\n\n\nb) T odos los aparatos sanitarios deberán tener un sello hidráulico, mediante el \nuso de sifones, para impedir la entrada de malos olores e insectos, existentes \nen las tuberías del interior de la edificación.\nc) En todos los empalmes, el diámetro de la tubería de descarga será igual o \nmenor que el de la tubería que recibe la descarga.\nd) La ubicación:\n1. De tuberías de la red de desagüe se hará de forma tal que no se crucen áreas \ninnecesarias de la edificación, se facilite la labor de mantenimiento, no se in-\nterfiera con los elementos estructurales y se evite que estén expuestas a la vista \npara cuidar con la armonía de los ambientes.\n2. Para edificios mayores a seis niveles, será obligatorio el uso de patinillos, \npara permitir la instalación de las tuberías drenaje, que, por sus diámetros, ta-\nmaños y cantidad, y evitar que afecten elementos estructurales e impidan un \ncorrecto mantenimiento de las mismas.\ne) En la construcción de la red de drenaje sanitario domiciliaria, la tubería míni-\nma permitida será del tipo SDR-41, según la Norma ASTM 2241.\nf ) Los diámetros mínimos que se utilizarán en la red de drenaje de aguas resi-\nduales se tomarán según la TABLA 19.\nTABLA 19\nDIÁMETROS MÍNIMOS SEGÚN EL USO\n\n\n\ng) Las tuberías colectoras en la planta baja de la edificación estarán separadas \n80 centímetros, mínimo, de los muros externos de la edificación (en zonas re-\nguladas) o a una distancia equidistante entre el lindero y los muros de la edifi-\ncación.\nh) Las tuberías colectoras deberán mantener una distancia mínima horizontal \nde 1.00 metro de la tubería de agua potable más próxima. Cuando esto no sea \nposible, se hará según lo establecido en el siguiente literal.\ni) Cuando la tubería de drenaje de aguas residuales se cruce con la de agua po-\ntable, la de agua potable estará a 25 centímetros por encima del borde superior \nde la de aguas residuales.\nj) La pendiente mínima permisible en la tubería de drenaje de aguas residuales \nserá de un 2% o en función del diámetro, aquélla que garantice una velocidad \nmínima de 0.60 m/seg.\nk) La tubería de drenaje de aguas residuales deberá cumplir con el requisito de \naccesibilidad (ductos, patinillos, registros, huecos, u otros a consideración de \nlos diseños arquitectónico y estructural) a fin de evitar roturas en las infraes-\ntructuras cuando sea necesario efectuar reparaciones y mantenimiento en el \nsistema. Las tuberías sujetas a presiones o fuerzas externas estarán protegidas.\nl) La descarga de todo aparato en el cual se produzca aguas residuales con gra-\nsa se hará a través de tuberías independientes a la descarga de otros aparatos \ny deberá ser provista de una trampa de grasa, antes de que las mismas sean \nconducidas a la tubería colectora principal.\nm) Las alineaciones de todas las tuberías, tanto en dirección horizontal como \nvertical, serán en lo posible rectas, evitando cambios innecesarios de dirección.\nn) Los bajantes de pisos superiores descargarán en cámaras de inspección in-\ndependientes de las del primer nivel, para evitar la inundación de este nivel.",
+   "paginas": [
+    86,
+    87,
+    88
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.2.2",
+   "titulo_num": 4,
+   "capitulo": "4.2",
+   "encabezado": "",
+   "texto": "RED DE VENTILACIÓN",
+   "paginas": [
+    88,
+    89
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.2.2.1",
+   "titulo_num": 4,
+   "capitulo": "4.2",
+   "encabezado": "CRITERIOS A CUMPLIR",
+   "texto": "CRITERIOS A CUMPLIR. El diseño de la red de ventilación deberá \ncumplir con los criterios siguientes:\na) Las columnas de ventilación no deberán interferir con los elementos estruc-\nturales de la edificación.\nb) Las columnas de ventilación deberán cumplir con el requisito de verticali-\ndad, con relación a la horizontalidad de las tuberías colectoras.\nc) El empalme de la tubería de ventilación con la tubería principal de la deri-\nvación deberá ser ubicado en el extremo opuesto al sentido del flujo y lo más \ncerca posible al aparato que tenga descarga mayor.\nd) El tramo horizontal que empalma la columna de ventilación con la tubería \nprincipal de la derivación deberá tener un diámetro igual o mayor que el de la \ncolumna de ventilación y una pendiente no menor del 1%.\ne) T odas las columnas de ventilación deberán continuar directa o indirecta-\nmente hasta el techo de la edificación a una altura no menor de 35 centímetros, \npor encima de éste, protegidas adecuadamente.\nf ) Las columnas de ventilación, en lo posible, no deberán estar expuestas a la \nvista, evitando romper la armonía arquitectónica de los ambientes.\ng) El diámetro mínimo para las columnas de ventilación será de acuerdo con las \nindicaciones de la TABLA 20.\no) No se permitirá la interconexión con otros sistemas. Estará prohibido la in-\nterconexión del drenaje de los aires acondicionados (AA) a las ventilaciones.\n\n\nTABLA 20\nDIÁMETRO MÍNIMO DE LAS COLUMNAS DE VENTILACIÓN",
+   "paginas": [
+    89,
+    90
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.2.2.2",
+   "titulo_num": 4,
+   "capitulo": "4.2",
+   "encabezado": "VENTILACIÓN SECUNDARIA",
+   "texto": "VENTILACIÓN SECUNDARIA. La tubería de ventilación secundaria \nserá necesaria cuando el número de aparatos que compone un grupo que des-\ncargue a una misma derivación sea de tres o más inodoros situados en forma \ncontinua, o cuatro aparatos mixtos, cualquiera que sea el nivel de la edificación \nen que se encuentren.",
+   "paginas": [
+    90
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.2.2.3",
+   "titulo_num": 4,
+   "capitulo": "4.2",
+   "encabezado": "VENTILACIÓN AUXILIAR",
+   "texto": "VENTILACIÓN AUXILIAR. La tubería de ventilación auxiliar será nece-\nsaria cuando el grupo de aparatos que descargue en una misma derivación sea \nigual o mayor a ocho, cualquiera que sea el nivel de la edificación.",
+   "paginas": [
+    90
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.3.1",
+   "titulo_num": 4,
+   "capitulo": "4.3",
+   "encabezado": "CAJA DE INSPECCIÓN",
+   "texto": "CAJA DE INSPECCIÓN. Se requerirá la construcción de cámaras o cajas \nde inspección en los siguientes casos:\na) Para empalmar en la planta baja las tuberías colectoras con las columnas de \ndescarga, derivaciones u otras tuberías colectoras.\n \nb) Los aparatos sanitarios del primer nivel deberán entrar a las cámaras de ins-\npección, independientemente de los bajantes de descarga de los niveles supe-\nriores.\n\n\nc) Para facilitar la limpieza de las tuberías colectoras, conservando entre ellas \nuna distancia no mayor de 15 metros.\nd) En todo cambio de dirección de la tubería colectora.\ne) En la intersección de la tubería que conecta la trampa de grasa con la tubería \ncolectora principal.\nf ) A una distancia no mayor de 15 metros antes de la acometida con el alcan-\ntarillado sanitario.\ng) En el caso en que la profundidad de la caja de inspección supere los 0.80 \nmetros, se considerará como un registro sanitario.",
+   "paginas": [
+    90,
+    91
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.3.2",
+   "titulo_num": 4,
+   "capitulo": "4.3",
+   "encabezado": "REQUISITOS PARA CAJAS DE INSPECCIÓN",
+   "texto": "REQUISITOS PARA CAJAS DE INSPECCIÓN. En el diseño y construc-\nción de las cajas de inspección se deberá cumplir con los criterios indicados a \ncontinuación: \na) Se deberán ubicar en sitios de fácil acceso y localización.\nb)  La dimensión mínima requerida será de 0.50 x 0.50 metros y la profundidad \nserá la requerida por la pendiente de la tubería.\nc) Deberán ser herméticas e impermeables, para ello el fondo y las paredes in-\nteriores de las cajas de inspección serán pañetadas y pulidas.\nd) Se podrán construir en bloques de hormigón (u otro material aprobado para \nestos fines), o prefabricadas en material no degradable.\ne) Su forma y pendiente deberán ser adecuadas entre la entrada y la salida para \nfacilitar la circulación del agua residual en su interior (media caña, talud, etc.).\n\n\nf)  La tapa estará provista de agarraderas que permitan su remoción, en el caso \nde ser fabricadas en sitio. Si son prefabricadas deberán estar provistas de bisa-\ngras y portacandado o algún mecanismo de cierre.\ng) La cámara podrá tener una o más entradas, tanto por su frente como por sus \nlaterales, teniendo una sola salida, por lo menos 2 centímetros por debajo de \nsu entrada más baja, demostrando que su diseño cumple el funcionamiento \nhidráulico y sin que constituyan obstrucciones en su desempeño.",
+   "paginas": [
+    91,
+    92
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.3.3",
+   "titulo_num": 4,
+   "capitulo": "4.3",
+   "encabezado": "CÁMARA SÉPTICA",
+   "texto": "CÁMARA SÉPTICA. En el caso de que no exista alcantarillado sanitario \nmunicipal se requerirá la construcción de una cámara séptica como tratamien-\nto primario antes de la disposición final de las aguas residuales y se construirá \nsegún lo especificado en el TÍTULO 6 de este Volumen.",
+   "paginas": [
+    92
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.3.4",
+   "titulo_num": 4,
+   "capitulo": "4.3",
+   "encabezado": "TAPÓN DE REGISTRO",
+   "texto": "TAPÓN DE REGISTRO. Se requerirá la disposición de un tapón de re-\ngistro en las tuberías colectoras de aguas residuales para los siguientes casos:\na) T uberías colectoras colgantes.\nb) T uberías colectoras dentro de la edificación y en cambios bruscos de la tu-\nbería.\nc) En los extremos de las tuberías colgantes y derivaciones principales para to-\ndas las edificaciones de más de un nivel. Cada 15 metros, en cambios de direc-\nción.\nd) Al pie de cada bajante, si no es posible colocar una caja de inspección direc-\ntamente al pie del bajante. En todo caso el tapón no sustituirá el registro.",
+   "paginas": [
+    92,
+    93
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.4.1",
+   "titulo_num": 4,
+   "capitulo": "4.4",
+   "encabezado": "",
+   "texto": "ESPECIFICACIONES PARA JUNTAS EN TUBERÍAS DE DRENAJE SANI-\nTARIO. Las juntas en las tuberías en drenaje sanitario dentro de la edificación \nse harán conforme a las especificaciones y recomendaciones del fabricante.",
+   "paginas": [
+    93
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.4.2",
+   "titulo_num": 4,
+   "capitulo": "4.4",
+   "encabezado": "JUNTAS DE ESPIGA Y CAMPANA PARA PVC",
+   "texto": "JUNTAS DE ESPIGA Y CAMPANA PARA PVC. Deberán estar limpias \ny libres de humedad. El pegamento de las juntas (cemento solvente), deberá \ncumplir con la Norma ASTM D 2235, y será aplicado en todas las caras.",
+   "paginas": [
+    93
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.4.3",
+   "titulo_num": 4,
+   "capitulo": "4.4",
+   "encabezado": "JUNTAS MECÁNICAS",
+   "texto": "JUNTAS MECÁNICAS. Serán hechas con un sellador que cumpla con la \nASTM D 3212 y serán instaladas de acuerdo con las instrucciones del fabrican-\nte.",
+   "paginas": [
+    93
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.4.4",
+   "titulo_num": 4,
+   "capitulo": "4.4",
+   "encabezado": "JUNTAS SOLDADAS",
+   "texto": "JUNTAS SOLDADAS. Las soldaduras se deberán hacer de acuerdo con \nlos métodos de ASTM B 828. T odos los cortes deberán tener el mismo diáme-\ntro, y todas las superficies de las juntas deben ser limpiadas antes de hacer la \nsoldadura.",
+   "paginas": [
+    93
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.4.5",
+   "titulo_num": 4,
+   "capitulo": "4.4",
+   "encabezado": "JUNTAS ENTRE MATERIALES DIFERENTES",
+   "texto": "JUNTAS ENTRE MATERIALES DIFERENTES. Juntas entre diferentes ti-\npos de materiales se deberán hacer con junta mecánica. El sello elastomérico \ndeberá responder a los requerimientos establecidos en las siguientes normas \nde la TABLA 21.\nTABLA 21\nNORMAS PARA JUNTAS SEGÚN EL TIPO DE MATERIAL",
+   "paginas": [
+    93
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.4.6",
+   "titulo_num": 4,
+   "capitulo": "4.4",
+   "encabezado": "ALCANTARILLADOS DE ACERO INOXIDABLE",
+   "texto": "ALCANTARILLADOS DE ACERO INOXIDABLE. Los empalmes para los \nalcantarillados de acero inoxidable serán hechos con un sello con electrodos \nque sea aprobado por la autoridad del Acueducto y Alcantarillado correspon-\ndiente.",
+   "paginas": [
+    93,
+    94
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.4.7",
+   "titulo_num": 4,
+   "capitulo": "4.4",
+   "encabezado": "ACCESORIOS DE JUNTAS DE EXPANSIÓN",
+   "texto": "ACCESORIOS DE JUNTAS DE EXPANSIÓN. Los accesorios de juntas de \nexpansión se deben utilizar únicamente donde sea necesario para permitir la \nexpansión y contracción de las tuberías.",
+   "paginas": [
+    94
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.4.8",
+   "titulo_num": 4,
+   "capitulo": "4.4",
+   "encabezado": "JUNTAS Y CONEXIONES PROHIBIDAS",
+   "texto": "JUNTAS Y CONEXIONES PROHIBIDAS. No será permitido el uso de \njuntas unidas con adhesivo solvente entre diferentes tipos de plástico, o hechas \ncon accesorios que no están aprobados para esa instalación específica.",
+   "paginas": [
+    94
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.5.1",
+   "titulo_num": 4,
+   "capitulo": "4.5",
+   "encabezado": "",
+   "texto": "INSPECCIÓN Y PRUEBAS DE SISTEMAS DE DESAGÜE DURANTE LA \nCONSTRUCCIÓN. Durante el proceso de construcción, los sistemas de des-\nagüe de aguas residuales y de aguas pluviales deberán ser inspeccionados y so-\nmetidos a las pruebas parciales y pruebas finales especificadas en esta sección. \nEl ingeniero que dirige la obra será el responsable del cumplimiento de estos \nrequisitos. La prueba de los sistemas de drenaje sanitario por gravedad se rea-\nlizará cerrando la conexión entre el drenaje de la edificación y el alcantarillado \npúblico o sistema de disposición; luego se deberá llenar con agua, mantenien-\ndo una carga hidráulica no menor de 3.05 metros columna de agua (m.c.a.), al \nmenos por 15 minutos.",
+   "paginas": [
+    94
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.5.2",
+   "titulo_num": 4,
+   "capitulo": "4.5",
+   "encabezado": "PRUEBA CON AGUA",
+   "texto": "PRUEBA CON AGUA. La sección a prueba deberá tener una carga míni-\nma de 3.05 m.c.a (10 pies) por encima de la junta en prueba, y por lo menos 15 \nminutos antes de que empiece la inspección.\nPÁRRAFO I. Si la prueba con agua es aplicada en la entrada del sistema, todas \nlas tuberías que están abiertas deberán ser cerradas y apretadas, excepto las \n\n\nque están instaladas a una altura superior a 1.80 metros, y el sistema deberá \nser llenado con agua hasta el punto de que se desborde.\nPÁRRAFO II. Si el sistema es examinado en las secciones, cada salida debe-\nrá ser sellada, excepto las salidas que se encuentran más altas de la sección a \nprueba.",
+   "paginas": [
+    94,
+    95
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.5.3",
+   "titulo_num": 4,
+   "capitulo": "4.5",
+   "encabezado": "PRUEBA CON AIRE",
+   "texto": "PRUEBA CON AIRE. Para realizar esta prueba se deberá utilizar un com-\npresor y seguir el procedimiento siguiente:\na) Conectar el compresor a uno de los orificios de la sección o sistema, cerran-\ndo el resto de ellos.\nb) Someter la sección o el sistema a una presión uniforme de 34.5 kilo pascales \n(5 libras / pulgada2).\n \nPÁRRAFO. Se aceptarán las secciones o el sistema probado cuando la presión \nse mantenga constante durante 15 minutos. Si el resultado no es satisfactorio, \nse procederá a hacer las correcciones necesarias y se repetirá la prueba hasta \neliminar las filtraciones.\n\n\nTÍTULO 5. \nAPARATOS, GRIFOS Y \nACCESORIOS SANITARIOS",
+   "paginas": [
+    95,
+    96
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  }
+ ]
+}

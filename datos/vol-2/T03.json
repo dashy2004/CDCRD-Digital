@@ -1,0 +1,420 @@
+{
+ "volumen": 2,
+ "sigla": "DIHE",
+ "nombre_volumen": "Instalaciones Hidrosanitarias en Edificaciones",
+ "titulo": 3,
+ "nombre": "Drenaje Pluvial",
+ "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "3.1": "REQUISITOS GENERALES",
+  "3.2": "DRENAJE DE TECHOS, PARQUEOS Y OTROS",
+  "3.3": "DIMENSIONAMIENTO DE LOS BAJANTES, COLECTORES",
+  "3.4": "DRENAJE DE SÓTANOS"
+ },
+ "clausulas": [
+  {
+   "id": "3.1.1",
+   "titulo_num": 3,
+   "capitulo": "3.1",
+   "encabezado": "",
+   "texto": "NORMAS PARA EL DISEÑO E INSTALACIÓN DEL SISTEMA DE DRE-\nNAJE PLUVIAL. Las disposiciones de este título regirán lo referente a los ma-\nteriales, diseño, construcción e instalación del sistema de drenaje pluvial en los \nlugares de las edificaciones donde sea requerido, tales como todos los techos, \náreas pavimentadas, parqueos, jardines, terrazas, plazas, patios españoles u \notros lugares, cuya descarga se hará hacia un sistema de alcantarillado pluvial \no a un punto de descarga aprobado por la autoridad que administra el sistema.",
+   "paginas": [
+    79
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.1.2",
+   "titulo_num": 3,
+   "capitulo": "3.1",
+   "encabezado": "PROHIBICIÓN",
+   "texto": "PROHIBICIÓN. En ningún caso, el drenaje pluvial se deberá dirigir hacia \nel alcantarillado sanitario. T ampoco se permitirá utilizar los conductores del \ndrenaje pluvial como tuberías de descarga en suelo, como ventilación o como \ndrenaje sanitario.",
+   "paginas": [
+    79
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.1.3",
+   "titulo_num": 3,
+   "capitulo": "3.1",
+   "encabezado": "CONTINUIDAD DEL FLUJO",
+   "texto": "CONTINUIDAD DEL FLUJO. No se permitirá la reducción del diámetro \nde la tubería en la dirección del flujo. Las juntas y cambios de dirección se de-\nberán diseñar e instalar de manera tal que no se retarde, ni obstruya el flujo.",
+   "paginas": [
+    79
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.1.4",
+   "titulo_num": 3,
+   "capitulo": "3.1",
+   "encabezado": "MATERIALES",
+   "texto": "MATERIALES. En general, la tubería para el drenaje pluvial de las edifica-\nciones se usará según lo especificado en la TABLA 13.\n\n\nTABLA 13\nTUBERÍA PARA EL DRENAJE PLUVIAL DE EDIFICACIONES\nTABLA 14\nTUBERÍA PARA DRENAJE AL SUBSUELO",
+   "paginas": [
+    79,
+    80
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.1.5",
+   "titulo_num": 3,
+   "capitulo": "3.1",
+   "encabezado": "TUBERÍAS PARA EL DRENAJE AL SUBSUELO",
+   "texto": "TUBERÍAS PARA EL DRENAJE AL SUBSUELO. Para estos casos se usará \ntubería de PVC SDR-32.5, o en su defecto se permitirán las especificadas en la \nTABLA 14. Se deberán colocar con hendiduras horizontales o perforadas.",
+   "paginas": [
+    80
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.1.6",
+   "titulo_num": 3,
+   "capitulo": "3.1",
+   "encabezado": "JUNTAS",
+   "texto": "JUNTAS. Las juntas a ser utilizadas en el sistema de drenaje pluvial de-\nberán estar aprobadas para su uso, con el tipo de tubería a colocar, y deberán \nsatisfacer los estándares indicados en la TABLA 15.\nTABLA 15\nNORMAS DE REFERENCIAS PARA JUNTAS DE TUBERIAS DEL SISTEMA \nDE DRENAJE PLUVIAL",
+   "paginas": [
+    80
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.1.7",
+   "titulo_num": 3,
+   "capitulo": "3.1",
+   "encabezado": "USO DE ALCANTARILLADO COMBINADO",
+   "texto": "USO DE ALCANTARILLADO COMBINADO. Se prohíbe la construcción \nde sistemas de alcantarillado combinado.",
+   "paginas": [
+    80,
+    81
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.1.8",
+   "titulo_num": 3,
+   "capitulo": "3.1",
+   "encabezado": "DRENAJES DE PISO",
+   "texto": "DRENAJES DE PISO. Las aguas residuales provenientes del lavado de los \npisos y las paredes de la edificación no se deberán conectar al drenaje pluvial, \nsino al sanitario. Los drenajes de piso en balcones y terrazas serán conectados \nal drenaje pluvial siempre que su solución en primer nivel sea por tuberías y su \ndestino final este dentro de los límites del terreno.",
+   "paginas": [
+    81
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.2.1",
+   "titulo_num": 3,
+   "capitulo": "3.2",
+   "encabezado": "REJILLAS",
+   "texto": "REJILLAS. Dado que el diseño del drenaje pluvial determina la cantidad \nde bajantes necesarios para evacuar eficientemente el agua de lluvia, en cada \nuno de ellos debe instalarse una rejilla para prevenir obstrucciones causadas \npor partículas u objetos.",
+   "paginas": [
+    81
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.2.2",
+   "titulo_num": 3,
+   "capitulo": "3.2",
+   "encabezado": "SUPERFICIES PLANAS",
+   "texto": "SUPERFICIES PLANAS. Las rejillas y/o imbornales a ser utilizados en su-\nperficies de drenaje planas, como parqueos o terrazas, serán del tipo plano, \ncolocados al ras de la superficie, con un área efectiva de entrada de agua de por \nlo menos el doble del área del bajante o colector al que están conectadas.",
+   "paginas": [
+    81
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.3.1",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "TORMENTA DE DISEÑO",
+   "texto": "TORMENTA DE DISEÑO. El diseño de los bajantes, colectores, drenajes \nde edificaciones, alcantarillado pluvial en el lote y cualquier ramal horizontal de \ntales drenajes, se deberá basar en los datos de lluvias para una tormenta, con \nperíodo de retorno de 10 años para una hora de duración, según los datos loca-\nles de lluvia proporcionados y aprobados por el Instituto Nacional de Recursos \nHidráulicos (INDRHI) e Instituto Dominicano de Meteorología (INDOMET)",
+   "paginas": [
+    81
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.3.2",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "BAJANTES Y COLECTORES",
+   "texto": "BAJANTES Y COLECTORES. Los bajantes y colectores se diseñarán uti-\nlizando el área máxima de la proyección horizontal del techo, de conformidad \ncon las TABLAS 16 y 17.\n\n\nTABLA 16\nTAMAÑO DE BAJANTES\nTABLA 17\nTAMAÑO DE LOS COLECTORES\n\n\n\nPÁRRAFO. El valor base de precipitación estimada a considerar para el diseño \nserá de 100 mm/h, o según lo establecido por la autoridad competente para un \nperiodo de retorno de 10 años.",
+   "paginas": [
+    81,
+    82,
+    83
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.3.3",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "APORTE DE MUROS VERTICALES SOBRE EL TECHO",
+   "texto": "APORTE DE MUROS VERTICALES SOBRE EL TECHO. Cuando exista \nun muro vertical que desvíe el agua de lluvia hacia el techo o drenaje, la mitad \nde su área deberá ser sumada al área del techo para fines del dimensionamien-\nto del sistema de drenaje.",
+   "paginas": [
+    83
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.3.4",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "CANALETAS DE RECOLECCIÓN",
+   "texto": "CANALETAS DE RECOLECCIÓN. Éstas se dimensionarán de acuerdo \ncon la TABLA 18.\nTABLA 18\nTAMAÑO DE CANALETAS SEMICIRCULARES EN TECHOS",
+   "paginas": [
+    83
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.3.5",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "DESCARGA CONTINUA",
+   "texto": "DESCARGA CONTINUA. Donde hay una descarga continua o semi con-\ntinua de agua hacia el drenaje pluvial (como por ejemplo el drenaje de equipos \nacondicionadores de aire), cada galón por minuto de dicha descarga deberá ser \ncomputada como el equivalente a 9 m2 (96 pie2) de área de techo, consideran-\ndo una precipitación de 25 mm (1”) en una hora.",
+   "paginas": [
+    83,
+    84
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.3.6",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "DIÁMETRO MÍNIMO",
+   "texto": "DIÁMETRO MÍNIMO. El diámetro mínimo permitido para los desagües \npluviales será de 76.2 mm (3 pulgadas).",
+   "paginas": [
+    84
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.4.1",
+   "titulo_num": 3,
+   "capitulo": "3.4",
+   "encabezado": "DRENAJE EN EDIFICIOS",
+   "texto": "DRENAJE EN EDIFICIOS. Cuando el drenaje pluvial descargue a un nivel \ninferior que el nivel del alcantarillado pluvial en la calle deberá ser conducido \npor gravedad a un sistema de absorción (filtrante). En el caso que esto no sea \nposible, el agua deberá ser captada y elevada hasta el punto de disposición.",
+   "paginas": [
+    84
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.4.2",
+   "titulo_num": 3,
+   "capitulo": "3.4",
+   "encabezado": "CONSTRUCCIÓN DEL DEPÓSITO O CÁRCAMO DE BOMBEO",
+   "texto": "CONSTRUCCIÓN DEL DEPÓSITO O CÁRCAMO DE BOMBEO. La fosa \npara la recepción de las aguas de drenaje para su bombeo podrá ser fabricada \nen hormigón, acero, plástico u otro material aprobado. Deberá estar provista de \nuna tapa o cubierta removible con una dimensión mínima de 0.60 m, capaz de \nsoportar las cargas en el área donde se ubique. El piso de la fosa deberá proveer \nsoporte para la bomba.\n\n\nTÍTULO 4. \nDRENAJE SANITARIO",
+   "paginas": [
+    84,
+    85
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  }
+ ]
+}

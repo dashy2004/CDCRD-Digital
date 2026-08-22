@@ -1,0 +1,2615 @@
+{
+ "volumen": 5,
+ "sigla": null,
+ "nombre_volumen": "Diseño Arquitectónico en Edificaciones",
+ "titulo": 2,
+ "nombre": "Medios de Circulación Vertical en Edificaciones",
+ "fuente_pdf": "MIVHED-Diseno-Arquitectonico-en-Edificaciones-Vol-V.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "2.1": "CONSIDERACIONES GENERALES. OBJETIVO Y CAMPO DE APLICACIÓN",
+  "2.10": "RAMPAS PEATONALES. ASPECTOS GENERALES",
+  "2.11": "REQUISITOS DE DISEÑO RAMPAS PEATONALES",
+  "2.12": "SANCIONES. DISPOSICIONES ADMINISTRATIVAS",
+  "2.2": "DEFINICIONES",
+  "2.3": "REQUISITOS GENERALES",
+  "2.4": "REQUISITOS GENERALES. ACCESO AL MEDIO DE CIRCULACION VERTICAL",
+  "2.5": "BARANDILLAS Y PASAMANOS",
+  "2.6": "ILUMINACIÓN Y VENTILACIÓN",
+  "2.7": "ESCALERAS. ASPECTOS GENERALES",
+  "2.8": "REQUISITOS A CUMPLIR SEGÚN TIPO DE ESCALERA",
+  "2.9": "DIMENSIONES MÍNIMAS DE LAS ESCALERAS"
+ },
+ "clausulas": [
+  {
+   "id": "2.1.1",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "OBJETIVO",
+   "texto": "OBJETIVO. El presente Título establece los requisitos mínimos que deben cumplir los \nmedios de circulación vertical en las edificaciones, a fin de garantizar una accesibilidad \nadecuada para los usuarios, incluyendo a las personas con discapacidad, al desplazarse \nhacia los diferentes n iveles de la edificación. Además, se busca proveer una circulación \nrazonablemente segura para la evacuación o defensa de los ocupantes durante una \nemergencia, teniendo en cuenta el uso y la carga ocupacional.",
+   "paginas": [
+    56
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.2",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "CAMPO DE APLICACIÓN",
+   "texto": "CAMPO DE APLICACIÓN. Este Título será de aplicación obligatoria en los proyectos \nnuevos que se  erigirán en todo el territorio n acional; así como en ampliaciones, \nmodificaciones y cambios de uso de edificaciones existentes. \nPÁRRAFO. Los cambios de uso  en edificaciones existentes deberán estar debidamente \nautorizados por la autoridad competente, y cumplirán con las regulaciones vigentes para el \nnuevo uso a que se destine.  \nEXCEPCIÓN. Las disposiciones relativas a escaleras contenidas en este título no serán \naplicables a proyectos de edificación que sometan una modificación a la licencia de \nconstrucción con una antigüedad mínima de cinco (5) años desde su emisión, siempre que \ndicha modificación no implique un cambio de uso ni requiera la incorporación  de más de \nuna escalera para cumplir con los requerimientos de seguridad humana establecidos.",
+   "paginas": [
+    56
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.1",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ACCESO AL MEDIO DE CIRCULACIÓN VERTICAL (AMC)",
+   "texto": "ACCESO AL MEDIO DE CIRCULACIÓN VERTICAL (AMC): Espacio mínimo requerido en \nlos diferentes niveles de piso de una edificación para acceder a las escaleras, ascensores, \nrampas u otros medios.",
+   "paginas": [
+    56
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.2",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ALTURA ENTRE PLANTAS",
+   "texto": "ALTURA ENTRE PLANTAS:  Es la distancia  vertical entre dos plantas consecutivas, \nmedida desde los niveles terminados del piso inferior y el piso superior.",
+   "paginas": [
+    56
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.3",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "AMPLIACIÓN",
+   "texto": "AMPLIACIÓN. Es la acción de aumentar o hacer más extenso el espacio físico de una \nedificación o parte de ella.",
+   "paginas": [
+    56,
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.4",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ANCHO LIBRE",
+   "texto": "ANCHO LIBRE: Es el ancho efectivo libre de paso en espacios de circulación, tales \ncomo pasillos, puertas, escaleras, rampas y similares, sin obstrucciones, medidos sin tomar \nen cuenta el espacio ocupado por los objetos adyacentes, marcos de puertas, pasamanos \ny similares.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.5",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ANCHO BRUTO",
+   "texto": "ANCHO BRUTO: Es el ancho total de escaleras y rampas, medido entre los elementos \nfijos laterales (como muros o barandas), sin descontar el espacio ocupado por pasamanos \nu otros elementos salientes.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.6",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ÁREAS DE USO PÚBLICO",
+   "texto": "ÁREAS DE USO PÚBLICO: Son aquellas áreas de circulación dispuestas para el público \nen general, ya sea en edificaciones públicas o privadas, las cuales deben responder a l \ndesarrollo de las actividades propias del uso de las mismas.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.7",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ASCENSOR",
+   "texto": "ASCENSOR: Medio de circulación vertical mecánico, que facilita el acceso a todo tipo \nde persona u objeto a lo diferentes niveles de un edificio o estructura.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.8",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "BARANDILLA O BARANDA",
+   "texto": "BARANDILLA O BARANDA: Es un tipo de protección de media altura compuesta de \npasamanos o largueros y balaustres o barras verticales, que, bordeando una escalera, \nbalcón, puente u otros elementos similares, constituye una protección a modo de barrera.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.9",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "CAJA DE ESCALERA",
+   "texto": "CAJA DE ESCALERA: Es el espacio delimitado por muros en el que se desarrollan las \nescaleras cerradas.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.10",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "CAMBIO DE USO",
+   "texto": "CAMBIO DE USO. Es la transformación de una edificación existente, con el objetivo \nde cambiar el uso para el cual fue originalmente concebida.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.11",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "CARGA DE OCUPACIÓN",
+   "texto": "CARGA DE OCUPACIÓN. Número máximo de personas que de forma simultánea \npuede ocupar una edificación de acuerdo con la capacidad de espacio y uso establecido en \nel diseño.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.12",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "CIRCULACIÓN VERTICAL EN EDIFICIOS",
+   "texto": "CIRCULACIÓN VERTICAL EN EDIFICIOS: Es el desplazamiento hacia arriba o hacia \nabajo de personas, bienes o servicios en una edificación, mediante la utilización de \nescaleras, ascensores, escaleras mecánicas u otros dispositivos diseñados para tales fines.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.13",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "COMPARTIMENTACIÓN",
+   "texto": "COMPARTIMENTACIÓN: División o separación de un edificio en partes herméticas \no compartimientos, con elementos de construcción resistentes al fuego, de manera que lo \nretengan dentro del área de origen  del mismo, retardando su propagación a los sectores \nmás próximos del área de incendio.",
+   "paginas": [
+    57,
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.14",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "CONTRAHUELLA",
+   "texto": "CONTRAHUELLA: Es la diferencia de altura entre dos huellas o peldaños \nconsecutivos de una escalera, o entre estos y un descanso.",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.15",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "DESCANSO O MESETA",
+   "texto": "DESCANSO O MESETA: Parte de la escalera, localizada entre una secuencia de dos \ntramos de escalones,  que cuenta con una superficie horizontal de mayor dimensi ón que \néstos, y que les permite a los usuarios hacer una pausa en su recorrido.",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.16",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERA",
+   "texto": "ESCALERA: Medio de circulación vertical compuesto por una serie de escalones, que \npermite al usuario desplazarse hacia los diferentes pisos de un edifici o o a un plano más \nelevado; diseñado conforme a parámetros establecidos que garanticen adecuadas \ncondiciones y seguridad a los usuarios.",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.17",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERAS ABIERTAS",
+   "texto": "ESCALERAS ABIERTAS: Son aquellas que no están circunscritas dentro de una \nestructura de cierre o muros  perimetrales en todo su desarrollo y en sustitución de estos \nposeen barandillas para la seguridad de los usuarios.",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.18",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERAS CURVAS",
+   "texto": "ESCALERAS CURVAS: Son aquellas que sus líneas cambian de dirección sin formar \nángulos en sí mismas y pueden ser diseñadas en forma de círculo, óvalo, semicírculo, con o \nsin ojo interior.",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.19",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERAS DE EMERGENCIA",
+   "texto": "ESCALERAS DE EMERGENCIA : Es la parte del medio de egreso , protegida  \n(compartimentada) con respecto a los demás espacios del edificio, diseñada y construida \npara proporcionar una evacuación rápida de las personas por razones de emergencias, de \nacuerdo con los criterios establecidos en el Título 5: Seguridad y Protección Contra \nIncendios (Volumen V).",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.20",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERA EXTERIOR",
+   "texto": "ESCALERA EXTERIOR: Escalera con no menos de uno de sus lados abierto hacia el \nexterior.",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.21",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERAS DE SERVICIO",
+   "texto": "ESCALERAS DE SERVICIO:  Son aquellas escaleras que podrán ser utilizadas para \nrealizar actividades de acceso a azotea, servicios de mantenimiento y limpieza, las cuales \ndeberán ser rectas.",
+   "paginas": [
+    58,
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.22",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERAS FIJAS",
+   "texto": "ESCALERAS FIJAS: Son aquellas escaleras sin movilidad de sus partes ni peldaños, \ncontrarias a las escaleras mecánicas.",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.23",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERAS FLOTANTES",
+   "texto": "ESCALERAS FLOTANTES: Son escaleras suspendidas o escaleras voladizas, son \nestructuras arquitectónicas diseñadas para crear la ilusión de que los escalones están \nsuspendidos en el aire, sin soportes visibles debajo de ellos.",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.24",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERA MECÁNICA",
+   "texto": "ESCALERA MECÁNICA:  Son escalera con peldaños móviles utilizada en centros \ncomerciales, aeropuertos y estaciones de transporte.",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.25",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERAS MIXTAS",
+   "texto": "ESCALERAS MIXTAS: Son aquellas escaleras que están formadas por tramos rectos \ny curvos, pero con sus peldaños regulares en los tramos rectos, y peldaños compensados \nen los curvos, lo cual permite pasar del tramo recto al curvo sin descanso o meseta.",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.26",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERAS MIXTAS COMPENSADAS",
+   "texto": "ESCALERAS MIXTAS COMPENSADAS : Son aquellas escaleras mixtas que , en la \ncombinación de los tramos rectos con curvos , evitan que exista un cambio brusco , al \nrealizar una transición equilibrada de los efectos  del tramo recto al curvo para lograr un \npaso gradual al usuario.",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.27",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERA ORTOPOLIGONAL",
+   "texto": "ESCALERA ORTOPOLIGONAL: Es aquella cuyo eje está formado por una serie de \nsegmentos consecutivos que forman ángulos de 90 grados entre sí. Esto significa que la \nescalera no sigue una línea recta, sino que presenta cambios de dirección en ángulos rectos, \ncreando una especie de zigzag.",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.28",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERAS PRINCIPALES",
+   "texto": "ESCALERAS PRINCIPALES: Son escaleras fijas, diseñadas para suplir de manera fluida \ntoda o parte de la demanda de acceso que se genera en los diferentes pisos de las \nedificaciones, cumpliendo con las características que aseguren su funcionamiento efectivo.",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.29",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERAS RECTAS",
+   "texto": "ESCALERAS RECTAS: Son aquellas cuyo desarrollo se realiza en línea recta, ya sea en \nuno o más tramos, y que deberán cumplir con los requisitos de cantidad máxima de \nescalones por tramo.",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.30",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERAS SECUNDARIAS",
+   "texto": "ESCALERAS SECUNDARIAS : Son escaleras que sirven como complemento de las \nescaleras principales.",
+   "paginas": [
+    59,
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.31",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERAS TIPO CARACOL",
+   "texto": "ESCALERAS TIPO CARACOL: Son escaleras curvas que definen un círculo completo \nen su desarrollo en abanico, regularmente soportadas por una barra central y que no \nposeen ojo, ni descanso.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.32",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERAS TIPO ESCALA",
+   "texto": "ESCALERAS TIPO ESCALA:  Son aquellas escaleras que se usan para dar servicio o \nmantenimiento, cuyos escalones están fijados a una estructura ( edificios, tanques de \nalmacenamiento o silos, torres de comunicación, equipos y/o maquinarias de gran \ntamaño).",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.33",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALERAS TIPO HELICOIDAL",
+   "texto": "ESCALERAS TIPO HELICOIDAL: Son escaleras curvas que presentan un desarrollo  \nalabeado alrededor de un hueco circular y con peldaños radiales.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.34",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ESCALINATA",
+   "texto": "ESCALINATA: Es el Medio de circulación compuesto por amplios escalones, utilizado \ngeneralmente en accesos exteriores a lo s edificios o en los vestíbulos  de algunos tipos de \nedificaciones; así como, en parques o zonas de recreación  u otros lugares de uso público. \nSe caracterizan por sus huellas anchas y contrahuellas reducidas, con superficie resistente \nal alto tráfico.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.35",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "GIRO DE ESCALERA",
+   "texto": "GIRO DE ESCALERA : Es el cambio de dirección que se produce en las escaleras \ncurvas; así como, en las escaleras rectas o combinadas, para pasar de un tramo a otro por \nmedio de un descanso.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.36",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "HUELLA",
+   "texto": "HUELLA: Plano horizontal del escalón o peldaño de una escalera en que se apoya el \npie al subir o bajar de ella.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.37",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "MEDIO DE EGRESO",
+   "texto": "MEDIO DE EGRESO: Recorrido continuo y sin obstrucciones desde cualquier punto \nen un edificio o estructura hasta una vía pública, consistente en tres partes separadas y \ndistintas: (1) el acceso a salida, (2) la salida y (3) la descarga de salida.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.38",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "MEDIO DE ESCAPE",
+   "texto": "MEDIO DE ESCAPE: Vía hacia fuera de un edificio o estructura que no conforma la \ndefinición estricta de medio de egreso, pero que provee un camino hacia fuera alternativo.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.39",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "OJO DE LA ESCALERA",
+   "texto": "OJO DE LA ESCALERA : Es el espacio comprendido entre los bordes internos  de los \ntramos de las escaleras, ya sean rectas o curv as, que amplía el desarrollo del descanso, \nfacilita el transporte de artículos y la iluminación cenital del espacio.",
+   "paginas": [
+    60,
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.40",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "PASAMANOS",
+   "texto": "PASAMANOS: Es un elemento de continuidad y guía de la escalera , que se coloca \ntanto en las barandas como en los muros que bordean las escaleras, con el fin de \nproporcionar estabilidad y seguridad a los usuarios en el tránsito por la misma.",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.41",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "PELDAÑOS O ESCALONES",
+   "texto": "PELDAÑOS O ESCALONES: Son las superficies de apoyo que conforman los tramos \nde una escalera para pasar de un nivel a otro, compuestos por un plano horizontal (huella) \ny otro vertical (contrahuella).",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.42",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "PENDIENTE",
+   "texto": "PENDIENTE: Es la medida de la inclinación de una recta o de un plano con respecto \na la horizontal, la cual se expresa en porcentajes o en grados.",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.43",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "PLAZAS COMERCIALES ABIERTAS",
+   "texto": "PLAZAS COMERCIALES ABIERTAS:  Las mismas están compuesta por una serie de \ntiendas y locales comerciales dispuestos al aire libre en un espacio abierto. Por lo general, \ncuentan con áreas de caminata peatonal, zonas verdes y plazas públicas. La mayoría de las \ntiendas tienen acceso directo desde el exterior.",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.44",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "PLAZAS COMERCIALES CERRADAS",
+   "texto": "PLAZAS COMERCIALES CERRADAS:  Son estructuras construidas bajo techo que \nalbergan una variedad de tiendas y locales comerciales. Los espacios de tiendas están \ngeneralmente conectados por pasillos interiores y cuentan con áreas comunes como atrios, \npatios de comida y zonas de descanso.",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.45",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "RAMPA",
+   "texto": "RAMPA: Medio de circulación vertical de p lano inclinado, que facilita el acceso a \ntodo tipo de persona, y el transporte de mobiliarios u otros artículos.",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.46",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "REBORDE DEL ESCALÓN",
+   "texto": "REBORDE DEL ESCALÓN: Pieza o faja estrecha que sobresale del escalón a lo largo \ndel plano horizontal de la huella, a fin de lograr mayor superficie de pisada.",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.47",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "TRAMO DE UNA ESCALERA",
+   "texto": "TRAMO DE UNA ESCALERA: Es la secuencia de escalones consecutivos que forma n \nparte de una escalera, que comunica un nivel de piso con otro.",
+   "paginas": [
+    61,
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.1",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "CONEXIÓN DE NIVELES EN EDIFICACIONES",
+   "texto": "CONEXIÓN DE NIVELES EN EDIFICACIONES. Toda edificación que cuente con más de \nun nivel de piso, o presente diferencias de nivel entre sus áreas, deberá disponer de medios \nde circulación vertical no mecánicos (como escaleras, rampas, entre otros) que permitan la \ncomunicación entre dichos niveles , adicional a los medios de circulación mecánica (como \nascensores o escaleras eléctricas) que se dispongan.",
+   "paginas": [
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.2",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "",
+   "texto": "Estos elementos deberán cumplir con las disposiciones establecidas en el presente \nTítulo, así como con cualquier otro Título normativo vigente que resulte aplicable.",
+   "paginas": [
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.3",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "",
+   "texto": "Las escaleras instaladas podrán formar parte de los medios de egreso o de \nemergencia, siempre que cumplan, adicionalmente, con los requisitos mínimos \nestablecidos en el Volumen V, Título 5: Seguridad y Protección Contra Incendios.",
+   "paginas": [
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.4",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "DETALLES CONSTRUCTIVOS DE MEDIOS DE CIRCULACIÓN VERTICAL",
+   "texto": "DETALLES CONSTRUCTIVOS DE MEDIOS DE CIRCULACIÓN VERTICAL. Los planos de \nlos proyectos de edificaciones deberán contener los detalles constructivos de todos los \nelementos que componen los medios de circulación vertical, tanto en planta como en \nsecciones, que muestren claramente las pendientes, dimensiones, detalles estructurales y \ncualquier otra información importante para la correcta interpretación de dichos medios.",
+   "paginas": [
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.5",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "REQUISITO DE ASCENSORES EN EDIFICACIONES",
+   "texto": "REQUISITO DE ASCENSORES EN EDIFICACIONES.  Las edificaciones deberán ser \nprovistas de ascensores que permitan comunicar los diferentes niveles, cuando el número \nde pisos sea igual o mayor a los indicados en la TABLA 1, tomando en cuenta los niveles \nsoterrados e internos de la edificación: \nTABLA 1   \nEXIGENCIAS MÍNIMAS DE ASCENSORES EN EDIFICACIONES \nOcupación Número de pisos \nResidencial. 6 \nHoteles, Centros de Salud, Centros Comerciales (Mall), \nInstituciones de Servicios, Bibliotecas, Museos y de usos \nsimilares, Funerarias, Deportes, Industriales. \n \n\n \n\n \nHostales, Dormitorios y Oficinas. 3 \nPlazas Comerciales Abiertas. 4 \nPÁRRAFO. En el caso de hoteles que dispongan de salones de reuniones, restaurantes y \náreas de servicios, así como habitaciones accesibles en el primer piso o nivel habitable, el \nrequerimiento de ascensores será a partir de los tres pisos.",
+   "paginas": [
+    62,
+    63
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.6",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "DETERMINACIÓN DE LA CANTIDAD DE ASCENSORES",
+   "texto": "DETERMINACIÓN DE LA CANTIDAD DE ASCENSORES. Para determinar la cantidad de \nascensores requerida p ara una edificación se deberá remitir al Título correspondiente a \nAscensores.",
+   "paginas": [
+    63
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.7",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "REQUISITO DE ASCENSORES EN EDIFICACIONES HABITACIONALES",
+   "texto": "REQUISITO DE ASCENSORES EN EDIFICACIONES HABITACIONALES . En edificaciones \nhabitacionales, con ocupación transitoria (hoteles, casas de huéspedes u otros), serán \nrequeridos al menos dos ascensores en edificios mayores de dos pisos cuya ocupación \nexceda 100 personas por piso, o tengan más de 30 habitaciones por piso.",
+   "paginas": [
+    63
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.8",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "RAMPAS DE ACCESIBILIDAD EN EDIFICACIONES",
+   "texto": "RAMPAS DE ACCESIBILIDAD EN EDIFICACIONES . Toda edificación que presente \nalguna diferencia de nivel con respecto a su acceso desde el exterior deberá contar con una \nrampa o con algún otro dispositivo que garantice la accesibilidad de personas con \ndiscapacidad física. Dichos elementos deberán cumpli r con las disposiciones establecidas \nen el Título 6 sobre Proyectar sin Barreras Arquitectónicas perteneciente al Volumen V y \nserá permitido el uso de otras Normas de Accesibilidad Universal vigentes.",
+   "paginas": [
+    63
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.9",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "INSPECCIÓN DE LOS MEDIOS DE CIRCULACIÓN VERTICAL",
+   "texto": "INSPECCIÓN DE LOS MEDIOS DE CIRCULACIÓN VERTICAL . Todos los medios de \ncirculación vertical deber án ser inspeccionados  de acuerdo con  lo establecido en el \nVolumen I Título 3 sobre Procedimientos para la Tramitación de Planos, Inspección y \nSupervisión de Obras Privadas.",
+   "paginas": [
+    63
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.10",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "SEGURIDAD EN ÁREAS SOTERRADAS",
+   "texto": "SEGURIDAD EN ÁREAS SOTERRADAS.  En edificaciones con áreas situadas por \ndebajo de la rasante (soterradas), los medios de circulación vertical (rampas, escaleras y \nascensores) que conecten desde áreas soterradas al nivel de piso de acceso a la vía pública, \ndeben estar compartimentados, construidos con materiales resistentes al fuego no menos \nde dos horas, y sus puertas deben tener una resistencia al fuego de mínimo una hora.  \n  \n \n\n \nFIGURA 1 \nÁREA DE ACCESO PROTEGIDA EN CIRCULACIÓN VERTICAL",
+   "paginas": [
+    63,
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.11",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "SEÑALIZACIÓN",
+   "texto": "SEÑALIZACIÓN. En los edificios de uso público se deberá proveer señalización visible \ncontigua a los medios de circulación vertical, indicando el nivel , así como otras \ninformaciones correspondientes a los medios de egreso o emergencia.",
+   "paginas": [
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.12",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "SEÑALIZACIÓN DE ACCESIBILIDAD PARA PERSONAS CON DISCAPACIDAD",
+   "texto": "SEÑALIZACIÓN DE ACCESIBILIDAD PARA PERSONAS CON DISCAPACIDAD.  Los \nlugares con accesibilidad para las personas con discapacidad como rampas, escaleras, áreas \nde resguardo para personas con discapacidad físico-motores entre otros, deberán es tar \ndebidamente señalizados con un símbolo gráfico establecido por la autoridad competente \ny que indique accesibilidad. Ejemplo FIGURA 2.  \n  \n\n \n\n \nFIGURA 2 \nSÍMBOLO DE ACCESO A PERSONAS CON DISCAPACIDAD",
+   "paginas": [
+    64,
+    65
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.1",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "DISTANCIA MÍNIMA AL MEDIO DE CIRCULACIÓN VERTICAL",
+   "texto": "DISTANCIA MÍNIMA AL MEDIO DE CIRCULACIÓN VERTICAL. La distancia mínima del \nacceso más próximo al medio de circulación vertical será determinada de acuerdo con la \ncapacidad de ocupación de la edificación, calculada según lo establecido en el  capítulo de \nla Capacidad de los Medios de Egreso, perteneciente al Título 5 sobre Seguridad y \nProtección Contra Incendios  (Volumen V ). El mínimo de esta distancia será 1.30  m en \nedificios residenciales, exceptuando las rampas que deberán cumplir con lo establecido en \nla Sección 2.11.1.",
+   "paginas": [
+    65
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.2",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "ESCALERAS",
+   "texto": "ESCALERAS. La Distancia de Acceso al medio de circulación vertical, en el caso de las \nescaleras será determinado de acuerdo con los criterios expresados en la TABLA 2. \nTABLA 2   \nDISTANCIA DE ACCESO AL MEDIO DE CIRCULACIÓN VERTICAL \nDonde a=ancho libre de la rampa al Medio de Circulación \nNúmero de personas Distancia de acceso al medio de circulación \nvertical \nHasta 100 1.25 x a \nMás de 100 1.50 x a \n \n\n \nFIGURA 3 \nANCHO DE ACCESO AL MEDIO DE CIRCULACION EN ESCALERAS",
+   "paginas": [
+    65,
+    66
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.3",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "CÁLCULO DE DISTANCIA DE ACCESO EN ASCENSORES",
+   "texto": "CÁLCULO DE DISTANCIA DE ACCESO EN ASCENSORES. Para el cálculo de la distancia \nde Acceso al medio de Circulación Vertical (AMC) en los   ascensores se aplicará la fórmula \n1.50 por el ancho libre de la puerta de acceso al mismo. Ver FIGURA 4. \n \n \n \n \n \n \n  \n\n \n\n \nFIGURA 4 \nDISTANCIA DE ACCESO A LOS ASCENSORES",
+   "paginas": [
+    66,
+    67
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.4",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "DISTANCIA MÍNIMA DE ACCESO EN ÁREAS DE LLEGADA",
+   "texto": "DISTANCIA MÍNIMA DE ACCESO EN ÁREAS DE LLEGADA. Cuando dos o más medios \nde circulación vertical, sea escalera, rampa o ascensor, se encuentren uno frente al otro , \nen una misma área de llegada, la distancia mínima de acceso a estos medios de circulación \n(AMC) será aumentada en un 50 % en  el caso de edificios públicos , de acuerdo con  lo \nespecificado en la FIGURA 5. \nPÁRRAFO: En edificios de apartamentos se permitirá que el porcentaje a incrementar sea \nde un 20%. \n \n \n \n \n \n \n\n \n\n \nFIGURA 5 \nDISTANCIA MÍNIMA DE ACCESO ENTRE DOS MEDIOS DE CIRCULACIÓN VERTICAL",
+   "paginas": [
+    67,
+    68
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.5",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "DISTANCIA MÍNIMA DE PUERTAS EN MEDIOS DE CIRCULACIÓN VERTICAL",
+   "texto": "DISTANCIA MÍNIMA DE PUERTAS EN MEDIOS DE CIRCULACIÓN VERTICAL . Cuando \nlas puertas giren hacia el medio de circulación vertical, la distancia entre el punto final del \ngiro de dicha puerta y el medio de circulación vertical nunca será menor de 0.60 m. (Ver \nFIGURA 6), exceptuando las rampas que deberán cumplir con lo establecido en la Sección \n2.4.6, de este Título.  \n \n \n \n \n \n \n\n \n\n \nFIGURA 6 \nSEPARACION ENTRE EL GIRO DE LA PUERTA Y EL MEDIO DE CIRCULACIÓN VERTICAL",
+   "paginas": [
+    68,
+    69
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.6",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "PUERTAS DE ACCESO HACIA LAS RAMPAS",
+   "texto": "PUERTAS DE ACCESO HACIA LAS RAMPAS. Cuando una rampa tenga una puerta de \nacceso hacia ella, deberá contar con un área de acceso horizontal, cuya dimensión mínima \nserá el doble de la medida del giro de la puerta, de manera que no interfiera con la \ncirculación en la rampa.  \nFIGURA 7 \nSEPARACION ENTRE EL GIRO DE LA PUERTA Y LA RAMPA",
+   "paginas": [
+    69,
+    70
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "",
+   "texto": "REQUISITOS DE BARANDILLAS Y PASAMANOS EN MEDIOS DE CIRCULACIÓN \nVERTICAL. Todo medio de circulación vertical tendrá barandillas y pasamanos, \ndependiendo de su tipología, cumpliendo con los requerimientos particulares que le \ncorrespondan, según este Título.",
+   "paginas": [
+    70
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.2",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "REQUISITOS PARA ESCALERAS Y RAMPAS PEATONALES",
+   "texto": "REQUISITOS PARA ESCALERAS Y RAMPAS PEATONALES.  Las escaleras y rampas \npeatonales, ya sea en el interior o exterior de un edificio, deberán cumplir con lo siguiente: \na) Todas las escaleras abiertas de 3 escalones en adelante deberán tener barandillas en \nlos lados libres. \nb) Toda rampa con una longitud mayor de 1.50 m deberá contar con barand illas en los \nlados libres.  \nc) Las escaleras principales y las rampas deberán tener pasamanos, en ambos lados, \npara cuyos efectos el espacio ocupado por estos no será considerado dentro del ancho \nlibre mínimo establecido en la TABLA 3. \nEXCEPCIÓN. En el caso de viviendas unifamiliares y apartamentos tipo pent-house, se \npermite, de manera excepcional, que los pasamanos de las escaleras interiores se instalen \núnicamente en el área correspondiente al ojo de la escalera.",
+   "paginas": [
+    70
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.3",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "ESPACIADO ENTRE BARARNDILLAS",
+   "texto": "ESPACIADO ENTRE BARARNDILLAS. En el diseño de las barandillas, el espaciamiento \nlibre entre las barras será de un máximo de 0.10 m en uno de los sentidos. En edificios de \nmanufactura (fábricas, industrias y talleres) estos espaciamientos podrán tener un máximo \nde 0.30 m de separación.",
+   "paginas": [
+    70
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.4",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "INSTALACIÓN DE BARANDILLAS INTERMEDIAS",
+   "texto": "INSTALACIÓN DE BARANDILLAS INTERMEDIAS. En los medios de circulación vertical \nse deberán instalar barandillas intermedias en los siguientes casos:  \na) En escaleras y rampas interiores de más de 2.50 m de ancho. \nb) En escaleras y rampas exteriores de 4.00 m de ancho o más.",
+   "paginas": [
+    70
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.5",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "REQUISITOS DE FIJACIÓN Y RESISTENCIA DE BARANDILLAS",
+   "texto": "REQUISITOS DE FIJACIÓN Y RESISTENCIA DE BARANDILLAS. El sistema de fijación de \nlas barandillas deberá soportar el alabeo y  cualquier otro movimiento en sentido lateral , \ncon una resistencia mínima de 150 kg/m.",
+   "paginas": [
+    70,
+    71
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.6",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "REQUISITOS PARA PASAMANOS",
+   "texto": "REQUISITOS PARA PASAMANOS. Los pasamanos, ya sea que estén colocados sobre \nbarandillas o adosados a muros o paredes, deberán cumplir con lo siguiente:  \na) Serán instalados de manera continua desde el inicio hasta el final del medio de \ncirculación, incluyendo los cambios de dirección. \nb) Terminarán en forma redondeada hacia abajo o hacia la pared. \nc) Tendrán una altura máxima de 0.90m.",
+   "paginas": [
+    71
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.7",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "REQUISITOS PARA PASAMANOS EN RAMPAS PEATONALES",
+   "texto": "REQUISITOS PARA PASAMANOS EN RAMPAS PEATONALES. En rampas peatonales, \nlos pasamanos serán dobles y continuos. La forma de fijación no deberá interrumpir el \ndeslizamiento de la mano y su anclaje será firme. La altura de colocación del pasamano \nsuperior será de 0.90 m y la del inferior será de 0.75 m, med idos a partir del piso de la \nrampa hasta el plano superior del pasamano. El diámetro mínimo de los pasamanos \ncumplirá con lo establecido en la Sección 2.5.9 de este Título.  \n \nFIGURA 8 \nALTURA DE PASAMANOS",
+   "paginas": [
+    71
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.8",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "PASAMANOS ADICIONALES EN ESCALERAS PARA EDIFICACIONES EDUCATIVAS",
+   "texto": "PASAMANOS ADICIONALES EN ESCALERAS PARA EDIFICACIONES EDUCATIVAS.  En \nedificios de educación preescolar y básica, las barandillas de las escaleras deberán tener un \nsegundo nivel de pasamanos, para el uso de los niños, el cual estará a una altura de 0.50 m \ndel escalón. Ver FIGURA 9. \nFIGURA 9 \nDOBLE PASAMANOS EN BARANDILLAS",
+   "paginas": [
+    71,
+    72
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.9",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "DIÁMETRO MÍNIMO DE LOS PASAMANOS",
+   "texto": "DIÁMETRO MÍNIMO DE LOS PASAMANOS.  El diámetro mínimo de los pasamanos, \nsegún el material, será el siguiente: \na) De 65 mm (2½ pulg.), si es de madera.  \nb) De 40 mm (1½ pulg.), si es de metal.",
+   "paginas": [
+    72
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.10",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "ESPACIO LIBRE ENTRE PASAMANO Y PARED",
+   "texto": "ESPACIO LIBRE ENTRE PASAMANO Y PARED . Se dejará un espacio libre entre el \npasamano y la pared que variará entre 40 y 50 mm. En todo caso, el espacio total máximo \nque ocupará el pasamano desde la pared no excederá de 100 mm. (Ver FIGURA 10). \n \n \n \n \n\n \n\n \nFIGURA 10  \nESPACIO LIBRE ENTRE PASAMANOS Y PARED",
+   "paginas": [
+    72,
+    73
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.1",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "ILUMINACIÓN",
+   "texto": "ILUMINACIÓN. Todos los medios de circulación vertical en las edificaciones de uso \npúblico o privado deberán tener iluminación natural o artificial en cada planta.  Cuando la \niluminación sea solo artificial deberá ser continua, con un nivel mínimo de 200 lux medidos \ndesde la posición de la fuente de luz hasta el suelo. Deberá tener un sistema adicional \nalterno de iluminación de emergencia, que se active automáticamente en caso de falla de \nla energía. En caso de iluminación natural, la abertura para iluminación (hueco o ventana) \nen cada nivel, deberá ser de no menos de 1.20 m2.",
+   "paginas": [
+    73
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.2",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "ILUMINACIÓN EN PASILLOS DE LUGARES DE REUNIÓN",
+   "texto": "ILUMINACIÓN EN PASILLOS DE LUGARES DE REUNIÓN. En lugares de reunión, tales \ncomo cines, auditorios cerrados, teatros u otros similares, los escalones de los pasillos de \ncirculación y de acceso a las filas de asientos, deberán tener un nivel mínimo de iluminación \nequivalente a 2 lux en el piso o en el lateral del escalón.",
+   "paginas": [
+    73
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.3",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "VENTILACIÓN",
+   "texto": "VENTILACIÓN. Todos los medios de circulación vertical deberán estar ventilados de \nforma natural o mecánica. En caso de que se encuentren por debajo del nivel de la rasante, \ndeberán tener un sistema de ventilación mecánica o extracción de aireación y extracción \nde humo.",
+   "paginas": [
+    73,
+    74
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.1",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "UBICACIÓN Y CONSTRUCCIÓN DE ESCALERAS",
+   "texto": "UBICACIÓN Y CONSTRUCCIÓN DE ESCALERAS.  Todas las escaleras deberán  ser \ndesarrolladas y construidas en el área  delimitada para la construcción , respetando los \nlinderos establecidos, tanto a nivel de acceso al edificio como en los pisos superiores. \nPÁRRAFO. Se permitirán pendientes de hasta cuarenta grados (40°), en los siguientes \ncasos: \na) Para acceder a un piso de sótano o “mezzanine” de servicio o de mantenimiento. \nb) En el interior de oficinas y tiendas, para comunicar a un segundo nivel, siempre que \nsea exclusivamente para el uso del personal de trabajo del lugar. \nc) Para salvar diferencias de nivel de piso de hasta 1.00 m.",
+   "paginas": [
+    74
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.2",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "REQUISITOS DE SUPERFICIES EN ESCALONES DE ÁREAS PÚBLICAS",
+   "texto": "REQUISITOS DE SUPERFICIES EN ESCALONES DE ÁREAS PÚBLICAS. Las superficies de \nlos escalones en áreas de uso público deberán ser:  \na) Resistentes al alto tráfico, con durabilidad y resistencia al uso y a impactos. \nb) De un material antideslizante, o que tenga un cambio de textura en los escalones, ya \nsea mediante una franja de bajo relieve de 50 mm y a 2 mm o una franja de material \nantideslizante de no menos de 50 mm de ancho, colocada a no menos de 20 mm del \nborde del escalón.  \nc) Se deberá poner un cambio de textura y rugosidad en la superficie del piso próximo \nal acceso de las escaleras, a una distancia mínima de 0.30 m o del inicio y final de las \nmismas.",
+   "paginas": [
+    74
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.3",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "PROFUNDIDAD MINIMA DESCANSOS ESCALERAS",
+   "texto": "PROFUNDIDAD MINIMA DESCANSOS ESCALERAS. Los descansos de las escaleras , \ntanto principales como secundarias, deberán tener una profundidad mínima equivalente a \nla del ancho libre del tramo de la escalera.  Ver FIGURA 11. \nPÁRRAFO. El ancho del descanso se debe mantener libre en toda su extensión y el ojo de \nla escalera no deberá trascender la línea de escalones hacia el descanso. \n \n\n \nFIGURA 11 \nPROFUNDIDAD DE LOS DESCANSOS",
+   "paginas": [
+    74,
+    75
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.4",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "UBICACIÓN DE ESCALONES EN ÁREAS DE DESCANSO",
+   "texto": "UBICACIÓN DE ESCALONES EN ÁREAS DE DESCANSO.  El escalón contiguo al \ndescanso de la escalera no deberá sobresalir por fuera del área del descanso. Ver FIGURA \n12. \nFIGURA 12 \nDETALLE DE ESCALÓN CONTIGUO AL DESCANSO",
+   "paginas": [
+    75,
+    76
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.1",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "ESCALERAS RECTAS",
+   "texto": "ESCALERAS RECTAS. En edificios de uso público, los tramos de escaleras rectas no \ndeberán exceder de diecisiete (17) escalones consecutivos sin descanso intermedio.",
+   "paginas": [
+    76
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.2",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "",
+   "texto": "En edificios residenciales que cuenten con una única escalera, requerida para \ncumplir con los criterios de seguridad humana establecidos, los tramos no deberán exceder \nde quince (15) escalones consecutivos sin descanso. \nEXCEPCIONES.  \n1. En viviendas unifamiliares y pent -houses, las escaleras interiores que sirvan \nexclusivamente a la misma unidad de vivienda podrán ser diseñadas sin descansos \nintermedios.  \n2. En edificios residenciales con una única escalera, que además cuenten con medios de \ncirculación mecánica (como ascensores) y un sistema alterno de energía, se permitirá \ndisponer de hasta diecisiete (17) escalones consecutivos sin descanso. \n3. En edificaciones que requieran dos (2) o más medios de egreso, cada medio podrá \ncontar con tramos de escaleras rectas con una altura máxima de 3.65 metros sin \ndescanso.",
+   "paginas": [
+    76
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.3",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "ESCALERAS TIPO U",
+   "texto": "ESCALERAS TIPO U. Los descansos de las escaleras rectas principales no deberán ser \nfraccionados con escalones intermedios, excepto en las escaleras rectas tipo U de dos \ntramos, donde será permitido un escalón intermedio como indica la FIGURA 13. \n \n \n \n \n \n \n\n \nFIGURA 13 \nESCALÓN INTERMEDIO EN DESCANSO \n \nEXCEPCIÓN. Se permitirá el uso de escalones en diagonal únicamente en edificios que \ncuenten con semisótano, con el objetivo de salvar la diferencia de altura entre el primer \nnivel y el semisótano, o entre el semisótano y el segundo nivel. Este tipo de escalones \ntambién será permitido en el interior de viviendas unifamiliares y pent -houses. En todos \nlos casos, los escalones deberán cumplir con los requisitos establecidos para las escaleras \nmixtas compensadas (FIGURA 16). Ver FIGURA 13.1. \n \n \n \n \n \n\n \n\n \nFIGURA 13.1 \nESCALÓNES EN DIAGONAL INTERMEDIO EN DESCANSO",
+   "paginas": [
+    76,
+    77,
+    78
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.4",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "ESCALERAS TIPO HELICOIDAL",
+   "texto": "ESCALERAS TIPO HELICOIDAL. Se permitirá el diseño de escaleras curvas tipo \nhelicoidal en edificaciones de uso público y privado, siempre que  el radio mínimo del ojo \nde la escalera sea de 1.00 m, y siempre que no se consideren como parte de los medios de \negreso requeridos por la normativa vigente.",
+   "paginas": [
+    78
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.5",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "ESCALERAS TIPO CARACOL",
+   "texto": "ESCALERAS TIPO CARACOL. Sólo se permitirán escaleras tipo caracol en: \na) El interior de oficinas y tiendas, para comunicar a un segundo nivel o a un \n“mezzanine”, siempre que sean para uso exclusivo del personal. \nb)  En el interior de una unidad de vivienda, para acceder a otro nivel que sea parte de \nesta.",
+   "paginas": [
+    78
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.6",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "REQUISITOS ESCALERAS CARACOL",
+   "texto": "REQUISITOS ESCALERAS CARACOL. Las escaleras tipo caracol deberán cumplir con \nlos requisitos indicados a continuación:  \n1. Tendrán un diámetro mínimo de1.70m \n2. La huella deberá tener una dimensión mínima  de 0.15 m , medida a partir de una \ndistancia de 0.20 m desde el borde de la barra que la soporta. \n\n \n\n \n3. El diámetro mínimo de la barra sustentante si es de metal, será de 0.10 m. \n4. La contrahuella no excederá de 0.20 m.  \nFIGURA 14 \nDETALLES ESCALERA TIPO CARACOL  \n \n       \nFIGURA 15 \nDETALLES ESCALERA TIPO CARACOL \n \n \n \n \n \n \nZona del \npeldaño sin \nfunción para \nel tránsito, no \nincluida en el \nancho útil",
+   "paginas": [
+    78,
+    79
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.7",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "ESCALERAS MIXTAS COMPENSADAS",
+   "texto": "ESCALERAS MIXTAS COMPENSADAS.  Serán permitidas escaleras mixtas  \ncompensadas, si el ancho de la escalera , establecido en la  TABLA 3, es aumentado en al \nmenos 0.30 m desde el interior de la escalera y se cumpla que la dimensión de la huella en \nese punto sea de 0.27 m, cumpliendo con la relación huella-contrahuella. Ver FIGURA 16.  \nFIGURA 16 \n  DETALLE ESCALERA MIXTA COMPENSADA",
+   "paginas": [
+    79,
+    80
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.8",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "ESCALERAS TIPO ESCALA",
+   "texto": "ESCALERAS TIPO ESCALA. Este tipo de escaleras sólo será permitido en el interior de \nedificios industriales, almacenes, y áreas de mantenimiento técnico o de utilería; en cuyo \ncaso tendrán un acabado antideslizante (tola corrugada o similar) y deberán cumplir las \ndisposiciones siguientes: \na) El ancho libre mínimo será de 0.60 m. \nb) La contrahuella máxima será de 0.30 m. \nc) La huella no será menor de 0.08 m. \nd) La pendiente podrá oscilar entre 65° y 90. \n\n \n\n \ne) Cuando sean fijas y estén desarrolladas en una pendiente de hasta 80°, serán dotadas \nde barandillas a ambos lados. \nPÁRRAFO I. Cuando las escaleras tipo escala sean de 90° con longitudes mayores a 3.00 m, \nel ancho mínimo será de 0.70 m, la contrahuella máxima de 0.25 m y sus peldaños estarán \nseparados 0.15 m mínimo de la pared. Estarán provistas de una protección horizontal fijada \na la pared, en forma semicircular, con una separación máxima de 0.85 m, y una protección \nvertical formada por al menos 3 barras, separadas de manera equidistante, en el perímetro \ntotal de la protección horizontal. Se exceptúan de esta protección, las escaleras tipo escala \ninstaladas en un espacio confinado igual o menor a 1.00 x 1.00 m. \nFIGURA 17 \nESCALERA TIPO ESCALA",
+   "paginas": [
+    80,
+    81,
+    82
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.9.1",
+   "titulo_num": 2,
+   "capitulo": "2.9",
+   "encabezado": "DIMENSIONES DE LAS ESCALERAS SEGÚN EL USO Y TRÁFICO",
+   "texto": "DIMENSIONES DE LAS ESCALERAS SEGÚN EL USO Y TRÁFICO. Las dimensiones de las \nescaleras deberán estar en correspondencia con el uso de la edificación y la cantidad de \nusuarios que se espera circularán por ellas.",
+   "paginas": [
+    82
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.9.2",
+   "titulo_num": 2,
+   "capitulo": "2.9",
+   "encabezado": "ANCHO LIBRE MÍNIMO REQUERIDO",
+   "texto": "ANCHO LIBRE MÍNIMO REQUERIDO . El  ancho mínimo libre de los tramos de las \nescaleras, para los diferentes tipos de edificaciones será el siguiente: \nTABLA 3   \nANCHO MÍNIMO LIBRE EN TRAMOS DE ESCALERAS",
+   "paginas": [
+    82
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.9.3",
+   "titulo_num": 2,
+   "capitulo": "2.9",
+   "encabezado": "HUELLAS Y CONTRAHUELLAS",
+   "texto": "HUELLAS Y CONTRAHUELLAS. Las huellas y contrahuellas de las escaleras deberán \ntener dimensiones uniformes, tanto en un mismo tramo como en todos los tramos que \nTipo de Escalera Según Ocupación de la Edificación  Ancho Libre mínimo \nen metros \nEscaleras Principales \na) Uso Público (escuelas, hospitales, iglesias, centros comerciales, \nteatros, cines, lugares de reunión y otros similares) 1.40 \nb) Oficinas y comercios individuales 1.20 \nc) Escaleras rectas en viviendas y edificios de apartamentos 1.00 \nd) En viviendas unifamiliares de hasta dos (2) pisos, se permitirán \nescaleras de caracol internas, incluyendo la barra central con un \ndiámetro mínimo de 0.10 m",
+   "paginas": [
+    82
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.70",
+   "titulo_num": 2,
+   "capitulo": "1.70",
+   "encabezado": "",
+   "texto": "(Diámetro) \nEscaleras Secundarias \na) Escaleras rectas en el interior de viviendas unifamiliares, pent-\nhouses y escaleras secundarias en general  0.90 \nb) Escaleras de caracol interna, incluyendo la barra central de 0.10 m, \nen Oficinas, tiendas individuales 1.70 (Diámetro) \nc) Escaleras de servicio.  (véase definición 2.2.21) 0.80 \n \n\n \nconforman la escalera en general, las cuales no deberán presentar diferencias mayores al \n5% de las dimensiones de diseño.",
+   "paginas": [
+    82,
+    83
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "2.9.4",
+   "titulo_num": 2,
+   "capitulo": "2.9",
+   "encabezado": "DIMENSIONES DE HUELLA Y CONTRAHUELLA",
+   "texto": "DIMENSIONES DE HUELLA Y CONTRAHUELLA. Las escaleras rectas deberán cumplir \ncon las siguientes dimensiones: \n1. La huella tendrá una profundidad mínima de 0.28 m y no deberá exceder de 0.31 m, \nmedida desde el inicio de la contrahuella hasta el borde del escalón, a lo largo de \ntoda su longitud. \n2. La contrahuella tendrá una altura máxima de 0.19 m. \nHUELLA Mínima: 0.28 m \nMáxima: 0.31 m \nCONTRAHUELLA Máxima: 0.19 m",
+   "paginas": [
+    83
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.9.5",
+   "titulo_num": 2,
+   "capitulo": "2.9",
+   "encabezado": "DIMENSIONES Y PENDIENTE EN ESCALINATAS",
+   "texto": "DIMENSIONES Y PENDIENTE EN ESCALINATAS.  En escalinatas, las contrahuellas \ndeberán estar comprendidas entre 0.10 y 0.16 m, con un espacio mínimo de 1.00 m entre \nescalones, y sus escalones tendrán una pendiente transversal mínima de un 2%, hacia \nafuera, para evitar que se acumule agua.",
+   "paginas": [
+    83
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.9.6",
+   "titulo_num": 2,
+   "capitulo": "2.9",
+   "encabezado": "LIMITACIÓN DE REBORDE EN ESCALONES",
+   "texto": "LIMITACIÓN DE REBORDE EN ESCALONES. En caso de que se contemple un reborde \no proyección por fuera del plano vertical o contrahuella, dicho reborde no excederá de 30 \nmm. Ver FIGURA 18. \n  \n \n\n \nFIGURA 18 \nLARGO DE LA PROYECCIÓN DEL ESCALÓN",
+   "paginas": [
+    83,
+    84
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.9.7",
+   "titulo_num": 2,
+   "capitulo": "2.9",
+   "encabezado": "ALTURA LIBRE DE OBSTÁCULOS EN ESCALERAS",
+   "texto": "ALTURA LIBRE DE OBSTÁCULOS EN ESCALERAS. La altura mínima libre de obstáculos \nen todo el tramo de la escalera, medida desde la superficie horizontal de la huella hasta el \nobstáculo no será menor de 2. 10 m . Las escaleras no deberán presentar obstáculos \nsalientes, tales como: carteles, equipos, luminarias, maceteros u otros, en el pasillo libre de \ncirculación de las personas. \nFIGURA 19 \nALTURA MÍNIMA LIBRE SOBRE LA ESCALERA",
+   "paginas": [
+    84
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.9.8",
+   "titulo_num": 2,
+   "capitulo": "2.9",
+   "encabezado": "ALTURA MÍNIMA DEBAJO DE ESCALERAS",
+   "texto": "ALTURA MÍNIMA DEBAJO DE ESCALERAS .  Cuando exista circulación peatonal por \ndebajo de una escalera, la altura libre mínima, sin obstáculos, deberá ser de 2.10 metros, \nmedida desde el nivel del piso terminado hasta el punto más bajo del elemento estructural \nsuperior. Ver FIGURA 19 y FIGURA 20.",
+   "paginas": [
+    84,
+    85
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.9.9",
+   "titulo_num": 2,
+   "capitulo": "2.9",
+   "encabezado": "",
+   "texto": "Cuando el espacio bajo la escalera no cumpla con la altura mínima o no esté \nhabilitado para circulación peatonal, podrá destinarse a fines que no impliquen circulación, \nsiempre que esté claramente delimitado e identificado para prevenir transito involuntario. \nFIGURA 20 \nCIRCULACIÓN DEBAJO DE LA ESCALERA",
+   "paginas": [
+    85
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.10.1",
+   "titulo_num": 2,
+   "capitulo": "2.10",
+   "encabezado": "RAMPAS PEATONALES PARA ACCESO A PERSONAS CON DISCAPACIDAD",
+   "texto": "RAMPAS PEATONALES PARA ACCESO A PERSONAS CON DISCAPACIDAD. Todos los \nedificios con diferencia de nivel , entre la acera y el piso de acceso , deberán contar con al \nmenos una rampa peatonal que permita acceder a las personas con discapacidad al interior \n\n \n\n \nde los mismos. En caso de que este acceso no pueda ser ubicado en la fachada principal, se \ndeberá disponer una señal informativa indicando su localización.",
+   "paginas": [
+    85,
+    86
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.10.2",
+   "titulo_num": 2,
+   "capitulo": "2.10",
+   "encabezado": "RAMPAS PARA ACCESO EN EDIFICACIONES CON DIFERENCIAS DE NIVEL",
+   "texto": "RAMPAS PARA ACCESO EN EDIFICACIONES CON DIFERENCIAS DE NIVEL.  Toda \nedificación de uso público que en su interior tenga una diferencia de nivel de piso entre sus \náreas adyacentes e intercomunicadas entre sí, deberá tener las rampas necesarias para \npermitir el acceso de las personas con discapacidad; además de los esca lones y escaleras \nrequeridos en este Título.",
+   "paginas": [
+    86
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.10.3",
+   "titulo_num": 2,
+   "capitulo": "2.10",
+   "encabezado": "RAMPAS PARA ACCESO EN EDIFICACIONES",
+   "texto": "RAMPAS PARA ACCESO EN EDIFICACIONES. Las aceras de acceso a los edificios no \ndeberán ser utilizadas p arcial o totalmente para desarrollar rampas de acceso a una \npropiedad, sobrepasando el límite del lindero frontal o lateral. \nFIGURA 21 \nRAMPAS DE ACCESO A PROPIEDADES",
+   "paginas": [
+    86
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.11.1",
+   "titulo_num": 2,
+   "capitulo": "2.11",
+   "encabezado": "ANCHO LIBRE E N RAMPAS DE ACCESO",
+   "texto": "ANCHO LIBRE E N RAMPAS DE ACCESO. El ancho libre mínimo de las rampas de \nacceso peatonal, en edificios de uso público , será de 1. 30 m en todo su desarrollo , \nincluyendo las que presentan cambio de dirección . Cuando se contemple el paso  \nsimultaneo de dos sillas de ruedas por la rampa, el ancho mínimo será de 1.80 m.",
+   "paginas": [
+    86
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.11.2",
+   "titulo_num": 2,
+   "capitulo": "2.11",
+   "encabezado": "PENDIENTE LONGITUDINAL EN RAMPAS",
+   "texto": "PENDIENTE LONGITUDINAL EN RAMPAS.  Las rampas peatonales tendrán una  \npendiente longitudinal máxima no mayor  al 8%, y tendrán, en el sentido transversal , un \nperalte mínimo de un 2 % de inclinación.  La pendiente s erá calculada de acuerdo a la \nsiguiente ecuación: \n𝐏 = (𝐇/𝐋) × 𝟏𝟎𝟎 \nDonde: \nP = pendiente (en %) \nH = altura entre los niveles a comunicar \nL = longitud de la proyección horizontal del plano de la rampa (L ≥ 12.5 H) \n \nFIGURA 22 \nESQUEMA DE PENDIENTE EN RAMPA \n \nPÁRRAFO. Cuando se origine una rampa , para alcanzar la diferencia de nivel entre dos \náreas, con pendiente menor a un 2%, esta se obviará  (la rampa)  y se integrará esta \ndiferencia al desarrollo de la superficie de manera paulatina.",
+   "paginas": [
+    86,
+    87
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.11.3",
+   "titulo_num": 2,
+   "capitulo": "2.11",
+   "encabezado": "DESCANSOS EN RAMPAS",
+   "texto": "DESCANSOS EN RAMPAS .  En edificios de uso público, cuando los tramos de las \nrampas superen los 9.00 m, deberán contar con descansos de una longitud mínima de 1.50 \nm. Cuando exista cambio de dirección  en las rampas , las dimensiones del descanso \ndependerán del radio de giro. \n  \n\n \n\n \nFIGURA 23 \nDESCANSOS EN RAMPAS",
+   "paginas": [
+    87,
+    88
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.11.4",
+   "titulo_num": 2,
+   "capitulo": "2.11",
+   "encabezado": "DESCANSOS EN RAMPAS CON CAMBIOS DE DIRECCIÓN",
+   "texto": "DESCANSOS EN RAMPAS CON CAMBIOS DE DIRECCIÓN. Cuando la rampa cambie \nde dirección, con un ángulo de 90 grados, el descanso deberá tener un ancho mínimo de \n1.50 m para permitir el giro de una silla de ruedas. Para cambios de dirección de  180°, el \nlado largo del descanso tendrá una dimensión mínima equivalente a la suma de los anchos \nde las rampas que la componen más la separación entre ambas (2 x a + s). Ver FIGURA 24. \nFIGURA 24 \nDESCANSOS EN RAMPAS CON CAMBIO DE DIRECCIÓN",
+   "paginas": [
+    88
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.11.5",
+   "titulo_num": 2,
+   "capitulo": "2.11",
+   "encabezado": "ALTURA ENTRE PISO Y TECHO EN LAS RAMPAS",
+   "texto": "ALTURA ENTRE PISO Y TECHO EN LAS RAMPAS. En todo el trayecto de la rampa , \nse deberá mantener una altura mínima libre de obstáculos de 2.10 m. \nFIGURA 25 \nALTURA LIBRE DE PISO A TECHO EN RAMPAS",
+   "paginas": [
+    88,
+    89
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.11.6",
+   "titulo_num": 2,
+   "capitulo": "2.11",
+   "encabezado": "CONDICIONES DE ACCESIBILIDAD Y SEGURIDAD EN RAMPAS",
+   "texto": "CONDICIONES DE ACCESIBILIDAD Y SEGURIDAD EN RAMPAS.  Las rampas no \ndeberán presentar obstáculos salientes, tales como: carteles, equipos, luminarias, \nmaceteros u otros, en el espacio libre de circulación de las personas. El piso de la rampa  \ndeberá tener características antideslizantes, ser firme y sin salientes que estorben la \ncirculación peatonal en las mismas.",
+   "paginas": [
+    89
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.11.7",
+   "titulo_num": 2,
+   "capitulo": "2.11",
+   "encabezado": "MEDIDAS DE SEGURIDAD EN RAMPAS",
+   "texto": "MEDIDAS DE SEGURIDAD EN RAMPAS. Todos los pisos de las rampas deberán \npresentar al inicio y al final de su desarrollo, un cambio de textura en relieve y de color \ncontrastante, en una franja de 0.60 m. mínimo, por el ancho de la rampa.",
+   "paginas": [
+    89
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.12.1",
+   "titulo_num": 2,
+   "capitulo": "2.12",
+   "encabezado": "",
+   "texto": "El no cumplimiento a las disposiciones establecidas en este Título conllevará a la \naplicación de las sanciones instituidas en los capítulos V y VI , de la Ley No. 687, del 27 de \njulio del 1982, que crea un Sistema de Elaboración de Reglamentos Técnicos para \nPreparación y Ejecución, relativos a la ingeniería, la arquitectura y ramas afines.",
+   "paginas": [
+    89
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.12.2",
+   "titulo_num": 2,
+   "capitulo": "2.12",
+   "encabezado": "Se deroga el Decreto No",
+   "texto": "Se deroga el Decreto No. 361-15, que regula el diseño de los medios de circulación \nvertical en edificaciones.",
+   "paginas": [
+    89
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.12.3",
+   "titulo_num": 2,
+   "capitulo": "2.12",
+   "encabezado": "Formato",
+   "texto": "Formato.",
+   "paginas": [
+    89,
+    90
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.12.4",
+   "titulo_num": 2,
+   "capitulo": "2.12",
+   "encabezado": "",
+   "texto": "Envíese al Ministerio de la Vivienda, Hábitat y Edificaciones , para los fines \ncorrespondientes. \n \n \n \nÍndice de\ncontenidos\n\n \n\n \nTÍTULO 3. DISEÑO DE ESTACIONAMIENTO VEHICULAR EN \nEDIFICACIONES.",
+   "paginas": [
+    90,
+    91,
+    92,
+    93
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  }
+ ]
+}

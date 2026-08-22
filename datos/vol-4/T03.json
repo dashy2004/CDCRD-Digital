@@ -1,0 +1,709 @@
+{
+ "volumen": 4,
+ "sigla": null,
+ "nombre_volumen": "Recomendaciones para Instalaciones Mecánicas en Edificaciones",
+ "titulo": 3,
+ "nombre": "Ventilación",
+ "fuente_pdf": "MIVHED-Recomendaciones-para-Instalaciones-Mecanicas-en-Edificaciones-Vol-IV.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "3.1": "GENERAL",
+  "3.2": "VENTILACIÓN NATURAL",
+  "3.3": "VENTILACIÓN MECÁNICA",
+  "3.4": "ESTACIONAMIENTOS CERRADOS",
+  "3.5": "CONTROL DE SISTEMAS",
+  "3.6": "VENTILACIÓN DE ESPACIOS NO HABITADOS",
+  "3.7": "INSTALACIONES DE CUIDADOS AMBULATORIOS  Y"
+ },
+ "clausulas": [
+  {
+   "id": "3.1.1",
+   "titulo_num": 3,
+   "capitulo": "3.1",
+   "encabezado": "ÁMBITO DE APLICACIÓN",
+   "texto": "ÁMBITO DE APLICACIÓN. El presente capítulo regula la ventilación de \nlos espacios de un edificio destinados a ser ocupados. Los sistemas mecáni-\ncos de extracción, incluidos los sistemas de extracción que dan servicio a se-\ncadoras de ropa y aparatos de cocina; los sistemas de extracción de sustancias \npeligrosas; los sistemas transportadores de polvo, existencias y desechos; los \nsistemas de extracción de suelos bajo losa; los sistemas de control de humos; \nlos sistemas de ventilación con recuperación de energía y otros sistemas espe-\ncificados en la Sección 4.2 deberán cumplir lo dispuesto en el Capítulo 4.",
+   "paginas": [
+    101
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.1.2",
+   "titulo_num": 3,
+   "capitulo": "3.1",
+   "encabezado": "VENTILACIÓN REQUERIDA",
+   "texto": "VENTILACIÓN REQUERIDA. T odo espacio ocupado deberá ventilarse \npor medios naturales de conformidad con la Sección 3.2 o por medios mecá-\nnicos de conformidad con la Sección 3.3. Cuando la tasa de infiltración de aire \nen una unidad de vivienda sea inferior a 3 cambios de aire por hora cuando se \npruebe con una puerta sopladora a una presión de 0,2 pulgadas de columna de \nagua (50 Pa) de acuerdo con el Código de Construcción de Edificaciones de \nla República Dominicana, la unidad de vivienda deberá ventilarse por medios \nmecánicos de acuerdo con la Sección 3.3. Las instalaciones de atención am-\nbulatoria y las ocupaciones del Grupo I-2 deberán estar ventiladas por medios \nmecánicos de acuerdo con la Sección 3.7.",
+   "paginas": [
+    101
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.1.3",
+   "titulo_num": 3,
+   "capitulo": "3.1",
+   "encabezado": "CUÁNDO SE REQUIERE",
+   "texto": "CUÁNDO SE REQUIERE. La ventilación se proporcionará durante los pe-\nríodos en que la habitación o el espacio estén ocupados.",
+   "paginas": [
+    101,
+    102
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.1.4",
+   "titulo_num": 3,
+   "capitulo": "3.1",
+   "encabezado": "UBICACIÓN DE LAS ABERTURAS DE ADMISIÓN",
+   "texto": "UBICACIÓN DE LAS ABERTURAS DE ADMISIÓN. Las aberturas de ad-\nmisión de aire deberán cumplir con todo lo siguiente:\n1. Las aberturas de admisión deben estar ubicadas a no menos de 3048 mm \n(10 pies) de los límites del lote o de edificios en el mismo lote.\n2. Las aberturas de entrada de aire exterior mecánicas y por gravedad deberán \nestar ubicadas a no menos de 3048 mm (10 pies) horizontalmente de cualquier \nfuente de contaminantes peligrosos o nocivos, tales como respiraderos, calles, \ncallejones, estacionamientos y muelles de carga, excepto como se especifica en \nel Punto 3 o en la sección 4.1.3.1. Se permitirá que las aberturas de entrada de \naire exterior estén ubicadas a menos de 3048 mm (10 pies) horizontalmente \nde las calles, callejones, estacionamientos y muelles de carga siempre que las \naberturas estén ubicadas a no menos de 7620 mm (25 pies) verticalmente por \nencima de dichos lugares. Cuando las aberturas den a una calle o vía pública, la \ndistancia se medirá desde el borde más cercano de la calle o vía pública.\n3. Las aberturas de admisión deberán estar situadas a no menos de 914 mm \n(3 pies) por debajo de las fuentes contaminantes cuando dichas fuentes estén \nsituadas a menos de 3048 mm (10 pies) de la abertura. No se requiere sepa-\nración entre las aberturas de admisión de aire y las aberturas de extracción de \naire del espacio habitable de una unidad de vivienda individual o unidad dormi-\ntorio cuando se utilice un accesorio de terminación combinado de admisión/\nextracción aprobado y construido en fábrica para separar las corrientes de aire \nde acuerdo con las instrucciones del fabricante.",
+   "paginas": [
+    102
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.1.5",
+   "titulo_num": 3,
+   "capitulo": "3.1",
+   "encabezado": "PROTECCIÓN DE LAS ABERTURAS DE ADMISIÓN",
+   "texto": "PROTECCIÓN DE LAS ABERTURAS DE ADMISIÓN. Las aberturas de \nentrada de aire que terminan en el exterior deben estar protegidas con panta-\nllas, persianas o rejillas resistentes a la corrosión. Las aberturas de las persia-\nnas, rejillas y pantallas deben dimensionarse de acuerdo con la T abla 3.1.5 y \n\n\ndeben estar protegidas contra las condiciones climáticas locales. Las persianas \nque protegen las aberturas de entrada de aire en estructuras ubicadas en regio-\nnes propensas a huracanes, como se define en el Código de Construcción \nde Edificaciones de la República Dominicana, deberán cumplir con AMCA \n550. Las aberturas de entrada de aire exterior ubicadas en paredes exteriores \ndeben cumplir con las disposiciones para Protecciónes de aberturas de paredes \nexteriores de acuerdo con el Código de Construcción de Edificaciones de la \nRepública Dominicana.\nTABLA 3.1.5 TAMAÑOS DE ABERTURAS EN PERSIANAS, REJILLAS Y PAN-\nTALLAS PROTECTORAS DE ABERTURAS DE ENTRADA DE AIRE\nPara el SI: 1 pulgada = 25,4 mm.",
+   "paginas": [
+    102,
+    103
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.1.6",
+   "titulo_num": 3,
+   "capitulo": "3.1",
+   "encabezado": "FUENTES CONTAMINANTES",
+   "texto": "FUENTES CONTAMINANTES. Las fuentes locales fijas que produzcan \npartículas en suspensión en el aire, calor, olores, humos, aerosoles, vapores, \nhumo o gases en cantidades tales que puedan ser irritantes o nocivos para la \nsalud, deberán estar provistas de un sistema de escape de conformidad con el \nCapítulo 4 o de un medio de recolección y eliminación de los contaminantes. \nDicho sistema de evacuación deberá descargar directamente en un lugar auto-\nrizado situado en el exterior del edificio.",
+   "paginas": [
+    103
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.2.1",
+   "titulo_num": 3,
+   "capitulo": "3.2",
+   "encabezado": "VENTILACIÓN NATURAL",
+   "texto": "VENTILACIÓN NATURAL. La ventilación natural de un espacio ocupado \nse realizará a través de ventanas, puertas, persianas u otras aberturas al exterior. \nEl mecanismo de funcionamiento de dichas aberturas deberá estar provisto de \nfácil acceso para que los ocupantes del edificio puedan controlarlas fácilmente.",
+   "paginas": [
+    103
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.2.2",
+   "titulo_num": 3,
+   "capitulo": "3.2",
+   "encabezado": "ÁREA DE VENTILACIÓN REQUERIDA",
+   "texto": "ÁREA DE VENTILACIÓN REQUERIDA. El área mínima de apertura hacia \nel exterior deberá ser del 4 por ciento del área del piso que se ventila.",
+   "paginas": [
+    103,
+    104
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.2.3",
+   "titulo_num": 3,
+   "capitulo": "3.2",
+   "encabezado": "ESPACIOS CONTIGUOS",
+   "texto": "ESPACIOS CONTIGUOS. Cuando los locales y espacios sin aberturas al \nexterior se ventilen a través de un local contiguo, la abertura a los locales conti-\nguos deberá estar libre de obstáculos y tener una superficie no inferior al 8 por \nciento de la superficie de suelo del local o espacio interior, pero no inferior a 2,3 \nm2 (25 pies cuadrados). La superficie mínima de apertura al exterior se basará \nen la superficie total de suelo que se ventile.\nEXCEPCIÓN: Se permitirá que las aberturas exteriores necesarias para la ven-\ntilación se abran a una terraza acristalada o cubierta de patio térmicamente \naislada, siempre que el área abierta entre la terraza acristalada o cubierta de \npatio y la habitación interior tenga una superficie no inferior al 8 por ciento de \nla superficie de suelo de la habitación o espacio interior, pero no inferior a 1,86 \nm2 (20 pies cuadrados). El área mínima que se puede abrir al exterior se basará \nen el área total del piso que se ventila.",
+   "paginas": [
+    104
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.2.4",
+   "titulo_num": 3,
+   "capitulo": "3.2",
+   "encabezado": "ABERTURAS BAJO EL NIVEL DEL SUELO",
+   "texto": "ABERTURAS BAJO EL NIVEL DEL SUELO. Cuando las aberturas bajo \nnivel proporcionen la ventilación natural requerida, el espacio libre horizontal \nexterior medidos perpendicularmente a la abertura deberá ser una vez y media \nla profundidad de la abertura. La profundidad de la abertura se medirá desde el \nnivel medio del suelo adyacente hasta el fondo de la abertura.",
+   "paginas": [
+    104
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.3.1",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "SISTEMA DE VENTILACIÓN",
+   "texto": "SISTEMA DE VENTILACIÓN. La ventilación mecánica se proporcionará \nmediante un método de suministro de aire y retorno o extracción de aire, ex-\ncepto que los requisitos de ventilación mecánica de aire para las ocupaciones \nde los Grupos R-2, R-3 y R-4 de tres pisos o menos de altura sobre el nivel del \nsuelo se proporcionarán mediante un sistema de extracción, un sistema de su-\nministro o una combinación de los mismos. La cantidad de aire de suministro \nserá aproximadamente igual a la cantidad de aire de retorno y de escape. No \n\n\nse prohibirá que el sistema produzca presión negativa o positiva. El sistema de \nconducción del aire de ventilación se diseñará e instalará de conformidad con \nel capítulo 5.\nEXCEPCIÓN: Cuando el profesional de diseño registrado demuestre que un di-\nseño de sistema de ventilación de ingeniería evitará que la concentración máxi-\nma de contaminantes exceda la obtenible por la tasa de ventilación de aire exte-\nrior determinada de acuerdo con la Sección 3.3.3, la tasa mínima requerida de \naire exterior se reducirá de acuerdo con dicho diseño de sistema de ingeniería.",
+   "paginas": [
+    104,
+    105
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.3.2.1",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "RECIRCULACIÓN DEL AIRE",
+   "texto": "RECIRCULACIÓN DEL AIRE.\nNo se recirculará el aire exterior requerido por la Sección 3.3.3. No se prohibirá \nla recirculación de aire en exceso de lo requerido por la Sección 3.3.3 como \ncomponente del aire de suministro a los espacios del edificio, excepto que:\n1. El aire de ventilación no se recirculará de una vivienda a otra o a ocupaciones \ndistintas.\n2. El aire de suministro de una piscina y las zonas de cubierta asociadas no se \nrecirculará a menos que dicho aire se deshumidifique para mantener la hume-\ndad relativa de la zona en un 60 por ciento o menos. El aire de esta zona no se \nrecirculará a otros espacios en los que más del 10% de la corriente de aire de \nsuministro resultante consista en aire recirculado de estos espacios. El diseño y \nla instalación de los sistemas de deshumidificación se ajustarán a lo dispuesto \nen el Manual SPS ANSI/ACCA 10.\n3. Cuando la nota b de la tabla 3.3.3.1.1 exija extracción mecánica, se prohibi-\nrá la recirculación del aire de dichos espacios. No se prohibirá la recirculación \ndel aire contenido completamente en dichos espacios. Cuando se prohíba la \nrecirculación del aire, se evacuará todo el aire suministrado a dichos espacios, \nincluido todo el aire que exceda de lo prescrito en la tabla 3.3.3.1.1.\nCuando la nota g de la tabla 3.3.3.1.1 exija extracción mecánica, ésta será obli-\n\n\ngatoria y se prohibirá la recirculación desde dichos espacios cuando más del \n10% de la corriente de aire de impulsión resultante consista en aire recirculado \ndesde estos espacios. No se prohibirá la recirculación del aire contenido com-\npletamente en dichos espacios.\nEXCEPCIÓN: No es necesario determinar la carga de ocupantes basándose en \nel índice estimado de carga máxima de ocupantes indicado en la tabla 3.3.3.1.1 \ncuando los datos estadísticos aprobados documenten la exactitud de una den-\nsidad de ocupantes prevista alternativa.\nTABLA 3.3.3.1.1 ÍNDICES MÍNIMOS DE VENTILACIÓN\n\n\n\n\n\n\nPara el SI: 1 pie cúbico por minuto = 0,0004719 m3/s, 1 tonelada = 908 \nkg, 1 pie cúbico por minuto por pie cuadrado = 0,00508 m3/(s - m2), °C = \n[(°F) -32]/1,8, 1 pie cuadrado = 0,0929 m2.\na) Basado en la superficie neta ocupable.\nb) Se requiere extracción mecánica y se prohíbe la recirculación del aire de \ndichos espacios. No se prohibirá la recirculación del aire contenido comple-\ntamente en dichos espacios (véase el punto 3 de la sección 3.3.2.1).\nc) Los espacios no calentados o mantenidos por debajo de 50° F no están \ncubiertos por estos requisitos a menos que la ocupación sea continua.\nd) Los sistemas de ventilación en garajes cerrados deberán cumplir con la \nSección 3.4.\ne) Las tarifas son por inodoro o urinario. La tasa más alta se proporcio-\nnará cuando el sistema de escape esté diseñado para funcionar de forma \nintermitente. La tarifa más baja sólo se permitirá cuando el sistema de \nextracción esté diseñado para funcionar de forma continua mientras esté \nocupado.\nf ) Las tarifas son por habitación a menos que se indique lo contrario. La \ntasa más alta se proporcionará cuando el sistema de escape esté diseñado \npara funcionar de forma intermitente. La tasa más baja sólo se permitirá \ncuando el sistema de extracción esté diseñado para funcionar de forma \ncontinua mientras esté ocupado.\ng) Se requiere extracción mecánica y se prohíbe la recirculación desde di-\nchos espacios. En los locales que no sean laboratorios científicos, cuando \nen el diseño del sistema de extracción haya una unidad de ventilación con \nrecuperación de energía (ERV) de tipo rueda, el volumen de aire que se filtre \nde la corriente de aire de extracción a la corriente de aire exterior dentro de \n\n\nla ERV deberá ser inferior al 10% del volumen de aire exterior. No se prohi-\nbirá la recirculación del aire contenido completamente en dichos espacios \n(véanse los puntos 2 y 4 de la sección 3.3.2.1).\nh) Para los salones de manicura, cada puesto de manicura y pedicura \ndeberá estar provisto de un sistema de captación en la fuente capaz de \nevacuar no menos de 50 cfm por puesto. Las entradas de gases de escape \nestarán situadas de acuerdo con la sección 4.2.20. Cuando uno o más de \nlos sistemas de captación en el origen exigidos funcionen de forma conti-\nnua durante la ocupación, se permitirá que el caudal de escape de dichos \nsistemas se aplique al caudal de escape exigido en la tabla 3.3.3.1.1 para \nel salón de manicura y pedicura.\n3.3.3.1.1.1 CAUDAL DE AIRE EXTERIOR DE ZONA. El caudal mínimo de aire \nexterior que debe suministrarse a cada zona se determinará en función de la \nclasificación de la ocupación y de la eficacia de la distribución del aire en el es-\npacio, de acuerdo con los apartados 3.3.3.1.1.1 a 3.3.3.1.1.3.\n3.3.3.1.1.1.1 CAUDAL DE AIRE EXTERIOR DE LA ZONA DE RESPIRACIÓN.\nEl caudal de aire exterior necesario en la zona de respiración (Vbz) del espacio \no espacios ocupables de una zona se determinará de acuerdo con la ecuación \n3-1..\ndonde:\nECUACIÓN (3-1)\nDonde:\nAz = Superficie útil de la zona: la superficie útil neta ocupable del espacio \no espacios de la zona.\nPz = Población de la zona: número de personas en el espacio o espacios \nde la zona.\nRp = Caudal de aire exterior por persona: el caudal de aire exterior nece-\n\n\nsario por persona según la tabla 3.3.3.1.1.\nRa = Caudal de aire exterior por superficie: el caudal de aire exterior nece-\nsario por unidad de superficie de la tabla 3.13.3.1.1.\n3.3.3.1.1.1.2. EFICACIA DE LA DISTRIBUCIÓN DEL AIRE POR ZONAS. La \neficacia de distribución del aire por zonas (Ez) se determinará utilizando la \ntabla 3.3.3.1.1.1.2.\nTABLA 3.3.3.1.1.1.2 EFICACIA DE LA DISTRIBUCIÓN ZONAL DEL AIRE \na,b,c,d\nPara el SI: 1 pie = 304,8 mm, 1 pie por minuto = 0,00506 m/s, °C = [(°F) - \n32]/1,8.\na) \"Aire frío\" es el aire más frío que la temperatura ambiente.\nb) \"Aire caliente\" es el aire más caliente que la temperatura del espacio.\nc) \"Techo\" incluye cualquier punto por encima de la zona de respiración.\nd) \"Suelo\" incluye cualquier punto situado por debajo de la zona de respi-\nración.\ne) Se permitirá una eficacia de distribución del aire por zonas de 1,2 para \nlos sistemas con suministro de aire frío desde el suelo y retorno desde el \ntecho, siempre que la ventilación por desplazamiento a baja velocidad con-\nsiga un flujo unidireccional y estratificación térmica.\nf ) Se permitirá una eficacia de distribución del aire de zona de 1,0 para \nlos sistemas con suministro de aire caliente desde el techo, siempre que \nla temperatura del aire de suministro sea inferior a 15°F por encima de la \ntemperatura del espacio y siempre que el chorro de aire de suministro de \n150 pies por minuto llegue a menos de 41/2 pies del nivel del suelo.\n\n\n3.3.3.1.1.1.3 CAUDAL DE AIRE EXTERIOR DE ZONA. El caudal de aire exte-\nrior de la zona (Voz) se determinará de acuerdo con la Ecuación 3-2.\nECUACIÓN (3-2)\n3.3.3.1.1.2 CAUDAL DE AIRE EXTERIOR DEL SISTEMA. El aire exterior que \ndebe suministrar cada sistema de ventilación se determinará de acuerdo con \nlos apartados 3.3.3.1.1.2.1 a 3.3.3.1.1.2.3 en función del tipo de sistema y de \nlos caudales de aire exterior de zona.\n3.3.3.1.1.2.1 SISTEMAS DE ZONA ÚNICA.\nCuando una unidad de tratamiento de aire suministre una mezcla de aire exte-\nrior y aire de retorno recirculado a una sola zona, el caudal de entrada de aire \nexterior del sistema (Vot) se determinará de acuerdo con la Ecuación 3-3.\nECUACIÓN (3-3)\n3.3.3.1.1.2.2 SISTEMAS CON 100 POR CIENTO DE AIRE EXTERIOR. Cuan-\ndo una unidad de tratamiento de aire suministre únicamente aire exterior a \nuna o más zonas, el caudal de entrada de aire exterior del sistema (Vot) se \ndeterminará mediante la ecuación 3-4.\nECUACIÓN (3-4)\n3.3.3.1.1.2.3 SISTEMAS DE RECIRCULACIÓN DE VARIAS ZONAS. Cuando \nuna unidad de tratamiento de aire suministre una mezcla de aire exterior y aire \nde retorno recirculado a más de una zona, el caudal de entrada de aire exterior \ndel sistema (Vot) se determinará de acuerdo con los apartados 3.3.3.1.1.2.3.1 \na 3.3.3.1.1.2.3.4.\n3.3.3.1.1.2.3.1 FRACCIÓN PRIMARIA DE AIRE EXTERIOR. La fracción \nprimaria de aire exterior (Zp) se determinará para cada zona de acuerdo con la \nEcuación 3-5.\n\n\nECUACIÓN (3-5)\ndonde:\nVpz = Caudal de aire primario: El caudal de aire suministrado a la zona \ndesde la unidad de tratamiento de aire en la que se encuentra la entrada \nde aire exterior. Incluye el aire de entrada exterior y el aire recirculado de \nesa unidad de tratamiento de aire, pero no incluye el aire transferido o \nrecirculado a la zona por otros medios. A efectos de diseño, Vpz será el \ncaudal de aire primario de diseño de la zona, excepto para las zonas con \nsuministro de volumen de aire variable y Vpz será el caudal de aire prima-\nrio más bajo previsto para la zona cuando esté totalmente ocupada.\n3.3.3.1.1.2.3.2 EFICIENCIA DE VENTILACIÓN DEL SISTEMA.\nLa eficiencia de ventilación del sistema (Ev) se determinará utilizando la \nTabla 3.3.3.1.1.2.3.2 o el Apéndice A de ASHRAE 62.1.\nTABLA 3.3.3.1.1.2.3.2 EFICIENCIA DE VENTILACIÓN DEL SISTEMA a,b\na) Max (Zp) es el mayor valor de Zp calculado utilizando la Ecuación 3-5 \nentre todas las zonas servidas por el sistema.\nb) Se permitirá la interpolación entre los valores de la tabla.\n3.3.3.1.1.2.3.3 ENTRADA DE AIRE EXTERIOR NO CORREGIDA. El caudal \nde entrada de aire exterior no corregido (Vou) se determinará de acuerdo con \nla Ecuación 3-6.\n\n\n\nECUACIÓN (3-6)\ndonde:\nD = Diversidad de ocupantes: la relación entre la población del sistema y \nla suma de las poblaciones de las zonas, determinada de acuerdo con la \nEcuación 3-7.\nECUACIÓN (3-7)\ndonde:\nPs = Población del sistema: El número total de ocupantes en la zona ser-\nvida por el sistema. A efectos de diseño, Ps será el número máximo de \nocupantes que se espera que estén simultáneamente en todas las zonas \nservidas por el sistema.\n3.3.3.1.1.2.3.4 CAUDAL DE ENTRADA DE AIRE EXTERIOR.\nEl caudal de entrada de aire exterior (Vot) se determinará de acuerdo con la \nEcuación 3-8.\nECUACIÓN (3-8)",
+   "paginas": [
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ANSI",
+     "ASHRAE"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.3.3.1.2",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "VENTILACIÓN DE EXTRACCIÓN",
+   "texto": "VENTILACIÓN DE EXTRACCIÓN. El caudal de aire de extracción de-\nberá proporcionarse de acuerdo con los requisitos de la tabla 3.3.3.1.1. El aire \nexterior introducido en un espacio por un sistema de extracción se considerará \nque contribuye al caudal de aire exterior requerido por la tabla 3.3.3.1.1.",
+   "paginas": [
+    113
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.3.3.1.3",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "FUNCIONAMIENTO DEL SISTEMA",
+   "texto": "FUNCIONAMIENTO DEL SISTEMA. Se permitirá que el caudal mí-\nnimo de aire exterior que el sistema de ventilación debe ser capaz de suminis-\ntrar durante su funcionamiento se base en el caudal por persona indicado en la \ntabla 3.3.3.1.1 y en el número real de ocupantes presentes.",
+   "paginas": [
+    113
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.3.3.1.4",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "CONTROL DEL SISTEMA DE VOLUMEN DE AIRE VARIABLE",
+   "texto": "CONTROL DEL SISTEMA DE VOLUMEN DE AIRE VARIABLE. Los \n\n\nsistemas de distribución de aire de volumen de aire variable, distintos de los \ndiseñados para suministrar solo el 100 por ciento de aire exterior, deberán es-\ntar provistos de controles para regular el flujo de aire exterior. Dicho sistema de \ncontrol deberá estar diseñado para mantener el caudal de aire exterior a una \ntasa no inferior a la exigida por la Sección 3.3.3 en toda la gama de caudales de \nfuncionamiento del aire de suministro.",
+   "paginas": [
+    113,
+    114
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.3.3.2",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "",
+   "texto": "OCUPACIONES DE LOS GRUPOS R-2, R-3 Y R-4 DE TRES PISOS O \nMENOS. El diseño de los sistemas de extracción locales y de los sistemas de \nventilación para aire exterior en las ocupaciones de los Grupos R-2, R-3 y R-4 \nde tres pisos y menos de altura sobre el plano de nivel deberá cumplir con las \nSecciones 3.3.3.2.1 a 3.3.3.2.3.",
+   "paginas": [
+    114
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.3.3.2.1",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "AIRE EXTERIOR PARA UNIDADES DE VIVIENDA",
+   "texto": "AIRE EXTERIOR PARA UNIDADES DE VIVIENDA. Para cada unidad \nde vivienda se instalará un sistema de ventilación de aire exterior consistente en \nun sistema mecánico de extracción, un sistema de suministro o una combina-\nción de ambos. Se permite que los sistemas locales de extracción o suministro, \nincluidos los conductos de aire exterior conectados al lado de retorno de un \nclimatizador, sirvan como tal sistema. El sistema de ventilación de aire exterior \nestará diseñado para proporcionar el caudal requerido de aire exterior de forma \ncontinua durante el período en que el edificio esté ocupado. El caudal mínimo \ncontinuo de aire exterior se determinará de acuerdo con la Ecuación 3-9.\nECUACIÓN (3-9)\nDonde:\nQOA = caudal de aire exterior, cfm\nAfloor = superficie del suelo, pies2\nNbr = número de dormitorios; no debe ser inferior a uno\n\n\nEXCEPCIONES:\n1. No se requiere que el sistema de ventilación de aire exterior funcione conti-\nnuamente cuando el sistema tenga controles que permitan el funcionamiento \ndurante no menos de 1 hora de cada período de 4 horas. El caudal medio de \naire exterior durante el período de 4 horas no será inferior al prescrito por la \necuación 3-9.\n2. El caudal mínimo de ventilación mecánica determinado de acuerdo con la \nEcuación 3-9 se reducirá en un 30%, siempre que se den las dos condiciones \nsiguientes:",
+   "paginas": [
+    114,
+    115
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1",
+   "titulo_num": 3,
+   "capitulo": "2.1",
+   "encabezado": "",
+   "texto": "Un sistema de conductos suministra aire de ventilación directamente a \ncada dormitorio y a una o más de las siguientes habitaciones:",
+   "paginas": [
+    115
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": true
+  },
+  {
+   "id": "2.1.1",
+   "titulo_num": 3,
+   "capitulo": "2.1",
+   "encabezado": "Sala de estar",
+   "texto": "Sala de estar.",
+   "paginas": [
+    115
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": true
+  },
+  {
+   "id": "2.1.2",
+   "titulo_num": 3,
+   "capitulo": "2.1",
+   "encabezado": "Comedor",
+   "texto": "Comedor.",
+   "paginas": [
+    115
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": true
+  },
+  {
+   "id": "2.1.3",
+   "titulo_num": 3,
+   "capitulo": "2.1",
+   "encabezado": "Cocina",
+   "texto": "Cocina.",
+   "paginas": [
+    115
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": true
+  },
+  {
+   "id": "2.2",
+   "titulo_num": 3,
+   "capitulo": "2.2",
+   "encabezado": "",
+   "texto": "El sistema de ventilación de toda la casa es un sistema de ventilación equi-\nlibrada.",
+   "paginas": [
+    115
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": true
+  },
+  {
+   "id": "3.3.3.2.2",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "AIRE EXTERIOR PARA OTROS ESPACIOS",
+   "texto": "AIRE EXTERIOR PARA OTROS ESPACIOS. Los pasillos y otras zonas \ncomunes dentro del espacio acondicionado dispondrán de aire exterior a una \ntasa no inferior a 0,06 cfm por pie cuadrado [0,0038 m3/(s - m2)] de superficie \nde suelo.",
+   "paginas": [
+    115
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.3.3.2.3",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "EXTRACCIÓN LOCAL",
+   "texto": "EXTRACCIÓN LOCAL. Las cocinas, los baños y los cuartos de aseo \ndeben disponer de sistemas de extracción localizada con capacidad para ex-\ntraer el caudal mínimo de aire determinado de acuerdo con la tabla 3.3.3.2.3.\nTABLA 3.3.3.2.3 CAUDALES MÍNIMOS DE EXTRACCIÓN LOCAL REQUE-\nRIDOS PARA OCUPACIONES DE LOS GRUPOS R-2, R-3 Y R-4\n\n\n\nPara el SI: 1 pie cúbico por minuto = 0,0004719 m3/s.",
+   "paginas": [
+    115,
+    116
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.3.3.2.4",
+   "titulo_num": 3,
+   "capitulo": "3.3",
+   "encabezado": "EQUIPO DE VENTILACIÓN",
+   "texto": "EQUIPO DE VENTILACIÓN. Los ventiladores que proporcionan \naire de extracción o aire exterior deberán estar listados y etiquetados para \nproporcionar el caudal de aire mínimo requerido de acuerdo con ANSI/AMCA \n210-ANSI/ASHRAE 51.",
+   "paginas": [
+    116
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ANSI",
+     "ASHRAE"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.4.1",
+   "titulo_num": 3,
+   "capitulo": "3.4",
+   "encabezado": "ESTACIONAMIENTOS CERRADOS",
+   "texto": "ESTACIONAMIENTOS CERRADOS. Los sistemas de ventilación mecá-\nnica para estacionamientos cerrados deberán operar continuamente o deberán \nser operados automáticamente por medio de detectores de monóxido de car-\nbono aplicados en conjunto con detectores de dióxido de nitrógeno. Los detec-\ntores de monóxido de carbono se instalarán de 3 a 5 pies por encima del nivel \ndel suelo y los detectores de dióxido de nitrógeno se instalarán 1 pie por debajo \ndel nivel del techo. Dichos detectores deberán estar homologados conforme a \nla norma UL 2075 e instalarse de acuerdo con su homologación y las instruc-\nciones del fabricante. El funcionamiento automático deberá alternar el sistema \nde ventilación entre los dos modos de funcionamiento siguientes:\n1. Funcionamiento a pleno rendimiento con un caudal de aire no inferior a 0,75 \ncfm por pie cuadrado [0,0038 m3/(s - m2)] de la superficie de la planta.\n2. En modo de espera, con un caudal de aire no inferior a 0,05 cfm por pie cua-\ndrado [0,00025 m3/(s - m2)] del área de piso servida.",
+   "paginas": [
+    116
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.4.2",
+   "titulo_num": 3,
+   "capitulo": "3.4",
+   "encabezado": "ESPACIOS OCUPADOS ACCESORIOS A GARAJES PÚBLICOS",
+   "texto": "ESPACIOS OCUPADOS ACCESORIOS A GARAJES PÚBLICOS. Las ofi-\ncinas de conexión, salas de espera, taquillas y usos similares que sean acce-\nsorios de un garaje público se mantendrán a presión positiva y dispondrán de \nventilación de acuerdo con la Sección 3.3.3.1.",
+   "paginas": [
+    116,
+    117
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.5.1",
+   "titulo_num": 3,
+   "capitulo": "3.5",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Los sistemas de ventilación mecánica estarán provis-\ntos de controles manuales o automáticos que hagan funcionar dichos sistemas \nsiempre que los espacios estén ocupados. Los sistemas de aire acondicionado \nque suministren el aire de ventilación requerido estarán provistos de controles \ndiseñados para mantener automáticamente la tasa de suministro de aire exte-\nrior requerida durante la ocupación.",
+   "paginas": [
+    117
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.6.1",
+   "titulo_num": 3,
+   "capitulo": "3.6",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Los espacios deshabitados, tales como los espacios \nde acceso y los áticos, deben estar provistos de aberturas de ventilación na-\ntural, tal como lo exige el Código de Construcción de Florida, o deben estar \nprovistos de un sistema mecánico de extracción y suministro de aire. La tasa \nde extracción mecánica no será inferior a 0,02 cfm por pie cuadrado (0,00001 \nm3/s - m2) de área horizontal y se controlará automáticamente para que fun-\ncione cuando la humedad relativa en el espacio al que da servicio supere el 60 \npor ciento.",
+   "paginas": [
+    117
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.7.1",
+   "titulo_num": 3,
+   "capitulo": "3.7",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. La ventilación mecánica para establecimientos de \natención ambulatoria y ocupaciones del Grupo I-2 deberá ser diseñada e insta-\nlada de acuerdo con este código y ASHRAE 170 y NFPA 99.\n\n\nTÍTULO.4\nSISTEMAS DE ESCAPE",
+   "paginas": [
+    117,
+    118
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASHRAE",
+     "NFPA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  }
+ ]
+}

@@ -1,0 +1,507 @@
+{
+ "volumen": 4,
+ "sigla": null,
+ "nombre_volumen": "Recomendaciones para Instalaciones Mecánicas en Edificaciones",
+ "titulo": 8,
+ "nombre": "Sistemas Solares",
+ "fuente_pdf": "MIVHED-Recomendaciones-para-Instalaciones-Mecanicas-en-Edificaciones-Vol-IV.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "8.1": "GENERAL",
+  "8.2": "INSTALACIÓN",
+  "8.3": "FLUIDOS CALOPORTADORES",
+  "8.4": "MATERIALES"
+ },
+ "clausulas": [
+  {
+   "id": "8.1.1",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "ÁMBITO DE APLICACIÓN",
+   "texto": "ÁMBITO DE APLICACIÓN. El presente capítulo regula el diseño, la cons-\ntrucción, la instalación, la modificación y la reparación de sistemas, equipos y \naparatos destinados a utilizar la energía solar para la calefacción o refrigeración \nde locales, el calentamiento de agua caliente sanitaria, el calentamiento de pis-\ncinas o el calentamiento de procesos.",
+   "paginas": [
+    300
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.1.2",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "SUMINISTRO DE AGUA POTABLE",
+   "texto": "SUMINISTRO DE AGUA POTABLE. El suministro de agua potable a los \nsistemas solares debe estar protegido contra la contaminación de acuerdo con \nel Código de Diseño y Construcción de Edificaciones en la República Do-\nminicana.\nEXCEPCIÓN: Cuando todas las tuberías del sistema solar formen parte del sis-\ntema de distribución de agua potable, de acuerdo con los requisitos del Códi-\ngo de Diseño y Construcción de Edificaciones en la República Dominicana, \ny todos los componentes del sistema de tuberías estén catalogados para el uso \nde agua potable, no se exigirán medidas de protección contra conexiones cru-\nzadas.",
+   "paginas": [
+    300,
+    301
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.2.1",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "ACCESO",
+   "texto": "ACCESO. Se facilitará el acceso a los equipos y aparatos de energía solar \npara su mantenimiento. Los sistemas solares y sus accesorios no deberán obs-\ntruir ni interferir en el funcionamiento de puertas, ventanas u otros componen-\ntes del edificio que requieran funcionamiento o acceso.",
+   "paginas": [
+    301
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.2.2",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "PROTECCIÓN DE LOS EQUIPOS",
+   "texto": "PROTECCIÓN DE LOS EQUIPOS. Los equipos solares expuestos al trá-\nfico rodado deberán instalarse a una altura no inferior a 1.829 mm (6 pies) por \nencima del suelo acabado.\nEXCEPCIÓN: Esta sección no se aplicará cuando el equipo esté protegido del \nimpacto de vehículos motorizados.",
+   "paginas": [
+    301
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.2.3",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "CONTROL DE LA CONDENSACIÓN",
+   "texto": "CONTROL DE LA CONDENSACIÓN. Cuando los áticos o los espacios \nestructurales formen parte de un sistema solar pasivo, no será necesaria la ven-\ntilación de dichos espacios, tal como se exige en la sección 3.6, cuando se dis-\nponga de otros medios aprobados para controlar la condensación.",
+   "paginas": [
+    301
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.1.3",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "INTERCAMBIADORES DE CALOR",
+   "texto": "INTERCAMBIADORES DE CALOR. Los intercambiadores de calor uti-\nlizados en los sistemas de calentamiento de agua doméstica deberán estar \naprobados para el uso previsto. El sistema deberá contar con la protección \nadecuada para garantizar que la potabilidad del sistema de abastecimiento y \ndistribución de agua esté debidamente salvaguardada.",
+   "paginas": [
+    301
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.1.4",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "EQUIPOS Y APARATOS DE ENERGÍA SOLAR",
+   "texto": "EQUIPOS Y APARATOS DE ENERGÍA SOLAR. Los equipos y aparatos de \nenergía solar deberán cumplir los requisitos del presente capítulo y se instala-\nrán de acuerdo con las instrucciones del fabricante.",
+   "paginas": [
+    301
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.1.5",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "CONDUCTOS",
+   "texto": "CONDUCTOS. Los conductos utilizados en los sistemas de calefacción \ny refrigeración solares se construirán e instalarán de acuerdo con el título 6 de \neste código.",
+   "paginas": [
+    301
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.2.4",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "COLECTORES MONTADOS EN EL TEJADO",
+   "texto": "COLECTORES MONTADOS EN EL TEJADO. Los colectores solares \nmontados en tejados que también sirvan de cubierta deberán cumplir los \nrequisitos para cubiertas de tejados de acuerdo con el Código de Diseño y \nConstrucción de Edificaciones en la República Dominicana.\nEXCEPCIÓN: El uso de cubiertas de plástico para colectores solares se limitará \na aquellos plásticos aprobados que transmitan la luz y que cumplan los requi-\nsitos para paneles de plástico para tejados del Código de Diseño y Construc-\nción de Edificaciones en la República Dominicana.",
+   "paginas": [
+    301,
+    302
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.2.4.1",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "COLECTORES MONTADOS SOBRE EL TEJADO",
+   "texto": "COLECTORES MONTADOS SOBRE EL TEJADO. Cuando se mon-\nten sobre o por encima de la cubierta del tejado, el conjunto de colectores y \nla construcción de soporte deberán estar construidos con materiales incom-\nbustibles o madera tratada con retardante de fuego conforme al Código de \nDiseño y Construcción de Edificaciones en la República Dominicana en la \nmedida requerida para el tipo de construcción del tejado del edificio del que los \ncolectores son accesorios.\nEXCEPCIÓN: El uso de cubiertas de plástico para colectores solares se limitará \na aquellos plásticos aprobados que transmitan la luz y que cumplan con los \nrequisitos para paneles de plástico para techos del Código de Diseño y Cons-\ntrucción de Edificaciones en la República Dominicana.",
+   "paginas": [
+    302
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.2.4.2",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "",
+   "texto": "COLECTORES Y SISTEMAS SOLARES TÉRMICOS MONTADOS EN \nEL TEJADO. El tejado deberá estar construido para soportar las cargas impues-\ntas por los colectores solares montados en el tejado. Cuando se monten sobre \no por encima de la cubierta del tejado, el conjunto de colectores, los sistemas \nde montaje y sus fijaciones al tejado deberán estar construidos con materiales \nincombustibles o madera tratada con retardante de fuego conforme al Código \nde Diseño y Construcción de Edificaciones en la República Dominicana en la \nmedida requerida para el tipo de construcción del tejado del edificio del que \nson accesorios los colectores.",
+   "paginas": [
+    302
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.2.5",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "EQUIPAMIENTO",
+   "texto": "EQUIPAMIENTO. La instalación de energía solar deberá estar equipada \nde acuerdo con los requisitos de los apartados 8.2.5.1 a 8.2.5.4.",
+   "paginas": [
+    302,
+    303
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.2.5.1",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "PRESIÓN Y TEMPERATURA",
+   "texto": "PRESIÓN Y TEMPERATURA. Los componentes de la instalación solar \nque contengan fluidos a presión deberán estar protegidos contra presiones y \ntemperaturas superiores a los límites de diseño mediante una válvula de alivio \nde presión y temperatura. Cada sección del sistema en la que puedan desarro-\nllarse presiones excesivas tendrá un dispositivo de alivio situado de forma que \nuna sección no pueda cerrarse mediante válvulas ni aislarse de otro modo de \nun dispositivo de alivio. Las válvulas de alivio deberán cumplir con los requisi-\ntos de la Sección 10.6.4 y descargar de acuerdo con la Sección 6.6.6.",
+   "paginas": [
+    303
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.2.5.2",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "VACÍO",
+   "texto": "VACÍO. Los componentes del sistema de energía solar que estén so-\nmetidos a vacío durante el funcionamiento o durante la parada deberán estar \ndiseñados para soportar dicho vacío o deberán estar protegidos con válvulas \nde alivio de vacío.",
+   "paginas": [
+    303
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.2.5.3",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "PROTECCIÓN CONTRA CONGELACIÓN",
+   "texto": "PROTECCIÓN CONTRA CONGELACIÓN. Los componentes del sis-\ntema deberán estar protegidos contra daños por congelación de los líquidos de \ntransferencia de calor a las temperaturas ambiente más bajas que se encuen-\ntren durante el funcionamiento del sistema.",
+   "paginas": [
+    303
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.2.5.4",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "DEPÓSITOS DE EXPANSIÓN",
+   "texto": "DEPÓSITOS DE EXPANSIÓN. Los sistemas de energía solar monofá-\nsica líquida deberán estar equipados con depósitos de expansión dimensiona-\ndos de acuerdo con la sección 6.9.",
+   "paginas": [
+    303
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.2.6",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "PENETRACIONES",
+   "texto": "PENETRACIONES. Las penetraciones en tejados y paredes deberán estar \nselladas para evitar la entrada de agua, roedores e insectos.",
+   "paginas": [
+    303
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.2.7",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "FILTRADO",
+   "texto": "FILTRADO. El aire transportado a los espacios ocupados a través de rocas \no materiales que produzcan polvo por medios distintos de la convección natu-\nral deberá filtrarse a la salida del sistema de acumulación de calor.",
+   "paginas": [
+    303,
+    304
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.3.1",
+   "titulo_num": 8,
+   "capitulo": "8.3",
+   "encabezado": "PUNTO DE INFLAMACIÓN",
+   "texto": "PUNTO DE INFLAMACIÓN. El punto de inflamación del fluido calo-\nportador utilizado en una instalación solar no deberá ser inferior a 28 °C (50 \n°F) por encima de la temperatura máxima de diseño sin funcionamiento (sin \nflujo) del fluido alcanzada en el colector.",
+   "paginas": [
+    304
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.3.2",
+   "titulo_num": 8,
+   "capitulo": "8.3",
+   "encabezado": "GASES Y LÍQUIDOS INFLAMABLES",
+   "texto": "GASES Y LÍQUIDOS INFLAMABLES. No se utilizarán líquidos o gases \ninflamables como fluidos caloportadores. El punto de inflamación de los \nlíquidos utilizados en los locales clasificados en los grupos H o F no deberá ser \ninferior a menos que esté aprobado.",
+   "paginas": [
+    304
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.4.1",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "COLECTORES",
+   "texto": "COLECTORES. Los captadores solares térmicos construidos en fábrica \ndeberán llevar una etiqueta en la que se indique el nombre del fabricante y el \nnúmero de serie o el número de certificación, el peso en seco del captador, \nlas temperaturas y presiones máximas admisibles de funcionamiento y no fun-\ncionamiento del captador, las temperaturas mínimas admisibles y los tipos de \nfluidos caloportadores compatibles con el captador. La etiqueta deberá aclarar \nque estas especificaciones solo se aplican al captador.",
+   "paginas": [
+    304
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.4.2",
+   "titulo_num": 8,
+   "capitulo": "8.4",
+   "encabezado": "ACUMULADORES TÉRMICOS",
+   "texto": "ACUMULADORES TÉRMICOS. Las unidades de almacenamiento térmi-\nco presurizadas se enumerarán y etiquetarán, y llevarán una etiqueta en la que \nfiguren el nombre y la dirección del fabricante, el número de modelo, el número \nde serie, las temperaturas de funcionamiento máximas y mínimas admisibles \nde la unidad de almacenamiento, las presiones de funcionamiento máximas \ny mínimas admisibles de la unidad de almacenamiento y los tipos de fluidos \ncaloportadores compatibles con la unidad de almacenamiento. La etiqueta \naclarará que estas especificaciones se aplican únicamente a la unidad de alma-\ncenamiento térmico.",
+   "paginas": [
+    304,
+    305
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  }
+ ]
+}

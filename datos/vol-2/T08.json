@@ -1,0 +1,57 @@
+{
+ "volumen": 2,
+ "sigla": "DIHE",
+ "nombre_volumen": "Instalaciones Hidrosanitarias en Edificaciones",
+ "titulo": 8,
+ "nombre": "Disposiciones Finales",
+ "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {},
+ "clausulas": [
+  {
+   "id": "8.1",
+   "titulo_num": 8,
+   "capitulo": "8.1",
+   "encabezado": "SANCIONES",
+   "texto": "SANCIONES. El no cumplimiento a las disposiciones establecidas en \neste Volumen conllevará a la aplicación de las sanciones instituidas en los \ncapítulos V y VI, de la Ley No. 687, del 27 de julio del 1982, que establece el \nsistema de reglamentación técnica mediante la cual se rige la formulación, \npreparación, ejecución, inspección y supervisión de proyectos y obras relativas \na la ingeniería, la arquitectura y ramas afines.",
+   "paginas": [
+    161
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "8.2",
+   "titulo_num": 8,
+   "capitulo": "8.2",
+   "encabezado": "FORMATO DEL VOLUMEN II",
+   "texto": "FORMATO DEL VOLUMEN II. El presente Volumen será publicado en \nel formato que disponga el Consejo Nacional de Regulaciones T écnicas para \nEdificaciones (CONARTED).\nEl presente Reglamento deroga el Decreto No. 572-10, del 5 de octubre de \n2010, que establece el Reglamento para el Diseño y Construcción de Instala-\nciones Sanitarias en Edificaciones, y modifica el Artículo 4.7.5, del Decreto No. \n305-06, del 17 de julio de 2006, que establece el Reglamento para el Diseño \nde Plantas Físicas Escolares.\nEnvíese al Ministerio de la Vivienda, Hábitat y Edificaciones, para los fines \ncorrespondientes.\nDado en Santo Domingo de Guzmán, Distrito Nacional, Capital de la Repúbli-\nca Dominicana, a los ____ días del mes de _____________ del año 2025.\nLuis Abinader Corona",
+   "paginas": [
+    161
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  }
+ ]
+}

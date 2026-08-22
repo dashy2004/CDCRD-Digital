@@ -1,0 +1,466 @@
+{
+ "volumen": 5,
+ "sigla": null,
+ "nombre_volumen": "Diseño Arquitectónico en Edificaciones",
+ "titulo": 1,
+ "nombre": "Espacios Mínimos en Viviendas Urbanas",
+ "fuente_pdf": "MIVHED-Diseno-Arquitectonico-en-Edificaciones-Vol-V.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "1.1": "CONSIDERACIONES GENERALES",
+  "1.2": "DEFINICIONES",
+  "1.3": "ESPACIOS MÍNIMOS DE LA VIVIENDA URBANA",
+  "1.4": "EJEMPLOS DE RELACIÓN DE ÁREAS EN VIVIENDAS"
+ },
+ "clausulas": [
+  {
+   "id": "1.1.1",
+   "titulo_num": 1,
+   "capitulo": "1.1",
+   "encabezado": "CAMPO DE APLICACIÓN",
+   "texto": "CAMPO DE APLICACIÓN. Estas recomendaciones orientan la determinación de los \nsiguientes espacios mínimos de la vivienda urbana.  \na) Sala. \nb) Comedor. \nc) Comedor-cocina. \nd) Cocina. \ne) Patio servicio. \nf) Sala-comedor. \ng) Sala-comedor-cocina. \nh) Dormitorio. \ni) Baño.",
+   "paginas": [
+    4
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SALA",
+   "texto": "SALA: Espacio físico con la comodidad, área y mobiliario necesarios para que el \nusuario pueda descansar, conversar, reunirse, recibir visitas, etc.",
+   "paginas": [
+    4
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.2",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "COMEDOR",
+   "texto": "COMEDOR: Espacio físico con la comodidad, área y mobiliario necesarios para que el \nusuario pueda realizar funciones de ingerir alimentos.",
+   "paginas": [
+    4
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.3",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "COMEDOR-COCINA",
+   "texto": "COMEDOR-COCINA: Espacio físico integrado con la comodidad, área y mobiliario \nnecesarios para que el usuario  pueda con facilidad preparar, cocinar, servir, ingerir los \nalimentos, etc.",
+   "paginas": [
+    4
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.4",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "COCINA",
+   "texto": "COCINA: Espacio físico con la comodidad, área y mobiliario necesarios para que el \nusuario pueda almacenar, preparar, cocinar sus alimentos y fregar sus utensilios.",
+   "paginas": [
+    4
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.5",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PATIO DE SERVICIO",
+   "texto": "PATIO DE SERVICIO: Espacio físico con la comodidad, área y mobiliario necesarios \npara que el usuario pueda lavar, planchar, tender ropas, guardar utensilios, etc.",
+   "paginas": [
+    4,
+    5
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.6",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SALA-COMEDOR",
+   "texto": "SALA-COMEDOR: Espacio físico integrado con la comodidad, área y mobiliario \nnecesarios para que el usuario  pueda con facilidad descansar, reunirse, recibir visitas, \ningerir alimentos, etc.",
+   "paginas": [
+    5
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.7",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SALA-COMEDOR-COCINA",
+   "texto": "SALA-COMEDOR-COCINA: Espacio físico integrado con la comodidad, área y \nmobiliario necesarios para que el usuario pueda con facilidad descansar, reunirse, recibir \nvisitas, preparar los alimentos, cocinarlos e ingerir los mismos, etc.",
+   "paginas": [
+    5
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.8",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DORMITORIO",
+   "texto": "DORMITORIO: Espacio físico con la comodidad, área y mobiliario necesarios para que \nel usuario pueda dormir, descansar, leer, cambiar de ropa, disfrutar de su intimidad, etc. \nSe han considerado los siguientes tipos: \na) Dormitorio matrimonial. \nb) Dormitorio triple.  \nc) Dormitorio doble. \nd) Dormitorio sencillo.",
+   "paginas": [
+    5
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.9",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "BAÑO",
+   "texto": "BAÑO: Espacio físico  con la comodidad, área y mobiliario necesario para que el \nusuario pueda realizar funciones fisiológicas y de aseo personal.",
+   "paginas": [
+    5
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.3.1",
+   "titulo_num": 1,
+   "capitulo": "1.3",
+   "encabezado": "CONSIDERACIONES DE DISEÑO",
+   "texto": "CONSIDERACIONES DE DISEÑO. Para el empleo de estas recomendaciones deberán \ntomarse en cuenta las siguientes consideraciones de diseño:",
+   "paginas": [
+    5
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.3.1.1",
+   "titulo_num": 1,
+   "capitulo": "1.3",
+   "encabezado": "ESPACIOS TRADICIONALES",
+   "texto": "ESPACIOS TRADICIONALES. Para una habitación o espacio de formas \ntradicionales (cuadriláteros) sus dimensiones mínimas, así como la ubicación de sus \npuertas y ventanas,  se podrán determinar  entre los rangos  mínimos, críticos y \nsatisfactorios, de lados, áreas, alturas y volúmenes; también se tendrá en cuenta la \n\n\n\n \ncantidad y tamaño del mobiliario y equipo básico analizado; asimismo los ejemplos de \nplantas y otras indicaciones. Siempre se considerará el número de personas y las \nactividades de las mismas en dicho espacio.",
+   "paginas": [
+    5,
+    6
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.3.1.2",
+   "titulo_num": 1,
+   "capitulo": "1.3",
+   "encabezado": "ESPACIOS NO TRADICIONALES",
+   "texto": "ESPACIOS NO TRADICIONALES. Las habitaciones o espacios de formas no \ntradicionales cumplirán todas las recomendaciones para habitaciones o espacios de \nformas tradicionales.",
+   "paginas": [
+    6
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.3.2",
+   "titulo_num": 1,
+   "capitulo": "1.3",
+   "encabezado": "MOBILIARIO Y EQUIPO CONSIDERADOS",
+   "texto": "MOBILIARIO Y EQUIPO CONSIDERADOS. Para los fines de estas recomendaciones se \nha considerado un determinado mobiliario y equipo mínimo a utilizarse en las diferentes \nfunciones que se realizan en la vivienda. \nA continuación, presentamos las TABLAS 1 y 2, en las que se definen las dimensiones \nmínimas del mobiliario y equipo considerado, su área y las variaciones del mismo teniendo \nen cuenta el número de personas que lo van a utilizar. \n\n\n\n \nTABLA 1 \n \n \n \n \n \n \n\n\n\n \nTABLA 2",
+   "paginas": [
+    6,
+    7,
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.3.2.1",
+   "titulo_num": 1,
+   "capitulo": "1.3",
+   "encabezado": "MOBILIARIO Y EQUIPO MAYOR QUE EL CONSIDERADO",
+   "texto": "MOBILIARIO Y EQUIPO MAYOR QUE EL CONSIDERADO. Cuando se contemple en una habitación \no espacio la cantidad y tamaño mayor de mobiliario y equipo que los analizados en el presente \ndocumento, se añadirá al área de la habitación o espacio mínimo la que necesite adicionalmente dicho \nmobiliario y equipo, de forma tal que  permita su utilización para una realización satisfactoria de las \nactividades.",
+   "paginas": [
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.3.2.2",
+   "titulo_num": 1,
+   "capitulo": "1.3",
+   "encabezado": "MOBILIARIO Y EQUIPO MENOR QUE EL CONSIDERADO",
+   "texto": "MOBILIARIO Y EQUIPO MENOR QUE EL CONSIDERADO. Cuando se contemple en una habitación \no espacio la cantidad y tamaño menor de mobiliario y equipo que los aquí analizados, se deberán \nmantener las dimensiones mínimas que recomendamos.",
+   "paginas": [
+    8
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.3.3",
+   "titulo_num": 1,
+   "capitulo": "1.3",
+   "encabezado": "TABLAS Y GRÁFICOS DE ESPACIOS MÍNIMOS",
+   "texto": "TABLAS Y GRÁFICOS DE ESPACIOS MÍNIMOS. A continuación, presentamos los diferentes espacios \nmínimos que se han considerado como elementos componentes dentro de la vivienda urbana en base \na tablas que expresan sus valores numéricos y mediante esquemas gráficos dirigidos a lograr una \nmayor comprensión sobre el particular.  \n \n \n\n\n\n \n \n \nLas tablas establecen rangos de valores que varían de acuerdo a: \na) Número de personas consideradas en la vivienda \nb) Actividades y funciones a realizar dentro de la misma \nc) Mobiliario y equipo requeridos para desarrollar adecuadamente dichas actividades. \nDentro de esos rangos de valores numéricos, se han establecido dos parámetros que califican como \n“Crítico” o “Satisfactorio” las dimensiones, áreas y volúmenes asumidos en los diferentes espacios. \nSe considerarán “Valores Críticos” aquellas dimensiones, áreas y volúmenes que permiten desarrollar \nmínimamente las actividades contempladas dentro de la vivienda. En cambio, los valores “Satisfactorios” \npermiten que las dimensiones, áreas y volúmenes brinden un mayor grado de amplitud y comodidad al \nusuario en la vivienda. \nLos esquemas gráficos tienen la finalidad de establecer una guía que muestre la cantidad, tipo y \ndisposición del mobiliario respecto al número de personas, espacio y función que desempeñan\n\n\n\n \nTABLA 2.1 \n \n \nTABLA 2.2 \n \n \n\n\n\n \n \nTABLA 2.3 \n \n \n\n\n\n \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n \n \n\n\n \n \n\n\n\n \n\n\n\n \nTABLA 2.4 \n \n \nTABLLA 2.5 \n\n\n\n \n \n\n\n\n \nTABLA 2.6 \n \n \n \n\n\n\n \nTABLA 2.7 \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n\n\n\n \n\n\n\n \n \nTABLA 2.8",
+   "paginas": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.4.1",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "TIPOS DE VIVIENDAS",
+   "texto": "TIPOS DE VIVIENDAS. Para los fines de estas recomendaciones, se han establecido 4 tipos de \nviviendas con sus respectivos subtipos, resultado de seleccionar las combinaciones de espacios \ngeneralmente usadas en nuestras viviendas. \nV1 = Vivienda con sala, comedor, cocina, patio de servicio, dormitorios sin closet y baño.  \nV2 = Vivienda con sala-comedor, cocina, patio de servicio, dormitorios sin closet y baño.  \nV3 = Vivienda con sala, comedor-cocina, patio de servicio, dormitorios sin closet y baño. \n V4 = Vivienda con sala-comedor-cocina, patio de servicio, dormitorios sin closet y baño. \nLos subtipos están constituidos por los mismos espacios, con la variación de tener dormitorios  con \ncloset y se denominarán V1C, V2C, V3C Y V4C. \n \n\n\n\n \n\n\n\n \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n \n\n\n\n \n\n\n\n \n\n\n\n \n \n\n\n\n \n \n \nÍndice de\ncontenidos\n\n \n\n \nTÍTULO 2. MEDIOS DE CIRCULACIÓN VERTICAL EN EDIFICACIONES.",
+   "paginas": [
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  }
+ ]
+}

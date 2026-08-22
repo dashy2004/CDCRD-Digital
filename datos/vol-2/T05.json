@@ -1,0 +1,897 @@
+{
+ "volumen": 2,
+ "sigla": "DIHE",
+ "nombre_volumen": "Instalaciones Hidrosanitarias en Edificaciones",
+ "titulo": 5,
+ "nombre": "Aparatos, Grifos y Accesorios Sanitarios",
+ "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "5.1": "GENERALIDADES",
+  "5.2": "CAUDALES Y PRESIONES REQUERIDOS",
+  "5.3": "APARATOS SANITARIOS",
+  "5.4": "REQUERIMIENTOS DE APARATOS SANITARIOS",
+  "5.5": "INSTALACIÓN APARATOS SANITARIOS",
+  "5.6": "APARATOS SANITARIOS Y EQUIPOS EN CENTROS DE SA-",
+  "5.7": "GRIFERÍA Y OTROS TIPOS DE CONECTORES",
+  "5.8": "DISPOSITIVOS DE DESCARGA"
+ },
+ "clausulas": [
+  {
+   "id": "5.1.1",
+   "titulo_num": 5,
+   "capitulo": "5.1",
+   "encabezado": "",
+   "texto": "Este Título regula el diseño e instalación de los aparatos sanitarios de una \nedificación, proporcionando las dimensiones mínimas, forma de instalación o \ncolocación, consumos y presiones mínimos para el diseño de una red de abas-\ntecimiento de agua; así como los diámetros de las tuberías de salida para el \ndiseño de la red de desagüe.",
+   "paginas": [
+    96
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.1.2",
+   "titulo_num": 5,
+   "capitulo": "5.1",
+   "encabezado": "MATERIALES",
+   "texto": "MATERIALES. Los aparatos sanitarios, grifería y accesorios deberán ser \nconstruidos de materiales y formas, incluyendo dimensiones, aprobados por la \nnorma NORDOM 831del INDOCAL.",
+   "paginas": [
+    96
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.1.3",
+   "titulo_num": 5,
+   "capitulo": "5.1",
+   "encabezado": "MATERIALES PARA PIEZAS ESPECIALES",
+   "texto": "MATERIALES PARA PIEZAS ESPECIALES. Las piezas o aparatos espe-\nciales, que no hayan sido cubiertos por este Volumen, deberán ser fabricados \nen acero inoxidable, cerámica tratada, o plástico, o estar recubiertos de mate-\nrial no corrosivo, aleación cobre-níquel, aleación de cobre, acero resistente a \nla corrosión u otros materiales apropiados para el uso que se le dará a la pieza.",
+   "paginas": [
+    96
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.1.4",
+   "titulo_num": 5,
+   "capitulo": "5.1",
+   "encabezado": "",
+   "texto": "SUMINISTRO DE AGUA PARA APARATOS EN CONDICIONES DE RE-\nPOSO. T odos los aparatos sanitarios deberán contar con un suministro per-\nmanente de agua potable en cantidad y presión suficientes para su descarga, \n\n\nmanteniendo los mismos en condiciones sanitarias y de limpieza adecuadas, \nevitando el retorno de las aguas residuales o de desagüe y la contaminación \ncruzada. Los caudales utilizados por aparato sanitario no deberán exceder los \nvalores indicados en la TABLA 3.",
+   "paginas": [
+    96,
+    97
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.1.5",
+   "titulo_num": 5,
+   "capitulo": "5.1",
+   "encabezado": "",
+   "texto": "NORMATIVAS DE PENDIENTE PARA EL DISEÑO DE APARATOS SA-\nNITARIOS. Los lavamanos, fregaderos, bañeras, y demás aparatos sanitarios \ndeberán tener una pendiente mínima que garantice el escurrimiento total e im-\npida la acumulación de líquidos en reposo, en todo caso deberán cumplir con \nlas normas de INDOCAL.",
+   "paginas": [
+    97
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.2.1",
+   "titulo_num": 5,
+   "capitulo": "5.2",
+   "encabezado": "",
+   "texto": "SUMINISTRO DE AGUA PARA APARATOS EN CONDICIONES DE \nMAXIMA DEMANDA. El caudal disponible en las condiciones de máxima de-\nmanda, en las tuberías de conexión a los aparatos sanitarios y accesorios en \nla edificación, no deberá ser menor que los valores mostrados en la TABLA 3 \n(sobre Gasto, Diámetro y Presión mínimos requeridos en las tuberías alimen-\ntadoras, por aparatos y piezas sanitarias). El caudal mínimo disponible para \naparatos sanitarios y accesorios no mostrados en esta tabla se establecerá de \nacuerdo con las especificaciones del fabricante.",
+   "paginas": [
+    97
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.2.2",
+   "titulo_num": 5,
+   "capitulo": "5.2",
+   "encabezado": "PRESIÓN MÍNIMA",
+   "texto": "PRESIÓN MÍNIMA. Para tener un rendimiento aceptable, los aparatos y \naccesorios no se deberán forzar a trabajar con presiones menores a las mostra-\ndas en la TABLA 3.",
+   "paginas": [
+    97
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.2.3",
+   "titulo_num": 5,
+   "capitulo": "5.2",
+   "encabezado": "PRESIÓN MÁXIMA",
+   "texto": "PRESIÓN MÁXIMA. Para garantizar un rendimiento normal de trabajo y \nla vida útil de los aparatos sanitarios, estos no se deberán someter a presiones \nmayores que la establecida en la sección 2.4.1.2.\nPÁRRAFO: En todo caso para aparatos no especificados en la tabla, el fabrican-\nte y/o su representante, deberá demostrar el funcionamiento de los aparatos \ncon sus especificaciones de diseño.",
+   "paginas": [
+    97,
+    98
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.1",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "BAÑERAS",
+   "texto": "BAÑERAS. Las dimensiones de las bañeras no deberán ser menores que \nla dimensión mínima estándar, con ancho de 0.75 a 0.90 m y largo de 1.20 a \n1.80 m. T endrán una salida de desagüe de por lo menos 38 milímetros (1½”) \nde diámetro, además de una rejilla removible de no menos de 70 milímetros (2 \n¾”) de diámetro.",
+   "paginas": [
+    98
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.2",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "DUCHAS O CABINAS",
+   "texto": "DUCHAS O CABINAS. Las duchas deberán cumplir con las siguientes \ndisposiciones:\na) Los compartimientos deberán tener al menos 0.64 m2 de área de piso, y ser \ndel tamaño suficiente para inscribir un círculo de diámetro no menor de 0.80 m \no un cuadrado de 0.80m x 0.80m.\nb) Las duchas que lleven puertas de bisagra deberán abrir hacia fuera.\nc) Los receptores de las duchas (área de fondo de la ducha) deberán tener un \nborde terminado no menor de 5 cm (2”) y no mayor de 23 cm (9”) de profundi-\ndad entre la parte superior del borde y la parte superior del drenaje.\nd) Deberán tener una salida de desagüe de por lo menos 50.8 milímetros (2”) \nde diámetro, además de una rejilla removible de no menos de 76.2 mm (3 pul-\ngadas). El piso terminado deberá tener una pendiente uniforme, de acuerdo \ncon el drenaje no menor de 2%.\ne) Los platos de duchas se instalarán ante el cumplimiento de lo establecido en \nesta sección y con las especificaciones establecidas por el fabricante.",
+   "paginas": [
+    98
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.3",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "FREGADEROS",
+   "texto": "FREGADEROS. Las dimensiones de los fregaderos no deberán ser me-\nnores que la dimensión mínima estándar de 0.34 x 0.34 m de área de trabajo, \nindependientemente de los bordes, con altura mínima de colocación a 0.90 m, \nmedida desde el nivel de piso. Deberán tener una salida de desagüe no menor \n\n\nde 38.1 milímetros (1½ pulgadas) de diámetro, además de una rejilla removi-\nble en la entrada de la tubería de desagüe, para que el flujo de agua pase con la \nmenor cantidad de sólidos posible.",
+   "paginas": [
+    98,
+    99
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.4",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "INODOROS (TAZAS)",
+   "texto": "INODOROS (TAZAS). Los inodoros o tazas deberán cumplir con lo dis-\npuesto en la NORDOM 806, Instalaciones sanitarias (Piezas cerámicas y re-\nquerimientos hidráulicos para tazas, lavamanos y orinales) correspondiente y \ncumplir con las disposiciones siguientes:\na) Las dimensiones mínimas estándar para taza, ancho 350 mm (13 ¾ pulga-\ndas) y largo 610 mm (24 pulgadas). \nb) Las alturas para las tazas deberán ser de mínimo de 241 mm (9 ½ pulgadas) \ny cumplirán con lo establecido en la TABLA 22. \nTABLA 22\nALTURAS MINIMAS PARA INODOROS\nc) Para inodoros con tanque empotrado a la pared las dimensiones mínimas \nestándar serán ancho 350 mm (13 ¾ pulgadas) y largo 410 mm (16 1/8 pulga-\ndas). \nd) No se permitirán descargas que no estén ventiladas, ni que permitan el retor-\nno del flujo de descarga hacia dentro del tanque del inodoro.",
+   "paginas": [
+    99
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.5",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "LAVAMANOS",
+   "texto": "LAVAMANOS. Los Lavamanos deberán cumplir con lo dispuesto en la \nNORDOM 806, Instalaciones sanitarias (Piezas cerámicas y requerimientos \n\n\nhidráulicos para tazas, lavamanos y orinales) correspondiente y cumplir \ncon las siguientes disposiciones:\na) Sus dimensiones no serán menores que las dimensiones mínimas estándar \ncon ancho de 355.6 milímetros (14 pulgadas) y largo de 254 milímetros (10 ¼ \npulgadas). \nb) Deberán tener una salida de desagüe no menor de 32 milímetros (1 ¼ \npulgadas) de diámetro; la salida de descarga de agua estará provista de una re-\njilla removible, para que el flujo de agua pase con la menor cantidad de sólidos \nposible, con facilidad para la limpieza del mismo.\nc) Se deberán colocar a una altura mínima de 750 milímetros medida desde el \nnivel de piso.",
+   "paginas": [
+    99,
+    100
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.6",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "LAVADEROS",
+   "texto": "LAVADEROS. Los lavaderos deberán cumplir las disposiciones siguien-\ntes:\na) Sus dimensiones no deberán ser menores que las dimensiones mínimas es-\ntándar de (406 mm x 406 mm (16 pulgadas x16 pulgadas), con altura mínima \nde colocación de 0.90 metros, medida desde el nivel de piso. \nb) Deberán tener una salida de desagüe no menor de 38.1 mm (1 ½ pulgadas) \nde diámetro; además de una rejilla en el desagüe para que el flujo pase con la \nmenor cantidad de sólidos posible, con facilidad para la limpieza del mismo. \nc) Su fondo deberá permitir un desagüe rápido y completo, asegurando una \npendiente mínima de un 2% y así evitar la acumulación de agua residual.",
+   "paginas": [
+    100
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.7",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "LAVAPLATOS",
+   "texto": "LAVAPLATOS. Deberán cumplir las especificaciones técnicas del fabri-\ncante. Las descargas de lavaplatos deberán llegar a la trampa de grasa con un \ndiámetro de 50.8 mm (2\"); la tubería de descarga se deberá incrementar desde \nun mínimo de 19 mm (¾\") de diámetro, conectado a la tubería de descarga del \nfregadero. Deberá estar dotado de un filtro en la salida de descarga de agua \npara permitir que el flujo pase con la menor cantidad de sólidos posible, con \nfacilidad para la limpieza del mismo.",
+   "paginas": [
+    100
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.8",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "ORINALES",
+   "texto": "ORINALES. Los orinales deberán cumplir con lo dispuesto en la NOR -\nDOM 806, Instalaciones sanitarias (Piezas cerámicas y requerimientos hidráu-\nlicos para tazas, lavamanos y orinales) correspondiente, y con las disposiciones \nsiguientes:\na) Las dimensiones mínimas de los orinales serán las indicadas en la TABLA 23. \nFIGURA 2 – DIMENSIONES DE LOS ORINALES\nTABLA 23\nDIMENSIONES MÍNIMAS PARA ORINALES\n\n\n\nb) Los orinales con fluxómetro al suelo deberán tener dimensiones no menores \nque las dimensiones mínimas estándar con ancho 267 mm (10 ½\") y alto míni-\nmo de 914 milímetros (36 pulgadas).\nc) Los orinales con fluxómetro empotrado a pared deberán tener dimensiones \nno menores que las dimensiones mínimas estándar con ancho de 267 mm (10 \n½\"), alto de 406 mm (16\") y a una altura mínima de 508 mm (20\"), medida \ndesde el nivel de piso.",
+   "paginas": [
+    100,
+    101,
+    102
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.1",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "",
+   "texto": "REQUISITOS MÍNIMOS DE APARATOS SANITARIOS SEGÚN EL USO \nDE LA EDIFICACIÓN. T odas las edificaciones deberán disponer de facilidades \nsanitarias. Los criterios para fijar la cantidad mínima de aparatos sanitarios re-\nqueridos en las edificaciones, según su uso, serán los indicados en la TABLA \n24. Los valores en la tabla implican un mínimo de un aparato por la cantidad de \npersonas indicadas en cada caso, o fracción de ésta.",
+   "paginas": [
+    102
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.2",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "",
+   "texto": "ASOCIACIÓN DE USOS NO CONTEMPLADOS PARA EL CÁLCULO \nDE APARATOS SANITARIOS. Aquellas edificaciones cuyo uso no esté con-\ntemplado en la TABLA 24, para fines del cálculo de los aparatos sanitarios, se \ndeberá asociar a un uso similar a los indicados en dicha tabla.",
+   "paginas": [
+    102
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.3",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "",
+   "texto": "INSTALACIÓN OBLIGATORIA DE FACILIDADES SANITARIAS EN ES-\nTACIONES Y TERMINALES. Será obligatorio la instalación de facilidades sani-\ntarias para el público en estaciones y terminales de autobuses, estaciones de \ncombustibles, y en estaciones de metro.",
+   "paginas": [
+    102
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.4",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "",
+   "texto": "REQUISITOS DE BAÑOS PARA PÚBLICO EN EDIFICACIONES DE \nUSO COMÚN. En edificaciones de uso público se deberá proveer baños para \nvisitantes, tanto de sexo femenino como masculino y para discapacitados. La \ndistribución de la cantidad de aparatos sanitarios por sexo estará a opción del \nproyectista, atendiendo al uso de la edificación. T odas las edificaciones de uso \npúblico estarán provistas de inodoros con fluxómetro.",
+   "paginas": [
+    102
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.5",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "",
+   "texto": "REQUISITOS DE INSTALACIONES SANITARIAS MÍNIMAS EN OBRAS \nEN CONSTRUCCIÓN. Las obras en construcción deberán ser provistas de las \ninstalaciones sanitarias mínimas para el servicio de los obreros.",
+   "paginas": [
+    102,
+    103
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.6",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "BAÑO DE USO MIXTO",
+   "texto": "BAÑO DE USO MIXTO. En lugares donde el número de empleados no \nexceda de 10 personas, se permitirá un solo baño, por negocio o local, para \nuso del personal, independientemente del sexo. Estas facilidades deberán estar \ndebidamente identificadas como tales, y garantizar la privacidad en su uso.",
+   "paginas": [
+    103
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.7",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "DISTANCIA MÁXIMA HASTA LAS FACILIDADES SANITARIAS",
+   "texto": "DISTANCIA MÁXIMA HASTA LAS FACILIDADES SANITARIAS. En las \nedificaciones cuyo uso no implique la asistencia de visitantes de manera signi-\nficativa, las facilidades sanitarias se deberán ubicar a no más de 50 m desde el \nlugar más alejado, y no deberán estar a más de un piso por encima o por debajo \ndel piso en que se ubican las áreas de trabajo.",
+   "paginas": [
+    103
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.8",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "",
+   "texto": "FACILIDADES SANITARIAS PARA VISITANTES EN EDIFICACIONES \nDE USO PÚBLICO. En aquellas edificaciones cuyo uso implique la asistencia \nde visitantes, clientes o relacionados, se deberán proveer facilidades sanitarias \npara el uso de los mismos en cada piso donde se reciben visitantes, y con un \nrecorrido hasta ellas de no más de 50 m.\nTABLA 24\nNÚMERO MÍNIMO DE APARATOS SANITARIOS EN EDIFICACIONES\n\n\n\nTABLA 24\nNÚMERO MÍNIMO DE APARATOS SANITARIOS EN EDIFICACIONES\n\n\n\nTABLA 24\nNÚMERO MÍNIMO DE APARATOS SANITARIOS EN EDIFICACIONES\n\n\n\nTABLA 24\nNÚMERO MÍNIMO DE APARATOS SANITARIOS EN EDIFICACIONES\n\n\n\nTABLA 24\nNÚMERO MÍNIMO DE APARATOS SANITARIOS EN EDIFICACIONES",
+   "paginas": [
+    103,
+    104,
+    105,
+    106,
+    107
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.9",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "ACCESIBILIDAD",
+   "texto": "ACCESIBILIDAD. En edificaciones de uso público se dispondrá en las \ninstalaciones sanitarias, de por lo menos de un aparato sanitario de cada tipo \n(inodoro y lavamanos) que cumpla con los requisitos de accesibilidad para per-\nsonas con discapacidad, en cada batería de baños, provistos de rutas accesibles \npara llegar a ellos según la norma de accesibilidad norma NORDOM 11:2-001.",
+   "paginas": [
+    107
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.5.1",
+   "titulo_num": 5,
+   "capitulo": "5.5",
+   "encabezado": "PROTECCIÓN DEL AGUA POTABLE",
+   "texto": "PROTECCIÓN DEL AGUA POTABLE. T odas las líneas de abastecimien-\nto y conexiones a los aparatos sanitarios deberán ser instaladas de manera que \nse garantice que no haya flujo de retorno hacia la red de distribución de agua \npotable.",
+   "paginas": [
+    107
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.5.2",
+   "titulo_num": 5,
+   "capitulo": "5.5",
+   "encabezado": "ACCESO PARA LIMPIEZA",
+   "texto": "ACCESO PARA LIMPIEZA. Los aparatos sanitarios deberán ser instala-\ndos de manera tal que haya un fácil acceso para la limpieza del aparato mismo, \nasí como del área a su alrededor.",
+   "paginas": [
+    107
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.5.3",
+   "titulo_num": 5,
+   "capitulo": "5.5",
+   "encabezado": "UBICACIÓN DE LOS APARATOS SANITARIOS",
+   "texto": "UBICACIÓN DE LOS APARATOS SANITARIOS. Se deberán incluir en \nlos planos, los dibujos de detalle de la instalación de los aparatos sanitarios, los \ncuales deberán ser ubicados de acuerdo con las secciones 5.5.3, 5.5.4 y 5.5.5.",
+   "paginas": [
+    107,
+    108
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.5.4",
+   "titulo_num": 5,
+   "capitulo": "5.5",
+   "encabezado": "",
+   "texto": "Los aparatos sanitarios deberán ser colocados tomando en cuenta lo si-\nguiente: \na) Los inodoros, orinales y lavamanos no podrán estar a menos de:\nb) Las duchas y bañeras no podrán estar a menos de:",
+   "paginas": [
+    108
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.5.5",
+   "titulo_num": 5,
+   "capitulo": "5.5",
+   "encabezado": "CONEXIÓN PARA DESAGÜE DE PISO",
+   "texto": "CONEXIÓN PARA DESAGÜE DE PISO. Los desagües de piso deberán \ncumplir con las disposiciones siguientes:\na) T endrán un diámetro mínimo de 50.8 mm (2”) en la salida de drenaje. Ade-\nmás, deberán tener rejillas removibles que abarquen un área de agua aproxima-\nda no menor del área de recogida. Se recomienda la conexión del desagüe de la \nbañera al desagüe de piso.\nb) En áreas de lavado y espacios que comprendan lavadoras automáticas, se \ndeberán colocar drenajes de piso preparados para drenar toda el área del com-\npartimiento; éstos deberán tener un diámetro mínimo de 50.8 mm (2”) en la \nsalida de drenaje, con la respectiva rejilla de piso; diferenciándose del drenaje \nde la lavadora automática, en cuyo caso se conectará a un bajante no menor a \nun diámetro de 3” .\n\n\nc) Para otros tipos de uso de la edificación como almacenes, naves industriales, \nplazas comerciales, aplicará para un mínimo de 3” y el número de desagües \nestará en función del área a drenar.",
+   "paginas": [
+    108,
+    109
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.5.6",
+   "titulo_num": 5,
+   "capitulo": "5.5",
+   "encabezado": "JUNTAS IMPERMEABLES",
+   "texto": "JUNTAS IMPERMEABLES. Cuando los aparatos sanitarios estén en \ncontacto con el piso se deberá proveer de juntas de cera o plástica, para evitar \nel flujo de malos olores y además deberán ser selladas con cemento blanco o \nequivalente.",
+   "paginas": [
+    109
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.5.7",
+   "titulo_num": 5,
+   "capitulo": "5.5",
+   "encabezado": "",
+   "texto": "INSTALACIONES SANITARIAS EN HOSPITALES, HOSPITALES PSI-\nQUIÁTRICOS, PRISIONES Y REFORMATORIOS. En hospitales, hospitales \npsiquiátricos, prisiones y reformatorios, todas las instalaciones deberán garan-\ntizar que no puedan ser utilizadas para causar daño a los pacientes o a terce-\nros; estas instalaciones se deberán acoger a las disposiciones de los Detalles de \nAcabados para Baños de la Guía de Acabados Arquitectónicos para Estableci-\nmientos de Salud del Ministerio de Salud Pública de la República Dominicana.",
+   "paginas": [
+    109
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.5.8",
+   "titulo_num": 5,
+   "capitulo": "5.5",
+   "encabezado": "PLACAS TURCAS",
+   "texto": "PLACAS TURCAS. En hospitales psiquiátricos, prisiones o reformatorios, \nestará permitido el uso de este tipo de aparatos sanitarios.",
+   "paginas": [
+    109
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.6.1",
+   "titulo_num": 5,
+   "capitulo": "5.6",
+   "encabezado": "",
+   "texto": "Los proyectos de Centros de Salud deberán contar con la aprobación \ndel Ministerio de Salud Pública de la República Dominicana y acogerse a \nlas disposiciones de los Detalles de Acabados para Baños de la Guía de \nAcabados Arquitectónicos y la Guía para el Diseño y la Construcción Es-\ntructural y No Estructural de Establecimientos de Salud, del Ministerio de \nSalud Pública de la República Dominicana.",
+   "paginas": [
+    109,
+    110
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "REQUERIMIENTOS GENERALES",
+   "texto": "REQUERIMIENTOS GENERALES. Las descargas de los conectores de-\nberán estar construidas de tuberías de acero inoxidable, galvanizado o nique-\nlado de un calibre (espesor mínimo de pared) de 0.40 mm (1/64”), o de cobre \ncon un espesor mínimo de pared de 0.80 mm (1/32”), o de PVC SCH-40, po-\nlipropileno, polietileno, u otro material similar certificado por NORDOM 831 \n(Grifería. Llave. Requisitos.)",
+   "paginas": [
+    110
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.2",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "VÁLVULAS PARA DUCHAS",
+   "texto": "VÁLVULAS PARA DUCHAS. Las duchas y combinaciones de duchas-ba-\nñeras deberán tener válvulas que mantengan una presión balanceada, equipa-\ndas para soportar una temperatura máxima de 49°C (120°F) y serán instaladas \nde acuerdo con las especificaciones dadas por el fabricante.",
+   "paginas": [
+    110
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.8.1",
+   "titulo_num": 5,
+   "capitulo": "5.8",
+   "encabezado": "REQUERIMIENTOS",
+   "texto": "REQUERIMIENTOS. Cada inodoro, orinal, lavadero clínico, y cualquier \naparato sanitario que conste de sifones para enviar sus descargas al sistema de \ndrenaje, deberá estar provisto de una válvula para fluxómetro, un fluxómetro o \nun tanque manual instalado para suplir agua en las cantidades requeridas por \nel aparato sanitario, las cuales deberán cumplir con las disposiciones de las \nsecciones 6.1.4 y 6.1.5",
+   "paginas": [
+    110
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.8.2",
+   "titulo_num": 5,
+   "capitulo": "5.8",
+   "encabezado": "VÁLVULAS DE FLUXÓMETROS",
+   "texto": "VÁLVULAS DE FLUXÓMETROS. Las válvulas de fluxómetros deberán \nser del tipo “conservación de agua” y no serán utilizadas donde la presión y el \ncaudal del agua sea menor que la requerida para el buen funcionamiento de los \naparatos. Al ser operadas, estas válvulas deberán completar automáticamente \nel ciclo de operación, abriendo enteramente y cerrando positivamente bajo la \npresión y caudal del agua de abastecimiento. Cada válvula de fluxómetro de-\nberá estar provista de dispositivos para regular el flujo de agua a través de la \nmisma.",
+   "paginas": [
+    110
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.8.3",
+   "titulo_num": 5,
+   "capitulo": "5.8",
+   "encabezado": "TUBERÍAS DE DESCARGA Y CONECTORES",
+   "texto": "TUBERÍAS DE DESCARGA Y CONECTORES. Las tuberías de descarga y \nconectores deberán ser de materiales no ferrosos, o de PVC, que cumplan con \nla norma ASTM D 2729.\n\n\nTÍTULO 6. \nDISPOSICIÓN INDIVIDUAL \nDE AGUAS RESIDUALES",
+   "paginas": [
+    110,
+    111
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  }
+ ]
+}

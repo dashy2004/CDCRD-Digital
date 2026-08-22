@@ -1,0 +1,2388 @@
+{
+ "volumen": 4,
+ "sigla": null,
+ "nombre_volumen": "Recomendaciones para Instalaciones Mecánicas en Edificaciones",
+ "titulo": 2,
+ "nombre": "Normativa General",
+ "fuente_pdf": "MIVHED-Recomendaciones-para-Instalaciones-Mecanicas-en-Edificaciones-Vol-IV.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "2.1": "GENERAL",
+  "2.10": "CONTROL DE EXPLOSIÓN",
+  "2.11": "SALIDAS DE HUMOS Y CALOR",
+  "2.12": "CÁLCULOS DE CARGA DE CALEFACCIÓN Y REFRIGERA-",
+  "2.2": "PROTECCIÓN DE LA ESTRUCTURA",
+  "2.3": "UBICACIÓN DE EQUIPOS Y ARTEFACTOS",
+  "2.4": "INSTALACIÓN",
+  "2.5": "SOPORTE DE TUBERÍAS",
+  "2.6": "ACCESO Y ESPACIO DE SERVICIO",
+  "2.7": "ELIMINACIÓN DE CONDENSADOS",
+  "2.8": "REDUCCIÓN DEL ESPACIO LIBRE",
+  "2.9": "CONTROL DE TEMPERATURA"
+ },
+ "clausulas": [
+  {
+   "id": "2.1.1",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "ÁMBITO DE APLICACIÓN",
+   "texto": "ÁMBITO DE APLICACIÓN. Este capítulo regirá la aprobación e instala-\nción de todos los equipos y artefactos que forman parte de los sistemas mecá-\nnicos de edificios regulados por este código.",
+   "paginas": [
+    69
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.2",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "UTILIZACIÓN DE LA ENERGÍA",
+   "texto": "UTILIZACIÓN DE LA ENERGÍA. Los sistemas de calefacción, ventilación \ny aire acondicionado de todas las estructuras deben ser diseñados e instalados \npara una utilización eficiente de la energía, de acuerdo con el Código de Cons-\ntrucción de Edificaciones de la República Dominicana.",
+   "paginas": [
+    69
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.3",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "IDENTIFICACIÓN",
+   "texto": "IDENTIFICACIÓN. Cada tramo de tubería y cada accesorio de tubería \nutilizado en un sistema mecánico deberá llevar la identificación del fabricante.",
+   "paginas": [
+    69
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.4",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "TUBERÍAS, ACCESORIOS Y COMPONENTES DE PLÁSTICO",
+   "texto": "TUBERÍAS, ACCESORIOS Y COMPONENTES DE PLÁSTICO. Las tube-\nrías, accesorios y componentes de plástico deberán estar certificados por terce-\nros como conformes a la norma NSF 14.",
+   "paginas": [
+    69
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.5",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "PRUEBAS Y CERTIFICACIÓN POR TERCEROS",
+   "texto": "PRUEBAS Y CERTIFICACIÓN POR TERCEROS. Las tuberías, los tubos \ny los accesorios deberán cumplir las normas, especificaciones y criterios de \nrendimiento de referencia aplicables de este código y deberán identificarse de \nacuerdo con la sección 2.1.3. Las tuberías y conexiones deben ser probadas por \nuna agencia de pruebas aprobada o certificadas por una agencia de certifica-\nción aprobada.",
+   "paginas": [
+    69
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.6",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "APARATOS Y EQUIPOS DE GAS COMBUSTIBLE",
+   "texto": "APARATOS Y EQUIPOS DE GAS COMBUSTIBLE. La aprobación e ins-\ntalación de tuberías y equipos de distribución de gas combustible, artefactos \nque funcionan con gas combustible y sistemas de ventilación de artefactos \nque funcionan con gas combustible deben estar de acuerdo con el Código de \nConstrucción de Edificaciones de la República Dominicana.",
+   "paginas": [
+    69,
+    70
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.7",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "LISTADO Y ETIQUETADO",
+   "texto": "LISTADO Y ETIQUETADO. Los artefactos regulados por este código \ndeben estar listados y etiquetados para la aplicación en la que se instalan y \nutilizan, a menos que se apruebe lo contrario de acuerdo con el Código de \nConstrucción de Edificaciones de la República Dominicana.\nEXCEPCIÓN: El listado y etiquetado de equipos y artefactos utilizados para re-\nfrigeración deberá estar de acuerdo con la sección 7.1.2.",
+   "paginas": [
+    70
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.8",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "ETIQUETADO",
+   "texto": "ETIQUETADO. El etiquetado debe realizarse de acuerdo con los procedi-\nmientos establecidos en las secciones 2.1.8.1 a 2.1.8.2.3.",
+   "paginas": [
+    70
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.8.1",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "ENSAYOS",
+   "texto": "ENSAYOS. Un organismo autorizado deberá someter a ensayo una \nmuestra representativa de los equipos mecánicos y aparatos que se vayan a \netiquetar con arreglo a la norma o normas pertinentes. El organismo autoriza-\ndo deberá llevar un registro de todos los ensayos realizados. El registro deberá \nproporcionar detalles suficientes para verificar el cumplimiento de la norma de \nensayo.",
+   "paginas": [
+    70
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.8.2",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "INSPECCIÓN E IDENTIFICACIÓN",
+   "texto": "INSPECCIÓN E IDENTIFICACIÓN. El organismo autorizado deberá \nrealizar periódicamente una inspección, que deberá ser en la planta si es nece-\nsario, de los equipos mecánicos y aparatos que deban etiquetarse. La inspec-\nción verificará que los equipos y aparatos mecánicos etiquetados son represen-\ntativos de los equipos y aparatos mecánicos sometidos a ensayo.",
+   "paginas": [
+    70
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.8.2.1",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "INDEPENDENCIA",
+   "texto": "INDEPENDENCIA. El organismo que se apruebe deberá ser objetivo \ny competente. Para confirmar su objetividad, la agencia deberá revelar todos \nlos posibles conflictos de intereses.",
+   "paginas": [
+    70
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.8.2.2",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "EQUIPAMIENTO",
+   "texto": "EQUIPAMIENTO. La agencia autorizada deberá disponer del equipo \nadecuado para realizar todas las pruebas requeridas. El equipo deberá calibrar-\nse periódicamente.",
+   "paginas": [
+    70,
+    71
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.8.2.3",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "PERSONAL",
+   "texto": "PERSONAL. Una agencia autorizada deberá emplear personal experi-\nmentado y formado en la realización, supervisión y evaluación de ensayos.",
+   "paginas": [
+    71
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.9",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "INFORMACIÓN DE LA ETIQUETA",
+   "texto": "INFORMACIÓN DE LA ETIQUETA. En los aparatos debe colocarse una \no varias placas de características permanentes aplicadas en fábrica, en las que \naparezcan, con caracteres legibles, el nombre o la marca comercial del fabri-\ncante, el número de modelo, el número de serie y el sello o la marca del orga-\nnismo autorizado. La etiqueta también deberá incluir lo siguiente\na) EQUIPOS Y APARATOS ELÉCTRICOS: Potencia eléctrica nominal en vol-\ntios, amperios y fase del motor; identificación de los componentes eléctricos \nindividuales en voltios, amperios o vatios, fase del motor; potencia en Btu/h \n(W); y espacios libres requeridos.\nb) UNIDADES DE ABSORCIÓN: Potencia nominal horaria en Btu/h (W); po-\ntencia nominal horaria mínima para unidades con controles modulantes auto-\nmáticos o escalonados; tipo de combustible; tipo de refrigerante; capacidad de \nrefrigeración en Btu/h (W); y espacios libres requeridos.\nc) UNIDADES DE COMBUSTIÓN: Capacidad horaria en Btu/h (W); tipo de \ncombustible aprobado para su uso con el aparato; y espacios libres requeridos.\nd) APARATOS ELÉCTRICOS DE CALEFACCIÓN DE CONFORT: potencia \neléctrica nominal en voltios, amperios y fase; potencia nominal en Btu/h (W); \nmarcado individual para cada componente eléctrico en amperios o vatios, vol-\ntios y fase; y distancias requeridas con respecto a combustibles.",
+   "paginas": [
+    71
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.10",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "INSTALACIÓN ELÉCTRICA",
+   "texto": "INSTALACIÓN ELÉCTRICA. El cableado eléctrico, los controles y las \nconexiones a los equipos y aparatos regulados por este código deben estar de \nacuerdo con NFPA 70.",
+   "paginas": [
+    71
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NFPA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.11",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "CONEXIONES DE PLOMERÍA",
+   "texto": "CONEXIONES DE PLOMERÍA. Las conexiones del suministro de agua \npotable y del sistema de drenaje del edificio a los equipos y aparatos regulados \npor este código deberán estar de acuerdo con el Código de Construcción de \nEdificaciones de la República Dominicana.",
+   "paginas": [
+    71,
+    72
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.12",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "TIPOS DE COMBUSTIBLE",
+   "texto": "TIPOS DE COMBUSTIBLE. Los artefactos que funcionan con com-\nbustible deben estar diseñados para usarse con el tipo de combustible al que \nse conectarán y la altitud a la que están instalados. Los artefactos que forman \nparte del sistema mecánico del edificio no deberán ser convertidos para el uso \nde un combustible diferente, excepto cuando sean aprobados y convertidos de \nacuerdo con las instrucciones del fabricante. La tasa de entrada de combustible \nno sé aumentará ni disminuirá más allá del límite nominal para la altitud a la \nque esté instalado el aparato.",
+   "paginas": [
+    72
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.13",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "AISLAMIENTO DE VIBRACIONES",
+   "texto": "AISLAMIENTO DE VIBRACIONES. Cuando se emplee el aislamiento \nde vibraciones de equipos y aparatos, se utilizará un medio aprobado de suje-\nción suplementaria para lograr el soporte y la sujeción.",
+   "paginas": [
+    72
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.14",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "REPARACIÓN",
+   "texto": "REPARACIÓN. El material o las piezas defectuosas se sustituirán o re-\npararán de forma que se conserve la homologación o el listado original.",
+   "paginas": [
+    72
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.15",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "RESISTENCIA AL VIENTO",
+   "texto": "RESISTENCIA AL VIENTO. Los equipos mecánicos, aparatos y soportes \nque estén expuestos al viento deberán ser diseñados e instalados para resistir \nlas presiones del viento determinadas de acuerdo con Código de Construc-\nción de Edificaciones de la República Dominicana.\nEXCEPCIÓN: Se considera que los equipos o aparatos mecánicos expuestos su-\njetos a un techo o instalados en el suelo de conformidad con el código utilizan-\ndo soportes, plataformas, bordillos, losas, paredes u otros medios clasificados \ncumplen con los requisitos de resistencia al viento del Código de Construc-\nción de Edificaciones de la República Dominicana, según enmendado. Un \noficial estatal o local con autoridad para hacer cumplir el Código de Construc-\nción de Edificaciones de la República Dominicana no requiere soporte adi-\ncional o cerramiento de dicho equipo mecánico o aparatos.",
+   "paginas": [
+    72
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.16",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "RIESGO DE INUNDACIÓN",
+   "texto": "RIESGO DE INUNDACIÓN. Para estructuras ubicadas en áreas de ries-\ngo de inundación, los sistemas mecánicos, equipos y artefactos deben estar \nubicados en o por encima de la elevación requerida por el Código de Cons-\ntrucción de Edificaciones de la República Dominicana, Construcción para \nservicios públicos y equipos auxiliares.\nEXCEPCIÓN: Se permite que los sistemas mecánicos, equipos y artefactos es-\ntén ubicados por debajo de la elevación requerida por el Código de Construc-\nción de Edificaciones de la República Dominicana, Edificación para servicios \npúblicos y equipos auxiliares, siempre que estén diseñados e instalados para \nevitar que el agua ingrese o se acumule dentro de los componentes y para re-\nsistir cargas y esfuerzos hidrostáticos e hidrodinámicos, incluyendo los efectos \nde la flotabilidad, durante la ocurrencia de inundaciones hasta dicha elevación.",
+   "paginas": [
+    72,
+    73
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.16.1",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "ZONAS COSTERAS DE ALTO RIESGO Y ZONAS COSTERAS A",
+   "texto": "ZONAS COSTERAS DE ALTO RIESGO Y ZONAS COSTERAS A. En \nlas zonas costeras de alto riesgo y en las zonas costeras A, los sistemas me-\ncánicos y los equipos no se montarán ni penetrarán en muros destinados a \nromperse bajo cargas de inundación.",
+   "paginas": [
+    73
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.17",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "PROTECCIÓN CONTRA ROEDORES",
+   "texto": "PROTECCIÓN CONTRA ROEDORES. Los edificios o estructuras y las \nparedes que encierran habitaciones y espacios habitables u ocupables en los \nque las personas viven, duermen o trabajan, o en los que se almacenan, pre-\nparan, procesan, sirven o venden alimentos, deberán construirse para proteger \ncontra la entrada de roedores de acuerdo con el Código de Construcción de \nEdificaciones de la República Dominicana.",
+   "paginas": [
+    73
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.1",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "SEGURIDAD ESTRUCTURAL",
+   "texto": "SEGURIDAD ESTRUCTURAL. El edificio o estructura no deberá debili-\ntarse por la instalación de sistemas mecánicos. Cuando se requiera alterar o \nreemplazar pisos, paredes, techos o cualquier otra porción del edificio o es-\ntructura en el proceso de instalación o reparación de cualquier sistema, el edi-\n\n\nficio o estructura deberá dejarse en una condición estructural segura de \nacuerdo con el Código de Construcción de Edificaciones de la República \nDominicana.",
+   "paginas": [
+    73,
+    74
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.2",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "",
+   "texto": "PENETRACIONES DE CONJUNTOS DE PISO/TECHO Y CONJUN-\nTOS CON CLASIFICACIÓN DE RESISTENCIA AL FUEGO. Las penetraciones \nde conjuntos de piso/techo y conjuntos que deben tener una clasificación de \nresistencia al fuego deben protegerse de acuerdo con el Código de Construc-\nción de Edificaciones de la República Dominicana.",
+   "paginas": [
+    74
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.3",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "CORTE, ENTALLADURA Y PERFORACIÓN EN MARCOS DE MADERA",
+   "texto": "CORTE, ENTALLADURA Y PERFORACIÓN EN MARCOS DE MADERA. \nEl corte, entallado y taladrado de los miembros de entramado de madera debe-\nrán cumplir con las Secciones 2.2.3.1 a 2.2.3.4.",
+   "paginas": [
+    74
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.3.1",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "MUESCAS EN VIGUETAS",
+   "texto": "MUESCAS EN VIGUETAS. Las muescas en los extremos de las vigue-\ntas no deben exceder un cuarto de la profundidad de la vigueta. Los agujeros \nperforados en las viguetas no deben estar a menos de 51 mm (2 pulgadas) de \nla parte superior o inferior de la vigueta, y el diámetro de cualquiera de estos \nagujeros no debe exceder un tercio de la profundidad de la vigueta. Las mues-\ncas en la parte superior o inferior de las viguetas no superarán un sexto de la \nprofundidad y no estarán situadas en el tercio medio de la luz.",
+   "paginas": [
+    74
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.3.2",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "CORTE Y ENTALLADURA DE MONTANTES",
+   "texto": "CORTE Y ENTALLADURA DE MONTANTES. En paredes exteriores y \nparticiones portantes, un montante de madera no debe cortarse o entallarse \nen más del 25 por ciento de su profundidad. En particiones no portantes que \nno soporten cargas distintas al peso de la partición, un montante no debe ser \ncortado o entallado en más del 40 por ciento de su profundidad.",
+   "paginas": [
+    74
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.3.3",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "AGUJEROS",
+   "texto": "AGUJEROS. El diámetro de los agujeros taladrados en los montantes \nde madera no debe exceder el 40 por ciento de la profundidad del montante. El \ndiámetro de los agujeros perforados en montantes de madera no debe exceder \nel 60 por ciento de la profundidad del montante en particiones no portantes. El \ndiámetro de los agujeros taladrados en los montantes de madera no debe exce-\n\n\nder el 60 por ciento de la profundidad del montante en cualquier pared donde \ncada montante esté doblado, siempre que no se taladren más de dos montan-\ntes doblados sucesivos. El borde del orificio perforado no debe estar a menos \nde 5/8 de pulgada (15,9 mm) del borde del travesaño. Los taladros no deben \nestar situados en la misma sección del espárrago que un corte o una muesca.",
+   "paginas": [
+    74,
+    75
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.3.4",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "PRODUCTOS DE MADERA DE INGENIERÍA",
+   "texto": "PRODUCTOS DE MADERA DE INGENIERÍA. Se prohíben los cortes, \nlas muescas y los agujeros perforados en cerchas, madera compuesta estruc-\ntural, miembros estructurales laminados con pegamento y vigas en I, excepto \ncuando lo permitan las recomendaciones del fabricante o cuando los efectos de \ntales alteraciones sean considerados específicamente en el diseño del miembro \npor un profesional de diseño registrado.",
+   "paginas": [
+    75
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.4",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "ALTERACIONES EN LAS CERCHAS",
+   "texto": "ALTERACIONES EN LAS CERCHAS. Los miembros y componentes de \nlas cerchas no se cortarán, taladrarán, entallarán, empalmarán ni alterarán de \nninguna otra forma sin el consentimiento y la aprobación por escrito de un \nprofesional del diseño registrado. No se permitirán alteraciones que resulten \nen la adición de cargas a cualquier miembro, tales como equipos HVAC y calen-\ntadores de agua, sin la verificación de que la cercha es capaz de soportar dicha \ncarga adicional.",
+   "paginas": [
+    75
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.5",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "",
+   "texto": "CORTE, ENTALLADURA Y PERFORACIÓN EN ESTRUCTURAS DE \nACERO. El corte, entallado y taladrado de los elementos de la estructura de \nacero debe cumplir con las Secciones 2.2.5.1 a 2.2.5.3.",
+   "paginas": [
+    75
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.5.1",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "",
+   "texto": "CORTE, ENTALLADURA Y PERFORACIÓN DE ORIFICIOS EN ES-\nTRUCTURAS DE ACERO. El corte, entallado y taladrado de agujeros en las \nestructuras de acero se realizará según prescriba el profesional proyectista re-\ngistrado.",
+   "paginas": [
+    75
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.5.2",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "",
+   "texto": "CORTE, ENTALLADURA Y PERFORACIÓN DE ORIFICIOS EN ES-\nTRUCTURAS DE ACERO CONFORMADO EN FRÍO. No se cortarán ni en-\ntallarán los rebordes ni los labios de los elementos portantes de acero con-\n\n\nformado en frío. Los agujeros en las almas de los miembros de entramado de \nacero conformado en frío que soportan carga se permitirán a lo largo de la línea \ncentral de la alma del miembro de entramado y no excederán las limitaciones \ndimensionales, el espaciado de penetración o la distancia mínima del borde \ndel agujero según lo prescrito por el profesional de diseño registrado. El corte, \nentallado y taladrado de orificios en cubiertas de acero para suelos/techos se \nrealizará según lo prescrito por el profesional de diseño registrado.",
+   "paginas": [
+    75,
+    76
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.5.3",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "",
+   "texto": "CORTE, ENTALLADURA Y PERFORACIÓN DE ORIFICIOS EN EN-\nTRAMADOS NO ESTRUCTURALES DE ACERO CONFORMADO EN FRÍO \nPARA MUROS. Las alas y los labios de los montantes de acero no estructural \npara muros conformados en frío no deben cortarse ni entallarse. Los agujeros \nen las almas de los montantes de acero no estructural para muros conforma-\ndos en frío se permitirán a lo largo de la línea central de la alma del miembro \ndel armazón, no excederán 38 mm (11/2 pulgadas) de ancho o 102 mm (4 \npulgadas) de largo, y no estarán espaciados a menos de 610 mm (24 pulgadas) \nde centro a centro de otro agujero o a menos de 254 mm (10 pulgadas) del \nextremo de apoyo",
+   "paginas": [
+    76
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.1",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Los equipos y artefactos deben ubicarse según lo exi-\ngido por esta sección, los requisitos específicos de otras partes de este código \ny las condiciones del listado de equipos y artefactos.",
+   "paginas": [
+    76
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.2",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "UBICACIONES PELIGROSAS",
+   "texto": "UBICACIONES PELIGROSAS. Los artefactos no deben ubicarse en lugares \npeligrosos a menos que estén listados y aprobados para la instalación especí-\nfica.",
+   "paginas": [
+    76
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.3",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "LUGARES PROHIBIDOS",
+   "texto": "LUGARES PROHIBIDOS. Los aparatos que utilizan combustible no de-\nben estar situados en ninguna de las siguientes habitaciones o espacios, ni ob-\ntener aire de combustión de ellos:\n\n\n1. Dormitorios.\n2. Cuartos de baño.\n3. Aseos.\n4. Armarios.\n5. Quirófanos.\nEXCEPCIÓN: Esta sección no se aplicará a los siguientes aparatos:\n1. Aparatos de ventilación directa que obtienen todo el aire de combustión di-\nrectamente del exterior.\n2. Aparatos de combustible sólido, siempre que el aire de combustión se sumi-\nnistre de acuerdo con las instrucciones del fabricante.\n3. Aparatos instalados en un recinto exclusivo en el que todo el aire de combus-\ntión se toma directamente del exterior. El acceso a dicho recinto se efectuará a \ntravés de un conducto de ventilación. El acceso a dicho recinto se realizará a \ntravés de una puerta sólida, con burletes de acuerdo con los requisitos de fuga \nde aire de la puerta exterior del Código de Construcción de Edificaciones \nde la República Dominicana, Conservación de la Energía y equipada con un \ndispositivo de cierre automático aprobado.",
+   "paginas": [
+    76,
+    77
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.4",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "PROTECCIÓN CONTRA DAÑOS",
+   "texto": "PROTECCIÓN CONTRA DAÑOS. Los aparatos no deben instalarse en \nlugares expuestos a daños mecánicos a menos que estén protegidos por barre-\nras aprobadas.",
+   "paginas": [
+    77
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.5",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "LUGARES INTERIORES",
+   "texto": "LUGARES INTERIORES. Los hornos y calderas instalados en armarios y \nnichos deben estar homologados para dicha instalación.",
+   "paginas": [
+    77
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.6",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "LUGARES AL AIRE LIBRE",
+   "texto": "LUGARES AL AIRE LIBRE. Los aparatos instalados en lugares que no sean \ninteriores deben estar listados y etiquetados para su instalación en exteriores.",
+   "paginas": [
+    77
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.7",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "UBICACIONES EN FOSOS",
+   "texto": "UBICACIONES EN FOSOS. Los aparatos instalados en fosos o excava-\n\n\nciones no deben entrar en contacto directo con el suelo circundante. Los lados \nde la fosa o excavación deben mantenerse a una distancia no inferior a 305 \nmm (12 pulgadas) del aparato. Cuando la profundidad supere los 305 mm (12 \npulgadas) por debajo del nivel del terreno colindante, las paredes de la fosa o \nexcavación deberán revestirse con hormigón o mampostería. Dicho hormigón \no mampostería se extenderá no menos de 102 mm (4 pulgadas) por encima \ndel nivel colindante y tendrá suficiente capacidad de carga lateral para resistir el \ncolapso. El aparato deberá estar protegido contra inundaciones de una manera \naprobada.",
+   "paginas": [
+    77,
+    78
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.8",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "HUECOS DE ASCENSOR",
+   "texto": "HUECOS DE ASCENSOR. Los sistemas mecánicos no deberán ubicarse \nen el hueco de un ascensor.",
+   "paginas": [
+    78
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.1",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Los equipos y artefactos deben instalarse según lo \nexigen los términos de su aprobación, de acuerdo con las condiciones del lista-\ndo, las instrucciones de instalación del fabricante y este código. Las instruccio-\nnes de instalación del fabricante deben estar disponibles en el lugar de trabajo \nen el momento de la inspección.",
+   "paginas": [
+    78
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.2",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "CONFLICTOS",
+   "texto": "CONFLICTOS. Cuando ocurran conflictos entre este código y las condi-\nciones del listado o las instrucciones de instalación del fabricante, se aplicarán \nlas disposiciones de este código.\nEXCEPCIÓN: Cuando una disposición del código sea menos restrictiva que las \ncondiciones del listado del equipo o artefacto o las instrucciones de instalación \ndel fabricante, se aplicarán las condiciones del listado y las instrucciones de \ninstalación del fabricante.",
+   "paginas": [
+    78
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.3",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "ELEVACIÓN DE LA FUENTE DE IGNICIÓN",
+   "texto": "ELEVACIÓN DE LA FUENTE DE IGNICIÓN. Los equipos y aparatos \nque tengan una fuente de ignición y estén situados en ubicaciones peligrosas \n\n\ny garajes públicos, garajes privados, garajes de reparación, instalaciones dis-\npensadoras de combustible para motores de automoción y garajes de estacio-\nnamiento deberán estar elevados de forma que la fuente de ignición no esté a \nmenos de 457 mm (18 pulgadas) por encima de la superficie del suelo sobre \nla que descansa el equipo o aparato. A los efectos de esta sección, las habita-\nciones o espacios que no formen parte del espacio habitable de una unidad de \nvivienda y que se comuniquen directamente con un garaje privado a través de \naberturas se considerarán parte del garaje privado.\nEXCEPCIÓN: No se requiere la elevación de la fuente de ignición para los aparatos \nque estén catalogados como resistentes a la ignición de vapores inflamables.",
+   "paginas": [
+    78,
+    79
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.3.1",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "ESTACIONAMIENTOS",
+   "texto": "ESTACIONAMIENTOS. La conexión de un garaje de estacionamiento \ncon cualquier habitación en la que haya un artefacto que funcione con combus-\ntible se hará por medio de un vestíbulo que proporcione una separación de dos \npuertas, excepto que se permita una sola puerta cuando las fuentes de ignición \ndel artefacto estén elevadas de acuerdo con la Sección 2.4.3.\nEXCEPCIÓN: Esta sección no se aplicará a las instalaciones de aparatos que \ncumplan con la Sección 2.4.6.",
+   "paginas": [
+    79
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.4",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "UBICACIÓN DE EQUIPOS Y ARTEFACTOS PROHIBIDOS",
+   "texto": "UBICACIÓN DE EQUIPOS Y ARTEFACTOS PROHIBIDOS. Los equipos \ny artefactos que tengan una fuente de ignición no deberán instalarse en ocupa-\nciones del Grupo H ni en áreas de control donde se produzca el uso, manipula-\nción o despacho abierto de materiales combustibles, inflamables o explosivos.",
+   "paginas": [
+    79
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.5",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "OPERACIONES DE GENERACIÓN Y REPOSTAJE DE HIDRÓGENO",
+   "texto": "OPERACIONES DE GENERACIÓN Y REPOSTAJE DE HIDRÓGENO. \nLos aparatos de generación y repostaje de hidrógeno deberán instalarse y ubi-\ncarse de acuerdo con su listado y las instrucciones del fabricante. Se exigirá ven-\ntilación de conformidad con las secciones 2.4.5.1, 2.4.5.2 o 2.4.5.3 en garajes \npúblicos, garajes privados, garajes de reparación, instalaciones de suministro \nde combustible para automóviles y garajes de estacionamiento que contengan \naparatos de generación de hidrógeno o sistemas de repostaje. A efectos de la \n\n\npresente sección, las habitaciones o espacios que no formen parte del espacio \nhabitable de una unidad de vivienda y que comuniquen directamente con un \ngaraje privado a través de aberturas se considerarán parte del garaje privado.",
+   "paginas": [
+    79,
+    80
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.5.1",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "VENTILACIÓN NATURAL",
+   "texto": "VENTILACIÓN NATURAL. Los locales interiores destinados a las ope-\nraciones de generación o repostaje de hidrógeno estarán limitados a una su-\nperficie máxima de 79 m2 (850 pies cuadrados) y estarán comunicados con \nel exterior de conformidad con los puntos 2.4.5.1.1 y 2.4.5.1.2. La capacidad \nnominal máxima de salida de los aparatos generadores de hidrógeno no exce-\nderá de 0,00189 m3/s (4 pies cúbicos estándar por minuto) de hidrógeno por \ncada 23,2 m2 (250 pies cuadrados) de superficie de piso en dichos espacios. La \ndimensión mínima de la sección transversal de las aberturas de ventilación será \nde 76 mm (3 pulgadas). Cuando se utilicen conductos, estos tendrán la misma \nsección transversal que el área libre de las aberturas a las que se conecten. En \nestos lugares, los equipos y aparatos que tengan una fuente de ignición estarán \nsituados de forma que la fuente de ignición no se encuentre a menos de 305 \nmm (12 pulgadas) del techo.",
+   "paginas": [
+    80
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.5.1.1",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "DOS ABERTURAS",
+   "texto": "DOS ABERTURAS. Se deberán proveer dos aberturas permanentes \ndentro del garaje. La abertura superior deberá estar ubicada completamente \ndentro de 305 mm (12 pulgadas) del techo del garaje. La abertura inferior de-\nberá estar ubicada completamente a 305 mm (12 pulgadas) del piso del garaje. \nAmbas aberturas deberán estar situadas en la misma pared exterior. Las aber-\nturas deben comunicar directamente con el exterior y deben tener un área libre \nmínima de 1/2 pie cuadrado por cada 1 m2/610 m3 (1.000 pies cúbicos) de \nvolumen del garaje.",
+   "paginas": [
+    80
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.5.1.2",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "PERSIANAS Y REJILLAS",
+   "texto": "PERSIANAS Y REJILLAS. Al calcular el área libre requerida por la Sec-\nción 2.4.5.1, el tamaño requerido de las aberturas se basará en el área libre neta \nde cada abertura. Si se conoce el área libre a través de un diseño de persiana o \nrejilla, se utilizará para calcular el tamaño de abertura requerido para propor-\ncionar el área libre especificada. Si no se conocen el diseño y el área libre, se \nasumirá que las lamas de madera tendrán un 25 por ciento de área libre y que \n\n\nlas lamas y rejillas metálicas tendrán un 75 por ciento de área libre. Las lamas y \nrejillas se fijarán en posición abierta.",
+   "paginas": [
+    80,
+    81
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.5.2",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "VENTILACIÓN MECÁNICA",
+   "texto": "VENTILACIÓN MECÁNICA. Los locales interiores destinados a opera-\nciones de generación o repostaje de hidrógeno se ventilarán de conformidad \ncon la sección 4.2.16. En tales ubicaciones, los equipos y aparatos que tengan \nuna fuente de ignición se situarán de manera que la fuente de ignición quede \npor debajo de la salida o salidas de ventilación mecánica.",
+   "paginas": [
+    81
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.5.3",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "INSTALACIONES ESPECIALMENTE DISEÑADAS",
+   "texto": "INSTALACIONES ESPECIALMENTE DISEÑADAS. Como alternativa a \nlas disposiciones de las secciones 2.4.5.1 y 2.4.5.2, el suministro de aire nece-\nsario para la ventilación y dilución de gases inflamables deberá proporcionarse \nmediante un sistema de ingeniería aprobado.",
+   "paginas": [
+    81
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.6",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "GARAJES PÚBLICOS",
+   "texto": "GARAJES PÚBLICOS. Los artefactos ubicados en garajes públicos, ins-\ntalaciones de expendio de combustible para motores, garajes de reparación u \notras áreas frecuentadas por vehículos motorizados, deberán instalarse a no \nmenos de 2438 mm (8 pies) por encima del piso. Cuando los vehículos de mo-\ntor puedan pasar por debajo de un aparato, este deberá instalarse a la distancia \nrequerida por el fabricante del aparato y a no menos de 305 mm (1 pie) por \nencima de la abertura más alta de la puerta del garaje.\nEXCEPCIÓN: Los requisitos de esta sección no se aplicarán cuando los artefac-\ntos estén protegidos contra impactos de vehículos motorizados e instalados de \nacuerdo con la sección 2.4.3 y NFPA 30A.",
+   "paginas": [
+    81
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NFPA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.7",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "GARAJES PRIVADOS",
+   "texto": "GARAJES PRIVADOS. Los artefactos ubicados en garajes privados y co-\ncheras deberán instalarse con un espacio libre mínimo de 1829 mm (6 pies) \nsobre el piso.\nEXCEPCIÓN: Los requisitos de esta sección no se aplicarán cuando los apara-\ntos estén protegidos contra impactos de vehículos motorizados e instalados de \nacuerdo con la sección 2.4.3.",
+   "paginas": [
+    81
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.8",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "CONSTRUCCIÓN Y PROTECCIÓN",
+   "texto": "CONSTRUCCIÓN Y PROTECCIÓN. Las salas de calderas y de hornos \ndeben estar protegidas como lo exige el Código de Construcción de Edifica-\nciones de la República Dominicana.",
+   "paginas": [
+    81,
+    82
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.9",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "DISTANCIAS A CONSTRUCCIÓNES COMBUSTIBLES",
+   "texto": "DISTANCIAS A CONSTRUCCIÓNES COMBUSTIBLES. Los equipos y \naparatos que produzcan calor deberán instalarse de manera que mantengan \nlas distancias requeridas con respecto a Construcciónes combustibles, tal \ncomo se especifica en el listado y en las instrucciones del fabricante. Dichas \ndistancias solo se reducirán de acuerdo con la Sección 2.8. Las distancias a \ncombustibles deben incluir consideraciones tales como el giro de puertas, tira-\ndores de cajones, salientes superiores o estanterías y el giro de ventanas, per-\nsianas, cubiertas y cortinas. No se utilizarán dispositivos tales como topes o \nlímites de puertas, cierres, amarres o protectores de cortinas para proporcionar \nlas distancias requeridas.",
+   "paginas": [
+    82
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.10",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "ESPACIOS LIBRES DESDE LA RASANTE",
+   "texto": "ESPACIOS LIBRES DESDE LA RASANTE. Los equipos y aparatos ins-\ntalados a nivel del suelo deben estar apoyados sobre una losa de hormigón \nnivelada u otro material aprobado que se extienda no menos de 76 mm (3 pul-\ngadas) por encima del suelo adyacente o deben estar suspendidos no menos \nde 152 mm (6 pulgadas) por encima del suelo adyacente. Dicho soporte se \nrealizará de acuerdo con las instrucciones de instalación del fabricante.",
+   "paginas": [
+    82
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.11",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "GUARDAS",
+   "texto": "GUARDAS. Deberán instalarse Protecciónes donde varios componentes \nque requieran servicio y las aberturas de las escotillas del techo estén ubicados \na menos de 3048 mm (10 pies) del borde de un techo o del lado abierto de una \nsuperficie para caminar y dicho borde o lado abierto esté ubicado a más de 762 \nmm (30 pulgadas) por encima del piso, techo o nivel inferior. La protección se \nextenderá no menos de 762 mm (30 pulgadas) más allá de cada extremo de los \ncomponentes que requieran servicio. La parte superior de la protección estará \nsituada a no menos de 1067 mm (42 pulgadas) por encima de la superficie ele-\nvada adyacente a la protección. La protección deberá estar construida de ma-\nnera que impida el paso de una esfera de 533 mm (21 pulgadas) de diámetro y \ndeberá cumplir con los requisitos de carga para Protecciónes especificados en \n\n\nel Código de Construcción de Edificaciones de la República Dominicana.\nEXCEPCIÓN: No se requieren Protecciónes cuando se fijan dispositivos conec-\ntores de anclaje/ detención de caídas permanentes que cumplen con ANSI/\nASSE Z 359.1 para su uso durante toda la vida útil de la cubierta del tejado. \nLos dispositivos se reevaluarán para su posible sustitución cuando se sustituya \ntoda la cubierta del tejado. Los dispositivos se colocarán a no más de 3048 mm \n(10 pies|) al centro a lo largo de las líneas de lima y cumbrera y a no menos \nde 3048 mm (10 pies) de los bordes del tejado y de los lados abiertos de las \nsuperficies transitables.",
+   "paginas": [
+    82,
+    83
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ANSI"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.12",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "ÁREA SERVIDA",
+   "texto": "ÁREA SERVIDA. Los aparatos que den servicio a diferentes áreas de un \nedificio distintas de donde están instalados deben estar marcados permanen-\ntemente de una manera aprobada que identifique de forma exclusiva el aparato \ny el área a la que da servicio.",
+   "paginas": [
+    83
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Las tuberías de los sistemas mecánicos se soporta-\nrán de acuerdo con esta sección.",
+   "paginas": [
+    83
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.2",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "MATERIALES",
+   "texto": "MATERIALES. Los soportes colgantes de tuberías y los soportes debe-\nrán tener la resistencia suficiente para soportar todas las condiciones de carga \nestática y dinámica especificadas asociadas con el uso previsto. Los soportes y \ncolgadores de tuberías que estén en contacto directo con las tuberías deberán \nser de materiales aprobados que sean compatibles con las tuberías y que no \npromuevan la acción galvánica.",
+   "paginas": [
+    83
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.3",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "FIJACIÓN ESTRUCTURAL",
+   "texto": "FIJACIÓN ESTRUCTURAL. Los soportes colgantes y los anclajes debe-\nrán fijarse a la construcción del edificio de una manera aprobada.",
+   "paginas": [
+    83,
+    84
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.4",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "INTERVALO DE APOYO",
+   "texto": "INTERVALO DE APOYO. Las tuberías deberán soportarse a distancias \nque no excedan el espaciamiento especificado en la T abla 2.5.4, o de acuerdo \ncon ANSI/MSS SP-58.\nTABLA 2.5.4 ESPACIADO ENTRE SOPORTES DE TUBERÍAS\nPara el SI: 1 pulgada = 25,4 mm, 1 pie = 304,8 mm.\na. Ver Sección 3.1.18.\nb. El espaciamiento horizontal máximo de los colgadores de tubería de \nhierro fundido se aumentará a 10 pies cuando se instalen tramos de \ntubería de 10 pies.\nc. Guía a mitad del piso.",
+   "paginas": [
+    84
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ANSI"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.5",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "PROTECCIÓN CONTRA DAÑOS FÍSICOS",
+   "texto": "PROTECCIÓN CONTRA DAÑOS FÍSICOS. En lugares ocultos donde se \ninstalen tuberías, que no sean de hierro fundido o acero, a través de agujeros \no muescas en montantes, viguetas, vigas o miembros similares a menos de 38 \nmm (11/2 pulgadas) del borde más cercano del miembro, la tubería deberá \nprotegerse con placas protectoras. Las placas protectoras de acero con un es-\npesor mínimo de 1,463 mm (0,0575 pulgadas) (calibre n. º 16) cubrirán el área \nde la tubería donde el miembro esté entallado o perforado, y se extenderán no \nmenos de 51 mm (2 pulgadas) por encima de las placas de base y por debajo \nde las placas superiores.",
+   "paginas": [
+    84,
+    85
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.1",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "ACCESO",
+   "texto": "ACCESO. Los artefactos, dispositivos de control, intercambiadores de ca-\nlor y componentes del sistema de calefacción, ventilación y aire acondicionado \nque utilicen energía deberán ser accesibles para su inspección, servicio, repa-\nración y reemplazo sin inhabilitar la función de un conjunto con clasificación \nde resistencia al fuego ni retirar Construcciónes permanentes, otros artefactos, \nsistemas de ventilación o cualquier otra tubería o conducto que no esté conec-\ntado al artefacto que se está inspeccionando, revisando, reparando o reempla-\nzando. Se debe proporcionar un espacio de trabajo nivelado de no menos de \n762 mm por 762 mm (30 pulgadas de profundidad y 30 pulgadas de ancho) \nfrente al lado de control para dar servicio a un artefacto.",
+   "paginas": [
+    85
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.1.1",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "HORNOS CENTRALES",
+   "texto": "HORNOS CENTRALES. Los hornos centrales dentro de comparti-\nmientos o nichos deben tener un espacio libre de trabajo mínimo de 76 mm (3 \npulgadas) a lo largo de los lados, la parte posterior y la parte superior, con un \nancho total del espacio de cerramiento que no sea inferior a 305 mm (12 pul-\ngadas) más ancho que el horno. Los hornos con cámara de combustión abierta \na la atmósfera deberán tener un espacio de trabajo no inferior a 152 mm (6 \npulgadas) a lo largo del lado frontal de la cámara de combustión. Las aberturas \npara el aire de combustión en la parte posterior o lateral del compartimento \ndeberán cumplir los requisitos del título 7.\n\n\nEXCEPCIÓN: Esta sección no se aplicará a los aparatos de repuesto instalados \nen compartimentos y nichos existentes en los que los espacios de trabajo es-\ntén de acuerdo con las instrucciones de instalación del fabricante del equipo o \naparato.",
+   "paginas": [
+    85,
+    86
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.2",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "APARATOS EN LOCALES",
+   "texto": "APARATOS EN LOCALES. Los cuartos que contengan artefactos deben \nestar provistos de una puerta y un pasillo sin obstrucciones que mida no menos \nde 914 mm (36 pulgadas) de ancho y 2032 mm (80 pulgadas) de alto.\nEXCEPCIÓN: Dentro de una unidad de vivienda, los artefactos instalados en \nun compartimiento, alcoba, sótano o espacio similar deben tener acceso por \nuna abertura o puerta y un pasillo sin obstrucciones que mida no menos de 610 \nmm (24 pulgadas) de ancho y lo suficientemente grande como para permitir la \nextracción del artefacto más grande del espacio, siempre que haya un espacio \nde servicio nivelado de no menos de 762 mm (30 pulgadas) de profundidad y \nla altura del artefacto, pero no menos de 762 mm (30 pulgadas), en el frente o \nlado de servicio del artefacto con la puerta abierta.",
+   "paginas": [
+    86
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.3",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "APARATOS EN ÁTICOS",
+   "texto": "APARATOS EN ÁTICOS. Los áticos que contengan artefactos deben es-\ntar provistos de una abertura y un pasillo sin obstrucciones lo suficientemente \ngrande como para permitir la extracción del artefacto más grande. El pasillo no \ndebe tener menos de 762 mm (30 pulgadas) de alto y (22 pulgadas) de ancho, \nni más de 6096 mm (20 pies) de largo medidos a lo largo de la línea central del \npasillo desde la abertura hasta el artefacto. El pasillo debe tener un piso sólido \ncontinuo de no menos de 610 mm (24 pulgadas) de ancho. Debe haber un \nespacio de servicio nivelado de no menos de 762 mm (30 pulgadas) de profun-\ndidad y 762 mm (30 pulgadas) de ancho en la parte delantera o de servicio del \naparato. Las dimensiones de la abertura de acceso libre no deberán ser inferio-\nres a 508 mm por 762 mm (20 pulgadas por 30 pulgadas), y lo suficientemente \ngrandes como para permitir la extracción del aparato más grande.\n\n\nEXCEPCIONES:\n1. El pasillo y el espacio de servicio a nivel no son necesarios cuando el aparato \npuede ser reparado y retirado a través de la abertura requerida.\n2. Cuando el pasillo no esté obstruido y tenga una altura no inferior a 6 pies \n(1829 mm) y una anchura de 559 mm (22 pulgadas) en toda su longitud, el \npasillo no tendrá una longitud superior a 15 250 mm (50 pies).",
+   "paginas": [
+    86,
+    87
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.3.1",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "REQUISITOS ELÉCTRICOS",
+   "texto": "REQUISITOS ELÉCTRICOS. Se debe instalar una luminaria controlada \npor un interruptor ubicado en la abertura de paso requerida y un tomacorriente \nen la ubicación del artefacto o cerca de ella, de acuerdo con NFPA 70.",
+   "paginas": [
+    87
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NFPA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.4",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "ARTEFACTOS BAJO PISOS",
+   "texto": "ARTEFACTOS BAJO PISOS. Los espacios bajo el suelo que contengan \naparatos deben estar provistos de una abertura de acceso y un pasillo sin obs-\ntáculos lo suficientemente grande como para sacar el aparato más grande. El \npasadizo no debe tener menos de 30 pulgadas (762 mm) de alto y 559 mm (22 \npulgadas) de ancho, ni más de 6096 mm (20 pies) de largo medidos a lo largo \nde la línea central del pasadizo desde la abertura hasta el artefacto. Debe ha-\nber un espacio de servicio nivelado de no menos de 762 mm (30 pulgadas) de \nprofundidad y 762 mm (30 pulgadas) de ancho en el lado frontal o de servicio \ndel artefacto. Si la profundidad del pasillo o del espacio de servicio es superior \na 12 pulgadas (305 mm) por debajo de la rasante colindante, las paredes del \npasillo deberán estar revestidas de hormigón o mampostería. Dicho hormigón \no mampostería se extenderá no menos de 102 mm (4 pulgadas) por encima del \nnivel colindante y tendrá suficiente capacidad de soporte lateral para resistir el \ncolapso. Las dimensiones de la abertura de acceso libre no deberán ser inferio-\nres a 559 mm por 762 mm (22 pulgadas por 30 pulgadas), y lo suficientemente \ngrandes como para permitir la extracción del aparato más grande.\nEXCEPCIONES:\n1. El pasadizo no es necesario cuando el espacio de servicio a nivel está presen-\nte cuando el acceso está abierto y el aparato es capaz de ser atendido y retirado \na través de la abertura requerida.\n2. Cuando el pasadizo no esté obstruido y tenga una altura no inferior a 1828 \n\n\nmm (6 pies) y una anchura de 559 mm (22 pulgadas) en toda su longitud, el \npasadizo no estará limitado en longitud.",
+   "paginas": [
+    87,
+    88
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.4.1",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "REQUISITOS ELÉCTRICOS",
+   "texto": "REQUISITOS ELÉCTRICOS. Se debe instalar una luminaria controlada \npor un interruptor ubicado en la abertura de paso requerida y un tomacorriente \nen la ubicación del artefacto o cerca de ella, de acuerdo con NFPA 70.",
+   "paginas": [
+    88
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NFPA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.5",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "EQUIPOS Y ARTEFACTOS EN TECHOS O ESTRUCTURAS ELEVADAS",
+   "texto": "EQUIPOS Y ARTEFACTOS EN TECHOS O ESTRUCTURAS ELEVADAS. \nCuando los equipos o aparatos que requieran acceso estén ubicados en una \nestructura elevada o en el techo de un edificio, de manera que el personal tenga \nque subir a una altura superior a 4877 mm (16 pies) sobre el nivel del suelo \npara acceder a dichos equipos o aparatos, se debe proporcionar un medio de \nacceso interior o exterior. Dicho acceso no requerirá trepar por obstáculos de \nmás de 762 mm (30 pulgadas) de altura ni caminar por tejados con una pen-\ndiente superior a 4 unidades verticales en 12 unidades horizontales (pendiente \ndel 33 por ciento). Dicho acceso no requerirá el uso de escaleras portátiles. \nCuando el acceso implique trepar por encima de parapetos, la altura se medirá \nhasta la parte superior del parapeto.\nLas escaleras permanentes instaladas para proporcionar el acceso requerido \ndeberán cumplir los siguientes criterios mínimos de diseño:\n1. La barandilla lateral se extenderá por encima del parapeto o borde del tejado \nno menos de 762 mm (30 pulgadas).\n2. Las escaleras tendrán un espacio entre peldaños no superior a 356 mm (14 \npulgadas) entre centros. El peldaño superior no debe estar a más de 610 mm \n(24 pulgadas) por debajo del borde superior de la escotilla del techo, del techo \no del parapeto, según corresponda.\n3. Las escaleras tendrán un espacio entre los dedos no inferior a 152 mm (6 \npulgadas) de profundidad.\n4. No debe haber menos de 457 mm (18 pulgadas) entre los rieles.\n\n\n 5. Los peldaños deben tener un diámetro no menor de 19 mm (0.75 pulgadas) \ny ser capaces de soportar una carga de 136.1 kg (300 libras).\n6. Las escaleras de más de 9144 mm (30 pies) de altura deben tener secciones \ndesplazadas y descansos capaces de soportar 488.2 kg/m2 (100 libras por pie \ncuadrado). Las dimensiones de los descansos no deben ser menores de 457 \nmm (18 pulgadas) ni menores que el ancho de la escalera. Debe haber una \nbarandilla en todos los lados abiertos del rellano.\n7. Espacio libre para subir. La distancia desde la línea central de los peldaños \nhasta el objeto permanente más cercano en el lado de ascenso de la escalera \nno debe ser inferior a 762 mm (30 pulgadas) medidas perpendicularmente a \nlos peldaños. Esta distancia deberá mantenerse desde el punto de acceso a la \nescalera hasta la parte inferior de la trampilla del techo. A ambos lados de la \nescalera deberá haber una anchura libre mínima de 381 mm (15 pulgadas), \nmedida desde el punto medio de los peldaños y paralela a ellos, excepto cuan-\ndo se instalen jaulas o pozos.\n8. Aterrizaje obligatorio. La escalera debe estar provista de un área de aterrizaje \ninferior despejada y sin obstrucciones que tenga una dimensión mínima de 762 \nmm (30 pulgadas) por 762 mm (30 pulgadas) centrada delante de la escalera.\n9. Las escaleras deben estar protegidas contra la corrosión por medios apro-\nbados.\n10. Se debe proporcionar acceso a las escaleras en todo momento.\nLas pasarelas instaladas para proporcionar el acceso requerido deberán ser \nde no menos de 610 mm (24 pulgadas) de ancho y deberán tener barandales \ncomo se requiere para las plataformas de servicio.\nEXCEPCIÓN: Esta sección no se aplicará a las ocupaciones del Grupo R-3.",
+   "paginas": [
+    88,
+    89
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.5.1",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "TECHOS INCLINADOS",
+   "texto": "TECHOS INCLINADOS. Cuando se instalen aparatos, equipos, ventila-\n\n\ndores u otros componentes que requieran servicio en un techo que tenga una \npendiente de tres unidades verticales en 12 unidades horizontales (pendiente \ndel 25 por ciento) o mayor y que tenga un borde a más de 762 mm (30 pulga-\ndas) por encima del nivel en dicho borde, se debe proporcionar una platafor-\nma nivelada a cada lado del aparato o equipo al cual se requiera acceso para \nservicio, reparación o mantenimiento. La plataforma no deberá ser inferior a \n762 mm (30 pulgadas) en ninguna de sus dimensiones y deberá estar provista \nde Protecciónes. Las Protecciónes se extenderán no menos de 1067 mm (42 \npulgadas) por encima de la plataforma, estarán construidas de manera que im-\npidan el paso de una esfera de 533 mm de diámetro (21 pulgadas) y cumplirán \ncon los requisitos de carga para Protecciónes especificados en el Código de \nConstrucción de Edificaciones de la República Dominicana. El acceso no \nrequerirá caminar sobre tejados que tengan una pendiente superior a cuatro \nunidades verticales en 12 unidades horizontales (pendiente del 33 por ciento). \nCuando el acceso implique obstrucciones de más de 762 mm (30 pulgadas) \nde altura, dichas obstrucciones se proporcionarán con escaleras instaladas de \nacuerdo con la Sección 2.6.5 o escaleras instaladas de acuerdo con los requisi-\ntos especificados en el Código de Construcción de Edificaciones de la Repú-\nblica Dominicana en la trayectoria de desplazamiento hacia y desde aparatos, \nventiladores o equipos que requieran servicio.",
+   "paginas": [
+    89,
+    90
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.5.2",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "REQUISITOS ELÉCTRICOS",
+   "texto": "REQUISITOS ELÉCTRICOS. En la ubicación del equipo o cerca de ella \ndeberá haber una toma de corriente de acuerdo con la norma NFPA 70.",
+   "paginas": [
+    90
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NFPA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.1",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "APARATOS DE COMBUSTIÓN",
+   "texto": "APARATOS DE COMBUSTIÓN. Los subproductos líquidos de la combus-\ntión de los aparatos de condensación deben recogerse y descargarse en una \ninstalación de fontanería aprobada o en una zona de eliminación de acuerdo \ncon las instrucciones de instalación del fabricante. Las tuberías de condensa-\nción serán de un material aprobado resistente a la corrosión y no serán más \n\n\npequeñas que la conexión de desagüe del aparato. Dichas tuberías deberán \nmantener una pendiente horizontal mínima en la dirección de descarga no in-\nferior a un octavo de unidad vertical en 12 unidades horizontales (pendiente \ndel 1 por ciento).",
+   "paginas": [
+    90,
+    91
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.1.1",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "IDENTIFICACIÓN",
+   "texto": "IDENTIFICACIÓN. La terminación de la tubería de condensado oculta \ndebe estar marcada para indicar si la tubería está conectada al drenaje primario \no secundario.",
+   "paginas": [
+    91
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.2",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "EVAPORADORES Y SERPENTINES DE REFRIGERACIÓN",
+   "texto": "EVAPORADORES Y SERPENTINES DE REFRIGERACIÓN. Los equipos \ny aparatos que contengan evaporadores o serpentines de refrigeración deben \ndisponer de sistemas de drenaje de condensados. Los sistemas de drenaje de \ncondensados deben diseñarse, construirse e instalarse de acuerdo con las sec-\nciones 2.7.2.1 a 2.7.2.5.\nEXCEPCIÓN: Los evaporadores y serpentines de enfriamiento que estén dise-\nñados para operar solo en enfriamiento sensible y no soporten condensación, \nno deberán cumplir con los requisitos de esta sección.",
+   "paginas": [
+    91
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.2.1",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "ELIMINACIÓN DE CONDENSADOS",
+   "texto": "ELIMINACIÓN DE CONDENSADOS. El condensado de todos los ser-\npentines de enfriamiento y evaporadores deberá ser conducido desde la salida \nde la bandeja de drenaje hasta un lugar aprobado para su eliminación. Dicha \ntubería deberá mantener una pendiente horizontal mínima en la dirección de \ndescarga de no menos de un octavo de unidad vertical en 12 unidades hori-\nzontales (pendiente del 1 por ciento). Los condensados no deberán verterse en \ncalles, callejones u otras zonas de forma que causen molestias.",
+   "paginas": [
+    91
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.2.1.1",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "DESCARGA DE CONDENSADOS",
+   "texto": "DESCARGA DE CONDENSADOS. Los desagües de condensados no \nse conectarán directamente a ningún desagüe de fontanería, desagüe o tubería \nde ventilación. Los desagües de condensados no deben descargarse en una ins-\ntalación de fontanería que no sea un fregadero, un desagüe de suelo, un des-\nagüe de zanja, un fregadero de fregona, un desagüe de cubo, un tubo vertical, \n\n\nun fregadero de uso general o un fregadero de lavandería. Las conexiones de \nlos desagües de condensados a una derivación en estrella de un lavabo o a una \ntubería de rebose de bañera no se considerarán descargas a una instalación de \nfontanería. Excepto cuando descarguen al exterior, el punto de descarga de los \ndesagües de condensados estará situado dentro de la misma ocupación, espa-\ncio de inquilino o unidad de vivienda que la fuente del condensado.",
+   "paginas": [
+    91,
+    92
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.2.2",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "MATERIALES Y TAMAÑOS DE LAS TUBERÍAS DE DESAGÜE",
+   "texto": "MATERIALES Y TAMAÑOS DE LAS TUBERÍAS DE DESAGÜE. Los \ncomponentes del sistema de evacuación de condensados serán tuberías o tu-\nbos de ABS, hierro fundido, cobre y aleaciones de cobre, CPVC, polietileno re-\nticulado, acero galvanizado, PE-RT, polietileno, polipropileno, PVC o PVDF . Los \ncomponentes se seleccionarán en función de la presión y temperatura nomina-\nles de la instalación. Las uniones y conexiones se realizarán de acuerdo con las \ndisposiciones aplicables del Código de Construcción de Edificaciones de la \nRepública Dominicana, relativo al tipo de material. El tamaño de la tubería de \ndesagüe y drenaje de condensado no será inferior a 19,1 mm (3/4 de pulgada) \ny no disminuirá de tamaño desde la conexión de la bandeja de drenaje hasta el \nlugar de eliminación del condensado. Cuando las tuberías de desagüe de más \nde una unidad estén unidas para el desagüe de condensados, la tubería deberá \ndimensionarse de acuerdo con la tabla 2.7.2.2.\nTABLA 2.7.2.2 DIMENSIONAMIENTO DEL DRENAJE DE CONDENSADO\nPara el SI: 1 pulgada = 25,4 mm, 1 tonelada = 3,517 kW.",
+   "paginas": [
+    92
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.2.3",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "SISTEMAS DE DRENAJE AUXILIARES Y SECUNDARIOS",
+   "texto": "SISTEMAS DE DRENAJE AUXILIARES Y SECUNDARIOS.\nAdemás de los requisitos de la sección 2.7.2.1, cuando puedan producirse da-\nños en cualquiera de los componentes del edificio como resultado del desbor-\ndamiento del sistema primario de eliminación de condensados del equipo, de-\nberá preverse uno de los siguientes métodos auxiliares de protección para cada \nserpentín de refrigeración o aparato alimentado por combustible que produzca \ncondensados:\n1. Se instalará una bandeja de drenaje auxiliar con un desagüe independiente \ndebajo de las baterías en las que se produzca condensación. El desagüe de la \nbandeja auxiliar descargará en un punto de vertido bien visible para alertar a \nlos ocupantes en caso de que se interrumpa el desagüe principal. La bandeja \ntendrá una profundidad mínima de 38 mm (11/2 pulgadas), será no menos de \n76 mm (3 pulgadas) más grande que la unidad, o las dimensiones del serpentín \nen anchura y longitud y estará construida de material resistente a la corrosión. \nLas bandejas de chapa de acero galvanizado tendrán un espesor mínimo no \ninferior a 0,6010 mm (0,0236 pulgadas) (calibre n. º 24). Las cubetas no metáli-\ncas deberán tener un espesor mínimo no inferior a 1,6 mm (0,0625 pulgadas).\n2. Se conectará una línea de desagüe de rebosadero independiente a la bandeja \nde desagüe suministrada con el equipo. Dicho desagüe de rebose descargará \nen un punto visible de evacuación para alertar a los ocupantes en caso de que \nse obstruya el desagüe primario. La línea de desagüe de rebose se conectará a \nla bandeja de desagüe a un nivel más alto que la conexión del desagüe primario.\n3. Se instalará una bandeja de drenaje auxiliar sin línea de drenaje separada \ndebajo de los serpentines en los que se produzca condensación. Dicha bandeja \nestará equipada con un dispositivo de detección del nivel de agua conforme a \nla norma UL 508 que desconectará el equipo servido antes de que se desborde \nla bandeja. La bandeja de drenaje auxiliar se construirá de acuerdo con el punto \n1 de esta sección.\n4. Se instalará un dispositivo de detección del nivel de agua conforme a la nor-\nma UL 508 que desconectará el equipo en caso de que se bloquee el desagüe \n\n\nprimario. El dispositivo se instalará en la línea de drenaje principal, en la línea \nde drenaje de rebose o en la bandeja de drenaje suministrada con el equipo, \nsituada en un punto más alto que la conexión de la línea de drenaje principal y \npor debajo del borde de rebose de dicha bandeja.\nEXCEPCIÓN: Aparatos alimentados por combustible que desconectan auto-\nmáticamente el funcionamiento en caso de obstrucción del sistema de evacua-\nción de condensados.",
+   "paginas": [
+    92,
+    93,
+    94
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.2.3.1",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "DISPOSITIVOS DE CONTROL DEL NIVEL DE AGUA",
+   "texto": "DISPOSITIVOS DE CONTROL DEL NIVEL DE AGUA. En las unida-\ndes de flujo descendente y en todos los demás serpentines que no tengan un \ndrenaje secundario o disposiciones para instalar una bandeja de drenaje secun-\ndaria o auxiliar, se instalará un dispositivo de control del nivel de agua dentro \nde la bandeja de drenaje primaria. Este dispositivo desconectará el equipo en \ncaso de que el desagüe primario se obstruya. No se permitirán dispositivos ins-\ntalados en la línea de drenaje.",
+   "paginas": [
+    94
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.2.3.2",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "APARATOS, EQUIPOS Y AISLAMIENTO EN BANDEJAS",
+   "texto": "APARATOS, EQUIPOS Y AISLAMIENTO EN BANDEJAS. Cuando \nlos aparatos, equipos o aislamientos estén sujetos a daños por agua cuando \nse llenen las bandejas de drenaje auxiliares, la parte del aparato, equipo y aisla-\nmiento se instalará por encima del borde de la bandeja. Los soportes ubicados \ndentro de la cubeta para sostener el artefacto o equipo deben ser resistentes al \nagua y aprobados.",
+   "paginas": [
+    94
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.2.3.3",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "IDENTIFICACIÓN",
+   "texto": "IDENTIFICACIÓN. La terminación de la tubería de condensado ocul-\nta debe estar marcada para indicar si la tubería está conectada al drenaje pri-\nmario o secundario.",
+   "paginas": [
+    94
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.2.4",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "SIFONES",
+   "texto": "SIFONES. Los desagües de condensados deben estar atrapados según \nlo exija el fabricante del equipo o aparato.",
+   "paginas": [
+    94
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.2.4.1",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "SIFONES DE SISTEMAS MINI-SPLIT SIN CONDUCTOS",
+   "texto": "SIFONES DE SISTEMAS MINI-SPLIT SIN CONDUCTOS. Los \nequipos mini-split sin ductos que producen condensado deben estar pro-\n\n\nvistos de una válvula de retención en línea ubicada en la línea de drenaje, o \nuna trampa.",
+   "paginas": [
+    94,
+    95
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "3.7.2.5",
+   "titulo_num": 2,
+   "capitulo": "3.7",
+   "encabezado": "MANTENIMIENTO DE LA LÍNEA DE DRENAJE",
+   "texto": "MANTENIMIENTO DE LA LÍNEA DE DRENAJE. Las líneas de drenaje \nde condensado deben estar configuradas para permitir la eliminación de obs-\ntrucciones y la realización de tareas de mantenimiento sin necesidad de cortar \nla línea de drenaje.",
+   "paginas": [
+    95
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": true
+  },
+  {
+   "id": "3.7.3",
+   "titulo_num": 2,
+   "capitulo": "3.7",
+   "encabezado": "BOMBAS DE CONDENSADOS",
+   "texto": "BOMBAS DE CONDENSADOS. Las bombas de condensados situadas \nen espacios no habitables, como áticos y sótanos, deben estar conectadas al \naparato o equipo al que dan servicio de forma que, cuando falle la bomba, se \nimpida el funcionamiento del aparato o equipo. Las bombas se instalarán de \nacuerdo con las instrucciones del fabricante.",
+   "paginas": [
+    95
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": true
+  },
+  {
+   "id": "2.8.1",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "ÁMBITO DE APLICACIÓN",
+   "texto": "ÁMBITO DE APLICACIÓN. Esta sección regirá la reducción de las dis-\ntancias requeridas a materiales combustibles y conjuntos combustibles para \nchimeneas, ventilaciones, equipos de extracción de cocina, artefactos mecáni-\ncos y dispositivos y equipos mecánicos.",
+   "paginas": [
+    95
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.2",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "APARATOS Y EQUIPOS LISTADOS",
+   "texto": "APARATOS Y EQUIPOS LISTADOS. La reducción de las distancias re-\nqueridas a combustibles para artefactos y equipos listados y etiquetados de-\nberá estar de acuerdo con los requisitos de esta sección, excepto que dichas \ndistancias no deberán reducirse cuando la reducción esté específicamente pro-\nhibida por los términos del listado del artefacto o equipo.",
+   "paginas": [
+    95
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.3",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "",
+   "texto": "CONSTRUCCIÓN E INSTALACIÓN DE CONJUNTOS DE PROTEC -\nCIÓN. Los conjuntos de protección de espacio libre reducido, incluidos los \nelementos estructurales y de soporte, deben estar construidos con materiales \nincombustibles. Los espaciadores utilizados para mantener un espacio de aire \nentre el conjunto de protección y el material o conjunto protegido deberán ser \nincombustibles. Cuando se especifique un espacio entre el conjunto de pro-\n\n\ntección y el material o conjunto combustible protegido, se dejará el mismo \nespacio alrededor de los bordes del conjunto de protección y los espaciadores \nse colocarán de manera que permitan la circulación de aire por convección en \ndicho espacio. Los conjuntos de protección no se colocarán a menos de 25 \nmm (1 pulgada) de los aparatos, dispositivos o equipos mecánicos, indepen-\ndientemente del espacio libre reducido admisible.",
+   "paginas": [
+    95,
+    96
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.4",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "REDUCCIÓN PERMITIDA",
+   "texto": "REDUCCIÓN PERMITIDA. La reducción de las distancias requeridas \na conjuntos combustibles o materiales combustibles se basará en la utiliza-\nción de un conjunto protector de distancia reducida de acuerdo con la sección \n2.8.4.1 o 2.8.4.2.",
+   "paginas": [
+    96
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.4.1",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "CONJUNTOS ETIQUETADOS",
+   "texto": "CONJUNTOS ETIQUETADOS. La reducción de espacio libre admisi-\nble se basará en un conjunto protector de espacio libre reducido aprobado que \nesté listado y etiquetado de acuerdo con UL 1618.",
+   "paginas": [
+    96
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.4.2",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "TABLA DE REDUCCIÓN",
+   "texto": "TABLA DE REDUCCIÓN. La reducción del espacio libre admisible \ndebe basarse en uno de los métodos especificados en la tabla 2.8.4.2. Cuando \nlas distancias requeridas no estén enumeradas en la tabla 2.8.4.2, las distan-\ncias reducidas se determinarán por interpolación lineal entre las distancias \nenumeradas en la tabla. Las distancias reducidas no se obtendrán por extra-\npolación por debajo del rango de la tabla.\n\n\nTABLA 2.8.4.2 MÉTODOS DE REDUCCIÓN DEL CLARO b\nPara el SI: 1 pulgada = 25,4 mm, °C = [(°F)-32]/1,8, 1 libra por pie cúbico \n= 16,02 kg/m3, 1,0 Btu - in/(ft2 - h - °F) = 0,144 W/m2 - K.\na. La lana mineral y las napas de fibra de vidrio (manta o tabla) deberán \ntener una densidad mínima de 8 libras por pie cúbico y un punto de fu-\nsión mínimo de 1.500 °F. El material aislante utilizado como parte de un \nsistema de reducción de holguras deberá tener una conductividad térmica \nde 1,0 Btu - pulg/(ft2 - h - °F) o menos. El tablero aislante debe ser de \nmaterial incombustible.\nb. Para conocer las limitaciones de la reducción del espacio libre para \naparatos de combustión de combustibles sólidos, chimeneas de mampos-\ntería, pasos de conectores, chimeneas de mampostería y conductos de \ncocina, véanse los apartados 2.8.4.2.1 a 2.8.4.2.5.",
+   "paginas": [
+    96,
+    97
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.4.2.1",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "APARATOS DE QUEMA DE COMBUSTIBLE SÓLIDO",
+   "texto": "APARATOS DE QUEMA DE COMBUSTIBLE SÓLIDO. Los métodos \nde reducción del espacio libre especificados en la tabla 3.8.4.2 no se utilizarán \npara reducir el espacio libre requerido para los artefactos que queman combus-\ntibles sólidos etiquetados para instalación con espacios libres de 305 mm (12 \npulgadas) o menos. Cuando los artefactos estén etiquetados para instalación \ncon espacios libres superiores a 305 mm (12 pulgadas), los métodos de re-\nducción de espacio libre de la tabla 2.8.4.2 no deben reducir el espacio libre a \nmenos de 305 mm (12 pulgadas).",
+   "paginas": [
+    97,
+    98
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.4.2.2",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "CHIMENEAS DE MAMPOSTERÍA",
+   "texto": "CHIMENEAS DE MAMPOSTERÍA.\nLos métodos de reducción de espacio libre especificados en la T abla 3.8.4.2 \nno se utilizarán para reducir los espacios libres requeridos para chimeneas de \nmampostería según se especifica en el Código de Construcción de Edifica-\nciones de la República Dominicana.",
+   "paginas": [
+    98
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.4.2.3",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "PASO DE CONECTORES DE CHIMENEA",
+   "texto": "PASO DE CONECTORES DE CHIMENEA. Los métodos de reduc-\nción de espacio libre especificados en la tabla 2.8.4.2 no se utilizarán para re-\nducir los espacios libres requeridos para los pasos de conectores de chimeneas \nsegún se especifica en la sección 8.3.10.4.",
+   "paginas": [
+    98
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.4.2.4",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "CHIMENEAS DE MAMPOSTERÍA",
+   "texto": "CHIMENEAS DE MAMPOSTERÍA. Los métodos de reducción de es-\npacios libres especificados en la tabla 3.8.4.2 no se utilizarán para reducir los \nespacios libres requeridos para chimeneas de mampostería según se especifica \nen el Código de Construcción de Edificaciones de la República Dominicana.",
+   "paginas": [
+    98
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.4.2.5",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "CONDUCTOS DE ESCAPE DE COCINA",
+   "texto": "CONDUCTOS DE ESCAPE DE COCINA. Los métodos de reducción de \nespacios libres especificados en la T abla 2.8.4.2 no se utilizarán para reducir los \nespacios libres mínimos requeridos por la Sección 5.6.3.11.1 para conductos \nde escape de cocina encerrados en un pozo.",
+   "paginas": [
+    98,
+    99
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.9.1",
+   "titulo_num": 2,
+   "capitulo": "2.9",
+   "encabezado": "SISTEMAS DE CALEFACCIÓN DE ESPACIOS",
+   "texto": "SISTEMAS DE CALEFACCIÓN DE ESPACIOS. Los espacios interiores \ndestinados a la ocupación humana deberán estar provistos de sistemas activos \no pasivos de calefacción de espacios capaces de mantener una temperatura \ninterior no inferior a 68°F (20°C) en un punto situado a 914 mm (3 pies) por \nencima del suelo en el día de calefacción previsto. La instalación de calefactores \nportátiles no se utilizará para lograr el cumplimiento de esta sección.\nEXCEPCIONES:\n1. Espacios interiores cuya finalidad principal no esté relacionada con el confort \nhumano.\n2. Ocupaciones de los grupos F, H, S y U.",
+   "paginas": [
+    99
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.10.1",
+   "titulo_num": 2,
+   "capitulo": "2.10",
+   "encabezado": "REQUERIDO",
+   "texto": "REQUERIDO. Las estructuras ocupadas para propósitos que involucren \nriesgos de explosión deberán estar provistas de control de explosión donde lo \nrequiera el Reglamento Para la Seguridad y Protección Contra Incendios \n(R-032). Los sistemas de control de explosiones deben ser diseñados e ins-\ntalados de acuerdo con el Código de Construcción de Edificaciones de la \nRepública Dominicana.",
+   "paginas": [
+    99
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.11.1",
+   "titulo_num": 2,
+   "capitulo": "2.11",
+   "encabezado": "OBLIGATORIO",
+   "texto": "OBLIGATORIO.\nSe instalarán ventilaciones de humo y calor aprobadas en los techos de edificios \nde un piso donde lo requiera el Reglamento Para la Seguridad y Protección \nContra Incendios (R-032). Las ventilaciones de humo y calor deben diseñarse \ne instalarse de acuerdo con el Reglamento Para la Seguridad y Protección Con-\ntra Incendios (R-032).",
+   "paginas": [
+    99,
+    100
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.12.1",
+   "titulo_num": 2,
+   "capitulo": "2.12",
+   "encabezado": "CÁLCULOS DE CARGA",
+   "texto": "CÁLCULOS DE CARGA.\nLas cargas de diseño del sistema de calefacción y enfriamiento con el fin de di-\nmensionar los sistemas, artefactos y equipos se determinarán de acuerdo con \nlos procedimientos descritos en la Norma 183 de ASHRAE/ACCA. Alternati-\nvamente, las cargas de diseño se determinarán mediante un procedimiento de \ncálculo equivalente aprobado, utilizando los parámetros de diseño especifica-\ndos en el Código de Construcción de Edificaciones de la República Domi-\nnicana.\n\n\nTÍTULO.3\nVENTILACIÓN",
+   "paginas": [
+    100,
+    101
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASHRAE"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  }
+ ]
+}

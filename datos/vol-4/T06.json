@@ -1,0 +1,920 @@
+{
+ "volumen": 4,
+ "sigla": null,
+ "nombre_volumen": "Recomendaciones para Instalaciones Mecánicas en Edificaciones",
+ "titulo": 6,
+ "nombre": "Calderas, Calentadores de Agua y Recipientes a Presión",
+ "fuente_pdf": "MIVHED-Recomendaciones-para-Instalaciones-Mecanicas-en-Edificaciones-Vol-IV.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "6.1": "GENERALIDADES",
+  "6.10": "CALIBRES",
+  "6.2": "CALENTADORES DE AGUA",
+  "6.3": "RECIPIENTES A PRESIÓN",
+  "6.4": "CALDERAS",
+  "6.5": "CONEXIONES DE CALDERAS",
+  "6.6": "VÁLVULAS Y CONTROLES DE SEGURIDAD Y ALIVIO DE",
+  "6.7": "CORTE DE AGUA BAJA DE CALDERA",
+  "6.8": "VÁLVULA DE DESCARGA INFERIOR",
+  "6.9": "DEPÓSITO DE EXPANSIÓN DE LA CALDERA DE AGUA"
+ },
+ "clausulas": [
+  {
+   "id": "6.1.1",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "ÁMBITO DE APLICACIÓN",
+   "texto": "ÁMBITO DE APLICACIÓN. El presente capítulo regula la instalación, \nmodificación y reparación de calderas, calentadores de agua y recipientes a \npresión.\nEXCEPCIONES:\n1. Recipientes a presión utilizados para el suministro de agua sin calefacción.\n2. Recipientes a presión portátiles no encendidos y contenedores de la Comi-\nsión Interestatal de Comercio.\n3. Recipientes para oxígeno a granel y gases medicinales.\n4. Recipientes a presión no sometidos a combustión con un volumen de 0,14 \nm3 (5 pies cúbicos) o inferior que funcionen a presiones que no superen los \n1.724 kPa (250 libras por pulgada cuadrada) y estén situados en recintos de \nlos Grupos B, F, H, M, R, S y U.\n5. Recipientes a presión utilizados en sistemas de refrigeración regulados por \nel capítulo 11 del presente código.\n\n\n6. Depósitos a presión utilizados junto con cables coaxiales, cables telefóni-\ncos, cables de alimentación y otros sistemas similares de control de la hume-\ndad.\n7. Cualquier caldera o recipiente a presión sujeto a inspección por inspectores \nfederales o estatales.\n8. Calderas o recipientes a presión sujetos a inspección según lo dispuesto en \nlas normas locates.",
+   "paginas": [
+    260,
+    261
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.1",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Los calentadores de agua potable y los tanques de \nalmacenamiento de agua caliente deberán estar listados y etiquetados e insta-\nlados de acuerdo con las instrucciones del fabricante, el Código de Construc-\nción de Florida, Plomería y este código. T odos los calentadores de agua debe-\nrán poder retirarse sin necesidad de retirar primero una parte permanente de la \nestructura del edificio. Las conexiones de agua potable y válvulas de alivio para \ntodos los calentadores de agua deberán cumplir con los requisitos del Código \nde Construcción de Florida, Plomería. Los calentadores de agua eléctricos do-\nmésticos deberán cumplir las normas UL 174 o UL 1453. Los calentadores de \nagua eléctricos comerciales deberán cumplir la norma UL 1453. Los calentado-\nres de agua alimentados con aceite deberán cumplir la norma UL 732. Los ca-\nlentadores de agua de combustible sólido deberán cumplir la norma UL 2523. \nLos calentadores de agua solares térmicos deberán cumplir el capítulo 14 y las \nnormas UL 174 o UL 1453.",
+   "paginas": [
+    261
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.2",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "CALENTADORES DE AGUA UTILIZADOS PARA CALEFACCIÓN",
+   "texto": "CALENTADORES DE AGUA UTILIZADOS PARA CALEFACCIÓN. Los \ncalentadores de agua utilizados tanto para suministrar agua caliente potable \ncomo para proporcionar agua caliente para aplicaciones de calefacción de es-\npacios deberán estar listados y etiquetados para dichas aplicaciones por el fa-\nbricante y deberán instalarse de acuerdo con las instrucciones del fabricante y el \nCódigo de Diseño y Construcción de Edificaciones en la República Dominicana.",
+   "paginas": [
+    261
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.2.1",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "DIMENSIONAMIENTO",
+   "texto": "DIMENSIONAMIENTO. Los calentadores de agua utilizados tanto \n\n\npara el calentamiento de agua potable como para la calefacción de locales de-\nberán dimensionarse de forma que la carga de calefacción de locales no dismi-\nnuya la capacidad necesaria de calentamiento de agua potable.",
+   "paginas": [
+    261,
+    262
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.2.2",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "LIMITACIÓN DE TEMPERATURA",
+   "texto": "LIMITACIÓN DE TEMPERATURA. Cuando un sistema combinado de \ncalentamiento de agua potable y calefacción de locales requiera agua para la \ncalefacción de locales a temperaturas superiores a 60°C (140°F), se instalará \nuna válvula mezcladora accionada por temperatura que cumpla la norma ASSE \n1017 para templar el agua suministrada al sistema de distribución de agua ca-\nliente potable a una temperatura igual o inferior a 60°C (140°F).",
+   "paginas": [
+    262
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.3",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "DISPOSITIVOS SUPLEMENTARIOS DE CALENTAMIENTO DE AGUA",
+   "texto": "DISPOSITIVOS SUPLEMENTARIOS DE CALENTAMIENTO DE AGUA. \nLos dispositivos de calentamiento de agua potable que utilizan intercambiado-\nres de calor refrigerante-agua deberán ser aprobados e instalados de acuerdo \ncon el Código de Construcción de Florida, Fontanería y las instrucciones del \nfabricante.",
+   "paginas": [
+    262
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.3.1",
+   "titulo_num": 6,
+   "capitulo": "6.3",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. T odos los recipientes a presión, a menos que se \napruebe lo contrario, se construirán y certificarán de acuerdo con el Código \nASME de Calderas y Recipientes a Presión, y se instalarán de acuerdo con las \ninstrucciones del fabricante y las normas reconocidas a nivel nacional. Los reci-\npientes a presión de combustión directa cumplirán los requisitos de la sección \n6.4.",
+   "paginas": [
+    262
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.3.2",
+   "titulo_num": 6,
+   "capitulo": "6.3",
+   "encabezado": "TUBERÍAS",
+   "texto": "TUBERÍAS. T odos los materiales de tuberías, accesorios, juntas, conexio-\nnes y dispositivos asociados con los sistemas utilizados junto con los recipien-\ntes a presión deberán estar diseñados para la aplicación específica y deberán \nestar aprobados.",
+   "paginas": [
+    262
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.3.3",
+   "titulo_num": 6,
+   "capitulo": "6.3",
+   "encabezado": "SOLDADURA",
+   "texto": "SOLDADURA. Las soldaduras en recipientes a presión serán realizadas \npor un poseedor del Sello R de conformidad con el Código de Inspección de la \nJunta Nacional, Parte 3 o de conformidad con una norma aprobada.",
+   "paginas": [
+    262,
+    263
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.1",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "NORMAS",
+   "texto": "NORMAS. Las calderas se diseñarán, construirán y certificarán de con-\nformidad con el Código ASME de calderas y recipientes a presión, Sección I o \nIV . Los controles y dispositivos de seguridad para calderas con potencias no-\nminales de entrada de combustible inferiores a 12.500.000 Btu/h (3.662.500 \nW) cumplirán los requisitos del ASME CSD-1. Los controles y dispositivos \nde seguridad de las calderas con un consumo igual o superior a 12.500.000 \nBtu/h (3.662.500 W) cumplirán los requisitos de la norma NFPA 85. Las \ncalderas mixtas de gasóleo deberán estar homologadas y etiquetadas de \nconformidad con la norma UL 726. Las calderas eléctricas envasadas deberán \nestar homologadas y etiquetadas de conformidad con UL 834. Las calderas de \ncombustible sólido deberán estar homologadas y etiquetadas de conformidad \ncon la norma UL 2523.",
+   "paginas": [
+    263
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NFPA",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.2",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "INSTALACIÓN",
+   "texto": "INSTALACIÓN. Además de los requisitos de este código, la instalación \nde calderas deberá ajustarse a las instrucciones del fabricante. Se adjuntarán \na la caldera instrucciones de funcionamiento de tipo permanente. T odos los \nmandos de las calderas deberán ser instalados, ajustados y comprobados por \nel instalador. Los datos nominales del fabricante y la placa de características se \nfijarán a la caldera.",
+   "paginas": [
+    263
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.2.1",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "PRUEBAS DE MONÓXIDO DE CARBONO",
+   "texto": "PRUEBAS DE MONÓXIDO DE CARBONO. Las calderas se probarán \nhasta un nivel máximo de 50 partes por millón (ppm) de monóxido de carbo-\nno según las directrices de la OSHA.",
+   "paginas": [
+    263
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.3",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "ESPACIO LIBRE DE TRABAJO",
+   "texto": "ESPACIO LIBRE DE TRABAJO. Se mantendrán espacios libres alrede-\ndor de calderas, generadores, calentadores, depósitos y equipos y aparatos \nrelacionados, de forma que se permita la inspección, el mantenimiento, la \n\n\nreparación, la sustitución y la visibilidad de todos los medidores. Cuando se \ninstalen o sustituyan calderas, se dejará un espacio libre que permita el acceso \npara su inspección, mantenimiento y reparación. Los pasillos alrededor de \ntodos los lados de las calderas deberán tener una anchura sin obstáculos no \ninferior a 457 mm (18 pulgadas), a menos que se apruebe lo contrario.",
+   "paginas": [
+    263,
+    264
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.3.1",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "ESPACIO LIBRE SUPERIOR",
+   "texto": "ESPACIO LIBRE SUPERIOR. Las distancias desde la parte superior de \nlas calderas hasta el techo u otro obstáculo superior se ajustarán a lo dispues-\nto en la tabla 6.4.3.1.\nTABLA 6.4.3.1 HOLGURAS SUPERIORES DE LA CALDERA\nPara el SI: 1 pie = 304,8 mm, 1 pie cuadrado = 0,0929 m2 , 1 libra por \nhora = 0,4536 kg/h, 1 Btu/hr = 0,293 W.",
+   "paginas": [
+    264
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.4",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "MONTAJE",
+   "texto": "MONTAJE. Los equipos se colocarán o montarán sobre una base nive-\nlada capaz de soportar y distribuir el peso que contengan. Las calderas, depó-\nsitos y equipos se fijarán de acuerdo con las instrucciones de instalación del \nfabricante.",
+   "paginas": [
+    264
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.5",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "PISOS",
+   "texto": "PISOS. Las calderas se montarán sobre suelos de construcción incom-\nbustible, a menos que se indique que pueden montarse sobre suelos combus-\ntibles.",
+   "paginas": [
+    264,
+    265
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.6",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "SALAS Y RECINTOS DE CALDERAS",
+   "texto": "SALAS Y RECINTOS DE CALDERAS. Las salas y recintos de calderas y \nel acceso a los mismos deberán cumplir con el Código de Diseño y Construc-\nción de Edificaciones en la República Dominicana. Las salas de calderas estarán \nequipadas con un desagüe en el suelo u otro medio aprobado para la elimina-\nción de residuos líquidos.",
+   "paginas": [
+    265
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.7",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "AJUSTES E INSTRUCCIONES DE FUNCIONAMIENTO",
+   "texto": "AJUSTES E INSTRUCCIONES DE FUNCIONAMIENTO. Las calderas de \nagua caliente y vapor deberán tener todos los controles de funcionamiento y \nseguridad ajustados y probados en funcionamiento por el contratista instala-\ndor. El instalador proporcionará un diagrama de control completo y las instruc-\nciones de funcionamiento de la caldera para cada instalación.",
+   "paginas": [
+    265
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.1",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "VÁLVULAS",
+   "texto": "VÁLVULAS. Cada caldera o caldera modular dispondrá de una válvula de \ncierre en las tuberías de alimentación y retorno. En las instalaciones de varias \ncalderas o varias calderas modulares, cada caldera o caldera modular dispon-\ndrá de válvulas de cierre individuales en las tuberías de alimentación y retorno.\nEXCEPCIÓN: Las válvulas de cierre no son necesarias en un sistema que ten-\nga una única caldera de vapor de baja presión.",
+   "paginas": [
+    265
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.2",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "SUMINISTRO DE AGUA POTABLE",
+   "texto": "SUMINISTRO DE AGUA POTABLE. El suministro de agua a todas las \ncalderas se conectará de acuerdo con el Código de Construcción de Florida, \nFontanería.",
+   "paginas": [
+    265
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "VÁLVULAS DE SEGURIDAD PARA CALDERAS DE VAPOR",
+   "texto": "VÁLVULAS DE SEGURIDAD PARA CALDERAS DE VAPOR. Las calderas \nde vapor estarán protegidas con una válvula de seguridad.",
+   "paginas": [
+    265
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.2",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "VÁLVULAS DE SEGURIDAD PARA CALDERAS DE AGUA CALIENTE",
+   "texto": "VÁLVULAS DE SEGURIDAD PARA CALDERAS DE AGUA CALIENTE. \nLas calderas de agua caliente estarán protegidas con una válvula de seguridad.",
+   "paginas": [
+    265,
+    266
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.3",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "ALIVIO DE PRESIÓN PARA RECIPIENTES A PRESIÓN",
+   "texto": "ALIVIO DE PRESIÓN PARA RECIPIENTES A PRESIÓN. Los recipientes \na presión se protegerán con una válvula limitadora de presión o un dispositivo \nlimitador de presión, tal como se exige en las instrucciones de instalación del \nfabricante del recipiente a presión.",
+   "paginas": [
+    266
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.4",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "",
+   "texto": "APROBACIÓN DE VÁLVULAS DE SEGURIDAD Y DE ALIVIO DE SE-\nGURIDAD. Las válvulas de seguridad y de alivio de seguridad deberán estar \nlistadas y etiquetadas, y deberán tener una capacidad nominal mínima para \nel equipo o aparatos a los que sirven. Las válvulas de seguridad se ajustarán a \nuna presión no superior a la presión nominal indicada en la placa de la caldera \no recipiente a presión.",
+   "paginas": [
+    266
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.5",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "INSTALACIÓN",
+   "texto": "INSTALACIÓN. Las válvulas de seguridad o de alivio se instalarán direc-\ntamente en la abertura de la válvula de seguridad o de alivio de la caldera o \nrecipiente a presión. No se instalarán válvulas a ambos lados de la conexión de \nla válvula de seguridad o de descarga. La válvula de seguridad se descargará por \ngravedad.",
+   "paginas": [
+    266
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.6",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "DESCARGA DE VÁLVULAS DE SEGURIDAD Y ALIVIO",
+   "texto": "DESCARGA DE VÁLVULAS DE SEGURIDAD Y ALIVIO. Las tuberías de \ndescarga de las válvulas de seguridad y de alivio serán de tubo rígido homolo-\ngado para la temperatura del sistema. La tubería de descarga tendrá el mismo \ndiámetro que la salida de la válvula de seguridad o de alivio. Las válvulas de \nseguridad y de alivio no descargarán de forma que constituyan un peligro, una \ncausa potencial de daños o cualquier otra molestia. Las válvulas de seguridad \nde vapor a alta presión se purgarán hacia el exterior de la estructura. Cuando \nuna válvula de seguridad de baja presión o una válvula de alivio descargue en \nel sistema de drenaje, la instalación deberá cumplir con el Código de Diseño y \nConstrucción de Edificaciones en la República Dominicana.",
+   "paginas": [
+    266
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.7",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "DISPOSITIVOS DE SEGURIDAD DE LA CALDERA",
+   "texto": "DISPOSITIVOS DE SEGURIDAD DE LA CALDERA. Las calderas estarán \nequipadas con los controles y dispositivos de limitación exigidos por las ins-\ntrucciones de instalación del fabricante y las condiciones del listado.",
+   "paginas": [
+    266,
+    267
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.8",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "REQUISITOS ELÉCTRICOS",
+   "texto": "REQUISITOS ELÉCTRICOS. La alimentación del sistema de control \neléctrico se realizará a partir de un circuito derivado de dos hilos que tenga un \nconductor conectado a tierra, o a partir de un transformador de aislamiento \ncon un secundario de dos hilos. Cuando se disponga de un transformador de \naislamiento, un conductor del devanado secundario deberá estar conectado a \ntierra. La tensión de control no superará los 150 voltios nominales, de línea a \nlínea. Los dispositivos de control y limitación interrumpirán el lado no conec-\ntado a tierra del circuito. Se dispondrá de un medio de desconexión manual del \ncircuito de control y los controles se dispondrán de modo que, cuando se des-\nconecten, el quemador no funcione. Estos medios de desconexión deberán po-\nder bloquearse en la posición de apagado y deberán ser fácilmente accesibles.",
+   "paginas": [
+    267
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.7.1",
+   "titulo_num": 6,
+   "capitulo": "6.7",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Las calderas de vapor y agua caliente estarán protegi-\ndas con un control de corte por bajo nivel de agua.\nEXCEPCIÓN: No se requiere un corte por bajo nivel de agua para las calderas \nde tipo coiltype y acuotubular que requieren circulación forzada de agua a tra-\nvés de la caldera y que están protegidas con un control de detección de caudal\n.",
+   "paginas": [
+    267
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.7.2",
+   "titulo_num": 6,
+   "capitulo": "6.7",
+   "encabezado": "FUNCIONAMIENTO",
+   "texto": "FUNCIONAMIENTO. Los controles de corte por bajo nivel de agua y los \ncontroles de detección de flujo requeridos por la sección 10.7.1 detendrán au-\ntomáticamente la operación de combustión del artefacto cuando el nivel de \nagua descienda por debajo del nivel de agua seguro más bajo establecido por el \nfabricante o cuando se detenga la circulación de agua, respectivamente.",
+   "paginas": [
+    267,
+    268
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.8.1",
+   "titulo_num": 6,
+   "capitulo": "6.8",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Las calderas de vapor estarán equipadas con válvu-\nla(s) de purga inferior. La válvula o válvulas se instalarán en la abertura prevista \nen la caldera. El tamaño mínimo de la(s) válvula(s) y de las tuberías asociadas \nserá el especificado por el fabricante de la caldera o el tamaño de la abertura de \nla válvula de purga de la caldera. Cuando la presión de trabajo máxima admisi-\nble de la caldera sea superior a 689 kPa (100 psig), se instalarán dos válvulas de \npurga de fondo compuestas por dos válvulas de apertura lenta en serie o una \nválvula de apertura rápida y una válvula de apertura lenta en serie, con la válvula \nde apertura rápida instalada más cerca de la caldera.",
+   "paginas": [
+    268
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.8.2",
+   "titulo_num": 6,
+   "capitulo": "6.8",
+   "encabezado": "DESCARGA",
+   "texto": "DESCARGA. Las válvulas de purga descargarán a un lugar seguro de eli-\nminación. Cuando descarguen en el sistema de drenaje, la instalación deberá \ncumplir con el Código de Diseño y Construcción de Edificaciones en la Repú-\nblica Dominicana.",
+   "paginas": [
+    268
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.9.1",
+   "titulo_num": 6,
+   "capitulo": "6.9",
+   "encabezado": "CUANDO SEA NECESARIO",
+   "texto": "CUANDO SEA NECESARIO. Se instalará un depósito de expansión en \ncada sistema de agua caliente. En el caso de instalaciones con varias calderas, \nserá necesario como mínimo un depósito de expansión. Los depósitos de ex-\npansión serán de tipo cerrado o abierto. Los depósitos deberán estar dimensio-\nnados para la presión del sistema de agua caliente.",
+   "paginas": [
+    268
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.9.2",
+   "titulo_num": 6,
+   "capitulo": "6.9",
+   "encabezado": "DEPÓSITOS DE EXPANSIÓN DE TIPO CERRADO",
+   "texto": "DEPÓSITOS DE EXPANSIÓN DE TIPO CERRADO. Los depósitos de \nexpansión de tipo cerrado se instalarán de acuerdo con las instrucciones del \nfabricante. Los depósitos de expansión para sistemas diseñados para tener una \npresión de funcionamiento superior a 30 psi (207 kPa) se construirán y certi-\nficarán de acuerdo con el Código ASME de Calderas y Recipientes a Presión. El \ntamaño del depósito se basará en la capacidad del sistema de calefacción por \nagua caliente. El tamaño mínimo del depósito se determinará de acuerdo con la \nsiguiente ecuación cuando se conozca toda la información necesaria:\n\n\n(Ecuación 6-1)\nPara SI:\ndonde:\nVt = Volumen mínimo de los depósitos (galones) (L).\nVs = Volumen del sistema, sin incluir los depósitos de expansión (galones) \n(L).\nT = Temperatura media de funcionamiento (°F) (°C).\nPa = Presión atmosférica (psi) (kPa).\nPf = Presión de llenado (psi) (kPa).\nPo = Presión máxima de funcionamiento (psi) (kPa).\nCuando no se conozca toda la información necesaria, el tamaño mínimo del \ndepósito se determinará a partir de la tabla 6.9.2.\nTABLA 6.9.2 DIMENSIONAMIENTO DEL VASO DE EXPANSIÓN CERRA-\nDO\nPara el SI: 1 galón = 3,795 L.",
+   "paginas": [
+    268,
+    269
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.9.3",
+   "titulo_num": 6,
+   "capitulo": "6.9",
+   "encabezado": "DEPÓSITOS DE EXPANSIÓN DE TIPO ABIERTO",
+   "texto": "DEPÓSITOS DE EXPANSIÓN DE TIPO ABIERTO. Los depósitos de \nexpansión de tipo abierto estarán situados a no menos de 1219 mm (4 pies) \npor encima del elemento calefactor más alto. El depósito deberá tener las di-\nmensiones adecuadas para el sistema de agua caliente. En la parte superior del \ndepósito se instalará un rebosadero con un diámetro mínimo de 25 mm (1 pul-\ngada). El rebosadero se descargará en el sistema de desagüe de acuerdo con el \nCódigo de Diseño y Construcción de Edificaciones en la República Dominicana.",
+   "paginas": [
+    269,
+    270
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "CALIBRADORES DE CALDERAS DE AGUA CALIENTE",
+   "texto": "CALIBRADORES DE CALDERAS DE AGUA CALIENTE. T oda caldera \nde agua caliente deberá tener un manómetro y un termómetro, o una combina-\nción de manómetro y termómetro. Los manómetros indicarán la temperatura y \nla presión dentro del rango normal de funcionamiento del sistema.",
+   "paginas": [
+    270
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.2",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "INDICADORES DE CALDERAS DE VAPOR",
+   "texto": "INDICADORES DE CALDERAS DE VAPOR. T oda caldera de vapor dispon-\ndrá de un vaso indicador del nivel de agua y de un manómetro. El manómetro \nindicará la presión dentro del intervalo normal de funcionamiento del sistema.",
+   "paginas": [
+    270
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.2.1",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "VIDRIO CALIBRE AGUA",
+   "texto": "VIDRIO CALIBRE AGUA. El vidrio del manómetro se instalará de \nmodo que el punto medio se encuentre en el nivel normal del agua de la cal-\ndera.\nPRUEBAS DE LA",
+   "paginas": [
+    270
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.11.1",
+   "titulo_num": 6,
+   "capitulo": "6.11",
+   "encabezado": "PRUEBAS",
+   "texto": "PRUEBAS. Una vez finalizado el montaje y la instalación de las calderas \ny los recipientes a presión, se realizarán pruebas de aceptación de acuerdo con \nlos requisitos del Código de calderas y recipientes a presión ASME o con \nlos requisitos del fabricante, y se aprobarán dichas pruebas. Se presentará al \nresponsable del código una copia de todos los documentos de prueba junto \ncon todos los informes de datos del fabricante exigidos por el Código ASME \nde calderas y recipientes a presión.",
+   "paginas": [
+    270
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.11.2",
+   "titulo_num": 6,
+   "capitulo": "6.11",
+   "encabezado": "CALIBRADORES DE PRUEBA",
+   "texto": "CALIBRADORES DE PRUEBA. Se conectará un manómetro indicador \ndirectamente a la caldera o al recipiente a presión, de modo que el operador \npueda verlo durante toda la prueba. La escala del manómetro se graduará en \nun intervalo no inferior a una vez y media ni superior a cuatro veces la presión \nmáxima de prueba. Los manómetros utilizados para la prueba deberán estar \ncalibrados y certificados por el operador de la prueba.\nTÍTULO.7\nREFRIGERACIÓN",
+   "paginas": [
+    270,
+    271
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  }
+ ]
+}

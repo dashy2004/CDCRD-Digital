@@ -1,0 +1,2062 @@
+{
+ "volumen": 2,
+ "sigla": "DIHE",
+ "nombre_volumen": "Instalaciones Hidrosanitarias en Edificaciones",
+ "titulo": 1,
+ "nombre": "Consideraciones Generales",
+ "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "1.1": "OBJETIVO Y CAMPO DE APLICACIÓN",
+  "1.2": "DEFINICIONES Y NOTACIONES",
+  "1.3": "PRESENTACIÓN DE PLANOS",
+  "1.4": "CONTENIDO DE LOS PLANOS",
+  "1.5": "CÁLCULOS HIDRÁULICOS",
+  "1.6": "CONSTRUCCIÓN, SUPERVISIÓN, INSPECCIÓN Y ESPECI-",
+  "2.1": "ASPECTOS GENERALES"
+ },
+ "clausulas": [
+  {
+   "id": "1.1.1",
+   "titulo_num": 1,
+   "capitulo": "1.1",
+   "encabezado": "OBJETIVO",
+   "texto": "OBJETIVO. El Volumen II del Código de Construcción de la República \nDominicana (), sobre Diseño de Instalaciones Hidrosanitarias en Edi-\nficaciones (), establece los requisitos para el diseño, la presentación de \nplanos, construcción y supervisión de las instalaciones de los sistemas de agua \npotable, residuales y pluviales en edificaciones.",
+   "paginas": [
+    25
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.1.2",
+   "titulo_num": 1,
+   "capitulo": "1.1",
+   "encabezado": "CAMPO DE APLICACIÓN",
+   "texto": "CAMPO DE APLICACIÓN. Las disposiciones establecidas en este volu-\nmen son de cumplimiento obligatorio para todos los proyectos de edificacio-\nnes que se realicen en el territorio nacional.",
+   "paginas": [
+    25
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.1.3",
+   "titulo_num": 1,
+   "capitulo": "1.1",
+   "encabezado": "AUTORIDAD DE ADMINISTRACIÓN DEL CÓDIGO",
+   "texto": "AUTORIDAD DE ADMINISTRACIÓN DEL CÓDIGO. Los organismos \nfacultados para la revisión y/o aprobación de los planos y los documentos re-\nlativos a las instalaciones sanitarias de los proyectos, así como también la ins-\npección durante el proceso de construcción serán:\na)  El Ministerio de la Vivienda, Hábitat y Edificaciones (MIVHED), en todo lo \nreferente a la aprobación del proyecto e inspección de las instalaciones a lo \ninterno de las edificaciones. Los Organismos Estatales que tengan a su cargo el \nseguimiento a proyectos de su incumbencia, tales como: turísticos u otros, po-",
+   "paginas": [
+    25,
+    26
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DEFINICIONES GENERALES",
+   "texto": "DEFINICIONES GENERALES. A menos que sea establecido expresa-\nmente de otra manera, las siguientes palabras, para los propósitos de este vo-\nlumen, tendrán el significado siguiente:",
+   "paginas": [
+    26
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.1",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ACOMETIDA DE AGUA POTABLE",
+   "texto": "ACOMETIDA DE AGUA POTABLE: Es el conjunto de tuberías, piezas \ny accesorios que enlazan el sistema de abastecimiento público (acueducto) con \nel sistema de abastecimiento de la edificación.",
+   "paginas": [
+    26
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.2",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ACOMETIDA DEL ALCANTARILLADO SANITARIO",
+   "texto": "ACOMETIDA DEL ALCANTARILLADO SANITARIO: Es el conjunto \nde tuberías, piezas y accesorios que enlaza el sistema de drenaje sanitario de \nuna edificación hasta un colector ínter domiciliario o hasta la red secundaria de \nalcantarillado.",
+   "paginas": [
+    26
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.3",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ACUÍFERO",
+   "texto": "ACUÍFERO: Formación geológica, grupo de formaciones o parte de \nuna formación, capaz de acumular y permitir el flujo de una significativa canti-\ndad de agua subterránea.",
+   "paginas": [
+    26
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.4",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AGUA POTABLE",
+   "texto": "AGUA POTABLE: Es el agua apta para el consumo humano, es de-\ncir, aquella cuya calidad física, química y bacteriológica satisface las exigencias \nde las autoridades de Salud Pública y de la Norma Nacional de Agua Potable \n(NORDOM 1).",
+   "paginas": [
+    26,
+    27
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.5",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AGUAS RESIDUALES O AGUAS SERVIDAS",
+   "texto": "AGUAS RESIDUALES O AGUAS SERVIDAS: Es el agua descargada \nluego de un uso doméstico, industrial, comercial, agrícola, pecuario o de cual-\nquier otra índole y que por tal motivo ha sufrido degradación de su calidad ori-\nginal y tiene el potencial de contaminar los cuerpos receptores.",
+   "paginas": [
+    27
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.6",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ALCANTARILLA",
+   "texto": "ALCANTARILLA: Es una tubería o conducto cerrado, con condiciones \nde flujo a superficie libre, que transporta aguas residuales o pluviales.",
+   "paginas": [
+    27
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.7",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ALCANTARILLA PLUVIAL",
+   "texto": "ALCANTARILLA PLUVIAL: Es aquélla que transporta agua producto \nde las lluvias, incluyendo el escurrimiento superficial y las aguas de limpieza de \nlas calles.",
+   "paginas": [
+    27
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.8",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ALCANTARILLA SANITARIA",
+   "texto": "ALCANTARILLA SANITARIA: Es aquélla destinada a transportar las \naguas residuales.",
+   "paginas": [
+    27
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.9",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "APARATO SANITARIO",
+   "texto": "APARATO SANITARIO: Dispositivo conectado a la instalación interior \nde un edificio o vivienda que recibe agua potable y la descarga a un sistema de \nevacuación, después de ser utilizada.",
+   "paginas": [
+    27
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.10",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CALIDAD DEL AGUA",
+   "texto": "CALIDAD DEL AGUA: relación de parámetros físicos, químicos y bio-\nlógicos que definen su composición, grado de alteración y utilidad.",
+   "paginas": [
+    27
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.11",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CÁMARA DE INSPECCIÓN O CAJA DE INSPECCIÓN",
+   "texto": "CÁMARA DE INSPECCIÓN O CAJA DE INSPECCIÓN: Es un dispo-\nsitivo construido generalmente de bloques con cámaras llenas de hormigón, de \nfibra de vidrio o acero, que se coloca en las intersecciones y/o en los cambios \nde dirección o de diámetro de la tubería de drenaje, con el objetivo de facilitar \nla inspección y limpieza de las líneas colectoras.",
+   "paginas": [
+    27
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.12",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CAUDAL",
+   "texto": "CAUDAL: Volumen de agua que pasa por un punto dado por unidad \nde tiempo. Se expresa normalmente en metros cúbicos segundos (m3/seg) o \nlitros por segundos (l/seg).",
+   "paginas": [
+    27,
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.13",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CAUDAL DE DISEÑO",
+   "texto": "CAUDAL DE DISEÑO: Es el determinado en función de los caudales \nunitarios de cada aparato, cantidad, tipos y simultaneidad de uso de los apa-\nratos sanitarios que componen la instalación, en caso de edificaciones, y de la \ndotación poblacional y de las áreas de consumo, en caso de urbanizaciones.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.14",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CISTERNA",
+   "texto": "CISTERNA: Es un depósito cerrado, generalmente soterrado, donde \nse almacena en forma adecuada el agua potable que se utiliza en la instalación \nsanitaria de la edificación.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.15",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "COLECTOR ÍNTER DOMICILIARIO",
+   "texto": "COLECTOR ÍNTER DOMICILIARIO: Es la tubería que, sin pertene-\ncer a la red secundaria, recibe las aguas residuales de varias acometidas domi-\nciliarias.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.16",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "COLUMNA DE ALIMENTACIÓN",
+   "texto": "COLUMNA DE ALIMENTACIÓN: Son las tuberías verticales que, \npartiendo de las tuberías de distribución, llevan el agua a los diferentes niveles \nde la edificación.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.17",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "COLUMNAS DE DESCARGA",
+   "texto": "COLUMNAS DE DESCARGA: Son las tuberías verticales que reciben \nlas descargas de las tuberías de arrastre y las conducen a las tuberías colecto-\nras, localizadas a nivel de planta baja.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.18",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "COLUMNA DE VENTILACIÓN PRINCIPAL",
+   "texto": "COLUMNA DE VENTILACIÓN PRINCIPAL: Es la tubería que ventila \ndirectamente la tubería de descarga de un aparato o grupo de aparatos sanita-\nrios.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.19",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "COLUMNA DE VENTILACIÓN SECUNDARIA",
+   "texto": "COLUMNA DE VENTILACIÓN SECUNDARIA: Es la tubería que \ncomplementa la columna principal de ventilación. Su uso se requiere cuando \nel número de aparatos sanitarios a ventilar exceda de tres inodoros situados \ncontinuamente o cuatro aparatos mixtos.",
+   "paginas": [
+    28
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.20",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CONTAMINACIÓN DEL AGUA",
+   "texto": "CONTAMINACIÓN DEL AGUA: Es la alteración de las caracterís-\nticas físicas, químicas o biológicas de las aguas, que la hacen no apta para el \nconsumo humano, y que ocasiona trastornos de la salud a los usuarios.",
+   "paginas": [
+    28,
+    29
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.21",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CUERPO RECEPTOR",
+   "texto": "CUERPO RECEPTOR: Es todo ambiente natural o artificial (río, mar, \nocéano, cuenca, embalse, cauce o depósito de agua, porción de terreno o for-\nmación subterránea) que sea susceptible de recibir directa o indirectamente la \ndescarga de aguas residuales.",
+   "paginas": [
+    29
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.22",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DEMANDA BIOQUÍMICA DE OXÍGENO (D",
+   "texto": "DEMANDA BIOQUÍMICA DE OXÍGENO (D.B.O.): Cantidad de oxí-\ngeno utilizado en la oxidación bioquímica de la sustancia orgánica, en un tiem-\npo y a una temperatura especificada. Depende enteramente de la disponibili-\ndad de materia utilizable como alimento biológico y de la cantidad de oxígeno \nutilizado por los microorganismos durante la oxidación.",
+   "paginas": [
+    29
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.23",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DEMANDA QUÍMICA DE OXÍGENO (D",
+   "texto": "DEMANDA QUÍMICA DE OXÍGENO (D.Q.O.): medida indirecta del \ncontenido de materia orgánica e inorgánica oxidable, mediante el uso de un \nfuerte oxidante en una muestra de agua. Sus unidades son miligramos de oxí-\ngeno disuelto por litro.",
+   "paginas": [
+    29
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.24",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DEPÓSITO REGULADOR",
+   "texto": "DEPÓSITO REGULADOR: Es la obra destinada para almacenar un \nvolumen de regulación y/o reserva; para compensar las variaciones horarias de \nconsumo y regular presiones en el sistema; atender demandas de incendios y \neventuales desperfectos de la línea de conducción.",
+   "paginas": [
+    29
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.25",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DERIVACIÓN PRINCIPAL",
+   "texto": "DERIVACIÓN PRINCIPAL: Son las tuberías que partiendo de las lí-\nneas de distribución y/o columnas de alimentación llevan el agua directamente \na un aparato o un grupo de aparatos sanitarios de la edificación.",
+   "paginas": [
+    29
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.26",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DERIVACIÓN SECUNDARIA",
+   "texto": "DERIVACIÓN SECUNDARIA: Son las tuberías que, partiendo de las \nderivaciones principales, columnas o líneas de distribución alimentan directa-\nmente cada uno de los aparatos sanitarios de la edificación.",
+   "paginas": [
+    29
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.27",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DESAGÜE DE PISO",
+   "texto": "DESAGÜE DE PISO: Es una instalación fija con rejilla o colador plano \npara la recolección y disposición de aguas residuales.",
+   "paginas": [
+    29,
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.2",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DISPOSICIÓN FINAL: Es el receptor final de las aguas residuales",
+   "texto": "DISPOSICIÓN FINAL: Es el receptor final de las aguas residuales.",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.29",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DOTACIÓN",
+   "texto": "DOTACIÓN: Es el volumen que satisface en forma adecuada la nece-\nsidad de agua de la unidad de consumo en un tiempo determinado.",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.30",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DRENAJE PLUVIAL",
+   "texto": "DRENAJE PLUVIAL: Es el desagüe de una edificación que transporta \nagua de las lluvias.",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.31",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "RENAJE SANITARIO",
+   "texto": "RENAJE SANITARIO: Es el desagüe de una edificación que transporta \nagua residual.",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.32",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "EFLUENTE",
+   "texto": "EFLUENTE: Es el líquido descargado desde un séptico u otro tipo de \ninstalación de tratamiento.",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.33",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "EQUIPO DE BOMBEO",
+   "texto": "EQUIPO DE BOMBEO: Conjunto de aparatos e instalaciones utiliza-\ndos para elevar las aguas al nivel requerido.",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.34",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "FILTRANTE",
+   "texto": "FILTRANTE: Es una perforación realizada a mano o a máquina, que \nrecibe el efluente de una unidad de tratamiento o las aguas pluviales, incorpo-\nrándolo indirectamente al curso natural de las aguas subterráneas.",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.35",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "FILTRO ANAERÓBICO",
+   "texto": "FILTRO ANAERÓBICO: Es un reactor biológico de manto fijo que, \nal fluir las aguas residuales por el filtro, atrapa las partículas y se degrada la \nmateria orgánica por la biomasa que está adherida al material del filtro. Tiene \nla función de reducir la carga contaminante de las aguas servidas a través del \nfondo o manto, construido de un cuerpo poroso (piedras), adheridos a una pe-\nlícula de microorganismos que realizan el proceso de degradación anaerobia.",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.36",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "FUENTE DE ABASTECIMIENTO",
+   "texto": "FUENTE DE ABASTECIMIENTO: Es de donde se obtiene el agua para \nun sistema de abastecimiento.",
+   "paginas": [
+    30,
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.37",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "HIDROGRAMA",
+   "texto": "HIDROGRAMA: es un gráfico que muestra la variación en el tiempo \nde alguna información hidrológica tal como: nivel de agua, caudal, carga de \nsedimentos, entre otros.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.38",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "IMBORNAL",
+   "texto": "IMBORNAL: Estructura con entradas superiores para captar los es-\ncurrimientos superficiales de las áreas de drenaje consideradas.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.39",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "INSTALACIÓN SANITARIA",
+   "texto": "INSTALACIÓN SANITARIA: Es el sistema de tuberías, aparatos sa-\nnitarios, equipos, accesorios y obras complementarias que integran las redes \nde abastecimiento de agua potable, de evacuación de las aguas residuales y \ndrenaje de las aguas pluviales en las edificaciones.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.40",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "LÍNEA DE CONDUCCIÓN",
+   "texto": "LÍNEA DE CONDUCCIÓN: Es la tubería que conduce el agua desde \nla obra de captación hasta un depósito de regulación, una planta de tratamien-\nto o a la red de distribución. Si la conducción es por bombeo, la línea recibe el \nnombre de línea de impulsión; si es por gravedad, la línea se llama de aducción.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.41",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "LLAVE DE PASO",
+   "texto": "LLAVE DE PASO: Una llave de paso o llave de corte, es un dispositivo, \ngeneralmente de metálico, (aleación de estos), de polímeros (como el PVC) o \nde materiales cerámicos, usada para dar paso o cortar el flujo de agua u algún \notro fluido a través de una tubería de conducción a la que está inserto, como \nparte del sistema.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.42",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "LODOS",
+   "texto": "LODOS: Sólidos que se encuentran en el fondo del tanque séptico, \ntanque imhoff o laguna de oxidación.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.43",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "MANIFOLD HIDRAÚLICO",
+   "texto": "MANIFOLD HIDRAÚLICO: sistema por el cual se recogen varios \nflujos de gases o líquidos en un solo colector.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.44",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "MEDIDORES O CONTADORES DE AGUA",
+   "texto": "MEDIDORES O CONTADORES DE AGUA: Son los aparatos des-\n\n\ntinados a medir qué cantidad de agua está siendo o ha sido suministrada al \nusuario.",
+   "paginas": [
+    31,
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.45",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "NATA",
+   "texto": "NATA: Sustancia espesa que se forma sobre el agua almacenada en el \ntanque séptico, compuesto por residuos grasos y otro tipo de desechos orgáni-\ncos e inorgánicos flotantes.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.46",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "NIVEL FREÁTICO",
+   "texto": "NIVEL FREÁTICO: Es la superficie del acuífero que conforma las zo-\nnas de saturación del suelo, incluyendo los planos suspendidos de agua, acuí-\nferos, y las zonas que periódica o permanentemente se encuentran saturadas.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.47",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PH: Concentración de iones de hidrógeno",
+   "texto": "PH: Concentración de iones de hidrógeno. Nivel de acidez o alcalini-\ndad del agua.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.48",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PLANTA DE TRATAMIENTO",
+   "texto": "PLANTA DE TRATAMIENTO: Es una infraestructura destinada a dis-\nminuir y/o eliminar las impurezas del agua a través de procesos físicos, quími-\ncos o bacteriológicos, tales como: aireación, sedimentación, floculación, coa-\ngulación, infiltración, cloración u otros.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.49",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "POZO",
+   "texto": "POZO: Es una perforación realizada a mano o a máquina con fines de \nextracción de agua para fines de uso domésticos o industriales.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.50",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "RED DE DISTRIBUCIÓN EN LA EDIFICACIÓN",
+   "texto": "RED DE DISTRIBUCIÓN EN LA EDIFICACIÓN: Es el conjunto com-\npleto de tuberías, piezas y accesorios, que a partir de la conexión domiciliaria \n(acometida) alimenta a los diferentes aparatos de la edificación.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.51",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "REGISTRO SANITARIO",
+   "texto": "REGISTRO SANITARIO: Es la obra que facilita la inspección y la lim-\npieza de las tuberías de la red del alcantarillado sanitario.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.52",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SIFONAMIENTO",
+   "texto": "SIFONAMIENTO: Fenómeno de expulsión del agua fuera del sello hi-\ndráulico por efecto de las variaciones de presión en los sistemas de evacuación \ny ventilación.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.53",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SIFONES",
+   "texto": "SIFONES: Son piezas especiales colocadas en la descarga de los apa-\nratos sanitarios, con el objetivo de formar un sello hidráulico para evitar el paso \n\n\nde los malos olores de la red de desagüe hacia el interior de la edificación; pero \npermitiendo el paso de las materias sólidas en suspensión.",
+   "paginas": [
+    32,
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.54",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "",
+   "texto": "SISTEMA DE ABASTECIMIENTO DE AGUA POTABLE EN EDIFICA-\nCIONES: Es el conjunto de tuberías, equipos, accesorios y obras complemen-\ntarias necesarias para garantizar en forma adecuada el abastecimiento de agua \npotable a las mismas.",
+   "paginas": [
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.55",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE ABASTECIMIENTO INDIVIDUAL DE AGUA",
+   "texto": "SISTEMA DE ABASTECIMIENTO INDIVIDUAL DE AGUA: Es un su-\nministro de agua u otra forma de abastecimiento de agua aprobado, que sirve \na una o más edificaciones; pero que es independiente del suministro público \nde agua potable.",
+   "paginas": [
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.56",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "",
+   "texto": "SISTEMA DE DISPOSICIÓN INDIVIDUAL DE AGUAS RESIDUA-\nLES: Es el conjunto de tuberías, aparatos sanitarios, equipos, accesorios y \nobras complementarias que sirven para la disposición de las aguas residuales, \naislada de un sistema de alcantarillado público.",
+   "paginas": [
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.57",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "",
+   "texto": "SISTEMA DE DRENAJE DE AGUAS RESIDUALES EN EDIFICA-\nCIONES: Es el conjunto de tuberías, aparatos sanitarios, equipos, accesorios \ny obras complementarias necesarios para realizar en forma adecuada la reco-\nlección, conducción y disposición de las aguas residuales de origen doméstico \ny/o industriales.",
+   "paginas": [
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.58",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "TANQUE FLUXÓMETRO",
+   "texto": "TANQUE FLUXÓMETRO: Es un dispositivo integrado dentro de un \nrecipiente acumulador de aire, diseñado para evacuar el contenido de la taza. \nÉste utiliza el recipiente acumulador de aire para descargar una cantidad pre-\ndeterminada de agua en el recipiente para fines de operación de lavado del apa-\nrato.",
+   "paginas": [
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.59",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "TANQUE IMHOFF",
+   "texto": "TANQUE IMHOFF: Es una unidad de tratamiento anaeróbica, dise-\nñada para procesar aguas residuales, separando los procesos de sedimenta-\nción, digestión anaeróbica y separación de natas.\n\n\nDIHE1.2.1.60  TANQUE O CÁMARA SÉPTICA: Es una unidad cerrada de tratamien-\nto primario de aguas residuales de una edificación; diseñada y construida para \nfacilitar la separación de sólidos, líquidos y material flotante en el agua residual, \nque permite la digestión anaeróbica de los lodos acumulados.",
+   "paginas": [
+    33,
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.61",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "TAPÓN DE REGISTRO",
+   "texto": "TAPÓN DE REGISTRO: Es una pieza especial provista de tapa con \nrosca en uno de los ramales, colocada en lugares específicos de las tuberías, \nderivaciones y colectores, que permite la inspección y limpieza del sistema de \ndesagüe interno.",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.62",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "TIEMPO DE CONCENTRACIÓN",
+   "texto": "TIEMPO DE CONCENTRACIÓN: Es la suma del tiempo de penetra-\nción y el tiempo de conducción del drenaje pluvial.",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.63",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "TIEMPO DE CONDUCCIÓN",
+   "texto": "TIEMPO DE CONDUCCIÓN: Es el tiempo transcurrido en escurrir el \nagua pluvial desde la entrada hasta el punto considerado más bajo dentro del \nconducto.",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.64",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "TIEMPO DE PENETRACIÓN",
+   "texto": "TIEMPO DE PENETRACIÓN: Es el tiempo que tarda el agua en llegar \na la entrada del conducto de drenaje, considerada desde el punto más remoto \ndel área drenada.",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.65",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "TINACO",
+   "texto": "TINACO: es un tanque que sirve como reservorio de agua, que pue-\nde ser de hormigón, plástico u otro material, el cual es utilizado normalmente \ncomo almacenamiento del sistema de distribución de agua en edificaciones.",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.66",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "TRAMPA DE GRASA",
+   "texto": "TRAMPA DE GRASA: Es una estructura que recoge directamente \nlas descargas de fregaderos u otros aparatos sanitarios por los cuales circulan \ngrasas, con el objetivo de retenerlas en la parte superior para evitar que interfie-\nran con el tratamiento o que disminuya la vida útil del filtrante, en caso de que \nexista en el sistema.",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.67",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "TUBERÍAS COLECTORAS",
+   "texto": "TUBERÍAS COLECTORAS: Son las tuberías que recogen las descar-\ngas de las columnas y/o derivaciones y las conducen a la cámara séptica o al \nsistema de drenaje sanitario o a cualquier otra forma de disposición final.",
+   "paginas": [
+    34,
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.68",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "TUBERÍAS DE ARRASTRE",
+   "texto": "TUBERÍAS DE ARRASTRE: Son aquéllas que enlazan los aparatos o \npiezas sanitarios con las columnas de descarga o con las tuberías colectoras.",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.69",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "UNIDAD DE DESCARGA",
+   "texto": "UNIDAD DE DESCARGA: Es la medida de una descarga probable \nen un sistema de drenaje; el valor de una unidad de descarga depende del ni-\nvel del volumen de una descarga en un sistema de drenaje, la duración de una \noperación de drenaje y el tiempo empleado entre repetidas operaciones, gene-\nralmente se le asigna el valor de 28 l/m.",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.70",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VÁLVULA DE ALIVIO DE PRESIÓN",
+   "texto": "VÁLVULA DE ALIVIO DE PRESIÓN: Es una válvula diseñada para \nregular la presión de forma automática a una presión deseada.",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.71",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VÁLVULA DE ALIVIO DE VACÍO",
+   "texto": "VÁLVULA DE ALIVIO DE VACÍO: Es una válvula diseñada para regular \nla presión de forma automática a una presión deseada. Es un accesorio usado \npara prevenir el aumento excesivo de vacío en un compartimiento de presión.",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.72",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VÁLVULA DE CERRADO RÁPIDO",
+   "texto": "VÁLVULA DE CERRADO RÁPIDO: Es una válvula o grifo que se cie-\nrra automáticamente y que es liberada manualmente o controlada mecánica-\nmente para un cerrado de mayor rapidez.",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.73",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VÁLVULA DE ELEVACIÓN",
+   "texto": "VÁLVULA DE ELEVACIÓN: Es una válvula que se usa dentro de un \ntanque de agua tipo-gravedad para controlar el suministro de agua en el tan-\nque. T ambién se puede llamar válvula de control de agua.",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.74",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VÁLVULA DE LIMPIEZA",
+   "texto": "VÁLVULA DE LIMPIEZA: Es una abertura accesible en el sistema de \ndesagüe usada para remover las posibles obstrucciones.",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.1.75",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VÁLVULA DE LIMPIEZA DE TANQUE",
+   "texto": "VÁLVULA DE LIMPIEZA DE TANQUE: Dispositivo localizado en el extre-\nmo de la tubería de limpieza del tanque que se encuentra en el fondo, el cual facilita \nla labor de drenaje de los sedimentos que se acumulan con el tiempo.\n\n\nDIHE",
+   "paginas": [
+    35,
+    36
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.3.1",
+   "titulo_num": 1,
+   "capitulo": "1.3",
+   "encabezado": "",
+   "texto": "REQUISITO PARA APROBACION DE INSTALACIONES SANITARIAS\nPara la aprobación de la instalación sanitaria de una edificación, el interesado \ndeberá presentar a la Autoridad de Administración del Código, el conjunto de \nplanos que se señala a continuación:\na)  Ubicación de las instalaciones sanitarias de la edificación, detallando el sis-\ntema de ventilación (aireación) de los baños, especificando el tipo de la misma; \nya sea esta natural, mecánica o combinada.\nb)  Sistema de desagüe de aguas residuales y pluviales, confeccionado en plan-\nta para cada nivel diferente.\n \nc)  Isométrica del sistema de desagüe de aguas residuales.\n \nd)  Sistema de alimentación y distribución de agua potable, fría y caliente (si \naplica para el caso), confeccionado en planta para cada nivel diferente.\ne)  Isométrica del sistema de agua potable, fría y caliente (si aplica para el caso).\nf)   Planta desagüe pluvial de techos, parqueos y sótanos.\ng)  Isométrica del sistema de desagüe pluvial para techos planos, excepto para \nviviendas unifamiliares de menos de 150 m2 de construcción.\nh)  Los planos indicados en los literales (b), (c), (d), (f ) y (g) podrán ser presen-\n\n\ntados, en forma conjunta, en la planta de cada nivel diferente de la edificación \ny se incluirá la tabla de leyendas sanitarias, especificaciones técnicas y detalles.",
+   "paginas": [
+    36,
+    37
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.3.2",
+   "titulo_num": 1,
+   "capitulo": "1.3",
+   "encabezado": "PLANOS ADICIONALES",
+   "texto": "PLANOS ADICIONALES. Además de los planos indicados en la sección \n1.3.1. se requerirán planos adicionales para las edificaciones que requieran al-\nguno de los sistemas indicados a continuación, los cuales cumplirán con los \nrequisitos establecidos en los reglamentos o códigos correspondientes para \ncada sistema:\na)  Sistema de protección contra incendios.\nb)  Sistema de distribución de gas.\nc)  Sistema de ventilación mecánica.",
+   "paginas": [
+    37
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.3.3",
+   "titulo_num": 1,
+   "capitulo": "1.3",
+   "encabezado": "ESCALA",
+   "texto": "ESCALA. Los planos serán confeccionados a escala no menor de 1:100, \nindicando los trazos, letras y números de manera clara y legible en cada uno de \nlos sistemas sanitarios, a fin de que no se presten a confusión.",
+   "paginas": [
+    37
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.3.4",
+   "titulo_num": 1,
+   "capitulo": "1.3",
+   "encabezado": "SISTEMA DE UNIDADES",
+   "texto": "SISTEMA DE UNIDADES. T odos los documentos del proyecto deberán \nser preparados usando las unidades del Sistema Internacional (SI).",
+   "paginas": [
+    37
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.4.1.1",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "",
+   "texto": "PLANOS DEL SISTEMA DE DESAGÜE DE AGUAS RESIDUALES \n(DRENAJE SANITARIO)",
+   "paginas": [
+    37
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.4.1",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "",
+   "texto": "Los proyectos de edificaciones deberán contener al menos los planos \nde las instalaciones sanitarias de cada uno de los sistemas detallados en las \nsiguientes secciones de este capítulo, sin ser limitativos.",
+   "paginas": [
+    37
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.4.1.2",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "",
+   "texto": "PLANOS DEL SISTEMA DE ABASTECIMIENTO DE AGUA FRÍA Y \nCALIENTE\n Los planos del sistema de desagüe de aguas residuales contendrán al me-\nnos lo siguiente:\na)  Ubicación de todas las tuberías que componen el sistema, tanto las exterio-\nres como las interiores a la edificación, indicando diámetro y material, incluyen-\ndo el o los ramales de descarga del caudal de aguas residuales hasta su dispo-\nsición final, así como también, pendiente, sentido del flujo, piezas especiales, \ncajas de inspección, trampas de grasa, cámaras sépticas, filtrantes y campo de \nabsorción o conexión a la red de alcantarillado sanitario, si los hubiere.\nb)  Identificación de todas las áreas de la edificación, así como también la loca-\nlización exacta en estas áreas de cada uno de los aparatos sanitarios que com-\nponen la instalación. \nc)  Plano de detalles de las cajas de inspección, tapones de registro, trampa de \ngrasa, cámaras sépticas, unidades de tratamiento, así como también detalles \nde campo de absorción o conexión a la red del alcantarillado sanitario, si los \nhubiere. \nd)  Isométrica de la edificación, con representación simbólica de los aparatos \nsanitarios, tuberías de desagües y de ventilación con sus cambios de dirección, \ndiámetros, pendientes y piezas; se indicará, además, en forma esquemática, las \ncajas de inspección, trampas de grasas, registros, cámaras sépticas y filtrantes, \nsi los hubiere.\nLos planos del sistema de abastecimiento de agua fría y caliente conten-\ndrán al menos lo siguiente:\n\n\na)  Ubicación de todas las tuberías que componen el sistema, tanto las exterio-\nres como las interiores a la edificación, indicando diámetro y material, así como \ntambién la localización de piezas especiales, válvulas, calentadores, depósitos \nde almacenaje, equipos de bombeo y pozos, si los hubiere.\nb)  Identificación de todas las áreas de la edificación, así como también la loca-\nlización exacta en estas áreas de cada uno de los aparatos sanitarios que com-\nponen la instalación.\nc)  Plano de detalles de los depósitos de almacenaje (cisternas, tanques eleva-\ndos, superficiales, semienterrados y subterráneos) si los hubiere.\nd)  Isométrica de la edificación con representación simbólica de las salidas de \nlos aparatos sanitarios, tuberías y piezas especiales con sus diámetros, indican-\ndo, en forma esquemática, calentador, equipos de bombeo, llaves, medidores, \nválvulas y otros.",
+   "paginas": [
+    37,
+    38,
+    39
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.4.1.3",
+   "titulo_num": 1,
+   "capitulo": "1.4",
+   "encabezado": "",
+   "texto": "PLANOS DEL SISTEMA DE DRENAJE PLUVIAL\n Los planos del Sistema de Drenaje Pluvial contendrán al menos lo si-\nguiente:\na)  Ubicación exterior e interior a la edificación de todas las tuberías que com-\nponen el sistema, indicando diámetro, material y pendiente. Cuando el sistema \nasí lo requiera se deberán indicar, además, el o los ramales de descarga hasta \nsu disposición final, incluyendo imbornales, registros, desarenadores y filtran-\ntes si los hubiere.\nb)  Detalles de imbornales, registros, desarenadores o conexión a la red de al-\ncantarillado pluvial, si los hubiere.",
+   "paginas": [
+    39,
+    40
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.5.1",
+   "titulo_num": 1,
+   "capitulo": "1.5",
+   "encabezado": "",
+   "texto": "PROYECTOS DE EDIFICACIONES",
+   "paginas": [
+    40
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.5.2",
+   "titulo_num": 1,
+   "capitulo": "1.5",
+   "encabezado": "PROYECTOS RESIDENCIALES",
+   "texto": "PROYECTOS RESIDENCIALES.\nSe exigirán cálculos hidráulicos para las edificaciones cuyo uso sea dife-\nrente al residencial, que cumplan con lo siguiente:\nc)  Planta de techo que indique la ubicación de los elementos que componen \nel sistema de desagüe pluvial (tubos, gárgolas, canaletas u otros), así como \ntambién, la forma de recolección de las aguas, limatesa, limahoya y pendientes.\nd) Isométrica de la edificación señalando los cambios de dirección en los ba-\njantes.\na)  Aquéllas que requieran de un sistema de supresión contra incendios, de \nacuerdo con lo establecido en el Reglamento para la Seguridad y Protección \ncontra Incendios (R-032). \nb)  Edificaciones cuya instalación cuente con más de veinte (20) aparatos sa-\nnitarios o aquéllas que excedan de dos pisos, aunque la cantidad de aparatos \nsea menor a 20.\nc)  Edificaciones en general, donde se contemple la construcción de piscinas, \no en aquellas cuya instalación contenga aparatos sanitarios especiales, tales \ncomo: los del tipo fluxómetro, jacuzzis y otros, en cuyo caso deberá ser espe-\ncificado claramente en los planos y en las especificaciones. En el caso de pro-\nyectos residenciales se contempla aplicar una excepción a este requerimiento.\nNo se exigirán cálculos hidráulicos en los proyectos residenciales de hasta 16 \nsoluciones habitacionales, cuyos esquemas de diseño se ajusten a los casos \nmostrados en la FIGURA 1 de este volumen, en cuyo caso se deberá seguir con \n\n\nlos requerimientos indicados en la TABLA 9. Aquellos proyectos que no se ajus-\nten a estos esquemas deberán presentar memoria de cálculo cuando el número \nde aparatos excedan de 100.",
+   "paginas": [
+    40,
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.6.1",
+   "titulo_num": 1,
+   "capitulo": "1.6",
+   "encabezado": "CONSTRUCCIÓN",
+   "texto": "CONSTRUCCIÓN. Las instalaciones sanitarias de toda edificación \ndeberán ser inspeccionadas y aprobadas por la Dirección General de Edifica-\nciones, del Ministerio de la Vivienda, Hábitat y Edificaciones y/o pre inspec-\ncionadas por cualquier otro organismo estatal, cuyas funciones estén relacio-\nnadas con el control y ejecución de proyectos especializados (turísticos, salud, \nambientales, educacionales, entre otros), cumpliendo con los requerimientos \noficiales exigidos por la Ley No. 687, del 27 de julio del 1982, que establece \nel sistema de reglamentación técnica mediante la cual se rige la formulación, \npreparación, ejecución, inspección y supervisión de proyectos y obras relativas \na la ingeniería, la arquitectura y ramas afines.",
+   "paginas": [
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.6.2",
+   "titulo_num": 1,
+   "capitulo": "1.6",
+   "encabezado": "SUPERVISIÓN",
+   "texto": "SUPERVISIÓN.  La Supervisión de la construcción o remodelación de \ninstalaciones sanitarias e hidráulicas de toda edificación, deberá cumplir con \nlos requerimientos del Reglamento para la Supervisión e Inspección General de \nObras (R-004).",
+   "paginas": [
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.6.3",
+   "titulo_num": 1,
+   "capitulo": "1.6",
+   "encabezado": "INSPECCIÓN",
+   "texto": "INSPECCIÓN.  La Inspección de la construcción o remodelación de ins-\ntalaciones sanitarias e hidráulicas en edificaciones, deberá cumplir con lo espe-\ncificado en inspección de obras Privadas de Edificaciones, del Reglamento para \nla Supervisión e Inspección General de Obras (R-004), en todos sus artículos.",
+   "paginas": [
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.6.4",
+   "titulo_num": 1,
+   "capitulo": "1.6",
+   "encabezado": "ESPECIFICACIONES",
+   "texto": "ESPECIFICACIONES.  Las instalaciones hidráulicas y sanitarias se rea-\nlizarán conforme a lo establecido en el Reglamento de Especificaciones Gene-\nrales para la Construcción de Edificaciones (R-009), y estarán sujetas a lo esta-\nblecido en los mismos.",
+   "paginas": [
+    41,
+    42
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  }
+ ]
+}

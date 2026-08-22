@@ -1,0 +1,5697 @@
+{
+ "volumen": 4,
+ "sigla": null,
+ "nombre_volumen": "Recomendaciones para Instalaciones Mecánicas en Edificaciones",
+ "titulo": 1,
+ "nombre": "Definiciones",
+ "fuente_pdf": "MIVHED-Recomendaciones-para-Instalaciones-Mecanicas-en-Edificaciones-Vol-IV.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "1.1": "GENERALIDADES",
+  "1.2": "DEFINICIONES GENERALES"
+ },
+ "clausulas": [
+  {
+   "id": "1.1.1",
+   "titulo_num": 1,
+   "capitulo": "1.1",
+   "encabezado": "ÁMBITO DE APLICACIÓN",
+   "texto": "ÁMBITO DE APLICACIÓN. A menos que se indique expresamente lo \ncontrario, las siguientes palabras y términos tendrán, a los efectos del presente \ncódigo, el significado que se indica en este capítulo.",
+   "paginas": [
+    29
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.1.2",
+   "titulo_num": 1,
+   "capitulo": "1.1",
+   "encabezado": "INTERCAMBIABILIDAD",
+   "texto": "INTERCAMBIABILIDAD. Las palabras usadas en tiempo presente inclu-\nyen el futuro; las palabras en género masculino incluyen el femenino y el neu-\ntro; el número singular incluye el plural y el plural, el singular.",
+   "paginas": [
+    29
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.1.3",
+   "titulo_num": 1,
+   "capitulo": "1.1",
+   "encabezado": "TÉRMINOS DEFINIDOS EN OTROS CÓDIGOS",
+   "texto": "TÉRMINOS DEFINIDOS EN OTROS CÓDIGOS. Cuando los términos \nno estén definidos en este código y estén definidos en el Código de Construc-\nción de la Florida, Construcción; el Código de Prevención de Incendios de la \nFlorida; el Código de Construcción de la Florida, Gas Combustible o el Código \nde Construcción de la Florida, Plomería, dichos términos tendrán el significado \nque se les atribuye en dichos códigos.",
+   "paginas": [
+    29
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.1.4",
+   "titulo_num": 1,
+   "capitulo": "1.1",
+   "encabezado": "TÉRMINOS NO DEFINIDOS",
+   "texto": "TÉRMINOS NO DEFINIDOS. Cuando los términos no estén definidos a \ntravés de los métodos autorizados por esta capítulo, dichos términos tendrán \nlos significados aceptados ordinariamente según lo implique el contexto.",
+   "paginas": [
+    29
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d001",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ACEITE COMBUSTIBLE",
+   "texto": "ACEITE COMBUSTIBLE. Queroseno o cualquier aceite de hidrocarburo que \ntenga un punto de inflamación no inferior a 100°F (38°C).",
+   "paginas": [
+    29,
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d002",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ACCESO",
+   "texto": "ACCESO. Lo que permite llegar a un dispositivo, aparato o equipo por un \nacceso fácil o por un medio que requiere primero la retirada o el movimiento de \nun panel, puerta u obstrucción similar [véase también \"Acceso fácil (a)\".",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d003",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ACCESO FÁCIL",
+   "texto": "ACCESO FÁCIL. Aquel que permite llegar directamente a un dispositivo, \naparato o equipo, sin necesidad de retirar o mover ningún panel, puerta u obs-\ntrucción similar [véase \"Acceso (a)\"].",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d004",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ACCESORIOS DE TRANSICIÓN, PLÁSTICO A ACERO",
+   "texto": "ACCESORIOS DE TRANSICIÓN, PLÁSTICO A ACERO. Adaptador para \nunir una tubería de plástico con una de acero. El objetivo de este accesorio es \nproporcionar una conexión permanente y estanca a la presión entre dos mate-\nriales que no pueden unirse directamente.",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d005",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AGENCIA APROBADA",
+   "texto": "AGENCIA APROBADA. Una agencia establecida y reconocida que se dedica \nregularmente a realizar pruebas, suministrar servicios de inspección o suminis-\ntrar certificación de productos, cuando dicha agencia ha sido aprobada por el \nfuncionario del código.",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d006",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AGENCIA DE CERTIFICACIÓN DE TERCEROS",
+   "texto": "AGENCIA DE CERTIFICACIÓN DE TERCEROS. Organismo autorizado que \ngestiona un sistema de certificación de productos o materiales que incorpora \nensayos iniciales de productos, evaluación y vigilancia del sistema de control de \ncalidad de un fabricante.",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d007",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AIRE",
+   "texto": "AIRE. T odo aire suministrado a equipos y aparatos mecánicos para combus-\ntión, ventilación, refrigeración y fines similares. El aire estándar es el aire a tem-\nperatura y presión estándar, es decir, 21°C (70°F) y 101,3 kPa (29,92 pulgadas \nde mercurio).",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d008",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AIRE ACONDICIONADO",
+   "texto": "AIRE ACONDICIONADO. T ratamiento del aire para controlar simultánea-\nmente la temperatura, la humedad, la limpieza y la distribución del aire para \nsatisfacer los requisitos de un espacio acondicionado.",
+   "paginas": [
+    30
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d009",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AIRE DE COMBUSTIÓN",
+   "texto": "AIRE DE COMBUSTIÓN. Aire necesario para la combustión completa de un \ncombustible, incluido el aire teórico y el aire sobrante.",
+   "paginas": [
+    30,
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d010",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AIRE, ESCAPE",
+   "texto": "AIRE, ESCAPE. Aire que se extrae de cualquier espacio, aparato o pieza de \nequipo y se transporta directamente a la atmósfera por medio de aberturas o \nconductos.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d011",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AIRE AMBIENTAL",
+   "texto": "AIRE AMBIENTAL. Aire que se transporta hacia o desde zonas ocupadas \na través de conductos que no forman parte del sistema de calefacción o aire \nacondicionado, como la ventilación para uso humano, el escape de la cocina \ndoméstica, el escape del cuarto de baño, el escape de la secadora de ropa do-\nméstica y el escape del garaje.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d012",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "",
+   "texto": "AIRE, CREACION DE Cualquier combinación de aire exterior y de transfe-\nrencia destinada a sustituir al aire de extracción y a la exfiltración.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d013",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AIRE, EXTERIOR",
+   "texto": "AIRE, EXTERIOR. Aire ambiental que entra en un edificio a través de un \nsistema de ventilación, a través de aberturas intencionadas para ventilación \nnatural o por infiltración.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d014",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AIRE EXTERIOR",
+   "texto": "AIRE EXTERIOR. Aire tomado del exterior y que, por tanto, no ha circulado \npreviamente por el sistema.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d015",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AIRE DE RETORNO",
+   "texto": "AIRE DE RETORNO. Aire extraído de un espacio o lugar acondicionado \naprobado y recirculado o expulsado.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d016",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ABERTURA EXTERIOR",
+   "texto": "ABERTURA EXTERIOR. Puerta, ventana, persiana o claraboya que puede \nabrirse a la atmósfera exterior.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d017",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AIRE RECIRCULADO",
+   "texto": "AIRE RECIRCULADO. Aire extraído de un espacio acondicionado y desti-\nnado a ser reutilizado como aire de impulsión.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d018",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AIRE DE TRANSFERENCIA",
+   "texto": "AIRE DE TRANSFERENCIA. Aire movido de un espacio interior a otro.",
+   "paginas": [
+    31
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d019",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AIRE TEÓRICO",
+   "texto": "AIRE TEÓRICO. Cantidad exacta de aire necesaria para suministrar oxíge-\nno para la combustión completa de una cantidad determinada de un combus-\ntible específico.",
+   "paginas": [
+    31,
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d020",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AIRE DE SUMINISTRO",
+   "texto": "AIRE DE SUMINISTRO. El aire suministrado a cada uno o a cualquier espa-\ncio alimentado por el sistema de distribución de aire o el aire total suministrado \na todos los espacios alimentados por el sistema de distribución de aire, que se \nsuministra para ventilación, calefacción, refrigeración, humidificación, deshu-\nmidificación y otros fines similares.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d021",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AIRE DE VENTILACIÓN",
+   "texto": "AIRE DE VENTILACIÓN. La parte del aire de impulsión que procede del \nexterior (aire libre), más el aire recirculado que ha sido tratado para mantener \nla calidad deseada del aire dentro de un espacio designado.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d022",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ALTERACIÓN",
+   "texto": "ALTERACIÓN. Cambio en un sistema mecánico que implica una amplia-\nción, adición o modificación de la disposición, tipo o finalidad de la instalación \noriginal.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d023",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AMORTIGUADOR MECANICO",
+   "texto": "AMORTIGUADOR MECANICO. Dispositivo controlado manual o auto-\nmáticamente para regular el tiro o el caudal de aire o gases de combustión.\na) AMORTIGUADOR MECANICO DE VOLUMEN. Dispositivo que, cuando \nse instala, restringe, retarda o dirige el flujo de aire en un conducto, o los pro-\nductos de la combustión en un aparato productor de calor, su conector de ven-\ntilación, respiradero o chimenea.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d024",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "AMORTIGUADOR MECANICO DE RADIACIÓN DE TECHO",
+   "texto": "AMORTIGUADOR MECANICO DE RADIACIÓN DE TECHO. Un dispo-\nsitivo listado instalado en una membrana de techo de un ensamblaje de piso/\ntecho o techo/techo con resistencia al fuego para limitar automáticamente la \ntransferencia de calor radiactivo a través de una abertura de entrada/salida de \naire.",
+   "paginas": [
+    32
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d025",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "APARATO",
+   "texto": "APARATO. Dispositivo o aparato fabricado y diseñado para utilizar energía \ny para el cual este código establece requisitos específicos.",
+   "paginas": [
+    32,
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d026",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "APARATOS DE COCINA COMERCIALES",
+   "texto": "APARATOS DE COCINA COMERCIALES. Aparatos utilizados en un esta-\nblecimiento comercial de servicios alimentarios para calentar o cocinar alimen-\ntos y que producen vapores de grasa, vapor, humos u olores que deben elimi-\nnarse mediante un sistema local de ventilación por extracción. Dichos aparatos \nincluyen freidoras; parrillas verticales; planchas; parrillas; calderas con camisa \nde vapor; hornillos; parrillas bajo fuego (charbroilers); hornos; barbacoas; asa-\ndores; y aparatos similares. A efectos de esta definición, un establecimiento de \nservicio de comidas incluirá cualquier edificio o parte del mismo utilizado para \nla preparación y el servicio de comidas.",
+   "paginas": [
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d027",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "APARATO DE COCINA LIGERO",
+   "texto": "APARATO DE COCINA LIGERO. Entre los aparatos de cocción ligeros se \nincluyen los hornos eléctricos y de gas (incluidos los hornos estándar, de coc-\nción, de asado, giratorios, de recalentamiento, de convección, combinados de \nconvección/vapor, de sobremesa con cinta transportadora, de cubierta y de re-\npostería), las marmitas eléctricas y de gas con camisa de vapor, los cocedores \nde pasta eléctricos y de gas, los hornos de vapor eléctricos y de gas (tanto de \npresión como atmosféricos) y los fundidores de queso eléctricos y de gas.",
+   "paginas": [
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d028",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "APARATO DE COCCIÓN",
+   "texto": "APARATO DE COCCIÓN. Véase \"Aparatos de cocina comerciales\".",
+   "paginas": [
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d029",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "APARATO DE COCCIÓN DE USO MEDIO",
+   "texto": "APARATO DE COCCIÓN DE USO MEDIO. Entre los aparatos de cocción \nde uso medio se incluyen las cocinas eléctricas de elementos discretos (con o \nsin horno), las cocinas eléctricas y de gas con encimera caliente, las planchas \neléctricas y de gas, las planchas eléctricas y de gas de doble cara, las freidoras \neléctricas y de gas (incluidas las freidoras abiertas, las freidoras de donuts, las \nfreidoras de marmita y las freidoras a presión), los hornos de pizza eléctricos y \nde gas con cinta transportadora, las sartenes basculantes eléctricas y de gas y \nlos asadores eléctricos y de gas.",
+   "paginas": [
+    33
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d030",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "APARATO DE COCCIÓN EXTRAPESADO",
+   "texto": "APARATO DE COCCIÓN EXTRAPESADO. Los aparatos de cocción extra-\npesados son aquellos que utilizan la combustión con llama abierta de combus-\ntible sólido en cualquier momento.",
+   "paginas": [
+    33,
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d031",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "APARATO DE COCCIÓN DE GRAN POTENCIA",
+   "texto": "APARATO DE COCCIÓN DE GRAN POTENCIA. Entre los aparatos de \ncocción pesados se incluyen las parrillas eléctricas de cocción inferior, las pa-\nrrillas eléctricas de cadena (transportadoras), las parrillas de cocción inferior \nde gas, las parrillas de cadena (transportadoras) de gas, las cocinas abiertas de \ngas (con o sin horno), las cocinas wok eléctricas y de gas, los ahumadores, los \nhornos ahumadores y las parrillas y salamandras eléctricas y de gas de cocción \nsuperior (verticales).",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d032",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "APARATO DE COMBUSTIÓN CERRADA DE COMBUSTIBLE SÓLIDO",
+   "texto": "APARATO DE COMBUSTIÓN CERRADA DE COMBUSTIBLE SÓLIDO. \nAparato productor de calor que emplea una cámara de combustión que no tie-\nne más aberturas que el cuello de salida de humos, la puerta de carga de com-\nbustible y las aberturas ajustables previstas para controlar la cantidad de aire \nde combustión que entra en la cámara de combustión.",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d033",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "APARATO DE COMBUSTIÓN DE PELLETS",
+   "texto": "APARATO DE COMBUSTIÓN DE PELLETS. Aparato de combustión ce-\nrrada, con ventilación, equipado con un mecanismo de alimentación de com-\nbustible para quemar pellets procesados de combustible sólido de un tamaño \ny composición especificados.",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d034",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "APARATO GENERADOR DE HIDRÓGENO",
+   "texto": "APARATO GENERADOR DE HIDRÓGENO. Un paquete autónomo o pa-\nquetes de fábrica de sistemas integrados para generar hidrógeno gaseoso. Los \naparatos generadores de hidrógeno utilizan procesos de electrólisis, reforma-\nción, químicos o de otro tipo para generar hidrógeno.",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d035",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "APARATO PORTÁTIL DE PILA DE COMBUSTIBLE",
+   "texto": "APARATO PORTÁTIL DE PILA DE COMBUSTIBLE. Un generador de elec-\ntricidad de pila de combustible que no es fijo. Un aparato portátil de pila de \ncombustible utiliza una conexión de cable y enchufe a una carga no conectada \na la red y tiene un suministro de combustible integrado.",
+   "paginas": [
+    34
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d036",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "APARATOS DE VENTILACIÓN DIRECTA",
+   "texto": "APARATOS DE VENTILACIÓN DIRECTA. Aparatos construidos e insta-\nlados de forma que todo el aire para la combustión procede de la atmósfera \nexterior y todos los gases de combustión se descargan en la atmósfera exterior.",
+   "paginas": [
+    34,
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d037",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "",
+   "texto": "APARATO DECORATIVO DE COMBUSTIÓN DE ALCOHOL SIN VEN-\nTILACIÓN. Aparato fijo y autónomo destinado a ser fijado directa o indirecta-\nmente a una pared o al suelo y no destinado a ser conectado a un conducto. Di-\ncho aparato quema alcohol y se fabrica en una planta para su posterior entrega \nen el lugar de instalación.",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d038",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "APROBADO",
+   "texto": "APROBADO. Aceptable para el funcionario del código.",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d039",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ARTEFACTO, EXISTENTE",
+   "texto": "ARTEFACTO, EXISTENTE. Cualquier artefacto regulado por este código \nque haya sido instalado legalmente antes de la fecha de entrada en vigencia de \neste código, o para el cual se haya emitido un permiso de instalación.",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d040",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ARTEFACTO, VENTILADO",
+   "texto": "ARTEFACTO, VENTILADO. Un artefacto diseñado e instalado de manera \ntal que todos los productos de la combustión sean transportados directamente \ndesde el artefacto a la atmósfera exterior a través de una chimenea o sistema de \nventilación aprobado.",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d041",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "BAÑO",
+   "texto": "BAÑO. Habitación que contiene una bañera, ducha, spa o accesorio de \nbaño similar.",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d042",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "BOMBA DE CALOR",
+   "texto": "BOMBA DE CALOR. Un sistema de refrigeración que extrae calor de una \nsustancia y lo transfiere a otra porción de la misma sustancia o a una segunda \nsustancia a una temperatura más alta para un propósito beneficioso.",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d043",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "BRASEADO",
+   "texto": "BRASEADO. Proceso de unión de metales en el que la coalescencia se pro-\nduce mediante el uso de un metal de aportación no ferroso que tiene un punto \nde fusión superior a 1.000 °F (538 °C), pero inferior al del metal base que se \nestá uniendo. El material de relleno se distribuye entre las superficies estrecha-\nmente ajustadas de la unión por atracción capilar.",
+   "paginas": [
+    35
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d044",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "BTU",
+   "texto": "BTU. Abreviatura de unidad térmica británica, que es la cantidad de calor \nnecesaria para elevar la temperatura de 1 libra (454 g) de agua 1°F (0,56°C) (1 \nBtu = 1055 J).",
+   "paginas": [
+    35,
+    36
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d045",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CÁMARA DE COMBUSTIÓN",
+   "texto": "CÁMARA DE COMBUSTIÓN. Parte de un aparato en la que se produce la \ncombustión.",
+   "paginas": [
+    36
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d046",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CAMPANAS DE COCINA COMERCIALES",
+   "texto": "CAMPANAS DE COCINA COMERCIALES.\na) CAMPANA EXTRACTORA TRASERA. Las campanas extractoras traseras \ntambién se denominan campanas extractoras de baja proximidad o campanas \nextractoras laterales cuando se montan en la pared. Su borde inferior delantero \nqueda por debajo de los electrodomésticos y está \"retrasado\" con respecto a la \nparte delantera de éstos. Siempre está unida a la parte trasera de los aparatos \npor un panel si es independiente, o por un panel o pared si está montada en la \npared, y su altura sobre la superficie de cocción varía. (Este tipo de campana \npuede construirse con paneles parciales en los extremos para aumentar su efi-\ncacia en la captación de los efluentes generados por la cocción).\nb) CAMPANA DE ISLA DOBLE. La campana de isla doble se coloca sobre apa-\nratos o líneas de aparatos situados uno detrás de otro. Está abierta por todos \nlos lados y sobresale por los frentes y los laterales de los aparatos. Puede tener \nun panel de pared entre las partes traseras de los aparatos. (El hecho de que \nel aire de salida se extraiga de ambos lados de la campana doble para que se \nreúna en el centro hace que cada lado de esta campana emule una campana de \npared, por lo que funciona de forma muy similar con o sin un panel de pared \nreal entre la parte posterior de los aparatos).\nc) CAMPANA DE CEJAS. Se monta directamente en la parte frontal de un apa-\nrato, como un horno o un lavavajillas, por encima de la(s) abertura(s) o puer-\nta(s) de la(s) que sale(n) el efluente, sobrepasando los laterales y sobresaliendo \nde la parte frontal de la abertura para capturar el efluente.\n\n\nd) CAMPANA EXTRACTORA. Se trata de una forma independiente de cam-\npana de estante trasero construida a una altura lo suficientemente baja como \npara que los alimentos pasen por encima.\ne) CAMPANA DE ISLA SIMPLE. Se coloca sobre un solo aparato o línea de \naparatos. Está abierta por todos los lados y sobresale por delante, por detrás y \npor los lados de los aparatos. Una campana de isla única es más susceptible a \nlas corrientes de aire cruzadas y requiere un mayor caudal de aire de extracción \nque una campana de pared de tamaño equivalente para capturar y contener los \nefluentes generados por la(s) operación(es) de cocción.\nf ) CAMPANA DE PARED. Una campana extractora de pared se monta contra \nuna pared por encima de un solo aparato o línea de aparatos, o puede ser inde-\npendiente con un panel trasero desde la parte trasera de los aparatos hasta la \ncampana. La campana sobresale por todos los lados de los aparatos.\nLa pared actúa como panel trasero, obligando a que el aire de reposición pase \npor la parte delantera de los aparatos de cocción, aumentando así la eficacia de \nla campana para capturar y contener los efluentes generados por la(s) opera-\nción(es) de cocción.",
+   "paginas": [
+    36,
+    37
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d047",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CALENTADOR DE AGUA",
+   "texto": "CALENTADOR DE AGUA. Cualquier aparato o equipo de calefacción que \ncalienta agua potable y suministra dicha agua al sistema de distribución de \nagua caliente potable.",
+   "paginas": [
+    37
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d048",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CALENTADOR RADIANTE",
+   "texto": "CALENTADOR RADIANTE. Calentador diseñado para transferir calor \nprincipalmente por radiación directa.",
+   "paginas": [
+    37
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d049",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CALDERA MODULAR",
+   "texto": "CALDERA MODULAR. Conjunto de calderas de vapor o de agua caliente \nformado por un grupo de calderas individuales denominadas módulos, des-\ntinadas a ser instaladas como una unidad sin válvulas de cierre intermedias. \nLos módulos se encuentran bajo una camisa o están encamisados individual-\nmente. Los módulos individuales estarán limitados a una potencia de entrada \n\n\nmáxima de 400.000 Btu/h (117.228 W) de gas, 3 galones por hora (gph) (11,4 \nL/h) de aceite, o 115 kW (eléctrica).",
+   "paginas": [
+    37,
+    38
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d050",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "",
+   "texto": "CALDERA DE CALENTAMIENTO DE AGUA CALIENTE A BAJA PRE-\nSIÓN. Caldera que suministra agua caliente a una presión no superior a 1103 \nkPa (160 psi) y a una temperatura no superior a 121 °C (250 °F).",
+   "paginas": [
+    38
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d051",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CALDERA DE CALEFACCIÓN DE VAPOR DE BAJA PRESIÓN",
+   "texto": "CALDERA DE CALEFACCIÓN DE VAPOR DE BAJA PRESIÓN. Caldera \nque suministra vapor a una presión inferior o igual a 15 psi (103 kPa).",
+   "paginas": [
+    38
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d052",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CALEFACTOR DE AMBIENTE, VENTILADO",
+   "texto": "CALEFACTOR DE AMBIENTE, VENTILADO. Unidad de calefacción inde-\npendiente que quema combustible sólido o líquido para el calentamiento di-\nrecto del espacio en el que se encuentra la unidad y adyacente a éste.",
+   "paginas": [
+    38
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d053",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CALEFACCIÓN POR PANELES",
+   "texto": "CALEFACCIÓN POR PANELES. Método de calefacción radiante de espa-\ncios en el que el calor se suministra mediante grandes áreas calentadas de las \nsuperficies de la habitación. El elemento calefactor suele consistir en tuberías \nde agua caliente, conductos de aire caliente o elementos de resistencia eléctrica \nempotrados o situados detrás de las superficies del techo, la pared o el suelo.",
+   "paginas": [
+    38
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d054",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CERTIFICADO DE TERCERA PARTE",
+   "texto": "CERTIFICADO DE TERCERA PARTE. Certificación obtenida por el fabri-\ncante que indica que las características de función y rendimiento de un produc-\nto o material han sido determinadas mediante ensayos y vigilancia continua \npor parte de una agencia de certificación de tercera parte aprobada. La afirma-\nción de la certificación adopta la forma de una identificación conforme a los \nrequisitos de la agencia de certificación por terceros.",
+   "paginas": [
+    38
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d055",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CUARTO DE ASEO",
+   "texto": "CUARTO DE ASEO. Habitación que contiene un retrete y, con frecuencia, \nun lavabo, pero no una bañera, ducha, spa o accesorio de baño similar.",
+   "paginas": [
+    38
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d056",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CLASIFICACIÓN DE TOXICIDAD (REFRIGERANTE)",
+   "texto": "CLASIFICACIÓN DE TOXICIDAD (REFRIGERANTE). Designación alfabé-\ntica utilizada para identificar la toxicidad de los refrigerantes. La clase A indica \nun refrigerante con menor toxicidad. La clase B indica un refrigerante con ma-\nyor toxicidad.\n\n\nClase A. Refrigerantes que tienen un límite de exposición ocupacional (OEL) de \n400 partes por millón (ppm) o superior.\nClase B. Refrigerantes que tienen un OEL inferior a 400 ppm.",
+   "paginas": [
+    38,
+    39
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d057",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CLASIFICACIÓN DE LOS SISTEMAS DE REFRIGERACIÓN",
+   "texto": "CLASIFICACIÓN DE LOS SISTEMAS DE REFRIGERACIÓN. Los sistemas \nde refrigeración se clasifican según el grado de probabilidad de que una fuga \nde refrigerante procedente de una conexión, junta o componente defectuoso \nentre en una zona ocupada. La distinción se basa en el diseño básico o la ubi-\ncación de los componentes.",
+   "paginas": [
+    39
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d058",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CALENTADOR UNITARIO",
+   "texto": "CALENTADOR UNITARIO. Aparato autónomo del tipo ventilador, diseña-\ndo para suministrar aire caliente directamente al espacio en el que se encuentra \nel aparato.",
+   "paginas": [
+    39
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d059",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CALEFACCIÓN",
+   "texto": "CALEFACCIÓN. Unidad de calefacción completamente autónoma diseña-\nda para suministrar aire caliente a espacios alejados o adyacentes a la ubica-\nción del aparato.",
+   "paginas": [
+    39
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d060",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CLASIFICACIÓN DEL GRUPO DE SEGURIDAD DEL REFRIGERANTE",
+   "texto": "CLASIFICACIÓN DEL GRUPO DE SEGURIDAD DEL REFRIGERANTE. \nDesignación alfabética/numérica que indica las clasificaciones de toxicidad e \ninflamabilidad de los refrigerantes.",
+   "paginas": [
+    39
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d061",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CÓDIGO",
+   "texto": "CÓDIGO. Estos reglamentos, sus modificaciones posteriores o cualquier \nnorma o reglamento de emergencia que la autoridad administrativa competen-\nte haya adoptado legalmente.",
+   "paginas": [
+    39
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d062",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "COMBUSTIBLE",
+   "texto": "COMBUSTIBLE. En el contexto de este código, se refiere a la oxidación \nrápida del combustible acompañada de la producción de calor o calor y luz.",
+   "paginas": [
+    39
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d063",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "COMBUSTIBLE SÓLIDO (APLICACIONES DE COCINA)",
+   "texto": "COMBUSTIBLE SÓLIDO (APLICACIONES DE COCINA). Aplicable a las \noperaciones comerciales de servicio de alimentos únicamente, el combustible \nsólido es cualquier material a granel como madera dura, mezquite, carbón o \nbriquetas que se quema para producir calor para las operaciones de cocción.",
+   "paginas": [
+    39
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d064",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "COMPUERTA DE HUMOS",
+   "texto": "COMPUERTA DE HUMOS. Dispositivo homologado instalado en con-\nductos y aberturas de transferencia de aire diseñado para impedir el paso del \nhumo. El dispositivo está instalado para funcionar automáticamente, contro-\nlado por un sistema de detección de humo y, cuando sea necesario, se puede \nposicionar desde un centro de mando de incendios.",
+   "paginas": [
+    39,
+    40
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d065",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CENTRAL ELÉCTRICA ESTACIONARIA DE PILAS DE COMBUSTIBLE",
+   "texto": "CENTRAL ELÉCTRICA ESTACIONARIA DE PILAS DE COMBUSTIBLE. \nUn paquete autónomo o paquetes adaptados de fábrica que constituyen un \nconjunto de sistemas integrados de funcionamiento automático para generar \nenergía eléctrica útil y energía térmica recuperable que está permanentemente \nconectado y fijado en su lugar.",
+   "paginas": [
+    40
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d066",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CERRAMIENTO DE HUECO",
+   "texto": "CERRAMIENTO DE HUECO. Las paredes o Construcciónes que forman \nlos límites de un hueco.",
+   "paginas": [
+    40
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d067",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CALDERA",
+   "texto": "CALDERA. Aparato de calefacción cerrado destinado a suministrar agua \ncaliente o vapor para la calefacción de locales, la transformación o la produc-\nción de energía. Las calderas de baja presión funcionan a presiones inferiores \no iguales a 15 libras por pulgada cuadrada (psi) (103 kPa) para el vapor y 160 \npsi (1103 kPa) para el agua. Las calderas de alta presión funcionan a presiones \nsuperiores a dichas presiones.",
+   "paginas": [
+    40
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d068",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CALDERA, SUMINISTRO DE AGUA CALIENTE",
+   "texto": "CALDERA, SUMINISTRO DE AGUA CALIENTE. Cualquier recipiente uti-\nlizado para generar agua caliente destinada a un uso externo al recipiente, que \nsupere cualquiera de las siguientes limitaciones:\n1.Una capacidad de entrada de calor de 400.000 Btuh (117,2 kW).\n2.Una temperatura del agua de 210°F (99°C).\n3.Una capacidad nominal de agua de 454 L (120 gal).",
+   "paginas": [
+    40
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d069",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CALDERA AUTOMÁTICA",
+   "texto": "CALDERA AUTOMÁTICA. Cualquier clase de caldera equipada con los \nmandos y dispositivos limitadores especificados en el capítulo 10.",
+   "paginas": [
+    40
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d070",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CALDERA DE CALEFACCIÓN DE VAPOR",
+   "texto": "CALDERA DE CALEFACCIÓN DE VAPOR. Caldera que funciona a presio-\nnes no superiores a 15 psi (103 kPa) para el vapor.",
+   "paginas": [
+    40,
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d071",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CALDERA DE POTENCIA",
+   "texto": "CALDERA DE POTENCIA. Véase \"Caldera\".",
+   "paginas": [
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d072",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CUARTO DE CALDERAS",
+   "texto": "CUARTO DE CALDERAS. Cuarto utilizado principalmente para la instala-\nción de una caldera.",
+   "paginas": [
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d073",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "COMPUERTA CORTAFUEGOS",
+   "texto": "COMPUERTA CORTAFUEGOS. Dispositivo listado instalado en conduc-\ntos y aberturas de transferencia de aire diseñado para cerrarse automáticamen-\nte al detectar calor y restringir el paso de las llamas. Las compuertas cortafuegos \nse clasifican para su uso en sistemas estáticos que se cierran automáticamente \nen caso de incendio, o en sistemas dinámicos que siguen funcionando duran-\nte un incendio. Las compuertas cortafuegos dinámicas se ensayan y clasifican \npara su cierre bajo un flujo de aire a temperatura elevada.",
+   "paginas": [
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d074",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CONDUCTO",
+   "texto": "CONDUCTO. T ubo o conducto utilizado para transportar aire. Los con-\nductos de aire de los sistemas autónomos no deben interpretarse como con-\nductos de aire.",
+   "paginas": [
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d075",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CONDUCTO DE HUMOS",
+   "texto": "CONDUCTO DE HUMOS. Conducto situado en el interior de una chime-\nnea o de un respiradero por el que pasan los productos gaseosos de la com-\nbustión.",
+   "paginas": [
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d076",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CONDUCTO DE HUMOS",
+   "texto": "CONDUCTO DE HUMOS. Conducto por el que pasan los productos de \nla combustión desde un aparato que funciona con combustible hasta el respi-\nradero o la chimenea (véase también \"Conector de chimenea\" y \"Conector de \nrespiradero\").",
+   "paginas": [
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d077",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CONDUCTO DE HUMOS (REVESTIMIENTO)",
+   "texto": "CONDUCTO DE HUMOS (REVESTIMIENTO). Sistema o material utiliza-\ndo para formar la superficie interior de un conducto de humos en una chime-\nnea o respiradero, con el fin de proteger la estructura circundante de los efectos \nde los productos de combustión y transportar los productos de combustión sin \nfugas a la atmósfera.",
+   "paginas": [
+    41
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d078",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CONJUNTO COMBUSTIBLE",
+   "texto": "CONJUNTO COMBUSTIBLE. Pared, suelo, techo u otro conjunto cons-\ntruido con uno o más materiales componentes que no están definidos como \nincombustibles.",
+   "paginas": [
+    41,
+    42
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d079",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CONJUNTO DE PROTECCIÓN (ESPACIO LIBRE REDUCIDO)",
+   "texto": "CONJUNTO DE PROTECCIÓN (ESPACIO LIBRE REDUCIDO). Cual-\nquier conjunto no combustible etiquetado o construido de acuerdo con la ta-\nbla 308.4.2 y colocado entre materiales o conjuntos combustibles y aparatos, \ndispositivos o equipos mecánicos, con el fin de reducir las distancias de sepa-\nración requeridas. Los conjuntos de protección fijados directamente a un con-\njunto combustible no se considerarán parte de dicho conjunto combustible.",
+   "paginas": [
+    42
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d080",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CONTROL",
+   "texto": "CONTROL. Dispositivo manual o automático destinado a regular el sumi-\nnistro de gas, aire, agua o electricidad a un sistema mecánico, o su funciona-\nmiento.",
+   "paginas": [
+    42
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d081",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CONTROL DE LÍMITE",
+   "texto": "CONTROL DE LÍMITE. Dispositivo que responde a los cambios de pre-\nsión, temperatura o nivel para encender, cerrar o regular el suministro de gas \na un aparato.",
+   "paginas": [
+    42
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d082",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "COMPUERTA COMBINADA CONTRA INCENDIO/HUMO",
+   "texto": "COMPUERTA COMBINADA CONTRA INCENDIO/HUMO. Un dispositi-\nvo listado instalado en conductos y aberturas de transferencia de aire diseñado \npara cerrarse automáticamente al detectar calor y resistir el paso de llamas y \nhumo. El dispositivo se instala para que funcione automáticamente, sea con-\ntrolado por un sistema de detección de humo y, cuando sea necesario, pueda \nposicionarse desde un centro de mando de incendios.",
+   "paginas": [
+    42
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d083",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CHIMENEA",
+   "texto": "CHIMENEA. Estructura principalmente vertical que contiene uno o más \nconductos de humo, con el fin de transportar los productos gaseosos de la \ncombustión y el aire desde un aparato de quema de combustible a la atmósfera \nexterior.\na) CHIMENEA DE FÁBRICA. Una chimenea catalogada y etiquetada compues-\n\n\nta de componentes hechos en fábrica, ensamblados en el campo de acuerdo \ncon las instrucciones del fabricante y las condiciones de la catalogación.\nb) CHIMENEA DE MAMPOSTERÍA. Chimenea construida sobre el terreno, \ncompuesta de elementos macizos de albañilería, ladrillos, piedras u hormigón.\nc) CHIMENEA METÁLICA. Chimenea metálica construida sobre el terreno.",
+   "paginas": [
+    42,
+    43
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d084",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CLASIFICACIÓN DE INFLAMABILIDAD (REFRIGERANTE)",
+   "texto": "CLASIFICACIÓN DE INFLAMABILIDAD (REFRIGERANTE). Designación \nalfabética/numérica utilizada para identificar la inflamabilidad de los refrige-\nrantes.\nClase 1. Indica un refrigerante sin propagación de la llama.\nClase 2. Indica un refrigerante con baja inflamabilidad.\nClase 2L. Indica un refrigerante con baja inflamabilidad y baja velocidad de \ncombustión.\nClase 3. Indica un refrigerante con alta inflamabilidad.",
+   "paginas": [
+    43
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d085",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CONECTOR DE AIRE FLEXIBLE",
+   "texto": "CONECTOR DE AIRE FLEXIBLE. Conducto para transferir aire entre un \nconducto o cámara de aire y una unidad terminal de aire o entre un conducto o \ncámara de aire y una entrada o salida de aire. Dicho conducto está limitado en \nsu uso, longitud y ubicación.",
+   "paginas": [
+    43
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d086",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CONECTOR DE CHIMENEA",
+   "texto": "CONECTOR DE CHIMENEA. T ubo que conecta un aparato de combus-\ntión a una chimenea.",
+   "paginas": [
+    43
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d087",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CONDENSADO",
+   "texto": "CONDENSADO. Líquido que se condensa a partir de un gas (incluidos los \ngases de combustión) debido a una reducción de la temperatura.",
+   "paginas": [
+    43
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d088",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "CONDENSADOR",
+   "texto": "CONDENSADOR. Un intercambiador de calor diseñado para licuar el va-\npor refrigerante mediante la eliminación de calor.",
+   "paginas": [
+    43
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d089",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DISPOSITIVO DE ALIVIO DE PRESIÓN",
+   "texto": "DISPOSITIVO DE ALIVIO DE PRESIÓN. Válvula accionada por presión o \nmiembro de ruptura diseñado para aliviar automáticamente la presión excesi-\nva.",
+   "paginas": [
+    43,
+    44
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d090",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DISTANCIA LIBRE",
+   "texto": "DISTANCIA LIBRE. La distancia mínima a través del aire medida entre la \nsuperficie productora de calor del aparato mecánico, dispositivo o equipo y la \nsuperficie del material o conjunto combustible.",
+   "paginas": [
+    44
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d091",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DISPOSITIVO DE COMPUERTA DE VENTILACIÓN, AUTOMÁTICO",
+   "texto": "DISPOSITIVO DE COMPUERTA DE VENTILACIÓN, AUTOMÁTICO. \nDispositivo destinado a instalarse en el sistema de ventilación, en la salida de \nun aparato individual de quema de combustible de funcionamiento automá-\ntico que está diseñado para abrir el sistema de ventilación automáticamente \ncuando el aparato está en funcionamiento y para cerrar el sistema de ventila-\nción automáticamente cuando el aparato está en estado de espera o apagado.",
+   "paginas": [
+    44
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d092",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DISPOSITIVO LIMITADOR DE PRESIÓN",
+   "texto": "DISPOSITIVO LIMITADOR DE PRESIÓN. Mecanismo sensible a la pre-\nsión diseñado para detener automáticamente el funcionamiento del elemento \nque impone la presión a una presión predeterminada.",
+   "paginas": [
+    44
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d093",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DORMITORIO",
+   "texto": "DORMITORIO. Habitación o espacio en el que duermen las personas, que \ntambién puede incluir instalaciones permanentes para vivir, comer y servicios \nsanitarios o de cocina, pero no ambos. Dichas habitaciones y espacios que \ntambién forman parte de una unidad de vivienda no son unidades dormitorio.",
+   "paginas": [
+    44
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d094",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "DOCUMENTOS DE CONSTRUCCIÓN",
+   "texto": "DOCUMENTOS DE CONSTRUCCIÓN. Los documentos escritos, gráfi-\ncos y pictóricos preparados o reunidos para describir el diseño, la ubicación y \nlas características físicas de los elementos del proyecto necesarios para obtener \nun permiso de construcción. Los planos de construcción se dibujarán a una \nescala adecuada.",
+   "paginas": [
+    44
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d095",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "EDIFICIO",
+   "texto": "EDIFICIO. Cualquier estructura ocupada o destinada a soportar o albergar \ncualquier ocupación.",
+   "paginas": [
+    44
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d096",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ESPACIO OCUPABLE",
+   "texto": "ESPACIO OCUPABLE. Espacio cerrado destinado a actividades humanas, \nexcluidos los espacios destinados principalmente a otros fines, como almace-\nnes y salas de equipos, que sólo están destinados a ser ocupados ocasional-\nmente y durante breves períodos de tiempo.",
+   "paginas": [
+    44,
+    45
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d097",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ESCAPE",
+   "texto": "ESCAPE. Recipiente situado en un punto bajo de un sistema de tuberías \npara recoger el condensado y del que se puede extraer.",
+   "paginas": [
+    45
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d098",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ESPACIO ACONDICIONADO",
+   "texto": "ESPACIO ACONDICIONADO. Área, sala o espacio que se encuentra den-\ntro de la envolvente térmica del edificio y que se calienta o enfría directamente \no indirectamente. Los espacios se calientan o enfrían indirectamente cuando se \ncomunican a través de aberturas con espacios acondicionados, cuando están \nseparados de espacios acondicionados por paredes, suelos o techos sin aislar, \no cuando contienen conductos, tuberías u otras fuentes de calefacción o refri-\ngeración sin aislar.",
+   "paginas": [
+    45
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d099",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "EQUIPOS",
+   "texto": "EQUIPOS. T odas las tuberías, conductos, rejillas de ventilación, disposi-\ntivos de control y otros componentes de sistemas que no sean aparatos y que \nestén permanentemente instalados e integrados para proporcionar el control \nde las condiciones ambientales de los edificios. Esta definición también incluirá \notros sistemas regulados específicamente en este código.",
+   "paginas": [
+    45
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d100",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "EQUIPO, EXISTENTE",
+   "texto": "EQUIPO, EXISTENTE. Cualquier equipo regulado por este código que \nhaya sido instalado legalmente antes de la fecha de vigencia de este código, o \npara el cual se haya emitido un permiso de instalación.",
+   "paginas": [
+    45
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d101",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "EJE",
+   "texto": "EJE. Un espacio cerrado que se extiende a través de uno o más pisos de un \nedificio, conectando aberturas verticales en pisos sucesivos, o pisos y el techo.",
+   "paginas": [
+    45
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d102",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ENCHUFE FUSIBLE",
+   "texto": "ENCHUFE FUSIBLE. Dispositivo dispuesto para aliviar la presión median-\nte el accionamiento de un elemento fusible a una temperatura predeterminada.",
+   "paginas": [
+    45
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d103",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ENFRIADOR EVAPORATIVO",
+   "texto": "ENFRIADOR EVAPORATIVO. Dispositivo utilizado para reducir el calor \n\n\nsensible del aire para refrigeración mediante el proceso de evaporación del \nagua en una corriente de aire.",
+   "paginas": [
+    45,
+    46
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d104",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ENFRIAMIENTO EVAPORATIVO DIRECTO",
+   "texto": "ENFRIAMIENTO EVAPORATIVO DIRECTO. Proceso de enfriamiento \nevaporativo en el que el agua se evapora directamente en la corriente de aire, \nreduciendo la temperatura de bulbo seco del aire y aumentando su nivel de \nhumedad.",
+   "paginas": [
+    46
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d105",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ENFRIAMIENTO EVAPORATIVO INDIRECTO",
+   "texto": "ENFRIAMIENTO EVAPORATIVO INDIRECTO. Proceso de enfriamiento \nevaporativo en el que el agua se evapora en una corriente de aire secundaria, \neliminando el calor de una corriente de aire primaria mediante un intercambia-\ndor de calor.",
+   "paginas": [
+    46
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d106",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ENCLAVAMIENTO",
+   "texto": "ENCLAVAMIENTO. Dispositivo accionado por otro dispositivo con el \nque está directamente asociado, para gobernar las operaciones sucesivas del \nmismo dispositivo o de dispositivos aliados. Un circuito en el que una acción \ndeterminada no puede producirse hasta después de que otra u otras acciones \nhayan tenido lugar.",
+   "paginas": [
+    46
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d107",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ETIQUETADO",
+   "texto": "ETIQUETADO. Equipo, materiales o productos a los que se ha adherido \nuna etiqueta, sello, símbolo u otra marca de identificación de un laboratorio de \npruebas reconocido a nivel nacional, agencia aprobada u otra organización rela-\ncionada con la evaluación de productos que mantiene una inspección periódica \nde la producción de los artículos etiquetados anteriormente y cuyo etiquetado \nindica que el equipo, material o producto cumple con las normas identificadas \no ha sido probado y encontrado adecuado para un propósito específico.",
+   "paginas": [
+    46
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d108",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "EVAPORADOR",
+   "texto": "EVAPORADOR. La parte del sistema en la que el refrigerante líquido se \nvaporiza para producir refrigeración.",
+   "paginas": [
+    46
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d109",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "EXCESO DE AIRE",
+   "texto": "EXCESO DE AIRE. La cantidad de aire suministrada además del aire teó-\nrico para lograr la combustión completa de un combustible, evitando así la for-\nmación de productos peligrosos de la combustión.",
+   "paginas": [
+    46
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d110",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "EXFILTRACIÓN",
+   "texto": "EXFILTRACIÓN. Fuga incontrolada de aire hacia el exterior desde espa-\ncios acondicionados a través de aberturas no intencionadas en techos, suelos \ny paredes hacia espacios no acondicionados o el exterior, causada por diferen-\ncias de presión a través de estas aberturas resultantes del viento, el efecto chi-\nmenea creado por diferencias de temperatura entre el interior y el exterior, y \ndesequilibrios entre los caudales de aire de impulsión y extracción.",
+   "paginas": [
+    46,
+    47
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d111",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ELEVACIÓN DE LA INUNDACIÓN DE DISEÑO",
+   "texto": "ELEVACIÓN DE LA INUNDACIÓN DE DISEÑO. La elevación de la \"inun-\ndación de diseño\", incluida la altura de las olas, en relación con el punto de \nreferencia especificado en el mapa del área de riesgo de inundación legalmente \ndesignada de la comunidad. En áreas designadas como Zona AO, la elevación \nde la inundación de diseño será la elevación del grado existente más alto del pe-\nrímetro del edificio más el número de profundidad, en pies, especificado en el \nmapa de peligro de inundación. En áreas designadas como Zona AO donde no \nse especifica un número de profundidad en el mapa, el número de profundidad \nse tomará como igual a 2 pies (610 mm).",
+   "paginas": [
+    47
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d112",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ESPACIO HABITABLE",
+   "texto": "ESPACIO HABITABLE. Espacio dentro de una unidad de vivienda utili-\nzado para vivir, dormir, comer, cocinar, bañarse, lavarse y con fines sanitarios.",
+   "paginas": [
+    47
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d113",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ENSAYADO POR TERCEROS",
+   "texto": "ENSAYADO POR TERCEROS. Procedimiento mediante el cual un labora-\ntorio de ensayos autorizado proporciona documentación que acredita que un \nproducto, material o sistema cumple los requisitos especificados.",
+   "paginas": [
+    47
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d114",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "EQUIPO AUTÓNOMO",
+   "texto": "EQUIPO AUTÓNOMO. Equipo completo, ensamblado y probado en fá-\nbrica, de calefacción, aire acondicionado o refrigeración, instalado como una \nsola unidad, y que tiene todas las piezas de trabajo, completas con la fuerza \nmotriz, en una unidad cerrada de dicha maquinaria.",
+   "paginas": [
+    47
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d115",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "FUNCIONARIO DEL CÓDIGO",
+   "texto": "FUNCIONARIO DEL CÓDIGO. El funcionario u otra autoridad designa-\nda a cargo de la administración y aplicación de este código, o un representante \ndebidamente autorizado.",
+   "paginas": [
+    47
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d116",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "FUENTE DE IGNICIÓN",
+   "texto": "FUENTE DE IGNICIÓN. Llama, chispa o superficie caliente capaz de in-\nflamar vapores o humos inflamables. Dichas fuentes incluyen los quemadores \nde los aparatos, los encendedores de los quemadores y los dispositivos de con-\nmutación eléctrica.",
+   "paginas": [
+    47,
+    48
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d117",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "GASES DE COMBUSTIÓN",
+   "texto": "GASES DE COMBUSTIÓN. Productos de la combustión y exceso de aire.",
+   "paginas": [
+    48
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d118",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "GAS COMBUSTIBLE",
+   "texto": "GAS COMBUSTIBLE. Gas natural, gas manufacturado, gas licuado de \npetróleo o una mezcla de éstos.",
+   "paginas": [
+    48
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d119",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "GRUPO COMPRESOR",
+   "texto": "GRUPO COMPRESOR. Un compresor con su motor principal y acceso-\nrios.",
+   "paginas": [
+    48
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d120",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "HABITACIÓN O ESPACIO REFRIGERADO",
+   "texto": "HABITACIÓN O ESPACIO REFRIGERADO. Local o espacio en el que se \nencuentra un evaporador o un serpentín de salmuera con el fin de reducir o \ncontrolar la temperatura dentro del local o espacio por debajo de 20°C (68°F).",
+   "paginas": [
+    48
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d121",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "HORNO",
+   "texto": "HORNO. Dispositivo de entrada de aire utilizado para capturar por atra-\npamiento, impacto, adherencia o medios similares, grasa, humedad, calor y \ncontaminantes similares antes de que entren en un sistema de conductos.\nTipo I. Campana de cocina para recoger y eliminar vapores de grasa y humo. \nEstas campanas están equipadas con un sistema de extinción de incendios.\nTipo II. Campana general de cocina para la recogida y eliminación de vapores, \ncalor, olores y productos de combustión.",
+   "paginas": [
+    48
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d122",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "HORNO DE CONDUCTO",
+   "texto": "HORNO DE CONDUCTO. Horno de aire caliente instalado normalmente \nen un conducto de distribución de aire para suministrar aire caliente para cale-\n\n\nfacción. Esta definición se aplicará únicamente a los aparatos de calefacción de \naire caliente que, para la circulación del aire, dependan de un ventilador que no \nforme parte del horno.",
+   "paginas": [
+    48,
+    49
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d123",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "HORNO DE SUELO",
+   "texto": "HORNO DE SUELO. Un horno completamente autónomo suspendido \ndel suelo del espacio que se calienta, que toma el aire para la combustión del \nexterior de dicho espacio y con medios para observar las llamas y encender el \naparato desde dicho espacio.",
+   "paginas": [
+    49
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d124",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "INFLAMABILIDAD",
+   "texto": "INFLAMABILIDAD. Véase Clasificación de inflamabilidad (refrigerante).",
+   "paginas": [
+    49
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d125",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ÍNDICE DE DESARROLLO DE HUMO",
+   "texto": "ÍNDICE DE DESARROLLO DE HUMO. Valor numérico asignado a un \nmaterial ensayado según la norma ASTM E84.",
+   "paginas": [
+    49
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d126",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "INMEDIATAMENTE PELIGROSO PARA LA VIDA O LA SALUD (IDLH)",
+   "texto": "INMEDIATAMENTE PELIGROSO PARA LA VIDA O LA SALUD (IDLH). \nLa concentración de contaminantes transportados por el aire que supone una \namenaza de muerte, efectos adversos permanentes inmediatos o retardados \npara la salud, o efectos que podrían impedir escapar de dicho entorno. Este \nnivel de concentración de contaminantes lo establece el Instituto Nacional de \nSeguridad y Salud en el T rabajo (NIOSH) basándose tanto en la toxicidad como \nen la inflamabilidad. Generalmente se expresa en partes por millón por volu-\nmen (ppm v/v) o miligramos por metro cúbico (mg/m3).",
+   "paginas": [
+    49
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d127",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "INFILTRACIÓN",
+   "texto": "INFILTRACIÓN. Fuga incontrolada de aire hacia el interior de espacios \nacondicionados a través de aberturas no intencionadas en techos, suelos y pa-\nredes procedentes de espacios no acondicionados o del exterior, causada por \nlas diferencias de presión a través de estas aberturas resultantes del viento, el \nefecto chimenea creado por las diferencias de temperatura entre el interior y el \nexterior, y los desequilibrios entre los caudales de aire de impulsión y extrac-\nción.",
+   "paginas": [
+    49
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d128",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ÍNDICE DE PROPAGACIÓN DE LA LLAMA",
+   "texto": "ÍNDICE DE PROPAGACIÓN DE LA LLAMA. Valor numérico asignado a \nun material ensayado de acuerdo con ASTM E84 o UL 723.",
+   "paginas": [
+    49
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d129",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "INTERCAMBIADOR DE CALOR",
+   "texto": "INTERCAMBIADOR DE CALOR. Dispositivo que transfiere calor de un \nmedio a otro.",
+   "paginas": [
+    49,
+    50
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d130",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "JUNTA MECÁNICA",
+   "texto": "JUNTA MECÁNICA.\n1. Conexión entre tuberías, accesorios o tuberías y accesorios que no está sol-\ndada, calafateada, soldada con soldadura blanda, cementada con disolvente ni \nfusionada por calor.\n2. Forma general de conexiones estancas a gases o líquidos obtenidas median-\nte la unión de piezas a través de una construcción mecánica de sujeción posi-\ntiva como, por ejemplo, conexiones embridadas, atornilladas, abrazaderas o \nabocardadas, entre otras.",
+   "paginas": [
+    50
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d131",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "JUNTA BRIDADA",
+   "texto": "JUNTA BRIDADA. Unión estanca al gas obtenida por la unión de piezas \nmetálicas con mezclas o aleaciones metálicas que se funden a una temperatu-\nra superior a 538°C (1.000°F), pero inferior a la temperatura de fusión de las \npiezas a unir.",
+   "paginas": [
+    50
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d132",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "JUNTA DE CONEXIÓN A PRESIÓN",
+   "texto": "JUNTA DE CONEXIÓN A PRESIÓN. Junta mecánica permanente que \nincorpora una junta elastomérica o una junta elastomérica y un anillo de agarre \no mordida resistente a la corrosión. La junta se realiza con una herramienta de \nprensado y una mordaza o anillo aprobados por el fabricante del accesorio.",
+   "paginas": [
+    50
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d133",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "JUNTAS DE EMPUJE",
+   "texto": "JUNTAS DE EMPUJE. Tipo de junta mecánica formada por juntas elas-\ntoméricas y pinzas para tubos resistentes a la corrosión. Estas juntas son per-\nmanentes o desmontables, dependiendo del diseño.",
+   "paginas": [
+    50
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d134",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "JUNTA SOLDADA",
+   "texto": "JUNTA SOLDADA. Unión estanca al gas obtenida por la unión de piezas \nmetálicas en estado fundido.",
+   "paginas": [
+    50
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d135",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "JUNTA EMBRIDADA",
+   "texto": "JUNTA EMBRIDADA. Conjunto de elementos que se unen mediante tor-\nnillos.",
+   "paginas": [
+    50
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d136",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "JUNTA BRIDADA",
+   "texto": "JUNTA BRIDADA. Una junta de compresión metal-metal en la que se \nhace un ensanchamiento cónico en el extremo de un tubo que es comprimido \npor una tuerca abocardada contra un abocardado de acoplamiento.",
+   "paginas": [
+    50,
+    51
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d137",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "JUNTA, ADHESIVO PLÁSTICO",
+   "texto": "JUNTA, ADHESIVO PLÁSTICO. Unión realizada en tuberías de plástico \ntermoestable mediante el uso de una sustancia adhesiva que forma una unión \ncontinua entre las superficies de contacto sin disolver ninguna de ellas.",
+   "paginas": [
+    51
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d138",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "JUNTA, FUSIÓN TÉRMICA DE PLÁSTICO",
+   "texto": "JUNTA, FUSIÓN TÉRMICA DE PLÁSTICO. Unión realizada en tuberías \nde plástico termoestable calentando las piezas lo suficiente para permitir la fu-\nsión de los materiales cuando las piezas se presionan entre sí.",
+   "paginas": [
+    51
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d139",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "JUNTA, CEMENTO SOLVENTE PLÁSTICO",
+   "texto": "JUNTA, CEMENTO SOLVENTE PLÁSTICO. Unión realizada en tuberías \ntermoplásticas mediante el uso de un disolvente o cemento disolvente que for-\nma una unión continua entre las superficies de contacto.",
+   "paginas": [
+    51
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d140",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "JUNTA, SOLDADA",
+   "texto": "JUNTA, SOLDADA. Unión estanca al gas obtenida por la unión de piezas \nmetálicas con mezclas metálicas de aleaciones que se funden a temperaturas \ncomprendidas entre 204°C (400°F) y 538°C (1.000°F).",
+   "paginas": [
+    51
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d141",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "LISTADO",
+   "texto": "LISTADO. Equipos, materiales, productos o servicios incluidos en una \nlista publicada por una organización aceptable para el funcionario del código y \nrelacionada con la evaluación de productos o servicios que mantiene una ins-\npección periódica de la producción de los equipos o materiales incluidos en \nla lista o una evaluación periódica de los servicios y cuya inclusión en la lista \nestablece que el equipo, material, producto o servicio cumple con las normas \nidentificadas o que ha sido probado y considerado adecuado para un propósito \nespecífico.",
+   "paginas": [
+    51
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d142",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "LUGAR PELIGROSO",
+   "texto": "LUGAR PELIGROSO. Cualquier ubicación considerada de riesgo de in-\ncendio por vapores inflamables, polvo, fibras combustibles u otras sustancias \naltamente combustibles. La ubicación no está necesariamente categorizada en \nel Código de Construcción de Florida, Edificio como una clasificación de grupo \nde uso de alto riesgo.",
+   "paginas": [
+    51
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d143",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "LÍMITE DE EXPOSICIÓN OCUPACIONAL (OEL)",
+   "texto": "LÍMITE DE EXPOSICIÓN OCUPACIONAL (OEL). La concentración me-\ndia ponderada en el tiempo (TWA) para una jornada laboral normal de ocho \nhoras y una semana laboral de 40 horas a la que casi todos los trabajadores \npueden estar expuestos repetidamente sin efectos adversos, basada en el PEL \nde la OSHA, el TLV- TWA de la ACGIH, el WEEL de la AIHA o un valor coherente.",
+   "paginas": [
+    51,
+    52
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d144",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "LÍQUIDO CALOPORTADOR",
+   "texto": "LÍQUIDO CALOPORTADOR. El líquido de funcionamiento o de almace-\nnamiento térmico en un sistema mecánico, incluida el agua u otra base líquida, \ny los aditivos en la concentración presente en condiciones de funcionamiento \nutilizados para trasladar el calor de un lugar a otro. Los refrigerantes no se in-\ncluyen entre los líquidos caloportadores.",
+   "paginas": [
+    52
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d145",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "LÍQUIDO COMBUSTIBLE",
+   "texto": "LÍQUIDO COMBUSTIBLE. Líquido cuyo punto de inflamación en vaso \ncerrado es igual o superior a 38°C (100°F). Los líquidos combustibles se sub-\ndividirán como sigue:\nClase II. Líquidos cuyo punto de inflamación en vaso cerrado es igual o supe-\nrior a 38°C (100°F) e inferior a 60°C (140°F).\nClase IIIA. Líquidos con un punto de inflamación en vaso cerrado igual o supe-\nrior a 60°C (140°F) e inferior a 93°C (200°F).\nClase IIIB. Líquidos cuyo punto de inflamación en vaso cerrado es igual o su-\nperior a 93°C (200°F).\nLa categoría de líquidos combustibles no incluye los gases comprimidos ni los \nfluidos criogénicos.",
+   "paginas": [
+    52
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d146",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "LÍQUIDOS INFLAMABLES",
+   "texto": "LÍQUIDOS INFLAMABLES. Cualquier líquido que tenga un punto de in-\nflamación por debajo de 100°F (38°C), y que tenga una presión de vapor que no \nexceda 40 psia (276 kPa) a 100°F (38°C). Los líquidos inflamables se denomi-\nnarán líquidos de Clase I y se dividirán en las siguientes clasificaciones:\nClase IA. Líquidos que tienen un punto de inflamación inferior a 73°F (23°C) y \nun punto de ebullición inferior a 100°F (38°C).\n\n\n Clase IB. Líquidos con un punto de inflamación inferior a 23°C (73°F) y un \npunto de ebullición igual o superior a 38°C (100°F).\nClase IC. Líquidos cuyo punto de inflamación es igual o superior a 23°C (73°F) \ne inferior a 38°C (100°F).",
+   "paginas": [
+    52,
+    53
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d147",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "LOCAL",
+   "texto": "LOCAL. Lote, parcela o terreno, incluida cualquier estructura que se \nencuentre en él.",
+   "paginas": [
+    53
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d148",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "MATERIALES NO ABRASIVOS/ABRASIVOS",
+   "texto": "MATERIALES NO ABRASIVOS/ABRASIVOS. Partículas no abrasivas en \nconcentraciones elevadas, partículas moderadamente abrasivas en concentra-\nciones bajas y moderadas, y partículas muy abrasivas en concentraciones ba-\njas, como alfalfa, asfalto, yeso, escayola y sal.",
+   "paginas": [
+    53
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d149",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "MATERIALES INCOMBUSTIBLES",
+   "texto": "MATERIALES INCOMBUSTIBLES. Materiales que, cuando se ensayan \nde acuerdo con la norma ASTM E136, al menos tres de las cuatro muestras \nensayadas cumplen todos los criterios siguientes:\n1. La temperatura registrada de los termopares superficiales e interiores no de-\nberá elevarse en ningún momento del ensayo más de 54°F (30°C) por encima \nde la temperatura del horno al comienzo del ensayo.\n2. El espécimen no deberá arder después de los primeros 30 segundos.\n3. Si la pérdida de peso del espécimen durante la prueba excede el 50 por cien-\nto, la temperatura registrada de los termopares superficiales e interiores no \ndebe subir en cualquier momento durante la prueba sobre la temperatura del \naire del horno al principio de la prueba, y no debe haber flamear del espécimen.",
+   "paginas": [
+    53
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d150",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "MATERIALES ABRASIVOS",
+   "texto": "MATERIALES ABRASIVOS. Partículas moderadamente abrasivas en altas \nconcentraciones, y partículas altamente abrasivas en concentraciones modera-\ndas y altas, como alúmina, bauxita, silicato de hierro, arena y escoria.",
+   "paginas": [
+    53
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d151",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "MATERIAL COMBUSTIBLE",
+   "texto": "MATERIAL COMBUSTIBLE. Cualquier material no definido como in-\ncombustible.",
+   "paginas": [
+    53
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d152",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "RECIPIENTES A PRESIÓN",
+   "texto": "RECIPIENTES A PRESIÓN. Recipientes cerrados, tanques o recipientes \ndiseñados para contener líquidos o gases, o ambos, bajo presión.",
+   "paginas": [
+    53,
+    54
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d153",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "RECIPIENTES A PRESIÓN-REFRIGERANTES",
+   "texto": "RECIPIENTES A PRESIÓN-REFRIGERANTES. Cualquier recipiente que \ncontenga refrigerante en un sistema de refrigeración. Esto no incluye evapora-\ndores donde cada sección separada no exceda 0,5 pies cúbicos (0,014 m3) de \nvolumen que contenga refrigerante, independientemente de las dimensiones \ninteriores máximas, serpentines del evaporador, controles, colectores, bombas \ny tuberías.",
+   "paginas": [
+    54
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d154",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "RECIPIENTE, LÍQUIDO",
+   "texto": "RECIPIENTE, LÍQUIDO. Recipiente conectado permanentemente a un \nsistema de refrigeración mediante tuberías de entrada y salida para el almace-\nnamiento de refrigerante líquido.",
+   "paginas": [
+    54
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d155",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "REFRIGERANTES RECUPERADOS",
+   "texto": "REFRIGERANTES RECUPERADOS. Refrigerantes reprocesados con las \nmismas especificaciones que los refrigerantes nuevos por medios que incluyen \nla destilación. Estos refrigerantes han sido analizados químicamente para veri-\nficar que se cumplen las especificaciones. La recuperación suele implicar el uso \nde procesos o procedimientos que sólo están disponibles en una instalación de \nreprocesamiento o fabricación.\n156)REFRIGERANTES RECUPERADOS. Refrigerantes retirados de un sistema \nen cualquier estado sin someterlos necesariamente a pruebas o procesarlos.\n157)REFRIGERANTES RECICLADOS. Refrigerantes cuyos contaminantes se \nhan reducido mediante la separación del aceite, la eliminación de gases no con-\ndensables y el paso único o múltiple por dispositivos que reducen la humedad, \nla acidez y las partículas, como los filtros secadores de núcleo reemplazables. \nEstos procedimientos suelen realizarse en el lugar de trabajo o en un taller de \nservicio local.",
+   "paginas": [
+    54
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d158",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "REFRIGERANTE",
+   "texto": "REFRIGERANTE. Sustancia utilizada para producir refrigeración median-\nte su expansión o vaporización.",
+   "paginas": [
+    54
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d159",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "RESISTENCIA, ÚLTIMA",
+   "texto": "RESISTENCIA, ÚLTIMA. El nivel de tensión más elevado que el compo-\nnente puede tolerar sin romperse.",
+   "paginas": [
+    54,
+    55
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d160",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "RESISTENCIA TÉRMICA (R)",
+   "texto": "RESISTENCIA TÉRMICA (R). Medida de la capacidad de retardar el flujo \nde calor. El valor R es el recíproco de la conductancia térmica.",
+   "paginas": [
+    55
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d161",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SALA DE CALDERAS",
+   "texto": "SALA DE CALDERAS. Local utilizado principalmente para la instalación \nde aparatos que queman combustible, calientan espacios y calientan agua, ex-\ncepto calderas (véase también \"Sala de calderas\").",
+   "paginas": [
+    55
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d162",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SALA DE MÁQUINAS DE REFRIGERACIÓN",
+   "texto": "SALA DE MÁQUINAS DE REFRIGERACIÓN. Véase \"Sala de máquinas\".",
+   "paginas": [
+    55
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d163",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SALA DE EQUIPOS/APARATOS MECÁNICOS",
+   "texto": "SALA DE EQUIPOS/APARATOS MECÁNICOS. Local o espacio en el que \nse encuentran los equipos y aparatos mecánicos no alimentados por combus-\ntible.",
+   "paginas": [
+    55
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d164",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SALIDA",
+   "texto": "SALIDA. Conexión roscada o brida atornillada de un sistema de tuberías \na la que se conecta un aparato de gas.",
+   "paginas": [
+    55
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d165",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SALVALLAMAS",
+   "texto": "SALVALLAMAS. Dispositivo que cortará automáticamente el suministro \nde combustible a un quemador principal o grupo de quemadores cuando el \nmedio de ignición de dichos quemadores deje de funcionar y cuando se pro-\nduzca un fallo de la llama en el quemador o grupo de quemadores.",
+   "paginas": [
+    55
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d166",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SECADORA DE ROPA",
+   "texto": "SECADORA DE ROPA. Aparato utilizado para secar ropa mojada me-\ndiante calor.",
+   "paginas": [
+    55
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d167",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMAS DE LIMPIEZA EN SECO",
+   "texto": "SISTEMAS DE LIMPIEZA EN SECO. Las plantas o sistemas de limpieza \nen seco se clasifican de la siguiente manera:\nTipo I. Aquellos sistemas que utilizan disolventes líquidos inflamables de Clase \nI que tienen un punto de inflamación inferior a 38°C (100°F).\n\n\nTipo II. Los sistemas que utilizan disolventes líquidos combustibles de Clase II \ncon un punto de inflamación igual o superior a 38°C (100°F) e inferior a 60°C \n(140°F).\nTipo III. Sistemas que utilizan disolventes líquidos combustibles de Clase III \ncon un punto de inflamación igual o superior a 60°C (140°F).\nTipos IV y V . Sistemas que utilizan disolventes líquidos no inflamables de clase \nI V.",
+   "paginas": [
+    55,
+    56
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d168",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE VENTILACIÓN CON RECUPERACIÓN DE ENERGÍA",
+   "texto": "SISTEMA DE VENTILACIÓN CON RECUPERACIÓN DE ENERGÍA. Sis-\ntemas que emplean intercambiadores de calor aire-aire para recuperar energía \no rechazar energía del aire de salida con el fin de precalentar, preenfriar, hu-\nmidificar o deshumidificar el aire de ventilación exterior antes de suministrar \ndicho aire a un espacio, ya sea directamente o como parte de un sistema de \ncalefacción, ventilación y aire acondicionado.",
+   "paginas": [
+    56
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d169",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE ENFRIAMIENTO POR EVAPORACIÓN",
+   "texto": "SISTEMA DE ENFRIAMIENTO POR EVAPORACIÓN. Los equipos y \naparatos destinados o instalados con el fin de enfriar el ambiente mediante un \nenfriador evaporativo desde el que se distribuye el aire acondicionado a través \nde conductos o plénums a la zona acondicionada.",
+   "paginas": [
+    56
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d170",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE BUCLE DE BOMBA DE CALOR GEOTÉRMICA",
+   "texto": "SISTEMA DE BUCLE DE BOMBA DE CALOR GEOTÉRMICA. T uberías \nenterradas en excavaciones horizontales o verticales o colocadas en una masa \nde agua con el fin de transportar líquido caloportador hacia y desde una bomba \nde calor. Se incluyen en esta definición los sistemas de bucle cerrado en los que \nel líquido se recircula y los sistemas de bucle abierto en los que el líquido se \nextrae de un pozo u otra fuente.",
+   "paginas": [
+    56
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d171",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE ABSORCIÓN",
+   "texto": "SISTEMA DE ABSORCIÓN. Sistema de refrigeración en el que el refri-\ngerante se presuriza bombeando una solución química de refrigerante en ab-\nsorbente, y luego se separa mediante la adición de calor en un generador, se \ncondensa (para rechazar el calor), se expande, se evapora (para proporcionar \nrefrigeración), y se reabsorbe en un absorbedor para repetir el ciclo; el sistema \n\n\npuede ser de efecto simple o múltiple, este último utilizando múltiples etapas o \ninternamente el uso en cascada del calor para mejorar la eficiencia.",
+   "paginas": [
+    56,
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d172",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE AIRE ACONDICIONADO",
+   "texto": "SISTEMA DE AIRE ACONDICIONADO. Sistema formado por intercam-\nbiadores de calor, soplantes, filtros, conductos de impulsión, extracción y re-\ntorno, e incluirá cualquier aparato instalado en relación con el mismo.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d173",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE AIRE DE RETORNO",
+   "texto": "SISTEMA DE AIRE DE RETORNO. Conjunto de conductos, cámaras, ac-\ncesorios, registros y rejillas conectados a través de los cuales el aire procedente \ndel espacio o espacios que se van a calentar o enfriar se conduce de vuelta a la \nunidad de suministro (véase también \"Sistema de suministro de aire\").",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d174",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMAS DE ALTA PROBABILIDAD",
+   "texto": "SISTEMAS DE ALTA PROBABILIDAD. Un sistema de refrigeración en el \nque el diseño básico o la ubicación de los componentes es tal que una fuga \nde refrigerante procedente de una conexión, junta o componente defectuoso \nentrará en una zona clasificada de ocupación, distinta de la sala de máquinas.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d175",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMAS DE BAJA PROBABILIDAD",
+   "texto": "SISTEMAS DE BAJA PROBABILIDAD. Un sistema de refrigeración en el \nque el diseño básico o la ubicación de los componentes es tal que una fuga de \nrefrigerante procedente de una conexión, junta o componente defectuoso no \nentrará en una zona clasificada de ocupación, excepto la sala de máquinas.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d176",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE CAPTURA EN LA FUENTE",
+   "texto": "SISTEMA DE CAPTURA EN LA FUENTE. Un sistema mecánico de escape \ndiseñado y construido para capturar los contaminantes del aire en su origen y \nexpulsarlos a la atmósfera exterior.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d177",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE CARGA LIMITADA",
+   "texto": "SISTEMA DE CARGA LIMITADA. Sistema en el que, con el compresor \nparado, no se superará la presión de diseño cuando la carga de refrigerante se \nhaya evaporado por completo.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d178",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE CONDUCTOS",
+   "texto": "SISTEMA DE CONDUCTOS. Un conducto continuo para la transmisión \nde aire que, además de conductos, incluye accesorios de conductos, compuer-\ntas, cámaras de aire, ventiladores y equipos y aparatos accesorios de tratamien-\nto de aire.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d179",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE EXTRACCIÓN",
+   "texto": "SISTEMA DE EXTRACCIÓN. Conjunto de conductos, cámaras, acceso-\nrios, registros, rejillas y campanas conectados a través de los cuales se conduce \nel aire desde el espacio o espacios y se expulsa a la atmósfera exterior.",
+   "paginas": [
+    57,
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d180",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE DISPERSIÓN DE AIRE",
+   "texto": "SISTEMA DE DISPERSIÓN DE AIRE. Cualquier sistema difusor diseñado \ntanto para transportar aire dentro de una habitación, espacio o área como para \ndifundir aire dentro de ese espacio mientras opera bajo presión positiva. Los \nsistemas se construyen comúnmente de, pero no limitado a, tela o película de \nplástico.",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d181",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE DISTRIBUCIÓN DE AIRE",
+   "texto": "SISTEMA DE DISTRIBUCIÓN DE AIRE. Cualquier sistema de conductos, \ncámaras impelentes y equipos de tratamiento de aire que hace circular el aire \ndentro de un espacio o espacios e incluye los sistemas formados por una o más \nunidades de tratamiento de aire.",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d182",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE REFRIGERACIÓN",
+   "texto": "SISTEMA DE REFRIGERACIÓN. Combinación de piezas interconectadas \nque contienen refrigerante y que constituyen un circuito cerrado de refrigerante \nen el que circula un refrigerante con el fin de extraer calor.",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d183",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA MINI-SPLIT SIN CONDUCTOS",
+   "texto": "SISTEMA MINI-SPLIT SIN CONDUCTOS. Sistema de calefacción y re-\nfrigeración compuesto por una o varias unidades interiores de evaporación/\nmanejo del aire y una unidad exterior de condensación conectadas mediante \ntuberías de refrigerante y cableado eléctrico. Un sistema mini-split sin conduc-\ntos es capaz de enfriar o calentar una o más habitaciones sin necesidad de uti-\nlizar un sistema de conductos tradicional.",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d184",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE RECIRCULACIÓN DE COCINA COMERCIAL",
+   "texto": "SISTEMA DE RECIRCULACIÓN DE COCINA COMERCIAL. Sistema au-\ntónomo compuesto por la campana extractora, el equipo de cocción, los filtros \ny el sistema de extinción de incendios. El sistema está diseñado para capturar \nlos vapores y residuos de cocción generados por el equipo de cocina comercial. \nEl sistema elimina los contaminantes del aire de extracción y recircula el aire al \nespacio del que se extrajo.",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d185",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE TUBERÍAS DE COMBUSTIBLE-ACEITE",
+   "texto": "SISTEMA DE TUBERÍAS DE COMBUSTIBLE-ACEITE. Sistema cerrado \nde tuberías que conecta un líquido combustible desde una fuente de suminis-\ntro hasta un aparato de combustión de fuel-oil.",
+   "paginas": [
+    58,
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d186",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE REFRIGERACIÓN INDIRECTA",
+   "texto": "SISTEMA DE REFRIGERACIÓN INDIRECTA. Sistema en el que un refri-\ngerante secundario enfriado o calentado por el sistema de refrigeración circula \nhasta el aire u otra sustancia que se desea enfriar o calentar. Los sistemas indi-\nrectos se distinguen por los siguientes métodos de aplicación:",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d187",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA CERRADO",
+   "texto": "SISTEMA CERRADO. Un sistema en el que un fluido secundario es en-\nfriado o calentado por el sistema de refrigeración y luego circula dentro de un \ncircuito cerrado en contacto indirecto con el aire u otra sustancia a enfriar o \ncalentar.",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d188",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE SUMINISTRO DE AIRE",
+   "texto": "SISTEMA DE SUMINISTRO DE AIRE. Conjunto de conductos, cámaras, \naccesorios, registros y rejillas conectados, a través de los cuales se conduce el \naire, calentado o enfriado, desde la unidad de suministro hasta el espacio o \nespacios que han de calentarse o enfriarse (véase también \"Sistema de aire de \nretorno\").",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d189",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA CERRADO VENTILADO",
+   "texto": "SISTEMA CERRADO VENTILADO. Un sistema en el que un refrigerante \nsecundario es enfriado o calentado por el sistema de refrigeración y luego pasa \na través de un circuito cerrado en el aire u otra sustancia a enfriar o",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d190",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE PULVERIZACIÓN ABIERTA",
+   "texto": "SISTEMA DE PULVERIZACIÓN ABIERTA. Sistema en el que un refrige-\nrante secundario es enfriado o calentado por el sistema de refrigeración y lue-\ngo circula en contacto directo con el aire u otra sustancia a enfriar o calentar, \nexcepto que el evaporador o condensador se coloca en un tanque abierto o \nadecuadamente ventilado.",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d191",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE PULVERIZACIÓN ABIERTA DOBLEMENTE INDIRECTO",
+   "texto": "SISTEMA DE PULVERIZACIÓN ABIERTA DOBLEMENTE INDIRECTO. \nSistema en el que la sustancia secundaria de un sistema indirecto de pulveriza-\nción abierta es calentada o enfriada por un refrigerante intermedio que circula \ndesde un segundo recinto.",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d192",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SALA DE MÁQUINAS",
+   "texto": "SALA DE MÁQUINAS. Sala que cumple los requisitos de seguridad pres-\ncritos y en la que se encuentran los sistemas de refrigeración o sus componen-\ntes (véanse los apartados 1105 y 1106).",
+   "paginas": [
+    59,
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d193",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE TIRO MECÁNICO",
+   "texto": "SISTEMA DE TIRO MECÁNICO. Sistema de ventilación diseñado para \neliminar los gases de combustión o de ventilación por medios mecánicos, que \nconsta de una parte de tiro inducido bajo presión estática no positiva o una \nparte de tiro forzado bajo presión estática positiva.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d194",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE VENTILACIÓN",
+   "texto": "SISTEMA DE VENTILACIÓN. Un conducto abierto continuo desde el \ncuello de humos de un aparato hasta la atmósfera exterior con el fin de eliminar \nlos gases de combustión o de ventilación. Un sistema de ventilación se compo-\nne normalmente de un conducto de ventilación o de una chimenea y un conec-\ntor de ventilación, si se utiliza, ensamblados para formar el conducto abierto.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d195",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE VENTILACIÓN DE TIRO FORZADO",
+   "texto": "SISTEMA DE VENTILACIÓN DE TIRO FORZADO. Parte de un sistema \nde ventilación que utiliza un ventilador u otro medio mecánico para provocar la \nevacuación de los gases de combustión o de ventilación bajo presión estática \npositiva.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d196",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE VENTILACIÓN DE TIRO INDUCIDO",
+   "texto": "SISTEMA DE VENTILACIÓN DE TIRO INDUCIDO. Parte de un sistema \nde ventilación que utiliza un ventilador u otros medios mecánicos para eliminar \nlos gases de combustión o de ventilación bajo una presión estática de ventila-\nción no positiva.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d197",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE VENTILACIÓN ELÉCTRICA",
+   "texto": "SISTEMA DE VENTILACIÓN ELÉCTRICA. Parte de un sistema de ven-\ntilación que utiliza un ventilador u otros medios mecánicos para provocar la \neliminación de los gases de combustión o de ventilación bajo una presión de \nventilación estática positiva.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d198",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA MECÁNICO DE EXTRACCIÓN",
+   "texto": "SISTEMA MECÁNICO DE EXTRACCIÓN. Sistema para extraer aire de \nun local o espacio por medios mecánicos.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d199",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA MECÁNICO",
+   "texto": "SISTEMA MECÁNICO. Sistema abordado y regulado específicamente en \neste código e integrado por componentes, dispositivos, aparatos y equipos.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d200",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE TIRO NATURAL",
+   "texto": "SISTEMA DE TIRO NATURAL. Un sistema de ventilación diseñado para \neliminar los gases de combustión o de ventilación bajo una presión de ventila-\nción estática no positiva totalmente por tiro natural.",
+   "paginas": [
+    60,
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d201",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE REFRIGERACIÓN, ABSORCIÓN",
+   "texto": "SISTEMA DE REFRIGERACIÓN, ABSORCIÓN. Ciclo de refrigeración ce-\nrrado, accionado por calor, en el que un fluido secundario (el absorbente) ab-\nsorbe un fluido primario (el refrigerante) que se ha vaporizado en el evaporador.",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d202",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DIRECTO",
+   "texto": "SISTEMA DIRECTO. Sistema en el que el evaporador está en contacto \ndirecto con el material o el espacio refrigerado, o está situado en conductos de \ncirculación de aire que comunican con dichos espacios.",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d203",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA INDIRECTO",
+   "texto": "SISTEMA INDIRECTO. Sistema en el que un serpentín de salmuera en-\nfriado por el refrigerante circula hasta el material o espacio refrigerado, o se \nutiliza para enfriar el aire que circula. Los sistemas indirectos se distinguen por \nel tipo o método de aplicación.",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d204",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE REFRIGERACIÓN DIRECTA",
+   "texto": "SISTEMA DE REFRIGERACIÓN DIRECTA. Un sistema en el que el eva-\nporador o el condensador del sistema de refrigeración está en contacto directo \ncon el aire u otras sustancias a enfriar o calentar.",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d205",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE REFRIGERACIÓN, MECÁNICO",
+   "texto": "SISTEMA DE REFRIGERACIÓN, MECÁNICO. Combinación de piezas de \nrefrigeración interconectadas que constituyen un circuito cerrado de refrige-\nrante en el que circula un refrigerante con el fin de extraer calor y en el que se \nutiliza un compresor para comprimir el vapor refrigerante.",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d206",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SISTEMA DE REFRIGERACIÓN, AUTÓNOMO",
+   "texto": "SISTEMA DE REFRIGERACIÓN, AUTÓNOMO. Un sistema completo \n\n\nensamblado y probado en fábrica que se envía en una o más secciones y que \nno tiene piezas que contengan refrigerante que se unan en el campo mediante \nválvulas que no sean de compañía o de bloqueo.",
+   "paginas": [
+    61,
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d207",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SUPERFICIE OCUPABLE NETA",
+   "texto": "SUPERFICIE OCUPABLE NETA. Superficie de suelo de un espacio ocu-\npable definida por las superficies interiores de sus paredes, pero excluidos los \nhuecos, los recintos de columnas y otras zonas permanentemente cerradas, \ninaccesibles y no ocupables. Las obstrucciones del espacio, como mobiliario, \nestanterías de exposición o almacenamiento y otros obstáculos, temporales o \npermanentes, no se deducirán de la superficie del espacio.",
+   "paginas": [
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d208",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "SUPERFICIE DE SUELO, NETA",
+   "texto": "SUPERFICIE DE SUELO, NETA. La superficie ocupada real, sin incluir las \nzonas accesorias no ocupadas ni el grosor de las paredes.",
+   "paginas": [
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d209",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "TUBERÍA",
+   "texto": "TUBERÍA. Cuando se utiliza en este código, \"tubería\" se refiere a un tubo \no tubería, o ambos.\nT ubería. Conducto rígido de hierro, acero, cobre, latón, aleación de cobre o \nplástico.\nT ubería. Conducto semirrígido de cobre, latón, aleación de cobre, aluminio, \nplástico o acero.",
+   "paginas": [
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d210",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "",
+   "texto": "TLV- TWA (VALOR LÍMITE UMBRAL-MEDIA PONDERADA EN EL \nTIEMPO). La concentración media ponderada en el tiempo de un refrigerante \nu otro producto químico en el aire para una jornada laboral normal de 8 horas \ny una semana laboral de 40 horas, a la que casi todos los trabajadores están \nexpuestos repetidamente, día tras día, sin efectos adversos, adoptada por la \nConferencia Americana de Higienistas Industriales Gubernamentales (ACGIH).",
+   "paginas": [
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d211",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "TOXICIDAD",
+   "texto": "TOXICIDAD. Véase Clasificación de toxicidad (Refrigerante).",
+   "paginas": [
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d212",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "TIRO",
+   "texto": "TIRO. Diferencia de presión existente entre el aparato o cualquiera de sus \ncomponentes y la atmósfera, que provoca un flujo continuo de aire y productos \n\n\nde la combustión a través de los conductos de gas del aparato hacia la atmós-\nfera.\na. TIRO INDUCIDO. Diferencia de presión creada por la acción de un ventila-\ndor, soplante o eyector, situado entre el aparato y la chimenea o el conducto \nde evacuación.\nb. TIRO NATURAL. Diferencia de presión creada por un conducto de ventila-\nción o chimenea debido a su altura y a la diferencia de temperatura entre los \ngases de combustión y la atmósfera.",
+   "paginas": [
+    62,
+    63
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d213",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "TIPO DE APARATO",
+   "texto": "TIPO DE APARATO.\nAPARATO DE AL TA TEMPERATURA. Cualquier aparato en el que los productos \nde la combustión en el punto de entrada al conducto de humos en condicio-\nnes normales de funcionamiento tienen una temperatura superior a 2.000 °F \n(1093 °C).\nAPARATO DE BAJA TEMPERATURA (APARATO RESIDENCIAL). T odo aparato \nen el que los productos de la combustión en el punto de entrada al conducto de \nhumos, en condiciones normales de funcionamiento, tienen una temperatura \nigual o inferior a 538°C (1.000°F).\nAPARATO DE CALOR MEDIO. T odo aparato en el que los productos de la com-\nbustión en el punto de entrada al conducto de humos, en condiciones nor-\nmales de funcionamiento, tienen una temperatura superior a 538°C (1.000°F), \npero no superior a 1093°C (2.000°F).",
+   "paginas": [
+    63
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d214",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "OCUPACIÓN",
+   "texto": "OCUPACIÓN. El propósito para el cual se utiliza u ocupa un edificio o una \nparte del mismo.",
+   "paginas": [
+    63
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d215",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "OFFSET (VENTILACIÓN)",
+   "texto": "OFFSET (VENTILACIÓN). Una combinación de curvas aprobadas que \nhacen dos cambios de dirección que llevan una sección de la ventilación fuera \nde línea pero en una línea paralela con la otra sección.",
+   "paginas": [
+    63
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d216",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PUERTA DE CHIMENEA",
+   "texto": "PUERTA DE CHIMENEA. Conjunto formado por un hogar y una cámara \nde combustión de material incombustible, provisto de chimenea, para el uso \nde combustibles sólidos.",
+   "paginas": [
+    63,
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d217",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PUERTA DE CHIMENEA CONSTRUIDA EN FÁBRICA",
+   "texto": "PUERTA DE CHIMENEA CONSTRUIDA EN FÁBRICA. Sistema de hogar \ny chimenea catalogado y etiquetado, compuesto de componentes fabricados \nen fábrica y montado in situ de acuerdo con las instrucciones del fabricante y \nlas condiciones de la catalogación.",
+   "paginas": [
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d218",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PUERTA DE CHIMENEA DE MAMPOSTERÍA",
+   "texto": "PUERTA DE CHIMENEA DE MAMPOSTERÍA. Puerta de chimenea cons-\ntruida sobre el terreno y compuesta por unidades de mampostería maciza, la-\ndrillos, piedras u hormigón.",
+   "paginas": [
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d219",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PUERTA DE CHIMENEA TIPO ESTUFA",
+   "texto": "PUERTA DE CHIMENEA TIPO ESTUFA. Calentador independiente de \ncombustible sólido conectado a la chimenea, diseñado para funcionar con las \npuertas de la cámara de combustión en posición abierta o cerrada.",
+   "paginas": [
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d220",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PRESIÓN DE TRABAJO DE DISEÑO",
+   "texto": "PRESIÓN DE TRABAJO DE DISEÑO. La presión de trabajo máxima ad-\nmisible para la que se ha diseñado una parte específica de un sistema.",
+   "paginas": [
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d221",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PRESIÓN DEL LADO BAJO",
+   "texto": "PRESIÓN DEL LADO BAJO. Las partes de un sistema de refrigeración \nsometidas a la presión del evaporador.",
+   "paginas": [
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d222",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PUNTO DE INFLAMACIÓN",
+   "texto": "PUNTO DE INFLAMACIÓN. La temperatura mínima corregida a una \npresión de 14,7 psia (101 kPa) a la que la aplicación de una llama de ensayo \nprovoca la ignición de los vapores de una porción de la muestra en las condi-\nciones especificadas por los procedimientos y aparatos de ensayo. El punto de \ninflamación de un líquido se determinará de acuerdo con las normas ASTM \nD56, ASTM D93 o ASTM D3278.",
+   "paginas": [
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d223",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PRESIÓN DEL LADO DE ALTA",
+   "texto": "PRESIÓN DEL LADO DE ALTA. Las partes de un sistema frigorífico so-\nmetidas a la presión del condensador.",
+   "paginas": [
+    64,
+    65
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d224",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PRODUCTOS DE COMBUSTIÓN",
+   "texto": "PRODUCTOS DE COMBUSTIÓN. Constituyentes resultantes de la com-\nbustión de un combustible con el oxígeno del aire, incluidos los gases inertes, \npero excluido el exceso de aire.",
+   "paginas": [
+    65
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d225",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PRODUCTO DISCRETO",
+   "texto": "PRODUCTO DISCRETO. Productos que son piezas no continuas, indi-\nviduales y distintas, como, por ejemplo, productos eléctricos, de fontanería y \nmecánicos y correas de conductos, accesorios de conductos, registros de con-\nductos y colgadores de tuberías.",
+   "paginas": [
+    65
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d226",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PISO",
+   "texto": "PISO. La parte de un edificio comprendida entre la superficie superior de \nun piso y la superficie superior del piso inmediatamente superior, salvo que el \núltimo piso será la parte de un edificio comprendida entre la superficie superior \ndel último piso y el techo o tejado superior.",
+   "paginas": [
+    65
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d227",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PLÁSTICO TERMOPLÁSTICO",
+   "texto": "PLÁSTICO TERMOPLÁSTICO. Plástico que puede ablandarse repetida-\nmente al aumentar la temperatura y endurecerse al disminuir la temperatura.",
+   "paginas": [
+    65
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d228",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PLÁSTICO TERMOESTABLE",
+   "texto": "PLÁSTICO TERMOESTABLE. Plástico que puede transformarse en un \nproducto sustancialmente infusible o insoluble cuando se endurece por aplica-\nción de calor o por medios químicos.",
+   "paginas": [
+    65
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d229",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PLENO",
+   "texto": "PLENO. Parte cerrada de la estructura de un edificio, distinta de un espa-\ncio ocupable que está siendo acondicionado, que está diseñada para permitir \nel movimiento del aire y, por lo tanto, servir como parte de un sistema de dis-\ntribución de aire.",
+   "paginas": [
+    65
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d230",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "POTENCIA FRIGORÍFICA NOMINAL",
+   "texto": "POTENCIA FRIGORÍFICA NOMINAL. Expresado como 1 caballo de va-\npor (0,75 kW), 1 tonelada o 12.000 Btu/h (3,5 kW), significará todos la misma \ncantidad.",
+   "paginas": [
+    65
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d231",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PRESIÓN, PRUEBA DE CAMPO",
+   "texto": "PRESIÓN, PRUEBA DE CAMPO. Prueba realizada sobre el terreno para \ndemostrar la estanqueidad del sistema.",
+   "paginas": [
+    65,
+    66
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d232",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PROFESIONAL DE DISEÑO REGISTRADO",
+   "texto": "PROFESIONAL DE DISEÑO REGISTRADO. Una persona que está regis-\ntrada o autorizada para ejercer su respectiva profesión de diseño, tal como se \ndefine en los requisitos legales de las leyes de registro profesional del estado o \njurisdicción en la que se va a construir el proyecto.",
+   "paginas": [
+    66
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d233",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "PURGAR",
+   "texto": "PURGAR. Limpiar de aire, agua u otras sustancias extrañas.",
+   "paginas": [
+    66
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d234",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "QUEMADOR DE CONVERSIÓN",
+   "texto": "QUEMADOR DE CONVERSIÓN. Quemador diseñado para suministrar \ncombustible gaseoso a un aparato diseñado originalmente para utilizar otro \ncombustible.",
+   "paginas": [
+    66
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d235",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "UNIDAD DE TRATAMIENTO DE AIRE",
+   "texto": "UNIDAD DE TRATAMIENTO DE AIRE. Soplante o ventilador utilizado \npara distribuir aire de impulsión a una habitación, espacio o zona.",
+   "paginas": [
+    66
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d236",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "UBICACIÓN OCULTA",
+   "texto": "UBICACIÓN OCULTA. Un lugar al que no se puede acceder sin dañar \npartes permanentes de la estructura del edificio o la superficie de acabado. Los \nespacios situados encima, debajo o detrás de paneles o puertas fácilmente ex-\ntraíbles no se considerarán ocultos.",
+   "paginas": [
+    66
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d237",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "UNIDAD CONDENSADORA",
+   "texto": "UNIDAD CONDENSADORA. Combinación específica de máquinas fri-\ngoríficas para un refrigerante determinado, constituida por uno o varios com-\npresores de accionamiento mecánico, condensadores y, en su caso, receptores \nde líquido, y los accesorios regularmente suministrados.",
+   "paginas": [
+    66
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d238",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "UNIDAD DE VIVIENDA",
+   "texto": "UNIDAD DE VIVIENDA. Una sola unidad que proporciona instalaciones \nde vida completas e independientes para una o más personas, incluyendo dis-\nposiciones permanentes para vivir, dormir, comer, cocinar y saneamiento.",
+   "paginas": [
+    66
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d239",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "UNIDAD DE CONTROL DE LA CONTAMINACIÓN (UCP)",
+   "texto": "UNIDAD DE CONTROL DE LA CONTAMINACIÓN (UCP). Equipo fa-\nbricado que se instala en un sistema de conductos de evacuación de grasas con \nel fin de eliminar el humo, las partículas de grasa y los olores de la corriente de \nevacuación a través de una serie de filtros.",
+   "paginas": [
+    66,
+    67
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d240",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VIVIENDA",
+   "texto": "VIVIENDA. Edificio o parte del mismo que no contiene más de dos uni-\ndades de vivienda.",
+   "paginas": [
+    67
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d241",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VAPORES O HUMOS INFLAMABLES",
+   "texto": "VAPORES O HUMOS INFLAMABLES. Mezclas de gases en el aire en \nconcentraciones iguales o superiores al LFL e inferiores o iguales al límite supe-\nrior de inflamabilidad (UFL).",
+   "paginas": [
+    67
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d242",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VENTILADOR DE TECHO DE GRAN DIÁMETRO",
+   "texto": "VENTILADOR DE TECHO DE GRAN DIÁMETRO. Ventilador de techo \nde más de 7 pies (2134 mm) de diámetro. Estos ventiladores a veces se deno-\nminan ventiladores de gran volumen y baja velocidad (HVLS).",
+   "paginas": [
+    67
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d243",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VÁLVULA DE APERTURA RÁPIDA",
+   "texto": "VÁLVULA DE APERTURA RÁPIDA. Válvula que se abre completamente \npor acción rápida, ya sea manual o automáticamente controlada. Una válvula \nque requiere un cuarto de vuelta o menos se considera de apertura rápida.",
+   "paginas": [
+    67
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d244",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VÁLVULA DE SEGURIDAD",
+   "texto": "VÁLVULA DE SEGURIDAD. Válvula que alivia la presión en una caldera de \nvapor abriéndose completamente a la presión nominal de descarga. La válvula \nes del tipo \"spring-pop\".",
+   "paginas": [
+    67
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d245",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VÁLVULA DE CIERRE",
+   "texto": "VÁLVULA DE CIERRE. Una válvula de cierre para controlar el flujo de lí-\nquido o gases.",
+   "paginas": [
+    67
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d246",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VÁLVULA LIMITADORA DE PRESIÓN",
+   "texto": "VÁLVULA LIMITADORA DE PRESIÓN. Válvula accionada por presión \nque se mantiene cerrada por un resorte u otro medio y está diseñada para ali-\nviar automáticamente la presión que excede el ajuste del dispositivo.",
+   "paginas": [
+    67
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d247",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VENTILACIÓN",
+   "texto": "VENTILACIÓN. T ubería u otro conducto compuesto de componentes fa-\nbricados en fábrica, que contiene un conducto para transportar los productos \nde la combustión y el aire a la atmósfera, catalogado y etiquetado para su uso \ncon un tipo o clase específica de aparato.",
+   "paginas": [
+    67
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d248",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VENTILACIÓN NATURAL",
+   "texto": "VENTILACIÓN NATURAL. El movimiento del aire dentro y fuera de un \nespacio a través de aberturas intencionadas, como ventanas y puertas, o a tra-\nvés de ventiladores no motorizados.",
+   "paginas": [
+    67,
+    68
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d249",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VENTILACIÓN DE PELLETS",
+   "texto": "VENTILACIÓN DE PELLETS. Un conducto de ventilación listado y eti-\nquetado para su uso con aparatos de combustión de pellets listados.",
+   "paginas": [
+    68
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d250",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VENTILACIÓN TIPO L",
+   "texto": "VENTILACIÓN TIPO L. Un respiradero listado y etiquetado para su uso \ncon lo siguiente:\n1. Aparatos de combustión de aceite que están listados para su uso con respi-\nraderos de tipo L.\n2. Aparatos de combustión de gas que están listados para su uso con respira-\nderos de tipo B.",
+   "paginas": [
+    68
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d251",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VENTILACIÓN",
+   "texto": "VENTILACIÓN. El proceso natural o mecánico de suministrar aire acon-\ndicionado o no acondicionado a cualquier espacio, o de extraer dicho aire de él.",
+   "paginas": [
+    68
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d252",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "VENTILACIÓN EQUILIBRADA",
+   "texto": "VENTILACIÓN EQUILIBRADA. Cualquier combinación de extracción \nmecánica y suministro mecánico que funcionen simultáneamente, en la que \nel caudal de aire total de extracción mecánica esté dentro del 10 por ciento del \ncaudal de aire total de suministro mecánico.",
+   "paginas": [
+    68
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d253",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ZONA",
+   "texto": "ZONA. Un espacio ocupable o varios espacios ocupables con una clasifi-\ncación de ocupación similar (véase la tabla 403.3.1.1), densidad de ocupantes, \neficacia de distribución del aire por zonas y caudal de aire primario por unidad \nde superficie.",
+   "paginas": [
+    68
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.2.d254",
+   "titulo_num": 1,
+   "capitulo": "1.2",
+   "encabezado": "ZONA DE RESPIRACIÓN",
+   "texto": "ZONA DE RESPIRACIÓN. La región dentro de un espacio ocupado entre \nlos planos 3 y 72 pulgadas (76 y 1829 mm) por encima del suelo y a más de 2 \npies (610 mm) de las paredes del espacio o de los equipos fijos de aire acondi-\ncionado.\n\n\nTÍTULO.2\nNORMATIVA GENERAL",
+   "paginas": [
+    68,
+    69
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  }
+ ]
+}

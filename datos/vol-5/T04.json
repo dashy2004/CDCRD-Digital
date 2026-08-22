@@ -1,0 +1,429 @@
+{
+ "volumen": 5,
+ "sigla": null,
+ "nombre_volumen": "Diseño Arquitectónico en Edificaciones",
+ "titulo": 4,
+ "nombre": "Ventilación Natural en Edificaciones",
+ "fuente_pdf": "MIVHED-Diseno-Arquitectonico-en-Edificaciones-Vol-V.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "4.1": "ASPECTOS GENERALES",
+  "4.10": "ORIENTACIÓN DE LAS EDIFICACIONES",
+  "4.2": "VENTILACIÓN NATURAL",
+  "4.3": "DIMENSIONES DE ABERTURAS",
+  "4.4": "VELOCIDAD DEL AIRE",
+  "4.5": "RENDIMIENTO MÁXIMO DE VENTILACIÓN",
+  "4.6": "DIRECCIÓN DEL VIENTO",
+  "4.7": "ESPACIOS DE CIRCULACIÓN, DISTRIBUCIÓN Y DESAHOGO",
+  "4.8": "ABERTURAS EN EDIFICIOS MULTIPISOS",
+  "4.9": "DISPOSICIÓN DE LAS EDIFICACIONES CON RELACIÓN A SU ENTORNO"
+ },
+ "clausulas": [
+  {
+   "id": "4.1.1",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "CONTENIDO",
+   "texto": "CONTENIDO. El presente Título contiene una serie de recomendaciones referentes a \nla ventilación natural en edificaciones, tendentes a establecer pautas generales de \nprocedimientos a seguir por los diseñadores, en la obtención de respuestas particulares en \nla elaboración de sus proyectos.",
+   "paginas": [
+    160
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.1.2",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "OBJETIVOS",
+   "texto": "OBJETIVOS.  Aprovechar las condiciones beneficiosas del tiempo atmosférico para \nlograr una aproximación en  la confortabilidad térmica de las personas dentro de las \nedificaciones a través de la ventilación natural.",
+   "paginas": [
+    160
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.1.3",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "CAMPO DE APLICACIÓN",
+   "texto": "CAMPO DE APLICACIÓN. Estas recomendaciones provisionales serán aplicables a los \nproyectos y remodelaciones de edificaciones urbanas en razón de la gran necesidad que \nconfrontamos de adecuar el espacio al ser humano.",
+   "paginas": [
+    160
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.1.4",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "ABREVIATURAS",
+   "texto": "ABREVIATURAS. Para los fines de estas recomendaciones los términos más utilizados \nse identificarán por las siguientes abreviaturas. \nAb=Aberturas a Barlovento \nAs=Aberturas a Sotavento \nAm=Área de Muros o Paredes \nAp= Área de Piso \nRmxv= Rendimiento Máximo de Ventilación \nRvr= Rendimiento de ventilación Requerido \nZc=Zona de calma o zona de sombra",
+   "paginas": [
+    160
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.1.5",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "DEFINICIONES",
+   "texto": "DEFINICIONES. Para los fines de estas recomendaciones los términos más utilizados \nse definirán de la manera siguiente:",
+   "paginas": [
+    160
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.1.5.1",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "ABERTURAS A BARLOVENTO",
+   "texto": "ABERTURAS A BARLOVENTO: Son aquellas aberturas de una edificaron ubicadas \nfrente a la dirección del viento destinadas principalmente para la entrada del aire.",
+   "paginas": [
+    160
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.1.5.2",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "ABERTURAS A SOTAVENTO",
+   "texto": "ABERTURAS A SOTAVENTO: Son aquellas aberturas de una edificación ubicadas \nen el lado opuesto a la dirección del viento destinadas principalmente a la salida del aire.",
+   "paginas": [
+    160
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.1.5.3",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "ZONA DE CALMA O ZONA DE SOMBRA",
+   "texto": "ZONA DE CALMA O ZONA DE SOMBRA: Es la masa de aire semi–estancado que se \nforma en la región posterior a la incidencia del flujo de aire en el edificio y que tiene \npresión negativa (-) reducida.",
+   "paginas": [
+    160,
+    161
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.1.5.4",
+   "titulo_num": 4,
+   "capitulo": "4.1",
+   "encabezado": "CONFORTABILIDAD TÉRMICA: Es la comodidad climática",
+   "texto": "CONFORTABILIDAD TÉRMICA: Es la comodidad climática. Son aquellas \ncondiciones ambientales en que el hombre en  condiciones normales se sienta \ntérmicamente cómodo, es decir, que no siente frío ni calor.",
+   "paginas": [
+    161
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.2.1",
+   "titulo_num": 4,
+   "capitulo": "4.2",
+   "encabezado": "VENTILACIÓN CRUZADA",
+   "texto": "VENTILACIÓN CRUZADA. \nLa ventilación cruzada se obtiene utilizando aberturas para la entrada (Ab) y salida de aire \n(As) en paredes, techo y/o puertas que permitan la renovación de aire que requieran los \nocupantes de un espacio de acuerdo a las actividades que realizan y el número de personas. \n(Figura 1). \n \nFIGURA 1 \nVENTILACION CRUZADA",
+   "paginas": [
+    161
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.2.2",
+   "titulo_num": 4,
+   "capitulo": "4.2",
+   "encabezado": "VENTILACIÓN DE ABERTURAS",
+   "texto": "VENTILACIÓN DE ABERTURAS. La ubicación de las aberturas de entrada de aire (Ab) \nde ser posible, se colocarán en las Zonas de Presión a Barlovento, siempre que los vientos \ndominantes tengan una dirección más o menos constante; si los vientos dominantes soplan \nen más de una dirección, las aberturas se distribuirán proporcionalmente (Figura 2). \nFIGURA 2 \n \n \nLas aberturas para la entrada de aire  (Ab) se abrirán, de ser posible, en zonas bajas; las \naberturas para la salida (As) en zonas altas, (Figura3). \n \n \nFIGURA 3 \n \n \n \n\n \n\n \nLos techos inclinados se pueden utilizar para facilitar la salida del aire caliente por arriba \nmediante la succión del aire exterior. (Figura 4). \nFIGURA 4",
+   "paginas": [
+    161,
+    162,
+    163
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.2.3",
+   "titulo_num": 4,
+   "capitulo": "4.2",
+   "encabezado": "",
+   "texto": "VENTILACIÓN CRUZADA EN HABITACIONES CON UNA SOLA ABERTURA DE ENTRADA \nDE AIRE. En este tipo de espacios, la ventilación cruzada se consigue eficazmente haciendo \ncircular el aire a través de un falso techo en cuyo extremo se encuentra una abertura de \nventilación. (Véase Figura 5) \n \n \nFIGURA 5",
+   "paginas": [
+    163,
+    164
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.4.1",
+   "titulo_num": 4,
+   "capitulo": "4.4",
+   "encabezado": "ANCHO DE LA ABERTURA",
+   "texto": "ANCHO DE LA ABERTURA. Si la abertura abarca el 100% de la pared, lograremos un \n38% de la velocidad exterior del aire en el interior de la habitación. \nGRAFICO 1",
+   "paginas": [
+    166
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.4.2",
+   "titulo_num": 4,
+   "capitulo": "4.4",
+   "encabezado": "ALTURA DE LA ABERTURA",
+   "texto": "ALTURA DE LA ABERTURA. Las alturas más satisfactorias oscilan entre 1.2 m y 1.5 m \ndebido a que estas son las alturas donde el hombre realiza sus actividades ya que para \nmayores alturas los incrementos de velocidad son menores. \nCon estas alturas se obtendrá una velocidad interior de un 25% a un 30% de la velocidad \nexterior del aire. \nGRAFICO 2",
+   "paginas": [
+    166,
+    167
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.4.3",
+   "titulo_num": 4,
+   "capitulo": "4.4",
+   "encabezado": "ÁREA DE LA ABERTURA",
+   "texto": "ÁREA DE LA ABERTURA. El rendimiento máximo de la ventilación se obtiene \nutilizando un área abertura entre un 25% y un 35% del área de piso (Ap), obteniendo \ninteriormente desde un 37% a un 41% de la velocidad exterior del aire. \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n\n \nGRAFICO 3",
+   "paginas": [
+    167,
+    168
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.9.1",
+   "titulo_num": 4,
+   "capitulo": "4.9",
+   "encabezado": "VIVIENDAS AISLADAS",
+   "texto": "VIVIENDAS AISLADAS. Para conjunto de viviendas aisladas de uno o dos niveles se \nrecomienda que estas sean dispuestas en forma de “tablero” o “damero” para evitar que se \nformen las sombras de viento entre una vivienda y otra. ( Figura 15). Este es el caso de las \nurbanizaciones en donde se considerarán además las dimensiones de dichas edificaciones \nen la determinación de la separación entre las mismas. \n \n \n \n \n\n \n\n \nFIGURA 15",
+   "paginas": [
+    171,
+    172
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.9.2",
+   "titulo_num": 4,
+   "capitulo": "4.9",
+   "encabezado": "EDIFICIOS MULTIPISOS",
+   "texto": "EDIFICIOS MULTIPISOS. En los casos de conjuntos de multipisos la ventilación será \nposible con el uso de torres de viento, las cuales funcionaran como duetos de entrada y \nsalida de aire. (Figura. 16). \nFIGURA 16 \n \n\n \n\n \nEn los casos de edificios multipisos rodeados de edificaciones de menor altura, de uno de dos \nniveles, se recomienda dejar su primer nivel libre para lograr el paso del viento. (Figura. 17). \n \nFIGURA 17",
+   "paginas": [
+    172,
+    173
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "4.9.3",
+   "titulo_num": 4,
+   "capitulo": "4.9",
+   "encabezado": "USO DE ÁRBOLES Y ELEMENTOS DIVISORIOS",
+   "texto": "USO DE ÁRBOLES Y ELEMENTOS DIVISORIOS. La ubicación de árboles y  elementos \ndivisorios a barlovento deberá evitarse en lo posible, debido a que pueden generar zonas de \ncalma o sombras de viento. Cuando sea imprescindible su ubicación frente a las aberturas de \nentrada de aire (Ab) deberá preverse su conformación de manera que no obstaculicen la \ncirculación del aire. (Figura 18). \n \n \n \n \n \n \n \n\n \n\n \nFIGURA 18",
+   "paginas": [
+    173,
+    174
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  }
+ ]
+}

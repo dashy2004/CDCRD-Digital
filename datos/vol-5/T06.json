@@ -1,0 +1,3372 @@
+{
+ "volumen": 5,
+ "sigla": null,
+ "nombre_volumen": "Diseño Arquitectónico en Edificaciones",
+ "titulo": 6,
+ "nombre": "Proyectar sin Barreras Arquitectónicas",
+ "fuente_pdf": "MIVHED-Diseno-Arquitectonico-en-Edificaciones-Vol-V.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "6.1": "CONSIDERACIONES GENERALES",
+  "6.2": "SÍMBOLO DE SEGURIDAD",
+  "6.3": "MEDIOS DE DESPLAZAMIENTO",
+  "6.4": "ACCESIBILIDAD",
+  "6.5": "RECOMENDACIONES GENERALES SOBRE MOBILIARIO Y EQUIPOS",
+  "6.6": "CONSIDERACIONES GENERALES SOBRE URBANISMO"
+ },
+ "clausulas": [
+  {
+   "id": "6.1.1",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "OBJETIVO",
+   "texto": "OBJETIVO. Este Título  establece los requisitos mínimos que deben cumplir los \nedificios o partes  de ellos que se designen expresamente, a fin de suprimir las barreras \narquitectónicas que obstaculizan el proceso de rehabilitación e integración social de \npersonas que padecen algún grado de limitación.",
+   "paginas": [
+    293
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.2",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "CAMPO DE APLICACIÓN",
+   "texto": "CAMPO DE APLICACIÓN. Estas reglamentaciones serán aplicadas en todos los \nproyectos para edificios a ser construidos, ampliados o modificados en todo el Territorio \nNacional, de acuerdo a los tipos contemplados en la Sección  6.1.3. \nPÁRRAFO I.  El Ministerio de la Vivienda, Hábitat y Edificaciones (MIVHED), a través de \nlas Dirección de Tramitación, Tasación y Licencias, podrá exigir el cumplimiento de estas \nreglamentaciones en cualquier otro tipo de edificación no contemplada, por considerarlo \nnecesario para el mejor desenvolvimiento de las actividades de las personas con algún \ngrado de limitación. Para esos casos se deberá solicitar orientación en dichas Oficinas en \nla etapa del anteproyecto. \nPÁRRAFO II. Los Proyectos para Conjuntos Habitacionales deberán cumplir con \nlos requisitos del",
+   "paginas": [
+    293
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.3",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "EDIFICIOS DE SERVICIOS ESENCIALES",
+   "texto": "EDIFICIOS DE SERVICIOS ESENCIALES.",
+   "paginas": [
+    293
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.3.1",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "ADMINISTRATIVOS Y COMERCIALES",
+   "texto": "ADMINISTRATIVOS Y COMERCIALES. \nLocales de Servicios Públicos en general, tanto del Sector Oficial como del Sector Privado.",
+   "paginas": [
+    293
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.3.2",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "CENTROS DE REUNIÓN",
+   "texto": "CENTROS DE REUNIÓN. \nCines, teatros, auditorios, iglesias, otros.",
+   "paginas": [
+    293
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.3.3",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "HOSPEDAJE",
+   "texto": "HOSPEDAJE. \nHospedaje transitorio, hoteles, hostales y similares.",
+   "paginas": [
+    293
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.3.4",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "CENTROS EDUCATIVOS",
+   "texto": "CENTROS EDUCATIVOS. \nEscuelas, universidades, bibliotecas, centros comunales y similares.",
+   "paginas": [
+    293,
+    294
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.3.5",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "CENTROS DE SALUD",
+   "texto": "CENTROS DE SALUD. \n1. Hospitales, clínicas y similares. \n2. Edificios especializados para consultorios. \n3. Laboratorios clínicos. \n4. Centros de rehabilitación física y similares. \n5. Hospicios, asilos, otros.",
+   "paginas": [
+    294
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.3.6",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "CENTROS DEPORTIVOS Y DE RECREACIÓN",
+   "texto": "CENTROS DEPORTIVOS Y DE RECREACIÓN. \n1. Canchas, piscinas, gimnasios, otros. \n2. Estadios, coliseos, otros. \n3. Áreas de recreación pública, parques, ferias, otros.",
+   "paginas": [
+    294
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.4",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "DEFINICIONES",
+   "texto": "DEFINICIONES. \nPara los fines de este Título los términos que aparecen a continuación tendrán el significado \nsiguiente:",
+   "paginas": [
+    294
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.4.1",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "BARRERAS ARQUITECTÓNICOS",
+   "texto": "BARRERAS ARQUITECTÓNICOS: Impedimentos que presentan determinadas \nobras urbanísticas y edificios, que imposibilitan a las personas con limitación su utilización \ntotal con seguridad física y bienestar.",
+   "paginas": [
+    294
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.4.2",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "PERSONA CON LIMITACIÓN",
+   "texto": "PERSONA CON LIMITACIÓN: Persona que, en forma congénita o adquirida, \npermanentemente o temporal, sufre alguna  deficiencia en sus facultades motrices, \nsensoriales, mentales o de otra naturaleza y que se encuentra  apta para realizar \nactividades cotidianas en forma limitada, a veces con ayuda de sillas de ruedas, aparatos \nprotésicos, ortésicos u otros aditamentos. \nIncluyen personas de edad avanzada, así como las que sufren problemas circulatorios.",
+   "paginas": [
+    294
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.4.3",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "ACCESIBILIDAD",
+   "texto": "ACCESIBILIDAD. Facilidad de desplazamiento desde espacios exteriores a espacios \ninteriores y viceversa. \nPara los fines de este Título, dicha facilidad está requerida a personas con algún grado de \nlimitación.",
+   "paginas": [
+    294,
+    295
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.4.4",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "SÍMBOLO DE ACCESIBILIDAD",
+   "texto": "SÍMBOLO DE ACCESIBILIDAD: Emblema adoptado internacionalmente, utilizado \npara señalar edificios y facilidades que permitan su uso o sean accesibles a las personas \ncon alguna limitación.",
+   "paginas": [
+    295
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.4.5",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "SEÑALES DE SEGURIDAD",
+   "texto": "SEÑALES DE SEGURIDAD: Son figuras geométricas sobre las cuales se colocan \ncolores y/o símbolos que indiquen seguridad,  usadas para atraer la atención con el \npropósito de obtener un significado determinado.",
+   "paginas": [
+    295
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.4.6",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "SÍMBOLO DE SEGURIDAD",
+   "texto": "SÍMBOLO DE SEGURIDAD: Es cualquier  figura colocada dentro de la señal de  \nseguridad con la finalidad de complementar la información de la misma.",
+   "paginas": [
+    295
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.4.7",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "QUICIOS",
+   "texto": "QUICIOS: Diferencia de nivel de pisos que se practica en el plano de una puerta o \nhueco de acceso.",
+   "paginas": [
+    295
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.5",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "NOTACIONES",
+   "texto": "NOTACIONES. \nd1- diámetro externo de la señal de seguridad \nd2- diámetro del símbolo de seguridad \ne- borde de la señal de seguridad",
+   "paginas": [
+    295
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.1",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "PROPIEDADES GENERALES",
+   "texto": "PROPIEDADES GENERALES.",
+   "paginas": [
+    296
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.1.1",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "DIMENSIONAMIENTO",
+   "texto": "DIMENSIONAMIENTO. El diámetro mínimo de la señal dependerá de la distancia \nmáxima de observación, para lo cual se  usará la siguiente expresión matemática que \nrelaciona el área mínima de la señal y dicha distancia. \n𝐒 = 𝐋𝟐\n𝟐𝟎𝟎𝟎 \ndonde: \nS= área mínima de la señal \nL= distancia máxima de observación \nS y L deberán expresarse en las mismas unidades. \nLos diámetros de la señal y el símbolo de seguridad deberán cumplir con las relaciones \nsiguientes: \nd1≥0.025l \nd2=0.60d1 \n         e= 1/6 (d1-d2) \n \n \n \n\n \n\n \nFIGURA 2 \n \n \n \nPÁRRAFO  I: El diámetro mínimo de las señales que se colocarán en la entrada de los \nedificios o en el área más próxima a su acceso principal, será de veinticinco centímetros \n(0.25 mts.), lo cual permite una distancia máxima de observación aproximada de diez \nmetros (10.00 mts.). \nPÁRRAFO  II: El diámetro mínimo de las señales que serán colocadas en el interior de los \nedificios, de acuerdo al presente título, deberá ser de ocho centímetros (0.08 mts.), lo cual \npermite una distancia máxima de observación aproximada de tres metros (3.00 mts.).",
+   "paginas": [
+    296,
+    297
+   ],
+   "flags": {
+    "formula": true,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.1.2",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "COLORES",
+   "texto": "COLORES. Los colores a utilizar en el símbolo de accesibilidad serán los \nestablecidos internacionalmente (véase Figura 1).",
+   "paginas": [
+    297,
+    298
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.3.1",
+   "titulo_num": 6,
+   "capitulo": "6.3",
+   "encabezado": "SILLAS DE RUEDAS",
+   "texto": "SILLAS DE RUEDAS.",
+   "paginas": [
+    298
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.3.1.1",
+   "titulo_num": 6,
+   "capitulo": "6.3",
+   "encabezado": "DIMENSIONES",
+   "texto": "DIMENSIONES. Las dimensiones contenidas en los diferentes gráficos que \npresentamos a continuación corresponden a las sillas de ruedas manuales tradicionales. \nExisten otros tipos de sillas accionadas electrónicamente, cuya anchura es ligeramente \nsuperior (0.75 m.).  Los reposabrazos y reposapiés generalmente son desmontables, \ncualidad que permite mayor facilidad de movimiento a personas con limitaciones. \nFIGURA 3",
+   "paginas": [
+    298
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.3.1.2",
+   "titulo_num": 6,
+   "capitulo": "6.3",
+   "encabezado": "MANIOBRABILIDAD EN LA SILLA DE RUEDAS",
+   "texto": "MANIOBRABILIDAD EN LA SILLA DE RUEDAS. Las posibilidades y cantidades de \ngiros estarán en correspondencia con la forma geométrica y las dimensiones del lugar en \nque éstos se ejecuten.  Es importante, además, el nivel de rehabilitación en que se \n\n \n\n \nencuentre la persona con limitación; cuanto más completo sea éste, mayor posibilidad \ntendrá en la ejecución de los movimientos. \nEn los siguientes esquemas gráficos, presentamos los espacios mínimos requeridos en \nla diversidad de formas de giro que puede permitir las sillas de ruedas. \nFIGURA 4 \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nEspacio mínimo requerido para:  \n• Giro de 180 grados 1.70x1.40m \n• Giro 360 grados 1.70x1.70m \n \nEspacio mínimo requerido para un giro de 90 grados. \n\n \n\n \nFIGURA 5",
+   "paginas": [
+    298,
+    299,
+    300
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.3.1.3",
+   "titulo_num": 6,
+   "capitulo": "6.3",
+   "encabezado": "RADIO DE ACCIÓN",
+   "texto": "RADIO DE ACCIÓN. VISIBILIDAD. OTROS. \nLas posibilidades de alcance y el grado de movilidad que puedan tener las personas con \nlimitación dependerán fundamentalmente del tipo de lesión física padecida por éstas. \nLas áreas de alcance que a continuación s e  presentan, corresponden tanto a hombres \ncomo a mujeres con mayor o menor grado de movilidad. \n \nFIGURA 6 \n \nVista Frontal\nVista Lateral\n0.60\n0.20\n1.00\n1.40\n0.40\n0.60",
+   "paginas": [
+    300,
+    301
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.00",
+   "titulo_num": 6,
+   "capitulo": "1.00",
+   "encabezado": "",
+   "texto": "Con el cuerpo inclinado (Hombre)",
+   "paginas": [
+    301
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "1.80",
+   "titulo_num": 6,
+   "capitulo": "1.80",
+   "encabezado": "",
+   "texto": "Con el cuerpo erguido (Hombre)\n0.40",
+   "paginas": [
+    301
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "6.3.2",
+   "titulo_num": 6,
+   "capitulo": "6.3",
+   "encabezado": "BASTÓN O MULETAS",
+   "texto": "BASTÓN O MULETAS. \nLos siguientes dibujos muestran el espacio mínimo requerido para el movimiento de \npersonas con limitación que utilizan bastón o muletas. \nFIGURA  9",
+   "paginas": [
+    303,
+    304
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.1",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "PUERTAS",
+   "texto": "PUERTAS.",
+   "paginas": [
+    304
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.1.1",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "REQUISITOS GENERALES",
+   "texto": "REQUISITOS GENERALES.",
+   "paginas": [
+    304
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.1.1.1",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "Toda puerta, no importa el lugar que ocupe dentro de un edificio, deberá tener \nuna anchura mínima libre no menor de 0.85 mts.",
+   "paginas": [
+    304
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.1.1.2",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "En edificaciones donde sean utilizadas puertas pesadas giratorias, o que \nrequieran de mucho esfuerzo físico para ser operadas manualmente, deberá haber para \nel uso de personas con limitación otra puerta de fácil manejo. Se recomienda el uso de \npuertas automáticas como solución óptima en estos casos.",
+   "paginas": [
+    304
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.1.1.3",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "En casos de la presencia o utilización de puertas corredizas, los rieles no \ndeberán sobresalir del nivel del piso. \n0.900.70",
+   "paginas": [
+    304
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.1.1.4",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "Deberá evitarse la construcción de quicios; si su utilización resultara \nimprescindible en la edificación, estos no podrán exceder de 0.02 metros de altura y su \ncanto preferiblemente deberá terminar en forma ovalada.",
+   "paginas": [
+    304,
+    305
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.1.2",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "REQUISITOS ESPECÍFICOS PARA PUERTAS DE USO EXCLUSIVO PARA PERSONAS \nCON LIMITACIÓN.",
+   "paginas": [
+    305
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.1.2.1",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "Todas estas puertas deberán llevar en sus caras exteriores el símbolo de \naccesibilidad en forma clara y visible.",
+   "paginas": [
+    305
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.1.2.2",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "Los marcos de las puertas deberán exhibir colores contratantes para \nque resulten fácilmente distinguibles por invidentes parciales.",
+   "paginas": [
+    305
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.1.2.3",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "Los marcos de las puertas y hasta la altura de 1",
+   "texto": "Los marcos de las puertas y hasta la altura de 1.00 metro, deberán estar \nrevestidos por un material resistente a los golpes.",
+   "paginas": [
+    305
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.1.2.4",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "Las puertas deberán tener una franja de 0",
+   "texto": "Las puertas deberán tener una franja de 0.40 m. de altura a partir del nivel del \npiso, que sirva como elemento protector contra golpes y rasguños.",
+   "paginas": [
+    305
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.1.2.5",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "Los tiradores y cerraduras deberán ser fáciles de asir y colocadas a una altura \nentre 0.90 y 1.20 m. \nFIGURA 10 \n \n \n  \n\nUnidad de medida en metro\n1 2 3\nMarco Puerta\ncolor contrastante a\npared adyacente\n1- Tirador a\n2- Barra Inclinada\n3- Tirador b\n4- Barra Horizonaral\n5- Barra Vertical\nba\nBanda\nProtectora\nPuerta\nCorrediza\n0.80\n1.10\n\n> 0.40\n0.80\n\n> 0.40\n\n0.10\n> 0.40\nBanda\nProtectora\nancho libre,\nhueco de\npuertas\nTipo de Tiradores",
+   "paginas": [
+    305
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.10",
+   "titulo_num": 6,
+   "capitulo": "1.10",
+   "encabezado": "",
+   "texto": "Posibilidades colocación de tiradores",
+   "paginas": [
+    305
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "6.4.2",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "PASILLO",
+   "texto": "PASILLO.",
+   "paginas": [
+    305,
+    306
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.2.1",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "Los pasillos deberán tener una anchura mínima libre de 1",
+   "texto": "Los pasillos deberán tener una anchura mínima libre de 1.10 metros. En aquellos \ncasos en que el pasillo permita el paso simultáneo de dos sillas de ruedas, éste deberá \nposeer una anchura mínima libre de 1.80 metros.",
+   "paginas": [
+    306
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.2.2",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "En aquellos lugares visitados frecuentemente por personas con limitación las \nparedes laterales de los pasillos deberán estar provistas de barandas colocadas a 0.90 m. \nde altura.",
+   "paginas": [
+    306
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.2.3",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "Todo objeto adosado a una pared y a una altura menor de 2",
+   "texto": "Todo objeto adosado a una pared y a una altura menor de 2.10 metros, no deberá \nsobresalir más de 0.05 metros.",
+   "paginas": [
+    306
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.2.4",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "Los pasillos no deberán tener alfombras sueltas, ni rejillas con aberturas mayores \nde 0.02 metros, ni pisos exageradamente pulidos a fin de garantizar la seguridad de \naquellas personas que utilicen bastón o muletas.",
+   "paginas": [
+    306
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.2.5",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "Los esquemas siguientes muestran los espacios mínimos requeridos en pasillos y \nentradas para garantizar la maniobrabilidad de la silla de ruedas, dependiendo de la \nubicación de la puerta. \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \nFIGURA 11 \n \n \n                                                                              \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n\n \nNota: El cuadro presenta algunas soluciones, pudiendo interpolarse para para \ndimensiones intermedias.",
+   "paginas": [
+    306,
+    307,
+    308
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.3",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "RAMPAS",
+   "texto": "RAMPAS. \nCuando exista desnivel entre dos áreas de uso público, adyacentes y funcionalmente \nrelacionadas, éstas deberán estar comunicadas entre sí mediante una rampa. Las \nrampas deberán cumplir con lo siguiente.",
+   "paginas": [
+    308
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.3.1",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "Deberán ser construidas de materiales antideslizantes",
+   "texto": "Deberán ser construidas de materiales antideslizantes.",
+   "paginas": [
+    308
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.3.2",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "La pendiente no deberá exceder del ocho por ciento (8%) en los edificios oficiales \ny privados y de doce y medio por ciento (12.5%) en viviendas.",
+   "paginas": [
+    308
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.3.3",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "La anchura mínima en viviendas será de 0",
+   "texto": "La anchura mínima en viviendas será de 0.85 a 0.95 metros; en edificios oficiales \ny privados, la anchura  mínima será de 1.30 metros.  En caso en que permita el paso \nsimultáneo de dos sillas de ruedas, la anchura deberá ser de 1.80 metros.",
+   "paginas": [
+    308
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.3.4",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "Las rampas deberán tener descansos de 1",
+   "texto": "Las rampas deberán tener descansos de 1.50 metros a 2.00 metros cada 9.00 \nmetros máximos de longitud. Asimismo, en viviendas las rampas con longitudes mayores \nde 3.00 metros deberán tener descansos.",
+   "paginas": [
+    308
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.3.5",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "Toda rampa con una longitud mayor de 1",
+   "texto": "Toda rampa con una longitud mayor de 1.50 metros deberá contar con barandas \no pasamanos a ambos lados, colocados a 0.90 metros de altura y construidos con \nmaterial resistente. En caso en que la pendiente sea mayor del ocho por ciento (8%) \ndeberá disponerse de un pasamanos adicional, a una altura de 0.75 metros. \n \n\n \nFIGURA 12       \n\n \n\n \nFIGURA 13",
+   "paginas": [
+    308,
+    309,
+    310
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.3.6",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "Según esté situada la puerta en el descanso, deberá disponerse \nconvenientemente el encuentro de éste con la rampa para lograr los espacios mínimos \nnecesarios que permitan la maniobrabilidad de la silla de ruedas. \nLas siguientes gráficas muestran algunas soluciones. \n \nFIGURA 14",
+   "paginas": [
+    310,
+    311
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.4",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "ESCALERAS",
+   "texto": "ESCALERAS. \nEn todo edificio oficial o privado, las escaleras que podrán ser utilizadas por las \npersonas con limitación, como son las de acceso al edificio y las que conduzcan \ndirectamente a áreas de servicios sanitarios que ofrezcan facilidades a dichas personas, \ndeberán cumplir con las disposiciones siguientes.",
+   "paginas": [
+    311
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.4.1",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "Deberán tener una anchura mínima de 0",
+   "texto": "Deberán tener una anchura mínima de 0.90 metros. En casos en que se \ncontemple la posibilidad del paso simultáneo de dos personas con limitación, la anchura \nserá de 1.20 metros.",
+   "paginas": [
+    311
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.4.2",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "Deberán tener una huella de 0",
+   "texto": "Deberán tener una huella de 0.32 metros con una contrahuella de 0.14 metros; \nsu terminación deberá ser en colores contrastantes y de canto ovalado.",
+   "paginas": [
+    311
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.4.3",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "Deberán tener barandillas de material resistente a ambos lados; las cuales se \nprolongarán 0.45 metros en los extremos superior e inferior de las mismas, siempre y \ncuando sea posible.",
+   "paginas": [
+    311,
+    312
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.4.4",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "Para que los invidentes puedan detectar la presencia de escaleras, debe \nproducirse un cambio de textura en el piso desde una distancia de 1.20 metros antes del \ninicio de las mismas. \nFIGURA 15",
+   "paginas": [
+    312
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.5",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "PASAMANOS Y BARANDAS",
+   "texto": "PASAMANOS Y BARANDAS.",
+   "paginas": [
+    312
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.5.1",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "Los pasamanos deberán ser fuertes y fáciles de asir y su sección tendrá \nuna forma amoldable a la mano.",
+   "paginas": [
+    312
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.5.2",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "Deberán estar colocados a todo lo largo de las escaleras o rampas y a una \naltura de 0.90 metros.",
+   "paginas": [
+    312
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.5.3",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "En caso de que los pasamanos se encuentren adyacentes a un muro, la \nseparación entre ambos no deberá ser menor de 0.05 metros, para facilitar el agarre.",
+   "paginas": [
+    312
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.5.4",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "Aquellas escaleras de una anchura mayor de 1",
+   "texto": "Aquellas escaleras de una anchura mayor de 1.80 metros, deberán estar provistas \nde una baranda central. \n\n \n\n \nFIGURA 16 \nTIPOS DE PASAMANOS",
+   "paginas": [
+    312,
+    313
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.6",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "ASCENSORES",
+   "texto": "ASCENSORES.",
+   "paginas": [
+    313
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.6.1",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "La cabina del ascensor no deberá ser menor de 1",
+   "texto": "La cabina del ascensor no deberá ser menor de 1.10 metros x 1.40 metros para \npermitir la colocación de la persona con limitación en silla de ruedas y su ayudante.",
+   "paginas": [
+    313
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.6.2",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "La puerta será corrediza, preferiblemente automática",
+   "texto": "La puerta será corrediza, preferiblemente automática.",
+   "paginas": [
+    313
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.6.3",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "La máxima separación entre la cabina del ascensor y el piso será de 0",
+   "texto": "La máxima separación entre la cabina del ascensor y el piso será de 0.02 metros.",
+   "paginas": [
+    313
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.6.4",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "Se colocarán barandillas a 0",
+   "texto": "Se colocarán barandillas a 0.90 metros de altura en los lados interiores del \nascensor, separadas 0.05 metros de los muros laterales.",
+   "paginas": [
+    313
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.6.5",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "Ningún botón deberá estar ubicado a una altura mayor de 1",
+   "texto": "Ningún botón deberá estar ubicado a una altura mayor de 1.50 metros. La \naltura recomendada es de 1.20 metros.",
+   "paginas": [
+    313
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.6.6",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "El tiempo de cierre de los ascensores no deberá ser menor de 3 segundos",
+   "texto": "El tiempo de cierre de los ascensores no deberá ser menor de 3 segundos.",
+   "paginas": [
+    313
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.6.7",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "No se recomienda el uso de alfombras en el piso de la cabina del ascensor",
+   "texto": "No se recomienda el uso de alfombras en el piso de la cabina del ascensor .",
+   "paginas": [
+    313
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.6.8",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "En los edificios con más de un ascensor, uno de ellos por los menos deberá \ncumplir con todo lo estipulado. \n \n\n \n\n \nFIGURA 17 \nFIGURA 18",
+   "paginas": [
+    313,
+    314
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.7",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "ESTACIONAMIENTO VEHICULAR",
+   "texto": "ESTACIONAMIENTO VEHICULAR. \nEn los espacios de estacionamientos reservados para las personas con limitación, \ndeberá estar colocado el símbolo de accesibilidad para identificar su uso exclusivo.",
+   "paginas": [
+    314,
+    315
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.7.1",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "NÚMERO DE ESPACIOS REQUERIDOS",
+   "texto": "NÚMERO DE ESPACIOS REQUERIDOS. \nLos edificios de servicios esenciales destinarán de estacionamientos para las \npersonas con limitación que puedan conducir, según el cuadro siguiente: \nTABLA 1 \nNúmero Total Espacios de \nEstacionamiento \nNúmero de  e s p a c i o s \ne s t a c i o n a m i e n t o s \ndestinados a personas con limitación \nMenor de 100 \n \nMayor de 100 \n1 por cada 50 ó fracción \n2 + 1 por cada 100 ó fracción en exceso \nde los primeros 100 \n \nPÁRRAFO I: Esta disposición será aplicada para los estacionamientos en áreas abiertas. \nPÁRRAFO II: En los edificios de estacionamiento de varios niveles, los espacios \nreservados para las personas con limitación deberán estar ubicados en el primer nivel.",
+   "paginas": [
+    315
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.7.2",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "DIMENSIONAMIENTO",
+   "texto": "DIMENSIONAMIENTO. Las dimensiones de los espacios de estacionamiento \ncorresponden a las de vehículos livianos.",
+   "paginas": [
+    315
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.7.3",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "En áreas abiertas la anchura del espacio de estacionamiento será de 3",
+   "texto": "En áreas abiertas la anchura del espacio de estacionamiento será de 3.30 metros, \nsegún la figura siguiente: \n \n\n \nFIGURA 19",
+   "paginas": [
+    315,
+    316
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.7.4",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "En garajes o marquesinas la anchura libre del espacio de estacionamiento \nserá de 3.50 metros, según lo señalado en la figura siguiente: \nFIGURA 20",
+   "paginas": [
+    316,
+    317
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.1",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "MESAS Y SUPERFICIES DE APOYO",
+   "texto": "MESAS Y SUPERFICIES DE APOYO.",
+   "paginas": [
+    317
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.1.1",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "Para escribir, leer, comer y realizar actividades afines, deberán ofrecer mesas \nespeciales con una altura mínima de 0.77 metros.",
+   "paginas": [
+    317
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.1.2",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "Se recomienda una variación de altura entre 0",
+   "texto": "Se recomienda una variación de altura entre 0.77 a 0.85 metros, para posibilitar \nel desplazamiento de la silla de ruedas por debajo de la mesa.",
+   "paginas": [
+    317
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.1.3",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "El ancho mínimo del tablero de la mesa debe ser 0",
+   "texto": "El ancho mínimo del tablero de la mesa debe ser 0.60 metros y su longitud estará \nen correspondencia con los requerimientos y necesidades del lugar.",
+   "paginas": [
+    317
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.1.4",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "Es recomendable que la mesa cuente con una solución estructural, que haga \ninnecesario el uso de elementos de soportes verticales.",
+   "paginas": [
+    317
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.1.5",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "En casos de Oficinas de Servicios tales como Rentas Internas, la Dirección General \nde la Cédula, Bancos, etc., donde se utilicen superficies de apoyo, como los mostradores, \néstas deberán cumplir con todo lo especificado en esta sección, colocando en las mismas \nla Señal de Seguridad que las identifique. \nFIGURA 21",
+   "paginas": [
+    317
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.2",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "INTERRUPTORES Y TOMACORRIENTES",
+   "texto": "INTERRUPTORES Y TOMACORRIENTES. \nLos interruptores de luces deberán estar a una altura variable de 0.90 a 1.20 metros.",
+   "paginas": [
+    317,
+    318
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.2.1",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "Los tomacorrientes de pared estarán colocados a una altura de 0",
+   "texto": "Los tomacorrientes de pared estarán colocados a una altura de 0.60 metros.",
+   "paginas": [
+    318
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.2.2",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "Es recomendable para los dos casos anteriores, enmarcarlos en un recuadro de \ncolor contrastante, para facilidad de invidentes parciales.",
+   "paginas": [
+    318
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.2.3",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "Se recomienda ubicar estos accesorios  eléctricos en lugares que permitan a las \npersonas con limitación maniobrar con facilidad la silla de ruedas. \nFIGURA 22",
+   "paginas": [
+    318
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.3",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "VENTANAS",
+   "texto": "VENTANAS.",
+   "paginas": [
+    318
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.3.1",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "En los edificios y/o lugares interiores de los mismos, donde las personas con \nlimitación requieran de una adecuada visibilidad hacia el exterior, las ventanas deberán \nestar colocadas a una altura variable entre los 0.60 a 0.85 metros.",
+   "paginas": [
+    318
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.3.2",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "El mecanismo de cierre deberá ser de fácil manejo y colocado a una altura de 0",
+   "texto": "El mecanismo de cierre deberá ser de fácil manejo y colocado a una altura de 0.90 \na 1.20 metros. \n \n\n \n\n \nFIGURA 23",
+   "paginas": [
+    318,
+    319
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.4",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "CASILLA DE TELÉFONOS",
+   "texto": "CASILLA DE TELÉFONOS.",
+   "paginas": [
+    319
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.4.1",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "La casilla telefónica deberá tener un tamaño mínimo de 1",
+   "texto": "La casilla telefónica deberá tener un tamaño mínimo de 1.10 x 1.40 metros.",
+   "paginas": [
+    319
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.4.2",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "La puerta de la casilla debe abrirse con facilidad y tener una anchura mínima libre \nde 0.85 metros.",
+   "paginas": [
+    319
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.4.3",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "Es recomendable evitar desniveles innecesarios entre el nivel de piso terminado \ndel lugar de ubicación de la casilla y el piso de la misma. \n\n \n\n \nFIGURA 24",
+   "paginas": [
+    319,
+    320
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.5",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "CASILLEROS DE CORREOS",
+   "texto": "CASILLEROS DE CORREOS. \nEn edificios donde este equipamiento sea requerido y en oficinas pertenecientes a la \nDirección General de Correos y Telecomunicaciones, deberán destinarse casilleros de \ncorreos para el uso exclusivo de las personas con limitación.",
+   "paginas": [
+    320
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.5.1",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "Los casilleros de correos designados para uso exclusivo de las personas con \nlimitación deberán estar colocados a una altura variable entre 0.90 a 1.40 metros.",
+   "paginas": [
+    320
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.5.2",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "Es recomendable su ubicación en espacios  que hagan permisible la \nmaniobrabilidad de la silla de ruedas.",
+   "paginas": [
+    320,
+    321
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.5.3",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "En el área reservada para los casilleros de las personas con limitación deberá \ncolocarse la Señal de Seguridad que identifique a los mismos.",
+   "paginas": [
+    321
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.6",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "APARADORES Y ANAQUELES",
+   "texto": "APARADORES Y ANAQUELES. \nEn bibliotecas, librerías y otros edificios o espacios de naturaleza similar, los aparadores y  \nanaqueles deberán poder alcanzarse de frente y de costado y contar con un espacio \nmínimo debajo del gabinete de 0.30 metros. \nSe recomienda que las puertas sean corredizas. \nFIGURA 25",
+   "paginas": [
+    321
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.7",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "ESPACIOS PARA ESPECTADORES",
+   "texto": "ESPACIOS PARA ESPECTADORES. \nEn teatros, cines, auditorios, instalaciones deportivas y otras edificaciones de carácter \nsimilar, deberán destinarse espacios para las personas que usen sillas de ruedas, según \nel cuadro siguiente: \n \n \n \nUnidad de medida en metro\n0.35 a 0.60\n0.30 a 0.40\n0.20",
+   "paginas": [
+    321
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.10",
+   "titulo_num": 6,
+   "capitulo": "1.10",
+   "encabezado": "",
+   "texto": "Alcance Frontal\n1.10\n1.40\n0.20\n1.40\n0.35 a 0.60\nAlcance Lateral 0.20 0.20\n0.30 a 0.40\n \n\n \nTABLA 2 \nCapacidad Edificación Mínimo de espacios para personas con \nlimitación \n0-300 PERSONAS 1 por cada 100 \nmás de 300 PERSONAS 3+1 por cada 200 \n \nFIGURA 26",
+   "paginas": [
+    321,
+    322
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "6.5.7.1",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "En caso de destinarse para estos fines la primera o la última fila, deberán éstas \nregirse según los esquemas siguientes: \nFIGURAS 27",
+   "paginas": [
+    322,
+    323
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.8",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "INSTALACIONES SANITARIAS",
+   "texto": "INSTALACIONES SANITARIAS. \nEn los edificios tales como escuelas, estadios, auditorios o que ofrezcan servicios \nsemejantes deberá destinarse, para uso de las personas con limitación, un mínimo de \nuna unidad sanitaria para damas y otra para caballeros, por cada piso del edificio.",
+   "paginas": [
+    323
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.8.1",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "Las puertas deberán cumplir con todo lo establecido en la Sección 6",
+   "texto": "Las puertas deberán cumplir con todo lo establecido en la Sección 6.4.1.",
+   "paginas": [
+    323
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.8.2",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "Las puertas de entrada deberán abrir hacia fuera o podrían ser de corredera",
+   "texto": "Las puertas de entrada deberán abrir hacia fuera o podrían ser de corredera.",
+   "paginas": [
+    323
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.8.3",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "Las unidades sanitarias dotarse de aditamentos diseñados especialmente para \nlas personas con limitación, los cuales deberán estar dispuestos convenientemente para \nque estas unidades sean accesibles. \n \n \n \n \n\n \n\n \nFIGURA 28",
+   "paginas": [
+    323,
+    324
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.8.4",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "Los inodoros serán de sifón, con descanso para brazos en ambos lados del mismo",
+   "texto": "Los inodoros serán de sifón, con descanso para brazos en ambos lados del mismo. \nDe ser posible tendrán en la parte superior del  local, un aditamento para soliviarse  \n(triángulo). La altura del inodoro será de 0.46 a 0.60 metros. \n \n \n \n \n \n \n\n \n\n \nFIGURA 29 \n\n \n\n \nFIGURA 30",
+   "paginas": [
+    324,
+    325,
+    326
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.8.5",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "Las duchas y baños deberán tener a su alrededor barras o asideros, los cuales \nestarán adosados a la pared en posición horizontal, a no menos de 0.10 metros y no más \nde 0.15 metros del borde de la bañera.",
+   "paginas": [
+    326
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.8.6",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "En las bañeras se colocará un asiento de material resistente al agua, de 0",
+   "texto": "En las bañeras se colocará un asiento de material resistente al agua, de 0.40 \nmetros de profundidad, fijo, plegable o removible, de no menos de 0.45 metros y no más \nde 0.50 metros sobre el piso en la bañera.",
+   "paginas": [
+    326
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.8.7",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "Cuando no se instale duchas en una bañera, deberá proveerse de una ducha de \nmanguera flexible de no menos de 1.85 metros de longitud y una barra vertical de ajuste \npara la ducha de no menos de 1.20 metros de longitud.",
+   "paginas": [
+    326
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.8.8",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "El piso de las duchas deberá tener un reborde no mayor de 0",
+   "texto": "El piso de las duchas deberá tener un reborde no mayor de 0.02 metros. \n\n \n\n \nFIGURA 31 \n\n \n\n \nFIGURA 32",
+   "paginas": [
+    326,
+    327,
+    328
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.8.9",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "Los lavamanos deben estar fijos firmemente a la pared y estar libres de obstáculos \nen su parte inferior, con excepción de sus tuberías correspondientes, las cuales deberán \nrevertirse de un material aislante. \nLa inclinación del espejo debe ser ligera, unos diez grados (10°) con respecto a la pared y \nsu borde inferior estará a noventa y cinco centímetros del suelo (0.95 cm.) \nFIGURA 33",
+   "paginas": [
+    328,
+    329
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.9",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "VESTIDORES",
+   "texto": "VESTIDORES. \nEn fábricas, talleres, piscinas y en edificaciones donde se requieran vestidores públicos, \ndeberán colocarse para las personas con limitación cabinas individuales, cuyas dimensiones \nmínimas serán de 1.50 x 1.80 metros.",
+   "paginas": [
+    329
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.9.1",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "Las puertas de entrada deben de cumplir con lo especificado en la Sección 6",
+   "texto": "Las puertas de entrada deben de cumplir con lo especificado en la Sección 6.4.1.",
+   "paginas": [
+    329
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.9.2",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "Todos los aditamentos internos del vestidor deben ajustarse a los requerimientos \ny dimensiones adecuados, para que las personas con limitación puedan desarrollar sus \nactividades sin dificultad.",
+   "paginas": [
+    329
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.9.3",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "Se recomienda la instalación de un lavapies, del tipo de la figura 35 tanto en \nvestidores de piscinas, así como en cuartos de baño o aseos de centros recreativos, \ngimnasios, etc. \nFIGURA 34 \nDETALLES VESTIDORES \n \n\n \n\n \nFIGURA 35 \nDETALLES DE LAVAPIES",
+   "paginas": [
+    329,
+    330,
+    331,
+    332
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "ACERAS Y SENDAS PEATONALES",
+   "texto": "ACERAS Y SENDAS PEATONALES.",
+   "paginas": [
+    332
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1.1",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "",
+   "texto": "Las aceras y sendas peatonales tendrán una anchura mínima pavimentada de \n1.20 metros, o de 1.80 metros para dar posibilidades del paso simultáneo de dos sillas de \nruedas; tendrán una pendiente transversal máxima de 1%.",
+   "paginas": [
+    332
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1.2",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "",
+   "texto": "En cruces de peatones, las áreas deberán tener el bordillo rebajado para facilidad \nde las personas con limitación y estar construidas con materiales de textura diferente para \nalertar a los invidentes parciales o totales.",
+   "paginas": [
+    332
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1.3",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "",
+   "texto": "En cruces de peatones a través de calles con isletas, éstas deberán interrumpirse \nen una longitud de 1.10 metros como mínimo, para mantener el paso al nivel de la calle.",
+   "paginas": [
+    332
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1.4",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "",
+   "texto": "No se colocarán objetos colgantes a una altura menor de dos metros cuarenta \ncentímetros (2.40 m.) en las aceras y pasos como mínimo, para mantener el paso a nivel \nde la calle.",
+   "paginas": [
+    332
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1.5",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "",
+   "texto": "Los objetos en aceras y pasos peatonales que deban ser detectados por los \ninvidentes que usan bastón, no deberán ser colocados a una altura mayor de 0.65 metros \nsobre el nivel del piso.",
+   "paginas": [
+    332
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1.6",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "Los postes deberán ser colocados en las franjas verdes de las aceras",
+   "texto": "Los postes deberán ser colocados en las franjas verdes de las aceras. En los \ncasos de no existir franjas verdes los mismos deberán ubicarse al borde de las aceras.",
+   "paginas": [
+    332
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1.7",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "",
+   "texto": "Las aceras no podrán ser ocupadas parcial o totalmente por rampas, \ndesniveles o escaleras que deban ser construidos para tener acceso a una propiedad.",
+   "paginas": [
+    332
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1.8",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "",
+   "texto": "Las rampas que se construyen en las aceras para la entrada de vehículos o \nsillas de ruedas no deberán sobrepasar la franja verde.",
+   "paginas": [
+    332,
+    333
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1.9",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "",
+   "texto": "Los giros en puertas exteriores y entradas a marquesinas no deberán \nefectuarse hacia fuera.  En caso de que esto sea inevitable, se recomienda el uso de \npuertas corredizas.",
+   "paginas": [
+    333
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1.10",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "Todo objeto adosado a una pared  y a una altura menor  de 2",
+   "texto": "Todo objeto adosado a una pared  y a una altura menor  de 2.40 metros,  no \ndeberá sobresalir más de 0.05 metros de la línea de propiedad.",
+   "paginas": [
+    333
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1.11",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "",
+   "texto": "Cuando los postes requieran tensores (vientos), éstos se colocarán de manera \nque su altura no sea menor de 2.40 metros en toda la anchura de las aceras.",
+   "paginas": [
+    333
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1.12",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "",
+   "texto": "Los elementos señalizados del tránsito deberán ser colocados en las paredes \ny a no menos de 2.10 metros de altura.",
+   "paginas": [
+    333
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1.13",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "",
+   "texto": "En parques o jardines donde se coloquen postes o cualquier otro tipo de \nobstáculo para impedir el paso vehicular, debe disponerse al menos un paso para las \npersonas en sillas de ruedas. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \nFIGURA 36 \n \n\n \n\n \nFIGURA 37",
+   "paginas": [
+    333,
+    334,
+    335
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.2",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "TELÉFONOS, FUENTES PÚBLICAS Y OTROS",
+   "texto": "TELÉFONOS, FUENTES PÚBLICAS Y OTROS.",
+   "paginas": [
+    335,
+    336
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.2.1",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "",
+   "texto": "El dial y la caja del dinero de los teléfonos con conchas aislantes deben colocarse \na 1.00 metros de altura, para poder utilizarse sentado. \nEn caso de que se coloquen más de una unidad de teléfono, uno por lo menos deberá \ncumplir con lo anterior, y deberá colocársele la Señal de Seguridad que lo identifique.",
+   "paginas": [
+    336
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.2.2",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "",
+   "texto": "Las fuentes públicas, si se adosan a las paredes, deben disponerse de forma \nque tanto los niños como las personas con limitación tengan posibilidad de usarlas; si \nvan apoyadas sobre un pedestal, éste no tendrá más de 0.02 metros de alto.",
+   "paginas": [
+    336
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.2.3",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "",
+   "texto": "En kioscos, bares al aire libre y en mostradores en general, debe habilitarse una \nzona accesible para las personas con limitación. \n \n\n \nFIGURA 38 \n \n \n \n \n \n \n \n\n \n\n \nANEXO \n \n \n \n \n  \n \n\n \n1. REQUISITOS GENERALES PARA VIVIENDAS DESTINADAS A PERSONAS CON \nLIMITACIÓN. \nA continuación, presentamos los requerimientos mínimos de diseño que podrán ser \nconsiderados como punto de referencia  por los proyectistas en el  diseño de viviendas \npara las personas con algún grado de limitación.",
+   "paginas": [
+    336,
+    337,
+    338,
+    339
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": false
+  },
+  {
+   "id": "1.1",
+   "titulo_num": 6,
+   "capitulo": "1.1",
+   "encabezado": "ACCESIBILIDAD",
+   "texto": "ACCESIBILIDAD.",
+   "paginas": [
+    339
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "1.1.1",
+   "titulo_num": 6,
+   "capitulo": "1.1",
+   "encabezado": "",
+   "texto": "Todas las puertas de las viviendas deberán  tener una anchura libre no menor de \n0.85 metros y sus tiradores y cerraduras deben poder asirse con facilidad y estar colocados \na una altura entre 0.90 a 1.20 metros.",
+   "paginas": [
+    339
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "1.1.2",
+   "titulo_num": 6,
+   "capitulo": "1.1",
+   "encabezado": "Los pasillos de las viviendas deberán tener una anchura mínima de 0",
+   "texto": "Los pasillos de las viviendas deberán tener una anchura mínima de 0.90 metros.",
+   "paginas": [
+    339
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "1.1.3",
+   "titulo_num": 6,
+   "capitulo": "1.1",
+   "encabezado": "En caso de rampas, su longitud no deberá ser mayor de 3",
+   "texto": "En caso de rampas, su longitud no deberá ser mayor de 3.00 metros, su anchura \nmínima entre 0.85 a 0.90 metros y una pendiente de 12.5%. Deberán estar construidas \ncon materiales no resbaladizos y disponer de barandas o pasamanos a 0.90 metros de \naltura.",
+   "paginas": [
+    339
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "1.1.4",
+   "titulo_num": 6,
+   "capitulo": "1.1",
+   "encabezado": "Las escaleras deberán tener una anchura mínima de 0",
+   "texto": "Las escaleras deberán tener una anchura mínima de 0.90 metros.  Se recomienda \nuna huella de 0.32 metros y una contrahuella de 0.14 metros. Sus cantos deberán terminar \nde forma ovalada.",
+   "paginas": [
+    339
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "1.1.5",
+   "titulo_num": 6,
+   "capitulo": "1.1",
+   "encabezado": "Las barandas o pasamanos deberán estar colocados a una altura de 0",
+   "texto": "Las barandas o pasamanos deberán estar colocados a una altura de 0.90 metros \nde altura y construido con material resistente y fácil de asir.",
+   "paginas": [
+    339
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "1.2",
+   "titulo_num": 6,
+   "capitulo": "1.2",
+   "encabezado": "COCINA",
+   "texto": "COCINA.",
+   "paginas": [
+    339
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "1.2.1",
+   "titulo_num": 6,
+   "capitulo": "1.2",
+   "encabezado": "",
+   "texto": "El espacio mínimo entre meseta y meseta o entre meseta y muro, deberá ser \nde 1.50 metros para permitir el giro de la silla de ruedas.",
+   "paginas": [
+    339
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "1.2.2",
+   "titulo_num": 6,
+   "capitulo": "1.2",
+   "encabezado": "Los planos de trabajo deberán estar situados a una altura entre 0",
+   "texto": "Los planos de trabajo deberán estar situados a una altura entre 0.80 a 0.85 metros \ncon respecto al piso y con un espacio libre bajo ellos de 0.77 metros mínimos, para permitir \nque las piernas y la silla pasen libremente.",
+   "paginas": [
+    339
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "1.2.3",
+   "titulo_num": 6,
+   "capitulo": "1.2",
+   "encabezado": "",
+   "texto": "Los armarios, estantes y otros deberán situarse a alturas accesibles, no mayores de \n1.40 metros.  \n \n\n \nFIGURA A-1 \n\n \n\n \nFIGURA A-2 \n \nFIGURA A-3",
+   "paginas": [
+    339,
+    340,
+    341
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "1.2.4",
+   "titulo_num": 6,
+   "capitulo": "1.2",
+   "encabezado": "",
+   "texto": "Los fregaderos deberán estar dispuestos de manera tal que permitan introducir las \npiernas bajo los aparatos. \n\n \n\n \nLa profundidad libre desde el frente del fregadero hasta el sifón de descarga deberá ser de \n0.305 metros mínimos. \nEl tope del fregadero deberá quedar a una altura máxima de 0.85 metros. \nLas válvulas de control del agua deberán ser protegidas mediante aislantes térmicos. \nFIGURA A-4 \n \n \n \n \n \n \n\n \n\n \nFIGURA A-5",
+   "paginas": [
+    341,
+    342,
+    343
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "1.2.5",
+   "titulo_num": 6,
+   "capitulo": "1.2",
+   "encabezado": "Las neveras, lavadoras, lavaplatos, etc",
+   "texto": "Las neveras, lavadoras, lavaplatos, etc.; deben colocarse sobre un suplemento \n(banco) a una altura mínima de 0.30 metros. \nFIGURA A-6",
+   "paginas": [
+    343,
+    344
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "1.3",
+   "titulo_num": 6,
+   "capitulo": "1.3",
+   "encabezado": "DORMITORIO",
+   "texto": "DORMITORIO.  \nLa superficie mínima de los dormitorios deberá permitir a las personas con limitación en \nsilla de ruedas, desplazarse fácilmente a todos los espacios de los mismos. Los restantes \ncomponentes del dormitorio deberán ajustarse a los requerimientos físicos de estas \npersonas. \n\n \n\n \nFIGURA A-7",
+   "paginas": [
+    344,
+    345
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "1.3.1",
+   "titulo_num": 6,
+   "capitulo": "1.3",
+   "encabezado": "",
+   "texto": "Si las puertas de los armarios abren hacia fuera, es necesario disponer de un \nespacio frontal de por lo menos 1.40 metros para que se puedan abrirse las dos puertas. \n\n \n\n \nSi las puertas son de correderas o plegables el espacio frontal puede ser de 1.10 metros. \nEn caso de que haya cajones, deberán estar situados a una altura de 0.40 metros a 1.30 \nmetros, con un fondo de 0.30 metros. \nFIGURA 8-A",
+   "paginas": [
+    345,
+    346
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  },
+  {
+   "id": "1.4",
+   "titulo_num": 6,
+   "capitulo": "1.4",
+   "encabezado": "BAÑOS",
+   "texto": "BAÑOS. \nTodas las instalaciones sanitarias deberán ajustarse a las recomendaciones que se han \npuesto en la parte referente a edificaciones oficiales o privadas del presente Título. En caso \nde sufrir variaciones por los requerimientos específicos de diseño que plantea la vivienda, \néstas deberán garantizar siempre el desarrollo adecuado de las actividades y funciones de \nlas personas con limitación. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \nFIGURA A-9",
+   "paginas": [
+    346,
+    347,
+    348
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 5,
+   "num_conflicto": true
+  }
+ ]
+}

@@ -1,0 +1,1900 @@
+{
+ "volumen": 4,
+ "sigla": null,
+ "nombre_volumen": "Recomendaciones para Instalaciones Mecánicas en Edificaciones",
+ "titulo": 7,
+ "nombre": "Refrigeración",
+ "fuente_pdf": "MIVHED-Recomendaciones-para-Instalaciones-Mecanicas-en-Edificaciones-Vol-IV.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "7.1": "GENERALIDADES",
+  "7.2": "REQUISITOS DEL SISTEMA",
+  "7.3": "CLASIFICACIÓN DE LOS SISTEMAS DE REFRIGERACIÓN",
+  "7.4": "REQUISITOS DE APLICACIÓN DEL SISTEMA",
+  "7.5": "SALA DE MÁQUINAS, REQUISITOS GENERALES",
+  "7.6": "SALA DE MÁQUINAS, REQUISITOS ESPECIALES",
+  "7.7": "TUBERÍAS DE REFRIGERANTE",
+  "7.8": "PRUEBA DE CAMPO",
+  "7.9": "PRUEBAS PERIÓDICAS"
+ },
+ "clausulas": [
+  {
+   "id": "7.1.1",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "ÁMBITO DE APLICACIÓN",
+   "texto": "ÁMBITO DE APLICACIÓN. Este capítulo regirá el diseño, instalación, \nconstrucción y reparación de sistemas de refrigeración que vaporizan y licúan \nun fluido durante el ciclo de refrigeración. El diseño y la instalación de tuberías \nde refrigerante, incluidos los recipientes a presión y los dispositivos de alivio \nde presión, se ajustarán a este código. Los sistemas de almacenamiento de re-\nfrigerante y otros componentes instalados permanentemente se considerarán \nparte del sistema de refrigeración al que están unidos.",
+   "paginas": [
+    271
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.2",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "EQUIPOS Y APARATOS CONSTRUIDOS EN FÁBRICA",
+   "texto": "EQUIPOS Y APARATOS CONSTRUIDOS EN FÁBRICA. Los equipos y \naparatos autónomos y etiquetados, fabricados en fábrica, deberán someterse \na ensayo de acuerdo con las normas UL 207, UL 412, UL 471, UL 1995, UL/CSA \n60335-2-40 o UL 60335-2-89. Se considerará que dichos equipos y aparatos \ncumplen los requisitos de diseño, fabricación y ensayo en fábrica de este có-\ndigo si se instalan de acuerdo con su listado y las instrucciones del fabricante. \n\n\nSe considera que dichos equipos y aparatos cumplen los requisitos de diseño, \nfabricación y pruebas de fábrica de este código si se instalan de acuerdo con su \nlistado y las instrucciones del fabricante.",
+   "paginas": [
+    271,
+    272
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.3",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "PROTECCIÓN",
+   "texto": "PROTECCIÓN. Cualquier parte de un sistema de refrigeración que esté \nsujeta a daños físicos deberá protegerse de una manera aprobada.",
+   "paginas": [
+    272
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.4",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "CONEXIÓN DE AGUA",
+   "texto": "CONEXIÓN DE AGUA. Las conexiones de suministro y descarga de agua \nasociadas con los sistemas de refrigeración deberán realizarse de acuerdo con \nel Código de Diseño y Construcción de Edificaciones en la República Domini-\ncana.",
+   "paginas": [
+    272
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.5",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "CONEXIÓN DE GAS COMBUSTIBLE",
+   "texto": "CONEXIÓN DE GAS COMBUSTIBLE. Los dispositivos, equipos y apa-\nratos de gas combustible utilizados con sistemas de refrigeración se instalarán \nde acuerdo con el Código de Diseño y Construcción de Edificaciones en la Re-\npública Dominicana.",
+   "paginas": [
+    272
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.6",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Los sistemas de refrigeración deberán cumplir con \nlos requisitos de este código y, excepto en lo modificado por este código, con \nASHRAE 15. Los sistemas de refrigeración de amoníaco deberán cumplir con \neste código y, salvo modificación por este código, con ASHRAE 15 y IIAR 2.",
+   "paginas": [
+    272
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASHRAE"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.7",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "MANTENIMIENTO",
+   "texto": "MANTENIMIENTO. Los sistemas mecánicos de refrigeración se man-\ntendrán en condiciones adecuadas de funcionamiento, libres de acumulacio-\nnes de aceite, suciedad, residuos, corrosión excesiva, otros residuos y fugas.",
+   "paginas": [
+    272
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.8",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "CAMBIO DE TIPO DE REFRIGERANTE",
+   "texto": "CAMBIO DE TIPO DE REFRIGERANTE. El tipo de refrigerante en los \nsistemas de refrigeración que tengan un circuito de refrigerante que contenga \nmás de 99,8 kg (220 libras) de refrigerante del Grupo A1 o 13,6 kg (30 libras) \nde refrigerante de cualquier otro grupo no se cambiará sin notificación previa \nal funcionario del código y el cumplimiento de las disposiciones aplicables del \ncódigo para el nuevo tipo de refrigerante.",
+   "paginas": [
+    272
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.9",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "DESCARGA DE REFRIGERANTE",
+   "texto": "DESCARGA DE REFRIGERANTE. La notificación de descarga de refrige-\nrante se realizará de acuerdo con el Reglamento Para la Seguridad y Protección \nContra Incendios (R-032).",
+   "paginas": [
+    272,
+    273
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.10",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "TAPONES DE CIERRE DE LOS PUERTOS DE ACCESO",
+   "texto": "TAPONES DE CIERRE DE LOS PUERTOS DE ACCESO. Los orificios de \nacceso al circuito de refrigerante situados en el exterior deberán estar provistos \nde tapones de cierre a prueba de manipulaciones o deberán estar asegurados \nde otro modo para impedir el acceso no autorizado.\nEXCEPCIÓN: Esta sección no se aplicará a los puertos de acceso al circuito de \nrefrigerante en equipos instalados en zonas controladas, como en tejados con \ntrampillas o puertas de acceso cerradas.",
+   "paginas": [
+    273
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.2.1",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. La clasificación del sistema, los refrigerantes permiti-\ndos, la cantidad máxima, los requisitos de envolvente, las limitaciones de ubi-\ncación y los requisitos de prueba de presión de campo se determinarán de la \nsiguiente manera:\n1.  Determine la clasificación del sistema de refrigeración, de acuerdo con la \nSección 7.3.3.\n2.  Determine la clasificación del refrigerante de acuerdo con la Sección 7.3.1.\n3.  Determine la cantidad máxima permitida de refrigerante de acuerdo con la \nSección 7.4, en función del tipo de refrigerante, la clasificación del sistema y la \nocupación.\n4.  Determine los requisitos de cerramiento del sistema de acuerdo con la Sec-\nción 7.4.\n\n\n5.  La ubicación e instalación de equipos y aparatos frigoríficos estará sujeta a \nlas limitaciones del título 2.\n6.  Los equipos y aparatos montados sobre el terreno que no hayan sido pro-\nbados en fábrica deberán someterse a una prueba de presión de conformidad \ncon la sección 7.8.",
+   "paginas": [
+    273,
+    274
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.2.2",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "REFRIGERANTES",
+   "texto": "REFRIGERANTES. El refrigerante será el que el equipo o aparato fue di-\nseñado para utilizar o convertido para utilizar. Los refrigerantes no identificados \nen la tabla 7.3.1 deberán ser aprobados antes de su uso.",
+   "paginas": [
+    274
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.2.2.1",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "MEZCLA",
+   "texto": "MEZCLA. Los refrigerantes, incluidas las mezclas de refrigerantes, con \ndiferentes designaciones en ASHRAE 34 no se mezclarán en un sistema.\nExcepción: Se permite la adición de un segundo refrigerante cuando lo permi-\nta el fabricante del equipo o aparato para mejorar el retorno de aceite a bajas \ntemperaturas. El refrigerante y la cantidad añadida deberán ajustarse a las ins-\ntrucciones del fabricante.",
+   "paginas": [
+    274
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASHRAE"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.2.2.2",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "PUREZA",
+   "texto": "PUREZA. Los refrigerantes utilizados en los sistemas de refrigeración \ndeberán ser refrigerantes nuevos, recuperados o regenerados de conformidad \ncon la Sección 7.2.2.2.1, 7.2.2.2.2 o 7.2.2.2.3. Cuando así lo exija el propietario \ndel equipo o aparato o el responsable del código, el instalador deberá presentar \nuna declaración firmada de que el refrigerante utilizado cumple los requisitos \nde la Sección 7.2.2.2.1, 7.2.2.2.2 o 7.2.2.2.3.\nEXCEPCIÓN: El refrigerante utilizado deberá cumplir las especificaciones de \npureza establecidas por el fabricante del equipo o aparato en el que se utilice \ndicho refrigerante cuando dichas especificaciones son diferentes de las especi-\nficadas en las Secciones 7.2.2.2.1, 7.2.2.2.2 y 7.2.2.2.3.",
+   "paginas": [
+    274
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.2.2.2.1",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "REFRIGERANTES NUEVOS",
+   "texto": "REFRIGERANTES NUEVOS. Los refrigerantes deberán tener el grado \nde pureza especificado por el fabricante del equipo o aparato.",
+   "paginas": [
+    274
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.2.2.2.2",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "REFRIGERANTES RECUPERADOS",
+   "texto": "REFRIGERANTES RECUPERADOS. Los refrigerantes que se recupe-\nren de los sistemas de refrigeración y aire acondicionado no se reutilizarán en \notro sistema que no sea aquel del que se recuperaron y en otros sistemas del \nmismo propietario. Los refrigerantes recuperados se filtrarán y secarán antes \nde su reutilización. Los refrigerantes recuperados que muestren signos claros \nde contaminación no se reutilizarán a menos que se recuperen de conformidad \ncon el apartado 7.2.2.2.3.",
+   "paginas": [
+    274,
+    275
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.2.2.2.3",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "REFRIGERANTES REUTILIZADOS",
+   "texto": "REFRIGERANTES REUTILIZADOS. Los refrigerantes usados no se \nreutilizarán en los equipos o aparatos de otro propietario a menos que se com-\npruebe que cumplen los requisitos de pureza del AHRI 700. Los refrigerantes \ncontaminados no se utilizarán a menos que se recuperen y se compruebe que \ncumplen los requisitos de pureza del AHRI 700.",
+   "paginas": [
+    275
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.2.3",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "PROTECCIÓN DE LOS PUERTOS DE ACCESO",
+   "texto": "PROTECCIÓN DE LOS PUERTOS DE ACCESO. Los puertos de acceso \nde refrigerante se protegerán de acuerdo con la Sección 7.1.10, siempre que se \nañada o recupere refrigerante de los sistemas de refrigeración o aire acondicio-\nnado.",
+   "paginas": [
+    275
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.3.1",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "CLASIFICACIÓN DE LOS REFRIGERANTES",
+   "texto": "CLASIFICACIÓN DE LOS REFRIGERANTES. Los refrigerantes se clasifica-\nrán con arreglo a la norma ASHRAE 34, tal como se indica en la tabla 7.3.1.\nTABLA 7.3.1 CLASIFICACIÓN DEL REFRIGERANTE, CANTIDAD Y OEL\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPara el SI: 1 libra = 0,454 kg, 1 pie cúbico = 0,0283 m3 .\n1. Los grados de peligro son para la salud, el fuego y la reactividad, respec-\ntivamente, de acuerdo con NFPA 704.\n2. Se permite la reducción a 1-0-0 si un análisis satisfactorio para el res-\nponsable del código muestra que la concentración máxima en caso de ro-\ntura o pérdida total de carga de refrigerante no superaría la IDLH, teniendo \nen cuenta tanto la cantidad de refrigerante como el volumen de la sala.\n3. Para instalaciones totalmente exteriores, utilizar 3-1-0.\n4. Sustancia agotadora de la capa de ozono de clase I; prohibida para \ninstalaciones nuevas.\n5. Límite de exposición profesional basado en el PEL de la OSHA, el TLV-\nTWA de la ACGIH, el WEEL de la AIHA o un valor coherente sobre la base de \nla media ponderada en el tiempo (TWA) (a menos que se indique C para el \nlímite máximo) para una jornada de 8 h/d y 40 h/semana.\n6. La clasificación de inflamabilidad ASHRAE Standard 34 para este refrige-\nrante es 2L, que es una subclase de la Clase 2.",
+   "paginas": [
+    275,
+    276,
+    277,
+    278,
+    279,
+    280
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASHRAE",
+     "NFPA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.3.2",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "CLASIFICACIÓN DE LA OCUPACIÓN",
+   "texto": "CLASIFICACIÓN DE LA OCUPACIÓN. Las ubicaciones de los sistemas de \nrefrigeración se describen mediante clasificaciones de ocupación que tienen en \ncuenta la capacidad de las personas para responder a la exposición potencial a los \nrefrigerantes. Cuando los equipos o aparatos, que no sean tuberías, estén situa-\ndos fuera de un edificio y a menos de 6096 mm (20 pies) de cualquier abertura del \nedificio, dichos equipos o aparatos se regirán por la clasificación de ocupación del \nedificio. Las clasificaciones de ocupación se definirán como sigue:\n1.  La ocupación institucional es la parte de un local de la que los ocupantes no \npueden salir fácilmente sin la ayuda de otras personas porque están incapaci-\ntados, debilitados o confinados. Las ocupaciones institucionales incluyen, en-\ntre otros, hospitales, residencias de ancianos, asilos y espacios que contienen \nceldas cerradas.\n2.  Los locales de pública concurrencia son aquellos en los que se reúne un gran \nnúmero de personas y cuyos ocupantes no pueden desalojar rápidamente el \nespacio. Los locales de pública concurrencia incluyen, entre otros, auditorios, \nsalones de baile, aulas, depósitos de pasajeros, restaurantes y teatros.\n3.  La ocupación residencial es la parte de un local que proporciona a sus ocu-\npantes instalaciones completas para vivir de forma independiente, incluidas \ninstalaciones permanentes para vivir, dormir, comer, cocinar y asearse. Las \nocupaciones residenciales incluyen, entre otros, dormitorios, hoteles, aparta-\nmentos de varias unidades y residencias privadas.\n4.  La ocupación comercial es la parte de los locales donde las personas realizan \ntransacciones comerciales, reciben servicios personales o compran alimentos \ny otros bienes. Las ocupaciones comerciales incluyen, entre otras, edificios de \noficinas y profesionales, mercados (pero no grandes ocupaciones mercantiles) \ny áreas de trabajo o almacenamiento que no se califican como ocupaciones \nindustriales.\n5. La gran ocupación mercantil es aquella parte del local en la que se reúnen \n\n\nmás de 100 personas en niveles superiores o inferiores al de la calle para com-\nprar mercancías personales.\n6.  La ocupación industrial es la parte de los locales que no está abierta al pú-\nblico, en la que el acceso de las personas autorizadas está controlado, y que se \nutiliza para fabricar, procesar o almacenar mercancías como productos quími-\ncos, alimentos, hielo, carne o petróleo.\n7.  La ocupación mixta se produce cuando dos o más ocupaciones están situa-\ndas dentro del mismo edificio. Cuando cada ocupación esté aislada del resto \ndel edificio por paredes, suelos y techos herméticos y por puertas de cierre au-\ntomático, los requisitos para cada ocupación se aplicarán a su parte del edificio. \nCuando las distintas ocupaciones no estén aisladas de este modo, la ocupación \nque tenga los requisitos más estrictos será la que rija.",
+   "paginas": [
+    280,
+    281,
+    282
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.3.3",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "CLASIFICACIÓN DEL SISTEMA",
+   "texto": "CLASIFICACIÓN DEL SISTEMA. Los sistemas de refrigeración se cla-\nsificarán según el grado de probabilidad de que el refrigerante fugado de una \nconexión, junta o componente defectuoso pueda entrar en una zona ocupada. \nLa distinción se basa en el diseño básico o la ubicación de los componentes.",
+   "paginas": [
+    282
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.3.3.1",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "SISTEMAS DE BAJA PROBABILIDAD",
+   "texto": "SISTEMAS DE BAJA PROBABILIDAD. Los sistemas de pulverización \nabierta doblemente indirectos, los sistemas cerrados indirectos y los sistemas \ncerrados con ventilación indirecta se clasificarán como sistemas de baja proba-\nbilidad, siempre que todas las tuberías y accesorios que contengan refrigerante \nestén aislados cuando se superen las cantidades de la tabla 7.3.1.",
+   "paginas": [
+    282
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.3.3.2",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "SISTEMAS DE ALTA PROBABILIDAD",
+   "texto": "SISTEMAS DE ALTA PROBABILIDAD. Los sistemas directos y los sis-\ntemas indirectos de pulverización abierta se clasificarán como sistemas de alta \nprobabilidad.\nEXCEPCIÓN: No se exigirá que un sistema indirecto de pulverización abierta \nse clasifique como sistema de alta probabilidad si la presión del refrigerante se-\ncundario es en todo momento (funcionamiento y espera) superior a la presión \ndel refrigerante.",
+   "paginas": [
+    282,
+    283
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.1",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. La clasificación del refrigerante, la ocupación y el sis-\ntema citados en esta sección se determinarán de conformidad con las seccio-\nnes 7.3.1, 7.3.2 y 7.3.3, respectivamente.",
+   "paginas": [
+    283
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.2",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "SALA DE MÁQUINAS",
+   "texto": "SALA DE MÁQUINAS. Salvo lo dispuesto en los apartados 7.4.2.1 y \n7.4.2.2, todos los componentes que contengan el refrigerante deberán estar \nsituados en el exterior o en una sala de máquinas cuando la cantidad de re-\nfrigerante en un circuito independiente de un sistema supere las cantidades \nindicadas en la tabla 7.3.1. Para las mezclas de refrigerantes que no figuren en \nla tabla 7.3.1, se aplicará el mismo requisito cuando la cantidad para cualquier \ncomponente de la mezcla supere la indicada en la tabla 7.3.1 para dicho com-\nponente. Este requisito también se aplicará cuando la cantidad combinada de \nlos componentes de la mezcla supere un límite de 69.100 partes por millón \n(ppm) en volumen. Las salas de máquinas exigidas por esta sección se cons-\ntruirán y mantendrán de conformidad con la sección 7.5 para los refrigerantes \nde los grupos A1 y B1 y de conformidad con las secciones 7.5 y 7.6 para los \nrefrigerantes de los grupos A2, B2, A3 y B3.\nEXCEPCIONES:\n1. No se requieren salas de máquinas para los equipos y aparatos listados que \nno contengan más de 3 kg (6,6 libras) de refrigerante, independientemente de \nla clasificación de seguridad del refrigerante, cuando se instalen de acuerdo con \nel listado del equipo o aparato y las instrucciones de instalación del fabricante \ndel equipo o aparato.\n2. Se permiten tuberías conformes con la Sección 7.7 en otras ubicaciones para \nconectar los componentes instalados en una sala de máquinas con los instala-\ndos en el exterior.",
+   "paginas": [
+    283
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.2.1",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "OCUPACIONES INSTITUCIONALES",
+   "texto": "OCUPACIONES INSTITUCIONALES. Las cantidades indicadas en la \ntabla 7.3.1 se reducirán en un 50 por ciento para todas las áreas de ocupacio-\n\n\nnes institucionales, excepto cocinas, laboratorios y morgues. El total de todos \nlos refrigerantes de los grupos A2, B2, A3 y B3 no superará las 250 kg (550 \nlibras) en las zonas ocupadas o salas de máquinas.",
+   "paginas": [
+    283,
+    284
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.2.2",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "LOCALES INDUSTRIALES Y CÁMARAS FRIGORÍFICAS",
+   "texto": "LOCALES INDUSTRIALES Y CÁMARAS FRIGORÍFICAS. Esta sección \nse aplica únicamente a las ocupaciones industriales y a las cámaras frigoríficas \npara fabricación, preparación de alimentos y bebidas, despiece de carne, otros \nprocesos y almacenamiento. Las salas de máquinas no son necesarias cuando \nse cumplen todas las condiciones siguientes:\n1.  El espacio que contiene la maquinaria está separado de otras ocupaciones \nmediante una construcción estanca con puertas herméticas.\n2.  El acceso está restringido al personal autorizado.\n3. La superficie de suelo por ocupante no será inferior a 9,3 m2 (100 pies cua-\ndrados) cuando la maquinaria esté situada en plantas con salidas a más de \n2012 mm (6,6 pies) del suelo. Cuando se disponga de salida directa al exterior \no a salidas aprobadas del edificio, no se aplicará la superficie mínima de suelo.\n4.  Los detectores de refrigerante están instalados como se requiere para las \nsalas de máquinas de acuerdo con la Sección 7.5.3.\n5.  Las superficies con temperaturas superiores a 427°C (800°F) y las llamas \nabiertas no están presentes cuando se utiliza cualquier refrigerante de los gru-\npos A2, B2, A3 o B3 (véase la sección 7.4.3.4).\n6.  T odos los equipos y aparatos eléctricos se ajustan a los requisitos de clasi-\nficación de lugares peligrosos de la Clase 1, División 2, de la NFPA 70 cuando \nla cantidad de cualquier refrigerante de los grupos A2, B2, A3 o B3, distinto del \namoníaco, en un único circuito independiente supere el 25 por ciento del límite \ninferior de inflamabilidad (LFL) en caso de liberación al espacio.\n\n\n7.  T odas las piezas que contengan refrigerante en sistemas que superen los \n100 caballos de fuerza (CV) (74,6 kW) de potencia motriz, excepto los evapo-\nradores utilizados para refrigeración o deshumidificación; los condensadores \nutilizados para calefacción; las válvulas de control y de alivio de presión para \ncualquiera de ellos; y las tuberías de conexión, se ubicarán al aire libre o en una \nsala de máquinas.",
+   "paginas": [
+    284,
+    285
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NFPA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.3",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "RESTRICCIONES DE REFRIGERANTE",
+   "texto": "RESTRICCIONES DE REFRIGERANTE. Las aplicaciones, las cantidades \nmáximas y el uso de refrigerantes estarán restringidos de conformidad con los \napartados 7.4.3.1 a 7.4.3.4.",
+   "paginas": [
+    285
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.3.1",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "AIRE ACONDICIONADO PARA CONFORT HUMANO",
+   "texto": "AIRE ACONDICIONADO PARA CONFORT HUMANO. En lugares \nque no sean industriales, en los que la cantidad en un solo circuito indepen-\ndiente no supere la cantidad de la tabla 7.3.1, no se utilizarán refrigerantes de \nlos grupos B1, B2 y B3 en sistemas de alta probabilidad para el aire acondicio-\nnado destinado al confort de las personas.",
+   "paginas": [
+    285
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.3.2",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "OCUPACIONES NO INDUSTRIALES",
+   "texto": "OCUPACIONES NO INDUSTRIALES. Los refrigerantes de los grupos \nA2 y B2 no se utilizarán en sistemas de alta probabilidad en los que la canti-\ndad de refrigerante en cualquier circuito de refrigerante independiente supere \nla cantidad indicada en la tabla 7.4.3.2. Los refrigerantes de los grupos A3 y B3 \nno se utilizarán excepto cuando estén aprobados.\nEXCEPCIÓN: Esta sección no se aplica a los laboratorios en los que la superfi-\ncie de suelo por ocupante no sea inferior a 9,3 m2 (100 pies cuadrados).\nTABLA 7.4.3.2 CANTIDADES MÁXIMAS ADMISIBLES DE REFRIGERANTES\n\n\n\nPara el SI: 1 libra = 0,454 kg.",
+   "paginas": [
+    285,
+    286
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.3.3",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "TODAS LAS OCUPACIONES",
+   "texto": "TODAS LAS OCUPACIONES. El total de todos los refrigerantes de los \ngrupos A2, B2, A3 y B3 distintos del R-717, amoníaco, no superará los 499 kg \n(1.100 libras), excepto cuando esté aprobado.",
+   "paginas": [
+    286
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.3.4",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "PROTECCIÓN CONTRA LA DESCOMPOSICIÓN DEL REFRIGE-\nRANTE. Cuando se utilice cualquier dispositivo que tenga una llama abierta \no una temperatura de superficie superior a 427 °C (800 °F) en una sala que \ncontenga más de 3 kg (6,6 libras) de refrigerante en un único circuito indepen-\ndiente, se deberá instalar una campana y un sistema de escape de acuerdo con \nla Sección 5.10. Dicho sistema de escape deberá evacuar los productos de la \ncombustión al exterior.\nEXCEPCIÓN: No se exigirá campana ni sistema de extracción cuando se dé \nalguna de las siguientes circunstancias:\n1. El refrigerante es R-717, R-718 o R-744.\n2. El aire de combustión se canaliza desde el exterior de forma que se evite la \ncombustión del refrigerante fugado.\n3. Se utiliza un detector de refrigerante para detener la combustión en caso de \nfuga de refrigerante (véanse los apartados 7.5.3 y 7.5.5).",
+   "paginas": [
+    286
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.4",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "CÁLCULOS DE VOLUMEN",
+   "texto": "CÁLCULOS DE VOLUMEN. Los cálculos de volumen se ajustarán a lo \ndispuesto en los apartados 7.4.4.1 a 7.4.4.3.",
+   "paginas": [
+    286
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.4.1",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "ESPACIOS NO COMUNICANTES",
+   "texto": "ESPACIOS NO COMUNICANTES. Cuando las partes de una instala-\nción que contengan refrigerante estén situadas en uno o varios espacios que \nno se comuniquen a través de aberturas permanentes o conductos de cale-\nfacción, ventilación y aire acondicionado, se utilizará el volumen del espacio \nocupado cerrado más pequeño para determinar la cantidad admisible de refri-\ngerante en la instalación.",
+   "paginas": [
+    286
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.4.2",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "ESPACIOS COMUNICANTES",
+   "texto": "ESPACIOS COMUNICANTES. Cuando un evaporador o condensador \nesté situado en un sistema de conductos de aire, se utilizará el volumen del es-\npacio ocupado cerrado más pequeño al que dé servicio el sistema de conductos \npara determinar la cantidad máxima admisible de refrigerante en el sistema.\nEXCEPCIÓN: Si el flujo de aire a cualquier espacio cerrado no puede reducirse \npor debajo de un cuarto de su máximo, se utilizará todo el espacio servido por \nel sistema de conductos de aire para determinar la cantidad máxima admisible \nde refrigerante en el sistema.",
+   "paginas": [
+    286,
+    287
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.4.3",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "PLENUMS",
+   "texto": "PLENUMS. Cuando el espacio situado por encima de un falso techo \nsea continuo y forme parte del sistema de impulsión o retorno de aire, este \nespacio se incluirá en el cálculo del volumen del espacio cerrado.",
+   "paginas": [
+    287
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.1",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "DISEÑO Y CONSTRUCCIÓN",
+   "texto": "DISEÑO Y CONSTRUCCIÓN. Las salas de máquinas se diseñarán y \nconstruirán de acuerdo con el Código de Diseño y Construcción de Edificacio-\nnes en la República Dominicanay esta sección.",
+   "paginas": [
+    287
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.2",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "APERTURAS",
+   "texto": "APERTURAS. Los conductos y manipuladores de aire de la sala de má-\nquinas que funcionen a una presión inferior a la de la sala se sellarán para evitar \nque cualquier fuga de refrigerante entre en la corriente de aire.",
+   "paginas": [
+    287
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.3",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "DETECTOR DE REFRIGERANTE",
+   "texto": "DETECTOR DE REFRIGERANTE. Se instalarán detectores de refrigeran-\nte en las salas de máquinas, tal como exige el Reglamento Para la Seguridad y \nProtección Contra Incendios (R-032).",
+   "paginas": [
+    287
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.4",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "PRUEBAS",
+   "texto": "PRUEBAS. Se realizarán pruebas periódicas del sistema de ventilación \nmecánica de acuerdo con las especificaciones del fabricante y según lo requiera \nel funcionario del código.",
+   "paginas": [
+    287
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.5",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "APARATOS DE COMBUSTIÓN",
+   "texto": "APARATOS DE COMBUSTIÓN. No se instalarán en un cuarto de má-\nquinas aparatos y equipos de combustión que tengan llamas abiertas y que \nutilicen aire de combustión procedente del cuarto de máquinas.\nEXCEPCIONES:\n1. Cuando el refrigerante es dióxido de carbono o agua.\n2. No se prohibirá la instalación de aparatos de combustión en la misma sala de \nmáquinas con equipos o aparatos que contengan refrigerante cuando el aire de \ncombustión se conduzca desde el exterior de la sala de máquinas y se selle de \nmanera que se impida la entrada de cualquier fuga de refrigerante en la cámara \nde combustión, o cuando se utilice un detector de vapor de refrigerante para \ninterrumpir automáticamente el proceso de combustión en caso de fuga de \nrefrigerante.",
+   "paginas": [
+    287,
+    288
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.6",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "VENTILACIÓN",
+   "texto": "VENTILACIÓN. Las salas de máquinas estarán ventiladas mecánicamen-\nte al exterior.\nEXCEPCIÓN: Cuando un sistema de refrigeración esté situado en el exterior \na más de 6096 mm (20 pies) de cualquier abertura del edificio y esté cerrado \npor un ático, un cobertizo u otra estructura abierta, deberá preverse ventilación \nnatural o mecánica. La ubicación de las aberturas se basará en la densidad rela-\ntiva del refrigerante con respecto al aire. La sección transversal de apertura libre \npara la ventilación de la sala de máquinas no será inferior a:\n(Ecuación 7-1)\ndonde:\nF = El área de apertura libre en m2 (pies cuadrados).\nG = La masa de refrigerante en kg (libras) en el sistema más grande, \ncualquiera de cuyas partes se encuentre en la sala de máquinas.",
+   "paginas": [
+    288
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.6.1",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "LUGAR DE VERTIDO",
+   "texto": "LUGAR DE VERTIDO. La descarga del aire se efectuará al exterior de \nconformidad con el título 5. El escape de los sistemas de ventilación mecánica \nse descargará a no menos de 6096 mm (20 pies) de una línea de propiedad o \naberturas en edificios.",
+   "paginas": [
+    288,
+    289
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.6.2",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "AIRE DE REPOSICIÓN",
+   "texto": "AIRE DE REPOSICIÓN. Se tomarán medidas para que el aire de reposi-\nción sustituya al de extracción. Las aberturas para el aire de reposición estarán \nsituadas de manera que se evite la entrada de aire de escape. Los conductos de \nalimentación y evacuación de la sala de máquinas no darán servicio a ninguna \notra zona, se construirán de conformidad con el título 5 y se cubrirán con una \npantalla resistente a la corrosión de malla no inferior a 6,4 mm (1/4 pulgada).",
+   "paginas": [
+    289
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.6.3",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "VELOCIDAD DE VENTILACIÓN",
+   "texto": "VELOCIDAD DE VENTILACIÓN. Para los sistemas que no sean de \namoníaco, los sistemas de ventilación mecánica deberán ser capaces de eva-\ncuar la cantidad mínima de aire tanto en condiciones normales de funciona-\nmiento como en condiciones de emergencia, tal como exigen los apartados \n7.5.6.3.1 y 7.5.6.3.2. El caudal mínimo de ventilación de emergencia requerido \npara el amoníaco será de 30 renovaciones de aire por hora, de conformidad con \nIIAR2. Se permitirán ventiladores múltiples o de varias velocidades para produ-\ncir el caudal de ventilación de emergencia y obtener un caudal de aire reducido \npara la ventilación normal.",
+   "paginas": [
+    289
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.6.3.1",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "CANTIDAD: VENTILACIÓN NORMAL",
+   "texto": "CANTIDAD: VENTILACIÓN NORMAL. En condiciones de ocupa-\nción, el sistema de ventilación mecánica deberá evacuar la mayor de las si-\nguientes sustancias:\n1.  No menos de 0,5 cfm por pie cuadrado (0,0025 m3 /s - m2 ) de superficie de \nla sala de máquinas o 20 cfm (0,009 m3 /s) por persona.\n2. Un volumen necesario para limitar el aumento de la temperatura ambiente a \n10 °C (18 °F) teniendo en cuenta el efecto de calentamiento ambiental de toda \nla maquinaria de la sala.",
+   "paginas": [
+    289
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.6.3.2",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "CANTIDAD: CONDICIONES DE EMERGENCIA",
+   "texto": "CANTIDAD: CONDICIONES DE EMERGENCIA. Al activarse el de-\ntector de refrigerante requerido en la Sección 7.5.3, el sistema de ventilación \nmecánica deberá extraer el aire de la sala de máquinas en la siguiente cantidad:\n(Ecuación 7-2)\ndonde:\nQ = El caudal de aire en pies cúbicos por minuto (m3 /s).\nG = La masa de refrigerante de diseño en libras (kg) en el sistema más \ngrande, cualquiera de cuyas partes se encuentre en la sala de máquinas.",
+   "paginas": [
+    289,
+    290
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.7",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "TERMINACIÓN DE LOS DISPOSITIVOS DE DESCARGA",
+   "texto": "TERMINACIÓN DE LOS DISPOSITIVOS DE DESCARGA. Los disposi-\ntivos de alivio de presión, los tapones fusibles y los sistemas de purga situados \ndentro de la sala de máquinas terminarán fuera de la estructura en un lugar \nsituado a no menos de 4572 mm (15 pies) por encima del nivel del terreno \ncolindante y a no menos de 6096 mm (20 pies) de cualquier ventana, abertura \nde ventilación o salida.",
+   "paginas": [
+    290
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.8",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "VERTIDO DE AMONÍACO",
+   "texto": "VERTIDO DE AMONÍACO. Las válvulas limitadoras de presión de los \nsistemas de amoníaco se descargarán de conformidad con la norma ASHRAE \n15.",
+   "paginas": [
+    290
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASHRAE"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.9",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "SISTEMA DE CONTROL DE PRESIÓN DE EMERGENCIA",
+   "texto": "SISTEMA DE CONTROL DE PRESIÓN DE EMERGENCIA. Los siste-\nmas de refrigeración instalados permanentemente que contengan más de 3 \nkg (6,6 libras) de refrigerante inflamable, tóxico o altamente tóxico o amoníaco \ndeberán estar provistos de un sistema de control de presión de emergencia de \nacuerdo con el Reglamento Para la Seguridad y Protección Contra Incen-\ndios (R-032).",
+   "paginas": [
+    290,
+    291
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.6.1",
+   "titulo_num": 7,
+   "capitulo": "7.6",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Cuando así lo exija el apartado 7.4.2, la sala de má-\nquinas deberá cumplir los requisitos de este apartado, además de los requisi-\ntos del apartado 7.5.",
+   "paginas": [
+    291
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.6.2",
+   "titulo_num": 7,
+   "capitulo": "7.6",
+   "encabezado": "TEMPERATURA ELEVADA",
+   "texto": "TEMPERATURA ELEVADA. No deberá haber ningún dispositivo abierto \nque produzca llamas ni ninguna superficie caliente de funcionamiento conti-\nnuo que supere los 427 °C (800 °F) instalada permanentemente en la sala.",
+   "paginas": [
+    291
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.6.3",
+   "titulo_num": 7,
+   "capitulo": "7.6",
+   "encabezado": "VENTILACIÓN DE LA SALA DE AMONÍACO",
+   "texto": "VENTILACIÓN DE LA SALA DE AMONÍACO. Los sistemas de ventila-\nción de las salas de máquinas de amoníaco funcionarán de forma continua a la \nvelocidad de ventilación especificada en el apartado 7.5.6.3.\nEXCEPCIONES:\n1. Salas de máquinas equipadas con un detector de vapores que ponga en mar-\ncha automáticamente el sistema de ventilación a la velocidad de ventilación es-\npecificada en la Sección 7.5.6.3, y que active una alarma a un nivel de detección \nque no supere las 1.000 ppm.\n2. Salas de máquinas conformes a los requisitos de clasificación de lugares pe-\nligrosos de Clase 1, División 2, de la NFPA 70.",
+   "paginas": [
+    291
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NFPA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.6.4",
+   "titulo_num": 7,
+   "capitulo": "7.6",
+   "encabezado": "REFRIGERANTES INFLAMABLES",
+   "texto": "REFRIGERANTES INFLAMABLES. Cuando se utilicen refrigerantes de \nlos grupos A2, A3, B2 y B3, la sala de máquinas deberá ajustarse a los requisitos \nde clasificación de lugares peligrosos de la Clase 1, División 2, de la NFPA 70.\nEXCEPCIÓN: Las salas de máquinas de amoníaco provistas de ventilación de \nconformidad con la sección 7.6.3.",
+   "paginas": [
+    291
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NFPA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.6.5",
+   "titulo_num": 7,
+   "capitulo": "7.6",
+   "encabezado": "MANDOS A DISTANCIA",
+   "texto": "MANDOS A DISTANCIA. El control a distancia de los equipos y aparatos \nmecánicos situados en la sala de máquinas deberá cumplir lo dispuesto en los \napartados 7.6.5.1 y 7.6.5.2.",
+   "paginas": [
+    291
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.6.5.1",
+   "titulo_num": 7,
+   "capitulo": "7.6",
+   "encabezado": "CIERRE DE EMERGENCIA DEL SISTEMA DE REFRIGERACIÓN",
+   "texto": "CIERRE DE EMERGENCIA DEL SISTEMA DE REFRIGERACIÓN. Un \n\n\ninterruptor claramente identificado del tipo de cristal rompible o con una cu-\nbierta aprobada a prueba de manipulaciones proporcionará control sólo de \napagado de los compresores de refrigerante, bombas de refrigerante y válvulas \nde refrigerante automáticas normalmente cerradas situadas en la sala de má-\nquinas. Además, este equipo se desconectará automáticamente siempre que la \nconcentración de vapor de refrigerante en la sala de máquinas supere el límite \nsuperior de detección del detector de vapor o el 25 por ciento del LIE, el valor \nque sea inferior.",
+   "paginas": [
+    291,
+    292
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.6.5.2",
+   "titulo_num": 7,
+   "capitulo": "7.6",
+   "encabezado": "SISTEMA DE VENTILACIÓN",
+   "texto": "SISTEMA DE VENTILACIÓN. Los ventiladores de ventilación de la sala \nde máquinas se controlarán únicamente mediante un interruptor claramente \nidentificado del tipo de cristal rompible o con una cubierta aprobada a prueba \nde manipulaciones.",
+   "paginas": [
+    292
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.6.6",
+   "titulo_num": 7,
+   "capitulo": "7.6",
+   "encabezado": "SEÑALES Y ETIQUETAS DE EMERGENCIA",
+   "texto": "SEÑALES Y ETIQUETAS DE EMERGENCIA. Las unidades y sistemas de \nrefrigeración deberán estar provistos de señales, gráficos y etiquetas de emer-\ngencia aprobados de acuerdo con el Código de Diseño y Construcción de Edifi-\ncaciones en la República Dominicana.",
+   "paginas": [
+    292
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.1",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. El diseño de las tuberías de refrigerante deberá ser \nconforme a ASME B31.5. Las tuberías de refrigerante se instalarán, probarán y \npondrán en funcionamiento de conformidad con este capítulo.",
+   "paginas": [
+    292
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.2",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "UBICACIÓN DE LAS TUBERÍAS",
+   "texto": "UBICACIÓN DE LAS TUBERÍAS. Las tuberías de refrigerante que atra-\nviesen un espacio abierto que permita el paso en cualquier edificio no deberán \nestar a menos de 2210 mm (7 pies y 3 pulgadas) por encima del suelo, a menos \nque las tuberías estén situadas contra el techo de dicho espacio. Las tuberías \nfrigoríficas no deberán colocarse en ningún ascensor, montaplatos u otro hue-\nco que contenga un objeto móvil, ni en ningún hueco que tenga aberturas a \nviviendas o a medios de salida. Las tuberías frigoríficas no se instalarán en es-\ncaleras públicas cerradas, rellanos de escaleras o vías de evacuación.",
+   "paginas": [
+    292
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.2.1",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "TUBERÍAS EN SUELOS DE HORMIGÓN",
+   "texto": "TUBERÍAS EN SUELOS DE HORMIGÓN. Las tuberías de refrigerante \ninstaladas en suelos de hormigón deberán ir encapsuladas en conductos. Las \ntuberías se aislarán y soportarán para evitar vibraciones perjudiciales, tensio-\nnes y corrosión.",
+   "paginas": [
+    292,
+    293
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.2.2",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "PENETRACIONES DE REFRIGERANTE",
+   "texto": "PENETRACIONES DE REFRIGERANTE. Las tuberías de refrigerante \nno deben penetrar en suelos, techos o tejados.\nEXCEPCIONES:\n1. Penetraciones que conectan el sótano y el primer piso.\n2. Penetraciones que conectan el último piso y un ático de maquinaria o una \ninstalación en el tejado.\n3. Penetraciones que conecten pisos adyacentes servidos por el sistema de re-\nfrigeración.\n4. Penetraciones por tuberías en un sistema directo en el que la cantidad de \nrefrigerante no supere la tabla 7.3.1 para el espacio ocupado más pequeño por \nel que pasen las tuberías.\n5. En los locales que no sean industriales y en los que la cantidad de refrigerante \nsupere la tabla 7.3.1 para el espacio más pequeño, las penetraciones para tube-\nrías que conecten piezas separadas de equipos que sean:\na) Cerrado por un conducto o pozo aprobado, estanco al gas y resistente al \nfuego, con aberturas a los pisos a los que da servicio el sistema de refrigeración.\nb) Situados en el exterior del edificio donde se ventila al exterior o al espacio \nservido por el sistema y no se utilizan como conducto de aire, patio cerrado o \nespacio similar.",
+   "paginas": [
+    293
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.3",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "CERRAMIENTOS DE TUBERÍAS",
+   "texto": "CERRAMIENTOS DE TUBERÍAS. Se instalarán cajas o conductos metáli-\n\n\ncos rígidos o flexibles para las tuberías de cobre recocido blando que se utilicen \npara las tuberías de refrigerante instaladas en las instalaciones y que no con-\ntengan refrigerantes de los grupos A1 o B1. No se requerirán envolventes para \nlas conexiones entre las unidades condensadoras y la(s) caja(s) elevadora(s) \nmás cercana(s), siempre que dichas conexiones no superen los 1829 mm (6 \npies) de longitud.",
+   "paginas": [
+    293,
+    294
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.4",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "CONDENSACIÓN",
+   "texto": "CONDENSACIÓN. Las tuberías y accesorios de refrigeración, las tube-\nrías y accesorios de salmuera que, durante el funcionamiento normal, alcancen \nuna temperatura superficial inferior al punto de rocío del aire circundante, y \nestén situados en espacios o zonas donde la condensación pueda causar un \nriesgo para la seguridad de los ocupantes del edificio, la estructura, el equipo \neléctrico o cualquier otro equipo o aparato, deberán estar protegidos de una \nmanera aprobada para evitar tales daños.",
+   "paginas": [
+    294
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.5",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "MATERIALES PARA TUBERÍAS Y CONDUCTOS DE REFRIGERANTE",
+   "texto": "MATERIALES PARA TUBERÍAS Y CONDUCTOS DE REFRIGERANTE.\nLos materiales de las tuberías serán los establecidos en los apartados 7.7.5.1 \na 7.7.5.5.",
+   "paginas": [
+    294
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.5.1",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "TUBERÍA DE ACERO",
+   "texto": "TUBERÍA DE ACERO. Para las tuberías de líquido refrigerante de los \ngrupos A2, A3, B2 o B3 se utilizará tubería de acero al carbono con un espesor \nde pared no inferior a Schedule 80 para tamaños de 38 mm (1,5 pulgadas) y \nmenores. Se utilizará tubería de acero al carbono con un espesor de pared no \ninferior a Schedule 40 para las líneas de líquido refrigerante de los Grupos A1 o \nB1 de 152 mm (6 pulgadas) y menores, las líneas de líquido refrigerante de los \nGrupos A2, A3, B2 o B3 de tamaños de 51 mm (2 pulgadas) a 152 mm (6 pulga-\ndas) y todas las líneas de succión y descarga de refrigerante de 152 mm (6 pul-\ngadas) y menores. La tubería de acero Tipo F no deberá utilizarse para líneas de \nrefrigerante que tengan una temperatura de operación menor a -29°C (-20°F).",
+   "paginas": [
+    294
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.5.2",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "TUBERÍAS DE COBRE, LATÓN Y ALEACIONES DE COBRE",
+   "texto": "TUBERÍAS DE COBRE, LATÓN Y ALEACIONES DE COBRE.\nLas tuberías estándar de hierro, latón, cobre y aleaciones de cobre (con un por-\n\n\ncentaje de cobre no inferior al 80 %) se ajustarán a las normas ASTM B42 y \nASTM B43.",
+   "paginas": [
+    294,
+    295
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.5.3",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "TUBO DE COBRE",
+   "texto": "TUBO DE COBRE. El tubo de cobre utilizado para las tuberías frigorífi-\ncas instaladas en las instalaciones será un tubo de cobre sin soldadura de tipo \nACR (duro o recocido) conforme a la norma ASTM B280. Cuando se apruebe, \nel tubo de cobre para tuberías de refrigerante erigidas en las instalaciones será \ntubo de cobre sin soldadura de Tipo K, L o M (estirado o recocido) conforme \na ASTM B88. No se utilizará tubo de cobre recocido templado en tamaños su-\nperiores a un tamaño nominal de 51 mm (2 pulgadas). No se utilizarán juntas \nmecánicas en los tubos de cobre recocido de dimensiones superiores a 22,2 \nmm (7/8 pulgadas) de diámetro exterior.",
+   "paginas": [
+    295
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.5.4",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "UNIONES DE TUBOS DE COBRE",
+   "texto": "UNIONES DE TUBOS DE COBRE. Las uniones de tubos de cobre uti-\nlizadas en sistemas de refrigeración que contengan refrigerantes de los grupos \nA2, A3, B2 o B3 deberán soldarse. No se utilizarán juntas soldadas en estos \nsistemas de refrigeración.",
+   "paginas": [
+    295
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.5.5",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "TUBO DE ALUMINIO",
+   "texto": "TUBO DE ALUMINIO. Los tubos de aluminio tipo 3003-0 con acceso-\nrios de alta presión no se utilizarán con cloruro de metilo y otros refrigerantes \nconocidos por atacar el aluminio.",
+   "paginas": [
+    295
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.6",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "",
+   "texto": "JUNTAS Y PIEZAS QUE CONTENGAN REFRIGERANTE EN CONDUC-\nTOS DE AIRE. Las juntas y todas las piezas que contengan refrigerante de un \nsistema de refrigeración situado en un conducto de aire de un sistema de aire \nacondicionado que transporte aire acondicionado hacia y desde un espacio \nocupado por personas deberán estar construidas para soportar, sin fugas, una \npresión del 150 por ciento de la presión de diseño o del ajuste del dispositivo \nde alivio de presión, el mayor de los dos.",
+   "paginas": [
+    295
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.7",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "EXPOSICIÓN DE JUNTAS DE TUBERÍAS DE REFRIGERANTE",
+   "texto": "EXPOSICIÓN DE JUNTAS DE TUBERÍAS DE REFRIGERANTE. Las jun-\ntas de las tuberías de refrigerante instaladas en las instalaciones se expondrán \n\n\npara su inspección visual antes de ser cubiertas o cerradas.",
+   "paginas": [
+    295,
+    296
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.8",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "VÁLVULAS DE CIERRE",
+   "texto": "VÁLVULAS DE CIERRE. Los sistemas que contengan más de 3 kg (6,6 \nlibras) de un refrigerante en sistemas que utilicen compresores de desplaza-\nmiento positivo deberán tener válvulas de cierre instaladas como se indica a \ncontinuación:\n1. A la entrada de cada compresor, unidad compresora o unidad condensadora.\n2.  En la salida de descarga de cada compresor, unidad de compresión o unidad \nde condensación y de cada recipiente de líquido.\nEXCEPCIONES:\n1. Sistemas que tienen una función de bombeo de refrigerante capaz de alma-\ncenar toda la carga de refrigerante en un receptor o intercambiador de calor.\n2. Sistemas equipados con dispositivos para el bombeo del refrigerante me-\ndiante equipos de recuperación portátiles o instalados permanentemente.\n3. Sistemas autónomos.",
+   "paginas": [
+    296
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.8.1",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "RECEPTORES DE LÍQUIDOS",
+   "texto": "RECEPTORES DE LÍQUIDOS. Los sistemas que contengan 45 kg (100 \nlibras) o más de refrigerante, distintos de los sistemas que utilicen compreso-\nres de desplazamiento no positivo, deberán tener válvulas de cierre, además de \nlas exigidas en el apartado 7.7.8, en cada entrada de cada recipiente de líquido. \nNo se exigirán válvulas de cierre en la entrada de un recipiente en una unidad \ncondensadora, ni en la entrada de un recipiente que forme parte integrante del \ncondensador.",
+   "paginas": [
+    296
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.8.2",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "TUBOS DE COBRE",
+   "texto": "TUBOS DE COBRE. Las válvulas de cierre utilizadas con tubo de co-\nbre recocido blando o tubo de cobre estirado duro 22,2 mm (7/8 pulgadas) de \ndiámetro exterior de tamaño estándar o inferior se montarán de forma segura, \n\n\nindependientemente de las fijaciones o soportes del tubo.",
+   "paginas": [
+    296,
+    297
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.7.8.3",
+   "titulo_num": 7,
+   "capitulo": "7.7",
+   "encabezado": "IDENTIFICACIÓN",
+   "texto": "IDENTIFICACIÓN. Las válvulas de cierre se identificarán cuando su fi-\nnalidad no sea evidente. No se utilizarán números para etiquetar las válvulas, a \nmenos que cerca de ellas se encuentre una clave con los números.",
+   "paginas": [
+    297
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.8.1",
+   "titulo_num": 7,
+   "capitulo": "7.8",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. T odas las piezas que contengan refrigerante de cada \nsistema que se instale en las instalaciones, excepto los compresores, conden-\nsadores, recipientes, evaporadores, dispositivos de seguridad, manómetros y \nmecanismos de control que figuren en la lista y hayan sido probados en fábrica, \ndeberán someterse a prueba y demostrar su estanqueidad después de la insta-\nlación completa y antes de su funcionamiento. Las pruebas incluirán los lados \nde alta y baja presión de cada sistema a una presión no inferior a la menor de \nlas presiones de diseño o al ajuste del dispositivo o dispositivos de descarga \nde presión. Las presiones de diseño para las pruebas serán las indicadas en la \nplaca de características de la unidad de condensación, el compresor o el grupo \ncompresor, tal como exige ASHRAE 15.\nEXCEPCIONES:\n1. T anques de almacenamiento de gas a granel que no están conectados per-\nmanentemente a un sistema de refrigeración.\n2. Los sistemas instalados en las instalaciones con tuberías de cobre que no \nsuperen 15,8 mm (5/8 pulgadas) de diámetro exterior, con el grosor de pa-\nred requerido por ASHRAE 15, se probarán de acuerdo con la Sección 7.8.1, o \nmediante refrigerante cargado en el sistema a la presión de vapor saturado del \nrefrigerante a 21 °C (70 °F) o superior.\n3. Los sistemas de carga limitada equipados con un dispositivo de descarga de \npresión, instalados en las instalaciones, se someterán a ensayo a una presión \nno inferior a una vez y media la presión de ajuste del dispositivo de descarga. Si",
+   "paginas": [
+    297
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASHRAE"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.8.1.1",
+   "titulo_num": 7,
+   "capitulo": "7.8",
+   "encabezado": "COMPRESOR DE REFUERZO",
+   "texto": "COMPRESOR DE REFUERZO. Cuando un compresor se utilice como \ncompresor de refuerzo para obtener una presión intermedia y descargue en el \nlado de aspiración de otro compresor, el compresor de refuerzo se considerará \nparte del lado de baja, siempre que esté protegido por un dispositivo limitador \nde presión.",
+   "paginas": [
+    298
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.8.1.2",
+   "titulo_num": 7,
+   "capitulo": "7.8",
+   "encabezado": "",
+   "texto": "COMPRESORES CENTRÍFUGOS/DE DESPLAZAMIENTO NO PO-\nSITIVO. En los sistemas de ensayo sobre el terreno que utilicen compresores \ncentrífugos u otros compresores de desplazamiento no positivo, todo el siste-\nma se considerará como la presión del lado de baja a efectos del ensayo sobre \nel terreno.",
+   "paginas": [
+    298
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.8.2",
+   "titulo_num": 7,
+   "capitulo": "7.8",
+   "encabezado": "GASES DE ENSAYO",
+   "texto": "GASES DE ENSAYO. Los ensayos se realizarán con un gas inerte seco que \nincluya, entre otros, nitrógeno y dióxido de carbono. No se utilizará oxígeno, \naire, gases combustibles ni mezclas que contengan dichos gases.\nEXCEPCIÓN: Se permite el uso de aire para probar sistemas R-717, amoníaco, \nsiempre que se evacuen posteriormente antes de cargarlos con refrigerante.",
+   "paginas": [
+    298
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.8.3",
+   "titulo_num": 7,
+   "capitulo": "7.8",
+   "encabezado": "APARATO DE ENSAYO",
+   "texto": "APARATO DE ENSAYO. Los medios utilizados para generar la presión \nde ensayo deberán tener un dispositivo limitador o un dispositivo reductor de \npresión y un manómetro en el lado de salida.",
+   "paginas": [
+    298
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.8.4",
+   "titulo_num": 7,
+   "capitulo": "7.8",
+   "encabezado": "DECLARACIÓN",
+   "texto": "DECLARACIÓN. Se proporcionará un certificado de prueba para todos \nlos sistemas que contengan 25 kg (55 libras) o más de refrigerante. El certifica-\ndo indicará el nombre del refrigerante y la presión de prueba aplicada al lado de \nalta y al lado de baja del sistema. El certificado de prueba deberá ir firmado por \nel instalador y formar parte del registro público.",
+   "paginas": [
+    298,
+    299
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.9.1",
+   "titulo_num": 7,
+   "capitulo": "7.9",
+   "encabezado": "PRUEBAS OBLIGATORIAS",
+   "texto": "PRUEBAS OBLIGATORIAS. Los siguientes dispositivos y sistemas de \nemergencia deberán ser probados periódicamente de acuerdo con las instruc-\nciones del fabricante y según lo requerido por el funcionario del código:\n1.  Sistemas de tratamiento y combustión en antorcha.\n2.  Válvulas y accesorios necesarios para el funcionamiento de las cajas de \ncontrol de refrigeración de emergencia.\n3.  Ventiladores y equipos asociados destinados a hacer funcionar sistemas de \nventilación de emergencia.\n4.  Sistemas de detección y alarma.\n\n\nTÍTULO.8\nSISTEMAS SOLARES",
+   "paginas": [
+    299,
+    300
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  }
+ ]
+}

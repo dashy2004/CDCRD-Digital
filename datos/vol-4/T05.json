@@ -1,0 +1,2850 @@
+{
+ "volumen": 4,
+ "sigla": null,
+ "nombre_volumen": "Recomendaciones para Instalaciones Mecánicas en Edificaciones",
+ "titulo": 5,
+ "nombre": "Sistemas de Conductos",
+ "fuente_pdf": "MIVHED-Recomendaciones-para-Instalaciones-Mecanicas-en-Edificaciones-Vol-IV.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "5.1": "GENERALIDADES",
+  "5.2": "PLÉNUMS",
+  "5.3": "CONSTRUCCIÓN E INSTALACIÓN DE CONDUCTOS",
+  "5.4": "AISLAMIENTO",
+  "5.5": "FILTROS DE AIRE",
+  "5.6": "CONTROL DE LOS SISTEMAS DE DETECCIÓN DE HUMOS",
+  "5.7": "CONDUCTOS Y ABERTURAS DE TRANSFERENCIA",
+  "5.8": "EQUILIBRIO"
+ },
+ "clausulas": [
+  {
+   "id": "5.1.1",
+   "titulo_num": 5,
+   "capitulo": "5.1",
+   "encabezado": "ÁMBITO DE APLICACIÓN",
+   "texto": "ÁMBITO DE APLICACIÓN. Los sistemas de conductos utilizados para el \nmovimiento del aire en los sistemas de aire acondicionado, calefacción, venti-\nlación y extracción se ajustarán a las disposiciones del presente capítulo, salvo \nque se especifique lo contrario en los capítulos 5 y 7.\nEXCEPCIÓN: Los conductos que descarguen material combustible directa-\nmente en cualquier cámara de combustión deberán cumplir los requisitos de \nla norma NFPA 82.",
+   "paginas": [
+    217
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NFPA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.1.2",
+   "titulo_num": 5,
+   "capitulo": "5.1",
+   "encabezado": "MOVIMIENTO DE AIRE EN LOS ELEMENTOS DE SALIDA",
+   "texto": "MOVIMIENTO DE AIRE EN LOS ELEMENTOS DE SALIDA. Los pasillos \nno servirán como conductos de suministro, retorno, extracción, alivio o venti-\nlación de aire.\nEXCEPCIONES:\n1. Se permitirá la utilización de un pasillo como fuente de aire de reposición \npara los sistemas de extracción de los locales que den directamente a dichos \npasillos, incluidos los aseos, cuartos de baño, vestuarios, salas de fumadores \ny armarios de conserjes, siempre que cada uno de dichos pasillos reciba direc-\ntamente aire del exterior en una proporción superior a la del aire de reposición \ntomado del pasillo.\n\n\n2. Cuando estén situados dentro de una unidad de vivienda, no se prohibirá el \nuso de pasillos para la conducción del aire de retorno.\n3. Se permite el uso de pasillos para la conducción del aire de retorno en los \nespacios de los inquilinos con una superficie igual o inferior a 93 m2.\n4. Movimiento accidental de aire desde habitaciones presurizadas dentro de \ninstalaciones sanitarias, siempre que el pasillo no sea la fuente principal de su-\nministro o retorno a la habitación.",
+   "paginas": [
+    217,
+    218
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.1.2.1",
+   "titulo_num": 5,
+   "capitulo": "5.1",
+   "encabezado": "TECHO DE PASILLO",
+   "texto": "TECHO DE PASILLO. Se permite el uso del espacio entre el techo del \npasillo y la estructura del suelo o techo superior como cámara de aire de retor-\nno para una o más de las siguientes condiciones:\n1.  No es necesario que el pasillo tenga una construcción resistente al fuego.\n2. El pasillo está separado del pleno por una construcción resistente al fuego.\n3.  El sistema de tratamiento de aire que da servicio al pasillo se apaga al acti-\nvarse los detectores de humo de la unidad de tratamiento de aire exigidos por \neste código.\n4.  El sistema de tratamiento de aire que da servicio al pasillo se desconecta al \ndetectar el flujo de agua de los rociadores cuando todo el edificio está equipado \ncon un sistema automático de rociadores.\n5.  El espacio entre el techo del pasillo y el suelo o la estructura del techo por \nencima del pasillo se utiliza como componente de un sistema técnico de con-\ntrol de humos homologado.",
+   "paginas": [
+    218
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.1.3",
+   "titulo_num": 5,
+   "capitulo": "5.1",
+   "encabezado": "SALIDAS",
+   "texto": "SALIDAS. Los equipos y conductos para la ventilación de los recintos de \nsalida deberán cumplir uno de los siguientes puntos:\n\n\n1. T ales equipos y conductos deberán estar ubicados en el exterior del edificio y \ndeberán estar conectados directamente al recinto de salida mediante conduc-\ntos encerrados en la construcción como lo requiere el Código de Construcción \nde Florida, Construcción para pozos.\n2.  Cuando dicho equipo y conductos estén ubicados dentro del recinto de sa-\nlida, el aire de admisión se tomará directamente del exterior y el aire de escape \nse descargará directamente al exterior, o dicho aire se transportará a través de \nconductos encerrados en la construcción, tal como lo exige el Código de Cons-\ntrucción de Florida, Construcción para pozos.\n3.  Cuando estén ubicados dentro del edificio, dichos equipos y conductos de-\nberán estar separados del resto del edificio, incluidos otros equipos mecánicos, \ncon una construcción conforme a lo exigido por el Código de Construcción de \nFlorida, Construcción para pozos.\nEn cada caso, las aberturas en la construcción con clasificación de resistencia \nal fuego se limitarán a las necesarias para el mantenimiento y el funcionamien-\nto y estarán protegidas por dispositivos de cierre automático con clasificación \nde resistencia al fuego de acuerdo con el Código de Construcción de Florida, \nConstrucción para Protecciones de aberturas en paredes de cerramiento. Los \nsistemas de ventilación de los recintos de salida deben ser independientes de \notros sistemas de ventilación del edificio.",
+   "paginas": [
+    218,
+    219
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.1.4",
+   "titulo_num": 5,
+   "capitulo": "5.1",
+   "encabezado": "PREVENCIÓN DE LA CONTAMINACIÓN",
+   "texto": "PREVENCIÓN DE LA CONTAMINACIÓN. Los conductos de evacuación \nbajo presión positiva, las chimeneas y los respiraderos no se prolongarán ni \natravesarán conductos o cámaras.\nExcepciones:\n1. Sistemas de extracción situados en cámaras de aire de retorno de techo so-\nbre espacios en los que se permite una recirculación del 10 por ciento, de con-\nformidad con el punto 4 de la sección 3.3.2.1. Las juntas y conexiones de los \nconductos de extracción deberán cumplir lo dispuesto en la sección 5.3.9. Las \n\n\njuntas, uniones y conexiones de los conductos de evacuación deberán cumplir \nla Sección 5.3.9.\n2. Esta sección no se aplicará a las chimeneas y conductos de ventilación que \natraviesen cámaras de aire cuando dichos sistemas de ventilación cumplan uno \nde los siguientes requisitos:\na) El sistema de ventilación estará homologado para aplicaciones de presión \npositiva y se sellará de acuerdo con las instrucciones del fabricante de la ven-\ntilación.\nb) El sistema de ventilación se instalará de forma que los accesorios y las juntas \nentre secciones no se instalen en el espacio por encima del techo.\nc) El sistema de ventilación se instalará en un conducto o caja con juntas sella-\ndas que separen el interior del conducto o caja del espacio del techo.",
+   "paginas": [
+    219,
+    220
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.1.5",
+   "titulo_num": 5,
+   "capitulo": "5.1",
+   "encabezado": "ABERTURAS DE AIRE DE RETORNO",
+   "texto": "ABERTURAS DE AIRE DE RETORNO. Las aberturas de aire de retorno de \nlos sistemas de calefacción, ventilación y aire acondicionado deberán cumplir \ntodo lo siguiente:\n1.  Las aberturas no deben estar situadas a menos de 3048 mm (10 pies), me-\ndidos en cualquier dirección, de una cámara de combustión abierta o de una \ncampana extractora de otro aparato situado en la misma habitación o espacio.\n2.  El aire de retorno no se tomará de un lugar peligroso o insalubre ni de una \ncámara frigorífica, según se define en este código.\n3.  La cantidad de aire de retorno tomado de cualquier local o espacio no será \nsuperior al caudal de aire de impulsión suministrado a dicho local o espacio.\n4.  Las aberturas de retorno y transferencia se dimensionarán de acuerdo con \nlas instrucciones de instalación del fabricante del aparato o equipo, el Manual \n\n\nD de la ACCA o el diseño del profesional de diseño registrado.\n5. El aire de retorno tomado de una unidad de vivienda no se descargará en otra \nunidad de vivienda.\n6.  La toma de aire de retorno de un falso conducto no se realizará a través de \nuna conexión directa al lado de retorno de un horno de aire forzado. No se pro-\nhibirán las aberturas de transferencia en el cerramiento del semisótano.\n7.  El aire de retorno no se tomará de un armario, cuarto de aseo, cocina, garaje, \ncuarto de calderas, cuarto de calderas o desván no acondicionado.\n● EXCEPCIONES:\n1.  La toma de aire de retorno de una cocina no está prohibida cuando dichas \naberturas de aire de retorno sirvan a la cocina y estén situadas a no menos de \n3048 mm (10 pies) de los aparatos de cocción.\n2.  No se prohibirá que los sistemas de aire forzado dedicados que den servicio \núnicamente al garaje obtengan aire de retorno del garaje.\n3.  No está prohibido tomar aire de retorno de un armario cuando dicho aire \nde retorno tomado de los armarios sirva sólo al armario y pueda tomarse de \narmarios que no tengan un conducto de suministro dedicado. Cuando el aire \nde retorno se tome de un armario de menos de 2,8 m2, el aire de retorno no \nserá superior a 15 l/s (30 cfm), servirá únicamente al armario y no requerirá un \nconducto de suministro específico. Cuando el aire de retorno se tome de un ar-\nmario de menos de 2,8 m (30 pies cuadrados)2 ), la puerta del armario deberá \nestar rebajada un mínimo de 38 mm (1,5 pulgadas) o el armario deberá incluir \nuna puerta de lamas o una rejilla de transferencia con una superficie libre neta \nmínima de 194 cm (30 pulgadas cuadradas)2.",
+   "paginas": [
+    220,
+    221
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.1.6",
+   "titulo_num": 5,
+   "capitulo": "5.1",
+   "encabezado": "AIRE DE RETORNO EQUILIBRADO",
+   "texto": "AIRE DE RETORNO EQUILIBRADO. El aire de retorno restringido se \nproduce en los edificios cuando los retornos están situados en zonas centrales \n\n\ny las puertas interiores cerradas impiden el flujo de aire a la rejilla de retor-\nno o cuando los espacios del techo se utilizan como plénums de retorno y las \nparedes cortafuegos restringen el movimiento del aire de una parte a otra del \nplénum de retorno. T anto en los edificios residenciales como en los comercia-\nles se tomarán medidas para evitar los flujos de aire desequilibrados y los dife-\nrenciales de presión causados por el aire de retorno restringido. Las diferencias \nde presión a través de puertas cerradas cuando los retornos estén situados en \nel centro se limitarán a 0,01 pulgadas WC (2,5 pascales) o menos. Los diferen-\nciales de presión a través de paredes cortafuegos en cámaras de aire de espa-\ncios de techo se limitarán a 0,01 pulgadas WC (2,5 pascales) proporcionando \nvías de conductos de aire o vías de transferencia de aire desde la zona de alta \npresión a la zona de baja presión.\nEXCEPCIONES:\n1. Los conductos de transferencia pueden lograrlo aumentando la transferen-\ncia de retorno 1 1/2 veces el área de la sección transversal (pulgadas cuadra-\ndas) del conducto de suministro que entra en la habitación o espacio al que \nsirve y la puerta que tiene al menos un socavado sin restricciones de 1 pulgada \npara lograr un equilibrio adecuado del aire de retorno.\n2. Las rejillas de transferencia utilizarán 50 pulgadas cuadradas (de área de reji-\nlla) por 100 cfm (de aire de suministro) para dimensionar las rejillas de transfe-\nrencia a través de la pared y utilizando un rebaje sin restricciones de 1 pulgada \nen las puertas para lograr un equilibrio adecuado del aire de retorno.\n3. Sólo las habitaciones habitables deberán cumplir estos requisitos para un \nretorno de aire equilibrado adecuado, excluidos los cuartos de baño, armarios, \ntrasteros y lavanderías, salvo que se incluirá todo el aire de impulsión de la suite \nprincipal.",
+   "paginas": [
+    221,
+    222,
+    223
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.2.1",
+   "titulo_num": 5,
+   "capitulo": "5.2",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Las cámaras de aire de impulsión, retorno, extrac-\nción, descarga y ventilación se limitarán a los espacios de acceso no habitados, \nlas zonas situadas por encima del techo o por debajo del suelo, los áticos y las \nsalas de equipos mecánicos. Las cámaras impelentes se limitarán a una zona \nde incendio. Los sistemas de aire se canalizarán desde el límite del área de in-\ncendio directamente hasta el equipo de tratamiento de aire. No se instalarán \naparatos de combustión dentro de un plenum.",
+   "paginas": [
+    223
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.2.2",
+   "titulo_num": 5,
+   "capitulo": "5.2",
+   "encabezado": "CONSTRUCCIÓN",
+   "texto": "CONSTRUCCIÓN. Los materiales de construcción del cerramiento del \nplénum que estén expuestos al flujo de aire deberán cumplir con los requisitos \ndel Código de Diseño y Construcción de Edificaciones en la República Domi-\nnicana o dichos materiales deberán tener un índice de propagación de llama \nno superior a 25 y un índice de desarrollo de humo no superior a 50 cuando se \nensayen de acuerdo con ASTM E84 o UL 723.\nEl uso de placas de yeso para formar plénums se limitará a sistemas en los que \nlas temperaturas del aire no superen los 52°C (125°F) y las condiciones de di-\nseño del edificio y del sistema mecánico sean tales que la temperatura de la \nsuperficie de la placa de yeso se mantenga por encima de la temperatura del \npunto de rocío de la corriente de aire. Las cámaras de aire de suministro forma-\ndas por placas de yeso no se incorporarán en sistemas de tratamiento de aire \nque utilicen sistemas de enfriamiento evaporativo directo.",
+   "paginas": [
+    223
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.2.2.1",
+   "titulo_num": 5,
+   "capitulo": "5.2",
+   "encabezado": "MATERIALES EN EL INTERIOR DE CÁMARAS IMPELENTES",
+   "texto": "MATERIALES EN EL INTERIOR DE CÁMARAS IMPELENTES. Excep-\nto en los casos exigidos en los apartados 5.2.2.1.1 a 5.2.2.1.7, los materiales \nsituados en el interior de las cámaras impelentes deberán ser incombustibles \no estar catalogados y etiquetados con un índice de propagación de la llama no \nsuperior a 25 y un índice de desarrollo de humo no superior a 50 cuando se \nensayen de conformidad con ASTM E84 o UL 723.\nEXCEPCIONES:\n1. Los conductos rígidos y flexibles y los conectores se ajustarán a la Sección \n5.3.\n\n\n2. Los recubrimientos, revestimientos, cintas y conectores de conductos se \najustarán a las Secciones 5.3 y 5.4.\n3. Esta sección no se aplicará a los materiales expuestos en el interior de los \nplenums de las viviendas unifamiliares y bifamiliares.\n4. Esta sección no se aplicará a los detectores de humo.\n5. Materiales combustibles completamente encerrados dentro de uno de los \nsiguientes:\na) Conductos de rodadura o envolventes incombustibles continuos.\nb) Ensamblajes de paneles de yeso aprobados.\nc) Materiales listados y etiquetados para su instalación dentro de un plenum.\n6. Materiales en áreas de fabricación del Grupo H, División 5 y las áreas por \nencima y por debajo del área de fabricación que comparten una vía común de \nrecirculación de aire con el área de fabricación.",
+   "paginas": [
+    223,
+    224
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.2.1.1",
+   "titulo_num": 5,
+   "capitulo": "6.2",
+   "encabezado": "CABLEADO",
+   "texto": "CABLEADO. Los alambres y cables eléctricos combustibles y los ca-\nbles de fibra óptica expuestos dentro de una cámara impelente deberán estar \nlistados y etiquetados para tener una densidad óptica pico no superior a 0,50, \nuna densidad óptica media no superior a 0,15 y una distancia de propagación \nde la llama no superior a 1524 mm (5 pies) cuando se ensayen de acuerdo con \nla norma NFPA 262 o deberán instalarse en conductos metálicos o cables con \nrevestimiento metálico. La fibra óptica combustible y los conductos de comu-\nnicación expuestos dentro de una cámara impelente deberán estar listados y \netiquetados para tener una densidad óptica pico no superior a 0,5, una densi-\ndad óptica media no superior a 0,15 y una distancia de propagación de la llama \nno superior a 1524 mm (5 pies) cuando se ensayen de acuerdo con UL 2024. \nSolo se instalarán alambres y cables con clasificación plenum en conductos con \nclasificación plenum.",
+   "paginas": [
+    224
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NFPA",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": true
+  },
+  {
+   "id": "5.2.2.1.2",
+   "titulo_num": 5,
+   "capitulo": "5.2",
+   "encabezado": "TUBERÍAS DE ROCIADORES CONTRA INCENDIOS",
+   "texto": "TUBERÍAS DE ROCIADORES CONTRA INCENDIOS. Las tuberías \nde plástico para rociadores contra incendios expuestas dentro de una cámara \nimpelente se utilizarán únicamente en sistemas de tuberías húmedas y debe-\nrán estar listadas y etiquetadas para tener una densidad óptica pico no supe-\nrior a 0,50, una densidad óptica media no superior a 0,15 y una distancia de \npropagación de la llama no superior a 1524 mm (5 pies) cuando se ensayen de \nacuerdo con la norma UL 1887.",
+   "paginas": [
+    224,
+    225
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.2.2.1.3",
+   "titulo_num": 5,
+   "capitulo": "5.2",
+   "encabezado": "TUBERÍA NEUMÁTICA",
+   "texto": "TUBERÍA NEUMÁTICA. Los tubos neumáticos combustibles ex-\npuestos dentro de una cámara impelente deberán estar listados y etiquetados \npara tener una densidad óptica pico no superior a 0,50, una densidad óptica \nmedia no superior a 0,15 y una distancia de propagación de la llama no supe-\nrior a 1524 mm (5 pies) cuando se ensayen de acuerdo con UL 1820.",
+   "paginas": [
+    225
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.2.2.1.4",
+   "titulo_num": 5,
+   "capitulo": "5.2",
+   "encabezado": "EQUIPO ELÉCTRICO EN CÁMARAS IMPELENTES",
+   "texto": "EQUIPO ELÉCTRICO EN CÁMARAS IMPELENTES. El equipo eléc-\ntrico expuesto dentro de una cámara impelente deberá cumplir los apartados \n5.2.2.1.4.1 y 5.2.2.1.4.2.\n5.2.2.1.4.1 EQUIPOS EN ENVOLVENTES METÁLICOS. Se permitirán los \nequipos eléctricos con envolventes metálicas expuestas dentro de un plenum.\n5.2.2.1.4.2 EQUIPOS EN ENVOLVENTES COMBUSTIBLES. Los equipos \neléctricos con envolventes combustibles expuestos dentro de una cámara im-\npelente deberán estar listados y etiquetados para tal uso de acuerdo con la nor-\nma UL 2043.",
+   "paginas": [
+    225
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.2.2.1.5",
+   "titulo_num": 5,
+   "capitulo": "5.2",
+   "encabezado": "",
+   "texto": "PRODUCTOS DISCRETOS DE FONTANERÍA Y MECÁNICA EN \nCÁMARAS IMPELENTES. Cuando los productos y accesorios mecánicos y de \nfontanería discretos estén situados en una cámara impelente y tengan material \ncombustible expuesto, deberán estar homologados y etiquetados para dicho \nuso de acuerdo con la norma UL 2043.",
+   "paginas": [
+    225
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.2.2.1.6",
+   "titulo_num": 5,
+   "capitulo": "5.2",
+   "encabezado": "",
+   "texto": "ESPUMA PLÁSTICA EN CÁMARAS DE AIRE COMO ACABADO \nINTERIOR O GUARNECIDO INTERIOR. La espuma plástica en plénums uti-\nlizada como acabado interior de paredes o techos o como guarnecido interior \ndeberá presentar un índice de propagación de la llama de 25 o menos y un \níndice de desarrollo de humo de 50 o menos cuando se ensaye de acuerdo con \nASTM E84 o UL 723 con el grosor y la densidad máximos previstos para su uso, \ny deberá ensayarse de acuerdo con NFPA 286 y cumplir los criterios de acep-\ntación del Código de Diseño y Construcción de Edificaciones en la República \nDominicana.\nEXCEPCIONES:\n1. La espuma plástica en plénums utilizada como acabado interior de paredes o \ntechos o como guarnecido interior deberá presentar un índice de propagación \nde llama de 75 o inferior y un índice de desarrollo de humo de 450 o inferior \ncuando se ensaye de acuerdo con ASTM E84 o UL 723 en el espesor y densidad \nmáximos previstos para su uso, cuando esté separada del flujo de aire en el \nplénum por una barrera térmica que cumpla con el Código de Diseño y Cons-\ntrucción de Edificaciones en la República Dominicana.\n2. La espuma plástica en cámaras de aire utilizadas como acabado interior de \nparedes o techos o como guarnecido interior deberá presentar un índice de \npropagación de la llama igual o inferior a 75 y un índice envuelto en humo igual \no inferior a 450 cuando se ensaye de acuerdo con ASTM E84 o UL 723 con el \nespesor y la densidad máximos previstos para su uso, cuando esté separada del \nflujo de aire en la cámara de aire mediante acero resistente a la corrosión con \nun espesor de metal base no inferior a 0,4 mm (0,0160 pulgadas).\n3. La espuma plástica en cámaras de aire utilizadas como acabado interior de \nparedes o techos o como guarnecido interior deberá presentar un índice de \npropagación de la llama igual o inferior a 75 y un índice envuelto en humo igual \no inferior a 450 cuando se ensaye de acuerdo con ASTM E84 o UL 723 en el \nespesor y densidad máximos previstos para su uso, cuando esté separada del \nflujo de aire en la cámara de aire por un espesor no inferior a 25 mm (1 pulgada) \nde mampostería u hormigón.",
+   "paginas": [
+    225,
+    226
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM",
+     "NFPA",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.2.2.1.7",
+   "titulo_num": 5,
+   "capitulo": "5.2",
+   "encabezado": "TUBERÍAS Y CONDUCTOS DE PLÁSTICO",
+   "texto": "TUBERÍAS Y CONDUCTOS DE PLÁSTICO. Las tuberías de plástico \n\n\nutilizadas en sistemas de fontanería deberán estar catalogadas y etiquetadas \ncon un índice de propagación de la llama no superior a 25 y un índice de desa-\nrrollo de humo no superior a 50 cuando se ensayen de conformidad con ASTM \nE84 o UL 723.\nEXCEPCIÓN: T uberías y conductos plásticos de distribución de agua listados y \netiquetados de acuerdo con la norma UL 2846 como poseedores de una densi-\ndad óptica máxima no superior a 0,50, una densidad óptica media no superior \na 0,15 y una distancia de propagación de la llama no superior a 1524 mm (5 \npies), e instalados de acuerdo con su listado.",
+   "paginas": [
+    226,
+    227
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.2.2.1.8",
+   "titulo_num": 5,
+   "capitulo": "5.2",
+   "encabezado": "",
+   "texto": "AISLAMIENTO DE TUBERÍAS Y CONDUCTOS DENTRO DE CÁ-\nMARAS IMPELENTES. Los aislamientos de tuberías y conductos contenidos \nen cámaras de aire, incluidos los adhesivos aislantes, tendrán un índice de \npropagación de la llama no superior a 25 y un índice de desarrollo de humo \nno superior a 50 cuando se ensayen de conformidad con ASTM E84 o UL 723 \nutilizando los procedimientos de preparación y montaje de muestras de ASTM \nE2231. Los aislamientos de tuberías y conductos no deben arder, brillar, hu-\nmear ni desprender humo cuando se ensayan de acuerdo con ASTM C411 a \nla temperatura a la que están expuestos en servicio. La temperatura de ensayo \nno debe ser inferior a 121°C (250°F). Los aislamientos de tuberías y conductos \ndeberán estar listados y etiquetados. El aislamiento de tuberías y conductos no \nse utilizará para reducir los índices máximos de propagación de la llama y de \ndesarrollo de humo, excepto cuando la tubería o el conducto y su aislamiento, \nrevestimientos y adhesivos relacionados se ensayen como un conjunto com-\npuesto de acuerdo con la Sección 6.2.2.1.7.",
+   "paginas": [
+    227
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.2.3",
+   "titulo_num": 5,
+   "capitulo": "5.2",
+   "encabezado": "PLENUMS DE CAVIDAD DE MONTANTES Y VIGUETAS",
+   "texto": "PLENUMS DE CAVIDAD DE MONTANTES Y VIGUETAS. Las cavidades \nde las paredes con montantes y los espacios entre las vigas del suelo macizo \nque se utilicen como cámaras de aire deberán cumplir las siguientes condicio-\nnes:\n1.  Dichas cavidades o espacios no se utilizarán como plenum para el aire de \n\n\nimpulsión.\n2.  Dichas cavidades o espacios no formarán parte de un conjunto con clasifica-\nción de resistencia al fuego.\n3.  Los huecos de los montantes no deben transportar aire desde más de un \nnivel de piso.\n4.  Las cavidades de la pared de montantes y los plenos del espacio de la vigueta \ndeben cumplir con los requisitos de protección de la penetración del piso del \nCódigo de Construcción de Florida, Construcción.\n5. Las cavidades de las paredes de montantes y los espacios de viguetas deben \naislarse de los espacios ocultos adyacentes mediante un bloqueo contra incen-\ndios aprobado, tal como se requiere en el Código de Construcción de Florida, \nConstrucción.\n6.  Las cavidades de los montantes en las paredes exteriores de los cerramien-\ntos del edificio no se utilizarán como cámaras de aire.",
+   "paginas": [
+    227,
+    228
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.2.4",
+   "titulo_num": 5,
+   "capitulo": "5.2",
+   "encabezado": "PELIGRO DE INUNDACIÓN",
+   "texto": "PELIGRO DE INUNDACIÓN. En el caso de estructuras situadas en zo-\nnas con riesgo de inundación, los espacios de cámara impelente se situarán \npor encima de la elevación requerida por el Código de Diseño y Construcción \nde Edificaciones en la República Dominicana para servicios públicos y equipos \nauxiliares, o se diseñarán y construirán para evitar la entrada o acumulación de \nagua dentro de los espacios de cámara impelente durante inundaciones hasta \ndicha elevación. Si los espacios plenum están ubicados por debajo de la eleva-\nción requerida por el Código de Diseño y Construcción de Edificaciones en la \nRepública Dominicana para servicios públicos y equipos auxiliares, deberán ser \ncapaces de resistir cargas y esfuerzos hidrostáticos e hidrodinámicos, incluyen-\ndo los efectos de la flotabilidad, durante la ocurrencia de inundaciones hasta \ndicha elevación.",
+   "paginas": [
+    228
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.1",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Se diseñará e instalará un sistema de distribución de \n\n\naire para suministrar la distribución de aire requerida. La instalación de un sis-\ntema de distribución de aire no afectará a los requisitos de protección contra \nincendios especificados en el Código de Edificación de Florida, Edificación. Los \nconductos se construirán, arriostrarán, reforzarán e instalarán para proporcio-\nnar resistencia estructural y durabilidad.",
+   "paginas": [
+    228,
+    229
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.2",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "DIMENSIONAMIENTO DE CONDUCTOS",
+   "texto": "DIMENSIONAMIENTO DE CONDUCTOS. Los conductos instalados \nen el interior de una vivienda individual se dimensionarán de acuerdo con el \nManual D de la ACCA, las instrucciones de instalación del fabricante del apara-\nto u otros métodos aprobados. Los conductos instalados en el resto de edifi-\ncios se dimensionarán de acuerdo con el Manual de Fundamentos de ASHRAE \nu otro procedimiento de cálculo equivalente.",
+   "paginas": [
+    229
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASHRAE"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.3",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "CLASIFICACIÓN DE LOS CONDUCTOS",
+   "texto": "CLASIFICACIÓN DE LOS CONDUCTOS. Los conductos se clasificarán \nen función de la presión máxima de funcionamiento del conducto a presiones \npositivas o negativas de 0,5, 1,0, 2,0, 3,0, 4,0, 6,0 o 10,0 pulgadas (1 pulgada \nc.a. = 248,7 Pa) de columna de agua. La clasificación de presión de los conduc-\ntos será igual o superior a la presión de diseño de la distribución de aire en la \nque se utilicen los conductos.",
+   "paginas": [
+    229
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.4",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "CONDUCTOS METÁLICOS",
+   "texto": "CONDUCTOS METÁLICOS. Los conductos metálicos se construirán se-\ngún lo especificado en las Normas de construcción de conductos HVAC SMAC-\nNA - Metálicos y flexibles.\nEXCEPCIÓN: Los conductos instalados en el interior de viviendas unifamiliares \ndeberán tener un espesor mínimo según lo especificado en la tabla 5.3.4.",
+   "paginas": [
+    229
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.4.1",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "FIJACIONES MÍNIMAS",
+   "texto": "FIJACIONES MÍNIMAS. Los conductos metálicos redondos se fijarán \nmecánicamente mediante no menos de tres tornillos de chapa o remaches es-\npaciados por igual alrededor de la junta.\nEXCEPCIÓN: Cuando se realice una conexión de conducto que sea parcial-\nmente inaccesible, se colocarán tres tornillos o remaches equidistantes en la \nparte expuesta, de forma que se evite el efecto bisagra.",
+   "paginas": [
+    230
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.4.2",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "SOLAPA DEL CONDUCTO",
+   "texto": "SOLAPA DEL CONDUCTO. Las juntas de engarce para conductos me-\ntálicos redondos y ovalados se solaparán no menos de 25 mm (1 pulgada) y el \nextremo macho del conducto se extenderá dentro del conducto contiguo en la \ndirección del flujo de aire.",
+   "paginas": [
+    230,
+    231
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.5",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "CONDUCTOS NO METÁLICOS",
+   "texto": "CONDUCTOS NO METÁLICOS. Los conductos no metálicos se cons-\ntruirán con material de conducto de Clase 0 o Clase 1 y cumplirán la norma UL \n181. La construcción de conductos de fibra de vidrio deberá ajustarse a las nor-\nmas de construcción de conductos de fibra de vidrio de SMACNA o a las nor-\nmas de construcción de conductos de fibra de vidrio de NAIMA. La temperatura \ndel aire dentro de los conductos no metálicos no superará los 121°C (250°F).",
+   "paginas": [
+    231
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NAIMA",
+     "SMACNA",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.5.1",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "CONDUCTOS DE YESO",
+   "texto": "CONDUCTOS DE YESO. El uso de placas de yeso para formar conduc-\ntos de aire se limitará a los sistemas de aire de retorno en los que la tempera-\ntura del aire no supere los 52°C (125°F) y la temperatura de la superficie de la \nplaca de yeso se mantenga por encima de la temperatura del punto de rocío de \nla corriente de aire. Los conductos de aire de suministro formados por placas \nde yeso no se incorporarán en sistemas de tratamiento de aire que utilicen sis-\ntemas de enfriamiento evaporativo directo.",
+   "paginas": [
+    231
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.5.2",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "CONDUCTOS FENÓLICOS",
+   "texto": "CONDUCTOS FENÓLICOS. Los conductos fenólicos no metálicos se \nconstruirán de acuerdo con las Normas de Construcción de Conductos Fenó-\nlicos SMACNA.",
+   "paginas": [
+    231
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "SMACNA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.6",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "",
+   "texto": "CONDUCTOS DE AIRE FLEXIBLES Y CONECTORES DE AIRE FLEXI-\nBLES. Los conductos de aire flexibles, tanto metálicos como no metálicos, de-\nberán cumplir los apartados 5.3.6.1, 5.3.6.1.1, 5.3.6.3 y 5.3.6.4. Los conectores \nflexibles de aire, tanto metálicos como no metálicos, deberán cumplir lo dis-\npuesto en los apartados 5.3.6.2 a 5.3.6.4.",
+   "paginas": [
+    231
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.6.1",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "CONDUCTOS DE AIRE FLEXIBLES",
+   "texto": "CONDUCTOS DE AIRE FLEXIBLES. Los conductos de aire flexibles, \ntanto metálicos como no metálicos, se ensayarán de conformidad con la nor-\nma UL 181. Dichos conductos deberán estar catalogados y etiquetados como \n\n\nconductos de aire flexibles de Clase 0 o Clase 1 y deberán instalarse de confor-\nmidad con la Sección 2.4.1.",
+   "paginas": [
+    231,
+    232
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.6.1.1",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "LONGITUD DEL CONDUCTO",
+   "texto": "LONGITUD DEL CONDUCTO. La longitud de los conductos de aire \nflexibles no estará limitada.",
+   "paginas": [
+    232
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.6.2",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "CONECTORES DE AIRE FLEXIBLES",
+   "texto": "CONECTORES DE AIRE FLEXIBLES. Los conectores flexibles de aire, \ntanto metálicos como no metálicos, se ensayarán de acuerdo con la norma UL \n181. Dichos conectores deberán estar listados y etiquetados como conectores \nde aire flexibles de Clase 0 o Clase 1 y deberán instalarse de acuerdo con la \nSección 2.4.1.",
+   "paginas": [
+    232
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.6.2.1",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "LONGITUD DEL CONECTOR",
+   "texto": "LONGITUD DEL CONECTOR. La longitud de los conectores de aire \nflexibles se limitará a 4267 mm (14 pies).",
+   "paginas": [
+    232
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.6.2.2",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "LIMITACIONES DE PENETRACIÓN DEL CONECTOR",
+   "texto": "LIMITACIONES DE PENETRACIÓN DEL CONECTOR.\nLos conectores de aire flexibles no atravesarán ninguna pared, suelo o techo.",
+   "paginas": [
+    232
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.6.3",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "TEMPERATURA DEL AIRE",
+   "texto": "TEMPERATURA DEL AIRE. La temperatura de diseño del aire a trans-\nportar en conductos de aire flexibles y conectores de aire flexibles será inferior \na 121°C (250°F).",
+   "paginas": [
+    232
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.6.4",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "",
+   "texto": "CONDUCTO DE AIRE FLEXIBLE Y ESPACIO LIBRE DEL CONECTOR \nDE AIRE. Los conductos de aire flexibles y los conectores de aire se instalarán \ncon una distancia mínima a un aparato, tal como se especifica en las instruccio-\nnes de instalación del fabricante del aparato.",
+   "paginas": [
+    232
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.7",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "PENETRACIONES DE CONDUCTOS RÍGIDOS",
+   "texto": "PENETRACIONES DE CONDUCTOS RÍGIDOS. Las penetraciones del \nsistema de conductos en paredes, suelos, techos y tejados, así como las aber-\nturas de transferencia de aire en dichos componentes del edificio, deberán es-\ntar protegidas según lo exigido en la Sección 6.7. Los conductos de un garaje \nprivado que atraviesen una pared o techo que separe una vivienda de un garaje \nprivado deben ser continuos, estar construidos con chapa de acero de un espe-\n\n\nsor no inferior a 0,4712 mm (0,0187 pulgadas) (calibre n. º 26) o fibra de vidrio \nrígida con revestimiento de lámina y no deben tener aberturas en el garaje. No \nse requieren compuertas cortafuegos y cortahumo en los conductos que atra-\nviesan la pared o el techo que separa una vivienda de un garaje privado, excepto \ncuando lo exija el título 7 del Código de Construcción de Florida, Construcción.",
+   "paginas": [
+    232,
+    233
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.8",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "CONDUCTOS SUBTERRÁNEOS",
+   "texto": "CONDUCTOS SUBTERRÁNEOS. Los conductos deberán estar homolo-\ngados para su instalación subterránea. Los conductos metálicos que no tengan \nun revestimiento protector aprobado deberán estar completamente encapsu-\nlados en no menos de 51 mm (2 pulgadas) de hormigón.",
+   "paginas": [
+    233
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.8.1",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "PENDIENTE",
+   "texto": "PENDIENTE. Los conductos tendrán una pendiente mínima de 10,4 \nmm/m (1/8 pulgadas por pie) para permitir el drenaje a un punto provisto de \nacceso.",
+   "paginas": [
+    233
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.8.2",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "SELLADO",
+   "texto": "SELLADO. Los conductos se sellarán, fijarán y probarán antes de su \nencapsulamiento en hormigón o enterramiento directo. Los conductos se so-\nmeterán a pruebas de estanqueidad según lo exigido por la Sección C403 del \nCódigo de Construcción de Florida, Conservación de la Energía.",
+   "paginas": [
+    233
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.8.3",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "CONDUCTOS Y ACCESORIOS DE PLÁSTICO",
+   "texto": "CONDUCTOS Y ACCESORIOS DE PLÁSTICO. Los conductos de plás-\ntico serán de PVC con una rigidez mínima de 55 kPa (8 psi) a una deflexión del \n5 por ciento cuando se ensayen de acuerdo con ASTM D2412. Los accesorios \npara conductos de plástico serán de PVC o de polietileno de alta densidad. Los \nconductos y accesorios de plástico se utilizarán únicamente en instalaciones \nsubterráneas. La temperatura máxima de diseño para los sistemas que utilicen \nconductos y accesorios de plástico será de 66°C (150°F).",
+   "paginas": [
+    233
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.9",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "JUNTAS, UNIONES Y CONEXIONES",
+   "texto": "JUNTAS, UNIONES Y CONEXIONES. T odas las juntas, uniones y cone-\nxiones longitudinales y transversales en conductos metálicos y no metálicos \nse construirán según lo especificado en las Normas de construcción de con-\nductos HVAC SMACNA - Metálicos y flexibles y en las Normas de construcción \nde conductos de vidrio fibroso NAIMA. T odas las juntas, uniones y conexiones \n\n\nlongitudinales y transversales de los conductos deben estar bien sujetas y se-\nlladas con soldaduras, juntas, masillas (adhesivos), sistemas de masilla más \ntejido incrustado, selladores líquidos o cintas. Las cintas y masillas utilizadas \npara sellar conductos de vidrio fibroso deberán estar listadas y etiquetadas de \nacuerdo con la norma UL 181A y deberán llevar la marca \"181 A-P\" para cinta \nsensible a la presión, \"181 A-M\" para masilla o \"181 A-H\" para cinta sensible al \ncalor. Las cintas y masillas utilizadas para sellar conductos de aire metálicos y \nflexibles y conectores de aire flexibles cumplirán la norma UL 181B y llevarán la \nmarca \"181 B-FX\" para cinta sensible a la presión o \"181 B-M\" para masilla. Las \nconexiones de los conductos a las bridas de los equipos del sistema de distribu-\nción de aire se sellarán y fijarán mecánicamente. Las fijaciones mecánicas para \nuso con conductos de aire flexibles no metálicos cumplirán la norma UL 181B y \nllevarán la marca \"181 B-C\". Los sistemas de cierre utilizados para sellar todos \nlos conductos se instalarán de acuerdo con las instrucciones del fabricante.\nEXCEPCIÓN: Para los conductos que tengan una clasificación de presión está-\ntica inferior a 2 pulgadas de columna de agua (500 Pa), no se exigirán sistemas \nde cierre adicionales para las juntas y uniones soldadas de forma continua y las \njuntas y uniones de tipo de cierre que no sean de tipo de cierre a presión y de \ntipo de cierre de botón.",
+   "paginas": [
+    233,
+    234
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NAIMA",
+     "SMACNA",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.10",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "SOPORTES",
+   "texto": "SOPORTES. Los conductos se soportarán de acuerdo con las normas \nSMACNA de construcción de conductos HVAC metálicos y flexibles. Los con-\nductos flexibles y otros conductos fabricados en fábrica se soportarán de acuer-\ndo con las instrucciones del fabricante.",
+   "paginas": [
+    234
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "SMACNA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.11",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "CONEXIONES DE HORNOS",
+   "texto": "CONEXIONES DE HORNOS. Los conductos que se conecten a un hor-\nno deberán tener un espacio libre hasta los combustibles de acuerdo con las \ninstrucciones de instalación del fabricante del horno.",
+   "paginas": [
+    234
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.12",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "CONDENSACIÓN",
+   "texto": "CONDENSACIÓN. Se tomarán medidas para evitar la formación de \ncondensación en el exterior de cualquier conducto.",
+   "paginas": [
+    234
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.13",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "ZONAS DE RIESGO DE INUNDACIÓN",
+   "texto": "ZONAS DE RIESGO DE INUNDACIÓN. Para estructuras en áreas de \nriesgo de inundación, los conductos deberán estar ubicados por encima de la \nelevación requerida por el Código de Diseño y Construcción de Edificaciones en \nla República Dominicana para servicios públicos y equipos auxiliares o deberán \nestar diseñados y construidos para evitar que el agua ingrese o se acumule den-\ntro de los conductos durante inundaciones hasta dicha elevación. Si los con-\nductos están ubicados por debajo de la elevación requerida por la el Código de \nDiseño y Construcción de Edificaciones en la República Dominicana para servi-\ncios públicos y equipos auxiliares, los conductos deberán ser capaces de resistir \ncargas y esfuerzos hidrostáticos e hidrodinámicos, incluyendo los efectos de la \nflotabilidad, durante la ocurrencia de inundaciones hasta dicha elevación.",
+   "paginas": [
+    234,
+    235
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.14",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "UBICACIÓN",
+   "texto": "UBICACIÓN. Los conductos no se instalarán en o a menos de 102 mm \n(4 pulgadas) de la tierra, excepto cuando dichos conductos cumplan con la \nSección 6.3.8.",
+   "paginas": [
+    235
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.15",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "PROTECCIÓN MECÁNICA",
+   "texto": "PROTECCIÓN MECÁNICA. Los conductos instalados en lugares don-\nde estén expuestos a daños mecánicos por vehículos o por otras causas se pro-\ntegerán mediante barreras homologadas.",
+   "paginas": [
+    235
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.16",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "PROTECCIÓN CONTRA LA INTEMPERIE",
+   "texto": "PROTECCIÓN CONTRA LA INTEMPERIE. Los conductos, incluidos \nlos revestimientos, los recubrimientos y los conectores de aislamiento de vi-\nbraciones instalados en el exterior del edificio, estarán protegidos contra la in-\ntemperie.",
+   "paginas": [
+    235
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.17",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "SISTEMAS DE DISPERSIÓN DE AIRE",
+   "texto": "SISTEMAS DE DISPERSIÓN DE AIRE. Los sistemas de dispersión de \naire deberán:\n1.  Instalarse en su totalidad en lugares expuestos.\n2.  Ser utilizado en sistemas bajo presión positiva.\n3.  No atravesar ni penetrar en Construcciones resistentes al fuego.\n\n\n4.  Estar homologados y etiquetados de conformidad con la norma UL 2518.",
+   "paginas": [
+    235,
+    236
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.18",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "REGISTROS, REJILLAS Y DIFUSORES",
+   "texto": "REGISTROS, REJILLAS Y DIFUSORES. Los registros, rejillas y difusores \nde los conductos se instalarán de acuerdo con las instrucciones del fabricante. \nSe instalarán reguladores de caudal u otros medios de ajuste del aire de impul-\nsión en los conductos derivados o en cada registro, rejilla o difusor individual \ndel conducto. Cada compuerta de regulación u otro medio de ajuste del aire de \nimpulsión utilizado en el equilibrado estará provisto de un acceso.",
+   "paginas": [
+    236
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.18.1",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "REGISTROS DE SUELO",
+   "texto": "REGISTROS DE SUELO. Los registros de suelo deben resistir, sin fallo \nestructural, una carga concentrada de 90,8 kg (200 libras) sobre un disco de 51 \nmm (2 pulgadas) de diámetro aplicado a la zona más crítica de la cara expuesta.",
+   "paginas": [
+    236
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.3.18.2",
+   "titulo_num": 5,
+   "capitulo": "5.3",
+   "encabezado": "LUGARES PROHIBIDOS",
+   "texto": "LUGARES PROHIBIDOS.\nSe prohíben los difusores, registros y rejillas en el suelo o en su prolongación \nhacia arriba dentro de los aseos y cuartos de baño que, según el Código de \nEdificación de Florida, deben tener superficies lisas, duras y no absorbentes.\nEXCEPCIÓN: Unidades de vivienda.",
+   "paginas": [
+    236
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.1",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. El aislamiento de los conductos deberá cumplir los \nrequisitos de las secciones 6.4.2 a 6.4.13 y del Código de Construcción de Flo-\nrida, Conservación de la Energía.",
+   "paginas": [
+    236
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.2",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "TEMPERATURA DE LA SUPERFICIE",
+   "texto": "TEMPERATURA DE LA SUPERFICIE. Los conductos que funcionen a \ntemperaturas superiores a 49°C (120°F) deberán tener un aislamiento térmico \nsuficiente para limitar la temperatura de la superficie expuesta a 49°C (120°F).",
+   "paginas": [
+    236
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.3",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "REVESTIMIENTOS Y FORROS",
+   "texto": "REVESTIMIENTOS Y FORROS. Los recubrimientos y revestimientos de \n\n\nconductos, incluidos los adhesivos cuando se utilicen, tendrán un índice de \npropagación de la llama no superior a 25 y un índice de desarrollo de humo \nno superior a 50, cuando se ensayen de conformidad con ASTM E84 o UL 723, \nutilizando los procedimientos de preparación y montaje de muestras de ASTM \nE2231. Los recubrimientos y revestimientos de conductos no deben arder, bri-\nllar, humear ni desprender humo cuando se ensayan de acuerdo con ASTM \nC411 a la temperatura a la que están expuestos en servicio. La temperatura de \nensayo no debe ser inferior a 121°C (250°F). Los recubrimientos y revestimien-\ntos deberán estar listados y etiquetados.\nEXCEPCIÓN: El aislamiento de espuma de poliuretano que se aplique por pul-\nverización al exterior de los conductos en áticos y entrepisos estará sujeto a \ntodos los requisitos siguientes:\n1. El aislamiento de espuma plástica tendrá un índice de propagación de llama \nno superior a 25 y un índice de desarrollo de humo no superior a 450, cuando \nse ensaye de acuerdo con ASTM E84 o UL 723, utilizando los procedimientos \nde preparación y montaje de muestras de ASTM E2231.\n2. Los aislamientos de espuma plástica no deberán arder, brillar, arder en lla-\nmas ni humear cuando se ensayen de acuerdo con ASTM C411 a la temperatu-\nra a la que estén expuestos en servicio. La temperatura de ensayo no deberá ser \ninferior a 121°C (250°F).\n3. El aislamiento de espuma plástica está protegido contra la ignición en aticos \nutilizando panels de fibra de vidrio de 38 mm, paneles de madera estructural de \n6.4 mm, paneles de sheetrock de 9.5 mm, panels de metal resistentes a la co-\nrrosion de 0.4 mm, o paneles de celulosa aplicada de spray de al menos 38 mm.",
+   "paginas": [
+    236,
+    237
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.4",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "AISLAMIENTO DE ESPUMA PLÁSTICA",
+   "texto": "AISLAMIENTO DE ESPUMA PLÁSTICA. La espuma plástica utilizada \ncomo recubrimiento y revestimiento de conductos deberá cumplir los requisi-\ntos de la Sección 6.4.",
+   "paginas": [
+    237
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.5",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "AISLAMIENTO DE APARATOS",
+   "texto": "AISLAMIENTO DE APARATOS. Los aparatos listados y etiquetados que \nestén aislados internamente se considerarán conformes a los requisitos de la \nsección 5.4.",
+   "paginas": [
+    237,
+    238
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.6",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "PENETRACIÓN DE CONJUNTOS",
+   "texto": "PENETRACIÓN DE CONJUNTOS. Los revestimientos de conductos no \ndeberán penetrar en paredes o suelos que deban tener una clasificación de re-\nsistencia al fuego o que deban estar bloqueados contra el fuego.",
+   "paginas": [
+    238
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.7",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "IDENTIFICACIÓN",
+   "texto": "IDENTIFICACIÓN. El aislamiento exterior de conductos, excepto la es-\npuma de poliuretano en spray, y los conductos flexibles aislados en fábrica de-\nberán estar impresos o identificados de forma legible a intervalos no superiores \na 914 mm (36 pulgadas) con el nombre del fabricante, el valor R de resisten-\ncia térmica al espesor instalado especificado y los índices de propagación de \nla llama y de desarrollo de humo de los materiales compuestos. Los valores \nR de los productos de aislamiento de conductos se basarán únicamente en el \naislamiento, excluyendo las películas de aire, los retardadores de vapor u otros \ncomponentes del conducto, y se basarán en los valores C probados a una tem-\nperatura media de 24°C (75°F) en el espesor instalado, de acuerdo con los pro-\ncedimientos reconocidos de la industria. El espesor instalado del aislamiento \ndel conducto utilizado para determinar su valor R se determinará de la siguien-\nte manera:\n1.  Para la placa de conductos, el revestimiento de conductos y los conductos \nrígidos fabricados en fábrica que normalmente no se someten a compresión, se \nutilizará el espesor nominal del aislamiento.\n2.  Para la envoltura de conductos, se supondrá que el espesor instalado es del \n75 por ciento (25 por ciento de compresión) del espesor nominal.\n3.  Para los conductos de aire flexibles fabricados en fábrica, el espesor insta-\nlado se determinará dividiendo por dos la diferencia entre el diámetro exterior \nreal y el diámetro interior nominal.\n\n\n4.  En el caso de la espuma de poliuretano pulverizada, el valor R envejecido por \npulgada, medido de acuerdo con las normas reconocidas del sector, se facilita-\nrá al cliente por escrito en el momento de la aplicación de la espuma.",
+   "paginas": [
+    238,
+    239
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.8",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "INSTALACIÓN DE REVESTIMIENTO",
+   "texto": "INSTALACIÓN DE REVESTIMIENTO. Los revestimientos se interrumpi-\nrán en la zona de funcionamiento de una compuerta cortafuegos y a no menos \nde 6 pulgadas () aguas arriba y 152 mm (6 pulgadas) aguas abajo de resisten-\ncias eléctricas y calentadores de combustible en un sistema de conductos. Se \ninstalarán rebordes o manguitos metálicos sobre los bordes expuestos del re-\nvestimiento del conducto orientados en dirección opuesta a la del flujo de aire.",
+   "paginas": [
+    239
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.9",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "CONTINUIDAD TÉRMICA",
+   "texto": "CONTINUIDAD TÉRMICA. Cuando se haya interrumpido un revesti-\nmiento de conducto, se instalará un revestimiento de conducto de igual ren-\ndimiento térmico.",
+   "paginas": [
+    239
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.10",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "APERTURAS DE SERVICIO",
+   "texto": "APERTURAS DE SERVICIO. Las aberturas de servicio no se ocultarán \ncon cubiertas de conductos, a menos que la ubicación exacta de la abertura \nesté debidamente identificada.",
+   "paginas": [
+    239
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.11",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "RETARDADORES DE VAPOR",
+   "texto": "RETARDADORES DE VAPOR. Cuando los conductos utilizados para \nla refrigeración estén aislados externamente, el aislamiento se cubrirá con un \nretardador de vapor que tenga una permeabilidad máxima de 0,05 perm [2,87 \nng/(Pa - s - m2 )] o papel de aluminio con un espesor mínimo de 2 mils (0,051 \nmm). No será necesario cubrir los aislamientos que tengan una permeabilidad \nde 0,05 perm [2,87 ng/(Pa - s - m2  )] o inferior. T odas las juntas y uniones de-\nberán sellarse para mantener la continuidad del retardador de vapor.\nEXCEPCIÓN: No se requiere un retardador de vapor para el aislamiento de es-\npuma de poliuretano en spray que tenga una permeabilidad al vapor de agua no \nsuperior a 3 perm por pulgada [1722 ng/(s - m2  - Pa)] en el espesor instalado.",
+   "paginas": [
+    239
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.12",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "BARRERAS RESISTENTES A LA INTEMPERIE",
+   "texto": "BARRERAS RESISTENTES A LA INTEMPERIE. Los conductos exterio-\nres aislados se protegerán con una barrera impermeable aprobada.",
+   "paginas": [
+    239
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.4.13",
+   "titulo_num": 5,
+   "capitulo": "5.4",
+   "encabezado": "AISLAMIENTO INTERIOR",
+   "texto": "AISLAMIENTO INTERIOR. Los materiales utilizados como aislamiento \ninterno y expuestos a la corriente de aire en los conductos deberán demostrar \nsu durabilidad cuando se sometan a ensayo de conformidad con la norma UL \n181. No se utilizará aislamiento interno expuesto que no sea impermeable al \nagua para revestir conductos o cámaras desde la salida de una batería de refri-\ngeración hasta el extremo aguas abajo de la bandeja de drenaje.",
+   "paginas": [
+    239,
+    240
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.5.1",
+   "titulo_num": 5,
+   "capitulo": "5.5",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Los sistemas de calefacción y aire acondicionado dis-\npondrán de filtros de aire homologados. Los filtros se instalarán de forma que \ntodo el aire de retorno, el aire exterior y el aire de reposición se filtren antes de \ncualquier intercambiador de calor o serpentín. Los filtros se instalarán en un lu-\ngar conveniente aprobado. Los revestimientos adhesivos líquidos utilizados en \nlos filtros deberán tener un punto de inflamación no inferior a 163°C (325°F).",
+   "paginas": [
+    240
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.5.2",
+   "titulo_num": 5,
+   "capitulo": "5.5",
+   "encabezado": "APROBACIÓN",
+   "texto": "APROBACIÓN. Los filtros de aire de tipo medio y de tipo electrostáti-\nco deberán estar listados y etiquetados. Los filtros de aire de medios filtrantes \ncumplirán la norma UL 900. Los filtros de aire de partículas de alta eficiencia \ncumplirán la norma UL 586. Los filtros de aire electrostáticos deberán cum-\nplir la norma UL 867. Los filtros de aire utilizados dentro de las unidades de \nvivienda se diseñarán para la aplicación prevista y no será necesario que estén \nlistados y etiquetados.",
+   "paginas": [
+    240
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.5.3",
+   "titulo_num": 5,
+   "capitulo": "5.5",
+   "encabezado": "FLUJO DE AIRE SOBRE EL FILTRO",
+   "texto": "FLUJO DE AIRE SOBRE EL FILTRO. Los conductos se construirán de for-\nma que permitan una distribución uniforme del aire por todo el filtro.",
+   "paginas": [
+    240,
+    241
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.6.1",
+   "titulo_num": 5,
+   "capitulo": "5.6",
+   "encabezado": "CONTROLES NECESARIOS",
+   "texto": "CONTROLES NECESARIOS. Los sistemas de distribución de aire esta-\nrán equipados con detectores de humo homologados y etiquetados para su \ninstalación en sistemas de distribución de aire, tal como se exige en esta sec-\nción. Los detectores de humo de conducto deberán cumplir la norma UL 268A. \nLos demás detectores de humo deberán cumplir la norma UL 268.",
+   "paginas": [
+    241
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.6.2",
+   "titulo_num": 5,
+   "capitulo": "5.6",
+   "encabezado": "CUANDO SEA NECESARIO",
+   "texto": "CUANDO SEA NECESARIO. Los detectores de humo se instalarán don-\nde se indica en las Secciones 5.6.2.1 a 5.6.2.3.",
+   "paginas": [
+    241
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.6.2.1",
+   "titulo_num": 5,
+   "capitulo": "5.6",
+   "encabezado": "",
+   "texto": "Para evitar la recirculación de cantidades peligrosas de humo, se insta-\nlará un detector aprobado para su uso en conductos de aire en el lado de su-\nministro de los sistemas de tratamiento de aire, tal como exige la norma NFPA \n90A, Norma para la instalación de sistemas de aire acondicionado y ventilación. \nLos detectores de humo homologados para su uso en sistemas de distribución \nde aire se situarán aguas abajo de los filtros de aire y delante de cualquier cone-\nxión derivada en sistemas de suministro de aire con una capacidad superior a \n2000 pies cúbicos por minuto.\nEXCEPCIÓN: No se requieren detectores de humo en el sistema de suministro \nde aire cuando todas las partes del edificio servidas por el sistema de distribu-\nción de aire estén protegidas por detectores de humo de área conectados a un \nsistema de alarma contra incendios, de acuerdo con el Código de Prevención de \nIncendios de Florida. El sistema de detección de humo de área deberá cumplir \ncon la Sección 5.6.4.",
+   "paginas": [
+    241
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NFPA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.6.2.2",
+   "titulo_num": 5,
+   "capitulo": "5.6",
+   "encabezado": "SISTEMAS COMUNES DE SUMINISTRO",
+   "texto": "SISTEMAS COMUNES DE SUMINISTRO. Cuando varios sistemas de \ntratamiento de aire compartan un suministro común con una capacidad de di-\nseño combinada superior a 2.000 cfm (0,9 m3 /s), cada sistema de suminis-\ntro de aire estará provisto de detectores de humo de acuerdo con la Sección",
+   "paginas": [
+    241
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.6.2.3",
+   "titulo_num": 5,
+   "capitulo": "5.6",
+   "encabezado": "ELEVADORES DE AIRE DE RETORNO",
+   "texto": "ELEVADORES DE AIRE DE RETORNO. Cuando los elevadores de aire \nde retorno den servicio a dos o más pisos y den servicio a cualquier parte de \nun sistema de aire de retorno que tenga una capacidad de diseño superior a \n15.000 cfm (7,1 m3 /s), se instalarán detectores de humo en cada piso. Dichos \ndetectores de humo estarán situados antes de la conexión entre el elevador de \naire de retorno y cualquier conducto o cámara de aire.",
+   "paginas": [
+    242
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.6.3",
+   "titulo_num": 5,
+   "capitulo": "5.6",
+   "encabezado": "INSTALACIÓN",
+   "texto": "INSTALACIÓN. Los detectores de humo requeridos por esta sección se \ninstalarán de acuerdo con la norma NFPA 72. Los detectores de humo reque-\nridos se instalarán para controlar todo el flujo de aire transportado por el sis-\ntema. No será necesario instalar detectores de humo en los ventiladores cuya \núnica función sea extraer aire del interior del edificio hacia el exterior. Se facili-\ntará el acceso a los detectores de humo para su inspección y mantenimiento.",
+   "paginas": [
+    242
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NFPA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.6.4",
+   "titulo_num": 5,
+   "capitulo": "5.6",
+   "encabezado": "FUNCIONAMIENTO DE LOS CONTROLES",
+   "texto": "FUNCIONAMIENTO DE LOS CONTROLES. Al activarse, los detectores \nde humo desconectarán todas las capacidades operativas del sistema de distri-\nbución de aire de conformidad con el listado y el etiquetado de los aparatos uti-\n\n\nlizados en el sistema. Los sistemas de distribución de aire que formen parte de \nun sistema de control de humos pasarán al modo de control de humos cuando \nse active un detector.",
+   "paginas": [
+    242,
+    243
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.6.4.1",
+   "titulo_num": 5,
+   "capitulo": "5.6",
+   "encabezado": "SUPERVISIÓN",
+   "texto": "SUPERVISIÓN. Los detectores de humo de conducto se conectarán \na un sistema de alarma contra incendios cuando el Código de Prevención de \nIncendios de Florida exija un sistema de alarma contra incendios. El acciona-\nmiento de un detector de humo de conducto activará una señal de supervisión \nvisible y audible en un lugar constantemente atendido. En las instalaciones que \ndeban ser vigiladas por una estación de supervisión, los detectores de humo \nde conducto sólo informarán como señal de supervisión, no como alarma de \nincendio.\nEXCEPCIONES:\n1. La señal de supervisión en un lugar constantemente atendido no es necesa-\nria cuando el detector de humo del conducto activa los aparatos indicadores de \nalarma del edificio.\n2. En los locales no equipados obligatoriamente con un sistema de alarma \ncontra incendios, el accionamiento de un detector de humo activará una señal \nvisible y acústica en un lugar homologado. Las condiciones de avería de los \ndetectores de humo de conductos activarán una señal visible o audible en un \nlugar aprobado y se identificarán como avería del detector del conducto de aire.",
+   "paginas": [
+    243
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Las disposiciones de esta sección regirán la protec-\nción de las penetraciones de conductos y aberturas de transferencia de aire en \nconjuntos que deban protegerse.",
+   "paginas": [
+    243
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.1.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "CONDUCTOS ENTRE EJES",
+   "texto": "CONDUCTOS ENTRE EJES. Los conductos que pasen horizontalmen-\nte de un pozo a otro no requerirán un cerramiento de pozo siempre que la pe-\nnetración del conducto en cada pozo asociado esté protegida con compuertas \nque cumplan lo dispuesto en esta sección.",
+   "paginas": [
+    243,
+    244
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.1.2",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "",
+   "texto": "DUCTOS QUE PENETRAN ENSAMBLES CON CLASIFICACIÓN DE \nRESISTENCIA AL FUEGO SIN COMPUERTAS. Los ductos que penetran en-\nsambles con clasificación de resistencia al fuego y que esta sección no requiere \nque tengan compuertas deberán cumplir con los requisitos del Código de Di-\nseño y Construcción de Edificaciones en la República Dominicana. Los ductos \nque penetran ensambles horizontales que no requieren estar contenidos den-\ntro de un pozo y que esta sección no requiere que tengan compuertas, deberán \ncumplir con los requisitos del  Código de Diseño y Construcción de Edificacio-\nnes en la República Dominicana.",
+   "paginas": [
+    244
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.1.2.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "",
+   "texto": "DUCTOS QUE PENETRAN ENSAMBLES NO RESISTENTES AL \nFUEGO. El espacio alrededor de un conducto que penetra en un ensamblaje de \npiso no resistente al fuego deberá cumplir el Código de Diseño y Construcción \nde Edificaciones en la República Dominicana.",
+   "paginas": [
+    244
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.2",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "INSTALACIÓN",
+   "texto": "INSTALACIÓN. Las compuertas cortafuegos, las compuertas cortahu-\nmo, las compuertas combinadas cortafuegos/humo y las compuertas de radia-\nción de techo situadas dentro de los sistemas de distribución de aire y control \nde humos se instalarán de acuerdo con los requisitos de esta sección y las ins-\ntrucciones y listados del fabricante.",
+   "paginas": [
+    244
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.2.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "SISTEMA DE CONTROL DE HUMOS",
+   "texto": "SISTEMA DE CONTROL DE HUMOS. Cuando la instalación de una \ncompuerta cortafuegos interfiera con el funcionamiento de un sistema de con-\ntrol de humos requerido de acuerdo con el Código de Diseño y Construcción \nde Edificaciones en la República Dominicanase utilizará una protección alter-\nnativa aprobada. Cuando los sistemas mecánicos, incluidos los conductos y las \ncompuertas utilizados para la ventilación normal del edificio, formen parte del \nsistema de control de humos, el rendimiento previsto de estos sistemas en el \n\n\nmodo de control de humos se abordará en el análisis racional requerido por el \nCódigo de Diseño y Construcción de Edificaciones en la República Dominicana.",
+   "paginas": [
+    244,
+    245
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.2.2",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "CONDUCTOS DE ESCAPE PELIGROSOS",
+   "texto": "CONDUCTOS DE ESCAPE PELIGROSOS. Las compuertas cortafue-\ngos para sistemas de conductos de evacuación de gases peligrosos deberán \ncumplir lo dispuesto en la sección 5.10.",
+   "paginas": [
+    245
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.3",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "",
+   "texto": "PRUEBAS, VALORES NOMINALES Y ACCIONAMIENTO DE LAS \nCOMPUERTAS. Las pruebas, los valores nominales y el accionamiento de las \ncompuertas se ajustarán a lo dispuesto en los apartados 5.7.3.1 a 5.7.3.3.",
+   "paginas": [
+    245
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.3.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "PRUEBAS DE AMORTIGUADORES",
+   "texto": "PRUEBAS DE AMORTIGUADORES. Las compuertas deberán estar \nhomologadas y etiquetadas de acuerdo con las normas de esta sección. Las \ncompuertas cortafuegos deberán cumplir los requisitos de la norma UL 555. \nEn los sistemas de calefacción, ventilación y aire acondicionado diseñados para \nfuncionar con ventiladores encendidos durante un incendio, sólo se instalarán \ncompuertas cortafuegos y compuertas de radiación de techo etiquetadas para \nsu uso en sistemas dinámicos. Las compuertas cortahumo deberán cumplir los \nrequisitos de la norma UL 555S. Las compuertas combinadas de fuego/humo \ncumplirán los requisitos de las normas UL 555 y UL 555S. Las compuertas de \nradiación de techo cumplirán los requisitos de la norma UL 555C o se somete-\nrán a ensayo como parte de un conjunto de suelo/techo o techo/techo con cla-\nsificación de resistencia al fuego de acuerdo con las normas ASTM E119 o UL \n263. Las compuertas de pasillo deberán cumplir los requisitos de las normas \nUL 555 y UL 555S. Las compuertas de pasillo deben demostrar un rendimiento \nde cierre aceptable cuando se someten a una velocidad de 150 pies por minuto \n(0,76 mps) a través de la cara de la compuerta utilizando el ensayo de exposi-\nción al fuego UL 555.",
+   "paginas": [
+    245
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.3.2",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "CLASIFICACIÓN DE LOS AMORTIGUADORES",
+   "texto": "CLASIFICACIÓN DE LOS AMORTIGUADORES. Los valores nomina-\nles de las compuertas se ajustarán a lo dispuesto en los apartados 5.7.3.2.1 a \n5.7.3.2.4.",
+   "paginas": [
+    245
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.3.2.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "VALORES NOMINALES DE LAS COMPUERTAS CORTAFUEGOS",
+   "texto": "VALORES NOMINALES DE LAS COMPUERTAS CORTAFUEGOS. \nLas compuertas cortafuegos deberán tener el índice mínimo de protección \ncontra incendios especificado en la tabla 6.7.3.2.1 para el tipo de penetración.\nTABLA 5.7.3.2.1 CLASIFICACIÓN DE LAS COMPUERTAS CORTAFUEGOS",
+   "paginas": [
+    245,
+    246
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.3.2.2",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "VALORES NOMINALES DE LAS COMPUERTAS CORTAHUMO",
+   "texto": "VALORES NOMINALES DE LAS COMPUERTAS CORTAHUMO.\nLas clasificaciones de fugas de las compuertas cortahumo serán de clase I o \nII. Los valores nominales de temperatura elevada no serán inferiores a 121 °C \n(250 °F).",
+   "paginas": [
+    246
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.3.2.3",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "",
+   "texto": "CLASIFICACIÓN DE LAS COMPUERTAS COMBINADAS DE FUE-\nGO/HUMO. Las compuertas combinadas cortafuegos/humo deben tener la \nclasificación mínima de protección contra incendios especificada para las com-\npuertas cortafuegos en la tabla 5.7.3.2.1 para el tipo de penetración y deben \ntener una clasificación mínima de compuerta cortahumo como se especifica \nen la sección 5.7.3.2.2.",
+   "paginas": [
+    246
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.3.2.4",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "VALORES NOMINALES DE LAS COMPUERTAS DE PASILLO",
+   "texto": "VALORES NOMINALES DE LAS COMPUERTAS DE PASILLO. Las \ncompuertas de pasillo deberán tener los siguientes valores nominales míni-\nmos.\n1. Resistencia al fuego de una hora.\n2.  Clasificación de fuga de clase I o II según se especifica en la sección 5.7.3.2.2.",
+   "paginas": [
+    246
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.3.3",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "ACCIONAMIENTO DE LA COMPUERTA",
+   "texto": "ACCIONAMIENTO DE LA COMPUERTA. El accionamiento de la com-\npuerta se efectuará de conformidad con los apartados 6.7.3.3.1 a 6.7.3.3.4, \nsegún proceda.",
+   "paginas": [
+    246
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.3.3.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "",
+   "texto": "DISPOSITIVO DE ACCIONAMIENTO DE COMPUERTAS CORTA-\nFUEGOS. El dispositivo de accionamiento de la compuerta cortafuegos deberá \ncumplir uno de los requisitos siguientes:\n1.  La temperatura de funcionamiento será de aproximadamente 28 °C (50 °F) \npor encima de la temperatura normal dentro del sistema de conductos, pero no \ninferior a 71 °C (160 °F).\n2.  La temperatura de funcionamiento no será superior a 177 °C (350 °F) cuan-\ndo se encuentre en un sistema de control de humos que cumpla con la Sección \n9.9 del Código de Edificación de Florida, Edificación.",
+   "paginas": [
+    246,
+    247
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.3.3.2",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "ACCIONAMIENTO DE LA COMPUERTA DE HUMOS",
+   "texto": "ACCIONAMIENTO DE LA COMPUERTA DE HUMOS. La compuer-\nta cortahumo se cerrará al activarse uno o varios detectores de humo listados e \ninstalados de acuerdo con la sección 9.7.3 del código de edificación de florida, \nedificación y uno de los siguientes métodos, según corresponda:\n1. Cuando se instale una compuerta de humos dentro de un conducto, se ins-\ntalará un detector de humos dentro del conducto o fuera de él con tubos de \nmuestreo que sobresalgan dentro del conducto. El detector o los tubos situa-\ndos en el interior del conducto deberán estar situados a menos de 1,5 metros \n(1.524 mm) de la compuerta. Las salidas y entradas de aire no deberán estar \nsituadas entre el detector o los tubos y la compuerta. El detector deberá estar \nhomologado para la velocidad, temperatura y humedad del aire previstas en el \npunto en que se instale. Salvo en los sistemas mecánicos de control de humos, \nlas compuertas se cerrarán al apagarse el ventilador cuando los detectores de \nhumo locales requieran una velocidad mínima para funcionar.\n2. Cuando se instale una compuerta cortahumo por encima de las puertas de \nuna barrera cortahumo, se instalará un detector puntual a cada lado de la aber-\ntura de la puerta de la barrera cortahumo. El detector deberá estar homologado \npara servicio de liberación si se utiliza como interfaz directa con la compuerta.\n3.  Cuando se instale una compuerta de humos dentro de una abertura sin \n\n\nconducto en una pared, se instalará un detector de tipo puntual a menos de \n1524 mm (5 pies) horizontalmente de la compuerta. El detector deberá estar \nhomologado para servicio de liberación si se utiliza para interfaz directa con la \ncompuerta.\n4.  Cuando se instale una compuerta de extracción de humo en la pared o el te-\ncho de un pasillo, se permitirá que la compuerta sea controlada por un sistema \nde detección de humo instalado en el pasillo.\n5.  Cuando se instale un sistema de detección de humos en todas las zonas a \nlas que dé servicio el conducto en el que se ubicará la compuerta, se permitirá \nque las compuertas de humos sean controladas por el sistema de detección de \nhumos.",
+   "paginas": [
+    247,
+    248
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.3.3.3",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "",
+   "texto": "ACCIONAMIENTO COMBINADO DE COMPUERTAS CORTAFUE-\nGOS/HUMO. El accionamiento de las compuertas combinadas cortafuegos/\nhumo deberá ajustarse a lo dispuesto en los apartados 5.7.3.3.1 y 5.7.3.3.2. \nLas compuertas combinadas cortafuegos/humo instaladas en las penetracio-\nnes de los huecos de los sistemas de control de humos no se activarán median-\nte la detección de humos en el área local, a menos que sea secundaria a los \ncontroles del sistema de control de humos.",
+   "paginas": [
+    248
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.3.3.4",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "",
+   "texto": "ACCIONAMIENTO DE LA COMPUERTA DE RADIACIÓN DE TE-\nCHO. La temperatura de funcionamiento de un dispositivo de accionamiento \nde una compuerta de radiación de techo será de 28 °C (50 °F) por encima de la \ntemperatura normal dentro del sistema de conductos, pero no inferior a 71 °C \n(160 °F).",
+   "paginas": [
+    248
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.3.3.5",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "ACCIONAMIENTO DE LA COMPUERTA DEL PASILLO",
+   "texto": "ACCIONAMIENTO DE LA COMPUERTA DEL PASILLO. El acciona-\nmiento de las compuertas de los pasillos deberá ajustarse a lo dispuesto en las \nsecciones 5.7.3.3.1 y 5.7.3.3.2.",
+   "paginas": [
+    248
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.4",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "ACCESO E IDENTIFICACIÓN",
+   "texto": "ACCESO E IDENTIFICACIÓN. El acceso y la identificación de las com-\npuertas cortafuegos y cortahumo se ajustarán a lo dispuesto en los apartados \n5.7.4.1 a 5.7.4.2.",
+   "paginas": [
+    248,
+    249
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.4.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "ACCESO",
+   "texto": "ACCESO. Las compuertas cortafuegos y cortahumo dispondrán de un \nmedio de acceso homologado lo suficientemente amplio para permitir la ins-\npección y el mantenimiento de la compuerta y sus piezas de funcionamiento. \nLas compuertas equipadas con eslabones fusibles, operadores internos o am-\nbos estarán provistas de una puerta de acceso de 305 mm (12 pulgadas) de \nlado como mínimo o de una sección de conducto desmontable.",
+   "paginas": [
+    249
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.4.1.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "CONJUNTOS RESISTENTES AL FUEGO",
+   "texto": "CONJUNTOS RESISTENTES AL FUEGO. El acceso no afectará a la \nintegridad de los conjuntos resistentes al fuego. Las aberturas de acceso no \nreducirán la clasificación de resistencia al fuego del conjunto. Las puertas de \nacceso en los conductos serán herméticas y adecuadas para la construcción de \nconductos requerida.",
+   "paginas": [
+    249
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.4.1.2",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "ACCESO RESTRINGIDO",
+   "texto": "ACCESO RESTRINGIDO. Cuando las limitaciones de espacio o las \nbarreras físicas restrinjan el acceso a una compuerta para su inspección y com-\nprobación periódicas, la compuerta deberá ser de una o varias hojas y deberá \ncumplir los requisitos de inspección remota de la NFPA 80 o la NFPA 105.",
+   "paginas": [
+    249
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "NFPA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.4.2",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "IDENTIFICACIÓN",
+   "texto": "IDENTIFICACIÓN. Los puntos de acceso deberán estar permanente-\nmente identificados en el exterior de una etiqueta con letras de no menos de ½ \npulgadas (12,7 mm) de altura en las que se lea: FIRE/SMOKE DAMPER, SMOKE \nDAMPER o FIRE DAMPER.",
+   "paginas": [
+    249
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.5",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "DONDE SE REQUIERA",
+   "texto": "DONDE SE REQUIERA. Se instalarán compuertas cortafuegos, com-\npuertas cortahumo, compuertas combinadas cortafuegos/humo, compuertas \nde radiación de techo y compuertas de pasillo en los lugares prescritos en las \nSecciones 5.7.5.1 a 5.7.5.7. Cuando un conjunto deba disponer de compuertas \ncortafuegos y compuertas cortahumo, se instalarán compuertas combinadas \ncortafuegos/humo o una compuerta cortafuegos y una compuerta cortahumo.",
+   "paginas": [
+    249
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.5.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "MUROS CORTAFUEGOS",
+   "texto": "MUROS CORTAFUEGOS. Los conductos y aberturas de transferencia \nde aire permitidos en muros cortafuegos de acuerdo con la Sección 706.11 del \nCódigo de Construcción de Florida, Edificio deberán protegerse con compuer-\ntas cortafuegos listadas instaladas de acuerdo con su listado.",
+   "paginas": [
+    249,
+    250
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.5.1.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "SALIDAS HORIZONTALES",
+   "texto": "SALIDAS HORIZONTALES. En cada punto en que un conducto o \nuna abertura de transferencia de aire penetre en una pared cortafuegos que \nsirva de salida horizontal, se instalará una compuerta cortahumo homologada \ndiseñada para resistir el paso del humo.",
+   "paginas": [
+    250
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.5.2",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "BARRERAS CORTAFUEGOS",
+   "texto": "BARRERAS CORTAFUEGOS. Los conductos y las aberturas de trans-\nferencia de aire que penetren las barreras contra incendios deberán protegerse \ncon compuertas cortafuegos listadas instaladas de acuerdo con su listado. Los \nconductos y las aberturas de transferencia de aire no deben penetrar los cerra-\nmientos de las escaleras y rampas de salida interiores y los pasillos de salida, \nexcepto según lo permitido por el Código de Diseño y Construcción de Edifica-\nciones en la República Dominicana.\nEXCEPCIÓN: No se requieren compuertas cortafuegos en las penetraciones \nde barreras cortafuegos cuando se aplique cualquiera de las siguientes condi-\nciones:\n1. Las penetraciones se ensayan de acuerdo con ASTM E119 o UL 263 como \nparte del conjunto con clasificación de resistencia al fuego.\n2. Los conductos se utilizan como parte de un sistema de control de humos \naprobado de conformidad con la Sección 4.13 y cuando la compuerta cortafue-\ngos interferiría con el funcionamiento del sistema de control de humos.\n3. T ales paredes están penetradas por sistemas de HVAC por conductos, tienen \nuna clasificación de resistencia al fuego requerida de 1 hora o menos, están en \náreas que no son del Grupo H y están en edificios equipados en su totalidad \ncon un sistema de rociadores automáticos de acuerdo con el Código de Diseño \ny Construcción de Edificaciones en la República Dominicana. A los efectos de \n\n\nesta excepción, un sistema de HVAC por conductos será un sistema de conduc-\ntos para el sistema de HVAC de la estructura. Dicho sistema de conductos esta-\nrá construido con chapa de acero de un grosor no inferior a calibre 26 [0,0217 \npulgadas (0,55 mm)] y será continuo desde el aparato o equipo de tratamiento \nde aire hasta los terminales de salida y entrada de aire.",
+   "paginas": [
+    250,
+    251
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.5.2.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "SALIDAS HORIZONTALES",
+   "texto": "SALIDAS HORIZONTALES. En cada punto en que un conducto o \nuna abertura de transferencia de aire penetre en una barrera cortafuegos que \nsirva de salida horizontal, se instalará una compuerta cortahumo homologada \ndiseñada para resistir el paso del humo.",
+   "paginas": [
+    251
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.5.3",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "TABIQUES CORTAFUEGOS",
+   "texto": "TABIQUES CORTAFUEGOS. Los conductos y aberturas de transferen-\ncia de aire que penetren en tabiques cortafuegos se protegerán con compuer-\ntas cortafuegos homologadas instaladas de acuerdo con su catalogación.\nEXCEPCIÓN: En las ocupaciones que no pertenezcan al Grupo H, no se requie-\nren compuertas cortafuegos cuando se aplique cualquiera de las siguientes \ncondiciones:\n1. Paredes de pasillo en edificios equipados en su totalidad con un sistema de \nrociadores automáticos de acuerdo con el Código de Diseño y Construcción de \nEdificaciones en la República Dominicana y el conducto está protegido como \nuna penetración pasante de acuerdo con el Código de Diseño y Construcción \nde Edificaciones en la República Dominicana.\n2. Las particiones son particiones de inquilino en edificios cubiertos y abiertos \ndel centro comercial donde las paredes no son requeridas por disposiciones en \notra parte del Código de Diseño y Construcción de Edificaciones en la Repú-\nblica Dominicana para extender a la parte inferior del revestimiento de piso o \ntecho, losa o cubierta por encima.\n3. El sistema de conductos está construido con materiales aprobados de acuer-\ndo con la Sección 5.3 y el conducto que penetra en la pared cumple todos los \nrequisitos siguientes:\n\n\na) El conducto no superará los 0,06 m2 (100 pulgadas cuadradas).\nb) El conducto estará construido con acero de un espesor no inferior a 0,55 mm \n(0,0217 pulgadas).\nc) El conducto no tendrá aberturas que comuniquen el pasillo con espacios o \nhabitaciones adyacentes.\nd) El conducto se instalará por encima de un techo.\ne) El conducto no debe terminar en un registro de pared en la pared resistente \nal fuego.\nf ) En cada abertura del conducto se debe centrar un manguito de acero de al \nmenos 305 mm (12 pulgadas) de largo por 1,52 mm (0,060 pulgadas) de espe-\nsor. El manguito debe fijarse a ambos lados de la pared y a los cuatro lados del \nmanguito con ángulos de retención de acero de al menos 1 /12 -pulgada por 1 \n/12 -pulgada por 0,060 pulgadas (38 mm por 38 mm por 1,52 mm). Los ángu-\nlos de retención se fijarán al manguito y a la pared con tornillos No. 10 (M5). El \nespacio anular entre el manguito de acero y la abertura de la pared se rellenará \ncon lana de roca (mineral) en todos los lados.\n 4. T ales paredes están penetradas por sistemas de HVAC por conductos, tie-\nnen una clasificación de resistencia al fuego requerida de 1 hora o menos, y \nestán en áreas que no son del Grupo H y están en edificios equipados en su \ntotalidad con un sistema de rociadores automáticos de acuerdo con la Sección \n9.3.3.1.1 o 9.3.3.1.2 del Código de Construcción de Florida, Construcción. A \nlos efectos de esta excepción, un sistema de HVAC por conductos será un sis-\ntema de conductos para transportar aire de suministro, retorno o extracción \ncomo parte del sistema de HVAC de la estructura. Dicho sistema de conductos \nestará construido con chapa de acero de un grosor no inferior a 26 galgas y será \ncontinuo desde el aparato o equipo de tratamiento de aire hasta los terminales \nde salida y entrada de aire.",
+   "paginas": [
+    251,
+    252
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.5.4",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "PASILLOS/BARRERAS ANTIHUMO",
+   "texto": "PASILLOS/BARRERAS ANTIHUMO. En cada punto en que un con-\nducto o una abertura de transferencia de aire penetre en una pared de barrera \ncontra humos o en un recinto de pasillo que deba tener puertas de control de \nhumos y corrientes de aire, de acuerdo con el Código de Diseño y Construcción \nde Edificaciones en la República Dominicana, se instalará una compuerta de \nhumo homologada diseñada para resistir el paso del humo.\nSe proporcionará un amortiguador de pasillo donde se penetren techos de pa-\nsillo, construidos como se requiere para las paredes de pasillo según lo permi-\ntido en el Código de Diseño y Construcción de Edificaciones en la República \nDominicana.\nSe instalará un amortiguador de radiación en el techo cuando se atraviese la \nmembrana del techo de un conjunto de piso/techo o techo/techo con clasifi-\ncación de resistencia al fuego, construido según lo permitido en el Código de \nDiseño y Construcción de Edificaciones en la República Dominicana.\nLas compuertas cortahumo y los métodos de accionamiento de las mismas de-\nberán cumplir lo dispuesto en la sección 5.7.5.4.1.\nEXCEPCIONES:\n1. Las compuertas cortahumo no son necesarias en las penetraciones de los \npasillos cuando todo el edificio está equipado con un sistema de control de \nhumos aprobado de acuerdo con la Sección 513 y las compuertas cortahumo \nno son necesarias para el funcionamiento y control del sistema.\n2. Las compuertas cortahumo no son necesarias en las penetraciones de las ba-\nrreras cortahumo cuando las aberturas de los conductos se limitan a un único \ncompartimento de humos y los conductos son de acero.\n3. No se requieren compuertas cortahumo en las penetraciones de pasillos \ncuando el conducto está construido con acero de un espesor no inferior a 0,48 \nmm (0,019 pulgadas) y no hay aberturas que den servicio al pasillo.\n\n\n4. Las compuertas cortahumo no son necesarias en las barreras cortahumo exi-\ngidas por la Sección 4.7.5 del Código de Diseño y Construcción de Edificaciones \nen la República Dominicana para el Grupo I-2 Condición 2 cuando el sistema \nde calefacción, ventilación y aire acondicionado está totalmente canalizado de \nacuerdo con la Sección 6.3 y cuando los edificios están equipados en su totali-\ndad con un sistema de rociadores automáticos de acuerdo con el Reglamento \nPara la Seguridad y Protección Contra Incendios (R-032).",
+   "paginas": [
+    252,
+    253,
+    254
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.5.4.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "COMPUERTA DE HUMOS",
+   "texto": "COMPUERTA DE HUMOS. Las compuertas cortahumo se cerrarán \nsegún lo dispuesto en la sección 5.7.3.3.2.",
+   "paginas": [
+    254
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.5.5",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "RECINTOS DE EJES",
+   "texto": "RECINTOS DE EJES. Los cerramientos de huecos en los que se permita \nla penetración de conductos y aberturas de transferencia de aire se protegerán \ncon compuertas cortafuegos y cortahumo homologadas instaladas de acuerdo \ncon su listado.\nEXCEPCIONES:\n1. Las compuertas cortafuegos no son necesarias en las penetraciones de los \nhuecos cuando se dé alguna de las siguientes circunstancias:\na. Los subductos de escape de acero se extienden no menos de 559 mm (22 \npulgadas) verticalmente en los conductos de escape siempre que haya un flujo \nde aire continuo hacia arriba hasta el exterior.\nb. Las penetraciones se ensayan de acuerdo con ASTM E119 o UL 263 como \nparte del conjunto con clasificación de resistencia al fuego.\nc. Los conductos se utilizan como parte de un sistema de control de humos \naprobado de acuerdo con la Sección 9.9 del Código de Construcción de Florida, \nEdificación, y donde la compuerta cortafuegos interferirá con el funcionamien-\nto del sistema de control de humos.\n\n\nd. Las penetraciones se producen en los conductos de escape o de suministro \nde los aparcamientos que están separados de otros conductos del edificio por \nuna construcción con una resistencia al fuego no inferior a 2 horas.\n2. En las ocupaciones de los Grupos de negocios residenciales equipadas en \nsu totalidad con un sistema de rociadores automáticos de acuerdo con el Có-\ndigo de Diseño y Construcción de Edificaciones en la República Dominicana \ny el Reglamento Para la Seguridad y Protección Contra Incendios (R-032), no \nse requieren compuertas cortahumo en las penetraciones de los pozos donde \nlas aberturas de escape de la cocina, la secadora de ropa, el baño y el cuarto \nde aseo con subductos de escape de acero, que tengan un espesor mínimo de \n0.4712 mm (0.0187 pulgadas) (calibre No. 26), se extiendan no menos de 559 \nmm (22 pulgadas) verticalmente y el ventilador de extracción en el extremo su-\nperior esté alimentado continuamente y mantenga el flujo de aire hacia arriba \nhasta el exterior.\n3. No se requieren compuertas cortahumo en las penetraciones de los conduc-\ntos de extracción o suministro en los aparcamientos que estén separados de \notros conductos del edificio por una construcción con una resistencia al fuego \nno inferior a 2 horas.\n4. No se requieren compuertas de humo en las penetraciones de pozos don-\nde los conductos se utilizan como parte de un sistema mecánico aprobado de \ncontrol de humo diseñado de acuerdo con la Sección 9.9 del Código de Cons-\ntrucción de Florida, Construcción y donde la compuerta de humo interferirá \ncon el funcionamiento del sistema de control de humo.\n5. Las compuertas cortafuegos y las compuertas combinadas cortafuegos/\nhumo no son necesarias en los sistemas de extracción de cocinas y secadoras \nde ropa instalados de acuerdo con este código.",
+   "paginas": [
+    254,
+    255
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.5.5.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "CERRAMIENTO EN LA PARTE INFERIOR",
+   "texto": "CERRAMIENTO EN LA PARTE INFERIOR. Los cerramientos de ejes \nque no se extiendan hasta la parte inferior del edificio o estructura deberán es-\ntar protegidos de acuerdo con el Código de Diseño y Construcción de Edifica-\nciones en la República Dominicana.",
+   "paginas": [
+    255
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.5.6",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "PAREDES EXTERIORES",
+   "texto": "PAREDES EXTERIORES. Los conductos y las aberturas de transferen-\ncia de aire en paredes exteriores con clasificación de resistencia al fuego que \ndeban tener aberturas protegidas de acuerdo con el Código de Diseño y Cons-\ntrucción de Edificaciones en la República Dominicana deberán protegerse con \ncompuertas cortafuegos listadas instaladas de acuerdo con su listado.",
+   "paginas": [
+    255,
+    256
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.5.7",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "TABIQUES DE HUMO",
+   "texto": "TABIQUES DE HUMO. En cada punto en el que una abertura de paso \nde aire penetre en una partición de humos se instalará una compuerta de hu-\nmos homologada diseñada para resistir el paso del humo. Las compuertas cor-\ntahumo y los métodos de accionamiento de las mismas cumplirán lo dispuesto \nen el apartado 5.7.3.3.2.\nEXCEPCIÓN: Cuando la instalación de una compuerta de humos interfiera con \nel funcionamiento de un sistema de control de humos requerido de acuerdo \ncon la Sección 4.13, se utilizará una protección alternativa aprobada.",
+   "paginas": [
+    256
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.6",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "CONJUNTOS HORIZONTALES",
+   "texto": "CONJUNTOS HORIZONTALES. Las penetraciones por conductos de \naire de un piso, conjunto piso/techo o la membrana del techo de un conjunto \ntecho/techo deberán estar protegidas por un cerramiento de hueco que cum-\npla con el Código de Diseño y Construcción de Edificaciones en la República \nDominicana o deberán cumplir con las Secciones 5.7.6.1 a 5.7.6.3.",
+   "paginas": [
+    256
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.6.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "PENETRACIONES PASANTES",
+   "texto": "PENETRACIONES PASANTES. En ocupaciones que no sean de los \nGrupos I-2 e I-3, se permite un conducto construido con materiales aprobados \nde acuerdo con la Sección 6.3 que penetra un conjunto de piso/techo con clasi-\nficación de resistencia al fuego que conecta no más de dos pisos sin protección \nde cerramiento de hueco siempre que se instale una compuerta contra incen-\ndios listada en la línea del piso o que el conducto esté protegido de acuerdo \ncon el Código de Diseño y Construcción de Edificaciones en la República Domi-\nnican. Para aberturas de transferencia de aire, consulte el Código de Diseño y \nConstrucción de Edificaciones en la República Dominicana.\nEXCEPCIÓN: Se permite que un conducto penetre en tres plantas o menos sin \nuna compuerta cortafuegos en cada planta siempre que cumpla todos los re-\nquisitos siguientes:\n\n\n1. El conducto estará contenido y situado dentro de la cavidad de una pared \ny estará construido de acero con un espesor mínimo de 0,4712 mm (0,0187 \npulgadas) (calibre n. º 26).\n2. El conducto deberá abrirse a una sola unidad de vivienda o dormitorio y el \nsistema de conductos deberá ser continuo desde la unidad hasta el exterior del \nedificio.\n3. El conducto no deberá exceder un diámetro nominal de 102 mm (4 pulgadas) \ny el área total de dichos conductos no deberá exceder 100 pulgadas cuadradas \npor cada 64 516 mm2  por 9.3 m2 (100 pies cuadrados) del área del piso.\n4. El espacio anular alrededor del conducto está protegido con materiales que \nimpiden el paso de llamas y gases calientes suficientes para inflamar los resi-\nduos de algodón cuando se someten a las condiciones de tiempo-temperatura \nASTM E119 o UL 263 bajo una diferencia de presión positiva mínima de 0,01 \npulgadas (2,49 Pa) de agua en el lugar de la penetración durante el período de \ntiempo equivalente a la clasificación de resistencia al fuego de la construcción \npenetrada.\n5. Las aberturas de rejilla situadas en un techo de un conjunto de piso/techo \no techo/techo con clasificación de resistencia al fuego se protegerán con una \ncompuerta de radiación de techo listada instalada de acuerdo con la Sección \n5.7.6.2.1.",
+   "paginas": [
+    256,
+    257
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.6.2",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "PENETRACIONES DE MEMBRANA",
+   "texto": "PENETRACIONES DE MEMBRANA. Los conductos y aberturas de \ntransferencia de aire construidos con materiales aprobados, de conformidad \ncon la Sección 6.3, que penetren en la membrana del techo de un conjunto de \nsuelo/techo o techo/techo con clasificación de resistencia al fuego se protege-\nrán con uno de los siguientes elementos:\n1.  Un cerramiento de hueco de acuerdo con el Código de Diseño y Construc-\nción de Edificaciones en la República Dominicana.\n2.  Una compuerta de radiación de techo homologada instalada en la línea del \n\n\ntecho donde un conducto penetra en el techo de un conjunto suelo/techo o \ntecho/techo con clasificación de resistencia al fuego.\n3.  Una compuerta de radiación de techo homologada instalada en la línea del \ntecho en la que un difusor sin conducto penetra en el techo de un conjunto de \nsuelo/techo o techo/techo con resistencia al fuego.",
+   "paginas": [
+    257,
+    258
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.6.2.1",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "COMPUERTAS DE RADIACIÓN DE TECHO",
+   "texto": "COMPUERTAS DE RADIACIÓN DE TECHO. Los amortiguadores de \nradiación de techo se ensayarán de conformidad con la Sección 5.7.3.1. Los \namortiguadores de radiación de techo se instalarán de acuerdo con los detalles \nindicados en el conjunto con clasificación de resistencia al fuego y las instruc-\nciones de instalación del fabricante y el listado. Los amortiguadores de radia-\nción de techo no son necesarios en los siguientes casos:\n1.  Los ensayos realizados de conformidad con ASTM E119 o UL 263 han de-\nmostrado que las compuertas de radiación del techo no son necesarias para \nmantener la clasificación de resistencia al fuego del conjunto.\n2. Cuando las penetraciones del conducto de escape estén protegidas de acuer-\ndo con el Código de Diseño y Construcción de Edificaciones en la República \nDominicana, estén situadas dentro de la cavidad de una pared y no atraviesen \notra unidad de vivienda o espacio de inquilino.\n3.  Cuando las aberturas de conductos y de transferencia de aire estén protegi-\ndas con un sistema de protección de salida de conductos ensayado como parte \nde un conjunto con clasificación de resistencia al fuego de acuerdo con ASTM \nE119 o UL 263.",
+   "paginas": [
+    258
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM",
+     "UL"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.6.3",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "CONJUNTOS DE SUELO NO RESISTENTES AL FUEGO",
+   "texto": "CONJUNTOS DE SUELO NO RESISTENTES AL FUEGO. Los sistemas \nde conductos construidos con materiales aprobados de acuerdo con la Sección \n5.3 que penetren en conjuntos de suelo no resistentes al fuego deberán estar \nprotegidos por cualquiera de los métodos siguientes:\n\n\n1.  Un cerramiento de hueco de acuerdo con el Código de Diseño y Construc-\nción de Edificaciones en la República Dominicana.\n2.  El conducto no conecta más de dos pisos, y el espacio anular alrededor del \nconducto penetrante está protegido con un material incombustible aprobado \nque resiste el paso libre de las llamas y los productos de la combustión.\n3. En conjuntos de pisos compuestos de materiales incombustibles, no se re-\nquerirá un hueco cuando el conducto conecte no más de tres pisos, y el espa-\ncio anular alrededor del conducto penetrante esté protegido con un material \nincombustible aprobado que resista el paso libre de las llamas y los productos \nde la combustión y se instale una compuerta contra incendios en cada línea de \npiso.\nEXCEPCIÓN: No se requieren compuertas cortafuegos en conductos dentro \nde unidades de vivienda residenciales individuales.",
+   "paginas": [
+    258,
+    259
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.7",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "CONDUCTOS FLEXIBLES Y CONECTORES DE AIRE",
+   "texto": "CONDUCTOS FLEXIBLES Y CONECTORES DE AIRE. Los conductos \nflexibles y los conectores de aire no atravesarán ningún conjunto con clasifica-\nción de resistencia al fuego.",
+   "paginas": [
+    259
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.7.8",
+   "titulo_num": 5,
+   "capitulo": "5.7",
+   "encabezado": "DETALLES DE UBICACIÓN E INSTALACIÓN",
+   "texto": "DETALLES DE UBICACIÓN E INSTALACIÓN. La ubicación específica y \nlos detalles de instalación de cada compuerta cortafuegos, compuerta de techo \ny compuerta cortahumo se mostrarán e identificarán adecuadamente en los \nplanos del edificio por parte del proyectista.",
+   "paginas": [
+    259
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  },
+  {
+   "id": "5.8.1",
+   "titulo_num": 5,
+   "capitulo": "5.8",
+   "encabezado": "EQUILIBRIO",
+   "texto": "EQUILIBRIO. Los sistemas de distribución de aire, ventilación y extrac-\nción dispondrán de medios que permitan ajustar el sistema para alcanzar los \ncaudales de aire de diseño y se equilibrarán mediante un método aprobado. \nLa distribución del aire de ventilación se equilibrará mediante un método ho-\nmologado y dicho equilibrado verificará que el sistema de distribución de aire \nes capaz de suministrar y evacuar los caudales de aire exigidos en el capítulo 3.\n\n\nTÍTULO.6\nCALDERAS, CALENTADORES DE AGUA \nY RECIPIENTES A PRESIÓN",
+   "paginas": [
+    259,
+    260
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 4,
+   "num_conflicto": false
+  }
+ ]
+}

@@ -1,0 +1,2505 @@
+{
+ "volumen": 2,
+ "sigla": "DIHE",
+ "nombre_volumen": "Instalaciones Hidrosanitarias en Edificaciones",
+ "titulo": 2,
+ "nombre": "Abastecimiento y Distribución de Agua en Edificios",
+ "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "2.10": "UNIDADES PARA EL TRATAMIENTO DE AGUA POTABLE",
+  "2.11": "SISTEMA CONTRA INCENDIO",
+  "2.2": "DOTACIONES",
+  "2.3": "ACOMETIDAS Y MEDIDORES",
+  "2.4": "SISTEMA DE DISTRIBUCIÓN",
+  "2.5": "DEPÓSITO DE ALMACENAMIENTO DE AGUA",
+  "2.6": "INSTALACIÓN DEL SISTEMA DE DISTRIBUCIÓN DE",
+  "2.7": "PROTECCIÓN DEL SUMINISTRO DE AGUA POTABLE",
+  "2.8": "INSTALACIONES SANITARIAS PARA CENTROS DE SALUD",
+  "2.9": "DESINFECCIÓN DEL SISTEMA DE AGUA POTABLE"
+ },
+ "clausulas": [
+  {
+   "id": "2.1.1",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "ABASTECIMIENTO INDIVIDUAL DE AGUA",
+   "texto": "ABASTECIMIENTO INDIVIDUAL DE AGUA. Sólo se podrán utilizar \nfuentes individuales de abastecimiento de agua en aquellos lugares donde no \nexista una red pública de abastecimiento de agua potable. La Autoridad de Ad-\nministración del Código podrá eximir de este requerimiento a edificaciones que \nrequieran cantidades superiores a la capacidad de la red de acueducto en un \nlugar dado. Cuando se utilizan fuentes individuales de abastecimiento se debe-\nrán considerar, las especificaciones establecidas en el TÍTULO 7.",
+   "paginas": [
+    42
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.2",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "TUBERÍA DE SUMINISTRO",
+   "texto": "TUBERÍA DE SUMINISTRO. La tubería que abastece de agua a la edi-\nficación deberá ser de clase y material certificado por el Instituto Dominicano \npara la Calidad (INDOCAL), o por un laboratorio acreditado, para su uso en \nconducción de agua potable, en la cantidad y presión correspondientes, según \nlo establecido en este Volumen.",
+   "paginas": [
+    42
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.3",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "SEGURIDAD DE LAS LINEAS",
+   "texto": "SEGURIDAD DE LAS LINEAS. Se deberá diseñar y construir sistemas \nde suministro de tal forma que las edificaciones donde se formen construyan \njuntas de dilatación térmica, juntas de expansión que sean capaces de permitir \nel movimiento de las estructuras, sin que las líneas sufran daños, manteniendo \nla operatividad del sistema.",
+   "paginas": [
+    42,
+    43
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.4",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "",
+   "texto": "SEPARACIÓN DE LAS TUBERÍAS DE ABASTECIMIENTO Y TUBERÍAS \nDE ALCANTARILLADO DE LA EDIFICACIÓN. La tubería de suministro de \nagua desde la red de acueducto hasta la edificación deberá estar separada de \nla tubería de drenaje sanitario que sale desde la edificación hacia las redes pú-\nblicas de alcantarillado, a una distancia horizontal de por lo menos un metro \n(1m). Se podrá colocar a una distancia horizontal menor, únicamente cuando \nla tubería de agua está por lo menos a 0.25 m por encima de la tubería de dre-\nnaje.",
+   "paginas": [
+    43
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.5",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "PREVENCIÓN DE LA CONTAMINACIÓN",
+   "texto": "PREVENCIÓN DE LA CONTAMINACIÓN. Las tuberías que abaste-\ncen de agua a la edificación no se deberán colocar por debajo o por encima \nde cámaras sépticas, campos de infiltración de drenaje sanitario, filtrantes u \notras fuentes potenciales de contaminación cruzada por contacto con aguas \nresiduales.",
+   "paginas": [
+    43
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.1.6",
+   "titulo_num": 2,
+   "capitulo": "2.1",
+   "encabezado": "CAUDALES",
+   "texto": "CAUDALES. Los caudales necesarios para el abastecimiento de la edi-\nficación se calcularán considerando las dotaciones establecidas, por tipo o uso \nde edificación, de acuerdo con la TABLA 1-A. Los caudales en cada tramo de la \nred de distribución dentro de la edificación se calcularán utilizando los criterios \nde diseño presentados en este Volumen.",
+   "paginas": [
+    43
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.1",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "DOTACIONES URBANAS",
+   "texto": "DOTACIONES URBANAS. La cantidad de agua que se deberá asignar a \nlos usuarios de la red de abastecimiento de agua potable en el área urbana, de \nacuerdo con el tipo o uso de la edificación, está establecido en la TABLA 1-A. En \ncaso de que algún proyecto no especifique su dotación según lo indicado en la \ntabla, se deberá consultar la autoridad competente de acueducto que corres-\nponda. \n\n\nTABLA 1-A\nDOTACIONES URBANAS ESTIMADAS POR TIPO O USO \nDE LA EDIFICACIÓN\nTABLA 1-A\nDOTACIONES URBANAS ESTIMADAS POR TIPO \nO USO DE LA EDIFICACIÓN\n\n\n\nTABLA 1-A\nDOTACIONES URBANAS ESTIMADAS POR TIPO O \nUSO DE LA EDIFICACIÓN\n\n\n\nTABLA 1-B\nDOTACIONES INDUSTRIALES",
+   "paginas": [
+    43,
+    44,
+    45,
+    46
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.3",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "DOTACIONES PARA ACTIVIDADES MUNICIPALES",
+   "texto": "DOTACIONES PARA ACTIVIDADES MUNICIPALES. \nSe considerarán los valores establecidos en la TABLA 1-C.\nTABLA 1-C\nDOTACIONES PARA ACTIVIDADES MUNICIPALES",
+   "paginas": [
+    46
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.2",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "DOTACIONES INDUSTRIALES",
+   "texto": "DOTACIONES INDUSTRIALES. Se considerarán los valores estable-\ncidos en la siguiente TABLA 1-B, dependiendo del tipo de industria, más el \nconsumo por empleado establecido en la TABLA 1-A.",
+   "paginas": [
+    46
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.4",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "DOTACIONES RURALES",
+   "texto": "DOTACIONES RURALES. Las dotaciones de agua para edificaciones \ndestinadas al alojamiento y/o crianza de animales, tales como granjas, esta-\nblos, porquerizas, caballerizas y otras, se realizará según la TABLA 1-D.\nTABLA 1-D\nDOTACIONES RURALES ESTIMADAS POR TIPO O\n USO DEL ALOJAMIENTO \nTABLA 1-E\nDOTACIONES RURALES PARA MATADEROS ESTIMADAS  \nPOR TIPO O USO",
+   "paginas": [
+    46,
+    47
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.2.5",
+   "titulo_num": 2,
+   "capitulo": "2.2",
+   "encabezado": "DOTACIONES PARA MATADEROS",
+   "texto": "DOTACIONES PARA MATADEROS. La dotación de agua para mata-\nderos públicos o privados estará de acuerdo con el número y clase de anima-\nles a beneficiar, según la TABLA 1-E.",
+   "paginas": [
+    47
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.1",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "",
+   "texto": "ACOMETIDAS",
+   "paginas": [
+    47
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.1.1",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "AUTORIZACION Y VERIFICACION FINAL",
+   "texto": "AUTORIZACION Y VERIFICACION FINAL. La autorización y verifica-\nción final del adecuado diseño e instalación de las acometidas deberá ser dada \npor la empresa que administra la red pública de acueducto. Esta sección esta-\nblece los aspectos técnicos de la construcción de acometidas del sistema de \nabastecimiento de agua potable a las edificaciones, que deberá constar de los \nelementos indicados a continuación:\na)  Unión de Empalme de la Acometida a la Red Principal. La unión puede ser \ncon abrazadera, si se hace a tuberías de materiales plásticos o sin abrazadera si \nse efectúa a tuberías de hierro dúctil, hierro fundido o acero. En ambos casos, \nla unión deberá tener una llave de paso, pero en el segundo caso, la llave de \nincorporación quedará instalada directamente en la tubería, siempre y cuando \nésta permita hacerle rosca.\nb)  T ubería de la Acometida. La tubería de la acometida tendrá un diámetro \nmínimo de 19 mm (¾”) y será de Polietileno de alta densidad según NORDOM \n502, 503 (ASTM D1785) o equivalente. Las piezas de conexión deberán ser las \nadecuadas para el tipo y clase de tubería a utilizar, de conformidad con las nor-\nmas correspondientes.\nc)  Llave de Paso (a la Entrada del Medidor y antes del medidor un filtro).\nd)  Medidor con sus Acoples. Para registrar el consumo de la instalación se \ninstalará un medidor de un mínimo de 19mm (¾”) de diámetro, cuando sea \nrequerido por la autoridad de acueductos.\ne)  Válvula de Seccionamiento, (después del Medidor).\nf)   Unión universal.\ng)  Caja de medidor. Se deberá colocar en la acera a 0.30 m del borde interior, \nsalvo indicación contraria de la autoridad de acueducto. Siempre se deberá \ncolocar en sitio de fácil acceso, para operación, lectura y mantenimiento. La \n\n\nposición de las cajas en las aceras se hará de tal manera que se conserve un \nalineamiento uniforme de las mismas, garantizándose su impermeabilidad. \nh) Panel de lectura centralizada remota. Se podrá considerar la lectura centra-\nlizada remota, desde un panel ubicado convenientemente y de fácil acceso en \nel primer piso. En este caso además de lo indicado en el inciso d) del presente \ncapítulo, deberá preverse un espacio para el panel de lectura remota y ductos \npara la instalación de cables de transmisión desde los registros de lectura de \nlos medidores.\ni)  Válvula de retención (Check). Si se requiere.",
+   "paginas": [
+    47,
+    48,
+    49
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.1.2",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "DIÁMETRO DE LA ACOMETIDA",
+   "texto": "DIÁMETRO DE LA ACOMETIDA. Para determinar el diámetro de la \nacometida se calculará el volumen requerido de acuerdo con el tipo o uso de la \nedificación. Cuando la edificación tenga un tanque de almacenamiento o cis-\nterna se deberá estimar el tiempo de llenado correspondiente, nunca superior a \n8 horas, la válvula de retención (Check o cheque) será obligatoria. La autoridad \nque maneja el acueducto estará exenta del uso indebido de terceros.",
+   "paginas": [
+    49
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.1.3",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "INSTALACIÓN",
+   "texto": "INSTALACIÓN. La instalación de las acometidas se hará de acuerdo \ncon las consideraciones siguientes:\na)  Serán realizadas por personas o entidades debidamente autorizadas por la \nempresa que administra la red pública de acueducto.\nb)  No se admitirán dos o más acometidas para una vivienda, ni interconexión \nde tuberías interiores de propiedades diferentes.\nc)  En general, las perforaciones de la tubería principal se efectuarán en un cos-\ntado del tubo, con las máquinas apropiadas, de manera que formen un ángulo \nque no exceda los 45° con la horizontal, y la tubería se tenderá de tal manera \nque llegue normal al perímetro de la edificación. La perforación se efectuará \n\n\nen la parte superior del tubo en los casos en que por razones especiales no se \npueda efectuar de la manera indicada.\nd)  Las tuberías de hierro fundido, hierro dúctil y acero mayores de 6.35 mm \n(¼”) de espesor se pueden perforar e instalarles la llave de incorporación sin \nnecesidad de usar abrazaderas.\ne)  Las acometidas a tubería de PVC se harán mediante una abrazadera, la cual \nestará equipada con un empaque de caucho o similar que actúe como material \nsellante entre el cuerpo de la tubería y la abrazadera.\nf)   La tubería se colocará sobre un asiento de arena, a una profundidad mínima \nde 0.60 m, con relación al pavimento terminado. El relleno será de material \nclasificado y compactado.\ng)  Una vez instalada la tubería hasta la llave de paso se probará la misma ase-\ngurando que no haya escapes.",
+   "paginas": [
+    49,
+    50
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.1.4",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "DIÁMETRO MÁXIMO DE ACOMETIDA",
+   "texto": "DIÁMETRO MÁXIMO DE ACOMETIDA. Dependiendo del diámetro \nde la red de acueducto, el diámetro de la acometida no deberá superar los valo-\nres señalados en la TABLA 2.\nTABLA 2 \nDIÁMETROS MÁXIMOS DE ACOMETIDAS\n\n\n\nTABLA 2 \nDIÁMETROS MÁXIMOS DE ACOMETIDAS\nPÁRRAFO. Sólo se permitirán acometidas con diámetros mayores a los esta-\nblecidos en la TABLA 2 cuando se tenga la autorización de la autoridad com-\npetente, pero en ningún caso dicho diámetro podrá ser mayor que la mitad del \ndiámetro de la tubería de la red de distribución.",
+   "paginas": [
+    50,
+    51
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.2",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "",
+   "texto": "MEDIDORES",
+   "paginas": [
+    51
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.2.1",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "SUMINISTRO E INSTALACIÓN",
+   "texto": "SUMINISTRO E INSTALACIÓN. Los medidores serán suministrados \ny autorizados por la empresa que administra la red pública de acueducto.",
+   "paginas": [
+    51
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.3.2.2",
+   "titulo_num": 2,
+   "capitulo": "2.3",
+   "encabezado": "INDIVIDUALIDAD DEL SUMINISTRO",
+   "texto": "INDIVIDUALIDAD DEL SUMINISTRO. El diseño de las instalaciones \nsanitarias deberá permitir la medición de los volúmenes consumidos de agua, \nsea para la edificación completa o en forma individual para cada usuario. \nPÁRRAFO. El diseño de las instalaciones hidráulicas de suministro para pro-\nyectos multifamiliares deberá permitir la individualización para fines de micro \nmedición o para mantenimiento de las instalaciones, de cada apartamento o \nvivienda.",
+   "paginas": [
+    51
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.1",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "",
+   "texto": "CRITERIOS DE DISEÑO",
+   "paginas": [
+    51
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.1.1",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "",
+   "texto": "MÉTODOS PARA EL DISEÑO DEL SISTEMA DE DISTRIBUCIÓN DE \nAGUA.  El diseño del sistema de la distribución del agua se hará mediante mé-\ntodos de cálculo hidráulico generalmente aceptados. La velocidad de diseño \ndeberá fluctuar entre un valor mínimo de 0.60 m/seg y un valor máximo de 2.5 \nm/seg; siendo el valor óptimo de diseño de las redes de 1.5 m/seg respetando \nlos diámetros mínimos.",
+   "paginas": [
+    51,
+    52
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.1.2",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "PRESIÓN MÁXIMA ADMISIBLE EN REDES INTERIORES",
+   "texto": "PRESIÓN MÁXIMA ADMISIBLE EN REDES INTERIORES. La presión \nmáxima admisible en las redes interiores no deberá superar la equivalente a \n42.2 metros de columna de agua (m.c.a.), es decir 413.69 Kpa (60 libras/pul-\ngada²). Si la presión de suministro normal sobrepasa el límite indicado en esta \nsección, se deberán instalar válvulas reductoras de presión u otro sistema apro-\npiado, tanto en los sistemas de bombeo como en los sistemas por gravedad.",
+   "paginas": [
+    52
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.1.3",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "PRESIÓN MÍNIMA ADMISIBLE EN REDES INTERIORES",
+   "texto": "PRESIÓN MÍNIMA ADMISIBLE EN REDES INTERIORES. La presión \nmínima en la red interior deberá ser la suficiente para asegurar el correcto fun-\ncionamiento de los aparatos sanitarios conectados. Cuando en la instalación \nse usen aparatos con fluxómetros no será menor de 103.42 Kpa (15 libras/\npulgada²) en el aparato más desfavorable y cuando se usen aparatos de tanque \nno será menor de 68.95 Kpa (10 libras/pulgada²).",
+   "paginas": [
+    52
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.1.4",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "COLOCACIÓN DE TUBERÍAS EN EDIFICACIONES",
+   "texto": "COLOCACIÓN DE TUBERÍAS EN EDIFICACIONES. La colocación de \nla tubería en la edificación se hará procurando la mayor facilidad de acceso para \ncambio, mantenimiento o reparación.",
+   "paginas": [
+    52
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.1.5",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "",
+   "texto": "COLOCACIÓN DE TUBERÍAS EN MUROS DE HORMIGÓN AR -\nMADO DE DUCTILIDAD LIMITADA. En edificaciones basadas en muros de \nhormigón armado de ductilidad limitada no se permitirá el paso de tuberías de \ninstalaciones a través de los muros estructurales. Alternativamente se deberán \ndisponer aberturas en las losas (patinillos), con dimensiones adecuadas que \npermitan el paso de tuberías de las instalaciones.",
+   "paginas": [
+    52
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.1.6",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "CONSIDERACIÓN COLUMNAS FALSAS",
+   "texto": "CONSIDERACIÓN COLUMNAS FALSAS. En casos donde el diseña-\n\n\ndor lo considere necesario, se podrán disponer columnas falsas, consistentes \nen elementos no estructurales, diseñados para alojar las tuberías de las insta-\nlaciones.",
+   "paginas": [
+    52,
+    53
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.1.7",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "RECORRIDO TUBERÍAS",
+   "texto": "RECORRIDO TUBERÍAS. El recorrido de las tuberías deberá seguir el \ncamino más corto, sin cruzar áreas innecesarias de la edificación.",
+   "paginas": [
+    53
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.1.8",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "PASO DE TUBERÍAS",
+   "texto": "PASO DE TUBERÍAS.  Las tuberías no deberán interferir con los ele-\nmentos estructurales de la edificación.",
+   "paginas": [
+    53
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.1.9",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "",
+   "texto": "FACTORES POR CONSIDERAR PARA EL SISTEMA DE DISTRIBU-\nCIÓN DE AGUA. Para el diseño del sistema de distribución se tomarán en \ncuenta la demanda y la presión de los aparatos incluidos en la TABLA 3; se \nseleccionará el diámetro de la tubería de distribución según el uso de la edifica-\nción, de acuerdo con lo indicado en las TABLAS 4 y 5.",
+   "paginas": [
+    53
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.1.10",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "",
+   "texto": "REQUISITOS PARA EL DISEÑO DEL SISTEMA DE DISTRIBUCIÓN \nDE AGUA Y SELECCIÓN DE DIÁMETROS DE TUBERÍA. El sistema de distri-\nbución del agua deberá ser diseñado, y los diámetros de tubería serán selec-\ncionados para garantizar que, bajo las condiciones de máxima demanda, las \nconexiones a los aparatos sanitarios puedan suministrar los flujos mínimos \nindicados en la TABLA 3, a las presiones adecuadas. \nTABLA 3\nGASTO, DIÁMETRO Y PRESIÓN MÍNIMOS REQUERIDOS EN LAS \nTUBERÍAS ALIMENTADORAS, POR APARATOS Y PIEZAS SANITARIAS\n\n\nTABLA 3\nGASTO, DIÁMETRO Y PRESIÓN MÍNIMOS REQUERIDOS EN LAS \nTUBERÍAS ALIMENTADORAS, POR APARATOS Y PIEZAS SANITARIAS",
+   "paginas": [
+    53,
+    54
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.1.11",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "CAUDAL Y PRESIÓN MÍNIMOS",
+   "texto": "CAUDAL Y PRESIÓN MÍNIMOS. El caudal y la presión mínimos \npara los aparatos no incluidos en la TABLA 3 se tomarán de acuerdo con las \nespecificaciones del fabricante.",
+   "paginas": [
+    54
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.2",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "",
+   "texto": "RED DE DISTRIBUCIÓN",
+   "paginas": [
+    54
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.2.1",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "",
+   "texto": "NORMAS PARA EL DISEÑO DE INSTALACIONES SANITARIAS EN \nEDIFICIOS DE HASTA 20 PLANTAS. Para el diseño de las instalaciones sanita-\nrias en edificios de hasta 20 plantas, con una distancia máxima de 100 metros \ndesde la acometida a la conexión (grifo, fluxómetro o aparato más alejado), \npodrán ser utilizadas las TABLAS 4, 5 y 6 de esta sección.",
+   "paginas": [
+    54,
+    55
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.2.2",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "DIÁMETRO",
+   "texto": "DIÁMETRO. El diámetro (D) de las tuberías dependerá del número de \ngrifos servidos en el tramo calculado, y estará en función material de la tubería \ny del uso de la edificación, de acuerdo con lo indicado en la TABLA 4 y TABLA \n5. El diámetro mínimo será de 12.5mm (½”) para todo tramo, excepto para \ncolumnas que podrá ser de 18 mm (¾”).\nPÁRRAFO. El material podrá ser polipropileno PN16 o polietileno HDPE en el \ncaso de tuberías para agua fría, y polipropileno PN20, PN25 o polietileno HDPE \nen el caso de agua caliente, siempre que hayan sido aprobados previamente \npor el INDOCAL.\nTABLA 4\nDIAMETRO DE TUBERIAS EN EDIFICIOS DE USO PRIVADO\n\n\n\nTABLA 5\nDIÁMETRO DE TUBERÍAS EN EDIFICIOS DE USO PÚBLICO\nTABLA 5\nDIÁMETRO DE TUBERÍAS EN EDIFICIOS DE USO PÚBLICO\nTABLA 6\nDIÁMETRO SEGÚN NÚMERO DE FLUXÓMETROS",
+   "paginas": [
+    55,
+    56
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.2.3",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "DIÁMETROS REQUERIDOS AGUA FRÍA",
+   "texto": "DIÁMETROS REQUERIDOS AGUA FRÍA. Los diámetros requeridos \npara instalaciones de agua fría, según el número de fluxómetros servidos por \nun tramo, serán determinados de acuerdo con lo establecido en la TABLA 6.",
+   "paginas": [
+    56
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.2.4",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "LLAVES Y MEDIDORES",
+   "texto": "LLAVES Y MEDIDORES. El diámetro de las llaves que serán usadas \nen la acometida, así como el calibre de los medidores, serán seleccionados \nsegún el diámetro del tramo de tubería donde se instalarán y del material (el \ncual deberá haber sido aprobado por el INDOCAL), de acuerdo con lo estable-\ncido en la TABLA 7. \nTABLA 7\nSELECCIÓN DE LLAVES Y MEDIDORES\nTABLA 7\nSELECCIÓN DE LLAVES Y MEDIDORES",
+   "paginas": [
+    56,
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.2.5",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "EQUIPO DE PRESIÓN",
+   "texto": "EQUIPO DE PRESIÓN. Cuando la presión en la red interior sea \ninferior a la indicada en la sección 2.4.1.3, será preciso instalar un equipo de \npresión (bomba, tanque y depósito acumulador) que cumpla con la presión \nmínima estipulada en dicha sección.",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.3.1",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "",
+   "texto": "REQUISITOS DE SUMINISTRO DE AGUA CALIENTE EN EDIFICA-\nCIONES. Se deberá proveer agua caliente a los edificios destinados a hospita-\nles, industrias, donde la naturaleza de procesos industriales así lo requiera, y",
+   "paginas": [
+    57
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.3",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "",
+   "texto": "RED DE AGUA CALIENTE\n\n\nen instalaciones para preparación y expendio de alimentos. En las edificacio-\nnes para vivienda o uso comercial, donde se decida realizar instalación de agua \ncaliente, ésta deberá ser suministrada a los aparatos destinados para baño, \nlavado corporal, propósitos culinarios y lavandería del edificio. Para las edifica-\nciones que requieran suministro de agua caliente, las salidas se diseñarán a la \nizquierda de la salida de suministro de agua fría.",
+   "paginas": [
+    57,
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.3.2",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "DISEÑO",
+   "texto": "DISEÑO. La red de distribución para agua caliente se diseñará y calcu-\nlará de igual forma que la red de agua fría. Las instalaciones de agua caliente en \nlos edificios deberán satisfacer las necesidades de consumo y ofrecer seguridad \ncontra accidentes.",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.3.3",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "",
+   "texto": "TIPOS DE SISTEMAS PARA LA DISTRIBUCIÓN DE AGUA CALIEN-\nTE EN EDIFICACIONES. La distribución de agua caliente desde el equipo de \nproducción a los aparatos sanitarios o puntos requeridos se puede realizar por \nsistemas no circulados y circulados, de la manera siguiente:\na)  El sistema no circulado se recomienda en instalaciones pequeñas, como \nedificios de apartamentos o viviendas individuales de hasta dos pisos.\nb)  El sistema circulado se deberá utilizar en aquellos edificios donde se re-\nquiera un abastecimiento de agua caliente constante e instantáneo, tales como \nhospitales, clínicas, hoteles y los edificios con grandes instalaciones.",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.3.4",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "MATERIALES",
+   "texto": "MATERIALES. En el sistema de agua caliente, las tuberías de distri-\nbución deberán ser de un material que cumpla con la norma dominicana o la \ncertificación de un organismo acreditado que permita al INDOCAL emitir una \ncertificación.",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.3.5",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "MANTENIMIENTO",
+   "texto": "MANTENIMIENTO. El sistema de suministro de agua caliente deberá \nestar provisto con un método capaz de mantener la temperatura del agua du-\nrante el trayecto, cuando la longitud de la tubería de agua caliente sea de más \nde 30 metros para sistemas no circulados, desde el calentador hasta el grifo \nmás cercano.",
+   "paginas": [
+    58
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.3.6",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "AISLAMIENTO DE LA TUBERÍA",
+   "texto": "AISLAMIENTO DE LA TUBERÍA. Las tuberías para agua caliente en \nsistemas circulados deberán ser provistas de un aislante que garantice una re-\nsistencia térmica R, calculada según la fórmula siguiente:\nR = [(ti - to)] (0.0304)] K m2/ W\nDonde ti – t0 = es la diferencia de las temperaturas entre el agua en la tubería \ny el aire que la circunda en grados K.\nPÁRRAFO. No se requerirá aislamiento cuando la diferencia de temperaturas \nsea igual o menor a 287.15oK (14oC).",
+   "paginas": [
+    58,
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.3.7",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "OPERACIÓN DE BOMBEO",
+   "texto": "OPERACIÓN DE BOMBEO. En las edificaciones donde se requiera la \ninstalación de equipo de bombeo para circular el agua caliente en un sistema \ncirculado, la bomba deberá ser provista de un sistema de apagado automático \no manual, cuando el sistema de agua caliente no esté en operación.",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.3.8",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "CONTROL DE EXPANSIÓN TERMAL",
+   "texto": "CONTROL DE EXPANSIÓN TERMAL. En las instalaciones donde \nexista la posibilidad de expansiones termales, se proveerá de controles donde \nsea requerido.",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.3.9",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "CALENTADORES DE GAS, ELÉCTRICOS Y SOLARES",
+   "texto": "CALENTADORES DE GAS, ELÉCTRICOS Y SOLARES. Los aparatos \ncalentadores a gas propano a ser instalados en edificaciones, deberán cumplir \ncon la NORDOM 220. Su instalación según el Reglamento para el Diseño e \nInstalación de Sistemas de Gas Licuado de Petróleo (R-030) para los de gas \nlicuado de petróleo (GLP) y con lo especificado en el Código Eléctrico para los \ncalentadores eléctricos. Su instalación se hará siguiendo las instrucciones del \nfabricante.",
+   "paginas": [
+    59
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.4.3.10",
+   "titulo_num": 2,
+   "capitulo": "2.4",
+   "encabezado": "",
+   "texto": "REQUISITOS DE SEGURIDAD PARA EQUIPOS DE PRODUCCIÓN \nDE AGUA CALIENTE. T odo equipo de producción de agua caliente deberá es-\ntar provisto de válvulas de control de temperatura (válvula de seguridad o ali-\n\n\nvio), de los tipos de escape o de corte automático de la fuente de energía, para \nel caso de que sean eléctricos o de cierre automático de combustible, para el \ncaso de que sean a gas.",
+   "paginas": [
+    59,
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "",
+   "texto": "CISTERNA",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.1",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Se deberá proyectar y construir un depósito de al-\nmacenamiento (cisterna) cuando la edificación tenga más de 2 pisos o supere \nlos 7 m de altura, medidos a partir del nivel más bajo de la vía pública sobre la \ncual penetre la acometida. Sólo se permitirá la instalación directa, (sin cisterna) \ncuando se verifique caudal permanente y presión mínima para el aparato más \ndesfavorable.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.2",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "VOLUMEN",
+   "texto": "VOLUMEN. El volumen de diseño deberá ser por lo menos igual al \nconsumo de 2 días del caudal medio diario, o según lo amerite la frecuencia del \nservicio en la zona. Se deberá incluir además el volumen contra incendio. Para \ninstalaciones hospitalarias se exigirá un mínimo de 3 días del caudal medio \ndiario, para el cálculo del volumen de la cisterna.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.3",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "ENTRADA DE AGUA",
+   "texto": "ENTRADA DE AGUA. La abertura de la tubería de entrada de agua al \ntanque deberá estar a no menos de 0.10 m sobre la tubería de rebose, de tal \nforma que permita la caída completamente libre.",
+   "paginas": [
+    60
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.4",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "CONTROL DE LOS NIVELES",
+   "texto": "CONTROL DE LOS NIVELES. El control de los niveles de agua en los \ndepósitos se hará por medio de interruptores automáticos que permitan:\na) Detener la bomba cuando el nivel de agua en el tanque elevado ascienda \nhasta el nivel máximo previsto.\nb)  Detener la bomba cuando el nivel de agua en la cisterna descienda hasta \n0.05 m por encima de la parte superior de la canastilla de succión o a 15 centí-\nmetros del fondo del depósito.\n\n\nc)  En los depósitos que se alimentan directamente de la red pública, el con-\ntrol del nivel máximo del agua se hará mediante válvula de llenado, flotador o \nsimilar.",
+   "paginas": [
+    60,
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.5",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "DISEÑO",
+   "texto": "DISEÑO. Los tanques subterráneos y semienterrados (cisternas) de-\nberán ser diseñados estructuralmente para resistir las presiones del agua y del \nterreno a las que estarán sometidos, para cuyos fines se deberán considerar las \npresiones hidrostáticas y los empujes pasivos y activos del suelo en su condi-\nción más desfavorable (vacía para los empujes externos y llena para los inter-\nnos, sin compensación para los empujes hidrostáticos). \nPÁRRAFO. Se prohíben las cisternas hechas con paredes de bloques huecos.",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.6",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "CONSIDERACIONES ESTRUCTURALES",
+   "texto": "CONSIDERACIONES ESTRUCTURALES. La solución estructural del \nproyecto de cisterna planteado deberá considerar las condiciones de terreno, \nel tipo de suelo, el volumen de la cisterna y sus dimensiones, así como sus in-\nfluencias por proximidad con otras estructuras.",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.7",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "PREVENCIÓN FILTRACIONES",
+   "texto": "PREVENCIÓN FILTRACIONES. Para evitar filtraciones se deberá dar \nterminación interior a los muros de las cisternas mediante la aplicación de \npañete pulido de 1.5 cm mínimo de espesor, cuya superficie deberá ser im-\npermeabilizada, y adicionalmente se colocarán zabaletas en las uniones de los \nmuros, así como en las uniones de los muros con las losas de piso y techo.",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.8",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "REQUISITOS DE IMPERMEABILIZACIÓN PARA LOSAS DE TECHO",
+   "texto": "REQUISITOS DE IMPERMEABILIZACIÓN PARA LOSAS DE TECHO. \nLa losa de techo de las cisternas deberá ser impermeabilizada en el caso de \nestar situadas bajo parqueos o marquesinas, áreas de talleres o cualquier área \ncuyo uso implique el uso de materiales, para evitar la contaminación por infil-\ntración externa.",
+   "paginas": [
+    61
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.9",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "",
+   "texto": "REQUISITOS DE AUTORIZACIÓN Y PRUEBAS PARA CISTERNAS \nPREFABRICADAS. En el caso de unidades de cisternas prefabricadas, el fabri-\ncante deberá tramitar su autorización en la Dirección de Normas y Reglamen-\n\n\ntaciones del MIVHED, y demostrar mediante las pruebas correspondientes, la \nfactibilidad de resistencias a los esfuerzos que estará sometida la unidad.",
+   "paginas": [
+    61,
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.10",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "PROTECCIÓN DE LA POTABILIDAD DEL AGUA",
+   "texto": "PROTECCIÓN DE LA POTABILIDAD DEL AGUA. Los tanques de \nagua serán diseñados y construidos en forma tal, que garanticen la potabilidad \ndel agua y que no permitan la entrada de aguas de lluvias y el acceso de insectos \no roedores.",
+   "paginas": [
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.11",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "ACCESOS",
+   "texto": "ACCESOS. T oda cisterna deberá estar provista de al menos una aber-\ntura (boca de inspección) que permita el acceso del personal de forma segura \npara la revisión de su operación y el mantenimiento, la cual se levantará un \nmínimo de 0.10 m sobre el nivel del piso y estará dotada de tapa. Las tapas de \nestos accesos deberán estar construidas de tal forma que los materiales utiliza-\ndos no contaminen el agua potable, poniendo atención en pinturas anticorro-\nsivas que no contengan plomo. Deberán ser herméticas, y tener portacandados \ny candados para impedir el ingreso de personal no autorizado.\nEXCEPCIÓN. Se podrán emplear tapas de cierre hermético, las cuales pueden \ninstalarse a nivel del piso, siempre que se garantice la protección contra la con-\ntaminación del agua. La tapa empleada deberá contar con la aprobación del \nINDOCAL.",
+   "paginas": [
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.12",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "ACCESIBILIDAD PARA INSPECCIÓN",
+   "texto": "ACCESIBILIDAD PARA INSPECCIÓN. La ubicación de la abertura \n(boca de inspección) deben permanecer siempre accesibles y disponibles para \nsu apertura en todo momento, por lo que no deben ser bloqueadas en ningún \ncaso por vehículos u otros objetos que impidan el acceso.",
+   "paginas": [
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.13",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "REQUISITOS PARA TANQUES DE AGUA POTABLE",
+   "texto": "REQUISITOS PARA TANQUES DE AGUA POTABLE. Los tanques \nde almacenamiento de agua potable deberán ser lavados, desinfectados y pro-\nbada su impermeabilidad o estanqueidad antes de entrar en servicio, mediante \nla realización de pruebas durante el proceso de construcción o instalación.",
+   "paginas": [
+    62
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.14",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "PRUEBA DE ESTANQUEIDAD",
+   "texto": "PRUEBA DE ESTANQUEIDAD. Para realizar estas pruebas se debe-\nrá llenar la cisterna hasta su máximo nivel de operación, agregando cloro (0.3 \nPPM), y esperar 5 días para verificar el nivel de infiltración alcanzado, que en \nningún caso deberá superar el 0.5% del volumen de operación normal de la \ncisterna.",
+   "paginas": [
+    62,
+    63
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.15",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "",
+   "texto": "RESTRICCIONES PARA LA INSTALACIÓN DE TANQUES SUBTE-\nRRÁNEOS. No se deberán instalar tanques subterráneos o cisternas en lugares \nsujetos a inundación o filtración de aguas de lluvias o residuales.",
+   "paginas": [
+    63
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.16",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "",
+   "texto": "CONDICIONES PARA EL ALMACENAMIENTO DE AGUA POTA-\nBLE. El almacenamiento de agua potable se realizará fuera de calderas, cuartos \nde máquinas, garajes, talleres; y se deberá mantener fuera de atmosferas de \ngases, polvos u otras sustancias contaminantes y/o corrosivas.",
+   "paginas": [
+    63
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.17",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "",
+   "texto": "REBOSES PARA TANQUES DE ALMACENAMIENTO AGUA PO-\nTABLE. Cada tanque de almacenamiento, tinacos o cisternas para el abasteci-\nmiento de agua por gravedad o por impulsión deberá ser provisto con un rebo-\nse de diámetro no menor que los mostrados en la TABLA 8. \nTABLA 8\nTAMAÑO DE LOS TUBOS DE REBOSE EN TANQUES DE AGUA",
+   "paginas": [
+    63
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.18",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "REQUISITOS PARA LA SALIDA DE REBOSE EN CISTERNAS",
+   "texto": "REQUISITOS PARA LA SALIDA DE REBOSE EN CISTERNAS. La \nsalida del rebose deberá estar cubierta con una rejilla o tela metálica resistente \na la corrosión y descargará sobre un techo o drenaje de techo, un piso o drenaje \nde piso o a través de una conexión al sistema de drenaje pluvial de descarga \nabierta, colocándose a no más de 0.15 m de cualesquiera de éstos.",
+   "paginas": [
+    63
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.1.19",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "",
+   "texto": "UBICACIÓN CISTERNAS PARA SUMINISTRO DE AGUA POTA-\nBLE. Las cisternas o tanques de agua no deberán ser ubicados directamente \ndebajo, ni a una distancia menor de 1 m, de cualquier tubería de drenaje sani-\ntario o pluvial o cualquier otra posible fuente de contaminación. De igual for-\nma, se deberá mantener una distancia mínima de 5.00 m a cualquier cámara \nséptica.",
+   "paginas": [
+    63,
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.2",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "",
+   "texto": "TINACOS",
+   "paginas": [
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.2.1",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "",
+   "texto": "REQUISITOS ESTRUCTURALES PARA EL ALMACENAMIENTO DE \nAGUA EN EDIFICACIONES.  Para el almacenamiento de agua en edificaciones \nse permitirá disponer de tinacos o tanques, siempre y cuando en el diseño es-\ntructural se consideren las cargas generadas por éstos en el techo o elementos \nestructurales donde serán colocados.",
+   "paginas": [
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.2.2",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "REQUISITOS DE ANCLAJE Y SOPORTE",
+   "texto": "REQUISITOS DE ANCLAJE Y SOPORTE. Los Tinacos deberán estar \ndotados de una base que garantice la integridad tanto del tinaco como de la \nestructura del edificio. En todo momento deberán estar anclados a la base, con \nlos soportes requeridos, de forma que resistan vientos huracanados.",
+   "paginas": [
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.2.3",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "CONDICIONES PARA LA INSTALACIÓN",
+   "texto": "CONDICIONES PARA LA INSTALACIÓN. No deberán interferir con \nla cobertura del techo, de tal manera que se garantice el mantenimiento del \nimpermeabilizado. Las tuberías deberán colocarse sobre el techo, de forma que \nno interfieran con el mantenimiento del impermeabilizado del techo.",
+   "paginas": [
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.2.4",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "SELECCIÓN DE MATERIALES RESISTENTES",
+   "texto": "SELECCIÓN DE MATERIALES RESISTENTES. Se deberá garantizar la \nintegridad del sistema, utilizando materiales que resistan la exposición a los \nrayos solares, sobre todo los poliméricos.",
+   "paginas": [
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.2.5",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "",
+   "texto": "CONDICIONES PARA LA INSTALACIÓN EN EDIFICIOS EXISTEN-\nTES. En edificios existentes, se permitirá la colocación de tinacos con una ca-\npacidad máxima de hasta 600 galones, siempre y cuando sean ubicados en el \ncruce de vigas y columnas o sobre muros de carga, previo a una revisión estruc-\ntural de los elementos que van a recibir esta carga. No se permitirá la coloca-\nción de tinacos sobre el vano de las losas de techo o entrepisos.",
+   "paginas": [
+    64
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.2.6",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "DESAGÜE",
+   "texto": "DESAGÜE. El agua proveniente de lavado, desagüe o rebose de los \ndepósitos elevados se deberá disponer al sistema de drenaje pluvial de la edi-\nficación en forma indirecta, mediante caída libre no mayor a 0.15 m de altura \nsobre el piso, techo u otro sitio de descarga que sea aceptable.",
+   "paginas": [
+    64,
+    65
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.2.7",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "SOPORTES",
+   "texto": "SOPORTES. Se deberán proveer soportes adecuados para los tanques \nde almacenamiento de agua, de acuerdo con la norma general de construcción.",
+   "paginas": [
+    65
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.3",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "",
+   "texto": "AGUA NO POTABLE",
+   "paginas": [
+    65
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.5.3.1",
+   "titulo_num": 2,
+   "capitulo": "2.5",
+   "encabezado": "ALMACENAMIENTO DE AGUA NO POTABLE",
+   "texto": "ALMACENAMIENTO DE AGUA NO POTABLE. Cuando se propon-\ngan almacenamientos para aguas lluvias, subterráneas contaminadas o de otra \nfuente de agua no tratada y con exclusivo uso no potable se tendrá en cuenta lo \nsiguiente:\na) Su almacenamiento será independiente del previsto para el agua potable.\nb) No existirá interconexión entre los almacenamientos de uno y otro sistema.\nc) Solo se permitirá en el caso de un tratamiento previo del agua no potable; \néste deberá estar sujeto a un previo análisis físico, químico y bacteriológico, y \nsu consecuente tratamiento referido a la norma nacional NORDOM 64.",
+   "paginas": [
+    65
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.1",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "LOCALIZACIÓN DE LLAVES DE PASO",
+   "texto": "LOCALIZACIÓN DE LLAVES DE PASO. Estas deberán ser instaladas en \nlos siguientes lugares:\na) En la tubería de servicio de agua al edificio desde la fuente de abastecimiento \npúblico, según se indica en la sección sobre acometidas.\nb) En la tubería de distribución de agua, en el punto de entrada a la estructura.\n\n\nc) Aguas arriba de cualquier medidor de agua.\nd) En la base de cada columna de agua, en todas las edificaciones, excepto en \naquéllas de dos pisos o menos y en viviendas residenciales de una o dos fami-\nlias.\ne) Al inicio de tuberías alimentadoras, desde tanques elevados (tinacos u \notros), excepto en las edificaciones residenciales de una o dos familias.\nf ) A la entrada de cualquier tubo de abastecimiento de agua hacia una unidad \nde residencia.\ng) En la tubería de abastecimiento de agua a un tanque de almacenamiento por \ngravedad o a presión.\nh) En la tubería de abastecimiento de agua a cada calentador de agua.",
+   "paginas": [
+    65,
+    66
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.2",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "LOCALIZACIÓN DE LAS VÁLVULAS DE CIERRE",
+   "texto": "LOCALIZACIÓN DE LAS VÁLVULAS DE CIERRE. Las válvulas de cierre \ndeberán ser instaladas en las siguientes localizaciones:\na) En la conexión de abastecimiento a cada aparato o pieza sanitaria.\nb) En la tubería de abastecimiento de agua a cada aparato electrodoméstico o \nequipo mecánico.",
+   "paginas": [
+    66
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.3",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "ACCESO A LAS VÁLVULAS Y LLAVES",
+   "texto": "ACCESO A LAS VÁLVULAS Y LLAVES. Se deberá proveer acceso a todas \nlas llaves de paso y válvulas de cierre requeridas.",
+   "paginas": [
+    66
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.4",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "IDENTIFICACIÓN DE LAS VÁLVULAS Y LLAVES",
+   "texto": "IDENTIFICACIÓN DE LAS VÁLVULAS Y LLAVES. T odas las válvulas y \nllaves que no estén ubicadas inmediatamente adyacentes al aparato o pieza \nsanitaria a los que corresponden deberán ser adecuadamente identificadas. Las \nválvulas de conexión al servicio público de agua potable y las de hidrantes siem-\npre deberán ser identificadas.",
+   "paginas": [
+    66
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.5",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "SISTEMAS DE SUMINISTRO DE PRESIÓN",
+   "texto": "SISTEMAS DE SUMINISTRO DE PRESIÓN. En los lugares en que la \npresión de agua del sistema de abastecimiento público o individual es insu-\nficiente para suplir las presiones mínimas y cantidades especificadas en este \nVolumen, la presión deberá ser suplida por un equipo de bombeo, el cual pue-\nde estar auxiliado por un tanque de agua elevado o por un sistema de presión \nhidroneumático.",
+   "paginas": [
+    66,
+    67
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.6",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "TANQUES A PRESIÓN, ALIVIO DE VACÍO",
+   "texto": "TANQUES A PRESIÓN, ALIVIO DE VACÍO. T odos los tanques de agua a \npresión deberán ser provistos de una válvula de alivio de vacío; situada sobre el \ntanque, que operará hasta una presión máxima del agua de 1.37 megapascales \n(140 m.c.a. o 200 libras/pulgada2) y hasta una temperatura máxima de 366.15 \nºK (93 ºC o 200 ºF). El tamaño mínimo de esta válvula será de 6 milímetros \n(1/4”).\nPÁRRAFO. Los equipos de bombeo y tanques hidroneumáticos se deberán \ninstalar sobre una base encima de la losa y al mismo tiempo deberán estar an-\nclados a ella.",
+   "paginas": [
+    67
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.7",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "VÁLVULA ALIVIO DE PRESIÓN",
+   "texto": "VÁLVULA ALIVIO DE PRESIÓN. Los tanques de presión de sistemas \nhidroneumáticos deberán ser provistos de una válvula de alivio de presión, que \ndeberá estar calibrada para una presión máxima en función de la graduación \ndel tanque, según la recomendación del fabricante. La válvula deberá ser co-\nlocada en la tubería de alimentación al tanque o en el tanque mismo y deberá \ndescargar por gravedad a un lugar adecuado.",
+   "paginas": [
+    67
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.6.8",
+   "titulo_num": 2,
+   "capitulo": "2.6",
+   "encabezado": "PRUEBA A PRESIÓN",
+   "texto": "PRUEBA A PRESIÓN. Cuando se ha completado la instalación de la to-\ntalidad o de una parte del sistema de abastecimiento de agua a la edificación, \nésta deberá ser probada para determinar su estanqueidad, a una presión de \nagua por lo menos igual a la presión de diseño del sistema; en tuberías que no \nsean de plástico, con una prueba de aire a no menos de 50 libras/pulgada2. \nEl agua utilizada para las pruebas deberá ser tomada de una fuente de agua \npotable. La prueba a presión deberá ser llevada a cabo cumpliendo con los re-\nquisitos de supervisión establecidos por la autoridad competente. \n\n\nTABLA 9\nVARIABLES MÍNIMAS DE DISEÑO ABASTECIMIENTO \nDE AGUA A EDIFICACIONES PARA ALOJAR HASTA 16 VIVIENDAS \n(Otros valores requerirán justificación mediante cálculos)\n\n\n\nTABLA 9\nVARIABLES MÍNIMAS DE DISEÑO ABASTECIMIENTO \nDE AGUA A EDIFICACIONES PARA ALOJAR HASTA 16 VIVIENDAS \n(Otros valores requerirán justificación mediante cálculos)\nTABLA 9\nVARIABLES MÍNIMAS DE DISEÑO ABASTECIMIENTO DE AGUA A EDIFI-\nCACIONES PARA ALOJAR HASTA 16 VIVIENDAS \n(Otros valores requerirán justificación mediante cálculos)\n\n\n\nNOTA: esta tabla no aplica en el caso del uso de equipos de presión constante \ncon variadores de frecuencia.\nFIGURA 1 - ESQUEMAS DE DISEÑO DE INSTALACIONES SANITARIAS - \nAGUA POTABLE\nFIGURA 1 - ESQUEMAS DE DISEÑO DE INSTALACIONES SANITARIAS - \nAGUA POTABLE\n\n\n\nFIGURA 1 - ESQUEMAS DE DISEÑO DE INSTALACIONES SANITARIAS - \nAGUA POTABLE\n\n\n\nFIGURA 1 - ESQUEMAS DE DISEÑO DE INSTALACIONES \nSANITARIAS - AGUA POTABLE",
+   "paginas": [
+    67,
+    68,
+    69,
+    70,
+    71,
+    72
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.1",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "GENERALIDADES",
+   "texto": "GENERALIDADES. Un sistema de suministro de agua potable deberá \nser diseñado, instalado y mantenido de manera que se prevenga la contami-\nnación por líquidos, sólidos o gases nocivos y que en ninguna circunstancia \npermita conexiones cruzadas, ni en la instalación o durante el mantenimiento \ndel sistema. Se deberán colocar dispositivos para prevenir flujos de retorno ha-\ncia la red de distribución de agua potable, producidos por presiones negativas, \nsifonamientos o cualquier otra causa.",
+   "paginas": [
+    72
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.2",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "DISPOSITIVOS, APARATOS SANITARIOS Y ELECTRODOMÉSTICOS",
+   "texto": "DISPOSITIVOS, APARATOS SANITARIOS Y ELECTRODOMÉSTICOS. \nT odos los dispositivos y aparatos destinados a servir para alguna función espe-\ncial, como esterilización, destilación, procesamiento, enfriamiento o almace-\nnamiento de agua, hielo o alimentos, y que estén conectados al sistema de su-\nministro de agua, deberán ser provistos con protección contra flujos de retorno \ny contaminación del sistema de suministro de agua potable. Las bombas de \nagua, filtros, ablandadores, tanques y todo otro instrumento o depósitos que \nmaneje o trate agua potable se deberá proteger contra contaminación.",
+   "paginas": [
+    72,
+    73
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.3",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "SUSTANCIAS QUÍMICAS Y OTRAS SUSTANCIAS",
+   "texto": "SUSTANCIAS QUÍMICAS Y OTRAS SUSTANCIAS. Cualquier sustancia \nquímica u otras sustancias que puedan producir condiciones de toxicidad, sa-\nbor, color y olor en el agua potable no podrán ser introducidas o utilizadas en \ndichos sistemas. Esto incluye solventes, pegamentos y pinturas utilizadas en \ntanques, tuberías o accesorios.",
+   "paginas": [
+    73
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.4",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "CONTROL DE CONEXIÓN CRUZADA",
+   "texto": "CONTROL DE CONEXIÓN CRUZADA. Las conexiones cruzadas sólo se \npermitirán cuando se hayan instalado dispositivos de protección.",
+   "paginas": [
+    73
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.5",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "IDENTIFICACIÓN DE LAS TUBERÍAS",
+   "texto": "IDENTIFICACIÓN DE LAS TUBERÍAS. T odas las tuberías de los diferen-\ntes sistemas que componen las edificaciones deberán estar identificadas, ya \nsea por color o por medio de etiquetas. El color de identificación de la tubería \ndeberá ser discernible y constante a través del edificio. Se deberá usar el código \nde colores especificado en la TABLA 10, o de no ser posible, por razones justifi-\ncadas, se permitirá el uso de otros colores, en cuyo caso se colocarán tablas con \nel código utilizado, en un lugar visible de patinillos y áreas de servicio.\nTABLA 10\nCÓDIGO DE COLORES DE TUBERÍAS",
+   "paginas": [
+    73
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.6",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "INFORMACIÓN",
+   "texto": "INFORMACIÓN. La identificación de las tuberías deberá incluir el con-\ntenido del sistema de entubado y una flecha indicando la dirección del flujo. \nSistemas de tuberías con varios riesgos deberán contener además información \nsobre la naturaleza del riesgo. La identificación del tubo deberá ser repetida a \nintervalos máximos de 7.6 m (25 pies) y en cada punto donde la tubería atra-\nviesa una pared, piso o techo. Los letreros deberán ser observables y legibles \ndentro de la cavidad o espacio en que se colocan los tubos.",
+   "paginas": [
+    73,
+    74
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.7",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "REUSO COMO AGUA POTABLE",
+   "texto": "REUSO COMO AGUA POTABLE. El agua utilizada para el enfriamiento \nde equipos u otros procesos no consuntivos no deberá ser retornada al siste-\nma de agua potable. Dicha agua será descargada dentro del sistema de drena-\nje pluvial o será reutilizada para usos no potables.",
+   "paginas": [
+    74
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.8",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "REUSO DE TUBERÍA",
+   "texto": "REUSO DE TUBERÍA. La tubería que ha sido utilizada para cualquier \notro propósito distinto a la conducción de agua potable no deberá ser utiliza-\nda para conducir agua potable.",
+   "paginas": [
+    74
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.9",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "PINTURA DE LOS DEPÓSITOS DE AGUA",
+   "texto": "PINTURA DE LOS DEPÓSITOS DE AGUA. La superficie interior de un \ndepósito de agua no deberá ser recubierta, pintada o reparada con materiales \nque alteren el sabor, olor, color o potabilidad del suministro de agua, cuando \nel tanque sea colocado o retornado al servicio.\nArtículo 1 PROTECCIÓN DE SISTEMAS INDIVIDUALES DE ABASTECI-\nMIENTO. Los sistemas individuales (captación privada) de abastecimiento \nde agua deberán ser ubicados y construidos de manera tal que se garantice \nsu protección frente a posibles fuentes de contaminación, de acuerdo con lo \nestablecido entre las secciones 2.7.8 y 2.7.11.",
+   "paginas": [
+    74
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.10",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "LOCALIZACIÓN DE LA FUENTE",
+   "texto": "LOCALIZACIÓN DE LA FUENTE. Se deberán cumplir las distancias \nmínimas establecidas en la TABLA 11, entre cualquier potencial foco de con-\ntaminación y una fuente de agua potable subterránea y la línea de succión de \nla bomba. La autoridad administradora del Código podrá requerir los estudios \nnecesarios para determinar la no contaminación.\n\n\nTABLA 11\nDISTANCIA MÍNIMA DE FOCOS DE CONTAMINACIÓN A FUENTES DE \nABASTECIMIENTO PRIVADO",
+   "paginas": [
+    74,
+    75
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.11",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "ENCAMISADO",
+   "texto": "ENCAMISADO. Los pozos para abastecimiento de agua potable en \nsistemas individuales deberán ser provistos de un encamisado impermeable, \ndesde la superficie hasta la zona de succión de la bomba instalada. El enca-\nmisado se deberá proyectar al menos 0.15 m por encima de la plataforma del \npozo.",
+   "paginas": [
+    75
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.12",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "SELLO SANITARIO",
+   "texto": "SELLO SANITARIO. Cuando el material que conforma el subsuelo sea \ngranular, además del encamisado, se deberá colocar un sello sanitario.",
+   "paginas": [
+    75
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.7.13",
+   "titulo_num": 2,
+   "capitulo": "2.7",
+   "encabezado": "CUBIERTA Y DRENAJE",
+   "texto": "CUBIERTA Y DRENAJE. T odo pozo de agua potable deberá ser provis-\nto de una cubierta que lo proteja de la entrada de materiales potencialmente \ncontaminantes. Esta cubierta deberá permitir la manipulación de la insta-\nlación de bombeo sin ser retirada. Las aguas de escorrentía serán drenadas \nalejándolas de la boca del pozo y de la cubierta.",
+   "paginas": [
+    75
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.1",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "GENERALES",
+   "texto": "GENERALES. En adición a los requerimientos para edificaciones de uso \ndoméstico, los centros de salud cumplirán con los requisitos establecidos en \neste capítulo para la instalación de los sistemas de suministro de agua potable, \nde los sistemas de recolección y disposición de aguas residuales, del sistema de \nrecolección y disposición de agua pluvial.",
+   "paginas": [
+    75
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.2",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "SERVICIO DE AGUA",
+   "texto": "SERVICIO DE AGUA. T odos los hospitales o centros de salud deberán \ncontar con dos acometidas desde la red de agua potable, de diferentes ramales \nde suministro, de manera tal que se minimice el potencial de cualquier inte-\nrrupción del suministro del agua, en el caso de que fallara la tubería de abaste-\ncimiento a la edificación.",
+   "paginas": [
+    75,
+    76
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.3",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "",
+   "texto": "ALTERNATIVAS PARA EL SUMINISTRO DE AGUA EN CENTROS DE \nSALUD. En el caso de que sea imposible o ineficiente, la instalación de una se-\ngunda acometida, el centro de salud deberá identificar y solucionar el segundo \nsuministro mediante una alternativa alterna (fuente subterránea o superficial). \nEste sistema deberá también tener su propio sistema de tratamiento y de des-\ninfección, para lo cual deberán hacerse estudios de calidad de agua, debiendo \ncumplir con los requisitos descritos en este mismo Volumen.",
+   "paginas": [
+    76
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.4",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "AGUA CALIENTE",
+   "texto": "AGUA CALIENTE. Se deberá suministrar agua caliente para todas las \nactividades inherentes a los requerimientos y nivel de atención del Centro de \nSalud.",
+   "paginas": [
+    76
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.5",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "EQUIPOS CLÍNICOS, HIDROTERAPÉUTICOS Y RADIOLÓGICOS",
+   "texto": "EQUIPOS CLÍNICOS, HIDROTERAPÉUTICOS Y RADIOLÓGICOS. \nCualquier equipo conectado a la red de distribución de agua potable en la edi-\nficación o que descargue a la red de drenaje sanitario, deberá contar con me-\ncanismos que garanticen la protección de la red potable, de cualquier tipo de \ncontaminación cruzada. Además, cumplirá con las normas establecidas por las \nautoridades de salud y ambiente.",
+   "paginas": [
+    76
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.6",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "",
+   "texto": "PROHIBICIÓN DE LÍNEAS DE AGUA EN ÁREAS DE TRATAMIENTO \nRADIOLÓGICO. Estará prohibido el paso de cualquier línea de agua, ya sea de \nsuministro o de evacuación, por cualquier muro contiguo a las áreas donde se \npractiquen tratamientos radiológicos, imagenológicos o nucleares.",
+   "paginas": [
+    76
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.8.7",
+   "titulo_num": 2,
+   "capitulo": "2.8",
+   "encabezado": "CONDUCTOR DE ESCAPES EN VÁLVULAS",
+   "texto": "CONDUCTOR DE ESCAPES EN VÁLVULAS. T odo aparato esterilizador \nde agua abastecido por conexión directa al sistema de distribución deberá ser \nequipado con un mecanismo de desviación de escapes o una línea de purga en \nla válvula de control del abastecimiento de agua potable para alertar sobre los \nescapes y para conducir cualquier cantidad de agua no esterilizada, fuera del \nárea estéril.",
+   "paginas": [
+    76,
+    77
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.9.1",
+   "titulo_num": 2,
+   "capitulo": "2.9",
+   "encabezado": "",
+   "texto": "REQUISITOS DE PURGA Y DESINFECCIÓN PARA SISTEMAS DE \nAGUA POTABLE. Los sistemas de agua potable ya sean nuevos o reparados \ndeberán ser purgados de sustancias nocivas, y desinfectados antes de su utili-\nzación. El método por emplear deberá ser definido por la autoridad de salud o \npor el organismo oficial proveedor de agua en esa jurisdicción, o en caso de que \nno tengan ningún método establecido, se deberá seguir el procedimiento des-\ncrito en las especificaciones de la norma NORDOM 1 y el Reglamento de Aguas \npara el Consumo Humano del Ministerio de Salud Pública, Decreto No.42-05.",
+   "paginas": [
+    77
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.10.1",
+   "titulo_num": 2,
+   "capitulo": "2.10",
+   "encabezado": "DISEÑO",
+   "texto": "DISEÑO. Las unidades para el tratamiento de agua para beber deberán \nseguir los requerimientos de NSF 42, NSF 44, NSF 53 o NSF62, y satisfacer las \nnormas NORDOM 1 y NORDOM 64.",
+   "paginas": [
+    77
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.10.2",
+   "titulo_num": 2,
+   "capitulo": "2.10",
+   "encabezado": "SISTEMAS INDIVIDUALES DE TRATAMIENTO DE AGUA POTABLE",
+   "texto": "SISTEMAS INDIVIDUALES DE TRATAMIENTO DE AGUA POTABLE. \nSISTEMA DE ÓSMOSIS INVERSA. La descarga desde un sistema de ósmosis \ninversa deberá entrar al sistema de drenaje a través de una válvula de control de \nretornos, que siga los requerimientos de NSF 58.",
+   "paginas": [
+    77
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.10.3",
+   "titulo_num": 2,
+   "capitulo": "2.10",
+   "encabezado": "CONEXIÓN DE TUBERÍAS",
+   "texto": "CONEXIÓN DE TUBERÍAS. El sistema de tuberías desde y hacia uni-\ndades de tratamiento de agua de beber deberá ser del tamaño y del material \nrecomendado por el fabricante. La tubería deberá cumplir con las normas de \nla TABLA 12.",
+   "paginas": [
+    77,
+    78
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "2.11.1",
+   "titulo_num": 2,
+   "capitulo": "2.11",
+   "encabezado": "SISTEMA CONTRA INCENDIO",
+   "texto": "SISTEMA CONTRA INCENDIO. T odas las tuberías, así como los dispo-\nsitivos para ser usados en el sistema contra incendios de la edificación, deberán \ncumplir con las especificaciones dadas en el Reglamento para Sistemas de Se-\nguridad contra Incendios en Edificios (R-032).\n\n\nTÍTULO 3. \nDRENAJE PLUVIAL",
+   "paginas": [
+    78,
+    79
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  }
+ ]
+}

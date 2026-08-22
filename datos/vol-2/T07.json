@@ -1,0 +1,1668 @@
+{
+ "volumen": 2,
+ "sigla": "DIHE",
+ "nombre_volumen": "Instalaciones Hidrosanitarias en Edificaciones",
+ "titulo": 7,
+ "nombre": "Sistemas de Proyectos Residenciales Tipo Urbanización",
+ "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "7.1": "ABASTECIMIENTO",
+  "7.2": "ELABORACIÓN DE PROYECTOS",
+  "7.3": "RED DE DISTRIBUCIÓN",
+  "7.4": "RED DE ALCANTARILLADO SANITARIO",
+  "7.5": "SISTEMA DE DRENAJE PLUVIAL"
+ },
+ "clausulas": [
+  {
+   "id": "7.1.1",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "TIPOS DE ABASTECIMIENTO",
+   "texto": "TIPOS DE ABASTECIMIENTO. El abastecimiento de la red de distribu-\nción interna de los proyectos residenciales podrá ser de dos tipos: \na) Conexión o empalme a la red.\nb) Construcción de un sistema con fuente propia",
+   "paginas": [
+    143
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.2",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "CONEXIÓN O EMPALME A LA RED",
+   "texto": "CONEXIÓN O EMPALME A LA RED. La conexión o empalme de un sis-\ntema a la red de distribución de agua potable será realizada por la Autoridad de \nAcueducto y Alcantarillado correspondiente en el municipio, previa solicitud, \nrevisión, aprobación y pago del costo de los derechos de incorporación. Sólo se \naprobarán empalmes de menor diámetro que el de la tubería existente.",
+   "paginas": [
+    143
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.3",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "CONSTRUCCIÓN DE UN SISTEMA CON FUENTE PROPIA",
+   "texto": "CONSTRUCCIÓN DE UN SISTEMA CON FUENTE PROPIA. En donde \nla red no tenga alcance, o que la existente sea insuficiente para permitir una \nconexión, los promotores del proyecto habitacional tendrán que diseñar su \npropio sistema, el cual deberá ser revisado y aprobado por la Autoridad Com-\npetente en la Administración del servicio de abastecimiento de agua potable y \nalcantarillado.",
+   "paginas": [
+    143
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.4",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "FUENTES DE ABASTECIMIENTO",
+   "texto": "FUENTES DE ABASTECIMIENTO. Dependiendo de las condiciones hi-\n\n\ndrogeológicas, sanitarias y ambientales las fuentes de abastecimiento podrán \nser de los siguientes tipos: pozo perforado y excavado, manantiales, ríos, lagos \ny arroyos. Los cuerpos de aguas superficiales o subterráneos no deberán ser \nutilizados como fuentes de abastecimiento individual, a menos que se cuente \ncon el permiso de la autoridad competente y se provea el tratamiento requeri-\ndo para garantizar la potabilidad del agua. T oda fuente de abastecimiento in-\ndividual deberá ser tratada mediante métodos aprobados y de acuerdo a las \ncaracterísticas de la misma, a fines de eliminar o prevenir la contaminación Y \ndeberá estar de acuerdo a lo dispuesto en la Norma de Calidad de Aguas del \nMinisterio de Medio Ambiente y Recursos Naturales -MIMARENA. -",
+   "paginas": [
+    143,
+    144
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.5",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "",
+   "texto": "APROBACIÓN DE AGUA DE FUENTE INDIVIDUAL ANTES DE LA CO-\nNEXIÓN AL SISTEMA. El uso del agua procedente de una fuente de abaste-\ncimiento individual será aprobado por la Autoridad Competente, antes de la \nconexión al sistema.",
+   "paginas": [
+    144
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.6",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "",
+   "texto": "REQUISITOS DE LIMPIEZA Y DESINFECCIÓN EN SISTEMAS DE \nABASTECIMIENTO DE AGUA INDIVIDUAL. Después de la construcción o de \nuna reparación mayor, el sistema de abastecimiento de agua individual deberá \nser limpiado y desinfectado según NORDOM 1.",
+   "paginas": [
+    144
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.7",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "SISTEMA DE ABASTECIMIENTO POR BOMBEO",
+   "texto": "SISTEMA DE ABASTECIMIENTO POR BOMBEO. El sistema deberá ga-\nrantizar el suministro permanente de la demanda total del proyecto, aun pre-\nviendo la salida de servicio de algún equipo de bombeo.",
+   "paginas": [
+    144
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.1.8",
+   "titulo_num": 7,
+   "capitulo": "7.1",
+   "encabezado": "",
+   "texto": "DETERMINACIÓN DEL CAUDAL DE BOMBEO SEGÚN EL CONSU-\nMO MÁXIMO DIARIO. El caudal de bombeo será el correspondiente al con-\nsumo máximo diario, en función del tiempo de bombeo.",
+   "paginas": [
+    144
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.2.1",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "",
+   "texto": "LEVANTAMIENTO TOPOGRÁFICO",
+   "paginas": [
+    144
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.2.1.1",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "REQUISITOS LEVANTAMIENTO TOPOGRÁFICO",
+   "texto": "REQUISITOS LEVANTAMIENTO TOPOGRÁFICO. Se realizará un le-\nvantamiento topográfico en toda el área del proyecto, cumpliendo con lo espe-\ncificado a continuación:\na) La poligonal básica de la línea de conducción será trazada en estaciones \nde alineación de 50 en 50 metros, para terrenos muy planos o de escasa on-\ndulación; y de 10 en 10 metros, para terrenos ondulados o ligeramente acci-\ndentados. Cuando éstos sean considerablemente accidentados, se deben fijar \nalineaciones menores. El levantamiento deberá incluir los puntos de inflexión, \naunque no coincidan con las estaciones de alineación.\nb) Para el trazado altimétrico se tomará como referencia la altura sobre el nivel \nmedio del mar, usando los BM colocados por el Instituto Cartográfico Militar \no el Universitario. Se colocarán con características como: permanencia, pun-\ntos de referencia de elevación conocida BM, una edificación pública o un área \nverde. \nc) Los planos correspondientes a los levantamientos topográficos realizados se \npresentarán en escalas no menores de:\nTABLA 42\nESCALA PLANOS LEVANTAMIENTOS TOPOGRÁFICOS\nd) Las curvas de nivel se dibujarán con diferencia no mayor de un metro y \ndeberán aparecer acotadas. T ambién se presentarán las cotas correspondien-\ntes a las calles y otros puntos de interés para el diseño; así como, cambios de \npendiente, u otros.\n\n\ne) Se obtendrán los perfiles longitudinales de las rasantes de todas las calles; \nasí como, levantamientos de áreas donde se proyecten estructuras especiales.",
+   "paginas": [
+    144,
+    145,
+    146
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.2.2",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "",
+   "texto": "DATOS BÁSICOS",
+   "paginas": [
+    146
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.2.2.1",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "POBLACIÓN",
+   "texto": "POBLACIÓN. Se considerarán al menos seis habitantes por vivienda. \nSe realizará un análisis demográfico, cuando el caso así lo amerite.",
+   "paginas": [
+    146
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.2.2.2",
+   "titulo_num": 7,
+   "capitulo": "7.2",
+   "encabezado": "DOTACIÓN",
+   "texto": "DOTACIÓN.  Para uso doméstico, se fijarán las dotaciones según lo \nindicado en la TABLA 1-A.",
+   "paginas": [
+    146
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.3.1",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "DISPOSICIONES GENERALES",
+   "texto": "DISPOSICIONES GENERALES. Sus dimensiones y diseño dependerán \nde la topografía, de la ubicación y del tamaño de la comunidad. Para asegu-\nrar que los consumidores reciban un abastecimiento suficiente y continuo, el \ngasto a considerar en su diseño será el que resulte mayor entre (Qmáx diario + \nQ incendio) o el Qmáx horario. Dentro de la red de distribución se usarán vál-\nvulas de seccionamiento para sectorizar el sistema con fines de operación; los \ndiámetros de sus tuberías serán de 3”, como mínimo y los materiales deberán \ncumplir con las recomendaciones de la ASTM (American Society for T esting \nand Materials), la AWWA (American Water Works Asociation) y la ISO (Interna-\ntional Organization for Standarization).\nTABLA 43\nCLASES DE TUBERÍAS EN FUNCIÓN DE LA PRESIÓN \n(NORMAS AWWA)\n\n\n\nTABLA 44\nCLASES DE TUBERÍAS EN FUNCIÓN DE LA PRESIÓN \n(NORMAS ISO)",
+   "paginas": [
+    146,
+    147
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ASTM",
+     "AWWA"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.3.2",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "PRESIÓN DE SERVICIO",
+   "texto": "PRESIÓN DE SERVICIO. La presión de servicio en la red de distribución \nno será menor de 10 m.c.a. y no mayor de 42.2 m.c.a; para evitar daños en \nlas conexiones e inconvenientes de uso. En los casos en que la topografía sea \nmuy irregular, se recomienda separar las redes mediante tanques, válvulas o \ncámaras rompedoras de presión, a fin de mantener las presiones dentro de los \nlímites establecidos. Las cámaras rompedoras de presión en las redes de distri-\nbución deberán ser dotadas de flota o algún mecanismo semejante, con el pro-\npósito de regular el caudal aguas arriba de la misma, en función de la demanda \ny evitar desperdicios.",
+   "paginas": [
+    147
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.3.3",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "CLORO RESIDUAL",
+   "texto": "CLORO RESIDUAL. La concentración de cloro residual en la red de dis-\ntribución deberá estar entre 0.5 - 1.0 mg / l.",
+   "paginas": [
+    147
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.3.4",
+   "titulo_num": 7,
+   "capitulo": "7.3",
+   "encabezado": "ZANJAS",
+   "texto": "ZANJAS. Las excavaciones donde serán alojadas las tuberías se realizarán \nen cuanto al ancho y profundidad mínimos, de acuerdo con la TABLA 45. La \ndistancia del borde de la zanja al contén será 1.00 metro.\nTABLA 45 \nANCHO Y PROFUNDIDAD DE ZANJA EN FUNCIÓN DEL DIÁMETRO DE \nTUBERÍA",
+   "paginas": [
+    147,
+    148
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.1",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "CONSIDERACIONES GENERALES",
+   "paginas": [
+    148
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.1.1",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "DESCARGA AL ALCANTARILLADO EXISTENTE",
+   "texto": "DESCARGA AL ALCANTARILLADO EXISTENTE. Si la descarga se dis-\npone hacia el sistema de alcantarillado existente, se presentará un detalle de la \nacometida y se relacionará planimétricamente y altimétricamente con el nuevo \nsistema. Además, se presentará un análisis sobre el efecto que tendrá esa des-\ncarga en la capacidad de conducción del sistema existente, en las condiciones \nmás desfavorables. Por último, se deberá presentar un registro de aforos he-\nchos al sistema receptor. Estos aforos se harán durante una semana, en las \nhoras pico.",
+   "paginas": [
+    148
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.1.2",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "DESCARGA A CUERPOS DE AGUA",
+   "texto": "DESCARGA A CUERPOS DE AGUA. No se permitirá ningún tipo de \ndescarga a ningún cuerpo de agua superficial o subterránea, sin previo trata-\nmiento, que garantice el cumplimento con las normas vigentes emitidas por \nel Ministerio de Medio Ambiente y Recursos Naturales y el Ministerio de Salud \nPública y Asistencia Social, tanto para instalaciones existentes como para los \nproyectos nuevos.",
+   "paginas": [
+    148
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.1.3",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "DATOS BÁSICOS",
+   "texto": "DATOS BÁSICOS. El período de diseño de cada parte del sistema de \nred de alcantarillado sanitario se establece en la tabla siguiente:\nTABLA 46\nPERÍODO DE DISEÑO POR PARTES DEL SISTEMA RED DE ALCANTARI-\nLLADO SANITARIO",
+   "paginas": [
+    148,
+    149
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.1.4",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "CÁLCULO CAUDAL MEDIO DIARIO",
+   "texto": "CÁLCULO CAUDAL MEDIO DIARIO. El caudal medio diario se \ncalculará usando una dotación de aguas residuales de al menos el 75% de la \ndotación de agua potable elegida.",
+   "paginas": [
+    149
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.1.5",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "CÁLCULO DEL CAUDAL MÁXIMO DE AGUAS RESIDUALES",
+   "texto": "CÁLCULO DEL CAUDAL MÁXIMO DE AGUAS RESIDUALES. El \ncaudal máximo de aguas residuales se calculará multiplicando el caudal medio \npor el coeficiente de Harmon u otro similar aprobado por las autoridades de \nadministración de los sistemas.",
+   "paginas": [
+    149
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.1.6",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "CONSIDERACIÓN DEL CAUDAL DE INFILTRACIÓN EN EL CÁLCU-\nLO DE AGUAS RESIDUALES. A cada uno de estos caudales se le agregará el \ncaudal de infiltración; éste se calculará considerando la impermeabilidad del \nterreno, la posibilidad de inundación, la altura de la capa freática (máxima), ro-\nturas en las juntas o estructuras, entre otras. Pero este flujo no se deberá con-\nsiderar menor que 20,000 litros / kilómetro x día, para tuberías de hormigón.",
+   "paginas": [
+    149
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.1.7",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "LONGITUD DE CÁLCULO PARA EL CAUDAL DE AGUAS RESIDUA-\nLES. En la longitud de cálculo a considerar se tomarán en cuenta las acometi-\ndas domiciliarias, a partir de la acera, colectores ínter domiciliarios, redes se-\ncundarias, colectores principales y emisores.",
+   "paginas": [
+    149,
+    150
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.2",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "METODOS DE DISEÑO POR GRAVEDAD",
+   "paginas": [
+    150
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.2.1",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "CÁLCULO DE ALCANTARILLAS",
+   "texto": "CÁLCULO DE ALCANTARILLAS. Para el cálculo de alcantarillas se \npodrán usar las fórmulas y los ábacos de Manning o de Hazen Williams, u otra \nexpresión validada por la Hidráulica, considerando que las alcantarillas traba-\njarán como canales circulares a sección llena sin presión; esto como máxima \ncapacidad aceptable.",
+   "paginas": [
+    150
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.2.2",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "PENDIENTES MÍNIMAS PARA VELOCIDAD EN ALCANTARILLAS",
+   "texto": "PENDIENTES MÍNIMAS PARA VELOCIDAD EN ALCANTARILLAS. \nLas pendientes mínimas serán las que produzcan la velocidad mínima permisi-\nble a tubo lleno; esto es 0.60 m/seg.",
+   "paginas": [
+    150
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.2.3",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "PENDIENTES MÁXIMAS PARA VELOCIDAD EN ALCANTARILLAS",
+   "texto": "PENDIENTES MÁXIMAS PARA VELOCIDAD EN ALCANTARILLAS. \nLas pendientes máximas serán las que produzcan la velocidad máxima permiti-\nda por el material de la tubería, según se indica en la tabla siguiente:\nTABLA 47\nVELOCIDADES MÁXIMAS EN FUNCIÓN DEL MATERIAL DE LA TUBERÍA",
+   "paginas": [
+    150
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.2.4",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "COLOCACIÓN ALCANTARILLAS",
+   "texto": "COLOCACIÓN ALCANTARILLAS. Las alcantarillas se proyectarán \npara ser colocadas en el centro de la vía, a menos que la Autoridad Competente \nautorice otra ubicación.",
+   "paginas": [
+    150
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.2.5",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "PROFUNDIDAD Y DISPOSICIÓN DE TUBERÍAS DE ALCANTARI-\nLLADO. Las tuberías del alcantarillado se proyectarán a profundidades sufi-\ncientes para recoger los servicios sanitarios de las edificaciones a nivel de la vía. \nAdemás, deberán pasar a niveles inferiores de las tuberías de distribución de \nagua potable.",
+   "paginas": [
+    150,
+    151
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.2.6",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "DISTANCIA MÍNIMA ENTRE TUBERÍAS DE AGUA POTABLE Y AL -\nCANTARILLADO. La distancia (altimétrica) mínima que se deberá conservar \nentre tuberías de agua potable y del alcantarillado será 0.25 metros. Éstas de-\nberán estar separadas planimétricamente por una distancia mínima de 1.00 m.",
+   "paginas": [
+    151
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.2.7",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "CONDICIONES DE FLUJO Y DISEÑO PARA EVITAR OBSTRUCCIO-\nNES EN ALCANTARILLADO. No se permitirán reducciones de la sección en la \ndirección del flujo. Se evitarán en el diseño disminuciones bruscas de pendien-\nte y cualquier elemento que pueda producir efectos, tales como: remansos, sal-\ntos hidráulicos, turbulencias, o similares.",
+   "paginas": [
+    151
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.3",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "ACOMETIDAS DEL ALCANTARILLADO SANITARIO",
+   "paginas": [
+    151
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.3.1",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "REQUISITOS DE DIÁMETROS MÍNIMOS PARA ACOMETIDAS EN \nEDIFICACIONES. Los diámetros mínimos para las acometidas serán de 100 \nmm (4”). Para edificios de apartamentos, institucionales y centros comerciales \nserán de 150 mm (6”), a menos que por cálculos se compruebe el mínimo de \n100 mm (4”).",
+   "paginas": [
+    151
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.3.2",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "OPCIONES DE ACOMETIDA PARA EDIFICACIONES CON NIVELES \nDE PISO ELEVADOS. Cuando el nivel del piso de la edificación sea tal, que no \nse pueda usar una acometida directa, se estudiará la posibilidad de un colector \nínter domiciliario o el bombeo de las aguas residuales a un nivel desde el cual \npuedan circular por gravedad.",
+   "paginas": [
+    151
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.4",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "COLECTORES",
+   "paginas": [
+    151,
+    152
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.4.1",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "DIÁMETRO MÍNIMO REQUERIDO PARA CONDUCTOS EN EL SIS-\nTEMA DE ALCANTARILLADO. El diámetro mínimo de los conductos será de \n200 mm (8”).",
+   "paginas": [
+    152
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.4.2",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "PROFUNDIDAD MÍNIMA DE ENTERRAMIENTO DE TUBERÍAS",
+   "texto": "PROFUNDIDAD MÍNIMA DE ENTERRAMIENTO DE TUBERÍAS. La \nprofundidad mínima de las tuberías con relación a la superficie de la vía o del \nterreno será de 1.20 m, sobre la parte superior del tubo.",
+   "paginas": [
+    152
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.4.3",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "PROHIBICIÓN DE DESCARGA DISCORDANTE EN TUBERÍAS",
+   "texto": "PROHIBICIÓN DE DESCARGA DISCORDANTE EN TUBERÍAS. \nNunca se permitirá que una tubería descargue en otra, en sentido contrario al \nflujo o en una forma discordante con el supuesto flujo uniforme de la primera.",
+   "paginas": [
+    152
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.4.4",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "DIMENSIONAMIENTO DE ZANJAS SEGÚN DIÁMETRO DE TUBE-\nRÍAS. Se dispondrán los anchos de zanja correspondientes a cada diámetro, de \nacuerdo con la tabla siguiente:\nTABLA 48\nDIMENSIONES DE LAS ZANJAS EN FUNCIÓN DEL DIÁMETRO DEL TUBO\n\n\n\nTABLA 48\nDIMENSIONES DE LAS ZANJAS EN FUNCIÓN DEL DIÁMETRO DEL TUBO",
+   "paginas": [
+    152,
+    153
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.5",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "REGISTROS",
+   "paginas": [
+    153
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.5.1",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "UBICACIÓN REGISTROS",
+   "texto": "UBICACIÓN REGISTROS.  Se instalarán registros en:\na) T odo comienzo de colectores ínter domiciliarios, líneas de redes secundarias \ny colectores.\nb) T oda intersección de tuberías.\nc) T odo cambio de sección, pendiente o dirección.",
+   "paginas": [
+    153
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.5.2",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "REGISTROS CON PENDIENTE MÍNIMA DE FONDO",
+   "texto": "REGISTROS CON PENDIENTE MÍNIMA DE FONDO. Se construirán \nregistros con pendiente en el fondo, para lo cual se recomienda al menos una \ndiferencia de nivel de 2 cm entre la entrada más baja y la salida del registro.",
+   "paginas": [
+    153
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.5.3",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "DIFERENCIA DE COTA MÍNIMA",
+   "texto": "DIFERENCIA DE COTA MÍNIMA. Cuando en un mismo registro lle-\ngan dos o más tubos, la diferencia de cota entre el tubo que llega y el que sale, \nsegún la dirección del flujo, será de por lo menos el diámetro del tubo de salida.",
+   "paginas": [
+    153
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.5.4",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "INSTALACIÓN DE LLAVES DE LIMPIEZA EN REGISTROS",
+   "texto": "INSTALACIÓN DE LLAVES DE LIMPIEZA EN REGISTROS. Cuando \nhaya tramos que por su escaso caudal de aporte puedan presentar problemas \nde sedimentación y malos olores, se deberán instalar llaves de limpieza en el \nregistro o los registros de cabecera.",
+   "paginas": [
+    153
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.5.5",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "CONTROL DE CAÍDAS EN TUBERÍAS",
+   "texto": "CONTROL DE CAÍDAS EN TUBERÍAS. Las caídas no deberán ser ma-\nyores de 1.00 m y cuando se encuentren entre 0.60 m y 1.00 m se podrá usar un \n\n\ntubo a 45° con respecto a la horizontal para la transición. En caso de desniveles \nmayores de 1.00 m se usarán registros diseñados con escalonamiento o con \ncojín de agua.",
+   "paginas": [
+    153,
+    154
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.5.6",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "DISTANCIA MÁXIMA ENTRE REGISTROS",
+   "texto": "DISTANCIA MÁXIMA ENTRE REGISTROS. La distancia máxima en-\ntre registros dependerá de los diámetros de los colectores, según se especifica \nen la tabla siguiente:\nTABLA 49\nDISTANCIA ENTRE REGISTROS",
+   "paginas": [
+    154
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.6",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "DISEÑO POR IMPULSIÓN ESTACIONES DE BOMBEO Y LÍNEAS DE \nIMPULSIÓN",
+   "paginas": [
+    154
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.6.1",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "PREVISIÓN ESTACIÓN DE BOMBEO",
+   "texto": "PREVISIÓN ESTACIÓN DE BOMBEO. T oda estación de bombeo será \nprovista de un cárcamo húmedo que recibirá las aguas residuales. Este deberá \nser lo más pequeño posible, evitando encendidos a intervalos muy cortos, y se \ndeberán evitar periodos de detención mayores de 30 min, que pudiesen produ-\ncir condiciones de septicidad.",
+   "paginas": [
+    154
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.6.2",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "CÁRCAMO",
+   "texto": "CÁRCAMO. Se diseñará el fondo del cárcamo con fuertes pendientes \n(1:10 o mayores) hacia el sumidero. T ambién se proveerá una forma eficiente \npara la medición de las variaciones horarias del caudal de entrada, para este \nobjetivo se podrá usar una canaleta Parshall.\n\n\nPÁRRAFO I. El cárcamo húmedo deberá estar dotado de dispositivos que pue-\ndan comunicar eléctricamente al equipo de bombeo, señales que inicien o de-\ntengan las bombas para los niveles máximo y mínimo. El cárcamo se deberá \ndiseñar de manera tal que permita acceso a su interior.\nPÁRRAFO II. Antes de la entrada de las aguas residuales, el cárcamo húmedo \ndeberá pasar por rejas que disminuyan la entrada de sólidos de gran tamaño.",
+   "paginas": [
+    154,
+    155
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.6.3",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "DISEÑO",
+   "texto": "DISEÑO. Se diseñará el sistema de bombeo en base a unidades de \nbombeo centrífugas y no atascables por los cuerpos sólidos (mínimo 2.5 cm) \nque se pueden esperar en la instalación (bombas especiales para bombeo de \naguas residuales).",
+   "paginas": [
+    155
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.6.4",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "NÚMERO DE EQUIPOS",
+   "texto": "NÚMERO DE EQUIPOS. En la estación de bombeo se usarán tres \nequipos de servicio como mínimo; previendo que dos de ellos puedan satisfa-\ncer el caudal máximo. En el caso de estaciones pequeñas se permitirá el uso de \ndos bombas con capacidad igual o mayor que el caudal máximo.",
+   "paginas": [
+    155
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.6.5",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "SUMINISTRO DE ENERGÍA",
+   "texto": "SUMINISTRO DE ENERGÍA. Los equipos de bombeo deberán contar \ncon fuentes de energía independiente para emergencias.",
+   "paginas": [
+    155
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.6.6",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "PREVISIÓN",
+   "texto": "PREVISIÓN. Se proveerán las estaciones de bombeo de dispositivos \nde seguridad y se pintarán las tuberías para su identificación, según se indica \nen la TABLA 10.",
+   "paginas": [
+    155
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.6.7",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "LINEA DE SUCCIÓN",
+   "texto": "LINEA DE SUCCIÓN: La tubería de succión de las bombas no será \nmenor de 75 mm (3”) y se proveerá de una criba o rejilla integrada a la cámara \nde succión; en estos casos se podrá prescindir de las rejas de entrada. T anto la \nlínea de succión como la de impulsión deberán estar bien ancladas y se evita-\nrán cambios bruscos de dirección; asimismo, se dispondrán asientos de goma \ndebajo de los motores para evitar que las vibraciones del equipo pasen directa-\nmente a la estructura de la caseta de bombeo.",
+   "paginas": [
+    155
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.6.8",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "VALVULAS Y ACCESORIOS",
+   "texto": "VALVULAS Y ACCESORIOS. Se dispondrán las válvulas y los acceso-\nrios que fueren necesarios para el buen funcionamiento del sistema de bom-\nbeo; es decir, válvulas que permitan la combinación de los equipos, válvulas de \ncontraflujo, válvulas contra el golpe de ariete, u otras.",
+   "paginas": [
+    155,
+    156
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.4.6.9",
+   "titulo_num": 7,
+   "capitulo": "7.4",
+   "encabezado": "",
+   "texto": "SISTEMAS ALTERNATIVOS O NO CONVENCIONALES DE DRENA-\nJE. Cuando el promotor someta diseños no especificados en este Volumen, de-\nberá presentar a la Autoridad de Administración del Código, la documentación \nnecesaria, memorias de cálculos, evaluación de efectividad y de cumplimiento \ncon las normas ambientales y sanitarias vigentes. Estos sistemas serán evalua-\ndos, caso por caso, estando sujetos a la emisión de licencia de construcción \nconforme a las disposiciones del MIVHED.",
+   "paginas": [
+    156
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.1",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "DATOS BÁSICOS",
+   "texto": "DATOS BÁSICOS. Para el diseño del sistema de drenaje pluvial se reque-\nrirán los datos siguientes:\na) INTENSIDAD DE LLUVIA. Para su determinación se usarán las curvas típi-\ncas de intensidad persistencia-frecuencia de lluvia para la República Dominica-\nna. Se establecen como condiciones límites de diseño un tiempo de concentra-\nción de 60 minutos y un período de retorno de 25 años.\nb) COEFICIENTE DE ESCURRIMIENTO. Se considerará el porcentaje de área \nconstruida para asignar este coeficiente, según la tabla siguiente:\nTABLA 50\nCOEFICIENTES DE ESCURRIMIENTO",
+   "paginas": [
+    156
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.2",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "",
+   "texto": "USO DE COEFICIENTES AJUSTADOS SEGÚN CARACTERÍSTICAS \nESPECÍFICAS DEL ÁREA CONSTRUIDA. Se permitirá el uso de coeficientes \ndiferentes a los recomendados cuando exista un análisis de características de \nlos componentes del área construida con coeficientes específicos, ponderados \ncomo justificación. Se utilizará, para este fin, la clasificación presentada en la \ntabla siguiente:\nTABLA 51\nCOEFICIENTES DE ESCURRIMIENTOS POR TIPO DE ÁREA CONSTRUIDA",
+   "paginas": [
+    156,
+    157
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.3",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "MÉTODOS DE DISEÑO",
+   "texto": "MÉTODOS DE DISEÑO. Se permitirá el uso del método racional o al-\nguna versión modificada del mismo para analizar áreas menores de 10 km2. En \ncaso de áreas mayores, se recomienda el uso de análisis más exactos, como el \nmétodo del “hidrograma unitario” y el método Alemán.",
+   "paginas": [
+    157
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.4",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "",
+   "texto": "APLICACIÓN DEL MÉTODO RACIONAL PARA CÁLCULO DE CAU-\nDALES. Para la aplicación del método racional se partirá de la fórmula siguien-\nte:\nDonde:\nQ = Caudal máximo de escurrimiento, en litros / seg\nC = Coeficiente de escurrimiento\n I = Intensidad de lluvia, en mm / hora\nA = Área drenada, en m2",
+   "paginas": [
+    157
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.5",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "CAPTACIONES",
+   "texto": "CAPTACIONES. La capacidad de captación por parrilla de los imborna-\nles se calculará tomando en cuenta el tirante de escurrimiento superficial, la \npendiente transversal y la longitud de la calle. Los imbornales nunca se ubica-\nrán en las vías, ni en los estacionamientos.\nPÁRRAFO I. Se colocarán tantos imbornales como fueren necesarios para evi-\ntar que se sobrepase la capacidad de conducción de las cunetas.\nPÁRRAFO II. Las aguas pluviales de proyectos que tengan vías internas cuya \nsumatoria de la longitud sea igual o mayor a 50 metros lineales, deberán ser \ndispuestas mediante obras de drenaje pluvial dentro del mismo proyecto y en \nningún caso podrán verter hacia las obras de drenaje de las vías existentes.",
+   "paginas": [
+    157,
+    158
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.6",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "CONDUCCIONES",
+   "texto": "CONDUCCIONES. El diámetro mínimo de tubería en drenaje pluvial \nserá de 300 mm (12”). El diseño deberá minimizar las labores de movimientos \nde tierra.",
+   "paginas": [
+    158
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.7",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "LA VELOCIDAD MÍNIMA A CAUDAL MÁXIMO",
+   "texto": "LA VELOCIDAD MÍNIMA A CAUDAL MÁXIMO. Será 0.60 m/seg.",
+   "paginas": [
+    158
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.8",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "",
+   "texto": "VALIDEZ DE LOS REGISTROS DE INSPECCIÓN PARA AGUAS RESI-\nDUALES EN EL ALCANTARILLADO PLUVIAL. T odo lo referente a registros \nde inspección, establecido para el sistema de recolección de aguas residuales, \ntiene validez para el alcantarillado pluvial.",
+   "paginas": [
+    158
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.9",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "DISEÑO DE CANALES A CIELO ABIERTO",
+   "texto": "DISEÑO DE CANALES A CIELO ABIERTO. En el caso de canales a cielo \nabierto, se deberán trazar siguiendo las curvas de nivel que permitan una pen-\ndiente adecuada, a fin de que la velocidad del agua no produzca erosiones ni \nsedimentos.",
+   "paginas": [
+    158
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.10",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "MARGEN DE SEGURIDAD",
+   "texto": "MARGEN DE SEGURIDAD. Para tener un margen de seguridad en el \ncaso de utilizar canales para drenar la zona estudiada, será necesario dejar un \nborde libre, según la relación establecida en la tabla siguiente.\n\n\nTABLA 52\nBORDE LIBRE",
+   "paginas": [
+    158,
+    159
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.11",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "",
+   "texto": "PRUEBAS",
+   "paginas": [
+    159
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.11.1",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "REQUERIMIENTO",
+   "texto": "REQUERIMIENTO. La prueba del sistema de drenaje sanitario deberá \nser aplicada, tanto en la entrada, como en las secciones. Se emplearán los mé-\ntodos señalados por las secciones 7.5.6 y 7.5.7.",
+   "paginas": [
+    159
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.11.2",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "PRUEBA CON AGUA",
+   "texto": "PRUEBA CON AGUA. La sección a prueba deberá tener una carga \nmínima de 3.05 m (10 pies) de columna de agua por encima de la junta en \nprueba y por lo menos 15 minutos antes de que empiece la inspección.",
+   "paginas": [
+    159
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.11.3",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "",
+   "texto": "REQUISITOS PARA LA PRUEBA CON AGUA EN LA ENTRADA DEL \nSISTEMA. Si la prueba con agua es aplicada a la entrada del sistema, todas las \ntuberías que están abiertas deberán ser cerradas y apretadas, y el sistema debe-\nrá ser llenado con agua hasta el punto de que se desborde.",
+   "paginas": [
+    159
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.11.4",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "",
+   "texto": "NORMAS PARA EL SELLADO DE SALIDAS EN LA INSPECCIÓN \nPOR SECCIONES. Si el sistema es examinado en secciones, cada salida debe-\nrá ser sellada, excepto las salidas que se encuentran más altas de la sección a \nprueba.",
+   "paginas": [
+    159
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "7.5.11.5",
+   "titulo_num": 7,
+   "capitulo": "7.5",
+   "encabezado": "PRUEBA DE INFILTRACIÓN",
+   "texto": "PRUEBA DE INFILTRACIÓN. Se efectuará para tuberías de hormi-\ngón, cuando el nivel freático esté por encima de las tuberías. Se medirá la can-\ntidad de agua infiltrada en el tramo a prueba, el cual deberá estar taponado en \nambos extremos, superior e inferior. La medida del agua se hará por cualquier \nmétodo que garantice una precisión aceptable, tomando en cuenta los siguien-\ntes puntos:\n\n\nDIHEa) Antes de iniciar la prueba, el tramo de tubería que se va a ensayar se dejará \nsaturar de agua para evitar que la absorción de ésta, por la tubería de hormi-\ngón, afecte los resultados.\nb) Una vez producida la saturación se procederá a extraer el agua de la tubería. \nSi el nivel freático en el momento de la prueba está por debajo del alcantarilla-\ndo, se efectuará la prueba de fugas mediante sello provisional del alcantarillado \nen la cámara situada en el extremo inferior del tramo a probarse, y luego llenan-\ndo la alcantarilla con agua hasta una altura de 0.30 m, por encima de la clave \n(fondo de la alcantarilla en el punto más bajo), en la cámara de la parte superior \ndel tramo que se prueba.\nc) La fuga será la cantidad medida de agua que sea necesario agregar para man-\ntener el nivel a esa altura, en 4 horas, con lecturas a intervalos de 30 min.\nd) Al calcular la longitud de alcantarillas, que contribuyen con infiltración, se \nincluirán las longitudes de las conexiones domiciliarias en la longitud total.\ne) La infiltración máxima permisible, en litros por hora por metro de tubería, \nserá la establecida en la tabla siguiente.\nTABLA 53\nINFILTRACIÓN PERMISIBLE\n\n\n\nTÍTULO 8. DISPOSICIONES FINALES",
+   "paginas": [
+    159,
+    160,
+    161
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  }
+ ]
+}

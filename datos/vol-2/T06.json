@@ -1,0 +1,2262 @@
+{
+ "volumen": 2,
+ "sigla": "DIHE",
+ "nombre_volumen": "Instalaciones Hidrosanitarias en Edificaciones",
+ "titulo": 6,
+ "nombre": "Disposición Individual de Aguas Residuales",
+ "fuente_pdf": "MIVHED-Instalaciones-Hidrosanitarias-en-Edificaciones-Vol-II.pdf",
+ "version_codigo": null,
+ "nota_version": "Edición MIVHED sin fecha impresa; volumen complementario del CCRD/CDCRD.",
+ "capitulos": {
+  "6.1": "DISPOSICIONES GENERALES",
+  "6.10": "UNIDADES INDIVIDUALES DE TRATAMIENTO PRIMA-",
+  "6.11": "TANQUES DE ALMACENAMIENTO TEMPORAL DE",
+  "6.12": "TRAMPAS DE GRASAS",
+  "6.13": "OTROS SISTEMAS DE TRATAMIENTO",
+  "6.14": "INSPECCIONES",
+  "6.2": "EVALUACIÓN DEL SITIO",
+  "6.3": "EVALUACIÓN DE LA CAPACIDAD DE INFILTRACIÓN O",
+  "6.4": "VERIFICACIÓN DE LOS DATOS DE SUELO",
+  "6.5": "UBICACIÓN DEL SISTEMA DE ABSORCIÓN",
+  "6.6": "MATERIALES",
+  "6.7": "SISTEMAS DE ABSORCIÓN O INFILTRACIÓN EN SUELO",
+  "6.8": "INSTALACIÓN DE SISTEMAS CONVENCIONALES DE",
+  "6.9": "SISTEMAS DE DISTRIBUCIÓN A PRESIÓN"
+ },
+ "clausulas": [
+  {
+   "id": "6.1.1",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "",
+   "texto": "Este Título establece los requisitos para los sistemas individuales de tra-\ntamiento y disposición de aguas residuales.",
+   "paginas": [
+    111
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.2",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "",
+   "texto": "CONDICIONES PARA LA DESCARGA DE AGUAS RESIDUALES DO-\nMÉSTICAS. En el caso de aguas residuales domésticas, sólo se permitirá la \ndescarga a través de sistemas individuales cuando no haya acceso a un sistema \nmunicipal de alcantarillado sanitario.\nArtículo 2 TRATAMIENTO Y DISPOSICIÓN DE AGUAS RESIDUALES IN-\nDUSTRIALES. Para las aguas residuales industriales, se exigirá tratamiento y \ndisposición individual cuando no haya acceso a un sistema de alcantarillado, o \ncuando dicho sistema no esté en condiciones de aceptar los efluentes indus-\ntriales en cuestión.\n6.1.3REQUISITOS PARA LA APROBACIÓN DE SISTEMAS DE TRATAMIEN-\nTO DE AGUAS RESIDUALES. Para ser aprobados, los sistemas de tratamiento \ny disposición individual deberán demostrar que cumplen con los reglamentos \nde calidad de agua y descargas de aguas residuales emitidas por las autorida-\ndes del Ministerio de Salud Pública y el Ministerio de Medio Ambiente y Recur-\nsos Naturales.\n\n\nArtículo 3 AGUAS RESIDUALES DOMÉSTICAS. T odas las aguas residuales \ndomésticas deberán ser descargadas a un sistema de tratamiento individual, \nde acuerdo con el Capítulo 6.10 de este Volumen, previo a su descarga al suelo, \nsubsuelo o cuerpo de agua superficial o subterráneo.",
+   "paginas": [
+    111,
+    112
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.4",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "AGUAS RESIDUALES INDUSTRIALES",
+   "texto": "AGUAS RESIDUALES INDUSTRIALES. La autoridad administrativa de \naplicación de este Volumen, así como las autoridades sanitarias y ambienta-\nles, deberán revisar y autorizar los sistemas de tratamiento y disposición de las \naguas residuales producto de las operaciones industriales o de manufactura, \nincluyendo las combinaciones de los desechos domésticos e industriales.",
+   "paginas": [
+    112
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.5",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "AGUAS RESIDUALES DE HOSPITALES Y CLÍNICAS",
+   "texto": "AGUAS RESIDUALES DE HOSPITALES Y CLÍNICAS. Las aguas residua-\nles de clínicas y hospitales o las resultantes del lavado o tratamiento de equi-\npos biomédicos no podrán ser descargadas directamente al sistema. Aquellos \nmateriales, tales como: cenizas o hilachas; líquidos y gases inflamables, tóxicos \no explosivos; aceites, grasas u otro tipo de material que sea capaz de obstruir, \ndañar o sobrecargar el sistema individual de tratamiento y disposición de aguas \nresiduales, o que pueda interferir con la operación normal del mismo, no po-\ndrán ser depositados en dicho sistema. Se deberá proveer un método alternati-\nvo de tratamiento y disposición que satisfaga los requerimientos de las normas \nsanitarias y ambientales.",
+   "paginas": [
+    112
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.6",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "AGUAS PLUVIALES, CLARAS O NO CONTAMINADAS",
+   "texto": "AGUAS PLUVIALES, CLARAS O NO CONTAMINADAS. No se permitirá \nla descarga de aguas de escorrentía o de lluvias o de otros tipos de aguas no \ncontaminadas, en el sistema individual de tratamiento y disposición de aguas \nresiduales.",
+   "paginas": [
+    112
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.7",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "APROBACIÓN DE SISTEMAS ALTERNATIVOS",
+   "texto": "APROBACIÓN DE SISTEMAS ALTERNATIVOS. En caso de que el dise-\nñador proponga un sistema de tratamiento y disposición individual, no cubier-\nto por este Volumen, deberá presentar a la Autoridad de Administración del \nCódigo, los datos, referencias y cálculos que permitan probar que el mismo \nsatisface los requerimientos establecidos en éste y en las normas vigentes en \nmateria de protección del ambiente y de la salud humana.",
+   "paginas": [
+    112
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.8",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "ÁREAS SUSCEPTIBLES A INUNDACIÓN",
+   "texto": "ÁREAS SUSCEPTIBLES A INUNDACIÓN. La disposición individual de \naguas residuales a través de infiltración o absorción por el suelo no se deberá \nhacer en áreas susceptibles a inundación, o con problemas de infiltración. En \ntodo caso se requerirá la aprobación previa del Ministerio de Medio Ambiente \ny Recursos Naturales.",
+   "paginas": [
+    112,
+    113
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.9",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "FRANJAS DE INUNDACIÓN",
+   "texto": "FRANJAS DE INUNDACIÓN. La instalación de sistemas individuales \nde tratamiento de aguas residuales a través de infiltración o absorción por el \nsuelo, en las franjas adyacentes a las zonas susceptibles a inundación, deberá \nser analizada de manera particular. En caso de autorizarse, se deberán realizar \nrellenos de materiales granulares y/o de alta permeabilidad; o diques que ga-\nranticen que la zona estará libre de inundación.\nPÁRRAFO. En todos los casos la permeabilidad requerida deberá ser demos-\ntrada mediante una prueba de infiltración.",
+   "paginas": [
+    113
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.1.10",
+   "titulo_num": 6,
+   "capitulo": "6.1",
+   "encabezado": "MEJORA DE SISTEMAS EN ZONAS PROPENSAS A INUNDACIÓN",
+   "texto": "MEJORA DE SISTEMAS EN ZONAS PROPENSAS A INUNDACIÓN. \nCuando sea necesario rehabilitar o sustituir un sistema de disposición indivi-\ndual en áreas propensas a inundaciones, su autorización estará sujeta a una \nminuciosa evaluación sobre los criterios particulares de cada caso, para mitigar \nriesgos a la salud. Se procurará sustituir por un sistema de tratamiento y dispo-\nsición que garantice la protección del medio ambiente y la salud.",
+   "paginas": [
+    113
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.1",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "",
+   "texto": "EVALUACIÓN DEL SITIO PARA SISTEMAS INDIVIDUALES DE DISPO-\nSICIÓN DE AGUAS RESIDUALES. Para la instalación de sistemas individua-\nles de disposición de aguas residuales, se realizará una evaluación del sitio, de \nacuerdo con los requerimientos de este Capítulo.",
+   "paginas": [
+    113
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.2",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "CRITERIOS DE EVALUACIÓN",
+   "texto": "CRITERIOS DE EVALUACIÓN. La evaluación del sitio incluirá condicio-\nnes del suelo, sus propiedades y permeabilidad, profundidad del nivel freático, \nprofundidad al substrato de roca, pendiente, paisaje y potencial de inundación. \n\n\nLos datos de las pruebas de suelo estarán referidos a las elevaciones del terreno \nantes de cualquier movimiento de tierra, y se deberá establecer un punto de \nreferencia de elevación (BM).",
+   "paginas": [
+    113,
+    114
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.3",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "PENDIENTES DE LOS TERRENOS",
+   "texto": "PENDIENTES DE LOS TERRENOS. Los sistemas convencionales de \ndisposición en el suelo no se deberán localizar en terrenos con una pendiente \nmayor de 20%. Para el caso de una pendiente es mayor, el diseño deberá ser \naprobado por la Autoridad de Administración de este Volumen.",
+   "paginas": [
+    114
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.4",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "MUESTREOS DE SUELO Y DESCRIPCIONES DEL PERFIL",
+   "texto": "MUESTREOS DE SUELO Y DESCRIPCIONES DEL PERFIL. Se realiza-\nrán calicatas o muestreos de suelo en todos los proyectos donde se planifique \nla instalación de sistemas individuales de disposición de aguas residuales. Las \nperforaciones se extenderán por lo menos 0.9 m (3 pies), por debajo del fondo \ndel sistema propuesto. Las perforaciones serán de suficiente tamaño y exten-\nsión para determinar las características importantes del suelo para un sistema \nde eliminación de aguas residuales “in situ” . Los datos del muestreo deberán \npermitir caracterizar el sitio con relación a zonas de saturación estacional o per-\nmanente del suelo y la profundidad del lecho de roca. Las perforaciones serán \nrealizadas antes de las pruebas de percolación para determinar la viabilidad de \néstas y si es adecuado, a qué profundidad se conducirán dichas pruebas.",
+   "paginas": [
+    114
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.5",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "CANTIDAD DE CALICATAS",
+   "texto": "CANTIDAD DE CALICATAS. Se deberán realizar un mínimo de tres cali-\ncatas por sistema de absorción.",
+   "paginas": [
+    114
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.6",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "LOCALIZACIÓN",
+   "texto": "LOCALIZACIÓN. La posición de cada calicata deberá estar bien referen-\nciada con respecto a cota y a distancia horizontal. Los reportes de la caracteri-\nzación del suelo para el diseño incluirán un dibujo a escala con la ubicación de \nlas calicatas, o al menos un croquis con las distancias horizontales al punto de \nreferencia claramente indicadas.",
+   "paginas": [
+    114
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.7",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "DESCRIPCIÓN DEL SUELO",
+   "texto": "DESCRIPCIÓN DEL SUELO. Se deberán suministrar descripciones de los \nperfiles edafológico y estratigráfico (litológico) para cada calicata. Los distintos \nespesores de cada horizonte del suelo observado deberán de ser indicados (en \n\n\nmetros). Los horizontes se diferenciarán en función de la estratigrafía. Las pro-\nfundidades serán medidas desde la superficie del terreno hacia abajo.",
+   "paginas": [
+    114,
+    115
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.8",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "SUELO SATURADO",
+   "texto": "SUELO SATURADO. Las zonas estacionales o periódicas de saturación \ndel suelo serán estimadas en función del nivel más alto de suelo saturado.",
+   "paginas": [
+    115
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.9",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "NIVEL FREÁTICO",
+   "texto": "NIVEL FREÁTICO. De alcanzarse el nivel freático, se deberá reportar la \nprofundidad a la que se observó agua subterránea. Se reportará como nivel del \nagua subterránea el nivel que ésta alcanza dentro del punto de exploración, o el \nnivel más alto de infiltración a través de las paredes laterales de la perforación, \nindicando la profundidad medida desde la superficie del terreno. Se deberá eva-\nluar la presencia de descoloramientos (motas) en el suelo por encima del nivel \ndel agua.",
+   "paginas": [
+    115
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.2.10",
+   "titulo_num": 6,
+   "capitulo": "6.2",
+   "encabezado": "DEPÓSITOS COLUVIALES Y ALUVIALES",
+   "texto": "DEPÓSITOS COLUVIALES Y ALUVIALES. Se deberán instalar siste-\nmas de disposición de aguas residuales por absorción sub-superficial solo para \nsistemas de galerías de infiltración y se evitará para sistemas de filtrantes, en \ndepósitos aluviales y coluviales de poca profundidad, o susceptibles a extensos \nperíodos de saturación o anegamiento.",
+   "paginas": [
+    115
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.3.1",
+   "titulo_num": 6,
+   "capitulo": "6.3",
+   "encabezado": "",
+   "texto": "EVALUACIÓN DE LA PERMEABILIDAD DEL SUELO PARA SISTEMAS \nDE ABSORCIÓN. La permeabilidad del suelo, en el lugar donde se propone \ninstalar un sistema de absorción o infiltración, deberá ser determinada por \npruebas de percolación o evaluaciones de permeabilidad.",
+   "paginas": [
+    115
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.3.2",
+   "titulo_num": 6,
+   "capitulo": "6.3",
+   "encabezado": "PRUEBAS DE INFILTRACIÓN",
+   "texto": "PRUEBAS DE INFILTRACIÓN. Se realizarán por lo menos una prueba \nde infiltración por cada sistema de disposición individual. Se deberán distribuir \nde manera uniforme en el lugar y a la profundidad del fondo del sistema de \nabsorción propuesto.",
+   "paginas": [
+    115
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.3.3",
+   "titulo_num": 6,
+   "capitulo": "6.3",
+   "encabezado": "AGUJERO PARA LAS PRUEBAS DE INFILTRACIÓN",
+   "texto": "AGUJERO PARA LAS PRUEBAS DE INFILTRACIÓN. El agujero para la \nprueba será cavado o perforado, con una dimensión horizontal de 0.10 m a \n0.20 m (4” a 8”). Se deberá rascar el fondo y lados del hueco con un instru-\nmento de punta afilada para exponer el suelo natural. T odo material suelto será \nremovido del hueco, y el fondo se recubrirá con 0.05 m (2”) de grava o arena \ngruesa.",
+   "paginas": [
+    115,
+    116
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.3.4",
+   "titulo_num": 6,
+   "capitulo": "6.3",
+   "encabezado": "",
+   "texto": "PROCEDIMIENTO PARA SUELOS ARENOSOS Y OTROS TIPOS DE \nSUELO. Se procederá a realizar las pruebas de suelo para los sistemas de infil-\ntración, según la tabla siguiente:\nTABLA 25\nPRUEBAS DE INFILTRACIÓN SEGUN TIPO DE SUELO",
+   "paginas": [
+    116
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.3.5",
+   "titulo_num": 6,
+   "capitulo": "6.3",
+   "encabezado": "EQUIPOS MECÁNICOS",
+   "texto": "EQUIPOS MECÁNICOS. Cuando se plantee utilizar equipos mecánicos \npara realizar la prueba de infiltración, dicho equipo y el procedimiento a utilizar, \ndeberán ser aprobados por la autoridad competente.",
+   "paginas": [
+    116
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.3.6",
+   "titulo_num": 6,
+   "capitulo": "6.3",
+   "encabezado": "EVALUACIÓN DE LA PERMEABILIDAD",
+   "texto": "EVALUACIÓN DE LA PERMEABILIDAD. Se evaluará la permeabilidad \ndel suelo sobre la base de la estructura y textura del suelo, de acuerdo con las \nprácticas aceptadas de evaluación de suelos.",
+   "paginas": [
+    116
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.1",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "VERIFICACIÓN E INSPECCIÓN DE CONDICIONES DEL SUELO PARA \nSISTEMAS DE DISPOSICIÓN DE AGUAS RESIDUALES. La autoridad compe-\ntente podrá verificar, a través de un inspector, los datos referidos a la profundi-\ndad del suelo hasta la aparición de motas (decoloración), profundidad del agua \nsubterránea, textura del suelo, profundidad hasta el lecho de roca y pendientes. \nEl responsable del proyecto deberá facilitar el acceso del inspector al área y pro-\n\n\nveer los puntos de muestreo que sean necesarias para la verificación. Donde \nsea requerido por el inspector se verificarán los resultados de las pruebas de \ninfiltración o la evaluación de permeabilidad, debiendo repetirse las pruebas en \npresencia del inspector si éste así lo requiere.",
+   "paginas": [
+    116,
+    117
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.2",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "REQUISITOS PARA LA EVALUACIÓN DE SUELOS ALTERADOS POR \nRELLENOS O MEDIDAS ANTI-INUNDACIÓN. Donde el relieve natural del \nsuelo ha sido alterado por rellenos u otros métodos para prevenir inundación o \nanegamiento, la Autoridad de Acueducto y Alcantarillado correspondiente po-\ndrá requerir que se realicen observaciones bajo condiciones de suelo saturado.",
+   "paginas": [
+    117
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.3",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "USO DE MAPAS Y DATOS PARA DETERMINAR CARACTERÍSTICAS \nDEL SUELO Y TASAS DE PERCOLACIÓN. Se utilizarán mapas detallados del \nsuelo, u otra información adecuada, para determinar tasas estimadas de perco-\nlación y otras características del suelo, cuando así se requiera.",
+   "paginas": [
+    117
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.4",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "MONITOREO DE LOS NIVELES DE AGUA",
+   "texto": "MONITOREO DE LOS NIVELES DE AGUA. El propietario o desarrolla-\ndor de un terreno tendrá la opción de proveer documentación que demuestre \nque la presencia de decoloración en el perfil del suelo (suelo moteado) u otros \nindicadores, no indican condiciones estacionales de saturación en el suelo, \ndebidas a elevaciones en el nivel freático. Dicha documentación deberá incluir \nobservaciones directas de los niveles de agua subterránea a través de la instala-\nción de pozos de monitoreo (piezométricos) del nivel freático.",
+   "paginas": [
+    117
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.4.5",
+   "titulo_num": 6,
+   "capitulo": "6.4",
+   "encabezado": "",
+   "texto": "PROCEDIMIENTO DE MONITOREO Y SUPERVISIÓN DE INSTALA-\nCIONES DE MONITOREO. El procedimiento de monitoreo deberá contar con \nla aprobación de la autoridad competente, previa solicitud por escrito del in-\nteresado o su representante legal. En la solicitud, se detallarán los objetivos y \nmétodos del monitoreo. La Autoridad de Administración del Código realizará \nuna supervisión de campo a la instalación de monitoreo, por lo menos una vez, \ndurante el período de mayores niveles de agua.",
+   "paginas": [
+    117,
+    118
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.1",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "CONDICIONES DE UBICACIÓN PARA SISTEMAS DE ABSORCIÓN E \nINFILTRACIÓN EN RELACIÓN CON FUENTES DE AGUA POTABLE. La cota \nsuperficial de cualquier sistema de absorción o infiltración en suelo deberá es-\ntar por debajo de la cota superficial de cualquier pozo de agua para uso potable \nen la misma propiedad o en propiedades adyacentes. Donde esto no sea posi-\nble, se deberá emplazar el sistema de absorción; de manera tal que la escorren-\ntía superficial desde este no escurra hacia un pozo o reservorio. La distancia mí-\nnima horizontal entre un sistema de absorción y una fuente de abastecimiento \nserá la indicada en la TABLA 11. El drenaje superficial se deberá desviar fuera \ndel área de disposición de aguas residuales.",
+   "paginas": [
+    118
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.2",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "PROFUNDIDAD AL AGUA SUBTERRÁNEA Y AL SUSTRATO ROCOSO",
+   "texto": "PROFUNDIDAD AL AGUA SUBTERRÁNEA Y AL SUSTRATO ROCOSO. \nDeberá haber un mínimo de 3 m de suelo entre el fondo del sistema de absor-\nción o infiltración en suelo y el nivel freático o el lecho de roca. En esta franja se \ndeben encontrar suelos con tasas de infiltración de 60 minutos para 0.025 m \n(1”) o más rápidos. Se deberá disponer por lo menos de 1.42 m (56”) de suelo \nnatural, medidos a partir de la cota original del terreno, para poder instalar un \nsistema convencional de disposición por absorción en el suelo.",
+   "paginas": [
+    118
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.3",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "",
+   "texto": "TASA DE INFILTRACIÓN PARA SISTEMAS DE ZANJA O LECHO DE \nINFILTRACIÓN. No se podrán instalar sistemas de disposición superficial en \nsuelo de los tipos \"en zanja\" o de \"lecho\", en aquellos lugares donde la tasa \nde infiltración en cualquiera de las tres pruebas realizadas resulte ser mayor \nque 60 minutos para una disminución en el nivel del agua de 0.025 m (1”). La \nmenor tasa medida deberá ser la utilizada para calcular el área de infiltración \nrequerida.",
+   "paginas": [
+    118
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.4",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "TASA DE INFILTRACIÓN EN FILTRANTES",
+   "texto": "TASA DE INFILTRACIÓN EN FILTRANTES. Para el diseño de filtrantes \nse realizarán pruebas de infiltración para cada horizonte del suelo por debajo \nde la tubería de entrada de las aguas residuales al filtrante. Aquellos estratos \nde suelo con tasas de infiltración más lentas que 30 minutos por 0.025 m (1”) \n\n\nno serán considerados al calcular el área de absorción. La tasa más lenta de \npercolación medida en los distintos estratos se usará para determinar el área \nde absorción.",
+   "paginas": [
+    118,
+    119
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.5",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "PROHIBICIÓN DE DESFONDE DE FILTRANTES",
+   "texto": "PROHIBICIÓN DE DESFONDE DE FILTRANTES. No se permitirá la \nconstrucción de filtrantes para descarga de aguas residuales que penetren has-\nta el nivel freático. Se deberá siempre mantener, por lo menos, una distancia de \n3 m (10 pies) por encima del nivel freático.",
+   "paginas": [
+    119
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.5.6",
+   "titulo_num": 6,
+   "capitulo": "6.5",
+   "encabezado": "ÁREAS RELLENADAS",
+   "texto": "ÁREAS RELLENADAS. No se permitirá la instalación de sistemas de dis-\nposición de aguas residuales por absorción en suelo en las áreas rellenadas, a \nmenos que el emplazamiento sea específicamente aprobado por la Autoridad \nde Administración del Código, luego de realizar todos los estudios de lugar. \nEn caso de autorizarse su construcción se deberá garantizar que hay área dis-\nponible para instalar un sistema de zanjas de infiltración poco profunda. Los \nrellenos deberán ser realizados de acuerdo con las secciones correspondientes \ndel código de edificaciones.",
+   "paginas": [
+    119
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.1",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "REQUERIMIENTOS MÍNIMOS",
+   "texto": "REQUERIMIENTOS MÍNIMOS. Los materiales a utilizar en los sistemas \nindividuales de disposición de aguas residuales deberán cumplir con las espe-\ncificaciones referidas en este Volumen.",
+   "paginas": [
+    119
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.2",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "IDENTIFICACIÓN",
+   "texto": "IDENTIFICACIÓN. La marca o identificación del fabricante y la calidad \ndel producto deberán estar marcadas de manera indeleble o estampada en \ncada tubería, tanque, material y dispositivo utilizado en un sistema de disposi-\nción individual.",
+   "paginas": [
+    119
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.3",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "TUBERÍAS",
+   "texto": "TUBERÍAS. Las tuberías en cualquier sistema de disposición individual de \naguas residuales deberán ser de pared lisa y cumplir con los estándares listados \nen la tabla siguiente:\n\n\nTABLA 26\nESPECIFICACIONES PARA TUBERÍAS USADAS EN SISTEMAS DE DISPO-\nSICIÓN INDIVIDUAL\nTABLA 26\nESPECIFICACIONES PARA TUBERÍAS USADAS EN SISTEMAS \nDE DISPOSICIÓN INDIVIDUAL",
+   "paginas": [
+    119,
+    120
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.6.5",
+   "titulo_num": 6,
+   "capitulo": "6.6",
+   "encabezado": "APROBACIÓN DE LAS JUNTAS Y CONEXIONES",
+   "texto": "APROBACIÓN DE LAS JUNTAS Y CONEXIONES. T odas las juntas y \nconexiones deberán cumplir con las especificaciones de este Volumen y con \nlos estándares internacionales correspondientes. Los siguientes tipos de jun-\ntas y conexiones están prohibidos:",
+   "paginas": [
+    120,
+    121
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.7.1",
+   "titulo_num": 6,
+   "capitulo": "6.7",
+   "encabezado": "",
+   "texto": "DISPOSICIÓN DE EFLUENTES DE TANQUES SÉPTICOS Y MÉTODOS \nAPROBADOS. Los efluentes provenientes de tanques sépticos y otros tanques \nde tratamiento aprobados, pueden ser dispuestos por absorción o infiltración \nen suelo, o cualquier otro método expresamente autorizado por la Autoridad \nCompetente.",
+   "paginas": [
+    121
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.7.2",
+   "titulo_num": 6,
+   "capitulo": "6.7",
+   "encabezado": "",
+   "texto": "DIMENSIONAMIENTO Y REQUISITOS PARA SISTEMAS DE ABSOR -\nCIÓN O INFILTRACIÓN. El dimensionamiento de los sistemas de absorción \no infiltración se deberá hacer para sistemas que manejen menos de 18.93 m3 \n(18,925 litros o 5,000 galones) por día de efluentes. Se requerirán dos sistemas \nde igual tamaño para edificaciones donde el volumen de efluentes exceda dicho \nvalor. En un sistema dual, cada subsistema deberá contar con una capacidad \nmínima de por lo menos 75% del área requerida para un sistema simple equi-\nvalente. Se deberá proporcionar un medio aprobado para alternar la aplicación \nde los efluentes a cada subsistema. Un sistema dual deberá ser considerado \ncomo un solo sistema.",
+   "paginas": [
+    121
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.7.3",
+   "titulo_num": 6,
+   "capitulo": "6.7",
+   "encabezado": "MÉTODO DE APLICACIÓN",
+   "texto": "MÉTODO DE APLICACIÓN. El efluente proveniente desde el séptico o \ntanque de tratamiento hacia el sistema de absorción o infiltración en suelo de-\nberá ser dispuesto por gravedad o por dosificación para facilidades, con una \naplicación diaria de hasta 5.68 m3 (1,500 galones o 5,678 litros), a partir de \neste volumen deberá proveer una solución justificada técnicamente.",
+   "paginas": [
+    121
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.7.4",
+   "titulo_num": 6,
+   "capitulo": "6.7",
+   "encabezado": "",
+   "texto": "DIMENSIONAMIENTO DEL SISTEMA EN VIVIENDAS DE UNA Y DOS \nFAMILIAS. El área a ser ocupada por el fondo de las zanjas o lechos de infiltra-\nción, o el área efectiva de las paredes de un filtrante, para ser usados como me-\ndio de disposición individual de aguas residuales en edificaciones residenciales \nserá determinada mediante la TABLA 28, usando los datos de las pruebas de \ninfiltración realizadas según lo requerido por este Volumen.\n\n\nTABLA 28\nÁREA MÍNIMA DE INFILTRACIÓN REQUERIDA PARA VIVIENDAS DE \nUNA Y DOS FAMILIAS",
+   "paginas": [
+    121,
+    122
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.7.5",
+   "titulo_num": 6,
+   "capitulo": "6.7",
+   "encabezado": "DIMENSIONAMIENTO PARA OTROS TIPOS DE EDIFICACIONES",
+   "texto": "DIMENSIONAMIENTO PARA OTROS TIPOS DE EDIFICACIONES. El \nárea mínima requerida para los sistemas de disposición de aguas residuales por \nabsorción o infiltración en suelo, en cualquier tipo de edificación, exceptuando \nlas indicadas en la sección anterior, se deberá calcular en función del uso pro-\npuesto para la edificación, de los resultados de las pruebas de infiltración y del \ndiseño del sistema, de acuerdo con las TABLAS 29 y 30. El área mínima efectiva \nde absorción o infiltración se podrá calcular por la siguiente fórmula o cualquier \notro método aprobado:\nA = U x FC x AA\nDonde: \nA = Área mínima de sistema de absorción.\nU = Número de unidades.\nFC = Factor de conversión de la TABLA 30.\nAA = Área de absorción de la TABLA 29.\nTABLA 29\nÁREA MÍNIMA DE INFILTRACIÓN REQUERIDA PARA VIVIENDAS DE MÁS \nDE DOS FAMILIAS Y OTROS USOS\n\n\n\nTABLA 30\nFACTOR DE CONVERSIÓN (FC)\nTABLA 30\nFACTOR DE CONVERSIÓN (FC)",
+   "paginas": [
+    122,
+    123,
+    124
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.8.1",
+   "titulo_num": 6,
+   "capitulo": "6.8",
+   "encabezado": "ZANJAS DE INFILTRACIÓN",
+   "texto": "ZANJAS DE INFILTRACIÓN. Las zanjas de infiltración se excavarán de \n0.3 m a 1.5 m (1 a 5 pies) de ancho, separadas un mínimo de 1.80 m (6 pies) \nentre sí. El área efectiva para infiltración será calculada usando sólo el área del \nfondo de la zanja, sin incluir el área del fondo del canal de distribución al inicio \ndel sistema. La longitud máxima de los canales de infiltración será de 30.5 m \n(100 pies), a menos que sea específicamente aprobado por la autoridad com-\npetente.",
+   "paginas": [
+    124
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.8.2",
+   "titulo_num": 6,
+   "capitulo": "6.8",
+   "encabezado": "LECHOS DE INFILTRACIÓN",
+   "texto": "LECHOS DE INFILTRACIÓN. El área de absorción será computada \nusando el área del fondo. La tubería de distribución deberá estar uniformemen-\nte espaciada a un máximo de 1.5 m (5 pies) de ancho y a un mínimo de 0.6 m \n(2 pies) de profundidad entre sí; además, se colocará a un máximo de 0.91 m (3 \npies) y un mínimo de 0.30 m (1 pie) de las paredes laterales o principal.",
+   "paginas": [
+    124
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.8.3",
+   "titulo_num": 6,
+   "capitulo": "6.8",
+   "encabezado": "FILTRANTES EXCAVADOS",
+   "texto": "FILTRANTES EXCAVADOS. Los filtrantes excavados tendrán un diá-\nmetro interno mínimo de 1.5 m (5 pies). Consistirán en una cámara o pozo \nexcavado con las paredes recubiertas de algún material aprobado que permita \nla infiltración del efluente tratado. Se podrán utilizar anillos de hormigón prefa-\nbricado con huecos, bloques de cemento (mampostería) o ladrillos colocados \nde manera tal que permitan que suficiente flujo percole al terreno que rodea la \nexcavación.",
+   "paginas": [
+    124
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.8.4",
+   "titulo_num": 6,
+   "capitulo": "6.8",
+   "encabezado": "",
+   "texto": "ESPECIFICACIONES PARA EL FONDO Y ESPACIO ANULAR EN SIS-\nTEMAS DE FILTRACIÓN. El fondo del filtrante se dejará sin recubrir. Entre la \npared del filtrante y la excavación se dejará un espacio anular de al menos 0.15 \nm (6”), el cual deberá ser llenado de material agregado (grava o gravilla) de \n38.1 a 63.5 milímetros (1 ½” a 2 ½” pulgadas). La altura del espacio anular se \ndeberá extender desde la tubería de alimentación hasta el fondo de la cámara.",
+   "paginas": [
+    124
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.8.5",
+   "titulo_num": 6,
+   "capitulo": "6.8",
+   "encabezado": "",
+   "texto": "REQUISITOS PARA LA INSTALACIÓN Y CÁLCULO DE FILTRANTES \nEN SISTEMAS DE INFILTRACIÓN. Cada filtrante deberá ser provisto con un \nregistro de 0.60 m (24”) de diámetro, así como con una entrada de aire o ven-\ntilación de 0.10 m (4\") de diámetro. Los filtrantes se ubicarán a por lo menos \n1.5 m (5 pies) entre sí. La excavación y preparación del terreno se deberá hacer \nsegún lo indicado en la sección 6.8.2. El área de infiltración efectiva se calculará \ncomo el área de la pared vertical de la cámara que esté por debajo de la tubería \nde entrada, considerando sólo aquellos estratos del suelo en que los que la tasa \nde percolación sea menor de 30 minutos por pulgada. La TABLA 33, u otro mé-\ntodo aprobado por la Autoridad Competente, serán utilizados para determinar \nel área efectiva de los filtrantes circulares.\nTABLA 31\nÁREA DE ABSORCIÓN EFECTIVA EN FILTRANTES",
+   "paginas": [
+    124,
+    125
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.8.6",
+   "titulo_num": 6,
+   "capitulo": "6.8",
+   "encabezado": "EXCAVACIÓN",
+   "texto": "EXCAVACIÓN. El fondo de la excavación de una zanja o lecho de in-\nfiltración deberá estar a nivel. No se realizarán excavaciones en el suelo muy \nhúmedo. Se deberá escarificar las paredes y el fondo para retirar cualquier ma-\nterial compactado, el material resultante de la escarificación se retirará de la \nexcavación. Cuando llueva sobre una excavación abierta, se dejará hasta que el \nmaterial haya secado lo suficiente, luego el fondo deberá ser escarificado y el \nmaterial suelto removido.",
+   "paginas": [
+    125
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.8.7",
+   "titulo_num": 6,
+   "capitulo": "6.8",
+   "encabezado": "COLOCACIÓN DE AGREGADO Y COBERTURA",
+   "texto": "COLOCACIÓN DE AGREGADO Y COBERTURA. Se deberá colocar una \ncapa de material agregado (grava) de 38.1 milímetros (1½\") a 63.5 milímetros \n(2½\"), con un espesor mínimo de 0.15 m (6\") sobre el fondo de las zanjas o le-\nchos de infiltración, y hasta un mínimo de 0.05 m (2\") por encima de la tubería \nde distribución. El agregado deberá ser distribuido uniformemente y cubierto \ncon material fino, según lo especificado en la tabla siguiente:\nTABLA 32\nDETALLE DE ZANJA ALCANTARILLADO SANITARIO",
+   "paginas": [
+    125,
+    126
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.8.8",
+   "titulo_num": 6,
+   "capitulo": "6.8",
+   "encabezado": "TUBERÍA DE DISTRIBUCIÓN",
+   "texto": "TUBERÍA DE DISTRIBUCIÓN. La tubería de distribución para sistemas \npor gravedad no deberá ser menor de 4” (100 mm) de diámetro. El distribuidor \nprincipal deberá ser una tubería de pared sólida. El tope de la tubería de distri-\nbución estará a no menos de 0.20 m (8\") por debajo de la superficie original del \nterreno. La pendiente de la distribución deberá estar entre 0.17% a 0.33%. El \nefluente deberá ser distribuido entre todos los tubos de distribución, el diseño \nhidráulico del sistema deberá garantizar una distribución uniforme, y en caso \nnecesario, la aplicación en dosis.",
+   "paginas": [
+    126
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.8.9",
+   "titulo_num": 6,
+   "capitulo": "6.8",
+   "encabezado": "TUBOS DE OBSERVACIÓN",
+   "texto": "TUBOS DE OBSERVACIÓN. Se colocarán tubos de observación de diá-\nmetro no menor de 4” (100 mm), que sobresalgan por lo menos 0.30 m (12\") \nsobre el nivel del terreno, luego de colocar la cobertura del sistema y terminan-\ndo con una tapa de ventilación. Los últimos 0.30 m (12\") del tubo de observa-\nción deberán ser perforados y extenderse hasta el fondo de la capa de material \nagregado. Los tubos de observación se alejarán por lo menos 7.6 m (25 pies) \nde cualquier ventana, puerta o entrada de aire a cualquier edificación destinada \nal uso humano. Un máximo de 4 tuberías de distribución serán servidas por \nuna tubería de observación cuando estén interconectadas por un distribuidor \nprincipal (cabezal) común.",
+   "paginas": [
+    126,
+    127
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.8.10",
+   "titulo_num": 6,
+   "capitulo": "6.8",
+   "encabezado": "EVAPORACIÓN",
+   "texto": "EVAPORACIÓN. Los sistemas de absorción o infiltración en suelo tipo \nzanja o lecho de infiltración, no deberán ser sellados ni pavimentados con ma-\nteriales que puedan inhibir la evaporación del efluente.",
+   "paginas": [
+    127
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.9.1",
+   "titulo_num": 6,
+   "capitulo": "6.9",
+   "encabezado": "",
+   "texto": "REQUISITOS PARA SISTEMAS DE DISTRIBUCIÓN A PRESIÓN DE \nAGUAS RESIDUALES TRATADAS. Los sistemas de distribución a presión para \nla descarga de aguas residuales tratadas serán permitidos, siempre y cuando \nsu diseño e instalación cumplan con los requerimientos establecidos en este \ncapítulo.",
+   "paginas": [
+    127
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.9.2",
+   "titulo_num": 6,
+   "capitulo": "6.9",
+   "encabezado": "",
+   "texto": "PROFUNDIDADES MÍNIMAS DE SUELO EN SISTEMAS DE ABSOR -\nCIÓN POR GRAVEDAD Y A PRESIÓN. En sistemas de absorción por gravedad \ndeberán haber por lo menos 0.30 m de suelo entre el nivel del terreno y el tope \nde la tubería de distribución. En sistemas de absorción a presión las profundi-\ndades mínimas de suelo a la parte superior de la tubería están indicadas en la \ntabla siguiente:\nTABLA 33\nPROFUNDIDAD DE SUELO REQUERIDA PARA INSTALAR SISTEMAS DE \nDISTRIBUCIÓN A PRESIÓN",
+   "paginas": [
+    127
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.9.3",
+   "titulo_num": 6,
+   "capitulo": "6.9",
+   "encabezado": "ÁREA DE ABSORCIÓN",
+   "texto": "ÁREA DE ABSORCIÓN. El área total de absorción requerida deberá ser \ncomputada a partir del flujo diario estimado de aguas residuales y la tasa de \naplicación de la carga de diseño, considerando la tasa de infiltración medida en \nel lugar. El área de absorción requerida será determinada mediante la relación \ndel caudal de aguas residuales dividido entre la tasa de carga de diseño, esta-\nblecida en la tabla siguiente:\nTABLA 34\nTASA DE CARGA DE DISEÑO",
+   "paginas": [
+    127,
+    128
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.9.4",
+   "titulo_num": 6,
+   "capitulo": "6.9",
+   "encabezado": "",
+   "texto": "REQUISITOS PARA SISTEMAS DUALES DE DISPOSICIÓN DE AGUAS \nRESIDUALES. Se requerirá de dos sistemas de igual tamaño cuando la descar-\nga de aguas residuales supere los 18,925 litros (5,000 galones) por día. Cada \nsistema tendrá una capacidad mínima del 75% del área requerida para un sis-\ntema sencillo y contará con un medio adecuado para alternar la aplicación de \nresiduos. Un sistema dual será considerado como un solo sistema.",
+   "paginas": [
+    128
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.9.5",
+   "titulo_num": 6,
+   "capitulo": "6.9",
+   "encabezado": "DISEÑO DEL SISTEMA",
+   "texto": "DISEÑO DEL SISTEMA. Los sistemas de distribución a presión deberán \ndescargar el agua residual a zanjas o lechos de infiltración. Cada tubo conec-\ntado a la salida de un distribuidor de tubos (manifold hidráulico) será contada \ncomo una tubería de distribución aparte. El espaciamiento horizontal de las \ntuberías de distribución deberá ser de 0.76 a 1.83 m (30” a 72”). Las tuberías \n\n\nde distribución deberán ser instaladas al mismo nivel, a menos que el diseño \ngarantice la distribución uniforme del efluente sobre toda la superficie de infil-\ntración.",
+   "paginas": [
+    128,
+    129
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.9.6",
+   "titulo_num": 6,
+   "capitulo": "6.9",
+   "encabezado": "TUBERÍA DE DISTRIBUCIÓN",
+   "texto": "TUBERÍA DE DISTRIBUCIÓN. Se deberá seleccionar el tamaño de la tu-\nbería de distribución, diámetro y espaciamiento de las perforaciones o agujeros \nen la tubería de acuerdo con un diseño hidráulico, donde se demostrará el fun-\ncionamiento y la eficiencia del sistema.",
+   "paginas": [
+    129
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.9.7",
+   "titulo_num": 6,
+   "capitulo": "6.9",
+   "encabezado": "LÍNEA DE IMPULSIÓN",
+   "texto": "LÍNEA DE IMPULSIÓN. El tamaño de la línea de impulsión se determi-\nnará sobre la base de la pérdida por fricción y la velocidad del efluente en la tu-\nbería. La velocidad del efluente en la línea de impulsión no deberá ser superior \na 1.5 m/seg (5 pies/seg).",
+   "paginas": [
+    129
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.9.8",
+   "titulo_num": 6,
+   "capitulo": "6.9",
+   "encabezado": "CONSTRUCCIÓN DE ZANJAS Y LECHOS",
+   "texto": "CONSTRUCCIÓN DE ZANJAS Y LECHOS. La excavación y construcción \nde las zanjas y los lechos del sistema de distribución a presión deberán ser he-\nchas de acuerdo con las especificaciones del6.8.2. Se deberá colocar una capa \nuniforme de material agregado de por lo menos 0.15 m (6”) de espesor por de-\nbajo de la tubería de distribución, con por lo menos 0.05 m (2”) por encima de \nla misma. El agregado deberá estar limpio, con piedra no deteriorada de 12.7 \nmm a 64 mm (½” a 2 ½”).",
+   "paginas": [
+    129
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.9.9",
+   "titulo_num": 6,
+   "capitulo": "6.9",
+   "encabezado": "SELECCIÓN DE LA BOMBA",
+   "texto": "SELECCIÓN DE LA BOMBA. Se deberá basar en la tasa de descarga \n(caudal), la carga dinámica total (TDH) y la curva de desempeño de la bomba.",
+   "paginas": [
+    129
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.9.10",
+   "titulo_num": 6,
+   "capitulo": "6.9",
+   "encabezado": "CONTROLES DEL EQUIPO DE BOMBEO",
+   "texto": "CONTROLES DEL EQUIPO DE BOMBEO. La unidad de bombeo debe-\nrá tener un sistema de control para la operación de la bomba, con un sistema \nde alarma para detectar cualquier interrupción en el servicio. Los controles para \nel encendido y apagado automático de las bombas deberán ser ajustables. Los \ninterruptores deberán ser resistentes a la corrosión por contacto con aguas re-\nsiduales.",
+   "paginas": [
+    129
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.9.11",
+   "titulo_num": 6,
+   "capitulo": "6.9",
+   "encabezado": "SISTEMA DE ALARMA",
+   "texto": "SISTEMA DE ALARMA. El sistema de alarma consistirá en un timbre o \nbombilla, montado en la estructura, y localizados de manera que puedan ser \nvistos o escuchados fácilmente. Se deberá instalar un dispositivo para alertar \nsobre niveles de aguas que excedan los niveles normales de operación, apro-\nximadamente a 0.05 m (2”) por encima de la profundidad establecida para el \nencendido automático de la bomba, pero por debajo de la entrada del efluente \nal cárcamo de bombeo. Se deberá garantizar el suministro de energía eléctrica \nal sistema de alarma, de manera independiente al de la bomba.",
+   "paginas": [
+    129,
+    130
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.9.12",
+   "titulo_num": 6,
+   "capitulo": "6.9",
+   "encabezado": "DOSIFICACIÓN",
+   "texto": "DOSIFICACIÓN. La frecuencia de dosificación será de un máximo de \ncuatro veces al día. El volumen por dosis se establecerá dividiendo el caudal \ndiario de aguas residuales por la frecuencia de dosificación. El volumen de \ndosificación deberá ser por lo menos 10 veces la capacidad del volumen de la \ntubería de distribución. La TABLA 35 provee el volumen estimado para varios \ndiámetros de tuberías.\nTABLA 35\nVOLÚMENES ESTIMADOS PARA VARIOS DIÁMETROS DE TUBERÍAS",
+   "paginas": [
+    130,
+    131
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "",
+   "texto": "UNIDAD DE TRATAMIENTO AGUAS RESIDUALES",
+   "paginas": [
+    131
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.1",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "",
+   "texto": "REQUISITOS PARA EL DISEÑO Y MANTENIMIENTO DE CÁMA-\nRAS SÉPTICAS Y SISTEMAS DE TRATAMIENTO PRIMARIO. Las cámaras \nsépticas, tanques imhoff u otras unidades de tratamiento primario de aguas \nresiduales se utilizarán en edificaciones ubicadas en lugares que no disponen \nde alcantarillado sanitario o cuando por causa de la topografía no sea posible \nutilizar el alcantarillado existente. Los requerimientos de este capítulo regirán \nel diseño, instalación, reparación y mantenimiento de dichas cámaras sépticas \nde tratamiento, y de los depósitos de almacenamiento de aguas residuales.",
+   "paginas": [
+    131
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.2",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "",
+   "texto": "ESPECIFICACIONES PARA LA CONSTRUCCIÓN Y APROBACIÓN \nDE CÁMARAS SÉPTICAS. Las cámaras sépticas serán construidas de bloques \ncon cámaras llenas, acero soldado, hormigón monolítico, fibra de vidrio u otro \nmaterial debidamente aprobado. Deberán ser impermeables y fabricadas para \nconstituir una estructura individual. Serán diseñadas y construidas para sopor-\ntar las cargas estructurales de diseño. El diseño de cámaras sépticas prefabri-\ncadas deberá ser revisado y aprobado por la Autoridad Competente. Los planos \npara tanques de hormigón hechos en el sitio deberán ser aprobados antes de \niniciar la construcción. Se recomienda un período de limpieza anual.",
+   "paginas": [
+    131
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.3",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "DISEÑO DE LA CÁMARA SÉPTICA",
+   "texto": "DISEÑO DE LA CÁMARA SÉPTICA. Las cámaras sépticas podrán \nser de uno o dos compartimientos dependiendo del número de personas que \ndescarguen. (Véase TABLA 36 y TABLA 37). Será obligatorio diseñar y construir \nun filtro anaeróbico de flujo ascendente, adicional a los compartimentos, como \nmedida mínima de tratamiento. Serán preferiblemente de forma rectangular y \nse dimensionarán de forma tal que su largo sea 2 o 3 veces el ancho. Su altura \nútil (hasta el nivel del líquido) no será menor de 1.00 metro, ni mayor de 1.60 \nmetros. La capacidad útil se determinará de acuerdo con el número de perso-\nnas, periodo de retención y tiempo de limpieza.",
+   "paginas": [
+    131
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.4",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "",
+   "texto": "DISTRIBUCIÓN DE CAPACIDAD EN CÁMARAS SÉPTICAS DE DOS \nCOMPARTIMIENTOS. En las cámaras sépticas de dos compartimientos, el \ncompartimiento de entrada deberá ocupar por lo menos las dos terceras (2/3) \npartes de la capacidad total de la cámara; el compartimiento secundario de la \ncámara séptica deberá tener una capacidad no mayor de un tercio (1/3) de la \ncapacidad total.",
+   "paginas": [
+    131,
+    132
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.5",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "",
+   "texto": "REQUISITOS DIMENSIONALES PARA CÁMARAS SÉPTICAS REC -\nTANGULARES Y CILÍNDRICAS. Las cámaras rectangulares deberán ser dise-\nñadas y construidas con la dimensión más larga paralela a la dirección del flujo. \nLas cámaras cilíndricas no deberán tener menos de 1.22 m (48”) de diámetro.",
+   "paginas": [
+    132
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.6",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "",
+   "texto": "PROHIBICIÓN DE DESCARGA DE AGUAS PLUVIALES EN CÁMA-\nRAS SÉPTICAS. En ningún caso las aguas de lluvia deberán descargar en la \ncámara séptica.",
+   "paginas": [
+    132
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.7",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "ENTRADAS Y SALIDAS",
+   "texto": "ENTRADAS Y SALIDAS. Las cámaras sépticas tendrán solo una entra-\nda y una salida, las cuales serán colocadas en el centro de la cara menor, en la \ndirección del flujo y diametralmente opuestas. Las entradas y salidas de todas \nlas cámaras o sus compartimientos deberán ser provistas de piezas especiales \nen forma de T (T ee) de descarga, construidas para distribuir el flujo y retener \nlos desechos flotantes en el tanque o sus compartimientos. Las T (T ee) se de-\nberán extender un mínimo de 0.15 m (6”) por encima y 0.23 m (9”) por debajo \ndel nivel promedio de la superficie del líquido dentro del tanque; pero no de-\nberá exceder una tercera parte de la profundidad del líquido. Se deberá dejar \nun espacio libre de por lo menos 0.05 m (2”) por encima de la parte superior \nde la te. La parte inferior de la apertura para la descarga del efluente fuera del \ntanque deberá estar por lo menos 0.05 m (2”) por debajo de la parte inferior de \nla apertura de entrada.",
+   "paginas": [
+    132
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.8",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "TAPA DE REGISTRO",
+   "texto": "TAPA DE REGISTRO. Cada compartimiento de una cámara para el \ntratamiento de aguas residuales en sistemas de disposición individual deberá \nestar provisto de por lo menos un registro ubicado sobre la apertura de entrada \n\n\no la de salida, con dimensión mínima de 0.60 m (24”) de lado (si es de sección \ncuadrada) o 0.60 m (24”) de diámetro. Cuando el compartimiento primario de \nla cámara séptica exceda los 3.66 m (12 pies) de largo, se deberá colocar otro \nregistro sobre el muro divisorio. Las cámaras de acero deberán tener un borde \nde extensión de por lo menos 0.05 m (2”) para el registro, soldado a la cámara. \nLas extensiones para el registro en las cámaras de fibra de vidrio deberán ser del \nmismo material de la cámara y parte integral del mismo, con un borde de por lo \nmenos 0.05 m (2”) de ancho.",
+   "paginas": [
+    132,
+    133
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.9",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "CUBIERTAS DE LOS REGISTROS",
+   "texto": "CUBIERTAS DE LOS REGISTROS. Los registros deberán estar pro-\nvistos con una cubierta ajustada e impermeable, fabricada en hormigón, acero, \nhierro colado u otro material capaz de soportar las cargas previstas. Las cubier-\ntas de registros que sobresalgan sobre el terreno deberán tener mecanismos \nde cierre aprobados.",
+   "paginas": [
+    133
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.10",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "CAPACIDAD DE LA CÁMARA SÉPTICA",
+   "texto": "CAPACIDAD DE LA CÁMARA SÉPTICA. La capacidad de una cá-\nmara séptica o cualquier otro tanque para tratamiento de aguas residuales se \ndeberá calcular considerando el número de personas que utilizarán la edifica-\nción, y el volumen y el tipo de desecho. La capacidad mínima ocupada por el \nlíquido en viviendas será según se indica en las TABLAS 38 y 39. En otros tipos \nde edificaciones se usarán los valores establecidos en la TABLA 40. Se prohíbe \nla instalación de más de cuatro tanques en paralelo.",
+   "paginas": [
+    133
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.11",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "DIMENSIONAMIENTO DE LA CÁMARA",
+   "texto": "DIMENSIONAMIENTO DE LA CÁMARA. Las medidas recomenda-\nbles para cámaras sépticas en viviendas se establecerán según se indica en las \nTABLAS 36 y 37.\n\n\nTABLA 36\nPRIMERA CÁMARA EN LA UNIDAD DE TRATAMIENTO \nDE UN COMPARTIMIENTO\nTABLA 37\nSEGUNDA CÁMARA EN LA UNIDAD DE TRATAMIENTO DE DOS COM-\nPARTIMIENTOS",
+   "paginas": [
+    133,
+    134
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.12",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "UBICACIÓN DE CÁMARAS EN LA UNIDAD DE TRATAMIENTO",
+   "texto": "UBICACIÓN DE CÁMARAS EN LA UNIDAD DE TRATAMIENTO. \nSerán ubicadas a la distancia horizontal mínima especificada en la TABLA 39, \ncon respecto a ciertos elementos claves.\nTABLA 38\nCAPACIDAD MÍNIMA DE LA CÁMARA EN LA UNIDAD DE TRATAMIENTO \nPARA OTRAS EDIFICACIONES\n\n\nTABLA 39\nDISTANCIA MÍNIMA HORIZONTAL PARA UBICACIÓN DE CÁMARAS EN \nLA UNIDAD DE TRATAMIENTO",
+   "paginas": [
+    134,
+    135,
+    136
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.13",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "",
+   "texto": "INSTALACIÓN DE CÁMARAS EN LA UNIDAD DE TRATAMIENTO \nPREFABRICADAS. Serán colocadas sobre un asiento compactado de arena, \ngrava u otro material no corrosivo, de por lo menos 0.08 m (3”) de espesor.",
+   "paginas": [
+    136
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.14",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "COBERTURA O RELLENO",
+   "texto": "COBERTURA O RELLENO. El material de cobertura para tanques de \nacero o fibra de vidrio deberá ser colocado y compactado en el lugar, garanti-\nzando que no se causen daños al tanque. Se utilizarán materiales similares a los \nespecificados para el asiento del tanque. Los tanques de hormigón podrán ser \ncubiertos con el material extraído de la excavación u otro tipo de suelo, siempre \nque el material pase por un tamiz de 100 mm (4”), y deberá ser compactado \nluego de colocado el relleno.",
+   "paginas": [
+    136
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.15",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "JUNTAS DE LOS REGISTROS",
+   "texto": "JUNTAS DE LOS REGISTROS. En los registros de hormigón, las jun-\ntas se deberán sellar a prueba de agua con cemento, mortero o compuestos bi-\ntuminosos. En los registros de acero, las juntas deberán ser soldadas o selladas \ny atornilladas. Las aperturas de los registros de acero deberán ser recubiertas \npor compuestos bituminosos por dentro y por fuera. Los mecanismos para co-\nlocar las cubiertas en los registros de fibra de vidrio deberán ser a prueba de \nagua y debidamente aprobados por la Autoridad Competente.",
+   "paginas": [
+    136
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.16",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "MANTENIMIENTO Y ELIMINACIÓN DE LODOS",
+   "texto": "MANTENIMIENTO Y ELIMINACIÓN DE LODOS. Las cámaras \nsépticas y otros tanques de tratamiento deberán ser limpiados cada vez que el \nvolumen ocupado por los lodos y las espumas alcance una tercera parte de la \ncapacidad para retener líquidos del tanque. Los lodos y otros desechos retira-\ndos de un tanque séptico u otro tanque de tratamiento individual deberán ser \ndispuestos en facilidades para tratamiento y disposición de este tipo de resi-\nduos, debidamente aprobadas por las autoridades ambientales y de salud.",
+   "paginas": [
+    136,
+    137
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.10.1.17",
+   "titulo_num": 6,
+   "capitulo": "6.10",
+   "encabezado": "RESTAURACIÓN QUÍMICA",
+   "texto": "RESTAURACIÓN QUÍMICA. No se utilizarán productos o métodos \nquímicos para la restauración de la capacidad de tratamiento de un tanque sép-\ntico, a menos que sea previamente autorizado por la Autoridad Competente.",
+   "paginas": [
+    137
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.11.1",
+   "titulo_num": 6,
+   "capitulo": "6.11",
+   "encabezado": "",
+   "texto": "No se permitirá la instalación de tanques de almacenamiento de aguas \nresiduales cuando sea posible instalar cualquier otro sistema alternativo apro-\nbado por este Volumen y las normas ambientales y sanitarias vigentes. En caso \nde que sea imprescindible la instalación de un tanque de almacenamiento de \naguas residuales, el proponente deberá entregar a la Autoridad de Administra-\nción del Código un cronograma de mantenimiento y limpieza de cada tanque \nde almacenamiento instalado y garantizar su mantenimiento.",
+   "paginas": [
+    137
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.11.2",
+   "titulo_num": 6,
+   "capitulo": "6.11",
+   "encabezado": "CAPACIDAD MÍNIMA",
+   "texto": "CAPACIDAD MÍNIMA. La mínima capacidad líquida de un tanque de \nalmacenamiento para viviendas de una y dos familias será la establecida en la \nTABLA 40. Otros tipos de edificaciones tendrán tanques con capacidad para \nalmacenar las aguas residuales producidas en cinco días; pero en ningún caso \nmenor a 7.57 m3 (2,000 galones). No se podrán instalar más de 4 tanques de \nalmacenamiento en paralelo.\n\n\nTABLA 40\nVOLUMEN ÚTIL MÍNIMO PARA TANQUES DE ALMACENAMIENTO DE \nAGUAS RESIDUALES",
+   "paginas": [
+    137,
+    138
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.12.1",
+   "titulo_num": 6,
+   "capitulo": "6.12",
+   "encabezado": "TRAMPAS DE GRASAS",
+   "texto": "TRAMPAS DE GRASAS. Las trampas de grasas se consideran un siste-\nma de tratamiento primario de aguas residuales. Las aguas residuales domés-\nticas que provengan de fregaderos, lavaplatos y otros aparatos sanitarios que \ndesechen grasas, deberán hacer su descarga directamente en una trampa de \ngrasa.",
+   "paginas": [
+    138
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.12.2",
+   "titulo_num": 6,
+   "capitulo": "6.12",
+   "encabezado": "DIMENSIONAMIENTO",
+   "texto": "DIMENSIONAMIENTO. Las dimensiones de la trampa de grasa debe-\nrán estar en función del volumen de grasa producida, y en ningún caso podrán \nser menores de 1.00 m x 0.80 m., medidas entre sus muros interiores, y con \nuna profundidad mínima de 1.00 m.",
+   "paginas": [
+    138
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.12.3",
+   "titulo_num": 6,
+   "capitulo": "6.12",
+   "encabezado": "DISEÑO",
+   "texto": "DISEÑO. La determinación del caudal de diseño se ejecutará a partir de \nlas unidades de gasto según lo indicado en la tabla siguiente:\nTABLA 41\nUNIDADES DE GASTOS PARA TRAMPAS DE GRASAS\n\n\n\n1. El caudal máximo se calculará mediante la siguiente fórmula:\n2. El volumen de la trampa de grasa se calculará para un período de retención \nentre 2.5 a 3.0 minutos.",
+   "paginas": [
+    138,
+    139
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": true,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.12.4",
+   "titulo_num": 6,
+   "capitulo": "6.12",
+   "encabezado": "REQUISITOS",
+   "texto": "REQUISITOS. Las trampas de grasa cumplirán con los requisitos indi-\ncados a continuación:\na) La relación larga/ancho del área superficial de la trampa de grasa deberá \nestar comprendido entre 2:1 a 3:2.\nb) La profundidad no deberá ser menor a 0.80 m.\nc) El ingreso a la trampa de grasa se hará por medio de T ee y un diámetro mí-\nnimo de 75 mm.\nd) La salida será por medio de una T ee con un diámetro mínimo de 75 mm.\ne) La parte inferior del T ee de entrada deberá prolongarse hasta 0.15 m por \ndebajo del nivel de líquido.\nf ) La diferencia de nivel entre la tubería de ingreso y de salida deberá de ser no \nmenor a 0.05 m.\ng) La parte superior de los dispositivos de entrada y salida deberán dejar una \nluz libre para ventilación de no más de 0.05 m por debajo del nivel de la losa \ndel techo.\n\n\nh) La parte inferior de la tubería de salida deberá estar no menos de 0.075 m ni \nmás de 0.15 m del fondo.\ni) El espacio sobre el nivel del líquido y la parte inferior de la tapa deberá ser \ncomo mínimo 0.30 m.\nj) Se podrá aceptar diseños con un depósito adjunto para almacenamiento de \ngrasas, cuando la capacidad total supere los 0.6 m³ o donde el establecimiento \ntrabaje en forma continua por más de 16 horas diarias.\nk) Si la trampa de grasa se diseña con compartimento de almacenamiento es-\ntarán conectados a través de un vertedor de rebose, el cual deberá estar a 0.05 \nm por encima del nivel de agua. El volumen máximo de acumulación de grasa \nserá de por lo menos 1/3 del volumen total de la trampa de grasa.\nl) Las trampas de grasa se ubicarán antes de la línea colectora, en lugares don-\nde puedan ser inspeccionadas y limpiadas con facilidad. \nm) La distancia horizontal entre la columna de descarga de salida del fregade-\nro, u otro aparato equivalente y la trampa de grasa no deberá ser mayor de 5.00 \nmetros\nn) La trampa de grasa podrá tener una o más entradas y una sola salida, por \nmedio de una T e, con diámetro mínimo de 75mm.\no) Las partes inferiores de las T e de entradas (si tiene más de una), deberán \nprolongarse hasta 0.15 metros por debajo del nivel del líquido.\np) Las trampas de grasas se ubicarán antes de la línea colectora, en lugares \ndonde puedan ser inspeccionadas, limpiadas con facilidad y solo puedan reci-\nbir los efluentes de aparatos que descarguen grasas.",
+   "paginas": [
+    139,
+    140
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.12.5",
+   "titulo_num": 6,
+   "capitulo": "6.12",
+   "encabezado": "",
+   "texto": "USO DE TAPÓN REGISTRO Y TRAMPAS DE GRASA MÓVILES EN \nPROYECTOS CON LINDEROS REDUCIDOS. En proyectos con linderos re-\nducidos, que no se permiten el desarrollo de trampas de grasa y/o cámaras de \ninspección, se permitirá el uso de tapón registro en los cambios de dirección. El \ndiámetro mínimo para considerar el uso de tapón registro debe ser 4” . Además, \nse permitirá el uso de trampas de grasa móviles.",
+   "paginas": [
+    140,
+    141
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.13.1",
+   "titulo_num": 6,
+   "capitulo": "6.13",
+   "encabezado": "DISEÑO",
+   "texto": "DISEÑO. El diseño de otros sistemas de tratamiento deberá ser anali-\nzado y aprobado para cada caso. La capacidad, las dimensiones e instalación \ndel tanque deberán estar en concordancia con esta sección, a menos que la \nmemoria de diseño demuestre otra cosa. Donde un tanque de tratamiento esté \nsiendo precedido por un tanque séptico convencional, se reconocerá la capaci-\ndad del tanque séptico.",
+   "paginas": [
+    141
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.13.2",
+   "titulo_num": 6,
+   "capitulo": "6.13",
+   "encabezado": "",
+   "texto": "SISTEMAS ALTERNATIVOS O NO CONVENCIONALES DE TRATA-\nMIENTO. Cuando el promotor o diseñador desee o necesite utilizar mecanis-\nmos o dispositivos de tratamiento, disposición o reutilización en sistemas indi-\nviduales, distintos de los especificados en este Volumen, deberá presentar a la \nAutoridad de Administración del Código, la documentación necesaria, memo-\nrias de cálculos, evaluación de efectividad y de cumplimiento con las normas \nambientales y sanitarias vigentes. Estos sistemas serán evaluados, caso por \ncaso, estando sujetos a la emisión de licencia de construcción conforme a las \ndisposiciones del MIVHED.",
+   "paginas": [
+    141
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.14.1",
+   "titulo_num": 6,
+   "capitulo": "6.14",
+   "encabezado": "PROCEDIMIENTO PARA LA INSPECCIÓN INICIAL",
+   "texto": "PROCEDIMIENTO PARA LA INSPECCIÓN INICIAL. T odos los siste-\nmas privados de disposición de aguas residuales deberán ser inspeccionados \ndespués de la construcción o instalación; pero antes de colocar el relleno o co-\nbertura final. Se deberá notificar a la Autoridad de Administración del Código, \ncuando el sistema privado de evacuación de aguas esté listo para inspección. \n\n\nEn caso de que se haya colocado la cobertura antes de la inspección, el res-\nponsable del proyecto correrá con los costos de remover dicha cobertura, si \nesto es solicitado por la Autoridad de Administración del Código para realizar \nla inspección.",
+   "paginas": [
+    141,
+    142
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.14.2",
+   "titulo_num": 6,
+   "capitulo": "6.14",
+   "encabezado": "PREPARACIÓN PARA LA INSPECCIÓN",
+   "texto": "PREPARACIÓN PARA LA INSPECCIÓN. El responsable de la instala-\nción tomará las medidas necesarias para garantizar que el supervisor pueda \ninspeccionar todas las partes del sistema. El responsable de la instalación pro-\nveerá cualquier aparato o equipo necesario para la inspección y toda la asisten-\ncia que sea necesaria.",
+   "paginas": [
+    142
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.14.3",
+   "titulo_num": 6,
+   "capitulo": "6.14",
+   "encabezado": "OTRAS INSPECCIONES",
+   "texto": "OTRAS INSPECCIONES. Además de la inspección requerida antes del \nrelleno, la autoridad competente podrá realizar cualquier otra inspección que \nestime necesaria para determinar el cumplimiento con lo establecido en este \nVolumen.",
+   "paginas": [
+    142
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.14.4",
+   "titulo_num": 6,
+   "capitulo": "6.14",
+   "encabezado": "INSPECCIONES PARA AMPLIACIONES O MODIFICACIONES",
+   "texto": "INSPECCIONES PARA AMPLIACIONES O MODIFICACIONES. El \ninteresado en realizar una ampliación o modificación de un sistema de dispo-\nsición individual de aguas residuales deberá solicitar la aprobación de la Auto-\nridad de Administración del Código correspondiente, quien realizará las ins-\npecciones de lugar.",
+   "paginas": [
+    142
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.14.5",
+   "titulo_num": 6,
+   "capitulo": "6.14",
+   "encabezado": "DEFECTOS EN LOS MATERIALES Y EN LA INSTALACIÓN",
+   "texto": "DEFECTOS EN LOS MATERIALES Y EN LA INSTALACIÓN. En caso de \nque la inspección determine que la instalación no se corresponde con el diseño \naprobado o con los requerimientos de este Volumen y las buenas prácticas de \ningeniería, o que se hayan empleado materiales defectuosos, los elementos del \nsistema que no cumplan deberán ser removidos, reemplazados y re inspeccio-\nnados, por cuenta del responsable de la dirección de la obra o del contratista, \natendiendo a cualquier sanción que se pueda derivar de la violación de este \nVolumen o de la legislación vigente.",
+   "paginas": [
+    142
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": []
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  },
+  {
+   "id": "6.14.6",
+   "titulo_num": 6,
+   "capitulo": "6.14",
+   "encabezado": "NORMA INTERNACIONAL",
+   "texto": "NORMA INTERNACIONAL. Los materiales, diseño, construcción y \ndesempeño de los sistemas residenciales de tratamiento de aguas residuales \ndeberán cumplir con las especificaciones de la norma ANSI / NSF Estándar 40.\n\n\nTÍTULO 7. \nSISTEMAS DE PROYECTOS RESIDENCIALES \nTIPO URBANIZACIÓN",
+   "paginas": [
+    142,
+    143
+   ],
+   "flags": {
+    "formula": false,
+    "tabla": false,
+    "vision_ok": false
+   },
+   "refs": {
+    "externas": [
+     "ANSI"
+    ]
+   },
+   "tablas": [],
+   "formulas": [],
+   "volumen": 2,
+   "num_conflicto": false
+  }
+ ]
+}

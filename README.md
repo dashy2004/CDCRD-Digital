@@ -18,6 +18,8 @@ espectro sismico, factores R, derivas) estan listas para usarse en calculo direc
 | Si usted busca... | Abra... |
 |---|---|
 | Que dice el articulo X del codigo | `datos/titulos/` — un archivo por Titulo (T02 = Cargas, T05 = Hormigon...) |
+| Hidrosanitaria, electrica, mecanica o arquitectura (Vols II-V) | `datos/vol-2/` a `datos/vol-5/` (JSON) o `md/` (legible en GitHub) |
+| Por donde empezar cualquier busqueda | `datos/INDICE.md` — mapa de los 5 volumenes (6,580 clausulas) |
 | La carga viva de un uso (oficina, aula, parqueo...) | `datos/machine/cargas_vivas.json` — los 45 usos de la Tabla 4 |
 | Los factores R, Cd y limites de altura de su sistema estructural | `datos/machine/sistemas_estructurales.json` — la Tabla 11 completa (44 sistemas) |
 | Como armar el espectro de diseño de su proyecto | `datos/machine/espectro_diseno.json` + `factores_sitio.json` — paso a paso con las Tablas 7-10 |
@@ -50,7 +52,12 @@ arrastran a una conversacion con una IA. Cada valor trae su clausula, tomo y pag
   -> derivas). Verificado con un caso real de punta a punta.
 - Servidor MCP para ETABS: **54 herramientas**, probadas contra ETABS 23.3.0 / OAPI 2.016
   modelando un edificio de oficinas de punta a punta (ver `revision/`).
-- Pendiente: tablas de viento, Titulos 4 y 5, y formulas en notacion matematica limpia.
+- Volumenes II-V (MIVHED): **3,088 clausulas** nuevas — II Hidrosanitarias (465), III
+  Electricas (497), IV Mecanicas (976), V Arquitectonico (1,150) — en `datos/vol-2..5/`,
+  con espejo legible en `md/` e indice global en `datos/INDICE.md`. Total del proyecto:
+  **6,580 clausulas**. Metodo y muestreo contra el PDF en `verificacion-vols/`.
+- Pendiente: tablas de viento, Titulos 4 y 5, formulas en notacion matematica limpia, y
+  pase de vision de tablas/formulas de los Vols II-V.
 
 Advertencia honesta: los articulos marcados `"formula": true` y `"vision_ok": false` pueden
 tener simbolos corruptos heredados del PDF — no los cite sin verificar contra el original.
