@@ -1,7 +1,8 @@
 # Validacion cruzada: plantilla de practica profesional vs capa machine CDCRD
 
-**Fuente**: `ARCHIVO ESTRUCTURAL 2025.xls` — plantilla de cuantificacion de cargas y espesores
-de losas (Ing. Ingeniero Ejemplo, CODIA 00000), proyecto Proyecto Ejemplo. 15 hojas.
+**Fuente**: plantilla profesional de cuantificacion de cargas y espesores de losas,
+de uso corriente en la practica local (15 hojas). Autoria y proyecto omitidos a proposito:
+lo que se documenta aqui es el metodo de calculo, no el archivo ni su origen.
 
 ## Metodo de la plantilla (descifrado de las formulas)
 

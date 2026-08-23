@@ -75,7 +75,7 @@ _HELPER_CANDIDATES = [
 #   5 = Database Tables to XML
 #   0 y 6..20 devolvieron ret=0 SIN archivo con el modelo vacio.
 #   RE-SONDEADO el 2026-08-10 con modelo poblado, analizado y disenado
-#   (TORRE VERTICAL TORRE A, fundacion): 6..20 siguen devolviendo
+#   (TORRE A (caso de prueba, 51 niveles), fundacion): 6..20 siguen devolviendo
 #   ret=0 SIN producir archivo. CONCLUSION: el export a DXF NO es accesible
 #   via File.ExportFile en esta version de la OAPI (cFile tiene 13 metodos,
 #   ninguno DXF; el dialogo File > Export > Model as DXF de la interfaz no

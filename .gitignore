@@ -4,7 +4,6 @@ fea_mcp.log
 *.$et
 *.ebk
 *.ico
-__pycache__/
 *.log
 modelos/*.K_*
 modelos/*.Y*
@@ -21,9 +20,33 @@ Edificio_3niveles_oficinas.*
 modelos/
 *.EDB
 
-# sondas de probe_file_types (tablas_caso.txt sola pesa ~2.9 GB)
+# sondas de probe_file_types (una sola tabla pesa ~2.9 GB)
 tmp-probe-efiletype/
 
-# revit-mcp-write: salidas de corrida. Contienen ids, Marks y geometria
-# del modelo abierto al momento de la prueba -> no van al repo publico.
+# ============================================================
+# REPO PUBLICO — material de cliente prohibido
+# ============================================================
+# Salidas de corrida: contienen ids, Marks y geometria del modelo
+# abierto al momento de la prueba.
 revit-mcp-write/_log/
+revit-mcp-write/_referencia/
+*/_log/
+
+# Panel especifico de un proyecto real: sus constantes son nombres de vistas
+# del modelo del cliente y depende de _referencia/, que tampoco se publica.
+# Herramienta de encargo, no herramienta generica -> fuera del repo publico.
+revit-mcp-write/RevitWrite.extension/RevitWrite.tab/6-Vigas.panel/
+
+# Modelos y entregables de proyectos reales, en cualquier ubicacion
+*.rvt
+*.rfa
+*.dwg
+*.f2k
+*.FDB
+*.pdf
+*.xls
+*.xlsx
+
+# Regla que ningun ignore puede cubrir: no escribir nombres de cliente,
+# proyecto, colegiatura ni resultados de diseno atribuibles en el codigo
+# ni en la documentacion. Los ejemplos usan nombres inventados.

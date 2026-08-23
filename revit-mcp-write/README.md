@@ -57,6 +57,50 @@ proyecto (E-049, E-050).
 - Los que escriben marcan su obra (`Comments`), así son idempotentes y pueden limpiarla
 - Verificación final **releyendo el modelo**, nunca contando lo que se pidió
 
+## Acero de vigas (6-Vigas.panel) — hallazgos 2026-08-21
+
+Auditoría posterior a dos corridas "exitosas" (ArmarV2: 33 vigas/297 sets;
+GenerarAceroVigas: 228 vigas/2052 sets, ambas con `verificacion.coincide:
+true` en su JSON) encontró que **ninguno de esos elementos seguía en el
+modelo** al re-consultar. Causa: el `.rvt` no se guardó después de correr
+los scripts y Revit se cerró/crasheó antes del siguiente guardado — el
+JSON de un pushbutton describe la sesión en memoria, no lo que quedó en
+disco. Se agregó `GuardarModelo.pushbutton` (solo `doc.Save()`, sin
+SaveAs) y la instrucción es correrlo después de **cada** botón de
+escritura, no al final del día — no hay forma de saber de antemano cuál
+corrida precede a la próxima caída.
+
+Bugs de código encontrados y corregidos en `ArmarV2` y `GenerarAceroVigas`:
+
+- **`"cant"` nunca se usaba**: los diccionarios de armado traían un conteo
+  de barras (2 arriba, 3-4 abajo, etc.) que solo se leía para el catálogo
+  de diámetros, nunca para crear más de una barra por posición. Cada viga
+  quedaba con 1 barra por capa en vez de las 2-4 reales. Se agregó
+  `crear_grupo_recta()` + `offsets_y()`: reparte "cant" barras paralelas a
+  lo ancho útil de la viga.
+- **"En C/Lado" reinterpretado**: el JSON de referencia trae
+  `acero_inferior_adicional_apoyo: "2Ø1/2\" En C/Lado"` como valor casi
+  constante en los 10 pórticos digitalizados (a diferencia del adicional
+  superior de apoyo, que sí varía mucho por eje/nivel: Adic.2Ø1" a
+  Adic.6Ø1"). Un valor tan uniforme no encaja con refuerzo local de apoyo;
+  se remodeló como acero de piel continuo (`LATERAL_PIEL`/`lateral`): una
+  barra de 1/2" en cada cara, a todo lo largo, a media altura real
+  (bounding box), no dos tramos cortos cerca de cada apoyo.
+- **Verificación de forma (Shape Name)**: se pidió confirmar que estribos
+  usan la forma "T1" y las barras rectas "00"/"0". La firma real de
+  `CreateFromCurves` en esta instalación no expone un parámetro de forma
+  explícito (depende de `useExistingShapeIfPossible=True` reutilizando una
+  forma existente si la geometría calza), así que no se puede forzar desde
+  fuera sin una API distinta. Se agregó verificación releída
+  (`LookupParameter("Shape Name")`, misma convención que usa
+  `ColorAcero.pushbutton`) volcada en `result["verificacion_formas"]` de
+  cada JSON de salida — dato de auditoría, no garantía.
+
+Pendiente real: correr ambos botones de nuevo con el fix, **guardar**, y
+releer `verificacion_formas` del JSON de salida para confirmar contra el
+modelo si "T1"/"00" efectivamente se están reutilizando o si Revit está
+creando formas nuevas con otro nombre.
+
 ## Estado de verificación
 
 Este proyecto distingue **"el código existe"** de **"corrió contra un modelo real y devolvió

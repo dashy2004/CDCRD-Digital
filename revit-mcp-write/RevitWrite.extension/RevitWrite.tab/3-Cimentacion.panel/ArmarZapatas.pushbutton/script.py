@@ -81,7 +81,7 @@ doc = revit.doc
 
 MARCA = "MCP:acero-zapata"
 M = 0.3048                 # pies -> metros
-REC_INF = 0.075            # recubrimiento inferior [m]  (datos_maestros)
+REC_INF = 0.075            # recubrimiento inferior [m]  (datos maestros del proyecto)
 REC_LAT = 0.075            # recubrimiento lateral  [m]
 REC_SUP = 0.075            # recubrimiento superior [m]
 TOL_DIM = 0.03             # tolerancia al casar dimensiones [m]
