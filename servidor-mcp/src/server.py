@@ -174,6 +174,24 @@ if config.feaName == "ETABS":
     get_frames = mcp.tool()(etabs.get_frames)
     get_areas = mcp.tool()(etabs.get_areas)
 
+    # Tanda 2026-09-03 (edificio en dos bloques). Ciclo de vida de la instancia: el
+    # puente moria al cerrar el archivo y solo veia UNA instancia; no habia
+    # forma de abrir otro modelo sin intervencion manual.
+    reconnect = mcp.tool()(etabs.reconnect)
+    open_model = mcp.tool()(etabs.open_model)
+    close_model = mcp.tool()(etabs.close_model)
+    exit_etabs = mcp.tool()(etabs.exit_etabs)
+    refresh_text_model = mcp.tool()(etabs.refresh_text_model)
+    # Lector de texto (.e2k / .$et) sin COM: muros, decks, secciones,
+    # geometria y asignaciones de varios modelos a la vez. Verificado.
+    read_e2k = mcp.tool()(etabs.read_e2k)
+    # Lectores que faltaban: perfiles no rectangulares y muros/decks.
+    get_frame_section_dims = mcp.tool()(etabs.get_frame_section_dims)
+    get_area_sections_full = mcp.tool()(etabs.get_area_sections_full)
+    # Invocador generico: cualquier metodo de la OAPI, con describe_oapi
+    # como guia. Puede escribir; queda en el log.
+    call_oapi = mcp.tool()(etabs.call_oapi)
+
 elif config.feaName == "LUSAS":
     from Lusas import Lusas
     lusas = Lusas(config.feaVersion)

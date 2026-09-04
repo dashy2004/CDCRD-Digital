@@ -1652,19 +1652,44 @@ class Etabs:
         # (Grid, Story, Diaphragm, Load Pattern, asignaciones) lo toleraban y
         # devolvian todo igual -- por eso el defecto paso inadvertido.
         # Detectado 2026-08-07 al no poder verificar las combinaciones de R07.
-        result = oapi.call(
-            model.DatabaseTables,
-            [
-                ("GetTableForDisplayArray", (table_key, [], "")),
-                ("GetTableForDisplayArray", (table_key, [], "", 0, [], 0, [])),
-                ("GetTableForEditingArray", (table_key, "")),
-                ("GetTableForEditingArray", (table_key, "", 0, [], 0, [])),
-                # Respaldo con la forma anterior, por si alguna tabla la exige.
-                ("GetTableForDisplayArray", (table_key, [""], "")),
-                ("GetTableForDisplayArray", (table_key, [""], "", 0, [""], 0, [""])),
-            ],
-            f"lectura de la tabla '{table_key}'",
-        )
+        variantes = [
+            ("GetTableForDisplayArray", (table_key, [], "")),
+            ("GetTableForDisplayArray", (table_key, [], "", 0, [], 0, [])),
+            ("GetTableForEditingArray", (table_key, "")),
+            ("GetTableForEditingArray", (table_key, "", 0, [], 0, [])),
+            # Respaldo con la forma anterior, por si alguna tabla la exige.
+            ("GetTableForDisplayArray", (table_key, [""], "")),
+            ("GetTableForDisplayArray", (table_key, [""], "", 0, [""], 0, [""])),
+        ]
+        # 2026-09-03: una variante que responde ret=0 con NumberRecords=0 no
+        # es exito. 'Frame/Area Section Property Definitions - *' y
+        # 'Frame Assignments - Summary' devolvian solo el encabezado por la
+        # primera firma y nunca se probaba GetTableForEditingArray. Ahora se
+        # sigue con la siguiente variante; si todas dan 0 filas, se dice
+        # explicito y se apunta a read_e2k, que si tiene esas definiciones.
+        result = None
+        vacias = []
+        for method_name, args in variantes:
+            try:
+                r = oapi.call(model.DatabaseTables, [(method_name, args)],
+                              f"lectura de la tabla '{table_key}'")
+            except Exception:
+                continue
+            o = oapi.outs(r)
+            ints_v = [v for v in o if isinstance(v, int) and not isinstance(v, bool)]
+            if ints_v and ints_v[-1] == 0:
+                vacias.append(f"{method_name}({len(args)})")
+                continue
+            result = r
+            break
+        if result is None:
+            if vacias:
+                return (f"Tabla '{table_key}': 0 filas (NumberRecords=0 en "
+                        f"{', '.join(vacias)}). Para definiciones de secciones "
+                        f"use read_e2k sobre el .$et del modelo "
+                        f"(refresh_text_model lo regenera).")
+            raise EtabsError(f"No se pudo leer la tabla '{table_key}' con "
+                             f"ninguna firma conocida.")
         out = oapi.outs(result)
         str_lists = [list(v) for v in out
                      if isinstance(v, (tuple, list)) and len(v) > 0
@@ -3020,6 +3045,438 @@ class Etabs:
         except Exception as e:
             logger.warning("RefreshView fallo: %s", e)
         return results
+
+
+    # ==================================================================
+    # Tanda 2026-09-03 (edificio en dos bloques con junta): ciclo de vida de la instancia,
+    # lectores de secciones que faltaban, invocador generico y lector
+    # de texto. Escritos SIN conexion COM disponible: las firmas se
+    # tomaron del typelib ETABSv1 y se invocan via oapi.call con
+    # variantes, pero NINGUNA de las herramientas COM de esta tanda
+    # esta verificada en vivo. Verificar con describe_oapi antes de
+    # confiar en un resultado. read_e2k SI esta verificada (sin COM).
+    # ==================================================================
+
+    _FRAME_TYPE_NAMES = {
+        1: "I", 2: "Channel", 3: "Tee", 4: "Angle", 5: "DblAngle",
+        6: "Box/Tube", 7: "Pipe", 8: "Rectangular", 9: "Circle",
+        10: "General", 11: "DbChannel", 12: "AutoSelect", 13: "SD",
+        14: "Variable", 15: "Joist", 23: "BuiltupICoverplate",
+        29: "FilledTube", 30: "FilledPipe", 31: "EncasedRectangle",
+        32: "EncasedCircle", 33: "BRB", 39: "SteelPlate", 40: "SteelRod",
+    }
+    _FRAME_TYPE_GETTER = {
+        1: "GetISection", 2: "GetChannel", 3: "GetTee", 4: "GetAngle",
+        5: "GetDblAngle", 6: "GetTube", 7: "GetPipe", 8: "GetRectangle",
+        9: "GetCircle", 10: "GetGeneral", 39: "GetPlate", 40: "GetRod",
+    }
+    # Posiciones [out] segun typelib v1 (sin el ret final).
+    _FRAME_OUT_LABELS = {
+        "GetISection": ["FileName", "MatProp", "T3", "T2", "Tf", "Tw",
+                        "T2b", "Tfb", "Color", "Notes", "GUID"],
+        "GetChannel": ["FileName", "MatProp", "T3", "T2", "Tf", "Tw",
+                       "Color", "Notes", "GUID"],
+        "GetTee": ["FileName", "MatProp", "T3", "T2", "Tf", "Tw",
+                   "Color", "Notes", "GUID"],
+        "GetAngle": ["FileName", "MatProp", "T3", "T2", "Tf", "Tw",
+                     "Color", "Notes", "GUID"],
+        "GetTube": ["FileName", "MatProp", "T3", "T2", "Tf", "Tw",
+                    "Color", "Notes", "GUID"],
+        "GetPipe": ["FileName", "MatProp", "T3", "Tw", "Color", "Notes",
+                    "GUID"],
+        "GetRectangle": ["FileName", "MatProp", "T3", "T2", "Color",
+                         "Notes", "GUID"],
+        "GetCircle": ["FileName", "MatProp", "T3", "Color", "Notes",
+                      "GUID"],
+    }
+    _SECTPROPS_LABELS = ["Area", "As2", "As3", "Torsion", "I22", "I33",
+                         "S22", "S33", "Z22", "Z33", "R22", "R33"]
+    _AREA_TYPE_NAMES = {1: "Wall", 2: "Slab", 3: "Deck"}
+    _SHELL_TYPE_NAMES = {1: "ShellThin", 2: "ShellThick", 3: "Membrane",
+                         4: "Layered"}
+
+    # -- ciclo de vida de la instancia ---------------------------------
+
+    def _launch_instance(self) -> None:
+        """Ruta 3 explicita: arranca ETABS desde el proceso del servidor.
+
+        A diferencia de auto_start (que crea un modelo en blanco sin que
+        nadie lo pida), aqui NO se crea modelo: quien llama abre el suyo
+        con File.OpenFile. Como el proceso hijo hereda el nivel de
+        privilegio del servidor, esta ruta esquiva el aislamiento del ROT
+        (E-014) que deja a GetActiveObject/cHelper.GetObject sin ver una
+        instancia lanzada a mano con otro privilegio.
+        """
+        helper = comtypes.client.CreateObject('ETABSv1.Helper')
+        try:
+            import comtypes.gen.ETABSv1 as ETABSv1
+            helper = helper.QueryInterface(ETABSv1.cHelper)
+        except Exception:
+            pass
+        if self.exe_path and os.path.isfile(self.exe_path):
+            obj = helper.CreateObject(self.exe_path)
+        else:
+            obj = helper.CreateObjectProgID(PROG_ID)
+        ret = obj.ApplicationStart()
+        if ret not in (0, None):
+            raise EtabsError(f"ApplicationStart devolvio {ret}.")
+        self._etabs_object = obj
+        self.SapModel = obj.SapModel
+        try:
+            self.version_string = str(obj.GetOAPIVersionNumber())
+        except Exception:
+            self.version_string = "desconocida"
+        logger.warning("Instancia nueva de ETABS lanzada desde el servidor "
+                       "(sin modelo). OAPI %s", self.version_string)
+
+    @com_call
+    def reconnect(self, launch_if_missing: bool = False) -> str:
+        """Descarta la referencia cacheada y vuelve a adjuntarse a ETABS.
+
+        Usar cuando ETABS se cerro y se reabrio, o tras cambiar de archivo
+        a mano. Reporta que ruta funciono (GetActiveObject, cHelper) y,
+        si ninguna ve una instancia, el diagnostico. Con
+        launch_if_missing=True arranca una instancia nueva desde el propio
+        servidor (queda vacia: seguir con open_model).
+
+        ATENCION: si ya hay un ETABS abierto que el servidor no ve
+        (privilegio distinto, E-014), launch_if_missing abre un SEGUNDO
+        ETABS. Cerrar el otro antes, o aceptar dos instancias.
+        """
+        self.SapModel = None
+        self._etabs_object = None
+        try:
+            self._connect()
+            return ("Reconectado. " + self.get_model_info().replace("\n", " | "))
+        except EtabsError as e:
+            if not launch_if_missing:
+                return ("Sin instancia visible en el ROT. " + str(e)
+                        + " Opcion: reconnect(launch_if_missing=True) y "
+                        "luego open_model(path).")
+        self._launch_instance()
+        return (f"Instancia lanzada desde el servidor (OAPI "
+                f"{self.version_string}), sin modelo. Siga con open_model.")
+
+    @com_call
+    def open_model(self, path: str, units: str = "") -> str:
+        """Abre un .EDB / .e2k / .$et en la instancia activa (o en una nueva).
+
+        Si no hay instancia visible, la lanza desde el servidor. El modelo
+        que estuviera abierto se cierra SIN guardar (comportamiento de
+        File.OpenFile en modo API: no pregunta). Guardar antes con
+        save_model si hace falta. Un .e2k/.$et se importa y puede levantar
+        un modal; se descarta con el vigilante de _set_stories_via_texto.
+
+        Args:
+            path: ruta absoluta del archivo.
+            units: opcional, fija las unidades activas tras abrir
+                   (ej. "N, mm, C").
+        """
+        if not os.path.isfile(path):
+            raise EtabsError(f"No existe: {path}")
+        try:
+            self._connect()
+        except EtabsError:
+            logger.warning("open_model: sin instancia visible; lanzando una.")
+            self._launch_instance()
+        model = self.SapModel
+        es_texto = path.lower().endswith((".e2k", ".$et"))
+        alto = threading.Event()
+        vigia = None
+        if es_texto:
+            vigia = threading.Thread(target=_descartar_modales_etabs,
+                                     args=(alto,), daemon=True)
+            vigia.start()
+        try:
+            oapi.call_checked(model.File, "OpenFile", (path,),
+                              f"apertura de '{os.path.basename(path)}'")
+        finally:
+            alto.set()
+        if units:
+            self.set_units(units)
+        return "Abierto. " + self.get_model_info().replace("\n", " | ")
+
+    @com_call
+    def close_model(self, save: bool = False) -> str:
+        """Cierra el modelo actual dejando ETABS abierto con un modelo en blanco.
+
+        La OAPI no tiene 'cerrar sin salir'; NewBlank es el equivalente.
+        Con save=True guarda antes (File.Save sin path: exige que el
+        modelo ya tenga archivo).
+        """
+        model = self._model()
+        try:
+            filename = model.GetModelFilename()
+        except Exception:
+            filename = "(sin nombre)"
+        if save:
+            oapi.call_checked(model.File, "Save", (), "guardado previo")
+        oapi.call_checked(model.File, "NewBlank", (), "modelo en blanco")
+        return f"Cerrado {filename}{' (guardado)' if save else ' (sin guardar)'}. ETABS sigue abierto en blanco."
+
+    @com_call
+    def exit_etabs(self, save: bool = False) -> str:
+        """Cierra la aplicacion ETABS y descarta la referencia cacheada.
+
+        ApplicationExit(FileSave). Despues de esto cualquier llamada
+        intentara reconectar; si no hay otra instancia, fallara hasta
+        reconnect(launch_if_missing=True) u open_model.
+        """
+        self._connect()
+        obj = self._etabs_object
+        try:
+            filename = self.SapModel.GetModelFilename()
+        except Exception:
+            filename = "(sin nombre)"
+        ret = obj.ApplicationExit(bool(save))
+        self.SapModel = None
+        self._etabs_object = None
+        if ret not in (0, None):
+            raise EtabsError(f"ApplicationExit devolvio {ret}.")
+        return f"ETABS cerrado. Ultimo modelo: {filename}{' (guardado)' if save else ''}."
+
+    @com_call
+    def refresh_text_model(self) -> str:
+        """Guarda el modelo y devuelve la ruta del .$et regenerado.
+
+        Cada File.Save reescribe junto al .EDB un .$et que es e2k en texto
+        plano. Es la fuente para read_e2k: secciones de muro/deck con
+        espesor y material, definiciones completas, y lectura de varios
+        modelos sin tocar la instancia.
+        """
+        model = self._model()
+        edb = model.GetModelFilename()
+        if not edb:
+            raise EtabsError("El modelo no tiene archivo; use save_model(path).")
+        oapi.call_checked(model.File, "Save", (), "guardado para regenerar .$et")
+        et = os.path.splitext(edb)[0] + ".$et"
+        if not os.path.isfile(et):
+            return f"Guardado, pero no aparece {et}. Revise la carpeta del .EDB."
+        return f"Guardado. Texto del modelo: {et}"
+
+    # -- lector de texto (sin COM) -------------------------------------
+
+    def read_e2k(self, path: str, section: str = "summary") -> str:
+        """Lee un modelo ETABS en texto (.e2k o el .$et que deja File.Save).
+
+        No usa COM: funciona sin instancia, con ETABS cerrado, y sobre
+        varios archivos a la vez. Cubre lo que la OAPI no expone bien:
+        espesor y material de muros y decks, forma de cada seccion de
+        frame, niveles, grillas, geometria 3D y asignaciones.
+
+        Args:
+            path: ruta del .e2k / .$et. El .$et refleja el ULTIMO guardado.
+            section: "summary" (default), "stories", "grids", "materials",
+                     "frame_sections", "shell_sections", "frames" (3D con
+                     seccion), "areas" (3D con seccion; muros con
+                     vertical=True), "sections_in_use", "blocks".
+        """
+        import json
+        import e2k_reader
+        data = e2k_reader.query(path, section)
+        return json.dumps(data, ensure_ascii=False, default=str)
+
+    # -- lectores de secciones que faltaban -----------------------------
+
+    @com_call
+    def get_frame_section_dims(self, names: list[str]) -> str:
+        """Dimensiones y propiedades de secciones de frame de cualquier tipo.
+
+        Para cada nombre: PropFrame.GetTypeOAPI -> tipo; getter del tipo
+        (GetISection, GetTube, GetPipe, GetRectangle, ...) con los [out]
+        etiquetados por posicion del typelib; y GetSectProps (Area, I22,
+        I33, S, Z, r). Unidades: las activas del modelo. Complementa a
+        get_frame_sections, que solo resolvia rectangulares.
+
+        Args:
+            names: nombres de seccion, ej. ["W8X40", "W16X31"].
+        """
+        model = self._model()
+        out_lines = []
+        for nm in names:
+            ptype = None
+            try:
+                r = oapi.call(model.PropFrame, [("GetTypeOAPI", (nm,))],
+                              f"tipo de '{nm}'")
+                ints = [v for v in oapi.outs(r)
+                        if isinstance(v, int) and not isinstance(v, bool)]
+                ptype = ints[0] if ints else None
+            except Exception as e:
+                out_lines.append(f"{nm}: GetTypeOAPI fallo ({e})")
+            getters = []
+            if ptype in self._FRAME_TYPE_GETTER:
+                getters.append(self._FRAME_TYPE_GETTER[ptype])
+            getters += [g for g in ("GetISection", "GetTube", "GetPipe",
+                                    "GetRectangle", "GetCircle",
+                                    "GetChannel", "GetAngle", "GetTee")
+                        if g not in getters]
+            dims = None
+            used = None
+            for g in getters:
+                try:
+                    r = oapi.call(model.PropFrame, [(g, (nm,))],
+                                  f"'{nm}' via {g}")
+                    outs = list(oapi.outs(r))
+                    labels = self._FRAME_OUT_LABELS.get(g)
+                    if labels and len(outs) >= len(labels):
+                        dims = dict(zip(labels, outs[:len(labels)]))
+                    else:
+                        dims = {f"out{i}": v for i, v in enumerate(outs)}
+                    used = g
+                    break
+                except Exception:
+                    continue
+            props = None
+            try:
+                r = oapi.call(model.PropFrame, [("GetSectProps", (nm,))],
+                              f"propiedades de '{nm}'")
+                nums = [v for v in oapi.outs(r)
+                        if isinstance(v, float) and not isinstance(v, bool)]
+                props = dict(zip(self._SECTPROPS_LABELS, nums))
+            except Exception:
+                pass
+            tname = self._FRAME_TYPE_NAMES.get(ptype, str(ptype))
+            line = f"{nm}: tipo {tname}"
+            if dims is not None:
+                keep = {k: v for k, v in dims.items()
+                        if k not in ("Color", "GUID", "Notes")}
+                line += f" [{used}] " + ", ".join(
+                    f"{k}={v:g}" if isinstance(v, float) else f"{k}={v}"
+                    for k, v in keep.items())
+            else:
+                line += " (ningun getter devolvio datos)"
+            if props:
+                line += " | " + ", ".join(f"{k}={v:g}" for k, v in props.items())
+            out_lines.append(line)
+        return "\n".join(out_lines)
+
+    @com_call
+    def get_area_sections_full(self) -> str:
+        """Secciones de area de los tres tipos: losa, muro y deck.
+
+        Sustituye a get_area_sections, que solo llamaba GetSlab y dejaba
+        muros y decks como 'no es losa'. Dispatch por PropArea.GetTypeOAPI
+        (1 Wall, 2 Slab, 3 Deck) con respaldo probando los tres getters:
+          GetSlab -> (SlabType, ShellType, MatProp, Thickness, Color, Notes, GUID)
+          GetWall -> (WallPropType, ShellType, MatProp, Thickness, Color, Notes, GUID)
+          GetDeck -> (DeckType, ShellType, DeckMatProp, Thickness, Color, Notes, GUID)
+        Para decks agrega GetDeckFilled/GetDeckUnfilled/GetDeckSolidSlab
+        si responden. Unidades: las activas.
+        """
+        model = self._model()
+        names = self._name_list(model.PropArea, "listado de secciones de area")
+        if not names:
+            return "Sin secciones de area definidas."
+        lines = []
+        for nm in names:
+            ptype = None
+            try:
+                r = oapi.call(model.PropArea, [("GetTypeOAPI", (nm,))],
+                              f"tipo de area '{nm}'")
+                ints = [v for v in oapi.outs(r)
+                        if isinstance(v, int) and not isinstance(v, bool)]
+                ptype = ints[0] if ints else None
+            except Exception:
+                pass
+            order = {1: ["GetWall", "GetSlab", "GetDeck"],
+                     2: ["GetSlab", "GetWall", "GetDeck"],
+                     3: ["GetDeck", "GetSlab", "GetWall"]}.get(
+                ptype, ["GetSlab", "GetWall", "GetDeck"])
+            done = False
+            for g in order:
+                try:
+                    r = oapi.call(model.PropArea, [(g, (nm,))], f"'{nm}' via {g}")
+                    outs = list(oapi.outs(r))
+                    ints = [v for v in outs
+                            if isinstance(v, int) and not isinstance(v, bool)]
+                    strs = [v for v in outs if isinstance(v, str)]
+                    floats = [v for v in outs
+                              if isinstance(v, float) and not isinstance(v, bool)]
+                    if not floats:
+                        continue
+                    shell = self._SHELL_TYPE_NAMES.get(
+                        ints[1] if len(ints) > 1 else None, "?")
+                    kind = {"GetSlab": "losa", "GetWall": "muro",
+                            "GetDeck": "deck"}[g]
+                    mat = strs[0] if strs else "?"
+                    line = (f"{nm}: {kind}, espesor {floats[0]:g}, material "
+                            f"'{mat}', modelado {shell}")
+                    if g == "GetDeck":
+                        for dg, labels in (
+                            ("GetDeckFilled", ["SlabDepth", "RibDepth",
+                                               "RibWidthTop", "RibWidthBot",
+                                               "RibSpacing", "ShearThickness",
+                                               "UnitWeight", "StudDia",
+                                               "StudHt", "StudFu"]),
+                            ("GetDeckUnfilled", ["RibDepth", "RibWidthTop",
+                                                 "RibWidthBot", "RibSpacing",
+                                                 "ShearThickness",
+                                                 "UnitWeight"]),
+                            ("GetDeckSolidSlab", ["SlabDepth", "ShearStudDia",
+                                                  "ShearStudHt",
+                                                  "ShearStudFu"])):
+                            try:
+                                rr = oapi.call(model.PropArea, [(dg, (nm,))],
+                                               f"'{nm}' {dg}")
+                                nums = [v for v in oapi.outs(rr)
+                                        if isinstance(v, float)]
+                                if nums:
+                                    line += f" [{dg}] " + ", ".join(
+                                        f"{k}={v:g}" for k, v in zip(labels, nums))
+                                    break
+                            except Exception:
+                                continue
+                    lines.append(line)
+                    done = True
+                    break
+                except Exception:
+                    continue
+            if not done:
+                lines.append(f"{nm}: tipo {self._AREA_TYPE_NAMES.get(ptype, ptype)}, "
+                             f"ningun getter devolvio datos")
+        return f"{len(names)} seccion(es) de area:\n" + "\n".join(lines)
+
+    # -- invocador generico --------------------------------------------
+
+    @com_call
+    def call_oapi(self, path: str, method: str,
+                  args: list[Any] | None = None) -> str:
+        """Invoca CUALQUIER metodo de la OAPI y devuelve ret y [out] crudos.
+
+        Es la salida para lo que no tiene herramienta dedicada. Consultar
+        primero describe_oapi(path, method) para la firma real: los
+        argumentos [in] se pasan en orden; los [out] NO se pasan (comtypes
+        los devuelve). Arreglos [in] se pasan como listas JSON.
+
+        Puede ESCRIBIR en el modelo: cada llamada queda en el log con sus
+        argumentos. No hay deshacer.
+
+        Args:
+            path: namespace bajo SapModel, ej. "PropArea", "File",
+                  "FrameObj", "Results.Setup". Vacio = SapModel.
+            method: nombre exacto del metodo, ej. "GetWall".
+            args: lista de argumentos [in], ej. ["MH35"]. Enteros, floats,
+                  strings, booleanos o listas de esos.
+        """
+        import json
+        model = self._model()
+        target = oapi.resolve_path(model, path) if path else model
+        fn = getattr(target, method, None)
+        if fn is None:
+            raise EtabsError(f"'{method}' no existe en SapModel.{path or ''}. "
+                             f"Use describe_oapi.")
+        args = list(args or [])
+        logger.warning("call_oapi SapModel.%s.%s(%r)", path, method, args)
+        try:
+            result = fn(*args)
+        except Exception as e:
+            raise EtabsError(f"SapModel.{path}.{method}{tuple(args)!r} fallo: {e}")
+        code = oapi.ret_code(result)
+        outs = [list(v) if isinstance(v, (tuple, list)) else v
+                for v in oapi.outs(result)]
+        return json.dumps({"ret": code, "outs": outs, "raw_type":
+                           type(result).__name__}, ensure_ascii=False,
+                          default=str)
 
 
 # Prueba manual: python Etabs.py  (con ETABS abierto y un modelo cargado)
