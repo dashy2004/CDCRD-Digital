@@ -275,3 +275,24 @@ el modelo de Revit o de ETABS. Con esquema, la validación es una llamada al
 inicio de cada etapa y el error dice exactamente qué falta.
 
 Pendiente de crear: `esquemas/proyecto.schema.json`.
+
+## Implementación desde Revit (2026-09-06)
+
+`revit-mcp-tools/src/tools/exportar_proyecto.py` escribe este esquema desde el modelo
+abierto. Cubre `meta`, `materiales.hormigon` (f'c y E leídos del StructuralAsset, en
+kg/cm² y MPa), `entrepisos[]` (agrega `elevacion`), `ejes[]`, `columnas[]` (agrega
+`revit_id`, `nivel_base`, `nivel_tope`, `z_base`, `z_tope`, `rotacion_deg`, `seccion.origen`
+= `tipo` | `bbox`), `vigas[]` (`p1`/`p2` con z, `longitud`), `losas[]` (`contorno` desde el
+sketch, `huecos`, `espesor.h_usado`, `area_m2`), `muros[]` y `zapatas[]` (`columna` = la
+columna más baja en el mismo punto). `sismo`, `combinaciones`, `cargas` y `armado` quedan
+en `null`/vacío: son decisión humana o salida de las etapas de cálculo.
+
+Bloque nuevo `etabs`: los mismos datos traducidos a los argumentos del servidor `fea`
+(`set_stories`, `define_concrete_material` con f'c en kN/m², `define_rect_section`,
+`create_objects_by_coordinates` con `ref` y `seccion` por objeto). `assign_sections` de `fea`
+asigna una sección por clase; con varios tipos hay que asignar por elemento.
+
+Coordenadas: por defecto el mínimo X,Y de los puntos de inserción pasa a (0,0); la
+traslación queda en `meta.traslacion_origen_mm`.
+
+El JSON Schema (`esquemas/proyecto.schema.json`) sigue pendiente.

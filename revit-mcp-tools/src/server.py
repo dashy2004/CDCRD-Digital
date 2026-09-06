@@ -272,6 +272,171 @@ def revit_acero_columnas(regla: dict = None, columns: list[int] = None, filtro: 
                                         "limites": limites})
 
 
+# ----------------------------------------------------------------------
+# Verificacion y documentacion (2026-09-06)
+# ----------------------------------------------------------------------
+
+@mcp.tool(description=_doc("ver_vista"))
+def revit_ver_vista(views: list[str] = None, folder: str = "", prefix: str = "vista",
+                    pixel_width: int = 2000, clean: bool = False) -> dict:
+    return _run_tool("ver_vista", {"views": views, "folder": folder, "prefix": prefix,
+                                   "pixel_width": pixel_width, "clean": clean})
+
+
+@mcp.tool(description=_doc("vista_3d"))
+def revit_vista_3d(name: str = "MCP 3D", marker: str = "AGENTE:", categorias: list[str] = None,
+                   margen_mm: float = 1000.0, orientacion: str = "iso_se", estilo: str = "sombreado",
+                   detalle: str = "fino", replace: bool = False) -> dict:
+    return _run_tool("vista_3d", {"name": name, "marker": marker, "categorias": categorias, "margen_mm": margen_mm,
+                                  "orientacion": orientacion, "estilo": estilo, "detalle": detalle, "replace": replace})
+
+
+@mcp.tool(description=_doc("auditar"))
+def revit_auditar(marker: str = "AGENTE:", umbral_m2: float = 150.0, top_warnings: int = 12,
+                  categorias: list[str] = None) -> dict:
+    return _run_tool("auditar", {"marker": marker, "umbral_m2": umbral_m2, "top_warnings": top_warnings,
+                                 "categorias": categorias})
+
+
+@mcp.tool(description=_doc("vistas_planta"))
+def revit_vistas_planta(levels: list[str] = None, kind: str = "estructural", prefix: str = "PLANTA ",
+                        suffix: str = "", scale: int = 100, template: str = "", cut_mm: float = None,
+                        underlay_off: bool = True, crop: bool = False, crop_margen_mm: float = 2500.0,
+                        replace: bool = False, dry_run: bool = True) -> dict:
+    p = {"levels": levels, "kind": kind, "prefix": prefix, "suffix": suffix, "scale": scale, "template": template,
+         "underlay_off": underlay_off, "crop": crop, "crop_margen_mm": crop_margen_mm, "replace": replace, "dry_run": dry_run}
+    if cut_mm is not None:
+        p["cut_mm"] = cut_mm
+    return _run_tool("vistas_planta", p)
+
+
+@mcp.tool(description=_doc("laminas"))
+def revit_laminas(sheets: list[dict], titleblock: str = "", layout: str = "principal", strip_frac: float = 0.22,
+                  margin_mm: float = 15.0, reserved_right_mm: float = 120.0, auto_scale: bool = True,
+                  replace: bool = False, dry_run: bool = True) -> dict:
+    return _run_tool("laminas", {"sheets": sheets, "titleblock": titleblock, "layout": layout, "strip_frac": strip_frac,
+                                 "margin_mm": margin_mm, "reserved_right_mm": reserved_right_mm,
+                                 "auto_scale": auto_scale, "replace": replace, "dry_run": dry_run})
+
+
+@mcp.tool(description=_doc("tablas"))
+def revit_tablas(tablas: list[dict], export_folder: str = "", replace: bool = False, dry_run: bool = True) -> dict:
+    return _run_tool("tablas", {"tablas": tablas, "export_folder": export_folder, "replace": replace, "dry_run": dry_run})
+
+
+@mcp.tool(description=_doc("exportar_pdf"))
+def revit_exportar_pdf(folder: str, file_name: str = "laminas", sheets: list[str] = None, views: list[str] = None,
+                       combine: bool = True, gray: bool = False, paper: str = "default", hide_crop: bool = True) -> dict:
+    return _run_tool("exportar_pdf", {"folder": folder, "file_name": file_name, "sheets": sheets, "views": views,
+                                      "combine": combine, "gray": gray, "paper": paper, "hide_crop": hide_crop})
+
+
+@mcp.tool(description=_doc("exportar_ifc"))
+def revit_exportar_ifc(folder: str, file_name: str = "modelo", version: str = "IFC4", view: str = "",
+                       base_quantities: bool = True, split_walls: bool = False) -> dict:
+    return _run_tool("exportar_ifc", {"folder": folder, "file_name": file_name, "version": version, "view": view,
+                                      "base_quantities": base_quantities, "split_walls": split_walls})
+
+
+@mcp.tool(description=_doc("rooms"))
+def revit_rooms(level: str = "", create: bool = False, names: list[dict] = None, umbral_m2: float = 150.0,
+                dry_run: bool = True) -> dict:
+    return _run_tool("rooms", {"level": level, "create": create, "names": names, "umbral_m2": umbral_m2, "dry_run": dry_run})
+
+
+# ----------------------------------------------------------------------
+# Modelado desde cero (2026-09-06). Todas con dry_run=True por defecto y
+# marca en Comments para poder borrarlas con revit_borrar_por_marca.
+# ----------------------------------------------------------------------
+
+@mcp.tool(description=_doc("niveles_ejes"))
+def revit_niveles_ejes(levels: list[dict] = None, grids: list[dict] = None, rejilla: dict = None,
+                       marker: str = "AGENTE:DATUM", dry_run: bool = True) -> dict:
+    return _run_tool("niveles_ejes", {"levels": levels, "grids": grids, "rejilla": rejilla, "marker": marker, "dry_run": dry_run})
+
+
+@mcp.tool(description=_doc("familias_cargar"))
+def revit_familias_cargar(familias: list[str], library_root: str = "", dry_run: bool = True) -> dict:
+    return _run_tool("familias_cargar", {"familias": familias, "library_root": library_root, "dry_run": dry_run})
+
+
+@mcp.tool(description=_doc("tipos"))
+def revit_tipos(tipos: list[dict], dry_run: bool = True) -> dict:
+    return _run_tool("tipos", {"tipos": tipos, "dry_run": dry_run})
+
+
+@mcp.tool(description=_doc("columnas"))
+def revit_columnas(tipo: str, nivel_base: str, nivel_tope: str, posiciones=None, ejes: list[str] = None,
+                   puntos_mm: list[list[float]] = None, offset_base_mm: float = 0.0, offset_tope_mm: float = 0.0,
+                   rotacion_deg: float = 0.0, marker: str = "AGENTE:COL", tolerancia_mm: float = 50.0,
+                   dry_run: bool = True) -> dict:
+    """posiciones: lista de pares de ejes [["A","1"], ...] o el texto "todas"."""
+    return _run_tool("columnas", {"tipo": tipo, "nivel_base": nivel_base, "nivel_tope": nivel_tope, "posiciones": posiciones,
+                                  "ejes": ejes, "puntos_mm": puntos_mm, "offset_base_mm": offset_base_mm,
+                                  "offset_tope_mm": offset_tope_mm, "rotacion_deg": rotacion_deg, "marker": marker,
+                                  "tolerancia_mm": tolerancia_mm, "dry_run": dry_run})
+
+
+@mcp.tool(description=_doc("vigas_crear"))
+def revit_vigas_crear(tipo: str, nivel: str, tramos=None, ejes: list[str] = None, lineas_mm: list = None,
+                      z_offset_mm: float = 0.0, sin_union_extremos: bool = False, marker: str = "AGENTE:VIGA",
+                      tolerancia_mm: float = 50.0, dry_run: bool = True) -> dict:
+    """tramos: [[["A","1"],["B","1"]], ...] o el texto "por_ejes"."""
+    return _run_tool("vigas_crear", {"tipo": tipo, "nivel": nivel, "tramos": tramos, "ejes": ejes, "lineas_mm": lineas_mm,
+                                     "z_offset_mm": z_offset_mm, "sin_union_extremos": sin_union_extremos, "marker": marker,
+                                     "tolerancia_mm": tolerancia_mm, "dry_run": dry_run})
+
+
+@mcp.tool(description=_doc("losas_crear"))
+def revit_losas_crear(tipo: str, nivel: str, modo: str = "contornos", contornos_mm: list = None, ejes: list[str] = None,
+                      estructural: bool = True, offset_mm: float = 0.0, marker: str = "AGENTE:LOSA",
+                      tolerancia_mm: float = 50.0, dry_run: bool = True) -> dict:
+    return _run_tool("losas_crear", {"tipo": tipo, "nivel": nivel, "modo": modo, "contornos_mm": contornos_mm, "ejes": ejes,
+                                     "estructural": estructural, "offset_mm": offset_mm, "marker": marker,
+                                     "tolerancia_mm": tolerancia_mm, "dry_run": dry_run})
+
+
+@mcp.tool(description=_doc("muros_crear"))
+def revit_muros_crear(tipo: str, nivel_base: str, nivel_tope: str = "", altura_mm: float = None, lineas_mm: list = None,
+                      tramos=None, ejes: list[str] = None, estructural: bool = True, linea_ubicacion: int = 0,
+                      offset_base_mm: float = 0.0, marker: str = "AGENTE:MURO", tolerancia_mm: float = 50.0,
+                      dry_run: bool = True) -> dict:
+    p = {"tipo": tipo, "nivel_base": nivel_base, "nivel_tope": nivel_tope, "lineas_mm": lineas_mm, "tramos": tramos, "ejes": ejes,
+         "estructural": estructural, "linea_ubicacion": linea_ubicacion, "offset_base_mm": offset_base_mm, "marker": marker,
+         "tolerancia_mm": tolerancia_mm, "dry_run": dry_run}
+    if altura_mm is not None:
+        p["altura_mm"] = altura_mm
+    return _run_tool("muros_crear", p)
+
+
+@mcp.tool(description=_doc("zapatas"))
+def revit_zapatas(tipo: str, nivel: str, columnas, offset_mm: float = 0.0, rotar_con_columna: bool = True,
+                  solo_nivel_mas_bajo: bool = True, marker: str = "AGENTE:ZAP", tolerancia_mm: float = 50.0,
+                  dry_run: bool = True) -> dict:
+    """columnas: "nivel:<nombre>", "marker:<prefijo>" o lista de ids."""
+    return _run_tool("zapatas", {"tipo": tipo, "nivel": nivel, "columnas": columnas, "offset_mm": offset_mm,
+                                 "rotar_con_columna": rotar_con_columna, "solo_nivel_mas_bajo": solo_nivel_mas_bajo,
+                                 "marker": marker, "tolerancia_mm": tolerancia_mm, "dry_run": dry_run})
+
+
+@mcp.tool(description=_doc("borrar_por_marca"))
+def revit_borrar_por_marca(marker: str = "", categorias: list[str] = None, ejes_nombres: list[str] = None,
+                           niveles_nombres: list[str] = None, dry_run: bool = True) -> dict:
+    return _run_tool("borrar_por_marca", {"marker": marker, "categorias": categorias, "ejes_nombres": ejes_nombres,
+                                          "niveles_nombres": niveles_nombres, "dry_run": dry_run})
+
+
+# ----------------------------------------------------------------------
+# Puente Revit -> proyecto.json -> ETABS (2026-09-06)
+# ----------------------------------------------------------------------
+
+@mcp.tool(description=_doc("exportar_proyecto"))
+def revit_exportar_proyecto(path: str, marker: str = "", origen="auto", proyecto: str = "Proyecto Ejemplo",
+                            incluir: list[str] = None) -> dict:
+    return _run_tool("exportar_proyecto", {"path": path, "marker": marker, "origen": origen, "proyecto": proyecto,
+                                           "incluir": incluir})
+
+
 @mcp.tool()
 def revit_ejecutar_tool(name: str, params: dict = None) -> dict:
     """Ejecuta cualquier tool de la carpeta tools/ por nombre con un dict de

@@ -26,7 +26,8 @@ permiten a una IA operar ETABS, SAFE y Revit con esos mismos datos.
 | Los factores R, Cd y limites de altura de su sistema | `datos/machine/sistemas_estructurales.json` — la Tabla 11 completa (44 sistemas) |
 | Como armar el espectro de diseño de su proyecto | `datos/machine/espectro_diseno.json` + `factores_sitio.json` |
 | Las combinaciones de carga LRFD y ASD | `datos/machine/combinaciones.json` |
-| Conectar la IA con ETABS, SAFE o Revit | `servidor-mcp/`, `servidor-mcp-safe/`, `revit-mcp-write/` + `instalacion/INSTALACION.md` |
+| Conectar la IA con ETABS, SAFE o Revit | `servidor-mcp/`, `servidor-mcp-safe/`, `revit-mcp-tools/` + `instalacion/INSTALACION.md` |
+| Que la IA modele un edificio en Revit desde cero y saque planos | `revit-mcp-tools/ejemplos/residencial-4n/` — receta de 30 pasos, corrida verificada |
 | Un edificio completo modelado y verificado por IA, paso a paso | `revision/` — 10 bloques con capturas de pantalla de ETABS |
 | Como se verifico la digitalizacion | `verificacion-vols/` |
 
@@ -68,6 +69,13 @@ asigna por posicion en el documento, no por el prefijo del id.
 3. **Auditar sus plantillas de Excel contra el codigo nuevo.** Primer resultado real en
    `validacion/`: una plantilla profesional en uso tenia la carga de escaleras **18% por
    debajo** del CDCRD (3.92 vs 4.79 kN/m²). Ese tipo de hallazgo es el objetivo del proyecto.
+4. **Levantar un modelo BIM completo en Revit desde una descripcion.** `revit-mcp-tools`
+   (36 herramientas) cubre niveles y ejes, tipos, columnas, vigas, losas, muros, zapatas,
+   plantas, tablas, laminas, PDF, IFC y la exportacion a `proyecto.json` para ETABS. Cada
+   herramienta de escritura simula primero (`dry_run`), marca lo que crea para poder
+   deshacerlo, y la salida grafica se exporta a PNG para que la IA la **mire** antes de
+   entregarla. El ejemplo `ejemplos/residencial-4n` (edificio de 4 niveles y 8
+   apartamentos, nombres inventados) corre de punta a punta en ~15 s.
 
 ## Los servidores MCP
 
@@ -75,7 +83,8 @@ asigna por posicion en el documento, no por el prefijo del id.
 |---|---|---|
 | `servidor-mcp/` | ETABS (OAPI 2.016) | **54 herramientas**, probado de punta a punta contra ETABS 23.3.0 |
 | `servidor-mcp-safe/` | SAFE — losas, zapatas, franjas, punzonamiento, presion de suelo | v0.1.0, probado en vivo contra un modelo real de fundacion |
-| `revit-mcp-write/` | Revit 2027 via pyRevit Routes — lectura e inventario, y escritura | 9 herramientas; las tres que **mutan** el modelo aun sin corridas reales |
+| `revit-mcp-tools/` | Revit 2027 via pyRevit Routes — modelar desde cero, verificar con vision, documentar (plantas, tablas, laminas, PDF, IFC), armado, exportar a ETABS | **36 herramientas**; modelado y documentacion probados de punta a punta (receta `residencial-4n`); armado en `dry_run` |
+| `revit-mcp-write/` | Revit 2027 via pyRevit Routes — lectura e inventario, y escritura (pushbuttons) | 9 herramientas; las tres que **mutan** el modelo aun sin corridas reales |
 | `puente-autocad-etabs/` | Extraccion de geometria desde DWG por convencion de capas | Inventario y convencion definidos (`docs/CONVENCION-CAPAS-CAD.md`) |
 
 Como encajan entre si: `docs/ARQUITECTURA-ECOSISTEMA.md`. Que **no** cubre cada uno, con el
