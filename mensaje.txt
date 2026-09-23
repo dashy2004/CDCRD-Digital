@@ -1,9 +1,0 @@
-﻿revit-mcp-tools: +19 herramientas (modelado, verificacion/documentacion, puente proyecto.json a ETABS)
-
-- Verificacion y documentacion: ver_vista, vista_3d, auditar, vistas_planta, tablas, laminas, exportar_pdf, exportar_ifc, rooms
-- Modelado desde cero: niveles_ejes, familias_cargar, tipos, columnas, vigas_crear, losas_crear, muros_crear, zapatas, borrar_por_marca
-- Puente Revit -> proyecto.json -> ETABS: exportar_proyecto
-- Ejemplo publico: ejemplos/residencial-4n (4 niveles, 8 aptos, nombres inventados) + correr_receta.py
-- _common.py ampliado: ft/xyz_mm, need_level/need_symbol, grids_info/grid_point/grid_segments, dup_type, fix_datum (E-099), leave_view, errs/note (E-101)
-- Todas idempotentes: dry_run=True por defecto, marca AGENTE:<tipo>:<etiqueta>, verificacion contra duplicados
-- README del modulo y del repo, docs/ESQUEMA-PROYECTO.md actualizados
