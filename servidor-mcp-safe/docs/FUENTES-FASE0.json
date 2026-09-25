@@ -1,0 +1,2870 @@
+{
+  "author": "Codex <codex@aiq>",
+  "task": "codex-205",
+  "phase": 0,
+  "captured_utc": "2026-09-25T19:54:47.839491+00:00",
+  "method": "Lectura de archivos y AST/XML; sin importar Safe/server/comtypes ni invocar COM. SHA del log es del corte, puede crecer por la sesión de Claude.",
+  "sources": [
+    {
+      "path": "C:\\Users\\emilg\\Artificial IQ\\CDCRD-Digital\\servidor-mcp-safe\\README.md",
+      "bytes": 6594,
+      "sha256": "5d19f726d42e8997ab11c368d8cb13072f84d37fe29b5a7c2d7f4bdbfb063603",
+      "mtime_utc": "2026-08-10T13:56:07.886589+00:00"
+    },
+    {
+      "path": "C:\\Users\\emilg\\Artificial IQ\\CDCRD-Digital\\servidor-mcp-safe\\src\\Safe.py",
+      "bytes": 51361,
+      "sha256": "534e1478fc8e34e9193658eb776d53f66795f6d85fbcf75be1590d721e416c65",
+      "mtime_utc": "2026-08-23T09:20:48.916667+00:00"
+    },
+    {
+      "path": "C:\\Users\\emilg\\Artificial IQ\\CDCRD-Digital\\servidor-mcp-safe\\src\\server.py",
+      "bytes": 3646,
+      "sha256": "dc7bc21d857635fbc50c207abc4afd920a8b7d810db803feaaa874649db8cc21",
+      "mtime_utc": "2026-08-10T16:45:10.281170+00:00"
+    },
+    {
+      "path": "C:\\Users\\emilg\\Artificial IQ\\CDCRD-Digital\\servidor-mcp-safe\\src\\oapi.py",
+      "bytes": 12832,
+      "sha256": "ca70560436c07cf1ad66c9b348fc2778859756517d554a164fad38f82be41e6a",
+      "mtime_utc": "2026-08-10T17:33:18.475732+00:00"
+    },
+    {
+      "path": "C:\\Users\\emilg\\Artificial IQ\\CDCRD-Digital\\servidor-mcp-safe\\src\\safe_mcp.log",
+      "bytes": 274944,
+      "sha256": "59aaa332b8f921b03fd3fd47829d6ce2f14f911a1d4d06d48b414ea5ef204eaf",
+      "mtime_utc": "2026-09-25T19:51:56.857783+00:00"
+    },
+    {
+      "path": "C:\\Users\\emilg\\Artificial IQ\\CDCRD-Digital\\docs\\HUECOS-ETABS-SAFE.md",
+      "bytes": 17080,
+      "sha256": "e95ce9a8b9235da21398f303c59fed4e2262497bf1d083568a2d05e37d5e9d57",
+      "mtime_utc": "2026-08-23T09:20:48.893478+00:00"
+    },
+    {
+      "path": "C:\\Users\\emilg\\Artificial IQ\\BRAIN\\03_APPS\\2026-08-10 SAFE-MCP - primera corrida real SERRALLES II, ETABS pendiente.md",
+      "bytes": 4151,
+      "sha256": "3d5a0571f5801e2f532ce61ca5dc0b5c50bc314f1ca3eeb758a67e8f3c67531f",
+      "mtime_utc": "2026-08-23T09:34:24.878503+00:00"
+    },
+    {
+      "path": "C:\\Users\\emilg\\Documentos\\02 TRABAJO_INGENIERIA\\TRABAJO\\_RECURSOS\\Pasos.pdf",
+      "bytes": 5823125,
+      "sha256": "b88a8d8f65fc506ec69d2a84b55cce4b3f4b1252b08ea91296721d33d244fab1",
+      "mtime_utc": "2026-09-25T19:37:08.187969+00:00"
+    },
+    {
+      "path": "C:\\Users\\emilg\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\comtypes\\gen\\_2406CB05_79B9_49C2_8684_CC7A67F5B12E_0_1_0.py",
+      "bytes": 1305850,
+      "sha256": "d53ead5e47d40843e971a8963fa30812a9b05358c47b5bea0aac17fad1b04ea2",
+      "mtime_utc": "2026-08-10T13:47:51.485655+00:00"
+    },
+    {
+      "path": "C:\\Program Files\\Computers and Structures\\SAFE 23\\Table and Field Keys.xml",
+      "bytes": 931892,
+      "sha256": "e8490bc0c17bca64763c2e2288e6a89b2e6ae58e4de20d07a8a678ddad8f2dc2",
+      "mtime_utc": "2026-06-23T21:58:10+00:00"
+    },
+    {
+      "path": "C:\\Users\\emilg\\Artificial IQ\\CDCRD-Digital\\servidor-mcp-safe\\docs\\OAPI-SAFE-real.md",
+      "bytes": 22512,
+      "sha256": "1a7a434cfc2cd6a70c0552ac874475da1ee449adbf52b463bf7bdb23ca85e791",
+      "mtime_utc": "2026-09-25T19:52:44.423172+00:00"
+    },
+    {
+      "path": "C:\\Users\\emilg\\Artificial IQ\\CDCRD-Digital\\servidor-mcp-safe\\docs\\CSI-API-SAFE-v1-paginas-clave.md",
+      "bytes": 31607,
+      "sha256": "5bb70ae1dbbc4293c503c53de73697ac67c85dcfb0d1865f64f8e58f535b93c7",
+      "mtime_utc": "2026-09-25T19:46:04.071287+00:00"
+    },
+    {
+      "path": "C:\\Users\\emilg\\Artificial IQ\\_coordinacion\\buzon\\206-claude.md",
+      "bytes": 3279,
+      "sha256": "7dfe2edfede51e8f365fad69a4ae3a025d3b87fc9ac5e213721df227a73655bc",
+      "mtime_utc": "2026-09-25T19:46:46.523150+00:00"
+    }
+  ],
+  "registered_tools_count": 31,
+  "registered_tools": [
+    "get_model_info",
+    "get_units",
+    "set_units",
+    "save_model",
+    "refresh_view",
+    "describe_oapi",
+    "get_points",
+    "get_areas",
+    "create_area_by_coordinates",
+    "define_concrete_material",
+    "define_rebar_material",
+    "define_slab_section",
+    "define_soil_spring",
+    "assign_area_spring",
+    "add_load_pattern",
+    "add_load_combo",
+    "run_analysis",
+    "get_analysis_status",
+    "run_slab_design",
+    "get_slab_design_summary",
+    "get_slab_design_detail",
+    "get_design_strips",
+    "get_span_definitions",
+    "get_punching_check",
+    "get_soil_pressure",
+    "probe_file_types",
+    "list_tables",
+    "get_table_data",
+    "set_table_data",
+    "import_file",
+    "export_file"
+  ],
+  "log": {
+    "lines": 2080,
+    "levels": {
+      "INFO": 2073,
+      "WARNING": 3
+    },
+    "warnings_errors": [
+      {
+        "line": 59,
+        "text": "2026-08-10 11:07:51,496 - safe_mcp_server - WARNING - Referencia a SAFE invalida ((-2147023174, 'The RPC server is unavailable.', (None, None, None, 0, None))). Reconectando."
+      },
+      {
+        "line": 67,
+        "text": "2026-08-10 11:19:52,325 - safe_mcp_server - WARNING - Referencia a SAFE invalida ((-2147023174, 'The RPC server is unavailable.', (None, None, None, 0, None))). Reconectando."
+      },
+      {
+        "line": 2054,
+        "text": "2026-09-25 15:45:42,550 - safe_mcp_server - WARNING - Referencia a SAFE invalida ((-2147023174, 'The RPC server is unavailable.', (None, None, None, 0, None))). Reconectando."
+      }
+    ]
+  },
+  "checks": {
+    "all_registered_tools_in_backlog": true,
+    "all_29_required_entries_present": true,
+    "four_extended_domains_present": true
+  },
+  "static_oapi": {
+    "cFile": [
+      {
+        "name": "NewBlank",
+        "line": 1127
+      },
+      {
+        "name": "OpenFile",
+        "line": 1133
+      },
+      {
+        "name": "Save",
+        "line": 1140
+      },
+      {
+        "name": "GetFilePath",
+        "line": 1147
+      },
+      {
+        "name": "NewSteelDeck",
+        "line": 1154
+      },
+      {
+        "name": "NewGridOnly",
+        "line": 1167
+      },
+      {
+        "name": "ImportFile",
+        "line": 1180
+      },
+      {
+        "name": "ExportFile",
+        "line": 1189
+      }
+    ],
+    "cAnalysisResultsSetup": [
+      {
+        "name": "DeselectAllCasesAndCombosForOutput",
+        "line": 1856
+      },
+      {
+        "name": "GetCaseSelectedForOutput",
+        "line": 1862
+      },
+      {
+        "name": "GetComboSelectedForOutput",
+        "line": 1870
+      },
+      {
+        "name": "GetOptionBaseReactLoc",
+        "line": 1878
+      },
+      {
+        "name": "GetOptionBucklingMode",
+        "line": 1887
+      },
+      {
+        "name": "GetOptionDirectHist",
+        "line": 1896
+      },
+      {
+        "name": "GetOptionModalHist",
+        "line": 1903
+      },
+      {
+        "name": "GetOptionModeShape",
+        "line": 1910
+      },
+      {
+        "name": "GetOptionMultiStepStatic",
+        "line": 1919
+      },
+      {
+        "name": "GetOptionMultiValuedCombo",
+        "line": 1926
+      },
+      {
+        "name": "GetOptionNLStatic",
+        "line": 1933
+      },
+      {
+        "name": "SetCaseSelectedForOutput",
+        "line": 1940
+      },
+      {
+        "name": "SetComboSelectedForOutput",
+        "line": 1948
+      },
+      {
+        "name": "SetOptionBaseReactLoc",
+        "line": 1956
+      },
+      {
+        "name": "SetOptionBucklingMode",
+        "line": 1965
+      },
+      {
+        "name": "SetOptionDirectHist",
+        "line": 1974
+      },
+      {
+        "name": "SetOptionModalHist",
+        "line": 1981
+      },
+      {
+        "name": "SetOptionModeShape",
+        "line": 1988
+      },
+      {
+        "name": "SetOptionMultiStepStatic",
+        "line": 1997
+      },
+      {
+        "name": "SetOptionMultiValuedCombo",
+        "line": 2004
+      },
+      {
+        "name": "SetOptionNLStatic",
+        "line": 2011
+      }
+    ],
+    "cCaseStaticNonlinearStaged": [
+      {
+        "name": "GetGeometricNonlinearity",
+        "line": 2219
+      },
+      {
+        "name": "GetHingeUnloading",
+        "line": 2227
+      },
+      {
+        "name": "GetInitialCase",
+        "line": 2235
+      },
+      {
+        "name": "GetMaterialNonlinearity",
+        "line": 2243
+      },
+      {
+        "name": "GetResultsSaved",
+        "line": 2251
+      },
+      {
+        "name": "GetSolControlParameters",
+        "line": 2261
+      },
+      {
+        "name": "GetStageData",
+        "line": 2278
+      },
+      {
+        "name": "GetStageData_1",
+        "line": 2293
+      },
+      {
+        "name": "GetStageDefinitions",
+        "line": 2309
+      },
+      {
+        "name": "GetStageDefinitions_1",
+        "line": 2319
+      },
+      {
+        "name": "GetTargetForceParameters",
+        "line": 2331
+      },
+      {
+        "name": "SetCase",
+        "line": 2342
+      },
+      {
+        "name": "SetGeometricNonlinearity",
+        "line": 2349
+      },
+      {
+        "name": "SetHingeUnloading",
+        "line": 2357
+      },
+      {
+        "name": "SetInitialCase",
+        "line": 2365
+      },
+      {
+        "name": "SetMaterialNonlinearity",
+        "line": 2373
+      },
+      {
+        "name": "SetResultsSaved",
+        "line": 2381
+      },
+      {
+        "name": "SetSolControlParameters",
+        "line": 2391
+      },
+      {
+        "name": "SetStageData",
+        "line": 2408
+      },
+      {
+        "name": "SetStageData_1",
+        "line": 2423
+      },
+      {
+        "name": "SetStageDefinitions",
+        "line": 2439
+      },
+      {
+        "name": "SetStageDefinitions_1",
+        "line": 2449
+      },
+      {
+        "name": "SetTargetForceParameters",
+        "line": 2461
+      },
+      {
+        "name": "GetMassSource",
+        "line": 2472
+      },
+      {
+        "name": "SetMassSource",
+        "line": 2480
+      },
+      {
+        "name": "GetStageData_2",
+        "line": 2488
+      },
+      {
+        "name": "GetStageDefinitions_2",
+        "line": 2504
+      },
+      {
+        "name": "SetStageData_2",
+        "line": 2516
+      },
+      {
+        "name": "SetStageDefinitions_2",
+        "line": 2532
+      }
+    ],
+    "cPropArea": [
+      {
+        "name": "ChangeName",
+        "line": 5924
+      },
+      {
+        "name": "Count",
+        "line": 5932
+      },
+      {
+        "name": "Delete",
+        "line": 5939
+      },
+      {
+        "name": "GetModifiers",
+        "line": 5946
+      },
+      {
+        "name": "GetNameList",
+        "line": 5954
+      },
+      {
+        "name": "GetShellDesign",
+        "line": 5963
+      },
+      {
+        "name": "GetShellLayer",
+        "line": 5976
+      },
+      {
+        "name": "GetShellLayer_1",
+        "line": 5991
+      },
+      {
+        "name": "GetShellLayer_2",
+        "line": 6009
+      },
+      {
+        "name": "GetTypeOAPI",
+        "line": 6028
+      },
+      {
+        "name": "SetModifiers",
+        "line": 6036
+      },
+      {
+        "name": "SetShellDesign",
+        "line": 6044
+      },
+      {
+        "name": "SetShellLayer",
+        "line": 6057
+      },
+      {
+        "name": "SetShellLayer_1",
+        "line": 6072
+      },
+      {
+        "name": "SetShellLayer_2",
+        "line": 6090
+      },
+      {
+        "name": "GetDeck",
+        "line": 6109
+      },
+      {
+        "name": "GetDeckFilled",
+        "line": 6123
+      },
+      {
+        "name": "GetDeckSolidSlab",
+        "line": 6140
+      },
+      {
+        "name": "GetDeckUnfilled",
+        "line": 6151
+      },
+      {
+        "name": "GetSlab",
+        "line": 6164
+      },
+      {
+        "name": "GetSlabRibbed",
+        "line": 6178
+      },
+      {
+        "name": "GetSlabWaffle",
+        "line": 6191
+      },
+      {
+        "name": "GetWall",
+        "line": 6204
+      },
+      {
+        "name": "GetWallAutoSelectList",
+        "line": 6218
+      },
+      {
+        "name": "SetDeck",
+        "line": 6227
+      },
+      {
+        "name": "SetDeckFilled",
+        "line": 6241
+      },
+      {
+        "name": "SetDeckSolidSlab",
+        "line": 6258
+      },
+      {
+        "name": "SetDeckUnfilled",
+        "line": 6269
+      },
+      {
+        "name": "SetSlab",
+        "line": 6282
+      },
+      {
+        "name": "SetSlabRibbed",
+        "line": 6296
+      },
+      {
+        "name": "SetSlabWaffle",
+        "line": 6309
+      },
+      {
+        "name": "SetWall",
+        "line": 6322
+      },
+      {
+        "name": "SetWallAutoSelectList",
+        "line": 6336
+      },
+      {
+        "name": "GetDeck_1",
+        "line": 6345
+      },
+      {
+        "name": "SetDeck_1",
+        "line": 6368
+      }
+    ],
+    "cDesignStrip": [
+      {
+        "name": "ChangeName",
+        "line": 6554
+      },
+      {
+        "name": "Delete",
+        "line": 6562
+      },
+      {
+        "name": "GetDesignStrip",
+        "line": 6569
+      },
+      {
+        "name": "GetGUID",
+        "line": 6585
+      },
+      {
+        "name": "GetNameList",
+        "line": 6593
+      },
+      {
+        "name": "GetDesignStrip_1",
+        "line": 6601
+      },
+      {
+        "name": "SetGUID",
+        "line": 6618
+      }
+    ],
+    "cPropRebar": [
+      {
+        "name": "GetNameList",
+        "line": 7093
+      },
+      {
+        "name": "GetRebarProps",
+        "line": 7101
+      },
+      {
+        "name": "GetRebarPropsWithGUID",
+        "line": 7110
+      },
+      {
+        "name": "GetNameListWithData",
+        "line": 7120
+      }
+    ],
+    "cAreaObj": [
+      {
+        "name": "AddByCoord",
+        "line": 9679
+      },
+      {
+        "name": "AddByPoint",
+        "line": 9693
+      },
+      {
+        "name": "ChangeName",
+        "line": 9704
+      },
+      {
+        "name": "Count",
+        "line": 9712
+      },
+      {
+        "name": "Delete",
+        "line": 9718
+      },
+      {
+        "name": "DeleteLoadTemperature",
+        "line": 9726
+      },
+      {
+        "name": "DeleteLoadUniform",
+        "line": 9735
+      },
+      {
+        "name": "DeleteLoadUniformToFrame",
+        "line": 9744
+      },
+      {
+        "name": "DeleteLoadWindPressure",
+        "line": 9753
+      },
+      {
+        "name": "DeleteMass",
+        "line": 9762
+      },
+      {
+        "name": "DeleteModifiers",
+        "line": 9770
+      },
+      {
+        "name": "DeleteSpring",
+        "line": 9778
+      },
+      {
+        "name": "GetEdgeConstraint",
+        "line": 9786
+      },
+      {
+        "name": "GetElm",
+        "line": 9794
+      },
+      {
+        "name": "GetGUID",
+        "line": 9803
+      },
+      {
+        "name": "GetLoadTemperature",
+        "line": 9811
+      },
+      {
+        "name": "GetLoadUniform",
+        "line": 9825
+      },
+      {
+        "name": "GetLoadUniformToFrame",
+        "line": 9839
+      },
+      {
+        "name": "GetLoadWindPressure",
+        "line": 9854
+      },
+      {
+        "name": "GetLocalAxes",
+        "line": 9867
+      },
+      {
+        "name": "GetMass",
+        "line": 9876
+      },
+      {
+        "name": "GetMaterialOverwrite",
+        "line": 9884
+      },
+      {
+        "name": "GetModifiers",
+        "line": 9892
+      },
+      {
+        "name": "GetNameList",
+        "line": 9900
+      },
+      {
+        "name": "GetOpening",
+        "line": 9908
+      },
+      {
+        "name": "GetPoints",
+        "line": 9916
+      },
+      {
+        "name": "GetProperty",
+        "line": 9925
+      },
+      {
+        "name": "GetSelected",
+        "line": 9933
+      },
+      {
+        "name": "GetSelectedEdge",
+        "line": 9941
+      },
+      {
+        "name": "GetTransformationMatrix",
+        "line": 9950
+      },
+      {
+        "name": "SetEdgeConstraint",
+        "line": 9959
+      },
+      {
+        "name": "SetGroupAssign",
+        "line": 9968
+      },
+      {
+        "name": "SetGUID",
+        "line": 9978
+      },
+      {
+        "name": "SetLoadTemperature",
+        "line": 9986
+      },
+      {
+        "name": "SetLoadUniform",
+        "line": 9999
+      },
+      {
+        "name": "SetLoadUniformToFrame",
+        "line": 10012
+      },
+      {
+        "name": "SetLoadWindPressure",
+        "line": 10026
+      },
+      {
+        "name": "SetLocalAxes",
+        "line": 10037
+      },
+      {
+        "name": "SetMass",
+        "line": 10046
+      },
+      {
+        "name": "SetMaterialOverwrite",
+        "line": 10056
+      },
+      {
+        "name": "SetModifiers",
+        "line": 10065
+      },
+      {
+        "name": "SetOpening",
+        "line": 10074
+      },
+      {
+        "name": "SetProperty",
+        "line": 10083
+      },
+      {
+        "name": "SetSelected",
+        "line": 10092
+      },
+      {
+        "name": "SetSelectedEdge",
+        "line": 10101
+      },
+      {
+        "name": "GetGroupAssign",
+        "line": 10110
+      },
+      {
+        "name": "GetDesignOrientation",
+        "line": 10119
+      },
+      {
+        "name": "GetNameListOnStory",
+        "line": 10127
+      },
+      {
+        "name": "GetDiaphragm",
+        "line": 10136
+      },
+      {
+        "name": "SetDiaphragm",
+        "line": 10144
+      },
+      {
+        "name": "GetLabelNameList",
+        "line": 10152
+      },
+      {
+        "name": "GetLabelFromName",
+        "line": 10162
+      },
+      {
+        "name": "GetNameFromLabel",
+        "line": 10171
+      },
+      {
+        "name": "GetRebarDataPier",
+        "line": 10180
+      },
+      {
+        "name": "GetRebarDataSpandrel",
+        "line": 10203
+      },
+      {
+        "name": "GetAllAreas",
+        "line": 10223
+      },
+      {
+        "name": "GetPier",
+        "line": 10242
+      },
+      {
+        "name": "SetPier",
+        "line": 10250
+      },
+      {
+        "name": "GetSpandrel",
+        "line": 10259
+      },
+      {
+        "name": "SetSpandrel",
+        "line": 10267
+      },
+      {
+        "name": "GetSpringAssignment",
+        "line": 10276
+      },
+      {
+        "name": "SetSpringAssignment",
+        "line": 10284
+      },
+      {
+        "name": "GetOffsets3",
+        "line": 10293
+      },
+      {
+        "name": "GetCurvedEdges",
+        "line": 10302
+      }
+    ],
+    "cPointObj": [
+      {
+        "name": "AddCartesian",
+        "line": 10647
+      },
+      {
+        "name": "ChangeName",
+        "line": 10661
+      },
+      {
+        "name": "Count",
+        "line": 10669
+      },
+      {
+        "name": "CountLoadDispl",
+        "line": 10675
+      },
+      {
+        "name": "CountLoadForce",
+        "line": 10684
+      },
+      {
+        "name": "CountPanelZone",
+        "line": 10693
+      },
+      {
+        "name": "CountRestraint",
+        "line": 10699
+      },
+      {
+        "name": "CountSpring",
+        "line": 10705
+      },
+      {
+        "name": "DeleteLoadDispl",
+        "line": 10711
+      },
+      {
+        "name": "DeleteLoadForce",
+        "line": 10720
+      },
+      {
+        "name": "DeleteMass",
+        "line": 10729
+      },
+      {
+        "name": "DeletePanelZone",
+        "line": 10737
+      },
+      {
+        "name": "DeleteRestraint",
+        "line": 10745
+      },
+      {
+        "name": "DeleteSpecialPoint",
+        "line": 10753
+      },
+      {
+        "name": "DeleteSpring",
+        "line": 10761
+      },
+      {
+        "name": "GetCommonTo",
+        "line": 10769
+      },
+      {
+        "name": "GetConnectivity",
+        "line": 10777
+      },
+      {
+        "name": "GetCoordCartesian",
+        "line": 10788
+      },
+      {
+        "name": "GetCoordCylindrical",
+        "line": 10799
+      },
+      {
+        "name": "GetCoordSpherical",
+        "line": 10810
+      },
+      {
+        "name": "GetElm",
+        "line": 10821
+      },
+      {
+        "name": "GetGUID",
+        "line": 10829
+      },
+      {
+        "name": "GetLoadDispl",
+        "line": 10837
+      },
+      {
+        "name": "GetLoadForce",
+        "line": 10856
+      },
+      {
+        "name": "GetLocalAxes",
+        "line": 10875
+      },
+      {
+        "name": "GetMass",
+        "line": 10886
+      },
+      {
+        "name": "GetNameList",
+        "line": 10894
+      },
+      {
+        "name": "GetPanelZone",
+        "line": 10902
+      },
+      {
+        "name": "GetRestraint",
+        "line": 10917
+      },
+      {
+        "name": "GetSelected",
+        "line": 10925
+      },
+      {
+        "name": "GetSpecialPoint",
+        "line": 10933
+      },
+      {
+        "name": "GetSpring",
+        "line": 10941
+      },
+      {
+        "name": "GetSpringCoupled",
+        "line": 10949
+      },
+      {
+        "name": "GetTransformationMatrix",
+        "line": 10957
+      },
+      {
+        "name": "IsSpringCoupled",
+        "line": 10966
+      },
+      {
+        "name": "SetGroupAssign",
+        "line": 10974
+      },
+      {
+        "name": "SetGUID",
+        "line": 10984
+      },
+      {
+        "name": "SetLoadDispl",
+        "line": 10992
+      },
+      {
+        "name": "SetLoadForce",
+        "line": 11004
+      },
+      {
+        "name": "SetMass",
+        "line": 11016
+      },
+      {
+        "name": "SetMassByVolume",
+        "line": 11027
+      },
+      {
+        "name": "SetMassByWeight",
+        "line": 11039
+      },
+      {
+        "name": "SetPanelZone",
+        "line": 11050
+      },
+      {
+        "name": "SetRestraint",
+        "line": 11066
+      },
+      {
+        "name": "SetSelected",
+        "line": 11075
+      },
+      {
+        "name": "SetSpecialPoint",
+        "line": 11084
+      },
+      {
+        "name": "SetSpring",
+        "line": 11093
+      },
+      {
+        "name": "SetSpringCoupled",
+        "line": 11104
+      },
+      {
+        "name": "GetGroupAssign",
+        "line": 11115
+      },
+      {
+        "name": "GetNameListOnStory",
+        "line": 11124
+      },
+      {
+        "name": "GetDiaphragm",
+        "line": 11133
+      },
+      {
+        "name": "SetDiaphragm",
+        "line": 11142
+      },
+      {
+        "name": "GetLabelNameList",
+        "line": 11151
+      },
+      {
+        "name": "GetLabelFromName",
+        "line": 11161
+      },
+      {
+        "name": "GetNameFromLabel",
+        "line": 11170
+      },
+      {
+        "name": "GetAllPoints",
+        "line": 11179
+      },
+      {
+        "name": "GetSpringAssignment",
+        "line": 11191
+      },
+      {
+        "name": "SetSpringAssignment",
+        "line": 11199
+      }
+    ],
+    "cPropTendon": [
+      {
+        "name": "ChangeName",
+        "line": 12919
+      },
+      {
+        "name": "Count",
+        "line": 12927
+      },
+      {
+        "name": "Delete",
+        "line": 12933
+      },
+      {
+        "name": "GetNameList",
+        "line": 12940
+      },
+      {
+        "name": "GetProp",
+        "line": 12948
+      },
+      {
+        "name": "SetProp",
+        "line": 12961
+      }
+    ],
+    "cSapModel": [
+      {
+        "name": "Analyze",
+        "line": 16739
+      },
+      {
+        "name": "AreaElm",
+        "line": 16745
+      },
+      {
+        "name": "AreaObj",
+        "line": 16751
+      },
+      {
+        "name": "ConstraintDef",
+        "line": 16757
+      },
+      {
+        "name": "DesignConcrete",
+        "line": 16763
+      },
+      {
+        "name": "DesignSteel",
+        "line": 16769
+      },
+      {
+        "name": "EditArea",
+        "line": 16775
+      },
+      {
+        "name": "EditFrame",
+        "line": 16781
+      },
+      {
+        "name": "EditGeneral",
+        "line": 16787
+      },
+      {
+        "name": "EditPoint",
+        "line": 16793
+      },
+      {
+        "name": "File",
+        "line": 16799
+      },
+      {
+        "name": "FrameObj",
+        "line": 16805
+      },
+      {
+        "name": "Func",
+        "line": 16811
+      },
+      {
+        "name": "GDispl",
+        "line": 16817
+      },
+      {
+        "name": "GetDatabaseUnits",
+        "line": 16823
+      },
+      {
+        "name": "GetMergeTol",
+        "line": 16829
+      },
+      {
+        "name": "GetModelFilename",
+        "line": 16836
+      },
+      {
+        "name": "GetModelFilepath",
+        "line": 16843
+      },
+      {
+        "name": "GetModelIsLocked",
+        "line": 16849
+      },
+      {
+        "name": "GetPresentCoordSystem",
+        "line": 16855
+      },
+      {
+        "name": "GetPresentUnits",
+        "line": 16861
+      },
+      {
+        "name": "GetProgramInfo",
+        "line": 16867
+      },
+      {
+        "name": "GetProjectInfo",
+        "line": 16876
+      },
+      {
+        "name": "GetVersion",
+        "line": 16885
+      },
+      {
+        "name": "GroupDef",
+        "line": 16893
+      },
+      {
+        "name": "InitializeNewModel",
+        "line": 16899
+      },
+      {
+        "name": "LineElm",
+        "line": 16906
+      },
+      {
+        "name": "LinkElm",
+        "line": 16912
+      },
+      {
+        "name": "LinkObj",
+        "line": 16918
+      },
+      {
+        "name": "LoadCases",
+        "line": 16924
+      },
+      {
+        "name": "LoadPatterns",
+        "line": 16930
+      },
+      {
+        "name": "Options",
+        "line": 16936
+      },
+      {
+        "name": "PatternDef",
+        "line": 16942
+      },
+      {
+        "name": "PointElm",
+        "line": 16948
+      },
+      {
+        "name": "PointObj",
+        "line": 16954
+      },
+      {
+        "name": "PropArea",
+        "line": 16960
+      },
+      {
+        "name": "PropFrame",
+        "line": 16966
+      },
+      {
+        "name": "PropLink",
+        "line": 16972
+      },
+      {
+        "name": "PropMaterial",
+        "line": 16978
+      },
+      {
+        "name": "PropRebar",
+        "line": 16984
+      },
+      {
+        "name": "PropTendon",
+        "line": 16990
+      },
+      {
+        "name": "RespCombo",
+        "line": 16996
+      },
+      {
+        "name": "Results",
+        "line": 17002
+      },
+      {
+        "name": "SelectObj",
+        "line": 17008
+      },
+      {
+        "name": "SetMergeTol",
+        "line": 17014
+      },
+      {
+        "name": "SetModelIsLocked",
+        "line": 17021
+      },
+      {
+        "name": "SetPresentUnits",
+        "line": 17028
+      },
+      {
+        "name": "SetProjectInfo",
+        "line": 17035
+      },
+      {
+        "name": "TendonObj",
+        "line": 17043
+      },
+      {
+        "name": "View",
+        "line": 17049
+      },
+      {
+        "name": "DesignResults",
+        "line": 17055
+      },
+      {
+        "name": "DatabaseTables",
+        "line": 17061
+      },
+      {
+        "name": "DesignCompositeBeam",
+        "line": 17067
+      },
+      {
+        "name": "GridSys",
+        "line": 17073
+      },
+      {
+        "name": "Story",
+        "line": 17079
+      },
+      {
+        "name": "Tower",
+        "line": 17085
+      },
+      {
+        "name": "GetDatabaseUnits_2",
+        "line": 17091
+      },
+      {
+        "name": "GetPresentUnits_2",
+        "line": 17100
+      },
+      {
+        "name": "SetPresentUnits_2",
+        "line": 17109
+      },
+      {
+        "name": "Diaphragm",
+        "line": 17118
+      },
+      {
+        "name": "TreeIsUpdateSuspended",
+        "line": 17124
+      },
+      {
+        "name": "TreeResumeUpdateData",
+        "line": 17131
+      },
+      {
+        "name": "TreeSuspendUpdateData",
+        "line": 17137
+      },
+      {
+        "name": "PierLabel",
+        "line": 17144
+      },
+      {
+        "name": "SpandrelLabel",
+        "line": 17150
+      },
+      {
+        "name": "Detailing",
+        "line": 17156
+      },
+      {
+        "name": "PropPointSpring",
+        "line": 17162
+      },
+      {
+        "name": "PropLineSpring",
+        "line": 17168
+      },
+      {
+        "name": "PropAreaSpring",
+        "line": 17174
+      },
+      {
+        "name": "DesignConcreteSlab",
+        "line": 17180
+      },
+      {
+        "name": "DesignShearWall",
+        "line": 17186
+      },
+      {
+        "name": "DesignCompositeColumn",
+        "line": 17192
+      },
+      {
+        "name": "DesignConcreteShell",
+        "line": 17198
+      },
+      {
+        "name": "SectCut",
+        "line": 17204
+      }
+    ],
+    "cEditArea": [
+      {
+        "name": "MergeToCreateUserMesh",
+        "line": 18744
+      }
+    ],
+    "cEditGeneral": [
+      {
+        "name": "Move",
+        "line": 19503
+      }
+    ],
+    "cFrameObj": [
+      {
+        "name": "AddByCoord",
+        "line": 19720
+      },
+      {
+        "name": "AddByPoint",
+        "line": 19736
+      },
+      {
+        "name": "ChangeName",
+        "line": 19747
+      },
+      {
+        "name": "Count",
+        "line": 19755
+      },
+      {
+        "name": "Delete",
+        "line": 19762
+      },
+      {
+        "name": "DeleteLateralBracing",
+        "line": 19770
+      },
+      {
+        "name": "DeleteLoadDistributed",
+        "line": 19779
+      },
+      {
+        "name": "DeleteLoadPoint",
+        "line": 19788
+      },
+      {
+        "name": "DeleteLoadTemperature",
+        "line": 19797
+      },
+      {
+        "name": "DeleteMass",
+        "line": 19806
+      },
+      {
+        "name": "DeleteModifiers",
+        "line": 19814
+      },
+      {
+        "name": "DeleteSpring",
+        "line": 19822
+      },
+      {
+        "name": "GetDesignProcedure",
+        "line": 19830
+      },
+      {
+        "name": "GetElm",
+        "line": 19838
+      },
+      {
+        "name": "GetEndLengthOffset",
+        "line": 19849
+      },
+      {
+        "name": "GetGUID",
+        "line": 19860
+      },
+      {
+        "name": "GetHingeAssigns",
+        "line": 19868
+      },
+      {
+        "name": "GetHingeAssigns_1",
+        "line": 19882
+      },
+      {
+        "name": "GetInsertionPoint",
+        "line": 19898
+      },
+      {
+        "name": "GetInsertionPoint_1",
+        "line": 19911
+      },
+      {
+        "name": "GetLateralBracing",
+        "line": 19925
+      },
+      {
+        "name": "GetLoadDistributed",
+        "line": 19940
+      },
+      {
+        "name": "GetLoadPoint",
+        "line": 19960
+      },
+      {
+        "name": "GetLoadTemperature",
+        "line": 19977
+      },
+      {
+        "name": "GetLocalAxes",
+        "line": 19991
+      },
+      {
+        "name": "GetMass",
+        "line": 20000
+      },
+      {
+        "name": "GetMaterialOverwrite",
+        "line": 20008
+      },
+      {
+        "name": "GetModifiers",
+        "line": 20016
+      },
+      {
+        "name": "GetNameList",
+        "line": 20024
+      },
+      {
+        "name": "GetOutputStations",
+        "line": 20032
+      },
+      {
+        "name": "GetPoints",
+        "line": 20044
+      },
+      {
+        "name": "GetReleases",
+        "line": 20053
+      },
+      {
+        "name": "GetSection",
+        "line": 20064
+      },
+      {
+        "name": "GetSectionNonPrismatic",
+        "line": 20073
+      },
+      {
+        "name": "GetSelected",
+        "line": 20083
+      },
+      {
+        "name": "GetTCLimits",
+        "line": 20091
+      },
+      {
+        "name": "GetTransformationMatrix",
+        "line": 20102
+      },
+      {
+        "name": "GetTypeOAPI",
+        "line": 20111
+      },
+      {
+        "name": "SetDesignProcedure",
+        "line": 20119
+      },
+      {
+        "name": "SetEndLengthOffset",
+        "line": 20128
+      },
+      {
+        "name": "SetGroupAssign",
+        "line": 20140
+      },
+      {
+        "name": "SetGUID",
+        "line": 20150
+      },
+      {
+        "name": "SetInsertionPoint",
+        "line": 20158
+      },
+      {
+        "name": "SetInsertionPoint_1",
+        "line": 20172
+      },
+      {
+        "name": "SetLateralBracing",
+        "line": 20187
+      },
+      {
+        "name": "SetLoadDistributed",
+        "line": 20200
+      },
+      {
+        "name": "SetLoadPoint",
+        "line": 20218
+      },
+      {
+        "name": "SetLoadTemperature",
+        "line": 20234
+      },
+      {
+        "name": "SetLocalAxes",
+        "line": 20247
+      },
+      {
+        "name": "SetMass",
+        "line": 20256
+      },
+      {
+        "name": "SetMaterialOverwrite",
+        "line": 20266
+      },
+      {
+        "name": "SetModifiers",
+        "line": 20275
+      },
+      {
+        "name": "SetOutputStations",
+        "line": 20284
+      },
+      {
+        "name": "SetReleases",
+        "line": 20307
+      },
+      {
+        "name": "SetSection",
+        "line": 20319
+      },
+      {
+        "name": "SetSelected",
+        "line": 20330
+      },
+      {
+        "name": "SetTCLimits",
+        "line": 20339
+      },
+      {
+        "name": "GetGroupAssign",
+        "line": 20351
+      },
+      {
+        "name": "GetColumnSpliceOverwrite",
+        "line": 20360
+      },
+      {
+        "name": "GetNameListOnStory",
+        "line": 20369
+      },
+      {
+        "name": "GetLabelNameList",
+        "line": 20378
+      },
+      {
+        "name": "GetLabelFromName",
+        "line": 20388
+      },
+      {
+        "name": "GetNameFromLabel",
+        "line": 20397
+      },
+      {
+        "name": "GetSupports",
+        "line": 20406
+      },
+      {
+        "name": "GetAllFrames",
+        "line": 20417
+      },
+      {
+        "name": "GetDesignOrientation",
+        "line": 20444
+      },
+      {
+        "name": "GetPier",
+        "line": 20452
+      },
+      {
+        "name": "SetPier",
+        "line": 20460
+      },
+      {
+        "name": "GetSpandrel",
+        "line": 20469
+      },
+      {
+        "name": "SetColumnSpliceOverwrite",
+        "line": 20477
+      },
+      {
+        "name": "SetSpandrel",
+        "line": 20487
+      },
+      {
+        "name": "GetSpringAssignment",
+        "line": 20496
+      },
+      {
+        "name": "SetSpringAssignment",
+        "line": 20504
+      },
+      {
+        "name": "GetCurved_2",
+        "line": 20513
+      }
+    ],
+    "cAnalysisResults": [
+      {
+        "name": "AreaForceShell",
+        "line": 21070
+      },
+      {
+        "name": "AreaJointForceShell",
+        "line": 21102
+      },
+      {
+        "name": "AreaStressShell",
+        "line": 21123
+      },
+      {
+        "name": "AreaStressShellLayered",
+        "line": 21156
+      },
+      {
+        "name": "AssembledJointMass",
+        "line": 21185
+      },
+      {
+        "name": "BaseReact",
+        "line": 21201
+      },
+      {
+        "name": "BaseReactWithCentroid",
+        "line": 21220
+      },
+      {
+        "name": "BucklingFactor",
+        "line": 21248
+      },
+      {
+        "name": "FrameForce",
+        "line": 21259
+      },
+      {
+        "name": "FrameJointForce",
+        "line": 21281
+      },
+      {
+        "name": "GeneralizedDispl",
+        "line": 21302
+      },
+      {
+        "name": "JointAcc",
+        "line": 21316
+      },
+      {
+        "name": "JointAccAbs",
+        "line": 21336
+      },
+      {
+        "name": "JointDispl",
+        "line": 21356
+      },
+      {
+        "name": "JointDisplAbs",
+        "line": 21376
+      },
+      {
+        "name": "JointReact",
+        "line": 21396
+      },
+      {
+        "name": "JointVel",
+        "line": 21416
+      },
+      {
+        "name": "JointVelAbs",
+        "line": 21436
+      },
+      {
+        "name": "LinkDeformation",
+        "line": 21456
+      },
+      {
+        "name": "LinkForce",
+        "line": 21476
+      },
+      {
+        "name": "LinkJointForce",
+        "line": 21497
+      },
+      {
+        "name": "ModalLoadParticipationRatios",
+        "line": 21518
+      },
+      {
+        "name": "ModalParticipatingMassRatios",
+        "line": 21530
+      },
+      {
+        "name": "ModalParticipationFactors",
+        "line": 21553
+      },
+      {
+        "name": "ModalPeriod",
+        "line": 21572
+      },
+      {
+        "name": "ModeShape",
+        "line": 21586
+      },
+      {
+        "name": "PanelZoneDeformation",
+        "line": 21606
+      },
+      {
+        "name": "PanelZoneForce",
+        "line": 21625
+      },
+      {
+        "name": "SectionCutAnalysis",
+        "line": 21645
+      },
+      {
+        "name": "SectionCutDesign",
+        "line": 21662
+      },
+      {
+        "name": "Setup",
+        "line": 21679
+      },
+      {
+        "name": "AreaStrainShell",
+        "line": 21685
+      },
+      {
+        "name": "AreaStrainShellLayered",
+        "line": 21718
+      },
+      {
+        "name": "AssembledJointMass_1",
+        "line": 21747
+      },
+      {
+        "name": "PierForce",
+        "line": 21765
+      },
+      {
+        "name": "SpandrelForce",
+        "line": 21782
+      },
+      {
+        "name": "JointDrifts",
+        "line": 21799
+      },
+      {
+        "name": "StoryDrifts",
+        "line": 21816
+      }
+    ],
+    "cPropAreaSpring": [
+      {
+        "name": "ChangeName",
+        "line": 21993
+      },
+      {
+        "name": "Delete",
+        "line": 22001
+      },
+      {
+        "name": "GetAreaSpringProp",
+        "line": 22008
+      },
+      {
+        "name": "GetNameList",
+        "line": 22026
+      },
+      {
+        "name": "SetAreaSpringProp",
+        "line": 22034
+      }
+    ],
+    "cTendonObj": [
+      {
+        "name": "ChangeName",
+        "line": 22151
+      },
+      {
+        "name": "Count",
+        "line": 22159
+      },
+      {
+        "name": "GetNameList",
+        "line": 22165
+      },
+      {
+        "name": "GetProperty",
+        "line": 22173
+      },
+      {
+        "name": "GetSelected",
+        "line": 22181
+      },
+      {
+        "name": "GetTendonGeometry",
+        "line": 22189
+      },
+      {
+        "name": "SetSelected",
+        "line": 22201
+      },
+      {
+        "name": "GetGroupAssign",
+        "line": 22210
+      },
+      {
+        "name": "SetGroupAssign",
+        "line": 22219
+      },
+      {
+        "name": "GetNameListOnStory",
+        "line": 22229
+      },
+      {
+        "name": "GetLoadForceStress_1",
+        "line": 22238
+      },
+      {
+        "name": "GetLossesDetailed",
+        "line": 22254
+      },
+      {
+        "name": "GetLossesFixed",
+        "line": 22271
+      },
+      {
+        "name": "GetLossesPercent",
+        "line": 22283
+      },
+      {
+        "name": "GetNumberStrands",
+        "line": 22295
+      },
+      {
+        "name": "GetDatumOffset",
+        "line": 22306
+      },
+      {
+        "name": "GetDrawingPoint",
+        "line": 22317
+      }
+    ],
+    "cCaseStaticNonlinear": [
+      {
+        "name": "GetGeometricNonlinearity",
+        "line": 24018
+      },
+      {
+        "name": "GetHingeUnloading",
+        "line": 24026
+      },
+      {
+        "name": "GetInitialCase",
+        "line": 24034
+      },
+      {
+        "name": "GetLoadApplication",
+        "line": 24042
+      },
+      {
+        "name": "GetLoads",
+        "line": 24056
+      },
+      {
+        "name": "GetModalCase",
+        "line": 24067
+      },
+      {
+        "name": "GetResultsSaved",
+        "line": 24075
+      },
+      {
+        "name": "GetSolControlParameters",
+        "line": 24086
+      },
+      {
+        "name": "GetTargetForceParameters",
+        "line": 24103
+      },
+      {
+        "name": "SetCase",
+        "line": 24114
+      },
+      {
+        "name": "SetGeometricNonlinearity",
+        "line": 24121
+      },
+      {
+        "name": "SetHingeUnloading",
+        "line": 24129
+      },
+      {
+        "name": "SetInitialCase",
+        "line": 24137
+      },
+      {
+        "name": "SetLoadApplication",
+        "line": 24145
+      },
+      {
+        "name": "SetLoads",
+        "line": 24159
+      },
+      {
+        "name": "SetModalCase",
+        "line": 24170
+      },
+      {
+        "name": "SetResultsSaved",
+        "line": 24178
+      },
+      {
+        "name": "SetSolControlParameters",
+        "line": 24189
+      },
+      {
+        "name": "SetTargetForceParameters",
+        "line": 24206
+      },
+      {
+        "name": "GetMassSource",
+        "line": 24217
+      },
+      {
+        "name": "SetMassSource",
+        "line": 24225
+      }
+    ],
+    "cDatabaseTables": [
+      {
+        "name": "ApplyEditedTables",
+        "line": 24529
+      },
+      {
+        "name": "CancelTableEditing",
+        "line": 24541
+      },
+      {
+        "name": "GetAllFieldsInTable",
+        "line": 24547
+      },
+      {
+        "name": "GetAllTables",
+        "line": 24561
+      },
+      {
+        "name": "GetAvailableTables",
+        "line": 24572
+      },
+      {
+        "name": "GetLoadCasesSelectedForDisplay",
+        "line": 24582
+      },
+      {
+        "name": "GetLoadCombinationsSelectedForDisplay",
+        "line": 24590
+      },
+      {
+        "name": "GetLoadPatternsSelectedForDisplay",
+        "line": 24598
+      },
+      {
+        "name": "GetTableForDisplayArray",
+        "line": 24606
+      },
+      {
+        "name": "GetTableForDisplayCSVFile",
+        "line": 24619
+      },
+      {
+        "name": "GetTableForDisplayCSVString",
+        "line": 24631
+      },
+      {
+        "name": "GetTableForDisplayXMLString",
+        "line": 24643
+      },
+      {
+        "name": "GetTableForEditingArray",
+        "line": 24655
+      },
+      {
+        "name": "GetTableForEditingCSVFile",
+        "line": 24667
+      },
+      {
+        "name": "GetTableForEditingCSVString",
+        "line": 24678
+      },
+      {
+        "name": "SetLoadCasesSelectedForDisplay",
+        "line": 24689
+      },
+      {
+        "name": "SetLoadCombinationsSelectedForDisplay",
+        "line": 24696
+      },
+      {
+        "name": "SetLoadPatternsSelectedForDisplay",
+        "line": 24703
+      },
+      {
+        "name": "SetTableForEditingArray",
+        "line": 24710
+      },
+      {
+        "name": "SetTableForEditingCSVFile",
+        "line": 24721
+      },
+      {
+        "name": "SetTableForEditingCSVString",
+        "line": 24731
+      },
+      {
+        "name": "ShowTablesInExcel",
+        "line": 24741
+      },
+      {
+        "name": "GetObsoleteTableKeyList",
+        "line": 24749
+      },
+      {
+        "name": "GetOutputOptionsForDisplay",
+        "line": 24758
+      },
+      {
+        "name": "SetOutputOptionsForDisplay",
+        "line": 24779
+      }
+    ],
+    "cDesignConcreteSlab": [
+      {
+        "name": "ACI318_14",
+        "line": 24907
+      },
+      {
+        "name": "DesignStrip",
+        "line": 24913
+      },
+      {
+        "name": "GetFlexureAndShear",
+        "line": 24919
+      },
+      {
+        "name": "GetSummaryResultsFlexureAndShear",
+        "line": 24945
+      },
+      {
+        "name": "GetSummaryResultsSpanDefinition",
+        "line": 24966
+      },
+      {
+        "name": "StartSlabDesign",
+        "line": 24982
+      },
+      {
+        "name": "ACI318_19",
+        "line": 24988
+      },
+      {
+        "name": "ACI318_25",
+        "line": 24994
+      }
+    ],
+    "cLoadCases": [
+      {
+        "name": "Buckling",
+        "line": 25457
+      },
+      {
+        "name": "ChangeName",
+        "line": 25463
+      },
+      {
+        "name": "Count",
+        "line": 25471
+      },
+      {
+        "name": "Delete",
+        "line": 25478
+      },
+      {
+        "name": "DirHistLinear",
+        "line": 25485
+      },
+      {
+        "name": "DirHistNonlinear",
+        "line": 25495
+      },
+      {
+        "name": "GetNameList",
+        "line": 25505
+      },
+      {
+        "name": "GetTypeOAPI",
+        "line": 25514
+      },
+      {
+        "name": "HyperStatic",
+        "line": 25523
+      },
+      {
+        "name": "ModalEigen",
+        "line": 25529
+      },
+      {
+        "name": "ModalRitz",
+        "line": 25535
+      },
+      {
+        "name": "ModHistLinear",
+        "line": 25541
+      },
+      {
+        "name": "ModHistNonlinear",
+        "line": 25551
+      },
+      {
+        "name": "ResponseSpectrum",
+        "line": 25561
+      },
+      {
+        "name": "SetDesignType",
+        "line": 25567
+      },
+      {
+        "name": "StaticLinear",
+        "line": 25576
+      },
+      {
+        "name": "StaticNonlinear",
+        "line": 25582
+      },
+      {
+        "name": "StaticNonlinearStaged",
+        "line": 25588
+      },
+      {
+        "name": "GetTypeOAPI_1",
+        "line": 25598
+      }
+    ],
+    "cEditPoint": []
+  },
+  "static_tables_selected": [
+    {
+      "key": "Analysis Options - Automatic Rectangular Mesh Options for Walls",
+      "fields": [
+        "MaxMeshSize"
+      ]
+    },
+    {
+      "key": "Area Assignments - Wall Auto Mesh Options",
+      "fields": [
+        "UniqueName",
+        "MeshOption",
+        "Nv",
+        "Nh",
+        "Restraints"
+      ]
+    },
+    {
+      "key": "Concrete Slab Design - Punching Shear Data",
+      "fields": [
+        "Point",
+        "GlobalX",
+        "GlobalY",
+        "ReinfType",
+        "Status",
+        "Ratio",
+        "NumRails",
+        "StudPerRail",
+        "Combo",
+        "ShrStrMax",
+        "ShrStrCap",
+        "ReinfPat",
+        "ReinfFy",
+        "ReinfDiam",
+        "Gamma_v2",
+        "Gamma_v3",
+        "Mu2",
+        "Mu3",
+        "Vu",
+        "UnbalMu2",
+        "UnbalMu3",
+        "Depth",
+        "Perimeter",
+        "Location"
+      ]
+    },
+    {
+      "key": "Concrete Slab Design Overwrites - Punching Shear - General",
+      "fields": [
+        "UniqueName",
+        "CheckPunchingShear",
+        "LocationType",
+        "Perimeter",
+        "UserXDim",
+        "UserYDim",
+        "UserAngle",
+        "EffDepthType",
+        "EffDepth",
+        "OpeningDef",
+        "RebarType",
+        "RebarPattern",
+        "RebarFy",
+        "RebarDia",
+        "RebarSpacing"
+      ]
+    },
+    {
+      "key": "Concrete Slab Design Overwrites - Punching Shear - Openings",
+      "fields": [
+        "UniqueName",
+        "OpeningNum",
+        "OpeningShape",
+        "XOffset",
+        "YOffset",
+        "Width",
+        "Height",
+        "Angle",
+        "Diameter"
+      ]
+    },
+    {
+      "key": "Concrete Slab Design Overwrites - Punching Shear - Perimeter",
+      "fields": [
+        "UniqueName",
+        "PointNum",
+        "XCoord",
+        "YCoord",
+        "Radius",
+        "IsNull"
+      ]
+    },
+    {
+      "key": "Concrete Slab Design Overwrites - Strip Based",
+      "fields": [
+        "StripName",
+        "StripLayer",
+        "DesignType",
+        "DoDesign",
+        "IgnorePT",
+        "RebarMat",
+        "CoverType",
+        "TopCov",
+        "BotCov",
+        "LLRF"
+      ]
+    },
+    {
+      "key": "Integrated Wall Reactions",
+      "fields": [
+        "UniqueName",
+        "OutputCase",
+        "CaseType",
+        "StepType",
+        "StepNumber",
+        "StepLabel",
+        "FX",
+        "FY",
+        "FZ",
+        "MX",
+        "MY",
+        "MZ",
+        "globalX",
+        "globalY",
+        "globalZ"
+      ]
+    },
+    {
+      "key": "Load Case Definitions - Nonlinear Staged Construction",
+      "fields": [
+        "Name",
+        "MassSource",
+        "InitialCond",
+        "NonlinCase",
+        "Stage",
+        "StageName",
+        "Duration",
+        "Output",
+        "Comments",
+        "Operation",
+        "ObjectType",
+        "ObjectName",
+        "AgeAtAdd",
+        "ItemType",
+        "ItemName",
+        "LoadSF",
+        "TransAccSF",
+        "RotAccSF",
+        "GeoNonlin",
+        "ResultsType",
+        "MinInstant",
+        "MinTimeDep",
+        "MaxTotal",
+        "MaxNull",
+        "EventTol",
+        "MaxEvents",
+        "MaxCSIters",
+        "MaxNRIters",
+        "IterTol",
+        "LineSearch",
+        "MaxSearches",
+        "SearchTol",
+        "SearchFact",
+        "StopAnalysis",
+        "MinEvStepSz",
+        "MaxNullEvStp",
+        "UseCorrStep",
+        "MatTimeDep",
+        "CrackedOpt",
+        "CrackAge",
+        "optConvChkType",
+        "DisplTol",
+        "MaxIter",
+        "DesignType",
+        "UserDesType",
+        "GUID",
+        "Notes"
+      ]
+    },
+    {
+      "key": "Load Case Definitions - Nonlinear Static",
+      "fields": [
+        "Name",
+        "MassSource",
+        "InitialCond",
+        "NonlinCase",
+        "LoadType",
+        "LoadName",
+        "LoadSF",
+        "TransAccSF",
+        "RotAccSF",
+        "ModalCase",
+        "GeoNonlin",
+        "ResultsType",
+        "MinStates",
+        "MaxStates",
+        "PosOnly",
+        "MaxTotal",
+        "MaxNull",
+        "EventTol",
+        "MaxEvents",
+        "MaxCSIters",
+        "MaxNRIters",
+        "IterTol",
+        "LineSearch",
+        "MaxSearches",
+        "SearchTol",
+        "SearchFact",
+        "StopAnalysis",
+        "MinEvStepSz",
+        "MaxNullEvStp",
+        "UseCorrStep",
+        "CrackedOpt",
+        "LongTermOpt",
+        "AgeAtLoad",
+        "CrackAge",
+        "CreepCoeff",
+        "ShrnkStrain",
+        "optConvChkType",
+        "DisplTol",
+        "MaxIter",
+        "DesignType",
+        "UserDesType",
+        "GUID",
+        "Notes"
+      ]
+    },
+    {
+      "key": "Material Properties - Rebar Data",
+      "fields": [
+        "Material",
+        "Fy",
+        "Fu",
+        "Fye",
+        "Fue",
+        "SSCurveOpt",
+        "SSHysType",
+        "SHard",
+        "SCap",
+        "FinalSlope"
+      ]
+    },
+    {
+      "key": "Material Properties - Tendon Data",
+      "fields": [
+        "Material",
+        "Fy",
+        "Fu",
+        "SSCurveOpt",
+        "SSHysType",
+        "FinalSlope"
+      ]
+    },
+    {
+      "key": "Reinforcing Bar Sizes",
+      "fields": [
+        "Name",
+        "Diameter",
+        "Area",
+        "GUID"
+      ]
+    },
+    {
+      "key": "Slab Rebar Object Geometry",
+      "fields": [
+        "Name",
+        "X1",
+        "Y1",
+        "X2",
+        "Y2",
+        "VertOffset",
+        "WidthLeft",
+        "WidthRight",
+        "Layer",
+        "GUID"
+      ]
+    },
+    {
+      "key": "Slab Rebar Property Assignments",
+      "fields": [
+        "Name",
+        "RebarSize",
+        "Material",
+        "BarNumType",
+        "TotalBars",
+        "MaxSpacing"
+      ]
+    },
+    {
+      "key": "Soil Pressures",
+      "fields": [
+        "UniqueName",
+        "ShellElm",
+        "Joint",
+        "OutputCase",
+        "CaseType",
+        "StepType",
+        "StepNumber",
+        "StepLabel",
+        "SoilPressure",
+        "GlobalX",
+        "GlobalY"
+      ]
+    },
+    {
+      "key": "Soil Pressures Enveloping Summary",
+      "fields": [
+        "SlabPanel",
+        "OutputItem",
+        "SoilPress",
+        "OutputCase",
+        "CaseType",
+        "GlobalX",
+        "GlobalY"
+      ]
+    },
+    {
+      "key": "Soil Pressures Summary",
+      "fields": [
+        "SlabPanel",
+        "OutputCase",
+        "CaseType",
+        "MaxPress",
+        "MinPress",
+        "GlobalXMax",
+        "GlobalYMax",
+        "GlobalXMin",
+        "GlobalYMin"
+      ]
+    },
+    {
+      "key": "Strip Forces",
+      "fields": [
+        "StripObject",
+        "Station",
+        "Location",
+        "OutputCase",
+        "CaseType",
+        "StepType",
+        "StepNumber",
+        "StepLabel",
+        "P",
+        "V2",
+        "T",
+        "M3",
+        "CutWidth",
+        "GlobalX",
+        "GlobalY",
+        "GlobalZ"
+      ]
+    },
+    {
+      "key": "Strip Forces - Enveloping Summary",
+      "fields": [
+        "StripObject",
+        "SpanID",
+        "Location",
+        "OutputItem",
+        "ValForce",
+        "ValMoment",
+        "OutputCase",
+        "CaseType",
+        "StepType",
+        "StepNumber",
+        "StepLabel"
+      ]
+    },
+    {
+      "key": "Strip Forces Summary",
+      "fields": [
+        "StripObject",
+        "SpanID",
+        "Location",
+        "OutputCase",
+        "CaseType",
+        "StepType",
+        "StepNumber",
+        "StepLabel",
+        "AbsMaxP",
+        "AbsMaxV2",
+        "AbsMaxT",
+        "MaxM3",
+        "MinM3"
+      ]
+    },
+    {
+      "key": "Strip Object Connectivity",
+      "fields": [
+        "Name",
+        "NumSegs",
+        "StartPoint",
+        "EndPoint",
+        "WStartLeft",
+        "WStartRight",
+        "WEndLeft",
+        "WEndRight",
+        "AutoWiden",
+        "Layer",
+        "GUID"
+      ]
+    },
+    {
+      "key": "Tendon  - Total Elongation",
+      "fields": [
+        "Name",
+        "TranLoadPat",
+        "JackLoc",
+        "ForceI",
+        "ForceJ",
+        "ElongationI",
+        "ElongationJ"
+      ]
+    },
+    {
+      "key": "Tendon Assignments - Properties",
+      "fields": [
+        "Name",
+        "TendonProp",
+        "NumStrands",
+        "BondingOpt"
+      ]
+    },
+    {
+      "key": "Tendon Discretized Points",
+      "fields": [
+        "Name",
+        "PointNum",
+        "GlobalX",
+        "GlobalY",
+        "GlobalZ"
+      ]
+    },
+    {
+      "key": "Tendon Load Assignments - Jacking Stress",
+      "fields": [
+        "Name",
+        "TranLoadPat",
+        "FinLoadPat",
+        "JackStress",
+        "JackLoc"
+      ]
+    },
+    {
+      "key": "Tendon Load Assignments - Loss Options",
+      "fields": [
+        "Name",
+        "LossMethod",
+        "StrLoss",
+        "LTLoss",
+        "StrLossFix",
+        "LTLossFix",
+        "CurvCoeff",
+        "WobbleCoeff",
+        "AnchorSlip",
+        "ShortStress",
+        "CreepStress",
+        "ShrnkStress",
+        "RelaxStress"
+      ]
+    },
+    {
+      "key": "Tendon Object Connectivity",
+      "fields": [
+        "Name",
+        "NumPoints",
+        "PointName",
+        "HorizSegNum",
+        "HCurveType",
+        "NumCP",
+        "Tension",
+        "CurvePtNum",
+        "GlobalX",
+        "GlobalY",
+        "NumSpans",
+        "DatumOffset",
+        "FirstSType",
+        "SpanNum",
+        "SpanID",
+        "EndSType",
+        "SpanProfile",
+        "RD",
+        "L",
+        "A",
+        "B",
+        "C",
+        "D",
+        "ZL",
+        "ZC",
+        "ZD",
+        "ZR",
+        "Layer",
+        "GUID",
+        "MinCurvatureRadius"
+      ]
+    },
+    {
+      "key": "Tendon Section Properties",
+      "fields": [
+        "Name",
+        "Material",
+        "StrandArea",
+        "Color",
+        "GUID",
+        "Notes"
+      ]
+    },
+    {
+      "key": "Wall Object Connectivity",
+      "fields": [
+        "UniqueName",
+        "CurveType",
+        "UniquePt1",
+        "UniquePt2",
+        "UniquePt3",
+        "UniquePt4",
+        "Perimeter",
+        "Area",
+        "GUID"
+      ]
+    },
+    {
+      "key": "Wall Object Curve Data",
+      "fields": [
+        "UniqueName",
+        "CurveType",
+        "ICPNumber",
+        "GlobalX",
+        "GlobalY",
+        "Tension"
+      ]
+    },
+    {
+      "key": "Wall Property Definitions - Auto Select List",
+      "fields": [
+        "Name",
+        "IncludedPrp",
+        "StartProp",
+        "Color",
+        "GUID",
+        "Notes"
+      ]
+    },
+    {
+      "key": "Wall Property Definitions - Specified",
+      "fields": [
+        "Name",
+        "ModelType",
+        "Material",
+        "Thickness",
+        "RigidZone",
+        "NotSizeType",
+        "NotAutoFact",
+        "NotUserSize",
+        "f11Mod",
+        "f22Mod",
+        "f12Mod",
+        "m11Mod",
+        "m22Mod",
+        "m12Mod",
+        "v13Mod",
+        "v23Mod",
+        "MMod",
+        "WMod",
+        "Color",
+        "GUID",
+        "Notes"
+      ]
+    }
+  ],
+  "closing_update": {
+    "captured_utc": "2026-09-25T19:59:20.546008+00:00",
+    "baseline_git": "fb71f65",
+    "baseline_tools": 31,
+    "current_tools": 49,
+    "claude_new_tools": [
+      "add_point",
+      "assign_point_load",
+      "call_oapi",
+      "clear_selection",
+      "close_model",
+      "copy_model_file",
+      "delete_object",
+      "get_area_info",
+      "get_selection",
+      "get_strip_rebar_stations",
+      "get_table_fields",
+      "move_objects",
+      "open_model",
+      "select_objects",
+      "set_area_opening",
+      "set_area_points",
+      "set_area_property",
+      "set_point_coordinates"
+    ],
+    "live_tested_by_codex": false,
+    "new_code_committed_by_codex": false,
+    "cursor_preserved": 206,
+    "baseline_and_current_documentary_checks": "PASS",
+    "sources": [
+      {
+        "path": "C:\\Users\\emilg\\Artificial IQ\\CDCRD-Digital\\servidor-mcp-safe\\docs\\OAPI-SAFE-real.md",
+        "bytes": 22512,
+        "sha256": "1a7a434cfc2cd6a70c0552ac874475da1ee449adbf52b463bf7bdb23ca85e791"
+      },
+      {
+        "path": "C:\\Users\\emilg\\Artificial IQ\\CDCRD-Digital\\servidor-mcp-safe\\docs\\CHANGELOG.md",
+        "bytes": 844,
+        "sha256": "10595d513ea5f4e7ebbe41e94c0d21f30546199c6f574e75cb7a5ec52b665eee"
+      },
+      {
+        "path": "C:\\Users\\emilg\\Artificial IQ\\_coordinacion\\buzon\\208-claude.md",
+        "bytes": 2625,
+        "sha256": "7f39951d2cd9a1574ec945f9af033a02a14fc7938e192b5a08c2ca0c602d8023"
+      },
+      {
+        "path": "C:\\Users\\emilg\\Artificial IQ\\CDCRD-Digital\\servidor-mcp-safe\\src\\server.py",
+        "bytes": 4610,
+        "sha256": "da792125812a5b5a32c0f18a706fb8e85945bdc598ea32098d000bb8b77b76fe"
+      }
+    ]
+  }
+}
