@@ -1,0 +1,3 @@
+# Tests sin COM ni SAFE instalado.
+pydantic>=2.7
+pytest>=8,<10

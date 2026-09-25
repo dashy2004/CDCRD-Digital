@@ -1,0 +1,21 @@
+CDX: SAFE-MCP lote 2 — 2026-09-25T16:44:44.806398-04:00
+Comando: python -m pytest tests/
+Interprete: C:\Users\emilg\Documents\Codex\2026-09-25\sos-codex-trabajando-en-c-users\work\safe-lote2\venv\Scripts\python.exe
+Python: Python 3.14.6
+PYTEST_ADDOPTS=-p no:cacheprovider (sin cache local)
+COM sustituido; Safe._model parcheado; sin SAFE ni FDB.
+
+============================= test session starts =============================
+platform win32 -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\emilg\Artificial IQ\CDCRD-Digital\servidor-mcp-safe
+plugins: anyio-4.14.2
+collected 192 items
+
+tests\test_lote1.py .................................................... [ 27%]
+........................................................................ [ 64%]
+......................                                                   [ 76%]
+tests\test_tablas.py ..............................................      [100%]
+
+============================= 192 passed in 1.01s =============================
+
+Exit code: 0

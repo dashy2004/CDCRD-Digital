@@ -1,4 +1,4 @@
-# SAFE MCP - v0.1.0
+# SAFE MCP - v0.2.0
 # Servidor MCP para SAFE (CSI), estructurado identico a
 # servidor-mcp/src/server.py (mismo patron: logging antes de Config, log
 # junto al script, sys.path explicito, registro de herramientas por bloque).
@@ -96,6 +96,31 @@ set_table_data = mcp.tool()(safe.set_table_data)
 import_file = mcp.tool()(safe.import_file)
 export_file = mcp.tool()(safe.export_file)
 
+# LOTE 1 (claude, 2026-09-25) — ver docs\OAPI-SAFE-real.md §4
+open_model = mcp.tool()(safe.open_model)
+close_model = mcp.tool()(safe.close_model)
+copy_model_file = mcp.tool()(safe.copy_model_file)
+call_oapi = mcp.tool()(safe.call_oapi)
+clear_selection = mcp.tool()(safe.clear_selection)
+select_objects = mcp.tool()(safe.select_objects)
+get_selection = mcp.tool()(safe.get_selection)
+delete_object = mcp.tool()(safe.delete_object)
+move_objects = mcp.tool()(safe.move_objects)
+get_area_info = mcp.tool()(safe.get_area_info)
+set_area_property = mcp.tool()(safe.set_area_property)
+set_area_opening = mcp.tool()(safe.set_area_opening)
+set_point_coordinates = mcp.tool()(safe.set_point_coordinates)
+# set_area_points: EditArea.ChangeConnectivity devuelve -99 en SAFE 23 (2026-09-25); no se registra.
+add_point = mcp.tool()(safe.add_point)
+assign_point_load = mcp.tool()(safe.assign_point_load)
+get_strip_rebar_stations = mcp.tool()(safe.get_strip_rebar_stations)
+get_table_fields = mcp.tool()(safe.get_table_fields)
+
+
+# CDX: lote 2 — esquemas leidos en vivo, escritura pendiente de Claude [T].
+add_design_strip = mcp.tool()(safe.add_design_strip)
+set_strip_widths = mcp.tool()(safe.set_strip_widths)
+set_punching_overwrite = mcp.tool()(safe.set_punching_overwrite)
 
 if __name__ == "__main__":
     mcp.run(transport='stdio')

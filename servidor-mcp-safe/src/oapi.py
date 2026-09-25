@@ -1,4 +1,5 @@
-# SAFE MCP - copia de servidor-mcp/src/oapi.py, sin cambios funcionales.
+# SAFE MCP - basado en servidor-mcp/src/oapi.py.
+# CDX lote 2: exige ret=0 y no reintenta tras un retorno de error de CSI.
 #
 # Este modulo es la capa de compatibilidad con la OAPI de CSI (Computers and
 # Structures Inc.). SAFE, ETABS y SAP2000 comparten la misma arquitectura de
@@ -128,10 +129,13 @@ def call(owner: Any, variants: Sequence[tuple[str, tuple]], what: str = "") -> A
             attempts.append(f"{method_name}({len(args)} args): {e}")
             continue
         code = ret_code(result)
-        if code == 0 or code is None:
+        if code == 0:
             logger.info("OAPI %s -> %s OK", what or "call", method_name)
             return result
         attempts.append(f"{method_name}({len(args)} args): ret={code}")
+        # Un retorno de CSI es una respuesta, no un error de firma. No
+        # repetir escrituras ni cambiar su significado tras ret != 0.
+        break
 
     detail = "; ".join(attempts) if attempts else "sin variantes"
     raise OapiError(
