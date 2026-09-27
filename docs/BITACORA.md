@@ -1,0 +1,3 @@
+# Bitacora tecnica
+
+- 2026-09-27 [codex] T5(b), masa modal. `verificacion_masa_modal.py` coteja la participacion acumulada SumUX/SumUY contra 0.90 en ambas direcciones segun T2 2.10.8.2.1.2 (p. 79; `md/vol-1/T02.md:3075-3081`). Exige modos consecutivos desde 1 y fracciones entre 0 y 1; calcula el menor prefijo suficiente. Datos ausentes o inconsistentes dan INCOMPLETO. El umbral y la fuente viven en `datos/machine/participacion_modal.json`. El autotest esta escrito, pero no se pudo ejecutar en esta sesion: no hay ejecutable Python accesible desde la terminal. `participacion_modal.json` se releyo y parseo con PowerShell.
