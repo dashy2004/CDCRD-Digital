@@ -1,0 +1,27 @@
+{
+  "parametro": "irregularidades_verticales",
+  "descripcion": "Tabla 14: irregularidades verticales V-1 a V-6 y requisitos de 2.10.4.2",
+  "fuente": {
+    "clausula": "2.10.4.2",
+    "tabla": "14",
+    "tomo": 1,
+    "paginas": [66, 67, 68],
+    "version_codigo": "2026-07",
+    "metodo": "cotejo_textual_md_vol-1_T02",
+    "fecha_extraccion": "2026-09-27"
+  },
+  "notas": {
+    "orden_pisos": "La entrada se ordena de arriba hacia abajo; se comparan pisos adyacentes y, cuando existen, los tres inmediatamente superiores.",
+    "V-1": "El asterisco de Tabla 14 dice que no existen limitaciones para esta irregularidad.",
+    "V-4": "La excepcion de 2.10.4.2.3.1 solo cubre columna discontinua en CDS C, D o E y exige verificar soporte y conexiones con Omega0.",
+    "V-5_V-6": "Resistencia total de los elementos del sistema sismorresistente que efectivamente resisten el cortante de piso en la direccion considerada; no usar cortante demandado de ETABS como sustituto."
+  },
+  "valores": [
+    {"id": "V-1", "cds_aplicable": ["D", "E", "F"], "rigidez_menor_que_superior": 0.70, "rigidez_menor_que_promedio_tres_superiores": 0.80, "fuente": {"clausula": "2.10.4.2", "tabla": "14", "paginas": [66]}},
+    {"id": "V-2", "cds_aplicable": ["D", "E", "F"], "rigidez_menor_que_superior": 0.60, "rigidez_menor_que_promedio_tres_superiores": 0.70, "prohibida_cds": ["E", "F"], "fuente": {"clausula": "2.10.4.2.1", "tabla": "14", "paginas": [66]}},
+    {"id": "V-3", "cds_aplicable": ["C", "D", "E", "F"], "dimension_mayor_que_adyacente": 1.30, "amplificacion_conexiones_diafragma": 1.25, "amplificacion_colectores_y_conexiones": 1.25, "fuente": {"clausula": "2.10.4.2.4", "tabla": "14", "paginas": [67, 68]}},
+    {"id": "V-4", "cds_aplicable": ["C", "D", "E", "F"], "prohibida_cds": ["C", "D", "E", "F"], "excepcion_columna_cds": ["C", "D", "E"], "fuente": {"clausula": "2.10.4.2.3", "tabla": "14", "paginas": [67, 68]}},
+    {"id": "V-5", "cds_aplicable": ["D", "E", "F"], "resistencia_menor_que_superior": 1.0, "prohibida_cds": ["D", "E", "F"], "fuente": {"clausula": "2.10.4.2.1/2.10.4.2.2", "tabla": "14", "paginas": [66, 67]}},
+    {"id": "V-6", "cds_aplicable": ["D", "E", "F"], "resistencia_menor_que_superior": 0.65, "prohibida_cds": ["D", "E", "F"], "fuente": {"clausula": "2.10.4.2.1/2.10.4.2.2", "tabla": "14", "paginas": [66, 67]}}
+  ]
+}
