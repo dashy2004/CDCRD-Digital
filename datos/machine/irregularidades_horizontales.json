@@ -1,0 +1,71 @@
+{
+  "parametro": "irregularidades_horizontales",
+  "descripcion": "Tablas 12 y 13: irregularidades horizontales H-1 a H-5 y clasificacion torsional",
+  "fuente": {
+    "clausula": "2.10.4.1",
+    "tabla": "12 y 13",
+    "tomo": 1,
+    "paginas": [62, 63, 64, 65],
+    "version_codigo": "2026-07",
+    "metodo": "cotejo_textual_md_vol-1_T02",
+    "fecha_extraccion": "2026-09-27"
+  },
+  "notas": {
+    "H-1": "Tabla 12 da dos disparadores alternativos: mas del 75% de resistencia lateral a un lado del centro de masa, o CIT > 1.20. Aplica a diafragma rigido o semirrigido.",
+    "limite_1_40": "La Tabla 13 escribe 1.40 > CIT > 1.20 y CIT > 1.40. CIT exactamente 1.40 queda sin clase textual; pendiente de decision de Emil.",
+    "limite_1_60": "2.10.4.1.2.1 dice que CIT no podra exceder 1.60, mientras 2.10.4.1.2.2 escribe 1.40 < CIT < 1.60 para extrema prohibida en CDS D/E/F.",
+    "H-5": "La nota de Tabla 12 no impone requisito especial H-5, pero la toma en cuenta para el factor de redundancia."
+  },
+  "valores": [
+    {
+      "id": "H-1",
+      "nombre": "Irregularidad torsional en planta",
+      "cds_aplicable": ["C", "D", "E", "F"],
+      "diafragma": ["rigido", "semirrigido"],
+      "resistencia_lateral_un_lado_cm_mayor_que": 0.75,
+      "cit_mayor_que": 1.20,
+      "criterios": "alternativos",
+      "fuente": {"clausula": "2.10.4.1", "tabla": "12", "tomo": 1, "paginas": [62, 63]}
+    },
+    {
+      "id": "H-2",
+      "nombre": "Esquina reentrante",
+      "cds_aplicable": ["C", "D", "E", "F"],
+      "ambas_proyecciones_mayores_que_dimension": 0.20,
+      "fuente": {"clausula": "2.10.4.1", "tabla": "12", "tomo": 1, "paginas": [63]}
+    },
+    {
+      "id": "H-3",
+      "nombre": "Discontinuidad del diafragma",
+      "cds_aplicable": ["C", "D", "E", "F"],
+      "abertura_mayor_que_area_bruta": 0.25,
+      "cambio_rigidez_entre_pisos_mayor_que": 0.50,
+      "fuente": {"clausula": "2.10.4.1", "tabla": "12", "tomo": 1, "paginas": [63]}
+    },
+    {
+      "id": "H-4",
+      "nombre": "Desfase fuera del plano",
+      "cds_aplicable": ["C", "D", "E", "F"],
+      "criterio": "Desplazamiento de al menos un elemento vertical ortogonal al plano del sistema sismorresistente",
+      "fuente": {"clausula": "2.10.4.1", "tabla": "12", "tomo": 1, "paginas": [63]}
+    },
+    {
+      "id": "H-5",
+      "nombre": "Sistema no paralelo",
+      "cds_aplicable": ["C", "D", "E", "F"],
+      "criterio": "Elementos verticales del sistema resistente lateral no paralelos a los ejes principales",
+      "fuente": {"clausula": "2.10.4.1", "tabla": "12", "tomo": 1, "paginas": [63]}
+    }
+  ],
+  "clasificacion_torsional": {
+    "moderada": {"cit_mayor_que": 1.20, "cit_menor_que": 1.40, "fuente": {"clausula": "2.10.4.1", "tabla": "13", "tomo": 1, "paginas": [64]}},
+    "extrema": {"cit_mayor_que": 1.40, "fuente": {"clausula": "2.10.4.1", "tabla": "13", "tomo": 1, "paginas": [64]}},
+    "tope": {"cit_no_excede": 1.60, "fuente": {"clausula": "2.10.4.1.2.1", "tabla": null, "tomo": 1, "paginas": [66]}}
+  },
+  "amplificacion_torsion_accidental": {
+    "divisor_desplazamiento_promedio": 1.20,
+    "Ax_minimo": 1.0,
+    "Ax_maximo": 3.0,
+    "fuente": {"clausula": "2.10.8.1.14", "tabla": null, "tomo": 1, "paginas": [78]}
+  }
+}

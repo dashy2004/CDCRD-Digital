@@ -45,5 +45,20 @@
    "nota": "a"
   }
  ],
- "multiplicador": "hpx"
+ "multiplicador": "hpx",
+ "limites_adicionales": {
+  "componentes_no_acomodan": {
+   "factor_hpx": 0.005,
+   "aplica_fila": "Todas las demas estructuras",
+   "fuente": {"clausula": "2.10.11", "tabla": "19", "tomo": 1, "paginas": [96], "nota": "a"}
+  },
+  "solo_porticos_momento_cds_def": {
+   "operacion": "dividir_limite_entre_rho",
+   "fuente": {"clausula": "2.10.11.1", "tabla": null, "tomo": 1, "paginas": [96]}
+  },
+  "dos_lineas_resistencia_cds_def": {
+   "factor_hpx_maximo": 0.010,
+   "fuente": {"clausula": "2.10.11.2", "tabla": null, "tomo": 1, "paginas": [96]}
+  }
+ }
 }

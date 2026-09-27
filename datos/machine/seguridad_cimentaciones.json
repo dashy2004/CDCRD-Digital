@@ -1,0 +1,21 @@
+{
+  "parametro": "factores_seguridad_cimentaciones_corte",
+  "descripcion": "Factores de seguridad minimos frente a falla por corte de cimentaciones",
+  "fuente": {
+    "clausula": "4.3.2.7",
+    "tabla": null,
+    "tomo": 1,
+    "paginas": [222],
+    "version_codigo": "2026-07",
+    "metodo": "cotejo_textual_md_vol-1_T04",
+    "fecha_extraccion": "2026-09-27"
+  },
+  "notas": {
+    "alcance": "El texto limita estos factores a seguridad frente a falla por corte. El esfuerzo admisible de 4.4.1.5 tambien considera asentamientos; aplicar 3.0/2.5 a un sigma_adm sin conocer que criterio lo controla requiere decision de Emil.",
+    "sismo_viento": "El factor 2.5 corresponde a la solicitacion maxima de sismo o viento, la que sea mas desfavorable."
+  },
+  "valores": {
+    "cargas_estaticas": 3.0,
+    "solicitacion_maxima_sismo_o_viento": 2.5
+  }
+}
