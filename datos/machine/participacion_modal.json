@@ -1,0 +1,16 @@
+{
+  "parametro": "participacion_modal_masas",
+  "descripcion": "Numero de modos suficiente para alcanzar la participacion modal de masas combinada minima en cada direccion ortogonal de analisis",
+  "fuente": {
+    "clausula": "2.10.8.2.1.2",
+    "tabla": null,
+    "tomo": 1,
+    "paginas": [79],
+    "version_codigo": "2026-07",
+    "metodo": "cotejo_texto_t02_lineas_3075_3081",
+    "fecha_extraccion": "2026-09-27"
+  },
+  "participacion_minima_fraccion": 0.9,
+  "direcciones_horizontales": ["X", "Y"],
+  "notas": "El limite se aplica a la masa modal combinada acumulada de cada direccion. El numero de modos requerido es el mayor primer modo que alcanza el limite entre las direcciones verificadas."
+}
