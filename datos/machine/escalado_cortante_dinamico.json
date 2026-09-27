@@ -1,0 +1,17 @@
+{
+  "parametro": "escalado_cortante_dinamico",
+  "descripcion": "Cortante modal combinado minimo y factor de ajuste de fuerzas por direccion",
+  "fuente": {
+    "clausula": "2.10.8.2.1.6",
+    "tabla": null,
+    "tomo": 1,
+    "paginas": [80],
+    "version_codigo": "2026-07",
+    "metodo": "cotejo_texto_t02_lineas_3118_3128",
+    "fecha_extraccion": "2026-09-27"
+  },
+  "fraccion_minima_vb": 1.0,
+  "direcciones_horizontales": ["X", "Y"],
+  "periodo_limite_fuente": "CDCRD T2 2.10.8.1.4",
+  "notas": "Vb se calcula con el periodo del modelo, limitado por el periodo de 2.10.8.1.4 cuando el primero es mayor. Si Vu modal combinado es menor que Vb, todas las fuerzas se multiplican por Vb/Vu. El chequeo de derivas de 2.10.8.2.1.7 es independiente."
+}
