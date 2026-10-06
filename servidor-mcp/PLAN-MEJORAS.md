@@ -175,6 +175,17 @@ espectro sin rama descendente en silencio.
 
 ---
 
+### 1.10 Pendientes detectados en Amantina (2026-10-05)
+
+- `get_joint_reactions`: agregar `resumen=True` que devuelva solo ΣFX, ΣFY, ΣFZ por caso
+  (hoy 3993 filas, 230 KB; E-117).
+- `set_area_section(ids, sec)` o `set_area_sections({sec: [ids]})` que escriba la tabla
+  `Area Assignments - Section Properties` COMPLETA (lee, modifica, escribe) para no repetir E-114.
+- `set_stories`: si la verificación falla, reabrir automáticamente el `.respaldo-niveles.EDB`
+  en vez de dejar el `.e2k` importado abierto como "Untitled" (E-113).
+- Prueba viva pendiente de las tres correcciones del 2026-10-06 (`_set_stories_via_texto`,
+  filtro de `assign_area_uniform_load`, `set_rigid_diaphragm` idempotente).
+
 ## 2. Límites de ETABS — convivir, no arreglar
 
 ### 2.1 No se pueden redefinir niveles en un modelo con objetos

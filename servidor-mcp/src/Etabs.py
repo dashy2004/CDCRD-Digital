@@ -43,6 +43,9 @@ PRESET_UNITS = [
 ]
 
 
+# Marca temporal del bloque $ STORIES en _set_stories_via_texto.
+_CENTINELA_STORIES = "\x01STORIES_NUEVOS\x01"
+
 class GeomObject(BaseModel):
     """Punto / linea (frame) / superficie (area) definido por coordenadas."""
     type: str = Field(description='Tipo: "point", "line" o "surface".')
@@ -802,12 +805,13 @@ class Etabs:
             if s.startswith("$ STORIES"):
                 en_bloque = True
                 salida.append(ln)
-                # :.10g y no :.6g: con 6 cifras, 3 m -> 118.110 in ->
-                # 2.99999 m al releer. Reproducido en la prueba 2026-08-07.
-                for nm, h in zip(reversed(names), reversed(heights)):
-                    salida.append(f'  STORY "{nm}"  HEIGHT {h * factor:.10g} ')
-                salida.append(
-                    f'  STORY "Base"  ELEV {base_elevation * factor:.10g} ')
+                # El bloque nuevo se inserta DESPUES del renombrado (paso 2)
+                # mediante un centinela. Si se escribe antes, los nombres
+                # nuevos que coinciden con nombres viejos se vuelven a
+                # renombrar: NIVEL 1..4 -> NIVEL 2..AZOTEA termino como
+                # NIVEL 3, NIVEL 4, AZOTEA, AZOTEA (nombre duplicado) y ETABS
+                # descarto los objetos de un nivel (Amantina, 2026-10-05).
+                salida.append(_CENTINELA_STORIES)
                 continue
             if en_bloque:
                 if s.startswith("$"):
@@ -833,6 +837,17 @@ class Etabs:
                         f"Respaldo: {respaldo}")
                 continue
             nuevo = nuevo.replace(marca, f'"{nv}"')
+
+        # 2b) Ahora si, el bloque $ STORIES nuevo (va de ARRIBA hacia abajo,
+        #     con la Base al final). :.10g y no :.6g: con 6 cifras, 3 m ->
+        #     118.110 in -> 2.99999 m al releer (prueba 2026-08-07).
+        bloque = [f'  STORY "{nm}"  HEIGHT {h * factor:.10g} '
+                  for nm, h in zip(reversed(names), reversed(heights))]
+        bloque.append(f'  STORY "Base"  ELEV {base_elevation * factor:.10g} ')
+        if nuevo.count(_CENTINELA_STORIES) != 1:
+            raise EtabsError("No se encontro el bloque $ STORIES en el texto "
+                             f"del modelo. Respaldo: {respaldo}")
+        nuevo = nuevo.replace(_CENTINELA_STORIES, "\n".join(bloque))
 
         e2k = os.path.splitext(edb)[0] + ".niveles.e2k"
         with open(e2k, "w", encoding="latin-1") as f:
@@ -2215,9 +2230,19 @@ class Etabs:
             semi_rigid: False = rigido (lo usual para losas macizas).
         """
         model = self._model()
-        oapi.call(model.Diaphragm,
-                  [("SetDiaphragm", (name, bool(semi_rigid)))],
-                  f"definicion del diafragma '{name}'")
+        # Si el diafragma ya existe, SetDiaphragm(name, semi) devuelve ret=1
+        # y la herramienta abortaba sin asignar nada (Amantina, 2026-10-05).
+        existentes: list[str] = []
+        try:
+            r = oapi.call(model.Diaphragm, [("GetNameList", ())],
+                          "lista de diafragmas")
+            existentes = oapi.find_str_list(r) or []
+        except EtabsError:
+            existentes = []
+        if name not in existentes:
+            oapi.call(model.Diaphragm,
+                      [("SetDiaphragm", (name, bool(semi_rigid)))],
+                      f"definicion del diafragma '{name}'")
 
         points = self._read_points()
         TOL = 1e-6
@@ -2281,9 +2306,14 @@ class Etabs:
             wanted = [float(elevation)]
 
         if wanted is not None:
+            # Todos los vertices en UNA misma cota (area horizontal). La
+            # condicion anterior (cada vertice en alguna de las cotas) dejaba
+            # pasar los muros que van de una cota pedida a otra: con
+            # elevations=[2.72, 5.44, 8.16] cargo 243 areas en vez de 99 losas
+            # (Amantina, 2026-10-05).
             targets = [a for a in areas
-                       if all(any(abs(z - w) < tolerance for w in wanted)
-                              for z in a.zs)]
+                       if any(all(abs(z - w) < tolerance for z in a.zs)
+                              for w in wanted)]
             if not targets:
                 present = sorted({round(z, 4) for a in areas for z in a.zs})
                 raise EtabsError(

@@ -136,6 +136,57 @@ cliente desde el ícono de bandeja, no solo cerrar la ventana.
 
 ---
 
+## Residencial Amantina — 2026-10-05 (ETABS 23.3.0, modelo de 584 áreas)
+
+### E-113 — `set_stories` por texto renombraba también el bloque `$ STORIES` nuevo
+**Qué pasó**: con el modelo poblado se pidió NIVEL 1..4 → `NIVEL 2, NIVEL 3, NIVEL 4, AZOTEA`.
+ETABS quedó con `NIVEL 3, NIVEL 4, AZOTEA, AZOTEA` y descartó los objetos de un nivel (584 → 427
+áreas). Una simulación del algoritmo sobre el `.$et` real reproduce esa salida exacta.
+**Causa raíz**: `_set_stories_via_texto` escribía el bloque nuevo ANTES del renombrado en dos
+fases; los nombres nuevos que coinciden con nombres viejos se volvían a mapear.
+**Corrección (código)**: el bloque se marca con `_CENTINELA_STORIES` y se inserta después del
+renombrado. Simulado sobre el mismo `.$et`: devuelve `NIVEL 2, NIVEL 3, NIVEL 4, AZOTEA`.
+Pendiente de prueba viva en ETABS.
+**Regla**: niveles definidos y nombrados antes de crear geometría. Si se renombra con objetos,
+contar áreas por story antes y después; si el conteo cambia, reabrir el `.respaldo-niveles.EDB`.
+Si la verificación falla, el modelo queda abierto desde el `.e2k` importado ("Untitled"):
+guardar con path explícito o reabrir el respaldo, nunca `save_model` sin path.
+
+### E-114 — Filas parciales en `Area Assignments - Section Properties` (repite E-024)
+**Qué pasó**: escribir solo las 101 losas dejó los 483 muros con sección `None`.
+**Regla**: ya estaba en E-024. Tabla de asignación = conjunto completo en una llamada (584
+filas pasan sin problema) y releer. Las tablas de asignación por área (`Diaphragms`,
+`Load Assignments - Uniform`) solo aparecen en `list_tables` después de la primera asignación
+hecha por OAPI.
+
+### E-115 — `assign_area_uniform_load(elevations=[2.72, 5.44, 8.16])` cargó muros (repite E-029)
+**Qué pasó**: devolvió 243 áreas; las losas eran 99.
+**Corrección (código)**: el filtro de áreas ahora exige todos los vértices en UNA misma cota
+(área horizontal). `assign_frame_distributed_load` conserva la semántica de E-029.
+
+### E-116 — `set_rigid_diaphragm` abortaba si el diafragma ya existía
+**Qué pasó**: `Diaphragm.SetDiaphragm(name, semi)` da `ret=1` con un nombre existente y la
+herramienta no llegaba a asignar.
+**Corrección (código)**: consulta `GetNameList` y solo define si falta. Alternativa manual:
+`AreaObj.SetDiaphragm(id, "DIA1")` (2 argumentos) y luego la tabla `Area Assignments - Diaphragms`.
+
+### E-117 — `get_joint_reactions` sin filtro excede el límite de la respuesta
+**Qué pasó**: 3993 filas, 230 KB. El cliente volcó la salida a archivo.
+**Regla**: pedir solo los casos necesarios y sumar FZ con script. Pendiente modo resumen
+(ver PLAN-MEJORAS §1.10).
+
+### Notas de operación del mismo día
+- Al conectar, la OAPI puede estar en lb-in aunque el modelo sea Ton-m: `set_units("Ton, m, C")`
+  antes de leer o escribir coordenadas y cargas.
+- `AreaObj.Delete` devuelve `ret=1` con el modelo bloqueado por resultados:
+  `call_oapi(path="", method="SetModelIsLocked", args=[false])` antes.
+- `AreaObj.SetProperty("", sec, 2)` tras `SelectObj.All(false)` asigna a todas las áreas en una
+  llamada; `SelectObj.PropertyArea` devuelve -99 en 23.3.0.
+- Chequeo final de Amantina: Dead 549.0 t, SDead 203.0 t (esperado 201.2), Live 128.9 t
+  (esperado 128.1).
+
+---
+
 ## Nota de método
 
 Todas las entradas anteriores comparten una forma: **la herramienta ya devolvía la evidencia
