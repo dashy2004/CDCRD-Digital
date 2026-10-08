@@ -1,0 +1,7 @@
+{
+  "modos": [
+    {"modo": 1, "sum_ux": 0.65, "sum_uy": 0.30},
+    {"modo": 2, "sum_ux": 0.82, "sum_uy": 0.85},
+    {"modo": 3, "sum_ux": 0.93, "sum_uy": 0.94}
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Planta sintetica 6 x 4 m - demostracion CDX",
+  "units": "m",
+  "outlines": [
+    {"id": "perimetro", "layer": "E-LOS", "points": [[0, 0], [6, 0], [6, 4], [0, 4]]},
+    {"id": "columna-A", "layer": "E-COL", "points": [[0.2, 0.2], [0.5, 0.2], [0.5, 0.5], [0.2, 0.5]]},
+    {"id": "columna-B", "layer": "E-COL", "points": [[5.5, 0.2], [5.8, 0.2], [5.8, 0.5], [5.5, 0.5]]}
+  ],
+  "dimensions": [
+    {"p1": [0, 0], "p2": [6, 0], "offset": -0.6},
+    {"p1": [6, 0], "p2": [6, 4], "offset": -0.6}
+  ],
+  "notes": [
+    {"text": "EJEMPLO SINTETICO - MEDIDAS EN METROS", "position": [0, 4.6]},
+    {"text": "Geometria ilustrativa; sin calculo ni validacion normativa", "position": [0, 4.3]}
+  ]
+}

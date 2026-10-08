@@ -1,0 +1,42 @@
+[project]
+name = "cdcrd-local"
+version = "0.1.0"
+description = "Herramientas locales de CAD, openBIM y consulta CDCRD"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "ezdxf>=1.4,<2",
+  "ifcopenshell>=0.8,<1",
+  "ifctester>=0.8,<1",
+  "ifcclash>=0.8,<1",
+  "matplotlib>=3.9,<4",
+  "mcp>=1.13,<2",
+  "pdfplumber>=0.11,<1",
+  "pint>=0.24,<1",
+  "pydantic>=2.10,<3",
+  "pypdfium2>=4.30,<6",
+  "shapely>=2,<3",
+]
+
+[project.scripts]
+cdcrd-local = "cdcrd_local.cli:main"
+cdcrd-local-mcp = "cdcrd_local.server:main"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "ruff>=0.9,<1"]
+
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cdcrd_local"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

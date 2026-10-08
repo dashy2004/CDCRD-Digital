@@ -30,6 +30,7 @@ permiten a una IA operar ETABS, SAFE y Revit con esos mismos datos.
 | Que la IA modele un edificio en Revit desde cero y saque planos | `revit-mcp-tools/ejemplos/residencial-4n/` — receta de 30 pasos, corrida verificada |
 | Un edificio completo modelado y verificado por IA, paso a paso | `revision/` — 10 bloques con capturas de pantalla de ETABS |
 | Como se verifico la digitalizacion | `verificacion-vols/` |
+| Generar DXF, convertir previews, revisar IFC/IDS y consultar CDCRD localmente | [herramientas-locales/](herramientas-locales/README.md) — CLI, entorno reproducible y MCP de 10 herramientas |
 
 Los `.json` se abren con cualquier editor de texto (Bloc de notas incluido) o se arrastran a
 una conversacion con una IA. Cada valor trae su clausula, tomo y pagina de origen: **la cita
@@ -81,6 +82,7 @@ asigna por posicion en el documento, no por el prefijo del id.
 
 | Servidor | Que opera | Estado |
 |---|---|---|
+| `herramientas-locales/` | Archivos DXF/IFC/IDS/PDF y corpus CDCRD, sin aplicaciones BIM vivas | CLI y **10 herramientas MCP stdio**, entorno Python aislado; [instalacion y ejemplos](herramientas-locales/README.md) |
 | `servidor-mcp/` | ETABS (OAPI 2.016) | **54 herramientas**, probado de punta a punta contra ETABS 23.3.0 |
 | `servidor-mcp-safe/` | SAFE — losas, zapatas, franjas, punzonamiento, presion de suelo | v0.1.0, probado en vivo contra un modelo real de fundacion |
 | `revit-mcp-tools/` | Revit 2027 via pyRevit Routes — modelar desde cero, verificar con vision, documentar (plantas, tablas, laminas, PDF, IFC), armado, exportar a ETABS | **36 herramientas**; modelado y documentacion probados de punta a punta (receta `residencial-4n`); armado en `dry_run` |

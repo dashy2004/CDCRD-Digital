@@ -50,3 +50,14 @@ revit-mcp-write/RevitWrite.extension/RevitWrite.tab/6-Vigas.panel/
 # Regla que ningun ignore puede cubrir: no escribir nombres de cliente,
 # proyecto, colegiatura ni resultados de diseno atribuibles en el codigo
 # ni en la documentacion. Los ejemplos usan nombres inventados.
+
+# Entornos y salidas locales; publicar solo codigo/configuracion reproducible
+.venv/
+.local/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.env
+.env.*
+!.env.example
+herramientas-locales/salidas/
