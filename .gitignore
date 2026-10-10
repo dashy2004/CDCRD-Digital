@@ -44,8 +44,6 @@ revit-mcp-write/RevitWrite.extension/RevitWrite.tab/6-Vigas.panel/
 *.f2k
 *.FDB
 *.pdf
-# Sintesis publica anonimizada, sin expediente ni resultados identificables.
-!docs/casos/residencial-bim/INFORME.pdf
 *.xls
 *.xlsx
 
