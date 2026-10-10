@@ -129,7 +129,8 @@ print("__RT__" + _b64.b64encode(_json.dumps(_R, default=str).encode("utf-8")).de
 def _run_tool(name: str, params: dict) -> dict:
     import base64
     p64 = base64.b64encode(json.dumps(params or {}).encode("utf-8")).decode("ascii")
-    code = _common() + "\n\n" + _read(name) + "\n" + _FOOTER % p64
+    helpers = _read("_mep") if name in ("mep_inventario", "mep_conectividad") else ""
+    code = _common() + "\n\n" + helpers + "\n" + _read(name) + "\n" + _FOOTER % p64
     r = _post(_port(), code, "revit-tools: " + name)
     text = r if isinstance(r, str) else json.dumps(r)
     m = re.search(r"__RT__([A-Za-z0-9+/=]+)__RT_END__", text)
@@ -435,6 +436,16 @@ def revit_exportar_proyecto(path: str, marker: str = "", origen="auto", proyecto
                             incluir: list[str] = None) -> dict:
     return _run_tool("exportar_proyecto", {"path": path, "marker": marker, "origen": origen, "proyecto": proyecto,
                                            "incluir": incluir})
+
+
+@mcp.tool(description=_doc("mep_inventario"))
+def revit_mep_inventario(disciplines: list[str] = None, max_details: int = 500) -> dict:
+    return _run_tool("mep_inventario", {"disciplines": disciplines, "max_details": max_details})
+
+
+@mcp.tool(description=_doc("mep_conectividad"))
+def revit_mep_conectividad(disciplines: list[str] = None, max_details: int = 500) -> dict:
+    return _run_tool("mep_conectividad", {"disciplines": disciplines, "max_details": max_details})
 
 
 @mcp.tool()

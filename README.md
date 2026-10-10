@@ -1,14 +1,26 @@
 # CDCRD-Digital
 
-**El Codigo de Construccion de la Republica Dominicana, organizado para encontrar cualquier
-requisito en segundos — con la pagina exacta del documento oficial — y conectado a los
-programas de calculo.**
+### Normativa trazable · Automatización BIM · Evidencia de ingeniería
 
-Los cinco volumenes del codigo suman mas de 1,800 paginas. Este proyecto los convierte en un
-archivo por Titulo donde cada clausula aparece con su numero, su texto y la pagina del PDF
-oficial de donde salio. Ademas, las tablas mas usadas del dia a dia (cargas vivas, espectro
-sismico, factores R, derivas) estan listas para usarse en calculo, y hay servidores MCP que
-permiten a una IA operar ETABS, SAFE y Revit con esos mismos datos.
+**Consulta el Código de Construcción de la República Dominicana con referencia a su página
+de origen y conecta sus datos con flujos de trabajo en Revit, ETABS y SAFE.**
+
+El proyecto reúne **5 volúmenes, 34 títulos y 6,580 cláusulas**, tablas listas para cálculo,
+herramientas MCP y revisiones documentadas. Su propósito es hacer que cada decisión pueda
+rastrearse desde la fuente normativa hasta los datos y la evidencia del modelo.
+
+[Explorar la norma](datos/INDICE.md) · [Instalar](instalacion/INSTALACION.md) ·
+[Herramientas](#los-servidores-mcp) · [Casos e informes](#casos-e-informes) ·
+[Documentación técnica](#documentacion-tecnica)
+
+| Capa | Qué aporta | Punto de entrada |
+|---|---|---|
+| **Normativa** | Cláusulas, tablas y referencias al PDF oficial | [Índice del código](datos/INDICE.md) |
+| **BIM y cálculo** | Lectura, modelado y documentación mediante herramientas especializadas | [Arquitectura del ecosistema](docs/ARQUITECTURA-ECOSISTEMA.md) |
+| **Verificación** | Evidencia, hallazgos y límites de cada caso | [Informe BIM multidisciplinar](docs/casos/residencial-bim/INFORME.md) |
+
+La cobertura del texto normativo y la disponibilidad de herramientas son distintas de la
+verificación de un proyecto. Cada informe identifica qué se comprobó y qué evidencia falta.
 
 > Fuente oficial: MIVHED — Ministerio de la Vivienda, Habitat y Edificaciones. Este proyecto
 > reproduce el texto normativo citando la fuente, conforme al articulo 41 de la Ley 65-00 de
@@ -19,14 +31,14 @@ permiten a una IA operar ETABS, SAFE y Revit con esos mismos datos.
 
 | Si usted busca... | Abra... |
 |---|---|
-| Por donde empezar cualquier busqueda | `datos/INDICE.md` — mapa de los 5 volumenes, **6,580 clausulas** |
+| Por donde empezar cualquier busqueda | [datos/INDICE.md](datos/INDICE.md) — mapa de los 5 volumenes, **6,580 clausulas** |
 | Que dice la clausula X del Volumen I (estructural) | `datos/titulos/` — un archivo por Titulo (T02 = Cargas, T05 = Hormigon...) |
 | Hidrosanitaria, electrica, mecanica o arquitectura (Vols II-V) | `datos/vol-2/` a `datos/vol-5/` (JSON) o `md/` (legible aqui mismo en GitHub) |
 | La carga viva de un uso (oficina, aula, parqueo...) | `datos/machine/cargas_vivas.json` — los 45 usos de la Tabla 4 |
 | Los factores R, Cd y limites de altura de su sistema | `datos/machine/sistemas_estructurales.json` — la Tabla 11 completa (44 sistemas) |
 | Como armar el espectro de diseño de su proyecto | `datos/machine/espectro_diseno.json` + `factores_sitio.json` |
 | Las combinaciones de carga LRFD y ASD | `datos/machine/combinaciones.json` |
-| Conectar la IA con ETABS, SAFE o Revit | `servidor-mcp/`, `servidor-mcp-safe/`, `revit-mcp-tools/` + `instalacion/INSTALACION.md` |
+| Conectar la IA con ETABS, SAFE o Revit | [ETABS](servidor-mcp/), [SAFE](servidor-mcp-safe/), [Revit](revit-mcp-tools/) + [instalacion](instalacion/INSTALACION.md) |
 | Que la IA modele un edificio en Revit desde cero y saque planos | `revit-mcp-tools/ejemplos/residencial-4n/` — receta de 30 pasos, corrida verificada |
 | Un edificio completo modelado y verificado por IA, paso a paso | `revision/` — 10 bloques con capturas de pantalla de ETABS |
 | Como se verifico la digitalizacion | `verificacion-vols/` |
@@ -71,7 +83,7 @@ asigna por posicion en el documento, no por el prefijo del id.
    `validacion/`: una plantilla profesional en uso tenia la carga de escaleras **18% por
    debajo** del CDCRD (3.92 vs 4.79 kN/m²). Ese tipo de hallazgo es el objetivo del proyecto.
 4. **Levantar un modelo BIM completo en Revit desde una descripcion.** `revit-mcp-tools`
-   (36 herramientas) cubre niveles y ejes, tipos, columnas, vigas, losas, muros, zapatas,
+   cubre niveles y ejes, tipos, columnas, vigas, losas, muros, zapatas,
    plantas, tablas, laminas, PDF, IFC y la exportacion a `proyecto.json` para ETABS. Cada
    herramienta de escritura simula primero (`dry_run`), marca lo que crea para poder
    deshacerlo, y la salida grafica se exporta a PNG para que la IA la **mire** antes de
@@ -85,12 +97,60 @@ asigna por posicion en el documento, no por el prefijo del id.
 | `herramientas-locales/` | Archivos DXF/IFC/IDS/PDF y corpus CDCRD, sin aplicaciones BIM vivas | CLI y **10 herramientas MCP stdio**, entorno Python aislado; [instalacion y ejemplos](herramientas-locales/README.md) |
 | `servidor-mcp/` | ETABS (OAPI 2.016) | **54 herramientas**, probado de punta a punta contra ETABS 23.3.0 |
 | `servidor-mcp-safe/` | SAFE — losas, zapatas, franjas, punzonamiento, presion de suelo | v0.1.0, probado en vivo contra un modelo real de fundacion |
-| `revit-mcp-tools/` | Revit 2027 via pyRevit Routes — modelar desde cero, verificar con vision, documentar (plantas, tablas, laminas, PDF, IFC), armado, exportar a ETABS | **36 herramientas**; modelado y documentacion probados de punta a punta (receta `residencial-4n`); armado en `dry_run` |
+| [revit-mcp-tools/](revit-mcp-tools/README.md) | Revit 2027 via pyRevit Routes — modelar, documentar, armado y exportacion a ETABS | Modelado y documentacion probados en la receta `residencial-4n`; alcance y validacion por herramienta en su README |
 | `revit-mcp-write/` | Revit 2027 via pyRevit Routes — lectura e inventario, y escritura (pushbuttons) | 9 herramientas; las tres que **mutan** el modelo aun sin corridas reales |
 | `puente-autocad-etabs/` | Extraccion de geometria desde DWG por convencion de capas | Inventario y convencion definidos (`docs/CONVENCION-CAPAS-CAD.md`) |
 
-Como encajan entre si: `docs/ARQUITECTURA-ECOSISTEMA.md`. Que **no** cubre cada uno, con el
-hueco identificado y su estado: `docs/HUECOS-ETABS-SAFE.md`.
+Como encajan entre si: [arquitectura del ecosistema](docs/ARQUITECTURA-ECOSISTEMA.md).
+Capacidades pendientes y su estado: [huecos ETABS/SAFE](docs/HUECOS-ETABS-SAFE.md).
+
+## Casos e informes
+
+### Caso residencial BIM — revisión multidisciplinar
+
+[**Leer el informe y la matriz de verificación →**](docs/casos/residencial-bim/INFORME.md)
+
+[Descargar la síntesis pública en PDF](docs/casos/residencial-bim/INFORME.pdf)
+
+La revisión reúne arquitectura, estructura e instalaciones para detectar inconsistencias,
+comprobar la correspondencia entre planos y modelo, y dejar explícitos los datos que faltan.
+La edición pública utiliza una identificación anónima del caso. Los hallazgos CAD y las
+correcciones comunicadas deben distinguirse de las comprobaciones independientes del modelo.
+
+| Arquitectura · archivo RVT | Estructura · archivo RVT |
+|:---:|:---:|
+| ![Miniatura embebida del archivo RVT arquitectónico](docs/casos/residencial-bim/assets/arquitectura-miniatura-rvt.png) | ![Miniatura embebida del archivo RVT estructural](docs/casos/residencial-bim/assets/estructura-miniatura-rvt.png) |
+
+Miniaturas embebidas de los archivos RVT guardados, extraídas sin modificar sus píxeles
+(128 × 128). Identifican visualmente los archivos; no son capturas de la sesión actual ni
+prueba de cumplimiento. Las vistas de alta resolución siguen pendientes.
+
+| Evidencia del caso | Estado de publicación |
+|---|---|
+| Informe de coordinación ARQ / EST / MEP | [Informe con alcance, hallazgos y pendientes](docs/casos/residencial-bim/INFORME.md) |
+| Revit — arquitectura | Captura del modelo actual pendiente de exportación y revisión |
+| Revit — estructura | Captura del modelo actual pendiente de exportación y revisión |
+| ETABS — análisis del caso residencial | Evidencia pendiente; la demostración inferior corresponde a otro modelo |
+| SAFE — cimentación del caso residencial | Evidencia pendiente |
+
+Las nuevas herramientas de auditoría MEP se documentan en [Revit MCP Tools](revit-mcp-tools/README.md).
+El inventario y la conectividad ayudan a localizar omisiones; no sustituyen el cálculo de
+caudales, cargas, ventilación, protección contra incendios ni una revisión normativa completa.
+
+### Demostración ETABS — oficinas de tres niveles
+
+**Caso independiente del residencial BIM.** El protocolo existente permite seguir la
+geometría, las cargas, el análisis y la lectura de resultados de una demostración controlada.
+
+| Recorrido visual y técnico | Evidencia existente |
+|---|---|
+| Geometría y secciones | [R02 · Geometría](revision/R02-geometria-niveles/README.md) / [R03 · Materiales y secciones](revision/R03-materiales-secciones/README.md) |
+| Espectro y análisis | [R06 · Espectro](revision/R06-sismo-espectro/README.md) / [R08 · Análisis](revision/R08-analisis/README.md) |
+| Derivas y equilibrio | [R09 · Derivas](revision/R09-derivas/README.md) / [R10 · Reacciones](revision/R10-reacciones/README.md) |
+
+Las capturas históricas se consultan dentro de su protocolo. La galería de portada se
+completará con exportaciones limpias, identificadas por caso y disciplina; véase el
+[criterio de presentación y evidencia](docs/PRESENTACION.md).
 
 ## El servidor de ETABS, probado de punta a punta
 
@@ -166,10 +226,12 @@ tener simbolos corruptos heredados del PDF — **no las cite sin verificar contr
 ## Politica de datos
 
 Este es un repositorio **publico** y su contenido es la norma (publica) y las herramientas.
-No se publican modelos, planos, memorias ni resultados de diseño de proyectos reales, ni
-nombres de clientes, proyectos o profesionales. Los ejemplos de la documentacion usan nombres
-inventados. Las salidas de corrida de los scripts (`_log/`), que contienen ids y geometria del
-modelo abierto al momento de la prueba, estan excluidas por `.gitignore`.
+Los ejemplos utilizan nombres inventados. Los casos autorizados para divulgación se presentan
+mediante informes e imágenes seleccionados y anonimizados, sin nombres de clientes,
+proyectos o profesionales ni rutas personales. Los modelos, planos completos, memorias y
+salidas de trabajo permanecen en sus proyectos. Las salidas de corrida de los scripts
+(`_log/`), que contienen ids y geometria del modelo abierto al momento de la prueba, estan
+excluidas por `.gitignore`. Véase el [criterio de publicación](docs/PRESENTACION.md).
 
 ## Documentacion tecnica
 
