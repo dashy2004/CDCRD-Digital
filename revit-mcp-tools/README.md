@@ -142,3 +142,9 @@ extensión de proyecto, quedan `LosasAligeradas` (1 742 líneas) y
 `AceroLosasAligeradas` (2 863), que dependen de leer bovedillas de un CAD y
 de una tabla del plano; su conversión exige primero separar la lectura del
 CAD (entrada) de la colocación (salida) y parametrizar la tabla.
+
+## Auditoría MEP
+
+Se incorporan `revit_mep_inventario` y `revit_mep_conectividad`, de solo lectura.
+Inventarían categorías y sistemas observados y señalan conectores físicos abiertos para
+revisión. [Uso, alcance, limitaciones y pruebas offline](MEP.md).
