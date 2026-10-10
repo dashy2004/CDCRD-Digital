@@ -27,15 +27,15 @@ Tampoco se convierten sus datos en ejemplos mediante un simple cambio de nombre.
 
 ## Descripción y temas de GitHub
 
-Propuesta para **About**:
+**About**, aplicado el 10 de octubre de 2026:
 
 > Código de Construcción de RD con fuentes trazables y herramientas BIM para Revit, ETABS y SAFE.
 
-Temas propuestos: `bim`, `revit`, `etabs`, `safe`, `mcp`, `structural-engineering`,
+Temas aplicados: `bim`, `revit`, `etabs`, `safe`, `mcp`, `structural-engineering`,
 `building-codes`, `dominican-republic`.
 
-Estos campos se configuran en GitHub. Este documento propone sus valores; no afirma que ya
-estén aplicados. No se anuncia una página web, paquete publicado o release que no exista.
+La descripción y los temas se comprobaron en GitHub el 10 de octubre de 2026; ya
+están aplicados. No se anuncia una página web, paquete publicado o release que no exista.
 
 ## Distribución y reconocimiento
 
