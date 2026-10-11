@@ -3,7 +3,8 @@
 Núcleo puro `src/hidraulica.py`, sin dependencias externas ni conexión CAD.
 Fachada independiente `src/mcp_hidraulica.py`, compatible con las dependencias
 MCP del servidor existente. Exportador `src/exportar.py` para tablas JSON/CSV.
-La integración en `src/server.py` se coordina por separado; ejecutar esta fachada
+`src/server.py` también registra `calcular_seccion_si` entre sus 18 herramientas.
+El cálculo hidráulico funciona sin conectar con Civil 3D. Ejecutar esta fachada
 no modifica dibujos ni carga el plugin .NET.
 
 ## Uso reproducible
@@ -15,6 +16,8 @@ py -m pip install "mcp>=1.10,<2"
 py -m unittest discover -s tests -v
 py src/exportar.py tests/ejemplo_sintetico.json salida-nueva
 py src/mcp_hidraulica.py
+# Alternativa: servidor común, con hidráulica local y herramientas CAD separadas
+py src/server.py
 ```
 
 El último comando sirve MCP por stdio. La herramienta es `calcular_seccion_si`.
@@ -22,6 +25,8 @@ La prueba `test_hidraulica_stdio.py` inicia un proceso real, negocia MCP, consul
 el esquema, ejecuta un cálculo, comprueba errores y recupera la sesión.
 La fachada usa tipos estrictos de Pydantic (dependencia de MCP) para rechazar
 booleanos y cadenas en campos numéricos antes de convertirlos.
+`test_server_hidraulica_stdio.py` repite el contrato en el servidor común real;
+solo llama a la herramienta hidráulica, nunca a las herramientas CAD.
 Los ejemplos del repositorio son sintéticos.
 
 ## Contrato 0.1.0

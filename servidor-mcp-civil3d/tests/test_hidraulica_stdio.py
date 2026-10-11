@@ -14,10 +14,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class StdioTests(unittest.TestCase):
+    server_entry = 'mcp_hidraulica.py'
+
     def test_transport_schema_errors_and_recovery(self):
         async def scenario():
             params = StdioServerParameters(command=sys.executable,
-                                           args=[str(ROOT/'src/mcp_hidraulica.py')])
+                                           args=[str(ROOT/'src'/self.server_entry)])
             with tempfile.TemporaryFile(mode='w+', encoding='utf-8') as log:
                 with anyio.fail_after(30):
                     async with stdio_client(params, errlog=log) as (reader, writer):

@@ -1,0 +1,4 @@
+# Servidor MCP de Civil 3D (CDCRD-Digital)
+# El puente dentro de Civil 3D no necesita nada de Python: la comunicacion es
+# por socket TCP local, sin COM ni pywin32.
+mcp>=1.10,<2

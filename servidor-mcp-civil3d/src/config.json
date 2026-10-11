@@ -1,0 +1,6 @@
+{
+  "serverName": "civil3d",
+  "puerto": 8760,
+  "timeout_s": 70,
+  "limite_objetos_por_consulta": 100
+}
