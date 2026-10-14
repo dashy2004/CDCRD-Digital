@@ -226,9 +226,12 @@ def generar(spec, puente, log=print):
 
     for e in perfiles_estrato:
         nombre_forma = '%s-FORMA-%s' % (pref, e['nombre'])
-        _esc(puente, 'estilos.crear', {
+        rc = _esc(puente, 'estilos.crear', {
             'familia': 'ShapeStyles', 'nombre': nombre_forma,
             'base': e.get('estilo_forma_base', spec.get('estilo_forma_base', 'GEO - Relleno'))})
+        if str(rc.get('handle')) in ('0', None) and not rc.get('ya_existia'):
+            resultado['advertencias'].append(
+                {'forma_%s' % e['nombre']: 'CopyAsSibling devolvio nulo (nombre recien purgado?)'})
         e['forma'] = nombre_forma
         if e.get('color_rgb') or e.get('color_aci') is not None:
             params = {'familia': 'ShapeStyles', 'estilo': nombre_forma, 'vista': 'Profile',
@@ -316,7 +319,7 @@ def generar(spec, puente, log=print):
         try:
             _esc(puente, 'vista.guardada', {
                 'nombre': vista_nombre, 'direccion': 'PLANTA', 'handles': [pv],
-                'estilo_visual': spec.get('estilo_visual', '2D Wireframe')})
+                'estilo_visual': spec.get('estilo_visual', '2dWireframe')})
         except Exception as exc:
             resultado['advertencias'].append({'vista_planta': str(exc)})
             vista_nombre = None

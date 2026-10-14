@@ -570,8 +570,11 @@ namespace Cdcrd.Civil3dBridge
                     var baseId = EstiloPorNombre(tr, familia, basee, true);
                     var ob = tr.GetObject(baseId, OpenMode.ForRead);
                     var ret = Invocar(ob, "CopyAsSibling", new List<object> { nombre });
-                    if (ret is ObjectId rid) nuevo = rid;
-                    else nuevo = EstiloPorNombre(tr, familia, nombre, true);
+                    if (ret is ObjectId rid && !rid.IsNull) nuevo = rid;
+                    else nuevo = EstiloPorNombre(tr, familia, nombre, false);
+                    if (nuevo.IsNull)
+                        throw new BridgeException(Rpc.ErrInternal, "CopyAsSibling devolvio nulo para '" +
+                            nombre + "' (el nombre puede estar ocupado por un estilo recien borrado y no purgado)");
                 }
                 else
                 {

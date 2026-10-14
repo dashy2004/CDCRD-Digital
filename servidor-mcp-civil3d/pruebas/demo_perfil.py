@@ -85,12 +85,8 @@ def limpiar():
             if hx:
                 puente.llamar_con_aprobacion('objects.erase', {'handles': hx})
                 borrados[clave] += len(hx)
-    # 4. estilos de forma
-    try:
-        r = puente.llamar_con_aprobacion('estilos.purgar', {'familia': 'ShapeStyles', 'patron': '^' + PREF})
-        borrados['estilos'] = len(r.get('borrados', []))
-    except puente.PuenteError:
-        pass
+    # 4. estilos de forma: NO se purgan (se reusan por ya_existia; purgar+recrear
+    #    el mismo nombre en el acto hace que CopyAsSibling devuelva nulo).
     print('limpieza:', json.dumps(borrados))
     return borrados
 
