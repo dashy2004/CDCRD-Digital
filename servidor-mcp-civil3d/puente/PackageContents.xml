@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Estructura copiada de los bundles de Civil 3D 2027 que si cargan en esta
+     maquina (ADSK-ProjectExplorer-2027, groundforce2027):
+       - sin atributo AutodeskProduct (no admite "Civil3D"; el filtro de producto
+         lo hace RuntimeRequirements/@Platform)
+       - RuntimeRequirements DENTRO de <Components>
+       - ComponentEntry con AppType=".NET" y LoadOnRequest="True" -->
+<ApplicationPackage
+  SchemaVersion="1.0"
+  AppVersion="0.1.0"
+  Author="CDCRD-Digital"
+  Name="CDCRD Puente MCP Civil 3D"
+  Description="Expone el dibujo activo de Civil 3D a un servidor MCP local"
+  ProductCode="{7F1C2A64-5D3B-4E21-9C58-CD3CD1C30001}"
+  UpgradeCode="{7F1C2A64-5D3B-4E21-9C58-CD3CD1C30002}">
+
+  <CompanyDetails Name="CDCRD-Digital" Url="https://github.com/dashy2004/CDCRD-Digital" />
+
+  <Components>
+    <!-- R26.0 = serie de Civil 3D 2027 -->
+    <RuntimeRequirements SupportPath="./Contents" Platform="Civil3D" SeriesMin="R26.0" SeriesMax="R26.0" OS="Win64" />
+    <ComponentEntry
+      AppName="CdcrdCivil3dBridge"
+      AppDescription="Puente JSON-RPC en 127.0.0.1 para el servidor MCP de CDCRD"
+      AppType=".NET"
+      ModuleName="./Contents/Cdcrd.Civil3dBridge.dll"
+      LoadOnAutoCADStartup="True"
+      LoadOnRequest="True">
+      <Commands GroupName="CDCRD">
+        <Command Global="CDCRDMCP" Local="CDCRDMCP" />
+        <Command Global="CDCRDMCPSTOP" Local="CDCRDMCPSTOP" />
+        <Command Global="CDCRDMCPINFO" Local="CDCRDMCPINFO" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+
+  <DisplayInAppManager>false</DisplayInAppManager>
+</ApplicationPackage>
