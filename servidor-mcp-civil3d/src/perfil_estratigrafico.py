@@ -245,17 +245,25 @@ def generar(spec, puente, log=print):
             except Exception as exc:
                 resultado['advertencias'].append({'color_%s' % e['nombre']: str(exc)})
 
-    capas_perfil = [dict(perfil=terr['nombre'])] + perfiles_estrato
+    # Cada superficie "GM - Stratum - X" es el TECHO del estrato X: el relleno del
+    # estrato i va de su propio techo al techo del siguiente (el ultimo, al fondo).
+    tramos = []
+    if spec.get('rellenar_hasta_terreno', True) and perfiles_estrato:
+        # hueco entre el terreno real (TIN) y el techo interpolado del primer
+        # estrato: se pinta con el color del primer estrato
+        tramos.append((pref + '-H-TERRENO', terr['nombre'], perfiles_estrato[0]['perfil'],
+                       perfiles_estrato[0]['forma'], 'terreno->' + perfiles_estrato[0]['nombre']))
     for i, e in enumerate(perfiles_estrato):
-        superior = capas_perfil[i]['perfil']
         inferior = perfiles_estrato[i + 1]['perfil'] if i + 1 < len(perfiles_estrato) else (pref + '-FONDO')
+        tramos.append(('%s-H-%s' % (pref, e['nombre']), e['perfil'], inferior, e['forma'], e['nombre']))
+    for nombre_h, superior, inferior, forma, etiqueta in tramos:
         try:
             _esc(puente, 'civil.hatch_vista_perfil', {
-                'vista': pref + '-VP', 'nombre': '%s-H-%s' % (pref, e['nombre']),
-                'superior': superior, 'inferior': inferior, 'estilo_forma': e['forma']})
-            log('hatch %s: %s -> %s' % (e['nombre'], superior, inferior))
+                'vista': pref + '-VP', 'nombre': nombre_h,
+                'superior': superior, 'inferior': inferior, 'estilo_forma': forma})
+            log('hatch %s: %s -> %s' % (etiqueta, superior, inferior))
         except Exception as exc:
-            resultado['advertencias'].append({'hatch_%s' % e['nombre']: str(exc)})
+            resultado['advertencias'].append({'hatch_%s' % etiqueta: str(exc)})
 
     entidades = [{'tipo': 'capa', 'nombre': pref + '-SOND', 'color': 7},
                  {'tipo': 'capa', 'nombre': pref + '-TXT', 'color': 7}]
@@ -336,6 +344,8 @@ def generar(spec, puente, log=print):
     if exp.get('png'):
         try:
             params = {'ruta': exp['png'], 'dispositivo': 'PublishToWeb PNG.pc3'}
+            if exp.get('papel_png'):
+                params['papel'] = exp['papel_png']
             if vista_nombre:
                 params['nombre_vista'] = vista_nombre
             else:

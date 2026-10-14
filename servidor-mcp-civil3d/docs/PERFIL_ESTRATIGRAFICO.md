@@ -45,12 +45,17 @@ Fuente de sondeos: usa `db_sondeos` si existe (sobre COPIA local — SQLite en
 carpeta montada da "disk I/O error"), si no los CSV. El N-SPT y el nivel freático
 se leen de la columna Description cuando no vienen estructurados.
 
-## Verificación en vivo (2026-10-14, v0.3.0, origen 410000)
-`pruebas/demo_perfil.py` reprodujo el corte A-A' desde cero: 6 perfiles, vista,
-4 hatches encadenados, 33 entidades, export. **Estaciones S-4=0.00, S-3=243.52,
-S-2=502.94 — coinciden exactamente con el perfil hecho a mano.** Pendiente de
-v0.3.1: color por estrato (en v0.3.0 el color quedaba como fallido silencioso) y
-export por vista guardada en planta (el plot por ventana salía casi vacío).
+## Verificación en vivo (2026-10-14, v0.3.2, origen 410000) — COMPLETA
+`pruebas/demo_perfil.py` reprodujo el corte A-A' desde cero con 0 advertencias:
+6 perfiles, vista, 5 hatches nativos (terreno→techo del 1er estrato + 4 estratos),
+33 entidades (columnas, N-SPT, N.F.), leyenda, PDF A3 (105 KB) y PNG.
+**Estaciones S-4=0.00, S-3=243.52, S-2=502.94 — idénticas al perfil hecho a mano.**
+Los rellenos coinciden con las columnas de sondeo (verificado visualmente sobre
+el PDF). Cada superficie "GM - Stratum - X" es el TECHO de X: el relleno de X va
+de su techo al techo del siguiente; `rellenar_hasta_terreno` (default true) pinta
+con el color del 1er estrato el hueco entre el TIN del terreno y el techo
+interpolado del relleno (diferencia real FABDEM vs sondeos, visible a la derecha).
+El PNG de PublishToWeb sale en papel vertical por defecto: use `papel_png`.
 
 ## MCP
 `generar_perfil_estratigrafico(spec)` en el servidor (disponible cuando el
