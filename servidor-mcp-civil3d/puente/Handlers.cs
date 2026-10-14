@@ -20,7 +20,7 @@ namespace Cdcrd.Civil3dBridge
 {
     internal static partial class Handlers
     {
-        public const string Version = "0.2.0";
+        public const string Version = "0.3.1";
         private const int MaxItems = 500;
 
         // Alias en espanol -> candidatos de miembro del CivilDocument, en orden.
@@ -290,6 +290,11 @@ namespace Cdcrd.Civil3dBridge
                     : t.GetProperty(nombre, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
                 if (pr != null && pr.GetIndexParameters().Length != 0) pr = null;
 
+                if (pr != null && !pr.CanRead)
+                {
+                    pr = t.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                        .FirstOrDefault(x => x.Name == pr.Name && x.CanRead && x.GetIndexParameters().Length == 0);
+                }
                 if (pr != null)
                 {
                     if (!pr.CanRead) throw new BridgeException(Rpc.ErrParams, nombre + " no es de lectura en " + t.Name);
@@ -380,8 +385,7 @@ namespace Cdcrd.Civil3dBridge
                 {
                     var item = AbrirSiEsId(tr, e, OpenMode.ForRead);
                     if (item == null) continue;
-                    var prn = item.GetType().GetProperty("Name");
-                    var nm = prn == null ? null : prn.GetValue(item) as string;
+                    var nm = NombreDe(item);
                     if (string.Equals(nm, nombre, StringComparison.OrdinalIgnoreCase)) return item;
                 }
                 throw new BridgeException(Rpc.ErrParams, "no hay elemento con Name '" + nombre + "' en " + col.GetType().Name);
@@ -799,9 +803,16 @@ namespace Cdcrd.Civil3dBridge
 
             if (string.IsNullOrEmpty(handle))
             {
-                var v0 = ResolverRuta(null, CivilDoc(), ruta, OpenMode.ForRead, out dueno, out prf);
+                object valor0;
+                using (var tr0 = Doc().Database.TransactionManager.StartTransaction())
+                {
+                    var v0 = ResolverRuta(tr0, CivilDoc(), ruta, OpenMode.ForRead, out dueno, out prf);
+                    v0 = AbrirSiEsId(tr0, v0, OpenMode.ForRead);
+                    valor0 = Val(v0, 0, prof);
+                    tr0.Commit();
+                }
                 return new Dictionary<string, object>
-                { { "objetivo", "CivilDocument" }, { "ruta", ruta }, { "profundidad", prof }, { "valor", Val(v0, 0, prof) } };
+                { { "objetivo", "CivilDocument" }, { "ruta", ruta }, { "profundidad", prof }, { "valor", valor0 } };
             }
 
             var db = Doc().Database;
@@ -838,6 +849,7 @@ namespace Cdcrd.Civil3dBridge
         private static object Coerce(object json, Type destino)
         {
             if (json == null) return null;
+            if (destino.IsInstanceOfType(json)) return json;
             if (destino == typeof(string)) return Convert.ToString(json);
             if (destino.IsEnum) return Enum.Parse(destino, Convert.ToString(json), true);
             if (IsSimple(destino)) return Convert.ChangeType(json, destino);
@@ -932,10 +944,17 @@ namespace Cdcrd.Civil3dBridge
 
             if (string.IsNullOrEmpty(handle))
             {
-                destino = ResolverRuta(null, CivilDoc(), ruta, OpenMode.ForRead, out dueno, out prf);
-                resultado = Invocar(destino, nombre, args);
+                object res0;
+                using (var tr0 = db.TransactionManager.StartTransaction())
+                {
+                    destino = ResolverRuta(tr0, CivilDoc(), ruta, lectura ? OpenMode.ForRead : OpenMode.ForWrite, out dueno, out prf);
+                    destino = AbrirSiEsId(tr0, destino, lectura ? OpenMode.ForRead : OpenMode.ForWrite);
+                    resultado = Invocar(destino, nombre, args);
+                    res0 = Val(resultado, 0, prof);
+                    tr0.Commit();
+                }
                 return new Dictionary<string, object>
-                { { "objetivo", "CivilDocument" }, { "ruta", ruta }, { "metodo", nombre }, { "resultado", Val(resultado, 0, prof) } };
+                { { "objetivo", "CivilDocument" }, { "ruta", ruta }, { "metodo", nombre }, { "resultado", res0 } };
             }
 
             using (lectura ? null : doc.LockDocument())

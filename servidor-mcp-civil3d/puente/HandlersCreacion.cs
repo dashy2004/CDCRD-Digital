@@ -37,6 +37,11 @@ namespace Cdcrd.Civil3dBridge
                 case "entity.create": return CrearEntidadesNativo(p, method);
                 case "entity.draworder": return OrdenDibujo(p, method);
                 case "objects.erase": return BorrarObjetos(p, method);
+                case "vista.exportar": return VistaExportar(p, method);
+                case "vista.papeles": return VistaPapeles(p);
+                case "vista.guardada": return VistaGuardada(p, method);
+                case "vista.activar": return VistaActivar(p);
+                case "vista.3d": return Vista3d(p, method);
                 default: throw new BridgeException(Rpc.ErrMethod, "metodo desconocido: " + method);
             }
         }
@@ -88,6 +93,26 @@ namespace Cdcrd.Civil3dBridge
             return cd;
         }
 
+
+        // Los estilos declaran un Name solo-escritura que oculta al legible de la
+        // base: GetProperty("Name").GetValue lanza "Property Get method was not
+        // found". Este lector busca cualquier Name legible en la jerarquia.
+        private static string NombreDe(object ob)
+        {
+            if (ob == null) return null;
+            foreach (var pr in ob.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                if (pr.Name != "Name" || !pr.CanRead || pr.GetIndexParameters().Length != 0) continue;
+                try { return pr.GetValue(ob) as string; } catch { }
+            }
+            var g = ob.GetType().GetMethod("get_Name", BindingFlags.Public | BindingFlags.Instance, null, Type.EmptyTypes, null);
+            if (g != null)
+            {
+                try { return g.Invoke(ob, null) as string; } catch { }
+            }
+            return null;
+        }
+
         private static ObjectId ResolverId(Transaction tr, Database db, IEnumerable ids, string clave, string quees)
         {
             if (string.IsNullOrWhiteSpace(clave))
@@ -105,8 +130,7 @@ namespace Cdcrd.Civil3dBridge
             {
                 if (!(o is ObjectId id) || id.IsNull || id.IsErased) continue;
                 var ob = tr.GetObject(id, OpenMode.ForRead);
-                var pr = ob.GetType().GetProperty("Name");
-                var nombre = pr == null ? null : pr.GetValue(ob) as string;
+                var nombre = NombreDe(ob);
                 if (string.Equals(nombre, clave, StringComparison.OrdinalIgnoreCase)) return id;
             }
             throw new BridgeException(Rpc.ErrParams, "no se encontro " + quees + " '" + clave + "'");
@@ -158,7 +182,7 @@ namespace Cdcrd.Civil3dBridge
                     ObjectId id = e is ObjectId o ? o : ObjectId.Null;
                     if (id.IsNull) continue;
                     var ob = tr.GetObject(id, OpenMode.ForRead);
-                    var nm = ob.GetType().GetProperty("Name")?.GetValue(ob) as string;
+                    var nm = NombreDe(ob);
                     if (string.Equals(nm, nombre, StringComparison.OrdinalIgnoreCase)) return id;
                 }
             }
@@ -415,7 +439,7 @@ namespace Cdcrd.Civil3dBridge
                 var existentes = new List<string>();
                 foreach (var it in (IEnumerable)col)
                 {
-                    var nm = it?.GetType().GetProperty("Name")?.GetValue(it) as string;
+                    var nm = NombreDe(it);
                     if (nm != null) existentes.Add(nm);
                 }
                 if (quitar)
@@ -501,7 +525,7 @@ namespace Cdcrd.Civil3dBridge
                         if (!(e is ObjectId id) || id.IsNull || id.IsErased) continue;
                         object ob;
                         try { ob = tr.GetObject(id, OpenMode.ForRead); } catch { continue; }
-                        var nm = ob.GetType().GetProperty("Name")?.GetValue(ob) as string;
+                        var nm = NombreDe(ob);
                         if (rx != null && (nm == null || !rx.IsMatch(nm))) continue;
                         filas.Add(new Dictionary<string, object>
                         {
@@ -676,7 +700,7 @@ namespace Cdcrd.Civil3dBridge
                 {
                     if (!(e is ObjectId id) || id.IsNull || id.IsErased) continue;
                     var ob = tr.GetObject(id, OpenMode.ForRead);
-                    var nm = ob.GetType().GetProperty("Name")?.GetValue(ob) as string;
+                    var nm = NombreDe(ob);
                     if (nm != null && rx.IsMatch(nm)) candidatos.Add(new KeyValuePair<string, ObjectId>(nm, id));
                 }
                 foreach (var kv in candidatos)

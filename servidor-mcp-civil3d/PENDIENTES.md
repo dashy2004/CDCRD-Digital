@@ -1,5 +1,14 @@
 # Pendientes del puente MCP de Civil 3D
 
+## Hecho el 2026-10-14 (v0.3.x, verificado EN VIVO 26/27)
+
+Export sin dialogos y vistas (3.3): exportar_vista (PlotEngine sincrono
+PDF/PNG/DWF), listar_papeles, vista_3d, crear_vista_guardada, activar_vista.
+Fix v0.3.0: lectura de nombres de estilos (NombreDe); v0.3.1: Coerce pasa
+valores ya tipados (Color), objects.read/invoke sin handle abren transaccion,
+y rutas resuelven la propiedad legible cuando la visible es solo-escritura
+(Name de estilos). Ver docs/VISTAS.md. Prueba de humo: pruebas/humo_creacion.py.
+
 ## Hecho el 2026-10-14 (v0.2.0, pendiente de reinicio y prueba en vivo)
 
 Creacion nativa de objetos: perfiles (superficie y elevacion constante),
