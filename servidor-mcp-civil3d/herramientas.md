@@ -1,7 +1,7 @@
 # Herramientas del servidor MCP de Civil 3D
 
-35 herramientas (19 base + 11 de creacion nativa + 5 de vista/export, v0.3.x;
-ver docs/CREACION.md, docs/VISTAS.md y docs/DIBUJO.md). Las de escritura exigen `confirmar=True`; el servidor pide
+36 herramientas (19 base + 11 creacion + 5 vista/export + generar_perfil_estratigrafico,
+v0.3.x; ver docs/CREACION.md, docs/VISTAS.md, docs/PERFIL_ESTRATIGRAFICO.md, docs/DIBUJO.md). Las de escritura exigen `confirmar=True`; el servidor pide
 entonces el token de aprobacion ligado a esos parametros exactos.
 
 ## Estado y descubrimiento

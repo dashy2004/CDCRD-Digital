@@ -34,6 +34,7 @@ import puente_cliente as puente                   # noqa: E402
 import dibujo                                      # noqa: E402
 import creacion                                    # noqa: E402
 import vistas                                      # noqa: E402
+import perfil_estratigrafico                       # noqa: E402
 
 with open(os.path.join(SRC_DIR, 'config.json'), encoding='utf-8') as fh:
     CONFIG = json.load(fh)
@@ -524,6 +525,35 @@ def listar(area: str, limite: int = 0) -> str:
 
 creacion.registrar(mcp, _llamar, _ok)
 vistas.registrar(mcp, _llamar, _ok)
+
+
+@mcp.tool()
+def generar_perfil_estratigrafico(spec: str) -> str:
+    """Genera un perfil estratigrafico completo de un corte, 100% nativo y repetible.
+
+    spec: JSON con alineamiento, superficie_terreno, lista de estratos
+    (cada uno: codigo, nombre, superficie, color_aci|color_rgb), sondeos,
+    origen [x,y], y opcionalmente db_sondeos o csv_ubicaciones/csv_estratigrafia,
+    elev_min/elev_max (se calculan si faltan), fondo, prefijo, mostrar
+    {spt, nivel_freatico, leyenda, columnas} y exportar {pdf, png, papel}.
+    Crea perfiles de estrato, vista de perfil, estilos de forma por estrato
+    (color), rellenos nativos (hatch), columnas de sondeo con SPT y nivel
+    freatico y leyenda; exporta sin dialogos. Todo con el prefijo indicado,
+    idempotente. Datos geotecnicos hipoteticos/preliminares.
+    """
+    try:
+        datos = json.loads(spec)
+    except json.JSONDecodeError as exc:
+        return _ok({'error': f'spec no es JSON valido: {exc}'})
+    import puente_cliente as _p
+    mensajes = []
+    try:
+        res = perfil_estratigrafico.generar(datos, _p, log=lambda m: mensajes.append(str(m)))
+        res['log'] = mensajes
+        return _ok(res)
+    except Exception as exc:                        # noqa: BLE001
+        logger.exception('generar_perfil_estratigrafico fallo')
+        return _ok({'error': f'{type(exc).__name__}: {exc}', 'log': mensajes})
 
 
 # Calculo hidraulico local; no llama al puente ni accede a CAD.
