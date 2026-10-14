@@ -18,9 +18,9 @@ using AcApp = Autodesk.AutoCAD.ApplicationServices.Core.Application;
 
 namespace Cdcrd.Civil3dBridge
 {
-    internal static class Handlers
+    internal static partial class Handlers
     {
-        public const string Version = "0.1.0";
+        public const string Version = "0.2.0";
         private const int MaxItems = 500;
 
         // Alias en espanol -> candidatos de miembro del CivilDocument, en orden.
@@ -78,7 +78,7 @@ namespace Cdcrd.Civil3dBridge
                 case "layers.query": return LayersQuery(p);
                 case "layers.set": return LayersSet(p, method);
                 case "doc.save": return DocSave(p, method);
-                default: throw new BridgeException(Rpc.ErrMethod, "metodo desconocido: " + method);
+                default: return DispatchExtra(method, p);
             }
         }
 
@@ -215,8 +215,8 @@ namespace Cdcrd.Civil3dBridge
         // Llega a lo que no tiene handle propio: "Analysis",
         // "Analysis.ElevationRanges[2].MaximumElevation", "GetGeneralProperties()".
         // Cada tramo es una propiedad o un metodo sin argumentos, mas cero o mas indices.
-        private static readonly Regex RutaTramo = new Regex(@"^([A-Za-z_][A-Za-z0-9_]*)(\(\))?((?:\[\d+\])*)$");
-        private static readonly Regex RutaIndice = new Regex(@"\[(\d+)\]");
+        private static readonly Regex RutaTramo = new Regex(@"^([A-Za-z_][A-Za-z0-9_]*)(\((?<args>[^()]*)\))?(?<idx>(?:\[[^\[\]]+\])*)$");
+        private static readonly Regex RutaIndice = new Regex(@"\[([^\[\]]+)\]");
         private const int MaxExpand = 3;
 
         private static object Indexar(object col, int i)
@@ -269,7 +269,7 @@ namespace Cdcrd.Civil3dBridge
             object actual = raiz;
             if (string.IsNullOrWhiteSpace(ruta)) return actual;
 
-            foreach (var bruto in ruta.Split('.'))
+            foreach (var bruto in PartirRuta(ruta))
             {
                 var tramo = bruto.Trim();
                 if (tramo.Length == 0) continue;
@@ -280,10 +280,10 @@ namespace Cdcrd.Civil3dBridge
                 var m = RutaTramo.Match(tramo);
                 if (!m.Success)
                     throw new BridgeException(Rpc.ErrParams,
-                        "tramo de ruta invalido: '" + tramo + "'. Formas validas: Nombre, Nombre(), Nombre[0], Nombre()[0]");
+                        "tramo de ruta invalido: '" + tramo + "'. Formas validas: Nombre, Nombre(), Nombre(a;b), Nombre[0], Nombre[\"x\"], Nombre()[0]");
                 string nombre = m.Groups[1].Value;
                 bool esLlamada = m.Groups[2].Success;
-                string indices = m.Groups[3].Value;
+                string indices = m.Groups["idx"].Value;
                 var t = actual.GetType();
 
                 PropertyInfo pr = esLlamada ? null
@@ -302,27 +302,113 @@ namespace Cdcrd.Civil3dBridge
                 {
                     dueno = actual;
                     propFinal = null;
-                    actual = Invocar(actual, nombre, new List<object>());
+                    actual = Invocar(actual, nombre, esLlamada ? ArgsDeTramo(m.Groups["args"].Value) : new List<object>());
                 }
 
                 foreach (Match mi in RutaIndice.Matches(indices))
                 {
                     actual = AbrirSiEsId(tr, actual, modo);
-                    actual = Indexar(actual, int.Parse(mi.Groups[1].Value));
+                    actual = IndexarPorClave(tr, actual, mi.Groups[1].Value);
                     propFinal = null;   // tras indexar ya no queda propiedad escribible
                 }
             }
             return actual;
         }
 
-        private static Dictionary<string, object> DescribirObjeto(object o, bool valores)
+        // Divide la ruta por '.' respetando los puntos dentro de comillas y de
+        // parentesis: Styles.ProfileStyles["GEO - 1.5"].Name, ElevationAt(243.51).
+        private static IEnumerable<string> PartirRuta(string ruta)
+        {
+            var partes = new List<string>();
+            var sb = new System.Text.StringBuilder();
+            bool com = false; char comc = '"'; int par = 0;
+            foreach (var c in ruta)
+            {
+                if (com) { sb.Append(c); if (c == comc) com = false; continue; }
+                if (c == '"' || c == '\'') { com = true; comc = c; sb.Append(c); continue; }
+                if (c == '(') { par++; sb.Append(c); continue; }
+                if (c == ')') { par--; sb.Append(c); continue; }
+                if (c == '.' && par == 0) { partes.Add(sb.ToString()); sb.Clear(); continue; }
+                sb.Append(c);
+            }
+            partes.Add(sb.ToString());
+            return partes;
+        }
+
+        // Argumentos de un tramo Metodo(a;b;c): numero, bool, null, "texto" o texto
+        // suelto (Coerce lo convierte a enum o string segun el parametro real).
+        private static List<object> ArgsDeTramo(string crudo)
+        {
+            var args = new List<object>();
+            if (string.IsNullOrWhiteSpace(crudo)) return args;
+            foreach (var parte in crudo.Split(';'))
+            {
+                var v = parte.Trim();
+                if (v.Length == 0) continue;
+                if ((v.StartsWith("\"") && v.EndsWith("\"")) || (v.StartsWith("'") && v.EndsWith("'")))
+                { args.Add(v.Substring(1, v.Length - 2)); continue; }
+                if (v == "null") { args.Add(null); continue; }
+                if (v == "true" || v == "false") { args.Add(v == "true"); continue; }
+                double d;
+                if (double.TryParse(v, System.Globalization.NumberStyles.Float,
+                    System.Globalization.CultureInfo.InvariantCulture, out d)) { args.Add(d); continue; }
+                args.Add(v);
+            }
+            return args;
+        }
+
+        // Indice numerico o clave con nombre: Styles.ProfileStyles["GEO - TERRENO"].
+        private static object IndexarPorClave(Transaction tr, object col, string clave)
+        {
+            if (col == null) throw new BridgeException(Rpc.ErrParams, "no se puede indexar null");
+            int n;
+            if (int.TryParse(clave, out n)) return Indexar(col, n);
+            string nombre = clave.Trim();
+            if ((nombre.StartsWith("\"") && nombre.EndsWith("\"")) || (nombre.StartsWith("'") && nombre.EndsWith("'")))
+                nombre = nombre.Substring(1, nombre.Length - 2);
+            var idx = col.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .FirstOrDefault(x => x.GetIndexParameters().Length == 1 &&
+                                     x.GetIndexParameters()[0].ParameterType == typeof(string));
+            if (idx != null)
+            {
+                try { return idx.GetValue(col, new object[] { nombre }); }
+                catch (TargetInvocationException ex) { throw ex.InnerException ?? ex; }
+            }
+            if (col is IEnumerable en2 && !(col is string))
+            {
+                foreach (var e in en2)
+                {
+                    var item = AbrirSiEsId(tr, e, OpenMode.ForRead);
+                    if (item == null) continue;
+                    var prn = item.GetType().GetProperty("Name");
+                    var nm = prn == null ? null : prn.GetValue(item) as string;
+                    if (string.Equals(nm, nombre, StringComparison.OrdinalIgnoreCase)) return item;
+                }
+                throw new BridgeException(Rpc.ErrParams, "no hay elemento con Name '" + nombre + "' en " + col.GetType().Name);
+            }
+            throw new BridgeException(Rpc.ErrParams, col.GetType().Name + " no se puede indexar por nombre");
+        }
+
+        private static Dictionary<string, object> DescribirObjeto(object o, bool valores,
+                                                                  string patron = null, bool soloEscribibles = false, string incluir = null)
         {
             var t = o.GetType();
+            Regex rxm = null;
+            if (!string.IsNullOrWhiteSpace(patron))
+            {
+                try { rxm = new Regex(patron, RegexOptions.IgnoreCase); }
+                catch (Exception ex) { throw new BridgeException(Rpc.ErrParams, "patron invalido: " + ex.Message); }
+            }
+            bool conProps = string.IsNullOrEmpty(incluir) || incluir == "ambos" || incluir == "props";
+            bool conMetodos = (string.IsNullOrEmpty(incluir) || incluir == "ambos" || incluir == "metodos") && !soloEscribibles;
             var props = new List<object>();
             var metodos = new List<object>();
             foreach (var pr in t.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 if (pr.GetIndexParameters().Length != 0) continue;
+                if (!conProps) break;
+                if (rxm != null && !rxm.IsMatch(pr.Name)) continue;
+                if (soloEscribibles && !pr.CanWrite) continue;
                 var fila = new Dictionary<string, object>
                 {
                     { "nombre", pr.Name }, { "tipo", pr.PropertyType.Name },
@@ -340,6 +426,8 @@ namespace Cdcrd.Civil3dBridge
             {
                 if (m.IsSpecialName) continue;
                 if (m.DeclaringType == typeof(object)) continue;
+                if (!conMetodos) break;
+                if (rxm != null && !rxm.IsMatch(m.Name)) continue;
                 metodos.Add(new Dictionary<string, object>
                 {
                     { "nombre", m.Name },
@@ -676,6 +764,9 @@ namespace Cdcrd.Civil3dBridge
             if (string.IsNullOrEmpty(handle)) throw new BridgeException(Rpc.ErrParams, "falta handle");
             string ruta = p["ruta"]?.GetValue<string>();
             bool valores = p["valores"] != null && p["valores"].GetValue<bool>();
+            string patron = p["patron"]?.GetValue<string>();
+            bool soloEscribibles = p["solo_escribibles"] != null && p["solo_escribibles"].GetValue<bool>();
+            string incluir = p["incluir"]?.GetValue<string>();
             var db = Doc().Database;
             var id = IdFromHandle(db, handle);
             Dictionary<string, object> res;
@@ -686,7 +777,7 @@ namespace Cdcrd.Civil3dBridge
                 destino = ResolverRuta(tr, destino, ruta, OpenMode.ForRead, out dueno, out prf);
                 if (destino == null) throw new BridgeException(Rpc.ErrParams, "la ruta devolvio null: " + ruta);
                 destino = AbrirSiEsId(tr, destino, OpenMode.ForRead);
-                res = DescribirObjeto(destino, valores);
+                res = DescribirObjeto(destino, valores, patron, soloEscribibles, incluir);
                 tr.Commit();
             }
             res["handle"] = handle;

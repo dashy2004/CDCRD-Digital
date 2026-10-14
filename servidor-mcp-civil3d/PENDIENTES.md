@@ -1,5 +1,15 @@
 # Pendientes del puente MCP de Civil 3D
 
+## Hecho el 2026-10-14 (v0.2.0, pendiente de reinicio y prueba en vivo)
+
+Creacion nativa de objetos: perfiles (superficie y elevacion constante),
+vistas de perfil con rangos exactos, hatch nativo de vista de perfil
+(HatchAreas.Add), estilos (listar/crear/clonar/editar display/purgar),
+entidades de dibujo nativas (reemplaza LISP), borrar objetos, orden de
+dibujo. leer_ruta con argumentos y claves por nombre; inspeccionar_objeto
+con filtro regex. Ver docs/CREACION.md.
+
+
 Backlog de capacidades. El criterio de prioridad es cuantas veces hizo falta la
 capacidad para resolver algo real y si existe una alternativa razonable sin ella.
 

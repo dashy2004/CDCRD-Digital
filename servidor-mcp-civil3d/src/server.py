@@ -32,6 +32,7 @@ logger.info('Iniciando servidor MCP de Civil 3D')
 from mcp.server.fastmcp import FastMCP            # noqa: E402
 import puente_cliente as puente                   # noqa: E402
 import dibujo                                      # noqa: E402
+import creacion                                    # noqa: E402
 
 with open(os.path.join(SRC_DIR, 'config.json'), encoding='utf-8') as fh:
     CONFIG = json.load(fh)
@@ -174,7 +175,9 @@ def agregar_objetos(prop: str, op: str = 'suma', coleccion: str = '', tipo: str 
 
 
 @mcp.tool()
-def inspeccionar_objeto(handle: str, ruta: str = '', valores: bool = False) -> str:
+def inspeccionar_objeto(handle: str, ruta: str = '', valores: bool = False,
+                        patron: str = '', solo_escribibles: bool = False,
+                        incluir: str = '') -> str:
     """Lista propiedades y metodos reales de un objeto, con firma y si son de lectura.
 
     Es el paso previo a invocar_metodo o actualizar_objeto: la firma sale del
@@ -185,12 +188,22 @@ def inspeccionar_objeto(handle: str, ruta: str = '', valores: bool = False) -> s
       propiedad o un metodo sin argumentos, con indices opcionales:
       'Analysis.ElevationRanges[0]'.
     valores: ademas de la firma, trae el valor actual de cada propiedad legible.
+    patron: regex sobre el nombre del miembro (p. ej. 'Station|Elev') para no
+      recibir las decenas de KB de un ProfileView completo.
+    solo_escribibles: solo propiedades con escritura (y sin metodos).
+    incluir: 'props', 'metodos' o vacio/'ambos'.
     """
     parametros = {'handle': handle}
     if ruta:
         parametros['ruta'] = ruta
     if valores:
         parametros['valores'] = True
+    if patron:
+        parametros['patron'] = patron
+    if solo_escribibles:
+        parametros['solo_escribibles'] = True
+    if incluir:
+        parametros['incluir'] = incluir
     return _llamar('objects.props', parametros)
 
 
@@ -203,7 +216,9 @@ def leer_ruta(ruta: str, handle: str = '', profundidad: int = 1) -> str:
     la raiz es el CivilDocument.
 
     ruta: 'Analysis', 'Analysis.ElevationRanges[2].MaximumElevation',
-      'GetGeneralProperties()'.
+      'GetGeneralProperties()', y ademas metodos con argumentos y claves por
+      nombre: 'GetDisplayStyleProfile(Line).Color',
+      'Styles.ProfileStyles["GEO - TERRENO"].Name'.
     profundidad: 0 deja los objetos compuestos como {tipo, texto}; 1 a 3 los
       expande propiedad por propiedad. Suba solo si hace falta: expande rapido.
     """
@@ -504,6 +519,9 @@ def listar(area: str, limite: int = 0) -> str:
         return _ok({'error': 'area desconocida', 'areas': sorted(_ATAJOS)})
     coleccion, props = _ATAJOS[area]
     return consultar_objetos(coleccion=coleccion, props=props, limite=limite or LIMITE)
+
+
+creacion.registrar(mcp, _llamar, _ok)
 
 
 # Calculo hidraulico local; no llama al puente ni accede a CAD.

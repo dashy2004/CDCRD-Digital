@@ -1,7 +1,8 @@
 # Herramientas del servidor MCP de Civil 3D
 
-17 herramientas. Las de escritura exigen `confirmar=True`; el servidor pide entonces
-el token de aprobacion ligado a esos parametros exactos.
+30 herramientas (19 base + 11 de creacion nativa, v0.2.0; ver docs/CREACION.md
+y docs/DIBUJO.md). Las de escritura exigen `confirmar=True`; el servidor pide
+entonces el token de aprobacion ligado a esos parametros exactos.
 
 ## Estado y descubrimiento
 
