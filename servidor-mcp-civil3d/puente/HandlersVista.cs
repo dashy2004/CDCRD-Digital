@@ -177,7 +177,9 @@ namespace Cdcrd.Civil3dBridge
                         }
                         psv.SetUseStandardScale(ps, true);
                         psv.SetStdScaleType(ps, esPapel ? StdScaleType.StdScale1To1 : StdScaleType.ScaleToFit);
-                        psv.SetPlotCentered(ps, true);
+                        // SetPlotCentered es eInvalidInput con PlotType.Layout
+                        // (el layout plotea a 1:1 desde su origen, sin centrar)
+                        if (!esPapel) psv.SetPlotCentered(ps, true);
                         if (!string.IsNullOrWhiteSpace(estiloPlot)) psv.SetCurrentStyleSheet(ps, estiloPlot);
                         if (!string.IsNullOrWhiteSpace(sombreado))
                         {
@@ -452,7 +454,7 @@ namespace Cdcrd.Civil3dBridge
                     Ajuste("SetPlotType", () => psv.SetPlotType(lay, Autodesk.AutoCAD.DatabaseServices.PlotType.Layout));
                     Ajuste("SetUseStandardScale", () => psv.SetUseStandardScale(lay, true));
                     Ajuste("SetStdScaleType", () => psv.SetStdScaleType(lay, StdScaleType.StdScale1To1));
-                    Ajuste("SetPlotCentered", () => psv.SetPlotCentered(lay, true));
+                    // SetPlotCentered es eInvalidInput en layouts (plotean desde su origen)
                     string rot = Txt(p, "rotacion");
                     if (!string.IsNullOrWhiteSpace(rot))
                         Ajuste("SetPlotRotation", () => psv.SetPlotRotation(lay,

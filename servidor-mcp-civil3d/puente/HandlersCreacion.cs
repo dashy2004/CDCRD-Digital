@@ -44,7 +44,10 @@ namespace Cdcrd.Civil3dBridge
                 case "vista.3d": return Vista3d(p, method);
                 case "layout.crear": return LayoutCrear(p, method);
                 case "doc.undo": return DocUndo(p, method);
-                default: throw new BridgeException(Rpc.ErrMethod, "metodo desconocido: " + method);
+                default:
+                    var rgm = DispatchGm(method, p);
+                    if (rgm != null) return rgm;
+                    throw new BridgeException(Rpc.ErrMethod, "metodo desconocido: " + method);
             }
         }
 
