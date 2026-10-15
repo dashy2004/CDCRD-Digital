@@ -56,12 +56,13 @@ def registrar(mcp, llamar, ok):
     @mcp.tool()
     def exportar_vista(ruta: str, dispositivo: str = 'DWG To PDF.pc3', papel: str = '',
                        ventana: str = '', handles: str = '', nombre_vista: str = '',
-                       estilo_plot: str = '', sombreado: str = '', margen: str = '',
-                       confirmar: bool = False) -> str:
+                       layout: str = '', estilo_plot: str = '', sombreado: str = '',
+                       margen: str = '', confirmar: bool = False) -> str:
         """Exporta el modelo a PDF/PNG/DWF por PlotEngine, SINCRONO y sin dialogos.
 
-        Area a plotear, en orden de prioridad: nombre_vista (vista guardada;
-        unica via correcta para vistas 3D), ventana 'x1,y1,x2,y2' (coordenadas
+        Area a plotear, en orden de prioridad: layout (una presentacion, a 1:1),
+        nombre_vista (vista guardada; unica via correcta para vistas 3D), ventana
+        'x1,y1,x2,y2' (coordenadas
         del modelo), handles (extension de esos objetos + margen), o la extension
         completa. papel acepta el nombre canonico, el visible o un pedazo
         ('A3', 'ISO full bleed A3'); vacio = el del dispositivo por defecto.
@@ -70,7 +71,8 @@ def registrar(mcp, llamar, ok):
         """
         try:
             parametros = area(sin_vacios(dict(ruta=ruta, dispositivo=dispositivo, papel=papel,
-                                              nombre_vista=nombre_vista, estilo_plot=estilo_plot,
+                                              nombre_vista=nombre_vista, layout=layout,
+                                              estilo_plot=estilo_plot,
                                               sombreado=sombreado,
                                               margen=parsear_num(margen, 'margen'))),
                               ventana, handles)
@@ -133,5 +135,54 @@ def registrar(mcp, llamar, ok):
     def activar_vista(nombre: str) -> str:
         """Restaura una vista guardada como vista actual del modelo."""
         return llamar('vista.activar', {'nombre': nombre})
+
+    @mcp.tool()
+    def crear_layout(nombre: str, viewports: str = '[]', textos: str = '[]', papel: str = 'A3',
+                     dispositivo: str = 'DWG To PDF.pc3', rotacion: str = '',
+                     confirmar: bool = False) -> str:
+        """Crea (o reemplaza) una presentacion con papel, viewports y textos de rotulo.
+
+        viewports: lista JSON [{"vista":"<vista guardada>","centro":[x,y] mm,
+        "ancho":mm,"alto":mm,"escala":N (1:N, opcional; sin escala encuadra la
+        vista),"bloquear":true}]. textos: [{"punto":[x,y],"texto":"...","altura":3.5}]
+        en mm de papel. Luego exportar_vista(layout=nombre) la plotea a 1:1.
+        """
+        try:
+            vps = json.loads(viewports or '[]')
+            txs = json.loads(textos or '[]')
+        except json.JSONDecodeError as exc:
+            return ok({'error': f'viewports/textos no son JSON validos: {exc}'})
+        parametros = sin_vacios(dict(nombre=nombre, papel=papel, dispositivo=dispositivo,
+                                     rotacion=rotacion, viewports=vps, textos=txs))
+        if not confirmar:
+            return pendiente(**{k: v for k, v in parametros.items() if k != 'viewports'},
+                             viewports=len(vps))
+        return llamar('layout.crear', parametros, escribe=True)
+
+    @mcp.tool()
+    def leer_log_puente(n: int = 100) -> str:
+        """Ultimas n lineas del log del puente (%LOCALAPPDATA%/CdcrdCivil3dBridge/puente.log).
+
+        No depende de que Civil 3D este inactivo: sirve para ver que paso cuando
+        una herramienta dio timeout o Civil 3D quedo en un dialogo.
+        """
+        return llamar('diag.log', {'n': n})
+
+    @mcp.tool()
+    def ping_comandos(timeout_ms: int = 3000) -> str:
+        """Comprueba rapido si Civil 3D esta inactivo (sin dialogo modal ni comando).
+
+        inactivo=false significa que cualquier herramienta de lectura/escritura
+        se quedaria esperando: hay un dialogo modal, un comando activo o edicion
+        en curso. Usela antes de operaciones largas y tras ejecutar_comando.
+        """
+        return llamar('diag.ping', {'timeout_ms': timeout_ms})
+
+    @mcp.tool()
+    def deshacer(veces: int = 1, confirmar: bool = False) -> str:
+        """Encola _.U (deshacer) n veces en Civil 3D. Asincrono: verifique despues."""
+        if not confirmar:
+            return pendiente(veces=veces)
+        return llamar('doc.undo', {'veces': veces}, escribe=True)
 
     return mcp

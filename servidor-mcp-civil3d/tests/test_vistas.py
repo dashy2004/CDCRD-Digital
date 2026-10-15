@@ -34,7 +34,7 @@ class ParsearDireccion(unittest.TestCase):
 
 
 class Registro(unittest.TestCase):
-    def test_registra_cinco(self):
+    def test_registra_nueve(self):
         nombres = []
 
         class McpFalso:
@@ -47,7 +47,8 @@ class Registro(unittest.TestCase):
         vistas.registrar(McpFalso(), lambda *a, **k: '{}', lambda d: '{}')
         self.assertEqual(sorted(nombres), sorted([
             'listar_papeles', 'exportar_vista', 'vista_3d',
-            'crear_vista_guardada', 'activar_vista']))
+            'crear_vista_guardada', 'activar_vista',
+            'crear_layout', 'leer_log_puente', 'ping_comandos', 'deshacer']))
 
     def test_exportar_exige_confirmar(self):
         registradas = {}

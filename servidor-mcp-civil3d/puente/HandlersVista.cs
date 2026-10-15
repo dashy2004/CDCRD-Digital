@@ -119,8 +119,17 @@ namespace Cdcrd.Civil3dBridge
                 using (doc.LockDocument())
                 using (var tr = db.TransactionManager.StartTransaction())
                 {
-                    var btr = (BlockTableRecord)tr.GetObject(SymbolUtilityServices.GetBlockModelSpaceId(db), OpenMode.ForRead);
+                    string nombreLayout = Txt(p, "layout");
+                    BlockTableRecord btr;
+                    if (!string.IsNullOrWhiteSpace(nombreLayout))
+                    {
+                        var layId = LayoutIdPorNombre(tr, db, nombreLayout);
+                        var layTmp = (Layout)tr.GetObject(layId, OpenMode.ForRead);
+                        btr = (BlockTableRecord)tr.GetObject(layTmp.BlockTableRecordId, OpenMode.ForRead);
+                    }
+                    else btr = (BlockTableRecord)tr.GetObject(SymbolUtilityServices.GetBlockModelSpaceId(db), OpenMode.ForRead);
                     var layout = (Layout)tr.GetObject(btr.LayoutId, OpenMode.ForRead);
+                    bool esPapel = !string.IsNullOrWhiteSpace(nombreLayout);
                     var psv = PlotSettingsValidator.Current;
                     using (var ps = new PlotSettings(layout.ModelType))
                     {
@@ -145,8 +154,12 @@ namespace Cdcrd.Civil3dBridge
                             psv.SetCanonicalMediaName(ps, papelUsado);
                         }
 
-                        var ext = ExtentsDe(p, tr, db);
-                        if (!string.IsNullOrWhiteSpace(nombreVista))
+                        var ext = esPapel ? null : ExtentsDe(p, tr, db);
+                        if (esPapel)
+                        {
+                            psv.SetPlotType(ps, Autodesk.AutoCAD.DatabaseServices.PlotType.Layout);
+                        }
+                        else if (!string.IsNullOrWhiteSpace(nombreVista))
                         {
                             psv.SetPlotViewName(ps, nombreVista);
                             psv.SetPlotType(ps, Autodesk.AutoCAD.DatabaseServices.PlotType.View);
@@ -163,7 +176,7 @@ namespace Cdcrd.Civil3dBridge
                             psv.SetPlotType(ps, Autodesk.AutoCAD.DatabaseServices.PlotType.Extents);
                         }
                         psv.SetUseStandardScale(ps, true);
-                        psv.SetStdScaleType(ps, StdScaleType.ScaleToFit);
+                        psv.SetStdScaleType(ps, esPapel ? StdScaleType.StdScale1To1 : StdScaleType.ScaleToFit);
                         psv.SetPlotCentered(ps, true);
                         if (!string.IsNullOrWhiteSpace(estiloPlot)) psv.SetCurrentStyleSheet(ps, estiloPlot);
                         if (!string.IsNullOrWhiteSpace(sombreado))
@@ -372,6 +385,173 @@ namespace Cdcrd.Civil3dBridge
             }
             Log.Write("vista.guardada '" + nombre + "'");
             return res;
+        }
+
+        private static ObjectId LayoutIdPorNombre(Transaction tr, Database db, string nombre)
+        {
+            var dict = (DBDictionary)tr.GetObject(db.LayoutDictionaryId, OpenMode.ForRead);
+            foreach (DBDictionaryEntry e in dict)
+                if (string.Equals(e.Key, nombre, StringComparison.OrdinalIgnoreCase)) return e.Value;
+            var hay = new List<string>();
+            foreach (DBDictionaryEntry e in dict) hay.Add(e.Key);
+            throw new BridgeException(Rpc.ErrParams, "no existe el layout '" + nombre + "'; hay: " + string.Join(", ", hay));
+        }
+
+        // layout.crear: presentacion con papel, viewports (desde vistas guardadas) y
+        // textos de rotulo. Idempotente: si existe, se borra y se vuelve a crear.
+        private static object LayoutCrear(JsonObject p, string method)
+        {
+            ExigirEscritura(method, p);
+            string nombre = Txt(p, "nombre");
+            if (string.IsNullOrWhiteSpace(nombre)) throw new BridgeException(Rpc.ErrParams, "falta nombre");
+            string dispositivo = Txt(p, "dispositivo") ?? "DWG To PDF.pc3";
+            string papel = Txt(p, "papel") ?? "A3";
+            var doc = Doc(); var db = doc.Database;
+            var lm = LayoutManager.Current;
+            var creados = new List<object>();
+            var fallidos = new List<object>();
+            Dictionary<string, object> res;
+            using (doc.LockDocument())
+            {
+                bool reemplazado = false;
+                if (lm.LayoutExists(nombre))
+                {
+                    if (string.Equals(lm.CurrentLayout, nombre, StringComparison.OrdinalIgnoreCase))
+                        lm.CurrentLayout = "Model";
+                    lm.DeleteLayout(nombre);
+                    reemplazado = true;
+                }
+                var layId = lm.CreateLayout(nombre);
+                string layoutAnterior = lm.CurrentLayout;
+                // los viewports solo se pueden encender con su layout activo
+                try { lm.CurrentLayout = nombre; } catch (Exception ex) { fallidos.Add(new Dictionary<string, object> { { "activar_layout", ex.Message } }); }
+                var avisos = new List<string>();
+                using (var tr = db.TransactionManager.StartTransaction())
+                {
+                    var lay = (Layout)tr.GetObject(layId, OpenMode.ForWrite);
+                    var psv = PlotSettingsValidator.Current;
+                    psv.SetPlotConfigurationName(lay, dispositivo, null);
+                    psv.RefreshLists(lay);
+                    string papelUsado = null;
+                    var canonicos = psv.GetCanonicalMediaNameList(lay);
+                    string clave = NormalizarMedio(papel);
+                    for (int i = 0; i < canonicos.Count; i++)
+                    {
+                        if (NormalizarMedio(canonicos[i]).Contains(clave) ||
+                            NormalizarMedio(psv.GetLocaleMediaName(lay, i)).Contains(clave))
+                        { papelUsado = canonicos[i]; break; }
+                    }
+                    if (papelUsado == null)
+                        throw new BridgeException(Rpc.ErrParams, "papel '" + papel + "' no existe en " + dispositivo);
+                    void Ajuste(string nombreAjuste, Action a)
+                    {
+                        try { a(); } catch (Exception ex) { avisos.Add(nombreAjuste + ": " + (ex.InnerException ?? ex).Message); }
+                    }
+                    Ajuste("SetCanonicalMediaName", () => psv.SetCanonicalMediaName(lay, papelUsado));
+                    Ajuste("SetPlotPaperUnits", () => psv.SetPlotPaperUnits(lay, PlotPaperUnit.Millimeters));
+                    Ajuste("SetPlotType", () => psv.SetPlotType(lay, Autodesk.AutoCAD.DatabaseServices.PlotType.Layout));
+                    Ajuste("SetUseStandardScale", () => psv.SetUseStandardScale(lay, true));
+                    Ajuste("SetStdScaleType", () => psv.SetStdScaleType(lay, StdScaleType.StdScale1To1));
+                    Ajuste("SetPlotCentered", () => psv.SetPlotCentered(lay, true));
+                    string rot = Txt(p, "rotacion");
+                    if (!string.IsNullOrWhiteSpace(rot))
+                        Ajuste("SetPlotRotation", () => psv.SetPlotRotation(lay,
+                            rot == "90" ? PlotRotation.Degrees090 : rot == "180" ? PlotRotation.Degrees180 :
+                            rot == "270" ? PlotRotation.Degrees270 : PlotRotation.Degrees000));
+                    var ps = (BlockTableRecord)tr.GetObject(lay.BlockTableRecordId, OpenMode.ForWrite);
+
+                    // viewports desde vistas guardadas
+                    var vports = p["viewports"] as JsonArray ?? new JsonArray();
+                    var tabla = (ViewTable)tr.GetObject(db.ViewTableId, OpenMode.ForRead);
+                    for (int i = 0; i < vports.Count; i++)
+                    {
+                        var v = vports[i] as JsonObject;
+                        try
+                        {
+                            if (v == null) throw new BridgeException(Rpc.ErrParams, "viewport no es objeto");
+                            string vista = Txt(v, "vista");
+                            if (string.IsNullOrWhiteSpace(vista) || !tabla.Has(vista))
+                                throw new BridgeException(Rpc.ErrParams, "vista guardada '" + vista + "' no existe");
+                            var vtr = (ViewTableRecord)tr.GetObject(tabla[vista], OpenMode.ForRead);
+                            var centro = PuntoDe(v["centro"], "centro");   // mm de papel
+                            double ancho = Num(v, "ancho") ?? 200, alto = Num(v, "alto") ?? 150;
+                            var vp = new Viewport
+                            {
+                                CenterPoint = new Point3d(centro.X, centro.Y, 0),
+                                Width = ancho, Height = alto
+                            };
+                            ps.AppendEntity(vp);
+                            tr.AddNewlyCreatedDBObject(vp, true);
+                            vp.ViewDirection = vtr.ViewDirection;
+                            vp.ViewTarget = vtr.Target;
+                            vp.ViewCenter = vtr.CenterPoint;
+                            var esc = Num(v, "escala");   // 1:N (unidades del modelo en m, papel en mm)
+                            if (esc != null && esc.Value > 0) vp.ViewHeight = alto / 1000.0 * esc.Value;
+                            else vp.ViewHeight = vtr.Height;
+                            if (!vtr.VisualStyleId.IsNull)
+                            {
+                                try { vp.VisualStyleId = vtr.VisualStyleId; }
+                                catch (Exception ex) { avisos.Add("VisualStyleId vp" + i + ": " + ex.Message); }
+                            }
+                            try { vp.On = true; } catch (Exception ex) { avisos.Add("On vp" + i + ": " + ex.Message); }
+                            if (Flag(v, "bloquear")) { try { vp.Locked = true; } catch { } }
+                            creados.Add(new Dictionary<string, object>
+                            { { "indice", i }, { "vista", vista }, { "handle", HandleOf(vp.ObjectId) }, { "escala", esc } });
+                        }
+                        catch (Exception ex)
+                        {
+                            fallidos.Add(new Dictionary<string, object> { { "indice", i }, { "error", (ex.InnerException ?? ex).Message } });
+                        }
+                    }
+                    // textos de rotulo en espacio papel (mm)
+                    var textos = p["textos"] as JsonArray ?? new JsonArray();
+                    foreach (var tn in textos)
+                    {
+                        var t = tn as JsonObject;
+                        if (t == null) continue;
+                        try
+                        {
+                            var tx = new DBText
+                            {
+                                TextString = Txt(t, "texto") ?? "",
+                                Height = Num(t, "altura") ?? 3.5,
+                                Position = PuntoDe(t["punto"], "punto")
+                            };
+                            ps.AppendEntity(tx);
+                            tr.AddNewlyCreatedDBObject(tx, true);
+                            creados.Add(new Dictionary<string, object> { { "texto", tx.TextString }, { "handle", HandleOf(tx.ObjectId) } });
+                        }
+                        catch (Exception ex) { fallidos.Add(new Dictionary<string, object> { { "texto", Txt(t, "texto") }, { "error", (ex.InnerException ?? ex).Message } }); }
+                    }
+                    res = new Dictionary<string, object>
+                    {
+                        { "layout", nombre }, { "handle", HandleOf(layId) }, { "reemplazado", reemplazado },
+                        { "papel", papelUsado }, { "dispositivo", dispositivo },
+                        { "creados", creados }, { "fallidos", fallidos }, { "avisos", avisos }
+                    };
+                    tr.Commit();
+                }
+                if (!Flag(p, "dejar_activo"))
+                {
+                    try { lm.CurrentLayout = layoutAnterior; } catch { }
+                }
+            }
+            Log.Write("layout.crear '" + nombre + "' viewports=" + creados.Count);
+            return res;
+        }
+
+        // doc.undo: encola _.U (asincrono, como cmd.run) sin exigir PERMITIR_COMANDOS.
+        private static object DocUndo(JsonObject p, string method)
+        {
+            ExigirEscritura(method, p);
+            int n = p["veces"] != null ? p["veces"].GetValue<int>() : 1;
+            if (n < 1) n = 1; if (n > 50) n = 50;
+            var doc = Doc();
+            var sb = new System.Text.StringBuilder();
+            for (int i = 0; i < n; i++) sb.Append("_.U ");
+            doc.SendStringToExecute(sb.ToString(), true, false, true);
+            Log.Write("doc.undo x" + n);
+            return new Dictionary<string, object> { { "encolado", "_.U x" + n }, { "sincrono", false } };
         }
 
         private static object VistaActivar(JsonObject p)

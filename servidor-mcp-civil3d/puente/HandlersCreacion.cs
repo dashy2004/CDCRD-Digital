@@ -42,6 +42,8 @@ namespace Cdcrd.Civil3dBridge
                 case "vista.guardada": return VistaGuardada(p, method);
                 case "vista.activar": return VistaActivar(p);
                 case "vista.3d": return Vista3d(p, method);
+                case "layout.crear": return LayoutCrear(p, method);
+                case "doc.undo": return DocUndo(p, method);
                 default: throw new BridgeException(Rpc.ErrMethod, "metodo desconocido: " + method);
             }
         }
@@ -804,9 +806,36 @@ namespace Cdcrd.Civil3dBridge
                                      PuntoDe(e["p3"], "p3"), PuntoDe(e["p4"], "p4"));
                 case "punto":
                     return new DBPoint(PuntoDe(e["punto"], "punto"));
+                case "cilindro":
+                {
+                    // base = centro de la cara inferior; eje vertical (Z)
+                    var b = PuntoDe(e["base"], "base");
+                    double rad = Num(e, "radio") ?? 1.0, alt = Num(e, "altura") ?? 1.0;
+                    if (rad <= 0 || alt == 0) throw new BridgeException(Rpc.ErrParams, "cilindro requiere radio > 0 y altura != 0");
+                    var sol = new Solid3d();
+                    sol.SetDatabaseDefaults();
+                    sol.RecordHistory = false;
+                    sol.CreateFrustum(Math.Abs(alt), rad, rad, rad);
+                    double zc = alt > 0 ? b.Z + alt / 2.0 : b.Z + alt / 2.0;
+                    sol.TransformBy(Matrix3d.Displacement(new Vector3d(b.X, b.Y, zc)));
+                    return sol;
+                }
+                case "caja":
+                {
+                    // esquina = esquina minima; dx, dy, dz tamanos (dz puede ser negativo: hacia abajo)
+                    var c = PuntoDe(e["esquina"], "esquina");
+                    double dx = Num(e, "dx") ?? 1.0, dy = Num(e, "dy") ?? 1.0, dz = Num(e, "dz") ?? 1.0;
+                    if (dx == 0 || dy == 0 || dz == 0) throw new BridgeException(Rpc.ErrParams, "caja requiere dx, dy, dz != 0");
+                    var sol = new Solid3d();
+                    sol.SetDatabaseDefaults();
+                    sol.RecordHistory = false;
+                    sol.CreateBox(Math.Abs(dx), Math.Abs(dy), Math.Abs(dz));
+                    sol.TransformBy(Matrix3d.Displacement(new Vector3d(c.X + dx / 2.0, c.Y + dy / 2.0, c.Z + dz / 2.0)));
+                    return sol;
+                }
                 default:
                     throw new BridgeException(Rpc.ErrParams, "tipo de entidad no soportado: '" + tipo +
-                        "' (soportados: capa, linea, polilinea, polilinea3d, texto, mtexto, circulo, solido, punto, hatch, bloque)");
+                        "' (soportados: capa, linea, polilinea, polilinea3d, texto, mtexto, circulo, solido, punto, hatch, bloque, cilindro, caja)");
             }
         }
 

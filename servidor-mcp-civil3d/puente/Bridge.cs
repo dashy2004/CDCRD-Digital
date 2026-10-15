@@ -247,6 +247,57 @@ namespace Cdcrd.Civil3dBridge
                         { "log", Log.Path }
                     });
 
+                // Diagnostico que NO debe depender de que Civil 3D este inactivo:
+                // diag.log lee el archivo; diag.ping prueba la bomba con timeout corto
+                // (si hay un dialogo modal o un comando activo, Idle no dispara).
+                if (method == "diag.log")
+                {
+                    int n = prms["n"] != null ? prms["n"].GetValue<int>() : 100;
+                    if (n < 1) n = 1; if (n > 2000) n = 2000;
+                    var lineas = new List<string>();
+                    try
+                    {
+                        if (File.Exists(Log.Path))
+                        {
+                            using (var fs = new FileStream(Log.Path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                            using (var sr = new StreamReader(fs, new UTF8Encoding(false)))
+                            {
+                                string l;
+                                var cola = new Queue<string>();
+                                while ((l = sr.ReadLine()) != null)
+                                {
+                                    cola.Enqueue(l);
+                                    if (cola.Count > n) cola.Dequeue();
+                                }
+                                lineas.AddRange(cola);
+                            }
+                        }
+                    }
+                    catch (Exception ex) { lineas.Add("<error leyendo log: " + ex.Message + ">"); }
+                    return Rpc.Ok(id, new Dictionary<string, object> { { "ruta", Log.Path }, { "lineas", lineas } });
+                }
+                if (method == "diag.ping")
+                {
+                    int t = prms["timeout_ms"] != null ? prms["timeout_ms"].GetValue<int>() : 3000;
+                    if (t < 200) t = 200; if (t > 30000) t = 30000;
+                    var sw = System.Diagnostics.Stopwatch.StartNew();
+                    try
+                    {
+                        HiloPrincipal.Ejecutar(() => "ok", t);
+                        return Rpc.Ok(id, new Dictionary<string, object>
+                        { { "inactivo", true }, { "ms", sw.ElapsedMilliseconds }, { "comandos", AllowCommands } });
+                    }
+                    catch (BridgeException be)
+                    {
+                        return Rpc.Ok(id, new Dictionary<string, object>
+                        {
+                            { "inactivo", false }, { "ms", sw.ElapsedMilliseconds },
+                            { "motivo", "Civil 3D no quedo inactivo en " + t + " ms: dialogo modal, comando activo o edicion en curso" },
+                            { "detalle", be.Message }
+                        });
+                    }
+                }
+
                 if (method == "approval.request")
                 {
                     string target = prms["metodo"]?.GetValue<string>();
@@ -339,7 +390,8 @@ namespace Cdcrd.Civil3dBridge
                 throw new BridgeException(Rpc.ErrBusy,
                     "Civil 3D no quedo inactivo en " + timeoutMs + " ms: suele estar en un comando, " +
                     "un dialogo modal o en modo edicion. La peticion sigue en cola y se descartara sola");
-            if (t.Error != null) throw t.Error;
+            // preserva la pila original (el metodo exacto que fallo) al relanzar
+            if (t.Error != null) System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(t.Error).Throw();
             return t.Resultado;
         }
     }

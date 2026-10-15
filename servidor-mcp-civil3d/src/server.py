@@ -35,6 +35,7 @@ import dibujo                                      # noqa: E402
 import creacion                                    # noqa: E402
 import vistas                                      # noqa: E402
 import perfil_estratigrafico                       # noqa: E402
+import tridimensional                              # noqa: E402
 
 with open(os.path.join(SRC_DIR, 'config.json'), encoding='utf-8') as fh:
     CONFIG = json.load(fh)
@@ -525,6 +526,7 @@ def listar(area: str, limite: int = 0) -> str:
 
 creacion.registrar(mcp, _llamar, _ok)
 vistas.registrar(mcp, _llamar, _ok)
+tridimensional.registrar(mcp, _llamar, _ok)
 
 
 @mcp.tool()
