@@ -57,6 +57,26 @@ con el color del 1er estrato el hueco entre el TIN del terreno y el techo
 interpolado del relleno (diferencia real FABDEM vs sondeos, visible a la derecha).
 El PNG de PublishToWeb sale en papel vertical por defecto: use `papel_png`.
 
+## Estilo de vista y grilla (2026-10-15)
+Claves nuevas del spec: `grilla_tenue` (default `true`) crea un
+ProfileViewStyle propio `<prefijo>-VISTA_<base>` clonado de
+`estilo_vista_base` (default `"Major Grids"`; el nombre lleva un slug de la
+base para no purgar+recrear, que anula CopyAsSibling) y atenúa las grillas
+mayores a `grilla_color_aci` (default 253) apagando las menores si la base
+las trae. `exageracion` (número) escribe
+`GraphStyle.VerticalExaggeration` en ese estilo. La grilla de la vista se
+dibuja por encima de los HatchAreas nativos y ese orden no es controlable
+por API: atenuarla es la salida. Ojo: `"Standard"` en este dibujo es la
+plantilla imperial del GM — no usarla de base.
+
+## Suite de humo
+`pruebas/humo_perfil.py` (lanzada con `_diag/humo-perfil.ps1`): limpia,
+genera el corte A-A' completo y verifica 0 advertencias, estaciones exactas,
+PDF/PNG exportados y la presencia de los 4 colores de estrato en el PNG con
+`pruebas/verificar_png.py` (decodificador PNG en Python puro, probado
+offline en `tests/test_verificar_png.py`). Verificada en vivo 2026-10-15:
+13/13 OK.
+
 ## MCP
 `generar_perfil_estratigrafico(spec)` en el servidor (disponible cuando el
 cliente MCP recargue el servidor Python). La lógica está en

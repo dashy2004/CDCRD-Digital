@@ -1,8 +1,11 @@
 # Herramientas del servidor MCP de Civil 3D
 
-36 herramientas (19 base + 11 creacion + 5 vista/export + generar_perfil_estratigrafico,
-v0.3.x; ver docs/CREACION.md, docs/VISTAS.md, docs/PERFIL_ESTRATIGRAFICO.md, docs/DIBUJO.md). Las de escritura exigen `confirmar=True`; el servidor pide
-entonces el token de aprobacion ligado a esos parametros exactos.
+47 herramientas (19 base + 11 creacion + 5 vista/export + recetas 3.2/3.4 +
+gm_* y diagnostico de la v0.5.0; ver docs/CREACION.md, docs/VISTAS.md,
+docs/PERFIL_ESTRATIGRAFICO.md, docs/TRIDIMENSIONAL.md, docs/GM.md,
+docs/DIAGNOSTICO.md, docs/DIBUJO.md; limites en docs/LIMITACIONES.md). Las de
+escritura exigen `confirmar=True`; el servidor pide entonces el token de
+aprobacion ligado a esos parametros exactos.
 
 ## Estado y descubrimiento
 
