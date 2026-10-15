@@ -170,6 +170,51 @@ def _handle_por_nombre(puente, coleccion, nombre):
     return None
 
 
+GRILLA_MENOR = ('GridHorizontalMinor', 'GridVerticalMinor')
+GRILLA_MAYOR = ('GridHorizontalMajor', 'GridVerticalMajor')
+
+
+def _estilo_vista(puente, spec, pref, resultado):
+    """ProfileViewStyle propio del perfil: grilla tenue (mayores en gris claro,
+    menores apagadas) y exageracion vertical explicita si el spec la trae.
+
+    Devuelve el nombre del estilo a usar en civil.vista_perfil ('' si no se
+    pudo crear: la vista sale con el estilo por defecto y queda advertencia).
+    """
+    base = spec.get('estilo_vista_base', 'Major Grids')
+    # el nombre lleva la base: cambiar de base crea un estilo nuevo en vez de
+    # purgar y recrear (CopyAsSibling devuelve nulo tras purgar en la sesion)
+    import re as _re
+    nombre = '%s-VISTA_%s' % (pref, _re.sub(r'\W+', '', base)[:12] or 'BASE')
+    rc = _esc(puente, 'estilos.crear', {'familia': 'ProfileViewStyles',
+                                        'nombre': nombre, 'base': base})
+    h = str(rc.get('handle') or '')
+    if h in ('', '0', 'None') and not rc.get('ya_existia'):
+        resultado['advertencias'].append(
+            {'estilo_vista': 'no se pudo crear %s desde %s' % (nombre, base)})
+        return spec.get('estilo_vista', '')
+    if spec.get('grilla_tenue', True):
+        aci = str(spec.get('grilla_color_aci', 253))
+        for comp, params in ([(c, {'visible': 'false'}) for c in GRILLA_MENOR] +
+                             [(c, {'color_aci': aci}) for c in GRILLA_MAYOR]):
+            try:
+                _esc(puente, 'estilos.display', dict(params, familia='ProfileViewStyles',
+                                                     estilo=nombre, vista='Plan',
+                                                     componente=comp))
+            except Exception as exc:
+                resultado['advertencias'].append({'grilla_%s' % comp: str(exc)})
+    if spec.get('exageracion') is not None and h not in ('', '0', 'None'):
+        try:
+            r = puente.llamar_con_aprobacion('objects.update', {
+                'handle': h, 'ruta': 'GraphStyle',
+                'props': {'VerticalExaggeration': float(spec['exageracion'])}})
+            if r.get('fallidos'):
+                resultado['advertencias'].append({'exageracion': r['fallidos']})
+        except Exception as exc:
+            resultado['advertencias'].append({'exageracion': str(exc)})
+    return nombre
+
+
 def generar(spec, puente, log=print):
     """Genera el perfil estratigrafico completo descrito en spec.
 
@@ -214,10 +259,13 @@ def generar(spec, puente, log=print):
         'estilo': estilo_terreno})
     resultado['creado']['fondo'] = fondo_p['handle']
 
+    estilo_vista = spec.get('estilo_vista', '')
+    if spec.get('grilla_tenue', True) or spec.get('exageracion') is not None:
+        estilo_vista = _estilo_vista(puente, spec, pref, resultado) or estilo_vista
     vista = _esc(puente, 'civil.vista_perfil', {
         'alineamiento': alin_nombre, 'nombre': pref + '-VP', 'origen': spec['origen'],
         'elev_min': el_min, 'elev_max': el_max,
-        'estilo': spec.get('estilo_vista', ''), 'banda': spec.get('banda', '')})
+        'estilo': estilo_vista, 'banda': spec.get('banda', '')})
     pv = vista['handle']
     resultado['creado']['vista'] = pv
     if vista.get('fallidos'):

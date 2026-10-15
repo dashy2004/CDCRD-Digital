@@ -130,6 +130,8 @@ def copiar_a_3d(puente, vista, paso=10.0, prefijo='3D', solo=None, log=print):
         raise ValueError('la vista %s no tiene AlignmentId legible' % vista)
     ids = puente.llamar('objects.invoke', {'handle': alin, 'metodo': 'GetProfileIds'})['resultado']
     ids = ids.get('handles', []) if isinstance(ids, dict) else []
+    if not ids:
+        res['advertencias'].append({'perfiles': 'el alineamiento de la vista no tiene perfiles que copiar'})
     ents = [{'tipo': 'capa', 'nombre': prefijo + '-PERFILES', 'color': 7}]
     nombres = []
     for h in ids:
