@@ -67,7 +67,8 @@ def registrar(mcp, llamar, ok):
             return pendiente(alineamiento=alineamiento, vista=vista)
         import json as _json
         parametros = {'alineamiento': alineamiento, 'exageracion': exageracion,
-                      'superficie_top': superficie_top, 'solo_perfil': solo_perfil}
+                      'superficie_top': superficie_top, 'solo_perfil': solo_perfil,
+                      'hatch_geologia': False}
         if vista:
             parametros['vista'] = vista
         if origen:

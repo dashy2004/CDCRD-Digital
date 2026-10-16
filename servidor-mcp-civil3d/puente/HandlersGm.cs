@@ -422,8 +422,13 @@ namespace Cdcrd.Civil3dBridge
                         FijarPropGm(cfg, "MinElev", (double)minE);
                         FijarPropGm(cfg, "MaxElev", (double)maxE);
 
-                        // estilos de hatch de geologia (puede ser null, como en el comando de prueba del GM)
+                        // estilos de hatch de geologia. Por defecto NO se arma:
+                        // el propio comando de prueba del GM pasa null, y con un
+                        // ProfileGeologyField vacio AssignHatchStylesToBoreholeStrata
+                        // es sospechoso de colgar el hilo principal (hallazgo 2026-10-15)
                         object hatchCfg = null;
+                        bool conHatch = p["hatch_geologia"]?.GetValue<bool>() ?? false;
+                        if (conHatch)
                         try
                         {
                             var tHatch = TipoGm(tCad, tCad + ".GeologyHatchingService");
@@ -434,6 +439,7 @@ namespace Cdcrd.Civil3dBridge
                             hatchCfg = mi.Invoke(null, new object[] { docService, rutaHatch, projectId, lista, geoField });
                         }
                         catch (Exception ex) { r["hatch_config"] = "no disponible: " + ((ex as TargetInvocationException)?.InnerException ?? ex).Message; }
+                        Log.Write("gm.perfil_sondeos: GetProfileView");
 
                         // punto de insercion: la vista existente o el parametro 'origen'
                         object insertPoint;
