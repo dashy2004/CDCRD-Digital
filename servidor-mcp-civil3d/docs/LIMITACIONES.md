@@ -1,7 +1,7 @@
 # Que falta / limitaciones conocidas
 
-Estado al 2026-10-15 (puente 0.5.0 en fuente; 0.4.1 cargado hasta el
-reinicio del build final). Complementa `PENDIENTES.md` (backlog por
+Estado al 2026-10-16 (puente **0.5.2** compilado, instalado y verificado en
+vivo, build `2069be350f76`). Complementa `PENDIENTES.md` (backlog por
 prioridad).
 
 ## Limites del puente
@@ -13,9 +13,20 @@ prioridad).
 - **El servidor MCP Python no se recarga solo.** Cambios en `src/*.py` se
   prueban por script TCP (`src/puente_cliente.py`), no por las herramientas
   `mcp__...` de la app, hasta reiniciar la app de Claude.
-- **Dialogos modales congelan las peticiones** (vencen a 55 s). Diagnostico:
-  `eventos_dialogo` / `leer_log_puente`. `ejecutar_comando` es asincrono y
-  no sirve para comandos que abren dialogos.
+- **Dialogos modales congelan las peticiones** (vencen a 55 s): el modal
+  bloquea la ventana principal y la bomba de `Application.Idle` no dispara.
+  Desde 0.5.2 `eventos_dialogo` se sirve **en el hilo del socket** (solo
+  user32) y responde igual, con el titulo y los textos de los dialogos
+  `#32770`; `leer_log_puente` sigue siendo el otro diagnostico que no
+  depende del hilo principal. `ejecutar_comando` es asincrono y no sirve
+  para comandos que abren dialogos.
+- **SECURELOAD con el `.lsp` temporal.** `ejecutar_lisp` escribe un `.lsp` en
+  `%LOCALAPPDATA%\Temp\cdcrd_lisp` y lo carga con `(load ...)`. Si esa
+  carpeta no esta en TRUSTEDPATHS, AutoCAD abre
+  *"Security - Unsigned Executable File"* y cuelga el puente hasta que
+  alguien pulse un boton. Salidas: agregar la carpeta a TRUSTEDPATHS, o
+  mandar el codigo corto directo por `ejecutar_comando` (ojo: ~256
+  caracteres por linea y se rompen los acentos).
 - **La grilla de la vista de perfil se dibuja encima de los HatchAreas
   nativos** y ese orden interno no es controlable por API (los rellenos no
   son entidades independientes reordenables). Salida aplicada: estilo de
@@ -33,12 +44,21 @@ prioridad).
 
 ## Geotechnical Modeler
 
-- `ProfileService.CreateStickLogProfile` del GM tiene un
-  `NullReferenceException` documentado en
-  `BUG-GM-CreateStickLogProfile.md`; `gm_diagnosticar` revisa las
-  precondiciones conocidas y `gm_crear_perfil_sondeos` captura la excepcion
-  completa como evidencia. El flujo nativo (perfil estratigrafico 3.2 +
-  isometricos 3.4) es el camino oficial del proyecto y no depende del GM.
+- El flujo del GM tiene **dos** fallas documentadas en
+  `BUG-GM-CreateStickLogProfile.md`: (1) `NullReferenceException` en el
+  borrado previo (`DeleteStickLogProfile` -> `StickLogDiagram.Delete` ->
+  `ProfileStickLog.Delete` -> `ObjectId.GetObject`) cuando el dibujo tiene
+  sticklogs residuales de una corrida interrumpida, y (2) un **MessageBox
+  modal** dentro de `GeologyHatchingService.AssignHatchStylesToBoreholeStrata`
+  cuando ningun estrato casa con `GeologyHatchStyle.config`, que cuelga
+  cualquier llamada por API. Mitigacion: limpiar el estado residual y dejar
+  `hatch_geologia=False`. Con eso `CreateStickLogProfile` **pasa** (verificado
+  2026-10-16, `Corte B-B'`, 5 sondeos, 230 ms).
+- El paso 2 del perfil de sondeos (diagrama de sticklogs) sigue fallando por
+  un defecto **del puente**: `CreateStickLogDiagram` devuelve un `ValueTuple`
+  y la reflexion del puente busca `Item1` como propiedad en vez de campo.
+- El flujo nativo (perfil estratigrafico 3.2 + isometricos 3.4) es el camino
+  oficial del proyecto y no depende del GM.
 - Las herramientas `gm_*` requieren que el contenedor IoC del GM este
   inicializado (algun comando del GM corrido en la sesion) y un proyecto GM
   activo en el dibujo.
@@ -53,10 +73,23 @@ prioridad).
 - QGIS (3.5): se evaluara con un MCP de QGIS existente, no en este puente.
 - Redes hidrosanitarias y planos/cantidades: backlog P2 en `PENDIENTES.md`.
 
-## Pendiente de verificar en vivo (tras el proximo reinicio)
+## Verificado en vivo
 
-- `exportar_vista(layout=...)` con el fix de `SetPlotCentered` (lamina A3).
-- Las seis herramientas `gm_*` y `eventos_dialogo` (DLL 0.5.0).
-- `isometrico_sondeos_3d` ya quedo verificado en v0.4.0; `copiar_a_3d` y
-  `crear_layout` quedaron verificados en vivo con v0.4.1 el 2026-10-15
-  (el export del layout es lo unico que espera el build).
+- v0.4.0/0.4.1: `isometrico_sondeos_3d`, `copiar_a_3d`, `crear_layout`.
+- v0.5.1 (2026-10-15): `exportar_vista(layout=...)` con el fix de
+  `SetPlotCentered` (lamina A3, sin workaround), `eventos_dialogo`,
+  `gm_diagnosticar`, `gm_reparar` (simulacion), suite de humo del perfil
+  13/13, `aplanar_dibujo` (126.186 entidades).
+- v0.5.2 (2026-10-16): `eventos_dialogo` desde el hilo del socket (detecto el
+  modal de SECURELOAD con sus textos), `gm_diagnosticar` con conteo de
+  grupos, `gm_reparar` con `borrar_grupos_muertos` (simulacion) y
+  `gm_crear_perfil_sondeos` con `solo_perfil=True` -> OK.
+
+## Pendiente de verificar en vivo (proximo build)
+
+- `gm_reparar borrar_grupos_muertos` con un caso real (ajustar el criterio a
+  grupos **vacios** con prefijo `GM - `; la prueba positiva de
+  `pruebas/humo_v052.py` quedo sin correr).
+- Paso 2 del perfil de sondeos (`CreateStickLogDiagram`) tras corregir la
+  lectura de campos de `ValueTuple`.
+- `aplanar_dibujo` y la suite de humo del perfil contra el DLL 0.5.2.

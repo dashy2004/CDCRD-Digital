@@ -16,11 +16,16 @@ Requisito comun: un proyecto GM activo (settings guardados en el dibujo;
 Sin parametros. Reporta: ensamblados `Aecc.Gtm.*` cargados, contenedor IoC
 inicializado, existencia de `%PROGRAMDATA%\Autodesk\C3D-GeoTechModeler-2027\
 Application.config`, superficies del dibujo (en particular `GM - Top
-Surface`, cuya ausencia es la causa directa del NRE de
-`CreateStickLogProfile`; ver `BUG-GM-CreateStickLogProfile.md`), superficies
-con sufijo `.1`, los seis estilos de nombre fijo que GM exige, hatches
-huerfanos de la capa `GM-PROF-STICKLOG-2D` y el `ProjectId`. `problemas`
+Surface`), superficies con sufijo `.1`, los seis estilos de nombre fijo que
+GM exige, hatches huerfanos de la capa `GM-PROF-STICKLOG-2D`, grupos de
+`ACAD_GROUP` con miembros borrados (0.5.2) y el `ProjectId`. `problemas`
 resume lo que falta; `ok=true` significa que el flujo del GM tiene todo.
+
+El estado residual de corridas anteriores (hatches huerfanos y grupos de
+sticklogs viejos) es la causa **verificada** del NRE del GM, que ocurre en el
+borrado previo (`DeleteStickLogProfile`), no en la creacion; la ausencia de
+`GM - Top Surface` es un segundo camino al mismo sintoma. Ver
+`BUG-GM-CreateStickLogProfile.md`.
 
 ## gm_reparar
 
@@ -29,7 +34,15 @@ resume lo que falta; `ok=true` significa que el flujo del GM tiene todo.
 | `aplicar` | `False` = simulacion (lista las acciones sin tocar nada) |
 | `renombrar_sufijo_1` | renombra `GM - ... .1` al nombre base cuando el base no existe |
 | `borrar_hatches_huerfanos` | borra los hatch de `GM-PROF-STICKLOG-2D` |
+| `borrar_grupos_muertos` | 0.5.2: borra grupos de `ACAD_GROUP` con miembros borrados (Erase, con `dictremove` de respaldo). Un grupo con miembros vivos fuera de capas `GM-*` se reporta y no se toca |
 | `confirmar` | escritura |
+
+Limitacion medida (2026-10-16): al borrar una entidad AutoCAD la quita de
+sus grupos, asi que el grupo residual queda **vacio**, no con referencias
+nulas. El criterio de `borrar_grupos_muertos` por eso aun no atrapa el caso
+real; el ajuste pendiente es detectar grupos **vacios** con prefijo `GM - `
+(mas BlockTableRecords sin referencias), como hace
+`ProfileService.DeleteOrphanedStickLogObjects` del propio GM.
 
 ## gm_crear_perfil_sondeos
 
@@ -46,7 +59,19 @@ diagrama de sticklogs (`CreateStickLogDiagram` + `Render` + draw order).
 | `exageracion` | vertical, 4.0 por defecto (el GM la escribe en el estilo `GM - Standard`) |
 | `estacion_inicio/fin` | defecto: todo el alineamiento |
 | `superficie_top` | defecto `GM - Top Surface` |
-| `solo_perfil` | `True` se detiene tras `CreateStickLogProfile` (repro del bug) |
+| `solo_perfil` | `True` se detiene tras `CreateStickLogProfile` |
+| `hatch_geologia` | 0.5.2, **False** por defecto: no arma `GeologyHatchStyleConfiguration`. Con `True` el GM abre un MessageBox modal si ningun estrato casa con el config (`ProfileGeologyField` viene vacio) y cuelga el puente. Ver Falla 2 del reporte del bug |
+
+Verificado en vivo 2026-10-16 (build 2069be350f76), tras limpiar el estado
+residual del dibujo: `Corte B-B'` con `solo_perfil=True` devuelve
+`CreateStickLogProfile OK` en 230 ms, 5 sondeos, y el `DebugLog` del GM llega
+hasta `End: ProfileService.CreateStickLogProfile`.
+
+El paso 2 (diagrama, `solo_perfil=False`) falla todavia con
+`ValueTuple\`2 no tiene la propiedad Item1`: `CreateStickLogDiagram` devuelve
+una tupla de valor y `Item1`/`Item2` son **campos**, no propiedades, asi que
+el helper de reflexion del puente no los ve. Corregir en el proximo build
+(leer campos antes que propiedades).
 
 Si `CreateStickLogProfile` falla, `perfil_error` trae la excepcion completa
 (tipo, mensaje, metodo y pila): es la evidencia del reporte del bug. Con

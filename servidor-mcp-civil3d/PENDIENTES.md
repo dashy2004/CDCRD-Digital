@@ -150,3 +150,30 @@ lo que Civil 3D dibuja). Salida privada en HIDRAULICA 1/04_CALCULOS/02_TRABAJO/M
 defectos corregidos por la corrida: la ultima estacion se redondeaba por encima del fin del eje
 (PointNotOnEntity) y `objects.query` recibe `handles`/`props` como listas, no cadenas. Mejoras
 pendientes: progreso ya existe (cada 50); usar `SampleElevations` por tramo para reducir 3300 llamadas.
+
+### v0.5.2 en vivo: modales, grupos del GM y perfil de sondeos OK — 2026-10-16 [claude]
+Build `2069be350f76` compilado con `instalar.ps1` (0/0), instalado en `Contents/build-98d93bb9be13`
+y cargado tras un reinicio. Verificado en vivo: `eventos_dialogo` servido desde el **hilo del
+socket** (solo user32 + textos de los `#32770`) — con eso se identifico el modal
+*"Security - Unsigned Executable File"* de SECURELOAD que colgaba el puente al cargar el `.lsp`
+temporal; `gm_diagnosticar` con conteo de grupos; `gm_reparar borrar_grupos_muertos` en
+simulacion; y `gm_crear_perfil_sondeos("Corte B-B'", solo_perfil=True)` -> **CreateStickLogProfile
+OK**, 5 sondeos, 230 ms, con el DebugLog del GM completo. El NRE del GM queda explicado por el
+estado residual del dibujo (hatches + grupos de sticklogs viejos) y el cuelgue por un MessageBox
+dentro de `GeologyHatchingService.AssignHatchStylesToBoreholeStrata` (unico MessageBox del
+ensamblado); los dos estan documentados en `docs/BUG-GM-CreateStickLogProfile.md`.
+
+Pendientes que deja (P0 del proximo build):
+- `Invocar`/`PropGm` deben leer **campos** antes que propiedades: `CreateStickLogDiagram` devuelve
+  un `ValueTuple` y el paso 2 del perfil de sondeos muere con
+  "ValueTuple`2 no tiene la propiedad Item1".
+- Ajustar `borrar_grupos_muertos`: al borrar una entidad AutoCAD la quita del grupo, asi que el
+  grupo residual queda **vacio** (0 codigos 340), no con referencias nulas. Detectar grupos vacios
+  con prefijo `GM - ` y BlockTableRecords sin referencias, como
+  `ProfileService.DeleteOrphanedStickLogObjects`.
+- Correr la prueba positiva de `pruebas/humo_v052.py` (quedo a medias por el modal de SECURELOAD) y
+  la suite de humo del perfil contra el DLL 0.5.2.
+- `_diag/reiniciar-civil3d.ps1` (nuevo): mata `acad.exe` y relanza Civil 3D 2027 Metric con el dwg,
+  en dos etapas (la etapa 2 se crea por WMI para no morir con el padre). Util para el reinicio que
+  exige cada build. Cerrar el dibujo NO basta: mientras quede un `acad.exe` vivo el `build` del
+  `ping` no cambia.
