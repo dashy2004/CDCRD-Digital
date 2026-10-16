@@ -102,7 +102,21 @@ namespace Cdcrd.Civil3dBridge
                 .Where(m => m.Name == metodo && m.GetParameters().Length == args.Length).ToList();
             if (cands.Count == 0)
                 throw new BridgeException(Rpc.ErrParams, t.Name + " no tiene " + metodo + " con " + args.Length + " parametros");
-            var mi = cands[0];
+            // con sobrecargas (GetProfileView(string,string) vs (Alignment,string)),
+            // elegir la primera cuyos tipos acepten los argumentos reales
+            var mi = cands.FirstOrDefault(m =>
+            {
+                var ps = m.GetParameters();
+                for (int i = 0; i < args.Length; i++)
+                {
+                    if (args[i] == null) continue;
+                    var tp = ps[i].ParameterType;
+                    if (tp.IsInstanceOfType(args[i])) continue;
+                    if (tp.IsValueType && args[i] is IConvertible) continue;
+                    return false;
+                }
+                return true;
+            }) ?? cands[0];
             try { return mi.Invoke(objeto, args); }
             catch (TargetInvocationException tie)
             {
@@ -346,6 +360,15 @@ namespace Cdcrd.Civil3dBridge
             using (AmbitoGm(cont))
             {
                 var tCad = "Aecc.Gtm.CADServices";
+                // el DebugLogger del GM es Scoped: habilitarlo en ESTE scope para que
+                // CreateStickLogProfile deje su traza en DebugLog_*.txt
+                try
+                {
+                    var lg = ResolverGm(cont, TipoGm("Aecc.Gtm.Domain", "Aecc.Gtm.Domain.DebugLogger"));
+                    FijarPropGm(lg, "IsEnabled", true);
+                }
+                catch { }
+                Log.Write("gm.perfil_sondeos: resolviendo servicios");
                 var docService = ResolverGm(cont, TipoGm(tCad, tCad + ".AcadDocumentService"));
                 var landServices = ResolverGm(cont, TipoGm(tCad, tCad + ".LandServices"));
                 var profileService = ResolverGm(cont, TipoGm(tCad, tCad + ".ProfileService"));
@@ -365,6 +388,7 @@ namespace Cdcrd.Civil3dBridge
                         var projectId = (string)PropGm(settings, "ProjectId");
                         r["project_id"] = projectId;
 
+                        Log.Write("gm.perfil_sondeos: GetBoreholes");
                         var boreholes = (IList)InvocarGm(repo, "GetBoreholes", projectId);
                         var conEstratos = new List<object>();
                         double? minE = null, maxE = null;
@@ -382,6 +406,7 @@ namespace Cdcrd.Civil3dBridge
                         if (conEstratos.Count == 0)
                             throw new BridgeException(Rpc.ErrParams, "el proyecto GM no tiene sondeos con estratos");
 
+                        Log.Write("gm.perfil_sondeos: GetAlignment");
                         var alignment = InvocarGm(landServices, "GetAlignment", alinNombre);
                         if (alignment == null)
                             throw new BridgeException(Rpc.ErrParams, "no existe el alineamiento '" + alinNombre + "'");
@@ -425,6 +450,7 @@ namespace Cdcrd.Civil3dBridge
 
                         // LA llamada bajo investigacion (NRE del handoff): capturada con detalle
                         object desplazamiento = null;
+                        Log.Write("gm.perfil_sondeos: CreateStickLogProfile");
                         try
                         {
                             desplazamiento = InvocarGm(profileService, "CreateStickLogProfile",

@@ -114,6 +114,16 @@ namespace Cdcrd.Civil3dBridge
             object bgAnterior = AcApp.GetSystemVariable("BACKGROUNDPLOT");
             AcApp.SetSystemVariable("BACKGROUNDPLOT", 0);
             string papelUsado = null;
+            // el PlotEngine exige que el layout a plotear sea el ACTUAL
+            // (eLayoutNotCurrent): activarlo antes y restaurar al salir
+            string layoutPedido = Txt(p, "layout");
+            string layoutPrevio = null;
+            var lmPlot = LayoutManager.Current;
+            if (!string.IsNullOrWhiteSpace(layoutPedido) && lmPlot.CurrentLayout != layoutPedido)
+            {
+                layoutPrevio = lmPlot.CurrentLayout;
+                using (doc.LockDocument()) lmPlot.CurrentLayout = layoutPedido;
+            }
             try
             {
                 using (doc.LockDocument())
@@ -223,6 +233,10 @@ namespace Cdcrd.Civil3dBridge
             finally
             {
                 try { AcApp.SetSystemVariable("BACKGROUNDPLOT", Convert.ToInt16(bgAnterior)); } catch { }
+                if (layoutPrevio != null)
+                {
+                    try { using (doc.LockDocument()) lmPlot.CurrentLayout = layoutPrevio; } catch { }
+                }
             }
 
             var fi = new FileInfo(ruta);
