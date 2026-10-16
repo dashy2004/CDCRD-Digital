@@ -29,6 +29,7 @@ namespace Cdcrd.Civil3dBridge
             try
             {
                 HiloPrincipal.Suscribir();
+                Handlers.CapturarHandlePrincipal();
                 BridgeServer.Instance.Start(silent: true);
             }
             catch (Exception ex)
@@ -276,6 +277,10 @@ namespace Cdcrd.Civil3dBridge
                     catch (Exception ex) { lineas.Add("<error leyendo log: " + ex.Message + ">"); }
                     return Rpc.Ok(id, new Dictionary<string, object> { { "ruta", Log.Path }, { "lineas", lineas } });
                 }
+                // diag.dialogos solo usa user32: se sirve aqui para que responda
+                // justo cuando hace falta, con un modal bloqueando la bomba de Idle
+                if (method == "diag.dialogos")
+                    return Rpc.Ok(id, Handlers.DiagDialogosSinHilo());
                 if (method == "diag.ping")
                 {
                     int t = prms["timeout_ms"] != null ? prms["timeout_ms"].GetValue<int>() : 3000;

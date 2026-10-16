@@ -24,28 +24,34 @@ def registrar(mcp, llamar, ok):
         """Diagnostico del Geotechnical Modeler: que falta para que funcione.
 
         Revisa ensamblados cargados, contenedor IoC, Application.config,
-        la superficie 'GM - Top Surface' (su ausencia es la causa directa del
-        NullReferenceException de CreateStickLogProfile), las superficies con
-        sufijo .1, los estilos de nombre fijo que GM exige, los hatches
-        huerfanos del sticklog y el ProjectId guardado en el dibujo.
+        la superficie 'GM - Top Surface', las superficies con sufijo .1, los
+        estilos de nombre fijo que GM exige, los hatches huerfanos del
+        sticklog, los grupos con miembros borrados (causa real del
+        NullReferenceException de DeleteStickLogProfile) y el ProjectId
+        guardado en el dibujo.
         """
         return llamar('gm.diagnosticar', {})
 
     @mcp.tool()
     def gm_reparar(aplicar: bool = False, renombrar_sufijo_1: bool = True,
-                   borrar_hatches_huerfanos: bool = False, confirmar: bool = False) -> str:
+                   borrar_hatches_huerfanos: bool = False, borrar_grupos_muertos: bool = False,
+                   confirmar: bool = False) -> str:
         """Repara lo reparable del estado del GM en el dibujo.
 
         Por defecto SIMULA (aplicar=False) y lista las acciones. Con
         aplicar=True: renombra superficies 'GM - ... .1' a su nombre base
-        cuando el base no existe, y si se pide borra los hatches huerfanos de
-        la capa GM-PROF-STICKLOG-2D.
+        cuando el base no existe; si se pide borra los hatches huerfanos de
+        la capa GM-PROF-STICKLOG-2D; y con borrar_grupos_muertos borra los
+        grupos de ACAD_GROUP con miembros borrados (causa real del
+        NullReferenceException de DeleteStickLogProfile). Un grupo con
+        miembros vivos fuera de capas GM-* se reporta y no se toca.
         """
         if not confirmar:
             return pendiente(aplicar=aplicar)
         return llamar('gm.reparar', {'aplicar': aplicar,
                                      'renombrar_sufijo_1': renombrar_sufijo_1,
-                                     'borrar_hatches_huerfanos': borrar_hatches_huerfanos},
+                                     'borrar_hatches_huerfanos': borrar_hatches_huerfanos,
+                                     'borrar_grupos_muertos': borrar_grupos_muertos},
                       escribe=True)
 
     @mcp.tool()

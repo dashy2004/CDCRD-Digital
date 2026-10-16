@@ -228,6 +228,14 @@ namespace Cdcrd.Civil3dBridge
                     if (e is Hatch && e.Layer == "GM-PROF-STICKLOG-2D") huerfanos++;
                 }
                 r["hatches_sticklog"] = huerfanos;
+
+                // grupos de ACAD_GROUP con miembros borrados: causa REAL del NRE
+                // (DeleteStickLogProfile -> StickLogDiagram.Delete ->
+                // ProfileStickLog.Delete -> ObjectId.GetObject sobre un miembro muerto)
+                var muertos = GruposMuertos(tr, db);
+                r["grupos_muertos"] = muertos.Count;
+                if (muertos.Count > 0)
+                    problemas.Add(muertos.Count + " grupo(s) con miembros borrados: DeleteStickLogProfile lanza NullReferenceException al recorrerlos (gm_reparar borrar_grupos_muertos=true)");
                 tr.Commit();
             }
 
@@ -288,6 +296,7 @@ namespace Cdcrd.Civil3dBridge
             bool aplicar = p["aplicar"]?.GetValue<bool>() ?? false;
             bool quitarSufijo = p["renombrar_sufijo_1"]?.GetValue<bool>() ?? true;
             bool borrarHuerfanos = p["borrar_hatches_huerfanos"]?.GetValue<bool>() ?? false;
+            bool borrarGrupos = p["borrar_grupos_muertos"]?.GetValue<bool>() ?? false;
             var acciones = new List<object>();
             var doc = Doc();
             var db = doc.Database;
@@ -335,11 +344,113 @@ namespace Cdcrd.Civil3dBridge
                     acciones.Add(new Dictionary<string, object> { { "hatches_sticklog", n },
                         { "accion", aplicar ? "borrados" : "se borrarian" } });
                 }
+                if (borrarGrupos)
+                {
+                    // port de la limpieza LISP del 2026-10-15 (dictremove sobre ACAD_GROUP).
+                    // Se borra el grupo si TODOS sus miembros estan muertos, o si tiene
+                    // miembros muertos y todos los identificables estan en capas GM-*.
+                    // Un grupo ajeno al GM con miembros muertos se reporta y no se toca.
+                    int n = 0;
+                    var detalle = new List<object>();
+                    foreach (var g in GruposMuertos(tr, db))
+                    {
+                        string accion;
+                        if (!(bool)g["borrable"]) accion = "sin cambio: tiene miembros fuera de capas GM-*";
+                        else if (!aplicar) { accion = "se borraria"; n++; }
+                        else
+                        {
+                            accion = BorrarGrupo(tr, db, (ObjectId)g["_id"], (string)g["nombre"]);
+                            if (accion.StartsWith("borrado")) n++;
+                        }
+                        g.Remove("_id");
+                        g["accion"] = accion;
+                        detalle.Add(g);
+                    }
+                    acciones.Add(new Dictionary<string, object> { { "grupos_muertos", n },
+                        { "accion", aplicar ? "borrados" : "se borrarian" }, { "detalle", detalle } });
+                }
                 tr.Commit();
             }
             Log.Write("gm.reparar aplicar=" + aplicar + " acciones=" + acciones.Count);
             return new Dictionary<string, object> { { "aplicado", aplicar }, { "acciones", acciones },
                 { "nota", aplicar ? null : "simulacion: repita con aplicar=true" } };
+        }
+
+        // Grupos de ACAD_GROUP con al menos un miembro muerto (nulo, invalido o
+        // borrado). Abre los miembros borrados con openErased para leer su capa.
+        // Cada registro: nombre, miembros, muertos, capas, borrable y _id (interno).
+        private static List<Dictionary<string, object>> GruposMuertos(Transaction tr, Database db)
+        {
+            var r = new List<Dictionary<string, object>>();
+            var gd = (DBDictionary)tr.GetObject(db.GroupDictionaryId, OpenMode.ForRead);
+            var entradas = new List<KeyValuePair<string, ObjectId>>();
+            foreach (DBDictionaryEntry de in gd) entradas.Add(new KeyValuePair<string, ObjectId>(de.Key, de.Value));
+            foreach (var de in entradas)
+            {
+                if (de.Value.IsNull || de.Value.IsErased) continue;
+                var g = tr.GetObject(de.Value, OpenMode.ForRead) as Group;
+                if (g == null) continue;
+                ObjectId[] ids;
+                try { ids = g.GetAllEntityIds(); }
+                catch { ids = new ObjectId[0]; }
+                int muertos = 0, vivos = 0;
+                bool soloGm = true;
+                var capas = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+                foreach (var id in ids)
+                {
+                    bool muerto = id.IsNull || !id.IsValid || id.IsErased || id.IsEffectivelyErased;
+                    if (muerto) muertos++; else vivos++;
+                    if (id.IsNull || !id.IsValid) continue;
+                    try
+                    {
+                        var e = tr.GetObject(id, OpenMode.ForRead, true) as Entity;
+                        if (e == null) continue;
+                        capas.Add(e.Layer);
+                        if (!e.Layer.StartsWith("GM-", StringComparison.OrdinalIgnoreCase)) soloGm = false;
+                    }
+                    catch { }
+                }
+                // NumEntities (leido por reflexion) mayor que los ids devueltos
+                // tambien delata referencias que ya no resuelven
+                try
+                {
+                    var pn = g.GetType().GetProperty("NumEntities");
+                    int declarados = pn == null ? ids.Length : Convert.ToInt32(pn.GetValue(g));
+                    if (declarados > ids.Length) muertos += declarados - ids.Length;
+                }
+                catch { }
+                if (muertos == 0) continue;
+                r.Add(new Dictionary<string, object>
+                {
+                    { "nombre", de.Key }, { "miembros", ids.Length }, { "muertos", muertos },
+                    { "capas", capas.ToList() },
+                    { "borrable", vivos == 0 || (soloGm && capas.Count > 0) },
+                    { "_id", de.Value }
+                });
+            }
+            return r;
+        }
+
+        // Erase del grupo (lo que hace GROUP > Explode); si falla, dictremove como
+        // en la limpieza LISP original.
+        private static string BorrarGrupo(Transaction tr, Database db, ObjectId id, string nombre)
+        {
+            try
+            {
+                var g = tr.GetObject(id, OpenMode.ForWrite);
+                g.Erase();
+                return "borrado (Erase)";
+            }
+            catch (Exception ex1)
+            {
+                try
+                {
+                    var gd = (DBDictionary)tr.GetObject(db.GroupDictionaryId, OpenMode.ForWrite);
+                    gd.Remove(nombre);
+                    return "borrado (dictremove; Erase fallo: " + ex1.Message + ")";
+                }
+                catch (Exception ex2) { return "error: " + ex1.Message + " / " + ex2.Message; }
+            }
         }
 
         // ---------- gm.perfil_sondeos (CreateStickLogProfile + diagrama) ----------
@@ -622,13 +733,29 @@ namespace Cdcrd.Civil3dBridge
         [DllImport("user32.dll", CharSet = CharSet.Unicode)] private static extern int GetClassName(IntPtr h, StringBuilder sb, int max);
         [DllImport("user32.dll")] private static extern uint GetWindowThreadProcessId(IntPtr h, out uint pid);
         [DllImport("user32.dll")] private static extern bool EnumWindows(EnumThreadDelegate fn, IntPtr lp);
+        [DllImport("user32.dll")] private static extern bool EnumChildWindows(IntPtr parent, EnumThreadDelegate fn, IntPtr lp);
         private delegate bool EnumThreadDelegate(IntPtr hWnd, IntPtr lParam);
 
-        private static object DiagDialogos(JsonObject p)
+        // Handle de la ventana principal, capturado en el hilo principal al
+        // inicializar (AcadApp.MainWindow no se toca desde el hilo del socket).
+        internal static IntPtr HandlePrincipal = IntPtr.Zero;
+
+        internal static void CapturarHandlePrincipal()
         {
-            var principal = AcadApp.MainWindow;
-            IntPtr hMain = IntPtr.Zero;
-            try { hMain = principal.Handle; } catch { }
+            try { HandlePrincipal = AcadApp.MainWindow.Handle; } catch { }
+        }
+
+        private static object DiagDialogos(JsonObject p) { return DiagDialogosSinHilo(); }
+
+        // Servido desde el hilo del socket (0.5.2): solo user32, sin API de AutoCAD,
+        // asi responde aunque un modal tenga bloqueada la bomba de Idle. Para cada
+        // dialogo clasico (#32770) devuelve tambien sus textos estaticos: el mensaje
+        // de un MessageBox queda como evidencia sin captura de pantalla.
+        internal static object DiagDialogosSinHilo()
+        {
+            IntPtr hMain = HandlePrincipal;
+            if (hMain == IntPtr.Zero)
+                try { hMain = System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle; } catch { }
             bool mainHabilitada = hMain != IntPtr.Zero && IsWindowEnabled(hMain);
             uint pidPropio = (uint)System.Diagnostics.Process.GetCurrentProcess().Id;
             var ventanas = new List<object>();
@@ -642,8 +769,27 @@ namespace Cdcrd.Civil3dBridge
                 var cl = clase.ToString();
                 // los dialogos modales clasicos de AutoCAD/WPF/WinForms
                 if (cl == "#32770" || cl.StartsWith("WindowsForms10") || cl.StartsWith("HwndWrapper"))
-                    ventanas.Add(new Dictionary<string, object> { { "titulo", titulo.ToString() }, { "clase", cl },
-                        { "habilitada", IsWindowEnabled(h) } });
+                {
+                    var v = new Dictionary<string, object> { { "titulo", titulo.ToString() }, { "clase", cl },
+                        { "habilitada", IsWindowEnabled(h) } };
+                    if (cl == "#32770")
+                    {
+                        var textos = new List<string>();
+                        EnumChildWindows(h, (hc, lc) =>
+                        {
+                            var cc = new StringBuilder(64); GetClassName(hc, cc, 64);
+                            var c = cc.ToString();
+                            if (c == "Static" || c == "Button" || c == "DirectUIHWND")
+                            {
+                                var tx = new StringBuilder(1024); GetWindowText(hc, tx, 1024);
+                                if (tx.Length > 0 && textos.Count < 20) textos.Add(tx.ToString());
+                            }
+                            return true;
+                        }, IntPtr.Zero);
+                        v["textos"] = textos;
+                    }
+                    ventanas.Add(v);
+                }
                 return true;
             }, IntPtr.Zero);
             return new Dictionary<string, object>
@@ -651,6 +797,7 @@ namespace Cdcrd.Civil3dBridge
                 { "modal_abierto", !mainHabilitada },
                 { "ventana_principal_habilitada", mainHabilitada },
                 { "ventanas", ventanas },
+                { "hilo", "socket" },
                 { "nota", "modal_abierto=true significa que un dialogo bloquea Civil 3D y las peticiones al puente van a vencer por timeout" }
             };
         }
