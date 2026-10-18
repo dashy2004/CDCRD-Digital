@@ -1,9 +1,11 @@
 # CDCRD-Digital
 
+[![CDCRD Digital: normativa trazable y APIs para Revit, ETABS, SAFE, Civil 3D y AutoCAD](docs/assets/banner-cdcrd-digital.png)](https://www.canva.com/design/DAHYTip4pJ8/Cw9S-5IRfy_MZrj0EXIeaA/edit)
+
 **Normativa trazable · Automatización BIM · Evidencia de ingeniería**
 
 **Consulta el Código de Construcción de la República Dominicana con referencia a su página
-de origen y conecta sus datos con flujos de trabajo en Revit, ETABS y SAFE.**
+de origen y conecta sus datos con flujos de trabajo en Revit, ETABS, SAFE, Civil 3D y AutoCAD.**
 
 El proyecto reúne **5 volúmenes, 34 títulos y 6,580 cláusulas**, tablas listas para cálculo,
 herramientas MCP y revisiones documentadas. Su propósito es hacer que cada decisión pueda
@@ -26,6 +28,10 @@ verificación de un proyecto. Cada informe identifica qué se comprobó y qué e
 > reproduce el texto normativo citando la fuente, conforme al articulo 41 de la Ley 65-00 de
 > Derecho de Autor. No es un documento oficial: ante cualquier diferencia, manda el PDF del
 > MIVHED.
+
+## Constructoras que confían en este programa
+
+**Guillen Rosa & Associados**
 
 ## Que hay aqui (sin necesidad de programar)
 
