@@ -1,0 +1,9 @@
+# Normative content and the controls governing it require owner review when
+# GitHub branch protection enables required code-owner reviews.
+/datos/ @dashy2004
+/md/ @dashy2004
+/corpus-reglamentos/ @dashy2004
+/verificacion-vols/ @dashy2004
+/normativa-lock.json @dashy2004
+/tools/verify_normative.py @dashy2004
+/.github/ @dashy2004

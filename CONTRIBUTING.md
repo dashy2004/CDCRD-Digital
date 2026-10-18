@@ -43,7 +43,11 @@ con una aplicación debe respaldarse además con evidencia de integración en es
 
 ## Reconocimientos
 
-**Asistencia de código y documentación: OpenAI Codex.**
+**Asistencia de desarrollo: OpenAI Codex y Anthropic Claude**, según el historial de cada cambio.
+
+[Cómo probar con cualquiera de los dos asistentes](docs/TRABAJAR-CON-IA.md).
+Las contribuciones normativas siguen el [protocolo de integridad](docs/PROTECCION-NORMATIVA.md).
+Los cambios a herramientas no deben regenerar ni corregir automáticamente el corpus.
 
 El historial de cambios y las propuestas de contribución registran el trabajo concreto.
 El reconocimiento de una herramienta de asistencia no sustituye la revisión humana ni

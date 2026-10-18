@@ -1,0 +1,42 @@
+name: Repository checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  normative-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify current snapshot
+        run: python tools/verify_normative.py
+      - name: Check against the trusted base snapshot on pull requests
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if git cat-file -e "$BASE_SHA:normativa-lock.json" 2>/dev/null; then
+            git show "$BASE_SHA:normativa-lock.json" > "$RUNNER_TEMP/normativa-base.json"
+            git show "$BASE_SHA:tools/verify_normative.py" > "$RUNNER_TEMP/verify-base.py"
+            python "$RUNNER_TEMP/verify-base.py" --root "$GITHUB_WORKSPACE" --manifest "$RUNNER_TEMP/normativa-base.json"
+          else
+            echo 'First baseline: compare the corpus diff and review hashes before merging.'
+          fi
+  portable-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s civil3d-points-survey/tests -v
+        env:
+          PYTHONPATH: civil3d-points-survey
+      - run: python -m unittest discover -s civil3d-terrain-tools/tests -v
+        env:
+          PYTHONPATH: civil3d-terrain-tools
+      - run: python -m unittest discover -s tools/tests -v

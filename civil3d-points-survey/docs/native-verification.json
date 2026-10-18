@@ -1,0 +1,210 @@
+{
+  "civil3d": "2027 / Windows / COM 13.9",
+  "version": "0.1.0",
+  "fixture": "12 fictional points, local metres",
+  "operations": {
+    "import": {
+      "receipt": {
+        "version": "0.1.0",
+        "ok": true,
+        "action": "import",
+        "count": 12,
+        "error": ""
+      },
+      "comparison": {
+        "ok": true,
+        "expected": 12,
+        "actual": 12,
+        "missing": [],
+        "extra": [],
+        "changed_descriptions": [],
+        "max_coordinate_error_m": 1.7763568394002505e-15,
+        "tolerance_m": 1e-07
+      }
+    },
+    "audit": {
+      "receipt": {
+        "version": "0.1.0",
+        "ok": true,
+        "action": "audit",
+        "count": 12,
+        "error": ""
+      },
+      "comparison": {
+        "ok": true,
+        "expected": 12,
+        "actual": 12,
+        "missing": [],
+        "extra": [],
+        "changed_descriptions": [],
+        "max_coordinate_error_m": 1.7763568394002505e-15,
+        "tolerance_m": 1e-07
+      }
+    },
+    "survey-import": {
+      "receipt": {
+        "version": "0.1.0",
+        "ok": true,
+        "action": "survey-import",
+        "count": 12,
+        "error": ""
+      },
+      "comparison": {
+        "ok": true,
+        "expected": 12,
+        "actual": 12,
+        "missing": [],
+        "extra": [],
+        "changed_descriptions": [],
+        "max_coordinate_error_m": 1.7763568394002505e-15,
+        "tolerance_m": 1e-07
+      }
+    },
+    "survey-read": {
+      "receipt": {
+        "version": "0.1.0",
+        "ok": true,
+        "action": "survey-read",
+        "count": 12,
+        "error": ""
+      },
+      "comparison": {
+        "ok": true,
+        "expected": 12,
+        "actual": 12,
+        "missing": [],
+        "extra": [],
+        "changed_descriptions": [],
+        "max_coordinate_error_m": 1.7763568394002505e-15,
+        "tolerance_m": 1e-07
+      }
+    }
+  },
+  "cogo_save_close_reopen": true,
+  "survey_save_close_reopen": true,
+  "scope": "Coordinates only; no observed survey network or adjustment",
+  "initial_database_creation": "Manual prerequisite; automatic COM Create trial interrupted and excluded from supported API",
+  "group": {
+    "name": "DEMO_TN",
+    "count": 6,
+    "numbers": [
+      101,
+      102,
+      105,
+      106,
+      109,
+      110
+    ]
+  },
+  "rejections": {
+    "wrong-drawing": {
+      "version": "0.1.0",
+      "ok": false,
+      "action": "audit",
+      "count": 0,
+      "error": "Wrong active drawing"
+    },
+    "duplicate-group": {
+      "version": "0.1.0",
+      "ok": false,
+      "action": "group",
+      "count": 0,
+      "error": "Group already exists"
+    },
+    "occupied-survey": {
+      "version": "0.1.0",
+      "ok": false,
+      "action": "survey-import",
+      "count": 0,
+      "error": "Survey import requires an empty database"
+    }
+  },
+  "final_survey_import_retest": {
+    "receipt": {
+      "version": "0.1.0",
+      "ok": true,
+      "action": "survey-import",
+      "count": 12,
+      "error": ""
+    },
+    "comparison": {
+      "ok": true,
+      "expected": 12,
+      "actual": 12,
+      "missing": [],
+      "extra": [],
+      "changed_descriptions": [],
+      "max_coordinate_error_m": 1.7763568394002505e-15,
+      "tolerance_m": 1e-07
+    },
+    "empty_database_source": "Copy of an existing empty practice database; never published"
+  },
+  "civil_unit_correction": {
+    "before": "Feet=1 while INSUNITS=6",
+    "after": "Meters=2 and INSUNITS=6",
+    "coordinate_comparison": {
+      "ok": true,
+      "expected": 12,
+      "actual": 12,
+      "missing": [],
+      "extra": [],
+      "changed_descriptions": [],
+      "max_coordinate_error_m": 1.7763568394002505e-15,
+      "tolerance_m": 1e-07
+    },
+    "wrong_civil_units_rejected": true
+  },
+  "metric_final_save_close_reopen": {
+    "receipt": {
+      "version": "0.1.0",
+      "ok": true,
+      "action": "audit",
+      "count": 12,
+      "error": ""
+    },
+    "comparison": {
+      "ok": true,
+      "expected": 12,
+      "actual": 12,
+      "missing": [],
+      "extra": [],
+      "changed_descriptions": [],
+      "max_coordinate_error_m": 1.7763568394002505e-15,
+      "tolerance_m": 1e-07
+    },
+    "groups": [
+      {
+        "name": "DEMO_TN",
+        "count": 6,
+        "numbers": [
+          101,
+          102,
+          105,
+          106,
+          109,
+          110
+        ]
+      },
+      {
+        "name": "_All Points",
+        "count": 12,
+        "numbers": [
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111
+        ]
+      }
+    ],
+    "native_label_elevation_units": "Metres, explicit m suffix",
+    "coordinate_rescaling": false
+  }
+}

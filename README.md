@@ -12,7 +12,7 @@ herramientas MCP y revisiones documentadas. Su propósito es hacer que cada deci
 rastrearse desde la fuente normativa hasta los datos y la evidencia del modelo.
 
 [Explorar la norma](datos/INDICE.md) · [Instalar](#instalación-y-paquetes) ·
-[Herramientas](#los-servidores-mcp) · [Ejemplos](#ejemplos-de-herramientas) ·
+[Civil 3D](#civil-3d-resultados-reproducibles) · [Herramientas](#los-servidores-mcp) · [Ejemplos](#ejemplos-de-herramientas) ·
 [Documentación técnica](#documentacion-tecnica) · [Contribuir](CONTRIBUTING.md)
 
 | Capa | Qué aporta | Punto de entrada |
@@ -97,6 +97,71 @@ asigna por posicion en el documento, no por el prefijo del id.
    entregarla. El ejemplo `ejemplos/residencial-4n` (edificio de 4 niveles y 8
    apartamentos, nombres inventados) corre de punta a punta en ~15 s.
 
+## Civil 3D: resultados reproducibles
+
+Una galería con el mismo formato permite ver **qué hace cada herramienta, qué se
+probó y cómo repetirlo**. Todos estos ejemplos usan geometría ficticia.
+
+### Puntos COGO y Survey
+
+[Guía y ejemplos](civil3d-points-survey/README.md) ·
+[Entradas y resultados](civil3d-points-survey/docs/VALIDACION.md)
+
+| Inventario y exportación | Importación COGO |
+|---|---|
+| ![Inventario de puntos](civil3d-points-survey/docs/images/audit.png) | ![Importación de puntos](civil3d-points-survey/docs/images/import.png) |
+| Coordenadas y descripciones para comparar antes/después. | 12 puntos ficticios en un dibujo vacío, en metros. |
+
+| Grupos de puntos | Survey y persistencia |
+|---|---|
+| ![Grupo TN](civil3d-points-survey/docs/images/group.png) | ![Base Survey](civil3d-points-survey/docs/images/survey.png) |
+| Selección explícita de seis puntos de terreno. | Base separada; coordenadas importadas, sin observaciones de campo. |
+
+![Verificación de COGO y Survey](civil3d-points-survey/docs/images/survey-read.png)
+
+Relectura, comparación de coordenadas y controles tras guardar y reabrir.
+
+### Superficies, taludes y secciones
+
+[Instalación y API](civil3d-terrain-tools/README.md) ·
+[Verificaciones nativas](civil3d-terrain-tools/docs/VALIDACION.md)
+
+| Excavación | Relleno |
+|---|---|
+| ![Excavación con taludes](civil3d-terrain-tools/docs/images/excavacion.png) | ![Plataforma de relleno](civil3d-terrain-tools/docs/images/relleno.png) |
+| Corte verificado: 276 m³. | Relleno verificado: 276 m³. |
+
+| Caso mixto | Secciones |
+|---|---|
+| ![Corte y relleno](civil3d-terrain-tools/docs/images/mixta.png) | ![Secciones nativas](civil3d-terrain-tools/docs/images/secciones.png) |
+| Corte y relleno separados: 6,444444 m³ cada uno. | Muestreo nativo y comparación con el volumen TIN. |
+
+![Comparación de volúmenes y secciones](civil3d-terrain-tools/docs/images/verificacion.png)
+
+**Pendiente de cierre en terreno:** los valores numéricos de R2 están comparados,
+pero falta verificar por separado las unidades de Civil y de las etiquetas de su
+demostración histórica. INSUNITS por sí solo no basta; véase la
+[limitación de unidades](civil3d-terrain-tools/docs/VALIDACION.md#comprobación-de-unidades-pendiente-en-la-demostración-r2).
+
+Las imágenes identifican su origen: exportación nativa del modelo o informe de
+lecturas de la API. No se presentan como capturas de escritorio. Civil 3D 2027 es
+la versión probada; cada módulo documenta sus límites.
+
+## Usarlo con Claude o Codex
+
+[Guía para el ingeniero y prompt de prueba](docs/TRABAJAR-CON-IA.md).
+Puede pedir a cualquiera de los dos asistentes que prepare un ejemplo, muestre
+los supuestos y compare los resultados. Las herramientas también tienen un
+procedimiento manual reproducible.
+
+## Conservar la normativa revisada
+
+[Estado y propuesta de protección](docs/PROTECCION-NORMATIVA.md): manifiesto de
+111 archivos, verificador local, plantilla de CI y responsables de revisión.
+La CI está pendiente de instalación; los controles preparados no equivalen a
+reglas de GitHub ya activadas. Tampoco cambian las marcas
+de fórmulas/tablas pendientes de cotejo.
+
 ## Los servidores MCP
 
 | Servidor | Que opera | Estado |
@@ -127,10 +192,34 @@ no contiene datos, imágenes ni resultados de un proyecto en desarrollo.
 | [Auditoría MEP](revit-mcp-tools/MEP.md) | Inventariar categorías/sistemas y revisar conectores físicos abiertos |
 | [Revit residencial de cuatro niveles](revit-mcp-tools/ejemplos/residencial-4n/) | Seguir una receta de modelado y documentación |
 | [Planta CAD sintética](herramientas-locales/README.md#ejemplo-de-plano-reproducible) | Generar DXF, inspeccionarlo y producir vistas previas |
+| [Esquemas DXF de secciones y pórtico](herramientas-locales/ejemplos/secciones-dxf/README.md) | Dibujar secciones acotadas y un pórtico tipo por código, con capas y cotas nativas |
 
 El inventario y la conectividad ayudan a localizar omisiones; no sustituyen el cálculo de
 caudales, cargas, ventilación, protección contra incendios ni una revisión normativa completa.
 El estado de las pruebas de cada herramienta está documentado en su módulo.
+
+### Esquemas DXF: secciones y pórtico
+
+[Ejemplo y parámetros](herramientas-locales/ejemplos/secciones-dxf/README.md) ·
+[Operaciones de la CLI](herramientas-locales/README.md#ejemplo-de-plano-reproducible)
+
+Cuatro archivos `.dxf` generados por código y abiertos después en CAD. Unidades
+en centímetros, capas separadas y cotas nativas. Geometría ficticia.
+
+| Sección 35 × 35 | Sección 40 × 40 |
+|---|---|
+| <picture><source media="(prefers-color-scheme: dark)" srcset="herramientas-locales/docs/images/seccion-c1-dark.png"><img alt="Sección de columna 35 x 35 con 12 barras No. 6" height="430" src="herramientas-locales/docs/images/seccion-c1.png"></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="herramientas-locales/docs/images/seccion-c2-dark.png"><img alt="Sección de columna 40 x 40 con 14 barras No. 6" height="430" src="herramientas-locales/docs/images/seccion-c2.png"></picture> |
+| 12 barras No. 6; estribo No. 3 dibujado con su espesor. | 14 barras No. 6; separaciones acotadas a ejes de barra. |
+
+| Sección 40 × 45 | Pórtico tipo |
+|---|---|
+| <picture><source media="(prefers-color-scheme: dark)" srcset="herramientas-locales/docs/images/seccion-c3-dark.png"><img alt="Sección de columna 40 x 45 con 16 barras No. 6" height="430" src="herramientas-locales/docs/images/seccion-c3.png"></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="herramientas-locales/docs/images/portico-tipo-dark.png"><img alt="Pórtico tipo de tres niveles de 310 cm" height="430" src="herramientas-locales/docs/images/portico-tipo.png"></picture> |
+| 16 barras No. 6; dobleces redondeados y gancho a 135°. | Tres niveles de 310 cm con empotramientos y cotas. |
+
+Son vistas directas de esos `.dxf`, sin rótulos ni montaje añadidos; cada una se
+sirve en versión clara u oscura según el tema de quien lee. El ejemplo produce
+esquemas acotados: no incluye cajetín, láminas de presentación ni despiece de
+armadura, y no sustituye cálculo ni verificación normativa.
 
 ### Demostración ETABS — oficinas de tres niveles
 
@@ -145,6 +234,9 @@ geometría, las cargas, el análisis y la lectura de resultados de una demostrac
 
 Las capturas históricas se consultan dentro de su protocolo. Los ejemplos visuales nuevos
 deben seguir el [criterio de presentación y evidencia](docs/PRESENTACION.md).
+
+<details>
+<summary>Consultar el informe detallado de pruebas ETABS y pendientes normativos</summary>
 
 ## El servidor de ETABS, probado de punta a punta
 
@@ -217,6 +309,8 @@ verificar contra su API antes de modelar.
 Advertencia honesta: las clausulas marcadas `"formula": true` y `"vision_ok": false` pueden
 tener simbolos corruptos heredados del PDF — **no las cite sin verificar contra el original**.
 
+</details>
+
 ## Politica de datos
 
 Este es un repositorio **publico** y su contenido es la norma (publica) y las herramientas.
@@ -240,6 +334,45 @@ del modelo abierto, están excluidas por `.gitignore`. Véase el
 
 ## Instalación y paquetes
 
+**Un solo comando abre un menú que hace todo lo demás.** Descargue el repositorio
+(botón verde **Code → Download ZIP**, o `git clone`), abra la carpeta en
+PowerShell y escriba:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\instalar-cdcrd.ps1
+```
+
+```
+   ####  ####   ####  ####   ####
+  ##     ##  ## ##     ##  ## ##  ##
+  ##     ##  ## ##     ####   ##  ##
+  ##     ##  ## ##     ##  ## ##  ##
+   ####  ####   ####  ##  ## ####
+
+  1  Ver que hay en este equipo (diagnostico)
+  2  Instalar las herramientas locales
+  3  Conectar ETABS, SAFE, Revit y Civil 3D
+  4  Comprobar el corpus normativo
+  5  Configurar mi asistente de IA
+  6  Instalarlo todo de una vez
+  7  Preguntas frecuentes
+  0  Salir
+```
+
+El menú detecta qué hay en el equipo (Python, `uv`, git, ETABS, SAFE, Revit,
+Civil 3D y qué asistente de IA tiene instalado), instala solo lo que falta y
+escribe la configuración de su asistente **sin borrar lo que ya tuviera**. No
+pide privilegios de administrador y respalda cada archivo antes de tocarlo.
+
+¿Prefiere que lo haga su asistente? Páguele el enlace de este repositorio y
+pídale que siga [INSTALAR-CON-IA.md](INSTALAR-CON-IA.md): ahí están los mismos
+pasos sin menú (`-Accion diagnostico|locales|bim|clientes|todo`, con `-Json`),
+los archivos de configuración de Claude Desktop, Claude Code, Codex, Cursor y
+VS Code, y los fallos conocidos con su causa real.
+
+<details>
+<summary>Instalación manual, paso a paso</summary>
+
 El módulo local se distribuye en este repositorio como el paquete Python `cdcrd-local`
 (versionado en [pyproject.toml](herramientas-locales/pyproject.toml)), con CLI y servidor MCP.
 La instalación documentada utiliza el código fuente y `uv.lock`:
@@ -254,11 +387,14 @@ Requiere `uv`; el instalador prepara Python 3.13 y un entorno aislado. Véanse l
 publicación en PyPI ni en GitHub Packages. Los conectores Revit, ETABS y SAFE tienen sus
 [propias instrucciones](instalacion/INSTALACION.md) y requieren las aplicaciones correspondientes.
 
+</details>
+
 ## Contribuir y reconocimientos
 
 Las mejoras de herramientas, documentación y ejemplos se describen en
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
-**Asistencia de código y documentación: OpenAI Codex.** Las contribuciones concretas quedan
+**Desarrollo asistido: OpenAI Codex y Anthropic Claude**, según el historial de cada cambio.
+[Probar las herramientas con IA](docs/TRABAJAR-CON-IA.md). Las contribuciones concretas quedan
 registradas en el historial del repositorio. Este reconocimiento no representa una cuenta
 personal de GitHub ni una certificación de los resultados de ingeniería.
