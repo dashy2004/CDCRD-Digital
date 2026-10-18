@@ -63,6 +63,13 @@ ganchos, traslapos y su conciliación con la sección comprobada.
 Las propiedades de la sección TEST_L2 del editor muestran `Cover=38,1 mm`,
 otro valor distinto del recubrimiento comprobado de 40 mm. No se sustituyó
 ninguna de estas fuentes ni se ajustó el modelo para ocultar la diferencia.
+Una captura adicional de propiedades muestra vertical `#6` a 250 mm y
+horizontal `As=500 mm²/m`, `#4`, separación máxima 450 mm. La separación
+vertical del editor sí coincide con el overwrite de 250 mm, pero no con la
+capa derivada de 230 mm. El catálogo `PropRebar` del modelo contiene barras
+métricas 6–50, no los nombres `#4`/`#6`: **no se elimina el prefijo # para
+convertirlos**. Por API, la barra `6` tiene diámetro 6 mm, no es prueba de
+equivalencia con la designación `#6` del editor.
 
 ## Pruebas
 
@@ -75,6 +82,12 @@ ninguna de estas fuentes ni se ajustó el modelo para ocultar la diferencia.
   sin evidencia de unidades. La igualdad numérica tampoco autoriza despiece.
 - Lectura real del modelo: cuatro registros conciliados con estado `differences`.
   Cambio temporal de unidades restaurado; modelo bloqueado y nueve casos Finished.
+- Instalación de la corrección `d6cc8e1` verificada por SHA-256, con respaldo
+  y configuración preservada. Dos sesiones nuevas MCP por stdio, una con cada
+  runtime configurado, comprobaron las 76 herramientas, los cuatro D/C, las
+  cuatro capas, el rechazo del comando legado y nueve casos Finished.
+  Los clientes que ya estaban abiertos requieren recargar `fea`; no se cerraron
+  sus procesos. Los EDB de referencia y corregido conservaron sus hashes.
 
 `complete_detailing=false` y `engineering_approval=false` permanecen explícitos.
 El siguiente paso es obtener y verificar los datos del editor nativo, no repetir
