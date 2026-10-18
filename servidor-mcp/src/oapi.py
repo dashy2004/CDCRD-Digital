@@ -201,7 +201,9 @@ def call_checked(owner: Any, method_name: str, args: tuple, what: str = "") -> A
 
 
 def result_rows(owner: Any, method: str, result: Any,
-                fields: Sequence[tuple[str, type]]) -> list[dict]:
+                fields: Sequence[tuple[str, type]],
+                count_name: str = 'NumberResults',
+                nullable_fields: Sequence[str] = ()) -> list[dict]:
     """Decode counted COM result arrays by typelib names, never by magnitude.
 
     With no typelib, use the explicit CSI layout supplied by the caller. A
@@ -211,29 +213,33 @@ def result_rows(owner: Any, method: str, result: Any,
     if ret_code(result) != 0:
         raise OapiError(f'{method}: codigo de retorno invalido: {ret_code(result)!r}')
     values = outs(result)
-    names = ['NumberResults', *[name for name, _ in fields]]
+    names = [count_name, *[name for name, _ in fields]]
     for entry in _iter_specs(type(owner)):
         name, _, params, _ = _unpack_spec(entry)
         if name == method:
             names = [n for bits, n, _, _ in params
                      if bits is not None and bits & 2 and not bits & 8]
             break
-    expected = {'NumberResults', *[name for name, _ in fields]}
+    expected = {count_name, *[name for name, _ in fields]}
     if len(values) != len(names) or len(set(names)) != len(names) or set(names) != expected:
         raise OapiError(f'{method}: contrato de salidas no reconocido; use describe_oapi')
     columns = dict(zip(names, values))
-    count = columns.pop('NumberResults')
+    count = columns.pop(count_name)
     if type(count) is not int or count < 0:
-        raise OapiError(f'{method}: NumberResults invalido')
+        raise OapiError(f'{method}: {count_name} invalido')
     for name, kind in fields:
         column = columns[name]
         if count == 0 and column is None:
             column = columns[name] = []
         if not isinstance(column, (tuple, list)) or len(column) != count:
-            raise OapiError(f'{method}.{name}: longitud distinta de NumberResults={count}')
+            raise OapiError(f'{method}.{name}: longitud distinta de {count_name}={count}')
         for value in column:
-            valid = isinstance(value, str) if kind is str else (
-                type(value) in (int, float) and math.isfinite(value))
+            if value is None and name in nullable_fields:
+                continue
+            if kind in (str, bool, int):
+                valid = type(value) is kind
+            else:
+                valid = type(value) in (int, float) and math.isfinite(value)
             if not valid:
                 raise OapiError(f'{method}.{name}: valor no valido')
     return [{name: columns[name][i] for name, _ in fields} for i in range(count)]

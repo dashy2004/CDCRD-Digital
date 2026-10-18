@@ -53,7 +53,7 @@ def get_config() -> str:
 if config.feaName == "ETABS":
     from Etabs import Etabs
     from oapi_catalog import search_oapi_catalog
-    etabs = Etabs(auto_start=config.autoStart, exe_path=config.exePath)
+    etabs = Etabs(auto_start=config.autoStart, exe_path=config.exePath, process_id=config.processId)
     logger.info("Registrando herramientas de ETABS...")
 
     get_model_info = mcp.tool()(etabs.get_model_info)

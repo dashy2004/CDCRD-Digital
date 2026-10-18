@@ -31,6 +31,7 @@ from pydantic import BaseModel, Field
 
 from comthread import com_call, run_in_com
 import oapi
+from table_contracts import editing_rows, mass_source_rows, time_history_row
 
 logger = logging.getLogger('fea_mcp_server')
 
@@ -60,7 +61,7 @@ class EtabsError(RuntimeError):
     """Fallo de conexion u operacion en ETABS. FastMCP lo convierte en isError."""
 
 
-def _descartar_modales_etabs(stop_event: threading.Event) -> None:
+def _descartar_modales_etabs(stop_event: threading.Event, process_id: int) -> None:
     """Descarta dialogos modales (#32770) de ETABS durante un import de texto.
 
     File.OpenFile sobre un .e2k/.$et puede levantar un modal ("System memory
@@ -72,6 +73,9 @@ def _descartar_modales_etabs(stop_event: threading.Event) -> None:
     posteado cross-thread no funciona; verificado). Cada descarte queda en
     el log.
     """
+    # Sin identidad explicita no es seguro tocar ventanas de otras sesiones.
+    if type(process_id) is not int or process_id <= 0:
+        return
     import ctypes
     from ctypes import wintypes
 
@@ -82,6 +86,8 @@ def _descartar_modales_etabs(stop_event: threading.Event) -> None:
     u32.EnumChildWindows.argtypes = (wintypes.HWND, ENUM, wintypes.LPARAM)
     u32.GetClassNameW.argtypes = (wintypes.HWND, ctypes.c_wchar_p, ctypes.c_int)
     u32.IsWindowVisible.argtypes = (wintypes.HWND,)
+    u32.GetWindowThreadProcessId.argtypes = (wintypes.HWND,
+                                            ctypes.POINTER(wintypes.DWORD))
     u32.GetDlgCtrlID.argtypes = (wintypes.HWND,)
     u32.PostMessageW.argtypes = (wintypes.HWND, ctypes.c_uint,
                                  wintypes.WPARAM, wintypes.LPARAM)
@@ -103,6 +109,10 @@ def _descartar_modales_etabs(stop_event: threading.Event) -> None:
         tops: list[int] = []
 
         def _top(h, _l):
+            pid = wintypes.DWORD()
+            u32.GetWindowThreadProcessId(h, ctypes.byref(pid))
+            if pid.value != process_id:
+                return True
             cls = ctypes.create_unicode_buffer(64)
             u32.GetClassNameW(h, cls, 64)
             if cls.value == "#32770" and u32.IsWindowVisible(h):
@@ -132,7 +142,10 @@ def _descartar_modales_etabs(stop_event: threading.Event) -> None:
 
 
 class Etabs:
-    def __init__(self, auto_start: bool = False, exe_path: str = ""):
+    def __init__(self, auto_start: bool = False, exe_path: str = "", process_id: int = 0):
+        if type(process_id) is not int or process_id < 0:
+            raise ValueError('process_id debe ser 0 (automatico) o un PID positivo')
+        self.process_id = process_id
         self.SapModel = None
         self._etabs_object = None
         self.auto_start = auto_start
@@ -158,6 +171,30 @@ class Etabs:
                 self._etabs_object = None
 
         etabs_object = None
+
+        # An explicitly pinned instance must never fall back to the ROT or
+        # launch another process: that could overwrite a different open model.
+        if self.process_id:
+            try:
+                helper = comtypes.client.CreateObject('ETABSv1.Helper')
+                try:
+                    import comtypes.gen.ETABSv1 as ETABSv1
+                    helper = helper.QueryInterface(ETABSv1.cHelper)
+                except ImportError:
+                    pass
+                etabs_object = helper.GetObjectProcess(PROG_ID, self.process_id)
+                if not etabs_object:
+                    raise EtabsError('GetObjectProcess no devolvio instancia')
+                self.SapModel = etabs_object.SapModel
+                self.SapModel.GetModelFilename()
+                self._etabs_object = etabs_object
+                self.version_string = str(etabs_object.GetOAPIVersionNumber())
+                return
+            except Exception as exc:
+                self.SapModel = None
+                self._etabs_object = None
+                raise EtabsError(f'No se pudo conectar al PID ETABS {self.process_id}; '
+                                 f'no se usara otra instancia: {exc}') from exc
 
         # Ruta 1: adjuntarse a una instancia ya abierta (la mas comun).
         try:
@@ -479,8 +516,17 @@ class Etabs:
                 f"Use point, frame o area.")
         model = self._model()
         owner = getattr(model, ns)
-        oapi.call(owner, [("Delete", (name, 0)), ("Delete", (name,))],
+        if ns == 'PointObj':
+            connected = oapi.outs(oapi.call_checked(owner, 'GetConnectivity', (name,)))
+            if not connected or type(connected[0]) is not int or connected[0] != 0:
+                raise EtabsError('No se puede borrar un punto conectado; borre primero sus objetos.')
+            variants = [('DeleteSpecialPoint', (name, 0))]
+        else:
+            variants = [("Delete", (name, 0)), ("Delete", (name,))]
+        oapi.call(owner, variants,
                   f"borrado de {ns} '{name}'")
+        if name in self._name_list(owner, 'verificacion de borrado'):
+            raise EtabsError(f"{ns} '{name}' sigue existiendo tras el borrado.")
         return f"{ns} '{name}' borrado."
 
     @com_call
@@ -760,6 +806,9 @@ class Etabs:
         las unidades ACTIVAS y se convierten a las del archivo (la linea
         UNITS del $et), que pueden diferir.
         """
+        if not self.process_id:
+            raise EtabsError('El import de texto requiere process_id / ETABS_PROCESS_ID '
+                             'para limitar el manejo de modales a una instancia.')
         model = self._model()
         n = len(names)
         edb = str(model.GetModelFilename() or "")
@@ -859,7 +908,7 @@ class Etabs:
         #    2026-08-07); descartado, el import termina bien.
         alto = threading.Event()
         vigia = threading.Thread(target=_descartar_modales_etabs,
-                                 args=(alto,), daemon=True)
+                                 args=(alto, self.process_id), daemon=True)
         vigia.start()
         try:
             oapi.call_checked(model.File, "OpenFile", (e2k,),
@@ -1282,6 +1331,7 @@ class Etabs:
         actuales y R en radianes. No ejecuta analisis ni modifica geometria.
         cases cambia la seleccion de salida; None conserva la existente.
         La paginacion limita la respuesta, no la lectura COM completa.
+        Obj puede ser null en nodos internos de la malla; Elm conserva su ID.
         """
         if type(item_type) is not int or item_type not in range(4):
             raise ValueError('item_type debe ser 0, 1, 2 o 3')
@@ -1297,7 +1347,8 @@ class Etabs:
         fields = [('Obj', str), ('Elm', str), ('LoadCase', str), ('StepType', str),
                   ('StepNum', float), ('U1', float), ('U2', float), ('U3', float),
                   ('R1', float), ('R2', float), ('R3', float)]
-        rows = oapi.result_rows(model.Results, 'JointDispl', result, fields)
+        rows = oapi.result_rows(model.Results, 'JointDispl', result, fields,
+                                nullable_fields=('Obj',))
         units = model.GetPresentUnits()
         if type(units) is not int or not 1 <= units <= len(PRESET_UNITS):
             raise EtabsError(f'Unidades ETABS no reconocidas: {units!r}')
@@ -1565,8 +1616,26 @@ class Etabs:
         get_analysis_status en vez de relanzar a ciegas.
         """
         model = self._model()
+        if not os.path.isfile(str(model.GetModelFilename() or '')):
+            raise EtabsError('El modelo debe estar guardado antes del analisis; use save_model(path).')
+        flags = oapi.result_rows(
+            model.Analyze, 'GetRunCaseFlag',
+            oapi.call_checked(model.Analyze, 'GetRunCaseFlag', ()),
+            [('CaseName', str), ('Run', bool)], count_name='NumberItems')
+        selected = [row['CaseName'] for row in flags if row['Run']]
+        if not selected:
+            raise EtabsError('No hay casos seleccionados para ejecutar el analisis.')
         oapi.call(model.Analyze, [("RunAnalysis", ())], "ejecucion del analisis")
-        return "Analisis ejecutado."
+        statuses = oapi.result_rows(
+            model.Analyze, 'GetCaseStatus',
+            oapi.call_checked(model.Analyze, 'GetCaseStatus', ()),
+            [('CaseName', str), ('Status', int)], count_name='NumberItems')
+        by_name = {row['CaseName']: row['Status'] for row in statuses}
+        unfinished = {name: by_name.get(name) for name in selected if by_name.get(name) != 4}
+        if unfinished:
+            raise EtabsError(f'RunAnalysis retorno 0 pero hay casos sin finalizar: {unfinished}. '
+                             'Revise el log de analisis; no relance a ciegas.')
+        return f'Analisis ejecutado y verificado: {len(selected)} caso(s) seleccionado(s) finalizado(s).'
 
     @com_call
     def get_analysis_status(self) -> str:
@@ -1863,10 +1932,15 @@ class Etabs:
         out = oapi.outs(result)
         ints = [v for v in out if isinstance(v, int) and not isinstance(v, bool)]
         logs = [v for v in out if isinstance(v, str) and v.strip()]
-        fatal = ints[0] if ints else 0
+        if len(ints) != 4 or len(out) != 5:
+            raise EtabsError('ApplyEditedTables devolvio un contrato no reconocido; verificar tabla.')
+        fatal, errors, warnings, _infos = ints
+        if fatal or errors:
+            raise EtabsError(f"Tabla '{table_key}': {fatal} errores fatales, {errors} errores. "
+                             f"Puede haber cambios parciales. Log: {logs[0][:1000] if logs else '(vacio)'}")
         msg = f"Tabla '{table_key}' escrita: {len(rows)} fila(s)."
-        if fatal:
-            msg += f" ATENCION: {fatal} error(es) fatal(es) al aplicar."
+        if warnings:
+            msg += f' Advertencias: {warnings}.'
         if logs:
             msg += f" Log: {logs[0][:500]}"
         return msg
@@ -2257,6 +2331,10 @@ class Etabs:
             oapi.call(model.Diaphragm,
                       [("SetDiaphragm", (name, bool(semi_rigid)))],
                       f"definicion del diafragma '{name}'")
+        else:
+            current = oapi.outs(oapi.call_checked(model.Diaphragm, 'GetDiaphragm', (name,)))
+            if len(current) != 1 or type(current[0]) is not bool or current[0] != semi_rigid:
+                raise EtabsError(f"El diafragma '{name}' existe con otra rigidez; no se cambio ni asigno.")
 
         points = self._read_points()
         TOL = 1e-6
@@ -2526,27 +2604,27 @@ class Etabs:
 
         Args:
             name: nombre del caso, ej. "PDELTA".
-            base_case: caso estatico existente del que copiar parametros
-                       generales (normalmente el de carga muerta).
+            base_case: parametro legado. Solo se acepta "Dead" o vacio;
+                       no copia parametros ni establece condiciones iniciales.
             load_pattern: patron de carga a aplicar en este caso, ej. "D".
                           Vacio = no agrega carga (util si solo se necesita
                           el caso como referencia para no linealidad geometrica).
             scale: factor de escala del patron de carga.
         """
+        if base_case not in ('', 'Dead'):
+            raise EtabsError('base_case no copia casos; use initial_case en add_nonlinear_static_case.')
         model = self._model()
         snl = model.LoadCases.StaticNonlinear
         oapi.call(snl, [("SetCase", (name,))], f"creacion del caso '{name}'")
         oapi.call(
             snl,
-            [("SetGeometricNonlinearity", (name, 1)),
-             ("SetGeometricNonlinearity", (name, 2))],
+            [("SetGeometricNonlinearity", (name, 1))],
             f"no linealidad geometrica (P-Delta) en '{name}'",
         )
         if load_pattern:
             oapi.call(
                 snl,
-                [("SetLoads", (name, 1, "Load", [load_pattern], [float(scale)])),
-                 ("SetLoads", (name, 1, ["Load"], [load_pattern], [float(scale)]))],
+                [("SetLoads", (name, 1, ["Load"], [load_pattern], [float(scale)]))],
                 f"cargas del caso '{name}'",
             )
         return (f"Caso P-Delta '{name}' creado (no linealidad geometrica activa)"
@@ -2576,8 +2654,7 @@ class Etabs:
             )
         oapi.call(
             snl,
-            [("SetLoads", (name, 1, "Load", [load_pattern], [float(scale)])),
-             ("SetLoads", (name, 1, ["Load"], [load_pattern], [float(scale)]))],
+            [("SetLoads", (name, 1, ["Load"], [load_pattern], [float(scale)]))],
             f"cargas del caso '{name}'",
         )
         return (f"Caso no lineal '{name}' creado: carga '{load_pattern}' x{scale:g}"
@@ -2588,7 +2665,8 @@ class Etabs:
                               load_pattern: str = "U1", scale: float = 1.0,
                               nonlinear: bool = False,
                               time_step: float = 0.02,
-                              n_steps: int = 1500) -> str:
+                              n_steps: int = 1500, modal_case: str = "Modal",
+                              experimental_nonlinear: bool = False) -> str:
         """Crea un caso de historia en el tiempo (sismo registrado).
 
         Requiere una funcion de time-history ya importada o definida en
@@ -2603,26 +2681,50 @@ class Etabs:
             nonlinear: False = lineal modal; True = no lineal directo.
             time_step: paso de tiempo de salida.
             n_steps: numero de pasos de salida.
+            modal_case: caso modal existente para la variante lineal.
+            experimental_nonlinear: autoriza SOLO en una copia de prueba la
+                rama directa no lineal aun no validada en ejecucion/reapertura.
+                No cambia ni elude las restricciones de licencia de ETABS.
+
+        Crea un caso NUEVO por tablas ETABSv1; no sobrescribe casos existentes.
+        No lineal directo: inicia sin esfuerzos, sin no linealidad geometrica,
+        amortiguamiento proporcional cero, Newmark gamma=.5 beta=.25. Ajuste
+        estos parametros y las leyes no lineales para su problema antes de usarlo.
         """
+        if nonlinear and not experimental_nonlinear:
+            raise EtabsError('Historia no lineal directa no validada en ejecucion/reapertura. '
+                             'Se rechazo antes de modificar el modelo. Solo diagnostico en copia '
+                             'con experimental_nonlinear=True y una edicion ETABS habilitada.')
         if load_pattern not in ("U1", "U2", "U3"):
             raise EtabsError("load_pattern debe ser U1, U2 o U3.")
         model = self._model()
-        th = (model.LoadCases.ModHistoryNonlinear if nonlinear
-              else model.LoadCases.ModHistoryLinear)
-        oapi.call(th, [("SetCase", (name,))], f"creacion del caso '{name}'")
-        oapi.call(
-            th,
-            [("SetLoads", (name, 1, "Accel", [load_pattern], [function_name],
-                          [float(scale)], [0.0], ["Global"], [0])),
-             ("SetLoads", (name, 1, ["Accel"], [load_pattern], [function_name],
-                          [float(scale)], [0.0]))],
-            f"cargas del caso '{name}'",
-        )
-        oapi.call(
-            th,
-            [("SetTimeStep", (name, int(n_steps), float(time_step)))],
-            f"paso de tiempo de '{name}'",
-        )
+        existing = self._name_list(model.LoadCases, 'casos')
+        if name in existing:
+            raise EtabsError(f"El caso '{name}' ya existe; no se sobrescribe.")
+        if not nonlinear and modal_case not in existing:
+            raise EtabsError(f"No existe el caso modal '{modal_case}'.")
+        if function_name not in self._name_list(model.Func, 'funciones'):
+            raise EtabsError(f"No existe la funcion '{function_name}'.")
+        key = 'Load Case Definitions - Time History - ' + (
+            'Nonlin Direct Integration' if nonlinear else 'Linear Modal')
+        fields, rows = editing_rows(oapi.call_checked(
+            model.DatabaseTables, 'GetTableForEditingArray', (key, '', 0, [], 0, [])))
+        row, expected = time_history_row(fields, name, function_name, load_pattern,
+                                         scale, time_step, n_steps, nonlinear, modal_case)
+        self.set_table_data(key, fields, rows + [row])
+        check_fields, check_rows = editing_rows(oapi.call_checked(
+            model.DatabaseTables, 'GetTableForEditingArray', (key, '', 0, [], 0, [])))
+        matches = [dict(zip(check_fields, row)) for row in check_rows
+                   if row[check_fields.index('Name')] == name]
+        if len(matches) != 1:
+            raise EtabsError('No se pudo releer exactamente un caso time-history creado.')
+        numeric = {'TransAccSF','TimeFactor','ArrivalTime','Angle','NumSteps','StepSize',
+                   'MassCoeff','StiffCoeff','Gamma','Beta'}
+        for field, value in expected.items():
+            found = matches[0].get(field)
+            same = float(found) == float(value) if field in numeric and found else found == value
+            if not same:
+                raise EtabsError(f'Time-history no coincide al releer {field}: {found!r} != {value!r}')
         kind = "no lineal" if nonlinear else "lineal modal"
         return (f"Caso time-history {kind} '{name}' creado: funcion "
                 f"'{function_name}' en {load_pattern} x{scale:g}, "
@@ -2715,9 +2817,9 @@ class Etabs:
                                    item_type: int = 2) -> str:
         """Lee el resumen de diseño de columnas: PMMRatio, acero, cortante.
 
-        Regla del SOP paso 26: si PMMRatio > 1.05 ('falla en flexion en mas
-        de un 5%'), aumentar el acero; el reporte lo marca. Requiere
-        run_concrete_design previo.
+        Reporta los valores de CSI sin tolerancias adicionales de aceptacion.
+        Un ratio mayor que 1 requiere revision, no prescribe una correccion.
+        Requiere run_concrete_design previo.
 
         Args:
             name: frame o grupo. "" con item_type=2 = seleccion actual.
@@ -2742,10 +2844,8 @@ class Etabs:
                     f"PMM={pmm_ratio[i]:.3f} ({pmm_combo[i]}, As={pmm_area[i]:g}); "
                     f"Av_maj={av_major[i]:g} ({vmaj_combo[i]}), "
                     f"Av_min={av_minor[i]:g} ({vmin_combo[i]})")
-            if pmm_ratio[i] > 1.05:
-                fila += " | FALLA >5%: aumentar acero (SOP paso 26)"
-            elif pmm_ratio[i] > 1.0:
-                fila += " | excedido <=5%"
+            if pmm_ratio[i] > 1.0:
+                fila += " | PMM>1: requiere revision estructural"
             if err[i]:
                 fila += f" | ERROR: {err[i]}"
             if warn[i]:
@@ -2759,17 +2859,14 @@ class Etabs:
                                   top_story: str = "") -> str:
         """Lee joint shear ratio y beam/column capacity ratio por columna.
 
-        Reglas del SOP paso 26 codificadas: si falla por joint, aumentar la
-        geometria de la seccion; las columnas del ultimo nivel que fallan por
-        joint se marcan como omitibles (sin continuidad, la rigidez es menor).
-        Requiere run_concrete_design previo.
+        Reporta ratios y mensajes sin eximir nudos por nombre o nivel.
+        Requiere run_concrete_design previo; no certifica cumplimiento.
 
         Args:
             name: frame o grupo. "" con item_type=2 = seleccion actual.
             item_type: 0=objeto, 1=grupo, 2=seleccion.
-            top_story: nombre del nivel de techo; las fallas de joint en
-                       frames cuyo nombre/etiqueta contenga este texto se
-                       anotan como omitibles. Vacio = no marcar.
+            top_story: parametro legado, conservado por compatibilidad.
+                       No modifica ni exime resultados.
         """
         model = self._model()
         (n, frame, lc_js_maj, js_maj, lc_js_min, js_min,
@@ -2792,11 +2889,7 @@ class Etabs:
                     f"BCC_min={bcc_min[i]:.3f} ({lc_bcc_min[i]})")
             js_falla = max(js_maj[i], js_min[i]) > 1.0
             if js_falla:
-                if top_story and top_story.lower() in str(frame[i]).lower():
-                    fila += (" | joint>1 en nivel de techo: omitible "
-                             "(SOP paso 26, sin continuidad)")
-                else:
-                    fila += " | FALLA JOINT: aumentar geometria (SOP paso 26)"
+                fila += " | JS>1: requiere revision estructural; sin exencion automatica"
             if err[i]:
                 fila += f" | ERROR: {err[i]}"
             if warn[i]:
@@ -2877,24 +2970,40 @@ class Etabs:
         adicionales en False), carga muerta con factor 1, vivas con el
         coeficiente de la Tabla A-2 del R-001 (0.15 residencial, 0.20
         oficinas/hoteles, 0.25 escuelas/almacenaje, 0.30 hospitales, 0.10
-        techos). El "no incluir masa vertical" del SOP se cumple por omision:
-        esta firma no tiene ese parametro.
-        SourceMass.SetMassSource verificado el 2026-08-10 (el namespace bajo
-        SapModel se llama SourceMass, no MassSource).
+        techos). Masa lateral activa y vertical desactivada, verificadas por tabla.
+        ETABSv1 no expone SourceMass (es una interfaz CSI compartida).
+        Se usa Mass Source Definition, conservando las otras fuentes y
+        releyendo los factores. La fuente indicada queda como predeterminada.
 
         Args:
             load_patterns: {patron: factor}, ej. {"Dead": 1.0, "Live": 0.15}.
             name: nombre de la fuente de masa.
         """
         model = self._model()
-        pats = list(load_patterns.keys())
-        sfs = [float(v) for v in load_patterns.values()]
-        _pats_eco, _sfs_eco, ret = model.SourceMass.SetMassSource(
-            name, False, False, True, True, len(pats), pats, sfs)
-        if ret != 0:
-            raise EtabsError(
-                f"SetMassSource fallo. ¿Existen todos los patrones? "
-                f"Ver get_load_patterns. Patrones pedidos: {', '.join(pats)}")
+        key = 'Mass Source Definition'
+        fields, rows = editing_rows(oapi.call_checked(
+            model.DatabaseTables, 'GetTableForEditingArray', (key, '', 0, [], 0, [])))
+        updated = mass_source_rows(fields, rows, name, load_patterns)
+        existing = self._name_list(model.LoadPatterns, 'patrones de masa')
+        if any(pattern not in existing for pattern in load_patterns):
+            raise EtabsError('La fuente de masa referencia patrones inexistentes.')
+        self.set_table_data(key, fields, updated)
+        check_fields, check_rows = editing_rows(oapi.call_checked(
+            model.DatabaseTables, 'GetTableForEditingArray', (key, '', 0, [], 0, [])))
+        found = {}
+        owner = ''
+        flags = {'IsDefault':'Yes','IncLateral':'Yes','IncVertical':'No',
+                 'SourceSelf':'No','SourceAdded':'No','SourceLoads':'Yes','LumpMass':'Yes'}
+        verified_flags = {}
+        for row in check_rows:
+            data = dict(zip(check_fields, row))
+            owner = data['Name'] or owner
+            if owner == name:
+                verified_flags.update({key: data[key] for key in flags if data.get(key)})
+            if owner == name and data['LoadPattern']:
+                found[data['LoadPattern']] = float(data['Multiplier'])
+        if verified_flags != flags or found != {p: float(sf) for p, sf in load_patterns.items()}:
+            raise EtabsError(f'La fuente de masa no coincide al releer: {found}')
         detalle = ", ".join(f"{p}x{f:g}" for p, f in load_patterns.items())
         return (f"Fuente de masa '{name}' definida (solo patrones "
                 f"especificados, default): {detalle}.")
@@ -2952,13 +3061,19 @@ class Etabs:
         """Asigna una etiqueta de pier a una o mas areas de muro (SOP paso 27).
 
         AreaObj.SetPier(Name, PierName, ItemType) verificado el 2026-08-10.
-        El pier debe existir como etiqueta; ETABS lo crea si no existe.
+        La herramienta crea la etiqueta en PierLabel si no existe; SetPier
+        sobre AreaObj no la crea automaticamente.
 
         Args:
             area_ids: IDs de area de muro (de get_areas).
             pier_name: etiqueta de pier, ej. "P1".
         """
         model = self._model()
+        if not area_ids or not pier_name.strip():
+            raise EtabsError('Indique areas y un nombre de pier no vacio.')
+        existing = self._name_list(model.PierLabel, 'etiquetas de pier')
+        if pier_name not in existing:
+            oapi.call_checked(model.PierLabel, 'SetPier', (pier_name,))
         errores = []
         for aid in area_ids:
             try:
@@ -2972,8 +3087,19 @@ class Etabs:
         ok = len(area_ids) - len(errores)
         msg = f"Pier '{pier_name}' asignado a {ok} de {len(area_ids)} area(s)."
         if errores:
-            msg += " Fallos: " + "; ".join(errores[:5])
+            raise EtabsError(msg + ' Cambios parciales; fallos: ' + '; '.join(errores[:5]))
         return msg
+
+    def _require_wall_design_results(self) -> None:
+        """Avoid ETABS 23 native getter failure when no wall design exists."""
+        result = oapi.call_checked(self._model().DatabaseTables, 'GetAvailableTables', ())
+        tables = oapi.result_rows(self._model().DatabaseTables, 'GetAvailableTables', result,
+                                 [('TableKey', str), ('TableName', str), ('ImportType', int)],
+                                 count_name='NumberTables')
+        if not any(row['TableKey'].startswith('Shear Wall Pier Design Summary - ') for row in tables):
+            raise EtabsError('No hay resultados de diseño de muros. Ejecute el diseño en ETABS; '
+                             'ETABSv1 23 no expone DesignShearWall.StartDesign. '
+                             'Lectura nativa cancelada para proteger el proceso COM.')
 
     @com_call
     def get_shearwall_design(self) -> str:
@@ -2984,6 +3110,7 @@ class Etabs:
         refuerzo, zona de borde, mensajes). Requiere diseño de muros corrido
         y pier labels asignados (set_pier_label).
         """
+        self._require_wall_design_results()
         model = self._model()
         res = model.DesignShearWall.GetPierSummaryResults(
             *([[]] * 39))
@@ -3023,6 +3150,7 @@ class Etabs:
         detallado que alimenta la vuelta a Revit (C6): por pierna de pier,
         geometria, espesor, materiales y las cadenas de refuerzo.
         """
+        self._require_wall_design_results()
         model = self._model()
         (area_obj, story, pier, station, leg_id, x1, y1, x2, y2,
          length, thickness, fc, fy, fys, flexural, shear_conf,
@@ -3151,6 +3279,8 @@ class Etabs:
         (E-014) que deja a GetActiveObject/cHelper.GetObject sin ver una
         instancia lanzada a mano con otro privilegio.
         """
+        if self.process_id:
+            raise EtabsError(f'PID ETABS fijado en {self.process_id}; arranque automatico prohibido.')
         helper = comtypes.client.CreateObject('ETABSv1.Helper')
         try:
             import comtypes.gen.ETABSv1 as ETABSv1
@@ -3193,6 +3323,8 @@ class Etabs:
             self._connect()
             return ("Reconectado. " + self.get_model_info().replace("\n", " | "))
         except EtabsError as e:
+            if self.process_id:
+                raise
             if not launch_if_missing:
                 return ("Sin instancia visible en el ROT. " + str(e)
                         + " Opcion: reconnect(launch_if_missing=True) y "
@@ -3216,6 +3348,10 @@ class Etabs:
             units: opcional, fija las unidades activas tras abrir
                    (ej. "N, mm, C").
         """
+        es_texto = path.lower().endswith((".e2k", ".$et"))
+        if es_texto and not self.process_id:
+            raise EtabsError('El import de texto requiere process_id / ETABS_PROCESS_ID '
+                             'para limitar el manejo de modales a una instancia.')
         if not os.path.isfile(path):
             raise EtabsError(f"No existe: {path}")
         try:
@@ -3224,12 +3360,11 @@ class Etabs:
             logger.warning("open_model: sin instancia visible; lanzando una.")
             self._launch_instance()
         model = self.SapModel
-        es_texto = path.lower().endswith((".e2k", ".$et"))
         alto = threading.Event()
         vigia = None
         if es_texto:
             vigia = threading.Thread(target=_descartar_modales_etabs,
-                                     args=(alto,), daemon=True)
+                                     args=(alto, self.process_id), daemon=True)
             vigia.start()
         try:
             oapi.call_checked(model.File, "OpenFile", (path,),
@@ -3255,6 +3390,12 @@ class Etabs:
             filename = "(sin nombre)"
         if save:
             oapi.call_checked(model.File, "Save", (), "guardado previo")
+        units = model.GetPresentUnits()
+        if type(units) is not int or not 1 <= units <= len(PRESET_UNITS):
+            raise EtabsError('Unidades invalidas; se cancelo el cierre antes de vaciar el modelo.')
+        # CSI requires initialization before NewBlank; calling NewBlank directly
+        # on the analyzed steel fixture crashed the ETABS 23 process.
+        oapi.call_checked(model, 'InitializeNewModel', (units,), 'reinicializacion del modelo')
         oapi.call_checked(model.File, "NewBlank", (), "modelo en blanco")
         return f"Cerrado {filename}{' (guardado)' if save else ' (sin guardar)'}. ETABS sigue abierto en blanco."
 
@@ -3484,7 +3625,7 @@ class Etabs:
 
     @com_call
     def call_oapi(self, path: str, method: str,
-                  args: list[Any] | None = None) -> str:
+                  args: list[Any] | None = None, returns_status: bool = True) -> str:
         """Invoca CUALQUIER metodo de la OAPI y devuelve ret y [out] crudos.
 
         Es la salida para lo que no tiene herramienta dedicada. Consultar
@@ -3501,6 +3642,9 @@ class Etabs:
             method: nombre exacto del metodo, ej. "GetWall".
             args: lista de argumentos [in], ej. ["MH35"]. Enteros, floats,
                   strings, booleanos o listas de esos.
+            returns_status: False para getters cuyo retorno es el valor mismo
+                  (GetPresentUnits, GetModelFilename, GetModelIsLocked). En ese
+                  modo ret=null y value contiene el resultado sin interpretarlo.
         """
         import json
         model = self._model()
@@ -3515,6 +3659,9 @@ class Etabs:
             result = fn(*args)
         except Exception as e:
             raise EtabsError(f"SapModel.{path}.{method}{tuple(args)!r} fallo: {e}")
+        if not returns_status:
+            return json.dumps({'ret': None, 'outs': [], 'value': result,
+                               'raw_type': type(result).__name__}, ensure_ascii=False, default=str)
         code = oapi.ret_code(result)
         outs = [list(v) if isinstance(v, (tuple, list)) else v
                 for v in oapi.outs(result)]

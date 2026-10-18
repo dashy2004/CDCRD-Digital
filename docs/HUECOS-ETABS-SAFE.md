@@ -1,5 +1,13 @@
 # Huecos de ETABS y SAFE — especificación para implementar
 
+> Actualización ETABS 2026-10-17: esta especificación histórica no sustituye la
+> [validación nativa actual](../servidor-mcp/docs/VALIDACION-ETABS.md). Los lectores
+> de vigas/columnas/nudos ya devolvieron resultados reales; la fuente de masa
+> usa tablas porque `SourceMass` no está expuesto por ETABSv1. Se retiraron de
+> los lectores las tolerancias adicionales del 5% y las exenciones por nombre
+> de techo descritas abajo. Diseño de muros e historia no lineal directa siguen
+> pendientes de validación positiva. SAFE no se modificó en esta etapa.
+
 Fecha: 2026-08-10. Firmas sondeadas en vivo contra ETABS 23.3.0 / SAFE 23.3.0,
 OAPI 2.016, con `describe_oapi`. Todo lo que aparece acá como firma es
 **transcripción literal del typelib de esta instalación**, no conjetura.

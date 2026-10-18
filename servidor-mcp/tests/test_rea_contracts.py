@@ -74,6 +74,18 @@ def test_empty_results():
     assert oapi.result_rows(object(), 'StoryDrifts', [0] + [None]*10 + [0], DRIFT_FIELDS) == []
 
 
+def test_mesh_object_nullable_only_when_declared():
+    raw = [1, [None], ['~17'], 0]
+    fields = [('Obj', str), ('Elm', str)]
+    with pytest.raises(oapi.OapiError):
+        oapi.result_rows(object(), 'JointDispl', raw, fields)
+    assert oapi.result_rows(object(), 'JointDispl', raw, fields,
+                            nullable_fields=('Obj',)) == [{'Obj':None, 'Elm':'~17'}]
+    raw[2] = [None]
+    with pytest.raises(oapi.OapiError):
+        oapi.result_rows(object(), 'JointDispl', raw, fields, nullable_fields=('Obj',))
+
+
 @pytest.fixture
 def etabs_unit():
     # Compile the two production method bodies, excluding the Windows imports

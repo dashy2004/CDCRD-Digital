@@ -1,0 +1,139 @@
+# Validación nativa ETABS 23.3.0 — 2026-10-17
+
+Se ejecutaron modelos sintéticos en **ETABS 23.3.0 / OAPI 2.016**, por conexión
+exclusiva a PID y hora de creación. Hay comprobaciones numéricas, lectura tras
+escritura y reapertura. **La validación integral sigue abierta**: diseño de
+muros y ejecución de historia no lineal directa tienen los límites indicados
+abajo. No se afirma haber probado las 4.861 firmas del catálogo CSI.
+
+## Correcciones y regresiones
+
+- `Etabs(process_id=PID)` / `fea.process_id` / variable `ETABS_PROCESS_ID`:
+  conexión a una instancia concreta mediante `GetObjectProcess`. Si falla,
+  nunca se conecta a otra instancia del ROT ni inicia otra automáticamente.
+- Los importadores `.e2k`/`.$et` y el cambio de niveles por texto requieren PID
+  explícito. El vigilante de modales filtra por ese PID; no manipula ventanas de
+  otras instancias. Sin PID, el import falla antes de escribir o conectar.
+- `run_analysis` exige un archivo guardado y casos seleccionados. Tras la
+  llamada revisa que todos los casos seleccionados tengan estado CSI 4
+  (Finished). Un retorno 0 con casos incompletos es error, no éxito.
+- Fuente de masa por `Mass Source Definition`: ETABSv1 no tiene `SourceMass`.
+  Conserva las otras fuentes, fija la predeterminada y relee factores y flags.
+- Creación de etiquetas por `PierLabel.SetPier` antes de asignarlas a áreas.
+  Una asignación parcial es error, no éxito.
+- Borrado de puntos aislados mediante `DeleteSpecialPoint`; rechaza puntos
+  conectados y relee su ausencia.
+- `JointDispl`: acepta `Obj=null` en nodos internos de la malla conservando
+  `Elm`; los demás campos y longitudes siguen bajo contrato estricto.
+- Importación de tablas: errores fatales o de importación no se anuncian como
+  éxito. El mensaje advierte que puede haber cambios parciales.
+- Time-history por tablas reales: creación y relectura de función, dirección,
+  escala, paso y cantidad; conserva otros casos y rechaza sobrescribir nombres.
+  El caso lineal modal se ejecutó. El directo no lineal solo se creó/releyó.
+- P-Delta: no cambia silenciosamente a grandes desplazamientos si falla;
+  cargas como arrays; `base_case` legado ya no promete una copia inexistente.
+- Diafragma existente: rechaza un tipo rígido/semirrígido distinto antes de
+  asignar puntos; no afirma haber cambiado una rigidez que no modificó.
+- `close_model`: guarda si se solicita, obtiene unidades, llama
+  `InitializeNewModel` y después `NewBlank`. La secuencia anterior cerró
+  inesperadamente ETABS en la prueba de acero. La corregida pasó y reabrió el EDB.
+- Lectores de muros: cancelan con error explicativo si no existen tablas de
+  diseño. Una llamada nativa sin resultados terminó el cliente Python durante
+  la prueba; la guarda evita repetir esa ruta.
+- `call_oapi(..., returns_status=False)` conserva el valor de getters como
+  `GetPresentUnits` sin confundir el enum 6 con un código de error.
+- Resultados de concreto: sin tolerancia adicional del 5% ni exenciones de
+  juntas por contener el nombre del techo. Los valores no certifican un diseño.
+
+La selección por PID no sustituye un protocolo de propietario único, ni evita
+que el usuario cambie manualmente el modelo dentro de esa misma instancia.
+
+## Verificación realizada
+
+- 96 pruebas offline ETABS aprobadas; 10 regresiones del corpus aprobadas
+  (**106 total**). No requieren conexión a modelos.
+- Compilación Python y `git diff --check` correctos.
+- Importación Windows y generación de los esquemas de las 76 herramientas MCP.
+- Regresiones en rojo/verde para conexión fijada, finalización de análisis y
+  orden de cierre. Las discrepancias nativas se conservaron en registros privados.
+- No se midió cobertura porcentual; no se atribuye cobertura total al servidor.
+- Lint/tipado estático completo no ejecutado (herramientas no disponibles).
+
+## Arnés de prueba (opt-in, Windows)
+
+`tools/validate_etabs_live.py` requiere Python con `comtypes`, `mcp` y `pydantic`.
+La fase `launch` crea una instancia nueva; exige un directorio de salida nuevo
+y registra PID + hora de creación. Las siguientes fases verifican esa identidad
+y rechazan archivos abiertos fuera del directorio de prueba. No usa ROT.
+
+```powershell
+python tools/validate_etabs_live.py --phase launch --output C:\TEMP\ETABS_TEST_01
+python tools/validate_etabs_live.py --phase baseline --output C:\TEMP\ETABS_TEST_01
+python tools/validate_etabs_live.py --phase suite --output C:\TEMP\ETABS_TEST_01
+python tools/validate_etabs_live.py --phase advanced --output C:\TEMP\ETABS_TEST_01
+python tools/validate_etabs_live.py --phase lifecycle --output C:\TEMP\ETABS_TEST_01
+python tools/validate_etabs_live.py --phase roundtrip --output C:\TEMP\ETABS_TEST_01
+python tools/validate_etabs_live.py --phase walls --output C:\TEMP\ETABS_TEST_01
+python tools/validate_etabs_live.py --phase close --output C:\TEMP\ETABS_TEST_01
+```
+
+No ejecutar las fases en paralelo. Si ETABS muestra un aviso al arrancar,
+resolverlo en la instancia nueva y esperar que termine `launch`; no relanzar.
+Un timeout del cliente no cancela una llamada COM.
+
+`relaunch` solo se permite si el PID anterior ya no existe; archiva su identidad
+y no borra modelos/logs. `summarize_etabs_live.py` inventaría llamadas, **no**
+convierte automáticamente un retorno de texto en una prueba aprobada.
+
+## Evidencia numérica y persistencia
+
+| Ensayo | Resultado comprobado |
+|---|---|
+| Voladizo 3 m, 0,30 × 0,40 m, E=25.000.000 kN/m²; 100 kN axiales | U3=−0,100000 mm, coincide con FL/EA |
+| Mismo voladizo, 10 kN lateral | U1=2,278800 mm; flexión más cortante rectangular, tolerancia relativa 0,2% |
+| Reacción axial | 100 kN; desplazamiento cotejado también con tabla nativa |
+| Pórtico de dos niveles, 16 frames, 4 áreas (2 losas y 2 muros) | 6/6 casos seleccionados terminados: G, X, modal, espectro, P-Delta, estático no lineal |
+| Gravedad aplicada: 96 kN en losas + 40 kN en vigas | Suma Fz=135,999999999999 kN frente a 136 kN |
+| Diseño ACI 318-19 | Lectura positiva: 18 estaciones de viga, 3 de columna y 1 nudo |
+| Acero AISC 360-16 | Análisis y diseño ejecutados; ratio leído 0,1335024405, sin mensajes de error/advertencia |
+| Time-history lineal modal | 5 pasos × 0,02 s completados; envolventes de desplazamientos no nulas |
+| Guardado/reapertura | Geometría conservada; resultado axial idéntico |
+| Exportación/importación `.$et` + recálculo | 1 frame, 2 puntos, U3=−0,100000 mm |
+| Cierre de modelo / aplicación | Modelo vacío, EDB reabierto y proceso cerrado verificadamente |
+
+La definición geométrica de una sección rectangular no define su función de
+armado: la viga sintética recibió `PropFrame.SetRebarBeam` antes del diseño.
+Los valores negativos de acero provisto que devuelve CSI se conservan como
+datos crudos; no son un despiece ni aprobación profesional. Los resultados de
+texto E2K usan las unidades del archivo (mm en estas pruebas), no necesariamente
+las unidades activas de la interfaz (m).
+
+## Puertas pendientes antes de otras aplicaciones
+
+1. **Muros:** ETABSv1 instalado no expone `DesignShearWall.StartDesign`.
+   Falta ejecutar diseño de muros en la interfaz del modelo sintético y probar
+   positivamente ambos lectores. La guarda final de ausencia de resultados tiene
+   regresión unitaria; su comprobación nativa final quedó pendiente al cerrarse
+   la sesión durante la reapertura del archivo avanzado. No equivale a validar
+   despiece. No usar modelos privados como sustituto.
+2. **Historia no lineal directa:** definición y relectura correctas, pero
+   `TEST_TH_NL` queda en estado 1 y ETABS desactiva su bandera. La edición en
+   ejecución se identifica como **Nonlinear**, no Ultimate. La documentación
+   de CSI asigna integración directa a Ultimate; la licencia es la hipótesis
+   principal, no una comprobación del contrato de licencia de esta máquina.
+   La reapertura del EDB avanzado devolvió `ret=1` y la sesión dejó de estar
+   disponible; no se atribuye todavía una causa definitiva a ese cierre.
+   La rama queda bloqueada por defecto: solo permite diagnóstico en copia con
+   `experimental_nonlinear=True`. Falta ejecución y reapertura positivas en una
+   edición habilitada; no se eluden licencias.
+3. Probar matrices más amplias (otras versiones, unidades, geometrías,
+   materiales no lineales, parámetros y errores). Una llamada por herramienta
+   no acredita todas sus ramas ni un ensayo end-to-end del transporte MCP.
+
+No se pasa a SAFE/Revit/Civil 3D/AutoCAD dentro de esta etapa. EDB, resultados,
+logs, rutas de usuario y licencia quedan fuera del repositorio público.
+
+Referencias CSI: [NewBlank e inicialización previa](https://docs.csiamerica.com/help-files/etabs-api-2016/html/343e38b3-b137-cadc-26a7-8a97247fe5bd.htm),
+[niveles del producto, manual histórico](https://docs.csiamerica.com/manuals/etabs/Welcome%20to%20ETABS.pdf).
+Las firmas y campos se cotejaron además con ETABSv1 y `Table and Field Keys.xml`
+de la instalación real 23.3.0, no se dedujeron solo del catálogo compartido.

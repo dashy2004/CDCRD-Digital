@@ -10,7 +10,7 @@ logger = logging.getLogger('fea_mcp_server')
 DEFAULTS = {
     "server": {"name": "FEA MCP", "version": "1.1.0"},
     "fea": {"software": "ETABS", "version": "22.0",
-            "auto_start": False, "exe_path": ""},
+            "auto_start": False, "exe_path": "", "process_id": 0},
 }
 
 
@@ -60,6 +60,15 @@ class Config:
     @property
     def exePath(self) -> str:
         return str(self.data['fea'].get('exe_path', ""))
+
+    @property
+    def processId(self) -> int:
+        raw = os.environ.get('ETABS_PROCESS_ID', self.data['fea'].get('process_id', 0))
+        if isinstance(raw, str) and raw.isdecimal():
+            raw = int(raw)
+        if type(raw) is not int or raw < 0:
+            raise ValueError('ETABS_PROCESS_ID / fea.process_id debe ser un entero no negativo')
+        return raw
 
 
 if __name__ == "__main__":

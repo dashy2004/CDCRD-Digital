@@ -102,7 +102,7 @@ asigna por posicion en el documento, no por el prefijo del id.
 | Servidor | Que opera | Estado |
 |---|---|---|
 | `herramientas-locales/` | Archivos DXF/IFC/IDS/PDF y corpus CDCRD, sin aplicaciones BIM vivas | CLI y **10 herramientas MCP stdio**, entorno Python aislado; [instalacion y ejemplos](herramientas-locales/README.md) |
-| `servidor-mcp/` | ETABS (OAPI 2.016) | **54 herramientas**, probado de punta a punta contra ETABS 23.3.0 |
+| `servidor-mcp/` | ETABS (OAPI 2.016) | **76 herramientas registradas**; pruebas sintéticas en ETABS 23.3.0 y 96 regresiones offline. Muros e historia no lineal directa pendientes: [evidencia y límites](servidor-mcp/docs/VALIDACION-ETABS.md) |
 | `servidor-mcp-safe/` | SAFE — losas, zapatas, franjas, punzonamiento, presion de suelo | v0.1.0, probado en vivo contra un modelo real de fundacion |
 | [revit-mcp-tools/](revit-mcp-tools/README.md) | Revit 2027 via pyRevit Routes — modelar, documentar, armado, exportacion a ETABS y auditoría MEP de solo lectura | Modelado y documentacion probados en la receta `residencial-4n`; [alcance y validación MEP](revit-mcp-tools/MEP.md) |
 | `revit-mcp-write/` | Revit 2027 via pyRevit Routes — lectura e inventario, y escritura (pushbuttons) | 9 herramientas; las tres que **mutan** el modelo aun sin corridas reales |
