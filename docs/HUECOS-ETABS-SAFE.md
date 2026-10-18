@@ -5,8 +5,10 @@
 > de vigas/columnas/nudos ya devolvieron resultados reales; la fuente de masa
 > usa tablas porque `SourceMass` no está expuesto por ETABSv1. Se retiraron de
 > los lectores las tolerancias adicionales del 5% y las exenciones por nombre
-> de techo descritas abajo. Diseño de muros e historia no lineal directa siguen
-> pendientes de validación positiva. SAFE no se modificó en esta etapa.
+> de techo descritas abajo. Diseño/check de muros comprobado por tablas;
+> GetRebar vacío tiene lectura alternativa por AreaObj.GetRebarDataPier.
+> Despiece integral e historia no lineal directa siguen pendientes.
+> SAFE no se modificó en esta etapa.
 
 Fecha: 2026-08-10. Firmas sondeadas en vivo contra ETABS 23.3.0 / SAFE 23.3.0,
 OAPI 2.016, con `describe_oapi`. Todo lo que aparece acá como firma es

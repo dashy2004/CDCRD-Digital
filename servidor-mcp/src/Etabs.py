@@ -32,7 +32,7 @@ from pydantic import BaseModel, Field
 from comthread import com_call, run_in_com
 import oapi
 from table_contracts import editing_rows, mass_source_rows, time_history_row
-from wall_results import display_rows, required_cases, assess_reinforcement
+from wall_results import display_rows, required_cases, assess_reinforcement, read_wall_area_layers
 
 logger = logging.getLogger('fea_mcp_server')
 
@@ -3165,8 +3165,9 @@ class Etabs:
         """JSON del refuerzo disponible; distingue resumen de detalle completo.
 
         GetRebar puede devolver ret=0 con cero filas aun con diseno realizado.
-        En ese caso se conserva el resumen nativo sin inventar Fc, fy, barras,
-        longitudes de anclaje ni cadenas de confinamiento no disponibles.
+        En ese caso lee capas nativas con AreaObj.GetRebarDataPier y conserva
+        su procedencia. Esas capas no sustituyen la seccion comprobada ni
+        acreditan despiece, anclajes, vigencia o conformidad estructural.
         """
         data = self._wall_design_data()
         model = self._model()
@@ -3181,8 +3182,17 @@ class Etabs:
             raise EtabsError('GetRebar: longitudes de columnas incompatibles')
         data['native_rebar_count'] = count
         data['native_rebar'] = [dict(zip(names, values)) for values in zip(*result[:-1])]
+        data['rebar_source'] = 'DesignShearWall.GetRebar' if count else 'AreaObj.GetRebarDataPier'
+        if not count:
+            data['area_rebar'] = read_wall_area_layers(model, data['rows'], oapi.call_checked)
+            data['rebar_status'] = ('native_area_layers' if data['area_rebar']['layer_count']
+                                    else 'no_rebar_data')
+        else:
+            data['rebar_status'] = 'native_design_rebar'
         data['complete_detailing'] = False
-        data['limitation'] = ('GetRebar no devuelve detalle; se muestra solo el resumen de diseno.'
+        data['limitation'] = ('GetRebar vacio: capas leidas por AreaObj.GetRebarDataPier. '
+                              'Sus separaciones/recubrimientos pueden diferir de la seccion comprobada. '
+                              'Cobertura de lectura no equivale a diseno aprobado ni despiece completo.'
                               if not count else 'Datos nativos disponibles; despiece integral no certificado.')
         return json.dumps(data, ensure_ascii=False, allow_nan=False)
 

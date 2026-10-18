@@ -63,7 +63,8 @@ def test_empty_native_rebar_not_reported_as_complete():
     cls = next(n for n in source.body if isinstance(n, ast.ClassDef) and n.name == 'Etabs')
     node = next(n for n in cls.body if isinstance(n, ast.FunctionDef) and n.name == 'get_shearwall_rebar')
     node.decorator_list = []
-    scope = {'json':json, 'oapi':oapi, 'EtabsError':RuntimeError}
+    scope = {'json':json, 'oapi':oapi, 'EtabsError':RuntimeError,
+             'read_wall_area_layers':lambda *args: {'layer_count':0}}
     exec(compile(ast.Module(body=[node],type_ignores=[]),'Etabs.py','exec'),scope)
     obj = SimpleNamespace(_wall_design_data=lambda: {'rows':[{'EdgeBar':'8'}]},
                           _model=lambda:SimpleNamespace(DesignShearWall=SimpleNamespace(GetRebar=lambda *a: [*([[]]*16),0])))

@@ -3,7 +3,7 @@
 Se ejecutaron modelos sintéticos en **ETABS 23.3.0 / OAPI 2.016**, por conexión
 exclusiva a PID y hora de creación. Hay comprobaciones numéricas, lectura tras
 escritura y reapertura. **La validación integral sigue abierta**: diseño de
-muros y ejecución de historia no lineal directa tienen los límites indicados
+despiece integral de muros y ejecución de historia no lineal directa tienen los límites indicados
 abajo. No se afirma haber probado las 4.861 firmas del catálogo CSI.
 
 ## Correcciones y regresiones
@@ -42,8 +42,12 @@ abajo. No se afirma haber probado las 4.861 firmas del catálogo CSI.
   con precisión de visualización, null y campos no aplicables conservados.
   Verifica todas las dependencias de combinaciones (incluidas anidadas) y rechaza
   casos no terminados. No convierte ausencia de DCRatio en cero.
-  `GetRebar` retornó 0 con cero filas: el lector entrega el resumen disponible
-  con `complete_detailing=false`, nunca un despiece inventado.
+  `GetRebar` retornó 0 con cero filas: el lector usa `AreaObj.GetRebarDataPier`
+  para obtener capas nativas, identificadas por área, nivel y pier. Valida tipos,
+  longitudes, números finitos y cobertura; propaga errores, conserva null y cero.
+  Devuelve `rebar_source`, `rebar_status` y `area_rebar` separados del resumen.
+  Mantiene `complete_detailing=false`: una capa nativa no prueba que coincida
+  con la sección comprobada ni acredita anclajes o un despiece completo.
 - `call_oapi(..., returns_status=False)` conserva el valor de getters como
   `GetPresentUnits` sin confundir el enum 6 con un código de error.
 - Resultados de concreto: sin tolerancia adicional del 5% ni exenciones de
@@ -54,14 +58,19 @@ que el usuario cambie manualmente el modelo dentro de esa misma instancia.
 
 ## Verificación realizada
 
-- 120 pruebas offline ETABS aprobadas; 10 regresiones del corpus aprobadas
-  (**130 total**). No requieren conexión a modelos.
+- 136 pruebas offline ETABS aprobadas; 10 regresiones del corpus aprobadas
+  (**146 total**). No requieren conexión a modelos.
 - Compilación Python y `git diff --check` correctos.
 - Importación Windows y generación de los esquemas de las 76 herramientas MCP.
+- Sesión nueva MCP por stdio contra ETABS: listado de 76 herramientas y llamadas
+  reales a `get_model_info`, `call_oapi` (lectura del bloqueo),
+  `get_shearwall_design`, `get_shearwall_rebar` y `search_oapi_catalog`.
 - Regresiones en rojo/verde para conexión fijada, finalización de análisis y
   orden de cierre. Las discrepancias nativas se conservaron en registros privados.
-- No se midió cobertura porcentual; no se atribuye cobertura total al servidor.
-- Lint/tipado estático completo no ejecutado (herramientas no disponibles).
+- Cobertura de sentencias/ramas del módulo `wall_results.py`: **87%**.
+  No se atribuye ese porcentaje al servidor completo ni a las 4.861 firmas.
+- Ruff y Pyright sin errores en el módulo de contratos de muros; Ruff también
+  en las nuevas pruebas de capas. Lint/tipado del servidor completo pendiente.
 
 ## Arnés de prueba (opt-in, Windows)
 
@@ -115,9 +124,44 @@ después del análisis, ya sin aviso de combinaciones omitidas.
 
 Las cuatro filas no tienen mensajes de error/advertencia, pero requieren
 0,25–0,49 % frente a 0,21 % actual. Se conserva ese hallazgo, sin aumentar barras
-automáticamente ni certificar armado. El resumen y las respuestas de ambos
+en esa primera copia ni certificar armado. El resumen y las respuestas de ambos
 lectores coinciden antes/después de guardar/reabrir; GetRebar sigue sin detalle.
 La reapertura, no solo File.Save ret=0, fue la comprobación de persistencia.
+
+### Corrección posterior del armado, autorizada en otra copia sintética
+
+Se asignó refuerzo uniforme con barras de borde y extremo de 16 mm,
+separación nominal de 250 mm y recubrimiento de 40 mm; se solicitó modo Check.
+Se conservaron geometría, asignaciones de sección, preferencias y combinaciones.
+La tabla de overwrites normaliza `DesignCheck=Check` a `Program Determined`:
+no se aceptó ese texto como prueba; el nuevo resultado contiene efectivamente
+`DCRatio` en las cuatro estaciones, en lugar de los porcentajes de diseño.
+
+| Nivel | Estación | D/C comprobado |
+|---|---|---:|
+| TEST_L2 | Top | 0,412 |
+| TEST_L2 | Bottom | 0,247 |
+| TEST_L1 | Top | 0,276 |
+| TEST_L1 | Bottom | 0,589 |
+
+Todos quedan por debajo de `DCLimit=0,95`, sin mensajes nativos de error o
+advertencia. Nueve casos Finished, resumen, overwrites y capas coinciden antes
+de guardar, después de guardar y después de reabrir el EDB. Original SHA-256
+intacto. Esta prueba de integración no certifica un proyecto real.
+
+`GetRebar` sigue vacío aun pasando nombres de áreas, seleccionando los muros
+y después de que el usuario ejecutara en GUI **Concrete Detailing → Run/Update
+Wall Stack Detailing/Check**. `Detailing.StartDetailing(False)` retornó 0, pero
+`GetDetailingAvailable` siguió false y `GetNumberDetailedWallStacks` dio cero.
+No se usa ese retorno como éxito ni se automatiza ese comando en el lector.
+
+La alternativa `AreaObj.GetRebarDataPier` devolvió dos capas por cada muro:
+horizontal 12 mm / 450 mm y vertical 16 mm / 230 mm, ambas por cara según el
+enum CSI. Los recubrimientos nativos son 25 y 0 mm; el cero se conserva, no se
+interpreta como recubrimiento constructivo aprobado. Estos datos **no son
+idénticos a los overwrites de la sección comprobada**; el lector separa ambas
+fuentes y deja `matches_checked_section=not_verified`. No transforma capas en
+longitudes de corte, ganchos o planos que ETABS no haya proporcionado.
 
 La definición geométrica de una sección rectangular no define su función de
 armado: la viga sintética recibió `PropFrame.SetRebarBeam` antes del diseño.
@@ -130,7 +174,8 @@ las unidades activas de la interfaz (m).
 
 1. **Muros:** resumen por tablas y persistencia comprobados; la API instalada
    no expone `DesignShearWall.StartDesign`, por lo que sigue requiriendo GUI.
-   Falta despiece nativo no vacío y conciliación del armado requerido/actual.
+   Armado uniforme corregido y D/C comprobados; queda pendiente despiece nativo
+   completo y conciliación entre las capas devueltas y la sección comprobada.
    GetPierSummaryResults también queda bloqueado en call_oapi antes de acceder
    al modelo; se dirige al lector seguro por tablas.
 2. **Historia no lineal directa:** definición y relectura correctas, pero
@@ -145,7 +190,8 @@ las unidades activas de la interfaz (m).
    edición habilitada; no se eluden licencias.
 3. Probar matrices más amplias (otras versiones, unidades, geometrías,
    materiales no lineales, parámetros y errores). Una llamada por herramienta
-   no acredita todas sus ramas ni un ensayo end-to-end del transporte MCP.
+   no acredita todas sus ramas. La prueba end-to-end por stdio cubre las cinco
+   herramientas indicadas arriba, no la totalidad del servidor.
 
 No se pasa a SAFE/Revit/Civil 3D/AutoCAD dentro de esta etapa. EDB, resultados,
 logs, rutas de usuario y licencia quedan fuera del repositorio público.
