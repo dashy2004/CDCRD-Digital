@@ -1,0 +1,89 @@
+{
+  "fixture": "synthetic, local coordinates in meters",
+  "checks": [
+    {
+      "surface": "CDCRD_DEMO_CUT",
+      "cut_m3": 276,
+      "fill_m3": 0,
+      "independent_expected": {
+        "cut_m3": 276.0,
+        "fill_m3": 0.0
+      },
+      "absolute_error_m3": {
+        "cut": 0.0,
+        "fill": 0.0
+      },
+      "native_sections_aea_m3": {
+        "cut": 275.9583333333333,
+        "fill": 0.0
+      },
+      "pass": true
+    },
+    {
+      "surface": "CDCRD_DEMO_FILL",
+      "cut_m3": 0,
+      "fill_m3": 276,
+      "independent_expected": {
+        "cut_m3": 0.0,
+        "fill_m3": 276.0
+      },
+      "absolute_error_m3": {
+        "cut": 0.0,
+        "fill": 0.0
+      },
+      "native_sections_aea_m3": {
+        "cut": 0.0,
+        "fill": 275.9583333333333
+      },
+      "pass": true
+    },
+    {
+      "surface": "CDCRD_DEMO_MIXED",
+      "cut_m3": 6.444444480119663,
+      "fill_m3": 6.44444447088889,
+      "independent_expected": {
+        "cut_m3": 6.444444444444478,
+        "fill_m3": 6.444444444444414
+      },
+      "absolute_error_m3": {
+        "cut": 3.5675184584249564e-08,
+        "fill": 2.644447594235544e-08
+      },
+      "native_sections_aea_m3": {
+        "cut": 6.464140660074968,
+        "fill": 6.464140650844204
+      },
+      "pass": true
+    }
+  ],
+  "section_count": 485,
+  "sample_line_count": 194,
+  "view_count": 14,
+  "max_section_elevation_error_m": 3.0769236047945014e-09,
+  "native_data_unchanged_since_before_audit": true,
+  "verified_utc": "2026-10-18T15:51:19.1321928Z",
+  "native_assembly": "Cdcrd.Earthworks, Version=0.2.0.0, Culture=neutral, PublicKeyToken=null",
+  "civil3d": "2027, R26.0, Windows x64, .NET 10",
+  "save_close_reopen_performed": true,
+  "tin_volume_tolerance_m3": 0.0001,
+  "section_elevation_tolerance_m": 1e-06,
+  "section_volume_relative_tolerance": 0.01,
+  "assembly_sha256": "4524e31afb16c04f052d59402627c3c30b7926c40931e580a8f1cdb02ccdfdec",
+  "native_rejection_checks": [
+    {
+      "case": "volume",
+      "rejected": true,
+      "data_unchanged_after_rejections_and_reopen": true
+    },
+    {
+      "case": "duplicate",
+      "rejected": true,
+      "data_unchanged_after_rejections_and_reopen": true
+    },
+    {
+      "case": "drawing",
+      "rejected": true,
+      "data_unchanged_after_rejections_and_reopen": true
+    }
+  ]
+}

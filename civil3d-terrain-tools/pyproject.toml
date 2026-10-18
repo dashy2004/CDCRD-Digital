@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cdcrd-terrain-tools"
+version = "0.2.0"
+description = "Explicit sloped platform meshes and independent earthwork checks for Civil 3D"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+plots = ["matplotlib>=3.8"]
+
+[tool.setuptools.packages.find]
+include = ["terrain_tools*"]
