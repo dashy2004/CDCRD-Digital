@@ -48,9 +48,11 @@ con sus cotas.
   `generar-dxf` de la CLI, pero no pasa por ella: el esquema JSON de
   `planta-ejemplo.json` describe polígonos, cotas y notas, y no incluye círculos
   ni sombreados.
-- Las láminas de
-  [`../../docs/images/`](../../docs/images/) se generaron desde estos mismos
-  `.dxf` con ezdxf y Matplotlib. **No son capturas de AutoCAD.**
+- Las imágenes de
+  [`../../docs/images/`](../../docs/images/) son vistas directas de estos mismos
+  `.dxf`, dibujadas con ezdxf y Matplotlib, sin rótulos ni montaje añadidos. Hay
+  una versión clara y una oscura de cada una para que el README se lea bien en
+  los dos temas de GitHub. **No son capturas de AutoCAD.**
 - Verificación aplicada: relectura de cada archivo con `ezdxf.readfile` y
   recuento de entidades por capa; los números de la tabla anterior son esos
   recuentos.

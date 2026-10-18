@@ -208,17 +208,17 @@ en centímetros, capas separadas y cotas nativas. Geometría ficticia.
 
 | Sección 35 × 35 | Sección 40 × 40 |
 |---|---|
-| ![Sección de columna 35 x 35](herramientas-locales/docs/images/seccion-c1.png) | ![Sección de columna 40 x 40](herramientas-locales/docs/images/seccion-c2.png) |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="herramientas-locales/docs/images/seccion-c1-dark.png"><img alt="Sección de columna 35 x 35 con 12 barras No. 6" height="430" src="herramientas-locales/docs/images/seccion-c1.png"></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="herramientas-locales/docs/images/seccion-c2-dark.png"><img alt="Sección de columna 40 x 40 con 14 barras No. 6" height="430" src="herramientas-locales/docs/images/seccion-c2.png"></picture> |
 | 12 barras No. 6; estribo No. 3 dibujado con su espesor. | 14 barras No. 6; separaciones acotadas a ejes de barra. |
 
 | Sección 40 × 45 | Pórtico tipo |
 |---|---|
-| ![Sección de columna 40 x 45](herramientas-locales/docs/images/seccion-c3.png) | ![Pórtico tipo de tres niveles](herramientas-locales/docs/images/portico-tipo.png) |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="herramientas-locales/docs/images/seccion-c3-dark.png"><img alt="Sección de columna 40 x 45 con 16 barras No. 6" height="430" src="herramientas-locales/docs/images/seccion-c3.png"></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="herramientas-locales/docs/images/portico-tipo-dark.png"><img alt="Pórtico tipo de tres niveles de 310 cm" height="430" src="herramientas-locales/docs/images/portico-tipo.png"></picture> |
 | 16 barras No. 6; dobleces redondeados y gancho a 135°. | Tres niveles de 310 cm con empotramientos y cotas. |
 
-Las cuatro láminas se generaron desde esos mismos `.dxf` con ezdxf y Matplotlib:
-son informes de salida del archivo, no capturas de AutoCAD. El ejemplo produce
-esquemas acotados; no incluye cajetín, láminas de presentación ni despiece de
+Son vistas directas de esos `.dxf`, sin rótulos ni montaje añadidos; cada una se
+sirve en versión clara u oscura según el tema de quien lee. El ejemplo produce
+esquemas acotados: no incluye cajetín, láminas de presentación ni despiece de
 armadura, y no sustituye cálculo ni verificación normativa.
 
 ### Demostración ETABS — oficinas de tres niveles
@@ -334,6 +334,45 @@ del modelo abierto, están excluidas por `.gitignore`. Véase el
 
 ## Instalación y paquetes
 
+**Un solo comando abre un menú que hace todo lo demás.** Descargue el repositorio
+(botón verde **Code → Download ZIP**, o `git clone`), abra la carpeta en
+PowerShell y escriba:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\instalar-cdcrd.ps1
+```
+
+```
+   ####  ####   ####  ####   ####
+  ##     ##  ## ##     ##  ## ##  ##
+  ##     ##  ## ##     ####   ##  ##
+  ##     ##  ## ##     ##  ## ##  ##
+   ####  ####   ####  ##  ## ####
+
+  1  Ver que hay en este equipo (diagnostico)
+  2  Instalar las herramientas locales
+  3  Conectar ETABS, SAFE, Revit y Civil 3D
+  4  Comprobar el corpus normativo
+  5  Configurar mi asistente de IA
+  6  Instalarlo todo de una vez
+  7  Preguntas frecuentes
+  0  Salir
+```
+
+El menú detecta qué hay en el equipo (Python, `uv`, git, ETABS, SAFE, Revit,
+Civil 3D y qué asistente de IA tiene instalado), instala solo lo que falta y
+escribe la configuración de su asistente **sin borrar lo que ya tuviera**. No
+pide privilegios de administrador y respalda cada archivo antes de tocarlo.
+
+¿Prefiere que lo haga su asistente? Páguele el enlace de este repositorio y
+pídale que siga [INSTALAR-CON-IA.md](INSTALAR-CON-IA.md): ahí están los mismos
+pasos sin menú (`-Accion diagnostico|locales|bim|clientes|todo`, con `-Json`),
+los archivos de configuración de Claude Desktop, Claude Code, Codex, Cursor y
+VS Code, y los fallos conocidos con su causa real.
+
+<details>
+<summary>Instalación manual, paso a paso</summary>
+
 El módulo local se distribuye en este repositorio como el paquete Python `cdcrd-local`
 (versionado en [pyproject.toml](herramientas-locales/pyproject.toml)), con CLI y servidor MCP.
 La instalación documentada utiliza el código fuente y `uv.lock`:
@@ -347,6 +386,8 @@ Requiere `uv`; el instalador prepara Python 3.13 y un entorno aislado. Véanse l
 [requisitos e instalación](herramientas-locales/README.md#instalación). No se presupone
 publicación en PyPI ni en GitHub Packages. Los conectores Revit, ETABS y SAFE tienen sus
 [propias instrucciones](instalacion/INSTALACION.md) y requieren las aplicaciones correspondientes.
+
+</details>
 
 ## Contribuir y reconocimientos
 
