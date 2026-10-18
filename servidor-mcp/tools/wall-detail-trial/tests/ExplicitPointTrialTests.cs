@@ -9,18 +9,18 @@ public sealed class ExplicitPointTrialTests
     {
         public double X = x, Y = y, Dia = diameter;
     }
-    public sealed class CachedPoint
+    public class CachedPoint
     {
         public double Diameter = 16;
         public double CachedDiameter = 20;
         public PointValue[] GetBarPoints() => [new(34, 250, Diameter)];
-        public void GenerateMesh() => CachedDiameter = Diameter;
+        protected void GenerateMesh() => CachedDiameter = Diameter;
     }
-    public sealed class CachedGroup(CachedPoint point)
+    public class CachedGroup(CachedPoint point)
     {
         public double CachedDiameter = 20;
         public PointValue[] GetBarPoints() => [new(34, 250, point.CachedDiameter)];
-        public void GenerateMesh() => CachedDiameter = point.CachedDiameter;
+        protected void GenerateMesh() => CachedDiameter = point.CachedDiameter;
     }
     [Fact] public void FreshPointAndGroupMustRefreshBeforeUsingCachedArea()
     {
@@ -51,9 +51,24 @@ public sealed class ExplicitPointTrialTests
         Assert.Contains("\"Diameter\":12", error.Message);
         Assert.Contains("\"Diameter\":16", error.Message);
     }
-    public sealed class WrongRefreshSignature { public int GenerateMesh() => 0; }
+    public class WrongRefreshSignature { protected int GenerateMesh() => 0; }
     [Fact] public void UnexpectedMeshContractFailsClosed() => Assert.Throws<InvalidOperationException>(() =>
         ExplicitPointTrial.RefreshAndValidate(new WrongRefreshSignature(), [new(34, 250, 16)], "point", () => { }));
+    public sealed class PublicRefresh { public void GenerateMesh() { } }
+    public sealed class PrivateRefresh { private void GenerateMesh() { } }
+    [Fact] public void PublicOrPrivateMethodCannotSubstitutePinnedProtectedContract()
+    {
+        foreach (object value in new object[] { new PublicRefresh(), new PrivateRefresh() })
+            Assert.Throws<InvalidOperationException>(() => ExplicitPointTrial.RefreshAndValidate(
+                value, [new(34, 250, 16)], "point", () => { }));
+    }
+    public class FailingRefresh { protected void GenerateMesh() => throw new InvalidOperationException("native failure"); }
+    [Fact] public void NativeRefreshFailureIsNotSwallowed()
+    {
+        var error = Assert.Throws<System.Reflection.TargetInvocationException>(() =>
+            ExplicitPointTrial.RefreshAndValidate(new FailingRefresh(), [new(34, 250, 16)], "point", () => { }));
+        Assert.Equal("native failure", error.InnerException?.Message);
+    }
     [Fact] public void OrderingDoesNotChangePhysicalLayout()
     {
         Axis[] plan = [new(-34, 250, 16), new(34, 250, 16), new(30, 62, 16)];

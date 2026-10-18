@@ -65,10 +65,10 @@ internal static class ExplicitPointTrial
     internal static void RefreshAndValidate(object pattern, IReadOnlyList<Axis> expected, string stage, Action guard)
     {
         guard();
-        var refresh = pattern.GetType().GetMethod("GenerateMesh", BindingFlags.Public | BindingFlags.Instance,
+        var refresh = pattern.GetType().GetMethod("GenerateMesh", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly,
             null, Type.EmptyTypes, null);
-        if (refresh is null || refresh.ReturnType != typeof(void))
-            throw new InvalidOperationException(stage + ": missing void GenerateMesh contract.");
+        if (refresh is null || !refresh.IsFamily || refresh.ReturnType != typeof(void))
+            throw new InvalidOperationException(stage + ": missing declared protected void GenerateMesh contract.");
         refresh.Invoke(pattern, null);
         Axis[] actual = Points(pattern);
         try { RequireSameLayout(expected, actual); }

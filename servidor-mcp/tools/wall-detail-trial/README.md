@@ -1,4 +1,4 @@
-# Detached wall-detail trials — experimental R07.1
+# Detached wall-detail trials — experimental R07.2
 
 This separate .NET 8 plugin generates trial reinforcement patterns on detached
 copies of two uniform wall sections with their end joints in an explicitly authorized ETABS 23.3.0 fixture.
@@ -67,7 +67,7 @@ Provide `probe-options.json` using the same explicit authorization schema as V2.
 and `trial-options.json` with `ResourceLockPath` set to the actual cooperative
 ETABS lock. A present lock blocks execution; do not remove another owner's lock.
 
-Add `CDCRD.WallDetailTrialR071.dll` through ETABS Tools → Add/Show Plugins and invoke
+Add `CDCRD.WallDetailTrialR072.dll` through ETABS Tools → Add/Show Plugins and invoke
 it once on the authorized, already analyzed copy. No design/detailing rerun is
 needed. A restarted process invalidates the configuration.
 
@@ -145,7 +145,8 @@ end-bar interferences, horizontal hooks, vertical end elevations, native lap
 geometry, material metadata, capacity or persistence. The original source cage and
 EDB remain untouched. R07 stopped at its layout guard during point conversion;
 source sections, preferences and all four source cages remained unchanged.
-Native R07.1 execution is pending; passing tests is not native validation. `src/wall_cage_checks.py` adds independent signed-clearance checks for
+R07.1 also stopped before refresh because it searched only public methods.
+Native R07.2 execution is pending; passing tests is not native validation. `src/wall_cage_checks.py` adds independent signed-clearance checks for
 finite vertical bars versus straight segments or explicitly identified horizontal
 circular arcs. Negative means overlapping radius envelopes. The checks do not
 infer arcs from arbitrary samples or approve positive clearance as code compliance.
@@ -164,8 +165,8 @@ that mesh. R07 omitted this refresh, so a direct point read could pass while the
 containing group still used the previous diameter.
 
 R07.1 explicitly refreshes each freshly constructed point before adding it to the
-new group, then refreshes the new group. The zero-argument public method must
-return void. Identity guards run before refresh, and all original layout checks
+new group, then refreshes the new group. R07.1 incorrectly required a public zero-argument method returning void;
+the native method is protected, so the guard stopped before invoking it. Identity guards run before refresh, and all original layout checks
 remain. A mismatch reports the stage and expected/actual numeric coordinates and
 diameters. No mesh of the source model is refreshed.
 
@@ -174,3 +175,20 @@ cover stale child/group state, a guard stopping mutation, an incorrect diameter
 after refresh, and an unsupported refresh signature. These use independent test
 doubles; live execution against ETABS remains a separate requirement. Assembly
 identity changes to R071 so the loaded R07 binary can be preserved.
+
+
+## R07.2 protected refresh contract
+
+R07.1 failed on its first refresh lookup. The native zero-argument GenerateMesh
+method is declared protected on both concrete point types. R07.2 requires that
+exact declared protected instance method returning void; it does not fall back to
+arbitrary private/public or inherited methods. The owning native assembly remains
+hash-pinned by the plugin. Only independently constructed objects are refreshed.
+
+The installed assembly's method signatures were checked by reflection in a
+separate process without creating native objects or attaching to ETABS. Tests now
+model protected visibility, reject public/private substitutes and wrong return
+types, and retain propagation of native exceptions. Validation: 91 C# tests and
+Release build, zero warnings/errors. Live four-case execution remains pending;
+R07 and R07.1 source invariants passed despite their failures. Loaded R071 remains
+preserved; this build uses assembly identity R072.
