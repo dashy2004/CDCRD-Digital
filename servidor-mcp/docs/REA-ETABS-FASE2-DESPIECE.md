@@ -92,3 +92,41 @@ equivalencia con la designación `#6` del editor.
 `complete_detailing=false` y `engineering_approval=false` permanecen explícitos.
 El siguiente paso es obtener y verificar los datos del editor nativo, no repetir
 el comando legado ni pasar a las otras aplicaciones.
+
+## Continuación: copia aislada y lector nativo experimental
+
+Se creó una revisión sintética independiente para el despiece. En esta sesión,
+`File.Save(nueva_ruta)` devolvió cero, pero dejó el nombre activo con extensión
+`.$et`, el modelo desbloqueado y los casos sin ejecutar. Se detectó mediante
+relectura, no se confundió con una copia analizada correctamente. Tras abrir el
+EDB nuevo y analizarlo, los **nueve casos terminaron** y quedó bloqueado. Los
+hashes de los dos EDB anteriores permanecieron iguales. El diseño de muros y
+el detallado deben regenerarse en esta copia antes de leerlos; los resultados
+del modelo anterior no prueban esta nueva revisión.
+
+La continuación con REA, limitada a esta compilación, identificó:
+
+- Un accesor de lectura del objeto de wall stacks cargado dentro de ETABS.
+  No es un endpoint COM público. Se resolvió por token solo después de fijar
+  SHA-256 y MVID; el análisis amplio alcanzó de nuevo el límite de representación,
+  por lo que se usaron consultas focalizadas, no cobertura completa.
+- El serializador nativo `GetDataObjet` y su cadena de construcción del modelo
+  de intercambio. Puede normalizar identidades de torres en memoria; no se
+  asume que exporte toda la lista de barras ni que sea una instantánea íntegra.
+- `ExportRebarsToExcel` llega a una tabla de propiedades de `DesignLeg`, y su
+  retorno booleano no acredita la creación de un archivo. No se invoca esa
+  exportación ni se presenta como lista de cortes validada.
+
+Se añadió [wall-detail-plugin](../tools/wall-detail-plugin/README.md), un lector
+.NET 8 que usa el mecanismo de plugins de CSI y el accesor investigado. Exige
+versión/binarios exactos, modelo autorizado, PID y hora de creación del proceso,
+y modelo bloqueado. No modifica armado, geometría, análisis ni guarda el EDB.
+No se distribuyen dependencias CSI ni cuerpos reconstruidos.
+
+**Verificación actual:** 11 pruebas del control de acceso pasan y la compilación
+termina sin avisos/errores; las 184 pruebas Python existentes siguen pasando.
+El paquete experimental fue copiado y cotejado por SHA-256 en una carpeta nueva.
+**Carga dentro de ETABS, captura y validación de contenido pendientes**. No se
+reemplazó el runtime MCP ya instalado ni se publicó esto como corrección final
+del despiece. Barras, recubrimientos, cantidades, cortes, ganchos, traslapos y
+anclajes siguen sin cierre. No se trabajó en otras aplicaciones.

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EtabsInstallDir Condition="'$(EtabsInstallDir)' == ''">C:\Program Files\Computers and Structures\ETABS 23</EtabsInstallDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ETABSv1">
+      <HintPath>$(EtabsInstallDir)\ETABSv1.dll</HintPath>
+      <Private>false</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </Reference>
+    <Compile Remove="tests\**\*.cs" />
+  </ItemGroup>
+</Project>
