@@ -1,0 +1,6 @@
+{
+  "action": "audit",
+  "drawing": "C:/CivilPractice/DEMO_COGO_SURVEY.dwg",
+  "expected_count": 12,
+  "output": "C:/CivilPractice/results/audit-01"
+}

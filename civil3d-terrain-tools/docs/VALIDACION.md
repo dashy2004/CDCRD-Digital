@@ -15,3 +15,19 @@ Fecha: 2026-10-18. Ejecución local sobre dibujos sintéticos nuevos, con Civil 
 Compatibilidad con otras versiones o plantillas, curvas de alineamiento, límites interiores de malla, dominios desconectados, cambios de geometría de origen después del ejercicio, cargas de miles de superficies, fallos de disco durante la escritura de recibos, validación geotécnica y cubicación contractual. Los perfiles requieren continuidad; la comprobación de área del dominio no demuestra una topología arbitraria correcta. La auditoría recorre todo el dibujo y puede generar datos privados; no se debe subir una auditoría de un proyecto real a este repositorio.
 
 La prueba de sesión instalada se realiza manualmente con el ejemplo reproducible: los tests Python por sí solos no prueban una conexión con Civil 3D.
+
+## Comprobación de unidades pendiente en la demostración R2
+
+La etapa COGO/Survey detectó que una plantilla podía tener INSUNITS=6 y
+DrawingUnits=Feet, además de etiquetas en pies. Se corrigió y verificó la nueva
+demostración COGO. La copia privada de trabajo sí tiene DrawingUnits=Meters.
+La demostración sintética histórica de terreno R2 todavía no se ha inspeccionado
+para estas dos configuraciones adicionales. Sus comparaciones numéricas y la
+persistencia permanecen documentadas, pero la presentación métrica integral de
+esa demostración queda pendiente.
+
+El guard del plugin 0.2.0 solo comprueba INSUNITS. Antes de cerrar esta entrega:
+comprobar Civil DrawingUnits y unidades de estilos en una copia de la demo R2,
+añadir el guard correspondiente y repetir la comprobación nativa con una nueva
+versión del ensamblado. No interpretar una compilación como prueba de la DLL
+cargada, ni reiniciar una sesión que contenga un original con cambios sin guardar.

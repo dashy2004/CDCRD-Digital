@@ -1,0 +1,7 @@
+{
+  "action": "import",
+  "drawing": "C:/CivilPractice/DEMO_COGO_SURVEY.dwg",
+  "expected_count": 0,
+  "name": "DEMO_POINTS",
+  "output": "C:/CivilPractice/results/import-01"
+}

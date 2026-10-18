@@ -46,3 +46,22 @@ La existencia de metadatos de paquete no acredita publicación en PyPI o GitHub 
 
 **Asistencia de código y documentación: OpenAI Codex.** El historial permite atribuir cambios
 concretos; no se inventa una identidad personal ni una cuenta de contribuidor.
+
+## Formato de informe para la portada (18 de octubre de 2026)
+
+Una única portada en el README de la rama principal presenta contexto, catálogo,
+galerías y vínculos a la evidencia técnica. Las ramas de desarrollo no son páginas
+públicas alternativas: se integran mediante PR revisados; no se mezclan trabajos
+pendientes solo para reducir el número de ramas. GitHub Pages no estaba activado
+al revisar este cambio.
+
+Cada lámina nueva usa proporción 1000:650, encabezado CDCRD, título de operación,
+entrada/unidades, imagen o tabla, resultado y pie de procedencia. Las cinco láminas
+COGO/Survey acompañan a las cinco de terreno. Diferenciar exportación nativa,
+informe de API y captura de escritorio; no intercambiar esos rótulos.
+
+La marca visible es CDCRD-Digital. Los créditos de asistencia se colocan en
+Contribuir y en la guía de IA; no se añaden prefijos de agente a títulos públicos.
+Los nombres internos históricos en ejemplos de desarrollo permanecen cuando son
+parte de un contrato o de una evidencia que no debe reescribirse. No hace falta
+un banner adicional: el banner aprobado encabeza esta portada.
