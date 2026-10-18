@@ -123,10 +123,35 @@ versión/binarios exactos, modelo autorizado, PID y hora de creación del proces
 y modelo bloqueado. No modifica armado, geometría, análisis ni guarda el EDB.
 No se distribuyen dependencias CSI ni cuerpos reconstruidos.
 
-**Verificación actual:** 11 pruebas del control de acceso pasan y la compilación
-termina sin avisos/errores; las 184 pruebas Python existentes siguen pasando.
-El paquete experimental fue copiado y cotejado por SHA-256 en una carpeta nueva.
-**Carga dentro de ETABS, captura y validación de contenido pendientes**. No se
-reemplazó el runtime MCP ya instalado ni se publicó esto como corrección final
-del despiece. Barras, recubrimientos, cantidades, cortes, ganchos, traslapos y
-anclajes siguen sin cierre. No se trabajó en otras aplicaciones.
+### Captura V1 comprobada y ampliación V2.1
+
+El usuario completó diseño y detallado nativos en la copia. V1 se ejecutó y produjo
+un JSON de 238.383 bytes: una pila, dos niveles, geometría y cuatro estaciones de
+diseño. Dos GUID de muros y sus ocho vértices coincidieron con OAPI; las estaciones
+coincidieron dentro de la precisión de visualización. Los nueve casos siguen
+Finished y los originales conservan sus hashes. Este JSON **no incluye los grupos
+físicos de barras**: no se presenta como lista de cantidades o cortes.
+
+Se comprobó una etiqueta externa de unidades imperial aunque la geometría y las
+unidades internas del JSON son N-mm-C. REA localizó la dependencia de dos contextos
+globales del detallador. No se aplicó una conversión de pulgadas a geometría ya
+expresada en milímetros. Los valores nativos confirman recubrimiento 38,1 frente a
+40 mm y área vertical preferida 283,8704 frente a 201,1 mm² comprobados. La separación
+preferida es 250 mm. La preferencia horizontal de 129,032 mm² tampoco demuestra
+equivalencia con las capas derivadas. Son diferencias pendientes, no correcciones.
+
+V2 amplió la lectura al catálogo, grupos verticales/transversales, jaulas y caché
+de cantidades, pero falló antes de capturar al buscar como público un método
+privado de activación. V2.1 corrige la activación mediante los accesores públicos
+verificados por REA y restaura ambos contextos en el orden requerido por sus
+efectos cruzados. Una identidad de ensamblado nueva evita sustituir la DLL cargada.
+La lectura exige concordancia de unidades; cada parte fallida queda explícita.
+No se deserializan los metadatos `$type`, no se recalcula la caché ni se alteran
+armado, resultados o archivo del modelo.
+
+**Verificación actual:** 19 pruebas C# de autorización/contexto aprobadas, build
+sin avisos/errores y 184 pruebas Python aprobadas. V2.1 copiada y cotejada por SHA-256;
+**su ejecución y captura nativa siguen pendientes**. El runtime MCP ya instalado
+no se reemplazó. Una jaula 3D no acredita longitud de corte ni desarrollo de anclaje;
+las preferencias de traslapo no son un cálculo aprobado. Despiece integral aún
+abierto, sin pasar a otras aplicaciones.

@@ -12,5 +12,7 @@
     <PackageReference Include="xunit" Version="2.9.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2"><PrivateAssets>all</PrivateAssets></PackageReference>
     <Compile Include="../ProbeGate.cs" Link="ProbeGate.cs" />
+    <Compile Include="../ContextLease.cs" Link="ContextLease.cs" />
+    <Compile Include="../NativeDetailCapture.cs" Link="NativeDetailCapture.cs" />
   </ItemGroup>
 </Project>
