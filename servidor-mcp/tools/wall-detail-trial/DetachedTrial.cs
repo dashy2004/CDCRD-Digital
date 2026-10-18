@@ -92,8 +92,10 @@ internal static class DetachedTrial
     }
 
     public static object Run(object designer, Assembly detail, Assembly core, Assembly design, string output, Action guard,
-        bool includeSectionJoints = false, bool includeStoryCages = false)
+        bool includeSectionJoints = false, bool includeStoryCages = false, bool includeExplicitPointTrials = false)
     {
+        if (includeExplicitPointTrials && !includeStoryCages)
+            throw new InvalidOperationException("Explicit-point trials require native story cages.");
         if (includeStoryCages && !includeSectionJoints)
             throw new InvalidOperationException("Story cage trials require isolated section joints.");
         guard();
@@ -178,8 +180,10 @@ internal static class DetachedTrial
                     (double)Read(Read(sourceData, "MidZone"), "Thickness") != 200)
                     throw new InvalidOperationException("Fixture is not the authorized uniform 4000 x 200 mm wall.");
                 Save($"leg-{i + 1:D2}-source-data", sourceData);
-                foreach (string scenario in new[] { "control", "metric-mid", "metric-start-tie",
-                    "metric-both-ties-cover40", "metric-both-ties-cover46" })
+                foreach (string scenario in includeExplicitPointTrials
+                    ? new[] { "metric-both-ties-cover46", "metric-explicit-points-cover46" }
+                    : new[] { "control", "metric-mid", "metric-start-tie",
+                        "metric-both-ties-cover40", "metric-both-ties-cover46" })
                 {
                     guard();
                     object? sectionClone = includeSectionJoints ? Call(piers[i], "Clone") : null;
@@ -197,7 +201,7 @@ internal static class DetachedTrial
                         Change("BarSizeHBars", "12");
                         Change("MaxBarSpacingHBars", 400.0);
                         if (scenario == "metric-start-tie") Change("ConfinedPrefTieSize", "12");
-                        if (scenario.StartsWith("metric-both", StringComparison.Ordinal))
+                        if (scenario.StartsWith("metric-both", StringComparison.Ordinal) || scenario.Contains("explicit-points", StringComparison.Ordinal))
                         {
                             guard();
                             RequireDetached(original, clone);
@@ -211,6 +215,8 @@ internal static class DetachedTrial
                     guard();
                     if (sectionClone is not null)
                         CallVoid(sectionClone, "AutoAddFlexuralRebarsBasedOnDesignLegdata", pierPreferences);
+                    object? pointConversion = scenario.Contains("explicit-points", StringComparison.Ordinal)
+                        ? ExplicitPointTrial.Replace(original, clone, design, guard) : null;
                     object vertical = sectionClone is null ? Call(clone, "GenerateVerticalRebarPatterns", pierPreferences)
                         : Read(clone, "VerticalBars");
                     var allPatterns = Items(vertical).ToList();
@@ -250,6 +256,7 @@ internal static class DetachedTrial
                         throw new InvalidOperationException("No numeric trial reinforcement geometry generated.");
                     Save(prefix + "-generated-data", Call(clone, "GetLegData"));
                     object? cageEvidence = null;
+                    object? pointComparison = null;
                     if (includeStoryCages)
                     {
                         guard();
@@ -260,6 +267,8 @@ internal static class DetachedTrial
                             string json = Save(prefix + "-native-" + direction.ToLowerInvariant() + "-cage",
                                 Call(candidateStory, "Get" + direction + "BarsFor3DCage", false));
                             TrialGeometryEvidence.RequireCage(json);
+                            if (pointConversion is not null && direction == "Vertical")
+                                pointComparison = ExplicitPointTrial.RequireCageMatches(sectionClone!, json);
                         }
                         Save(prefix + "-native-vertical-groups", Call(candidateStory, "GetVerticalBarGroups"));
                         Save(prefix + "-native-horizontal-sets", Call(candidateStory, "GetTransBarSets"));
@@ -277,6 +286,7 @@ internal static class DetachedTrial
                         clone_section_rebar_fy = sectionClone is null ? null : Call(sectionClone, "GetRebarFy"),
                         clone_section_rebar_fys = sectionClone is null ? null : Call(sectionClone, "GetRebarFys"),
                         vertical = verticalEvidence, horizontal = horizontalEvidence, cage = cageEvidence,
+                        explicit_point_conversion = pointConversion, plan_cage_comparison = pointComparison,
                         not_applied = true, physical_cage_spacing_verified = false, cover_verified = false,
                         numeric_plan_geometry_exported = true, full_story_cage_generated = includeStoryCages });
                 }

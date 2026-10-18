@@ -14,6 +14,7 @@
     <Compile Include="../DetachedTrial.cs" Link="DetachedTrial.cs" />
     <Compile Include="../TrialGeometryEvidence.cs" Link="TrialGeometryEvidence.cs" />
     <Compile Include="../SectionCloneIsolation.cs" Link="SectionCloneIsolation.cs" />
+    <Compile Include="../ExplicitPointTrial.cs" Link="ExplicitPointTrial.cs" />
     <Compile Include="../DetachedCageTrial.cs" Link="DetachedCageTrial.cs" />
     <Compile Include="../TrialOwnership.cs" Link="TrialOwnership.cs" />
   </ItemGroup>

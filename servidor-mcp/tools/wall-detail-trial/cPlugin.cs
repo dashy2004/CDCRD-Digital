@@ -6,7 +6,7 @@ using ETABSv1;
 using CDCRD.WallDetailProbe;
 using CDCRD.WallDetailTrial;
 
-namespace CDCRD.WallDetailTrialR06;
+namespace CDCRD.WallDetailTrialR07;
 
 /// <summary>Experimental detached-clone trials. Never writes the model or source cage.</summary>
 public sealed class cPlugin : cPluginContract
@@ -17,7 +17,7 @@ public sealed class cPlugin : cPluginContract
 
     public int Info(ref string Text)
     {
-        Text = "CDCRD R06 detached native cage trials for an authorized ETABS 23.3.0 test copy. " +
+        Text = "CDCRD R07 detached explicit-point reconciliation for an authorized ETABS 23.3.0 test copy. " +
                "Changes discarded clone settings only. Source cage and EDB are not changed. Does not approve detailing.";
         return 0;
     }
@@ -108,7 +108,7 @@ public sealed class cPlugin : cPluginContract
                     throw new InvalidOperationException("Units changed during trial.");
             }
             object trials = DetachedTrial.Run(designer, detail, core, design, output, Guard,
-                includeSectionJoints: true, includeStoryCages: true);
+                includeSectionJoints: true, includeStoryCages: true, includeExplicitPointTrials: true);
             Guard();
             WriteJson(Path.Combine(output, "trial-results.json"), trials);
             if (SapModel.GetModelFilename(true) != model || !SapModel.GetModelIsLocked())

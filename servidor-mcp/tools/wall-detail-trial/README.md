@@ -1,4 +1,4 @@
-# Detached wall-detail trials — experimental R06
+# Detached wall-detail trials — experimental R07
 
 This separate .NET 8 plugin generates trial reinforcement patterns on detached
 copies of two uniform wall sections with their end joints in an explicitly authorized ETABS 23.3.0 fixture.
@@ -9,7 +9,7 @@ before implementing a writer.
 The physical cage captured by the earlier reader differs from the checked section.
 Changing a cover label or bar preference does not establish physical agreement.
 This tool measures what the native generator actually produces without assigning
-those trial patterns to a story or saving the model.
+those trial patterns to a source story or saving the model.
 
 ## Scope and guards
 
@@ -30,7 +30,7 @@ those trial patterns to a story or saving the model.
   failure paths. Any source mismatch fails visibly. An error is not approval.
 - Restores both temporary native application contexts in the established order.
 
-Five trials per leg (ten detached trials):
+Historical R04–R06 cases: five trials per leg (ten detached trials):
 
 1. `control`: unchanged clone, regenerated to establish a control.
 2. `metric-mid`: vertical 16 at 250 mm; horizontal 12, maximum 400 mm; cover 40 mm.
@@ -67,7 +67,7 @@ Provide `probe-options.json` using the same explicit authorization schema as V2.
 and `trial-options.json` with `ResourceLockPath` set to the actual cooperative
 ETABS lock. A present lock blocks execution; do not remove another owner's lock.
 
-Add `CDCRD.WallDetailTrialR06.dll` through ETABS Tools → Add/Show Plugins and invoke
+Add `CDCRD.WallDetailTrialR07.dll` through ETABS Tools → Add/Show Plugins and invoke
 it once on the authorized, already analyzed copy. No design/detailing rerun is
 needed. A restarted process invalidates the configuration.
 
@@ -108,17 +108,48 @@ isolated candidate pier, then exports native vertical/horizontal cages and group
 It copies six finite bounds coordinates explicitly and checks the authorized
 3000 mm story extents. The native bounds clone was not used. No source geometry,
 parent stack, editor, elevation update, model setter or save is involved. R06 has
-68 tests and builds without warnings; native R06 execution is pending.
+68 tests and builds without warnings. Native R06 completed ten trials; all 150
+manifest files and four unchanged source cages were independently verified.
 
 Private R05 curve analysis independently fitted the five circular bends and their
 extrema. The reported native cut equals the 3D chord sum, not the circular-arc
 centreline length. Native bend getters also reduce the code-returned radius and
 tail for the generated drawing. Preserve raw values and do not label this drawing
-as a fabrication schedule. R06 cage output still needs checks for actual spacing,
-vertical extents, continuity, cover, hooks and discrepancies with plan points.
+as a fabrication schedule. R06 confirmed that the 16/12 mm, 46 mm cover-label candidate has 34 vertical
+segments and eight horizontal rows per story, at 406.8 mm. However only the four
+end-joint axes match the plan: thirty line-derived axes differ. Independent finite
+line/circular-arc distance checks reject the resulting overlaps. Even the plan
+end-joint bars interfere with the horizontal bends. The candidate remains rejected.
+Local crossover Z is retained in the native cage; it must not be flattened.
 
 No fixture, CSI DLL or reconstructed implementation is distributed. REA 6.5 member
 inspection and focused parser analysis were performed locally against the installed
 binaries; private analysis bodies remain outside this repo.
 
 `complete_detailing=false`, `engineering_approval=false`.
+
+## R07 point correspondence trial
+
+Four detached trials replace the earlier ten-case matrix: the 46 mm cover-label
+baseline and its explicit-point variant, once per story. The variant copies the
+thirty generated leg coordinates into fresh native point objects and a new native
+point-pattern collection. It uses the catalog size property, not the native
+three-number constructor (whose first argument is area). Source patterns are read
+only. End-joint patterns are preserved. Before assigning the new collection to the
+detached leg, every coordinate and diameter is compared. After generating the
+native cage, all 34 axes must match the complete section plan one-to-one. Counts,
+finite coordinates, unique locations and straight vertical geometry are required.
+
+This addresses a specific plan-to-cage discrepancy. It does not correct the four
+end-bar interferences, horizontal hooks, vertical end elevations, native lap
+geometry, material metadata, capacity or persistence. The original source cage and
+EDB remain untouched. Native R07 execution is pending; passing tests is not native
+validation. `src/wall_cage_checks.py` adds independent signed-clearance checks for
+finite vertical bars versus straight segments or explicitly identified horizontal
+circular arcs. Negative means overlapping radius envelopes. The checks do not
+infer arcs from arbitrary samples or approve positive clearance as code compliance.
+
+R07 software validation: 85 C# tests and Release build with zero warnings/errors;
+69 Python tests across the three geometry/check modules, including 28 new checks
+and 98% statement coverage of the new interference module. These checks are not
+a complete review of the native API or an engineering approval.
