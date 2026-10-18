@@ -10,6 +10,24 @@ ROOT = Path(__file__).parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
 import oapi
 from wall_results import display_rows, assess_reinforcement, required_cases
+from wall_reconciliation import reconcile_layers
+
+
+@pytest.mark.parametrize('path', ['Detailing', ' Detailing. '])
+def test_legacy_start_detailing_noop_is_blocked_before_invocation(path):
+    source = ast.parse((ROOT/'src/Etabs.py').read_text(encoding='utf-8'))
+    cls = next(n for n in source.body if isinstance(n, ast.ClassDef) and n.name == 'Etabs')
+    node = next(n for n in cls.body if isinstance(n, ast.FunctionDef) and n.name == 'call_oapi')
+    node.decorator_list = []
+    scope = {'oapi': oapi, 'EtabsError': RuntimeError, 'Any': object}
+    exec(compile(ast.Module(body=[node], type_ignores=[]), 'Etabs.py', 'exec'), scope)
+    def forbidden():
+        pytest.fail('Native no-op must not be invoked')
+    model = SimpleNamespace(GetProgramInfo=lambda: ['ETABS', '23.3.0', 'Nonlinear', 0],
+                            Detailing=SimpleNamespace(StartDetailing=forbidden))
+    obj = SimpleNamespace(_model=lambda: model)
+    with pytest.raises(RuntimeError, match='no genera despiece'):
+        scope['call_oapi'](obj, path, 'StartDetailing')
 
 
 def test_display_preserves_null_not_applicable():
@@ -64,6 +82,7 @@ def test_empty_native_rebar_not_reported_as_complete():
     node = next(n for n in cls.body if isinstance(n, ast.FunctionDef) and n.name == 'get_shearwall_rebar')
     node.decorator_list = []
     scope = {'json':json, 'oapi':oapi, 'EtabsError':RuntimeError,
+             'reconcile_layers':reconcile_layers,
              'read_wall_area_layers':lambda *args: {'layer_count':0}}
     exec(compile(ast.Module(body=[node],type_ignores=[]),'Etabs.py','exec'),scope)
     obj = SimpleNamespace(_wall_design_data=lambda: {'rows':[{'EdgeBar':'8'}]},

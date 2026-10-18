@@ -33,6 +33,7 @@ from comthread import com_call, run_in_com
 import oapi
 from table_contracts import editing_rows, mass_source_rows, time_history_row
 from wall_results import display_rows, required_cases, assess_reinforcement, read_wall_area_layers
+from wall_reconciliation import reconcile_layers
 
 logger = logging.getLogger('fea_mcp_server')
 
@@ -3187,10 +3188,20 @@ class Etabs:
             data['area_rebar'] = read_wall_area_layers(model, data['rows'], oapi.call_checked)
             data['rebar_status'] = ('native_area_layers' if data['area_rebar']['layer_count']
                                     else 'no_rebar_data')
+            overwrites = []
+            if data['area_rebar'].get('units_verified'):
+                key = data['table'].replace('Shear Wall Pier Design Summary - ',
+                                            'Shear Wall Pier Design Overwrites - ', 1)
+                overwrites = display_rows(oapi.call_checked(model.DatabaseTables,
+                    'GetTableForDisplayArray', (key, [], '', 0, [], 0, [])))
+            data['reconciliation'] = reconcile_layers(data['area_rebar'], data['rows'],
+                                                      overwrites, data.get('units_enum'))
         else:
             data['rebar_status'] = 'native_design_rebar'
         data['complete_detailing'] = False
         data['limitation'] = ('GetRebar vacio: capas leidas por AreaObj.GetRebarDataPier. '
+                              'Capas en unidades de base de datos verificadas solo en ETABS 23.3.0, '
+                              'no en las unidades de visualizacion. Pueden ser sintetizadas por ETABS. '
                               'Sus separaciones/recubrimientos pueden diferir de la seccion comprobada. '
                               'Cobertura de lectura no equivale a diseno aprobado ni despiece completo.'
                               if not count else 'Datos nativos disponibles; despiece integral no certificado.')
@@ -3678,6 +3689,12 @@ class Etabs:
             raise EtabsError('GetPierSummaryResults bloqueado: termina el cliente en ETABS 23.3. '
                              'Use get_shearwall_design, que lee la tabla nativa con validaciones.')
         model = self._model()
+        if normalized_path == 'Detailing' and method == 'StartDetailing':
+            program = oapi.call_checked(model, 'GetProgramInfo', ())
+            if tuple(program[:2]) == ('ETABS', '23.3.0'):
+                raise EtabsError('StartDetailing no genera despiece en ETABS 23.3.0 aunque devuelva 0. '
+                                 'Use Run/Update Wall Stack Detailing/Check en la interfaz y '
+                                 'exporte las barras del detalle para verificarlas.')
         target = oapi.resolve_path(model, path) if path else model
         fn = getattr(target, method, None)
         if fn is None:

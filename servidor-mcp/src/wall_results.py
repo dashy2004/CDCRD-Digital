@@ -2,6 +2,8 @@
 import math
 from typing import Any
 
+from wall_reconciliation import length_unit
+
 
 def display_rows(result):
     """Decode GetTableForDisplayArray, preserving CSI's null/not-applicable cells."""
@@ -122,6 +124,9 @@ def read_wall_area_layers(model, summary_rows, call_checked):
 
     Errors are propagated. Coverage describes retrieved layers, never a design
     pass. Native layer spacing/cover may differ from the checked pier section.
+    ETABS 23.3.0 copies database-unit layers without display-unit conversion;
+    its generator may synthesize spacing and default covers from design ratios.
+    Other versions retain raw values but do not receive a verified units label.
     """
     expected = {(r['Story'], r['Pier']) for r in summary_rows}
     result = call_checked(model.AreaObj, 'GetNameList', ())
@@ -154,7 +159,21 @@ def read_wall_area_layers(model, summary_rows, call_checked):
             covered.add(pair)
         else:
             missing_areas.append(name)
+    database_units = model.GetDatabaseUnits()  # Direct enum, not an OAPI status.
+    length_name, _ = length_unit(database_units)
+    program = call_checked(model, 'GetProgramInfo', ())
+    if (not isinstance(program, (list, tuple)) or len(program) != 4
+            or type(program[-1]) is not int or program[-1] != 0
+            or any(type(v) is not str for v in program[:3])):
+        raise ValueError('GetProgramInfo: contrato invalido')
+    verified = program[0] == 'ETABS' and program[1] == '23.3.0'
     return {'source': 'AreaObj.GetRebarDataPier', 'areas': areas,
+            'program_version': program[1], 'database_units_enum': database_units,
+            'units_enum': database_units if verified else None,
+            'length_unit': length_name if verified else None,
+            'units_basis': 'database' if verified else 'unverified',
+            'units_verified': verified,
+            'semantics': 'native_layers_not_bar_schedule',
             'layer_count': sum(len(a['layers']) for a in areas),
             'missing_area_layers': missing_areas,
             'missing_story_piers': [{'Story': s, 'Pier': p} for s, p in sorted(expected-covered)],

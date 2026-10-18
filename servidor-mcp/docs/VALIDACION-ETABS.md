@@ -8,6 +8,11 @@ abajo. No se afirma haber probado las 4.861 firmas del catálogo CSI.
 
 ## Correcciones y regresiones
 
+Actualización posterior: [fase 2 REA — unidades, conciliación y despiece](REA-ETABS-FASE2-DESPIECE.md).
+La conciliación numérica ya identifica diferencias en las cuatro capas; el
+despiece integral continúa pendiente. Esa actualización registra 184 pruebas
+offline y no sustituye las evidencias históricas de esta primera validación.
+
 - `Etabs(process_id=PID)` / `fea.process_id` / variable `ETABS_PROCESS_ID`:
   conexión a una instancia concreta mediante `GetObjectProcess`. Si falla,
   nunca se conecta a otra instancia del ROT ni inicia otra automáticamente.
