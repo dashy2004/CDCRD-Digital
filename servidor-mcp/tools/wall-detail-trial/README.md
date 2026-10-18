@@ -1,4 +1,4 @@
-# Detached wall-detail trials — experimental R03
+# Detached wall-detail trials — experimental R03.1
 
 This separate .NET 8 plugin generates trial reinforcement patterns on detached
 copies of two uniform wall legs in an explicitly authorized ETABS 23.3.0 fixture.
@@ -51,7 +51,7 @@ Provide `probe-options.json` using the same explicit authorization schema as V2.
 and `trial-options.json` with `ResourceLockPath` set to the actual cooperative
 ETABS lock. A present lock blocks execution; do not remove another owner's lock.
 
-Add `CDCRD.WallDetailTrialR03.dll` through ETABS Tools → Add/Show Plugins and invoke
+Add `CDCRD.WallDetailTrialR031.dll` through ETABS Tools → Add/Show Plugins and invoke
 it once on the authorized, already analyzed copy. No design/detailing rerun is
 needed. A restarted process invalidates the configuration.
 
@@ -65,7 +65,13 @@ the plugin preserves the exception. Do not save on the strength of the callback.
 
 The pure isolation/ownership tests and compilation can run without ETABS. They do
 not prove that detached native generation works or that a native clone exposes all
-required context. Native invocation is pending. No fixture, CSI DLL or reconstructed
+required context. R03 stopped at its isolation gate before changing clone settings:
+the native line endpoints are public fields, whereas the reader expected properties.
+Source legs and preferences were confirmed unchanged by the failure-path invariant.
+R03.1 reads those two fields explicitly; regression fixtures use the real field
+shape and assert that shared endpoint rejection reaches the alias check. A new
+assembly identity allows deployment without replacing the loaded R03 binary.
+Native invocation of R03.1 is pending. No fixture, CSI DLL or reconstructed
 CSI implementation is distributed. REA 6.5 parser analysis was performed locally
 against the installed binaries; private analysis bodies remain outside this repo.
 

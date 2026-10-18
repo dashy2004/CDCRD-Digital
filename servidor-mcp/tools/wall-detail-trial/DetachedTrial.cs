@@ -12,6 +12,12 @@ internal static class DetachedTrial
         value.GetType().GetProperty(name, BindingFlags.Public | BindingFlags.Instance)?.GetValue(value)
         ?? throw new InvalidOperationException("Missing native value " + name);
 
+    // The pinned native line type exposes Pt1/Pt2 as fields, not properties.
+    // Keep field access separate; other contracts still require their properties.
+    private static object ReadField(object value, string name) =>
+        value.GetType().GetField(name, BindingFlags.Public | BindingFlags.Instance)?.GetValue(value)
+        ?? throw new InvalidOperationException("Missing native field " + name);
+
     internal static object Call(object value, string name, params object[] args)
     {
         var matches = value.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance)
@@ -61,7 +67,7 @@ internal static class DetachedTrial
     {
         object line = Read(data, "CLine");
         return [data, Read(data, "StartZone"), Read(data, "EndZone"), Read(data, "MidZone"),
-            line, Read(line, "Pt1"), Read(line, "Pt2")];
+            line, ReadField(line, "Pt1"), ReadField(line, "Pt2")];
     }
 
     public static object Run(object designer, Assembly detail, Assembly core, Assembly design, string output, Action guard)

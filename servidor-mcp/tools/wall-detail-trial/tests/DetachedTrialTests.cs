@@ -5,8 +5,9 @@ public sealed class DetachedTrialTests
 {
     public sealed class Line
     {
-        public object Pt1 { get; set; } = new();
-        public object Pt2 { get; set; } = new();
+        // Match the installed native line contract: endpoints are public fields.
+        public object Pt1 = new();
+        public object Pt2 = new();
     }
     public sealed class Data
     {
@@ -35,7 +36,8 @@ public sealed class DetachedTrialTests
         DetachedTrial.RequireDetached(new Leg(), new Leg { InEditMode = true }));
     [Theory]
     [InlineData("Data")][InlineData("Start")][InlineData("End")][InlineData("Mid")]
-    [InlineData("Line")][InlineData("Point")][InlineData("CrossAlias")]
+    [InlineData("Line")][InlineData("Point1")][InlineData("Point2")]
+    [InlineData("CrossPointAlias")][InlineData("CrossAlias")]
     public void SharedMutableStateRejected(string node)
     {
         var a = new Leg(); var b = new Leg();
@@ -46,10 +48,23 @@ public sealed class DetachedTrialTests
             case "End": b.Data.EndZone = a.Data.EndZone; break;
             case "Mid": b.Data.MidZone = a.Data.MidZone; break;
             case "Line": b.Data.CLine = a.Data.CLine; break;
-            case "Point": b.Data.CLine.Pt2 = a.Data.CLine.Pt2; break;
+            case "Point1": b.Data.CLine.Pt1 = a.Data.CLine.Pt1; break;
+            case "Point2": b.Data.CLine.Pt2 = a.Data.CLine.Pt2; break;
+            case "CrossPointAlias": b.Data.CLine.Pt2 = a.Data.CLine.Pt1; break;
             case "CrossAlias": b.Data.EndZone = a.Data.StartZone; break;
         }
-        Assert.Throws<InvalidOperationException>(() => DetachedTrial.RequireDetached(a, b));
+        var error = Assert.Throws<InvalidOperationException>(() => DetachedTrial.RequireDetached(a, b));
+        Assert.Equal("Clone shares mutable geometry or reinforcing data.", error.Message);
+    }
+    [Theory]
+    [InlineData("Pt1")][InlineData("Pt2")]
+    public void MissingEndpointRejected(string point)
+    {
+        var a = new Leg(); var b = new Leg();
+        if (point == "Pt1") b.Data.CLine.Pt1 = null!;
+        else b.Data.CLine.Pt2 = null!;
+        var error = Assert.Throws<InvalidOperationException>(() => DetachedTrial.RequireDetached(a, b));
+        Assert.Equal("Missing native field " + point, error.Message);
     }
     [Fact] public void ExistingLockIsNotReplacedOrDeleted()
     {
