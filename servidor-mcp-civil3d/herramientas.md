@@ -133,3 +133,30 @@ actualizar_objeto(handle='7F3C', cambios='{"Name":"EJE-PRINCIPAL"}', confirmar=T
 |---|---|
 | `src/perfil.py` | cota de superficie por progresiva sobre un alineamiento y comparacion contra un perfil nativo; CSV/JSON; `tests/test_perfil.py` sin CAD |
 | `pruebas/arnes_invocar/correr.py` | compila `Invocar`/`Coerce` de Handlers.cs con .NET 10 y prueba ref/out sin Civil 3D |
+
+## Grupos de puntos y superficies (v0.5.3 a 0.5.5)
+
+| Herramienta MCP | Metodo del puente | Que hace |
+| --- | --- | --- |
+| `grupos_de_puntos` | `puntos.grupos` | Lista los grupos con su conteo y su consulta vigente. |
+| `crear_grupo_puntos` | `puntos.grupo_crear` | Crea o reescribe un grupo con membresia por consulta (StandardPointGroupQuery: IncludeRawDescriptions, IncludeNumbers, IncludeNames y sus excluir). Opcionalmente sobrescribe el estilo de punto y el de etiqueta. |
+| `crear_superficie` | `superficie.crear` | TinSurface.Create con estilo y capa; idempotente por nombre. |
+| `superficie_agregar_grupos` | `superficie.grupos` | Agrega grupos de puntos a la definicion de la superficie y reconstruye; devuelve las estadisticas de Civil 3D. |
+
+Las herramientas MCP nuevas solo aparecen cuando el cliente reinicia el servidor
+Python. Mientras tanto, lo mismo se hace con los metodos genericos, porque desde
+v0.5.4 `Coerce` construye argumentos que antes eran inexpresables:
+
+- un **handle hexadecimal** se convierte a `ObjectId`, asi que
+  `invocar_metodo(handle=<superficie>, ruta='PointGroupsDefinition', metodo='AddPointGroup', args=['<handle del grupo>'])`
+  y `actualizar_objeto(<superficie>, {'StyleId': '<handle del estilo>'})` funcionan;
+- un **objeto JSON pasado como texto** se convierte en una instancia con sus
+  propiedades fijadas, eligiendo la unica subclase concreta del parametro o la que
+  diga la clave `$tipo`:
+  `invocar_metodo(handle=<grupo>, metodo='SetQuery', args=['{"$tipo":"StandardPointGroupQuery","IncludeRawDescriptions":"ACERA*"}'])`;
+- una **lista** se convierte en Point3dCollection, ObjectIdCollection o cualquier
+  coleccion con constructor vacio y `Add` de un argumento.
+
+Ojo: `JsonToClr` del puente revienta con un objeto JSON crudo dentro de `args`
+("The node must be of type 'JsonValue'") hasta v0.5.5 inclusive; por eso la query
+va como texto. Corregido en fuente despues de 0.5.5.

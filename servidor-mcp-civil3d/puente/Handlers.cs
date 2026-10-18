@@ -20,7 +20,7 @@ namespace Cdcrd.Civil3dBridge
 {
     internal static partial class Handlers
     {
-        public const string Version = "0.5.2";
+        public const string Version = "0.5.5";
         private const int MaxItems = 500;
 
         // Alias en espanol -> candidatos de miembro del CivilDocument, en orden.
@@ -854,6 +854,18 @@ namespace Cdcrd.Civil3dBridge
             if (destino.IsEnum) return Enum.Parse(destino, Convert.ToString(json), true);
             if (IsSimple(destino)) return Convert.ChangeType(json, destino);
             // Point3d, Point2d, Vector3d: desde [x,y,z]
+            // ObjectId desde un handle hexadecimal. Sin esto, cualquier API que pida
+            // un ObjectId (TinSurface.PointGroupsDefinition.AddPointGroup, PointStyleId)
+            // queda fuera del alcance de objects.invoke y objects.update, que solo
+            // mueven JSON.
+            if (destino == typeof(ObjectId))
+            {
+                var h = Convert.ToString(json);
+                if (h != null && Regex.IsMatch(h.Trim(), "^[0-9A-Fa-f]{1,16}$"))
+                    return IdFromHandle(Doc().Database, h.Trim());
+                throw new BridgeException(Rpc.ErrParams,
+                    "se esperaba un handle hexadecimal para ObjectId, no '" + h + "'");
+            }
             if (json is List<object> lista)
             {
                 var ctor = destino.GetConstructors()
@@ -861,14 +873,99 @@ namespace Cdcrd.Civil3dBridge
                                          c.GetParameters().All(x => x.ParameterType == typeof(double)));
                 if (ctor != null)
                     return ctor.Invoke(lista.Select(x => (object)Convert.ToDouble(x)).ToArray());
+                var col = ConstruirColeccion(lista, destino);
+                if (col != null) return col;
             }
+            // Objeto JSON -> instancia nueva con sus propiedades fijadas. JsonToClr
+            // deja los objetos como texto JSON, asi que aqui se vuelve a parsear.
+            // Con esto se construyen argumentos como StandardPointGroupQuery para
+            // PointGroup.SetQuery, que no se pueden expresar de otra forma.
+            if (json is string js && (destino.IsClass || destino.IsInterface) && js.TrimStart().StartsWith("{"))
+                return ConstruirDesdeJson(js, destino);
             throw new BridgeException(Rpc.ErrParams, "no se puede convertir el valor a " + destino.Name);
+        }
+
+        // Point3dCollection, ObjectIdCollection y cualquier coleccion con
+        // constructor sin parametros y un Add de un argumento.
+        private static object ConstruirColeccion(List<object> lista, Type destino)
+        {
+            if (destino.GetConstructor(Type.EmptyTypes) == null) return null;
+            var add = destino.GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                .FirstOrDefault(m => m.Name == "Add" && m.GetParameters().Length == 1);
+            if (add == null) return null;
+            object inst;
+            try { inst = Activator.CreateInstance(destino); }
+            catch { return null; }
+            var tp = add.GetParameters()[0].ParameterType;
+            foreach (var item in lista) add.Invoke(inst, new object[] { Coerce(item, tp) });
+            return inst;
+        }
+
+        // Para un destino abstracto se elige la unica subclase concreta con
+        // constructor sin parametros, o la que indique la clave "$tipo".
+        private static object ConstruirDesdeJson(string texto, Type destino)
+        {
+            JsonObject jo;
+            try { jo = JsonNode.Parse(texto) as JsonObject; }
+            catch (Exception ex)
+            { throw new BridgeException(Rpc.ErrParams, "JSON invalido para " + destino.Name + ": " + ex.Message); }
+            if (jo == null)
+                throw new BridgeException(Rpc.ErrParams, "se esperaba un objeto JSON para " + destino.Name);
+
+            var concreto = destino;
+            string pedido = null;
+            if (jo["$tipo"] != null) { try { pedido = jo["$tipo"].GetValue<string>(); } catch { } }
+            if (pedido != null)
+            {
+                concreto = FindType(pedido) ?? destino.Assembly.GetTypes()
+                    .FirstOrDefault(x => string.Equals(x.Name, pedido, StringComparison.OrdinalIgnoreCase));
+                if (concreto == null)
+                    throw new BridgeException(Rpc.ErrParams, "no existe el tipo " + pedido);
+            }
+            else if (destino.IsAbstract || destino.IsInterface)
+            {
+                var cands = destino.Assembly.GetTypes()
+                    .Where(x => !x.IsAbstract && destino.IsAssignableFrom(x) &&
+                                x.GetConstructor(Type.EmptyTypes) != null)
+                    .ToList();
+                if (cands.Count == 1) concreto = cands[0];
+                else throw new BridgeException(Rpc.ErrParams, "indique \"$tipo\" para " + destino.Name +
+                    "; candidatos: " + string.Join(", ", cands.Select(x => x.Name)));
+            }
+
+            object inst;
+            try { inst = Activator.CreateInstance(concreto); }
+            catch (Exception ex)
+            {
+                throw new BridgeException(Rpc.ErrParams, "no se pudo construir " + concreto.Name +
+                    ": " + (ex.InnerException ?? ex).Message);
+            }
+            foreach (var kv in jo)
+            {
+                if (kv.Key == "$tipo") continue;
+                var pr = concreto.GetProperty(kv.Key,
+                    BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+                if (pr == null || !pr.CanWrite)
+                    throw new BridgeException(Rpc.ErrParams,
+                        concreto.Name + " no tiene la propiedad escribible " + kv.Key);
+                try { pr.SetValue(inst, Coerce(JsonToClr(kv.Value), pr.PropertyType)); }
+                catch (BridgeException) { throw; }
+                catch (Exception ex)
+                {
+                    throw new BridgeException(Rpc.ErrParams,
+                        "al fijar " + kv.Key + ": " + (ex.InnerException ?? ex).Message);
+                }
+            }
+            return inst;
         }
 
         private static object JsonToClr(JsonNode n)
         {
             if (n == null) return null;
             if (n is JsonArray a) return a.Select(JsonToClr).ToList();
+            // Un objeto JSON se pasa como su texto: Coerce lo reconstruye en el tipo
+            // que pida el parametro. AsValue() lanza "node must be of type JsonValue".
+            if (n is JsonObject) return n.ToJsonString();
             var v = n.AsValue();
             if (v.TryGetValue<bool>(out var b)) return b;
             if (v.TryGetValue<double>(out var d)) return d;
@@ -945,6 +1042,11 @@ namespace Cdcrd.Civil3dBridge
             if (string.IsNullOrEmpty(handle))
             {
                 object res0;
+                // El bloqueo de documento tambien hace falta en la rama sin handle:
+                // sin el, PointGroupCollection.Add lanza NullReferenceException desde
+                // dentro de la API (verificado en vivo el 2026-10-18), en vez de un
+                // eLockViolation legible.
+                using (lectura ? null : doc.LockDocument())
                 using (var tr0 = db.TransactionManager.StartTransaction())
                 {
                     destino = ResolverRuta(tr0, CivilDoc(), ruta, lectura ? OpenMode.ForRead : OpenMode.ForWrite, out dueno, out prf);

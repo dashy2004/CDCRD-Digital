@@ -38,6 +38,7 @@ import perfil_estratigrafico                       # noqa: E402
 import tridimensional                              # noqa: E402
 import gm                                         # noqa: E402
 import aplanar                                    # noqa: E402
+import puntos                                     # noqa: E402
 
 with open(os.path.join(SRC_DIR, 'config.json'), encoding='utf-8') as fh:
     CONFIG = json.load(fh)
@@ -531,6 +532,7 @@ vistas.registrar(mcp, _llamar, _ok)
 tridimensional.registrar(mcp, _llamar, _ok)
 gm.registrar(mcp, _llamar, _ok)
 aplanar.registrar(mcp, _llamar, _ok)
+puntos.registrar(mcp, _llamar, _ok)
 
 
 @mcp.tool()

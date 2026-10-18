@@ -45,6 +45,8 @@ namespace Cdcrd.Civil3dBridge
                 case "layout.crear": return LayoutCrear(p, method);
                 case "doc.undo": return DocUndo(p, method);
                 default:
+                    var rpt = DispatchPuntos(method, p);
+                    if (rpt != null) return rpt;
                     var rgm = DispatchGm(method, p);
                     if (rgm != null) return rgm;
                     throw new BridgeException(Rpc.ErrMethod, "metodo desconocido: " + method);
