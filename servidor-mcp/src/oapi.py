@@ -103,7 +103,8 @@ def find_str_lists(result: Any, length: int) -> list[list[str]]:
 # StoryDrifts devuelve (NumberResults, Story, LoadCase, StepType, StepNum,
 # Direction, Drift, Label, X, Y, Z) en las versiones recientes, pero el orden
 # y la cantidad de parametros [out] no es contractual entre versiones.
-# Identificar cada columna por su contenido es inmune a esos cambios.
+# Estas heuristicas antiguas NO garantizan identificar una columna.
+# Los lectores nuevos deben usar result_rows y un contrato explicito.
 
 DIRECTION_TOKENS = {"X", "Y", "Z", "U1", "U2", "U3", "UX", "UY", "UZ"}
 
@@ -178,7 +179,11 @@ def call(owner: Any, variants: Sequence[tuple[str, tuple]], what: str = "") -> A
             attempts.append(f"{method_name}({len(args)} args): {e}")
             continue
         code = ret_code(result)
-        if code == 0 or code is None:
+        if code is None:
+            # A mutation may already have happened: do not retry an unrecognised
+            # response and never report it as success.
+            raise OapiError(f"{what or method_name}: respuesta sin codigo de retorno OAPI reconocido ({type(result).__name__}).")
+        if code == 0:
             logger.info("OAPI %s -> %s OK", what or "call", method_name)
             return result
         attempts.append(f"{method_name}({len(args)} args): ret={code}")
@@ -193,6 +198,45 @@ def call(owner: Any, variants: Sequence[tuple[str, tuple]], what: str = "") -> A
 def call_checked(owner: Any, method_name: str, args: tuple, what: str = "") -> Any:
     """Invoca un unico metodo y exige ret == 0."""
     return call(owner, [(method_name, args)], what or method_name)
+
+
+def result_rows(owner: Any, method: str, result: Any,
+                fields: Sequence[tuple[str, type]]) -> list[dict]:
+    """Decode counted COM result arrays by typelib names, never by magnitude.
+
+    With no typelib, use the explicit CSI layout supplied by the caller. A
+    different shape, missing field, nonfinite number or nonzero status fails.
+    """
+    import math
+    if ret_code(result) != 0:
+        raise OapiError(f'{method}: codigo de retorno invalido: {ret_code(result)!r}')
+    values = outs(result)
+    names = ['NumberResults', *[name for name, _ in fields]]
+    for entry in _iter_specs(type(owner)):
+        name, _, params, _ = _unpack_spec(entry)
+        if name == method:
+            names = [n for bits, n, _, _ in params
+                     if bits is not None and bits & 2 and not bits & 8]
+            break
+    expected = {'NumberResults', *[name for name, _ in fields]}
+    if len(values) != len(names) or len(set(names)) != len(names) or set(names) != expected:
+        raise OapiError(f'{method}: contrato de salidas no reconocido; use describe_oapi')
+    columns = dict(zip(names, values))
+    count = columns.pop('NumberResults')
+    if type(count) is not int or count < 0:
+        raise OapiError(f'{method}: NumberResults invalido')
+    for name, kind in fields:
+        column = columns[name]
+        if count == 0 and column is None:
+            column = columns[name] = []
+        if not isinstance(column, (tuple, list)) or len(column) != count:
+            raise OapiError(f'{method}.{name}: longitud distinta de NumberResults={count}')
+        for value in column:
+            valid = isinstance(value, str) if kind is str else (
+                type(value) in (int, float) and math.isfinite(value))
+            if not valid:
+                raise OapiError(f'{method}.{name}: valor no valido')
+    return [{name: columns[name][i] for name, _ in fields} for i in range(count)]
 
 
 # ----------------------------------------------------------------------

@@ -16,6 +16,7 @@
 #   7. create_solid eliminado: SolidObj no existe en la OAPI de ETABS.
 #   8. Validacion de la instancia cacheada en cada llamada.
 
+import json
 import logging
 import os
 import re
@@ -1271,6 +1272,45 @@ class Etabs:
     # con list_tables tras run_analysis, puede variar por version).
 
     @com_call
+    def get_joint_displacements(self, name: str, item_type: int = 0,
+                                cases: list[str] | None = None,
+                                max_results: int = 100, offset: int = 0) -> str:
+        """Lee desplazamientos U1/U2/U3 y giros R1/R2/R3, con casos y pasos.
+
+        item_type: 0 objeto, 1 elemento, 2 grupo, 3 seleccion actual.
+        Componentes en los ejes locales del punto; U en unidades de longitud
+        actuales y R en radianes. No ejecuta analisis ni modifica geometria.
+        cases cambia la seleccion de salida; None conserva la existente.
+        La paginacion limita la respuesta, no la lectura COM completa.
+        """
+        if type(item_type) is not int or item_type not in range(4):
+            raise ValueError('item_type debe ser 0, 1, 2 o 3')
+        if not isinstance(name, str) or (item_type != 3 and not name.strip()):
+            raise ValueError('Se requiere el nombre del objeto, elemento o grupo')
+        if type(max_results) is not int or not 1 <= max_results <= 10000:
+            raise ValueError('max_results debe estar entre 1 y 10000')
+        if type(offset) is not int or offset < 0:
+            raise ValueError('offset debe ser un entero no negativo')
+        model = self._model()
+        self._select_output_cases(model, cases)
+        result = oapi.call_checked(model.Results, 'JointDispl', (name, item_type))
+        fields = [('Obj', str), ('Elm', str), ('LoadCase', str), ('StepType', str),
+                  ('StepNum', float), ('U1', float), ('U2', float), ('U3', float),
+                  ('R1', float), ('R2', float), ('R3', float)]
+        rows = oapi.result_rows(model.Results, 'JointDispl', result, fields)
+        units = model.GetPresentUnits()
+        if type(units) is not int or not 1 <= units <= len(PRESET_UNITS):
+            raise EtabsError(f'Unidades ETABS no reconocidas: {units!r}')
+        end = offset + max_results
+        return json.dumps({'method': 'JointDispl', 'name': name, 'item_type': item_type,
+                           'coordinate_system': 'joint-local',
+                           'length_unit': PRESET_UNITS[units - 1].split(', ')[1],
+                           'rotation_unit': 'rad', 'units_code': units,
+                           'total_results': len(rows), 'offset': offset,
+                           'next_offset': end if end < len(rows) else None,
+                           'results': rows[offset:end]}, ensure_ascii=False, allow_nan=False)
+
+    @com_call
     def _select_output_cases(self, model: Any, cases: list[str] | None) -> None:
         # @com_call latente: hoy solo se invoca desde metodos ya decorados;
         # la guarda de reentrada de comthread evita el deadlock del executor
@@ -1564,49 +1604,23 @@ class Etabs:
                    usa los que ya esten seleccionados para salida.
         """
         model = self._model()
-        if cases:
-            oapi.call(model.Results.Setup,
-                      [("DeselectAllCasesAndCombosForOutput", ())],
-                      "limpieza de casos de salida")
-            for case in cases:
-                try:
-                    oapi.call(model.Results.Setup,
-                              [("SetCaseSelectedForOutput", (case,))],
-                              f"seleccion del caso '{case}'")
-                except Exception:
-                    oapi.call(model.Results.Setup,
-                              [("SetComboSelectedForOutput", (case,))],
-                              f"seleccion de la combinacion '{case}'")
-
+        self._select_output_cases(model, cases)
         result = oapi.call(model.Results, [("StoryDrifts", ())],
                            "lectura de derivas de piso")
-        values = oapi.outs(result)
-        if not values or not isinstance(values[0], int) or values[0] == 0:
+        fields = [('Story', str), ('LoadCase', str), ('StepType', str),
+                  ('StepNum', float), ('Direction', str), ('Drift', float),
+                  ('Label', str), ('X', float), ('Y', float), ('Z', float)]
+        rows = oapi.result_rows(model.Results, 'StoryDrifts', result, fields)
+        if not rows:
             return ("Sin resultados de deriva. Verifique que el analisis "
                     "corrio y que hay casos seleccionados para salida.")
-
-        # Orden documentado (reciente): NumberResults, Story, LoadCase,
-        # StepType, StepNum, Direction, Drift, Label, X, Y, Z. Pero el orden
-        # no es contractual entre versiones: cada columna se identifica por
-        # contenido, con el orden posicional solo como respaldo.
-        n = values[0]
-        strings = oapi.find_str_lists(result, n)
-        numbers = oapi.find_num_lists(result, n)
-        if len(strings) < 2 or not numbers:
-            return f"{n} resultado(s) de deriva, formato no reconocido: {values!r}"
-
-        story, case = strings[0], strings[1]
-        direction = oapi.pick_direction(strings) or ["?"] * n
-        drift = oapi.pick_drift(numbers)
-        if drift is None:
-            return f"{n} resultado(s), sin columna de derivas reconocible."
-
-        lines = [f"{story[i]} | {case[i]} | dir {direction[i]} | "
-                 f"deriva {drift[i]:.5f}" for i in range(n)]
-        peak = max(range(n), key=lambda i: abs(drift[i]))
-        return (f"{n} resultado(s):\n" + "\n".join(lines)
-                + f"\n\nMaxima: {drift[peak]:.5f} en {story[peak]} "
-                  f"({case[peak]}, dir {direction[peak]}).")
+        lines = [f"{r['Story']} | {r['LoadCase']} | dir {r['Direction']} | "
+                 f"deriva {r['Drift']:.5f} | paso {r['StepType']} {r['StepNum']:g}"
+                 for r in rows]
+        peak = max(rows, key=lambda r: abs(r['Drift']))
+        return (f"{len(rows)} resultado(s):\n" + "\n".join(lines)
+                + f"\n\nMaxima: {peak['Drift']:.5f} en {peak['Story']} "
+                  f"({peak['LoadCase']}, dir {peak['Direction']}).")
 
     # ------------------------------------------------------------------
     # Tablas interactivas (DatabaseTables)

@@ -52,6 +52,7 @@ def get_config() -> str:
 
 if config.feaName == "ETABS":
     from Etabs import Etabs
+    from oapi_catalog import search_oapi_catalog
     etabs = Etabs(auto_start=config.autoStart, exe_path=config.exePath)
     logger.info("Registrando herramientas de ETABS...")
 
@@ -65,6 +66,7 @@ if config.feaName == "ETABS":
 
     # Introspeccion: consultar firmas reales antes de suponerlas.
     describe_oapi = mcp.tool()(etabs.describe_oapi)
+    search_oapi_catalog = mcp.tool()(search_oapi_catalog)
 
     # Edicion: borrar, mover, liberar extremos
     delete_object = mcp.tool()(etabs.delete_object)
@@ -77,6 +79,7 @@ if config.feaName == "ETABS":
 
     # Resultados dedicados
     get_joint_reactions = mcp.tool()(etabs.get_joint_reactions)
+    get_joint_displacements = mcp.tool()(etabs.get_joint_displacements)
     get_frame_forces = mcp.tool()(etabs.get_frame_forces)
 
     # Acero

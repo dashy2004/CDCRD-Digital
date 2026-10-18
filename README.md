@@ -235,6 +235,7 @@ del modelo abierto, están excluidas por `.gitignore`. Véase el
 | [Esquema de proyecto](docs/ESQUEMA-PROYECTO.md) | Contrato de `proyecto.json` |
 | [Instalación de servidores](instalacion/INSTALACION.md) | Conexión con las aplicaciones |
 | [Hallazgos del API ETABS](servidor-mcp/ERRORES.md) | Causas y soluciones documentadas para tablas, filtros y análisis |
+| [ETABS + REA: primera etapa](servidor-mcp/docs/REA-ETABS-FASE1.md) | Catálogo estático de 4.861 firmas CSI, desplazamientos y lectura de derivas por contrato; validación viva pendiente |
 
 ## Instalación y paquetes
 
