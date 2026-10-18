@@ -146,7 +146,8 @@ geometry, material metadata, capacity or persistence. The original source cage a
 EDB remain untouched. R07 stopped at its layout guard during point conversion;
 source sections, preferences and all four source cages remained unchanged.
 R07.1 also stopped before refresh because it searched only public methods.
-Native R07.2 execution is pending; passing tests is not native validation. `src/wall_cage_checks.py` adds independent signed-clearance checks for
+R07.2 execution was verified separately on the authorized synthetic fixture;
+passing tests alone is not native validation. `src/wall_cage_checks.py` adds independent signed-clearance checks for
 finite vertical bars versus straight segments or explicitly identified horizontal
 circular arcs. Negative means overlapping radius envelopes. The checks do not
 infer arcs from arbitrary samples or approve positive clearance as code compliance.
@@ -189,6 +190,24 @@ The installed assembly's method signatures were checked by reflection in a
 separate process without creating native objects or attaching to ETABS. Tests now
 model protected visibility, reject public/private substitutes and wrong return
 types, and retain propagation of native exceptions. Validation: 91 C# tests and
-Release build, zero warnings/errors. Live four-case execution remains pending;
-R07 and R07.1 source invariants passed despite their failures. Loaded R071 remains
+Release build, zero warnings/errors. The four-case execution completed: both explicit-point variants matched all 34
+plan/cage axes and diameters. R07 and R07.1 source invariants passed despite
+their failures. Loaded R071 remains
 preserved; this build uses assembly identity R072.
+
+
+### Verified R07.2 trial result
+
+Four detached cases completed; 66 manifest files and the native snapshot digest
+were checked. Both explicit-point variants preserve all 34 plan axes in the
+native cage, with 30 fresh leg points plus four existing cloned end-joint bars.
+All four source cages, source sections/joints and preferences stayed unchanged;
+protected model file digests also stayed unchanged.
+
+Independent geometry checks found four remaining end-bar interferences per story
+in each explicit-point variant, compared with 34 in the unchanged line-pattern
+baseline. The variant therefore remains rejected as a complete physical cage.
+Horizontal hooks/cuts, vertical continuity/anchorage, material reconciliation,
+capacity and save/reopen persistence remain unresolved. No candidate was applied
+or saved. The software error and point-correspondence trial are closed;
+complete_detailing=false and engineering_approval=false remain in force.
