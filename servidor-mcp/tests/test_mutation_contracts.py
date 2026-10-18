@@ -89,6 +89,12 @@ def test_generic_value_getter_is_not_status(methods,value):
     assert result['ret'] is None and result['value'] == value
 
 
+def test_generic_call_blocks_known_crashing_wall_summary(methods):
+    obj = SimpleNamespace(_model=lambda: pytest.fail('Must reject before COM connection'))
+    with pytest.raises(RuntimeError, match='get_shearwall_design'):
+        methods['call_oapi'](obj, 'DesignShearWall', 'GetPierSummaryResults', [[]] * 39)
+
+
 def test_close_saves_and_initializes_before_newblank(methods):
     calls=[]
     model=SimpleNamespace(GetModelFilename=lambda:'test.edb',GetPresentUnits=lambda:6,

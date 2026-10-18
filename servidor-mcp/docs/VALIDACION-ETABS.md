@@ -37,9 +37,13 @@ abajo. No se afirma haber probado las 4.861 firmas del catálogo CSI.
 - `close_model`: guarda si se solicita, obtiene unidades, llama
   `InitializeNewModel` y después `NewBlank`. La secuencia anterior cerró
   inesperadamente ETABS en la prueba de acero. La corregida pasó y reabrió el EDB.
-- Lectores de muros: cancelan con error explicativo si no existen tablas de
-  diseño. Una llamada nativa sin resultados terminó el cliente Python durante
-  la prueba; la guarda evita repetir esa ruta.
+- Lectores de muros: `GetPierSummaryResults` terminó el cliente Python incluso
+  con diseño disponible. Se sustituyó por `GetTableForDisplayArray`; salida JSON
+  con precisión de visualización, null y campos no aplicables conservados.
+  Verifica todas las dependencias de combinaciones (incluidas anidadas) y rechaza
+  casos no terminados. No convierte ausencia de DCRatio en cero.
+  `GetRebar` retornó 0 con cero filas: el lector entrega el resumen disponible
+  con `complete_detailing=false`, nunca un despiece inventado.
 - `call_oapi(..., returns_status=False)` conserva el valor de getters como
   `GetPresentUnits` sin confundir el enum 6 con un código de error.
 - Resultados de concreto: sin tolerancia adicional del 5% ni exenciones de
@@ -50,8 +54,8 @@ que el usuario cambie manualmente el modelo dentro de esa misma instancia.
 
 ## Verificación realizada
 
-- 96 pruebas offline ETABS aprobadas; 10 regresiones del corpus aprobadas
-  (**106 total**). No requieren conexión a modelos.
+- 120 pruebas offline ETABS aprobadas; 10 regresiones del corpus aprobadas
+  (**130 total**). No requieren conexión a modelos.
 - Compilación Python y `git diff --check` correctos.
 - Importación Windows y generación de los esquemas de las 76 herramientas MCP.
 - Regresiones en rojo/verde para conexión fijada, finalización de análisis y
@@ -100,6 +104,20 @@ convierte automáticamente un retorno de texto en una prueba aprobada.
 | Guardado/reapertura | Geometría conservada; resultado axial idéntico |
 | Exportación/importación `.$et` + recálculo | 1 frame, 2 puntos, U3=−0,100000 mm |
 | Cierre de modelo / aplicación | Modelo vacío, EDB reabierto y proceso cerrado verificadamente |
+| Muros ACI 318-19, prueba posterior | Dead/Live ejecutados; 9 estados Finished incluyendo caso interno; 4 estaciones de pier cotejadas contra tabla, guardadas y reabiertas idénticas |
+
+En la primera prueba de dos niveles, Dead/Live no se habían ejecutado y las
+combinaciones automáticas de diseño carecían de resultados. Las lecturas
+positivas anteriores de concreto no acreditaban cobertura completa de diseño.
+El arnés ya selecciona Dead/Live. En la copia de muros se verificaron DWalS1–4:
+dependen de Dead, Live y TEST_RS. El usuario ejecutó Start Design/Check en GUI
+después del análisis, ya sin aviso de combinaciones omitidas.
+
+Las cuatro filas no tienen mensajes de error/advertencia, pero requieren
+0,25–0,49 % frente a 0,21 % actual. Se conserva ese hallazgo, sin aumentar barras
+automáticamente ni certificar armado. El resumen y las respuestas de ambos
+lectores coinciden antes/después de guardar/reabrir; GetRebar sigue sin detalle.
+La reapertura, no solo File.Save ret=0, fue la comprobación de persistencia.
 
 La definición geométrica de una sección rectangular no define su función de
 armado: la viga sintética recibió `PropFrame.SetRebarBeam` antes del diseño.
@@ -110,12 +128,11 @@ las unidades activas de la interfaz (m).
 
 ## Puertas pendientes antes de otras aplicaciones
 
-1. **Muros:** ETABSv1 instalado no expone `DesignShearWall.StartDesign`.
-   Falta ejecutar diseño de muros en la interfaz del modelo sintético y probar
-   positivamente ambos lectores. La guarda final de ausencia de resultados tiene
-   regresión unitaria; su comprobación nativa final quedó pendiente al cerrarse
-   la sesión durante la reapertura del archivo avanzado. No equivale a validar
-   despiece. No usar modelos privados como sustituto.
+1. **Muros:** resumen por tablas y persistencia comprobados; la API instalada
+   no expone `DesignShearWall.StartDesign`, por lo que sigue requiriendo GUI.
+   Falta despiece nativo no vacío y conciliación del armado requerido/actual.
+   GetPierSummaryResults también queda bloqueado en call_oapi antes de acceder
+   al modelo; se dirige al lector seguro por tablas.
 2. **Historia no lineal directa:** definición y relectura correctas, pero
    `TEST_TH_NL` queda en estado 1 y ETABS desactiva su bandera. La edición en
    ejecución se identifica como **Nonlinear**, no Ultimate. La documentación
@@ -134,6 +151,7 @@ No se pasa a SAFE/Revit/Civil 3D/AutoCAD dentro de esta etapa. EDB, resultados,
 logs, rutas de usuario y licencia quedan fuera del repositorio público.
 
 Referencias CSI: [NewBlank e inicialización previa](https://docs.csiamerica.com/help-files/etabs-api-2016/html/343e38b3-b137-cadc-26a7-8a97247fe5bd.htm),
+[secuencia de análisis y diseño de muros](https://docs.csiamerica.com/help-files/etabs/Getting_Started/Shear_Wall_Design_Procedure.htm),
 [niveles del producto, manual histórico](https://docs.csiamerica.com/manuals/etabs/Welcome%20to%20ETABS.pdf).
 Las firmas y campos se cotejaron además con ETABSv1 y `Table and Field Keys.xml`
 de la instalación real 23.3.0, no se dedujeron solo del catálogo compartido.

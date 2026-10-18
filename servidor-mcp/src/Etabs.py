@@ -32,6 +32,7 @@ from pydantic import BaseModel, Field
 from comthread import com_call, run_in_com
 import oapi
 from table_contracts import editing_rows, mass_source_rows, time_history_row
+from wall_results import display_rows, required_cases, assess_reinforcement
 
 logger = logging.getLogger('fea_mcp_server')
 
@@ -3090,85 +3091,100 @@ class Etabs:
             raise EtabsError(msg + ' Cambios parciales; fallos: ' + '; '.join(errores[:5]))
         return msg
 
-    def _require_wall_design_results(self) -> None:
-        """Avoid ETABS 23 native getter failure when no wall design exists."""
+    def _require_wall_design_results(self) -> str:
+        """Select the available wall summary; never invoke the unsafe native getter."""
         result = oapi.call_checked(self._model().DatabaseTables, 'GetAvailableTables', ())
         tables = oapi.result_rows(self._model().DatabaseTables, 'GetAvailableTables', result,
                                  [('TableKey', str), ('TableName', str), ('ImportType', int)],
                                  count_name='NumberTables')
-        if not any(row['TableKey'].startswith('Shear Wall Pier Design Summary - ') for row in tables):
+        keys = [row['TableKey'] for row in tables
+                if row['TableKey'].startswith('Shear Wall Pier Design Summary - ')]
+        if not keys:
             raise EtabsError('No hay resultados de diseño de muros. Ejecute el diseño en ETABS; '
                              'ETABSv1 23 no expone DesignShearWall.StartDesign. '
                              'Lectura nativa cancelada para proteger el proceso COM.')
+        if len(keys) != 1:
+            raise EtabsError(f'Varias tablas de muros disponibles; codigo ambiguo: {keys}')
+        return keys[0]
+
+    def _wall_design_data(self) -> dict:
+        """Require analyzed design dependencies and read the native display table.
+
+        In ETABS 23.3 GetPierSummaryResults terminated the Python client even
+        with populated design results. The table path avoids that native call.
+        Table values retain CSI display precision and null/not-applicable cells.
+        """
+        model = self._model()
+        key = self._require_wall_design_results()
+
+        def table(name):
+            return display_rows(oapi.call_checked(model.DatabaseTables, 'GetTableForDisplayArray',
+                                                  (name, [], '', 0, [], 0, [])))
+
+        selections = table('Shear Wall Design Load Combination Data')
+        combos = [r.get('ComboName') for r in selections if r.get('ComboType') == 'Strength']
+        if not combos or any(not isinstance(n, str) or not n for n in combos):
+            raise EtabsError('No se pudieron verificar las combinaciones de muros seleccionadas.')
+        cases = required_cases(combos, lambda name: oapi.call_checked(model.RespCombo, 'GetCaseList', (name,)))
+        statuses = oapi.result_rows(model.Analyze, 'GetCaseStatus',
+                                   oapi.call_checked(model.Analyze, 'GetCaseStatus', ()),
+                                   [('CaseName', str), ('Status', int)], count_name='NumberItems')
+        by_name = {r['CaseName']: r['Status'] for r in statuses}
+        missing = {name: by_name.get(name) for name in cases if by_name.get(name) != 4}
+        if missing:
+            raise EtabsError(f'Diseno de muros incompleto: casos sin resultados finalizados: {missing}. '
+                             'Ejecute esos casos y repita Start Design/Check; no ignore combinaciones.')
+        rows = table(key)
+        if not rows:
+            raise EtabsError('No hay resultados de diseño de muros: tabla vacia.')
+        if any(not all(r.get(k) for k in ('Story', 'Pier', 'Station')) for r in rows):
+            raise EtabsError('Tabla de muros sin identificadores completos.')
+        return {'source': 'DatabaseTables.GetTableForDisplayArray', 'table': key,
+                'units_enum': model.GetPresentUnits(), 'display_precision': True,
+                'design_combinations': combos, 'required_cases': cases,
+                'analysis_dependencies_finished': True, 'rows': rows,
+                'engineering_approval': False,
+                'limitation': 'Lectura de resultados existentes; no acredita vigencia del diseno '
+                              'tras cambios de preferencias ni detalle completo. Sin DCRatio no inferir cero.'}
 
     @com_call
     def get_shearwall_design(self) -> str:
-        """Lee el resumen de diseño de muros de corte (piers).
+        """JSON del resumen nativo por tablas; no invoca GetPierSummaryResults.
 
-        DesignShearWall.GetPierSummaryResults verificado el 2026-08-10:
-        devuelve 39 arreglos; aca se reportan los operativos (DCRatio,
-        refuerzo, zona de borde, mensajes). Requiere diseño de muros corrido
-        y pier labels asignados (set_pier_label).
+        Requiere resultados de todos los casos de las combinaciones elegidas.
+        Porcentajes requeridos/actuales se comparan sin declarar cumplimiento.
+        Campos ausentes/null permanecen asi, no se sustituyen por cero.
         """
-        self._require_wall_design_results()
-        model = self._model()
-        res = model.DesignShearWall.GetPierSummaryResults(
-            *([[]] * 39))
-        ret = res[-1]
-        if ret != 0:
-            raise EtabsError(
-                "GetPierSummaryResults fallo. ¿Hay pier labels asignados y "
-                "diseño de muros corrido? Ver set_pier_label.")
-        (story, pier, station, design_type, sec_type, edge_bar, end_bar,
-         bar_spacing, reinf_pct, curr_pct, dc_ratio, pier_leg) = res[:12]
-        bzone_len = res[36]
-        warn, err = res[37], res[38]
-        n = len(story)
-        if n == 0:
-            return "Sin resultados de pier. ¿Se asignaron pier labels?"
-        rows = []
-        for i in range(n):
-            fila = (f"{story[i]}/{pier[i]} ({station[i]}, {design_type[i]}): "
-                    f"DC={dc_ratio[i]:.3f}, refuerzo={reinf_pct[i]:.4f} "
-                    f"(actual {curr_pct[i]:.4f}), borde={edge_bar[i]}, "
-                    f"extremo={end_bar[i]} @ {bar_spacing[i]:g}, "
-                    f"zona_borde={bzone_len[i]:g}")
-            if dc_ratio[i] > 1.0:
-                fila += " | FALLA: DC>1"
-            if err[i]:
-                fila += f" | ERROR: {err[i]}"
-            if warn[i]:
-                fila += f" | AVISO: {warn[i]}"
-            rows.append(fila)
-        return f"{n} estacion(es) de pier:\n" + "\n".join(rows)
+        data = self._wall_design_data()
+        for row in data['rows']:
+            row['reinforcement_comparison'] = assess_reinforcement(row)
+        return json.dumps(data, ensure_ascii=False)
 
     @com_call
     def get_shearwall_rebar(self) -> str:
-        """Lee el despiece de refuerzo de muros (flexural + corte/confinamiento).
+        """JSON del refuerzo disponible; distingue resumen de detalle completo.
 
-        DesignShearWall.GetRebar verificado el 2026-08-10. Es el dato de
-        detallado que alimenta la vuelta a Revit (C6): por pierna de pier,
-        geometria, espesor, materiales y las cadenas de refuerzo.
+        GetRebar puede devolver ret=0 con cero filas aun con diseno realizado.
+        En ese caso se conserva el resumen nativo sin inventar Fc, fy, barras,
+        longitudes de anclaje ni cadenas de confinamiento no disponibles.
         """
-        self._require_wall_design_results()
+        data = self._wall_design_data()
         model = self._model()
-        (area_obj, story, pier, station, leg_id, x1, y1, x2, y2,
-         length, thickness, fc, fy, fys, flexural, shear_conf,
-         ret) = model.DesignShearWall.GetRebar(
-            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [])
-        if ret != 0:
-            raise EtabsError("GetRebar fallo. ¿Diseño de muros corrido?")
-        n = len(area_obj)
-        if n == 0:
-            return "Sin refuerzo de muros. ¿Pier labels y diseño corridos?"
-        rows = []
-        for i in range(n):
-            rows.append(
-                f"{story[i]}/{pier[i]}/{leg_id[i]} (area {area_obj[i]}, "
-                f"{station[i]}): L={length[i]:g}, t={thickness[i]:g}, "
-                f"f'c={fc[i]:g}, fy={fy[i]:g} | flexural: {flexural[i]} | "
-                f"corte/confinamiento: {shear_conf[i]}")
-        return f"{n} pierna(s) de muro:\n" + "\n".join(rows)
+        result = oapi.call_checked(model.DesignShearWall, 'GetRebar', tuple([] for _ in range(16)))
+        names = ['AreaObjName','StoryName','PierLabel','StationLocation','LegID',
+                 'LeftX1','LeftY1','RightX2','RightY2','Length','Thickness','Fc',
+                 'FY','fys','Flexural','ShearAndConfinement']
+        if len(result) != 17 or not isinstance(result[0], (list, tuple)):
+            raise EtabsError('GetRebar: contrato de salidas desconocido')
+        count = len(result[0])
+        if any(not isinstance(c, (list, tuple)) or len(c) != count for c in result[:-1]):
+            raise EtabsError('GetRebar: longitudes de columnas incompatibles')
+        data['native_rebar_count'] = count
+        data['native_rebar'] = [dict(zip(names, values)) for values in zip(*result[:-1])]
+        data['complete_detailing'] = False
+        data['limitation'] = ('GetRebar no devuelve detalle; se muestra solo el resumen de diseno.'
+                              if not count else 'Datos nativos disponibles; despiece integral no certificado.')
+        return json.dumps(data, ensure_ascii=False, allow_nan=False)
 
     async def create_objects_by_coordinates(
         self,
@@ -3626,7 +3642,7 @@ class Etabs:
     @com_call
     def call_oapi(self, path: str, method: str,
                   args: list[Any] | None = None, returns_status: bool = True) -> str:
-        """Invoca CUALQUIER metodo de la OAPI y devuelve ret y [out] crudos.
+        """Invoca metodos OAPI y devuelve ret y [out] crudos (salvo fallos nativos conocidos).
 
         Es la salida para lo que no tiene herramienta dedicada. Consultar
         primero describe_oapi(path, method) para la firma real: los
@@ -3647,6 +3663,10 @@ class Etabs:
                   modo ret=null y value contiene el resultado sin interpretarlo.
         """
         import json
+        normalized_path = '.'.join(part.strip() for part in path.split('.') if part.strip())
+        if normalized_path == 'DesignShearWall' and method == 'GetPierSummaryResults':
+            raise EtabsError('GetPierSummaryResults bloqueado: termina el cliente en ETABS 23.3. '
+                             'Use get_shearwall_design, que lee la tabla nativa con validaciones.')
         model = self._model()
         target = oapi.resolve_path(model, path) if path else model
         fn = getattr(target, method, None)

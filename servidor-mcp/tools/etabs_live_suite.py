@@ -149,7 +149,9 @@ def run_suite(adapter, out, tool, api, record, check):
     tool('delete_definition', 'load_pattern', 'TEST_DELETE')
     tool('save_model', str(out / 'two_storey.edb'))
     api('Analyze', 'SetRunCaseFlag', ['', False, True])
-    for case in ['TEST_G','TEST_X','Modal','TEST_RS','TEST_PD','TEST_NL']:
+    # Automatic concrete/wall design combos also require default Dead/Live.
+    # Running only the synthetic cases produces an incomplete design silently.
+    for case in ['Dead','Live','TEST_G','TEST_X','Modal','TEST_RS','TEST_PD','TEST_NL']:
         try: api('Analyze','SetRunCaseFlag',[case,True,False])
         except Exception as exc: failures.append({'case':case,'error':str(exc)})
     tool('run_analysis')
