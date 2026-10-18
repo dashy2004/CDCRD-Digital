@@ -68,6 +68,22 @@ el preview ajusta el encuadre, sin garantizar escala de impresión. No incorpora
 cajetín, láminas ni dimensionamiento de armaduras. La apariencia y las cotas
 deben revisarse también en el CAD destinatario antes de entregar un plano.
 
+## Ejemplo de secciones y pórtico en DXF
+
+[`ejemplos/secciones-dxf/`](ejemplos/secciones-dxf/README.md) genera cuatro
+archivos `.dxf` con ezdxf —tres secciones de columna armadas y un pórtico tipo
+de tres niveles— con capas separadas, estribo dibujado con su espesor y cotas
+nativas en centímetros.
+
+```powershell
+python .\herramientas-locales\ejemplos\secciones-dxf\generar_secciones.py
+```
+
+Ese script usa la biblioteca directamente y no pasa por `generar-dxf`: el
+esquema JSON de la CLI describe polígonos, cotas y notas, sin círculos ni
+sombreados. Su geometría es ficticia y no sustituye cálculo ni verificación
+normativa.
+
 ## Consulta y verificación normativa
 
 ```powershell

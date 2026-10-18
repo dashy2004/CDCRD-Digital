@@ -192,10 +192,34 @@ no contiene datos, imágenes ni resultados de un proyecto en desarrollo.
 | [Auditoría MEP](revit-mcp-tools/MEP.md) | Inventariar categorías/sistemas y revisar conectores físicos abiertos |
 | [Revit residencial de cuatro niveles](revit-mcp-tools/ejemplos/residencial-4n/) | Seguir una receta de modelado y documentación |
 | [Planta CAD sintética](herramientas-locales/README.md#ejemplo-de-plano-reproducible) | Generar DXF, inspeccionarlo y producir vistas previas |
+| [Esquemas DXF de secciones y pórtico](herramientas-locales/ejemplos/secciones-dxf/README.md) | Dibujar secciones acotadas y un pórtico tipo por código, con capas y cotas nativas |
 
 El inventario y la conectividad ayudan a localizar omisiones; no sustituyen el cálculo de
 caudales, cargas, ventilación, protección contra incendios ni una revisión normativa completa.
 El estado de las pruebas de cada herramienta está documentado en su módulo.
+
+### Esquemas DXF: secciones y pórtico
+
+[Ejemplo y parámetros](herramientas-locales/ejemplos/secciones-dxf/README.md) ·
+[Operaciones de la CLI](herramientas-locales/README.md#ejemplo-de-plano-reproducible)
+
+Cuatro archivos `.dxf` generados por código y abiertos después en CAD. Unidades
+en centímetros, capas separadas y cotas nativas. Geometría ficticia.
+
+| Sección 35 × 35 | Sección 40 × 40 |
+|---|---|
+| ![Sección de columna 35 x 35](herramientas-locales/docs/images/seccion-c1.png) | ![Sección de columna 40 x 40](herramientas-locales/docs/images/seccion-c2.png) |
+| 12 barras No. 6; estribo No. 3 dibujado con su espesor. | 14 barras No. 6; separaciones acotadas a ejes de barra. |
+
+| Sección 40 × 45 | Pórtico tipo |
+|---|---|
+| ![Sección de columna 40 x 45](herramientas-locales/docs/images/seccion-c3.png) | ![Pórtico tipo de tres niveles](herramientas-locales/docs/images/portico-tipo.png) |
+| 16 barras No. 6; dobleces redondeados y gancho a 135°. | Tres niveles de 310 cm con empotramientos y cotas. |
+
+Las cuatro láminas se generaron desde esos mismos `.dxf` con ezdxf y Matplotlib:
+son informes de salida del archivo, no capturas de AutoCAD. El ejemplo produce
+esquemas acotados; no incluye cajetín, láminas de presentación ni despiece de
+armadura, y no sustituye cálculo ni verificación normativa.
 
 ### Demostración ETABS — oficinas de tres niveles
 
