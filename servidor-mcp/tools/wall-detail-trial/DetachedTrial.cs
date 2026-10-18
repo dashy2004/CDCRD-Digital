@@ -36,6 +36,19 @@ internal static class DetachedTrial
         property.SetValue(value, data);
     }
 
+    internal static void SetBothEndTieAreas(object clone, double area)
+    {
+        if (!double.IsFinite(area) || area <= 0) throw new InvalidOperationException("Invalid tie area.");
+        object data = Call(clone, "GetLegData");
+        // Native DesignLeg.ConfinedPrefTieSize addresses StartZone only.
+        // These data objects belong to an already verified detached clone.
+        Set(Read(data, "StartZone"), "ConfinedPrefTieArea", area);
+        Set(Read(data, "EndZone"), "ConfinedPrefTieArea", area);
+        foreach (string name in new[] { "StartZone", "EndZone" })
+            if ((double)Read(Read(data, name), "ConfinedPrefTieArea") != area)
+                throw new InvalidOperationException("End-zone tie area did not persist on clone.");
+    }
+
     private static object[] Items(object value)
     {
         if (value is not IEnumerable sequence) throw new InvalidOperationException("Expected native collection.");
@@ -85,11 +98,12 @@ internal static class DetachedTrial
             return text;
         }
         var manifest = new List<object>();
-        void Save(string name, object value)
+        string Save(string name, object value)
         {
             string text = Serialize(value);
             File.WriteAllText(Path.Combine(output, name + ".json"), text);
             manifest.Add(new { file = name + ".json", sha256 = Convert.ToHexString(SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(text))) });
+            return text;
         }
         object preferences = detail.GetType("CSI.CSiNAWallStackDesigner.xAppWD", true)!
             .GetField("WallStackPref", BindingFlags.Public | BindingFlags.Static)?.GetValue(null)
@@ -124,6 +138,21 @@ internal static class DetachedTrial
             throw new InvalidOperationException("Expected exactly two stories and two isolated test legs.");
         string[] sourceBefore = legs.Select(l => Serialize(Call(l, "GetLegData"))).ToArray();
         string[] patternsBefore = legs.Select(Serialize).ToArray();
+        string[] CaptureSourceCages(string phase)
+        {
+            var cages = new List<string>();
+            for (int i = 0; i < stories.Count; i++)
+            foreach (string direction in new[] { "Vertical", "Horizontal" })
+            {
+                guard();
+                string json = Save($"source-{phase}-story-{i + 1:D2}-{direction.ToLowerInvariant()}-cage",
+                    Call(stories[i], "Get" + direction + "BarsFor3DCage", false));
+                TrialGeometryEvidence.RequireCage(json);
+                cages.Add(json);
+            }
+            return cages.ToArray();
+        }
+        string[] cagesBefore = CaptureSourceCages("before");
         var results = new List<object>();
         try
         {
@@ -135,7 +164,8 @@ internal static class DetachedTrial
                     (double)Read(Read(sourceData, "MidZone"), "Thickness") != 200)
                     throw new InvalidOperationException("Fixture is not the authorized uniform 4000 x 200 mm wall.");
                 Save($"leg-{i + 1:D2}-source-data", sourceData);
-                foreach (string scenario in new[] { "control", "metric-mid", "metric-all-ties" })
+                foreach (string scenario in new[] { "control", "metric-mid", "metric-start-tie",
+                    "metric-both-ties-cover40", "metric-both-ties-cover46" })
                 {
                     guard();
                     object clone = Call(original, "Clone");
@@ -144,34 +174,73 @@ internal static class DetachedTrial
                     Change("RebarMatID", Read(original, "RebarMatID"));
                     if (scenario != "control")
                     {
-                        Change("Cover", 40.0);
+                        Change("Cover", scenario.EndsWith("cover46", StringComparison.Ordinal) ? 46.0 : 40.0);
                         Change("UniformBarSize", "16");
                         Change("UniformBarSizeEnds", "16");
                         Change("UniformBarSpacing", 250.0);
                         Change("BarSizeHBars", "12");
                         Change("MaxBarSpacingHBars", 400.0);
-                        if (scenario == "metric-all-ties") Change("ConfinedPrefTieSize", "12");
+                        if (scenario == "metric-start-tie") Change("ConfinedPrefTieSize", "12");
+                        if (scenario.StartsWith("metric-both", StringComparison.Ordinal))
+                        {
+                            guard();
+                            RequireDetached(original, clone);
+                            SetBothEndTieAreas(clone, (double)Call(catalog, "get_Area", "12"));
+                        }
                     }
                     // InEditMode stays false: do not invoke parent/story updates.
                     RequireDetached(original, clone);
                     string prefix = $"leg-{i + 1:D2}-{scenario}";
                     Save(prefix + "-input", Call(clone, "GetLegData"));
                     guard();
-                    Save(prefix + "-vertical-patterns", Call(clone, "GenerateVerticalRebarPatterns", pierPreferences));
+                    object vertical = Call(clone, "GenerateVerticalRebarPatterns", pierPreferences);
+                    var verticalEvidence = new List<object>();
+                    int patternIndex = 0;
+                    foreach (object pattern in Items(vertical))
+                    {
+                        guard(); patternIndex++;
+                        string name = prefix + $"-vertical-{patternIndex:D2}";
+                        int count = TrialGeometryEvidence.RequireBarPoints(Save(name + "-points", Call(pattern, "GetBarPoints")));
+                        Save(name + "-lines", Call(pattern, "GetBarPointsOnLines"));
+                        verticalEvidence.Add(new { points_file = name + "-points.json", point_count = count,
+                            material = Read(pattern, "MaterialID"),
+                            start_z = Read(pattern, "StartZ"), end_z = Read(pattern, "EndZ") });
+                    }
                     guard();
-                    Save(prefix + "-horizontal-shapes", Call(clone, "GenerateHorizontalRebarShapes", pierPreferences));
+                    object horizontal = Call(clone, "GenerateHorizontalRebarShapes", pierPreferences);
+                    var horizontalEvidence = new List<object>();
+                    int shapeIndex = 0;
+                    foreach (object shape in Items(horizontal))
+                    {
+                        guard(); shapeIndex++;
+                        string name = prefix + $"-horizontal-{shapeIndex:D2}";
+                        int count = TrialGeometryEvidence.RequirePolylines(Save(name + "-polylines", Call(shape, "GetPlines")));
+                        Save(name + "-bar-parameters", Read(shape, "Bar"));
+                        horizontalEvidence.Add(new { polylines_file = name + "-polylines.json", polyline_count = count,
+                            material = Read(shape, "MaterialID"), bar_size = Read(shape, "BarSize"),
+                            spacing_setting = Read(shape, "Spacing"),
+                            native_reported_cut_length_unverified = Call(shape, "GetCutLength"),
+                            start_bend = Read(shape, "StartBendType").ToString(), end_bend = Read(shape, "EndBendType").ToString() });
+                    }
+                    if (verticalEvidence.Count == 0 || horizontalEvidence.Count == 0)
+                        throw new InvalidOperationException("No numeric trial reinforcement geometry generated.");
                     Save(prefix + "-generated-data", Call(clone, "GetLegData"));
                     results.Add(new { leg = i + 1, scenario, status = "generated_on_detached_clone_only",
-                        not_applied = true, physical_cage_spacing_verified = false, cover_verified = false });
+                        leg_rebar_material = Read(clone, "RebarMatID"),
+                        vertical = verticalEvidence, horizontal = horizontalEvidence,
+                        not_applied = true, physical_cage_spacing_verified = false, cover_verified = false,
+                        numeric_plan_geometry_exported = true, full_story_cage_generated = false });
                 }
             }
         }
         finally
         {
-            bool unchanged = legs.Select((l, i) => sourceBefore[i] == Serialize(Call(l, "GetLegData")) &&
+            bool cagesUnchanged = cagesBefore.SequenceEqual(CaptureSourceCages("after"));
+            bool unchanged = cagesUnchanged && legs.Select((l, i) => sourceBefore[i] == Serialize(Call(l, "GetLegData")) &&
                 patternsBefore[i] == Serialize(l)).All(x => x) && preferencesBefore == Serialize(preferences);
             File.WriteAllText(Path.Combine(output, "source-invariants.json"), JsonSerializer.Serialize(new
-            { source_legs_and_preferences_unchanged = unchanged, source_leg_count = legs.Count }));
+            { source_legs_and_preferences_unchanged = unchanged, source_cages_unchanged = cagesUnchanged,
+                source_leg_count = legs.Count }));
             if (!unchanged) throw new InvalidOperationException("Source invariant changed; do not save or claim isolation.");
         }
         return new { status = "detached_trials_completed_not_applied", results, files = manifest,

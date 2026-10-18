@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <AssemblyName>CDCRD.WallDetailTrialR031</AssemblyName>
-    <Version>0.1.1</Version>
+    <AssemblyName>CDCRD.WallDetailTrialR04</AssemblyName>
+    <Version>0.2.0</Version>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <EnableDynamicLoading>true</EnableDynamicLoading>

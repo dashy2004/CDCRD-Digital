@@ -12,6 +12,7 @@
     <PackageReference Include="xunit" Version="2.9.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2"><PrivateAssets>all</PrivateAssets></PackageReference>
     <Compile Include="../DetachedTrial.cs" Link="DetachedTrial.cs" />
+    <Compile Include="../TrialGeometryEvidence.cs" Link="TrialGeometryEvidence.cs" />
     <Compile Include="../TrialOwnership.cs" Link="TrialOwnership.cs" />
   </ItemGroup>
 </Project>

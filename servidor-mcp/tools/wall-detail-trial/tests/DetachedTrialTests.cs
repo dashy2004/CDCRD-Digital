@@ -3,6 +3,7 @@ using Xunit;
 
 public sealed class DetachedTrialTests
 {
+    public sealed class EndZone { public double ConfinedPrefTieArea { get; set; } = 129.032; }
     public sealed class Line
     {
         // Match the installed native line contract: endpoints are public fields.
@@ -11,8 +12,8 @@ public sealed class DetachedTrialTests
     }
     public sealed class Data
     {
-        public object StartZone { get; set; } = new();
-        public object EndZone { get; set; } = new();
+        public object StartZone { get; set; } = new EndZone();
+        public object EndZone { get; set; } = new EndZone();
         public object MidZone { get; set; } = new();
         public Line CLine { get; set; } = new();
     }
@@ -25,6 +26,25 @@ public sealed class DetachedTrialTests
     }
 
     [Fact] public void IndependentCloneAccepted() => DetachedTrial.RequireDetached(new Leg(), new Leg());
+    [Fact] public void TieAreaChangesBothDetachedEndsAndPreservesSource()
+    {
+        var original = new Leg(); var clone = new Leg();
+        DetachedTrial.RequireDetached(original, clone);
+        DetachedTrial.SetBothEndTieAreas(clone, 113.0999984741211);
+        Assert.Equal(113.0999984741211, ((EndZone)clone.Data.StartZone).ConfinedPrefTieArea);
+        Assert.Equal(113.0999984741211, ((EndZone)clone.Data.EndZone).ConfinedPrefTieArea);
+        Assert.Equal(129.032, ((EndZone)original.Data.StartZone).ConfinedPrefTieArea);
+        Assert.Equal(129.032, ((EndZone)original.Data.EndZone).ConfinedPrefTieArea);
+    }
+    [Theory]
+    [InlineData(0)][InlineData(-1)][InlineData(double.NaN)][InlineData(double.PositiveInfinity)]
+    public void InvalidTieAreasRejectedBeforeChangingEitherEnd(double area)
+    {
+        var clone = new Leg();
+        Assert.Throws<InvalidOperationException>(() => DetachedTrial.SetBothEndTieAreas(clone, area));
+        Assert.Equal(129.032, ((EndZone)clone.Data.StartZone).ConfinedPrefTieArea);
+        Assert.Equal(129.032, ((EndZone)clone.Data.EndZone).ConfinedPrefTieArea);
+    }
     [Fact] public void SourceIdentityRejected()
     {
         var a = new Leg();

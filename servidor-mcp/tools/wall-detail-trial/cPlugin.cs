@@ -6,7 +6,7 @@ using ETABSv1;
 using CDCRD.WallDetailProbe;
 using CDCRD.WallDetailTrial;
 
-namespace CDCRD.WallDetailTrialR031;
+namespace CDCRD.WallDetailTrialR04;
 
 /// <summary>Experimental detached-clone trials. Never writes the model or source cage.</summary>
 public sealed class cPlugin : cPluginContract
@@ -17,7 +17,7 @@ public sealed class cPlugin : cPluginContract
 
     public int Info(ref string Text)
     {
-        Text = "CDCRD R03.1 detached-clone reinforcement trials for an authorized ETABS 23.3.0 test copy. " +
+        Text = "CDCRD R04 detached-clone numeric geometry trials for an authorized ETABS 23.3.0 test copy. " +
                "Changes discarded clone settings only. Source cage and EDB are not changed. Does not approve detailing.";
         return 0;
     }
