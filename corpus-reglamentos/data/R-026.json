@@ -1,0 +1,284 @@
+{
+  "schema": "cdcrd-regulation/1",
+  "source": {
+    "id": "R-026",
+    "title": "Reglamento para trabajos de excavación en las vías públicas",
+    "file": "CARRETERAS/r-026 Reglamento para la Realización de Trabajos de Excavación en las Vías Públicas.pdf",
+    "sha256": "5069c86828c7b83f80a81ee90186807003f4cc02d675a391bf0b9e892b23f131",
+    "pages": 27,
+    "source_catalog": "https://portalweb.mopc.gob.do/dgrs/reglamentos/",
+    "legal_status": "vigencia_no_evaluada",
+    "document_warning": null
+  },
+  "extraction_method": "pypdf text layer + optional local Tesseract OCR on sparse pages",
+  "review_status": "texto_extraido_no_validado_para_calculo",
+  "pages": [
+    {
+      "page_pdf": 1,
+      "printed_page": null,
+      "text": "DE TRABAJOS DE\nEXCAVACION EN LAS\n\nR-026 xesi‘or\n\nREPÚBLICA DOMINICANA\n",
+      "text_sha256": "d3ca2e04f729797aed064b06f25e079fa5c1f532f563724627c6b0cc738fb353",
+      "quality_flags": [
+        "texto_escaso_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 2,
+      "printed_page": null,
+      "text": " \n \n \n \n \nReglamento para la Realización de \nTrabajos de Excavación en las Vías \nPúblicas \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n  \n \n \n \n Secretaría de Estado de Obras Públicas y Comunicaciones (SEOPC) \nSanto Domingo, República Dominicana \n2007",
+      "text_sha256": "77aeb6101d1824c73a119b59668a45991cf1d713b3629399516f9406bf9bf241",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 3,
+      "printed_page": null,
+      "text": "T A B L A  D E  C O N T E N I D O  \n \n \n \nArt.1.- Consideraciones Generales.................. ................................................... ..................... 1 \n1.1 Objetivo ....................................... ................................................... ............................. 1 \n1.2 Campo de Aplicación............................ ................................................... .................... 1 \n1.3 Definiciones................................... ................................................... ........................... 1 \n1.4 Coordinación Interinstitucional................ ................................................... .................. 2 \n1.5 Responsabilidades .............................. ................................................... ..................... 2 \n \nArt. 2.-  Tramitación de Permisos ..................................................................... ....................... 4 \n2.1 Documentos a Presentar ......................... ................................................... ................. 4 \n2.2 Ubicación de Excavaciones para Tuberías ........ ................................................... ....... 4 \n2.3 Requisitos a Cumplir antes de Proceder......... ................................................... .......... 5 \n \nArt. 3.- Requisitos para la Construcción .............................................................. ................... 6 \n3.1 Programación de Los Trabajos................... ................................................... .............. 6 \n3.2  Trabajos de Excavación........................ ................................................... .................... 6 \n3.3 Especificaciones Técnicas de Construcción ...... ................................................... ....... 7 \n3.4 Terminación de los Trabajos.................... ................................................... ................. 7 \n \nArt. 4.- Medidas de Seguridad...................... ................................................... ......................... 9 \n \nArt. 5.- Sanciones................................. ................................................... ................................ 10  \n \nArt. 6.- Formato del Reglamento ....................................................................... ..................... 10  \n \nArt. 7.- Sustitución de Decreto.................... ................................................... ........................ 10  \n \nArt. 8.- Remisión del Reglamento ...................................................................... .................... 10  \n \nAnexo I............................................ ................................................... ...................................... 11  \nAnexo 2............................................ ................................................... ..................................... 15  \nAnexo 3............................................ ................................................... ..................................... 19  \n ",
+      "text_sha256": "d073080535071fe3cb485ae6ea8a46591d9267c54b2d38c53e82dca77535b86f",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 4,
+      "printed_page": null,
+      "text": " \n \nPRESIDENCIA DE LA REPÚBLICA \n \n \nNÚMERO: 61- 07  \n \n \n \nCONSIDERANDO:  Que es deber del Estado, preservar el orden, garantizar la seguridad pública \ny la continuidad del flujo vehicular y de peatones en las aceras y las vías públicas, urbanas e \ninter-urbanas, en todo el territorio nacional. \n \nCONSIDERANDO: Que para dar paso al desarrollo sostenible del país  se hace necesario la \nrenovación de infraestructuras en instalaciones que  garanticen al usuario un servicio adecuado \na las nuevas tecnologías, mediante la realización d e los trabajos pertinentes en forma \norganizada y de acuerdo a las leyes vigentes en la materia. \n \nCONSIDERANDO:  Que es un deber ciudadano colaborar con el ordenam iento urbano, \nmediante el cumplimiento de las disposiciones emana das del Poder Ejecutivo, amparado en las \nleyes correspondientes. \n \nVISTA   la ley No.241 sobre tránsito de vehículos y demás  leyes relacionadas con las \nexcavaciones en las vías públicas. \n \nVISTA  la ley No. 687, del 27 de julio de 1982, que crea un Sistema de elaboración de \nreglamentos técnicos que sirve de base para la prep aración y ejecución de proyectos y obras \nrelativas a la ingeniería, la arquitectura y ramas afines, con el objetivo de garantizar la \nseguridad de las estructuras, el cumplimiento de lo s requisitos de habitabilidad, la preservación \nde la ecología y demás normas relativas a las obras  de transporte y edificaciones, así como \npara definir una política de reglamentación acorde con la tecnología que modernamente rige en \nestas disciplinas. \n \nVISTO el decreto No.558-04 de fecha del 18 de julio del año 2004. \n \n \nEn ejercicio de las atribuciones que me confiere el  Artículo 55 de la Constitución de la \nRepública, dicto el siguiente \n \n \n \nREGLAMENTO PARA LA REALIZACIÓN DE TRABAJOS DE EXCAVACIÓN \nEN LAS VÍAS PÚBLICAS. OBTENCIÓN DE PERMISOS. \n ",
+      "text_sha256": "93fc6f474dea9fd36bad51ef66355a5d7fa1afeb7f35939054cc5efd0d467013",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 5,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nARTÍ CUL O 1 : CONSI DERACI ONE S GE NE RALE S \nPROHIBIDA LA VENTA                                             1                       MOPC de la República Dominicana \nART.1.- CONSIDERACIONES GENERALES \n \n1.1 OBJETIVO \n \nEstablecer las disposiciones generales que deberán cumplir las entidades o instituciones, ya sean \npúblicas o privadas, autónomas o semi-autónomas, or ganizaciones no gubernamentales, empresas y \npersonas físicas o particulares que tengan la neces idad de romper la vía pública para realizar trabajo s de \ncualquier índole, así como los requisitos técnicos y administrativos mínimos necesarios para que las \nlabores de excavación, relleno, compactación o cual quier otra labor, se realicen con los debidos \ncontroles, y tomando en cuenta además que los mismo s no  interfieran o afecten de manera directa el \nlibre tránsito de vehículos y peatones, de acuerdo con lo dispuesto en las leyes relacionadas con el \ntránsito de vehículos y el ornato público. \n \n \n1.2 CAMPO DE APLICACIÓN \n \nLas disposiciones contenidas en este reglamento ser án de aplicación general a todos los proyectos y \ntrabajos de cualquier índole que se realicen en tod o el territorio nacional,  para cuya ejecución teng an la \nnecesidad de romper las vías públicas, independient emente de su categoría, tipo, o situación construct iva \n(pavimentada o no) y entrará en vigencia a partir de su publicación.  \n \n \n1.3 DEFINICIONES \n \nPara los fines del presente reglamento, los término s descritos a continuación tendrán el significado \nsiguiente: \n \n \n1.3.1 SEOPC \n \nSecretaría de Estado de Obras Públicas y Comunicaci ones. \n \n \n1.3.2 ACERA    \n \nParte de la vía pública destinada exclusivamente pa ra el uso de peatones, limitada por el contén y la \nlínea de las propiedades adyacentes a la vía pública. \n \n \n1.3.3 CALZADA O SUPERFICIE DE RODADURA   \n \nParte de la corona o plataforma destinada a la circulación de los vehículos. \n \n \n1.3.4  PAVIMENTO  \n \nCapa o capas de material seleccionado y/o tratado, comprendidas entre la sub-corona y la corona que \nsoporta las cargas inducidas por el tráfico, distri buidas de modo tal que los esfuerzos transmitidos a  la \ncapa de terracería subyacente y a la sub-corona no le causen deformaciones perjudiciales. \n \n \n ",
+      "text_sha256": "c51a8cd4e23167f60a42e3771d384b4424939c325d5a0764d03a718a099dd967",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 6,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nARTÍ CUL O 1 : CONSI DERACI ONE S GE NE RALE S \nPROHIBIDA LA VENTA                                             2                       MOPC de la República Dominicana \n1.3.5 VÍA PÚBLICA \n \nEstructura terrestre diseñada para servir de comuni cación a las personas que transitan por ella, ya se a \npor vía motorizada o peatonal, compuesta por al men os los elementos que la definen, dependiendo de su \ncategoría o situación constructiva, ya sea carreter a, camino, calle o avenida, entre los que se pueden  \ncitar: paseo, calzada, acera, contén, cuneta, islet a, o cualquier otro elemento necesario que caracter ice \nsu adecuado y efectivo funcionamiento. \n \n \n1.4 COORDINACIÓN INTERINSTITUCIONAL \n \n1.4.1   Los Organismos Estatales, Organismos no Gubername ntales  y Empresas Privadas relacionadas \ncon el desarrollo de infraestructuras que involucre n la ejecución de trabajos de excavación en las vía s \npúblicas, como responsables de su ejecución, deberá n someter en el último trimestre de cada año a la \nDirección General de Planificación y Programación d e Inversiones (DGPPI) de la SEOPC, una \nprogramación de los trabajos que planean realizar e n el siguiente año, a fin de coordinar dichos traba jos \ncon la programación de pavimentación de la SEOPC o de cualquier otro organismo estatal o municipal, \nquienes deberán informar con antelación a la SEOPC sobre sus planes de pavimentación. Cualquier \nmodificación a dicha programación deberá ser comuni cada al menos con sesenta (60) días de antelación. \n \n1.4.2   Dichos Organismos y Empresas deberán designar un representante único que sirva de enlace \ncon la SEOPC, para la coordinación de los trabajos de excavación o pavimentación correspondientes. \n \n1.4.3 Todas las Empresas o personas físicas que por cuent a del Estado o de los Ayuntamientos sean \ncontratadas para realizar trabajos de asfaltado de las vías públicas, deberán informar a los particula res o \nusuarios, con treinta días de antelación por medio de aviso en la prensa radial y escrita, sobre la \nrealización de trabajos de pavimentación, con el ob jetivo de que procedan a realizar cualquier trabajo  de \ncolocación de tuberías que sean necesarias para las  acometidas del acueducto, salida de cloacas, \ntendido de líneas eléctricas y de comunicaciones, a ntes de que se realicen los trabajos de pavimentaci ón \ncorrespondientes, de acuerdo con lo establecido en la ley 232, del 25 de noviembre de 1971.  \n \n \n1.5 RESPONSABILIDADES \n \n1.5.1  Los Organismos, Empresas y personas físicas respons ables de la ejecución de los trabajos \nevitarán la rotura de otras líneas de servicio dura nte la realización de los trabajos de excavación a su \ncargo. En caso de producirse la rotura de alguna lí nea, dichos Organismos y  Empresas deberán reparar \nlos daños ocasionados a la misma. \n \n1.5.2  En caso de que el Estado Dominicano disponga la r ealización de ampliaciones y/o modificaciones \na una vía, o se presente  cualquier otra situación que afecte las tuberías y cables soterrados, regist ros u \notra instalación existente, la reinstalación de las  tuberías y/o cables estará a cargo de los Organism os y \nEmpresas propietarias de dichas instalaciones. Dich os Organismos y Empresas realizarán los trabajos de  \nmanera coordinada con la institución encargada de l os trabajos de ampliación y se comprometerán al \ncumplimiento de los requisitos contemplados en este  Reglamento y demás leyes, decretos y reglamentos \nque lo amparan. Si las instalaciones existentes per tenecieran a otra Institución Estatal, la reinstala ción \nserá realizada según lo acordado entre ambas. \n \n1.5.3  Los Organismos, Empresas y personas físicas respons ables de la ejecución de los trabajos \ndeberán garantizar la calidad de los mismos mediant e una rigurosa supervisión, ya sea a través de la \npropia institución o de una empresa contratada para tales fines. \n ",
+      "text_sha256": "ae82330770060de71f29314d9e5a38e85c133aed414189b4a9db430527f10053",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 7,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nARTÍ CUL O 1 : CONSI DERACI ONE S GE NE RALE S \nPROHIBIDA LA VENTA                                             3                       MOPC de la República Dominicana \n1.5.4  Corresponde a la Dirección General de Supervisión d e Obras, de la SEOPC, fiscalizar los \ntrabajos en cualquier etapa de la obra que consider e pertinente, y comprobar que se hayan realizado lo s \nensayos de los materiales de reposición y las prueb as de compactación de dicho material, los cuales \ndeberán cumplir con las especificaciones técnicas d el proyecto, las medidas de seguridad, así como las  \ndemás disposiciones del presente Reglamento y los d emás reglamentos vigentes que le sean aplicables.  \n  \nEn caso del no cumplimiento de estos requisitos, la s empresas o instituciones responsables de los \ntrabajos deberán realizar las correcciones de lugar. \n \n1.5.5  La Dirección General de Supervisión de Obras estar á facultada para suspender los trabajos, en \ncaso de violación a las disposiciones aquí establec idas y de notificar legalmente dicha violación a tr avés \nde los canales correspondientes, los cuales no será n reanudados hasta que se realicen las correcciones  \nde lugar. \n \n1.5.6   Finalizados los trabajos conforme a lo establecido en este reglamento, los Organismos y \nEmpresas responsables de su ejecución solicitarán a  la SEOPC una certificación de recepción de los \ntrabajos de reposición de relleno y capa de rodadur a y demás elementos que conforman la estructura del  \npavimento, previo a la emisión del certificado de t erminación del proyecto que la empresa contratante \notorgue a la empresa contratada, lo cual constituirá un requisito para estos fines. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "ca6441b30fbeaaeea479d46268c25fb19e86ebad93df13731bda76cbaaf6c69e",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 8,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nARTÍ CUL O 2 : TRAMIT ACI ÓN DE  P ERMIS OS \nPROHIBIDA LA VENTA                                             4                       MOPC de la República Dominicana \nART. 2.-  TRAMITACIÓN DE PERMISOS \n \nEl interesado deberá solicitar por escrito a la Sec retaría de Estado de Obras Públicas y Comunicacione s, \na través de la Dirección General de Planificación y  Programación de Inversiones (DGPPI), la autorizaci ón \npara la realización de trabajos de excavación, acom pañada de los documentos indicados en la sección \n2.1. Además, deberá pagar los impuestos correspondi entes, establecidos en la ley 80-99 y el \nprocedimiento para la aplicación de dicha ley (orden No. 439-99). \n \nLa DGPPI emitirá en un plazo máximo de quince (15) días laborables su decisión respecto a la solicitud  \nde permiso de trabajos para excavación en la vía pú blica, especificando su aprobación, rechazo u \nobservación. \n \nUna vez expedido el permiso, el interesado deberá i niciar los trabajos de excavación dentro de los tre inta \n(30) días calendario, subsiguientes a la fecha de aprobación. \n \n \n2.1 DOCUMENTOS A PRESENTAR \n \na) Permisos y certificaciones de pago de impuestos al Ayuntamiento correspondiente o a la Liga \nMunicipal Dominicana en caso de que el Municipio no  cuente con el Departamento \ncorrespondiente. \n \nb) Aprobación de planos generales y especificacione s técnicas del organismo correspondiente, \ndependiendo del servicio a prestar (acueducto y alc antarillado, comunicación, energía, medio \nambiente u otros).  \n \nc) Cronograma de trabajo con el tiempo previsto de duración, de cada uno de los   tramos \nsolicitados y del proyecto completo.  \n \nd) Presupuesto de los trabajos necesarios para las labores de pavimentación, así como de \ninspección y supervisión de la colocación del mater ial de reposición y de pavimentación, para \nfines de aprobación y posterior emisión de un chequ e certificado  a nombre de la SEOPC o de la \nTesorería Municipal correspondiente, por el valor a probado, para cubrir dichos servicios, requisito \nsin el cual no se concederá la autorización. \n \ne) Especificaciones técnicas de las excavaciones co n detalles que incluyan dimensiones de las \nzanjas, tipos de relleno, cantidad y tipos de tubos  a utilizar, ubicación de las tuberías de acuerdo \nal uso de las mismas, protección y cualquier otro dato de interés. \n \nf) Planos de señalización de la obra y de desvíos d el tránsito regular, indicando carriles temporales,  \nen los casos que aplique, aprobados por la Dirección General de Tránsito Terrestre. \n \n \n2.2 UBICACIÓN DE EXCAVACIONES PARA TUBERÍAS \n \nLas tuberías serán ubicadas dependiendo del uso que  se dará a las mismas, de acuerdo a las \ndisposiciones siguientes: \n \na) En avenidas y calles de la ciudad. \n- Acueductos: en la calzada, a 1.00 metro del inter ior del contén. Entendiéndose por contén, todo  \nelemento vertical o inclinado situado a lo largo de l borde de la calzada, que define claramente su \nlímite. ",
+      "text_sha256": "86420db1e6deaa7b35efe44feceed92d06ffd0412e01d58a1ff2e7516ea89662",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 9,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nARTÍ CUL O 2 : TRAMIT ACI ÓN DE  P ERMIS OS \nPROHIBIDA LA VENTA                                             5                       MOPC de la República Dominicana \n     - Drenaje Sanitario: en el centro de la calzad a. \n     - Pluviales: debajo de aceras o en isletas. \n     - Telecomunicaciones: debajo de contenes. \n     - Eléctrica: debajo de las aceras opuestas a l as de drenaje pluvial.  \n \nb) En carreteras y caminos vecinales. \n Las tuberías de cualquier clase podrán ser colocad as dentro del límite del derecho de vías, pero \nsiempre fuera del paseo de las carreteras.  \n \nEn caso de tuberías que no estén contempladas en la  clasificación anterior, se deberá consultar con la  \nDirección General de Planificación y Programación de Inversiones.  \n \n \n2.3 REQUISITOS A CUMPLIR ANTES DE PROCEDER \n \nAutorizado el permiso para la realización de los tr abajos, el interesado antes del inicio de los mismo s, \ncumplirá con los requisitos siguientes:   \n \na) Presentación de la póliza de seguro contra daños  a terceros, incluyendo las líneas soterradas \npropiedad de otras empresas u organismos, para cubr ir costos de reparación. \n \nb) Notificar a la Policía de Tránsito por escrito p or lo menos con 48 horas de antelación sobre los \ntrabajos a realizar, con el objeto de que se adopte n las medidas necesarias para el ordenamiento \ndel tránsito, según establece la ley 241. \n \nc) Remitir a la DGPPI una copia de la notificación depositada en la Policía de Tránsito, como prueba \ndel cumplimiento de lo indicado en (a) \n \nd) Publicar en la Prensa, tanto radial como escrita , un comunicado a nivel nacional y local con por lo  \nmenos 48 horas de antelación, informando a la ciuda danía sobre los trabajos a realizar, cuando \néstos afecten de manera importante el libre tránsit o de vehículos, según recomendaciones de la \nSEOPC. Se detallarán claramente las zonas afectadas  y el tiempo estimado de terminación, \npidiendo excusas por los inconvenientes causados a los usuarios de las carreteras, calles y/o \navenidas. En caso de desvío o cierre de las calles,  se incluirá en la publicación el plano de \ncirculación temporal. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "49b15c13afa09e7d24b124cb45808f6b4a6cd23c419e98141de13c6269d04f3d",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 10,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nARTÍ CUL O 3 : RE QUI SIT OS  P ARA L A CONST RUCCIÓN \nPROHIBIDA LA VENTA                                             6                       MOPC de la República Dominicana \nART. 3.- REQUISITOS PARA LA CONSTRUCCIÓN \n \n3.1 PROGRAMACIÓN DE LOS TRABAJOS \n \na) Para la realización de los trabajos de excavació n, el responsable dispondrá de todos los \nmateriales, herramientas y piezas requeridas, a fin de evitar interrupciones durante su ejecución. \n \nb) No se expedirán permisos para la realización sim ultánea de trabajos de excavación en una \nmisma calle, área o sector a más de una empresa a l a vez, a menos que estén a una distancia \nmayor de 500.00 metros, uno de otro. \n \nc) No se realizarán trabajos de excavación en dos c alles consecutivas, en una misma cuadra, área \no sector a la vez. \n \nd) Dentro de una misma intersección no se podrá abr ir más de un frente de trabajo. \n \ne) No se romperán dos intersecciones consecutivas a  la vez, en una misma avenida. \n \nf) Las excavaciones en cruce de intersecciones en a venidas y carreteras principales serán iniciadas \ny terminadas en un término de 24 horas durante los fines de semana o en días feriados, \nobservando las reglas de señalización diurnas y nocturnas.  \n \n \n3.2  TRABAJOS DE EXCAVACIÓN \n \na) Los trabajos de apertura de zanjas han de ser co ntinuos y  no deberán sobrepasar de 150.00 \nmetros lineales en una misma vía, en los casos de c alles y avenidas, y de 300.00 metros lineales \nen los casos de carreteras y caminos vecinales. En la medida que sean colocadas las tuberías y \nel relleno de reposición correspondiente, se podrán  continuar los trabajos de excavación en el \npróximo tramo. Se deberá ir realizando el bote de m ateriales sobrantes y haciéndose la limpieza \npor tramo. \n \nb) En cada tramo se realizarán los trabajos de exca vación, colocación de tuberías, tapado de zanja, \nlimpieza del área y bote de escombros, en un plazo máximo de 15 días, teniendo en cuenta el \ncronograma de trabajo, a menos que causas de fuerza  mayor lo impidan. El Ayuntamiento \ncorrespondiente y/o la SEOPC se reservan el derecho  de suspender los trabajos que no cumplan \ncon esta condición y de notificarlos para que sean aplicadas las sanciones de lugar. \n \nc) Los trabajos de corta duración o cuya naturaleza  permita fraccionarlos, se harán en las horas de \nmenor tránsito. \n \nd) No se interrumpirá el libre paso de peatones por  las aceras y el acceso a las casas o comercios. \nEn estos últimos casos tendrán que utilizarse acces os provisionales con planchas de plywood de \n3/4˝ reforzadas con cuartones de 2”X4”,  para el pa so peatonal; y planchuelas metálicas con \nperfiles que resistan el tráfico pesado que pueda transitar en esa vía, para el paso vehicular. \n \ne) Las secciones o detalles de zanjas para colocaci ón de tuberías de diferentes diámetros en \ncalzadas, deben estar conforme a los planos y espec ificaciones técnicas aprobados por las \nentidades correspondientes según lo indicado en 2.1 (b) y de acuerdo a los reglamentos vigentes.   \n \n ",
+      "text_sha256": "1b2408ccf9739b1f9e41662e7cdcfa6aa4120b52499354cd4c3cefc1aec294a1",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 11,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nARTÍ CUL O 3 : RE QUI SIT OS  P ARA L A CONST RUCCIÓN \nPROHIBIDA LA VENTA                                             7                       MOPC de la República Dominicana \n3.3 ESPECIFICACIONES TÉCNICAS DE CONSTRUCCIÓN \n \nLos trabajos de excavación en las vías públicas y c olocación de tuberías cumplirán con los planos y \nespecificaciones técnicas aprobados por la entidad correspondiente, dependiendo del servicio a prestar , \nde acuerdo a lo indicado en la sección 2.1 (b). \n \nLas tuberías deberán ser enterradas a la profundida d mínima de cálculo, de manera que no sean \nafectadas. En caso de que por situaciones extremas dicha profundidad sea menor que la requerida, se \ndeberá colocar una torta de hormigón antes de compl etar la rasante existente.  \n \nEn caso de colocación de tuberías en las intersecci ones, éstas deberán ser encamisadas para evitar su \nrotura por causa de trabajos futuros. \n \nEn caso de zanjas cuya profundidad exceda los 2.00 mts, se deberán tomar medidas de precaución, para \nevitar posibles deslizamientos del terreno y ofrece r seguridad al personal que trabaje en la colocació n de \nlas tuberías. \n \n \n3.3.1 RELLENO DE REPOSICIÓN \n \nEl relleno de reposición será material granular que  cumpla con las especificaciones indicadas en las \nEspecificaciones Generales para la Construcción de Carreteras, de la Dirección General de Reglamentos \ny Sistemas de la SEOPC (M-014).  El Supervisor real izará los ensayos a los materiales de reposición y \nlas pruebas de compactación del relleno, y los some terá a la aprobación del Departamento de Mecánica \nde Suelos y Pruebas de Materiales de la SEOPC, a tr avés de la Dirección General de Supervisión de \nObras.  \n \nEl relleno y las diferentes partes que conformarán el pavimento existente se realizará colocando capas  no \nmayores de 0.15 metros de espesor y será compactado  con equipos manuales (maco o rodillo pequeño), \ny no podrá contener elementos mayores de 0.05 m.  \n \n \n3.4 TERMINACIÓN DE LOS TRABAJOS \n \nToda la zona afectada por la realización de los tra bajos de excavación deberá ser dejada en las mismas  \no mejores condiciones que las encontradas. \n \nPara la reposición de aceras y contenes se cuidarán  los detalles de terminación, debiendo prevalecer e l \ndiseño existente en la zona. Se deberán evitar los remiendos, mediante la reposición completa de las \naceras cuando el ancho de éstas sea menor de 1.50 m etros.  \n \nEn el caso de que el ancho de las aceras sea mayor de 1.50 metros, se permitirá realizar el corte con \nsierra y reponer solamente la parte afectada, siemp re y cuando el ancho de la excavación sea menor del  \n50% del ancho de la acera. En el caso de las calzad as, se abarcará un área de reposición de la capa de  \nrodadura mayor que el área correspondiente a la exc avación y de iguales condiciones que las existentes  \nmanteniendo la misma rasante de la vía.   \n \nCuando las excavaciones estén ubicadas en el área v erde de las isletas, la reposición de la misma \ndeberá tener igual o mejor calidad que la encontrad a, teniendo en cuenta la preservación del ornato y el \nmedio ambiente. \n \nLos elementos repuestos deberán cumplir con los req uisitos de calidad, espesores, secciones y \nespecificaciones técnicas en general. Los materiale s y desechos de todo el trabajo serán retirados por  el ",
+      "text_sha256": "e33f066ab9ece24c29e1f704f5b9448c24b643d7f70f9614c0a981ccddf901fe",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 12,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nARTÍ CUL O 3 : RE QUI SIT OS  P ARA L A CONST RUCCIÓN \nPROHIBIDA LA VENTA                                             8                       MOPC de la República Dominicana \nque obtuvo el permiso, antes de las 24 horas de fin alizado cada tramo de 150.00 metros, según \nestablece la ley 241 de tránsito de vehículos de mo tor. \n \n \n3.4.1 PLANOS FINALES DE LOS TRABAJOS REALIZADOS \n \nLos Organismos y Empresas responsables de la ejecuc ión de los trabajos de excavación entregarán a la \nDGPPI una copia de los planos finales tal como fuer on construidas las obras, en caso de que hayan \nsufrido modificaciones en el proceso constructivo. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "a3f6001a0c81ab3fc6f37c69d0d1773e407ddc17b706a9dce14fddcee5c2e4cc",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 13,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nARTÍ CUL O 4 : ME DI DAS  DE  S E GURI DAD \nPROHIBIDA LA VENTA                                             9                       MOPC de la República Dominicana \nART. 4.- MEDIDAS DE SEGURIDAD \n \nLas empresas, instituciones y personas físicas enca rgadas de la ejecución de los trabajos deberán \ncumplir con las medidas generales de seguridad, est ablecidas por la Secretaría de Estado de Trabajo, \ntanto para el personal, como para el lugar de los m ismos, así como todos los demás aspectos referentes  \na su cuidado. \n \nEn general, las Instituciones o empresas contratant es tomarán en cuenta las  disposiciones pertinentes  \nde control y seguridad para la debida ejecución de los trabajos, dependiendo de la situación que se \nprevé,  sin ser limitativas.   \n \nEn todo caso, deberán ser tomadas como mínimo las s iguientes medidas de seguridad: \n \na) Se colocará señalización indicando “Tramo en Con strucción” a 200 mts y  a 100 mts de la zanja, \nde acuerdo a lo establecido en las normas de señalización. \n \nb) Colocar señalización indicando desvíos, de acuer do a los planos aprobados. \n \nc) Proveer iluminación y señalización nocturna adec uada, tales como faroles y señales reflectivas. \n \nd) Colocar carteles informativos provisionales con la identificación y el número telefónico de la \ncompañía contratante, del contratista y del ingeniero encargado de la obra. \n \ne) Colocar cintas y rótulos con aviso de peligro, p ara la protección peatonal. \n \nf) Colocar barreras de protección con cinta de alta  intensidad de tráfico (tipo Scoth lite) con franja s \nde colores anaranjado y negro, a todo lo largo de las áreas excavadas y en los registros. \n \ng) Dotar un personal con banderas rojas en sitios d e tránsito difícil. \n \nh) En caso de registros u otros se colocarán conos color anaranjado alrededor del obstáculo. \n \ni) En caso de tuberías eléctricas o de comunicación  será obligatorio el uso de una cinta de aviso de \npeligro, en una capa intermedia del relleno de repo sición antes de llegar a la tubería, para indicar \nla existencia de ésta. \n \nj) Será obligatorio el uso de chalecos reflectivos por el personal que trabaja en las excavaciones. \n \n ",
+      "text_sha256": "a5ef75475056c8f00249145f77bd2a88c85606eed21ecec9c12ab4a00cfdaab3",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 14,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nARTÍ CUL OS  5 , 6 , 7  Y 8 : S ANCI ONES , F ORM AT O Y REMISI ÓN DEL  RE GLAME NTO  \nY S US TIT UCI ÓN DEL  DE CRE T O \nPROHIBIDA LA VENTA                                             10                        MOPC de la República Dominicana \nART.5.-  SANCIONES \n \nEl no cumplimiento de lo establecido en las disposi ciones de este Reglamento, conllevará a la aplicaci ón \nde las sanciones instituidas en los capítulos V y V I de la ley 687, y las demás leyes relacionadas con  el \nmismo.  \n \n \nART. 6.- FORMATO DEL REGLAMENTO \n \nEl presente Reglamento será publicado en el formato  que disponga la Comisión Nacional de \nReglamentos Técnicos de la Ingeniería, la Arquitectura y Ramas Afines, CONARTIA. \n \n \nART. 7.- SUSTITUCIÓN DE DECRETO \n \nEl presente reglamento sustituye al decreto número 558-04 de fecha 18 de julio del año 2004. \n \n \nART. 8.- REMISIÓN DEL REGLAMENTO \n \nEnvíese a la Secretaría de Estado de Obras Públicas  y Telecomunicaciones, para los fines \ncorrespondientes. \n \n \n \nDADO en la  ciudad de Santo Domingo de Guzmán, Distrito Naciona l, capital de la República Dominicana, \na los  veintiséis (26) días del mes de febrero de d os mil siete (2007), años 163 de la Independencia y  144 \nde la Restauración. \n \n \n \nLEONEL FERNÁNDEZ \n \n ",
+      "text_sha256": "c3afaf4ebaac8e5c741a59d37c17c0d8189a761127006eb45d67fe71d6701b8c",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 15,
+      "printed_page": null,
+      "text": " \n \n \n \n \n \n \nANEXO I \n \n \n \n \n \n \nMARCO LEGAL \n \n \n \n- Ley 241 del 28 de diciembre de 1967: Artículos 13 0, 209 y 229. \n- Ley 684 del 31 de marzo de 1965: Artículo 15. \n- Ley 3456 del 24 de diciembre de 1952: Artículos 9,  11, 13. \n- Ley 4848 del 7 de febrero de 1958: Artículo 45. \n- Ley 232 del 4 de septiembre de 1971: Artículos 1 y  3. \n \n ",
+      "text_sha256": "07e16b607351ac0ba4d74105a7b1edcbca4c04355ba59723c901f97b2ed7d932",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 16,
+      "printed_page": null,
+      "text": "",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "quality_flags": [
+        "sin_texto_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " \n \n \n \n \n  \n \n  \n \n \n  "
+    },
+    {
+      "page_pdf": 17,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nANE XO 1 : MARCO LE GAL  \nPROHIBIDA LA VENTA                                             13                        MOPC de la República Dominicana \n• MARCO LEGAL: \n \nLEY 241, sobre Tránsito de Vehículos, Promulgada el  28 de diciembre de 1967 Artículo 130. Conservación  de \nlas vías públicas y paseos. \n“a) Queda prohibido colocar, depositar, echar o lan zar u ordenar que sean colocadas, depositadas o lan zadas en las \nvías públicas o a sus áreas anexas dentro de la ser vidumbre de paso, basuras, latas, botellas, papeles , cenizas, \ndesperdicios, desalojos de animales muertos, ramas o troncos de árboles o cualquier materia ofensiva a  la salud o a \nla seguridad pública. Asimismo queda prohibido util izar las vías públicas y sus áreas anexas dentro de  la \nservidumbre de paso, para el depósito o almacenaje de materiales de construcción, con excepción de aqu ellos que \nhubieren de usarse en la reparación o construcción de la vía publica. El Director o las autoridades mu nicipales en su \ncaso, podrán autorizar dicho depósito o almacenaje de materiales cuando sea por períodos breves y ello  no resulte \nen riesgo a la seguridad pública y obstrucción del tránsito”. \n \nArtículo 209 , Daños en la Vía Pública: “Toda persona que, con intención o sin ella, causar e daño a la superficie, \nsoporte, zanjas, aceras, contenes, terraplenes, pue ntes, alcantarillas, postes indicadores de distanci as, etc., de una \nvía pública, pagará el costo de la reparación del d año causado, según tasación pericial de la Secretaría de Estado de \nObras Públicas y Comunicaciones o del municipio correspondiente”. \n \nArtículo 229 , Permisos para ejecutar trabajos en las vías públi cas: “Queda prohibido realizar trabajos en las \ncalzadas y aceras de una vía pública sin permiso de  la respectiva autoridad y sin que previamente se h ubiere dado \naviso a la Policía Nacional por lo menos 24 horas a ntes de comenzar los trabajos, con el objeto de que  puedan \nadoptarse las medidas necesarias para el ordenamiento del tránsito”. \nLos trabajos señalados deberán ejecutarse en forma continua, dentro del menor tiempo posible y de form a que \nobstaculicen lo menos posible el tránsito. En todo caso los trabajos de corta duración o cuya naturale za permita \nfraccionarlos, se harán en las horas de menor tránsito. \nLos materiales y desechos de todo trabajo deberá re tirarlos el que obtuvo el permiso, antes de las 24 horas de \nfinalizada la obra”. \n \nLey 684, d/f 31 de marzo del 1965, Artículo15 , párrafo 2: “Las tuberías de cualquier clase podrán ser colocad as \ndentro del límite del derecho de vía, pero siempre fuera de los paseos de las carreteras”. \nEn virtud de esta ley, SEOPC autorizará las excavac iones para colocación de tuberías de las empresas d e \ntelecomunicación debajo de los contenes y/o aceras en los casos de calles y/o avenidas, verificando qu e la red \npluvial no se encuentre funcionando bajo las aceras. \n \nLey 3456, de Organización del Distrito Nacional. (L ey orgánica del Ayuntamiento del Distrito Nacional)  \nPromulgada el 24 de diciembre de 1952, sobre las atribuciones del Ayuntamiento del Distrito Nacional. \nArtículo 9:  “Resolver sobre las solicitudes de permisos para re mover el afirmado de las calles o avenidas y las \naceras, contenes o cunetas, mediante el pago de las  tasas correspondientes y bajo reserva de la obliga ción del \ninteresado de reponerlos en su estado anterior”. \n \nArtículo 11:  “Resolver sobre las solicitudes de permisos para e rigir construcciones, instalaciones u obras en las vías \npúblicas, los cuales no deberán ser concedidos sino  cuando éstas no perjudiquen la seguridad, la higie ne o el ornato \nni constituyan un estorbo al uso general de dichas vías”. \n ",
+      "text_sha256": "384e99f51ac194b52749b626ef870a5b1081d1e58e8f457c85f711e845195621",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 18,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nANE XO 1 : MARCO LE GAL  \nPROHIBIDA LA VENTA                                             14                        MOPC de la República Dominicana \nArtículo 13:  “Reglamentar las formalidades y condiciones a que deberán sujetarse las obras que se ejecuten en los \npredios colindantes a las vías públicas y que puedan afectarlas”. \n \nLey 4848, que modifica los artículos 29, 30  y 45 d e la ley 675 sobre Urbanización y Ornato Público, \nPromulgada el 7 de febrero de 1958: \nArtículo 45:  “El Secretario de Estado de Obras Públicas, el Secr etario de Estado de Salud Pública y Previsión \nSocial, el Director General de Obras Públicas del D istrito Nacional y el Ingeniero Municipal o sus rep resentantes \nautorizados, podrán ordenar la inmediata suspensión  de los trabajos de toda obra que se ejecute sin la  \ncorrespondiente autorización o licencia o que teniéndola, no se lleven a cabo de acuerdo con las normas reconocidas \nde buena construcción, con los planos aprobados, o con las disposiciones legales en vigor, refiriendo el caso al \nprocurador fiscal del tribunal competente”. \n \nLey 232, que obliga a instituciones públicas y priv adas a reponer el pavimento de calles y carreteras \nafectadas por obras. Promulgada el 4 de septiembre de 1971. \nArtículo 1:  “Toda entidad, empresa, institución u organismo de l Estado, autónomo o semiautomático, o persona \nparticular que para realizar trabajos de cualquier índole, tenga necesidad de romper el pavimento de c alles, avenidas \no carreteras debidamente pavimentadas, con el propó sito de abrir zanjas, deberá proveerse previamente a la \napertura de las mismas, además del permiso de los a yuntamientos correspondientes, de la autorización d e la \nSecretaria de Estado de Obras Públicas y Comunicaciones y de la Oficina Técnica de la Presidencia. \n \nArtículo 3:  “Cuando el Estado o los municipios, ya sea directam ente o por medio de contratistas, vayan a proceder a \nasfaltar una vía pública, deberán informarlo a la c iudadanía por medio de avisos en la prensa con 30 d ías de \nantelación, a fin de que estos puedan colocar las t uberías que sean necesarias para acometidas del acu educto, \nsalidas de las cloacas u otros servicios, antes de que se realicen los trabajos de pavimentación correspondientes.           \n           \n \n \n \n \n \n \n \n ",
+      "text_sha256": "78a888eb74cc5bf9f382b518589f5520eaa51d70e8c2e2f7e7a2417dd66d835c",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 19,
+      "printed_page": null,
+      "text": "ANEXO 2\n\nDetalle de Zanjas Tipo\n",
+      "text_sha256": "b9335c2447f27a8c2942c2332f72da145351fca78109071090e316565f94777c",
+      "quality_flags": [
+        "texto_escaso_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " \n \n \n \n \n \n \n \n \n \n \n \n \nANEXO 2 \n \n \n \n \n \nDetalle de Zanjas Tipo \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+    },
+    {
+      "page_pdf": 20,
+      "printed_page": null,
+      "text": "",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "quality_flags": [
+        "sin_texto_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " \n \n \n \n "
+    },
+    {
+      "page_pdf": 21,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nANE XO 2 : DET ALL E DE Z ANJ AS  TIP O \nPROHIBIDA LA VENTA                                             17                        MOPC de la República Dominicana \n ",
+      "text_sha256": "72df553ca169263592c0eafd7d5d5ffc9c5ea75bbb8c1e34cc754e1b3f0170de",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 22,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nANE XO 2 : DET ALL E DE Z ANJ AS  TIP O \nPROHIBIDA LA VENTA                                             18                        MOPC de la República Dominicana \n",
+      "text_sha256": "871716368ab08443cf3cb864ede88957aa63045ec7b17ea8637ba35fcf6e5808",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 23,
+      "printed_page": null,
+      "text": "ANEXO 3\n",
+      "text_sha256": "7a682577f59634b83d2040659fb0638dd3497a58f1a7d97a6eb30748fa35778c",
+      "quality_flags": [
+        "texto_escaso_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " \n \n \n \n \n \n \n \n \n \n \n \nANEXO 3 \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+    },
+    {
+      "page_pdf": 24,
+      "printed_page": null,
+      "text": "",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "quality_flags": [
+        "sin_texto_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " \n \n "
+    },
+    {
+      "page_pdf": 25,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nANE XO 3 \nPROHIBIDA LA VENTA                                             21                        MOPC de la República Dominicana \n \nREGLAMENTO PARA LA REALIZACIÓN DE TRABAJOS DE EXCAV ACIÓN EN LAS VÍAS PÚBLICAS \n \nEn virtud de la ley No.687, promulgada el día 27 de  julio de 1982, el Estado creó un Sistema de \nReglamentación de la Ingeniería, la Arquitectura y Ramas Afines para garantizar la seguridad de las \nestructuras, la habitabilidad, la preservación de l a ecología y demás normas relativas a las obras de \ntransporte y edificios, así como para definir una p olítica de reglamentación acorde con la tecnología \nactual de estas disciplinas. Para estos fines se crearon los siguientes organismos: \n \na) La Comisión Nacional de Reglamentos Técnicos de la Ingeniería, la Arquitectura y Ramas \nAfines,  adscrita a la Secretaría de Estado de Obras Públic as y Comunicaciones,  investida como la única \nautoridad estatal encargada de definir la política de Reglamentación de la Ingeniería, la Arquitectura  y \nRamas Afines. \n \nb) La Dirección General de Reglamentos y Sistemas , organismo ejecutivo de la Comisión Nacional \ny encargado de la elaboración, de la coordinación y  del control de la aplicación de los reglamentos \ntécnicos. \n \nDe conformidad con la Ley antes citada, presentamos  este Reglamento para la Realización de \nTrabajos de Excavación en las Vías Públicas , cuyo objetivo es establecer las disposiciones gen erales, \nasí como los requisitos técnicos y administrativos mínimos que deberán cumplirse cuando se realicen \ntrabajos de cualquier índole en los que se tenga necesidad de romper la vía pública.                           \n \nLa Secretaría de Estado de Educación sometió a la D irección General de Reglamentos y Sistemas, \nDGRS, de la SEOPC, una propuesta de Reglamento para  su revisión y elaboración definitiva, el cual fue \nrevisado por varios Comités Técnicos convocados por  la DGRS, compuestos por profesionales de los \nsectores público y privado relacionados al área. Di chos comités técnicos estuvieron integrados por los  \nsiguientes representantes: \n \nREPRESENTANTE     INSTITUCION  \n \nIng. Rafael Fernández Correa     INDOTEL \nIng. José Bolívar Ángeles     \n \nIng. Cristian Cruz Pérez      EDESUR \n \nIng. Digno Vázquez      EDEESTE \n \nIng. Manuel Andrés Marte Leo     LMD \n \nIng. Ángel Cuello      VERIZON \nIng. Rafael Espinal \nLuis Miguel Pérez \nRoberto Caputo \n \nLic. Jhonatan Rivera                                                         ORANGE \nLic. Jeen Claude Clemente \n \nIng. José Rodríguez      TRICOM \nIng. José Estévez Diplán \n \nArq. Darío Hernández      Ayuntamiento Sto. Dgo. Es te \n ",
+      "text_sha256": "967b0401bebb15d330288f4f7a10451671969bd465f7760bdb19ce8a9daf0d66",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 26,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nANE XO 3 \nPROHIBIDA LA VENTA                                             22                        MOPC de la República Dominicana \nREPRESENTANTE     INSTITUCION  \n \nVíctor Ml. Pérez H.      Ayuntamiento Sto. Dgo. Nor te \n \nArq. Esther Morillo                                                             Ayuntamiento Distrito Nacional \n \nIng. Pedro Julio Reyes                 CAASD \nIng. Eusebio Trejo R. \nIng. Andrik Soto \nIng. Adriana Luna \nIng. Carmen Franjul \n \nIng. Yndhira Taveras      INAPA \n \nJeanine Martínez Grullón     SEMARENA \n \n                                                                                          SEOPC: \n \nIng. América Jiménez                                                   Planificación y Programación de Inversiones \nIng. Norah Tatis del Rosario \n \nIng. Lucía Orquídea Frías                                                Pavimentación Asfáltica \n \nIng. Miguelina Facundo                                                   Tránsito Terrestre \n \nIng. Mario Ramón García                                                Laboratorio de Suelos \n \nIng. Hernán Cuello                                                          Supervisión de Obras \n \nArq. Yocasta Aquino                                                        Estudio y Diseño de Carreteras \n \nLic. Aileen Guzmán                                                         Dirección Legal \n \n \nCoordinadoras  \nIng. Jaquelín Medrano                                                     Reglamentos y Sistemas \nIng. Rosa Ortiz \n \n \nEl anteproyecto de Reglamento fue aprobado por la D irectora General de Reglamentos y Sistemas, Ing. \nJaquelín Medrano, y convertido en Proyecto de Regla mento. Posteriormente fue sometido a la \nconsideración de la Comisión Nacional de Reglamento s Técnicos de la Ingeniería, la Arquitectura y \nRamas Afines (CONARTIA), para su estudio y opinión,  el cual fue aprobado con representación de los \nsiguientes profesionales de las instituciones miemb ro de esta Comisión: \n \n \nREPRESENTANTE          INSTITUCIÓN \n \nIng. Claudia F. de los Santos      Presidente ex of icio de CONARTIA \nSub-secretaria de Estado \n \nArq. Héctor T. Lockhart       Secretaría de Estado de Educación \nDirector Gral. Infraestructura Escolar \n ",
+      "text_sha256": "0998b5ec1dd0795b1d13c453f571b76986e581ba7e47bbb15554ddfa80304ec9",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 27,
+      "printed_page": null,
+      "text": "RE GL AM E NT O P ARA LA REALI Z ACI ÓN DE  T RABAJOS DE  EXCAVACI ÓN E N L AS VÍ AS  P ÚBLI CAS \n \nANE XO 3 \nPROHIBIDA LA VENTA                                             23                        MOPC de la República Dominicana \nArq. Rafael Vázquez       Instituto Nacional de la Vivienda \nAsesor Técnico \n \nArq. Marcos Martínez                                                                   CODIA  \nPresidente ISES-CODIA        \n \nIng. Cristian Ciccone       Cámara Dominicana de la   \nVicepresidente        Construcción \n \nArq. Marcos Blonda       Banco Nacional de la Vivie nda \nInspector de la Gerencia FHA  \n \nIng. Ramón Chahede       Liga Municipal Dominicana \nSub-secretario Técnico \n \nIng. Francisco De León       INDRHI \nGerente de Proyectos \n \nIng. José Morató       Secretaría de Estado de Turi smo \nDirector Depto. Planes y Proyectos \n \nSr. Carlos Barrientos       INAPA \nEnc. Progr. Y Asistencia Técnica    \n \nIng. Leonardo Reyes Madera      SODOSISMICA \nMiembro del Consejo \n \nIng. Caonabo Ortega       CDEEE \nDirector de Ingeniería  \nEmp. Elect. Transm. \n \nIng. Andrés Pichardo                                                                    SESPAS  \nDirector Ingeniería                                                                       \n \nIng. Héctor Martínez                                                                      SEIC                                                                   \nDirector Técnico de Digenor \n \nIng. Jaquelín Medrano                     Secretari a de la CONARTIA \nDirectora General de Reglamentos y Sistemas \n \n \nLa Comisión Nacional, luego de conocer y aprobar el  proyecto de Reglamento, lo remitió a la Presidenci a \nde la República, a la Consultoría Jurídica del Poder Ejecutivo, para fines de oficialización. \n \nEste proyecto fue oficializado como el Reglamento N o. 61–07 a los veintiséis (26) días del mes de febr ero \ndel año 2007.   \n \nLos Reglamentos serán publicados y se editará una c antidad suficiente de ejemplares para ser puestos a  \ndisposición de los interesados en la forma establec ida por la Dirección General de Reglamentos y \nSistemas. \n \n ",
+      "text_sha256": "7fc0a0f4bdaf6d9171177a2e07cf5c8b64d9a9674b2a2c59c655d944b5ac4b8c",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    }
+  ]
+}

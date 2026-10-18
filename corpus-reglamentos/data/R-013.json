@@ -1,0 +1,713 @@
+{
+  "schema": "cdcrd-regulation/1",
+  "source": {
+    "id": "R-013",
+    "title": "Instrucciones para presentación de propuestas de estudios y proyectos de carreteras",
+    "file": "CARRETERAS/r-013 INSTRUCCIONES PARA PRESENTACION DE PROPUESTAS DE ESTUDIOS Y PROYECTOS DE CARRETERAS.pdf",
+    "sha256": "b78f3a15a7fb302d3eb3d93ad9f5b09c602c91254be5cb33d74bc2bedcb7d925",
+    "pages": 77,
+    "source_catalog": "https://portalweb.mopc.gob.do/dgrs/reglamentos/",
+    "legal_status": "vigencia_no_evaluada",
+    "document_warning": null
+  },
+  "extraction_method": "pypdf text layer + optional local Tesseract OCR on sparse pages",
+  "review_status": "texto_extraido_no_validado_para_calculo",
+  "pages": [
+    {
+      "page_pdf": 1,
+      "printed_page": null,
+      "text": "INSTRUCCIONES\nPARA\nPRESENTACION\nDE PROPUESTAS\nDE ESTUDIOS Y\nPROYECTOS\n\nDE CARRETERAS\n\nSECRETARIA DE ESTADO\nDE OBRAS PUBLICAS\nY COMUNICACIONES\n\n",
+      "text_sha256": "771e89ac9950ecd867106cf7eeab84af047515e7db421b1615f98343982f5caa",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " \n \n \n \n \n \n \n \nINSTRUCCIONES  \nPARA  \nPRESENTACION  \nDE PROPUESTAS  \nDE ESTUDIOS   Y  \nPROYECTOS \nDE CARRETERAS \n \n \n \n "
+    },
+    {
+      "page_pdf": 2,
+      "printed_page": null,
+      "text": " \n \nREPUBLICA   DOMINICANA \nSECRETARIA DE ESTADO DE OBRAS PÚBLICAS Y COMUNICACIONES \n \n \n \n \n \nPRESENTACIÓN \n \n \nCon estas  Instrucciones para Presentación de Propuestas de Es tudios y Proyectos de \nCarreteras, inicia la Secretaría de Estado de Obras Públicas y Comunicaciones una serie de \nPublicaciones orientadas a organizar y reglamentar todo lo relativo a la preparación y presentación \nde propuestas de trabajos de consultoría y su poste rior contratación, desarrollo, seguimiento y \naceptación final. \n \nEstas instrucciones contienen con un alto grado de detalle, informaciones sobre los documentos y \ndatos requeridos para la precalificación, la organi zación y contenido de las propuestas técnicas y \nlas propuestas económicas, así como también, modelo s de cuadros a ser utilizados para \nsuministrar las informaciones requeridas. \n \nCon la presente publicación y las que continuarán dentro de la misma serie, pretende la Secretaría \nde Estado de Obras Públicas y Comunicaciones contin uar afianzando y fortaleciendo dentro de la \nRepublica Dominicana el desarrollo de las empresas consultoras nacionales. \n \n \n \n \nDIRECCIÓN GENERAL DE REGLAMENTOS Y SISTEMAS \n \n \n \nJulio/1983 \n \n \n \n \n ",
+      "text_sha256": "9e0d857c37a7ac07c0bf82f5f2dd9c0a4df64c473e116bd18b79376ecaa9c7c7",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 3,
+      "printed_page": null,
+      "text": " \nÍNDICE \n \n \n PAG. \n \n1. CONSIDERACIONES GENERALES    \n1.1 Campo de Aplicación………………………………………………………………………. .. 1  \n1.2 Documentación……………….…………………………………….……………..…………. 1 \n1.3 Sistema de Presentación…………………………………………………..……… ……….. 1 \n \n2. DOCUMENTOS Y DATOS DE PRECALIFICACIÓN: \n2.1 Campo de Aplicación……………………………………………………………..... ............ 4 \n2.2 Documentos…………………………………………………………………..……………….4 \n2.3 Datos………………………………………………………………………………………….. 5 \n2.4 Descalificación Automática de la Firma……………………… …………………………… 7 \n \n3. PROPUESTA TÉCNICA: \n3.1 Campo de Aplicación………………………………………………………………………. . 8 \n3.2 Presentación de Informaciones………….………………………………… ……………….8 \n \n4. PROPUESTA ECONÓMICA: \n4.1 Campo de Aplicación………………………………………………………………………. . 13 \n4.2 Presentación de Informaciones……………………………………………… …………….  13 \n \n5. CUADROS A UTILIZAR E INSTRUCCIONES: \n5.1 Campo de Aplicación………………………………………………………………………. .. 20 \n5.2 Instrucciones Generales……………………………………………………………… ……..20 \n5.3 Documentación de Precalificación……………………………………… ………………….20 \n5.4 Propuesta Técnica………………………………………… …………………………………44 \n5.5 Propuesta Económica………………………………………………………………………. .63 \n \nANEXO  69 \n \n \n \n ",
+      "text_sha256": "9ab1040f63656da4d6e81dc866f8c78633a016fab391404c82399285b11f54b5",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 4,
+      "printed_page": null,
+      "text": " 1 \n1 CONSIDERACIONES GENERALES  \n \n1.1 Campo de Aplicación \n \nEste volumen contiene las instrucciones que deberán  utilizar las empresas consultoras en la \nelaboración de propuestas para los trabajos de estudios, diseños y proyectos de carreteras. \n \n \n1.2 Documentación \n \nLa presentación de la documentación requerida en es tas instrucciones tiene por finalidad permitir \na la Secretaría de Estado de Obras Públicas y Comun icaciones evaluar los aspectos necesarios \npara la selección de las empresas consultoras. \n \nDicha documentación estará constituida por: Documen tos de Precalificación, Propuesta Técnica y \nPropuesta Económica. \n  \nLos aspectos a evaluar serán los siguientes: \n \na) Calificación del consultor \n \nb) Concepto e interpretación correcta de los términ os de referencia y trabajos a realizar. \n \nc) Conocimiento del tramo o carretera y de los trab ajos necesarios. \n \nd) Metodología que se adoptará en la ejecución de l as diversas partidas y fases de trabajo. \n \ne) Organización, instalación y equipos a ser utiliz ados. \n \nf) Cantidades de trabajo y sus costos. \n \ng) Precio global y unitario propuesto para la ejecu ción de los trabajos. \n \nh) Plazos totales y parciales para cada fase de los  trabajos. \n \n \n1.3 Sistema de Presentación \n \n1.3.1 Forma de Entrega \n \n1.3.1.1 Documentos de Precalificación    \n \nLos documentos de precalificación podrán presentars e a la Comisión de Concursos de la \nSecretaría de Estado de Obras Públicas y Comunicaciones, para fines de evaluación, en cualquier \nmomento, excepto cuando se celebren concursos espec íficos, en cuyo caso dicha Comisión \nestablecerá la fecha límite para la recepción de dichos documentos. ",
+      "text_sha256": "c1f4fbd549ed25d478474230bac6510d90f87001886444be0b742bf5512df137",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 5,
+      "printed_page": null,
+      "text": " 2 \nEn aquellos casos en que la Comisión de Concursos lo considere necesario, la participación en un \nconcurso específico de firmas previamente precalifi cadas podrá estar condicionada a la \npresentación de documentación adicional o de una nueva documentación de precalificación. \n \n1.3.1.2 Propuestas Técnica y Económica \n \nLas propuestas técnica y económica se entregarán en  dos sobres distintos, en la hora, fecha y \nlocal establecidos por la Comisión de Concursos de la Secretaría de Estado de Obras Públicas y \nComunicaciones. \n \nLos sobres estarán debidamente fechados y lacrados,  ya que se mantendrán cerrados hasta la \nfecha señalada por la Comisión  para su apertura, e  indicarán su contenido mediante el título \nescrito en letras mayúsculas y subrayadas, el númer o o nombre del concurso, la carretera y/o \ntramo a que se refiere y el nombre del concursante. \n \n1.3.2 Número de Copias \n \nTodos los documentos deberán presentarse en 3 (tres ) copias. Las firmas ganadoras deberán \npresentar 4 (cuatro) copias más de sus propuesta té cnica y económicas luego de la adjudicación \ndel concurso, quedando 3 (tres) copias en la Direcc ión General de Carreteras y 1 (una) en el \nArchivo General de la Secretaría de Estado de Obras Públicas y Comunicaciones. \n \nLas firmas que concursen en más de un trabajo, debe rán presentar sobres por separado de las \npropuestas técnica y económica para cada trabajo objeto de la propuesta. \n \n1.3.3 Forma de Presentación de las Propuestas \n \nLas propuestas se presentarán con encuadernación ti po libro en 8 ½” por 11”.  El copiado de las \nmismas será en fotostáticas o a mimeógrafo de forma nítida. \n \n1.3.3.1 Portada  \n \nLa portada de las propuestas técnica y económica deberá contener los siguientes datos: \n \nNúmero o nombre del concurso, carretera, número del  tramo, trabajo objeto de la propuesta, \nnombre de la firma y de la Secretaría de Estado de Obras Públicas y Comunicaciones, así como el \ntítulo del volumen (Propuesta técnica o Propuesta Económica). \nLa portada del volumen de Documentos de Precalifica ción deberá incluir solamente: nombre de la \nfirma y de la Secretaría de Estado de Obras Pública s y Comunicaciones, así como el título del \nvolumen (Documentos de Precalificación). \n \n1.3.3.2 Lomo \n \nEl lomo de los volúmenes de las propuestas técnicas y económicas deberá contener los siguientes \ndatos: \n ",
+      "text_sha256": "8952ea9cab53434be732033f5ce59db6954d28487c387ffe230f7d62ce961959",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 6,
+      "printed_page": null,
+      "text": " 3 \nCarretera, tramo, número o nombre del concurso y no mbre de la firma. El lomo del volumen de \nDocumentos de Precalificación deberá incluir solamente el nombre de la firma. \n \n1.3.3.3 Color de la Encuadernación \n \nLas propuestas serán presentadas con títulos en neg ro y la encuadernación en los colores \nsiguientes: \n \na) Documentos de Precalificación  : Azul \n \nb) Propuesta técnica : Amarillo \n \nc) Propuesta Económica : Rojo \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "3849a7be4b4bc2040a33b1a3fd9d6334f2b463e24ff918a808455fabda58af43",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 7,
+      "printed_page": null,
+      "text": " 4 \n2  DOCUMENTOS Y DATOS DE PRECALIFICACIÓN \n \n2.1 Campo de Aplicación \n \nEste capítulo contiene las informaciones y datos cu ya presentación es necesaria para la \nprecalificación de las firmas y grupos consultores. \n \n2.2 Documentos \n \nLos documentos señalados en esta sección se presentarán manteniendo el orden indicado. \n \nSi la Secretaría de Estado de Obras Públicas y Comu nicaciones lo estimase necesario, se \nreservará el derecho de solicitar otros documentos aparte de los indicados en esta sección. \n \nDe igual modo, la Secretaría de Estado de Obras Públicas y Comunicaciones podrá solicitar, si es \nnecesario, los originales de los documentos para fines de verificación. \n \n2.2.1 Certificado de Registro de la Firma \n \nCertificado de la Secretaría de Estado de Industria  y Comercio reconociendo el registro de la \nfirma. \n \n2.2.2 Certificado con Nombre de los Accionistas \n \nCertificado de la Secretaría de Estado de Industria  y Comercio con los nombres de accionistas o \nmiembros registrados. \n \n2.2.3 Certificado CODIA \n \nCertificado CODIA de los socios y /o accionistas de la firma consultora. \n \n2.2.4 Carta Compromiso de Trabajo \n \nCarta de compromiso de trabajo con la firma o grupo  por cada técnico no accionista cuyo \ncurrículum haya sido presentado para fines de evaluación. \n \nEn caso de que la firma o grupo resulte posteriorme nte favorecido con la adjudicación de un \ntrabajo específico, dichas cartas de compromiso ser án ratificadas con los correspondientes \ncontratos de trabajo. \n \n2.2.5 Acta Notarial \n \nEn el caso de que dos o más firmas se unan para for mar un consorcio, se exigirá un Acta Notarial \nen la cual se formalice dicha unión. \n \n \n ",
+      "text_sha256": "ccbdfed95e6dd55cb94ed656b5f7f879a75bae72bcd089884c41747161604063",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 8,
+      "printed_page": null,
+      "text": " 5 \n2.2.6 Declaración de Independencia Profesional \n \nDeclaración notarial de cada uno de los socios de l a firma certificando ser profesionalmente \nindependientes, o sea, que no están inscritos en el  registro de contratistas de ninguna entidad, \norganismo o institución pública ni privada, ni tamp oco tienen vinculación económica directa o \nindirecta con firmas constructoras, proveedoras de equipos y/o materiales o con algún grupo \nfinanciero. \n \n2.3 Datos  \n \nLos datos señalados en esta sección se presentarán manteniendo el orden indicado y haciendo \nuso de los cuadros correspondientes cuyos modelos s e presentan en el capítulo 5 de este \nvolumen. \n \nSi la firma lo estima conveniente, podrá proporcionar datos e informaciones adicionales. \n \n2.3.1 Identificación de la Firma Consultora  \n \nSe utilizará el cuadro DP-1 de este volumen. \n \n2.3.2 Experiencia de la Firma Consultora  \n \na) Estudios y proyectos realizados en los últimos 5  años. \n \nSe utilizará el cuadro DP-2 \n \nb) Trabajos en ejecución o por iniciar. \n \nSe utilizará el cuadro DP-3. \n \n2.3.3 Informaciones Relativas al Personal de la Fir ma Consultora  \n \na) Datos relativos a los directivos principales de la firma. \n \nSe utilizará el cuadro DP-4 y se presentará el curr ículum vitae de cada uno empleando el cuadro \nDP-8. \n \nb) Datos relativos a los técnicos que laboran a tie mpo completo en la firma. \n \nSe utilizará el cuadro DP-5 y se presentará el curr ículum vitae de cada uno empleando el cuadro \nDP-8. \n \nc) Datos relativos a técnicos que laboran eventualm ente en la firma. \n \nSe utilizará el cuadro DP-6 y se presentará el curr ículum vitae de cada uno empleando el cuadro \nDP-8. \nd) Datos relativos al personal auxiliar y administr ativo que labora en la firma. ",
+      "text_sha256": "fda57c9a1a56c2cd5dbba67b0d503ec9d44e888a1f40b56cac2396c5e98f3a30",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 9,
+      "printed_page": null,
+      "text": " 6 \n \nSe utilizará el cuadro DP-7. \n \n2.3.4 Estado Financiero de la Firma \n \na) Balance del último año \n \nSe utilizará el cuadro DP-9. \n \nb) Estado de ganancias y pérdidas \n \nSe utilizará el cuadro DP-10. \n \nc) Balance de los últimos tres años  \n \nSe utilizará el cuadro DP-11. \n \n2.3.5 Capacidad Financiera de la Firma \n \nSe indicará lo siguiente: \n \na) Referencias bancarias \n \nb) Referencias comerciales \n \nc) Disponibilidad de seguro. \n \n2.3.6  Disponibilidad de Equipo de la Firma \n \n2.3.6.1 Relación de Equipo Propio \n \nEsta relación se presentará para cada una de las diferentes áreas del proyecto y comprenderá: \n \na) Identificación \n \nb) Tipo \n \nc) Cantidad \n \nd) Localización. \n \n2.3.6.2 Relación de Equipo Arrendado \n \nEsta relación comprenderá: \n \na) Datos según el sub-acápite 2.3.6.1 \nb) Identificación del propietario ",
+      "text_sha256": "b35388388fe23fc344706d503de271ab67dddb5b73dadf774c66a0b13e5d05eb",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 10,
+      "printed_page": null,
+      "text": " 7 \nc) Forma, plazo y precio de arrendamiento. \n \n2.3.7 Empresas que Utilizarán Subcontratación \n \nLas empresas que utilicen subcontratación presentarán lo siguiente: \n \na) Indicación del tipo y especialidad de la firma a subcontratar. \n \nb) Declaración firmada de las subcontratantes indicando que aceptan la subcontratación. \n \nc) Documentación de las subcontratantes dentro de l a propuesta de la empresa contratante y en \nlos mismos modelos anteriormente especificados. \n \n \n2.4 Descalificación Automática de la Firma  \n \nEl volumen de Documentos de Precalificación no debe rá contener datos, valores o precios que \nindiquen o permitan calcular el valor total ofertado o valores parciales de las partidas de trabajo. \n \nLa inclusión de estos datos, valores o precios en e l referido volumen será motivo de \ndescalificación automática de la firma consultora e n el concurso para el cual presentó \nindebidamente la propuesta. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "9b99308d8a0e2f052754bc3d30336e7fc84f5bd3f05ddffc4d8259d23cb493f6",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 11,
+      "printed_page": null,
+      "text": " 8 \n3. PROPUESTA TÉCNICA \n \n3.1 Campo de Aplicación \n \nEste capítulo comprende las informaciones que conte ndrá la Propuesta Técnica, así como el \norden de presentación de las mismas. \n \n \n3.2 Presentación de Informaciones \n \nTodas las informaciones se presentarán de manera cl ara, concisa, objetiva y en el mismo orden \nen que están expuestas en este capítulo. \n \nLa Propuesta Técnica no deberá contener ninguna doc umentación de calificación técnica de la \nfirma ni de su cuerpo técnico, ya que la misma figura en los documentos de precalificación. \n \nDe igual modo, no contendrá fotografías ilustrativas ni panfletos o publicaciones descriptivas de la \nempresa. \n \nLa Propuesta Técnica no contendrá datos, valores o precios que indiquen o permitan calcular o \ndeducir los precios unitarios, los valores parciale s de partidas de trabajo o el valor total ofertado \npara la ejecución de los trabajos. La inclusión de estos datos, valores o precios en la Propuesta \nTécnica, será motivo de descalificación automática de la firma consultora en el concurso para el \ncual presentó la propuesta en cuestión. \n \n3.2.1 Índice \n \nIncluirá como mínimo la numeración de la página ini cial de cada capítulo y en el nombre del \nmismo. \n \n3.2.2 Carta de Presentación \n \nEn ella se darán informaciones sobre el objetivo de  la propuesta, la carretera, el tramo, su \nextensión total, el nombre de la firma proponente y  el de los subcontratistas y los números del \nconcurso y del tramo. \n \n3.2.3 Conocimiento del Problema \n \nTodas las informaciones relativas al conocimiento del problema se elaborarán en base a visitas de \ninspección al tramo, las cuales serán realizadas po r el grupo de especialistas de la firma \nconsultora. \n \nNo se justificará ningún error, falla u omisión de la propuesta debido a desconocimiento del tramo \no región. \n \n \n ",
+      "text_sha256": "ad61de534674f68b117909682d1bb95d1ec6b0b09589b0bf92b86ac39d625a56",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 12,
+      "printed_page": null,
+      "text": " 9 \n3.2.3.1 Informaciones referentes a la Región \n \nSe presentarán aquellos datos generales sobre la zo na de influencia de la vía a diseñar que \nconciernan a sus principales características con re specto a los siguientes aspectos: geografía, \ngeología, topografía, redes de transporte (en parti cular la red vial), tráfico y sus variaciones, \neconomía de la región, clima, vegetación, régimen d e lluvias y otros datos que interesen al \nproyecto, siempre en función del alcance establecido para los trabajos. \n \nSe presentará, a escala conveniente, un mapa de la región que indique la ruta probable del tramo \na ser diseñado. \n \n3.2.3.2 Informaciones referentes al Tramo o Carrete ra \n \na) Casos de Carreteras Existentes \n \nSe presentarán informaciones acerca de la situación del tramo y sus características, incluyendo su \nestado de conservación, las características geométr icas, la fecha de construcción, los trabajos de \nreconstrucción efectuados; los problemas existentes  de capacidad, drenaje, pavimentos, la \nnecesidad de complementación, mejoramiento, reconstrucción de obras de arte y otros. \n \nSe incluirán también esquemas que indiquen el kilom etraje a las intersecciones con otras \ncarreteras y caminos, a las poblaciones, a las obras de arte y a las obras principales de drenaje. \n \nb) Casos de Tramos Nuevos \n \nSe presentarán datos relativos a la red de carreter as existentes, a sus posibilidades de \naprovechamiento, a las características de los tramo s aprovechables, a los posibles problemas \ntécnicos (especialmente de drenaje, mecánica de suelos y obras de arte) y otros. \n \nSe presentará un mapa de la región que indique las posibles rutas que ocupará la carretera en \ncuestión. \n \n3.2.3.3 Informaciones referentes a los Estudios y D atos Existentes \n \nSe presentará una lista de todos los datos existent es, relativos al área de interés del proyecto, \ntales como mapas, estudios topográficos, fotografía s aéreas, estudios, proyectos y otros, \nindicando la fuente de obtención de esos datos. \n \n3.2.4 Plan de Trabajo \n \n3.2.4.1 Fundamento \n \nEl plan se basará en el conocimiento de la región y  del tramo, en los datos existentes y en el \nalcance de los trabajos. \n \nSe definirán y tratarán con claridad todas las part idas de trabajo y sus fases, indicando su \nsecuencia e interrelación por medio de un gráfico de ruta crítica. ",
+      "text_sha256": "5273da69df879c3e9241802be1cea5446704fae99f84f3f4ffce9f16013b57ae",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 13,
+      "printed_page": null,
+      "text": " 10  \nEl consultor prestará especial atención al desarrol lo del presente acápite 3.2.4, ya que el \ntratamiento que dé a esos temas demostrará el conoc imiento que tiene del proceso de ejecución \ndel proyecto y de las normas y métodos de diseño ap licables a los problemas específicos del \ntramo a diseñar. \n \n3.3.4.2 Normas a Utilizar \n \nLas normas a utilizar serán las indicadas en los términos de referencia, reservándose la Secretaría \nde Estado de Obras Públicas y Comunicaciones e dere cho de complementarlas o revisarlas de \nacuerdo con las necesidades del proyecto. \n \n3.3.4.3 Metodología \n \nEl plan de trabajo incluirá cualquier metodología e specífica que los consultores consideren \nnecesario utilizar para la ejecución de cualquier p artida de trabajo, debiendo incluir también su \njustificación. \n \nEn los casos en donde no han sido explícitamente in dicadas metodologías y normas para la \nejecución de los trabajos, el consultor las suminis trará en sus propuestas, siempre considerando \nlas normas modernas de diseño. \n \n3.2.5 Cantidades Trabajo \n \nEn esta sección se definen las cantidades a ser ejecutadas para cada partida de trabajo. \n \nDichas cantidades se examinarán en la fase de evalu ación de las propuestas en lo que se refiere \na su necesidad y suficiencia, y serán utilizadas en  la fase de ejecución de los trabajos para el \nseguimiento de los mismos, con la finalidad de determinar su avance físico. \n \nEl kilometraje a utilizar para el cálculo de las ca ntidades será el básico indicado en la publicación \ndel concurso u otro corregido que sea publicado por la Comisión de Concursos de la Secretaría de \nEstado de Obras Públicas y Comunicaciones antes de la entrega de las propuestas. \n \n3.2.5.1  Aumento o Disminución de Partidas \n \nCuando durante el desarrollo de los trabajos se ver ifique la necesidad de aumentar o disminuir \ndeterminados trabajos, las cantidades serán utiliza das para definir las unidades y precio unitario \nde los trabajos adicionales o no ejecutados. \n \nEstos precios estarán definidos por las informacion es de la propuesta técnica y de la propuesta \neconómica. Las cantidades se utilizarán también en la medición final de los trabajos, comparando \nlas cantidades propuestas con las cantidades ejecutadas. \n \nCabe indicar que no se considerará ningún aumento d e cantidades y/o partidas por aumento de \nkilometraje, a menos que se modifique oficialmente el origen o término de tramo y el aumento \nrepresente más del 5% de la longitud original o se incluyan ramales adicionales que no sean \nconsecuencia directa y previsible del diseño. ",
+      "text_sha256": "c8a550ca1279c720e0ab38958a6c5604b953270b30d0b5bdcd15c06ce622e757",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 14,
+      "printed_page": null,
+      "text": " 11  \nSi durante la preparación de la propuesta el consul tor detecta una diferencia en la longitud del \ntramo en comparación con la publicada oficialmente por la Comisión de concursos de la \nSecretaría de Estado de Obras Públicas y Comunicaci ones, éste deberá notificarlo a dicha \ncomisión para fines de corrección y publicación oficial de la longitud correcta. \n \n3.2.5.2 Cantidades a Ejecutar \n \nSe hará una relación de las diferentes partidas de trabajos con sus unidades y cantidades \nrespectivas, utilizando para ello los cuadros de ca ntidades presentadas en el capítulo 5 de este \nvolumen. \n \nLas actividades a desarrollar para determinadas partidas de trabajo dependerán prácticamente de \nla extensión del estudio o proyecto a ejecutar. \n \nPara otras partidas, las cantidades estarán en func ión de la mayor o menor complejidad, variando \nmás en relación con el grado de dificultad o su frecuencia que con la extensión del tramo. \n \n3.2.5.3 Cuadros para Diferentes Partidas  \n \nPara las partidas que se ajustan al primer caso ref erido en el sub-acápite 3.2.5.2, (por ejemplo: \nestudio de trazado, estudio económico, proyecto de drenaje, proyecto geométrico y otros), se \ncompletará el cuadro general de cantidades (cuadro T-1) y se usará siempre como unidad el \nkilómetro. \n \nPara las partidas que se ajustan al segundo caso (e jemplo: estudios geotécnicos, topográficos y \notros), los cuadros de cantidades se completarán ut ilizando las unidades correspondientes a las \nactividades o trabajos que componen la partida en cuestión. \n \nEn ambos casos, se indicará en los referidos cuadro s los porcentajes que los costos de las \npartidas representan con respecto al costo total pr opuesto o sea, el peso que tiene cada partida \ndentro de proyecto. \n \nLas distintas partidas de trabajo serán posteriorme nte sub-divididas para fines de seguimiento del \nmismo, asignando a cada subpartida de trabajo un porcentaje de la partida principal. \n \n3.2.6 Organización para la Ejecución del Plan de Tr abajo . \n \nSe presentará la organización que el consultor util izará para la ejecución de los trabajos, \ndefiniendo las áreas de actuación de las firmas (in dependiente, responsable, consorcio o \nsubcontratista). Se presentará un organigrama que i ndique las áreas, departamentos o secciones \nque integrarán la organización y que incluya los nombres de los responsables directos. \n \n3.2.6.1 Relaciones a Presentar \n \na) Oficinas, Campamentos y Laboratorios \n ",
+      "text_sha256": "7adfcc46e78f01c736eb0428ec402fafc2aeb90d9e3d2c33db021f9a4654abbd",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 15,
+      "printed_page": null,
+      "text": " 12  \nRelación de las oficinas, campamentos y laboratorios que se utilizarán indicando la localización, el \nárea y el tiempo de utilización previstos. \n \nb) Equipos Básicos \n \nRelación de los equipos que se utilizarán, tales co mo instrumentos de topografía, geotecnia y \notros, definiendo las cantidades y el tiempo de utilización previstos. \n \nc) Vehículos \n \nRelación de los vehículos que se utilizarán indicando su tipo y el tiempo de utilización previstos. \n \n3.2.7 Cronogramas, Personal, Viajes y Dietas. \n \nEstas informaciones se suministrarán por medio de l os cuadros correspondientes cuyos modelos \nse presentan en el capítulo 5 de este volumen. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "35b454b3356e01eea9258ebe0f4be28720a5a5f651c4df5986cd67909b083c8d",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 16,
+      "printed_page": null,
+      "text": " 13  \n4.  PROPUESTA ECONÓMICA \n \n4.1 Campo de Aplicación \n \nEste capítulo comprende las informaciones que conte ndrá la Propuesta Económica, así como el \norden de presentación de las mismas. \n \n \n4.2 Presentación de Informaciones \n \nTodas las informaciones se presentarán de manera cl ara, concisa, objetiva y en el mismo orden \nutilizado en el desarrollo de este capítulo. \n \n4.2.1 Índice \n \nIncluirá como mínimo la numeración de la página inicial de cada capítulo y el nombre del mismo. \n \n4.2.2 Carta de Presentación \n \nEn ella se incluirán las informaciones sobre el nom bre de la carretera o del tramo, su extensión \ntotal, el nombre de la firma o consorcio, el precio  global en número y letras y los números del \nconcurso y del tramo. \n \n4.2.3 Valor Ofertado \n \nEl valor total ofertado se obtendrá llenando el cuadro “Composición del Valor Ofertado y Costo por \nPartida de Trabajo”, de acuerdo con las instrucciones y codificación correspondientes. \n \nCada uno de los valores incluidos en el citado cuad ro se justificará de acuerdo a lo expuesto en \neste acápite. \n \n4.2.3.1 Costos Directivos \n \n4.2.3.1.1 Salarios \n \nSe incluirán los salarios de todo el personal asignado al proyecto, sea éste fijo u ocasional, técnico \no administrativo. \n \nSe incluirá el salario de los directores que realic en trabajos claramente identificables como \ncargables al proyecto. \n \nLos costos de servicios profesionales obtenidos por contratación de terceras personas, tales como \nservicios legales, contadores, auditores, trabajos de topografía, aerofotogrametría, sondeos, \nensayos y otros, se considerarán como costos reembo lsables y no se incluirán en la columna de \nsalarios. \n ",
+      "text_sha256": "bdd895f6a83cc68d47e18847650286e2f9995e083daafd69811a2f38162b1ceb",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 17,
+      "printed_page": null,
+      "text": " 14  \nTodos los costos de salarios deberán provenir del c uadro ” Salarios del personal por partida de \ntrabajo”. \n \n4.2.3.1.2 Viajes \n \nSe incluirán los costos en que se incurra por conce pto de viajes y transporte de los socios y \nempleados de la firma y que estén relacionados directamente con el proyecto en cuestión. \n \n4.2.3.1.3 Dietas \n \nSe incluirán los costos en que se incurra por concepto de pago de dietas a los socios y empleados \nde la firma y que estén relacionados directamente con el proyecto en cuestión. \n \n4.2.3.1.4 Utilización de Equipos y Vehículos \n \na) Estudios geotécnicos \n \nSe considerarán los costos de utilización e instala ción de equipos para la ejecución de los \nensayos, sondeos y otros trabajos previstos en la propuesta técnica, incluyendo vehículos. \n \nSe indicará en una o varias hojas la relación de eq uipos, el costo mensual, el período de \nutilización y el costo correspondiente a su utilización en el proyecto. \n \nb) Topografía \n \nSe seguirá el mismo procedimiento ya indicado para los estudios geotécnicos. \n \nc) Otros trabajos \n \nSe indicarán los costos de utilización e instalació n de equipos, incluyendo vehículos, para la \nejecución de trabajos tales como estudios de tráfic o y otros. Los costos se definirán e indicarán \nsiguiendo el procedimiento ya indicado para los estudios geotécnicos. \n \n4.2.3.1.5 Procesamiento Electrónico de Datos \n \nPara cada partida de trabajo en la cual se utilice el procesamiento electrónico, se indicarán las \ncantidades y precios unitarios para perforación de tarjetas, horas de computadoras, operadores, \nalquiler o adquisición de programas y otros. \n \n4.2.3.1.6 Trabajos Gráficos \n \nSe indicarán los costos de los trabajos gráficos incluyendo impresión, encuadernación de informes \ny copia de planos. Para cada partida de trabajo se indicará el número de copias fotostáticas, \nheliográficas y de otro tipo con su precio y el total. \n \nLos costos de entregas formales y la final se indic arán y distribuirán proporcionalmente entre las \ndiferentes partidas de trabajo. ",
+      "text_sha256": "61e082137eba97c77729f1aaee33862c34501f9b57dcc3afbdaf5521175078e0",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 18,
+      "printed_page": null,
+      "text": " 15  \n4.2.3.1.7 Servicios Especiales \n \nSe indicarán los costos en que se incurra por concepto de contratación de servicios profesionales, \ntales como abogados, economistas, contadores, audit ores, estudios topográficos, estudios \ngeológicos, estudios geotécnicos y otros. \n \nTodas las contrataciones de servicios profesionales se detallarán aparte, en cuadros iguales a los \nde “Salarios del personal por partida de trabajo” y  “Composición del valor ofertado y Costo por \npartida de trabajo”, y los valores totales obtenido s se indicarán en la columna “Servicios \nEspeciales”. \n \nSi, por ejemplo, una firma contrata con terceros la  parte de estudios geotécnicos correspondiente \na la ejecución de los sondeos, pero realiza por sí misma la parte correspondiente a los ensayos, el \ncosto de los sondeos aparecerá como un único valor en la columna “Servicios Especiales” y el de \nlos ensayos, en las columnas correspondientes a sal arios, viajes, dietas, equipos, procesamiento \nelectrónico de datos, trabajos de impresión y gastos generales. El valor incluido como costo de los \nsondeos en la columna “Servicios Especiales”, se de tallará en cuadros aparte, debidamente \nidentificados como “Servicios Especiales”, indicand o su desglose en salarios, dietas, equipos y \notros. \n \n4.2.3.1.8 Costos Generales \n \nSe considerarán y presentarán en forma apropiada los siguientes costos: \n \na) Costo de aquellos locales para oficina utilizado s exclusivamente para el proyecto. \n \nSe indicará el área útil, el costo de alquiler o am ortización por m², el período de utilización y el \ncosto total a cargar al proyecto. \n \nb) Costos de equipos y útiles para oficina y dibujo . \n \n Se indicarán los costos en que se incurra por conc epto de equipos y útiles para oficina y dibujo. \nSe presentará el porcentaje atribuible a cada partida de trabajo. \n \nc) Costos de material gastable. \n \nSe indicarán los costos en que se incurra por conce pto de material gastable. Se presentará el \nporcentaje atribuible a cada partida de trabajo. \n \nd) Costos de equipos y vehículos. \n \nSe considerarán los costos de alquiler o amortizaci ón de equipos y vehículos que se utilizarán en \nlos trabajos y que no hayan sido aún incluidos en otros precios unitarios. \n \nSe presentará el porcentaje atribuible a cada partida de trabajo. \n \n \n ",
+      "text_sha256": "d424422489ede3419d9cde102e3b3dc7c0209a49baf815fd84e074dcbc251ad5",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 19,
+      "printed_page": null,
+      "text": " 16  \ne) Costos administrativos. \n \nSe incluirán aquellos costos que no hayan quedado i ncluidos en los cuatros puntos anteriores, y \nque se refieran a gastos tales como los de: agua, l uz, teléfono, materiales para limpieza, \nconservación y otros incluidos en la operación de p royecto. Estos gastos se incluirán en la partida \nrelativa a administración. \n \nf) Costos diversos. \n \nSe incluirán otros costos, tales como adquisición de fotos, mapas, informes, aforos, pago de peaje \ny cualquier otro gasto directamente asociado con la elaboración del proyecto. \n \nSe presentará el porcentaje atribuible a cada partida de trabajo. \n \n4.2.3.2 Costos Indirectos \n \n4.2.3.2.1 Beneficios Sociales \n \nSe presentará un demostrativo del porcentaje medio adoptado. Para cada partida de trabajo este \nporcentaje tendrá incidencia sólo sobre los salarios. \n \nTodos estos beneficios deberán agruparse en dos componentes principales: \n \na) Beneficios y/o prestaciones sociales obligatoria s. \n \nb) Beneficios opcionales. \n \nLa SEOPC establecerá y revisará periódicamente el p orcentaje máximo aceptable para este \nrenglón. \n \nEl demostrativo se desglosará considerando todos lo s factores que intervengan en su \ncomposición, tales como los siguientes: \n \n- Vacaciones \n \n- Días no laborables \n \n- Ausencia por enfermedad \n \n- Seguros Médicos \n \n- Seguros de vida y/o accidentes \n \n- Seguro de desempleo \n \n- Seguro social \n ",
+      "text_sha256": "2988e1e23ddf45d62f073e3003d975ab45a1579495003405ef5f9636abb4e1be",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 20,
+      "printed_page": null,
+      "text": " 17  \n- Plan de jubilación \n \n- Impuestos y/o sellos de Rentas Internas aplicable s por concepto de nómina y salarios. \n \n- Cualquier otro beneficio o prestación social obli gatoria de acuerdo a las leyes dominicanas. \n \n4.2.3.2.2 Costos de Operación de la Firma \n \nSe presentará un demostrativo del porcentaje adopta do para cubrir los costos indirectos \nimputables a la realización de los trabajos. Este p orcentaje tendrá incidencia sólo sobre los \nsalarios para cada partida de trabajo y su valor máximo admisible será establecido por la SEOPC. \n \nEl demostrativo será lo más detallado posible. \n \nA continuación se presenta, a modo de guía, una rel ación de los elementos que podrían entrar en \nla elaboración del demostrativo. \n \na) General \n \n- Alquiler de oficinas principales \n \n- Asesorías permanentes (legal, auditoria, etc.) \n \n- Utilidades públicas (agua, luz, teléfono) \n \n- Depreciación o alquiler de muebles y equipos de o ficina. \n \n- Depreciación de equipos e instrumentos de Ingenie ría y dibujo no asignados directamente a \nningún proyecto. \n \n- Papelería y material gastable. \n \n- Depreciación y operación de vehículos no asignado s a un proyecto específico. \n \nb) Costos bancarios, legales y de seguros. \n \n- Intereses en los préstamos de capital \n \n- Comisiones \n \n- Sellos de Rentas Internas \n \n- Registro de contratos \n \n- Gastos notariales \n \n- Seguros sobre la propiedad y equipos \n ",
+      "text_sha256": "f76438f1b4256f7a5a164287d651deae3a9a9acb362e0a6aa4498eb2efb00efe",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 21,
+      "printed_page": null,
+      "text": " 18  \n- Seguros de accidentes \n \n- Seguros sobre responsabilidad profesional \n \nc) Costos administrativos \n \n- Salarios de oficinistas, secretarias, contables y  otro personal administrativo \n \n- Salarios de ejecutivos y directores \n \n- Salarios de socios \n \n- Gastos de limpieza y mantenimiento \n \nd) Impuestos \n \nImpuestos aplicables a la empresa, sin incluir impuestos sobre la renta. \n \ne) Promoción y representación \n \n- Anuncios y folletos \n \n- Donaciones \n \n- Gastos de viajes \n \n- Atención a clientes \n \n- Preparación de propuestas \n \n- Salarios del personal a cargo de promoción y rela ciones públicas. \n \n- Gastos de publicaciones y boletines técnicos \n \n- Cuotas e inscripciones en instituciones técnicas y profesionales. \n \nf) Documentación y actualización técnica \n \n- Biblioteca \n \n- Suscripciones \n \n- Traducciones \n \n- Libros de referencia y publicaciones \n \n- Cursos \n ",
+      "text_sha256": "82e0551ec71633a536e2569a0589a53dc67f12d31cad5a00067e1969a216d2a6",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 22,
+      "printed_page": null,
+      "text": " 19  \n- Convenciones y reuniones técnicas \n \ng) Disponibilidad del personal. \n \n- Tiempo no productivo de los empleados \n \n- Costo de salarios por tiempo de socios o empleado s dedicados a asuntos o actividades de \ninterés público. \n \nh) Soporte técnico. \n \n- Organización interna \n \n- Normalización de procedimientos \n \n- Investigación de nuevos métodos de operación o di seño \n \n- Preparación de programas de computadoras \n \n- Preparación de plantillas, modelos y otros. \n \n4.2.3.2.3 Beneficios \n \nEl porcentaje propuesto corresponderá a los benefic ios más los imprevistos y cubrirá la \ncompensación por los conocimientos, experiencia, ri esgo, responsabilidad y disponibilidad del \nconsultor. \n \nEste porcentaje incidirá solamente sobre los salarios para cada partida de trabajo. \n \n4.2.3.2.4 Administración de Costos Reembolsables. \n \nEl porcentaje propuesto corresponderá a la compensa ción por la administración de los costos \nreembolsables. El porcentaje máximo admisible será 15%. \n \nEl porcentaje propuesto será aplicable sólo al subtotal de costos reembolsables. \n \n4.2.4 Factor Multiplicador \n \nLa suma de los porcentajes propuestos para beneficios sociales, costos de operación y beneficios, \nrepresentará el factor multiplicador propuesto. \n \n4.2.5 Cuadro de Precios Unitarios \n \nSe indicarán en el cuadro correspondiente, los prec ios unitarios resultantes para cada partida y \nsubpartida de trabajo. \n \n ",
+      "text_sha256": "4a2ba0cbd96f113c097ed6cd7679956507514284004d38d93803e35f5f5a336e",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 23,
+      "printed_page": null,
+      "text": " 20  \n5 CUADROS A UTILIZARSE E INSTRUCCIONES . \n \n5.1 Campo de Aplicación \n \nEste capítulo contiene los cuadros a utilizar en la  Documentación de Precalificación, en la \nPropuesta Técnica y en la Propuesta Económica, así como las instrucciones a seguir para \nllenarlos. \n \n \n5.2 Instrucciones Generales \n \nLas instrucciones a seguir para llenar los cuadros presentados en este capítulo anteceden a los \nmodelos de los mismos. Dichas instrucciones no se i ncluirán en las propuestas. Los códigos a \nutilizar están indicados en el anexo de este volumen. \n \n \n5.3 Documentación de Precalificación. \n \nA continuación se presentan los modelos de los cuad ros a utilizar en la documentación de \nprecalificación. \n \n5.3.1 Cuadro DP-1. “Identificación de la Firma Cons ultora” \n \n5.3.1.1 Objetivo \n \nObtener las informaciones necesarias para identific ar la empresa, firma o grupo, incluyendo su \nregistro en la Secretaría de Estado de Industria y Comercio y entidades profesionales, su \nlocalización, dirección, teléfono y la relación de los diferentes tipos de trabajos para los cuales \nestá capacitada. \n \n5.3.1.2 Instrucciones \n \nEste cuadro se debe completar tal y como en él se solicita. \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "344d9562970d5f33532d558131dce59e8ed4ee3b855a4880c8fe4318e1f6c283",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 24,
+      "printed_page": null,
+      "text": " 21  \nCUADRO DP-1 \n                                                   CUADRO DP - 1 \nIDENTIFICACIÓN DE LA FIRMA \n                                                                                                                                                                              HOJA            DE  \nNOMBRE DE LA FIRMA                                                                                                                  CÓDIGO \n   \nDIRECCIÓN                                                                                                                                      TELÉFONO \n   \n                                                                          REGISTRO SEC. DE  \nFE CHA DE FORMACIÓN                                 ESTADO  IND. Y COM                      FECHA DE REGISTRO                                                                                                      \n       \n      NOMBRE DE LOS SOCIOS                                                    PROFESIÓN                      CARGO DE REGISTRO \n1.     \n  \n2.    \n \n \n \n3.      \n \n4.     \n  \n5.    \n \n \n \n6.     \n  \n7.    \n \n \n                  CAPITAL SUSCRITO Y PAGADO                                                        CANTIDAD DE EMPLEADOS                      \n    RD$         TÉCNICOS            OTROS    TOTAL  \n \nTipo de Sociedad                                                Organismos en los cuales la firma está registrada \n  FIRMA INDIVIDUAL 1.  \n \n  COMPAÑÍA POR ACCIONES 2.  \n \n  SOCIEDAD ANÓNIMA 3.  \n \n  CONSORCIO  4.  \n \n  OTROS (INDICAR) 5.  \n \n  Campos en los cuales la firma está especialmente calificada (indicar en orden de prioridades):  \n \n1.                  5.  \n \n2.                  6.  \n \n3.                  7.  \n \n4.                  8.  \n \nNOMBRE Y FIRMA DEL INFORMANTE CARGO \n   \n ",
+      "text_sha256": "7f90cb66931503d1fc3f0450f4e4acdb27d7f34853ff3d488fd86b9cc6fba72b",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 25,
+      "printed_page": null,
+      "text": " 22  \n5.3.2  Cuadro DP-2 “Estudios y Proyectos Realizados en los Últimos 5 años”. \n \n5.3.2.1 Objetivo \n \nObtener información relativa a los trabajos ejecutados por la firma en el área de Ingeniería Vial en \nlos últimos cinco años. \n \n5.3.2.2 Instrucciones \n \na) Descripción del Estudio o Proyecto \n \nLos trabajos ejecutados en los últimos cinco años s e presentarán en orden cronológico, con \ninformaciones resumidas que definan las característ icas de los contratos (magnitud, montos y \notros) y el tipo de trabajo ejecutado. \n \nb) Contratante \n \nNombre del organismo o empresa \n \nc) Fecha de los proyectos \n \nFecha de inicio y terminación de los trabajos  \n \nd) Costo del proyecto \n \nIndicar el costo total del proyecto y el valor que correspondió a la firma. Si el proyecto fue \ntotalmente realizado por la firma, se indicará el mismo valor de ambas columnas. \n \ne) Firmas Asociadas \n \nIndicar el nombre de otras firmas con las cuales se asoció para realizar el proyecto.  \n \n \n ",
+      "text_sha256": "4d3b1ae7d043235e355d58f54b54a28805f466c6dc4a524011c32d07f6efccdd",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 26,
+      "printed_page": null,
+      "text": " 23  \n \n                                                                                                                                                                                                      CUADRO        DP-2                \n \n                                       ESTUDIOS Y PROYECTOS REALIZADOS EN LOS ÚLTIMOS 5 AÑOS                                                      HOJA                DE  \n \nNOMBRE DE LA FIRMA                                                                                                                                                                             CÓDIGO \n \n \nDIRECCIÓN                                                                                                                                                                                                TELÉFONO                                                            FECHA \n \n \n                                                                                                                                                                                                                                             \nFecha de los Trabajos Costo de los Trabajos Nombre del Proyecto y Descripción \nResumida de los Trabajos Realizados \nPor la Firma \n(Indicar solamente proyectos en el área vial). \nExtensión CONTRATANTE O CLIENTE \nInicio Fijo Total Correspon. A la Firma \nFirmas \nAsociadas \n        \n \nNOMBRE Y FIRMA DEL INFORMANTE Cargo \n \nCUADRO DP -2 \n23  ",
+      "text_sha256": "e4a3fbffc6eb1989f142a48446990a6bfcfe0fe4956f3e1f9789cf63511f003c",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 27,
+      "printed_page": null,
+      "text": " 24  \n5.3.3 Cuadro DP-3 “Trabajos en Ejecución y por Inic iar” \n \n5.3.3.1 Objetivo \n \nValorar la carga de trabajo actual y futura de la f irma, o sea los contratos que está ejecutando los \nque va a iniciar. \n \n5.3.3.2 Instrucciones \n \nLas ya indicadas en el Cuadro DP-2, con las necesarias adaptaciones. \n  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "9b85565858a45fc80186d080fdd601698eb3474d42767876d4d4bef94dcd3b86",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 28,
+      "printed_page": null,
+      "text": " 25  \n \n                                                                                                                                                                                                        CUADRO            DP-3              \n \n                                                                           TRABAJOS EN EJECUCIÓN O A INICIAR                                                                    HOJA                DE  \n \nNOMBRE DE LA FIRMA                                                                                                                                                                             CÓDIGO \n \n \nDIRECCIÓN                                                                                                                                                                                                TELÉFONO                                                            FECHA \n \n \n                                                                                                                                                                                                                                    \nFecha de los Trabajos Costo de los Trabajos Nombre del Proyecto y Descripción \nResumida de los Trabajos en ejecución \no a iniciar \n(Indicar todo tipo de proyectos). \nExtensión Contratante o cliente \nInicio Fin Total Correspon. A la Firma \nFirmas \nAsociadas \n        \n \n \nNOMBRE Y FIRMA DEL INFORMANTE Cargo \n \nCUADRO DP -3 \n25 ",
+      "text_sha256": "2852c36fd66af524b4fe1d935fbd2b2636e5b00d9ecab96baf471cee9d5e0a3c",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 29,
+      "printed_page": null,
+      "text": " 26  \n5.3.4 Cuadro DP-4: “Datos relativos a Directivos y Principales de la Firma”. \n \n5.3.4.1 Objetivo \n \nObtener la relación del personal directivo y los pr incipales de la firma consultora, su cargo y \ncalificación.   \n \n5.3.4.2 Instrucciones \n \nSuministrar las informaciones de acuerdo a lo solicitado en el cuadro. \n \nLos niveles funcionales se indicarán de acuerdo a lo códigos contenidos en el anexo a este \nvolumen.",
+      "text_sha256": "2f8ae8307957438fc01ae8de5af9fcd8deaf2d3c872e483e94182ca52b225ab1",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 30,
+      "printed_page": null,
+      "text": " 27  \n \n                                                                                                                                                                                                        CUADRO            DP-4              \n                                                                                                     DATOS RELATIVOS A DIRECTIVOS \n                                                                                               Y PRINCIPALES DE LA FIRMA  HOJA              DE \n \nNOMBRE DE LA FIRMA                                                                                                                                                                             CÓDIGO \n \n \nDIRECCIÓN                                                                                                                                                                                                TELÉFONO                                                            FECHA \n \n \n                                                                                                                                                                                                                                 \nPROFESIÓN EXPERIENCIA ESPECIALIZACIÓN \n \n \n \nNOMBRE \nNacionalidad \nCargo en \nla firma \nNivel funcional \nEDAD \nTÍTULO Fecha de Graduación En la Firma (años) En otras Firmas consultoras(años) Otras Instituciones (años) RAMA \nAÑOS \n \n \n \n \n \n \n \n \n \n           \n \nNOMBRE Y FIRMA DEL INFORMANTE CARGO \n \nCUADRO DP - \n27  ",
+      "text_sha256": "f3a8f4c96cfc035e69fb28b6d0b6485675a7963ce218c447410390c1c73830fd",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 31,
+      "printed_page": null,
+      "text": " 28  \n5.3.5 Cuadro DP-5. “Datos del Personal Técnico que labora a Tiempo Completo en \nla Firma” \n \n5.3.5.1 Objetivo \n \nObtener la relación del personal técnico que labora  a tiempo completo en la firma consultora, su \ncargo y calificación. \n \n5.3.5.2 Instrucciones \n \na) El orden de colocación de los técnicos en el lis tado estará de acuerdo con la importancia de \nsu nivel funcional. \n \nb)   Los niveles funcionales se indicarán de acuerdo a los códigos contenidos en el anexo a este \nvolumen.",
+      "text_sha256": "e87ceb57b05f43bb1a310bab0264d63e7f2b423d9f8823a5689f3acd04ee43b7",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 32,
+      "printed_page": null,
+      "text": " 29  \n \n                                                                                                                                                                                                        CUADRO            DP-5                      \nDATOS DEL PERSONAL TÉCNICO QUE LABORA TIEMPO COMPLETO EN LA FIRMA \n                                                                                                                                                                                                                                                   HOJA              DE \n \nNOMBRE DE LA FIRMA                                                                                                                                                                             CÓDIGO \n \n \nDIRECCIÓN                                                                                                                                                                                                TELÉFONO                                                            FECHA \n \n \n                                                                                                                                                                                                                                 \nPROFESIÓN EXPERIENCIA ESPECIALIZACIÓN \n \n \n \nNOMBRE \nNacionalidad \nCargo en \nla firma \nNivel funcional \nEDAD \nTÍTULO Fecha de Graduación En la Firma (años) En otras Firmas consultoras(años) Otras Instituciones (años) RAMA \nAÑOS \n \n \n \n \n \n \n \n \n \n \n      \n \n \n \n \n \n \n \n \n \n    \n \nNOMBRE Y FIRMA DEL INFORMANTE CARGO \n \nCUADRO DP - \n29 ",
+      "text_sha256": "d6f2a8a0e0cd03e4bb279de930846ca61476df0fd020297c8a3869c14d721d6b",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 33,
+      "printed_page": null,
+      "text": " 30  \n5.3.6 Cuadro DP-6. “Datos del Personal Técnico que labora eventualmente en la \nFirma.”  \n \n5.3.6.1 Objetivo  \n \nObtener la relación del personal técnico que labora  eventualmente la firma consultora, su cargo y \ncalificación. \n \n5.3.6.2 Instrucciones \n \na) El orden de colocación de los técnicos en el lis tado estará de acuerdo con la importancia de \nsu nivel funcional. \n \nb) Los niveles funcionales se indicarán de acuerdo a los códigos incluidos en el anexo a este \nvolumen. ",
+      "text_sha256": "a00750c4b1fc5dcadea12922aa9585d79336db256ccc237d15ad3a3bae320175",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 34,
+      "printed_page": null,
+      "text": " 31  \n \n                                                                                                                                                                                                        CUADRO            DP-6                      \nDATOS DEL PERSONAL TÉCNICO QUE LABORA EVENTUALMENTE EN LA FIRMA \n                                                                                                                                                                                                                                                   HOJA              DE \n \nNOMBRE DE LA FIRMA                                                                                                                                                                             CÓDIGO \n \n \nDIRECCIÓN                                                                                                                                                                                                TELÉFONO                                                            FECHA \n \n \n                                                                                                                                                                                                                                 \nPROFESIÓN EXPERIENCIA ESPECIALIZACIÓN \n \n \n \nNOMBRE \nNacionalidad \nCargo en \nla firma \nNivel funcional \nEDAD \nTÍTULO Fecha de Graduación En la Firma (años) En otras Firmas consultoras(años) Otras Instituciones (años) RAMA \nAÑOS \n \n \n \n \n \n \n \n \n \n           \n \nNOMBRE Y FIRMA DEL INFORMANTE CARGO \n \nCUADRO DP - 6 \n31  ",
+      "text_sha256": "13bdd0e81348c401a37b739b34dfb103be5c36308b7988bda8b177df92d14ef9",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 35,
+      "printed_page": null,
+      "text": " 32  \n5.3.7 Cuadro DP-7: “Datos del Personal Auxiliar y A dministrativo que labora en la \nFirma.” \n \n5.3.7.1 Objetivo \n \nObtener la relación del personal auxiliar y adminis trativo que labora en la firma, su cargo y \ncalificación. \n \n5.3.7.2 Instrucciones \n \na) El orden de colocación de este personal en el li stado estará de acuerdo con la importancia de \nsu nivel funcional. \n \nb) Los niveles funcionales se indicarán de acuerdo a los códigos contenidos en el anexo a este \nvolumen. ",
+      "text_sha256": "baeb9d3f0dde285c2cde776ddceb8b9f1468264461040bada89282334c97fdee",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 36,
+      "printed_page": null,
+      "text": " 33  \nCUADRO DP- 7 \n                                                                                                                                                               CUADRO              DP-7 \n \nDATOS DEL PERSONAL AUXILIAR Y ADMINISTRATIVO \n     QUE LABORA EN LA FIRMA         HOJA             DE   \n \nNOMBRE DE LA FIRMA                                                                                                                     CÓDIGO \n \n \nDIRECCIÒN                                                                                            TELÉFONO                                              FECHA \n \n \n \nEXPERIENCIA (AÑOS) Tipo de \nVinculación  NOMBRE  Profesión  Cargo Nivel Funcional \nP          E \nEn la  Firma En Otras Instituciones \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n      \n \n \n \nNombre y Firma del Informante                 Cargo ",
+      "text_sha256": "679092bd178992f165802ccdd02551b9090ed32ce2a94292fce1bdac251e6e2f",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 37,
+      "printed_page": null,
+      "text": " 34  \n5.3.8 Cuadro DP-8: “Identificación y Formación Prof esional de Técnicos”. \n(Currículum Vitae). \n \n5.3.8.1 Objetivo \n \nObtener Informaciones sobre la identificación y for mación profesional del técnico de nivel superior \nincluyendo socios y directores, de forma que pueda evaluarse su experiencia profesional en \nrelación a la tarea para la cual está siendo propuesto. \n \n5.3.8.2 Instrucciones \n \na) No se utilizará más de una hoja por técnico. \n \nb) El currículum vitae de cada técnico deberá prese ntarse de acuerdo al orden preestablecido en \nlos cuadros DP-5 y DP-6, respectivamente. \n \nc) Cursos: se indicarán solamente 4 cursos principa les. \n \nd) Experiencia profesional en el área de carreteras ; áreas afines u otras aplicables: se señalarán \nsolamente los últimos cinco estudios o proyectos en  los cuales el técnico ha participado, con \nelementos que identifiquen y caractericen el trabajo. \n \ne) En caso de que el espacio previsto para las info rmaciones sea considerado insuficiente para \ndemostrar la capacidad técnica y experiencia del té cnico en las actividades para las cuales está \nsiendo propuesto, se podrá adicionar hojas similares al formato del dorso del cuadro DP-8. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "5453592a618b4dcebebd9dccec285fc9e8aacd27419c394a6ce769e3ef56da72",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 38,
+      "printed_page": null,
+      "text": " 35  \nCUADRO DP-8 \n \n \n \n                                                                                                                                                            CUADRO            DP- 8  \n         IDENTIFICACIÓN Y FORMACIÓN PROFESIONAL DE LOS TÉCNICOS  \n                                                                                                                                                                    \n                                                                                                                                                                     HOJA                DE  \nNOMBRE DE LA FIRMA                                                                                                                     CÉDULA \n \n     \nDIRECCIÓN                                                                                                                                        TELÉFONO \n \n \nFECHA NAC.                              LUGAR DE NAC.                         NACIONALIDAD                         ESTADO CIVIL \n \n \nESTUDIOS ADMINISTRATIVOS Y CURSOS DE EXTENSIÓN: \nCURSO Durac. TITULO OBTENIDO AÑO Institución de Dis eño \n     \n     \n     \n     \n \n     \n     \n \n     \n     \nASOCIACIONES PROFESIONALES                                                   ACTIVIDAD DOCENTE \n  \n  \n  \n  \n   \nPUBLICACIONES                                                                                IDIOMAS                                                 H          L           E \n  \n     \n     \n     \n      \nEXPERIENCIA PROFESIONAL \nFecha Tiempo Dedicado \n 1/4 1/2 3/4 1 \nMeses Proyecto en que participó y  Nombre de la firma o Institución. Nivel \n      \nBREVE DESCRIPCIÓN DEL TRABAJO REALIZADO: \n  \n \n \n ",
+      "text_sha256": "7ce678ac8303016d8fcbfb08d506fae9dff049475d1ce443b2aa725f76c35086",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 39,
+      "printed_page": null,
+      "text": " 36  \n \nEXPERIENCIA PROFESIONAL \nTiempo Dedicado  \n \nFecha \n \n1/4 \n \n1/2 \n \n3/4 \n \n1 \n \n \nMeses \n \nProyecto en que participó y Nombre de la firma o \nInstitución \n \n \nNivel \n      \n \n \nBREVE DESCRIPCIÓN DEL TRABAJO REALIZADO \n  \n \n \n \n \n \n \nEXPERIENCIA PROFESIONAL \nTiempo Dedicado  \n \nFecha \n \n1/4 \n \n1/2  \n \n3/4 \n \n1 \n \n \nMeses \n \nProyecto en que participó y Nombre de la firma o \nInstitución \n \n \nNivel \n \n \n     \n \nBREVE DESCRIPCIÓN DEL TRABAJO REALIZADO  \n  \n \n \n \n \n \n \nEXPERIENCIA PROFESIONAL \nTiempo Dedicado  \n \nFecha \n \n1/4  \n \n1/2 \n \n3/4  \n \n1 \n \n \nMeses \n \nProyecto en que participó y  Nombre de la firma o \nInstitución \n \n \nNivel \n \n \n    \n \n \nBREVE DESCRIPCIÓN DEL TRABAJO REALIZADO  \n  \n \n \n \n \n \n \nEXPERIENCIA PROFESIONAL \nTiempo Dedicado  \n \nFecha \n \n1/4 \n \n1/2  \n \n3/4 \n \n1 \n \n \nMeses \n \nProyecto en que participó y Nombre de la firma o \nInstitución \n \n \nNivel \n \n \n \n    \n \n \nBREVE DESCRIPCIÓN DEL TRABAJO REALIZADO \n  \n \n ",
+      "text_sha256": "5e8a3510663442115955341ad9329ce9520c73a56a9312a0314c3071a311a0cb",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 40,
+      "printed_page": null,
+      "text": " 37  \n5.3.9 Cuadro DP-9: “Balance del último año” \n \n5.3.9.1 Objetivo \n \nObtener información económico-financiera de la firma, específicamente el último balance. \n \n5.3.9.2 Instrucciones \n \na) Período \n \n1 Mes y año de balance \n \nb) Identificación \n \n1 Nombre completo de la firma  \n \n2 Código \n \nc) Activo y Pasivo \n \nA continuación, se presenta una descripción resumid a de la relación de las cuentas del activo y \ndel pasivo. \n   \n1. Disponible \n  \nIncluir solamente tendencias de liquidez inmediata.  Las acciones, bonos, depósitos a plazo, título \ny otros, se clasificarán dentro de lo realizable. \n \n2. Realizable \n \nIncluir los diferentes tipos de crédito de la empresa, observando sus plazos de vencimiento. \n \n3. Inmovilizado \n \nIncluir todas las cuentas referentes a lo inmoviliz ado (inmóviles en construcción, vehículos, \nmáquinas en general, gastos de inspección y otros). \n \n4. Resultado Pendiente \n \nIncluir todas las cuentas normalmente clasificadas bajo este rubro, tanto en el activo como en el \npasivo.  \n \n5. Compensación \n \nIncluir todas las cuentas normalmente clasificadas bajo este rubro, tanto en le activo como en el \npasivo. \n ",
+      "text_sha256": "52f34343e1b61fbb1facd8aa9473d47222ecdba7353f70f5c5bbba84038128fa",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 41,
+      "printed_page": null,
+      "text": " 38  \n6. Exigible \n \nIncluir la totalidad de las cuentas clasificadas bajo este rumbo. \n \n7. Crédito \n \nIncluir todos los créditos obtenidos en instituciones financieras en los últimos dos (2) años. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "3c8268c76efcce72e37788daf1ad7df1fa22e7208c000913caceb4ff1e6edeaa",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 42,
+      "printed_page": null,
+      "text": " 39  \nCUADRO DP-9 \n                                                                                                                                                                              CUADRO \n                                                               BALANCE DEL ÚLTIMO AÑO                   \n    \n                                                                                                                            HOJA              DE         \n                                                                                               \n                                                                                FECHA \n \n \nNOMBRE DE LA FIRMA                                                                                                                                     CÓDIGO \n \n \n \n ACTIVO VALOR RD$ \n Disponible - Caja y Depósitos Bancarios en C/C  \n Realización a corto plazo – Cuentas y facturas a recibir( hasta 90 días)  \n Realización a mediano o largo plazo-Cuentas y facturas a recibir (mas de 90 días)  \n Inmovilizado - Móviles y utensilios, inmóviles e instalaciones  \n Resultados pendientes - Gastos de ejercicios facturas  \n Cunetas de compensación   \n TOTAL  \n \n \n PASIVO VALOR RD$ \n Exigible a corto plazo – Cuentas y títulos a pagar (hasta 90dias)  \n Exigible a mediano y largo plazo – Cuentas y títulos a pagar (más de 90 días)   \n No exigible – Capital, reserva y fondos de depreciación  \n Resultados pendientes – Ganancias y pérdidas   \n Cuentas de compensación  \n   \n TOTAL  \n                                                                                           CRÉDITOS \nPERÍODO FUENTE VALOR RD$  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nNOMBRE Y FIRMA DEL INFORMANTE                                                                                                    CARGO \n \n \nDP -9 ",
+      "text_sha256": "064b643d06411c063781807106749319d195d9a6ed82bffc7c74f0dc3733ff64",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 43,
+      "printed_page": null,
+      "text": " 40  \n5.3.10 Cuadro DP-10: “Estado de Ganancias y Pérdida s” \n \n5.3.10.1 Objetivo \n \nObtener informaciones económico-financieras de la f irma, específicamente su estado de \nganancias y pérdidas. \n \n5.3.10.2 Instrucciones \n \na) Período \n  \n1 Mes y año del balance \n \nb) Identificación \n \n1. Nombre completo de la firma \n \n2. Código \n \nc) Ganancias y Pérdidas. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "5ac577400193a09e1773d3220f05fe448b20884f3e0d8cc06feb6abba6d449aa",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 44,
+      "printed_page": null,
+      "text": " 41  \nCUADRO DP-10 \n                                          CUADRO \n                                                   ESTADO DE GANANCIAS Y PÉRDIDAS            \n                                               \n                                                                                                                                                            HOJA                DE \n                                                                                 FECHA \n \n \nNOMBRE DE LA FIRMA                                                                                                                              CÓDIGO \n \n                                                         \n                                                       INGRESOS                                                                                RD $ \nServicios Prestados  \nGastos Recuperados  \nInterés y Descuentos Recibidos  \nIngresos Eventuales  \nOtras Rentas  \nResultado Positivo  \n  \nTOTAL  \n                                                                       GASTOS                                                                                              RD $ \nSalarios de Funcionarios Permanentes  \nServicios Prestados por Terceros (personas físicas)  \nRetirada de Directiva  \nGratificaciones  \nBeneficios Sociales  \nAlquileres  \nImpuestos sobre Servicios Prestados  \nImpuestos y Tasas Diversas  \nDepreciaciones y Amortizaciones  \nInterés sobre Préstamos Bancarios  \nIntereses Diversos   \nServicios Legales por Terceros (personas jurídicas)  \nGastos Generales  \nResultado Negativo  \n  \n  \nTOTAL  \n \n \n \nNOMBRE Y FIRMA DEL INFORMANTE                                                                                             CARGO \n \n \n \nDP -10  ",
+      "text_sha256": "652f1fc12f935973e33f2c8eeba75e1468ab132ecf3672606f29bea131e41fb7",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 45,
+      "printed_page": null,
+      "text": " 42  \n5.3.11 Cuadro DP-11: “Datos de los Balances de los tres (3) últimos años”. \n \n5.3.11.1 Objetivo \n \nObtener información sobre la capacidad financiera d e la firma en base a datos de los balances \noficiales de los tres (3) últimos años. \n \n5.3.11.2 Instrucciones \n \nLas informaciones requeridas están claramente definidas en el cuadro. \n \nLas firmas nuevas que no tengan más de tres (3) año s de existencia deberán, por medio de una \nnota, esclarecer cuándo fueron fundadas o incorpora das, pudiendo anexar informaciones \ncomplementarias. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "29f1c166cf60f9df1ce309f3446e31ee31868d6d105901e4b8df67798fbf040c",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 46,
+      "printed_page": null,
+      "text": " 43  \nCUADRO DP-11 \n                                                                                                                          CUADRO \nBALANCE DE LOS ÚLTIMOS 3 AÑOS  \n                                                \n                                                                                                                                                            HOJA               DE \n                                                                                 FECHA \n \n \nNOMBRE DE LA FIRMA                                                                                                                                    CÓDIGO \n \n \nAÑOS No. De \nOrden DESCRIPCIÓN 19 19 19 \n Cuentas de Capital    \nI Capital + Reservas    \nII Inmovilizado (Inmóviles, Instalaciones, Equipos y Vehículos)    \nIII Disponible en Caja  y Bancos    \nIV Realizable  a  Corto Plazo (90 días)    \nV Realizable a Mediano y Largo Plazo    \nVI Exigible a Corto Plazo (90 días)    \n Exigible a Mediano y Largo Plazo    \n \n \n \n \n \n \n \n \n \n \n \n \n   \nB Cuentas de Ganancias y Pérdidas    \nI Factura de los Servicios Prestados     \nII Salarios y Gratificaciones del Personal  Permanente    \nIII Servicios Prestados por Terceros     \nIV Beneficios Sociales Acumulados    \nV Gastos Generales     \nVI Impuestos    \nVII Gastos Financieros    \nVIII Ganancias Después de la deducción del Impuesto de  Renta    \n \n \n \n \nNombre y Firma del Informante                                                                                                     Cargo \n \n \n \n \n \nDP-11 \n ",
+      "text_sha256": "fc55ff7809c05e0bf230783cf3275e4fc384f6928b601f2e63c8704f2f598295",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 47,
+      "printed_page": null,
+      "text": " 44  \n5.4 Propuesta Técnica \n \nA continuación se presentan los modelos de los cuadros a utilizar en la Propuesta Técnica. \n \n \n5.4.1 Cuadro T-1: “Cronograma General por Partida d e Trabajo.” \n \n5.4.1.1 Objetivo \n \nDar una visión de conjunto del cronograma de todas las partidas de trabajo y de las cantidades \nrespectivas de personal a ser empleado. \n \n5.4.1.2 Instrucciones  \n \na) Lista de las partidas de trabajo como hayan sido  detalladas en el Cuadro General de \nCantidades. \n \nb) Definición de los períodos en los cuales serán e jecutados los trabajos y separación de las \nfases previstas en el Alcance. \n \nc) Cantidad de personal de nivel superior, que util izará la firma (en hombres/mes). \n \nd) Cantidad de personal de nivel técnico auxiliar y  de personal administrativo (en hombres/mes). \n \ne) Cantidad de personal de nivel superior, de nivel  técnico auxiliar y de nivel administrativo que \nutilizarán las empresas subcontratantes. \n \nf) Total de personal por partida de trabajo. \n \ng) Totales de personal para todas las partidas de t rabajo. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "2471b438170fd34c7573164a6065d63f08bfbd07044ca85e88a4347996ac9252",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 48,
+      "printed_page": null,
+      "text": " 45  \nCUADRO T-1 \n                                                                                                                                                        CUADRO \n                          CRONOGRAMA GENERAL POR PARTIDA DE TRABAJO \n                                                                                             \n                                                                                                                                                                          HOJA      DE \n                                                                                                              \nNOMBRE DE LA FIRMA                                                                                                                   CÓDIGO                                                                        \n \n \nCARRETERA O TRAMO                                                          TRAMO No.                          CONCURSO No.            FECHA \n \n \nDÍAS CORRIDOS No. DE HOMBRE POR MES  \nDE LA \nEMPRESA \nDE LA \nSUBCONT.   PARTIDA DE \nTRABAJO CÓDIGO \n30 \n60 \n90 \n120 \n150 \n180 \n210 \n240 \n270 \n300 \n330 \n360 \n390 \n420 \nNivel \nSup . \nAux. \ny \nAdm  \nNivel \nSup . \nAux. y \nAdm  \nTOTAL H/MES \n \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n                     \n TOTALES      \n \n \nT-1 \n ",
+      "text_sha256": "2e38f7c6c2008b866c079c91baf6216017f1c2bc46d51a9907614693888f6031",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 49,
+      "printed_page": null,
+      "text": " 46  \n5.4.2 Cuadro T-2: “Utilización de Personal por Part ida de Trabajo”. \n \n5.4.2.1 Objetivo \n \nObtener detalladamente para cada partida de trabajo , el cronograma de utilización de personal, el \npersonal a emplear, la carga de trabajo, el tipo de  vinculación de los técnicos con la firma y sus \nrespectivos niveles funcionales, así como los viajes y dientas propuestas para el personal. \n \n5.4.2.2 Instrucciones \n \na) Las partidas de trabajo estarán de acuerdo con l a secuencia adoptada en el cuadro \n“Cronograma General.” \n \nb) El personal de nivel superior se presentará en r elación nominal para cada partida; el período \nde trabajo del técnico se presentará en el diagrama  de barras con su carga horaria definida en la \nparte superior. \n \nc) El total de hombres/mes del personal se presenta rá en la columna correspondiente a su nivel \nfuncional, así como también las cantidades de viajes y dietas cuando sean previstas.  \n \nd) Se seguirá el mismo procedimiento de la letra ”c ” para los técnicos de nivel auxiliar y \nadministrativo, de acuerdo con las categorías definidas en la codificación que consta en el anexo a \neste volumen. \n \ne) Luego de definir el personal para la partida, el  cuadro se dividirá por una línea horizontal, \npasándose a la partida siguiente y utilizando el mismo procedimiento hasta el final. \n \nf) Se suministrarán los totales por hojas y el tota l de las hojas para los diferentes niveles \nfuncionales y para los viajes y dietas. \n \ng) Las hojas necesarias se numerarán en orden ascen dente, definiendo el número de hojas y el \ntotal de cuadros. \n \n \n \n \n ",
+      "text_sha256": "b021648e3cfa11b664fda32eab2b1cc3e5d2f553fa48119fbb7bd1da2f110ec6",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 50,
+      "printed_page": null,
+      "text": " 47  \n                                                                                                                                                                                                                                               CUADRO      \n                                                               UTILIZACIÓN DE PERSONAL POR PARTIDA DE TRABAJO                                                                                                          \n \n                                                                                                                                                                                                                             Hoja             De \n                                                                                                                                                                                                                           \nNOMBRE DE LA FIRMA                                                                                                                                                                       CÓDIGO  \n                                                \n                                                            \nCARRETERA  O TRAMO                                                                                                                                                                        Tramo No.           Concurso No.           Fecha \n \n \n \nCRONOGRAMA (DÍAS) UTILIZACION DEL PERSONAL \nNúmero de hombres x mes \nPartida  \nde Trabajo \n30 \n60 \n90 \n120 \n150 \n180 \n210 \n240 \n270 \n300 \n330 \n360 \n390 \n420 \n450 \nNombre o Función  \ndel Proyecto \nNo. de \n Horas / \nDías \nCO \n1O \n11 \n12 \n13 \n14 \nTO \nT1 \nT2 \nT3 \nT4 \nAO \nA1 \nA2 \nA3 \nA4 \nNo. de \nViales \nNo. de \nDietas \n \n                                   \n  \nTotales \n                  \nT-2 \nCUADRO T - 2 \n47 ",
+      "text_sha256": "41ae714838b672f42035acad02734d37615be46b38312d1f5fce67a06c79f865",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 51,
+      "printed_page": null,
+      "text": " 48  \n5.4.3 Cuadro de Cantidades T-3: “Cuadro General”  \n \n5.4.3.1 Objetivo \n \nObtener la relación de los trabajos previstos por p artida de acuerdo al alcance y al plan de trabajo \npropuesto, así como definir la cantidad de kilómetros a ser efectivamente considerada en el eje de \nla carretera. Esta cantidad será la extensión del t ramo donde se efectuarán los trabajos. Dicha \nextensión podrá ser menor que la longitud del tramo  cuando existan indicaciones particulares que \ndefinan el aprovechamiento de trabajos ya realizado s o podría ser mayor cuando se hayan \nefectuado estudios de alternativas de trazado consi derados necesarios y dichos estudios así lo \njustifiquen. \n \n5.4.3.2 Instrucciones \n \na) Código \n \nSe utilizarán lo códigos contenidos en el anexo a este volumen. \n \nb) Descripción \n \nLista de todas las partidas de trabajo definidas en  el Plan de Trabajo de la Propuesta, iniciándose \nsiempre por la partida Coordinación. \n \nc) Unidad \n \nUnidad de medida expresada en kilómetros medidos en el eje de la carretera. \n \nd) Cantidad \n \nCantidad de los trabajos, que será la extensión de acuerdo a la unidad ya definida en letra c. \n \nLa duplicación de pistas, las vías laterales, las ramas de intersecciones y accesos y las carreteras \nde acceso de determinadas localidades, se considera rán como trabajo adicional  con respecto a \nlas extensiones del tramo siempre considerado. \n \nDel mismo modo, las alternativas de trazado que des de el inicio puedan definirse como \nnecesarias, tendrán sus extensiones aumentadas en l as cantidades estimadas en las partidas \nrespectivas, Cuando se considere que determinados t rabajos, estudios o proyectos ya realizados \npuedan aprovecharse, se hará la consiguiente dismin ución en la extensión para las partidas de \ntrabajo que fuesen afectadas. \n  \nEn el caso de que se modifique para todas o algunas partidas la extensión o kilometraje publicado \noriginalmente por la Comisión de Concursos de la Se cretaría de Estado de Obras Públicas, el \nconsultor deberá incluir en su propuesta una justificación de dicha modificación. \n \n \n ",
+      "text_sha256": "a86e649de8a41316e1f542a6e976c97b0f55621d92ff968821848ca0521f17b2",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 52,
+      "printed_page": null,
+      "text": " 49  \ne) Porcentaje del Costo total \n \nLa columna relativa a dicho porcentaje se llenará c on los valores determinados en la última \ncolumna del cuadro “Composición del valor Ofertado y Costo por Partida de Trabajo. ",
+      "text_sha256": "ec18062b98bf6e743c7cd862eb43c1b9450f853424f491b3d44d4c7fca978b11",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 53,
+      "printed_page": null,
+      "text": " 50  \nCUADRO T-3 \n \n                                                                          CUADRO GENERAL \n \n \n \nNOMBRE DE LA FIRMA: \n \n \n \nCARRETERA O TRAMO:       Tramo No.                      Concurso No. \n        Cuadro de             \n       Cantidades  \n \n                     Hoja            De \n \nCÓDIGO: \n     \n \n \n                              Fecha \n                                  \nCÓDIGO DESCRIPCIÓN UNIDAD CANTIDAD % del Costo Total \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n   \n \n \nT-3 ",
+      "text_sha256": "fb01767079f4bc7f5bd87f2715567fa6a179a71e4f4b426abab2ace894c7c86b",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 54,
+      "printed_page": null,
+      "text": " 51  \n5.4.4 Cuadro de Cantidades T-4: “Estudio de Tráfico ” \n \n5.4.4.1 Objetivo \n \nDefinir los trabajos previstos de estudios de tráfi co, sus cantidades, unidades y los porcentajes de \nsus costos en relación a los costos totales de la partida de trabajo y del proyecto total. \n \n5.4.4.2 Instrucciones \n \na) Transcripción de lo especificado en el cuadro de  cantidades T-3, “Cuadro General”, en lo \nreferente a la partida de Estudio de Tráfico. \n \nb) Para las fases de los estudios previstos en el P lan de trabajo, definición de las cantidades, \nunidades y sus respectivos costos en porcentajes del costo total de la partida de partida. \n \nc) Definición de los puestos previstos de conteo, t anto de volúmenes, como de origen y destino, \ncon el número de puestos, los días de conteo y número de horas de funcionamiento, así como con \nlos porcentajes respectivos de sus costos en relación al costo total de la partida. \n \nd) Definición de otros trabajos de campo con los po rcentajes respectivos de sus costos en \nrelación al costo total de la partida. \n \ne) Tanto éste como los siguientes cuadros de cantid ades se llenarán cuando el proyecto así lo \nrequiera. La forma de llenarlos será de acuerdo al alcance de los trabajos y al plan de trabajo \npropuesto. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "2875d02a26ab96899aeba88abbc9ddf82f7b4daa12b0ae25da4a55cbca11790c",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 55,
+      "printed_page": null,
+      "text": " 52  \nCUADRO T- 4 \n                                           \n                                               ESTUDIO DE TRÁFICO \n        \n \n \nNOMBRE DE LA FIRMA: \n \n \n \nCARRETERA O TRAMO:          Tramo No.                  Concurso No.       \nNo. \nCuadro de                                                        \nCantidades \n \n                 Hoja               De \n \nCÓDIGO: \n \n \n \n                              Fecha \nCÓDIGO DESCRIPCIÓN UNIDAD CANTIDAD % del Costo Total \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n    \n \nT-4 ",
+      "text_sha256": "e9bf633928360c6778a51a35786473ee4bc2d9daf7e062fdaea2983ad13ac6d2",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 56,
+      "printed_page": null,
+      "text": " 53  \n5.4.5 Cuadro de Cantidades T-5: “Estudios Topográfi cos”. \n \n5.4.5.1 Objetivo  \n \nDefinir los trabajos a ejecutar en las diferentes f ases del proyecto de estudios topográficos, por \ntopografía convencional o aerofotogrametría, con la s cantidades respectivas, las unidades y sus \ncostos expresados en porcentajes de los costos tota les de la partida de trabajo y del proyecto \ntotal. \n \n5.4.5.2 Instrucciones \n \na) Transcripción de lo especificado en el cuadro de  cantidades T-3, “Cuadro General”, en lo \nreferente a la partida de Estudios Topográficos. \n \nb) Para las fases de los estudios previstos en el P lan de Trabajo, definición de las cantidades, \nunidades y sus respectivos costos en porcentajes del costo total de la partida. \n \nc) Definición de las tareas principales para cada f ase de acuerdo a lo señalado en el Plan de \nTrabajo, con cantidades, unidades y sus respectivos  costos en porcentajes del costo total de la \npartida. \n \nSe incluirán todos los trabajos topográficos necesa rios para lo siguiente: estudios de trazado, \nproyectos geométricos, de terraplén, de pavimentaci ón, drenaje, obras de arte, expropiación, \nintersecciones y otros. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "5452a6f96fdd9625ee4a46b6137459508705d943216b2cc6e15fb8ad94796349",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 57,
+      "printed_page": null,
+      "text": " 54  \nCUADRO T- 5 \n                                             \n                                                            ESTUDIOS TOPOGRÁFICOS \n \n \n \nNOMBRE DE LA FIRMA: \n \n \n \nCARRETERA O TRAMO:            Tramo No.               Concurso No.  \n                  CUADRO             \n \n               \n                   Hoja              De \n \n   CÓDIGO: \n \n \n \n                               Fecha \nCÓDIGO DESCRIPCIÓN UNIDAD CANTIDAD % del Costo Total \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n    \n \nT-5 ",
+      "text_sha256": "e78995b3b6d77c5ccb4727ecebc8064f27d2ce9488fe7cd908caedf1dfc24262",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 58,
+      "printed_page": null,
+      "text": " 55  \n5.4.6 Cuadro de Cantidades T- 6: “Estudios Geotécni cos” \n \n5.6.6.1 Objetivo \n \nDefinir los trabajos a ser ejecutados en las difere ntes fases del proyecto de estudios geotécnicos, \ncon sus respectivas cantidades, unidades y sus cost os expresados en porcentajes de los costos \ntotales de la partida de trabajo y del proyecto total. \n \n5.4.6.2 Instrucciones  \n \na) Transcripción de lo especificado en el Cuadro de  cantidades T-3, “Cuadro General”, en lo \nreferente a la partida de Estudios Geotécnicos. \n \nb) Para las fases de los estudios previstos en el P lan de Trabajo, definición de las cantidades, \nunidades y sus respectivos costos en porcentajes del costo total de la partida. \n \nc) Definición de las tareas principales para cada f ase, conforme es requerido por el Plan de \nTrabajo, y las metodologías a ser adoptadas, con ca ntidades, unidades y sus respectivos costos \nen porcentajes del costo total de la partida. \n \nSe incluirán todos los trabajos de campo y los ensa yos necesarios para los estudios del suelo de \nfundación, de las minas (yacimientos), de la invest igación geológica, de la estabilidad de taludes, \nde las fundaciones de relleno, de las obras de arte y otros. \n \nLos ensayos realizados en conjunto para un mismo ma terial podrán agruparse en una sola \ndenominación. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "07734252fc4f3238ecb873baca9abef8c276b06f63ac5ac6de2dcc3f208bb1cf",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 59,
+      "printed_page": null,
+      "text": " 56  \nCUADRO T- 6 \n                                                           \n                                                           ESTUDIOS GEOTÉCNICOS  \n \n \n \nNOMBRE DE LA FIRMA: \n \n \n \nCARRETERA O TRAMO:           Tramo No.                Concurso No.      No. \n \n \n \n \n                Cuadro de             \n               Cantidades \n \n                    Hoja             De \n \n  CÓDIGO: \n \n \n \n                      Fecha \nCÓDIGO DESCRIPCIÓN UNIDAD CANTIDAD % del Costo  Total \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n    \n \nT-6 ",
+      "text_sha256": "c2e5a2e40e3cb5ad5e881389e590fe6394d216ead3f48b18bc50e71b0fa5f259",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 60,
+      "printed_page": null,
+      "text": " 57  \n5.4.7 Cuadro de Cantidades T-7: “Proyecto de Inters ecciones, Accesos y Retornos. \n \n5.4.7.1 Objetivo \n \nDefinir los trabajos previstos para el Proyecto de Intersecciones, Accesos y Retornos con las \nunidades y cantidades de las tareas propuestas y su s costos unitarios expresados en porcentajes \ndel costo total de la partida. \n \n5.4.7.2 Instrucciones  \n \na) Transcripción de lo especificado en el Cuadro de  Cantidades T-3, “Cuadro General”, en lo \nreferente al Proyecto de Intersecciones, Accesos y Retornos. \n \nb) Definición de las cantidades estimadas de las ne cesidades del proyecto de intersecciones, \nespecificando el número de niveles (uno o más), acc esos e intersecciones con sus respectivos \ncostos en porcentajes del costo total de la partida. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "4e6157405ff02bbcfae60734fb1d943c6c2db3772cc1e3351ac7bb6780b70c49",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 61,
+      "printed_page": null,
+      "text": " 58  \nCUADRO T- 7 \n                                          \n                                                       PROYECCIONES DE INTERSECCIONES, \n                                           ACCESOS Y RETORNOS.  \n \n \nNOMBRE DE LA FIRMA: \n \n \n \nCARRETERA O TRAMO:             Tramo No.                Concurso No. \n \n \n \n \n     Cuadro de             \n     Cantidades \n \n                  Hoja              De \n \n   CÓDIGO: \n \n \n     \n                                  Fecha \nCÓDIGO DESCRIPCIÓN UNIDAD CANTIDAD % del Costo  Total  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n    \n \nT-7 ",
+      "text_sha256": "f79372318d4618ec18a546fa1c277e5827d80f87f5d0a3dbb99490a0f8dc3fd0",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 62,
+      "printed_page": null,
+      "text": " 59  \n5.4.8 Cuadro de Cantidades T- 8: “Proyectos de Obra s de Artes Especiales” \n \n5.4.8.1 Objetivo \n \nDefinir los trabajos previstos para el Proyecto de Obras de Arte Especiales y las condiciones de \naprovechamiento de las obras existentes, con las un idades y cantidades de las tareas propuestas \ny sus costos unitarios expresados en porcentajes del costo total de la partida. \n \n5.4.8.2 Instrucciones \n \na) Transcripción de lo especificado en el Cuadro de  Cantidades T-3, en lo referente al Proyecto \nde Obras de Artes Especiales. \n \nb) Definición de las tareas relativas a la inspecci ón, el examen del proyecto y las conclusiones \nsobre las condiciones y aprovechamiento de las obra s existentes, incluyendo el número de obras \na examinar (con su unidad y cantidad), indicando los metros lineales y los cuadrados. \n \nc) Definición de aquellas cantidades estimadas como  necesarias en los proyectos para la \nrestauración, el refuerzo o la ampliación de las obras existentes. Dichas cantidades se expresarán \ncon las mismas exigencias ya señaladas en la letra b). \n \nd) Definición de las cantidades estimadas como nece sarias en los proyectos nuevos, cumpliendo \nlas mismas exigencias ya señaladas en las letras b) y c). \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "8692fcef01d7813aa53c3eb608554570af8db7567c3157740200a8f03dee5752",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 63,
+      "printed_page": null,
+      "text": " 60  \nCUADRO T- 8 \n                                       \n                                                   PROYECTO DE OBRAS DE ARTE ESPECIALES.  \n \n \n \nNOMBRE DE LA FIRMA: \n \n \n \nCARRETERA O TRAMO:       Tramo No.                    Concurso No.  \n \n \n \n \n                 Cuadro de             \n               Cantidades \n \n                      Hoja           De \n \n   CÓDIGO: \n \n \n \n                                       Fecha \nCÓDIGO DESCRIPCIÓN UNIDAD CANTIDAD % del Costo Total \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n    \nT-8 ",
+      "text_sha256": "0d163930a24b7d93fbec30c2c2912e80b513bab76bbe281da413dc16bb2da4cf",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 64,
+      "printed_page": null,
+      "text": " 61  \n5.4.9 Cuando de Cantidades T-9: “Proyecto de Instal aciones para Operación de la \nCarretera.” \n \n5.4.9.1 Objetivo \n \nDefinir los trabajos previstos de instalaciones, co n las cantidades y unidades y sus respectivos \ncostos expresados en porcentajes de los costos totales del proyecto y de la partida de trabajo. \n \n5.4.9.2 Instrucciones \n \na) Transcripción de lo especificado en el Cuadro de  Cantidades T-3, “Cuadro General”, en lo \nreferente al proyecto de Instalaciones para Operación de la Carretera. \n \nb) Se hará un listado de los principales trabajos p revistos en la partida, con sus respectivos \ncostos, así como también las construcciones civiles , y la preparación de proyectos para \nrecreación, reposo, miradores, estacionamiento, puestos de policía, de balanzas y de peaje. Para \ncada tarea, se definirá su respectivo costo expresado en porcentaje del costo total de la partida. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "932eab56b5955c2557473a47cc0b3570ddc89f66dab6ca26beafd990c8909ab6",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 65,
+      "printed_page": null,
+      "text": " 62  \nCUADRO T-9 \n \n                                            PROYECTO DE INSTALACIONES PARA \n                                             OPERACIÓN DE LA CARRETERA.  \n \n \nNOMBRE DE LA FIRMA: \n \n \n \nCARRETERA O TRAMO:              Tramo No.             Concurso No.  \n \n \n \n \n              Cuadro de             \n            Cantidades \n \n                       Hoja          De \n \n  CÓDIGO: \n \n \n \n                                Fecha \nCÓDIGO DESCRIPCIÓN UNIDAD CANTIDAD % del Costo Total \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n    \nT-9 ",
+      "text_sha256": "b2eb064c14bd89c8bdd6f1fba45be77ef0a16c9922bd5232f8545ef5003858e8",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 66,
+      "printed_page": null,
+      "text": " 63  \n5.5 Propuesta Económica \n \nA continuación se presentan los modelos de los cuad ros y las instrucciones a utilizar en la \nPropuesta Económica. \n \n \n5.5.1 Cuadro E-1: “Salarios del Personal por Partid a de Trabajo.” \n \n5.5.1.1 Objetivo \n \nObtener los salarios correspondientes a los diferen tes niveles del personal y el costo de salarios \npor partida de trabajo. \n \n5.5.1.2 Instrucciones \n \na) Se presentarán los niveles salariales mensuales para cada nivel del personal. \n \nb) Se presentarán los valores unitarios de los viaj es y dietas. \n \nc) Para cada partida de trabajo definida en el cuad ro “Cronograma General”, se presentarán, en \nel mismo orden y adaptados al mismo código, las can tidades de hombre/mes de cada nivel \nfuncional, multiplicadas por el salario mensual del nivel. \n \nd) Se calcularán los totales de las líneas que sumi nistran el costo de salario por partida y el de \nlas columnas, cuyo total suministrará los salarios totales por nivel. La suma de la columna final y \nde la línea final suministrará el total previsto de los salarios. \n \ne) El valor de los viajes y dietas se calculará del  mismo modo explicado en la letra “d” y se \ndeterminarán también sus valores totales. \n \nf) Las hojas necesarias se numerarán en orden ascen dente, definiendo el número de hojas y el \ntotal de hojas utilizadas. ",
+      "text_sha256": "6ac534366d63573c5125e5ac1118d88a3ee4b1d7f27fa5c55241a5baca670698",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 67,
+      "printed_page": null,
+      "text": " 64  \n \n                                            SALARIOS DEL PERSONAL POR PARTIDA DE TRABAJO  \n \nNOMBRE DE LA FIRMA: CÓDIGO \n  \n \n \nCARRETERA O TRAMO:                                                                                                            Tramo No. \n                                                   CUADRO  \n                    \n \n                                                         HOJA           DE \n \n \n                        \n                     Concurso No.                                    Fecha \nSALARIOS DEL PERSONAL \nNivel C-1 0 11 12 13 14 T0 T1 T2 T3 T4 A0 A1 A2 A3 A4 TOTAL Partida de Trabajo  \nSalario/Mes                 \nNo.de \nViajes \nNo. de \nDietas \nH/Mes                    \nRD$                   \nH/Mes                    \nRD$                   \nH/Mes                    \nRD$                   \nH/Mes                    \nRD$                   \nH/Mes                    \nRD$                   \nH/Mes                    \nRD$                   \nH/Mes                    \nRD$                   \nH/Mes                    \nRD$                   \nH/Mes                    \nRD$                   \nH/Mes                    \nRD$                   \nH/Mes                    \nRD$                   \nH/Mes                    \nRD$                   \nH/Mes                   TOTALES \nRD$                   \nE-1 \nCUADRO E  - 1 \n64 ",
+      "text_sha256": "be6c2fd3dbde72eee6b4633e85777eb97f5236cd2b1e3b3b4f9979e836859856",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 68,
+      "printed_page": null,
+      "text": " 65  \n5.5.2 Cuadro E- 2: “Composición del Valor Ofertado y Costo Total por Partida de \nTrabajo.” \n \n5.5.2.1 Objetivo \n \nObtener el costo total, el porcentaje de cada partida de trabajo en relaci ón al costo total de \nlos trabajos y el valor total ofertado. \n \n5.5.2.2 Instrucciones \n \na) Se presentarán las partidas de trabajo de acuerd o al orden y codificación definidos en \ncuadros anteriores. \n \nb) Se presentará el salario del personal y los gast os reembolsables de viajes y dietas de acuerdo \na lo determinado en el cuadro E-1. \n \nc) Se presentarán para cada partida de trabajo, los  gastos reembolsables referentes a utilización \nde equipos, procesamiento electrónico de datos, tra bajos gráficos, servicios especiales y gastos \ngenerales de acuerdo a la propuesta económica. \n \nd) Se definirá el subtotal de gastos reembolsables por partida. \n \ne) Se definirá el costo total de los gastos directo s por partida (sumándose el subtotal de gastos \nreembolsables y los salarios) \n \nSe definirán los costos de beneficios sociales, gas tos operacionales, beneficios y administración \nde gastos reembolsables. \n \nf) Se calculará el costo total de cada partida, el costo total del trabajo y el porcentaje de este \ncosto para el costo de cada partida de trabajo (est os últimos valores serán transcriptos en los \ncuadros de cantidades). \n \ng) Se calcularán todos los totales de las columnas.  \nEl valor total ofertado será el resultado de la sum a de la columna “Costo Final por partida de \nTrabajo”. \n \n \n \n ",
+      "text_sha256": "70408c4805714dedd2ec0ef83e7c3678794b86717e85b61c6326d7e016afc47e",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 69,
+      "printed_page": null,
+      "text": " 66  \n \n                                                                                                                                                                                 CUADRO  No. \nCOMPOSICIÓN DEL VALOR OFERTADO \nY COSTO TOTAL POR PARTIDA DE TRABAJO \n                                                                                                                                                                                                                   HOJA               DE \nNOMBRE DE LA FIRMA CÓDIGO \n \n \nCARRETERA O TRAMO       Tramo No.      Concurso No.                      Fecha \n \n \nCOSTOS DIRECTOS  \nCOSTOS REEMBOLSABLES \nCOSTOS INDIRECTOS \nBeneficios \nSociales \nCostos de \nOperación \nBeneficios \nAdm.de Costos \nReembolsables  \n \nPARTIDA DE TRABAJO \nSALARIOS \nVIAJES \nDIETAS \nEquipos y \nVehículos \nProc. De Datos \nTrabajos Gráficos \nServicios \nEspeciales \nGastos Generales \nSUB-TOTAL \nTOTAL \n% % %  % \nTOTAL \nCOSTO FINAL  \nPOR PARTIDA  \nDE TRABAJO \nPORCENTAJE  \nDEL COSTO FINAL \n \n \n \n \n \n \n \n \n \n                \n \nTOTALES  \n          \n \n \n \n      \nValor \nTotal \nOfertad o \nE-2 \nCUADRO E -2 \n66  ",
+      "text_sha256": "552b1cf3fe8a8b2c6aac57fe570c1be3d2839f25bc1cb592472cf2d2c7b2948b",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 70,
+      "printed_page": null,
+      "text": " 67  \n5.5.3 Cuadro E- 3: “Costos Unitarios” \n \n5.5.1.3 Objetivo \n \nObtener el costo unitario para cada partida de trabajo especificando su uso cuando sea necesario. \n \n5.5.3.2 Instrucciones \n \na) Se llenará un número de cuadros igual al requeri do en la propuesta técnica, los cuales \ntendrán el mismo orden ascendente. \n \nb) La única diferencia entre los cuadros de la prop uesta técnica y los de la económica será la \nque se refiere a la columna del costo unitario. \n \nc) El costo unitario siempre corresponderá el costo  en la unidad del trabajo propuesto. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "c958336fda81102c8a12d98ffe303881913c4533d1c7a82001fd984234e1ee4c",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 71,
+      "printed_page": null,
+      "text": " 68  \nCUADRO E-3 \n \n                                                  COSTOS UNITARIOS  \n \n \nNOMBRE DE LA FIRMA:                                                                                        \n \n \n \nCARRETERA O TRAMO:       Tramo No.                    Concurso No.    \n                CUADRO         \n \n \n                      Hoja            De  \n  CÓDIGO:  \n \n \n               \n                                 Fecha \nCÓDIGO DESCRIPCIÓN UNIDAD % del Costo Total \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n   \nE-3 ",
+      "text_sha256": "9f52fb99834b6fb8d4e8962787d68923c43f1dbb431a493cb20eb01910dd77c9",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 72,
+      "printed_page": null,
+      "text": " 69  \nANEXO \n \n1 CODIFICACIÓN A UTILIZAR \n \n1.1 Generalidades  \n \nLa siguiente codificación propuesta se utilizará en  la medida en que se haga necesaria. A falta de \ncódigo para cualquier trabajo requerido, deberá proponerse un nuevo código. \n \nLos mismos trabajos deberán corresponder a los mismos códigos en cualquier cuadro. \n \n \n1.2 Códigos a utilizar en las Propuestas  Técnica y  Económica. \n \n1.2.1 Partidas de Trabajo . \n______________________________________________________________________________ \nINTERPRETACIÓN                  CÓDIGO  \n \n1.2.1.1 Coordinación del Proyecto   000 \n1.2.1.2 Estudios de Tráfico   010 \n1.2.1.3 Estudios de Transporte   020 \n1.2.1.4 Inventario Vial   030 \n1.2.1.5 Planes funcionales de circulación y señaliz ación  040 \n1.2.1.6 Estudio tipo PACS (programa para el aumento  de la  \n  capacidad y seguridad).   050 \n1.2.1.7 Estudios Preliminares de Ingeniería   060 \n  a) Estudios de Alternativas   061 \n  b) Evaluación de Alternativas   062 \n1.2.1.8 Evaluación de la Viabilidad Económica   070  \n  a) Definición y Cálculo de los Beneficios   071 \n  b) Definición y Cálculo de los Costos   072 \n  c) Comparaciones Beneficios/Costos   073 \n1.2.1.9 Estudios de Impacto sobre el Medio Ambiente    080 \n1.2.1.10 Programación de Proyectos y Obras   090 \n   a) Programa de Prioridades    091 \n   b) Análisis Financiero   092 \n   c) Programa de Implantación                                                                  093 \n1.2.1.11 Estudios Geológicos y Geotécnicos   100 \n   a) Fase Preliminar   101 \n   b) Anteproyecto   102 \n   c) Fase Definitiva   103 \n1.2.1.12 Estudios Hidrológicos y Drenaje     110 \n   a) Fase Preliminar     111 \n   b) Anteproyecto de Drenaje     112 \n   c) Proyecto Final de Drenaje     113 \n \n ",
+      "text_sha256": "2a6c6735f21f1f94024c9b858b19c58aebccd65c5d8d2c23771435dfcd608ff0",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 73,
+      "printed_page": null,
+      "text": " 70  \n______________________________________________________________________________  \nINTERPRETACIÓN                                                                                                CÓDIGO            \n \n1.2.1.13 Estudios y Levantamientos Topográficos     120 \n   a) Levantamiento para Fase Preliminar     121 \n   b) Anteproyecto     122 \n   c) Levantamiento para Fase de Proyecto     123 \n1.2.1.14 Proyecto Geométrico (incluyendo intersecci ones)    130 \n   a) Fase Preliminar      131 \n   b) Anteproyecto     132 \n   c) Proyecto Geométrico Final     133 \n1.2.1.15 Proyecto de Terraplén     140 \n   a) Fase Preliminar     141 \n   b) Anteproyecto     142 \n   c) Proyecto Final o Terraplén     143 \n1.2.1.16 Proyecto de Pavimentación     150 \n   a) Fase Preliminar     151 \n   b) Anteproyecto     152 \n   c) Proyecto Final de Pavimentación     153 \n1.2.1.17 Proyecto de Obras Arte     160 \n   a) Fase Preliminar     161 \n   b) Anteproyecto     162 \n   c) Proyecto Final     163 \n1.2.1.18 Proyecto de Señalización     170 \n1.2.1.19 Proyecto de Obras Complementarias     180 \n1.2.1.20 Proyectos Paisajístico y de Urbanismo     190 \n1.2.1.21 Proyecto de Expropiación (Derecho de Vía)     200 \n1.2.1.22 Proyecto de Iluminación     210 \n1.2.1.23 Proyecto de Instalaciones para Operación d e la Carretera   220 \n1.2.1.24 Presupuesto      230 \n   a) Presupuesto Preliminar     231 \n   b) Presupuesto de Anteproyecto     232 \n   c) Presupuesto Final     233 \n1.2.1.25 Especificaciones     240 \n1.2.1.26 Plan de Ejecución de la Obra     250 \n1.2.1.27 Plan de Supervisión     260 \n1.2.1.28 Documentos para Licitación     270 \n1.2.1.29 Administración     280 \n \n1.2.2 Niveles Funcionales   \n \n1.2.2.1  Consultor Especial     C \n1.2.2.2  Gerentes Técnicos y Encargados de División  Técnica    I 0 \n1.2.2.3  Encargados de Sección     I 1 \n1.2.2.4  Jefe de Equipo o Grupo     I 2 \n \n \n ",
+      "text_sha256": "a402d5955595cc62c995ce79d470ffba50563062a434035eb6fd59d711e0ce3f",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 74,
+      "printed_page": null,
+      "text": " 71  \n______________________________________________________________________________ \nINTERPRETACIÓN                                                                                                 CÓDIGO  \n \n1.2.2.5  Ingeniero de Equipo (con experiencia)     I3 \n1.2.2.6  Miembro de Equipo (Principiante)     I 4 \n1.2.2.7  Jefe de Topografía, Dibujante-Jefe, Labora torista-Jefe,  \n   Auxiliar Técnico (Formado por Escuelas Técnicas)     T 0 \n1.2.2.8  Operador de Instrumentos, Dibujante, Labor atorista \n   Especializado.     T 1 \n1.2.2.9  Auxiliar de Topografía, Dibujante, Laborat orista     T 2 \n1.2.2.10  Auxiliar de Cálculo, Auxiliares Diversos     T 3 \n1.2.2.11  Trabajador (Obrero o Peón)     T 4 \n1.2.2.12  Gerente Administrativo, Abogados, Auditor es     A 0 \n1.2.2.13  Jefe de Oficina, Contadores, Secretario E jecutivo    A 1 \n1.2.2.14  Secretaria, Oficinista     A 2 \n1.2.2.15  Mecanógrafo, Archivista, Chofer     A 3 \n1.2.2.16  Conserje, Mensajeros, Serenos     A 4 \n \n______________________________________________________________________________ \nINTERPRETACIÓN                                                       UNIDAD                            CÓDIGO  \n \n1.2.3  Trabajos Geotécnicos  \n \n1.2.3.1  Sondeo a Pico y Pala (Calicatas)  m    01 \n1.2.3.2  Sondeo a Taladro (sondeo a Mano)  m    02 \n1.2.3.3  Sondeo Rotativo (Sondeo a Rotación)  m    03 \n1.2.3.4  Sondeo a Percusión  m    04 \n1.2.3.5  Sondeo Mixto   m    05 \n1.2.3.6  Prospección Sísmica  m    06 \n1.2.3.7  Prospección Eléctrica (Resistividad Eléctr ica)  km    07 \n1.2.3.8  Penetración Estática (Tubo Shelby,  \n   Muestra Inalterada)  m    08 \n1.2.3.9  Vane Shear Test (Prueba de la Veleta)  ens     09 \n1.2.3.10 Límite Líquido  ens    10 \n1.2.3.11 Límite Plástico   ens    11 \n1.2.3.12 Granulometría sin sedimentación \n   (Tamizado)  ens    12 \n1.2.3.13 Granulometría con sedimentación \n   (Hidrómetro)  ens    13 \n1.2.3.14 Compactación Standard  ens    14 \n1.2.3.15 Compactación Modificada  ens    15 \n1.2.3.16 CBR-Método DPT-M49/64(Dinámico)  ens    16  \n1.2.3.17 CNR-Método DPT-M-50/64 (Estático)  ens    17 \n1.2.3.18 Humedad Higroscópica (Ensayo de Humedad)  ens    18 \n1.2.3.19 Equivalente de Arena  ens    19 \n1.2.3.20 Masa específica real en gramos de  \n   suelo (Peso Específico)  ens    20 ",
+      "text_sha256": "76ee8f825faf0856ed0cc99976b7cffa2a5c8acffb6d04e3bf3ddb0b2efcb885",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 75,
+      "printed_page": null,
+      "text": " 72  \n______________________________________________________________________________ \nINTERPRETACIÓN                                                       UNIDAD                            CÓDIGO  \n \n1.2.3.21 Densidad “In situ” (Prueba de Densidad de Campo) ens    21 \n1.2.3.22 Compresión simple  ens    22 \n1.2.3.23 Dureza por mojado y secado  ens    23 \n1.2.3.24 Abrasión Los Ángeles (Desgaste)  ens    24  \n1.2.3.25 Dureza de agregado (Ensayo de Inalterabili dad \n   de volumen, prueba de sanidad)  ens    25 \n1.2.3.26 Índice de forma de agregados pétreos  ens    26 \n1.2.3.27 Difracción de Rayos X en Muestra pétrea  e ns    27 \n1.2.3.28 Ensayo de lámina en microscopio polarizado   \n   de muestra pétrea  ens    28 \n1.2.3.29 Cohesión (Comprensión Triaxial)  ens    29  \n1.2.3.30 Corte directo  ens    30 \n1.2.3.31 Contracción  ens    31 \n1.2.3.32 Permeabilidad en Laboratorio  ens    32 \n1.2.3.33 Retiro de la Muestra Inalterada  UD    33 \n1.2.3.34 Retiro de la Muestra de Roca  UD    34 \n1.2.3.35 Retiro de Muestra “Shelby”  UD    35 \n1.2.3.36 Permeabilidad “in situ”  UD    36 \n1.2.3.37 Instalación de Equipos de sondeo a rotació n \n   y  percusión  UD    37 \n1.2.3.38 Otras  UD    38 \n \n1.2.4 Trabajos Topográficos. \n \nIncluye Trabajos de campo, Cálculo de libretas, Dib ujos de secciones y perfiles y Elaboración de \nPlanos Topográficos. \n \n1.2.4.1 Levantamiento Plani-Altimétrico y \n  Catastral de Vías Existentes  km    01 \n1.2.4.2 Exploración Topográfica Plani-Altimétrica \n  (Estudios Preliminares)  km    02 \n1.2.4.3 Lanzamiento de Poligonales  km    03 \n1.2.4.4 Replanteo  km    04 \n1.2.4.5 Implantación de BM  km    05 \n1.2.4.6 Nivelación y Contranivelación de la  \n  Vía Poligonal o Eje  km    06 \n1.2.4.7 Levantamiento de las Secciones \n  Transversales  UD    07 \n1.2.4.8 Amarre de Puntos Críticos  UD    08 \n1.2.4.9 Levantamiento de las Cuencas de Captación \n   Pluviométrica  ha    09 \n1.2.4.10 Levantamiento de las Líneas de recogida de  agua \n   (líneas de cotas más bajas en el fondo de los  \n   valles arroyos y cañadas)  m    10 \n1.2.4.11 Levantamientos Batimétricos  m 2    11 ",
+      "text_sha256": "5d6087d7a81218a1233128e435b80e08b48f3e7f029c6a3ccd33937787b5e93b",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 76,
+      "printed_page": null,
+      "text": " 73  \n______________________________________________________________________________ \nINTERPRETACIÓN                                                       UNIDAD                            CÓDIGO  \n \n1.2.4.12 Levantamientos Plani-Altimétricos de los \n   lugares de Puentes y Viaductos.  m 2    12 \n1.2.4.13 Levantamientos Plani-Altimétricos \n   de los Emboques de los Túneles  m 2      13 \n1.2.5.14 Levantamientos Plani-Altimétricos de Áreas  \n   y Fajas de interés para Proyecto Final  m 2  14 \n1.2.5.15 Levantamiento de los Lugares para \n   Aprovechamiento de Paisaje  m 2  15 \n1.2.5.16 Catastro de las mejoras de las propiedades  \n   particulares existentes en la faja de dominio \n    (derecho de vía incluyendo cálculo y dibujo).             m2  16 \n1.2.5.17 Catastro Geométrico de las áreas de las pr opieda- \n   des particulares dentro  del área del derecho de   \n   vía (Incluyendo cálculo y dibujo).                                 m 2                                      17 \n1.2.5.18 Levantamiento de los lugares de existencia  de \n   yacimientos, préstamos y otros.   m 2         18 \n1.2.5.19 Implantación y Amarre de los Puntos  \n   Notables del Trazado  UD         19 \n1.2.4.20 Replanteo Definitivo de los Ejes  km 2           20 \n \n1.2.5 AEROFOTOGRAMETRÍA  \n \n1.2.5.1 Recubrimiento Aerofotogramétrico en escala \n  1:20,000  km 2 01 \n1.2.5.2 Ídem, en la Escala 1:8,000  km 2 02 \n1.2.5.3 Ídem, en la Escala 1:4,000  km 2 03 \n1.2.5.4 Ídem, en la Escala 1:2,000  km 2 04 \n1.2.5.5 Ídem, en la Escala 1:1,000  km 2 05 \n1.2.5.6 Montaje de Mosaico en la Escala \n  1:20,000  km 2 06 \n1.2.5.7 Ídem, en la Escala 1:8,000  km 2 07 \n1.2.5.8 Ídem, en la Escala 1:4,000  km 2 08 \n1.2.5.9 Ídem, en la Escala 1:2,000  km 2 09 \n1.2.5.10 Ídem, en la Escala 1:1,000  km 2 10 \n1.2.5.11 Montaje de Foto-Índice en la Escala 1:80,0 00  km 2 11 \n1.2.5.12 Ídem, en la Escala 1:32,000  km 2 12 \n1.2.5.13 Ídem, en la Escala 1:16,000  km 2 13 \n1.2.5.14 Ídem, en la Escala 1:8,000  km 2 14 \n1.2.5.15 Copias de las Fotografías en Papel  km 2 15 \n1.2.5.16 Copias del Mosaico  Por copia 16 \n1.2.5.17 Copias del Foto-Índice  Por copia 17 \n1.2.5.18 Obtención de Diapositivas  UD 18 \n1.2.5.19 Poligonal Planimétrica Básica  km 2 19 \n1.2.5.20 Nivelación Básica  km 2 20 \n ",
+      "text_sha256": "a0bdc11fd6982040fd7170347262d13a52b76d4c690267e4eb50997c1509cdf6",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 77,
+      "printed_page": null,
+      "text": " 74  \n______________________________________________________________________________ \nINTERPRETACIÓN                                                       UNIDAD                            CÓDIGO  \n \n1.2.5.21 Apoyo Planimétrico para Restitución  Punto  de \n      Apoyo 21 \n1.2.5.22 Apoyo Altimétrico para Restitución  Punto de  \n      Apoyo 22 \n1.2.5.23 Puntos Aerotriangulados  Punto de \n                                                                                                     Apoyo 23 \n1.2.5.24 Restitución, incluyendo dibujo en papel de   \n   calidad, en la Escala 1:5,000  km 2 24 \n1.2.5.25 Restitución, incluyendo dibujo en papel de   \n   calidad, en la Escala 1:2,000  km 2 25  \n1.2.5.26 Ídem, en la Escala1:1,000  km 2 26 \n1.2.5.27 Impresión Digital del eje de la vía a trav és de \n   equipo fotogramétrico  km 2 27 \n1.2.5.28 Impresión Digital de la Secciones Transver sales \n   a través de equipo fotogramétrico  Por sección 2 8 \n1.2.5.29 Reproducción del mosaico y de la Restituci ón \n   en hojas poliéster tipo “Cronaflez” o similar, \n   tamaño 11” x17” (297 mm x 420 mm)  Hoja 29 \n1.2.5.30 Ídem, tamaño 8 ½” x 11”  Hoja  30 ",
+      "text_sha256": "4b0c6fea926b47a23c8e78ce97c3e44e420f50dc3bc7442f0a9ce581e34c1f24",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    }
+  ]
+}

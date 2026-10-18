@@ -1,0 +1,529 @@
+{
+  "schema": "cdcrd-regulation/1",
+  "source": {
+    "id": "R-012",
+    "title": "Criterios básicos para el diseño geométrico de carreteras",
+    "file": "CARRETERAS/r-012-diseno-geometrico-de-carreteras.pdf",
+    "sha256": "2dd94339ee1e5869bcc20162b9e09edbba803df9c6f053bfe273a261d9f87dcb",
+    "pages": 53,
+    "source_catalog": "https://portalweb.mopc.gob.do/dgrs/reglamentos/",
+    "legal_status": "vigencia_no_evaluada",
+    "document_warning": "La portada indica M-012; se conserva R-012 como identificador del archivo/catalogación local."
+  },
+  "extraction_method": "pypdf text layer + optional local Tesseract OCR on sparse pages",
+  "review_status": "texto_extraido_no_validado_para_calculo",
+  "pages": [
+    {
+      "page_pdf": 1,
+      "printed_page": null,
+      "text": " \n \n \nCRITERIOS  \nBÁSICOS PARA  \nEL DISEÑO  \nGEOMÉTRICO  \nDE CARRETERAS \n \n \nM-012 \n \n \nDGRS \n  Dirección General de Reglamentos y Sistemas \n \n \n \n \nSECRETARIA DE ESTADO  \nDE OBRAS PÚBLICAS  \nY COMUNICACIONES ",
+      "text_sha256": "402a776e81c68879fea4b642195fab426e0a298e37f46e6e2d0617e258c01ac8",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 2,
+      "printed_page": null,
+      "text": " \nREPUBLICA   DOMINICANA \nSECRETARIA DE ESTADO DE OBRAS PÚBLICAS Y COMUNICACIONES \n \n \nJulio de 1982 \n \n \nPRESENTACIÓN \n \nCon la publicación y puesta en vigencia de estos Criterios Básicos para el Diseño  Geométrico \nde Carreteras,  la Secretaría de Estado de Obras Públicas y Comuni caciones se da a sí misma, \npor primera vez, un documento técnico que traza y d efine, de manera organizada y coherente, los \nparámetros más relevantes que inciden en el diseño de un proyecto de carretera.   \n \nEstos Criterios Básicos  serán utilizados no solo en proyectos desarrollado s por la propia \ninstitución, sino que además formarán parte de los documentos contractuales que ampararán a \nproyectos desarrollados por firmas consultoras privadas para el Estado Dominicano. \n \nSe aplicarán tanto a proyectos de carreteras tronca les como a carreteras regionales y locales, \npersiguiéndose en todo momento proporcionar carrete ras seguras, de tráfico cómodo, de aspecto \nagradable y situadas dentro de niveles económicos a daptados a las necesidades reales y a las \ncaracterísticas especificas de la región en particular y del país en general.  \n \nEstos Criterios Básicos para el Diseño Geométrico de Carr eteras , son el resultado del trabajo \ncoordinado de técnicos contratados para la SEOPC de ntro de programas financiados por el Banco \nMundial, los cuales prepararon el borrador inicial apoyados en el personal de la Dirección General \nde Programación de Proyectos, y de técnicos contrat ados dentro del Programa ATN/SF-1914-DR \nfinanciado por el Banco Interamericano de Desarrollo (BID), bajo la coordinación del Departamento \nde Normas, Reglamentos y Sistemas, quienes tuvieron  a su cargo los trabajos de revisión, \nadaptación y preparación de la versión que hoy presentamos.   \n \n \n \n \nING. MIGUEL GIL MEJIA \nSubsecretario de Estado  \nde Obras Públicas y Comunicaciones  \ny  \nDirector del Departamento de Normas, \nReglamentos y Sistemas \n ",
+      "text_sha256": "4acfb0873d7774df532e61f8d0ca74c67194109f295abc6269a08c3bb8f9e67a",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 3,
+      "printed_page": null,
+      "text": " \n \n \n \n \n \n \n \n \n \n \nÍNDICE \n \n                                          PÁG. \n \n1. Consideraciones Generales…………………………………………………………… ……...1 \n \n2. Definiciones…………………………………………………………………………………..... .3 \n \n3. Criterios Generales para el Diseño Geométrico de  una Carretera………………………..5 \n \n4. Velocidad Directriz…………………………………………………………………………… ...7 \n \n5. Distancia de Visibilidad……………………………………………………………… ………...9 \n \n6. Características Geométricas……………………………………………………… …………12 \n \n7. Drenaje………………………………………………………………………………………....39 \n \n \n \n \n \n ",
+      "text_sha256": "f33926c639af482729c428be6706fc2032eb883aa256fae8db1ac7ce88284a7f",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 4,
+      "printed_page": null,
+      "text": " -1- \n1. CONSIDERACIONES GENERALES \n \n1.1 Objetivo \n \nLas presentes recomendaciones tienen como objetivo establecer los criterios básicos para el \ndiseño geométrico de carreteras. \n \n1.2 Campo de Aplicación \n \nSe aplicará a todos los tipos de carreteras de uso público. \nSe exceptúan las calles y avenidas en las ciudades. \n \n1.3 Clasificación de las Carreteras \n \nDe acuerdo a la función que desempeñan, las carreteras se agrupan en redes y se clasifican en: \n \na) Carreteras de la red primaria o troncal  \n \nb)  Carreteras de la red secundaria o regional \n \nc)  Carreteras de la red terciaria o local \n \n1.3.1 Carreteras de la Red Primaria o Troncal   \n \nSon aquellas que unen las regiones extremas del paí s, sirven de recolectoras del tráfico de las \nregiones adyacentes a ellas y están destinadas, sobre todo, al tráfico de largos recorridos. \n \n1.3.2 Carreteras de la Red Secundaria o Regional \n \nSon aquellas que enlazan las comunidades de una reg ión, desembocan en carreteras de la red \nprimaria y se destinan a trayectos de alcance medio . En ocasiones comunican comunidades de \nvarias regiones. \n \n1.3.3 Carreteras de la Red Terciaria o Local \n \nSon aquellas que comunican las carreteras secundari as con puntos de difícil acceso, \ngeneralmente de producción agrícola. \n \n1.4 Derecho de Vía* \n \n1.4.1 Ancho del Derecho de Vía  \n \nEl derecho de vía tendrá un ancho que abarcará la s ección transversal completa de la vía, más \ndiez (10) metros a ambos lados de ella. ",
+      "text_sha256": "b6bf716c0786feda2915470d4e7d3c453a3dafe91ce578205e52c060cc21eaef",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 5,
+      "printed_page": null,
+      "text": " -2- \n \nLos diez (10) metros adicionales se miden a partir del borde de los cortes, del pie de los \nterraplenes o de los bordes extremos de las obras de drenaje. \n \n1.4.1.1 Ancho Mínimo del Derecho de Vía \n \nEl ancho mínimo del derecho de vía será el que se establece a  continuación: \n \na) Sesenta (60) metros para carreteras de la red pr imaria o troncal. \n \nb) Cuarenta (40) metros para carreteras de la red  secundaria o regional. \n \nc) Treinta (30) metros para carreteras de la red te rciaria o local. \n \n \n1.4.2 Posición del Eje del Derecho de Vía \n \nEn general, el eje del Derecho de Vía coincidirá co n el eje de la carretera. En los casos en que se \nprevean futuras ampliaciones, el Derecho de Vía deb erá distribuirse en forma conveniente para \nque las futuras ampliaciones utilicen la zona reservada. \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "9cba206f05aa53fd45ea8827fa785ecc794200cb2dc11c202ee7d728a054ad7f",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 6,
+      "printed_page": null,
+      "text": " -3- \n2. DEFINICIONES \n \n2.1 Velocidad Directriz o de Diseño \n \nEs el valor de la velocidad que se escoge para real izar el diseño geométrico de la carretera. \nCorresponde a la máxima velocidad que se podrá mant ener con seguridad sobre la carretera \ncuando prevalezcan las condiciones de diseño. \n \n2.2 Distancia de Visibilidad \n \nEs la longitud continua a lo largo de la carretera,  que es visible al conductor de un vehículo. En el \ndiseño de carreteras se contemplan dos distancias de visibilidad: de parada y de sobrepaso. \n \n2.2.1 De Parada \n \nEs la longitud mínima a lo largo de la carretera, q ue un conductor necesita cuando, viajando a la \nvelocidad directriz, debe detener su vehículo antes  de alcanzar un objeto inmóvil situado en la \ncarretera. \n \n2.2.2 De Sobrepaso o Rebase \n \nEs la longitud mínima requerida para permitir al co nductor de un vehículo sobrepasar a otro que \nviaja en la misma dirección y con una velocidad menor en 15 Km/h. Esta maniobra no debe causar \nalteraciones a un tercer vehículo que viaje en sent ido contrario y a la velocidad directriz. El tercer  \nvehículo se hace visible cuando se ha iniciado la maniobra de sobrepaso. \n \n2.3 Longitud de Transición \n \nEs el tramo de carretera dispuesto entre los tramos  en tangente y las curvas horizontales. Se trata \nde una transición para que el cambio entre la tange nte y la curva se haga de modo gradual. El \nradio de la transición es variable, siendo infinito  en la tangente, y variando hasta alcanzar el radio  \nde la curva horizontal. \n \n2.4 Peralte \n \nEs la inclinación transversal de la superficie de r odadura en las curvas horizontales. La misma se \nda hacia el lado interior de la curva. \n \n2.5 Sobreancho \n \nAncho adicional que se provee a la superficie de rodadura en las curvas horizontales. \n \n \n ",
+      "text_sha256": "6919815b21d484a0ac470afbe23bce92c31a31ea548f3bb17332d5808f85b631",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 7,
+      "printed_page": null,
+      "text": " -4- \n2.6 Banquetas de Visibilidad \n \nCorte adicional que se hace al terreno en el lado i nterior de las curvas horizontales para garantizar \nque se cumpla la distancia de visibilidad de parada a todo lo largo de ella. \n \n2.7 Curvas Reversas \n \nSon dos curvas consecutivas que giran en dirección contraria. \n \n \n2.8 Bombeo \n \nInclinación transversal de las secciones en tangent e de la carretera las cuales se dan desde el eje \nde la superficie de rodadura hacia los bordes. \n \n \n2.9 Derecho de Vía  \n \nÁrea de terreno de propiedad estatal que ocupan u o cuparán la carretera y sus obras \ncomplementarias. \n \n \n2.10 Tránsito Medio Diario Anual (T. M. D. A.) \n \nEs el valor resultante de dividir la totalidad del tránsito vehicular durante el año entre 365. \n \n \n2.11 SEOPC \n \nSecretaría de Estado de Obras Públicas y Comunicaciones. \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "2e58eed3455c32fa91c748040ce4b588c5834c7c14b88ae3ae792d67e899d2e8",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 8,
+      "printed_page": null,
+      "text": " -5- \n3. CRITERIOS GENERALES PARA EL DISEÑO GEOMÉTRICO DE  UNA CARRETERA \n \nEn la ejecución del diseño geométrico de una carret era existen una serie de factores \ndeterminantes que, aplicados correctamente en el di seño, proporcionan carreteras seguras, de \ntráfico cómodo y aspecto agradable. \n \nEn este capítulo se presentan esos factores determi nantes. Los mismos no proporcionan rangos \npara los valores de las características geométricas de la carretera, sino que dan criterios generales \nal diseñador para la concepción del proyecto. \n \nEn los capítulos siguientes de estas recomendacione s se dan los rangos permitidos, así como las \nexcepciones, para los valores de los parámetros que  determinan las características geométricas \nde la carretera. \n \n \n3.1 Factores Determinantes para la Alineación Horiz ontal \n \na) La alineación será tan directa como sea posible,  pero se ajustará a la topografía del   terreno.  \n \nb) En general, el número de curvas se reducirá al m ínimo. \n \nc) Se evitará el uso de la máxima curvatura corresp ondiente a una velocidad dada. Se tratará de \nutilizar curvas abiertas, usando las más pronunciadas para las condiciones más críticas. \n \nd) Debe evitarse cambios bruscos de alineación: \n \n1) No deberán introducirse curvas pronunciadas al final de largas tangentes. \n \n2) Se evitarán cambios bruscos de tramos con curvat ura abierta a otros con curvatura \npronunciada. \n \n3) Donde haya que introducir curvas pronunciadas, l a aproximación desde la zona de \ncurvatura abierta se hará por medio de curvas con r adio variable. El radio irá \ndisminuyéndose hasta alcanzar el radio de la curva cerrada. \n \n4) Se evitará el uso de curvas reversas pronunciadas. \n \ne) En terraplenes largos y elevados, se evitará tod a curvatura pronunciada. \n \n \n3.2 Factores Determinantes para la Alineación Verti cal. \n \na) Se procurará, en lo posible, conseguir cambios g raduales en el perfil en vez de numerosos \ncambios de rasante. ",
+      "text_sha256": "f26cd89ae66d4816bd03ef3de6c619a8b650b61539379899fcacfd62b20ad190",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 9,
+      "printed_page": null,
+      "text": " -6- \n \nb) Se evitarán las curvas verticales cóncavas pronu nciadas. Este tipo de perfil es desagradable \nestéticamente y peligroso en las maniobras de adelanto. \n \nc) En intersecciones a nivel es aconsejable utiliza r la menor pendiente posible. \n \n3.3 Combinación de Alineación Horizontal y Vertical  \n \nLas alineaciones horizontales y verticales deberán proyectarse en conjunto, ya que ambas se \ncomplementan. \n \nLas consideraciones siguientes proporcionan una bue na combinación de alineación horizontal y \nvertical. \n \na) La planimetría y la rasante deben mantener entre  sí un equilibro apropiado representando \ndeficiencias las combinaciones siguientes: \n \n1) Alineaciones de tangentes de pequeñas curvaturas  a costa de rampas largas o fuertes \nrasantes. \n \n2) Curvaturas excesivas con rasante de pendiente baja. \n \nLa solución apropiada sería una condición intermedi a entre las dos condiciones anteriores, \ndentro de las limitaciones de la topografía. \n \nb) En curvas verticales convexas pronunciadas, no s e utilizarán curvas horizontales. Esta \ncondición resulta peligrosa porque el conductor no puede ver el cambio de alineación \nhorizontal, sobre todo en las noches. Esto puede evitarse si la curvatura horizontal abarca una \nlongitud mayor que la curvatura vertical. \n \nc) No se utilizarán curvas horizontales cerradas en  o cerca de una curva vertical cóncava \npronunciada. Esta disposición produce un aspecto es tético desagradable. Además, las \nvelocidades de los vehículos, especialmente de los pesados, son a menudo elevadas en las \npartes bajas de las curvas verticales. Esto puede p roducir situaciones peligrosas, sobre todo \nde noche. \n \nd) En intersecciones, los vehículos pueden tener qu e frenar o parar, por lo cual, la curvatura \nhorizontal y las pendientes se harán lo menos pronunciadas posible. \n \n \n \n \n \n ",
+      "text_sha256": "65f4eafe45d2357205c7778ddd9a4e30f528a33bc115576985f70a1f50a74669",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 10,
+      "printed_page": null,
+      "text": " -7- \n \n4. VELOCIDAD DIRECTRIZ \n \n4.1 Relación entre la Velocidad Directriz y las Car acterísticas Geométricas \n \nLa velocidad directriz está directamente relacionad a con las condiciones de seguridad de la \ncarretera, y por tanto, se relaciona con las características geométricas de la misma. \n \nEn las presentes recomendaciones, se dan en función  de la velocidad directriz las siguientes \ncaracterísticas geométricas: \n \na) La longitud mínima de las curvas verticales. \n \nb) El radio mínimo en las curvas horizontales. \n \nc) La distancia de visibilidad de parada y la de so brepaso. \n \nd) El valor del peralte y otros. \n \n \n4.2 Elección de la Velocidad Directriz         \n \nEn la elección de la velocidad directriz influyen principalmente:  \n \na) La topografía del terreno. \n \nb) La clasificación de la carretera. \n \nc) El volumen y la clasificación del tránsito que s e espera servir. \n \nd) Consideraciones de carácter económico. \n \nCuando no exista la posibilidad de efectuar un estu dio de factibilidad económica, el valor de la \nvelocidad directriz será establecido por la Direcci ón General de Programación y Proyectos de la \nSEOPC. \n \nEn la Tabla I se presenta, en forma general, una guía para determinar la velocidad directriz, la cual \nestá dada en función de la topografía, el tráfico p romedio diario anual (T.M.D.A) y la clasificación \nde la carretera. \n \n \n \n \n ",
+      "text_sha256": "77d69f51063b134859cb4ae166afb04eda5e60f693c657e53c70c016eb016bfc",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 11,
+      "printed_page": null,
+      "text": " -8- \nTABLA ΙΙ ΙΙ \n \nVALORES DE LA VELOCIDAD DIRECTRIZ \nVELOCIDAD DIRECTRIZ (KM/HORA) \nTRÁFICO PROMEDIO DIARIO ANUAL (T.M.D.A) CLASIFICACIÓN  TOPOGRAFÍA \n< 2000 (* ) >2000 (* ) \nLLANA           80                            100 \nONDULADA           65                              90 PRIMARIA O TRONCAL \nMONTAÑOSA           45                             65 \n  \n<250 (* ) 250-400 (*) >400 (* ) \nLLANA            65           80 80 \nONDULADA            45           65 65 SECUNDARIA O  REGIONAL \nMONTAÑOSA            35           35 45 \n \n <50 (* ) 50-100(* ) 100-250(* ) \nLLANA            35          45            60 \n \nONDULADA            25          30            45 \nTERCIARIA O \n  \nLOCAL  \nMONTAÑOSA            15          20            30 \n \n( *) Promedio Diario Anual del Tránsito Vehicular ( T.M.D.A) \n \n \n \n \n ",
+      "text_sha256": "d20ffa2c83eeefe427d36f849faabe6e32db3d5af9353a41c61ad4970a143200",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 12,
+      "printed_page": null,
+      "text": " -9- \n5. DISTANCIA DE VISIBILIDAD  \n \nLa distancia de visibilidad es de vital importancia  para la seguridad del usuario en la carretera y \npara la eficiente operación de la misma. La segurid ad dependerá de la distancia que el diseño \nprovea para que el conductor pueda controlar su veh ículo en caso de producirse algún obstáculo \nen la carretera y para poder sobrepasar a otro vehículo con seguridad. \n \n \n5.1 Distancia de Visibilidad de Parada \n \nLa distancia de visibilidad de parada es función de  la velocidad directriz y del coeficiente de \nfricción. La Figura 1 muestra los valores mínimos d e la distancia de visibilidad de parada en \nfunción de la velocidad directriz, para pendientes de + 6% y    -6%. \n \nPara la confección de la Figura 1 se tomaron valore s conservadores del coeficiente de fricción \ncorrespondientes a pavimentos mojados. La Tabla 2 m uestra los valores redondeados de la \ndistancia de visibilidad de parada. \n \nTABLA 2 \nDISTANCIA DE VISIBILIDAD DE PARADA (METROS) (Dp) \nVelocidad Directriz (Km/hr.)            30        40        50        60        70         80         90       100 \n \nPendiente 0%                                  30        45        60        75        95        115      135       160 \n \nPendiente -6%                                 35        50        65        85      105        125      155       185 \n \nPendiente +6%                                30         40       55        70        85        100      120       145 \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "11d06974eb9165fdf25a30ec72357e362c64280a7d35a712f59bcb4fc085184b",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 13,
+      "printed_page": null,
+      "text": " -10- \n \n \n \n \n \n \n5.2 Distancia de Visibilidad de Sobrepaso \n \nLa distancia de visibilidad de sobrepaso es función de la velocidad directriz. \nLa Figura 2 muestra un gráfico donde se dan los val ores mínimos de la distancia de visibilidad de \nsobrepaso en función de la velocidad directriz. \n \nSe recomienda proveer en la mayor longitud posible de la carretera las distancias de visibilidad de \nsobrepaso mostradas en la Figura 2; pero, para cada  tramo de 10Km, deberá asegurarse esta \ndistancia en por lo menos el por ciento indicado en la Tabla 3. \n \n ",
+      "text_sha256": "91da6c798748150e3bd959e0faf85fc56c3866fff4d450fa4becf6093b741258",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 14,
+      "printed_page": null,
+      "text": " -11- \nTABLA 3 \nPARTE DEL PROYECTO QUE ASEGURE LA DISTANCIA DE VISIBILIDAD DE \nSOBREPASO FIJADA DE ACUERDO A LOS VALORES MOSTRADOS EN LA FIGURA 2 \nVelocidad Directriz Km/hora \n \n \nTMDA \n \nHasta 500 \n \n500-2000 \n \n2000-4000 \n30 \n \n \n25% \n40 \n \n \n25% \n \n50% \n50 \n \n \n25% \n \n50% \n60 \n \n \n25% \n \n50% \n70 \n \n \n25% \n \n50% \n \n70% \n80 \n \n \n \n \n50% \n \n70% \n90 \n \n \n \n \n \n \n70% \n100 \n \n \n \n \n \n \n70% \n \n \n \n \n \n ",
+      "text_sha256": "48277839a6e49a6cfac020e4d1c004a6114cad22d7f0cab587f3ef1ed8fb1513",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 15,
+      "printed_page": null,
+      "text": " -12- \n6. CARACTERÍSTICAS GEOMÉTRICAS \n \nLas presentes recomendaciones establecen, en la may oría de los casos, valores mínimos y \nmáximos para las características geométricas de la carretera. Sin embargo, deberán utilizarse las \nmejores características posibles, dentro de los límites razonables de la economía. \n \nLo establecido no bebe ser considerado como algo in flexible; se podrán hacer excepciones pero \néstas deberán tener la previa aprobación de la Dire cción General de Programación y Proyectos de \nla Secretaría de Estado de Obras Públicas y Comunicaciones. \n \n \n6.1 Alineamiento Horizontal \n \n6.1.1 Generalidades \n \nEl alineamiento horizontal de una carretera deberá permitir la operación ininterrumpida de los \nvehículos. \n \nDeberá tratarse de conservar la misma velocidad directriz en la mayor parte posible de su longitud. \n \nLa topografía del terreno es el elemento que más in fluye en la selección, tanto del radio en las \ncurvas horizontales como de la velocidad directriz, ésta, a su vez, afecta la distancia de visibilidad. \n \nEn el trazado deberá buscarse una combinación de ta ngentes y curvas que produzcan un tránsito \nregular a todo lo largo de la carretera. \n \nSe deberá tener en cuenta que tangentes excesivamen te largas agravan el problema del \nencandilamiento nocturno prolongado y la fatiga síquica de los conductores durante el día. \n \nAl término de tangentes largas es evidente que la v elocidad de aproximación de los vehículos es \nmayor que la velocidad directriz. En estos casos, n o será ésta la que determine el valor del radio \nmínimo, sino aquella que razonablemente pueda alcanzarse.   \n \n \n6.1.2 Visibilidad en Planta \n \nEn todos los puntos de las curvas horizontales se p roveerá la distancia de visibilidad de parada. El \ncontrol de este requisito se efectuará mediante la aplicación de lo prescrito en la Sección 6.6. \n \nEl trazado en planta deberá tener en cuenta lo recomendado en la Tabla 3. \n \n \n \n ",
+      "text_sha256": "fbab20d21a7eee01493d9bd4d7587ee4f1f93a1c0cf04124ba5ddd6bba72461a",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 16,
+      "printed_page": null,
+      "text": " -13- \n6.2 Curvas Horizontales  \n \n6.2.1 Radios Mínimos \n \nLos radios mínimos que se utilicen estarán en funci ón de la velocidad directriz, del peralte y del \ncoeficiente de fricción de la superficie de rodadura. \n \nDe acuerdo a investigaciones realizadas, se han est ablecido valores límites, tanto para el peralte \n“e” como para el coeficiente de fricción “f”. Los radios mínimos se determinan utilizando los valores \nmáximos del peralte y un valor del coeficiente de f ricción que tenga en cuenta la seguridad del \ntránsito vehicular. La Tabla 4 nos muestra valores del radio mínimo en función de la velocidad \ndirectriz. \nTABLA 4  \n \nRADIO MÍNIMO DE CURVATURA TENIENDO EN CUENTA VALORE S \nLÍMITES DE “e” Y “f” \nVELOCIDAD \nDIRECTRIZ \nMÁXIMO \ne \nMÁXIMO \nf \nTOTAL \n(e + f) \nRADIO \nMÁXIMO \n48.3 0.06 0.16 0.22   83.23 \n64.4 0.06 0.15 0.21 154.87 \n80.5 0.06 0.14 0.20 253.96 \n96.6 0.06 0.13 0.19 385.06 \n         112.7 0.06 0.12 0.18          553.20 \n48.3 0.08 0.16 0.24   76.22 \n64.4 0.08 0.15 0.23          141.46 \n80.5 0.08 0.14 0.22 231.10 \n 96.6 0.08 0.13 0.21 348.48 \n         112.7 0.08 0.12 0.20 497.87 \n48.3 0.10 0.16 0.26   70.43 \n64.4 0.10 0.15 0.25 130.18 \n80.5 0.10 0.14 0.24  211.58 \n96.6 0.10 0.13 0.23 317.99 \n         112.7 0.10 0.12 0.22 452.74 \n48.3 0.12 0.16 0.28  65.24 \n64.4 0.12 0.15 0.27         120.43 \n80.5 0.12 0.14 0.26         195.43 \n96.6 0.12 0.13 0.25         292.68 \n         112.7 0.12 0.12 0.24         414.94 \n \nNOTA: “e” = Peralte \n “f”  = Coeficiente de fricción \n(*) Tomado de:  Tabla III-6, Pág. 133, A Policy on Geometric Design of Rural Highways, American Association of State Highway Officials \n(AASHTO). ",
+      "text_sha256": "6add0f7d338e6b75ea577a79aa16dcbbbdbd04d48b55a8dcd24428fd3911bc53",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 17,
+      "printed_page": null,
+      "text": " -14- \nLos mismos están dados para valores del peralte del  6% al 12% y coeficientes de fricción entre \n0.16 y 0.12.   \n \nSe recomienda la utilización de peraltes entre 8% y 10%, ya que estos valores proporcionan mayor \nseguridad y confort en la carretera. \n \nEn el deslizamiento de los vehículos interviene el coeficiente de fricción, el cual depende de varios \nfactores entre los cuales los más importantes son: \n \na) Velocidad del vehículo. \nb) Tipo y condición de la superficie de rodadura. \nc) Tipo y estado de los neumáticos del vehículo. \n \nInnumerables investigaciones han mostrado rangos de  los valores máximos del coeficiente de \nfricción permisible a ser utilizados en el diseño d e curvas. El resultado de esas investigaciones se \npresenta en la Figura 3. La misma muestra los valor es máximos seguros del coeficiente de fricción \nrecomendados, en relación a la velocidad de diseño. \n \nFIGURA No.3 \nVALORES MÁXIMOS DEL COEFICIENTE DE FRICCIÓN \nCON RELACIÓN A LA VELOCIDAD DIRECTRIZ \n \n \n(x) Tomado de la figura 3.4, Pág. 439, A. Policy on  Geometric \n Design of Rural Highways (AASHTO). 5ta. Edición.   \n ",
+      "text_sha256": "1c439561462a300f7ecf7b2c3891f1d79fb67554786d0df7aa2b2df23f90bf1f",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 18,
+      "printed_page": null,
+      "text": " -15- \n6.3 Curvas de Transición \n \nEn carreteras con velocidad directriz mayor de 60 K m/h, se intercalarán curvas de transición entre \nlos tramos en tangente y las curvas horizontales. Para ello se utilizarán espirales que se aproximan \na la Clotoide. \n \nEstas curvas de transición deberán usarse cuando lo s radios sean menores a los mostrados en la \nTabla 5, en función de la velocidad directriz. Valo res mayores de radios no requieren curvas de \ntransición. \n \nLas vías con velocidad directriz menor de 60Km/h no requerirán curvas de transición. \n \nTABLA 5 \nRADIOS PARA EL USO DE ESPIRALES \nVelocidad Directriz \nKm/Hr \n \nRadio Mínimo (m) \n \n60 \n70 \n80 \n90 \n                                  100 \n \n *300 \n *500 \n *800 \n                                 *1000 \n                                 *1300 \n \n(*) Valor del radio en metros por encima del cual n o es necesario el empleo de espirales. \n \n6.3.1 Longitud de Transición \n \nLa longitud mínima de transición está dada por la fórmula  \n \ndt \n(da)  x R\nv    L 3=           (1) \nDonde: \n \nV = Velocidad directriz (m/s.) \n \nR = Radio de la curva en el eje (m) \n \ndt \nda = Razón de aumento de la aceleración centrípeta \n \n ",
+      "text_sha256": "eb2bcb500906e0299115804697aa2c573b4b12d625b4d7627d539c0e9cf5b29b",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 19,
+      "printed_page": null,
+      "text": " -16- \nSe recomienda utilizar un valor de 0.5 m/s 3 para la razón de aumento de la aceleración centríp eta, \npero nunca se utilizará un valor mayor de 0.7. La F igura 4 es la solución de la ecuación de la \necuación (1) para diferentes velocidades directrice s y con la razón de aumento de la aceleración \ncentrípeta igual a 0.5 m. \n \n6.4 Peralte  \n \nEn ningún caso se adoptarán longitudes de transición menores de 30 m. Con el fin de contrarrestar \nla acción de la fuerza centrífuga, todas las curvas horizontales serán peraltadas. \n \n \n \n ",
+      "text_sha256": "1d7517122735debec1c64d3a8d6f2165034231323e4a938eb7d015e4bc55871e",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 20,
+      "printed_page": null,
+      "text": " -17- \n6.4.1 Valores del Peralte \n \nEl peralte tendrá como valor máximo normal el 6% y como valor máximo excepcional el 10%. Su \nrelación con los valores de la velocidad directriz y del coeficiente de fricción se muestra en la Tabla \n4. \n \nEn la Figura 5 se muestra el gráfico correspondient e a los valores del peralte en función del radio \nde la curva y de la velocidad directriz. Para la co nfección de la Figura 5 se tomaron valores \nnormales del coeficiente de fricción. \n \n ",
+      "text_sha256": "eda38c7cf7300e7d32e6cc898ff4c76e4a112a6e1a95bde27fe7c8327b0c8087",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 21,
+      "printed_page": null,
+      "text": " -18- \n6.4.2 Giro del Peralte \n \nEl giro del peralte se hará en general alrededor de l eje de la superficie de rodadura. En casos \nespeciales, como en terrenos excesivamente llanos, se puede realizar el giro alrededor del borde \ninterior de la curva cuando se desea levantarla. \n \n6.4.2.1 Peralte de los Paseos. \n \nEl paseo situado en la parte inferior del peralte ( lado interior de la curva), seguirá la inclinación de \néste. \n \nEl paseo situado en la parte superior del peralte s erá, en lo posible, horizontal o con una \ninclinación igual a la del bombeo en sentido contrario a la inclinación del peralte. \n \nDe este modo, las aguas se escurrirán hacia las cun etas y no hacia el pavimento. Estas \ncondiciones se muestran en la Figura 6. La diferenc ia algebraica entre las pendiente transversales \ndel paseo superior y del pavimento no deberá ser mayor de 7%. \n \n \n ",
+      "text_sha256": "514f4c8201c49ef8b170c3c08c302188d0572b37efe25ee8b7560c76d2bbf80d",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 22,
+      "printed_page": null,
+      "text": " -19- \n6.4.3 Transición del Peralte: Longitud* \n \nEl bombeo correspondiente a tramos en tangente vari ará hasta alcanzar el peralte de la curva. \nEsto se hará en el tramo definido como “longitud de transición”. (Ver Figuras 7A y 7B). \n \n ",
+      "text_sha256": "7b9aef120436063d9098e51533f780ed79efc4dbc5894d5f42ce3b9e0a16203e",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 23,
+      "printed_page": null,
+      "text": "FIGURA 7-B*\nTRANSICION DEL PERALTE\nCurvas con Espirales\n\nUNITARIA DESNIVEL MAXIMA RESPECTO DEL EJE\n\nINCLINACION DEL PAVIMENTO (BOMBEO)  b a\n“ \" \" (PERALTE )\nCURVA\nTANGENTE L= LONGITUD DE LA ESPIRAL DE TRANSICION— CIRCULAR\n\n(Ver 5.3.3.3 y 5.3.4.5 )\n\nene +\npor\nEJE DE _ tC MG is a PPP (Y\nROTACION T; a\n_— alo\n\nj\no\nVie\ny\ne\nES\no\nES\nm\n=\n5\nm\nEs\no\nro\n\nTE= TANGENT: - ESPIRAL\nEC= ESPIRAL-CURVA |\n\n—lo\n\nCARRETERAS\nNO DIVIDIDAS\n\n*La Figura 7-B ilustra el procedimiento a seguir para este fin cuando se usan espirales\nde transición,\n\n-20-\n",
+      "text_sha256": "6cd38b8765fbb1a6dd78ee9bc5cf40cd14be03f781fcf111b0a13c819bcfafad",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " -20- \n "
+    },
+    {
+      "page_pdf": 24,
+      "printed_page": null,
+      "text": " -21- \n \nLa variación de la transición no deberá sobrepasar incrementos que afecten la seguridad y el \nconfort del tránsito automotriz. \n \nPara lograr esto, la pendiente longitudinal del borde del pavimento con el eje no deberá exceder de \nlos valores mostrados en la tabla 6. \n \nDe acuerdo a lo expresado, los valores mínimos de l a longitud de transición del peralte serán los \nmostrados en la Tabla 7, dados en función del peral te, el ancho del pavimento y la velocidad \ndirectriz.  \n \nTABLA 6 \nPENDIENTE LONGITUDINAL DEL BORDE DEL PAVIMENTO \nCON EL EJE \nVelocidad K/h 40 60 80 100 \nPendiente \nLongitudinal (%) 0.70 0.60 0.50 0.45 \n \nTABLA 7 \nLONGITUD MÍNIMA DE TRANSICIÓN DEL PERALTE (m) \nPERALTE (%) Velocidad  \n(K/h) \nAncho \n2 Carriles 2 4 6 8 10  \n5.50  8 16 24 31 39 \n6.00  9 17 26 34 43 \n6.50  9 19 28 37 46 40 \n7.00 10 20 30 40 50 \n5.50   9 18 27 37 46 \n6.00 10 20 30 40 50 \n6.50 11 22 32 43 54 60 \n7.00 12 23 35 47 58 \n5.50 11 22 33 44 55 \n6.00 12 24 36 48 60 \n6.50 13 26 39 52 65 80 \n7.00 14 28 42 56 70 \n5.50 12 24 37 49 61 \n6.00 13 27 40 53 67 \n6.50 14 29 43 58 72 100 \n7.00 16 31 47 62 78 \n  \n \n ",
+      "text_sha256": "d5072d3792f499fe1c6ec00af3762e34689c87d2ab2a683d8bdb8ac4f9401cfa",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 25,
+      "printed_page": null,
+      "text": " -22- \n6.5 Sobreancho \n \nLas secciones en curva horizontal deberán ser provi stas de sobreancho. Esto se hace necesario \npara compensar el mayor espacio requerido por los vehículos en las curvas. \n \n ",
+      "text_sha256": "6829be7389e1d9e6252c8c8c38d12513a9e017761dc30f22d966069e59da1b69",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 26,
+      "printed_page": null,
+      "text": " -23- \nEl sobreancho está en función del tipo del vehículo, del radio de la curva y de la velocidad directriz. \n \nLa Figura 8 muestra los valores del sobreancho en l as curvas, dados en función de la velocidad \ndirectriz y radio de la curva. \n \nCuando el sobreancho sea menor de 0.30 m., no será obligatoria su aplicación. \n \nEl sobreancho afectará solamente a la superficie de  rodadura y deberá seguir la misma inclinación \ndel peralte, permaneciendo inalterables las dimensiones y la inclinación de los paseos. \n \nEl sobreancho se adicionará íntegramente al lado in terior de la curvar, si no está provista de \nespirales de transición. \n \nLa Figura 9-A muestra el procedimiento a seguir en ese caso. Si las curvas poseen espirales de \ntransición, el sobreancho se adicionará a ambos lados del pavimento. El procedimiento a seguir en \neste caso se muestra en la Figura 9 B. \n \n \n \n \n ",
+      "text_sha256": "d17a97e404589c08b78d217858d44ca52931e9030a90699fb7102cf8247fc567",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 27,
+      "printed_page": null,
+      "text": " -24- \n \n \n6.6 Banquetas de Visibilidad  \n \nLas curvas horizontales deberán proyectarse manteni endo en toda su longitud la distancia de \nvisibilidad de parada. \n \nEn caso de no cumplir este requisito debido a la to pografía, se proyectarán banquetas de \nvisibilidad siguiendo el procedimiento mostrado en la Figura 10. \n \nLa distancia que habrá que desplazar el talud interno del corte se determina con la expresión: \n \n ( )R  8\n2\nDp M =   \n \nM  = Distancia al borde del talud, medido desde el eje del carril (m) \n \nDp= Distancia de parada (m) \n \nR  = Radio de la curva (m) ",
+      "text_sha256": "2bb84b7f27a4aa2065e5df4c14a2a64a7da9bdbd3ed930c88354b5119f6d45a4",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 28,
+      "printed_page": null,
+      "text": "FIGURA No. 10\n\nVISIBILIDAD EN CURVA\n\naA\nDp= distancia de visibilidad de parada. E\n\nY\nEN Seccion AA\n\\\n\\\n\\\n\\\n\\\n\\\nE \\ _\nV foso\n\nalt\n\n¡Corrimientos\ndel talud\nde corte\n\nde lo carretera\n\ndel carril interior\n(Eje de visibilidad libre)\nEje\n\nEj\n\n-25-\n",
+      "text_sha256": "ea1e1e7481a30076f399533d57831046625eeeaa2aff3464a4826952780edad3",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " -25- \n "
+    },
+    {
+      "page_pdf": 29,
+      "printed_page": null,
+      "text": " -26- \n6.7 Curvas Compuestas  \n \nEn general, se recomienda evitar el uso de curvas c ompuestas y tratar de reemplazarlas por una \nsola curva. \n \nEn casos excepcionales, por razones de índole econó mica o de otro tipo, se podrá utilizar curvas \ncompuestas siguiendo los aspectos siguientes: \n \na)  El radio de una de las curvas no será mayor de 1.5 veces el radio de la otra. \n \nb)  En lo referente a la longitud de transición, se  cumplirá como lo indicado en el acápite 6.4.3, \n(longitud de transición del peralte). \n \n \n6.7.1 Curvas Continuas en el mismo sentido \n \nEn general, se evitará el empleo de curvas continua s en el mismo sentido y separadas por una \ntangente menor de 450 metros. Solo en casos excepci onales podrá emplearse una tangente \nmenor entre dos curvas continuas en el mismo sentid o. En el caso de que dicha distancia sea \nmenor de 100 m., deberá reemplazarse por una sola c urva o, excepcionalmente, por una curva \npolicéntrica. \n \n \n6.8 Curvas Reversas \n  \nEntre dos curvas reversas deberá siempre existir un  tramo en tangente. La longitud mínima de \neste tramo será aquella que permita cumplir con las longitudes de transición del peralte. \n \nEn este caso, la transición del peralte se efectuar á de acuerdo a lo mostrado en la Figura 11. Sin \nembargo, para las vías proyectadas con velocidad di rectriz igual o mayor de 60 Km/h., la longitud \nde tangente entre dos curvas reversas no será menor de lo indicado en la Tabla 8. \n \n \nTABLA No. 8 \nLongitud Mínima de Tangente Intermedia \nEntre Dos Curvas Reversas \n \nVelocidad Directriz \n(Km/Hr)                                60                    70                    80                    90                    100                   \n \nTangente Mínima \n(Metros)                               85                  100                  110                   125                    140  \n ",
+      "text_sha256": "9796cb023b645ce8376ae655d03dc86e8a79eac73baee59a009fdde5e7ec8000",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 30,
+      "printed_page": null,
+      "text": " -27- \n \n \n6.9 Sección Transversal \n \n6.9.1 Ancho de la Sección Transversal \n \n6.9.1.1 Donde no hay Estructuras  \n \nEl ancho de la sección transversal está en función de la capacidad de la carretera: ésta, a su vez, \nestá en relación directa con la demanda vehicular. Es por ello que, antes de determinar los anchos \ndel pavimento, es necesario relacionarlos con la demanda vehicular a servir. \n \nLa tabla 9 muestra la relación entre los parámetros  de la sección transversal y la demanda \nvehicular. \n ",
+      "text_sha256": "33d757dfe9df58b0cc55656dc40aa0bd7704f6ff92aedc48f867c495524ef836",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 31,
+      "printed_page": null,
+      "text": " -28- \nEn dicha tabla, las columnas denominadas “mínimo to lerable” corresponden a valores de las \ncaracterísticas geométricas impuestas por considera ciones económicas. Dichas características \nproducen restricciones que se consideran tolerables. \n \n        \nTABLA 9 \nSECCIÓN TRANSVERSAL-CARACTERÍSTICAS GENERALES \n12,000 12,000 - 6,000 6,000 - 2,000 2,000 - 500 500  Tráfico(TMD A) \nDeseable Mínimo Tolerable  Deseable Mínimo Tolerable  Deseable Mínimo Tolerable  Deseable  Mínimo  Tolerable  Deseable Mínimo Tolerable  \nCalzada \n(Unid) 2 2 2 1 1 1 1 1 1 1 \nSeparador \nCentral (m) 6.00 1.20 1.20 - - - - - - - \nCarriles \n(Unid) 6 4 4 2 2 2 2 2 2 2 \nAncho \nCarril (m) \n \n3.75 \n \n3.60 3.75 3.60 3.30 3.00 3.30 3.00 3.00 2.75 \nAncho \nPaseo (m) 2x3.00 2x2.40 2x3.00  2x2.40 2x2.40 2x1.20 2x2.40 2x1.20 2x2.40 2x0.75 \n \n \nNOTA: Se da una descripción de carácter general de las características principales de la \ninfraestructura vial, en función del tráfico que so porta (promedio diario anual) en sus valores \ndeseables y mínimo tolerables; posteriormente en la s recomendaciones específicas referente a \ncada componente, los valores a recomendar estarán en relación con la clasificación funcional de la \ncarretera y de la topografía del lugar. \n      \n     T.M.D.A = Tránsito Medio Diario Anual \n \n6.9.1.2 En Estructuras \n \nEl ancho de la sección transversal en estructuras n o necesitará incluir los paseos, sin embargo \ndeberá dejarse una distancia libre mínima entre la cara interior de la estructura y el borde del \npavimento: \n \na) En puentes, 60 cms. \nb) En pasos inferiores, 1.00 mts. \n ",
+      "text_sha256": "a7245e733d897d9debe4dba3e3f7d27acd9957ef02f5dd5683b22965d99d4f55",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 32,
+      "printed_page": null,
+      "text": " -29- \n6.9.2 Ancho de la Sección Transversal en Curvas Hor izontales \n \nLa sección transversal en las curvas estará provista de sobreancho, de acuerdo a lo indicado en la \nsección 6.5. \n \n6.9.3 Tipo y Espesor del Pavimento \n \nAmbos aspectos serán determinados por el proyectist a para cada tramo de la carretera. Se \nproyectarán en base a un estudio técnico-económico que tenga en cuenta: \n \na) El tránsito vehicular; \nb) Su composición; \nc) La capacidad de soporte de la subrasante; \nd) La disponibilidad de materiales apropiados en la zona, y \ne) El costo de su mantenimiento. \n \n6.9.4 Bombeo \n \nLas carreteras estarán provistas de bombeo en los t ramos en tangente. Dependiendo del tipo de \npavimento, tendrán las inclinaciones siguientes: \n \na) Pavimento tipo superior (hormigón hidráulico, concreto asfáltico), de 2% a 2.5%. \n \nb) Pavimentos de bajo costo (base estabilizada), de 3% a 4%. \n \nEn los tramos en curva, el bombeo es sustituido por  el peralte en la forma indicada en el acápite \n6.4.3. \n \n6.9.5 Pendiente en los Paseos  \n \nLos paseos estarán provistos de pendiente, dadas hacia los bordes del pavimento. Las pendientes \nestarán entre los rangos siguientes. \n \na) En carreteras con pavimento superior, de 3 a 4%. \nb) En carreteras con pavimento intermedio, de 3.5 a 5%. \nc) En carreteras con pavimento de bajo costo, de 4 a 6%. \n \n6.9.6 Ancho de los Paseos \n \nAl margen del aspecto estructural de la carretera, la finalidad de los paseos es la de dotarla de un \nespacio destinado al estacionamiento de los vehículos en caso de emergencia. \n \nDe esta forma, los carriles de circulación quedan l ibres y no se disminuye la capacidad de la \ncarretera. Este aspecto se hace más crítico en carreteras de 2 carriles de circulación. ",
+      "text_sha256": "f7b951ef754a5665c7cb8395e87698dcf3f043403bc1309ccee4c8d0865d9391",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 33,
+      "printed_page": null,
+      "text": " -30- \n \nEs recomendable un ancho de 2.40m. en los paseos de  forma que permita el estacionamiento de \nun vehículo. \n \nPor razones de carácter económico no es posible obtener en todos los casos esa dimensión en los \npaseos. \n \nEn la Tabla 9 se dan valores recomendados para el a ncho de los paseos en relación con la \ndemanda vehicular y la clasificación de la carretera. \n \nLa Tabla 10 muestra valores mínimos de ancho de pas eos para carreteras de dos carriles de \ncirculación y con un volumen de tránsito menor de 6 ,000 vehículos/días (T. M. D. A.). Esos valores \nestán en función de la velocidad directriz. \n \n \n \nTABLA 10 \n \nANCHO MINIMO DE LOS PASEOS \nVelocidad Directriz \nKm/Hr \nAncho Mínimo \nMetros \n \n30 \n40 \n50 \n60 \n70 \n80 \n \n0.75 \n0.75 \n1.20 \n1.20 \n1.50 \n1.50 \n \n \n6.9.7 Taludes \n \n6.9.7.1 Taludes en Corte \n \nLa inclinación de los taludes en corte variará de a cuerdo a la estabilidad de los terrenos en que \nsean efectuados. En general, los valores de inclina ción de los taludes corresponderán a los \nmostrados en la Tabla 11. \n \n ",
+      "text_sha256": "36ca9be9ec3448e4e2ea1562de8890ba0ccd1d791b5e582b9fda6ac37b0232b2",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 34,
+      "printed_page": null,
+      "text": " -31- \nTABLA 11 \nTALUDES DE CORTE \nTalud Clase de Terreno V H \n \nRoca Dura \nRoca Suelta \nConglomerado \nTierra Compacta \nTierra Suelta \nArena \n \n10 \n4 \n3 \n2 \n1 \n1 \n \n1 \n1 \n1 \n1 \n1 \n2 \n \n \n6.9.7.2 Taludes en Relleno \n \nLa inclinación de los taludes en rellenos variará de acuerdo a las características del material con el \ncual esté formado el terraplén. De manera general, se seguirá lo indicado en la Tabla 12. \n \n \n \nTABLA 12 \n \nTALUDES DE RELLENO \nTalud Material V H \n \nEnrocado \nMaterial Suelto \nArena \n \n1 \n1 \n1 \n \n1 \n   1.5 \n2 \n \n \n \n6.9.8 Altura Libre \n \nEn los pasos o cruces a diferentes niveles así como en los túneles, la altura libre no será menor de \n5.50m. \n \nDicha altura se medirá a partir del nivel superior de la superficie de rodadura. \n ",
+      "text_sha256": "6d6504ea12dd22d92d190e625f467aa92a414bffb76f0c3eba63f9dc111db0cc",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 35,
+      "printed_page": null,
+      "text": " -32- \n6.10 Perfil Longitudinal \n \nEn general, el perfil del proyecto corresponderá al  eje de simetría de la sección transversal de la \ncarretera. Las cotas del perfil longitudinal del pr oyecto corresponderán a la superficie de rodadura \nterminada. \n \nEn término generales, la rasante de la carretera se  determinará siguiendo las recomendaciones \nsiguientes: \n \na)  En terrenos llanos, por razones de drenaje, la rasante estará por encima del nivel del terreno. \n \nb)  En terreno ondulado, la rasante seguirá en lo p osible, las ondulaciones del terreno. Deberán \ntenerse en cuenta las limitaciones impuestas por la  estética, la visibilidad y la seguridad en la \noperación de los vehículos en la carretera. \n \nc)  En los terrenos montañosos, serán también neces ario adaptar la rasante al terreno, evitando \nlos tramos en contrapendiente que producen alargamientos innecesarios. \n \n \n6.10.1 Curvas Verticales  \n \nSe utilizarán curvas verticales parabólicas cuando la diferencia algebraica de las pendientes sea: \n \na) 1% o más en carreteras con pavimento tipo superi or (hormigón hidráulico, con concreto \nasfáltico), y \n \nb) 2% o más para las demás. \n \nLas curvas verticales se proyectarán de modo que pr ovean, por lo menos, la distancia de \nvisibilidad mínima de parada y la distancia de visibilidad de sobrepaso, de acuerdo a lo prescrito en \nla sección 5.2. \n \n \n6.10.1.1 Curvas Verticales Convexas \n \nPara determinar la longitud mínima de las curvas verticales convexas que cumplan con el requisito \nde la distancia de visibilidad mínima de parada, se  utilizará el gráfico de la Figura 12, y para que \ncumplan con el requisito de visibilidad de sobrepaso, el gráfico de la Figura 13. \n \nEn ambas figuras las longitudes se dan en función d e la velocidad directriz y de la diferencia \nalgebraica de las pendientes. \n \n \n ",
+      "text_sha256": "e941132a0aef6e3b00fdb45af87c5047db2f9ec9194992b600e8ca6f7a3a36e3",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 36,
+      "printed_page": null,
+      "text": "FIGURA 12\n\nLONGITUD\nMINIMA\n\nDE CURVA\nVERTICAL\nCONVEXA\nCON\nDISTANCIA\nDE\nVISIBILIDAD\nDE PARADA\n\nPARA: Dp <L\n\nL= AD?p\n\n444\n\nPARA: Dp> L\n\nL=20p-233\n\nO 100 200 300 400 500 600\n\ny BETO lOcm. DE ALTO=h’\n\nLINEA DE ‘iprewcis “Vv Ta == See Pen,\npsa -CaLrura DE 00 (m.137=4.5 pres )=n WE\n~~\nE DISTANCIA MINIMA\n\"PARADA PARA UNA -\nVELOCIDAD DISEÑO\n+———-LONGIT ID MINIMA DE CURVA CONVEXA ————-+—\nL\n\n-33-\n",
+      "text_sha256": "0ef0ad8c48d1546fa41e2bc5fdb9a04fadb7f6c6b89d70b5c1c994ecd2f34083",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " -33- \nFIGURA 12 \n \n "
+    },
+    {
+      "page_pdf": 37,
+      "printed_page": null,
+      "text": "FIGURA 13\n\nLONGITUD MINIMA DE CURVA VERTICAL PARABOLICA. L.MTS.\n\n[|\n\naN\nMENA\nCANT\n\nZa\nALAIN | Ni |]\n\nCIN\nAAN\n\nBie\n\nMIN |\n\nWAR N\nAA]\n\nSS\n<<\nSe Re\nWX Se\n\na\n\nNEA ae\n\nAW.\n\nUN |\n\nne\n\\\nAA\n\nSE\n<a\na”\n¡AE\n\ncs\nNG\nTNE\n\nul\n\ned\n\nLM\n\nAz DIFERENCIA ALGEBRAICA DE PENDIENTES\n> 20\n\nNA\n\nES.\nMM\n\nARA\nCIA\n| | RA\n\nNA\n¡E\na\n\n3\n3\no\n3\n8\n8\n8\n\njo]\n3\n3\n\nPARA: Ds>L PARA: Ds<L\n\n2\nL=20--100 1, ADs\nA 1100\n\nLinea de visibilidad o\n— _\n—— Altura de ojo (m.137<Spies) = h=h' —\n\n—=T distancia de visibilidad\n— +— minima de sobrepaso\nDs :\n\nLONGITUD MINIMA DE CURVA CONVEXA——--—-+—\nnn L*\n",
+      "text_sha256": "d445945d4a75357445e3aa3424a42cdc19b589db3cacaed0c33aadab75c20958",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " -34- \nFIGURA 13 \n \n "
+    },
+    {
+      "page_pdf": 38,
+      "printed_page": null,
+      "text": " -35- \n6.10.1.2 Curvas Verticales Cóncavas \n \nLa longitud mínima de las curvas verticales cóncava s se determinará utilizando el gráfico de la \nFigura 14, en función de la velocidad directriz y la diferencia algebraica de las pendientes. \n \nFIGURA 14 \n ",
+      "text_sha256": "d413a1256cb69245f54d7b6b569fa513f647b452ad3a5ed8b4c1cfe92a572513",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 39,
+      "printed_page": null,
+      "text": " -36- \n6.10.2 Pendientes Longitudinales de la Carretera \n \nLa selección y empleo de las pendientes en los dife rentes tramos de una carretera, deberá ser \nproducto de un detallado estudio del proyectista, e fectuándose comparaciones entre las diferentes \nalternativas. \n \nAdemás, deberá demostrarse que la solución elegida es la mejor, teniendo en cuenta los valores \nlímites fijados en las presentes recomendaciones. P ara dicha elección se deberá tener en cuenta, \nentre otros, los siguientes aspectos: \n \na) Su influencia en el costo de construcción de la carretera. \n \nb) El costo de operación vehicular. \n \nc) La capacidad de la vía. \n \n6.10.2.1 Pendiente Mínima \n \nEn tramos en corte cerrado, se evitará el empleo de  pendientes menores de 0.5%, a menos que \nlas cunetas laterales adyacentes tengan una pendiente que garantice el drenaje. \n \n6.10.2.2 Pendiente Máxima Normal  \n \nEl valor máximo de la pendiente longitudinal de la carretera será de 7%. Sin embargo, los límites \nmáximos normales para la pendiente se establecerán teniendo en cuenta la seguridad de la \ncirculación de los vehículos más pesados en las condiciones más desfavorables del pavimento. \n \n6.10.2.3 Pendiente Máxima Excepcional \n \nPodrá aumentarse la pendiente máxima normal en caso s excepcionales y justificados, \nespecialmente cuando valores menores conduzcan a ob ras costosas y alargamientos artificiales \ndel recorrido. \n \nEstas pendientes deberán ser aprobadas por la Dirección General de Programación de la SEOPC. \n \n \n6.11 Tránsito Horario \n \nDurante el día, el volumen de tránsito varía apreci ablemente de una hora a otra. El volumen de \ntránsito que pasa en cualquier hora del día, por un  punto dado de la carretera, se denomina \nTránsito Horario. ",
+      "text_sha256": "59a7fb985c25122830f9f8f6be736b903c55895f59f73a257d8fd8ca0e57758a",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 40,
+      "printed_page": null,
+      "text": " -37- \n6.11.1 Tránsito Horario Máximo- Hora Punta \n \nA determinadas horas del día se presenta gran conce ntración de tránsito. El valor horario con \nmayor volumen de tránsito se denomina Hora Punta. \n \nDiseñar la carretera para la Hora Punta sería servir muy apropiadamente al tránsito vehicular, pero \nrazones de índole económica no lo permiten. En cons ecuencia, es necesario determinar un \nvolumen horario apropiado para el diseño de la carr etera. La hora que corresponde a ese volumen \nse denomina Hora Diseño.   \n \n \n6.11.2 Tránsito Horario de Diseño-Hora diseño \n \nMediante observaciones e investigaciones de campo, en los Estados Unidos se obtuvo una \nrelación definida entre los volúmenes horarios de t odo el año y el número de horas en que los \nvolúmenes horarios son mayores. Esa relación se pre senta en la Figura 15, donde los volúmenes \nhorarios están como por ciento del T.M.D.A. \n \nSe concluyó que la Hora Diseño más apropiada es aqu ella que es sobrepasada sólo por 29 \nvalores horarios en el año, es decir, la hora número 30. La capacidad de la carretera está dada por \nese valor horario. \n \nSe observa que la hora número 30 en Estados Unidos,  oscila entre el 12 y el 18 por ciento del \nT.M.D.A.  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "8db720f52e823393e653fcf5455841bdac1307515961edae9ed05f2a2c1557e9",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 41,
+      "printed_page": null,
+      "text": " -38- \n \nFIGURA 15 \nRELACIÓN ENTRE LA HORA MÁXIMA \nY EL TRÁNSITO MEDIO DIARIO ANUAL (T.M.D.A) \nCARRETERAS EN ZONA RURAL \n \n \nNÚMERO DE HORAS EN EL AÑO EN QUE LOS VALORES \nDEL VOLUMEN DE TRÁNSITO SON MAYORES QUE EL \nMOSTRADO  \n \nTomando de: Fig. III-I, Pág. 427, A. Policy en Geometric Design of Rural Roads, \nAASHTO, 5ta. Edición. ",
+      "text_sha256": "804ffc9ea2219d28d93ce6df1a2b1c84888af140c28473d4a8557855a5e41674",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 42,
+      "printed_page": null,
+      "text": " -39- \n7 DRENAJE \n \n7.1 Drenaje de Aguas Superficiales \n \nEl drenaje superficial tiene el propósito de alejar  las aguas de la carretera. Esto evita su influenci a \nnegativa, tanto en el aspecto de la estabilidad de su infraestructura, como en sus condiciones de \ntransitabilidad. \n \nLas dimensiones de las obras de drenaje serán deter minadas en base a cálculos hidráulicos, \ntomando como base la información pluviométrica disponible. \n \n7.1.1 Drenaje del Agua que Escurre sobre el Pavimen to \n \nLa eliminación del agua que escurre sobre la superf icie del pavimento, se efectúa por medio del \nbombeo en las secciones en tangente y mediante el p eralte en las curvas, de modo que el \nescurrimiento sea hacia las cunetas. \n \nLos paseos de una carretera pavimentada se someterá n a un tratamiento de impermeabilización. \nDe este modo se logra fijar los agregados y se evit a que éstos sean arrastrados a las cunetas por \nel agua que fluye desde el pavimento. \n \n7.1.1.1 Desagüe sobre los Taludes de Rellenos  \n \nEn los rellenos, las aguas que escurren sobre el pa vimento deberán ser encauzadas hacia ambos \nlados del mismo. Deberá hacerse de tal forma que el  desagüe se efectúe en sitios preparados \nespecialmente para ello. De este modo se evita la erosión de los taludes. \n \nPara ello deberá construirse un “bordillo” al costa do del paseo. El mismo será interrumpido para \nfacilitar la evacuación de las aguas a través de zanjas de descarga ubicadas al pie del talud. \n \nPara una mayor aclaración se presenta al Figura 16,  que muestra los diferentes “bordillos” y su \ndisposición. \n \n \n \n \n \n \n \n \n \n \n \n ",
+      "text_sha256": "a2d1a7b96e3c4efadfbdb935d8a786e7c3fd476f8a7a61f6d56c90b047cbaf28",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 43,
+      "printed_page": null,
+      "text": "FIGURA 16\n\nDESAGUE SOBRE LOS TALUDES EN RELLENO (Dimensiones en cms.)\n\nBORDILLO EN TIERRA ,\nenhierbada L\n|\n\nASEO\nIMPERMEABIL!I ZADO——\n\n>e >\nPASEO\nnas IMPERMEABILIZADO:\nBORDILLO EN CONCRETO\n\nDE CEMENTO fed> 31\n\nBORDILLOEN CO\n\n——— PASEO eS\nIMPERMEABILIZADO ——»\nASFALTICO\n\n10+15\n\nA\n\npa\n\nY Perfii de\nv7 desague\n\nBORDILLO\n\n—\nZANJA DE DESAGUE\nREVESTIDA —\n\n— PASEO\noo IMPERMEABILIZADO\n\n-40-\n",
+      "text_sha256": "0ff8b5c1a217f8c7202be0cbb10399cee70fb39a77e6120cba060ba9f068e207",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " -40- \nFIGURA 16 \n "
+    },
+    {
+      "page_pdf": 44,
+      "printed_page": null,
+      "text": " -41- \n7.1.2 Cunetas \n \n \n7.1.2.1 Sección y Dimensión de las Cunetas \n \nLas cunetas tendrán en general, sección transversal  triangular. Deberán ser diseñadas para todos \nlos tramos de la carretera, tanto en laderas como e n cortes. Sus dimensiones estarán fijadas de \nacuerdo a las condiciones pluviométricas de la zona. \n \nLas dimensiones mínimas recomendadas están mostrada s en la Tabla 13 en función del régimen \npluviométrico. \n \nTABLA 13 \nDIMENSIONES MÍNIMAS DE LAS CUNETAS \n \nZona                                                Profundidad (m)*                               Ancho (m)** \n \nSeca                                                            0.20                                              0.50 \n \nLluviosa                                                       0.30                                              0.50 \n \nMuy Lluviosa                                               0.50                                              1.00 \n \n \n*La profundidad es medida verticalmente desde el ni vel de la subrasante hasta el fondo o vértice \ninferior del triángulo (Ver Figura 17). \n \n**El ancho de la cuneta es medido del extremo de la  subrasante hasta la vertical que pasa el \nvértice inferior. \n \n \n7.1.2.2 Revestimiento de las Cunetas \n \nCuando exista la posibilidad de que las corrientes erosionen el suelo de las cunetas, éstas deberán \nser revestidas con piedras asentadas en mortero. Como ilustración se presenta la Figura 17. \n \n \n \n \n \n \n \n ",
+      "text_sha256": "4752b3565a84a4aa1a11fbf789b30008e6da84778d926644bf16d5e4e5431133",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 45,
+      "printed_page": null,
+      "text": "FIGURA 17\nSECCION TRANSVERSAL\nAliviadero de la cuneta\n\nVARIABLE\n\nSECCION TRANSVERSAL\nAliviadero de la cuneta\n\nENTRADA DE LA CAIDA CON ENSANCHE\nVER DETALLE\n\nEMPEDRADO CON LECHADA\nO PIEDRA ACOMODADA\n\nLCANTAR ILLA Y MURO CABEZAL CUANDO SEA\nNECESARIO\n\nSECC. A—A\nVARIABLE\n\nPET\n\n-42-\n",
+      "text_sha256": "b3a16464d14565cc00174e6566ffe45054cfc7f01dd67766abfc27d352268841",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " -42- \n \n \n \n \n \n \n \n \n \n \n \n "
+    },
+    {
+      "page_pdf": 46,
+      "printed_page": null,
+      "text": " -43- \n7.1.2.3 Desagüe de las Cunetas \n \nEn general, la eliminación de las aguas de las cune tas se efectuará por medio de alcantarillas. La \nFigura 17 muestra el aliviadero de las cunetas a través de una alcantarilla. \n \nLa ubicación de las alcantarillas se hará teniendo en cuenta: \n \na) Las condiciones topográficas. \n \nb) La capacidad hidráulica de la cuneta. \n \nc) El régimen pluviométrico de la zona. \n \nEn aquellos lugares que correspondan a los puntos b ajos de una curva vertical cóncava, se \nrecomienda una alcantarilla de desagüe para las cunetas. \n \n7.1.3 Zanjas de Coronación y de Drenaje \n \nEs bien conocido el efecto erosivo de las aguas que escurren en las laderas de un corte o al pie de \nlos taludes de un relleno. Para evitar este efecto se proveerán zanjas de coronación y de drenaje \ncuya disposición se muestra en la Figura 18. \n \nLas dimensiones de las zanjas de coronación se fija rán mediante cálculos hidráulicos, de acuerdo \na las condiciones pluviométricas de la zona. \n \nSe recomienda secciones trapezoidales cuyas dimensiones mínimas se muestran en la Figura 17. \n \nEn lo concerniente al revestimiento de las zanjas d e coronación, se seguirá lo indicado en el \nacápite 7.1.2.2. \n \nSe recomienda revestir las zanjas de coronación en las zonas de filtración que puedan poner en \npeligro la estabilidad del talud. \n \nLa ubicación de los puntos de desagüe de las zanjas  de coronación deberá fijarse teniendo en \ncuenta: \n \na) La ubicación de las alcantarillas. \nb) La longitud máxima que puede tener la zanja. \nc) Las dimensiones de la zanja. \nd) La precipitación de la zona.   \n \nPara una mayor ilustración se han confeccionado las  Figuras 19, 20 y 21, las cuales muestran el \naliviadero y el canal de bajada en las zanjas de coronación. \n ",
+      "text_sha256": "71c49f9c1549b0d454f373a4e9d918420ef7dec31468ac9bd549e9d7f191fe43",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 47,
+      "printed_page": null,
+      "text": "FIGURA 18\n\nZANJAS DE CORONACION Y DE DRENAJE\n( Dimensiones én metros )\n\nMIN... MIN. 2.00\n\nCARRETERA\n\n-44-\n",
+      "text_sha256": "901ca56a4d287a550dd686c42a146cd300d0a3181410bc06544c20a87f75ddef",
+      "quality_flags": [
+        "texto_escaso_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " -44- \n "
+    },
+    {
+      "page_pdf": 48,
+      "printed_page": null,
+      "text": "LT Sty 194 / V-Y 019095 7 ve a\n\n- ; _ A A\n\nSS\nHAD\n\na\nAAA ”\nZ VOL 30 Veo _o o\nO O “oo v\nPl =\nO « _ .\n< i AA A AA >\nZz a OS — o\nS = VOVIONODV O VOWLNSWZ9 WuagId\nOo 5 OS\nO Y ¿A\nA oA aa\na ND AS\ne << Y a A A\nan v Es ? Á S\n>) fa L wn?\nte < af ES\nDN y X VQVULNS Y1 30 377vL30\nio) > a\nan $ 2 yovHO37 NO9\ne OUVEAIAWZ O OLBYONOD 3G OLNAWIAYd\nA v\no\na a me Sn te\nos 311V130\nAa YAA 3HINVSN3 NOD VO'MD V1 30 VOVSLN3\nS 30 VPNVZ : v7 20 paa\n= TWWSYIASNVY1L NOIDOIS J |\n< -\n\nWWVZ yY1 30\n\n-45-\n",
+      "text_sha256": "566716ec8cec4b6d08a04a1ed9d2fa6469f82b655be8e9209374f7d3c08105da",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " -45- \n "
+    },
+    {
+      "page_pdf": 49,
+      "printed_page": null,
+      "text": "FIGURA 20\nCANAL DE BAJADA\n\ne re\n\nLa\n\nSECCION B-B\n\nte\nS\no\nS\n$\ny N 3 |\n\"(EJE DE LACUNETA -—\nA 1.00\nPLANTA CANAL DE BAJADA SECCION c-C\nBURMA DE LA CARRETERA\nMuro CABEZAL\n. a Eje de lo cuneta\n_ : polo delo moto,\n= —— / a ANCHO EMPEDRADO DETER... ~~\nsE sn A =p MINADO POR EL FLUJO /\n= / 050\n9\nSECCION ¡A PARALELA AL EJE DE LA CUNETA SECCION D-D\n\n-46-\n",
+      "text_sha256": "3e12e735a49405eb39a43836dabd8bba0a1db6f6f38fcbea98fda8fd98237494",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " -46- \n "
+    },
+    {
+      "page_pdf": 50,
+      "printed_page": null,
+      "text": "—\n|\n\nCANAL TIPO i_\n\nFIGURA 21\nCANAL DE BAJADA\nElevación de Corte\n\nqe aa\n\nTipo de mero cabercl\nzegun ce indique\nTubo de material\n\ncorrugado _—_\n\\ ET\nmol\ngrrone ona <=\n\nY poa\n—T x 1\nCANAL TIPO_3 vf y\n\ncorr etero\n\nCaja de toma\n\n-47-\n",
+      "text_sha256": "0efa16183d3eeb811b4f02750b6a268d0cfc072fc5935521a071d33341b5a00c",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " -47- \n "
+    },
+    {
+      "page_pdf": 51,
+      "printed_page": null,
+      "text": " -48- \n7.1.4 Alcantarillas  \n \nEl tipo de alcantarilla deberá ser elegido en cada caso teniendo en cuenta: \n \na) El caudal a eliminar. \n \nb) Naturaleza y pendiente del cauce. \n \nc) El costo de los materiales de acuerdo a disponib ilidad en la zona. \n \nEl número y ubicación de las alcantarillas se estab lecerá de forma tal que garantice un drenaje \neficiente, evitando la acumulación excesiva de las aguas. \n \n \n7.2 Drenaje de Aguas del Sub-Suelo \n \nEl objetivo del “drenaje subterráneo” es obtener qu e el agua subterránea no afecte la estabilidad \nde la carretera. \n \nGeneralmente el agua subterránea se puede presentar en: \n \na)  Cauces definidos que fluyen a través de capas d e material poroso. \n \nb) Agua que aflora a la superficie por capilaridad \n \nc) Depósitos de agua subterránea limitados por mate rial impermeable. \n \nDeberá ser investigado el efecto que puedan produci r las aguas del subsuelo en la estabilidad de \nlos terrenos sobre los que esté construida la carre tera. Para este fin los principales elementos a \nexaminar son, entre otros: \n \na) La naturaleza del terreno \n \nb) La pendiente transversal del mismo \n \nc) Su estratificación \n \nd) La ubicación y cantidad de agua en la napa freát ica \n \n7.2.1 Subdrenajes \n \nLa profundidad, el número y la localización de los subdrenes dependerán de características del \nsubsuelo. Deberá tomarse especial cuidado en lo ref erente a la velocidad y distancia a la que el \nagua subterránea se desplace a través del subsuelo. ",
+      "text_sha256": "3ce80d495aadf8ac0ef5cfa20bca5a4ccc2a2330d6acffb5919ebbba7542408c",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 52,
+      "printed_page": null,
+      "text": " -49- \n \nDebido a los diferentes casos y múltiples condicion es que se presentan, el diseño del subdrenaje \ndeberá ser realizado de forma particular para cada uno de ellos. \n \nNo deberá escatimarse esfuerzos en la obtención de la mayor información posible que permita \nconocer con exactitud las características de la napa de agua freática que se desea interceptar. \n \nComo ilustración, se presentan las Figuras 22 y 23,  en donde se muestra el caso típico de un \nsubdrén y dos casos de subdrenaje, respectivamente. \n \n ",
+      "text_sha256": "a4ab5818c1187efc02813decb0e276dc634f46ece3ebe37c84316c5914076fbc",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 53,
+      "printed_page": null,
+      "text": "FIGURA 23\nSUB—DRENES\n\n",
+      "text_sha256": "3f6d6e85973ded2d7873adfff565b7d843f28ad3d17f87292a251964c821edea",
+      "quality_flags": [
+        "texto_escaso_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": " -50- \n "
+    }
+  ]
+}

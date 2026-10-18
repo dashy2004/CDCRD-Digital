@@ -1,0 +1,994 @@
+{
+  "schema": "cdcrd-regulation/1",
+  "source": {
+    "id": "R-002",
+    "title": "Reglamento para estacionamiento vehicular en edificaciones",
+    "file": "CARRETERAS/r-002-reglto-estacionamvehicular-en-edif_-002.pdf",
+    "sha256": "b0105c98ab0bba48c2c484860eeb7a5f8eadb60e825a876957337d5aa94513ec",
+    "pages": 80,
+    "source_catalog": "https://portalweb.mopc.gob.do/dgrs/reglamentos/",
+    "legal_status": "vigencia_no_evaluada",
+    "document_warning": null
+  },
+  "extraction_method": "pypdf text layer + optional local Tesseract OCR on sparse pages",
+  "review_status": "texto_extraido_no_validado_para_calculo",
+  "pages": [
+    {
+      "page_pdf": 1,
+      "printed_page": null,
+      "text": "REGLAMENTO PARA \nESTACIONAMIENTO \nVEHICULAR EN \nEDIFICACIONES\n2da. EDICIÓN\nR-002\nDecreto\nNo. 284-91",
+      "text_sha256": "11e780da74d0c169ea0c1a3e42275af5ac658842b15a0e8398d63d8d73ffc8a5",
+      "quality_flags": [],
+      "visually_verified": false,
+      "method": "pypdf_text_layer"
+    },
+    {
+      "page_pdf": 2,
+      "printed_page": null,
+      "text": "REGLAMENTO PARA\nESTACIONAMIENTO VEHICULAR\nEN EDIFICACIONES\n\nM-002\n\nDiciembre / 1989.\n",
+      "text_sha256": "b996bf0516e383c924ad5c92ef71c8fbc9528d31b213a42316cd4d56dc3b60fc",
+      "quality_flags": [
+        "texto_escaso_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": "Diciembre I 1989. \nREGLAMENTO PARA \nESTACIONAMIENTO VEHICULAR \nEN EDIFICACIONES \nl\\tl-002 "
+    },
+    {
+      "page_pdf": 3,
+      "printed_page": null,
+      "text": "",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "quality_flags": [
+        "sin_texto_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 4,
+      "printed_page": null,
+      "text": "REPUBLICA DOMINICANA\n\nSEGHETARIA DE ESTADO DE OBRAS PUBLICAS Y COMUNICACIONES\n\nPRESENTACION\n\nEl gran esfuerzo desplegado por la Dirección General de Reglamentos y Sistemas\nal presentar una segunda edición de este “Reglamento para Estacionamiento\nVehicular en Edificaciones”, nos satisface de manera preponderante, más aún\ncuando se ha logrado que este reglamento haya sido conocido y aprobado por la\n“Comisión Nacional de Reglamentos Técnicos de Ingeniería, Arquitectura y Ra-\nmas Afines’’-CONARTIA- organismo encargado de definir la politica de reglamen-\ntación de estas disciplinas.\n\nLa Oficialización de los Anteproyectos de Reglamentos que desde hace mucho\ntiempo han permanecido en la provisionalidad, ha sido una de las metas trazadas\nen los últimos años por esta Secretaría de Estado, a través de su Dirección General\nde Reglamentos y Sistemas.\n\nPara lograr los objetivos finales, en primer lugar iniciamos una serie de coordi-\nnaciones con los organismos que intervienen de una u otra forma en la aproba-\nción de proyectos de edificaciones, los que externaron sus opiniones sobre las\nmodificaciones y ampliaciones que consideraron necesarias luego de 9 años de\naplicación provisional.\n\nAgradecemos a los profesionales de estos organismos así como a los miembros\nde CONARTIA la culminación de estos trabajos para que finalmente llegue a\nnuestros proyectistas una nueva versión de un documento de tanta importancia\ncomo éste, para satisfacer las necesi\n\nRah dede Obras Pip ff y Comunicaciones\nLES\n\nDiciembre / 1989.\n",
+      "text_sha256": "878bd8d4d8c8392fd67b0a064c111990b876963f3be69cdb4cea86e3faa6bbff",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 5,
+      "printed_page": null,
+      "text": "",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "quality_flags": [
+        "sin_texto_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 6,
+      "printed_page": null,
+      "text": "INTRODUCCION\n\nEsta Dirección General de Reglamentos y Sistemas, DGRS, en su misión de oficia-\nlizar mediante decreto todos los proyectos de Reglamentos que han sido aplicados\nen forma provisional, se ha enmarcado en actualizar este “Reglamento para Estacio-\nnamiento Vehicular en Edificaciones”, que hoy presentamos en su Segunda Edición,\nluego de haber cumplido con todas las etapas de revisión para su aprobación final\npor parte de la Comisión Nacional de Reglamentos Técnicos de la Ingeniería, la\nArquitectura y Ramas Afines-CONARTIA-, y su oficialización por parte del Poder\nEjecutivo,\n\nEsta nueva edición ha sido ampliada en una serie de requisitos mínimos que, por la\naplicación práctica del documento anterior, ha sido necesario introducir para obte-\nner mejores resultados, entre los cuales cabe señalar el exigir que los proyectos sean\naprobados en forma provisional por parte de la Dirección General de Tránsito Terres-\ntre, así como los requisitos que deben cumplir los proyectos de ampliaciones horizon-\ntales y/o verticales y aquellas remodelaciones que involucren cambio en el uso de la\nedificación.\n\nOtras de las inquietudes que surgieron durante los trabajos de actualización y que han\nsido incorporadas al mismo fueron, el permitir diseños de estacionamientos con el sis-\ntema de parqueador para los tipos de edificaciones estipuladas, así como permitir el\nuso de un terreno próximo a la edificación para ser utilizado como estacionamiento\ncuando el disponible para tales fines no sea suficiente para cumplir con estas regla-\nmentaciones.\n\nUn aspecto muy importante que ha sido introducido en estas reglamentaciones es el\nestacionamiento exclusivo para motocicletas en aquellas edificaciones que por su uso\nasí lo requieran, debido al enorme auge que ha experimentado este medio de trans-\nporte en nuestro país. Con esta medida se resuelven los inconvenientes que se presen-\ntan en estos lugares donde es muy frecuente la sub-utilización de los estacionamientos\npara vehículos por parte de los conductores de motocicletas.\n\nAsí mismo se amplió y modificó la zonificación de la Ciudad de Santo Domingo, la\ncual fue aprobada por la Sala Capitular del Ayuntamiento del Distrito Nacional.\nEn ese mismo orden se reajustaron los factores de reducción K, cuyos valores fueron\n\nrevisados y adaptados en coordinasié la Dirección General de Tránsito Terres-\ntre, SD\n\n",
+      "text_sha256": "7dd0dd564794e3ba37ae944df8a7f35ac5405a6089d100a62069da8548943d7d",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 7,
+      "printed_page": null,
+      "text": "",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "quality_flags": [
+        "sin_texto_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 8,
+      "printed_page": null,
+      "text": "INDICE\n\nPAG.\n1. ASPECTOS GENERAEES ..........0.00.2.. ES A 1\nA E E E loess. soe. 1\n1.2 Campo de Aplicación ooo nos 1\nEN 1\nA AP E A O 3\nVA Definiciones .......,... 00... BENS, 98 a 5\nVAD ACOSO. eck ese e eee POE (RA 5\n142 Aca est Se Fo ove A 2 5\n1.4.3 Area Específica para Estacionamiento... 5\n144 Arteria... cee EE peu ina sian Eg E 5\n1.4.5 Avenida (via colectora)... eee 6\n1460 Calzada al 2 Oe GE Isp nGiggubaR eb cer rat Py 6\nVAT Casilla oo cc a tee eee bee ole tee eee es oR 6\n14.8 Contén (bordilloPY' ¿37 seve Seine compa eh beter LA 6\n149 Cuneta... eke ee ee ee 6\n1.4.10 Curva de Enlace de un Acceso... ooo eee ee. 6\n1.4.11 Espacio de Estacionamiento... o 0.0 eee 6\n1.4.12 Estacionamiento (parqueo) en “Línea Sencilla o Recta’... 2... 7\n1.4.13 Estacionamiento (parqueo) “Tipo Enllavado 6. 7\n1.4.14 Estacionamiento (parqueo) “Tipo AU 7\n1.4.15 Unidad de Estacionamiento.................. o 7\n1.4.16 Pasillo ooo 7\n14,17 Vía LOCAL, oe cis eem ini ab ant nae eee! ga TE 7\nVANS Area NS ees sie ale ahem ce mem A SE, 7\n1.4.19 Edificaciones de Uso Publico... 2.00.00... eee eee eee, 8\n1.4.20 Edificaciones de Servicios Esenciales............................. 8\n1.5 Requisitos Mínimos para Aprobación de Estacionamiento .......... o 8\nA cc A El 0d A ee 13\n\n2. ESPACIOS DE ESTACIONAMIENTOS A CONSIDERAR SEGUN EL\nUSO DE LAS EDIFICACIONES NN 15\n2.1 Generalidades ooo ccoo rro nro 15\n2.2 Número de Expasics Requeridos.. 2... cece cece eee. 15\n2.2.1 Viviendas. ccoo rro, 15\n",
+      "text_sha256": "0e30f7485cf524c4ea3c03d3154e78aafc4d098d2fefac2c3a866e58dd702f15",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 9,
+      "printed_page": null,
+      "text": "23\n\n24\n\nFiguraZ2.1..... ccc cece eee o 17\n\n22.2 Edificios Comerciales e Industriales. ............. o . 19\n2.2.2.1 Oficinas en General........ or Perea o a me we 19\n2.2.2.2 Bancos Comerciales, Asociaciones de Ahorros\n\ny Préstamos e Instituciones Crediticias ................... 19\n2.2.2.3 Edificios Comerciales ...............oooooococmommmoo.o 20\n\n223 Instituciones Educativas ............ Lama AA 22\n2.2.3.1 Escuelas PÚblicaS...............o.oooooooommorornaoc. 22\n2,232 COLEGIO’... 002.00 momo amet RARA 22\n2.2.3.3 Universidades, Instituciones de Educación Superior\n\ny Academias Comerciales ...........o.oooooooroomoooo.. 23\n\n22.4 Edificios para Reuniones PÚbliCaS...............oooooooomoooo.o.. 23\n\n2.2.5 Centros de Salud........ “ey EE be paa al ar a em a 24\n\nPorcientos de Reducción del Número de Espacios de Estacionamiento.\n\nExcepciones ............-. o mR RNa EES ORERR EIA 25\n\n2.3.1 Ciudad de Santo Domingo, Distrito Nacional ..................... 25\n\n23.2 Provincias .......o.oooooooooooorrrrr eee teen eens 25\n\n2.3.3 Factores de Reducción “K\" ............. o 25\n\n2.3.4 Casos de Excepción.................. pujar RARA ms 25\n\nUnidades de Estacionamientos que Compondrán un Area Especffica\n\npara Estacionar .... oo. ico 26\n\n. DIMENSIONAMIENTO DE AREAS ESPECIFICAS PARA ESTACIONA-\n\nMIENTO VEHICULAR. ........ 0.0 cece ccc cece cette reece eee e teen eens 27\n3.1 Factoresa ser Considerados...... 0.0... ccc ee ee ee tee eee 27\n3.2 Vehículo Tipo de Disefio.. 2... cc ete teen ees 27\n3.3 Dimensiones Mínimas Requeridas......................... o 28\n3.3.1 Ancho del Pasillo (P).......... ee da ee 28\n3.3.2 Longitud de Cunetas por Vehículo (c) ....................ooooo.. 29\n3.3.3 Ancho de la Casilla (d) .............0..o..ooooooooooo.oio. o 29\n3.34 Ancho Total de la Unidad de Estacionamiento (D)................. 30\n3.3.5 Longitud de Casilla no Utilizable (R) ...............o.o.o.o.o.o.o.o..... 30\n34 Controles de AccesO ........o.ooooooooooooooorr ee e ects e ene neenes 31\n3.4.1 Distancia de los Accesos a las Esquinas mas Próximas(DE) ........... 31\n34.2 Separación entre dos Accesos de Entrada y Salida a un Area\nEspectfica para Estacionar (IS) ...........o.o.o..oooooooooooooo.. 31\n3.4.3 Separación de los Límites de Propiedad (DP). .................... 31\n3.44 Ancho de los Accesos de Entrada o Salida (S).................... 31\n\nii\n",
+      "text_sha256": "6e2326c2f02e3e50d36f840f3da1b82226ca27e4a511393d7d8acf74b6083659",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 10,
+      "printed_page": null,
+      "text": "35\n\n3.6\n3.7\n\n3.45 Angulo Formado entre el Eje del Acceso y el Eje de la Vía\n\nPública lo do 32\n3.4.6 Radio de la Curva de Enlace del Acceso con el Contén o Bor-\n\ndillo (Re)... ccc cece cece e cece ees 32\nEntrada y Salida de los Vehículos a las Areas Especrficas para Estaciona-\nmiento Vehicular oa 32\n3.5.1 Arterias, Avenidas y Vías COlectoras. ............. ooo oo, 32\n3.5.2 Vias Locales ooo a 33\nSeñalización en Areas para Estacionar ooo oe 33\nDelimitaciones de las Areas Abiertas para Estacionar (Playas de Estacio-\nA cece cece cece ee be cee cece. Re\n\nEDIFICIOS PARA ESTACIONAMIENTO VEHICULAR.................00008 35\n4.1 Generalidades ooo 35\n4.2 Disposiciones Generales del Acceso a Edificios para Estacionamiento\nPublico 2... coco CURE EE ENG AAA ma ee me 35\n4.2.1 Número. de Carriles de Circulación . 2.0.0.0... 00 ccc oo 35\n4.2.2 Número de Accesos por Piso de la Edificación .................... 35\n4.2.3 Rampasen los AccesOs ......o.ocooocooooooo os 36\n4.2.4 Señalización en los ACC8sO0s. o... ooo ooo oros 36\n4.2.5 Semáforos en los ACCESOS .....ooooomoccccccococo or 1:36\n4.3 Rampas Interiores... ooo... o. o qe DURE AE RRA e 37\n4.3.1 Ancho Mínimo de los Carriles de Circulación de las Rampas\nInteriores. cc 37\n4.3.2 Radio Exterior Mínimo de las Curvas de las Rampas\nHelicoidales. ooo 37\n4.3.3 Pendientes Máximas de las Rampas Interiores..................... 37\n4.34 Transición entre Rampas Interiores y los Tramos Horizontales. ....... 37\n4.3.5 Delimitación de los Carriles de Circulación de las Rampas -\nIC 38\n4.3.6 Elementos de Protección y Límites del Pavimento de las Rampas\nIN 38\n4.4 Ascensores e Instalaciones Mecánicas Elevadoras de Vehiculos.............. 38\n4.5 Circulación Peatonal ooo nooo 39\nAA AMAS co 39\n45.2 Escaleras. cr 39\n45.3 Ascensores. cc 40\n4.6 Altura Libre Minima entre Pisos . Pl 40\n4.7 Barandas PrOteCtOraS. ccoo roo 40\n4.8 Bordillos de Contencion 2... ccoo 40\n\niii\n",
+      "text_sha256": "ca98d9950b1674a2ef0de3a66f328801ad113a07759dd68bf690f0efada94b98",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 11,
+      "printed_page": null,
+      "text": "4.9 Disposición de las Columnas y Soportes INteri0T8S.......oooococooooooo.s 41\n\n4.10 Desagues y Drenaje de Pisos .........oooooorooocrrra eee 41\n4.11 Ventilación .. gccc cess de wee cc ra mem IEA 41\n4.11.1 Ventilación Natural.............oooocoocroronoarr 41\n\n4.11.2 Ventilación Mecanizada... 0... ee 42\n\n4.12 Iluminación....... ekg et arma mm DEERE EE EE MEMES aOR 42\n4.13 Protección Contra Incendios... 0... eee eee 42\nANEXO. y wscwcw ce o o ecm ANA AR ERE RE ep PA AE ewe o 43\n1—A. Tipos de Estacionamientos . 0.0... ce eee eens 45\n1. Dimensiones de Estacionamientos en Línea Sencilla..................... 47\n\n1.1 Vehículos Livianos ... 0... eee 47\n\n1.2 Vehículos Pesados. 20... eee eee 48\n\n1.3 Motocieletas .. 2... 0005.2 - meee besa wma eee ame EER Man Clemens 49\n\n2. Dimensiones de Estacionamientos Tipos Arenque y Enllavado............. 50\n\n2.1 Vehículos Livianos ......... ....o.ooooooo eee eee 50\n\n22 Nehiculos Pesados. .iiooociooocooriirserritirsariiiam. 20.51\n\n2.3 Motocicletas ............ a a mmm es ie 52\n\n2—A, Zonificación para Regulación de Estacionamiento en la Ciudad de\n\nSanto Domingo.................... man a ma e e o e a a 53\n— Resolución del Ayuntamiento del Distrito Nacional ..................... 55\n— Mapa de Límites Urbanos de la Ciudad de Santo Domingo................ 57\n— Zonas para Regulación de Estacionamiento en la Ciudad de Santo\nDomingo. .saumrzrra ARIEL mn ces ma ens a A 59\n— Factores de Reducción del Número de Espacios Requeridos (K). . . mm nee .. 61\n— Zonas para Regulación en la Ciudad de Santo Domingo ................. 63\n— Apéndice... 2... cece eee tect eben eeeney 67\nBIBLIOGRAFIA. ................2.. Tete whee AER 70\n\niv\n",
+      "text_sha256": "599193341bf1f9c044e1221759c218a8b010a692373c83a74f961dc23d884e1c",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 12,
+      "printed_page": null,
+      "text": "L- ASPECTOS GENERALES\n\n1.1\n\n1.2\n\n1.3\n\nObjetivo\n\nEstablecer las características principales que deben cumplirse en los diseños de esta-\ncionamientos para alojar los vehículos de los usuarios y/o habitantes de las edificacio-\nnes que sean proyectadas, reconstruidas o restauradas en las áreas urbanas o suburba-\nnas del país, de acuerdo al flujo de vehículos que se espera, y a las características de —\nla zona donde se encuentren ubicadas.\n\nCampo de Aplicación\n\nEstas reglamentaciones serán aplicadas a todos los proyectos de edificaciones a cons-\ntruirse en todo el territorio nacional que requieran de áreas espectficas para estacio-\nnamiento, dotadas de los espacios necesarios, según el uso a que estarán destinadas di-\nchas edificaciones y al lugar donde serán construidas.\n\nEstas áreas estarán efectivamente delimitadas de la vía pública y deberán cumplir con\nlos criterios de funcionamiento, conexiones con dichas vías y controles de acceso,\nasí como con las divisiones especiales, marcas y señales necesarias que garanticen\nuna adecuada circulación dentro de dicha área.\n\nDe igual manera, se establecen los requisitos a cumplirse en el caso en que las disponi-\nbilidades de terreno impongan que el área especifica para estacionar sea dispuesta den-\ntro de una edificación, o en una especialmente proyectada para tal fin.\n\nNotación\n\nDonde quiera que en un plano de estacionamiento vehícular aparezcan las siguientes\nnotaciones, sus significados representarán lo siguiente: (véase fig.1.1 de la pág. No.3).\n\na: Ancho libre del “Espacio de Estacionamiento”, medido en metros perpendicu-\nlarmente a su eje, delimitado por bordillos, marcas en el pavimento y otros,\ndependiente del ancho del vehículo que lo usará.\n\nCc: Longitud de ‘Cuneta’ por carro, medida: en metros en la dirección del “Pasi-\nllo de Circulación”, dependiente del ángulo formado por el eje del “Pasillo\nde Estacionamiento” y dicho “Pasillo”\n\nd: Ancho de la “Casilla”, medida en metros perpendicularmente al eje del “Pasi-\nllo de Circulación”, dependiente del ángulo formado por el eje del “Espacio de\n\nEstacionamiento” y dicho pasillo, correspondiente a los estacionamientós en\n“Linea Sencilla o Recta”\n",
+      "text_sha256": "448f87fd8c59f9ce82c82cb22e15478cc9f8e1f143cf7e237740da57420d8fbd",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 13,
+      "printed_page": null,
+      "text": "di:\n\nDE:\n\nDP:\n\nRC:\n\nRi:\n\nIgual significado que d, pero aplicado a los casos de estacionamientos del\n“Tipo Arenque” o ““Tipo Enllavado\"'\n\nFactor de reducción del número de “Espacios-de Estacivnamiento” requeri-\ndos por una edificación, de acuerdo a la zonificación aprobada para estos fi-\nnes\n\nAncho total de la “Unidad de Estacionamiento”, compuesta por dos ‘‘Casi-\nllas\" y un *”Pasillo de Circulación”, medido en metros perpendicularmente\nal “Pasillo”\n\nDistancia desde el punto de tangencia de la “Curva de Enlace” de un “Acceso”\nhasta el punto de tangencia de la curva de una esquina. medida en metros.\n\nDistancia desde el punto de tangencia de la 'Curva de Enlace” de un “Acceso”\nhasta el límite de propiedad adyacente, medida en metros.\n\nSeparación entre los puntos de tangencia de las “Curvas de Enlace” de dos\n“Accesos” de una misma''Area de Estacionamiento”, medida en metros.\n\nLongitud del “Espacio de Estacionamiento ' medida en metros según el eje del .\nmismo. |\n\nAncho del “Pasillo de Circulación”, dependiente del ángulo que con él forme\nel eje del “Espacio de Estacionamiento” y de la longitud del vehículo tipo ele-\ngido, medido en metros perpendicularmente al eje del “Pasillo”,\n\nLongitud de ‘Casilla’ no utilizable, medida en metros en la dirección del\n“Pasillo de Circulación” al inicio y al final del mismo, en los estacionamientos\nde “Línea Sencilla o Recta”.\n\nRadio de la ‘‘Curva de Enlace” de un acceso, medida en metros.\n\nIgual significado que R, pero aplicado a los casos de estacionamientos del\n“Tipo Arenque” o “Tipo Enllavado”.\n\nAncho de un “Acceso”, medido en metros en dirección perpendicular a su línea\nde centro, sin incluir la apertura que producen las “Curvas de Enlace'' del mis-\nmo.\n\nAngulo formado por el eje del “Espacio de Estacionamiento’’ con la dirección\ndel “Pasillo de Circulación”.\n\nAngulo formado por la línea de centro de un “Acceso” con el eje de la \"Via Pú-\nblica’’ a que sirve,\n",
+      "text_sha256": "bfa0e59f2396778391b4fd8e6e8a3fe33583fc75ad780f68d32566ceb835008f",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 14,
+      "printed_page": null,
+      "text": "VUOLIITO) VIA O VAINIAV “VIVALAUV\n\n|\n\nS 8\no\n\nSs :\n3 E\n> e]\ny IB\n\n>\n\n——— iw]\n\nSODIdIL SOSAIDV\nVl Vanda\n\n",
+      "text_sha256": "5a389b9de796999bca95cdec6da7b93562b7578e59ab537a64188829ed170eaf",
+      "quality_flags": [
+        "texto_escaso_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 15,
+      "printed_page": null,
+      "text": "",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "quality_flags": [
+        "sin_texto_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 16,
+      "printed_page": null,
+      "text": "1.4 Definiciones\n\nLos siguientes términos, siempre que se empleen en este reglamento y a todos los efec-\ntos del mismo, tendrán el significado que a continuación se expresa:\n\n1.4.1\n\n1.4.2\n\n1.4.3\n\n1.4.4\n\nAcceso\n\nEs el espacio libre que permite la entrada y/o salida a un área especifica para es-\ntacionamiento, conectándola con una vía de circulación pública, para lo cual ha\nsido interrumpido el contén de dicha vía.\n\nAcera\n\nEs la parte de una vía pública destinada exclusivamente para el uso de peatones,\nlimitada por la vía del contén y la línea de las propiedades adyacentes a la via\npública.\n\nArea Específica para Estacionamiento\n\nEs aquella que, a cielo abierto o bajo techo, ha sido dispuesta para alojar los\nvehículos de los usuarios, visitantes ocasionales y/o habitantes de una edifica-\nción, de un conjunto de edificaciones, de un área o local donde se haya de reu-\nnir público o un sector cualquiera de la ciudad, situada fuera de las vías públi-\ncas y totalmente delimitada con respecto a éstas.\n\nArteria\n\nEs aquella vía urbana, con o sin isleta central, destinada primordialmente a pro-\nporcionar un medio para la circulación del tránsito vehicular en la forma más\nexpedita posible, y que tiene como: fin secundario el acceso a las propiedades\ncolindantes. Las vías que se consideren arterias serán designadas por la Direc-\nción General de Tránsito Terrestre de la SEOPC, en coordinación con la Direc-\n\nción General de Planeamiento Urbano del Ayuntamiento del Distrito Nacional\no con la Sindicatura de la localidad urbana de que se trate.\n",
+      "text_sha256": "2d3fb589639dc5653fec7bca213756b578fa88e3045e4a4dbad062ad0bbd45f1",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 17,
+      "printed_page": null,
+      "text": "1.4.5\n\n1.4.6\n\n1.4.7\n\n1.4.8\n\n1.4.9\n\nAvenida (via colectora)\n\nEs aquella vía urbana, con o sin isleta central, cuyo objeto es recoger el trán-\nsito de una zona urbana para conducirlo a uma arteria, y al mismo tiempo dar\nservicio a las propiedades colindantes. Las vías que se consideren avenidas ( y\nvías colectoras) serán designadas por la Dirección General de Tránsito Terrestre\nde la SEOPC, en coordinación con la Dirección General de Planeamiento Urba-\nno del Ayuntamiento del Distrito Nacional o con la Sindicatura de la localidad\nurbana de que se trate.\n\nCalzada\n\nEs aquella parte de una vía destinada al tránsito de vehículos, que corresponde\nal área ocupada por el pavimento, cuando existe, excluyendo los paseos.\n\nCasilla\n\nEs la proyección del espacio de estacionamiento en la dirección perpendicular\nal pasillo de circulación.\n\nContén (bordillo)\n\nPieza vertical o inclinada situada a lo largo del borde de una calzada que define\nclaramente su limite.\n\nCuneta\n\nEs la proyección del espacio de estacionamiento en la dirección paralela al pasi-\nllo de circulación.\n\n1.4.10 Curva de Enlace de un Acceso\n\nEs el arco de curva circular que parte del contén (bordillo) hacra la acera de una\nvía pública, donde se disponga un acceso a un área especifica para estacionar.\n\n1.4.11 Espacio de Estacionamiento\n\nEs un área delimitada por bordillos, marcas en el pavimento y otros, en la cual\nun vehículo puede ser estacionado cómodamente dentro dé un área especffica\npara estacionar, cuyo eje puede formar un ángulo entre 0% y 900 con la direc-\nción del pasille de circulación de la misma.\n\n",
+      "text_sha256": "d34af235b760f71cb1074e4240487e2d5da4cdf3613fa76c8b332640a966a52c",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 18,
+      "printed_page": null,
+      "text": "1.4.12 Estacionamiento (parqueo) en “Línea Sencilla o Recta”\n\nEs aquella unidad de estacionamiento dispuesta de tal forma que el área anexa\na la línea de cuneta, no utilizable como espacio de estacionamiento,no viene a\nformar parte de otra unidad de estacionamiento adyacente, según esquema de\nla fia. 1 del anexo.\n\n1.4.13 Estacionamiento (parqueo) “Tipo Enllavado”\n\nEs aquella unidad de estacionamiento dispuesta de tal forma que el área anexa a\nla línea de cuneta, no utilizable como espacio de estacionamiento, viene a for-\nmar parte de otra unidad de estacionamiento adyacente, según esquema de la\nfig. 2 del anexo, siendo coincidentes los ejes de ambas unidades adyacentes.\n\n1.4.14 Estacionamiento (parqueo) “Tipo Arenque”\n\nEs aquella unidad de estacionamiento dispuesta de tal forma que el área anexa a\nla línea de cuneta, no utilizable como espacio de estacionamiento, viene a for-\nmar parte de otra unidad de estacionamiento adyacente, según esquema de la\nfig. 2 del anexo, siendo los ejes de los espacios de estacionamiento de ambas\nunidades perpendiculares entre sí.\n\n1.4.15 Unidad de Estacionamiento\n\nEs el área que comprende los espacios de estacionamientos requeridos separa-\ndos por un pasillo de circulación, dentro de un área especifica para estacionar.\n\n1.4.16 Pasillo\nEs el área comprendida entre los espacios de estacionamientos de una unidad de\nestacionamiento, destinada a servir de salida y/o entrada a los vehículos que\nocupen dicha unidad.\n\n1417 Vía Local\n\nEs aquella que está destinada principalmente a proveer acceso a las propieda-\ndes colindantes.\n\n1418 Area Neta\n\nEs el área en planta de la edificación excluyendo la circulación horizontal y\nvertical así como el área de los muros.\n",
+      "text_sha256": "d182f94f593a565ef038fe88baab3d4146ba2dfa5821a2dc373dcf3350d5958c",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 19,
+      "printed_page": null,
+      "text": "1.419 Edificación de Uso Público\n\n_ Son todas aquellas edificaciones destinadas a prestar servicios al público en ge-\nneral. :\n\n14.20 Edificaciones de Servicios Esenciales\n\nSe considerarán dentro de este grupo las siguientes:\n\na)\nb)\nc)\n\nEscuelas, colegios, universidades y bibliotecas.\nHospitales, centros de salud, centros médicos y asilos.\nEstadios, auditorios, cines y teatros.\n\nOficinas comerciales, bancos.\n\nSupermercados, tiendas y restaurantes.\n\nHoteles, hostales y similares.\n\n1.5 Requisitos Mínimos para Aprobación de Estacionamiento.\n\nTodos los proyectos de edificaciones que requieran de áreas específicas para estacio-\nmiento deberán ser sometidos a la Dirección General de Tránsito Terrestre, a través\nde la Oficina de Tramitación de Planos, de la Dirección General de Edificaciones, de\nla SEOPC, los cuales deberán cumplir con los requisitos mínimos establecidos en esta\n\nsección.\n\n1.5.1\n\n152\n\n15.3\n\nTodos los proyectos ubicados en zonas urbanas, sub-urbanas y turísticas, in-\ncluyendo los de la costa norte, excepto viviendas individuales, deberán estar\naprobádos provisionalmente por la Dirección General de Tránsito Terrestre,\nen su fase de anteproyecto. (Véase mapa de límites urbanos en el anexo).\n\nLos proyectos ubicados en las carreteras deberán estar aprobados provisio-\nnalmente en su fase de anteproyecto por la Dirección General de Carreteras,\nantes de ser sometidos a la Dirección General de Tránsito Terrestre, a fin de\nasegurar que su ubicación, incluyendo el área para estacionamiento, estén\n\nfuera del derecho de vías establecido según la zona, de acuerdo a la ley\n\n1474 del 22 de febrero de 1938 y sus modificaciones. .\n\nPara estas aprobaciones provisionales se requerirán dos (2) copias de los pla-\nNos, que incluyan por lo menos: elevaciones, planta arquitectónica, planos\nde acondicionamiento del terreno y de ubicación, así como también la carta\nde uso de suelo, En las edificaciones cuyo acceso al estacionamiento sea en\nPendiente, se requerirán además, secciones donde se presenten rampas con\ninformaciones claras sobre las pendientes, alturas de entrepiso, transición\nen pendiente y cualquier otro detalle necesario para su debida interpretación.\n\n",
+      "text_sha256": "b611ca4b9843f2f768b37e56898f22eab2ea03ab12916c8e6371b9e96f52bc53",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 20,
+      "printed_page": null,
+      "text": "1.5.4\n\n155\n\n1.5.6\n\n1.5.7\n\n158\n\nPARRAFO: _ Se verificará que todos los proyectos de edificaciones al ser\nsometidos cumplan con las características propias dél uso a que serán desti-\nnados.\n\nLos proyectos ubicados en la Ciudad Colonial de Santo Domingo y en otros\nCentros Históricos declarados por Ley, deberán ser sometidos en su fase de\nanteproyecto a la Oficina Nacional de Patrimonio Cultural de la Presidencia\nde la República donde se trazarán lineamientos para la determinación de las\náreas destinadas al estacionamiento vehicular. Además, para verificar el buen\nfuncionamiento de las áreas de estacionamientos dichos anteproyectos deberán\nser sometidos a la Dirección General de Tránsito Terrestre.\n\nEn caso de proyectos turísticos en el que se presenten cabañas, se exigirá\nun espacio de estacionamiento por cada una, además de los espacios reque-\nridos por cada área que preste servicios.\n\nLas edificaciones que se proyecten para ser construidas O reconstruidas en\naquellas vias publicas, o conjunto de vías públicas, que hayan sido decreta-\ndas como de circulación peatonal por los respectivos Ayuntamientos, queda-\nrán exentos de la obligación de disponer un área específica para estacionar,\n\nEn todo proyecto de edificación destinado a presentar espectáculos públicos\ncon capacidad de tres mil (3,000) o más personas, será obligatorio habilitar\nun estacionamiento exclusivo para vehículos de emergencia (Ambulancia,\nBomberos, Policía, Rescate, etc.) debidamente señalizado y protegido.\n\nPARRAFO |:\n\nEn estos casos las rutas de ingreso y salida deben estar siempre libres para\nuna fácil evacuación en caso de emergencia.\n\nPARRAFO II:\n\nDeberá habilitarse una salida de emergencia por cada ciento cincuenta (150)\nvehículos, ubicada lo más equidistante posible de los mismos.\n\nEn caso de ampliaciones horizontales y verticales la edificación deberá cum-\n\nplir con el número total de estacionamientos requeridos para la nueva edifi-\ncación.\n",
+      "text_sha256": "63b25028fdb912146cf1a8b7848a778a2228fabeedeb23b8bc3e7c71f1f299af",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 21,
+      "printed_page": null,
+      "text": "1.5.9\n\n1.5.10\n\n1.5.11\n\n1.5.12\n\n1.5.13\n\nEn caso de “una y solo una” ampliación vertical que no involucre cambio en\nel uso de la edificación, no se requerirá nueva área de estacionamiento siem-\npre y cuando el número de estacionamientos requeridos no sea mayor del\nventicinco por ciento (253) del total dé estacionamientos existentes y la\nlicencia de construcción de la edificación tenga por lo menos cinco (5)\naños de haberse aprobado.\n\nSe exceptúan de esta disposición las edificaciones para viviendas, las cuales\ndeberán cumplir con los requisitos contemplados en este reglamento.\n\nPARRAFO: Cualquier solicitud de ampliación posterior deberá cumplir\ncon el acápite 1.58.\n\nCuando una remodelación contemple cambio en el uso de la edificación,\nse exigirá que la misma cumpla por lo menos con el cincuenta por ciento\n(503) de los estacionamientos requeridos por el nuevo uso de acuerdo a este\nreglamento, siempre y cuando la primera licencia de construcción de la edifi-\ncación tenga por lo menos cinco (5) años de haberse aprobado.\n\nPARRAFO: Cualquier solicitud de remodelación posterior con un nuevo\n\ncambio en el uso deberá cumplir con estas reglamentaciones.\n\nSe permitirá el sistema de estacionamiento con parqueador, exclusivamente\nen: Hoteles, Aparta-hoteles, Centros de Recreación y Deportes, Centros de\nSalud, Restaurantes, Discotecas, Casinos, Teatros, Cines y Oficinas en Gene-\nral, para lo cual deberá presentarse un diseño que lo justifique, acompañado\nde un acta notarial.\n\nEn conjuntos. habitacionales donde se habiliten dos estacionamientos por\napartamento, éstos deberán estar dispuestos uno detrás del otro (estaciona-\nmiento en doble línea; ver fig. 1.2 de la pág. No. 13).\n\nPARRAFO: Se permitirá el uso de parqueador en conjuntos habitacionales\nexclusivamente en los casos en que se ofrezcan más de dos (2) estacionamien-\ntos por apartamento, siempre y cuando se justifique que no hay otra solu-\nción para el diseño del área de estacionamiento.\n\nEn caso de que el terreno disponible para el proyecto de edificaciones no sea\nsuficiente para cumplir con este reglamento, se permitirá el uso de un terreno\npara estacionamiento próximo a la edificación, con la condición de que no\nhaya que cruzar más de una calle y que se encuentre a no más de cien (100)\nmetros de la edificación, el cual no podrá ser utilizado para otros fines,\n\n10\n",
+      "text_sha256": "4795da456d3cc4cb6240ef2c1fcc3e743466cddf7ed7e9949f4b55a87be6c5f0",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 22,
+      "printed_page": null,
+      "text": "1.5.14 Todas las edificaciones de servicios esenciales, señaladas en el acápite 1.4.20,\nasí como los proyectos turísticos ubicados en áreas urbanas y sub-urbanas,\nserán dotadas de estacionamientos especiales para personas con limitación,\nde acuerdo a lo establecido en la sección 5.7 de las Recomendaciones Provi-\nsionales para Proyectar sin Barreras Arquitectónicas. Estos estacionamientos\nestarán ubicados lo más cercano posible de la entrada principal del proyecto.\n\nLos estacionamientos requeridos se determinarán en base al número total de\nestacionamientos calculados para el proyecto de acuerdo al presente regla-\nmento, y según el cuadro siguiente. Del número total de estacionamientos\nse sustituirá el correspondiente al de minusválidos.\n\nNUMERO DE ESPACIOS PARA\nPERSONAS CON LIMITACION\n\nNUMERO TOTAL DE ESPACIOS\nDE ESTACIONAMIENTOS\n\nMenos de 100\n\n1 por cada 50 6 fracción\n\n2 más 1 por cada 100 6\nfracción en exceso de los\nprimeros 100.\n\nMás de 100\n\n11\n",
+      "text_sha256": "6d555657d3cb0c5a28a288c7c28da71ee5fe47c6adf81ab3f2e1c364de71150f",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 23,
+      "printed_page": null,
+      "text": "",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "quality_flags": [
+        "sin_texto_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 24,
+      "printed_page": null,
+      "text": "MOHOUW\n\n=\n",
+      "text_sha256": "d7bda2fc8e08928936f8232cab93af562c0722c60ee91a7fb017da3222520dab",
+      "quality_flags": [
+        "texto_escaso_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 25,
+      "printed_page": null,
+      "text": "",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "quality_flags": [
+        "sin_texto_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 26,
+      "printed_page": null,
+      "text": "2. ESPACIOS DE ESTACIONAMIENTOS A CONSIDERAR SEGUN EL USO D\nEDIFICACIONES.\n\n2.1 Generalidades\n\nE LAS\n\nEn este capítulo se establecen los criterios para determinar los espacios de estaciona-\n\nmientos requeridos en las edificaciones, según el uso a que serán destinadas.\n\nEl total de espacios de estacionamientos requeridos en las edificaciones se determi-\nnará por la sumatoria de los estacionamientos parciales obtenidos, los cuales se calcu-\n\nlarán separadamente para cada área, según su uso.\n\nSe establece, además, un factor de reducción “K”, el cual dependerá de la zona don-\nde estará ubicada la edificación y el uso a que estará destinada. Para estos fines, se\nha considerado una zonificación que regula los estacionamientos para la ciudad de\nSanto Domingo, cuyas zonas están delimitadas de acuerdo a lo señalado en el mapa\n\ndel anexo.\n\nAdicionalmente se dispondrá un área específica para motocicletas en las edi\nnes que así lo requieran, de acuerdo a estas reglamentaciones. El total de est\n\nficacio-\nos esta-\n\ncionamientos será determinado como un porcentaje del número total de estaciona-\nmientos para vehículos de motor. En estos casos se dispondrá de un tubo de hierro\n\ngalvanizado de cinco centímetros (2 pulg) de diámetro, el cual se colocará a\ncentímetros (60 cm) de altura del piso terminado, como facilidad de segurid\nel usuario. (Véase figs. 1.3 y 2.3 del anexo).\n\nsesenta\nad para\n\nCuando se presenten planos donde no se delimiten las áreas especificamente (pasi-\nllos, escaleras, etc.) se determinarán los espacios de estacionamientos considerando\n\ntoda el área de la edificación.\n\n2.2 Número de Espacios Requeridos\n\nSerán aplicadas las siguientes disposiciones a todas las Edificaciones, de acuerdo\nal uso a que estarán destinadas, las cuales cumplirán además con los requisitos de la\n\nsección 2.1.\n\nAsímismo, deberán cumplir con las disposiciones del acápite 1.5.14 exceptuando\n\nlas Escuelas, Edificios Industriales, Almacenes, Depósitos.\n\n15\n",
+      "text_sha256": "d9f34befc2e86de993c7e77c59c2171cc37971f82ca7b10311a9f4eef42709c6",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 27,
+      "printed_page": null,
+      "text": "2.2.1\n\nViviendas\n\na)\n\nb)\n\nUnifamiliares\n\nSe requerirá un (1) espacio de estacionamiento para cada vivienda unifa-\nmiliar.\n\nApartamentos y Viviendas en Hilera\n\nUn (1) espacio de estacionamiento por cada unidad de vivienda. Cuando\nlos apartamentos sean de una habitación, se requerirá cero punto ochen-\nta (0.80) espacio de estacionamiento.\n\nEn proyectos de apartamentos donde el número de viviendas exceda de\nveinte (20), se exigirá un espacio de estacionamiento adicional por cada\ndiez (10) unidades, para visitantes.\n\nEn caso de viviendas en hilera deberá presentarse la sección típica de las\ncalles. En calles cerradas con longitudes que sobrepasen de cincuenta\n(50.00) metros deberá proveerse de un área para devolverse ‘‘Cul-de-\nSacs’’. (Véase fig. 2.1 de la pág. No. 17).\n\n",
+      "text_sha256": "faa5a0c8b5e8a5043ed0f4358a4eae18623f122469e486428bc6bdc14ddb175d",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 28,
+      "printed_page": null,
+      "text": "FIGURA 2.1\nAREAS MINIMAS PARA CIRCULACION EN\nCALLES CERRADAS (Longitud > 50.00 Metros)\n\nR= 25.00\n\n| 6.00\n\neh CALLE SIN SALIDA (DEAD— 4%\n\n,-8.00; E (DEAD-END)\n17\n",
+      "text_sha256": "ffa2cf236d254491276ac11aceb06d8fd0df56067c20c96786c6aea7262cb490",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 29,
+      "printed_page": null,
+      "text": "",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "quality_flags": [
+        "sin_texto_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 30,
+      "printed_page": null,
+      "text": "2.2.2\n\nEdificios Comerciales e Industriales\n\n2.2.2.1\n\n2222\n\nOficinas en General\n\nSe considerard un (1) espacio de estacionamiento por cada cubrcu-\nlo cuya área sea menor de treinta (30) metros cuadrados, en pro-\nyectos ubicados en avenidas o vías colectoras; para los demás casos\nse considerará un (1) espacio por cada cuarenta (40) metros cua-\ndrados. Cuando los cubículos tengan áreas mayores, o cuando el\nárea para oficinas no haya sido subdividida, se requerirá un (1)\nespacio de estacionamiento por cada treinta (30) metros cuadrados\nde área neta, o de uno (1) por cada cuarenta (40) metros cuadra-\ndos, según lo anteriormente señalado.\n\nPara el área de recepción o espera, se considerará un (1) espacio de\nestacionamiento por cada cinco (5) metros cuadrados.\n\nBancos Comerciales, Asociaciones de Ahorros y Préstamos e Insti-\ntuciones Crediticias.\n\nSe considerará un (1) espacio de estacionamiento por cada cub ícu-\n\nlo para oficina cuya área sea menor de treinta (30) metros cuadra-\ndos. Para los cubrculos con áreas mayores y para aquellas áreas de -\nuso general, se requerirá un (1) espacio de estacionamiento por ca-\n\nda treinta (30) metros cuadrados de superficie neta, en caso de\n\nproyectos ubicados en avenidas y vías colectoras, y uno (1) por\n\ncada cuarenta (40) metros cuadrados en los demás casos.\n\nPara las áreas destinadas a uso público se requerirá un (1) espacio\n\n- de estacionamiento por cada cinco (5) metros cuadrados de super-\n\nficie neta, excluyenao las áreas de circulación.\n\nEn Bancos Comerciales se considerará, además, para el estaciona-\nmiento de motocicletas, un veinte por ciento (203) de los espacios\nrequeridos para vehículos de motor y un diez por ciento (10%) en\n\nlas Asociaciones de Ahorros y Préstamos e Instituciones Crediti-\ncias.\n\nPara la determinación de estas áreas será imprescindible presentar\nuna planta de la edificación con la delimitación de las mismas.\n\n19\n",
+      "text_sha256": "61c166ad8f10a763ee3e7e4456c8e1bf347fbf32e02cb565caeafb43ffa24cb5",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 31,
+      "printed_page": null,
+      "text": "2.2.2.3 Edificios Comerciales.\n\na)\n\nTiendas, Expendios de Productos al Detalle (Mercados, Super-\nmercados y otros).\n\nUn espacio de estacionamiento por cada veinticinco (25)\nmetros cuadrados de superficie neta, en avenidas y vías colec-\ntoras y por cada treinta (30) metros cuadrados en los demás\ncasos.\n\nAdemás, se considerará para el estacionamiento de motocicle-\ntas un quince por ciento (15%) de los espacios requeridos para\nvehículos de motor.\n\nAlmacenes\n\nAdemás de las ¿reas de oficinas, se exigirán los siguientes espa-\ncios de estacionamiento.\n\n1) Para ventas al por mayor\n\nUn espacio de estacionamiento por cada sesenta (60) me-\ntros cuadrados de superficie neta, para proyectos menores\nde mil (1,000) metros cuadrados de construcción. Para\nsuperficies mayores, solo se calcularán para los primeros\nmil (1,000) metros cuadrados.\n\n2 Para depósitos\n\nUn (1) espacio de estacionamiento por cada ciento veinte\n(120) metros cuadrados. de superficie neta, para áreas\nmenores de dos mil quinientos (2,500) metros cuadrados.\nEn superficies mayores solo se calculardn para los prime-\nros 2,500 metros cuadrados.\n\nSe considerarán como almacenes para depósito aquellas\nedificaciones cuyas características arquitectónicas garan-\n“ticen su.uso. Sus pisos deberán estar terminados en hor-\nmigón, sus ventanas estarán a no menos de dos (2) metros\nsobre el nivel del piso, no tendrán paneles fijos de vidrio,\ny estarán ubicados en un lugar aislado de las actividades\ncomerciales; en los demás casos se calculará como almacen.\n\n20\n",
+      "text_sha256": "b2f48274071a920c99bb7f1af7fe031b7b902aa743f5ae717625bccc8a2e0ecc",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 32,
+      "printed_page": null,
+      "text": "c)\n\nEn ambos casos se deberá proveer además, un (1) espacio de esta-\ncionamiento para. carga y descarga de camiones por cada tres\ny medio (3.50) metros lineales de andenes de cargas o por\npuertas anchas proyectadas.\n\nEn caso de almacenes con superficie mayor de mil (1,000) me-\ntros cuadrados y depósitos mayores de dos mil quinientos\n(2,500) metros cuadrados se deberá cumplir con ¡as condicio-\nnes estandarizadas para estacionamiento y radio de giro, para\nfacilitar el movimiento de vehículos pesados.\n\nRestaurantes, Discotecas, Cafeterías, Pizzerías, Bares, Helade-\nrías y otros.\n\nUn espacio de estacionamiento por cada diez (10) asientos de-\nsarrollados o por cada doce y medió:(12:50) metros cuadrados\nde la superficie neta para público, adoptándose el valor mayor.\n\nch) Hoteles y Aparta-Hoteles\n\n1). Zona Urbana\n\nUn (1) espacio de estacionamiento por cada cinco(5) habi-\ntaciones más dos (2) espacios para el estacionamiento tem-\nporal de autobuses, cuya ubicación estará próximo a la en- o\ntrada principal o a algún acceso que sirva para entrada y\nsalida de grupos de visitantes. Asimismo, se determinarán\nlos espacios correspondientes a las demás'áreas de servicio\ndel hotel, los cuales podrán ser reducido en un:veinte-y cine >\nco por ciento (253) por la frecuencia de uso de los diferen-\ntes espacios. : i\n\n2) Zona Sub-Urbana\n\nUn’ espacio’ ‘de estacionamiento por cada cinco(5) habita-\nnes; además de los espacios requeridos por cada área ad-\nministrativa, salones de conferencias, multiuso;.etc., se\nrequerirá un (1) espacio de estacionamiento por cada es-\npacio arquitectónico diferente y un (1) espacio de estacio-\nnamiento para autobuses de cien (100) pasajeros por cada\nciento cincuenta (150) habitaciones.\n\n21\n",
+      "text_sha256": "b31c371d05a38199a49c9c2dcfe6c5fb3551e7e74b3effff75f1763ffd798fb7",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 33,
+      "printed_page": null,
+      "text": "2.2.3\n\nUn (1) espacio de estacionamiento para motores por cada\ndiez (10) habitaciones y un mínimo de cinco (5) estaciona-\nmientos para proyectos de hasta treinta (30) habitaciones.\n\nd) Casas de Huéspedes\n\nUn espacio de estacionamiento por cada cinco (5) habitacio-\nnes.\n\nel) Moteles\nUn (1) espacio de estacionamiento para cada habitación.\nf) Edificios Industriales\n— Un (1) espacio de estacionamiento por cada doscientos cin-\ncuenta (250) metros cuadrados calculables, hasta cinco mil .\n(5,000) metros cuadrados.\n— Un (1) espacio de estacionamiento para motocicletas por\n\ncada quinientos (500) metros cuadrados, calculable para\náreas de taller exclusivamente.\n\nInstituciones Educativas\n\nLos espacios de estacionamiento requeridos deberán estar aislados de las acti:\nvidades escolares.\n\n2.2.3.1 Escuelas Públicas\n\nUn (1) espacio de estacionamiento por cada diez (10) aulas, más\notro adicional por cada cubículo de oficina administrativa.\n\n2.2.3.2 Colegios\n\n— Un (1) área especifica para el estacionamiento temporal de\nautobuses.\n\n22\n",
+      "text_sha256": "904abc0467b54a83fdc7f3eefb02f399293188f7b8010bb92d3a7089cde98b59",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 34,
+      "printed_page": null,
+      "text": "a) Colegios de Educación Primaria\nUn (1) espacio de estacionamiento por cada cinco (5) aulas,\nmás otro adicional por cada cubículo de oficina administra-\ntiva.\n\nb) Colegios de Educación Secundaria\nUn (1) espacio de estacionamiento por cada dos (2) aulas,\nmás otro adicional por cada cubículo de oficina administra-\n\ntiva.\n\n2.2.3.3 Universidades, Instituciones de Educación Superior y Academias\nComerciales.\n\nUn (1) espacio de estacionamiento por cada veinticinco (25) metros\ncuadrados de superficie neta.\n\nEn Universidades se considerará, además, para el estacionamiento de\nmotocicletas, un setenta y cinco por ciento (75%) de los espacios\nrequeridos para vels(culos de motor\n\n2.2.4 Edificios para Reuniones Públicas\na) Cines, Teatros y Anfiteatros, Estadios Deportivos.\nUn a) espacio de estacionamiento por cada diez (10) plazas (asientos).\nb) Salas de convenciones, Exhibiciones y Bailes, Salones de Juego.\n\nUn (1) espacio de estacionamiento por cada cinco (5) metros cuadrados,\nexceptuando las áreas de circulación.\n\nc) Iglesias\n\nUn (1) espacio de estacionamiento por cada veinticinco (25) plazas o por\n\ncada doce y medio (12.5) metros cuadrados de superficie neta, adoptán-\ndose el valor mayor.\n\n23\n",
+      "text_sha256": "4f18823dba1a4c5b0bdc3ccf91b7c50e06bf7d2adf26219814ab0b290b215bd9",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 35,
+      "printed_page": null,
+      "text": "2.2.5\n\nch) Capillas Funerarias\n\nUn (1) espacio de estacionamiento por cada cinco (5) metros cuadrados\nde superficie para áreas de público, exceptuando las áreas de circulación.\n\nCentros de Salud\n\na) Hospitales y Sanatorios Públicos\nUn (1) espacio de estacionamiento por cada veinte (20) camas.\n\nb) Clínicas y Centros Médicos Privados\nUn (1) espacio de estacionamiento por cada tres (3) camas, además de las\náreas administrativas y de consultorios. Se exceptúa el cálculo de cafete-\nría y otros serviclos Internos de la edificación.\n\nc) Dispensarlos Médicos, Edificios Profesionales de Consulta y Consultorios.\nUn (1) espacio de estaglonamlento por cada consultorio más un espacio\n\nde estacionamiento por cada cinco (5) metros cuadrados en áreas de es-\n\npera.\n\n24\n",
+      "text_sha256": "347a5feeeca848b6e89293e9e9fa61d7b4d7bc3019e7f6502fde3f7b43748e2f",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 36,
+      "printed_page": null,
+      "text": "2.3 Porcientos de Reducción del Número de Espacios de Estacionamiento. Excepciones.\n\n2.3.1\n\n2.3,2\n\n2.3.3\n\n2.3.4\n\nCiudad de Santo Domingo, Distrito Nacional.\n\nHa sido establecida una zonificación de la Ciudad de Santo Domingo y a ca-\nda zona le fue asignado un coeficiente de reducción *'K”', el cual varía de\nacuerdo al tipo de edificación. Los límites de cada zona y los valores corres-\npondientes de “K” fueron aprobados por Resolución de la Sala Capitular del\nHonorable Ayuntamiento del Distrito Nacional en base a un anteproyecto\npreparado por la Dirección General de Reglamentos y Sistemas en coordina-\nción con la Dirección General de Tránsito Terrestre y la Dirección General de\nPlaneamiento Urbano.\n\nProvincias\n\nSe aplicará un factor de reducción de 0.80 para las edificaciones de uso pú-\nblico ubicadas. en avenidas y vías colectoras y para los demás casos se aplica-\nrá un factor de reducción de 0.50, excepto en los polos turísticos cuyo fac-\ntor será igual a uno (1.00). Esta disposición será efectiva hasta tanto se con-\ncluyan las reglamentaciones para las ciudades del interior,\n\nFactores de reducción “K”.\n\nLa cantidad de espacios de estacionamientos requeridos, determinada según\nlos lineamientos de la sección 2.2 y sus acápites, será reducida multiplicándo-\nla por el valor de *'K** correspondiente, según la zona donde vaya a ser cons-\ntruida la edificación de que-se trate.\n\nCasos de Excepción\n\na) Cuando la edificación vaya a estar ubicada en una arteria, avenida o vía\ncolectora tal como se define en este reglamento, independientemente de\nla zona de que se trate, “K'\" se considerará igual a uno (1.00) en los\nsiguientes casos: oficinas en general, consultorios, bancos comerciales\nde todo tipo, asociaciones de ahorros y préstamos e instituciones credi-\ncias y edificios comerciales de todo tipo; universidades e instituciones\nde educación superior; estadios deportivos, cines, teatros y anfiteatros.\n\n25\n",
+      "text_sha256": "672e0a05baff834a04d2b190e2585e987de22ff2a8f3d2f426b8d9f109801254",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 37,
+      "printed_page": null,
+      "text": "b) Independientemente de la zona en que vayan a ser ubicadas aquellas edi-\nficaciones cuyos respectivos solares tengan un ancho medido paralela-\nmente a la vía publica aledaña menor que once (11.00) metros, podrán\nser proyectadas sin área especifica para estacionar siempre y cuando el\nnúmero de espacios de estacionamiento requeridos por dicha edificación,\naplicando el factor de reducción ‘’K’’ que le corresponde según su zona,\n\nsea menor de cinco(5).\n\nc) Cuando una edificación se encuentre ubicada en un sector que no esté\ndentro de la zonificación general presentada por las oficinas estatales co-\nrrespondientes, el factor de reducción a emplear deberá ser determinado\nconforme a criterios establecidos especialmente por la Dirección General\nde Tránsito Terrestre, para el caso especifico de que se trate.\n\nd) Cuando las características de las edificaciones lo requieran y se encuen-\ntren ubicadas en un sector donde el factor de reduccion ‘’K\"’ sea igual\na cero (0), el número de estacionamientos estará controlado por la Di-\nrección General de Tránsito Terrestre y el Ayuntamiento del Distrito\nNacional.\n\n2.4 Unidades de Estacionamiento que Compondrán un Area Específica para Estacionar\n\nSegún el requerimiento de espacios para estacionamiento, se proveerán tantas unida-\ndes de estacionamiento como sean necesarias, con uno o varios pasillos de circulación\nque cumplan con los requisitos establecidos en estas reglamentaciones, (Caprtulo 3).\n\nEl número de espacios de estacionamiento que se utilice en cada unidad dependerá de\nla longitud total de cuneta disponible y del ángulo que formen los ejes de los espacios\ncon su respectivo pasillo de circulación.\n\nPodrán disponerse medias unidades de estacionamiento, entendiéndose que las mismas\nestarán compuestas por los espacios de estacionamiento correspondientes y un pasillo\nde circulación cuyo ancho se ajuste al mínimo establecido para el caso del acápite\n3.3.1 y sus subacápites.\n\n26\n",
+      "text_sha256": "b691ed64d80e996644cfb1ac1cd66445cae147be37513ad26c6b19d79f84ab3b",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 38,
+      "printed_page": null,
+      "text": "3. DIMENSIONAMIENTO DE AREAS ESPECIFICAS PARA ESTACIONAMIENTO\nVEHICULAR.\n\n3.1 Factores a ser Considerados\n\nAl diseñar un área especifica para estacionar, deberán tomarse en consideración los\nsiguientes factores:\n\na) Número de espacios de estacionamiento (Véase 2.2 y 2.3)\nb) Tipos de estacionamientos (Véase 1.4.12 al 1.4.14 y figuras No.1 y 2 del anexo).\nc) Vehrculo tipo de diseño.\nd) Dimensiones minimas requeridas. Circulación interna; entradas y salidas.\n3.2 Vehículo Tipo de Diseño\n\nLos vehículos tipo a ser considerados para estacionamiento serán los siguientes y ten-\ndrán las dimensiones mínimas que se establecen a continuación:\n\nTIPO VEHICULO Longitud (L) Ancho Libre (a)\nMetros Metros\nLiviano\n(Automóviles) 5.00 2.30\nPesados ;\n(Camiones y Autobuses) 11.00 3.50\n\n20\n\nQueda a discresión del proyectista considerar dimensiones mayores según lo juzgue\nconveniente.\n\nEn caso de estacionamientos para personas con limitación las dimensiones deberán\ncumplir con las disposiciones establecidas en las reglamentaciones correspondientes.\n\n27\n",
+      "text_sha256": "e24d2494b14d6fe4e15c5f04ed9396dd5862daebbbe3618ff29cea48b87c170f",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 39,
+      "printed_page": null,
+      "text": "3.3 Dimensiones Mínimas Requeridas\nDe acuerdo al ángulo formado por el eje del espacio de estacionamiento con la direc-\nción del pasillo de circulación de una unidad de estacionamiento, al tipo de estaciona-\nmiento diseñado y al vehículo tipo elegido, las dimensiones mínimas requeridas se\nobtendrán como se establece en los acápites que siguen.\nEn las tablas de las figuras 1 y 2 del anexo se consignan las dimensiones mínimas tan-\n\nto para vehículos livianos y pesados como para motocicletas, según los ángulos indica-\ndos para todos los tipos de estacionamientos.\n\n3.3.1 Ancho del Pasillo (P)\n\nEs una constante que dependerá del ángulo de inclinación de los espacios de\nestacionamiento, del tipo de vehículo y del sentido de circulación.\n\nEste ancho se obtendrá mediante la ecuación:\nP=3.00 x (1x Tg (oc/2) x Tg (0c/2).\na) Vehrculos livianos\n\n— Circulación en uneanttda\n\ncono 455” : P =3.50 Mts;\n\nconoce = 60° : P=4.00 Mts;\nconc = 65 : P=4.22 Mts;\nconec = 70 : P=4.47 Mts.\n\n— Circulación en dos sentidos.\n\nconoc = 75 : P=4,77 Mts.\ncon 80% «< € 90° : P=6.00Mts.\n\nCuando el ángulo oc está comprendido entre’ 55° y 80° , para valores de\n\néste que no hayan sido indicados, P se determinará por prorrateo entre\nsus valores más cercanos.\n\n28\n",
+      "text_sha256": "34383437a740489435be9fc7224e8c79534bb83875ec37d0e6c7341f1e4d7165",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 40,
+      "printed_page": null,
+      "text": "b) Vehícuios pesados\n— Circulación en un sentido\ncon oc 450” : P= 3.50 Mts;\ncoroc = 55” : P= 8.00 Mts;\nconoc = 60° : P= 9.30 Mts;\nconoc = 65” : P=11.00 Mts;\nconoc =70* : P=12.85 Mts.\n\n— Circulación en dos sentidos,\n\nPe P = 13.25 Mts;\ncon 80°4 cc 490 : P=1350 Mts.\n\nCuando el ángulo oc está comprendido entre 55° y 80° , para valores de\néste que no hayan sido indicados, P se determinará por prorrateo en sus\nvalores.más cercanos.\nc) Motocicletas\n— Circulación en un sentido.\nconec 455 : P=1.20 Mts;\nconx< = 60° : P=1.26 Mts;\nconoc = 65” : P=1.31 Mts;\nconoc = 70° : P=1.36 Mts.\n\n— Circulación en dos sentidos.\n\nconcc=75 : P=1.41 Mts.\ncon 80°£ oc < 90° : P=1.60 Mts.\n\n3.3.2 Longitud de Cunetas por Vehículo (c).\nEsta longitud se obtendrá mediante la ecuación C=a / senos ;\n3.3.3 Ancho de la Casilla (d)\nEste ancho se obtendrá según el tipo de estacionamiento, mediante las ecua-\n\nciones que siguen para ( Oc #0).\n\n29\n",
+      "text_sha256": "fa61ffce5dac48db4e69575e579e4b7f682154d55e6ee5ba7e36ac176c32d2b6",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 41,
+      "printed_page": null,
+      "text": "3.3.4\n\n3.3.5\n\na) Estacionamiento de Linea Sencilla o Recta:\n\nd=a cosoc +L senoc\nb) Estacionamiento Tipo Arenque o Tipo Enllavado:\n\ndi =05 acosoc +L sen.\nAncho total de la Unidad de Estacionamiento (D)\nLa unidad de estacionamiento, compuesta por los espacios de estacionamien-\ntos separados por un pasillo de-circulación, en un sentido para a=75” yen\ndos sentidos para 75'<0%< 90”, deberá tener un ancho de acuerdo al tipo de\nestacionamiento, obtenido mediante las siguientes ecuaciones (para C¢ #0):\na) Estacionamiento de Línea Sencilla o Recta:\n\nD=2d+P=2 (acosoc+ L sena) + P.\nb) Estacionamiento Tipo Arenque o Tipo Enllavado:\n\nDi = 2di + P = (acosoc+2 Lsenoc) +P.\nLongitud de Casilla no Utilizable (R)\nSegún se define el término R.en la sección 1.3, existe un área no aprovechable\ndentro de una unidad de estacionamiento, cuya longitud medida en la direc-\nción del pasillo de circulación podrá obtenerse mediante las ecuaciones si-\nguientes (para OC £0).\na) Estacionamiento de Línea Sencilla o Recta:\n\na costoc\n\nR=d/tgx ———— + L cosce\nsenoc\n\nb) Estacionamiento Tipo Arenque o Tipo Enllavado:\n\na COS*0¢\nsen oc\n\nRi\n\n+ Lcosoc.\n\n30\n",
+      "text_sha256": "cd2e0319b9afb33acd1689ede3fcc9b4cea614c8daee40cff1ba96a1e633a160",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 42,
+      "printed_page": null,
+      "text": "3.4 Controles de Acceso\n\n3.4.1\n\n3.4.2\n\n3.4.3\n\n3.4.4\n\nDistancia de los Accesos a las Esquinas más Próximas (DE).\n\nLa separación o distancia de la orilla más cercana de un acceso de entrada y/o\nsa'ida a la esquina más próxima, se medirá entre los puntos de tangencia con\nel contén o bordillo de la curva de enlace del acceso y la curva de la esquina.\nLa minima distancia permitida, salvo que la Dirección General de Tránsito\nTerrestre la requiera mayor debido a las características propias de la intersec-\nción, será:\n\na) En zonas urbanas no comerciales.\n\n— Min. DE\n\nII\n\n10.00 Mts. en arterias, avenidas o vías colectoras.\n\n— Min. DE = 6.00 Mts. en vías locales.\n\n\"\n\nb) En zonas urbanas comerciales.\n\n— Min. DE =15.00 Mts. en arterias, avenidas o vías colectoras.\n— Min. DE =10.00 Mts. en vías locales.\n\nSeparación entre dos Accesos de Entrada y Salida a un Area Específica para\nEstacionar (IS).\n\nSe medirá entre los puntos de tangencia de las curvas de enlace de ambos.\n\naccesos con el contén o bordillo. La minima distancia (IS) permitida será\nde dos (2.00) metros.\n\nSeparación de los Límites de Propiedad (DP).\nSe medirá entre el punto de tangencia de la curva de enlace más cercana con\n\nel contén o bordillo y la intersección de la prolongación del límite de propie-\ndad con aquel. Su separación mínima será de un (1.00) metro.\n\nAncho de los Accesos de Entrada o Salida (S).\n\nSe medirá a ángulo recto con el eje del acceso, en la línea formada por las in-\ntersecciones de las curvas de enlace del mismo con la parte exterior de la ace-\nra. El ancho permitido estará comprendido entre los siguientes límites:\n\n31\n",
+      "text_sha256": "83bf45b6c8f2354cdef8ba1b2c82b2588c7406a769cee3b3111355491bbeca15",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 43,
+      "printed_page": null,
+      "text": "3.4.5\n\n3.4.6\n\na) En zonas urbanas no comerciales.\n— Mínimo de 5.00 Mts.\n— Máximo de 7.00 Mts.\n\nb) En _— urbanas comerciales.\n— Minimo de 7.00 Mts.\n\n— Máximo de 10.00 Mts.\n\nAngulo Formado entre el Eje del Acceso y el Eje de la Vía Pública ( A).\n\nEn ningún caso el ángulo formado por el eje de la vía con el eje del acceso\npodrá ser menor de 60° (sesenta grados).\n\nRadio de la Curva de Enlace del Acceso con el Contén o Bordillo (Rc).\na) Vehrculos Livianos\n\n150 £ Re € 4.00\nb) Vehículos Pesados\n\n8.00 < Re < 15.00\n\n3.5 Entrada y Salida de los Vehfculos a las Areas Especificas para Estacionamiento\n\nVehicular.\n\n35.1\n\nArterias, Avenidas y Vías Colectoras.\n\nCuando el área especifica para estacionar esté localizada en una vía de esta\nnaturaleza, dentro de la misma deberán disponerse pasillos de circulación y\náreas suficientes, para que los vehículos puedan realizar las maniobras necesa-\nrias y salir de frente a la vía pública enlazada. Estas reglamentaciones prohi-\nben de manera expresa la salida en retroceso a una vía pública con caracterís-\nticas de arteria, avenida o vía colectora, salvo el caso de una residencia pro-\nvista de marquesina con capacidad máxima para dos vehículos.\n\n32\n",
+      "text_sha256": "19ad4e18ffbd0bca0bdf91f9931216faa32af37a88354c3caeace9ad9ffbd57e",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 44,
+      "printed_page": null,
+      "text": "3.5.2 Vías Locales\n\nCuando el ¿rea especifica para estacionar esté ubicada en una vía: de esta na-\nturaleza, se podrá disponer hasta de seis (6) espacios de estacionamiento cu-\nya localización dentro del área imponga la salida de los vehículos en retroceso.\nCuando la edificación esté en esquina, se podrá disponer hasta de cuatro (4)\nespacios de estacionamiento con las características antes dichas por «cada\nvía local adyacente a la misma, siempre y cuando se establezca que un vehicu-\nlo estacionado no podrá salir en retroceso por más de una vía a la vez. Los\ndemás espacios requeridos para la edificación, en exceso de cuatro, deberán\ndisponerse de tal forma que quede garantizada la salida de frente de los ve-\nhrculos de los usuarios a la vía pública.\n\nEn el caso de vías sin salida el número de espacios de estacionamiento con\nsalida en retroceso será de un máximo de ocho (8).\n\n3.6 Señalización en Areas para Estacionar.\n\n3.7\n\nDeberá disponerse de medios adecuados que definan claramente los espacios de esta-\ncionamiento entre sí, así como éstos con los pasillos de circulación y áreas de manio-\nbras necesarias. Para estos fines se dispondrá de bordillos, estoperoles, franjas pinta-\ndas con pintura para tráfico, los cuales no deberán tener menos de diez (10) centímetros\nni más de quince (15) centímetros proyectados sobre el pavimento.\n\nEl ancho de las divisiones en todos los casos será de diez (10) centímetros, incluyendo\nlas marcadas con franjas de pintura.\n\nSe dispondrán las marcas en el pavimento y/o las señales verticales que garanticen\nuna adecuada y segura circulación interna, de acuerdo a la magnitud del proyecto: La\nDirección General de Tránsito Terrestre podrá requerir al proyectista marcas y señales\n\nespeciales, dependiendo del número de espacios de estacionamiento que proveerá el\nárea y de las características de la misma.\n\nDelimitaciones de las Areas Abiertas para Estacionar (Playas de Estacionamientos).\n\nCuando para satisfacer las demandas de espacios de estacionamiento de una zona ur-\nbana o de una edificación cualquiera se utilice un ¿rea abierta para estacionar deste-\nchada, ésta deberá estar claramente delimitada de la via pública mediante verjas de\nbloques de hormigón armado o de metal desplegado, bordillos y otros, dispuestos\ndentro del límite de la propiedad, con una altura no menor de cuarenta (40) centí-\n\nmetros. Sólo estarán desprovistos de estas delimitaciones los accesos de entrada y\nsalida al área de estacionamiento.\n\n33\n",
+      "text_sha256": "629bea83242427cecdec536af52a74f97f31b61891143257582ec993f395bce9",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 45,
+      "printed_page": null,
+      "text": "En los casos de edificaciones situadas en esquinas, la Dirección General de Tránsito\nTerrestre podrá requerir que se establezca una delimitación, con obstáculos, entre\nlas diversas áreas de estacionamiento que posean dichas edificaciones, para evitar que\nse produzcan tráficos indeseables de vehículos.\n\n34\n",
+      "text_sha256": "7927eca7f0f9abf71b13097dec4bc04cbe68cbbd3fe7f2f688e91b1b2064d272",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 46,
+      "printed_page": null,
+      "text": "4. EDIFICIOS PARA ESTACIONAMIENTO VEHICULAR\n\n4.1\n\n4.2\n\nGeneralidades\n\nPor edificios para estacionamiento vehicular deberán comprenderse todas las edifica-\nciones o aquellas partes de edificaciones proyectadas para disponer áreas de estaciona-\nmiento vehicular, como serían estacionamientos multipisos, sótanos, pisos interme-\ndios o azoteas, que cumplan con la condición de ser techadas o estar dispuestas sobre\nuna superficie estructural definida (hormigón armado, acero, Madera u otros). To-\ndas las disposiciones referentes a dimensionamiento de áreas especificas para estacio-\nnamiento vehicular deberán ser cumplidas cuando se: proyecte un edificio para estos\nfines. Los aspectos concernientes a arquitectura, instalaciones eléctricas y sanitarias,\nseparáciones mínimas de los linderos del terreno y otros, deberán cumplir con las\ndisposiciones legales establecidas as! como con los procedimientos de sometimien-\nto y aprobación de proyectos de edificaciones.\n\nDisposiciones Generales del Acceso a Edificios para Estacionamiento Público.\n\nCuando las disponibilidades de terreno impongan que el área específica para estacio-\nnar sea ubicada dentro de una edificación, o cuando una edificación haya sido pro-\nyectada especialmente para tal fin, sus accesos de entrada y salida deberán cumplir\ncon lo siguiente:\n\n4.2.1 Número de Carriles de Circulación.\n\nLos accesos estarán dotados de un mínimo de dos carriles de circulación de-\nbidamente delimitados, uno para entrada y otro para salida. Podrá disponerse\nde accesos de entrada y salida separados, siempre y cuando cumplan con lo\n\nestablecido en el artículo 3.4.2. El ancho de cada carril de circulación del ac-\n\nceso múltiple de entrada y salida será de 3.50 Mts (tres metros con 50 cen-\ntímetros).\n\n4.2.2 Número de Accesos por Piso de la Edificación.\n\nNo se permitirá más de un acceso de entrada y otro de salida por cada piso de\nque conste un área especifica para estacionar dispuesta dentro de una edifica-\n\nción. En los casos en que la edificación esté localizada en esquina, este regla-\nmento se aplicará para cada calle.\n\n35\n",
+      "text_sha256": "f9a44e29dddc3fdf59e054d2330a8023f4e31e7be2e9377063d9dd494c80bd21",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 47,
+      "printed_page": null,
+      "text": "4.2.3 Rampas en los Accesos\n\nEn ningún caso la o las rampas necesarias para dar acceso a un área especifica\npara estacionar, dispuestas dentro de una edificación, se comenzarán a desa-\nrrollar fuera de los límites del terreno que la alojará.\n\nCuando la pendiente de las rampas sea mayor de diez por ciento (103)\nserá necesario el uso de transiciones en los extremos de no menos de 2.50\nMts (dos metros con cincuenta centímetros) de longitud cuyas inclina-\nciónes serán de la mitad de la de la rampa (fig. 4.1). En estos casos la pen:\ndiente promedio no excederá de quince por ciento (153).\n\n1/2 de la\n\ninclinacion de la\nrampa.\n\nMaxima inclinacion\nde la rampa\n\nFIGURA 4.1\n\n4.2.4 Señalización en los Accesos.\n\n4.2.5\n\nDeberán colocarse señales verticales y marcas en el pavimento del área especr-\nfica para estacionar, que informen claramente al conductor la ubicación de los\naccesos de entrada y salida, Cuando la magnitud del proyecto requiera la co-\nlocación de señales en la via pública, éstas deberán disponerse de acuerdo a las\ninstrucciones que imparta la Dirección General de Tránsito Terrestre.\n\nSemáforos en los Accesos.\nCuando la magnitud del proyecto requiera la utilización de semáforos, en nin-\n\ngún caso éstos podrán interferir con el tráfico de la vía pública conexa, y sólo\n\nservirán para dirigir manualmente el tránsito que se produzca para entrar o\nsalir de la edificación.\n\n36\n",
+      "text_sha256": "27a64d45aa92c9b3b0280a0a51b34f4e4ea4b4f1d349b0f8c038d8bf0be96820",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 48,
+      "printed_page": null,
+      "text": "4.3 Rampas Interiores.\n\nLas rampas interiores en los edificios para estacionamiento vehicular se proyectarán\ncon tentos carriles de circulación como sean necesários para desalojar todos los ve-\nhiculos que puedan ocupar la totalidad de los espacios de estacionamiento conteni-\ndos en !9s diferentes pisos, en un tiempo máximo de treinta (30) minutos, bajo el su-\npuesto de que cada carril de circulación sea capaz de permitir el flujo de cuatrocientos\n(400) vehículos por hora. Tales rampas interiores podrán tener tramos con alineacio-\nnes rectas o helicoidales, según las características de diseño del proyecto en cuestión.\n\n4.3.1 Ancho Minimo de los Carriles de Circulación de las Rampas Interiores.\n\nSerá de 3.50 Mts. (tres metros con cincuenta centímetros) en tramos rectos\ny 4.00 Mts. (cuatro metros) en tramos curvos,\n\n4.3.2 Radio Exterior Mínimo de las Curvas de las Rampas Helicoidales.\n\nSerá de 9.80 Mts. (nueve metros con ochenta centímetros) medidos al borde\ndel carril exterior.\n\n4.3.3 Pendientes Máximas de las Rampas Interiores.\n\na) En tramos rectos:\n\nSe permitirá una pendiente máxima de quince por ciento (15%) en tra-\nmos rectos cuya longitud no sea mayor de treinta (30.00) metros y de\n\ndiez por ciento (10%) en tramos rectos cuya longitud sea mayor de trein-\nta (30.00) metros.\n\nb) En tramos helicoidales y curvos.\n\nLa máxima pendiente que se permitirá será de diez porciento (10%) en\ntodos los casos.\n\n4.3.4 ' Transición entre las Rampas Interiores y los Tramos Horizontales.\n\nSe deberá disponer una curva de transición vertical con un radio de curvatura\nno menor de veinte (20.00) metros, para evitar que los vehículos rocen sus\npartes bajas con el pavimento.\n\nay\n",
+      "text_sha256": "251a508d77f438a1de24ff06ea1f2085ba008ab3f1ad108178c019a5d66bbccd",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 49,
+      "printed_page": null,
+      "text": "4.3.5 Delimitación de los Carriles de Circulación de las Rampas Interiores.\n\nLos carriles de circulación en sentido contrario deberán separarse mediante es-\ntoperoles, barandas o bordillos, y deberán proveerse de señales que informen\nclaramente sobre la dirección del tráfico. Los carriles de circulación en un\nsólo sentido se delimitarán mediante una franja intermitente de pintura de\ntráfico blanca.\n\n4.3.6 Elementos de Protección y Límites del Pavimento de las Rampas Interiores.\n\nLos carriles extremos, tanto en sus interiores como en sus exteriores, deberán\nproveerse de barandas de protección confeccionadas en hormigón armado, con\nalturas no menores que 0.60 Mts. (sesenta centímetros) y diseñadas especial-\nmente para resistir el impacto de un vehículo. En el caso de que las rampas\nposean aceras para peatones, éstas deberán subir por lo menos 0.30 Mts.\n(treinta centímetros) por encima de la superficie del pavimento de las mismas\ny las barandas de protección podrán hacerse de bloques corrientes de hormi-\ngon.\n\n4.4 Ascensores e Instalaciones Mecánicas Elevadoras de Vehículos.\n\nSólo se permitirá el uso de ascensores y/o instalaciones mecánicas elevadoras de vehicu-\nlos, en lugar de rampas interiores.para que los vehículos se desplacen entre los diferen-\ntes niveles de un edificio para estacionamiento vehicular, cuando las disposiciones de\nespacios no permitan el desarrollo de dichas rampas. En todo caso, los mismos debe-\nrán poseer las potencias necesarias para elevar los vehículos a los niveles requeridos,\ncumpliendo con lo estipulado en 4.3 que establece que la totalidad de los vehículos que\npuedan ocupar el edificio deben ser desalojados en un tiempo máximo de treinta (30)\nminutos, según las capacidades indicadas por sus fabricantes. El edificio que posea es-\ntos medios elevadores deberá contar con una planta eléctrica de emergencia capaz de\nhacer funcionar todos los ascensores y/o equipos mecánicos elevadores de vehículos\nque en él hayan sido dispuestos.\n\n38\n",
+      "text_sha256": "63790efe475b85f8d8d9b246f9c1386dab1b6417bc48dba4b75cc8d9b091f43a",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 50,
+      "printed_page": null,
+      "text": "4,5\n\nCirculación Peatonal Interior.\n\nSe deberá asegurar que los usuarios de los edificios para estacionamiento vehicular, al\nconvertirse en peatones dentro de los mismos, puedan transitaren condiciones mínimas\nde seguridad y comodidad. En ningún caso las características de diseño podrán impo-\nner que una persona camine dentro de las áreas de circulación y/o estacionamiento una\ndistancia horizontal mayor a cincuenta (50.00) metros entre su vehículo y la entrada\ny/o salida del piso que éste ocupe. Para evitar que esto ocurra, deberán ser dispuestas\naceras, escaleras o ascensores a distancias convenientes. Cuando los accesos para pea-\ntones que comuniquen con el exterior del edificio coincidan con las rampas de acceso\nde vehículos, deberán estar claramente delimitados de los carriles de circulación de en-\ntrada y salida de los mismos, disponiéndolos a sobreniveles con respecto a dichos carri-\nles o separándolos mediante bordillos o muros.\n\n4.5.1\n\n4.5.2\n\nAceras\n\nTendrán un ancho no menor de 080 Mts. (ochenta centímetros) y su altu-\nra sobre la superficie de rodaje o estacionamiento será de 0.30 Mts. (treinta\ncentímetros).\n\nEscaleras\n\nTendrán un ancho minimo de 1.20 Mts. (un metro con veinte centímetros)\ny sus huellas, contrahuellas y descansos estarán dispuestos según lo aconsejen\nlas buenas normas de diseño vigentes en el país, al igual que sus sobrecargas\nde diseño. Tendrán barandas de bloques de hormigón, hormigón armado y/o\nmetálicas cuya altura minima sobre las huellas será de 0.90 Mts. (noventa cen-\ntímetros); en ningún caso se podrá disponer de menos de dos (2) escaleras pa-\nra peatones por piso, si éste es el medio empleado para el desalojo de peato-\nnes; tampoco se permitirá que los peatones tengan que subir o bajar más de\ncuatro plantas por medio de escaleras, o el equivalente a diez (10.00) metros,\npara desplazarse verticalmente-eritre sus vehículos y los accesos de entrada\ny/o salida desde el nivel de las vías exteriores que circunden el edificio. Las\nescaleras deberán estar claramente señalizadas.\n\n29\n",
+      "text_sha256": "1a13d61e9aae0208eb8c45236344220b89a3203932a7e7f40eadbdf757fbe9a3",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 51,
+      "printed_page": null,
+      "text": "4.5.3 Ascensores\n\nTendrán capacidad minima para seis (6) personas, y cuando sean dispuestos\ncomo medios para el desalojo vertical de los peatones, no deberán disponerse\nmenos de dos (2) de ellos. Se diseñarán para que puedan desalojar al mismo\ntiempo una cantidad de peatones equivalente al cinco por ciento (5%) de las\nunidades de estacionamiento vehicular que posea el edificio. Deberán ser uti-\nlizados como medio de desalojo vertical, cuando para alcanzar desde sus\nvehiculos los niveles de los accesos de entrada y/o salida a las vías exteriores\nque circunden el edificio, los peatones tengan que desplazarse verticalmente\nmás de cuatro plantas, o el equivalente a diez (10.00) metros. Los ascensores\ndeberán estar claramente señalizados y en todos los casos deberá disponerse\nescaleras de emergencia en igual número que el de ascensores dispuestos.\n\n4.6 Altura Libre Mínima entre Pisos.\n\n4.7\n\n4.8\n\nLa mínima altura libre admisible será de 2.10 Mts. (dos metros con diez centímetros)\nmedidos verticalmente desde la superficie del piso del estacionamiento hasta el fondo\nde vigas u otras partes y objetos salientes del entrepiso o losa de techo,\n\nLos fondos de losas en ningún caso podrán estar dispuestos a una altura menor que\n2.25 Mts. (dos metros con veinticinco centímetros) medidos verticalmente desde la\nsuperficie del piso del estacionamiento.\n\nBarandas Protectoras\n\nSe deberá disponer barandas de hormigón armado, diseñadas para resistir el impacto de\n\nun. vehículo, .en los«bordes Jibres:de:los:pisos:de que:conste un edificio para estaciona-\nmiento. vehicular. - Estas. barandas deberán. tener una altura no menor de 0:80 Mts.\n\n(ochenta centímetros) y un espesor no menor de.0.15 Mts. (quince centimetros).\n\nBordillos de Contención\n\nSe deberá, disponer bordillos de contención cuyas secciones transversales tengan un an-\ncho de.0.10 Mts. (diez centímetros) y una altura de 0.15 Mts. (quince centímetros), co-\nlocados perpendicularmente al eje del espacio para estacionar. Tales bordillos se dispon-\ndrán separados a 0.80 Mts.(ochenta centímetros) de la baranda ¡cuando el espacio para\nestacionar esté dispuesto perpendicularmente a ésta; en los casos en que el espacio para\nestacionar forme un ángulo no perpendicular con la baranda de protección, dicha sepa-\nración se medirá en el punto en que la porción utilizable del espacio para estacionar es-\nté en contacto con dicha baranda.\n\n40\n",
+      "text_sha256": "f0cb195b127630a64a4f1b4b7cb1128404984b1060e5f757611f20aaf3c57fca",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 52,
+      "printed_page": null,
+      "text": "4.9\n\n4.10\n\nDisposición de las Columnas y Soportes Interiores\n\nLas columnas y soportes interiores deberán disponerse de tal forma que no entorpez-\ncan la circulación interior en los edificios para estacionar. Las mismas se dispondrán\nademás. de manera que los vehiculos puedan girar con libertad para entrar a los espa -\ncios para estacionar quedando a una distancia no menor que 0.80 Mts (ochenta centi-\nmetros) desde el borae del espacio para estacionar en contacto con el pasillo de circu-\nlación. Se deberá cuidar que las columnas. o pilares no disminuyan el ancho libre del\nespacio para estacionar a menos de 2.30 Mts. (dos metros con treinta centímetros).\n\nDesagiles y Drenaje de los Pisos\n\nDeberán disponerse los medios, necesarios para recoger lastaguas que penetren a los pi-\nsos del edificio a través de las rampas de acceso o áreas abiertas dispuestas para venti-\nlación y/o iluminación, que podrán consistir en canaletas enrejadas, imbornales, desa-\ngles de piso y otros, relacionados con sistemas de bajantes, colectores y pendientes de\npiso o sistemas de bombeo que aseguren que las aguas de lluvia y/o negras, sean cana-\nlizadas a los sistemas de alcantarillados pluviales o facilidades de drenaje pluvial y al-\n\ncantarillas sanitarias existentes en las vias exteriores aledañas al edificio, En caso de\n\nque estos últimos servicios no hayan sido provistos, deberán disponerse septicos, im-\nbornales o pozos filtrantes que aseguren la canalización de estas aguas a las corrientes\nde agua del sub-suelo,\n\nIndependientemente de las pendientes necesarias para la circulación de vehículos, de-\nberán dispónerse pendientes para éfectos de drenaje en los pisos, oscilantes entré 14 y\n2.5% (uno y dos y medio por ciento).\n\nEn todos los casos deberán respetarse las normas vigentes para desagues y drenaje.\n\n4.11 Ventilación\n\n4.11.1 Ventilación Natural\n\n_Cuando se empleen en el edificio sistemas de ventilación natural a través de\nhuecos, deberá asegurarse que la misma sea cruzada, transversalmente al piso\nde que se trate. Se dispondrá para tal fin huecos o ventanales en las paredes\nopuestas que aseguren un área neta total mínima de 0.06 m? (punto cero\nseis metros cuadrados) por cada espacio para estacionar existente en el piso,\nsin incluir las aberturas que se provean para el.acceso de los vehículos. En\nlas rampas de acceso y circulación interior, el área neta de ventilación deberá\nser mayor que el uno por ciento (1%), del área de la superficie de los carriles\nde circulación que éstas posean.\n\n41\n",
+      "text_sha256": "5f23261281afd52dbb8355924376179a9b3012397ac641ccc3c665cd7190a275",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 53,
+      "printed_page": null,
+      "text": "4.12\n\n4.13\n\n4.11.2 Ventilación Mecanizada\n\nCuando se emplee la ventilación mecanizada, el sistema deberá asegurar que\nse produzca una impulsión de aire fresco de 12 M3/h (doce metros cúbicos\npor hora) por cada metro cuadrado de superticie interior del piso del edificio\npara estacionamiento vehicular. A la vez, el sistema deberá renovar el aire\ncomo mínimo cuatro veces por hora y en ningún momento la concentra-\nción de monóxido de carbono (CO) en el aire podrá ser superior a una parte\npor diez mil (1/10,000).\n\nIluminación\n\nSe deberá asegurar, mediante un sistema de alumbrado artificial, que se alcancen\nlos siguientes niveles mínimos de iluminación para garantizar la seguridad del trán-\nsito de vehículos y peatones y evitar el vandalismo dentro de los edificios para esta-\ncionamiento vehicular.\n\na) En las rampas de acceso y circulación interior:\n\n500 (quinientos), lúmenes por metro cuadrado de superficie de piso de la rampa.\n\nb) En los pasillos de circulación de vehículos y en las escaleras y aceras para peato-\nnes:\n\n100 (un ciento), lúmenes por metro cuadrado de superficie de piso de los mismos.\nc) En las áreas de espacios para estacionar:\n\n50 (cincuenta) lúmenes por metro cuadrado de superficie de piso.\nProtección contra Incendios.\nLos edificios para estacionamiento vehicular deberán estar provistos en cada uno de\nsus pisos de adecuados medios de protección contra incendios, tales como extintores\nde espuma, mangueras, sistemas aspersores y otros, requiriéndose que cumplan con\nlos mínimos requisitos establecidos por las leyes vigentes de la materia y con las\ndisposiciones que hayan emanado o puedan emanar de la Defensa Civil de la Repú-\nblica Dominicana, hasta tanto se elaboren las reglamentaciones sobre la materia,\nSe requerirá que en ausencia de sistemas automáticos de aspersión, cada piso sea pro-\n\nvisto de un extintor de espuma oficialmente reconocido, por cada 500 (quinientos)\nmetros cuadrados de superficie.\n\n42\n",
+      "text_sha256": "f48895b14d69427e4d0c45f1f8ee829f27a60fbeaac51bce7478f5bcc8307582",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 54,
+      "printed_page": null,
+      "text": "ANEXO\n",
+      "text_sha256": "f99fc227ef0833369c83f72c23f0b3026ed7fab185ee090a306afaca8f262d82",
+      "quality_flags": [
+        "texto_escaso_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 55,
+      "printed_page": null,
+      "text": "",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "quality_flags": [
+        "sin_texto_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 56,
+      "printed_page": null,
+      "text": "TIPOS\nDE\nESTACIONAMIENTOS\n",
+      "text_sha256": "5678be0137bf5d7e5db2c77e27cd97a5c440f09d397c5d82ea95fea7cfe8a64f",
+      "quality_flags": [
+        "texto_escaso_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 57,
+      "printed_page": null,
+      "text": "i\n",
+      "text_sha256": "50c393f158c3de2db92fa9661bfb00eda5b67c3a777c88524ed3417509631625",
+      "quality_flags": [
+        "texto_escaso_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 58,
+      "printed_page": null,
+      "text": "FIGURA 1\n\nDIMENSIONES DE ESTACIONAMIENTOS\nEN LINEA SENCILLA\n\n1.1 PARA VEHICULOS LIVIANOS\n\na) Para ángulo cc=90°\n\n47\n\n| EN LINEA SENCILLA\n\n.\n\nANQULO |LONOITUD DE\nDE CUNETA\nPARQUEO_| POR CARRO\n\n5.31 | 36\n\nFa [aan aad\n\nEsas | aon | 1006]\n4.47\n\nsas [arr [ass]\n\ne\n\nE\n\nDIMENSIONES\nBASICAS\n\nECUACIONES\n\nANGULO>0* d z a cosert Leone\nR= dAgu=2coserta co eyeonos\n6 =a/80x\nD:2d+P\nP =Conet. según el ángulo\ne=Angulo interno del parqueo\n\n",
+      "text_sha256": "944e19b6be7949d16a1a400470f3432ba7a4b021da029a7abb7dfdf10ef96652",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 59,
+      "printed_page": null,
+      "text": "PARA VEHICULOS PESADOS\n\na) Para ángulo oc=90*\n\nEN LINEA SENCILLA\n\nAN ONGITUD DE) [Y ANCHO\nCUNETA DEL\nPARQUEO | POR CARRO | CASILLA PASILLO\n\nare\nF600 | 21.68\n6.00 23.06\n6.00\n:\n10.25 | 6.00 26.50\n10.88 | 6. }\n\n8.00\nLio |\nuo [36\n\nd=1100 P=12,00\n0 £34.00\n\nb) Para ángulo O°< oc < 90°\n\n1200\n\nDIMENSIONES _ e@seachor 3.50 mis\nBASICAS L= Longitud = 11.00 mts\nECUACIONES:\nANGULO> O° dza cos¢+ Leena\nR=d /tgesResert+ a stay reno,\nc=a /tenn\nD=2d+P\nP =Gonet. eégun el ángulo\net Angulo interno del parqueo\n\n48\n",
+      "text_sha256": "cd24125db63b22c09e20519d5615dc11ae29f95768b19920eac8035dd2e89adf",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 60,
+      "printed_page": null,
+      "text": "1.3 PARA MOTOCICLETAS\n\na) Para ángulo oc= 90°\n\nb) Para ángulo O'<oc < 90°\n\nHo. 62\"\nh=0.60\n\nAngulo > O°\n\n1.22\n\n| 109 | |\n099 |\n\nlor [205 | 120 |530 |\n| ost | |\n\n0.85\n\n1.\n\n.\n\nECUACIONES\n\n| | oc\n\nANGULO [LONGITUD DE\nDE CUNETA POR\nPARQUEO | MOTOCICLETA]\n\nCASILLA\n\n2.24\n4.50\n1.78 4.76\n\n[iso | 120 | 498 |\nfis | 120 | s16_|\n\nree\non [220 | 198 | 609\nToa |\n\nLoza\n\nC=0a/sena\n\nd=acos « + Lsena\n\nD= 2d+P\n\nP= Constante según el Éngulo\n= Angulo interno del parqueo\n\nDIMENSIONES BASICAS:\n\n49\n\nazAncho=0.70 mts.\nL=Longitud=2.10 mts.\n\n",
+      "text_sha256": "37893d0c0ad02ca70d807937438ef25cf3d65cbc4dbf8799d7db0ec6f9a27739",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 61,
+      "printed_page": null,
+      "text": "FIGURA 2\nDIMENSIONES DE ESTACIONAMIENTOS TIPOS\nARENQUE Y ENLLAVADO\n\n2.1 PARA V@HFCULOS LIVIANOS\n\na) Tipo Enllavado\n\n|\n\nARENQUE Y ENLLAVADO\n| ee | c [ai |\n\nANGULO [LONGITUD :D ANCHO ANCHO O\nDE CUNETA DE DEL PO\nPARQUEO | POR CARRO | CASILLA PASILLO Dp\n—————— PE PA\n\nso [9\nBlo\n\nE a\n=]\nS\n\n©\n00\no\n\n11.12\n\n12.22\n12.79\n13.33\n13.82\n\n3.65\n3.81\n\n4,22\n4.47\n\n4.77\n\n14.67\n\n15.03\n16.24\n\n«1\n|\na\npt\n[7]\n\n|\n\n7\n\nDIMENSIONES azencho z 2.30 mts\nBASICAS L =Longitud 2 8.00 mts\n\nECUACIONES:\nANGULO >0° Diz 2di +P\nRiz L cos + a conto: / sonas\ndiz—}- coso: + Losna,\nCza / vena\n= Angulo interno del parqueo\n\n50\n",
+      "text_sha256": "c476ce2c6c1ba35863b2150c48479787f2a98fe55ca0b32b60aba16bf07f6a42",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 62,
+      "printed_page": null,
+      "text": "2.2 PARA VEHICULOS PESADOS\n\na) Tipo Enllavado\n\nARENQUE Y ENLLAVADO\ni Pi\n\nPR == ==\nPASILLO [DE RARQUEO\n\n»\n\n|\n\nDIMENSIONES\n\nBASICAS eruñchoz 3.50 mts\n\nL=Longitud=11.00mts\nECUACIONES\nANGULO>O° Diz 2di+P\n\nRiz L onse+a colo / sone\ndiz cos = +.L sens\n\n",
+      "text_sha256": "44ec485ba0790b34b08022649e77bb61f93dbc213eab4008b0291e2517af9a72",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 63,
+      "printed_page": null,
+      "text": "5.50\n\n2:3\n\nPARA MOTOCICLETAS\n\na) Tipo Arenque\n\nEN ARENQUE\n\n[o [e ee ee\nANGULO |LONGITUD DE ANCHO ANCHO ANCHO TOTAL\n\nDE CUNETA POR DE DEL POR UNIDAD\nPARQUEO | MOTOCICLETA] CASILLA PASILLO DE PARQUEO\n\nPo | 240 [070 | 120 | 200\nPao [200 [ros 120 | 326 7\nCao] ros rez [izo |\nFas oso [173 | 120 | 466 7\n\n7\n\n| co | os1 | 199 | 100 | 558 |\nLes | 077 | 205 | 168 | 5.78 |\n| so | .\n85 :\n90 40\n\n| or | 212 | 190 | 614 |\n| on | 213 | 240 | 666 |\nles | oso | 212 | 240 | 66 |\n\nECUACIONES\nAngulo > O°\n\nC=a/sena\n\ndi =-%c08 a+ Leena\nDl=2di+ Pi\n\nPi=Constante segun el angulo\n= Angulo interno del parqueo\n\nDIMENSIONES BASICAS:\n\n52\n",
+      "text_sha256": "543d6db1e2126890158a795f0db7ac0f639acdff91bd3d8114d90c0f5be7cf03",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 64,
+      "printed_page": null,
+      "text": "ZONIFICACION\n\nPARA REGULARIZACION\n\nDE ESTACIONAMIENTO\n\nEN LA CIUDAD DE SANTO DOMINGO\n",
+      "text_sha256": "a6b1ee2ee17a57c4dcb585df98abdb2396a5c632dab3cb8d1eb6380c63b9079e",
+      "quality_flags": [
+        "texto_escaso_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 65,
+      "printed_page": null,
+      "text": "",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "quality_flags": [
+        "sin_texto_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 66,
+      "printed_page": null,
+      "text": "Ayuntamiento del Distrito WHarioñal\n\nSANTO DOMINGO, R.D,\n\nRESOLUCION NUMERO :_15/89\n\nEL AYUNTAMIENTO DEL DISTRITO NACIONAL\n\nEn uso de sus facultades legales.\n\nCONSIDERANDO : Que es una necesidad tratar de regularizar el es-\ntacionamiento vehicular a fin de paliar los problemas que pre--\n\nsentan en las vías de tránsito.\n\nCONSIDERANDO : Que es de interés de esta Institución y de la se-\ncretaría de Obras Públicas y Comunicaciones resolver esos pro--\n\nblemas ciudadanos.\nPOR TALES MOTIVOS\n\nVISTA : La Ley No.5456, de fecha 2i de diciembre de 1952, so--\n\nbre Organización del Distrito Nacional.\n\nVISTA : La Ley No.5622, sobre Autonomía Municipal, de fecha 14\nde Septiembre de 1961.\n\nRES UELVE\n\nARTICULO PRIMERO : APROBAR como al efecto APRUEBA el Proyecto\nde Reglamentación para el estacionamiento vehicular de la ciu-\ndad de Santo Domingo, Distrito Nacional, elaborado por el Comi-\nté Técnico de la Secretaría de Estedo de Obras Públicas y Comu-\nnicaciones y la Dirección de Planeamiento Urbano de este Cabil-\ndo, que forma parte de esta Resolución.\n\nSigue\n",
+      "text_sha256": "d90dc5febc35396432046988de988b84a35d55165839756c349c43d74581ee3b",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 67,
+      "printed_page": null,
+      "text": "= 2 =\n\nARTICULO SEGUNDO : La. Dirección de Planeamiento Urbano y. la Di\nrección de Tránsito Urbano, del Ayuntamiento, conjuntamente --\ncon la Secretaría de Estado dé Obras Públicas y Comunicaciones\nquedan encargadas de dar cumplimiento a las disposiciones em-\n\ntenidas en la presente Resolución.\n\nARTICULO T¿GRCERO . La presente Resolución Modifica la Resolu--\nción No. 2/29, y deja sin efecto, cualquiera otra disposición\ncue le sea contraria sobre esta materia.\n\nDADA : En la Sala de Sesiones \" LICDO. EMILIO RODRIGUEZ DEMORI\n21 \" Gel Palacio del Ayuntamiento del Distrito Nacional, en --\nSanto Domingo de Guzm&n, capital de la Replica Dominicana, -\nen la sesión ordinaria celebrada en fecha i5 de Marzo del año\n\nmil novecientos ochentinueve (1939); Años 145° de la Indepen--\ndencia y 126° de la Restauración.\n\nDR. As\n\nPresidente del Ayynt E D+ swtrito\n\nAagional.\n\nAT\n' a\n\n- \\\n. ata Ce \\\n\nDR. RUBEN PEÑA CASTILLO,\nSecretario del Ayuntamiento del\nDistrito Nacional. i\n\nLDATE/Vjrt..\n",
+      "text_sha256": "1a23cc63a575ded516c06af8b8c3db2b5e85a3cd97c31b1bfc130ad488bb7164",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 68,
+      "printed_page": null,
+      "text": "\"996130 OZUVH 30 82130 ZE” ON\nNOIIN1OSIY YOd SODVEOUdY SONVEUN SILIWIT=0+++. scree eee >\nSv6 30 OLSOSV 30 pl 130 pvE“ON SS :\nNOTINTOSIY YOd SOUYIOUAY SONVEYN SI LIN : a ae\nS464 JUGNSIAON 30 €l 130 1 ANA\n292” ON A31 YOd SOMWEOUAV SONVEUN SILIWNIT- connaonnacanos: ; -\n\n0861 SOGVLIZAONd SONVIYN SALIWI1- ——— +=\n\nSOION!_$07 30 038%\nSOOZYIIVD ST S\na d =\n\ni ouvs # veoon uxnw\n| ‘oni reoa| mor\n\novules? >\nm3\n\nAz A\n/ a y Sep avanoe 1\n\nj MESS\nSS\nvrivz0 Ga SIMOUVO !\n\ny)\n\nconcn cacy crsgyss™ d |\npa pr x N a)\nros .\n\nSw. OA0UUY\nY, x Y ~}\n# —? j\n+ a !\nY i\n\\ ! i\n\\ Lo\nsx TV3Y WA TVS MN\n> ‘ n\nx 1]\nSa 2 5) il\nN. -/ |\n~ pa\n\n(\nSL SN\n5 DE\n\nSONV88nN S3LIMWIT 3d VIVAN\n",
+      "text_sha256": "492dd49ec85d8c449762a16d21c54d48ccd821f8ff9fdbac79868bdc859986e2",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 69,
+      "printed_page": null,
+      "text": "i\n!\n1\ni\nt 7\n.\n\"\n!\n|\nh\ni\n1\nI\n\n",
+      "text_sha256": "dd69c1465792d7c3330592701ebbba23f1fbedd409221102c4ff52f1559275f3",
+      "quality_flags": [
+        "texto_escaso_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 70,
+      "printed_page": null,
+      "text": "OONIWOG OLNVS 30 IVANIO\nV1 NA OLNIIWVNOIDV1S3 30 NOIDV INDIA VUVd SVNOZ\n\n",
+      "text_sha256": "f6c78a58f8f8f784d50510edad97e711be348c5ad3dd88bb1ff3e81f842ca631",
+      "quality_flags": [
+        "texto_escaso_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 71,
+      "printed_page": null,
+      "text": "",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "quality_flags": [
+        "sin_texto_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 72,
+      "printed_page": null,
+      "text": "$0/101/Nsu0) A ezynsuo;\nOP SOJBUO!IS9/01H SOIDFIPZ A SODIPON SOLLESUOAS! G\n\nDEIA Se soy sa] OT\nE se vf sev a eo\nEEE EEE E oa\nee ENEE ENEE\nModa da oi il al a El IA [E E IO E |:\n201 BOT EOEB ISE] Pe] PRS El | Ob) BET eG] SO) dl a e az\nMEME EG EEE kE\nro] Fol 10/90 [Fo] 70] eo[s0] coor | colo | sol eo\no\nMENA EE E E\nap ooo prop eel solro colo\nLO| GO GO | G0 So|s0\na\nEA A E E\nee\nEEE E\nOd opoprporporofopso |\nE A E E O\n\nE IA Tt NOIOVOIdIGS VI V OA VNILSAA OSN\n\nSOPBALId SOIIPZYY SOMUOI A seoius}\n\nSON A SOJ4OJeUeS A sejezidso\n\nseljesaeun y sej¡¡de:\n\n(seypauusa1u] a sej4evrag) sejonos3 A so¡Bojo:\n\nSo/e/415Npu| sO19/41P\n\nsopedi9nH Op UR) A $9/030H-“1lUAY ‘sojo10\n\n50130 A Se/JopejeH\n‘Saseg 'Se)10ZZ/d 'SeJ1939/0) '507UBINEISOY\n\nsojisgdag A JOAR y JOd ¡e sejuo\n\n(s0430 A sopeosauadns ‘sopesiey)) e//ex9p |\nsoj9nmpo1d o¡puedxa 'sepuar y |\n\n90130 A SOUJEISHI\nA $0110YY 9P ‘20S ‘SajelosaWIOD SODUBE\n\nSDIVMLSNIN! B EDIVIDUIROO SoOloidiGa\n\n(y) soaraanbaw SOlOVdSd AG OUAWAN TIA NOIOONGTY AC SHUOLOVA\n\n61\n",
+      "text_sha256": "1432c88cb5315ec4f04f61c94ade5126e302c096b081a2347644ddb33a58d034",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 73,
+      "printed_page": null,
+      "text": "",
+      "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "quality_flags": [
+        "sin_texto_revisar_imagen",
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 74,
+      "printed_page": null,
+      "text": "ZONAS PARA REGULACION DE ESTACIONAMIENTOS\nEN LA CIUDAD DE SANTO DOMINGO\n\nLos límites de las diferentes zonas para regulación de estacionamientos en Santo Domingo,\nson los siguientes:\n\nZONA 1.-\n\nAL NORTE : Paseo Camu, Av. Jardín Botánico, Av. de los Próceres, Av. John F.\nKennedy, Av. San Martín, Av. Lope de Vega, Amiama Tió y Antonio\nPolanco.\n\nAL ESTE : Av. Tiradentes, Pedro Livio Cedeño, José Ortega y Gasset, Av. San Martín,\nAv. Máximo Gómez, Av. 27 de Febrero, Leopoldo Navarro, Av. Bolivar,\nPalo Hincado y Pina.\n\nAL SUR : Mar Caribe, Héroes de Luperón, Av. Independencia, Av. Abraham Lincoln,\nJosé Contreras, Av. Mirador del Sur y Carretera Sánchez.\n\nAL OESTE : Rio Haina, Prolongación 27 de Febrero, Av. Isabel ‘Aguiar y Autopis-\n\n_ ta Duarte,\n\nZONA II.-\n\nAL NORTE : Pedro Livio Cedeño, Av. Máximo Gómez, Av. de los Mártires, Av. Duarte\ny Nicolás de Ovando.\n\nAL ESTE : Albert. Thomas.\n\nAL SUR : Av, 27 de Febrero.\n\nAL OESTE : Av. Máximo Gómez, Av. San Martín y José Ortega y Gasset.\n\nZONA I11.-\n\nAL NORTE : Río Isabela,\n\nAL ESTE : Río Ozama.\n\nAL SUR : Av, Mella y 30 de Marzo.\n\n63\n",
+      "text_sha256": "5e43aed762c107dd75e5803b76da9bfd19438328f4050c9cd60d157e221ded3b",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 75,
+      "printed_page": null,
+      "text": "AL OESTE\n\nZONA IV.-\n\nAL NORTE\n\nAL ESTE\n\nAL SUR\n\nAL ESTE\n\nZONA V.-\n\nAL NORTE\n\nAL ESTE\n\nAL SUR\n\nAL OESTE\n\nZONA VL.-\n\nAL NORTE\n\nAL ESTE\n\nAL SUR\n\nAL OESTE\n\n: 27 de Febrero, Albert Thomas, Nicolás de Ovando, Av. Duarte, Av.\n\nde los Mártires, Av. Máximo Gómez, Pedro Livio Cedeño, Tiradentes,\ny Av. del Zoológico.\n\n: Av. Mirador Sur y José Contreras.\n\n: Av. Abraham Lincoln, Av. Independencia y Héroes de Luperón.\n\nMar Caribe.\n\n: Av. Luperón.\n\n: Carretera a la Isabela y Ro Isabela.\n\n: Av. del Zoológico, Prolongación G. Rodriguez, Antonio Polanco, Amiama\n\nTió y Lope de Vega.\n\n: Av. San Martín, Av. John F. Kennedy, Av. de los Próceres, Av. Jardin\n\nBotánico, Paseo Camú, Autopista Duarte y Carretera a Manoguayabo.\n\n: Barrios San Miguel y la Ciénega.\n\n: Av.27 de Febrero, Rocco Cochía y Cachimán.\n: 30 de Marzo.\n\n: Av. Bolívar.\n\nLeopoldo Navarro.\n\n64\n",
+      "text_sha256": "910380505deacc78966af33bbc61036efd516cdc92a2e65b143b436922e3688c",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 76,
+      "printed_page": null,
+      "text": "ZONA VIL.-\n\nAL NORTE\n\nAL ESTE\n\nAL SUR\n\nAL OESTE\n\nCarretera a Manoguayabo.\n\n: Autopista Duarte e Isabel Aguiar.\n\nProlongación 27 de Febrero.\n\nRío Haina.\n\n65\n",
+      "text_sha256": "b5ec28b17ae0d3df2fc77bb55ca0b89f2d9b03d594b7d5fd46412d2a5b7027af",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 77,
+      "printed_page": null,
+      "text": "APENDICE\n\nEn virtud de la Ley No.687, promulgada el día 27 de Julio de 1982, el Estado creó un Sis-\ntema de Reglamentación de Ingeniería, Arquitectura y Ramas Afines para garantizar la se-\nguridad de las estructuras, los requisitos de habitabilidad, la preservación de la ecología y\ndemás normas relativas a las obras de transporte y edificaciones, asf como para definir una\npolítica de reglamentación acorde con la tecnología que modernamente rige en estas disci-\nplinas.\n\nPara estos fines se crearon los siguientes organismos:\n\na) La Comisión Nacional de Reglamentos Técnicos de Ingeniería, Arquitectura y Ramas\nAfines-CCONARTIA-. Está adscrita a la Secretaría de Estado de Obras Públicas y Co-\nmunicaciones y ha quedado investida como única autoridad estatal encargada de defi-\nnir la politica de Reglamentación de la Ingeniería, la Arquitectura y Ramas Afines.\n\nb) La Dirección General de Reglamentos y Sistemas-DGRS-, organismo ejecutivo de la\n- Comisión Nacional y encargado de la elaboración, de la coordinación y del control de\nla aplicación de los reglamentos técnicos.\n\nEl Anteproyecto de este Reglamento fue preparado por la Dirección General de Reglamen-\ntos y Sistemas de la Secretaría de Estado de Obras Públicas y Comunicaciones, a través de\nsu Sección de Reglamentos Técnicos y sometido al análisis de un Comité Técnico constitur-\n\ndo para este fin e integrado por los siguientes profesionales representantes del sector públi-\nco y privado,\n\n— Ing. Miguelina Facundo Dirección General de Tránsito Terrestre, SEOPC.\n\n— Arq. Denia de Severino . Dirección General de Tránsito Terrestre, SEOPC.\n\n— Ing. Jeannette Cordero Dirección General de Tránsito Terrestre, SEOPC.\n\n— Sr, Nelson Taveras Dirección General de Tránsito Terrestre, SEOPC.\n\n— Arq. Oscar Balbuena Secretaría de Estado de Turismo.\n\n— Arq. Dinorah de Rimoli Secretaría de Estado de Turismo.\n\n— Arq. Miguel Ortíz H. Secretar fa de Estado de Turismo.\n\n— Arq. Luis Gamborena INFRATUR\n\n— Arq. Adoris Martínez Oficina Patrimonio Cultural.\n\n— Arq. Pedro Mena L. Banco Nacional de la Vivienda, BNV,\n\n— Arq. Manolo Vásquez Ayuntamiento Distrito Nacional, ADN.\n\n— Arq. Dolores Miranda N, Dirección Gral. Reglamentos y Sistemas, SEOPC.\n\n— Ing. Mireya Veloz de Guillermo e Coordinadoras del Comité por la Dirección Gene-\nIng. Jacqueline Medrano. ral de Reglamentos y Sistemas, SEOPC.\n\n67\n",
+      "text_sha256": "23f5a89414ba0e27c306e061a22419dcb541a2ad7432c80d00201666b0eca426",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 78,
+      "printed_page": null,
+      "text": "El anteproyecto de Reglamento fue aprobado por la Ing. Mireya Veloz Directora General\nde Reglamentos y Sistemas, en Octubre de 1987, para ser sometido a encuesta pública.\n\n4\n\nPosteriormerte la Dirección General sometió el proyecto de Reglamento a la Comisión\nNacional el cual fué aprobado y finalmente enviado al Poder Ejecutivo.\n\nLa\n\nComisión Nacional estuvo representada en las diferentes reuniones por los siguientes\n\nprofesionales:\n\n1.- Secretaría de Estado de Obras Públicas y Comuhicaciones (SEOPC).\n\nIng. Buenaventura García Mateo\nSub-Secretario de Estado de la SEOPC.\n\n.- Secretar.ía de Estado de Industria y Comercio\n\nIng. Manuel C. Mateo Reyes\nEncargado Enlace Interinstitucional de la Dirección General de Minería.\n\n.- Secretaría de Estado de Salud Pública y Asistencia Social (SESPAS).\n\nArq. Luis F. Nicasio H.\nEncargado Departamento de Construcción.\n\n- Secretaría de Estado de Educación, Bellas Artes y Cultos (SEEBAC).\n\nIng. Teresa N. Lluberes\nSub-Directora de Edificaciones Escolares.\n\n- Secretaría de Estado de Turismo,\n\nIng. Miguel Ortíz H.\nTécnico de la Oficina de Planeamiento y Programación.\n\nLiga Municipal Dominicana (L.M.D.).\nArq. Héctor Ramón Morales\nAsesor Planeamiento Urbano.\n\n- Instituto Nacional de Recursos Hidráulicos (INDHR 1).\n\nIng. Manuel Saleta\nEncargado Dirección de Proyectos.\n\n- Instituto Nacional de la Vivienda (INV 1)\n\nIng. Ramón Arias Falcón.\nTécnico de la Sub-Dirección.\n\n68\n",
+      "text_sha256": "3d6d32bfb5f3646fc2f2e140287772f11bdb0bb1c23e08ccaa30ad9b261c5ff1",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 79,
+      "printed_page": null,
+      "text": "9.- Instituto Nacional de Aguas Potables y Alcantarillados (INAPA).\nIng. Ramón Sosa Reyes\nEnc. de Proyectos\n\n10. Corporación Dominicana de Electricidad (CDE).\nIng. Héctor Estrella\nIng. Encargado Dpto. de Ingeniería Eléctrica.\n\n11.- Banco Nacional de la Vivienda (BNV)\nAra. Pedro R. Mena L.\nSub-Gerente F.H.A.\n\n12.- Asociación de Bancos Hipotecarios (B.H.D.).\nAra. Rafael de Peña\nEncargado Departamento Técnico\n\n13. Sociedad Dominicana de Sismología e Ingeniería (SODOSISMICA).\nIng. Héctor O'Reilly\nSecretario.\n\nSecretaría de Estado de Obras Públicas y Comunicaciones, SEOPC.\nIng. Mireya Veloz de Guillermo\n\nDirectora General de Reglamentos y Sistemas\n\nSecretaria de la Comisión Nacional.\n\nSr. Nelson Taveras\nDirección General de Tránsito Terrestre (SEOPC).\n\nLa Comisión Nacional de Reglamentos Técnicos de la Ingeniería, Arquitectura y Ramas\nAfines-CONARTIA- exhorta a los Ingenieros, Arquitectos y Profesionales afines a que en-\nvien por escrito a la Dirección General de Reglamentos y Sistemas-DGRS-, las observacio-\nnes producto de la aplicación de estas reglamentaciones, las cuales servirán para una próxi-\nma actualización de este documento.\n",
+      "text_sha256": "b2a74e346f0db59e584ed1f9778dbd55a1e1bc81922e8a3976bef73dc60575bf",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    },
+    {
+      "page_pdf": 80,
+      "printed_page": null,
+      "text": "BIBLIOGRAFIA\n\n— Secretaría de Estado de Obras Públicas y Comunicaciones de la República Domi-\nnicana. Normas para Estacionamiento Vehicular, Santo Domingo: El autor,\n1980, 48 páginas.\n\n— Callender, John y De Chiara, Joseph. Times-Saver Standards, For Building Tipes\nU.S.A.:McGraw-Hill, Inc., 1980, 2nd. Edition, 1267 páginas.\n\n’\n\n— Neufert, Ernest. Arte de Proyectar en Arquitectura, Barcelona, España: Editorial\nGustavo Gili, S.A., 1970, Deudécima Edición, 436 páginas.\n\n70\n",
+      "text_sha256": "75e01f07ae04fb490543de1f16191e08586ef7e7d08287054513923dbf34043a",
+      "quality_flags": [
+        "ocr_generado_requiere_revision"
+      ],
+      "visually_verified": false,
+      "method": "tesseract_spa_eng_250dpi",
+      "native_text": ""
+    }
+  ]
+}

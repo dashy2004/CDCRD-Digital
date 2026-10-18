@@ -1,0 +1,147 @@
+{
+  "schema": "cdcrd-regulations-sources/1",
+  "sources": [
+    {
+      "id": "R-001",
+      "title": "Reglamento para el análisis y diseño sísmico de estructuras",
+      "file": "NORMATIVAS DE CONTRUCCION/r-001-reglamento-sismico.pdf",
+      "sha256": "79a4e85c4e9783a15ba2301c2f9ec9fbf3aba1c19e129df1ebaead97c5983535",
+      "pages": 65,
+      "source_catalog": "https://portalweb.mopc.gob.do/dgrs/reglamentos/",
+      "legal_status": "vigencia_no_evaluada",
+      "document_warning": null
+    },
+    {
+      "id": "R-002",
+      "title": "Reglamento para estacionamiento vehicular en edificaciones",
+      "file": "CARRETERAS/r-002-reglto-estacionamvehicular-en-edif_-002.pdf",
+      "sha256": "b0105c98ab0bba48c2c484860eeb7a5f8eadb60e825a876957337d5aa94513ec",
+      "pages": 80,
+      "source_catalog": "https://portalweb.mopc.gob.do/dgrs/reglamentos/",
+      "legal_status": "vigencia_no_evaluada",
+      "document_warning": null
+    },
+    {
+      "id": "R-008",
+      "title": "Reglamento para el diseño y la construcción de instalaciones sanitarias en edificaciones",
+      "file": "NORMATIVAS DE CONTRUCCION/r-008.pdf",
+      "sha256": "3c2fe4947cf421e81710a3cf830e6517d173dc26749481daf255a02135c8f5a2",
+      "pages": 102,
+      "source_catalog": "https://portalweb.mopc.gob.do/dgrs/reglamentos/",
+      "legal_status": "vigencia_no_evaluada",
+      "document_warning": null
+    },
+    {
+      "id": "R-012",
+      "title": "Criterios básicos para el diseño geométrico de carreteras",
+      "file": "CARRETERAS/r-012-diseno-geometrico-de-carreteras.pdf",
+      "sha256": "2dd94339ee1e5869bcc20162b9e09edbba803df9c6f053bfe273a261d9f87dcb",
+      "pages": 53,
+      "source_catalog": "https://portalweb.mopc.gob.do/dgrs/reglamentos/",
+      "legal_status": "vigencia_no_evaluada",
+      "document_warning": "La portada indica M-012; se conserva R-012 como identificador del archivo/catalogación local."
+    },
+    {
+      "id": "R-013",
+      "title": "Instrucciones para presentación de propuestas de estudios y proyectos de carreteras",
+      "file": "CARRETERAS/r-013 INSTRUCCIONES PARA PRESENTACION DE PROPUESTAS DE ESTUDIOS Y PROYECTOS DE CARRETERAS.pdf",
+      "sha256": "b78f3a15a7fb302d3eb3d93ad9f5b09c602c91254be5cb33d74bc2bedcb7d925",
+      "pages": 77,
+      "source_catalog": "https://portalweb.mopc.gob.do/dgrs/reglamentos/",
+      "legal_status": "vigencia_no_evaluada",
+      "document_warning": null
+    },
+    {
+      "id": "R-014",
+      "title": "Especificaciones generales para la construcción de carreteras",
+      "file": "CARRETERAS/r-014 ESPECIFICACIONES GENERALES PARA LA CONSTRUCCIÓN DE CARRETERAS.pdf",
+      "sha256": "ea2bb12c2124a7b71a2f0a767199bfa248546449349dba16b2fd99ff0e5e44a7",
+      "pages": 208,
+      "source_catalog": "https://portalweb.mopc.gob.do/dgrs/reglamentos/",
+      "legal_status": "vigencia_no_evaluada",
+      "document_warning": null
+    },
+    {
+      "id": "R-024",
+      "title": "Reglamento para estudios geotécnicos en edificaciones",
+      "file": "REGLAMENTO ESTUDIOS GEOTECNICOS/r-024.pdf",
+      "sha256": "67a5bfd4c31f44bb10b5c3c98139df450fc280a565277fae89e349f575874a3d",
+      "pages": 60,
+      "source_catalog": "https://portalweb.mopc.gob.do/dgrs/reglamentos/",
+      "legal_status": "vigencia_no_evaluada",
+      "document_warning": null
+    },
+    {
+      "id": "R-026",
+      "title": "Reglamento para trabajos de excavación en las vías públicas",
+      "file": "CARRETERAS/r-026 Reglamento para la Realización de Trabajos de Excavación en las Vías Públicas.pdf",
+      "sha256": "5069c86828c7b83f80a81ee90186807003f4cc02d675a391bf0b9e892b23f131",
+      "pages": 27,
+      "source_catalog": "https://portalweb.mopc.gob.do/dgrs/reglamentos/",
+      "legal_status": "vigencia_no_evaluada",
+      "document_warning": null
+    },
+    {
+      "id": "R-033",
+      "title": "Reglamento para diseño y construcción de estructuras en hormigón armado",
+      "file": "NORMATIVAS DE CONTRUCCION/r-033.pdf",
+      "sha256": "a76b9759b0e6321cf54a110cb33d81284eb1a92a7ded34a3555b62c793af1958",
+      "pages": 171,
+      "source_catalog": "https://portalweb.mopc.gob.do/dgrs/reglamentos/",
+      "legal_status": "vigencia_no_evaluada",
+      "document_warning": null
+    },
+    {
+      "id": "DEC-42-05",
+      "title": "Reglamento de aguas para consumo humano",
+      "file": "CDCRD INSTALACIONES HIDROSANITARIAS/Decreto-42-2005.pdf",
+      "sha256": "dbc3ff5021d4fcbb2a8037831ce3f1a5e3d07dc00198ef81a0baaeaef225d1b2",
+      "pages": 102,
+      "source_catalog": null,
+      "legal_status": "vigencia_no_evaluada",
+      "document_warning": null
+    },
+    {
+      "id": "INAPA-2018",
+      "title": "Reglamento técnico para diseño de obras e instalaciones hidro-sanitarias",
+      "file": "CDCRD INSTALACIONES HIDROSANITARIAS/REGLAMENTOS-TECNICOS-PARA-DISENO-E-INSTALACIONES-HIDRO-SANITARIO-DEL-INAPA.pdf",
+      "sha256": "b99dcb7faf97738ed00cb108d775208ea238944c0333869b0986db9ef06827b7",
+      "pages": 414,
+      "source_catalog": "https://inapa.gob.do/transparencia/base-legal-de-la-institucion/resoluciones-base-legal/",
+      "legal_status": "vigencia_no_evaluada",
+      "document_warning": null
+    },
+    {
+      "id": "REF-TUNEL",
+      "title": "Requisitos especiales de obras y excavaciones próximas al túnel Ortega y Gasset–UASD",
+      "file": "CARRETERAS/regl-tunel-ortega-gasset-uasd-poder-ejecutivo.pdf",
+      "sha256": "aa7a3c1309685181176bba3b54c545f8b828381f4273ec05c07910673a88d266",
+      "pages": 11,
+      "source_catalog": "https://portalweb.mopc.gob.do/dgrs/reglamentos/",
+      "legal_status": "vigencia_no_evaluada",
+      "document_warning": "Documento con número de decreto sin completar; no se presenta como norma promulgada."
+    }
+  ],
+  "exclusions": [
+    {
+      "category": "academicos",
+      "reason": "Excluidos por instrucción del usuario."
+    },
+    {
+      "category": "manuales_comerciales_y_docentes",
+      "reason": "ACI, AASHTO, presentación ACI e Ingeniería vial no se redistribuyen."
+    },
+    {
+      "category": "duplicados_exactos",
+      "reason": "R-012 e INAPA se extraen una sola vez por SHA-256."
+    },
+    {
+      "category": "R-008_compressed",
+      "reason": "Versión de 94 páginas que comienza con otro decreto; se prioriza R-008 de 102 páginas, sin asumir identidad entre archivos."
+    },
+    {
+      "category": "CDCRD_MIVHED",
+      "reason": "No se duplica el corpus CDCRD existente. Las ediciones históricas de la biblioteca requieren cotejo separado."
+    }
+  ]
+}
