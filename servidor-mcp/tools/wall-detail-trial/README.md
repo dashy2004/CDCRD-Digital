@@ -1,7 +1,7 @@
-# Detached wall-detail trials — experimental R04
+# Detached wall-detail trials — experimental R05
 
 This separate .NET 8 plugin generates trial reinforcement patterns on detached
-copies of two uniform wall legs in an explicitly authorized ETABS 23.3.0 fixture.
+copies of two uniform wall sections with their end joints in an explicitly authorized ETABS 23.3.0 fixture.
 The existing V2.2 reader is unchanged. **The source cage and EDB are not corrected
 by this plugin.** Native execution and interpretation of its results are required
 before implementing a writer.
@@ -17,13 +17,16 @@ those trial patterns to a story or saving the model.
   gates. Numeric context must agree even if the independent wrapper label differs.
 - Requires an exclusively acquired resource lock, two stories/two legs, uniform
   4000 × 200 mm wall plans and no boundary/confinement zones.
-- Calls the native leg's public `Clone`, then verifies independent data, start/end/
-  middle zones, centreline and endpoint objects, no parent section and edit mode off.
+- Calls the native section's public `Clone`, verifies its single leg and two end
+  joints, independent data/zones/centreline/endpoints, no external parent and edit
+  mode off. Native joint clones initially refer to the source leg: all joint
+  objects, centres and mutable lists are checked before rebinding those clone
+  lists to the detached leg. Any shared or unexpected object rejects the trial.
 - Only detached clones receive setters. No original setters, model unlock, analysis,
   story regeneration, `UpdateDBFile`, save or native JSON deserialization.
 - Verifies the metric catalog by area and actual selected diameter before using
   the names `16` and `12`; they are not imperial bar numbers.
-- Serializes source legs and global wall preferences before and after, including
+- Serializes source sections/joints, legs and global wall preferences before and after, including
   failure paths. Any source mismatch fails visibly. An error is not approval.
 - Restores both temporary native application contexts in the established order.
 
@@ -63,7 +66,7 @@ Provide `probe-options.json` using the same explicit authorization schema as V2.
 and `trial-options.json` with `ResourceLockPath` set to the actual cooperative
 ETABS lock. A present lock blocks execution; do not remove another owner's lock.
 
-Add `CDCRD.WallDetailTrialR04.dll` through ETABS Tools → Add/Show Plugins and invoke
+Add `CDCRD.WallDetailTrialR05.dll` through ETABS Tools → Add/Show Plugins and invoke
 it once on the authorized, already analyzed copy. No design/detailing rerun is
 needed. A restarted process invalidates the configuration.
 
@@ -82,10 +85,20 @@ completed six native trials with source data/preferences unchanged. Its pattern
 collections serialized as type-name strings, so geometric acceptability was not
 established. The old `metric-all-ties` label was inaccurate: only StartZone changed.
 
-R04 adds numeric geometry extraction, rejects the actual opaque output shape, and
-sets both detached end-zone areas in explicitly named scenarios. Tests also check
-source preservation and invalid areas. Native R04 execution remains pending. A new
-assembly identity avoids replacing R03/R03.1 already loaded in the host.
+R04 completed ten native trials with all 70 manifest files verified and source
+legs/preferences plus the four physical source cages identical before and after.
+Its individual-leg control contained 30 plan points while the source cage has 34:
+the four end-joint bars were outside that trial's scope. The 46 mm cover-label
+candidate has 40 mm minimum end clearance at the exported horizontal points;
+this is not a full curved-envelope verification.
+
+R05 generates the detached section and both end joints together, then exports all
+leg and joint patterns after native joint adjustment. It also reads the numeric
+section `GetRebarFy`/`GetRebarFys` values from source and clone: material-name strings
+alone are insufficient to establish the steel used by design. Native R05 execution
+remains pending. Its 54 tests cover independent rebindings, rejection before any
+list changes, read-only/fixed lists, aliases and existing ownership/export gates.
+A new assembly identity preserves the previously loaded trials.
 
 No fixture, CSI DLL or reconstructed implementation is distributed. REA 6.5 member
 inspection and focused parser analysis were performed locally against the installed

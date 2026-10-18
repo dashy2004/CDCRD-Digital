@@ -27,6 +27,14 @@ internal static class DetachedTrial
         return matches[0].Invoke(value, args) ?? throw new InvalidOperationException("Null native result: " + name);
     }
 
+    private static void CallVoid(object value, string name, object argument)
+    {
+        var method = value.GetType().GetMethod(name, BindingFlags.Public | BindingFlags.Instance,
+            null, [argument.GetType()], null) ?? throw new InvalidOperationException("Missing void contract: " + name);
+        if (method.ReturnType != typeof(void)) throw new InvalidOperationException("Unexpected void contract: " + name);
+        method.Invoke(value, [argument]);
+    }
+
     private static void Set(object value, string name, object data)
     {
         var property = value.GetType().GetProperty(name, BindingFlags.Public | BindingFlags.Instance)
@@ -76,14 +84,15 @@ internal static class DetachedTrial
             throw new InvalidOperationException("Clone shares mutable geometry or reinforcing data.");
     }
 
-    private static object[] DataNodes(object data)
+    internal static object[] DataNodes(object data)
     {
         object line = Read(data, "CLine");
         return [data, Read(data, "StartZone"), Read(data, "EndZone"), Read(data, "MidZone"),
             line, ReadField(line, "Pt1"), ReadField(line, "Pt2")];
     }
 
-    public static object Run(object designer, Assembly detail, Assembly core, Assembly design, string output, Action guard)
+    public static object Run(object designer, Assembly detail, Assembly core, Assembly design, string output, Action guard,
+        bool includeSectionJoints = false)
     {
         guard();
         var serializer = core.GetType("CSI.NADetBase.Common.JSONIO", true)!.GetMethod("GetJSonString",
@@ -124,6 +133,7 @@ internal static class DetachedTrial
                 throw new InvalidOperationException("Metric catalog identity mismatch for " + name);
         }
         var legs = new List<object>();
+        var piers = new List<object>();
         var stories = new List<object>();
         foreach (object tower in Items(Read(designer, "WallTowers")))
         foreach (object stack in Items(Read(Read(tower, "WallStackSet"), "Stacks")))
@@ -132,12 +142,13 @@ internal static class DetachedTrial
             stories.Add(story);
             foreach (object section in Items(Read(story, "Sections")))
             foreach (object pier in Items(Read(section, "PierSections")))
-            foreach (object leg in Items(Read(pier, "DesignLegs"))) legs.Add(leg);
+            foreach (object leg in Items(Read(pier, "DesignLegs"))) { legs.Add(leg); piers.Add(pier); }
         }
         if (stories.Count != 2 || legs.Count != 2)
             throw new InvalidOperationException("Expected exactly two stories and two isolated test legs.");
         string[] sourceBefore = legs.Select(l => Serialize(Call(l, "GetLegData"))).ToArray();
         string[] patternsBefore = legs.Select(Serialize).ToArray();
+        string[] sectionsBefore = piers.Select(Serialize).ToArray();
         string[] CaptureSourceCages(string phase)
         {
             var cages = new List<string>();
@@ -168,7 +179,9 @@ internal static class DetachedTrial
                     "metric-both-ties-cover40", "metric-both-ties-cover46" })
                 {
                     guard();
-                    object clone = Call(original, "Clone");
+                    object? sectionClone = includeSectionJoints ? Call(piers[i], "Clone") : null;
+                    object clone = sectionClone is null ? Call(original, "Clone")
+                        : SectionCloneIsolation.RebindFixtureJoints(piers[i], sectionClone);
                     void Change(string name, object value) { guard(); Set(clone, name, value); }
                     RequireDetached(original, clone);
                     Change("RebarMatID", Read(original, "RebarMatID"));
@@ -193,10 +206,17 @@ internal static class DetachedTrial
                     string prefix = $"leg-{i + 1:D2}-{scenario}";
                     Save(prefix + "-input", Call(clone, "GetLegData"));
                     guard();
-                    object vertical = Call(clone, "GenerateVerticalRebarPatterns", pierPreferences);
+                    if (sectionClone is not null)
+                        CallVoid(sectionClone, "AutoAddFlexuralRebarsBasedOnDesignLegdata", pierPreferences);
+                    object vertical = sectionClone is null ? Call(clone, "GenerateVerticalRebarPatterns", pierPreferences)
+                        : Read(clone, "VerticalBars");
+                    var allPatterns = Items(vertical).ToList();
+                    if (sectionClone is not null)
+                        foreach (object joint in Items(Read(sectionClone, "Joints")))
+                            allPatterns.AddRange(Items(Read(joint, "VerticalBars")));
                     var verticalEvidence = new List<object>();
                     int patternIndex = 0;
-                    foreach (object pattern in Items(vertical))
+                    foreach (object pattern in allPatterns)
                     {
                         guard(); patternIndex++;
                         string name = prefix + $"-vertical-{patternIndex:D2}";
@@ -207,7 +227,8 @@ internal static class DetachedTrial
                             start_z = Read(pattern, "StartZ"), end_z = Read(pattern, "EndZ") });
                     }
                     guard();
-                    object horizontal = Call(clone, "GenerateHorizontalRebarShapes", pierPreferences);
+                    object horizontal = sectionClone is null ? Call(clone, "GenerateHorizontalRebarShapes", pierPreferences)
+                        : Read(clone, "HorizontalBars");
                     var horizontalEvidence = new List<object>();
                     int shapeIndex = 0;
                     foreach (object shape in Items(horizontal))
@@ -227,6 +248,11 @@ internal static class DetachedTrial
                     Save(prefix + "-generated-data", Call(clone, "GetLegData"));
                     results.Add(new { leg = i + 1, scenario, status = "generated_on_detached_clone_only",
                         leg_rebar_material = Read(clone, "RebarMatID"),
+                        includes_section_end_joint_patterns = includeSectionJoints,
+                        source_section_rebar_fy = Call(piers[i], "GetRebarFy"),
+                        source_section_rebar_fys = Call(piers[i], "GetRebarFys"),
+                        clone_section_rebar_fy = sectionClone is null ? null : Call(sectionClone, "GetRebarFy"),
+                        clone_section_rebar_fys = sectionClone is null ? null : Call(sectionClone, "GetRebarFys"),
                         vertical = verticalEvidence, horizontal = horizontalEvidence,
                         not_applied = true, physical_cage_spacing_verified = false, cover_verified = false,
                         numeric_plan_geometry_exported = true, full_story_cage_generated = false });
@@ -236,10 +262,12 @@ internal static class DetachedTrial
         finally
         {
             bool cagesUnchanged = cagesBefore.SequenceEqual(CaptureSourceCages("after"));
-            bool unchanged = cagesUnchanged && legs.Select((l, i) => sourceBefore[i] == Serialize(Call(l, "GetLegData")) &&
+            bool sectionsUnchanged = sectionsBefore.SequenceEqual(piers.Select(Serialize));
+            bool unchanged = cagesUnchanged && sectionsUnchanged && legs.Select((l, i) => sourceBefore[i] == Serialize(Call(l, "GetLegData")) &&
                 patternsBefore[i] == Serialize(l)).All(x => x) && preferencesBefore == Serialize(preferences);
             File.WriteAllText(Path.Combine(output, "source-invariants.json"), JsonSerializer.Serialize(new
             { source_legs_and_preferences_unchanged = unchanged, source_cages_unchanged = cagesUnchanged,
+                source_sections_and_joints_unchanged = sectionsUnchanged,
                 source_leg_count = legs.Count }));
             if (!unchanged) throw new InvalidOperationException("Source invariant changed; do not save or claim isolation.");
         }
