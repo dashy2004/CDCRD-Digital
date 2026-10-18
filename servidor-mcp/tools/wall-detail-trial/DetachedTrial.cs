@@ -35,7 +35,7 @@ internal static class DetachedTrial
         method.Invoke(value, [argument]);
     }
 
-    private static void Set(object value, string name, object data)
+    internal static void Set(object value, string name, object data)
     {
         var property = value.GetType().GetProperty(name, BindingFlags.Public | BindingFlags.Instance)
                        ?? throw new InvalidOperationException("Missing clone setting " + name);
@@ -92,8 +92,10 @@ internal static class DetachedTrial
     }
 
     public static object Run(object designer, Assembly detail, Assembly core, Assembly design, string output, Action guard,
-        bool includeSectionJoints = false)
+        bool includeSectionJoints = false, bool includeStoryCages = false)
     {
+        if (includeStoryCages && !includeSectionJoints)
+            throw new InvalidOperationException("Story cage trials require isolated section joints.");
         guard();
         var serializer = core.GetType("CSI.NADetBase.Common.JSONIO", true)!.GetMethod("GetJSonString",
             BindingFlags.Public | BindingFlags.Static, null, [typeof(object)], null)
@@ -134,6 +136,7 @@ internal static class DetachedTrial
         }
         var legs = new List<object>();
         var piers = new List<object>();
+        var legStories = new List<object>();
         var stories = new List<object>();
         foreach (object tower in Items(Read(designer, "WallTowers")))
         foreach (object stack in Items(Read(Read(tower, "WallStackSet"), "Stacks")))
@@ -142,7 +145,7 @@ internal static class DetachedTrial
             stories.Add(story);
             foreach (object section in Items(Read(story, "Sections")))
             foreach (object pier in Items(Read(section, "PierSections")))
-            foreach (object leg in Items(Read(pier, "DesignLegs"))) { legs.Add(leg); piers.Add(pier); }
+            foreach (object leg in Items(Read(pier, "DesignLegs"))) { legs.Add(leg); piers.Add(pier); legStories.Add(story); }
         }
         if (stories.Count != 2 || legs.Count != 2)
             throw new InvalidOperationException("Expected exactly two stories and two isolated test legs.");
@@ -246,6 +249,26 @@ internal static class DetachedTrial
                     if (verticalEvidence.Count == 0 || horizontalEvidence.Count == 0)
                         throw new InvalidOperationException("No numeric trial reinforcement geometry generated.");
                     Save(prefix + "-generated-data", Call(clone, "GetLegData"));
+                    object? cageEvidence = null;
+                    if (includeStoryCages)
+                    {
+                        guard();
+                        object candidateStory = DetachedCageTrial.Build(legStories[i], sectionClone!);
+                        foreach (string direction in new[] { "Vertical", "Horizontal" })
+                        {
+                            guard();
+                            string json = Save(prefix + "-native-" + direction.ToLowerInvariant() + "-cage",
+                                Call(candidateStory, "Get" + direction + "BarsFor3DCage", false));
+                            TrialGeometryEvidence.RequireCage(json);
+                        }
+                        Save(prefix + "-native-vertical-groups", Call(candidateStory, "GetVerticalBarGroups"));
+                        Save(prefix + "-native-horizontal-sets", Call(candidateStory, "GetTransBarSets"));
+                        cageEvidence = new { vertical_file = prefix + "-native-vertical-cage.json",
+                            horizontal_file = prefix + "-native-horizontal-cage.json",
+                            generated_by_native_story_getters = true, source_story_reused = false,
+                            bounds_source = "six numeric coordinates copied into fresh native objects",
+                            anchorage_or_splice_correction_applied = false };
+                    }
                     results.Add(new { leg = i + 1, scenario, status = "generated_on_detached_clone_only",
                         leg_rebar_material = Read(clone, "RebarMatID"),
                         includes_section_end_joint_patterns = includeSectionJoints,
@@ -253,9 +276,9 @@ internal static class DetachedTrial
                         source_section_rebar_fys = Call(piers[i], "GetRebarFys"),
                         clone_section_rebar_fy = sectionClone is null ? null : Call(sectionClone, "GetRebarFy"),
                         clone_section_rebar_fys = sectionClone is null ? null : Call(sectionClone, "GetRebarFys"),
-                        vertical = verticalEvidence, horizontal = horizontalEvidence,
+                        vertical = verticalEvidence, horizontal = horizontalEvidence, cage = cageEvidence,
                         not_applied = true, physical_cage_spacing_verified = false, cover_verified = false,
-                        numeric_plan_geometry_exported = true, full_story_cage_generated = false });
+                        numeric_plan_geometry_exported = true, full_story_cage_generated = includeStoryCages });
                 }
             }
         }

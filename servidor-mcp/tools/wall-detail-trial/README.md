@@ -1,4 +1,4 @@
-# Detached wall-detail trials — experimental R05
+# Detached wall-detail trials — experimental R06
 
 This separate .NET 8 plugin generates trial reinforcement patterns on detached
 copies of two uniform wall sections with their end joints in an explicitly authorized ETABS 23.3.0 fixture.
@@ -52,7 +52,8 @@ cut length. It rejects type-name strings, empty geometry, missing coordinates an
 nonpositive diameters. Curves are preserved, not replaced by chord lengths.
 Source vertical/horizontal 3D cages are captured before and after and compared in
 addition to source leg data/preferences. Generators and setters operate on clones;
-the output is plan geometry, not a regenerated full-story cage or a cutting list.
+R06 also exports native story cages in fresh detached containers. Neither output
+is a validated fabrication schedule.
 
 ## Build and execution
 
@@ -66,7 +67,7 @@ Provide `probe-options.json` using the same explicit authorization schema as V2.
 and `trial-options.json` with `ResourceLockPath` set to the actual cooperative
 ETABS lock. A present lock blocks execution; do not remove another owner's lock.
 
-Add `CDCRD.WallDetailTrialR05.dll` through ETABS Tools → Add/Show Plugins and invoke
+Add `CDCRD.WallDetailTrialR06.dll` through ETABS Tools → Add/Show Plugins and invoke
 it once on the authorized, already analyzed copy. No design/detailing rerun is
 needed. A restarted process invalidates the configuration.
 
@@ -95,10 +96,26 @@ this is not a full curved-envelope verification.
 R05 generates the detached section and both end joints together, then exports all
 leg and joint patterns after native joint adjustment. It also reads the numeric
 section `GetRebarFy`/`GetRebarFys` values from source and clone: material-name strings
-alone are insufficient to establish the steel used by design. Native R05 execution
-remains pending. Its 54 tests cover independent rebindings, rejection before any
+alone are insufficient to establish the steel used by design. Native R05 completed ten trials with 110 manifest files verified, 34 unique
+vertical points per section, and source sections/joints/cages unchanged. Its numeric
+section yield getters returned zero; this is an unresolved detailing field, not a
+verified steel property. The 54 tests cover independent rebindings, rejection before any
 list changes, read-only/fixed lists, aliases and existing ownership/export gates.
 A new assembly identity preserves the previously loaded trials.
+
+R06 builds fresh native story/section/geometry/bounds objects containing each
+isolated candidate pier, then exports native vertical/horizontal cages and groups.
+It copies six finite bounds coordinates explicitly and checks the authorized
+3000 mm story extents. The native bounds clone was not used. No source geometry,
+parent stack, editor, elevation update, model setter or save is involved. R06 has
+68 tests and builds without warnings; native R06 execution is pending.
+
+Private R05 curve analysis independently fitted the five circular bends and their
+extrema. The reported native cut equals the 3D chord sum, not the circular-arc
+centreline length. Native bend getters also reduce the code-returned radius and
+tail for the generated drawing. Preserve raw values and do not label this drawing
+as a fabrication schedule. R06 cage output still needs checks for actual spacing,
+vertical extents, continuity, cover, hooks and discrepancies with plan points.
 
 No fixture, CSI DLL or reconstructed implementation is distributed. REA 6.5 member
 inspection and focused parser analysis were performed locally against the installed
