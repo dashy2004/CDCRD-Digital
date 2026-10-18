@@ -149,9 +149,62 @@ La lectura exige concordancia de unidades; cada parte fallida queda explícita.
 No se deserializan los metadatos `$type`, no se recalcula la caché ni se alteran
 armado, resultados o archivo del modelo.
 
-**Verificación actual:** 19 pruebas C# de autorización/contexto aprobadas, build
+**Verificación de V2.1:** 19 pruebas C# de autorización/contexto aprobadas, build
 sin avisos/errores y 184 pruebas Python aprobadas. V2.1 copiada y cotejada por SHA-256;
-**su ejecución y captura nativa siguen pendientes**. El runtime MCP ya instalado
+su ejecución posterior falló como se detalla abajo. El runtime MCP ya instalado
 no se reemplazó. Una jaula 3D no acredita longitud de corte ni desarrollo de anclaje;
 las preferencias de traslapo no son un cálculo aprobado. Despiece integral aún
 abierto, sin pasar a otras aplicaciones.
+
+### 2026-10-18: error de etiqueta de unidades y V2.2
+
+V2.1 se ejecutó y se detuvo antes de exportar por `OAPI=N_mm_C,
+payload=N_mm_C, wrapper=lb, inch, F`. La hipótesis de que activar el contexto
+actualizaría la etiqueta era incorrecta. REA confirma que
+`GetDataBaseUnitAsString` lee un campo estático independiente; en cambio,
+`LengthFactorUnitToDB` consulta el modelo de objetos de CSICommon. No son una
+sola fuente de verdad. Se mantiene el rótulo crudo y no se modifica ese campo.
+
+V2.2 conserva la guarda N-mm-C para OAPI/base/payload y añade cotejo en vivo de
+GUID/vértices de todos los muros con pier, sin conversión. Lee por separado las
+unidades del contexto numérico y factores mm/m, guardando discrepancias y errores.
+El JSON base y el diagnóstico se escriben antes de las validaciones posteriores;
+un fallo no descarta la evidencia ya leída. Los grupos se capturan para diagnóstico,
+no se declaran unidades/longitudes de barras aprobadas por coincidencia de etiquetas.
+Un callback exitoso acredita extracción, no despiece correcto.
+
+Validación V2.2: **34 pruebas C# y 184 Python**, compilación sin avisos/errores,
+y repetición offline del cotejo sobre V1 y su auditoría OAPI: dos muros/ocho vértices.
+No se midió cobertura porcentual de estas nuevas clases. Paquete separado y hashes
+cotejados; ninguna DLL cargada se sobrescribió.
+
+### Captura V2.2 verificada en ETABS y control geométrico
+
+V2.2 se ejecutó sin error: diez partes exportadas, cero fallos, una pila y dos
+niveles. Los dos GUID y ocho vértices coincidieron con OAPI. Contexto numérico
+N/mm/C, factores mm=1 y m=1000; etiqueta imperial externa conservada, sin conversión.
+La lectura OAPI posterior confirma nueve casos Finished y cuatro estaciones sin
+mensajes; concreto de muros 30 MPa. La resistencia del acero disponible en catálogo
+no debe confundirse con la asignación efectiva del diseño.
+
+La auditoría independiente reconstruyó 68 segmentos verticales desde los grupos,
+cotejándolos uno a uno con la jaula; suma recta 233.389,6 mm igual a la caché. Son
+barras físicas de 20 mm, frente a 16 mm comprobados. Las horizontales son de 14 mm,
+no 12 mm. Recubrimiento nominal nativo 38,1 mm frente a 40 mm del overwrite; aún
+se debe comprobar su semántica y la envolvente geométrica de las barras.
+
+REA confirmó dos contratos relevantes de esta compilación:
+
+- El generador horizontal redondea al entero más próximo el número de intervalos.
+  En la captura resultan siete formas con paso 474,6 mm, superior a los 450 mm
+  declarados. Para ese mismo rango se requieren al menos ocho formas, paso 406,8 mm.
+  La corrección propia usa techo y comprueba las posiciones finales; no parchea CSI.
+- El generador vertical consulta la longitud de empalme con diámetro cero; ese
+  camino usa una pulgada como referencia, dando 914,4 mm. No se interpreta como
+  36 diámetros de la barra física ni como una verificación normativa.
+
+Las horizontales tienen arcos y cambios locales de Z; `PLine.Length=0` no es una
+longitud de corte utilizable. Cantidades de formas, longitudes rectas, pesos,
+cortes y anclajes tienen estados de validación distintos. La cimentación no existe
+en la captura; se prepara un ensayo sintético explícito, sin aprobación geotécnica,
+sin convertirlo en una modificación ya realizada del EDB. Despiece integral abierto.

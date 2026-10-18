@@ -8,6 +8,28 @@ namespace CDCRD.WallDetailProbe;
 /// <summary>Exact-build read operations; never deserialize native type metadata.</summary>
 internal static class NativeDetailCapture
 {
+    internal sealed record NumericUnits(string ObjectModelUnits, double MillimeterToDatabase, double MeterToDatabase);
+
+    public static NumericUnits ReadNumericUnits(Assembly core, Assembly common)
+    {
+        // REA: the wrapper label reads a separate static field, whereas length
+        // factors read CSICommon.xApplication.ObjectModel.DatabaseUnits.
+        object model = StaticProperty(common, "CSI.CSICommon.xApplication", "ObjectModel").GetValue(null)
+                       ?? throw new InvalidOperationException("Native numeric object model is missing.");
+        object units = Property(model, "DatabaseUnits");
+        string label = $"{Property(units, "Force")}, {Property(units, "Length")}, {Property(units, "Temperature")}";
+        var factor = core.GetType("CSI.NADetBase.Common.xApp", true)!.GetMethod("LengthFactorUnitToDB",
+            BindingFlags.Public | BindingFlags.Static, null, [typeof(string)], null)
+            ?? throw new InvalidOperationException("Native length factor contract changed.");
+        double ReadFactor(string name)
+        {
+            if (factor.Invoke(null, [name]) is not double value || !double.IsFinite(value))
+                throw new InvalidOperationException("Native length factor is not finite.");
+            return value;
+        }
+        return new(label, ReadFactor("mm"), ReadFactor("m"));
+    }
+
     public static ContextLease Activate(Assembly detail, Assembly core, Assembly design)
     {
         PropertyInfo commonApp = StaticProperty(core, "CSI.NADetBase.Common.xApp", "App");

@@ -5,7 +5,7 @@ using System.Text.Json;
 using ETABSv1;
 using CDCRD.WallDetailProbe;
 
-namespace CDCRD.WallDetailProbeV21;
+namespace CDCRD.WallDetailProbeV22;
 
 /// <summary>Experimental, exact-build, read-only native detail capture. No model setters.</summary>
 public sealed class cPlugin : cPluginContract
@@ -16,7 +16,7 @@ public sealed class cPlugin : cPluginContract
 
     public int Info(ref string Text)
     {
-        Text = "CDCRD V2.1 read-only wall detail, catalog and bar group capture for an authorized ETABS 23.3.0 test copy. " +
+        Text = "CDCRD V2.2 read-only wall detail, catalog and bar group capture for an authorized ETABS 23.3.0 test copy. " +
                "No geometry, reinforcement, analysis or model save operations. Does not approve detailing.";
         return 0;
     }
@@ -43,6 +43,7 @@ public sealed class cPlugin : cPluginContract
             Assembly detail = RequireAssembly(assemblies, "CSiNAWallStackDesigner", DetailHash);
             Assembly core = RequireAssembly(assemblies, "CSiNADetBase", "0DB0AFCDE330B40F5AA8BDF3CA8EAB38BDE72CB86C419226979A366686EA5608");
             Assembly design = RequireAssembly(assemblies, "CSiNADetDesign", "CD983AC8F5D1223A535F92511B2F289C9FECEE9FA03EE13FE0975A224BBAD84C");
+            Assembly common = RequireAssembly(assemblies, "CSICommon", "F69C427D7803C99B076FD2D6A44A124EC6EFFDF2EBC1A24D1BDC59309C8CA831");
             RequireAssembly(assemblies, "CSiDetGeomModel", "78575429D65BE5CDD44788F10C765F597AF9FC8D69EB4DF1AF83E89DAE6207A5");
             // Build-specific read-only accessor resolved by REA: a single static-field read.
             var getter = host.ManifestModule.ResolveMethod(0x06006732) as MethodInfo
@@ -66,14 +67,34 @@ public sealed class cPlugin : cPluginContract
                 throw new InvalidOperationException("Empty native wall detail data.");
             string? wrapperUnits = data.GetType().GetProperty("DatabaseUnit")?.GetValue(data)?.ToString();
             string? modelUnits = parsed.RootElement.GetProperty("ModelInformation").GetProperty("DatabaseUnit").GetString();
-            if ((int)SapModel.GetDatabaseUnits() != 9 || modelUnits != "N_mm_C" ||
-                wrapperUnits?.Replace(" ", "") != "N,mm,C")
-                throw new InvalidOperationException($"Native unit context not corroborated: OAPI={SapModel.GetDatabaseUnits()}, payload={modelUnits}, wrapper={wrapperUnits}.");
             if (SapModel.GetModelFilename(true) != model || !SapModel.GetModelIsLocked())
                 throw new InvalidOperationException("Model context changed during capture.");
             output = Path.Combine(Path.GetDirectoryName(model)!, "wall-detail-capture-" + runId);
             Directory.CreateDirectory(output);
             File.WriteAllText(Path.Combine(output, "native-wall-detail.json"), nativeJson);
+            NativeDetailCapture.NumericUnits? numericUnits = null;
+            string? numericUnitError = null;
+            try { numericUnits = NativeDetailCapture.ReadNumericUnits(core, common); }
+            catch (Exception exception) { numericUnitError = exception.ToString(); }
+            // Preserve diagnostic evidence even if a later corroboration gate fails.
+            WriteJson(Path.Combine(output, "unit-evidence.json"), new
+            {
+                wrapper_unit_raw = wrapperUnits, payload_unit = modelUnits,
+                oapi_database_units = (int)SapModel.GetDatabaseUnits(), oapi_present_units = (int)SapModel.GetPresentUnits(),
+                numeric_context = numericUnits, numeric_context_error = numericUnitError,
+                conversion_applied = false, complete_detailing = false
+            });
+            var unitAssessment = CaptureEvidence.AssessUnits((int)SapModel.GetDatabaseUnits(), (int)SapModel.GetPresentUnits(),
+                modelUnits, wrapperUnits, numericUnits?.ObjectModelUnits,
+                numericUnits?.MillimeterToDatabase ?? double.NaN, numericUnits?.MeterToDatabase ?? double.NaN);
+            var nativeWalls = CaptureEvidence.ReadWalls(parsed.RootElement);
+            var currentWalls = OapiGeometry.Read(SapModel);
+            int matchedVertices = CaptureEvidence.MatchWalls(nativeWalls, currentWalls);
+            WriteJson(Path.Combine(output, "geometry-evidence.json"), new
+            {
+                status = "matched", units = "mm", walls = nativeWalls.Length, vertices = matchedVertices,
+                native = nativeWalls, oapi = currentWalls, coordinate_tolerance_mm = 1e-6, conversion_applied = false
+            });
             var expanded = NativeDetailCapture.Capture(designer, detail, core, output);
             WriteJson(Path.Combine(output, "expanded-capture.json"), expanded.Manifest);
             if (SapModel.GetModelFilename(true) != model || !SapModel.GetModelIsLocked())
@@ -81,12 +102,18 @@ public sealed class cPlugin : cPluginContract
             context.Dispose();
             WriteJson(Path.Combine(output, "capture.json"), new
             {
-                status = expanded.Success ? "captured_not_validated" : "partial_capture_failed", model, process_id = process.Id,
+                status = !expanded.Success ? "partial_capture_failed" :
+                    !unitAssessment.NumericContextAgrees ? "captured_for_diagnosis_unit_conflict" :
+                    !unitAssessment.WrapperAgrees ? "captured_with_wrapper_label_conflict" : "captured_not_validated",
+                model, process_id = process.Id,
                 source = "WallStackDesigner.GetDataObjet.JSonObject", host_sha256 = HostHash,
                 detail_sha256 = DetailHash, host_mvid = HostMvid,
                 database_unit = wrapperUnits, serialized_model_unit = modelUnits, oapi_database_units_enum = 9,
-                active_context_restored = true, native_labels_agree = true,
-                geometry_unit_validation = "requires_external_OAPI_coordinate_match",
+                active_context_restored = true, native_labels_agree = unitAssessment.WrapperAgrees,
+                numeric_unit_context_agrees = unitAssessment.NumericContextAgrees,
+                geometry_unit_validation = "current_OAPI_GUID_and_coordinates_matched",
+                geometry_walls_matched = nativeWalls.Length, geometry_vertices_matched = matchedVertices,
+                bar_group_units_verified = false, conversion_applied = false,
                 display_unit = data.GetType().GetProperty("DisplayUnit")?.GetValue(data)?.ToString(),
                 native_json_sha256 = Convert.ToHexString(SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(nativeJson))),
                 complete_detailing = false, engineering_approval = false

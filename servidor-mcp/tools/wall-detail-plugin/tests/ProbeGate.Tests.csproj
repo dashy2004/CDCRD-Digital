@@ -14,5 +14,6 @@
     <Compile Include="../ProbeGate.cs" Link="ProbeGate.cs" />
     <Compile Include="../ContextLease.cs" Link="ContextLease.cs" />
     <Compile Include="../NativeDetailCapture.cs" Link="NativeDetailCapture.cs" />
+    <Compile Include="../CaptureEvidence.cs" Link="CaptureEvidence.cs" />
   </ItemGroup>
 </Project>
