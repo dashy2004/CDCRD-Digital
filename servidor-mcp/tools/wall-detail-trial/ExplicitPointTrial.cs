@@ -60,6 +60,25 @@ internal static class ExplicitPointTrial
     private static object Create(Type type) => Activator.CreateInstance(type)
         ?? throw new InvalidOperationException("Cannot construct independent native object.");
 
+    // A point's direct coordinates can be current while the area used by its
+    // containing group still comes from an older mesh. Refresh only fresh clones.
+    internal static void RefreshAndValidate(object pattern, IReadOnlyList<Axis> expected, string stage, Action guard)
+    {
+        guard();
+        var refresh = pattern.GetType().GetMethod("GenerateMesh", BindingFlags.Public | BindingFlags.Instance,
+            null, Type.EmptyTypes, null);
+        if (refresh is null || refresh.ReturnType != typeof(void))
+            throw new InvalidOperationException(stage + ": missing void GenerateMesh contract.");
+        refresh.Invoke(pattern, null);
+        Axis[] actual = Points(pattern);
+        try { RequireSameLayout(expected, actual); }
+        catch (InvalidOperationException error)
+        {
+            throw new InvalidOperationException(stage + ": " + error.Message +
+                " Expected=" + JsonSerializer.Serialize(expected) + " Actual=" + JsonSerializer.Serialize(actual), error);
+        }
+    }
+
     internal static object Replace(object original, object clone, Assembly design, Action guard)
     {
         guard(); DetachedTrial.RequireDetached(original, clone);
@@ -87,10 +106,10 @@ internal static class ExplicitPointTrial
             DetachedTrial.Set(point, "X", axis.X);
             DetachedTrial.Set(point, "Y", axis.Y);
             DetachedTrial.Set(point, "MaterialID", material);
-            RequireSameLayout([axis], Points(point));
+            RefreshAndValidate(point, [axis], "explicit point " + points.Count, guard);
             points.Add(point);
         }
-        RequireSameLayout(axes, Points(group));
+        RefreshAndValidate(group, axes, "explicit point group", guard);
         object replacement = Create(previous.GetType());
         if (Items(replacement).Length != 0 || ReferenceEquals(replacement, previous) ||
             ReferenceEquals(replacement, DetachedTrial.Read(original, "VerticalBars")))

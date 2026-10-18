@@ -5,6 +5,55 @@ using Axis = CDCRD.WallDetailTrial.ExplicitPointTrial.Axis;
 
 public sealed class ExplicitPointTrialTests
 {
+    public sealed class PointValue(double x, double y, double diameter)
+    {
+        public double X = x, Y = y, Dia = diameter;
+    }
+    public sealed class CachedPoint
+    {
+        public double Diameter = 16;
+        public double CachedDiameter = 20;
+        public PointValue[] GetBarPoints() => [new(34, 250, Diameter)];
+        public void GenerateMesh() => CachedDiameter = Diameter;
+    }
+    public sealed class CachedGroup(CachedPoint point)
+    {
+        public double CachedDiameter = 20;
+        public PointValue[] GetBarPoints() => [new(34, 250, point.CachedDiameter)];
+        public void GenerateMesh() => CachedDiameter = point.CachedDiameter;
+    }
+    [Fact] public void FreshPointAndGroupMustRefreshBeforeUsingCachedArea()
+    {
+        var point = new CachedPoint();
+        var group = new CachedGroup(point);
+        Axis[] expected = [new(34, 250, 16)];
+        // Direct point read succeeds even though the consuming group is stale.
+        Assert.Equal(16, point.GetBarPoints()[0].Dia);
+        Assert.Throws<InvalidOperationException>(() =>
+            ExplicitPointTrial.RefreshAndValidate(group, expected, "stale group", () => { }));
+        ExplicitPointTrial.RefreshAndValidate(point, expected, "point", () => { });
+        ExplicitPointTrial.RefreshAndValidate(group, expected, "group", () => { });
+        Assert.Equal(16, point.CachedDiameter);
+        Assert.Equal(16, group.CachedDiameter);
+    }
+    [Fact] public void GuardFailurePreventsMeshMutation()
+    {
+        var point = new CachedPoint();
+        Assert.Throws<InvalidOperationException>(() => ExplicitPointTrial.RefreshAndValidate(point,
+            [new(34, 250, 16)], "point", () => throw new InvalidOperationException("guard")));
+        Assert.Equal(20, point.CachedDiameter);
+    }
+    [Fact] public void RefreshDoesNotHideWrongDiameterAndReportsStageAndValues()
+    {
+        var error = Assert.Throws<InvalidOperationException>(() => ExplicitPointTrial.RefreshAndValidate(
+            new CachedPoint { Diameter = 12 }, [new(34, 250, 16)], "test point", () => { }));
+        Assert.Contains("test point", error.Message);
+        Assert.Contains("\"Diameter\":12", error.Message);
+        Assert.Contains("\"Diameter\":16", error.Message);
+    }
+    public sealed class WrongRefreshSignature { public int GenerateMesh() => 0; }
+    [Fact] public void UnexpectedMeshContractFailsClosed() => Assert.Throws<InvalidOperationException>(() =>
+        ExplicitPointTrial.RefreshAndValidate(new WrongRefreshSignature(), [new(34, 250, 16)], "point", () => { }));
     [Fact] public void OrderingDoesNotChangePhysicalLayout()
     {
         Axis[] plan = [new(-34, 250, 16), new(34, 250, 16), new(30, 62, 16)];

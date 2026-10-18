@@ -1,4 +1,4 @@
-# Detached wall-detail trials — experimental R07
+# Detached wall-detail trials — experimental R07.1
 
 This separate .NET 8 plugin generates trial reinforcement patterns on detached
 copies of two uniform wall sections with their end joints in an explicitly authorized ETABS 23.3.0 fixture.
@@ -67,7 +67,7 @@ Provide `probe-options.json` using the same explicit authorization schema as V2.
 and `trial-options.json` with `ResourceLockPath` set to the actual cooperative
 ETABS lock. A present lock blocks execution; do not remove another owner's lock.
 
-Add `CDCRD.WallDetailTrialR07.dll` through ETABS Tools → Add/Show Plugins and invoke
+Add `CDCRD.WallDetailTrialR071.dll` through ETABS Tools → Add/Show Plugins and invoke
 it once on the authorized, already analyzed copy. No design/detailing rerun is
 needed. A restarted process invalidates the configuration.
 
@@ -143,8 +143,9 @@ finite coordinates, unique locations and straight vertical geometry are required
 This addresses a specific plan-to-cage discrepancy. It does not correct the four
 end-bar interferences, horizontal hooks, vertical end elevations, native lap
 geometry, material metadata, capacity or persistence. The original source cage and
-EDB remain untouched. Native R07 execution is pending; passing tests is not native
-validation. `src/wall_cage_checks.py` adds independent signed-clearance checks for
+EDB remain untouched. R07 stopped at its layout guard during point conversion;
+source sections, preferences and all four source cages remained unchanged.
+Native R07.1 execution is pending; passing tests is not native validation. `src/wall_cage_checks.py` adds independent signed-clearance checks for
 finite vertical bars versus straight segments or explicitly identified horizontal
 circular arcs. Negative means overlapping radius envelopes. The checks do not
 infer arcs from arbitrary samples or approve positive clearance as code compliance.
@@ -153,3 +154,23 @@ R07 software validation: 85 C# tests and Release build with zero warnings/errors
 69 Python tests across the three geometry/check modules, including 28 new checks
 and 98% statement coverage of the new interference module. These checks are not
 a complete review of the native API or an engineering approval.
+
+
+## R07.1 cache synchronization repair
+
+The point group's area calculation consumes each child point's cached mesh.
+Changing the size or coordinates and reading the point directly does not refresh
+that mesh. R07 omitted this refresh, so a direct point read could pass while the
+containing group still used the previous diameter.
+
+R07.1 explicitly refreshes each freshly constructed point before adding it to the
+new group, then refreshes the new group. The zero-argument public method must
+return void. Identity guards run before refresh, and all original layout checks
+remain. A mismatch reports the stage and expected/actual numeric coordinates and
+diameters. No mesh of the source model is refreshed.
+
+Validation: 89 C# tests, Release build without warnings/errors. Four new tests
+cover stale child/group state, a guard stopping mutation, an incorrect diameter
+after refresh, and an unsupported refresh signature. These use independent test
+doubles; live execution against ETABS remains a separate requirement. Assembly
+identity changes to R071 so the loaded R07 binary can be preserved.
