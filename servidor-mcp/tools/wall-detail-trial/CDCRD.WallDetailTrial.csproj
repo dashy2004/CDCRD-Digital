@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <AssemblyName>CDCRD.WallDetailTrialR03</AssemblyName>
+    <Version>0.1.0</Version>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EtabsInstallDir Condition="'$(EtabsInstallDir)' == ''">C:\Program Files\Computers and Structures\ETABS 23</EtabsInstallDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ETABSv1">
+      <HintPath>$(EtabsInstallDir)\ETABSv1.dll</HintPath>
+      <Private>false</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </Reference>
+    <Compile Remove="tests\**\*.cs" />
+    <Compile Include="../wall-detail-plugin/ProbeGate.cs" Link="ProbeGate.cs" />
+    <Compile Include="../wall-detail-plugin/ContextLease.cs" Link="ContextLease.cs" />
+    <Compile Include="../wall-detail-plugin/NativeDetailCapture.cs" Link="NativeDetailCapture.cs" />
+    <Compile Include="../wall-detail-plugin/CaptureEvidence.cs" Link="CaptureEvidence.cs" />
+    <Compile Include="../wall-detail-plugin/OapiGeometry.cs" Link="OapiGeometry.cs" />
+  </ItemGroup>
+</Project>

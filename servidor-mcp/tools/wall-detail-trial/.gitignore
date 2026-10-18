@@ -1,0 +1,7 @@
+bin/
+obj/
+**/bin/
+**/obj/
+probe-options.json
+trial-options.json
+failure-*.json
