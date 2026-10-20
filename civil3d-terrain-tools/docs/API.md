@@ -20,6 +20,14 @@ Una transacción contiene las superficies de diseño y de volumen de una solicit
 
 `audit` lee todas las superficies, COGO y alineamientos del dibujo, no únicamente el namespace solicitado. **Sus salidas de proyectos reales son privadas.** Cada sección incluye `segmentTo`; un perfil con discontinuidades debe tratarse por segmentos. El verificador de la demostración exige perfiles continuos y no conecta huecos automáticamente.
 
+## Unidades desde 0.2.1
+
+Las escrituras exigen `Database.Insunits == UnitsValue.Meters` y `CivilDocument.Settings.DrawingSettings.UnitZoneSettings.DrawingUnits == DrawingUnitType.Meters`. El segundo enum es el contrato .NET de Civil, no el código numérico de la API COM. Un rechazo ocurre antes de iniciar la transacción y no escala datos.
+
+`audit` conserva `units` (INSUNITS) y añade `civilUnits`, `metricDrawingUnits` y `sectionViewStyles`: estilos realmente referenciados por las vistas, ordenados por handle, con texto mayor/menor, título de los cinco ejes y título de estación. Puede auditar unidades incompatibles. No modifica estilos ni anuncia que toda la anotación del dibujo sea métrica.
+
+Las vistas creadas por `sections` usan expresiones `Um` y sufijos `m` en los ejes y en el título de estación; no heredan `Uft` de la plantilla. El verificador de la demo exige auditorías 0.2.1 con ambas unidades y estilos métricos, también en el estado anterior a la reapertura. Los recibos antiguos no acreditan estas comprobaciones y se conservan como evidencia histórica.
+
 ## Estados y reintentos
 
 Una respuesta `ok: true` confirma la acción en memoria. No confirma guardado ni persistencia en disco. Verifique el contenido nativo, guarde/cierre/reabra y compare otra auditoría. Si un comando se ha encolado en un puente, espere su recibo antes del siguiente. No interprete un timeout como cancelación.

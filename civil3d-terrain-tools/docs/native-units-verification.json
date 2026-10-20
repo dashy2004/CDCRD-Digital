@@ -1,0 +1,160 @@
+{
+  "date": "2026-10-20",
+  "host": "Civil 3D 2027",
+  "assembly": "Cdcrd.Earthworks, Version=0.2.1.0, Culture=neutral, PublicKeyToken=null",
+  "assembly_sha256": "dae90ba500605f3f260642ded11089d542e4bb4320597e1f7993dae8cbbe7bee",
+  "python_tests_passed": 23,
+  "build_errors": 0,
+  "build_warnings": 0,
+  "native_rejections": {
+    "build_civil_feet": true,
+    "sections_civil_feet": true,
+    "build_insunits_feet": true,
+    "sections_insunits_feet": true
+  },
+  "historical_demo": {
+    "observed_insunits": "Meters",
+    "observed_civil_units": "Feet",
+    "observed_section_units": "Uft including station title",
+    "geometry_unchanged_after_correction": true,
+    "corrected_copy_reopen_verified": true,
+    "original_file_unchanged": true
+  },
+  "final_demo": {
+    "fixture": "synthetic, local coordinates in meters",
+    "checks": [
+      {
+        "surface": "CDCRD_DEMO_CUT",
+        "cut_m3": 276,
+        "fill_m3": 0,
+        "independent_expected": {
+          "cut_m3": 276.0,
+          "fill_m3": 0.0
+        },
+        "absolute_error_m3": {
+          "cut": 0.0,
+          "fill": 0.0
+        },
+        "native_sections_aea_m3": {
+          "cut": 275.9583333333333,
+          "fill": 0.0
+        },
+        "pass": true
+      },
+      {
+        "surface": "CDCRD_DEMO_FILL",
+        "cut_m3": 0,
+        "fill_m3": 276,
+        "independent_expected": {
+          "cut_m3": 0.0,
+          "fill_m3": 276.0
+        },
+        "absolute_error_m3": {
+          "cut": 0.0,
+          "fill": 0.0
+        },
+        "native_sections_aea_m3": {
+          "cut": 0.0,
+          "fill": 275.9583333333333
+        },
+        "pass": true
+      },
+      {
+        "surface": "CDCRD_DEMO_MIXED",
+        "cut_m3": 6.444444480119663,
+        "fill_m3": 6.44444447088889,
+        "independent_expected": {
+          "cut_m3": 6.444444444444478,
+          "fill_m3": 6.444444444444414
+        },
+        "absolute_error_m3": {
+          "cut": 3.5675184584249564e-08,
+          "fill": 2.644447594235544e-08
+        },
+        "native_sections_aea_m3": {
+          "cut": 6.464140660074968,
+          "fill": 6.464140650844204
+        },
+        "pass": true
+      }
+    ],
+    "section_count": 485,
+    "sample_line_count": 194,
+    "view_count": 14,
+    "max_section_elevation_error_m": 3.0769236047945014e-09,
+    "native_data_unchanged_since_before_audit": true
+  },
+  "section_style_audit": [
+    {
+      "name": "CDCRD_DEMO_SECTIONS_FLAT_GRAPH",
+      "handle": "DFC",
+      "title": "<[Section View Station(Um|FS|P2|RN|Sn|OF|AP|B2|TP|EN|W0|DZY|GC|UN)]> m",
+      "axes": [
+        {
+          "major": "<[Section View Point Offset(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "minor": "<[Section View Point Offset(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "title": "Offset (m)"
+        },
+        {
+          "major": "<[Section View Point Offset(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "minor": "<[Section View Point Offset(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "title": "Offset (m)"
+        },
+        {
+          "major": "<[Section View Point Elevation(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "minor": "<[Section View Point Elevation(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "title": "Elevation (m)"
+        },
+        {
+          "major": "<[Section View Point Elevation(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "minor": "<[Section View Point Elevation(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "title": "Elevation (m)"
+        },
+        {
+          "major": "<[Section View Point Elevation(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "minor": "<[Section View Point Elevation(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "title": "Elevation (m)"
+        }
+      ]
+    },
+    {
+      "name": "CDCRD_DEMO_SECTIONS_SLOPED_GRAPH",
+      "handle": "F9C",
+      "title": "<[Section View Station(Um|FS|P2|RN|Sn|OF|AP|B2|TP|EN|W0|DZY|GC|UN)]> m",
+      "axes": [
+        {
+          "major": "<[Section View Point Offset(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "minor": "<[Section View Point Offset(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "title": "Offset (m)"
+        },
+        {
+          "major": "<[Section View Point Offset(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "minor": "<[Section View Point Offset(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "title": "Offset (m)"
+        },
+        {
+          "major": "<[Section View Point Elevation(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "minor": "<[Section View Point Elevation(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "title": "Elevation (m)"
+        },
+        {
+          "major": "<[Section View Point Elevation(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "minor": "<[Section View Point Elevation(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "title": "Elevation (m)"
+        },
+        {
+          "major": "<[Section View Point Elevation(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "minor": "<[Section View Point Elevation(Um|P2|RN|Sn|OF|AP|GC|UN)]> m",
+          "title": "Elevation (m)"
+        }
+      ]
+    }
+  ],
+  "visual": {
+    "source": "Native Civil 3D PDF export, synthetic data",
+    "station": "0+12.00 m",
+    "axis_units": "m",
+    "drawing_scale_demo_only": 0.1
+  },
+  "scope": "Synthetic validation; not engineering approval. Other template styles and plain AutoCAD are not certified."
+}

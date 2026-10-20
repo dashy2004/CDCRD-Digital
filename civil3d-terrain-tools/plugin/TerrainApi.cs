@@ -10,6 +10,7 @@ using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
 using Autodesk.Civil;
 using Autodesk.Civil.ApplicationServices;
+using Autodesk.Civil.Settings;
 using Autodesk.Civil.DatabaseServices;
 using Autodesk.Civil.DatabaseServices.Styles;
 using SectionViewStyle = Autodesk.Civil.DatabaseServices.Styles.SectionViewStyle;
@@ -24,12 +25,34 @@ public static class TerrainApi
     static void Require(bool condition, string text) { if (!condition) throw new InvalidOperationException(text); }
     static Point3d P(double[] a) { Require(a != null && a.Length == 3 && a.All(double.IsFinite), "Expected finite XYZ"); return new(a[0], a[1], a[2]); }
     static double[] XYZ(Point3d p) => new[] { p.X, p.Y, p.Z };
-    static void Guard(Request r)
+    static void MetricAxis(AxisStyle axis, string field, string title)
+    {
+        string text = "<[Section View Point " + field + "(Um|P2|RN|Sn|OF|AP|GC|UN)]> m";
+        axis.MajorTickStyle.LabelText = text;
+        axis.MinorTickStyle.LabelText = text;
+        axis.TitleStyle.Text = title + " (m)";
+    }
+    static object GraphUnits(SectionViewStyle style) => new
+    {
+        name = style.Name,
+        handle = style.ObjectId.Handle.ToString(),
+        title = style.GraphStyle.TitleStyle.Text,
+        axes = new[] { style.BottomAxis, style.TopAxis, style.LeftAxis, style.RightAxis, style.CenterAxis }
+            .Select(a => new { major = a.MajorTickStyle.LabelText, minor = a.MinorTickStyle.LabelText, title = a.TitleStyle.Text }).ToArray()
+    };
+    static void Guard(Request r, bool requireMetric = true)
     {
         var d = AcApp.DocumentManager.MdiActiveDocument;
         Require(d != null && !string.IsNullOrWhiteSpace(r.ExpectedDrawing) && Path.IsPathFullyQualified(r.ExpectedDrawing), "An absolute expected drawing path is required");
         Require(string.Equals(Path.GetFullPath(d.Name), Path.GetFullPath(r.ExpectedDrawing), StringComparison.OrdinalIgnoreCase), "Active drawing does not match request");
-        Require(d.Database.Insunits == UnitsValue.Meters, "Drawing INSUNITS must be meters");
+        var civil = CivilApplication.ActiveDocument;
+        Require(civil != null, "Terrain operations require a Civil 3D document; plain AutoCAD does not provide TIN surfaces or Civil sections");
+        if (requireMetric)
+        {
+            Require(d.Database.Insunits == UnitsValue.Meters, $"Drawing INSUNITS must be Meters; found {d.Database.Insunits}. No coordinates were scaled");
+            var units = civil.Settings.DrawingSettings.UnitZoneSettings.DrawingUnits;
+            Require(units == DrawingUnitType.Meters, $"Civil DrawingUnits must be Meters; found {units}. INSUNITS alone is insufficient. No coordinates were scaled");
+        }
         Require(!string.IsNullOrWhiteSpace(r.NamePrefix) && r.NamePrefix.StartsWith("CD"), "Explicit CD-prefixed namespace required");
         Require(r.VolumeTolerance > 0 && r.VolumeTolerance <= 0.01 && double.IsFinite(r.VolumeTolerance), "Invalid volume tolerance");
         if (r.ExpectedCogoCount >= 0) Require(CivilApplication.ActiveDocument.CogoPoints.Count == r.ExpectedCogoCount, "Unexpected COGO count");
@@ -135,6 +158,10 @@ public static class TerrainApi
         var graphTemplate = (SectionViewStyle)tr.GetObject(cd.Styles.SectionViewStyles[0], OpenMode.ForRead);
         var graphId = graphTemplate.CopyAsSibling(s.GroupName + "_GRAPH");
         var graph = (SectionViewStyle)tr.GetObject(graphId, OpenMode.ForWrite); graph.GraphStyle.VerticalExaggeration = 1;
+        graph.GraphStyle.TitleStyle.Text = "<[Section View Station(Um|FS|P2|RN|Sn|OF|AP|B2|TP|EN|W0|DZY|GC|UN)]> m";
+        MetricAxis(graph.BottomAxis, "Offset", "Offset"); MetricAxis(graph.TopAxis, "Offset", "Offset");
+        MetricAxis(graph.LeftAxis, "Elevation", "Elevation"); MetricAxis(graph.RightAxis, "Elevation", "Elevation");
+        MetricAxis(graph.CenterAxis, "Elevation", "Elevation");
         var model = (BlockTableRecord)tr.GetObject(SymbolUtilityServices.GetBlockModelSpaceId(doc.Database), OpenMode.ForWrite);
         double ux = delta.X / length, uy = delta.Y / length; int n = (int)Math.Floor(length / s.Spacing); var stations = Enumerable.Range(0, n + 1).Select(i => i * s.Spacing).ToList(); if (length - stations.Last() > 1e-8) stations.Add(length);
         var handles = new List<object>(); int viewIndex = 0;
@@ -159,7 +186,8 @@ public static class TerrainApi
     }
     public static object Audit(Request r)
     {
-        Guard(r); var doc = AcApp.DocumentManager.MdiActiveDocument; var cd = CivilApplication.ActiveDocument; using var tr = doc.Database.TransactionManager.StartTransaction();
+        // An audit must remain available to diagnose incompatible drawing units.
+        Guard(r, requireMetric: false); var doc = AcApp.DocumentManager.MdiActiveDocument; var cd = CivilApplication.ActiveDocument; using var tr = doc.Database.TransactionManager.StartTransaction();
         var surfaces = new List<object>(); foreach (ObjectId id in cd.GetSurfaceIds())
         {
             var surface = (CivilSurface)tr.GetObject(id, OpenMode.ForRead); var triangles = new List<double[][]>();
@@ -167,6 +195,7 @@ public static class TerrainApi
             object volume = null; if (surface is TinVolumeSurface vs) { var v = vs.GetVolumeProperties(); volume = new { cut = v.UnadjustedCutVolume, fill = v.UnadjustedFillVolume, cutFactor = v.CutFactor, fillFactor = v.FillFactor, baseHandle = v.BaseSurface.Handle.ToString(), comparisonHandle = v.ComparisonSurface.Handle.ToString() }; }
             surfaces.Add(new { name = surface.Name, handle = id.Handle.ToString(), isOutOfDate = surface.IsOutOfDate, autoRebuild = surface.AutoRebuild, isReference = surface.IsReferenceObject, triangles, volume });
         }
+        var graphStyles = new HashSet<ObjectId>();
         var alignments = new List<object>(); foreach (ObjectId id in cd.GetAlignmentIds())
         {
             var a = (Alignment)tr.GetObject(id, OpenMode.ForRead); var groups = new List<object>(); foreach (ObjectId gid in a.GetSampleLineGroupIds())
@@ -178,13 +207,19 @@ public static class TerrainApi
                         var section = (Autodesk.Civil.DatabaseServices.Section)tr.GetObject(sid, OpenMode.ForRead); var pts = new List<object>(); foreach (SectionPoint p in section.SectionPoints) pts.Add(new { location = XYZ(p.Location), segmentTo = p.SegmentTo });
                         sections.Add(new { name = section.Name, handle = sid.Handle.ToString(), source = section.SourceName, station = section.Station, updateMode = section.UpdateMode.ToString(), points = pts });
                     }
-                    lines.Add(new { name = line.Name, handle = lid.Handle.ToString(), station = line.Station, sections, views = line.GetSectionViewIds().Cast<ObjectId>().Select(v => v.Handle.ToString()).ToArray() });
+                    var viewIds = line.GetSectionViewIds().Cast<ObjectId>().ToArray();
+                    foreach (var viewId in viewIds) graphStyles.Add(((SectionView)tr.GetObject(viewId, OpenMode.ForRead)).StyleId);
+                    lines.Add(new { name = line.Name, handle = lid.Handle.ToString(), station = line.Station, sections, views = viewIds.Select(v => v.Handle.ToString()).ToArray() });
                 }
                 groups.Add(new { name = g.Name, handle = gid.Handle.ToString(), lines });
             }
             alignments.Add(new { name = a.Name, handle = id.Handle.ToString(), start = a.StartingStation, end = a.EndingStation, groups });
         }
         var cogo = cd.CogoPoints.Cast<ObjectId>().Select(id => { var p = (CogoPoint)tr.GetObject(id, OpenMode.ForRead); return new { number = p.PointNumber, e = p.Easting, n = p.Northing, z = p.Elevation, description = p.RawDescription }; }).ToArray();
-        tr.Commit(); return new { utc = DateTime.UtcNow, drawing = doc.Name, units = doc.Database.Insunits.ToString(), cogo, surfaces, alignments };
+        var civilUnits = cd.Settings.DrawingSettings.UnitZoneSettings.DrawingUnits;
+        var sectionViewStyles = graphStyles.OrderBy(id => id.Handle.Value).Select(id => GraphUnits((SectionViewStyle)tr.GetObject(id, OpenMode.ForRead))).ToArray();
+        tr.Commit(); return new { utc = DateTime.UtcNow, drawing = doc.Name, units = doc.Database.Insunits.ToString(), civilUnits = civilUnits.ToString(),
+            metricDrawingUnits = doc.Database.Insunits == UnitsValue.Meters && civilUnits == DrawingUnitType.Meters,
+            cogo, surfaces, alignments, sectionViewStyles };
     }
 }

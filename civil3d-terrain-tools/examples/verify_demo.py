@@ -22,13 +22,13 @@ def interpolate(profile, x):
 def verify(receipt, before=None):
     require(receipt.get("ok") is True, "Native command did not succeed")
     a = receipt["result"]
-    require(
-        a["units"] == "Meters" and a["cogo"] == [], "Wrong demo units or COGO content"
-    )
+    verify_units(a)
+    require(a["cogo"] == [], "Unexpected demo COGO content")
     require(
         len(a["surfaces"]) == 8 and len(a["alignments"]) == 2,
         "Unexpected native object count",
     )
+    verify_style_units(a)
     surfaces = {s["name"]: s for s in a["surfaces"]}
     require(all(not s["isOutOfDate"] for s in surfaces.values()), "Stale surface")
     report = {
@@ -125,12 +125,47 @@ def verify(receipt, before=None):
     )
     if before:
         require(before.get("ok") is True, "Invalid before audit")
-        for key in ["cogo", "surfaces", "alignments"]:
+        verify_units(before["result"])
+        verify_style_units(before["result"])
+        for key in ["cogo", "surfaces", "alignments", "sectionViewStyles"]:
             require(
                 before["result"][key] == a[key], "Native persistence mismatch: " + key
             )
         report["native_data_unchanged_since_before_audit"] = True
     return report
+
+
+def verify_units(a):
+    """Require both native settings; old INSUNITS-only receipts cannot prove this."""
+    require(
+        a.get("units") == "Meters"
+        and a.get("civilUnits") == "Meters"
+        and a.get("metricDrawingUnits") is True,
+        "Both AutoCAD INSUNITS and Civil DrawingUnits must be verified as Meters",
+    )
+
+
+def verify_style_units(a):
+    styles = a.get("sectionViewStyles", [])
+    require(len(styles) == 2, "Expected two audited section graph styles")
+    for style in styles:
+        axes = style.get("axes", [])
+        require(len(axes) == 5, "Incomplete section axis audit")
+        for axis in axes:
+            for tick in ("major", "minor"):
+                text = axis.get(tick, "")
+                require(
+                    text.startswith("<[Section View Point ")
+                    and "(Um|" in text and "Uft" not in text and text.endswith("> m"),
+                    "Section tick is not explicitly metric",
+                )
+            require(axis.get("title", "").endswith("(m)"), "Axis title lacks meters")
+        title = style.get("title", "")
+        require(
+            title.startswith("<[Section View Station(Um|")
+            and "Uft" not in title and title.endswith("> m"),
+            "Section station title is not explicitly metric",
+        )
 
 
 def main():
