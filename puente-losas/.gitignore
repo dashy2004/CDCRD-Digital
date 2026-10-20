@@ -1,0 +1,14 @@
+# Dependencias clonadas localmente para desarrollo (el pyproject las declara por git)
+.vendor/
+
+# Entornos y caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# Salidas de corrida: pueden contener geometria de un modelo real
+salidas/
+*.xlsx
+*.svg

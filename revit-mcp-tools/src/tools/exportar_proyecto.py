@@ -272,7 +272,14 @@ def run(doc, uidoc, DB, P):
             ys_ = [p[1] for p in contorno]
             ap = f.get_Parameter(DB.BuiltInParameter.HOST_AREA_COMPUTED)
             bb = f.get_BoundingBox(None)
-            losas.append({"id": "L%d" % (i + 1), "revit_id": eidv(f.Id), "tipo_revit": type_name(doc, f),
+            mk = None
+            try:
+                pm = f.get_Parameter(DB.BuiltInParameter.ALL_MODEL_MARK)
+                if pm is not None:
+                    mk = pm.AsString()
+            except Exception as ex:
+                note(E, "mark losa %d" % eidv(f.Id), ex)
+            losas.append({"id": "L%d" % (i + 1), "revit_id": eidv(f.Id), "mark": mk, "tipo_revit": type_name(doc, f),
                           "entrepiso": lv_id.get(lv.Name) if lv else None, "nivel": lv.Name if lv else None,
                           "contorno": contorno, "contorno_origen": org, "huecos": huecos,
                           "lx": round(max(xs_) - min(xs_), 3), "ly": round(max(ys_) - min(ys_), 3),

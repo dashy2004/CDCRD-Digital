@@ -1,0 +1,42 @@
+{
+ "meta": {
+  "proyecto": "Edificio Ejemplo PL",
+  "nota": "Datos INVENTADOS para demostrar el puente de losas. No corresponden a ningún proyecto real.",
+  "unidades": {"longitud": "m"}
+ },
+ "losas": [
+  {"id": "L1", "mark": "LE1", "nivel": "N1 +3.00", "z_tope": 3.0,
+   "contorno": [[0.0, 0.0], [5.0, 0.0], [5.0, 6.0], [0.0, 6.0]],
+   "huecos": [], "lx": 5.0, "ly": 6.0, "area_m2": 30.0,
+   "espesor": {"h_usado": 0.25}, "tipo_revit": "Generic - 0.25"},
+
+  {"id": "L2", "mark": "LE2", "nivel": "N1 +3.00", "z_tope": 3.0,
+   "contorno": [[5.0, 0.0], [10.0, 0.0], [10.0, 6.0], [5.0, 6.0]],
+   "huecos": [], "lx": 5.0, "ly": 6.0, "area_m2": 30.0,
+   "espesor": {"h_usado": 0.25}, "tipo_revit": "Generic - 0.25"},
+
+  {"id": "L3", "mark": "LE3", "nivel": "N1 +3.00", "z_tope": 3.0,
+   "contorno": [[10.1, 0.0], [15.1, 0.0], [15.1, 6.0], [10.1, 6.0]],
+   "huecos": [], "lx": 5.0, "ly": 6.0, "area_m2": 30.0,
+   "espesor": {"h_usado": 0.25}, "tipo_revit": "Generic - 0.25",
+   "_nota": "al otro lado de una junta de 0.10 m: no es continua con LE2"},
+
+  {"id": "L4", "mark": "LE4", "nivel": "N1 +3.00", "z_tope": 3.0,
+   "contorno": [[0.0, 6.0], [5.0, 6.0], [5.0, 12.0], [0.0, 12.0]],
+   "huecos": [], "lx": 5.0, "ly": 6.0, "area_m2": 30.0,
+   "espesor": {"h_usado": 0.25}, "tipo_revit": "Generic - 0.25"},
+
+  {"id": "L5", "mark": "LE5", "nivel": "N1 +3.00", "z_tope": 3.0,
+   "contorno": [[5.0, 6.0], [10.0, 6.0], [10.0, 12.0], [5.0, 12.0]],
+   "huecos": [[[7.0, 8.5], [8.2, 8.5], [8.2, 10.0], [7.0, 10.0]]],
+   "lx": 5.0, "ly": 6.0, "area_m2": 28.2,
+   "espesor": {"h_usado": 0.25}, "tipo_revit": "Generic - 0.25",
+   "_nota": "hueco de escalera inventado de 1.2 x 1.5 m"},
+
+  {"id": "L6", "mark": "LE6", "nivel": "N1 +3.00", "z_tope": 3.0,
+   "contorno": [[-1.8, 0.0], [0.0, 0.0], [0.0, 6.0], [-1.8, 6.0]],
+   "huecos": [], "lx": 1.8, "ly": 6.0, "area_m2": 10.8,
+   "espesor": {"h_usado": 0.20}, "tipo_revit": "Generic - 0.20",
+   "_nota": "balcón en vuelo"}
+ ]
+}
