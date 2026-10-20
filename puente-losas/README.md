@@ -51,7 +51,8 @@ ni corrige los números del motor.
 
    `usos.json` declara por Mark el uso (set de carga), la mampostería medida,
    los vuelos y, si hace falta, borde/dirección/espesor. Salidas:
-   `informe_losas.xlsx`, `mapa_losas.svg`, `plan_etabs.json` y
+   `informe_losas.xlsx`, `mapa_losas.svg`, `plan_etabs.json`,
+   `sistema_losas.DL` (abrible en LosasPlus / corrible en Losas.exe) y
    `resultados.json` (la corrida cruda, auditable).
 3. **ETABS (sesión viva, con turno/lock):** ejecutar `plan_etabs.json` paso a
    paso con el servidor MCP [`fea`](../servidor-mcp/): cada paso nombra la tool
@@ -75,6 +76,36 @@ ni corrige los números del motor.
 | LiveP solo si hay parqueos | `etabs_plan.py` |
 | Peso propio en el patrón Dead (multiplicador 1), nunca duplicado | `etabs_plan.py` |
 | Detenerse antes de Run Analysis | `plan_etabs.json` → `meta.requisitos` |
+
+## La vía Pieper-Martens (el método de Losas.exe)
+
+Además del FEM, el puente calcula cada paño por el **método de Pieper-Martens**
+(Prof. Dr. Ing. Klaus Pieper y Dipl. Ing. Peter Martens, TU Braunschweig), el
+mismo del motor `Losas.exe` del Ing. Francisco E. Perdomo (Losas v5.21) que
+LosasPlus invoca con archivos `.DL`:
+
+- `pieper_martens.py` — tablas de coeficientes (`datos/TablasPerdomo.json`,
+  21 subtipos × 31 filas, extraídas y validadas en EstructurasRD desde el PDF
+  de Perdomo), interpolación lineal en ε=Ly/Lx (0.50–2.00) y balanceo de
+  momentos de borde (promedio con piso 0.75·max; en vuelos gobierna el vuelo).
+- `tipo_pm.py` — clasifica cada paño en el código de TIPO del `.DL` (10..60,
+  71/72 voladizos) a partir de la adyacencia; un vuelo vecino **no** empotra
+  (convención verificada en el fixture). Las losas de TRES bordes (borde libre
+  real, códigos x3/x4) exigen declaración manual.
+- `dl_io.py` — escribe/lee el `.DL` y parsea el `.TXT` de salida de Losas.exe.
+- El informe trae las columnas **PM Mfx/Mfy/Msx/Msy** junto a las del FEM y la
+  hoja **Apoyos PM** con los momentos de borde balanceados.
+
+**Validación:** fixture de oro `restaurante_2.DL` → `restaurante_2.TXT`
+(salida real de Losas.exe v5.21, tomado de EstructurasRD): los 20 momentos de
+losa y los 6 de apoyo coinciden con tolerancia **0.01 ton·m/m** — la misma del
+motor C# verificado, porque los coeficientes S del PDF vienen a 2 decimales
+(introduce ~0.007 al interpolar). Solo los códigos 40 y 71 tienen verificación
+numérica contra Losas.exe; el resto del mapeo viene del PDF.
+
+Diferencia de fondo entre vías: PM asume **apoyos rígidos** y paños
+rectangulares; el FEM acota con bordes simple/empotrado; **ETABS** analiza la
+estructura real. Tener las tres columnas en el mismo informe es el chequeo.
 
 ## Qué es (y qué no es) este cálculo
 

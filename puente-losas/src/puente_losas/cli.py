@@ -21,9 +21,11 @@ import sys
 
 from puente_losas import __version__
 from puente_losas.contrato import aplicar_usos, asignar_bordes, panos_desde_json
+from puente_losas.dl_io import guardar_dl
 from puente_losas.etabs_plan import escribir_plan
 from puente_losas.informe_excel import escribir_informe, escribir_mapa_svg
 from puente_losas.motor import analizar_panos
+from puente_losas.pm_puente import calcular_pm, pm_a_dict
 
 
 def _resultado_a_dict(r) -> dict:
@@ -72,6 +74,7 @@ def main(argv: list[str] | None = None) -> int:
                 panos = aplicar_usos(panos, json.load(f))
         panos = asignar_bordes(panos)
         resultados = analizar_panos(panos)
+        pm = calcular_pm(resultados, nombre_sistema=args.nombre)
     except (OSError, ValueError, KeyError) as ex:
         print(f"error: {ex}", file=sys.stderr)
         return 1
@@ -81,15 +84,19 @@ def main(argv: list[str] | None = None) -> int:
     ruta_svg = os.path.join(args.salida, "mapa_losas.svg")
     ruta_plan = os.path.join(args.salida, "plan_etabs.json")
     ruta_res = os.path.join(args.salida, "resultados.json")
+    ruta_dl = os.path.join(args.salida, "sistema_losas.DL")
 
-    escribir_informe(resultados, ruta_xlsx, proyecto=args.nombre)
+    escribir_informe(resultados, ruta_xlsx, proyecto=args.nombre, pm=pm)
     escribir_mapa_svg(resultados, ruta_svg)
     escribir_plan(resultados, ruta_plan, proyecto=args.nombre)
+    guardar_dl(pm.sistema, ruta_dl)
+    datos = {"panos": [_resultado_a_dict(r) for r in resultados],
+             "pieper_martens": pm_a_dict(pm)}
     with open(ruta_res, "w", encoding="utf-8") as f:
-        json.dump([_resultado_a_dict(r) for r in resultados], f, indent=1, ensure_ascii=False)
+        json.dump(datos, f, indent=1, ensure_ascii=False)
 
     print(f"{len(resultados)} paños analizados.")
-    for ruta in (ruta_xlsx, ruta_svg, ruta_plan, ruta_res):
+    for ruta in (ruta_xlsx, ruta_svg, ruta_plan, ruta_dl, ruta_res):
         print(f"  {ruta}")
     return 0
 

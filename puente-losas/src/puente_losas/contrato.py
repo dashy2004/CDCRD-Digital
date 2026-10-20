@@ -145,8 +145,9 @@ def _solape(a0: float, a1: float, b0: float, b1: float) -> float:
     return max(0.0, min(a1, b1) - max(a0, b0))
 
 
-def bordes_continuos(panos: list[PanoLosa], tol: float = TOL_ADYACENCIA_M) -> dict[str, int]:
-    """Cuenta, por Mark, cuántos de los 4 bordes del bbox tienen un paño vecino.
+def lados_continuos(panos: list[PanoLosa], tol: float = TOL_ADYACENCIA_M
+                    ) -> dict[str, dict[str, str | None]]:
+    """Por Mark, el vecino de cada lado del bbox ("izq"/"der"/"inf"/"sup") o None.
 
     Dos bordes son vecinos si la separación perpendicular es ≤ ``tol`` y el
     solape paralelo cubre al menos ``SOLAPE_MINIMO`` del borde más corto, a la
@@ -154,10 +155,10 @@ def bordes_continuos(panos: list[PanoLosa], tol: float = TOL_ADYACENCIA_M) -> di
     0.10 m NO es continuidad (0.10 > tol): ese es el comportamiento buscado.
     """
     cajas = {p.mark: (_bbox(p), p.z_tope) for p in panos}
-    resultado: dict[str, int] = {}
+    resultado: dict[str, dict[str, str | None]] = {}
     for p in panos:
         (x0, y0, x1, y1), z = cajas[p.mark]
-        continuo = {"izq": False, "der": False, "inf": False, "sup": False}
+        vecino: dict[str, str | None] = {"izq": None, "der": None, "inf": None, "sup": None}
         for q in panos:
             if q.mark == p.mark:
                 continue
@@ -167,29 +168,51 @@ def bordes_continuos(panos: list[PanoLosa], tol: float = TOL_ADYACENCIA_M) -> di
             sol_y = _solape(y0, y1, v0, v1) >= SOLAPE_MINIMO * min(y1 - y0, v1 - v0)
             sol_x = _solape(x0, x1, u0, u1) >= SOLAPE_MINIMO * min(x1 - x0, u1 - u0)
             if sol_y and abs(x0 - u1) <= tol:
-                continuo["izq"] = True
+                vecino["izq"] = q.mark
             if sol_y and abs(x1 - u0) <= tol:
-                continuo["der"] = True
+                vecino["der"] = q.mark
             if sol_x and abs(y0 - v1) <= tol:
-                continuo["inf"] = True
+                vecino["inf"] = q.mark
             if sol_x and abs(y1 - v0) <= tol:
-                continuo["sup"] = True
-        resultado[p.mark] = sum(continuo.values())
+                vecino["sup"] = q.mark
+        resultado[p.mark] = vecino
     return resultado
+
+
+def bordes_continuos(panos: list[PanoLosa], tol: float = TOL_ADYACENCIA_M) -> dict[str, int]:
+    """Cuenta, por Mark, cuántos de los 4 bordes del bbox tienen un paño vecino."""
+    return {mark: sum(v is not None for v in lados.values())
+            for mark, lados in lados_continuos(panos, tol).items()}
+
+
+def lados_empotrados(panos: list[PanoLosa], tol: float = TOL_ADYACENCIA_M
+                     ) -> dict[str, dict[str, str | None]]:
+    """Como ``lados_continuos`` pero un VUELO vecino no cuenta como empotramiento.
+
+    Es la convención de Losas.exe verificada en el fixture RESTAURANTE 2: las
+    losas junto al voladizo son tipo 40 (dos adyacentes), no tres empotrados;
+    el vuelo solo entra por el balanceo de borde (modo "N").
+    """
+    vuelos = {p.mark for p in panos if p.es_vuelo}
+    return {mark: {lado: (None if vecino in vuelos else vecino)
+                   for lado, vecino in lados.items()}
+            for mark, lados in lados_continuos(panos, tol).items()}
 
 
 def asignar_bordes(panos: list[PanoLosa]) -> list[PanoLosa]:
     """Fija ``borde`` donde venga None: "empotrado" si los 4 bordes son continuos
     (paño interior), "simple" en el resto (conservador para el momento de vano).
 
+    Un vuelo vecino no empotra (misma convención que la vía Pieper-Martens).
     El modelo FEM solo admite el mismo borde en todo el contorno; la condición
     real mixta queda entre esos dos extremos y la decide ETABS en el análisis
     definitivo.
     """
-    n_cont = bordes_continuos(panos)
+    empotrados = lados_empotrados(panos)
     out = []
     for p in panos:
         if p.borde is None:
-            p = replace(p, borde="empotrado" if n_cont[p.mark] == 4 else "simple")
+            n = sum(v is not None for v in empotrados[p.mark].values())
+            p = replace(p, borde="empotrado" if n == 4 else "simple")
         out.append(p)
     return out

@@ -29,6 +29,8 @@ ENCABEZADOS = [
     ("As X", "mm²/m"), ("Armadura X", ""), ("As Y", "mm²/m"), ("Armadura Y", ""),
     ("As apoyo", "mm²/m"), ("Armadura apoyo", ""),
     ("Acero OK", ""), ("h modelo suficiente", ""),
+    ("Tipo PM", "cód. DL"), ("PM Mfx", "tonf·m/m"), ("PM Mfy", "tonf·m/m"),
+    ("PM Msx", "tonf·m/m"), ("PM Msy", "tonf·m/m"),
 ]
 
 SUPUESTOS = [
@@ -52,6 +54,11 @@ SUPUESTOS = [
     "Espesor mínimo: ACI 318-19 T.7.3.1.1 (1D) o §8.3.1.2(b) con supuesto αfm>2 (2D con vigas); "
     "luces entre ejes como aproximación de luces libres (conservador).",
     "Redondeos del Excel: Lx/Ly SIEMPRE hacia arriba a 0.05 m (Anexo A); nunca hacia abajo.",
+    "Columnas PM: método de Pieper-Martens (tablas de F. Perdomo, Losas v5.21) con la q última "
+    "del paño y el código de borde deducido de la adyacencia; mismos supuestos de apoyos rígidos "
+    "de Losas.exe. La hoja 'Apoyos PM' trae los momentos de borde balanceados (promedio con piso "
+    "0.75·max; en vuelos gobierna el vuelo). Validado contra el fixture RESTAURANTE 2 de "
+    "EstructurasRD (salida real de Losas.exe).",
 ]
 
 _CABECERA = Font(bold=True)
@@ -59,10 +66,16 @@ _ROJO = PatternFill("solid", start_color="FFC7CE")
 _CENTRO = Alignment(horizontal="center")
 
 
-def _fila(r: ResultadoPano) -> list:
+def _fila(r: ResultadoPano, pm=None) -> list:
     p, c, e = r.pano, r.cargas, r.espesor
     acero_ok = all(f.get("cumple") and not f.get("seccion_insuficiente")
                    for f in (r.franja_x, r.franja_y, r.franja_apoyo))
+    if pm is not None and p.mark in pm.momentos:
+        m = pm.momentos[p.mark]
+        cols_pm = [pm.clasificacion[p.mark].codigo, round(m.mfx, 3), round(m.mfy, 3),
+                   round(m.msx, 3), round(m.msy, 3)]
+    else:
+        cols_pm = ["", "", "", "", ""]
     return [
         p.mark, p.nivel or "", p.uso, "SÍ" if p.es_vuelo else "NO",
         round(p.lx, 3), round(p.ly, 3),
@@ -80,11 +93,12 @@ def _fila(r: ResultadoPano) -> list:
         round(r.franja_apoyo["as_diseno"], 1), r.franja_apoyo["disponer"],
         "SÍ" if acero_ok else "NO",
         "NO" if e.espesor_modelo_insuficiente else "SÍ",
+        *cols_pm,
     ]
 
 
 def escribir_informe(resultados: list[ResultadoPano], ruta: str,
-                     proyecto: str = "Proyecto Ejemplo") -> None:
+                     proyecto: str = "Proyecto Ejemplo", pm=None) -> None:
     wb = Workbook()
     ws = wb.active
     ws.title = "Losas"
@@ -99,13 +113,24 @@ def escribir_informe(resultados: list[ResultadoPano], ruta: str,
                    ENCABEZADOS.index(("Acero OK", "")) + 1,
                    ENCABEZADOS.index(("h modelo suficiente", "")) + 1}
     for r in resultados:
-        ws.append(_fila(r))
+        ws.append(_fila(r, pm))
         fila = ws.max_row
         for col in columnas_no:
             celda = ws.cell(row=fila, column=col)
             if celda.value == "NO":
                 celda.fill = _ROJO
     ws.freeze_panes = "A4"
+
+    if pm is not None and pm.apoyos:
+        hoja_pm = wb.create_sheet("Apoyos PM")
+        hoja_pm.append(["Momentos balanceados sobre apoyos — Pieper-Martens (ton·m/m)"])
+        hoja_pm["A1"].font = Font(bold=True, size=12)
+        hoja_pm.append(["Losa I", "Losa J", "Dirección", "Mu I", "Mu J", "Mu I-J", "Balanceo"])
+        for celda in hoja_pm[2]:
+            celda.font = _CABECERA
+        for a in pm.apoyos:
+            hoja_pm.append([a.losa_i, a.losa_j, a.direccion, round(a.mu_i, 3),
+                            round(a.mu_j, 3), round(a.mu_ij, 3), a.modo])
 
     hoja = wb.create_sheet("Supuestos")
     hoja.append(["Supuestos y limitaciones de la corrida"])
