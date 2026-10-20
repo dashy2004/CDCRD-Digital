@@ -26,6 +26,48 @@ class Program {
  }
  static async Task Main() {
   ThreadPool.SetMinThreads(8,8);
+  var steps = new List<string>();
+  Check(GmAtomicOperation.Execute(()=>{steps.Add("work");return true;},
+   ()=>steps.Add("commit"),()=>steps.Add("abort")) && steps.SequenceEqual(new[]{"work","commit"}),
+   "GM completo confirma una vez sin abortar");
+  steps.Clear();
+  Check(!GmAtomicOperation.Execute(()=>{steps.Add("partial");return false;},
+   ()=>steps.Add("commit"),()=>steps.Add("abort")) && steps.SequenceEqual(new[]{"partial","abort"}),
+   "GM parcial sin excepcion revierte sin confirmar");
+  steps.Clear();
+  var originalFailure = new InvalidOperationException("render late failure");
+  try {
+   GmAtomicOperation.Execute(()=>{steps.Add("partial");throw originalFailure;},
+    ()=>steps.Add("commit"),()=>steps.Add("abort"));
+   throw new Exception("GM acepto fallo tardio");
+  } catch(InvalidOperationException e) {
+   Check(ReferenceEquals(e,originalFailure) && steps.SequenceEqual(new[]{"partial","abort"}),
+    "GM fallo tardio revierte una vez y conserva excepcion");
+  }
+  steps.Clear();
+  try {
+   GmAtomicOperation.Execute(()=>true,
+    ()=>{steps.Add("commit");throw new InvalidOperationException("commit");},()=>steps.Add("abort"));
+   throw new Exception("GM acepto commit fallido");
+  } catch(InvalidOperationException) {
+   Check(steps.SequenceEqual(new[]{"commit","abort"}),"GM commit fallido intenta revertir");
+  }
+  int aborts=0;
+  try {
+   GmAtomicOperation.Execute(()=>throw originalFailure,()=>{},
+    ()=>{aborts++;throw new IOException("abort");});
+   throw new Exception("GM oculto rollback fallido");
+  } catch(AggregateException e) {
+   Check(aborts==1 && e.InnerExceptions.Count==2 && ReferenceEquals(e.InnerExceptions[0],originalFailure),
+    "GM no oculta error original ni fallo de reversion");
+  }
+  aborts=0;
+  try {
+   GmAtomicOperation.Execute(()=>false,()=>{},()=>{aborts++;throw new IOException("abort");});
+   throw new Exception("GM oculto rollback de resultado parcial");
+  } catch(AggregateException e) {
+   Check(aborts==1 && e.InnerExceptions.Count==1,"GM parcial no anuncia reversion si abort falla");
+  }
   Check(GmProfileContract.Field("GeologyCode1","LegendCode")=="GeologyCode1","campo explicito conserva eleccion");
   Check(GmProfileContract.Field("", "LegendName")=="LegendName","reutiliza campo guardado");
   foreach(var field in new[] {"", "GeologyCode", "GeologyCode3"}) {

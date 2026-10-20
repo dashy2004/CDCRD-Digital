@@ -75,6 +75,9 @@ def registrar(mcp, llamar, ok):
         se rechaza antes de reemplazar perfiles. completo exige render positivo.
         hatch_geologia=True usa los estilos GM ya configurados, sin dialogos
         ni generar estilos. False dibuja los limites sin rellenos solidos.
+        Desde 0.5.9, un fallo o render incompleto aborta la transaccion del
+        perfil. transaccion='revertida' y cambios_revertidos=True solo se
+        devuelven al terminar AbortTransaction. No elimina residuos previos.
         """
         if not confirmar:
             return pendiente(alineamiento=alineamiento, vista=vista)

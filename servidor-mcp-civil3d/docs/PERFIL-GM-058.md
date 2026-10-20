@@ -50,7 +50,9 @@ perfiles. El fallo anterior habia dejado un grupo vacio, un bloque con su
 referencia y un rectangulo parcial. Se retiraron exclusivamente esos residuos
 identificados en la copia antes de repetir. La limpieza automatica de grupos
 vacios no sustituye una auditoria de bloques residuales. La atomicidad de todo
-el flujo GM ante un fallo tardio sigue pendiente; no reintentar a ciegas.
+el flujo GM ante un fallo tardio era pendiente en 0.5.8. La correccion y su
+prueba en otra copia se describen en [Recuperacion 0.5.9](RECUPERACION-GM-059.md);
+no reintentar a ciegas ni tratar un timeout como reversion confirmada.
 
 El humo sintetico de timeout mantiene las 12 comprobaciones nativas de 0.5.6;
 no se presenta como un nuevo humo de timeout ejecutado bajo 0.5.8. Los recibos,

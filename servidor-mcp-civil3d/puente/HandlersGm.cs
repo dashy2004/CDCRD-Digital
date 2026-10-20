@@ -493,10 +493,10 @@ namespace Cdcrd.Civil3dBridge
                 var appConfig = ResolverGm(cont, TipoGm("Aecc.Gtm.Domain", "Aecc.Gtm.Domain.IApplicationConfig"));
 
                 var doc = AcadApp.DocumentManager.MdiActiveDocument;
-                using (var trGm = (IDisposable)TransaccionGm(docService))
                 using (doc.LockDocument())
+                using (var trGm = (IDisposable)TransaccionGm(docService))
                 {
-                    try
+                    GmAtomicOperation.Execute(() =>
                     {
                         var settings = InvocarGm(settingsRepo, "GetApplicationSettings");
                         if (settings == null)
@@ -631,8 +631,8 @@ namespace Cdcrd.Civil3dBridge
                         catch (BridgeException bex)
                         {
                             r["perfil_error"] = bex.Message;
-                            r["nota"] = "fallo CreateStickLogProfile: evidencia para el reporte del bug (active GM_DebugLogging_On y repita para el paso exacto)";
-                            return r;
+                            r["nota"] = "fallo CreateStickLogProfile; consultar el estado de la transaccion antes de reintentar";
+                            return false;
                         }
 
                         if (!soloPerfil)
@@ -660,7 +660,7 @@ namespace Cdcrd.Civil3dBridge
                                 r["completo"] = complete;
                                 if (!complete)
                                     r["diagrama_error"] = "Render incompleto: " + created + " creados, " +
-                                        missing + " sin estratos. No reintentar sin revisar el dibujo.";
+                                        missing + " sin estratos. Se revierte la operacion.";
                                 InvocarGm(profileService, "SetDrawOrderForSolidFilledStickLogObjects", diagrama);
                             }
                             catch (Exception ex)
@@ -669,11 +669,28 @@ namespace Cdcrd.Civil3dBridge
                                 r["diagrama_error"] = (ex as BridgeException)?.Message ?? ExcepcionDetallada(ex);
                             }
                         }
-                    }
-                    finally
-                    {
+                        return soloPerfil || (bool)r["completo"];
+                    }, () => {
                         InvocarGm(trGm, "CommitTransaction");
-                    }
+                        r["transaccion"] = "confirmada";
+                        r["cambios_revertidos"] = false;
+                    }, () => {
+                        // AbortTransaction also resets the GM document service's cached
+                        // transaction. Dispose alone leaves that cache stale on this GM version.
+                        r["completo"] = false;
+                        r["transaccion"] = "reversion_pendiente";
+                        InvocarGm(trGm, "AbortTransaction");
+                        r["transaccion"] = "revertida";
+                        r["cambios_revertidos"] = true;
+                        if (r.TryGetValue("sticklogs_creados", out var attempted))
+                            r["sticklogs_creados_intento"] = attempted;
+                        r["sticklogs_creados"] = 0;
+                        if (r.TryGetValue("perfil", out var profileAttempt))
+                        {
+                            r["perfil_intento"] = profileAttempt;
+                            r["perfil"] = "revertido; perfiles anteriores conservados";
+                        }
+                    });
                 }
             }
             Log.Write("gm.perfil_sondeos " + alinNombre + "/" + vistaNombre);

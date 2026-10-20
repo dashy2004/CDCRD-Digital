@@ -6,5 +6,6 @@
     <Compile Include="../../puente/ReflectionRead.cs" Link="ReflectionRead.cs" />
     <Compile Include="../../puente/GmGroupPolicy.cs" Link="GmGroupPolicy.cs" />
     <Compile Include="../../puente/GmProfileContract.cs" Link="GmProfileContract.cs" />
+    <Compile Include="../../puente/GmAtomicOperation.cs" Link="GmAtomicOperation.cs" />
   </ItemGroup>
 </Project>
