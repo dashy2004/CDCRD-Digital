@@ -17,6 +17,7 @@ namespace Autodesk.AutoCAD.ApplicationServices.Core {
  }
 }
 namespace Cdcrd.Civil3dBridge {
+ internal static class TrackedCommands { public static readonly CommandReceipts Receipts=new(); public static void Shutdown(){} }
  internal static class Handlers {
   public const string Version = "fixture";
   public static void CapturarHandlePrincipal() {}

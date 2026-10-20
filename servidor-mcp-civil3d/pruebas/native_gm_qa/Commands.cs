@@ -160,6 +160,30 @@ public class GmRecoveryQa
         }
         tr.Commit();return new{renamed=result};
     }
+    static object ResiduesFixture(Database db)
+    {
+        const string prefix="GM - Profile - 2D - StickLog ~ CDCRD_QA_RESIDUES_";
+        using var tr=db.TransactionManager.StartTransaction();
+        var blocks=(BlockTable)tr.GetObject(db.BlockTableId,OpenMode.ForRead);
+        var model=(BlockTableRecord)tr.GetObject(SymbolUtilityServices.GetBlockModelSpaceId(db),OpenMode.ForWrite);
+        var groups=(DBDictionary)tr.GetObject(db.GroupDictionaryId,OpenMode.ForWrite);
+        var result=new Dictionary<string,string>();
+        if(blocks.Has(prefix+"unused")||groups.Contains(prefix+"empty"))throw new Exception("QA fixture exists");
+        var empty=new Group("QA synthetic empty group",true);groups.SetAt(prefix+"empty",empty);tr.AddNewlyCreatedDBObject(empty,true);result["empty"]=H(empty.ObjectId);
+        foreach(string kind in new[]{"unused","valid","ungrouped"})
+        {
+            blocks.UpgradeOpen();var block=new BlockTableRecord{Name=prefix+kind};blocks.Add(block);tr.AddNewlyCreatedDBObject(block,true);
+            var line=new Line(new Point3d(0,0,0),new Point3d(1,0,0));block.AppendEntity(line);tr.AddNewlyCreatedDBObject(line,true);
+            result[kind+"_definition"]=H(block.ObjectId);
+            if(kind=="unused")continue;
+            var reference=new BlockReference(new Point3d(0,0,0),block.ObjectId);model.AppendEntity(reference);tr.AddNewlyCreatedDBObject(reference,true);result[kind]=H(reference.ObjectId);
+            if(kind=="valid")
+            {
+                var group=new Group("QA synthetic valid group",true);groups.SetAt(prefix+kind,group);tr.AddNewlyCreatedDBObject(group,true);group.Append(reference.ObjectId);result["valid_group"]=H(group.ObjectId);
+            }
+        }
+        tr.Commit();return new {handles=result};
+    }
     [CommandMethod("CDCRDGMRECOVERYQA",CommandFlags.Session)]
     public void Run()
     {
@@ -178,6 +202,7 @@ public class GmRecoveryQa
                 switch(action)
                 {
                     case "audit":result=Audit(doc.Database);break;
+                    case "residues_fixture":result=ResiduesFixture(doc.Database);break;
                     case "fixture":case "restore":result=Fixture(doc.Database,job,action=="restore");break;
                     case "surface_style_names":result=RenameSurfaceStyles(doc.Database,job);break;
                     case "watch_begin":

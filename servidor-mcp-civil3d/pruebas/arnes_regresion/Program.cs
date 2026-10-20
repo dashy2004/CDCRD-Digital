@@ -26,6 +26,25 @@ class Program {
  }
  static async Task Main() {
   ThreadPool.SetMinThreads(8,8);
+  long commandClock=0;
+  var receipts=new CommandReceipts(()=>commandClock,100);
+  var commandId=receipts.Add("A.dwg","LINE");
+  try {receipts.Add("A.dwg","CIRCLE");throw new Exception("Doble comando aceptado");}
+  catch(InvalidOperationException){Check(true,"un comando seguido por documento");}
+  commandClock=100;
+  Check(!receipts.Start(commandId),"ticket vencido no ejecuta al volver Idle");
+  commandId=receipts.Add("A.dwg","LINE");
+  Check(receipts.Start(commandId),"ticket vivo inicia una vez");
+  Check(!receipts.Start(commandId),"ticket no ejecuta dos veces");
+  commandClock=1000;
+  Check((string)((Dictionary<string,object>)receipts.Get(commandId))["estado"]=="en_ejecucion","timeout no cancela comando iniciado");
+  receipts.Event(commandId,"fin:LINE");receipts.Finish(commandId,"terminado");
+  receipts.Finish(commandId,"fallido");
+  Check((bool)((Dictionary<string,object>)receipts.Get(commandId))["correcto"],"estado final no se sobrescribe");
+  foreach(var state in new[]{"fallido","cancelado","desconocido"}) {
+   commandId=receipts.Add("A.dwg","LINE");receipts.Start(commandId);receipts.Finish(commandId,state);
+   Check(!(bool)((Dictionary<string,object>)receipts.Get(commandId))["correcto"],"solo CommandEnded acredita fin correcto");
+  }
   GmSurfaceContract.RequireLocations(new[]{("A",0d,0d),("B",10d,0d),("C",0d,10d)});
   Check(true,"GM superficie acepta sondeos no colineales");
   foreach(var points in new[] {
@@ -36,6 +55,11 @@ class Program {
    new[]{("A",0d,0d),("B",double.NaN,0d),("C",0d,10d)}}) {
    try {GmSurfaceContract.RequireLocations(points);throw new Exception("TIN degenerado aceptado");}
    catch(ArgumentException){Check(true,"GM superficie rechaza geometria o identidad invalida");}
+  }
+  Check(GmSurfaceContract.BottomElevation(100,20)==80,"fondo usa cota menos profundidad registrada");
+  foreach(var pair in new[]{(double.NaN,20d),(100d,0d),(100d,-1d),(100d,double.PositiveInfinity)}) {
+   try {GmSurfaceContract.BottomElevation(pair.Item1,pair.Item2);throw new Exception("Fondo invalido aceptado");}
+   catch(ArgumentException){Check(true,"fondo rechaza profundidad o cota invalida");}
   }
   var expectedSurfaces=GmSurfaceContract.SurfaceNames(new[]{"Sand.1","Rock.1"});
   GmSurfaceContract.RequireBottom(false,expectedSurfaces);

@@ -65,3 +65,18 @@ def test_superficies_campo_vacio_reutiliza_seleccion_guardada():
     registered, calls = tools()
     registered['gm_construir_superficies'](confirmar=True)
     assert calls[0][0][1] == {'superficie_fondo': False, 'simular': False}
+
+
+def test_residues_preview_is_read_only_and_apply_requires_confirmation():
+    registered, calls = tools()
+    fn = registered['gm_residuos']
+    fn()
+    assert calls[0][0][0] == 'gm.residuos'
+    assert not calls[0][1].get('escribe', False)
+    calls.clear()
+    fn(aplicar=True, huella='snapshot', handles_json='["A"]')
+    assert not calls
+    fn(aplicar=True, huella='snapshot', handles_json='["A"]', confirmar=True)
+    assert calls[0][0][1]['handles'] == ['A']
+    assert calls[0][0][1]['huella'] == 'snapshot'
+    assert calls[0][1]['escribe'] is True

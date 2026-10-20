@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json.Nodes;
 using Autodesk.AutoCAD.DatabaseServices;
+using Autodesk.AutoCAD.Geometry;
 using AcadApp = Autodesk.AutoCAD.ApplicationServices.Application;
 using CogoPoint = Autodesk.Civil.DatabaseServices.CogoPoint;
 using TinSurface = Autodesk.Civil.DatabaseServices.TinSurface;
@@ -64,6 +65,7 @@ namespace Cdcrd.Civil3dBridge
                                 locations.Add((point.RawDescription,point.Easting,point.Northing));
                             GmSurfaceContract.RequireLocations(locations);
                             var selected=new List<object>();
+                            var bottomVertices=new Point3dCollection();
                             var counts=new Dictionary<string,int>();
                             foreach(var point in locations)
                             {
@@ -71,6 +73,12 @@ namespace Cdcrd.Civil3dBridge
                                     Convert.ToString(PropGm(b,"BoringId")),point.Id,StringComparison.OrdinalIgnoreCase)).ToArray();
                                 if(matches.Length!=1) throw new ArgumentException("Sondeo del grupo sin correspondencia unica en GM: "+point.Id);
                                 selected.Add(matches[0]);
+                                if(bottom)
+                                {
+                                    double elevation=Convert.ToDouble(PropGm(PropGm(matches[0],"Location"),"Elevation"));
+                                    double depth=Convert.ToDouble(PropGm(matches[0],"TotalDepth"));
+                                    bottomVertices.Add(new Point3d(point.X,point.Y,GmSurfaceContract.BottomElevation(elevation,depth)));
+                                }
                                 counts[point.Id]=((IList)InvocarGm(matches[0],"GetStrataByFieldName",field,false)).Count;
                             }
                             GmProfileContract.RequireStrata(counts);
@@ -97,23 +105,45 @@ namespace Cdcrd.Civil3dBridge
                             bool hadScratchLayer=layers.Has(scratchGroup);
                             var graph=Activator.CreateInstance(TipoGm(cad,cad+".StratumServices.GraphServices.GraphService"),
                                 new object[]{land,CastLista(selected,all)});
-                            InvocarGm(graph,"BuildSubstrataGraphs",field,bottom,false);
+                            // GM drops its zero-thickness bottom stratum. Build the registered
+                            // borehole termination TIN directly, without inventing a thickness.
+                            InvocarGm(graph,"BuildSubstrataGraphs",field,false,false);
                             var graphs=(IList)PropGm(graph,"StratumGraphs");
                             string[] names=GmSurfaceContract.SurfaceNames(graphs.Cast<object>().Select(g => Convert.ToString(PropGm(g,"Name"))));
+                            string[] strataNames=names;
+                            if(bottom)
+                            {
+                                if(names.Contains(GmSurfaceContract.BottomName,StringComparer.OrdinalIgnoreCase))
+                                    throw new ArgumentException("Un estrato ya usa el nombre reservado para fondo de sondeos.");
+                                names=names.Concat(new[]{GmSurfaceContract.BottomName}).ToArray();
+                                result["origen_fondo"]="TIN nativo: XY del grupo filtrado, Location.Elevation - TotalDepth; modelo vertical";
+                                result["limite_fondo"]="envolvente convexa de los sondeos; no interpreta una frontera geologica";
+                            }
                             result["superficies_previstas"]=names;
                             GmSurfaceContract.RequireBottom(bottom,names);
                             var existing=names.Where(n => InvocarGm(land,"GetSurface",n)!=null).ToArray();
                             result["superficies_existentes"]=existing;
                             if(simulate) return false;
                             if(existing.Length>0) throw new ArgumentException("Se conservan superficies existentes; nombres en conflicto: "+string.Join(", ",existing));
-                            string[] files=names.Select(n => Path.Combine(Path.GetTempPath(),n+" - Breaklines.flt")).ToArray();
+                            string[] files=strataNames.Select(n => Path.Combine(Path.GetTempPath(),n+" - Breaklines.flt")).ToArray();
                             if(files.Any(f => File.Exists(f) || Directory.Exists(f)))
                                 throw new IOException("Existe un archivo temporal GM previo; no se sobrescribira.");
                             temporaryFiles.AddRange(files);
                             var service=Activator.CreateInstance(TipoGm(cad,cad+".StratumServices.StratumService"),
                                 new object[]{docService,land,graph,map});
-                            var built=(IList)InvocarGm(service,"BuildStratumSurfaces",bottom);
-                            var surfaces=built.Cast<TinSurface>().ToArray();
+                            var built=(IList)InvocarGm(service,"BuildStratumSurfaces",false);
+                            var surfaces=built.Cast<TinSurface>().ToList();
+                            if(!GmSurfaceContract.Complete(strataNames,surfaces.Select(s=>s.Name)))
+                                throw new InvalidOperationException("GM devolvio estratos incompletos.");
+                            if(bottom)
+                            {
+                                var id=TinSurface.Create(GmSurfaceContract.BottomName,surfaces[0].StyleId);
+                                var termination=(TinSurface)tr.GetObject(id,OpenMode.ForWrite);
+                                termination.Description="Fondo de sondeos: cota registrada menos profundidad total; interpolacion TIN, modelo vertical.";
+                                termination.AddVertices(bottomVertices);
+                                termination.Rebuild();
+                                surfaces.Add(termination);
+                            }
                             if(!GmSurfaceContract.Complete(names,surfaces.Select(s => s.Name)) || surfaces.Any(s => s.GetTriangles(false).Count==0))
                                 throw new InvalidOperationException("GM devolvio superficies incompletas o sin triangulos.");
                             var folder=InvocarGm(land,"GetOrCreateGeotechModelerFullStratumSurfaceFolder",true);
@@ -122,7 +152,7 @@ namespace Cdcrd.Civil3dBridge
                             if(!hadScratchLayer && layers.Has(scratchGroup))
                                 tr.GetObject(layers[scratchGroup],OpenMode.ForWrite).Erase();
                             result["superficies"]=surfaces.Select(s => s.Name).ToArray();
-                            result["superficies_creadas"]=surfaces.Length;
+                            result["superficies_creadas"]=surfaces.Count;
                             result["detalles"]=surfaces.Select(s => new {nombre=s.Name,handle=s.Handle.ToString(),triangulos=s.GetTriangles(false).Count}).ToArray();
                             return true;
                         }

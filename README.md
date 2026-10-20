@@ -27,6 +27,14 @@ verificación de un proyecto. Cada informe identifica qué se comprobó y qué e
 > Derecho de Autor. No es un documento oficial: ante cualquier diferencia, manda el PDF del
 > MIVHED.
 
+## Civil 3D y AutoCAD: capturas y pruebas nativas
+
+[Ver las capturas crudas y resultados de Civil 3D 0.5.11](servidor-mcp-civil3d/docs/CIERRE-0511.md) · [Perfil de sondeos y recuperación](servidor-mcp-civil3d/docs/RECUPERACION-GM-059.md) · [Adaptación común para AutoCAD](servidor-mcp-civil3d/docs/AUTOCAD-0511.md).
+
+![Superficies y fondo en Civil 3D, captura nativa sin retoque](servidor-mcp-civil3d/docs/images/gm-surfaces-bottom-0511.png)
+
+Pruebas sobre copias y datos hipotéticos. Capturas del área de dibujo; cada informe separa lo comprobado de lo pendiente.
+
 ## Que hay aqui (sin necesidad de programar)
 
 | Si usted busca... | Abra... |

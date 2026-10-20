@@ -4,3 +4,7 @@ puente/obj/
 # logs y cache del servidor Python
 src/__pycache__/
 src/*.log
+
+# salida de compilacion del adaptador AutoCAD
+puente-autocad/bin/
+puente-autocad/obj/

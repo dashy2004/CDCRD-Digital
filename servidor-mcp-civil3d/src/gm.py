@@ -40,8 +40,8 @@ def registrar(mcp, llamar, ok):
 
         Por defecto SIMULA (aplicar=False) y lista las acciones. Con
         aplicar=True: renombra superficies 'GM - ... .1' a su nombre base
-        cuando el base no existe; si se pide borra los hatches huerfanos de
-        la capa GM-PROF-STICKLOG-2D; y con borrar_grupos_muertos borra los
+        cuando el base no existe; borrar_hatches_huerfanos se rechaza por
+        seguridad de los objetos validos (usar gm_residuos). borrar_grupos_muertos borra los
         grupos vacios cuyo nombre empieza por "GM - " y los grupos de
         ACAD_GROUP con miembros borrados atribuibles al GM (causa real del
         NullReferenceException de DeleteStickLogProfile). Un grupo con
@@ -54,6 +54,28 @@ def registrar(mcp, llamar, ok):
                                      'borrar_hatches_huerfanos': borrar_hatches_huerfanos,
                                      'borrar_grupos_muertos': borrar_grupos_muertos},
                       escribe=True)
+
+    @mcp.tool()
+    def gm_residuos(aplicar: bool = False, huella: str = '', handles_json: str = '[]',
+                    confirmar: bool = False) -> str:
+        """Inventaria residuos sin borrar; aplica solo una seleccion explicita.
+
+        Grupos GM sin miembros vivos y definiciones generadas sin referencias
+        pueden seleccionarse por handle y huella de la previsualizacion.
+        Referencias/hatches vivos sin grupo se reportan para revision y se conservan.
+        Las superficies y los perfiles validos no se borran por prefijo.
+        """
+        import json
+        if aplicar and not confirmar:
+            return pendiente(aplicar=True)
+        try:
+            handles = json.loads(handles_json)
+            if not isinstance(handles, list) or any(not isinstance(h, str) for h in handles):
+                raise ValueError('handles_json debe ser una lista de handles.')
+        except (ValueError, TypeError) as exc:
+            return ok({'error': str(exc)})
+        return llamar('gm.residuos', {'aplicar': aplicar, 'huella': huella, 'handles': handles},
+                      escribe=aplicar)
 
     @mcp.tool()
     def gm_crear_perfil_sondeos(alineamiento: str, vista: str = '', origen: str = '',
@@ -106,8 +128,9 @@ def registrar(mcp, llamar, ok):
 
         Genera los estratos completos desde GM - Filtered Boreholes, usando
         estilos existentes y campo_geologia explicito o guardado para superficies.
-        superficie_fondo=True exige tambien el fondo: si GM lo omite, devuelve
-        error y revierte todo (limitacion detectada en GM 2027). Solo metros.
+        superficie_fondo=True agrega un TIN nativo con XY del grupo y cota GM
+        menos profundidad total (modelo vertical; envolvente convexa). No es
+        una frontera geologica interpretada. Solo metros.
         simular=True prepara y revierte el grafo para informar nombres/conflictos.
         Conserva superficies existentes: un conflicto de nombres impide crear.
         Un fallo o resultado incompleto aborta todos los cambios de la llamada.

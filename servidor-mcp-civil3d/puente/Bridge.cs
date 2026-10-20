@@ -25,7 +25,7 @@ namespace Cdcrd.Civil3dBridge
     {
         public void Initialize()
         {
-            Log.Write("Initialize: el plugin cargo en el proceso de Civil 3D");
+            Log.Write("Initialize: el plugin cargo en el proceso CAD");
             try
             {
                 HiloPrincipal.Suscribir();
@@ -40,6 +40,7 @@ namespace Cdcrd.Civil3dBridge
 
         public void Terminate()
         {
+            try { TrackedCommands.Shutdown(); } catch { }
             try { HiloPrincipal.Desuscribir(); } catch { }
             try { BridgeServer.Instance.Stop(silent: true); } catch { }
         }
@@ -51,14 +52,14 @@ namespace Cdcrd.Civil3dBridge
         public static void StartCmd() { HiloPrincipal.Suscribir(); BridgeServer.Instance.Start(silent: false); }
 
         [CommandMethod("CDCRDMCPSTOP", CommandFlags.Session)]
-        public static void StopCmd() { BridgeServer.Instance.Stop(silent: false); }
+        public static void StopCmd() { TrackedCommands.Shutdown(); BridgeServer.Instance.Stop(silent: false); }
 
         [CommandMethod("CDCRDMCPINFO", CommandFlags.Session)]
         public static void InfoCmd()
         {
             var ed = AcApp.DocumentManager.MdiActiveDocument?.Editor;
             string msg = string.Format(
-                "\nCDCRD puente Civil 3D: {0}  puerto {1}  escritura {2}  comandos {3}\nlog: {4}\n",
+                "\nCDCRD puente CAD: {0}  puerto {1}  escritura {2}  comandos {3}\nlog: {4}\n",
                 BridgeServer.Instance.Running ? "activo" : "detenido",
                 BridgeServer.Port,
                 BridgeServer.AllowWrite ? "si" : "no",
@@ -97,6 +98,11 @@ namespace Cdcrd.Civil3dBridge
     internal sealed class BridgeServer
     {
         public static readonly BridgeServer Instance = new BridgeServer();
+#if CIVIL3D
+        public const string Identity = "cdcrd-civil3d";
+#else
+        public const string Identity = "cdcrd-autocad";
+#endif
 
         public static int Port
         {
@@ -105,7 +111,11 @@ namespace Cdcrd.Civil3dBridge
                 int p;
                 if (int.TryParse(Environment.GetEnvironmentVariable("CDCRD_C3D_PORT"), out p) && p > 0 && p < 65536)
                     return p;
+#if CIVIL3D
                 return 8760;
+#else
+                return 8764;
+#endif
             }
         }
 
@@ -237,7 +247,7 @@ namespace Cdcrd.Civil3dBridge
                 if (method == "ping")
                     return Rpc.Ok(id, new Dictionary<string, object>
                     {
-                        { "puente", "cdcrd-civil3d" },
+                        { "puente", Identity },
                         { "version", Handlers.Version },
                         // la version no cambia entre builds: el MVID y la ruta del DLL si
                         { "build", typeof(Handlers).Assembly.ManifestModule.ModuleVersionId.ToString("N").Substring(0, 12) },
@@ -282,6 +292,7 @@ namespace Cdcrd.Civil3dBridge
                 // justo cuando hace falta, con un modal bloqueando la bomba de Idle
                 if (method == "diag.dialogos")
                     return Rpc.Ok(id, Handlers.DiagDialogosSinHilo());
+                if (method == "cmd.estado") return Rpc.Ok(id, TrackedCommands.Receipts.Get(prms["ticket"]?.GetValue<string>() ?? ""));
                 if (method == "diag.cola") return Rpc.Ok(id, HiloPrincipal.EstadoCola());
                 if (method == "diag.ping")
                 {

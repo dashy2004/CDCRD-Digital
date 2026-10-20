@@ -22,8 +22,8 @@ def preflight(drawing, info, ping):
     actual = os.path.normcase(os.path.abspath(info.get('dibujo', '')))
     if not Path(drawing).name.startswith('CDCRD_BRIDGE_SMOKE') or actual != expected:
         raise RuntimeError('Se exige el DWG sintetico exacto indicado; no se escribio')
-    if ping.get('version') not in ('0.5.6', '0.5.7', '0.5.8', '0.5.9', '0.5.10'):
-        raise RuntimeError('Se requiere puente 0.5.6/0.5.7/0.5.8/0.5.9/0.5.10, recibido %s' % ping.get('version'))
+    if ping.get('version') not in ('0.5.6', '0.5.7', '0.5.8', '0.5.9', '0.5.10', '0.5.11'):
+        raise RuntimeError('Se requiere puente 0.5.6/0.5.7/0.5.8/0.5.9/0.5.10/0.5.11, recibido %s' % ping.get('version'))
     if not ping.get('comandos') or not ping.get('escritura'):
         raise RuntimeError('La instancia de prueba debe permitir comandos y escritura')
     timeout = ping.get('timeout_ms', 55000)

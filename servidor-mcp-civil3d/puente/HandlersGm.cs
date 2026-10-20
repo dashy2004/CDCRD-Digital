@@ -25,6 +25,7 @@ namespace Cdcrd.Civil3dBridge
             switch (method)
             {
                 case "gm.diagnosticar": return GmDiagnosticar(p);
+                case "gm.residuos": return GmResidues(p, method);
                 case "gm.reparar": return GmReparar(p, method);
                 case "gm.perfil_sondeos": return GmPerfilSondeos(p, method);
                 case "gm.superficies": return GmConstruirSuperficies(p, method);
@@ -309,7 +310,7 @@ namespace Cdcrd.Civil3dBridge
                     var nombres = new Dictionary<string, ObjectId>();
                     foreach (ObjectId id in ObtenerSuperficies())
                         nombres[NombreDe(tr.GetObject(id, OpenMode.ForRead))] = id;
-                    foreach (var kv in nombres.Where(kv => kv.Key != null && kv.Key.EndsWith(".1")).ToList())
+                    foreach (var kv in nombres.Where(kv => kv.Key != null && kv.Key.StartsWith("GM - ", StringComparison.Ordinal) && kv.Key.EndsWith(".1")).ToList())
                     {
                         var destino = kv.Key.Substring(0, kv.Key.Length - 2);
                         if (nombres.ContainsKey(destino))
@@ -329,22 +330,8 @@ namespace Cdcrd.Civil3dBridge
                     }
                 }
                 if (borrarHuerfanos)
-                {
-                    int n = 0;
-                    var ms = (BlockTableRecord)tr.GetObject(SymbolUtilityServices.GetBlockModelSpaceId(db), OpenMode.ForRead);
-                    foreach (ObjectId id in ms)
-                    {
-                        if (!id.IsValid || id.IsErased) continue;
-                        var e = tr.GetObject(id, OpenMode.ForRead) as Entity;
-                        if (e is Hatch && e.Layer == "GM-PROF-STICKLOG-2D")
-                        {
-                            if (aplicar) { e.UpgradeOpen(); e.Erase(); }
-                            n++;
-                        }
-                    }
-                    acciones.Add(new Dictionary<string, object> { { "hatches_sticklog", n },
-                        { "accion", aplicar ? "borrados" : "se borrarian" } });
-                }
+                    throw new BridgeException(Rpc.ErrParams,
+                        "Borrado por capa deshabilitado: use gm.residuos para inventariar; los hatches vivos requieren revision individual.");
                 if (borrarGrupos)
                 {
                     // port de la limpieza LISP del 2026-10-15 (dictremove sobre ACAD_GROUP).
@@ -786,80 +773,5 @@ namespace Cdcrd.Civil3dBridge
 
         // ---------- diag.dialogos ----------
 
-        [DllImport("user32.dll")] private static extern bool IsWindowEnabled(IntPtr hWnd);
-        [DllImport("user32.dll")] private static extern bool IsWindowVisible(IntPtr hWnd);
-        [DllImport("user32.dll")] private static extern bool EnumThreadWindows(uint threadId, EnumThreadDelegate fn, IntPtr lp);
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)] private static extern int GetWindowText(IntPtr h, StringBuilder sb, int max);
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)] private static extern int GetClassName(IntPtr h, StringBuilder sb, int max);
-        [DllImport("user32.dll")] private static extern uint GetWindowThreadProcessId(IntPtr h, out uint pid);
-        [DllImport("user32.dll")] private static extern bool EnumWindows(EnumThreadDelegate fn, IntPtr lp);
-        [DllImport("user32.dll")] private static extern bool EnumChildWindows(IntPtr parent, EnumThreadDelegate fn, IntPtr lp);
-        private delegate bool EnumThreadDelegate(IntPtr hWnd, IntPtr lParam);
-
-        // Handle de la ventana principal, capturado en el hilo principal al
-        // inicializar (AcadApp.MainWindow no se toca desde el hilo del socket).
-        internal static IntPtr HandlePrincipal = IntPtr.Zero;
-
-        internal static void CapturarHandlePrincipal()
-        {
-            try { HandlePrincipal = AcadApp.MainWindow.Handle; } catch { }
-        }
-
-        private static object DiagDialogos(JsonObject p) { return DiagDialogosSinHilo(); }
-
-        // Servido desde el hilo del socket (0.5.2): solo user32, sin API de AutoCAD,
-        // asi responde aunque un modal tenga bloqueada la bomba de Idle. Para cada
-        // dialogo clasico (#32770) devuelve tambien sus textos estaticos: el mensaje
-        // de un MessageBox queda como evidencia sin captura de pantalla.
-        internal static object DiagDialogosSinHilo()
-        {
-            IntPtr hMain = HandlePrincipal;
-            if (hMain == IntPtr.Zero)
-                try { hMain = System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle; } catch { }
-            bool mainHabilitada = hMain != IntPtr.Zero && IsWindowEnabled(hMain);
-            uint pidPropio = (uint)System.Diagnostics.Process.GetCurrentProcess().Id;
-            var ventanas = new List<object>();
-            EnumWindows((h, lp) =>
-            {
-                if (!IsWindowVisible(h) || h == hMain) return true;
-                GetWindowThreadProcessId(h, out uint pid);
-                if (pid != pidPropio) return true;
-                var titulo = new StringBuilder(256); GetWindowText(h, titulo, 256);
-                var clase = new StringBuilder(128); GetClassName(h, clase, 128);
-                var cl = clase.ToString();
-                // los dialogos modales clasicos de AutoCAD/WPF/WinForms
-                if (cl == "#32770" || cl.StartsWith("WindowsForms10") || cl.StartsWith("HwndWrapper"))
-                {
-                    var v = new Dictionary<string, object> { { "titulo", titulo.ToString() }, { "clase", cl },
-                        { "habilitada", IsWindowEnabled(h) } };
-                    if (cl == "#32770")
-                    {
-                        var textos = new List<string>();
-                        EnumChildWindows(h, (hc, lc) =>
-                        {
-                            var cc = new StringBuilder(64); GetClassName(hc, cc, 64);
-                            var c = cc.ToString();
-                            if (c == "Static" || c == "Button" || c == "DirectUIHWND")
-                            {
-                                var tx = new StringBuilder(1024); GetWindowText(hc, tx, 1024);
-                                if (tx.Length > 0 && textos.Count < 20) textos.Add(tx.ToString());
-                            }
-                            return true;
-                        }, IntPtr.Zero);
-                        v["textos"] = textos;
-                    }
-                    ventanas.Add(v);
-                }
-                return true;
-            }, IntPtr.Zero);
-            return new Dictionary<string, object>
-            {
-                { "modal_abierto", !mainHabilitada },
-                { "ventana_principal_habilitada", mainHabilitada },
-                { "ventanas", ventanas },
-                { "hilo", "socket" },
-                { "nota", "modal_abierto=true significa que un dialogo bloquea Civil 3D y las peticiones al puente van a vencer por timeout" }
-            };
-        }
     }
 }

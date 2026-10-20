@@ -534,6 +534,8 @@ creacion.registrar(mcp, _llamar, _ok)
 vistas.registrar(mcp, _llamar, _ok)
 tridimensional.registrar(mcp, _llamar, _ok)
 gm.registrar(mcp, _llamar, _ok)
+import comandos
+comandos.registrar(mcp, _llamar, _ok)
 aplanar.registrar(mcp, _llamar, _ok)
 puntos.registrar(mcp, _llamar, _ok)
 

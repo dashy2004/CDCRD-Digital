@@ -31,6 +31,16 @@ namespace Cdcrd.Civil3dBridge
             return names.Select(n => "GM - Stratum - " + n).ToArray();
         }
 
+        internal const string BottomName = "GM - Stratum - Borehole Bottom";
+
+        internal static double BottomElevation(double elevation, double depth)
+        {
+            if (!double.IsFinite(elevation) || !double.IsFinite(depth) || depth <= 0 ||
+                !double.IsFinite(elevation-depth))
+                throw new ArgumentException("Fondo requiere cota finita y profundidad total positiva en cada sondeo.");
+            return elevation-depth;
+        }
+
         internal static bool Complete(IEnumerable<string> expected, IEnumerable<string> actual)
         {
             var e=expected.ToArray(); var a=actual.ToArray();

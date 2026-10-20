@@ -20,7 +20,7 @@ namespace Cdcrd.Civil3dBridge
 {
     internal static partial class Handlers
     {
-        public const string Version = "0.5.10";
+        public const string Version = "0.5.11";
         private const int MaxItems = 500;
 
         // Alias en espanol -> candidatos de miembro del CivilDocument, en orden.
@@ -74,6 +74,7 @@ namespace Cdcrd.Civil3dBridge
                 case "selection.set": return SelectionSet(p);
                 case "view.zoom": return ViewZoom(p);
                 case "cmd.run": return CmdRun(p, method);
+                case "cmd.ejecutar": return CmdTracked(p, method);
                 case "objects.read": return ObjectsRead(p);
                 case "layers.query": return LayersQuery(p);
                 case "layers.set": return LayersSet(p, method);
@@ -106,12 +107,16 @@ namespace Cdcrd.Civil3dBridge
 
         private static object CivilDoc()
         {
+#if !CIVIL3D
+            throw new BridgeException(Rpc.ErrNoDoc,"Este adaptador AutoCAD no expone objetos Civil 3D; use el puente Civil3D.");
+#else
             var t = FindType("Autodesk.Civil.ApplicationServices.CivilApplication");
             if (t == null) throw new BridgeException(Rpc.ErrNoDoc, "no se encontro la API de Civil 3D (AeccDbMgd): el dibujo puede estar abierto en AutoCAD puro");
             var prop = t.GetProperty("ActiveDocument", BindingFlags.Public | BindingFlags.Static);
             var cd = prop == null ? null : prop.GetValue(null);
             if (cd == null) throw new BridgeException(Rpc.ErrNoDoc, "CivilApplication.ActiveDocument devolvio null");
             return cd;
+#endif
         }
 
         private static string HandleOf(ObjectId id)
@@ -469,7 +474,8 @@ namespace Cdcrd.Civil3dBridge
                 { "measurement", AcApp.GetSystemVariable("MEASUREMENT") },
                 { "producto", AcApp.GetSystemVariable("PRODUCT") },
                 { "version_acad", AcApp.GetSystemVariable("ACADVER") },
-                { "puente_version", Version }
+                { "puente_version", Version },
+                { "funciones_comunes", new[]{"entity.create","objects.query","layers.query","vista.3d","vista.exportar","cmd.ejecutar","cmd.estado"} }
             };
             try
             {

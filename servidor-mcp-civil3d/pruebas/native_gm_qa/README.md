@@ -59,3 +59,7 @@ El inventario incluye extensiones calculadas por Civil 3D. Un cambio de rango
 puede invalidar su caché gráfica: iniciar la prueba sobre una copia recién
 abierta, con rango ya establecido y regenerada, y no mezclar pruebas de rango
 con la comparación de recuperación.
+
+## Residuos selectivos en 0.5.11
+
+La acción `residues_fixture` crea un grupo vacío y tres definiciones GM identificadas `CDCRD_QA_RESIDUES_`: una sin uso, otra con referencia agrupada y otra con referencia sin grupo. Conservar el recibo `handles`. Probar la vista previa, rechazo de huella caducada/objeto no elegible y eliminación de los dos candidatos seguros. Para retirar los fixtures restantes, borrar únicamente sus handles conocidos (referencias, grupo y definiciones, en ese orden) y comparar el inventario. No limpiar objetos históricos por prefijo.
