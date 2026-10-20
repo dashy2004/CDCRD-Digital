@@ -22,6 +22,8 @@ namespace Cdcrd.Civil3dBridge
             switch (method)
             {
 #if CIVIL3D
+                case "civil.feature_line": return PlatformOperation(() => CreateFeatureLine(p, method));
+                case "civil.superficie_feature_lines": return PlatformOperation(() => CreateFeatureSurface(p, method));
                 case "civil.parcela_polilinea": return CrearParcelaPolilinea(p, method);
                 case "civil.alineamiento_polilinea": return CrearAlineamientoPolilinea(p, method);
                 case "civil.perfil_pvi": return CrearPerfilPvi(p, method);

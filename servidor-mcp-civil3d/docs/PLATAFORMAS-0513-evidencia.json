@@ -1,0 +1,44 @@
+{
+  "version": "0.5.13",
+  "civil3d": "2027",
+  "synthetic": true,
+  "grading_native": false,
+  "dll_sha256": "218d297d488dfa0e78cf2935b1f523a2b37577b222c00203dbddf3b853628435",
+  "loaded_build": "4582ed4caac8",
+  "python_tests": 140,
+  "dotnet_checks": 91,
+  "concurrency_trials": 100,
+  "native_smoke_checks": 25,
+  "unit_refusals": 4,
+  "source_preserved": true,
+  "tin_triangles": 10,
+  "area_2d_m2": 1536,
+  "native_cut_m3": 0,
+  "native_fill_m3": 2474.6666666666665,
+  "rebuild_z_verified": true,
+  "saved_reopened_geometry_verified": true,
+  "original_objects_preserved": 1233,
+  "text_render_extents_recomputed": 5,
+  "stored_text_properties_verified": 13,
+  "prior_layers_restored": true,
+  "images": [
+    {
+      "file": "civil3d-plataforma-plan-0513.png",
+      "sha256": "f41f4de5a67577072d3dda391abe4d77e8678b968ebaca1be5d55455632d830c",
+      "dimensions": [
+        2205,
+        1000
+      ],
+      "unmodified_native_viewport": true
+    },
+    {
+      "file": "civil3d-plataforma-3d-0513.png",
+      "sha256": "f3bc0081ea6966925595f2b83ae179b68b0a1153358144dd3b00aa6e39c213a8",
+      "dimensions": [
+        2205,
+        1000
+      ],
+      "unmodified_native_viewport": true
+    }
+  ]
+}

@@ -63,3 +63,9 @@ con la comparación de recuperación.
 ## Residuos selectivos en 0.5.11
 
 La acción `residues_fixture` crea un grupo vacío y tres definiciones GM identificadas `CDCRD_QA_RESIDUES_`: una sin uso, otra con referencia agrupada y otra con referencia sin grupo. Conservar el recibo `handles`. Probar la vista previa, rechazo de huella caducada/objeto no elegible y eliminación de los dos candidatos seguros. Para retirar los fixtures restantes, borrar únicamente sus handles conocidos (referencias, grupo y definiciones, en ese orden) y comparar el inventario. No limpiar objetos históricos por prefijo.
+
+## Plataformas 0.5.13
+
+`audit` incluye XYZ, cierre, sitio y longitudes de FeatureLine, más cantidades separadas de corte/relleno y superficies base/comparación de TinVolumeSurface.
+
+`platform_volume` es una fixture **sintética fija**: recibe `design` (handle del TIN llamado `CDX QA PLATFORM 0513`), añade un plano Z=100 m de 48 × 32 m en las coordenadas de `humo_plataformas.py` y crea su volumen. Rechaza nombres QA existentes y opera en una transacción. No es una herramienta de cubicación general ni interpreta un terreno de proyecto. Debe usarse después del humo y comparar con 0 m³ de corte y 2474,666666667 m³ de relleno.

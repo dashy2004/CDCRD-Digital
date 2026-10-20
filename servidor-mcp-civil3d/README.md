@@ -1,6 +1,6 @@
 # Servidor MCP de Civil 3D 2027
 
-Puente **0.5.12**: parcelas desde polilínea, alineamientos y rasantes por PVI, con unidades verificadas y reversiones probadas. [Capturas crudas y validación de sitio](docs/SITIO-0512.md) · [Fondo GM y cierre 0.5.11](docs/CIERRE-0511.md) · [AutoCAD común](docs/AUTOCAD-0511.md).
+Puente **0.5.13**: feature lines y superficies de plataforma, con unidades, reversiones y volumen sintético verificados. [Capturas crudas de plataformas](docs/PLATAFORMAS-0513.md) · [Parcelas, ejes y PVI 0.5.12](docs/SITIO-0512.md) · [Fondo GM 0.5.11](docs/CIERRE-0511.md) · [AutoCAD común](docs/AUTOCAD-0511.md).
 
 Conecta un cliente MCP con el **dibujo abierto** en Civil 3D 2027. Dos piezas:
 

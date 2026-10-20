@@ -29,6 +29,8 @@ verificación de un proyecto. Cada informe identifica qué se comprobó y qué e
 
 ## Civil 3D y AutoCAD: capturas y pruebas nativas
 
+[Civil 3D 0.5.13: feature lines y plataforma — capturas crudas](servidor-mcp-civil3d/docs/PLATAFORMAS-0513.md).
+
 [Civil 3D 0.5.12: parcela, eje y rasante — capturas crudas](servidor-mcp-civil3d/docs/SITIO-0512.md).
 
 [Ver las capturas crudas y resultados de Civil 3D 0.5.11](servidor-mcp-civil3d/docs/CIERRE-0511.md) · [Perfil de sondeos y recuperación](servidor-mcp-civil3d/docs/RECUPERACION-GM-059.md) · [Adaptación común para AutoCAD](servidor-mcp-civil3d/docs/AUTOCAD-0511.md).

@@ -19,7 +19,7 @@ using CogoPoint = Autodesk.Civil.DatabaseServices.CogoPoint;
 using PointGroup = Autodesk.Civil.DatabaseServices.PointGroup;
 using SurfaceStyle = Autodesk.Civil.DatabaseServices.Styles.SurfaceStyle;
 
-public class GmRecoveryQa
+public partial class GmRecoveryQa
 {
     static readonly JsonSerializerOptions Json = new JsonSerializerOptions { WriteIndented = true };
     static string Root => Environment.GetEnvironmentVariable("CDCRD_GM_QA_ROOT");
@@ -57,6 +57,7 @@ public class GmRecoveryQa
         if(obj is BlockReference br){r["definition"]=H(br.BlockTableRecord);r["position"]=Pt(br.Position);r["rotation"]=br.Rotation;}
         if(obj is Line line){r["start"]=Pt(line.StartPoint);r["end"]=Pt(line.EndPoint);}
         if(obj is Polyline pl){r["vertices"]=Enumerable.Range(0,pl.NumberOfVertices).Select(i=>new{point=Pt(pl.GetPoint3dAt(i)),bulge=pl.GetBulgeAt(i)}).ToArray();r["closed"]=pl.Closed;}
+        if(obj is Autodesk.Civil.DatabaseServices.FeatureLine fl){r["feature_points"]=fl.GetPoints(Autodesk.Civil.FeatureLinePointType.AllPoints).Cast<Point3d>().Select(Pt).ToArray();r["closed"]=fl.Closed;r["site"]=H(fl.SiteId);r["length_2d"]=fl.Length2D;r["length_3d"]=fl.Length3D;}
         if(obj is MText mt)r["contents"]=mt.Contents;
         if(obj is DBText dt)r["text"]=dt.TextString;
         if(obj is Hatch ha){r["pattern"]=ha.PatternName;r["angle"]=ha.PatternAngle;r["scale"]=ha.PatternScale;r["loops"]=ha.NumberOfLoops;}
@@ -86,8 +87,11 @@ public class GmRecoveryQa
             }
             var civil=CivilApp.ActiveDocument;
             var surfaces=new List<object>();
+            var volumes=new List<object>();
             foreach(ObjectId id in civil.GetSurfaceIds())
             {
+                if(tr.GetObject(id,OpenMode.ForRead) is Autodesk.Civil.DatabaseServices.TinVolumeSurface volume)
+                    volumes.Add(VolumeRow(volume));
                 if(tr.GetObject(id,OpenMode.ForRead) is not TinSurface surface)continue;
                 var triangles=surface.GetTriangles(false).Cast<Autodesk.Civil.DatabaseServices.TinSurfaceTriangle>()
                     .Select(t => new[]{Pt(t.Vertex1.Location),Pt(t.Vertex2.Location),Pt(t.Vertex3.Location)}
@@ -134,7 +138,7 @@ public class GmRecoveryQa
                         return new {handle=H(pid),name=profile.Name,pvis=profile.PVIs.Cast<Autodesk.Civil.DatabaseServices.ProfilePVI>().Select(v=>new[]{v.RawStation,v.Elevation}).ToArray()};
                     }).ToArray()});
             }
-            return new {objects=rows,groups,surfaces,points,pointGroups,surfaceStyles=styles,layers,sites,alignments};
+            return new {objects=rows,groups,surfaces,volumes,points,pointGroups,surfaceStyles=styles,layers,sites,alignments};
         }
     }
     static void Appended(object sender,ObjectEventArgs e)
@@ -220,6 +224,7 @@ public class GmRecoveryQa
                 switch(action)
                 {
                     case "audit":result=Audit(doc.Database);break;
+                    case "platform_volume":result=PlatformVolume(doc.Database,job);break;
                     case "residues_fixture":result=ResiduesFixture(doc.Database);break;
                     case "fixture":case "restore":result=Fixture(doc.Database,job,action=="restore");break;
                     case "surface_style_names":result=RenameSurfaceStyles(doc.Database,job);break;
