@@ -1,0 +1,24 @@
+{
+  "profile": "modeling_20261015",
+  "data": {
+    "model_source": "Synthetic fixture, not a live EDB",
+    "demand_kind": "flexure_only",
+    "torsion_kind": "longitudinal_area_per_face",
+    "area_unit": "cm2",
+    "faces": [
+      {
+        "id": "T",
+        "beam": "B1",
+        "story": "E1",
+        "zone": "i",
+        "face": "top",
+        "flexure_demand": 8.0,
+        "flexure_provided": 10.0,
+        "torsion_demand": 3.755,
+        "torsion_provided": 2.54,
+        "design_errors": [],
+        "disjoint_bar_allocation_verified": true
+      }
+    ]
+  }
+}

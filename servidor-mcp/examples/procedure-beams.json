@@ -1,0 +1,72 @@
+{
+  "profile": "modeling_20261015",
+  "data": {
+    "model_source": "Synthetic fixture, not a live EDB",
+    "demand_kind": "total_longitudinal",
+    "area_unit": "cm2",
+    "beams": [
+      {
+        "id": "B1",
+        "axis": "X",
+        "story": "E1",
+        "clear_span_m": 5.0,
+        "support_mapping_verified": true,
+        "single_span_object_verified": true,
+        "design_errors": [],
+        "demands": {
+          "top": {
+            "i": 9.0,
+            "center": 8.0,
+            "j": 9.0
+          },
+          "bottom": {
+            "i": 6.4,
+            "center": 6.4,
+            "j": 6.4
+          }
+        },
+        "bars": [
+          {
+            "id": "T1",
+            "face": "top",
+            "role": "continuous",
+            "count": 2,
+            "diameter_in": "3/4",
+            "zones": [
+              "i",
+              "center",
+              "j"
+            ],
+            "drawing_verified": true
+          },
+          {
+            "id": "T2",
+            "face": "top",
+            "role": "additional",
+            "count": 1,
+            "diameter_in": "1",
+            "zones": [
+              "i",
+              "center",
+              "j"
+            ],
+            "drawing_verified": true
+          },
+          {
+            "id": "B1",
+            "face": "bottom",
+            "role": "continuous",
+            "count": 3,
+            "diameter_in": "3/4",
+            "zones": [
+              "i",
+              "center",
+              "j"
+            ],
+            "drawing_verified": true
+          }
+        ]
+      }
+    ]
+  }
+}

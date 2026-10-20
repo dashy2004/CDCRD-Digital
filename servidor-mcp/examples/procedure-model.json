@@ -1,0 +1,18 @@
+{
+  "profile": "modeling_20261015",
+  "project": {
+    "model_path": "C:/Models/Synthetic.edb",
+    "usage": "residential",
+    "has_parking": false,
+    "stories": [
+      {
+        "name": "E1",
+        "architectural_height_m": 3.0
+      },
+      {
+        "name": "E2",
+        "architectural_height_m": 3.5
+      }
+    ]
+  }
+}
