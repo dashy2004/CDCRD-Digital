@@ -100,15 +100,25 @@ def registrar(mcp, llamar, ok):
         return llamar('gm.perfil_sondeos', parametros, escribe=True)
 
     @mcp.tool()
-    def gm_construir_superficies(superficie_fondo: bool = False, confirmar: bool = False) -> str:
+    def gm_construir_superficies(superficie_fondo: bool = False, confirmar: bool = False,
+                                campo_geologia: str = '', simular: bool = False) -> str:
         """Construye las superficies de estrato del GM (StratumService.BuildStratumSurfaces).
 
-        Equivale al boton Build Surfaces del GM. superficie_fondo=True crea
-        ademas la superficie del fondo de los sondeos.
+        Genera los estratos completos desde GM - Filtered Boreholes, usando
+        estilos existentes y campo_geologia explicito o guardado para superficies.
+        superficie_fondo=True exige tambien el fondo: si GM lo omite, devuelve
+        error y revierte todo (limitacion detectada en GM 2027). Solo metros.
+        simular=True prepara y revierte el grafo para informar nombres/conflictos.
+        Conserva superficies existentes: un conflicto de nombres impide crear.
+        Un fallo o resultado incompleto aborta todos los cambios de la llamada.
+        No genera lentes, terreno superior ni superficies diferenciales.
         """
         if not confirmar:
             return pendiente()
-        return llamar('gm.superficies', {'superficie_fondo': superficie_fondo}, escribe=True)
+        params = {'superficie_fondo': superficie_fondo, 'simular': simular}
+        if campo_geologia:
+            params['campo_geologia'] = campo_geologia
+        return llamar('gm.superficies', params, escribe=True)
 
     @mcp.tool()
     def gm_3d_boreholes(altura_rotulo: float = 2.0, diametro: float = 2.0,

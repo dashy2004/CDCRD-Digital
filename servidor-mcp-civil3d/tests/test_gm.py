@@ -47,3 +47,21 @@ def test_estilos_optativos_se_transmiten_solo_con_confirmacion():
     assert not calls
     fn('B', hatch_geologia=True, confirmar=True)
     assert calls[0][0][1]['hatch_geologia'] is True
+
+
+def test_superficies_simulacion_y_fondo_exigen_confirmacion():
+    registered, calls = tools()
+    fn = registered['gm_construir_superficies']
+    fn(superficie_fondo=True, campo_geologia='GeologyCode1', simular=True)
+    assert not calls
+    fn(superficie_fondo=True, campo_geologia='GeologyCode1', simular=True, confirmar=True)
+    args, kwargs = calls[0]
+    assert args == ('gm.superficies', {'superficie_fondo': True,
+                                     'campo_geologia': 'GeologyCode1', 'simular': True})
+    assert kwargs['escribe'] is True
+
+
+def test_superficies_campo_vacio_reutiliza_seleccion_guardada():
+    registered, calls = tools()
+    registered['gm_construir_superficies'](confirmar=True)
+    assert calls[0][0][1] == {'superficie_fondo': False, 'simular': False}

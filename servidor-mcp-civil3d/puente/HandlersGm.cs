@@ -708,34 +708,6 @@ namespace Cdcrd.Civil3dBridge
 
         // ---------- gm.superficies ----------
 
-        private static object GmConstruirSuperficies(JsonObject p, string method)
-        {
-            ExigirEscritura(method, p);
-            bool fondo = p["superficie_fondo"]?.GetValue<bool>() ?? false;
-            var cont = ContenedorGm();
-            using (AmbitoGm(cont))
-            {
-                var docService = ResolverGm(cont, TipoGm("Aecc.Gtm.CADServices", "Aecc.Gtm.CADServices.AcadDocumentService"));
-                var stratum = ResolverGm(cont, TipoGm("Aecc.Gtm.CADServices", "Aecc.Gtm.CADServices.StratumServices.StratumService"));
-                var doc = AcadApp.DocumentManager.MdiActiveDocument;
-                using (var trGm = (IDisposable)TransaccionGm(docService))
-                using (doc.LockDocument())
-                {
-                    try
-                    {
-                        var lista = InvocarGm(stratum, "BuildStratumSurfaces", fondo) as IList;
-                        var nombres = new List<object>();
-                        if (lista != null)
-                            foreach (var s in lista) nombres.Add(NombreDe(s));
-                        Log.Write("gm.superficies creadas=" + nombres.Count);
-                        return new Dictionary<string, object> { { "superficies", nombres },
-                            { "aviso", "Datos geotecnicos hipoteticos/preliminares" } };
-                    }
-                    finally { try { InvocarGm(trGm, "CommitTransaction"); } catch { } }
-                }
-            }
-        }
-
         // ---------- gm.3d_boreholes ----------
 
         private static object Gm3dBoreholes(JsonObject p, string method)

@@ -1,6 +1,6 @@
 # Servidor MCP de Civil 3D 2027
 
-Puente **0.5.9**: revierte los cambios del perfil GM si falla o queda incompleto. Conserva las correcciones de ValueTuple, grupos GM vacíos, timeout y estilos. [Puente y humo](docs/PRUEBAS-056.md) · [Perfil GM](docs/PERFIL-GM-058.md) · [Recuperación y capturas](docs/RECUPERACION-GM-059.md).
+Puente **0.5.10**: prepara el grafo de superficies GM y revierte el intento si falla o queda incompleto; permite simular y protege superficies existentes. Conserva la recuperación del perfil y las correcciones de ValueTuple, grupos vacíos, timeout y estilos. [Puente y humo](docs/PRUEBAS-056.md) · [Perfil GM](docs/PERFIL-GM-058.md) · [Recuperación del perfil](docs/RECUPERACION-GM-059.md) · [Superficies y captura](docs/SUPERFICIES-GM-0510.md).
 
 Conecta un cliente MCP con el **dibujo abierto** en Civil 3D 2027. Dos piezas:
 

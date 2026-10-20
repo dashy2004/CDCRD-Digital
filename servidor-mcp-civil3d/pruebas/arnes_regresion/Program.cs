@@ -26,6 +26,31 @@ class Program {
  }
  static async Task Main() {
   ThreadPool.SetMinThreads(8,8);
+  GmSurfaceContract.RequireLocations(new[]{("A",0d,0d),("B",10d,0d),("C",0d,10d)});
+  Check(true,"GM superficie acepta sondeos no colineales");
+  foreach(var points in new[] {
+   new[]{("A",0d,0d),("B",1d,1d)},
+   new[]{("A",0d,0d),("B",1d,1d),("C",2d,2d)},
+   new[]{("A",0d,0d),("a",10d,0d),("C",0d,10d)},
+   new[]{("A",0d,0d),("B",0d,0d),("C",0d,10d)},
+   new[]{("A",0d,0d),("B",double.NaN,0d),("C",0d,10d)}}) {
+   try {GmSurfaceContract.RequireLocations(points);throw new Exception("TIN degenerado aceptado");}
+   catch(ArgumentException){Check(true,"GM superficie rechaza geometria o identidad invalida");}
+  }
+  var expectedSurfaces=GmSurfaceContract.SurfaceNames(new[]{"Sand.1","Rock.1"});
+  GmSurfaceContract.RequireBottom(false,expectedSurfaces);
+  GmSurfaceContract.RequireBottom(true,new[]{"GM - Stratum - Borehole Bottom"});
+  Check(true,"GM fondo solo es obligatorio si fue solicitado");
+  try {GmSurfaceContract.RequireBottom(true,expectedSurfaces);throw new Exception("GM omitio fondo solicitado");}
+  catch(InvalidOperationException){Check(true,"GM no confirma exito si falta el fondo solicitado");}
+  Check(GmSurfaceContract.Complete(expectedSurfaces,expectedSurfaces.Reverse()),"GM superficie valida nombres, sin depender del orden");
+  Check(!GmSurfaceContract.Complete(expectedSurfaces,new[]{expectedSurfaces[0],expectedSurfaces[0]}) &&
+   !GmSurfaceContract.Complete(expectedSurfaces,expectedSurfaces.Take(1)) &&
+   !GmSurfaceContract.Complete(Array.Empty<string>(),Array.Empty<string>()),"GM superficie rechaza resultado duplicado, parcial o vacio");
+  foreach(var names in new[]{new[]{"sand","SAND"},new[]{"../outside"},new[]{"folder\\file"},Array.Empty<string>()}) {
+   try {GmSurfaceContract.SurfaceNames(names);throw new Exception("Nombre peligroso aceptado");}
+   catch(ArgumentException){Check(true,"GM superficie rechaza colisiones y rutas de archivo invalidas");}
+  }
   var steps = new List<string>();
   Check(GmAtomicOperation.Execute(()=>{steps.Add("work");return true;},
    ()=>steps.Add("commit"),()=>steps.Add("abort")) && steps.SequenceEqual(new[]{"work","commit"}),

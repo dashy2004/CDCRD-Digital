@@ -13,6 +13,11 @@ using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.Runtime;
 using App = Autodesk.AutoCAD.ApplicationServices.Core.Application;
 using Exception = System.Exception;
+using CivilApp = Autodesk.Civil.ApplicationServices.CivilApplication;
+using TinSurface = Autodesk.Civil.DatabaseServices.TinSurface;
+using CogoPoint = Autodesk.Civil.DatabaseServices.CogoPoint;
+using PointGroup = Autodesk.Civil.DatabaseServices.PointGroup;
+using SurfaceStyle = Autodesk.Civil.DatabaseServices.Styles.SurfaceStyle;
 
 public class GmRecoveryQa
 {
@@ -29,6 +34,16 @@ public class GmRecoveryQa
     static string H(ObjectId id) => id.IsNull ? "0" : id.Handle.ToString();
     static ObjectId Id(Database db,string handle) => db.GetObjectId(false,new Handle(Convert.ToInt64(handle,16)),0);
     static double[] Pt(Point3d p) => new[]{p.X,p.Y,p.Z};
+    static PropertyInfo ReadableProperty(Type type,string name)
+    {
+        // Some Civil style subclasses hide the inherited getter with a setter.
+        for(var current=type;current!=null;current=current.BaseType)
+        {
+            var property=current.GetProperty(name,BindingFlags.Public|BindingFlags.Instance|BindingFlags.DeclaredOnly);
+            if(property!=null && property.CanRead && property.GetIndexParameters().Length==0)return property;
+        }
+        return null;
+    }
     static object Row(DBObject obj)
     {
         var r=new SortedDictionary<string,object>{{"handle",H(obj.ObjectId)},{"type",obj.GetType().FullName},{"owner",H(obj.OwnerId)}};
@@ -47,7 +62,7 @@ public class GmRecoveryQa
         if(obj is Hatch ha){r["pattern"]=ha.PatternName;r["angle"]=ha.PatternAngle;r["scale"]=ha.PatternScale;r["loops"]=ha.NumberOfLoops;}
         foreach(string name in new[]{"Name","StartingStation","EndingStation","ElevationMin","ElevationMax","StyleName"})
         {
-            try{var p=obj.GetType().GetProperty(name);if(p!=null && p.GetIndexParameters().Length==0){var value=p.GetValue(obj);if(value is string || value is double || value is int)r[name]=value;}}
+            try{var p=ReadableProperty(obj.GetType(),name);if(p!=null){var value=p.GetValue(obj);if(value is string || value is double || value is int)r[name]=value;}}
             catch(Exception ex){r[name+"_error"]=ex.GetBaseException().Message;}
         }
         return r;
@@ -69,7 +84,39 @@ public class GmRecoveryQa
                 var group=(Group)tr.GetObject(entry.Value,OpenMode.ForRead);
                 groups[entry.Key]=new {handle=H(entry.Value),members=group.GetAllEntityIds().Select(H).OrderBy(x=>x).ToArray()};
             }
-            return new {objects=rows,groups};
+            var civil=CivilApp.ActiveDocument;
+            var surfaces=new List<object>();
+            foreach(ObjectId id in civil.GetSurfaceIds())
+            {
+                if(tr.GetObject(id,OpenMode.ForRead) is not TinSurface surface)continue;
+                var triangles=surface.GetTriangles(false).Cast<Autodesk.Civil.DatabaseServices.TinSurfaceTriangle>()
+                    .Select(t => new[]{Pt(t.Vertex1.Location),Pt(t.Vertex2.Location),Pt(t.Vertex3.Location)}
+                        .OrderBy(p=>p[0]).ThenBy(p=>p[1]).ThenBy(p=>p[2]).ToArray())
+                    .OrderBy(t=>JsonSerializer.Serialize(t),StringComparer.Ordinal).ToArray();
+                surfaces.Add(new {handle=H(id),name=surface.Name,style=H(surface.StyleId),triangles});
+            }
+            var points=new List<object>();
+            foreach(ObjectId id in civil.CogoPoints)
+            {
+                var point=(CogoPoint)tr.GetObject(id,OpenMode.ForRead);
+                points.Add(new{handle=H(id),number=point.PointNumber,description=point.RawDescription,
+                    xyz=new[]{point.Easting,point.Northing,point.Elevation}});
+            }
+            var pointGroups=new List<object>();
+            foreach(ObjectId id in civil.PointGroups)
+            {
+                var group=(PointGroup)tr.GetObject(id,OpenMode.ForRead);
+                pointGroups.Add(new{handle=H(id),name=group.Name,points=group.GetPointNumbers().OrderBy(n=>n).ToArray()});
+            }
+            var styles=new List<object>();
+            foreach(ObjectId id in civil.Styles.SurfaceStyles)styles.Add(Row(tr.GetObject(id,OpenMode.ForRead)));
+            var layers=new List<object>();
+            foreach(ObjectId id in (LayerTable)tr.GetObject(db.LayerTableId,OpenMode.ForRead))
+            {
+                var layer=(LayerTableRecord)tr.GetObject(id,OpenMode.ForRead);
+                layers.Add(new{handle=H(id),name=layer.Name,color=layer.Color.ColorIndex,off=layer.IsOff,frozen=layer.IsFrozen,locked=layer.IsLocked});
+            }
+            return new {objects=rows,groups,surfaces,points,pointGroups,surfaceStyles=styles,layers};
         }
     }
     static void Appended(object sender,ObjectEventArgs e)
@@ -97,6 +144,22 @@ public class GmRecoveryQa
             tr.Commit();return new {group=name,body=H(bodyId),definition=H(block.ObjectId),restored=restore};
         }
     }
+    static object RenameSurfaceStyles(Database db,JsonElement job)
+    {
+        using var tr=db.TransactionManager.StartTransaction();
+        var result=new List<object>();
+        foreach(var change in job.GetProperty("changes").EnumerateArray())
+        {
+            string from=change.GetProperty("from").GetString(),to=change.GetProperty("to").GetString();
+            bool Allowed(string name)=>name.StartsWith("GM - ",StringComparison.Ordinal)||name.StartsWith("CDCRD_QA_",StringComparison.Ordinal);
+            if(!Allowed(from)||!Allowed(to))throw new Exception("Only GM or QA surface styles may be renamed in this fixture");
+            var styles=CivilApp.ActiveDocument.Styles.SurfaceStyles;
+            if(!styles.Contains(from)||styles.Contains(to))throw new Exception("Style fixture state mismatch");
+            var style=(SurfaceStyle)tr.GetObject(styles[from],OpenMode.ForWrite);
+            style.Name=to;result.Add(new{handle=H(style.ObjectId),from,to});
+        }
+        tr.Commit();return new{renamed=result};
+    }
     [CommandMethod("CDCRDGMRECOVERYQA",CommandFlags.Session)]
     public void Run()
     {
@@ -116,6 +179,7 @@ public class GmRecoveryQa
                 {
                     case "audit":result=Audit(doc.Database);break;
                     case "fixture":case "restore":result=Fixture(doc.Database,job,action=="restore");break;
+                    case "surface_style_names":result=RenameSurfaceStyles(doc.Database,job);break;
                     case "watch_begin":
                         if(watched!=null)throw new Exception("Watcher already active");
                         events.Clear();watched=doc.Database;watched.ObjectAppended+=Appended;result=new{watching=true};break;

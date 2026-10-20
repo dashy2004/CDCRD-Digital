@@ -15,7 +15,9 @@ JSON nuevo. No sobreescribe recibos. Ejemplo con nombre ficticio:
 
 Acciones:
 
-- `audit`: inventario de entidades, definiciones de bloque y grupos.
+- `audit`: inventario de entidades, definiciones de bloque, grupos, superficies
+  TIN (triangulos y estilos), puntos COGO, grupos de puntos, estilos de
+  superficie y capas. Los triangulos se ordenan para comparar su geometria.
 - `capture`: exige también `image`, un nombre `.png` nuevo. Usa
   `Document.CapturePreviewImage`; captura el área gráfica, no una ventana de
   Windows ni sus diálogos.
@@ -25,6 +27,21 @@ Acciones:
 - `restore`: vuelve a añadir esa referencia al mismo grupo.
 - `watch_begin` / `watch_end`: observa `Database.ObjectAppended`, sin lanzar
   excepciones en eventos CAD. `watch_end` incluye un nuevo inventario.
+- `surface_style_names`: recibe `changes`, lista de pares `from`/`to` para
+  renombrar estilos existentes con prefijo `GM - ` o `CDCRD_QA_`. Rechaza
+  destinos ocupados. Solo sirve en la copia protegida de pruebas.
+
+Para superficies: obtener primero los nombres previstos con `simular=true`,
+comprobar que la simulacion revierte el inventario, y escoger el segundo
+estrato de la lista. Renombrar temporalmente su estilo y la plantilla
+`GM - Stratum` a nombres QA nuevos; conservar el estilo del primer estrato.
+El constructor nativo debe crear la primera superficie antes de fallar al
+buscar la plantilla para la segunda. Comparar el inventario completo con el
+de la fixture y comprobar los eventos de TIN creados transitoriamente.
+Repetir el fallo, restaurar exactamente los dos nombres y comparar con la
+linea base. Despues ejecutar el caso correcto, rechazar nombres repetidos,
+guardar/reabrir y verificar la geometria. Una peticion de fondo omitido por
+GM debe abortar y nunca devolver `completo=true`.
 
 Secuencia: auditar y capturar; preparar la colisión en el segundo sondeo;
 auditar; iniciar observación; ejecutar `gm.perfil_sondeos` una vez; detener
