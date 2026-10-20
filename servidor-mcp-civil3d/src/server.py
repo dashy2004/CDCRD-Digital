@@ -32,6 +32,7 @@ logger.info('Iniciando servidor MCP de Civil 3D')
 from mcp.server.fastmcp import FastMCP            # noqa: E402
 import puente_cliente as puente                   # noqa: E402
 import dibujo                                      # noqa: E402
+import sitio
 import creacion                                    # noqa: E402
 import vistas                                      # noqa: E402
 import perfil_estratigrafico                       # noqa: E402
@@ -531,6 +532,7 @@ def listar(area: str, limite: int = 0) -> str:
 
 
 creacion.registrar(mcp, _llamar, _ok)
+sitio.registrar(mcp, _llamar, _ok)
 vistas.registrar(mcp, _llamar, _ok)
 tridimensional.registrar(mcp, _llamar, _ok)
 gm.registrar(mcp, _llamar, _ok)

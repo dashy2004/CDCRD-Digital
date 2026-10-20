@@ -26,6 +26,7 @@ class Program {
  }
  static async Task Main() {
   ThreadPool.SetMinThreads(8,8);
+  SiteDesignChecks.Run(Check);
   long commandClock=0;
   var receipts=new CommandReceipts(()=>commandClock,100);
   var commandId=receipts.Add("A.dwg","LINE");

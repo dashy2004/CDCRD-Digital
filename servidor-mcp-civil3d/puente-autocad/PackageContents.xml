@@ -2,7 +2,7 @@
 <!-- AutoCAD 2027 base only. Civil 3D uses its separate bundle. -->
 <ApplicationPackage
   SchemaVersion="1.0"
-  AppVersion="0.5.11"
+  AppVersion="0.5.12"
   Author="CDCRD-Digital"
   Name="CDCRD Puente MCP AutoCAD"
   Description="Expone el dibujo activo de AutoCAD a un servidor MCP local"

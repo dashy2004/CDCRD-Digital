@@ -116,7 +116,25 @@ public class GmRecoveryQa
                 var layer=(LayerTableRecord)tr.GetObject(id,OpenMode.ForRead);
                 layers.Add(new{handle=H(id),name=layer.Name,color=layer.Color.ColorIndex,off=layer.IsOff,frozen=layer.IsFrozen,locked=layer.IsLocked});
             }
-            return new {objects=rows,groups,surfaces,points,pointGroups,surfaceStyles=styles,layers};
+            var sites=new List<object>();
+            foreach(ObjectId id in civil.GetSiteIds())
+            {
+                var site=(Autodesk.Civil.DatabaseServices.Site)tr.GetObject(id,OpenMode.ForRead);
+                sites.Add(new {handle=H(id),name=site.Name,parcels=site.GetParcelIds().Cast<ObjectId>().Select(pid=>{
+                    var parcel=(Autodesk.Civil.DatabaseServices.Parcel)tr.GetObject(pid,OpenMode.ForRead);
+                    return new {handle=H(pid),name=parcel.Name,area=parcel.Area};}).ToArray()});
+            }
+            var alignments=new List<object>();
+            foreach(ObjectId id in civil.GetAlignmentIds())
+            {
+                var a=(Autodesk.Civil.DatabaseServices.Alignment)tr.GetObject(id,OpenMode.ForRead);
+                alignments.Add(new {handle=H(id),name=a.Name,length=a.Length,start=a.StartingStation,end=a.EndingStation,site=H(a.SiteId),
+                    profiles=a.GetProfileIds().Cast<ObjectId>().Select(pid=>{
+                        var profile=(Autodesk.Civil.DatabaseServices.Profile)tr.GetObject(pid,OpenMode.ForRead);
+                        return new {handle=H(pid),name=profile.Name,pvis=profile.PVIs.Cast<Autodesk.Civil.DatabaseServices.ProfilePVI>().Select(v=>new[]{v.RawStation,v.Elevation}).ToArray()};
+                    }).ToArray()});
+            }
+            return new {objects=rows,groups,surfaces,points,pointGroups,surfaceStyles=styles,layers,sites,alignments};
         }
     }
     static void Appended(object sender,ObjectEventArgs e)

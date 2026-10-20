@@ -22,6 +22,9 @@ namespace Cdcrd.Civil3dBridge
             switch (method)
             {
 #if CIVIL3D
+                case "civil.parcela_polilinea": return CrearParcelaPolilinea(p, method);
+                case "civil.alineamiento_polilinea": return CrearAlineamientoPolilinea(p, method);
+                case "civil.perfil_pvi": return CrearPerfilPvi(p, method);
                 case "civil.perfil_superficie": return CrearPerfilSuperficie(p, method);
                 case "civil.perfil_constante": return CrearPerfilConstante(p, method);
                 case "civil.vista_perfil": return CrearVistaPerfil(p, method);

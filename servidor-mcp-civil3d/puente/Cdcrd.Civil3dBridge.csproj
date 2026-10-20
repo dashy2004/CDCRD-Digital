@@ -19,7 +19,7 @@
     <!-- MSB3277: conflictos de version entre las DLL de Autodesk y el ref pack de .NET 10.
          Los resuelve el runtime de Civil 3D en tiempo de carga; aqui solo ensucian la salida. -->
     <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
-    <Version>0.5.11</Version>
+    <Version>0.5.12</Version>
     <Company>CDCRD-Digital</Company>
     <Product>Puente MCP Civil 3D</Product>
   </PropertyGroup>
