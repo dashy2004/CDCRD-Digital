@@ -59,7 +59,8 @@ def registrar(mcp, llamar, ok):
     def gm_crear_perfil_sondeos(alineamiento: str, vista: str = '', origen: str = '',
                                 exageracion: float = 4.0, estacion_inicio: str = '',
                                 estacion_fin: str = '', superficie_top: str = 'GM - Top Surface',
-                                solo_perfil: bool = False, confirmar: bool = False) -> str:
+                                solo_perfil: bool = False, confirmar: bool = False,
+                                campo_geologia: str = '', hatch_geologia: bool = False) -> str:
         """Perfil de sondeos del GM (CreateStickLogProfile + diagrama de sticklogs).
 
         Reproduce el flujo del panel Subsurface Profiles sin UI: borra los
@@ -69,13 +70,20 @@ def registrar(mcp, llamar, ok):
         respuesta trae la excepcion completa (evidencia del bug del GM); con
         GM_DebugLogging_On activo el log del GM dice el paso exacto.
         solo_perfil=True se detiene tras CreateStickLogProfile.
+        campo_geologia selecciona el campo real del GM (p. ej. GeologyCode1).
+        Vacio reutiliza la seleccion guardada; sin campo o estratos validos
+        se rechaza antes de reemplazar perfiles. completo exige render positivo.
+        hatch_geologia=True usa los estilos GM ya configurados, sin dialogos
+        ni generar estilos. False dibuja los limites sin rellenos solidos.
         """
         if not confirmar:
             return pendiente(alineamiento=alineamiento, vista=vista)
         import json as _json
         parametros = {'alineamiento': alineamiento, 'exageracion': exageracion,
                       'superficie_top': superficie_top, 'solo_perfil': solo_perfil,
-                      'hatch_geologia': False}
+                      'hatch_geologia': hatch_geologia}
+        if campo_geologia:
+            parametros['campo_geologia'] = campo_geologia
         if vista:
             parametros['vista'] = vista
         if origen:

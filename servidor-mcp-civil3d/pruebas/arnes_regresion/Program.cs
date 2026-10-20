@@ -26,6 +26,18 @@ class Program {
  }
  static async Task Main() {
   ThreadPool.SetMinThreads(8,8);
+  Check(GmProfileContract.Field("GeologyCode1","LegendCode")=="GeologyCode1","campo explicito conserva eleccion");
+  Check(GmProfileContract.Field("", "LegendName")=="LegendName","reutiliza campo guardado");
+  foreach(var field in new[] {"", "GeologyCode", "GeologyCode3"}) {
+   try {GmProfileContract.Field(field, "");throw new Exception("campo invalido aceptado");}
+   catch(ArgumentException) {Check(true,"rechaza campo vacio/desconocido antes de escribir");}
+  }
+  try {GmProfileContract.RequireStrata(new Dictionary<string,int>{{"S1",4},{"S2",0}});throw new Exception("cobertura incompleta aceptada");}
+  catch(ArgumentException) {Check(true,"rechaza campo sin estratos en un sondeo");}
+  GmProfileContract.RequireStrata(new Dictionary<string,int>{{"S1",4},{"S2",4}});
+  Check(GmProfileContract.Complete(5,0,5),"render completo positivo");
+  Check(!GmProfileContract.Complete(0,5,5),"no confunde cinco omitidos con exito");
+  Check(!GmProfileContract.Complete(0,0,0)&&!GmProfileContract.Complete(4,0,5),"rechaza render vacio o parcial");
   var tuple=("diagrama",42);
   Check((string)Read(tuple,"Item1")=="diagrama","ValueTuple.Item1 campo");
   Check((int)Read(tuple,"item2")==42,"campo sin distinguir mayusculas");

@@ -252,6 +252,8 @@ namespace Cdcrd.Civil3dBridge
                         {
                             var settings = InvocarGm(settingsRepo, "GetApplicationSettings");
                             r["project_id"] = settings == null ? null : PropGm(settings, "ProjectId");
+                            if (settings != null)
+                                r["perfil_configuracion"] = Val(PropGm(settings, "ProfileStickLogSettings"), 0, 1);
                             InvocarGm(trGm, "CommitTransaction");
                         }
                     }
@@ -468,7 +470,9 @@ namespace Cdcrd.Civil3dBridge
                 throw new BridgeException(Rpc.ErrParams, "falta 'alineamiento'");
 
             var cont = ContenedorGm();
-            var r = new Dictionary<string, object> { { "aviso", "Datos geotecnicos hipoteticos/preliminares" } };
+            var r = new Dictionary<string, object> {
+                { "aviso", "Datos geotecnicos hipoteticos/preliminares" }, { "completo", false }
+            };
             using (AmbitoGm(cont))
             {
                 var tCad = "Aecc.Gtm.CADServices";
@@ -528,29 +532,78 @@ namespace Cdcrd.Civil3dBridge
                         // configuracion del sticklog
                         var tCfg = TipoGm(tCad, tCad + ".StickLogConfiguration");
                         var cfg = Activator.CreateInstance(tCfg);
+                        var saved = PropGm(settings, "ProfileStickLogSettings");
+                        // Keep the drawing's existing dimensions/visibility settings.
+                        // The native location color has a different representation; retain its default.
+                        if (saved != null)
+                            foreach (var target in tCfg.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                            {
+                                if (!target.CanWrite || target.GetIndexParameters().Length != 0) continue;
+                                if (ReflectionRead.TryRead(saved, target.Name, out var value) &&
+                                    value != null && target.PropertyType.IsInstanceOfType(value))
+                                    target.SetValue(cfg, value);
+                            }
+                        if (!soloPerfil)
+                        {
+                            try
+                            {
+                                var field = GmProfileContract.Field(Txt(p, "campo_geologia"),
+                                    saved == null ? null : PropGm(saved, "ProfileGeologyField") as string);
+                                var counts = new Dictionary<string, int>();
+                                foreach (var b in conEstratos)
+                                    counts[Convert.ToString(PropGm(b, "BoringId"))] =
+                                        ((IList)InvocarGm(b, "GetStrataByFieldName", field, false)).Count;
+                                GmProfileContract.RequireStrata(counts);
+                                FijarPropGm(cfg, "ProfileGeologyField", field);
+                                r["campo_geologia"] = field;
+                                r["estratos_por_sondeo"] = counts;
+                            }
+                            catch (ArgumentException ex) { throw new BridgeException(Rpc.ErrParams, ex.Message); }
+                        }
                         FijarPropGm(cfg, "StratumProfiles", true);
                         FijarPropGm(cfg, "WaterTableProfile", true);
                         FijarPropGm(cfg, "VerticalExaggeration", exag);
                         FijarPropGm(cfg, "MinElev", (double)minE);
                         FijarPropGm(cfg, "MaxElev", (double)maxE);
 
-                        // estilos de hatch de geologia. Por defecto NO se arma:
-                        // el propio comando de prueba del GM pasa null, y con un
-                        // ProfileGeologyField vacio AssignHatchStylesToBoreholeStrata
-                        // es sospechoso de colgar el hilo principal (hallazgo 2026-10-15)
+                        // Load only existing styles through the non-interactive native API.
+                        // AssignHatchStylesToBoreholeStrata may open a modal and rewrite the
+                        // shared config when there are no matches; an MCP call must fail instead.
                         object hatchCfg = null;
-                        bool conHatch = p["hatch_geologia"]?.GetValue<bool>() ?? false;
+                        bool conHatch = !soloPerfil && (p["hatch_geologia"]?.GetValue<bool>() ?? false);
                         if (conHatch)
-                        try
                         {
-                            var tHatch = TipoGm(tCad, tCad + ".GeologyHatchingService");
-                            var geoField = PropGm(cfg, "ProfileGeologyField");
+                            var tHatchCfg = TipoGm(tCad, tCad + ".GeologyHatchStyleConfiguration");
                             var rutaHatch = PropGm(appConfig, "GeologyHatchStyleConfigurationPath");
-                            var mi = tHatch.GetMethod("AssignHatchStylesToBoreholeStrata", BindingFlags.Public | BindingFlags.Static);
-                            var lista = CastLista(conEstratos, boreholes);
-                            hatchCfg = mi.Invoke(null, new object[] { docService, rutaHatch, projectId, lista, geoField });
+                            hatchCfg = Activator.CreateInstance(tHatchCfg, new object[] { docService, rutaHatch });
+                            InvocarGm(hatchCfg, "LoadFromFile", true);
+                            var errors = (IList)PropGm(hatchCfg, "Errors");
+                            if (errors.Count > 0)
+                                throw new BridgeException(Rpc.ErrParams, "Estilos GM invalidos: " +
+                                    InvocarGm(hatchCfg, "GetErrorMessage") + ". No se modificaron perfiles.");
+                            var field = PropGm(cfg, "ProfileGeologyField");
+                            var lookup = PropGm(hatchCfg, "HatchStyleLookup");
+                            var defaultStyle = PropGm(hatchCfg, "DefaultHatchStyle");
+                            int matches = 0;
+                            foreach (var b in conEstratos)
+                            {
+                                int matched = Convert.ToInt32(InvocarGm(b, "AssignHatchStylesToStrata", field, lookup, defaultStyle));
+                                var strata = (IList)InvocarGm(b, "GetStrataByFieldName", field, false);
+                                if (matched == 0 || strata.Cast<object>().Any(x => PropGm(x, "HatchStyle") == null))
+                                    throw new BridgeException(Rpc.ErrParams, "Faltan estilos GM para " +
+                                        PropGm(b, "BoringId") + ". Configure los estilos existentes; no se modificaron perfiles.");
+                                matches += matched;
+                            }
+                            r["estratos_con_estilo_coincidente"] = matches;
                         }
-                        catch (Exception ex) { r["hatch_config"] = "no disponible: " + ((ex as TargetInvocationException)?.InnerException ?? ex).Message; }
+                        else
+                        {
+                            // GM's solid-fill renderer dereferences HatchStyle even when
+                            // hatching is disabled. Keep an outline-only profile consistent.
+                            FijarPropGm(cfg, "SolidFilledStrata", false);
+                        }
+                        r["hatch_geologia"] = conHatch;
+                        r["relleno_solido"] = PropGm(cfg, "SolidFilledStrata");
                         Log.Write("gm.perfil_sondeos: GetProfileView");
 
                         // punto de insercion: la vista existente o el parametro 'origen'
@@ -593,16 +646,33 @@ namespace Cdcrd.Civil3dBridge
                                 var lista = CastLista(conEstratos, boreholes);
                                 var tup = InvocarGm(diagService, "CreateStickLogDiagram", lista, cs, alinNombre, vistaNombre, cfg, escala, desplazamiento);
                                 var diagrama = PropGm(tup, "Item1");
+                                var outside = (IList)PropGm(tup, "Item2");
+                                var outsideIds = new List<string>();
+                                foreach (var b in outside) outsideIds.Add(Convert.ToString(PropGm(b, "BoringId")));
+                                r["sondeos_fuera_rango"] = outsideIds;
                                 var render = InvocarGm(diagrama, "Render");
                                 r["sticklogs"] = Val(render);
+                                int created = Convert.ToInt32(PropGm(render, "Item1"));
+                                int missing = Convert.ToInt32(PropGm(render, "Item2"));
+                                r["sticklogs_creados"] = created;
+                                r["sticklogs_sin_estratos"] = missing;
+                                bool complete = GmProfileContract.Complete(created, missing, conEstratos.Count - outside.Count);
+                                r["completo"] = complete;
+                                if (!complete)
+                                    r["diagrama_error"] = "Render incompleto: " + created + " creados, " +
+                                        missing + " sin estratos. No reintentar sin revisar el dibujo.";
                                 InvocarGm(profileService, "SetDrawOrderForSolidFilledStickLogObjects", diagrama);
                             }
-                            catch (Exception ex) { r["diagrama_error"] = (ex as BridgeException)?.Message ?? ExcepcionDetallada(ex); }
+                            catch (Exception ex)
+                            {
+                                r["completo"] = false;
+                                r["diagrama_error"] = (ex as BridgeException)?.Message ?? ExcepcionDetallada(ex);
+                            }
                         }
                     }
                     finally
                     {
-                        try { InvocarGm(trGm, "CommitTransaction"); } catch { }
+                        InvocarGm(trGm, "CommitTransaction");
                     }
                 }
             }

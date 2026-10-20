@@ -1,6 +1,6 @@
 # Servidor MCP de Civil 3D 2027
 
-Puente **0.5.6**: ValueTuple, grupos GM vacios y timeout corregidos. [Pruebas y limites](docs/PRUEBAS-056.md).
+Puente **0.5.8**: conserva las correcciones de ValueTuple, grupos GM vacios y timeout, y valida el campo geologico y los estilos del perfil completo. [Puente y humo](docs/PRUEBAS-056.md) · [Perfil GM](docs/PERFIL-GM-058.md).
 
 Conecta un cliente MCP con el **dibujo abierto** en Civil 3D 2027. Dos piezas:
 
