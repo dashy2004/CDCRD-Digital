@@ -54,7 +54,10 @@ def _ok(resultado):
 
 def _error(exc):
     if isinstance(exc, puente.PuenteError):
-        return _ok({'error': exc.mensaje, 'codigo': exc.codigo})
+        result = {'error': exc.mensaje, 'codigo': exc.codigo}
+        if exc.datos is not None:
+            result['datos'] = exc.datos
+        return _ok(result)
     logger.exception('fallo no esperado')
     return _ok({'error': f'{type(exc).__name__}: {exc}'})
 

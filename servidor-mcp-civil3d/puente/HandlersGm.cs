@@ -126,10 +126,9 @@ namespace Cdcrd.Civil3dBridge
 
         private static object PropGm(object objeto, string prop)
         {
-            var pi = objeto.GetType().GetProperty(prop, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
-            if (pi == null)
-                throw new BridgeException(Rpc.ErrParams, objeto.GetType().Name + " no tiene la propiedad " + prop);
-            return pi.GetValue(objeto);
+            if (ReflectionRead.TryRead(objeto, prop, out var value)) return value;
+            throw new BridgeException(Rpc.ErrParams,
+                (objeto == null ? "null" : objeto.GetType().Name) + " no tiene el campo o propiedad legible " + prop);
         }
 
         private static void FijarPropGm(object objeto, string prop, object valor)
@@ -392,23 +391,23 @@ namespace Cdcrd.Civil3dBridge
                 if (g == null) continue;
                 ObjectId[] ids;
                 try { ids = g.GetAllEntityIds(); }
-                catch { ids = new ObjectId[0]; }
+                catch (Exception ex) { throw new BridgeException(Rpc.ErrInternal, "No se pueden leer miembros del grupo " + de.Key + ": " + ex.Message); }
                 int muertos = 0, vivos = 0;
-                bool soloGm = true;
+                bool soloGm = true, capaDesconocida = false;
                 var capas = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
                 foreach (var id in ids)
                 {
                     bool muerto = id.IsNull || !id.IsValid || id.IsErased || id.IsEffectivelyErased;
                     if (muerto) muertos++; else vivos++;
-                    if (id.IsNull || !id.IsValid) continue;
+                    if (id.IsNull || !id.IsValid) { capaDesconocida = true; continue; }
                     try
                     {
                         var e = tr.GetObject(id, OpenMode.ForRead, true) as Entity;
-                        if (e == null) continue;
+                        if (e == null) { capaDesconocida = true; continue; }
                         capas.Add(e.Layer);
                         if (!e.Layer.StartsWith("GM-", StringComparison.OrdinalIgnoreCase)) soloGm = false;
                     }
-                    catch { }
+                    catch { capaDesconocida = true; }
                 }
                 // NumEntities (leido por reflexion) mayor que los ids devueltos
                 // tambien delata referencias que ya no resuelven
@@ -419,12 +418,14 @@ namespace Cdcrd.Civil3dBridge
                     if (declarados > ids.Length) muertos += declarados - ids.Length;
                 }
                 catch { }
-                if (muertos == 0) continue;
+                bool vacioGm = GmGroupPolicy.EmptyGm(de.Key, ids.Length, muertos);
+                if (muertos == 0 && !vacioGm) continue;
                 r.Add(new Dictionary<string, object>
                 {
                     { "nombre", de.Key }, { "miembros", ids.Length }, { "muertos", muertos },
                     { "capas", capas.ToList() },
-                    { "borrable", vivos == 0 || (soloGm && capas.Count > 0) },
+                    { "vacio_gm", vacioGm },
+                    { "borrable", vacioGm || GmGroupPolicy.CanErase(de.Key, vivos, soloGm, capas.Count, capaDesconocida) },
                     { "_id", de.Value }
                 });
             }

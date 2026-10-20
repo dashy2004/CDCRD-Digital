@@ -160,6 +160,16 @@ def registrar(mcp, llamar, ok):
         return llamar('layout.crear', parametros, escribe=True)
 
     @mcp.tool()
+    def estado_cola() -> str:
+        """Estado de despachos activos y los ultimos 64 terminados/cancelados.
+
+        Responde desde el socket, incluso durante un modal. Tras un timeout,
+        busque request_id antes de reintentar. Para cmd.run, terminado solo
+        acredita que AutoCAD recibio el comando, no que lo haya terminado.
+        """
+        return llamar('diag.cola', {})
+
+    @mcp.tool()
     def leer_log_puente(n: int = 100) -> str:
         """Ultimas n lineas del log del puente (%LOCALAPPDATA%/CdcrdCivil3dBridge/puente.log).
 

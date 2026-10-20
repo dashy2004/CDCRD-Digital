@@ -1,5 +1,28 @@
 # Pendientes del puente MCP de Civil 3D
 
+## Actualizacion local 0.5.6 — 2026-10-20
+
+Corregidos y probados: lectura de campos ValueTuple en Invocar/PropGm,
+limpieza de grupos vacios cuyo nombre empieza por `GM - ` y cancelacion
+atomica de solicitudes que vencen antes de comenzar. Las operaciones ya
+iniciadas NO se anuncian canceladas: el error incluye request_id y resultado
+incierto; `diag.cola` / `estado_cola` permite consultar su finalizacion.
+El historial conserva los ultimos 64 despachos, sin guardar parametros ni
+resultados. Un despacho cmd.run terminado sigue significando comando encolado,
+no CommandEnded. No reintentar automaticamente ante timeout de transporte.
+
+Validacion: 110 pruebas Python, 24 comprobaciones .NET + 100 carreras y humo
+0.5.6 en Civil 3D 2027 sobre DWG sintetico. La prueba TCP de escritura vencida
+no borro el grupo al volver Idle. El borrado posterior con aplicacion explicita
+conservo grupos ajenos, GM vivos y mixtos. El contrato ValueTuple se probo con
+Invocar/PropGm/InvocarGm del DLL cargado y un productor sintetico; no se ejecuto
+el flujo completo del GM sobre sondeos de proyecto.
+
+Instrucciones reproducibles: [pruebas 0.5.6](docs/PRUEBAS-056.md).
+Codigo y evidencia permanecen locales; no se publico esta correccion.
+Los pendientes historicos que figuran debajo deben leerse con esta actualizacion.
+
+
 ## Hecho el 2026-10-14 (v0.3.x, verificado EN VIVO 26/27)
 
 Export sin dialogos y vistas (3.3): exportar_vista (PlotEngine sincrono

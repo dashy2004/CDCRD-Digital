@@ -42,7 +42,8 @@ def registrar(mcp, llamar, ok):
         aplicar=True: renombra superficies 'GM - ... .1' a su nombre base
         cuando el base no existe; si se pide borra los hatches huerfanos de
         la capa GM-PROF-STICKLOG-2D; y con borrar_grupos_muertos borra los
-        grupos de ACAD_GROUP con miembros borrados (causa real del
+        grupos vacios cuyo nombre empieza por "GM - " y los grupos de
+        ACAD_GROUP con miembros borrados atribuibles al GM (causa real del
         NullReferenceException de DeleteStickLogProfile). Un grupo con
         miembros vivos fuera de capas GM-* se reporta y no se toca.
         """

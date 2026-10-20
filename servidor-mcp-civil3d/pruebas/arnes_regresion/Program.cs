@@ -1,0 +1,89 @@
+using Cdcrd.Civil3dBridge;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using App = Autodesk.AutoCAD.ApplicationServices.Core.Application;
+
+class Sample {
+ public int Field = 9;
+ public string NullField = null;
+ public int Property => 12;
+ public int this[int i] => i;
+ public int Broken => throw new InvalidOperationException("getter real");
+}
+class Program {
+ static int checks;
+ static void Check(bool condition, string name) {
+  if (!condition) throw new Exception("FAIL " + name);
+  checks++; Console.WriteLine("OK " + name);
+ }
+ static object Read(object target, string name) {
+  if (!ReflectionRead.TryRead(target,name,out var value)) throw new Exception("Miembro ausente " + name);
+  return value;
+ }
+ static JsonElement Queue() => JsonSerializer.SerializeToElement(HiloPrincipal.EstadoCola());
+ static void Queued() {
+  if (!SpinWait.SpinUntil(()=>Queue().GetProperty("activas").GetArrayLength()>0,3000)) throw new Exception("No se encolo");
+ }
+ static async Task Main() {
+  ThreadPool.SetMinThreads(8,8);
+  var tuple=("diagrama",42);
+  Check((string)Read(tuple,"Item1")=="diagrama","ValueTuple.Item1 campo");
+  Check((int)Read(tuple,"item2")==42,"campo sin distinguir mayusculas");
+  Check((string)Read(Tuple.Create("clasica",2),"Item1")=="clasica","Tuple.Item1 propiedad conservada");
+  var nested=((1,2),3);
+  Check((int)Read(Read(nested,"Item1"),"Item2")==2,"tupla anidada");
+  Check((int)Read(new Sample(),"Field")==9 && (int)Read(new Sample(),"Property")==12,"campos y propiedades normales");
+  Check(ReflectionRead.TryRead(new Sample(),"NullField",out var v)&&v==null,"campo existente null");
+  Check(!ReflectionRead.TryRead(new Sample(),"Item",out _)&&!ReflectionRead.TryRead(null,"Item1",out _),"indexador y null rechazados");
+  try { Read(new Sample(),"Broken"); throw new Exception("no lanzo"); }
+  catch (InvalidOperationException e) {Check(e.Message=="getter real","excepcion original del getter");}
+  Check(GmGroupPolicy.EmptyGm("GM - test",0,0),"grupo GM vacio detectado");
+  Check(!GmGroupPolicy.EmptyGm("AJENO",0,0),"grupo ajeno vacio conservado");
+  Check(!GmGroupPolicy.EmptyGm("GM - ocupado",1,0),"grupo GM vivo conservado");
+  Check(!GmGroupPolicy.CanErase("AJENO",0,true,0,true),"referencias desconocidas ajenas conservadas");
+  Check(GmGroupPolicy.CanErase("residual",0,true,1,false),"miembros GM muertos identificados");
+  Check(!GmGroupPolicy.CanErase("GM - mixto",1,false,2,false),"grupo mixto conservado");
+  HiloPrincipal.Suscribir();
+  int writes=0;
+  var pending=Task.Run(()=> {
+   try {HiloPrincipal.Ejecutar(()=> {Interlocked.Increment(ref writes);return 1;},30,"cancel-test");return (BridgeException)null;}
+   catch(BridgeException e){return e;}
+  });
+  var cancelled=await pending;
+  Check(cancelled!=null && JsonSerializer.SerializeToElement(cancelled.Detalle).GetProperty("cancelada_antes_de_ejecutar").GetBoolean(),"timeout pendiente identificado como cancelado");
+  App.Pump();
+  Check(writes==0,"peticion cancelada no escribe al volver Idle");
+  var call=Task.Run(()=>HiloPrincipal.Ejecutar(()=>42,2000,"success"));Queued();App.Pump();
+  Check((int)await call==42,"resultado normal");
+  var running=Task.Run(()=> {
+   try {HiloPrincipal.Ejecutar(()=>{Thread.Sleep(250);Interlocked.Increment(ref writes);return 8;},100,"running-test");return (BridgeException)null;}
+   catch(BridgeException e){return e;}
+  });
+  Queued(); App.Pump(); var uncertain=await running;
+  var data=JsonSerializer.SerializeToElement(uncertain.Detalle);
+  Check(data.GetProperty("resultado_incierto").GetBoolean() && writes==1,"operacion iniciada no se anuncia cancelada");
+  var id=data.GetProperty("request_id").GetString();
+  Check(Queue().GetProperty("recientes").EnumerateArray().Any(x=>x.GetProperty("request_id").GetString()==id && x.GetProperty("estado").GetString()=="terminada"),"finalizacion consultable por id");
+  var fault=Task.Run(()=> {
+   try {HiloPrincipal.Ejecutar(()=>throw new InvalidOperationException("fallo real"),2000,"fault");return "missing";}
+   catch(InvalidOperationException e){return e.Message;}
+  });Queued();App.Pump();Check(await fault=="fallo real","propaga error de operacion");
+  var stop=Task.Run(()=> {
+   try{HiloPrincipal.Ejecutar(()=>{Interlocked.Increment(ref writes);return 1;},2000,"stop");return false;}
+   catch(BridgeException e){return e.Code==Rpc.ErrBusy;}
+  });Queued();HiloPrincipal.Desuscribir();Check(await stop && writes==1,"desuscribir cancela pendientes");
+  HiloPrincipal.Suscribir();
+  for(int i=0;i<100;i++) {
+   var raced=Task.Run(()=>{try{HiloPrincipal.Ejecutar(()=>{Interlocked.Increment(ref writes);return 1;},1,"race");return false;}catch(BridgeException e){return JsonSerializer.SerializeToElement(e.Detalle).GetProperty("cancelada_antes_de_ejecutar").GetBoolean();}});
+   if(i%2==0) await Task.Delay(2);
+   int before=writes;App.Pump();bool c=await raced;App.Pump();
+   if(c && writes!=before) throw new Exception("cancelada escribio en carrera");
+  }
+  Check(Queue().GetProperty("activas").GetArrayLength()==0,"100 carreras: ninguna cancelada ejecutada, sin activas");
+  Check(Queue().GetProperty("recientes").GetArrayLength()<=64,"historial acotado");
+  var rpc=JsonNode.Parse(Rpc.Err(null,Rpc.ErrBusy,"timeout",cancelled.Detalle));
+  Check(rpc["error"]["data"]["cancelada_antes_de_ejecutar"].GetValue<bool>(),"RPC conserva data estructurada");
+  HiloPrincipal.Desuscribir();
+  Console.WriteLine($"PASS {checks} comprobaciones + 100 carreras (codigo real Bridge/Rpc)");
+ }
+}

@@ -24,10 +24,10 @@ namespace Cdcrd.Civil3dBridge
             return o.ToJsonString();
         }
 
-        public static string Err(JsonNode id, int code, string message, string data = null)
+        public static string Err(JsonNode id, int code, string message, object data = null)
         {
             var e = new JsonObject { ["code"] = code, ["message"] = message };
-            if (data != null) e["data"] = data;
+            if (data != null) e["data"] = JsonSerializer.SerializeToNode(data, Opts);
             var o = new JsonObject
             {
                 ["jsonrpc"] = "2.0",

@@ -1,125 +1,162 @@
-"""Verificacion EN VIVO del puente v0.5.2 tras el reinicio unico.
+"""Humo de regresion 0.5.6; se conserva el nombre historico del script.
 
-Corre por TCP contra el puente (el servidor MCP no recarga). Pasos:
-build/version, diag.dialogos servido desde el hilo del socket,
-gm.diagnosticar (nuevo conteo grupos_muertos), gm.reparar en simulacion con
-borrar_grupos_muertos y una prueba POSITIVA: un grupo de prueba cuyo unico
-miembro (capa GM-PRUEBA-GRUPO) se borra debe salir como muerto y borrable,
-borrarse con aplicar=true y desaparecer del diagnostico. El dibujo NO se
-guarda; la capa de prueba se purga al final.
-
-Uso:  py pruebas\\humo_v052.py
+Solo DWG sintetico CDCRD_BRIDGE_SMOKE y auxiliar native_qa cargado. No usa
+sondeos de proyecto ni cambia seguridad. Requiere CDCRD_C3D_QA_ROOT en el
+proceso CAD y un timeout del puente <= 10000 ms (instancia aislada).
+Uso: py humo_v052.py --drawing C:/QA/CDCRD_BRIDGE_SMOKE.dwg --output C:/QA/run
+La carpeta output debe coincidir con CDCRD_C3D_QA_ROOT y estar vacia.
 """
+import argparse
 import json
 import os
+from pathlib import Path
 import sys
 import time
 
-RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(RAIZ, 'src'))
-
-import dibujo                                           # noqa: E402
-import puente_cliente as puente                         # noqa: E402
-
-BUILD_VIEJO = '882828cd77d9'
-GRUPO = 'CDCRD_PRUEBA_MUERTO'
-fallas = []
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+import puente_cliente as puente
 
 
-def check(nombre, cond, detalle=''):
-    print('%-56s %s %s' % (nombre, 'OK' if cond else 'FALLA', str(detalle)[:400]))
-    if not cond:
-        fallas.append(nombre)
+def preflight(drawing, info, ping):
+    expected = os.path.normcase(os.path.abspath(drawing))
+    actual = os.path.normcase(os.path.abspath(info.get('dibujo', '')))
+    if not Path(drawing).name.startswith('CDCRD_BRIDGE_SMOKE') or actual != expected:
+        raise RuntimeError('Se exige el DWG sintetico exacto indicado; no se escribio')
+    if ping.get('version') != '0.5.6':
+        raise RuntimeError('Se requiere puente 0.5.6, recibido %s' % ping.get('version'))
+    if not ping.get('comandos') or not ping.get('escritura'):
+        raise RuntimeError('La instancia de prueba debe permitir comandos y escritura')
+    timeout = ping.get('timeout_ms', 55000)
+    if not 5000 <= timeout <= 10000:
+        raise RuntimeError('Use una instancia QA con CDCRD_C3D_TIMEOUT_MS=5000..10000')
 
 
-def lisp(codigo):
-    ruta = dibujo.escribir_lisp_temporal(codigo)
-    return puente.llamar_con_aprobacion('cmd.run', {'linea': dibujo.ruta_load(ruta)})
+def wait_json(path, timeout=25):
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        if path.exists():
+            # El escritor puede estar terminando el recibo; solo se reintenta lectura.
+            try:
+                return json.loads(path.read_text(encoding='utf-8-sig'))
+            except json.JSONDecodeError:
+                pass
+        time.sleep(0.1)
+    raise RuntimeError('Sin recibo %s; NO reenviar el comando' % path)
 
 
-def esperar(fn, segundos=25):
-    t0 = time.time()
-    while time.time() - t0 < segundos:
+def run(drawing, output):
+    out = Path(output)
+    if not out.is_dir() or any(out.iterdir()):
+        raise RuntimeError('La carpeta QA debe existir y estar vacia')
+    ping = puente.llamar('ping')
+    preflight(drawing, puente.llamar('doc.info'), ping)
+    if puente.llamar('diag.dialogos').get('modal_abierto'):
+        raise RuntimeError('Hay un modal; no se inicia la prueba')
+    checks = []
+    report = {'ping': ping, 'drawing': drawing, 'checks': checks, 'ok': False}
+    counter = 0
+
+    def check(name, condition):
+        checks.append({'name': name, 'pass': bool(condition)})
+        print(('OK ' if condition else 'FAIL ') + name, flush=True)
+        if not condition:
+            raise AssertionError(name)
+
+    def send_qa(action, **extra):
+        nonlocal counter
+        preflight(drawing, puente.llamar('doc.info'), ping)
+        counter += 1
+        name = '%02d-%s.json' % (counter, action)
+        job = {'action': action, 'output': name, **extra}
+        temp = out / 'job.tmp'
+        temp.write_text(json.dumps(job), encoding='utf-8')
+        temp.replace(out / 'job.json')
+        puente.llamar_con_aprobacion('cmd.run', {'linea': 'CDCRDBRIDGEQA\n'})
+        return out / name
+
+    def qa(action, **extra):
+        value = wait_json(send_qa(action, **extra))
+        if not value.get('ok'):
+            raise RuntimeError(value)
+        return value['result']
+
+    def repair(apply):
+        return puente.llamar_con_aprobacion('gm.reparar', {
+            'aplicar': apply, 'renombrar_sufijo_1': False,
+            'borrar_hatches_huerfanos': False, 'borrar_grupos_muertos': True})
+
+    try:
+        fixture = qa('fixture')
+        report['fixture'] = fixture
+        initial = fixture['audit']
+        check('ValueTuple por Invocar/PropGm/InvocarGm del DLL cargado',
+              fixture['tuple']['render'] == 'render-ok' and fixture['tuple']['second'] == 7.25)
+        check('grupo GM residual vacio real', initial['groups'].get('GM - CDCRD_EMPTY') == 0)
+        hold_ms = ping['timeout_ms'] + 2500
+        receipt = send_qa('hold', hold_ms=hold_ms, holding_output='holding.json')
+        wait_json(out / 'holding.json')
         try:
-            v = fn()
-            if v:
-                return v
-        except Exception:                               # noqa: BLE001
-            pass
-        time.sleep(1.5)
-    return None
+            repair(True)
+            raise AssertionError('La escritura debia vencer mientras CAD estaba ocupado')
+        except puente.PuenteError as exc:
+            report['cancelled_rpc'] = {'code': exc.codigo, 'message': exc.mensaje, 'data': exc.datos}
+            check('timeout TCP: cancelada antes de ejecutar',
+                  exc.codigo == -32000 and isinstance(exc.datos, dict)
+                  and exc.datos.get('cancelada_antes_de_ejecutar') is True)
+        check('bloqueo QA termino', wait_json(receipt)['ok'])
+        after_cancel = qa('audit')
+        check('al volver Idle el grupo sigue presente y no hubo escritura', after_cancel == initial)
+        sim = repair(False)
+        report['simulation'] = sim
+        details = [g for a in sim['acciones'] for g in a.get('detalle', [])]
+        check('simulacion detecta solo el grupo vacio GM',
+              len(details) == 1 and details[0]['nombre'] == 'GM - CDCRD_EMPTY'
+              and details[0]['borrable'] and details[0]['vacio_gm'])
+        report['applied'] = repair(True)
+        after = qa('audit')
+        expected = dict(initial['groups'])
+        del expected['GM - CDCRD_EMPTY']
+        check('borrado positivo conserva grupo ajeno, GM vivo y mixto', after['groups'] == expected)
+        check('limpieza conserva todas las entidades vivas', after['entities'] == initial['entities'])
+        qa('running', timeout_output='running-timeout.json')
+        running = wait_json(out / 'running-timeout.json')
+        report['running_timeout'] = running
+        check('timeout iniciado declara resultado incierto',
+              running.get('data', {}).get('resultado_incierto') is True
+              and running['data'].get('cancelada_antes_de_ejecutar') is False)
+        request_id = running['data']['request_id']
+        deadline = time.monotonic() + 15
+        finished = False
+        while time.monotonic() < deadline:
+            state = puente.llamar('diag.cola')
+            finished = any(x['request_id'] == request_id and x['estado'] == 'terminada'
+                           and x['error'] is None for x in state['recientes'])
+            if finished:
+                break
+            time.sleep(0.1)
+        check('finalizacion de operacion incierta consultable por id', finished)
+        final = qa('audit')
+        check('operacion iniciada se ejecuto exactamente una vez', final['entities'] == after['entities'] + 1)
+        report['final_audit'] = final
+        report['queue'] = puente.llamar('diag.cola')
+        check('sin despachos activos al cierre', report['queue']['activas'] == [])
+        report['ok'] = True
+        return 0
+    finally:
+        (out / 'humo-result.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
 
 
-def grupo_prueba(rep):
-    for acc in rep.get('acciones', []):
-        for g in acc.get('detalle', []) or []:
-            if str(g.get('nombre', '')).upper() == GRUPO:
-                return g
-    return None
-
-
-def principal():
-    print('== 1. build ==')
-    r = puente.llamar('ping', {})
-    check('version 0.5.2', r.get('version') == '0.5.2', r.get('version'))
-    check('build nuevo (no %s)' % BUILD_VIEJO, r.get('build') != BUILD_VIEJO, r.get('build'))
-    print('dll:', r.get('dll'))
-    doc = puente.llamar('doc.info', {})
-    print('dibujo:', doc.get('ruta') or doc.get('nombre'))
-
-    print('== 2. diag.dialogos desde el hilo del socket ==')
-    d = puente.llamar('diag.dialogos', {})
-    check('servido por el socket', d.get('hilo') == 'socket', d.get('hilo'))
-    check('sin modal abierto', d.get('modal_abierto') is False, d.get('ventanas'))
-
-    print('== 3. gm.diagnosticar ==')
-    g = puente.llamar('gm.diagnosticar', {})
-    print(json.dumps({k: g.get(k) for k in ('ok', 'problemas', 'grupos_muertos', 'hatches_sticklog',
-                                            'superficie_top', 'project_id')}, ensure_ascii=False))
-    check('reporta grupos_muertos', 'grupos_muertos' in g, g.get('grupos_muertos'))
-    base = g.get('grupos_muertos', 0)
-
-    print('== 4. gm.reparar simulacion con borrar_grupos_muertos ==')
-    rep = puente.llamar_con_aprobacion('gm.reparar', {
-        'aplicar': False, 'renombrar_sufijo_1': False,
-        'borrar_hatches_huerfanos': True, 'borrar_grupos_muertos': True})
-    print(json.dumps(rep, ensure_ascii=False)[:800])
-    check('accion grupos_muertos presente',
-          any('grupos_muertos' in a for a in rep.get('acciones', [])), rep.get('acciones'))
-
-    print('== 5. prueba positiva: grupo con miembro borrado ==')
-    lisp('(progn (setvar "CMDECHO" 0)'
-         ' (entmake (list (cons 0 "LINE") (cons 8 "GM-PRUEBA-GRUPO")'
-         ' (list 10 0.0 0.0 0.0) (list 11 1.0 1.0 0.0)))'
-         ' (setq cdcrd_e (entlast))'
-         ' (command "_.-GROUP" "_C" "%s" "prueba puente v052" cdcrd_e "")'
-         ' (entdel cdcrd_e) (princ))' % GRUPO)
-    gd = esperar(lambda: (lambda x: x if x.get('grupos_muertos', 0) > base else None)(
-        puente.llamar('gm.diagnosticar', {})))
-    check('diagnosticar ve el grupo muerto', gd is not None,
-          None if gd is None else (gd.get('grupos_muertos'), gd.get('problemas')))
-    sim = puente.llamar_con_aprobacion('gm.reparar', {
-        'aplicar': False, 'renombrar_sufijo_1': False, 'borrar_grupos_muertos': True})
-    gp = grupo_prueba(sim)
-    check('simulacion: grupo de prueba borrable', bool(gp and gp.get('borrable')), gp)
-    apl = puente.llamar_con_aprobacion('gm.reparar', {
-        'aplicar': True, 'renombrar_sufijo_1': False, 'borrar_grupos_muertos': True})
-    ga = grupo_prueba(apl)
-    check('aplicar: grupo de prueba borrado',
-          bool(ga and str(ga.get('accion', '')).startswith('borrado')), ga)
-    gf = puente.llamar('gm.diagnosticar', {})
-    check('diagnostico vuelve a la base (%s)' % base, gf.get('grupos_muertos') == base,
-          gf.get('grupos_muertos'))
-    lisp('(progn (setvar "CMDECHO" 0) (command "_.-PURGE" "_LA" "GM-PRUEBA-GRUPO" "_N") (princ))')
-
-    print('== resumen ==')
-    print('FALLAS:', fallas if fallas else 'ninguna')
-    return 1 if fallas else 0
+def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('--drawing', required=True)
+    ap.add_argument('--output', required=True)
+    args = ap.parse_args()
+    try:
+        return run(args.drawing, args.output)
+    except Exception as exc:
+        print('FALLA:', exc, file=sys.stderr)
+        return 1
 
 
 if __name__ == '__main__':
-    try:
-        sys.exit(principal())
-    except Exception as exc:                            # noqa: BLE001
-        print('EXCEPCION:', repr(exc))
-        sys.exit(2)
+    sys.exit(main())

@@ -34,7 +34,7 @@ class ParsearDireccion(unittest.TestCase):
 
 
 class Registro(unittest.TestCase):
-    def test_registra_nueve(self):
+    def test_registra_diez(self):
         nombres = []
 
         class McpFalso:
@@ -48,7 +48,7 @@ class Registro(unittest.TestCase):
         self.assertEqual(sorted(nombres), sorted([
             'listar_papeles', 'exportar_vista', 'vista_3d',
             'crear_vista_guardada', 'activar_vista',
-            'crear_layout', 'leer_log_puente', 'ping_comandos', 'deshacer']))
+            'crear_layout', 'leer_log_puente', 'ping_comandos', 'deshacer', 'estado_cola']))
 
     def test_exportar_exige_confirmar(self):
         registradas = {}

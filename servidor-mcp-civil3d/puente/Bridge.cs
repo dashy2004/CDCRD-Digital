@@ -243,6 +243,7 @@ namespace Cdcrd.Civil3dBridge
                         { "build", typeof(Handlers).Assembly.ManifestModule.ModuleVersionId.ToString("N").Substring(0, 12) },
                         { "dll", typeof(Handlers).Assembly.Location },
                         { "puerto", Port },
+                        { "timeout_ms", TimeoutMs },
                         { "escritura", AllowWrite },
                         { "comandos", AllowCommands },
                         { "log", Log.Path }
@@ -281,6 +282,7 @@ namespace Cdcrd.Civil3dBridge
                 // justo cuando hace falta, con un modal bloqueando la bomba de Idle
                 if (method == "diag.dialogos")
                     return Rpc.Ok(id, Handlers.DiagDialogosSinHilo());
+                if (method == "diag.cola") return Rpc.Ok(id, HiloPrincipal.EstadoCola());
                 if (method == "diag.ping")
                 {
                     int t = prms["timeout_ms"] != null ? prms["timeout_ms"].GetValue<int>() : 3000;
@@ -317,11 +319,11 @@ namespace Cdcrd.Civil3dBridge
                 object result;
                 try
                 {
-                    result = HiloPrincipal.Ejecutar(() => Handlers.Dispatch(method, prms), TimeoutMs);
+                    result = HiloPrincipal.Ejecutar(() => Handlers.Dispatch(method, prms), TimeoutMs, method);
                 }
                 catch (BridgeException be)
                 {
-                    return Rpc.Err(id, be.Code, be.Message);
+                    return Rpc.Err(id, be.Code, be.Message, be.Detalle);
                 }
                 catch (Exception ex)
                 {
@@ -354,11 +356,51 @@ namespace Cdcrd.Civil3dBridge
             public Func<object> Fn;
             public object Resultado;
             public Exception Error;
-            public readonly ManualResetEventSlim Listo = new ManualResetEventSlim(false);
+            // El CAS entre Pendiente -> Ejecutando y Pendiente -> Cancelada decide
+            // quien gano. Nunca se cancela una operacion que ya entro en la API.
+            public int Estado; // 0 pendiente, 1 ejecutando, 2 cancelada, 3 terminada
+            public long Limite;
+            public string Id = Guid.NewGuid().ToString("N");
+            public string Metodo;
+            public readonly TaskCompletionSource<bool> Listo = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
         }
 
         private static readonly ConcurrentQueue<Tarea> Cola = new ConcurrentQueue<Tarea>();
+        private static readonly ConcurrentDictionary<string, Tarea> Activas = new ConcurrentDictionary<string, Tarea>();
+        private static readonly Queue<object> Recientes = new Queue<object>();
+        private static readonly object RegistroGate = new object();
         private static int _suscrito;
+
+        private static object Resumen(Tarea t) => new Dictionary<string, object>
+        {
+            { "request_id", t.Id }, { "metodo", t.Metodo },
+            { "estado", new[] { "pendiente", "ejecutando", "cancelada", "terminada" }[Volatile.Read(ref t.Estado)] },
+            { "error", t.Error == null ? null : t.Error.Message }
+        };
+
+        private static void RegistrarFin(Tarea t)
+        {
+            lock (RegistroGate)
+            {
+                Activas.TryRemove(t.Id, out _);
+                Recientes.Enqueue(Resumen(t));
+                while (Recientes.Count > 64) Recientes.Dequeue();
+            }
+        }
+
+        public static object EstadoCola()
+        {
+            lock (RegistroGate)
+            {
+                var activas = new List<object>();
+                foreach (var t in Activas.Values) activas.Add(Resumen(t));
+                return new Dictionary<string, object>
+                {
+                    { "activas", activas }, { "recientes", Recientes.ToArray() },
+                    { "alcance", "Estado del despacho del puente; cmd.run terminado solo significa comando encolado en AutoCAD" }
+                };
+            }
+        }
 
         public static void Suscribir()
         {
@@ -371,6 +413,17 @@ namespace Cdcrd.Civil3dBridge
         {
             if (Interlocked.Exchange(ref _suscrito, 0) == 0) return;
             try { AcApp.Idle -= AlEstarInactivo; } catch { }
+            Tarea t;
+            while (Cola.TryDequeue(out t)) Cancelar(t);
+        }
+
+        private static bool Cancelar(Tarea t)
+        {
+            if (Interlocked.CompareExchange(ref t.Estado, 2, 0) != 0) return false;
+            t.Fn = null;
+            RegistrarFin(t);
+            t.Listo.TrySetResult(true);
+            return true;
         }
 
         private static void AlEstarInactivo(object sender, EventArgs e)
@@ -378,24 +431,49 @@ namespace Cdcrd.Civil3dBridge
             Tarea t;
             while (Cola.TryDequeue(out t))
             {
+                if (System.Diagnostics.Stopwatch.GetTimestamp() >= t.Limite) Cancelar(t);
+                if (Interlocked.CompareExchange(ref t.Estado, 1, 0) != 0) continue;
                 try { t.Resultado = t.Fn(); }
                 catch (Exception ex) { t.Error = ex; }
-                finally { t.Listo.Set(); }
+                finally
+                {
+                    t.Fn = null;
+                    Interlocked.Exchange(ref t.Estado, 3);
+                    RegistrarFin(t);
+                    t.Listo.TrySetResult(true);
+                }
             }
         }
 
-        public static object Ejecutar(Func<object> fn, int timeoutMs)
+        private static BridgeException Vencida(Tarea t)
+        {
+            bool cancelada = Volatile.Read(ref t.Estado) == 2;
+            return new BridgeException(Rpc.ErrBusy, cancelada
+                ? "La peticion fue cancelada antes de ejecutarse; no modificara el dibujo."
+                : "La peticion comenzo a ejecutarse; resultado incierto. No reintente: consulte diag.cola y verifique el dibujo.",
+                new Dictionary<string, object>
+                {
+                    { "request_id", t.Id }, { "estado", cancelada ? "cancelada" : "ejecutando" },
+                    { "cancelada_antes_de_ejecutar", cancelada }, { "resultado_incierto", !cancelada }
+                });
+        }
+
+        public static object Ejecutar(Func<object> fn, int timeoutMs, string metodo = "interno")
         {
             if (_suscrito == 0)
                 throw new BridgeException(Rpc.ErrInternal,
                     "la bomba del hilo principal no esta suscrita: reinicie Civil 3D o escriba CDCRDMCP");
-            var t = new Tarea { Fn = fn };
+            var t = new Tarea { Fn = fn, Metodo = metodo,
+                Limite = System.Diagnostics.Stopwatch.GetTimestamp() + (long)(timeoutMs * (double)System.Diagnostics.Stopwatch.Frequency / 1000) };
+            Activas[t.Id] = t;
             Cola.Enqueue(t);
-            if (!t.Listo.Wait(timeoutMs))
-                throw new BridgeException(Rpc.ErrBusy,
-                    "Civil 3D no quedo inactivo en " + timeoutMs + " ms: suele estar en un comando, " +
-                    "un dialogo modal o en modo edicion. La peticion sigue en cola y se descartara sola");
-            // preserva la pila original (el metodo exacto que fallo) al relanzar
+            if (!t.Listo.Task.Wait(timeoutMs))
+            {
+                Cancelar(t);
+                // Si termino justo al vencer la espera, se devuelve su resultado real.
+                if (Volatile.Read(ref t.Estado) != 3) throw Vencida(t);
+            }
+            if (Volatile.Read(ref t.Estado) == 2) throw Vencida(t);
             if (t.Error != null) System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(t.Error).Throw();
             return t.Resultado;
         }
@@ -404,6 +482,7 @@ namespace Cdcrd.Civil3dBridge
     internal class BridgeException : Exception
     {
         public int Code;
-        public BridgeException(int code, string message) : base(message) { Code = code; }
+        public object Detalle;
+        public BridgeException(int code, string message, object detalle = null) : base(message) { Code = code; Detalle = detalle; }
     }
 }

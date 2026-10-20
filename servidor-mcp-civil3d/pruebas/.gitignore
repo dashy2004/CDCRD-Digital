@@ -1,0 +1,3 @@
+# Compilaciones locales de los arneses; solo se versionan sus fuentes.
+**/bin/
+**/obj/

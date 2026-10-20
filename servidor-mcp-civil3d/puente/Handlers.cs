@@ -20,7 +20,7 @@ namespace Cdcrd.Civil3dBridge
 {
     internal static partial class Handlers
     {
-        public const string Version = "0.5.5";
+        public const string Version = "0.5.6";
         private const int MaxItems = 500;
 
         // Alias en espanol -> candidatos de miembro del CivilDocument, en orden.
@@ -136,6 +136,13 @@ namespace Cdcrd.Civil3dBridge
             if (v is DateTime dt) return dt.ToString("yyyy-MM-dd HH:mm:ss");
             if (v is ObjectId oid) return oid.IsNull ? null : (object)HandleOf(oid);
             if (v is Handle hh) return hh.ToString();
+
+            if (v is System.Runtime.CompilerServices.ITuple tuple)
+            {
+                var items = new Dictionary<string, object>();
+                for (int i = 0; i < tuple.Length; i++) items["Item" + (i + 1)] = Val(tuple[i], depth + 1, maxExpand);
+                return items;
+            }
 
             // Point3d / Point2d / Vector3d y similares
             var px = t.GetProperty("X"); var py = t.GetProperty("Y");
@@ -1077,6 +1084,7 @@ namespace Cdcrd.Civil3dBridge
 
         private static object Invocar(object obj, string nombre, List<object> args)
         {
+            if (args.Count == 0 && ReflectionRead.TryRead(obj, nombre, out var miembro)) return miembro;
             var candidatos = obj.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance)
                 .Where(m => string.Equals(m.Name, nombre, StringComparison.OrdinalIgnoreCase)
                             && m.GetParameters().Length == args.Count).ToList();
