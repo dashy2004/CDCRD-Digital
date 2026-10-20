@@ -38,9 +38,26 @@ de sondeos proyectados fuera del eje.
 
 Verificacion local: 113 pruebas Python; 33 comprobaciones .NET y 100 carreras
 de timeout; compilacion Release sin errores ni advertencias. Prueba nativa
-completa de 0.5.8 pendiente de cargar el puente en la instancia aislada.
-El ensayo 0.5.7 identifico correctamente 5 sondeos y 20 estratos, rechazo un
-campo sin datos antes de modificar perfiles y creo 5 perfiles de superficie;
-el render fallo por relleno sin estilos. No se considera una prueba positiva.
+0.5.8 en Civil 3D 2027, sobre una copia: 5 sondeos con 4 estratos cada uno,
+5 perfiles de superficie, render `(5, 0)` tanto sin rellenos como con estilos.
+Auditoria nativa: 20 limites de estrato, 20 tramas interiores, 40 rellenos
+laterales, 5 grupos de 12 miembros y 5 simbolos de nivel de agua. Coordenadas,
+espesores y materiales contrastados con los datos existentes. Guardado y
+reapertura conservaron handles, geometria y propiedades comparadas.
 
-Los recibos, DWG y datos de proyecto se conservan fuera del repositorio.
+La prueba negativa con un campo sin datos rechazo la llamada antes de cambiar
+perfiles. El fallo anterior habia dejado un grupo vacio, un bloque con su
+referencia y un rectangulo parcial. Se retiraron exclusivamente esos residuos
+identificados en la copia antes de repetir. La limpieza automatica de grupos
+vacios no sustituye una auditoria de bloques residuales. La atomicidad de todo
+el flujo GM ante un fallo tardio sigue pendiente; no reintentar a ciegas.
+
+El humo sintetico de timeout mantiene las 12 comprobaciones nativas de 0.5.6;
+no se presenta como un nuevo humo de timeout ejecutado bajo 0.5.8. Los recibos,
+DWG y datos de proyecto se conservan fuera del repositorio. No se modifico la
+base de sondeos ni se considera que el ensayo valide su calidad geotecnica.
+
+La salida grafica se comprobo con cuatro vistas guardadas y exportaciones PDF
+nativas, revisadas visualmente. La exportacion por ventana devolvio paginas
+vacias en esta prueba: hasta corregir esa variante, utilizar `nombre_vista`.
+La copia se dejo guardada con el perfil completo y las vistas de verificacion.
