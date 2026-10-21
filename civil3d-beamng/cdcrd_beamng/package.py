@@ -3,19 +3,25 @@
 import hashlib
 import json
 import math
-import os
-from pathlib import Path, PurePosixPath
 import re
 import shutil
 import tempfile
+from pathlib import Path, PurePosixPath
 
 import numpy as np
 from PIL import Image
 
 from .collada import write_road_dae
-from .geometry import (boundary_intersected_cells, choose_grid, classify_road,
-                       complete_terrain_cells, intersected_cells, raster_tin, spawn_on_road)
-from .sources import read_json, read_landxml, read_snapshot, validate_guide
+from .geometry import (
+    boundary_intersected_cells,
+    choose_grid,
+    classify_road,
+    complete_terrain_cells,
+    intersected_cells,
+    raster_tin,
+    spawn_on_road,
+)
+from .sources import load_sources, read_json
 
 SCHEMA = "cdcrd.beamng.package/1"
 LEVEL_ID = re.compile(r"^[a-z][a-z0-9_]{0,47}$")
@@ -149,19 +155,11 @@ def build_package(*, output, level_id, snapshot=None, terrain_landxml=None,
     destination = Path(output).absolute()
     if destination.exists() or destination.is_symlink():
         raise FileExistsError(f"Output already exists; choose a new folder: {destination}")
-    if snapshot is not None:
-        if terrain_landxml is not None or road_landxml is not None or terrain_surface is not None or road_surface is not None:
-            raise ValueError("Use either snapshot or two LandXML surfaces")
-        terrain, road, guide = read_snapshot(snapshot)
-        source_schema = "cdcrd.civil3d.snapshot/1"
-    else:
-        if terrain_landxml is None or road_landxml is None:
-            raise ValueError("Provide snapshot or both terrain_landxml and road_landxml")
-        terrain = read_landxml(terrain_landxml, terrain_surface)
-        road = read_landxml(road_landxml, road_surface)
-        guide, source_schema = None, "LandXML TIN"
-    if road_guide is not None:
-        guide = validate_guide(read_json(road_guide))
+    sources = load_sources(snapshot=snapshot, terrain_landxml=terrain_landxml,
+                           terrain_surface=terrain_surface, road_landxml=road_landxml,
+                           road_surface=road_surface, road_guide=road_guide)
+    terrain, road, guide = sources.terrain, sources.road, sources.guide
+    source_schema = sources.schema
     if road_is_drivable and guide is not None:
         raise ValueError("--road-is-drivable and a road guide are mutually exclusive")
     origin, size = choose_grid(terrain, road, size, square_size, margin)

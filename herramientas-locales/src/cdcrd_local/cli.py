@@ -16,6 +16,16 @@ def parser() -> argparse.ArgumentParser:
     sub = cli.add_subparsers(dest="command", required=True)
     sub.add_parser("doctor", help="Verificar dependencias sin conectar BIM vivo")
     sub.add_parser("mcp", help="Iniciar servidor MCP stdio")
+    exchange = sub.add_parser("validar-intercambio",
+                              help="Validar fuentes sin importar ni activar BIM")
+    exchange.add_argument("--modulo", choices=["beamng"], required=True)
+    exchange.add_argument("--repo", type=Path)
+    exchange.add_argument("--json", action="store_true", help="Salida JSON (predeterminada)")
+    from .interchange import PATH_OPTIONS, SOURCE_OPTIONS
+
+    for option in SOURCE_OPTIONS:
+        exchange.add_argument("--" + option.replace("_", "-"),
+                              type=Path if option in PATH_OPTIONS else str)
     for command in ("capacidades", "estado"):
         operation = sub.add_parser(command, help="Inventario y diagnostico offline del ecosistema")
         operation.add_argument("--repo", type=Path)
@@ -50,6 +60,10 @@ def parser() -> argparse.ArgumentParser:
 
 
 def execute(args: argparse.Namespace) -> dict:
+    if args.command == "validar-intercambio":
+        from .interchange import SOURCE_OPTIONS, validate_beamng
+
+        return validate_beamng(args.repo, **{name: getattr(args, name) for name in SOURCE_OPTIONS})
     if args.command in ("capacidades", "estado"):
         from .capabilities import catalog, diagnose_ecosystem
 
@@ -97,7 +111,7 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False), file=sys.stderr)
         return 2
     print(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))
-    if args.command in ("doctor", "estado"):
+    if args.command in ("doctor", "estado", "validar-intercambio"):
         return 0 if result["ok"] else 1
     if args.command == "verificar":
         return result["exit_code"]
