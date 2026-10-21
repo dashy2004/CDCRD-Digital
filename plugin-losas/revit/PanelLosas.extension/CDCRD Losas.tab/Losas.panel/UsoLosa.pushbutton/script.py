@@ -54,17 +54,37 @@ FT_A_M = 0.3048
 
 
 # ------------------------------ repo y datos ------------------------------
+def _es_repo(base):
+    return os.path.isdir(os.path.join(base, "plugin-losas")) and \
+        os.path.isdir(os.path.join(base, "puente-losas"))
+
+
 def _raiz_repo():
-    base = os.path.dirname(os.path.abspath(__file__))
+    """Raiz del repo CDCRD-Digital. La extension instalada vive FUERA del
+    repo (%APPDATA%\\pyRevit\\Extensions), asi que se intenta en orden:
+    (1) repo.txt junto al script (lo escribe la instalacion con la ruta),
+    (2) variable de entorno CDCRD_REPO, (3) subir carpetas desde el script
+    (caso: ejecutado desde el repo mismo)."""
+    aqui = os.path.dirname(os.path.abspath(__file__))
+    ruta_txt = os.path.join(aqui, "repo.txt")
+    if os.path.isfile(ruta_txt):
+        candidata = io.open(ruta_txt, encoding="utf-8").read().strip()
+        if _es_repo(candidata):
+            return candidata
+        raise Exception("repo.txt apunta a '%s' pero ahi no esta el repo" % candidata)
+    candidata = os.environ.get("CDCRD_REPO", "")
+    if candidata and _es_repo(candidata):
+        return candidata
+    base = aqui
     for _ in range(10):
-        if os.path.isdir(os.path.join(base, "plugin-losas")) and \
-           os.path.isdir(os.path.join(base, "puente-losas")):
+        if _es_repo(base):
             return base
         padre = os.path.dirname(base)
         if padre == base:
             break
         base = padre
-    raise Exception("no se encontro el repo CDCRD-Digital sobre el script")
+    raise Exception("no se encontro el repo CDCRD-Digital: escribir su ruta en "
+                    "repo.txt junto a script.py o en la variable CDCRD_REPO")
 
 
 def _slug(texto):
@@ -355,10 +375,29 @@ class PanelUsoLosa(Form):
                 Process.Start(psi)
 
 
-doc = revit.doc
-raiz = _raiz_repo()
-filas = _filas(doc)
-if not filas:
-    MessageBox.Show("Ninguna losa con Comments '%s*' en el modelo." % MARKER)
-else:
+def _principal():
+    doc = revit.doc
+    raiz = _raiz_repo()
+    filas = _filas(doc)
+    if not filas:
+        MessageBox.Show("Ninguna losa con Comments '%s*' en el modelo." % MARKER)
+        return
     PanelUsoLosa(doc, filas, _cargar_usos(raiz), raiz).ShowDialog()
+
+
+try:
+    _principal()
+except Exception:
+    # cualquier fallo queda en un archivo legible (ademas del dialogo), para
+    # diagnosticar sin depender de copiar el traceback a mano
+    import tempfile
+    import traceback
+    texto = traceback.format_exc()
+    ruta_log = os.path.join(tempfile.gettempdir(), "plugin_losas_panel_error.log")
+    try:
+        with io.open(ruta_log, "a", encoding="utf-8") as f:
+            import datetime
+            f.write("\n=== %s ===\n%s\n" % (datetime.datetime.now().isoformat(), texto))
+    except Exception:
+        pass
+    MessageBox.Show("Error del panel (anotado en %s):\n\n%s" % (ruta_log, texto[-1200:]))
