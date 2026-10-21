@@ -105,7 +105,8 @@ def _version(root: Path, module: Module) -> tuple[str | None, str]:
     try:
         if path.stat().st_size > MAX_METADATA_BYTES:
             return None, "invalid"
-        value = tomllib.loads(path.read_text(encoding="utf-8-sig")).get("project", {}).get("version")
+        metadata = tomllib.loads(path.read_text(encoding="utf-8-sig"))
+        value = metadata.get("project", {}).get("version")
     except (OSError, UnicodeError, tomllib.TOMLDecodeError, AttributeError):
         return None, "invalid"
     if value is None:
@@ -200,8 +201,12 @@ def diagnose_ecosystem(repo: Path | None = None, module: str | None = None,
                     live_connection="not_checked")
     return {
         "schema": "cdcrd.ecosystem-state/1",
-        "ok": environment["ok"] and all(m["source_available"] for m in inventory["modules"]),
+        "ok": environment["ok"] and all(
+            m["source_available"] and m["configured"] is not False
+            and not m["configuration_invalid"] for m in inventory["modules"]
+        ),
         "scope": "offline; source presence and declared configuration are not live validation",
         "configuration_checked": config is not None, "environment": environment,
+        "environment_scope": "herramientas-locales Python environment only",
         "modules": inventory["modules"], "live_bim_connected": False,
     }

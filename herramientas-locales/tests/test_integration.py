@@ -145,11 +145,15 @@ def test_real_mcp_stdio_search_path_boundaries_and_dxf(corpus, tmp_path):
                         "modulo": "civil3d",
                     })
                     assert not capabilities.isError
-                    assert capabilities.structuredContent["modules"][0]["id"] == "civil3d"
+                    inventory = capabilities.structuredContent or json.loads(
+                        capabilities.content[0].text
+                    )
+                    assert inventory["modules"][0]["id"] == "civil3d"
                     state = await session.call_tool("ecosistema_estado", {"modulo": "civil3d"})
                     assert not state.isError
-                    assert state.structuredContent["live_bim_connected"] is False
-                    assert state.structuredContent["modules"][0]["configured"] is None
+                    state_data = state.structuredContent or json.loads(state.content[0].text)
+                    assert state_data["live_bim_connected"] is False
+                    assert state_data["modules"][0]["configured"] is None
                     found = await session.call_tool("cdcrd_buscar", {
                         "consulta": "2.10.8.2.1.2", "volumen": 2,
                     })

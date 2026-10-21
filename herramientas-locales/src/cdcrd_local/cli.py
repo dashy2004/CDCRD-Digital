@@ -22,7 +22,9 @@ def parser() -> argparse.ArgumentParser:
         operation.add_argument("--modulo")
         operation.add_argument("--json", action="store_true", help="Salida JSON (predeterminada)")
         if command == "estado":
-            operation.add_argument("--config", type=Path, help="Configuracion MCP JSON/TOML explicita")
+            operation.add_argument(
+                "--config", type=Path, help="Configuracion MCP JSON/TOML explicita"
+            )
     find = sub.add_parser("buscar", help="Consultar clausulas con pagina y procedencia")
     find.add_argument("query")
     find.add_argument("--repo", type=Path)
