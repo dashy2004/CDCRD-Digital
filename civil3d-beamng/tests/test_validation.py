@@ -1,14 +1,13 @@
 """Synthetic interchange preflight; no CAD or game process is used."""
-from copy import deepcopy
 import hashlib
 import json
 import os
-from pathlib import Path
 import subprocess
 import sys
+from copy import deepcopy
+from pathlib import Path
 
 import pytest
-
 from cdcrd_beamng import build_package
 from cdcrd_beamng.sources import read_snapshot
 
