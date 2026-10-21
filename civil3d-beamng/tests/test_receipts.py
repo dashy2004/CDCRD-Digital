@@ -153,6 +153,43 @@ def test_atomic_publication_preserves_a_concurrent_receipt(source):
     assert not list(source.parent.glob(".receipt-*"))
 
 
+def test_build_receipt_detects_asset_change_after_package_verification(source):
+    from cdcrd_beamng import receipts
+    real_fingerprint = receipts._fingerprint
+    def changed_asset(path):
+        if path.name == "road.dae":
+            path.write_bytes(path.read_bytes() + b"changed after verification")
+        return real_fingerprint(path)
+    with patch.object(receipts, "_fingerprint", side_effect=changed_asset):
+        report = record("build", source.parent / "changed-output.json", snapshot=source,
+                        output=source.parent / "package", level_id="synthetic_receipt")
+    assert not report["ok"] and report["errors"]
+    assert report["evidence"]["level"] == "none"
+    assert report["result"]["level_id"] == "synthetic_receipt"
+    assert report["execution"]["completed"]
+
+
+def test_verify_receipt_keeps_existing_package_symlink_rejection(source):
+    folder = source.parent / "package"
+    build_package(snapshot=source, output=folder, level_id="synthetic_receipt")
+    alias = source.parent / "alias"
+    alias.symlink_to(folder, target_is_directory=True)
+    report = record("verify", source.parent / "symlink.json", folder=alias)
+    assert not report["ok"]
+
+
+def test_common_cli_refuses_a_dangling_receipt_symlink(source):
+    alias, destination = source.parent / "alias.json", source.parent / "not-created.json"
+    alias.symlink_to(destination)
+    env = dict(os.environ, PYTHONUTF8="1")
+    env["PYTHONPATH"] = str(REPO / "herramientas-locales/src")
+    result = subprocess.run([sys.executable, "-m", "cdcrd_local.cli", "validar-intercambio",
+        "--modulo", "beamng", "--repo", str(REPO), "--snapshot", str(source),
+        "--recibo", str(alias)], cwd=source.parent, env=env, capture_output=True, timeout=60)
+    assert result.returncode == 2
+    assert alias.is_symlink() and not destination.exists()
+
+
 @pytest.mark.parametrize("module,command,flag", [
     ("cdcrd_beamng", ["validate"], "--receipt"),
     ("cdcrd_local.cli", ["validar-intercambio", "--modulo", "beamng", "--repo", str(REPO)], "--recibo"),
