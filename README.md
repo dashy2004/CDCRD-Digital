@@ -68,7 +68,7 @@ Pruebas sobre copias y datos hipotéticos. Capturas del área de dibujo; cada in
 | Un edificio completo modelado y verificado por IA, paso a paso | `revision/` — 10 bloques con capturas de pantalla de ETABS |
 | Como se verifico la digitalizacion | `verificacion-vols/` |
 | Reglamentos R-001, R-002, R-008, carreteras, geotecnia e INAPA | [Corpus complementario](corpus-reglamentos/README.md) — 12 documentos, 1.370 páginas, texto/OCR con referencia; revisión numérica pendiente |
-| Generar DXF, convertir previews, revisar IFC/IDS y consultar CDCRD localmente | [herramientas-locales/](herramientas-locales/README.md) — CLI, entorno reproducible y MCP de 10 herramientas |
+| Generar DXF, convertir previews, revisar IFC/IDS y consultar CDCRD localmente | [herramientas-locales/](herramientas-locales/README.md) — CLI, entorno reproducible y MCP de 12 herramientas |
 
 Los `.json` se abren con cualquier editor de texto (Bloc de notas incluido) o se arrastran a
 una conversacion con una IA. Cada valor trae su clausula, tomo y pagina de origen: **la cita
@@ -185,7 +185,7 @@ de fórmulas/tablas pendientes de cotejo.
 
 | Servidor | Que opera | Estado |
 |---|---|---|
-| `herramientas-locales/` | Archivos DXF/IFC/IDS/PDF y corpus CDCRD, sin aplicaciones BIM vivas | CLI y **10 herramientas MCP stdio**, entorno Python aislado; [instalacion y ejemplos](herramientas-locales/README.md) |
+| `herramientas-locales/` | Archivos DXF/IFC/IDS/PDF y corpus CDCRD, sin aplicaciones BIM vivas | CLI y **12 herramientas MCP stdio**, entorno Python aislado; [instalacion y ejemplos](herramientas-locales/README.md) |
 | `servidor-mcp/` | ETABS (OAPI 2.016) | Herramientas OAPI con pruebas sintéticas en ETABS 23.3.0: [evidencia y límites](servidor-mcp/docs/VALIDACION-ETABS.md). Ocho herramientas adicionales de [procedimiento, cargas y revisión de acero](servidor-mcp/docs/PROCEDIMIENTO-ETABS.md) trabajan con entradas explícitas, sin modificar el modelo. Despiece integral e historia no lineal directa pendientes. |
 | `servidor-mcp-safe/` | SAFE — losas, zapatas, franjas, punzonamiento, presion de suelo | v0.1.0, probado en vivo contra un modelo real de fundacion |
 | [revit-mcp-tools/](revit-mcp-tools/README.md) | Revit 2027 via pyRevit Routes — modelar, documentar, armado, exportacion a ETABS y auditoría MEP de solo lectura | Modelado y documentacion probados en la receta `residencial-4n`; [alcance y validación MEP](revit-mcp-tools/MEP.md) |

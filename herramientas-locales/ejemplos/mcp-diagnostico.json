@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "cdcrd-local": {
+      "command": "python",
+      "args": ["-m", "cdcrd_local.server"]
+    }
+  }
+}
