@@ -1,10 +1,10 @@
 """Unify file-operation results and evidence; never infer a native CAD/game run."""
-from datetime import datetime, timezone
 import json
 import os
-from pathlib import Path
 import tempfile
 import time
+from datetime import datetime, timezone
+from pathlib import Path
 from uuid import uuid4
 from xml.etree.ElementTree import ParseError
 
@@ -73,6 +73,8 @@ def _finish(item, path, errors):
 
 
 def _package_files(folder):
+    if folder.is_symlink():
+        raise ValueError("Package folder must not be a symlink")
     manifest = read_json(relative_file(folder, "manifest.json"))
     hashes = manifest.get("sha256s") if isinstance(manifest, dict) else None
     if not isinstance(hashes, dict):
@@ -113,8 +115,9 @@ def record_operation(operation, receipt, *, evidence=(), **options):
     if target.exists() or target.is_symlink():
         raise FileExistsError("Receipt already exists; choose a new file")
     target = target.resolve()
-    folder = Path(options["output" if operation == "build" else "folder"]).resolve() if operation != "validate" else None
-    if folder is not None and target.is_relative_to(folder):
+    folder = (Path(options["output" if operation == "build" else "folder"]).absolute()
+              if operation != "validate" else None)
+    if folder is not None and target.is_relative_to(folder.resolve()):
         raise ValueError("Receipt must be outside the package folder")
     started = time.monotonic()
     report = {"schema": SCHEMA, "id": str(uuid4()), "module": "beamng",
@@ -161,16 +164,18 @@ def record_operation(operation, receipt, *, evidence=(), **options):
                             else verify_package(folder))
                 result = {key: manifest[key] for key in ("schema", "level_id", "counts", "warnings")}
                 success = True
-                if operation == "build":
-                    if verify_package(folder) != manifest:
-                        raise ValueError("Published manifest changed after build")
-                    for identifier, path in _package_files(folder):
-                        item = {"id": identifier, "path": _path(path, target.parent)}
-                        item.update(_fingerprint(path))
-                        report["files"]["outputs"].append(item)
             report["result"] = result
             report["ok"] = success
             report["execution"]["completed"] = True
+            if operation == "build":
+                if verify_package(folder) != manifest:
+                    raise ValueError("Published manifest changed after build")
+                for identifier, path in _package_files(folder):
+                    item = {"id": identifier, "path": _path(path, target.parent)}
+                    item.update(_fingerprint(path))
+                    report["files"]["outputs"].append(item)
+                    if identifier != "manifest" and item["sha256"] != manifest["sha256s"][identifier]:
+                        raise ValueError("Output asset changed after package verification")
             report["evidence"]["level"] = ("source_contract" if operation == "validate"
                                              else "package_file_integrity") if success else "none"
         except KNOWN_ERRORS as error:

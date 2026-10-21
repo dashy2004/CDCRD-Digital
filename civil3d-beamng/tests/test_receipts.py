@@ -1,16 +1,15 @@
 """Synthetic operation receipts: evidence cannot promote itself to native proof."""
-from datetime import datetime
 import hashlib
 import json
 import os
-from pathlib import Path
 import subprocess
 import sys
+from datetime import datetime
+from pathlib import Path
 from unittest.mock import patch
 from uuid import UUID
 
 import pytest
-
 from cdcrd_beamng import build_package, verify_package
 
 REPO = Path(__file__).resolve().parents[2]

@@ -22,7 +22,7 @@ def validate_beamng(repo: Path | None = None, *, receipt: Path | None = None,
     if evidence and receipt is None:
         raise ValueError("--evidencia requiere --recibo.")
     if receipt is not None:
-        command.extend(["--receipt", str(receipt.resolve())])
+        command.extend(["--receipt", str(receipt.absolute())])
     for path in evidence or []:
         command.extend(["--evidence", str(path.resolve())])
     for option, value in sources.items():
@@ -39,9 +39,11 @@ def validate_beamng(repo: Path | None = None, *, receipt: Path | None = None,
         result = json.loads(process.stdout)
     except json.JSONDecodeError as error:
         raise RuntimeError(
-            "El validador BeamNG no produjo JSON; compruebe sus dependencias."
+            f"BeamNG no produjo JSON (salida {process.returncode}); "
+            "revise argumentos, destino del recibo y dependencias."
         ) from error
-    schema = "cdcrd.operation-receipt/1" if receipt is not None else "cdcrd.interchange-validation/1"
+    schema = ("cdcrd.operation-receipt/1" if receipt is not None
+              else "cdcrd.interchange-validation/1")
     if (not isinstance(result, dict) or result.get("schema") != schema
             or type(result.get("ok")) is not bool
             or process.returncode != (0 if result["ok"] else 1)):
