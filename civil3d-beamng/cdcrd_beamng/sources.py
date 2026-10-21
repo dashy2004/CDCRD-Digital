@@ -108,7 +108,8 @@ def validate_guide(data):
             type(value) not in (int, float) for value in stations
         ):
             raise ValueError("Road guide station_m must match node count")
-        stations = np.asarray(stations, dtype=np.float64)
+        stations = numeric_array([[value] for value in stations], 1,
+                                 "Road guide stations").reshape(-1)
         if not np.isfinite(stations).all() or (np.diff(stations) <= 0).any():
             raise ValueError("Road guide stations must be finite and increasing")
     return nodes

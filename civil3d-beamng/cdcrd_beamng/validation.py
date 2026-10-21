@@ -20,7 +20,7 @@ def validate_interchange(**sources):
         return report
     terrain, road = bundle.terrain, bundle.road
     report.update(ok=True, source_schema=bundle.schema, units="m", coordinate_order="E,N,Z",
-                  source_identity_checked=bundle.source_identity_checked,
+                  declared_source_ids_checked=bundle.source_identity_checked,
                   bounds_abs_m={"min": np.minimum(terrain.vertices.min(axis=0),
                                                   road.vertices.min(axis=0)).tolist(),
                                 "max": np.maximum(terrain.vertices.max(axis=0),
