@@ -53,6 +53,11 @@ Las opciones `--terrain-landxml`, `--terrain-surface`, `--road-landxml`,
 `--road-surface` y `--road-guide` conservan el contrato del conversor.
 [Comprobaciones y límites](../civil3d-beamng/docs/VALIDACION-INTERCAMBIOS.md).
 
+Añada `--recibo RUTA.json` para guardar un recibo nuevo de la validación, con
+archivos, hashes y resultado. `--evidencia ARCHIVO` adjunta evidencia existente
+con comprobación de hash, sin certificar sus afirmaciones.
+[Formato y límites de los recibos](../civil3d-beamng/docs/RECIBOS.md).
+
 | Operación | Implementación y alcance |
 |---|---|
 | JSON → DXF | ezdxf: polígonos, capas, cotas nativas y notas; unidades `m` o `mm` |
