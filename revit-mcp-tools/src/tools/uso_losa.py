@@ -1,23 +1,26 @@
 # -*- coding: utf-8 -*-
-"""uso_losa: lee las losas esquematicas (marker en Comments) y su Uso_Losa, y
-opcionalmente asigna el uso de la Tabla 4 por Mark (plugin-losas).
+"""uso_losa: lee las losas esquematicas (marker en Comments) con su Uso_Losa y
+Tipo_Losa_PM, y opcionalmente asigna por Mark el uso de la Tabla 4 y/o el tipo
+de losa segun apoyos calculado por plugin-losas.
 
 Parametros (P):
   marker:   prefijo de Comments de las losas a listar (default "MCP:LOSA-ESQ").
   asignar:  {Mark: id_uso_tabla4} a escribir en el parametro Uso_Losa (opcional).
-  crear_parametro: True para crear el parametro de proyecto Uso_Losa (texto,
-            instancia, categoria Floors) si el modelo no lo tiene (default False:
-            sin el parametro y sin esta bandera, asignar falla con aviso).
+  escribir_tipos: {Mark: texto} a escribir en Tipo_Losa_PM (opcional; el texto
+            sale de `plugin-losas tipos` -> tipos_pm.json["asignar_en_revit"]:
+            codigo DL por apoyos + bordes empotrados).
+  crear_parametro: True para crear los parametros de proyecto que falten
+            (texto, instancia, categoria Floors). Sin la bandera y sin el
+            parametro, la escritura falla con aviso (default False).
 
-Devuelve una fila por losa (mark, nivel, lx/ly/area en m, espesor, uso_losa) y
-los conteos de la asignacion. Los ids de uso son los de plugin-losas
-(usos_tabla4: Tabla 4 del CDCRD, datos/machine/cargas_vivas.json); esta tool
-no valida el id contra la tabla (eso lo hace el panel/CLI del plugin), solo
-escribe texto. Escritura en UNA transaccion con rollback; no guarda (usar
-revit_guardar_modelo despues).
+Devuelve una fila por losa (mark, nivel, lx/ly/area en m, espesor, uso_losa,
+tipo_losa_pm) y los conteos. Esta tool no calcula el tipo (eso es de
+plugin_losas.tipos_pm, testeado): solo escribe texto. Escritura en UNA
+transaccion con rollback; no guarda (usar revit_guardar_modelo despues).
 """
 
 PARAM_USO = "Uso_Losa"
+PARAM_TIPO = "Tipo_Losa_PM"
 GRUPO_PARAMS = "CDCRD plugin-losas"
 
 
@@ -45,8 +48,8 @@ def _espesor_m(doc, el):
     return None
 
 
-def _uso_actual(el):
-    p = el.LookupParameter(PARAM_USO)
+def _texto_param(el, nombre):
+    p = el.LookupParameter(nombre)
     if p is None:
         return None
     try:
@@ -55,9 +58,16 @@ def _uso_actual(el):
         return None
 
 
-def _crear_parametro_uso(doc, DB):
-    """Parametro de proyecto Uso_Losa (texto, instancia) sobre Floors, via
-    archivo de parametros compartidos temporal (el mecanismo estandar)."""
+def _mark_de(el):
+    p = el.get_Parameter(DB.BuiltInParameter.ALL_MODEL_MARK)
+    if p is None:
+        return None
+    return p.AsString()
+
+
+def _crear_parametro_texto(doc, DB, nombre):
+    """Parametro de proyecto de texto (instancia) sobre Floors, via archivo de
+    parametros compartidos temporal (el mecanismo estandar)."""
     import os
     import tempfile
     app = doc.Application
@@ -76,9 +86,9 @@ def _crear_parametro_uso(doc, DB):
                 break
         if grupo is None:
             grupo = archivo.Groups.Create(GRUPO_PARAMS)
-        definicion = grupo.Definitions.get_Item(PARAM_USO)
+        definicion = grupo.Definitions.get_Item(nombre)
         if definicion is None:
-            opciones = DB.ExternalDefinitionCreationOptions(PARAM_USO, DB.SpecTypeId.String.Text)
+            opciones = DB.ExternalDefinitionCreationOptions(nombre, DB.SpecTypeId.String.Text)
             definicion = grupo.Definitions.Create(opciones)
         cats = app.Create.NewCategorySet()
         cats.Insert(doc.Settings.Categories.get_Item(DB.BuiltInCategory.OST_Floors))
@@ -95,6 +105,7 @@ def _crear_parametro_uso(doc, DB):
 def run(doc, uidoc, DB, P):
     marker = P.get("marker") or "MCP:LOSA-ESQ"
     asignar = P.get("asignar") or {}
+    escribir_tipos = P.get("escribir_tipos") or {}
     crear = bool(P.get("crear_parametro"))
     e = errs()
 
@@ -103,37 +114,48 @@ def run(doc, uidoc, DB, P):
     if not losas:
         raise Exception("ninguna losa con Comments '%s*'" % marker)
 
-    tiene_param = losas[0].LookupParameter(PARAM_USO) is not None
-    parametro_creado = False
+    parametros_creados = []
     asignadas = 0
+    tipos_escritos = 0
 
-    if asignar:
+    if asignar or escribir_tipos:
+        marks_modelo = {}
+        for f in losas:
+            mk = _mark_de(f)
+            if mk:
+                marks_modelo[mk] = f
+        faltan = [k for k in list(asignar.keys()) + list(escribir_tipos.keys())
+                  if k not in marks_modelo]
+        if faltan:
+            raise Exception("marks sin losa en el modelo: %s" % sorted(set(faltan)))
+
         def _escribir():
-            creado = False
-            if not tiene_param:
+            creados = []
+            pendientes = []
+            if asignar and losas[0].LookupParameter(PARAM_USO) is None:
+                pendientes.append(PARAM_USO)
+            if escribir_tipos and losas[0].LookupParameter(PARAM_TIPO) is None:
+                pendientes.append(PARAM_TIPO)
+            if pendientes:
                 if not crear:
-                    raise Exception("el modelo no tiene el parametro %s; "
-                                    "repetir con crear_parametro=true" % PARAM_USO)
-                _crear_parametro_uso(doc, DB)
-                creado = True
-            doc.Regenerate()
-            n = 0
-            for f in losas:
-                mk = None
-                p_mark = f.get_Parameter(DB.BuiltInParameter.ALL_MODEL_MARK)
-                if p_mark is not None:
-                    mk = p_mark.AsString()
-                if mk and mk in asignar:
+                    raise Exception("faltan los parametros %s; repetir con "
+                                    "crear_parametro=true" % pendientes)
+                for nombre in pendientes:
+                    _crear_parametro_texto(doc, DB, nombre)
+                    creados.append(nombre)
+                doc.Regenerate()
+            n_uso = 0
+            n_tipo = 0
+            for mk, f in marks_modelo.items():
+                if mk in asignar:
                     set_param(f, PARAM_USO, asignar[mk])
-                    n += 1
-            faltan = [k for k in asignar
-                      if k not in [x.get_Parameter(DB.BuiltInParameter.ALL_MODEL_MARK).AsString()
-                                   for x in losas]]
-            if faltan:
-                raise Exception("marks sin losa en el modelo: %s (rollback)" % faltan)
-            return n, creado
-        asignadas, parametro_creado = tx(doc, "plugin-losas: Uso_Losa", _escribir)
-        tiene_param = True
+                    n_uso += 1
+                if mk in escribir_tipos:
+                    set_param(f, PARAM_TIPO, escribir_tipos[mk])
+                    n_tipo += 1
+            return n_uso, n_tipo, creados
+        asignadas, tipos_escritos, parametros_creados = \
+            tx(doc, "plugin-losas: Uso_Losa / Tipo_Losa_PM", _escribir)
 
     filas = []
     for f in losas:
@@ -145,19 +167,17 @@ def run(doc, uidoc, DB, P):
                 area = round(p.AsDouble() * 0.09290304, 2)
         except Exception:
             e["n"] += 1
-        mk = None
-        try:
-            mk = f.get_Parameter(DB.BuiltInParameter.ALL_MODEL_MARK).AsString()
-        except Exception:
-            e["n"] += 1
-        filas.append({"revit_id": eidv(f.Id), "mark": mk,
+        filas.append({"revit_id": eidv(f.Id), "mark": _mark_de(f),
                       "nivel": level_name(doc, f.LevelId),
                       "lx": lx, "ly": ly, "z_tope": z,
                       "area_m2": area, "espesor_m": _espesor_m(doc, f),
-                      "uso_losa": _uso_actual(f),
+                      "uso_losa": _texto_param(f, PARAM_USO),
+                      "tipo_losa_pm": _texto_param(f, PARAM_TIPO),
                       "tipo_revit": type_name(doc, f)})
 
     return {"marker": marker, "losas": filas, "total": len(filas),
-            "parametro_uso_existe": tiene_param,
-            "parametro_creado": parametro_creado,
-            "asignadas": asignadas, "errores": e}
+            "parametro_uso_existe": losas[0].LookupParameter(PARAM_USO) is not None,
+            "parametro_tipo_existe": losas[0].LookupParameter(PARAM_TIPO) is not None,
+            "parametros_creados": parametros_creados,
+            "asignadas": asignadas, "tipos_escritos": tipos_escritos,
+            "errores": e}

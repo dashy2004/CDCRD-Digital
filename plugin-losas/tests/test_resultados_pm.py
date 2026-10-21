@@ -61,6 +61,7 @@ class TestDtoVisor(unittest.TestCase):
         self.assertEqual(dto.panos[0]["codigo_dl"], 22)
         self.assertEqual(dto.panos[1]["armaduras"]["apoyo"], "Ø1/2\" @0.22")
 
+        self.assertEqual(dto.campos["codigo_dl"]["valores"]["LV1"], 22.0)
         mfx = dto.campos["mfx"]
         self.assertEqual(mfx.get("unidad"), "ton·m/m")
         self.assertAlmostEqual(mfx["min"], 0.95)

@@ -25,6 +25,7 @@ CREDITOS = [
 ]
 
 CAMPOS_VISOR = {
+    "codigo_dl": ("Tipo de losa según apoyos (código DL)", "código"),
     "mfx": ("PM Mf según X (vano)", "ton·m/m"),
     "mfy": ("PM Mf según Y (vano)", "ton·m/m"),
     "msx": ("PM Ms según X (apoyo)", "ton·m/m"),
@@ -95,6 +96,7 @@ def dto_visor(proyecto: dict, resultados: dict, nombre: str = "Proyecto Ejemplo"
                 "apoyo": (r.get("franja_apoyo") or {}).get("disponer", ""),
             },
         }
+        valores["codigo_dl"][mark] = float(m.get("codigo_dl") or 0)
         valores["mfx"][mark] = m.get("mfx", 0.0)
         valores["mfy"][mark] = m.get("mfy", 0.0)
         valores["msx"][mark] = m.get("msx", 0.0)

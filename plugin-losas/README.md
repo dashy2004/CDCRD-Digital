@@ -38,6 +38,7 @@ el `.DL` de `dl_io.py`, las cargas de `cargas.py` y el informe de
 | Filas del panel (mark/dimensiones/uso editable) + tabla Excel + `usos.json` | `extraccion.py` | testeado |
 | Lector DXF de recuadros + numeración (AutoCAD) | `acad_dxf.py` | testeado (fixture inventado) |
 | Plan paramétrico de aligeradas: nervios, ejes locales, conexiones | `aligeradas.py` | testeado |
+| Tipo de losa según apoyos (código DL) + payload para Revit | `tipos_pm.py` | testeado |
 | Visor Pieper-Martens (DTO + HTML offline) | `resultados_pm.py` + `viz/` | testeado |
 | CLI `plugin-losas` (tabla / usos / aligeradas / visor) | `cli.py` | testeado |
 | Tool MCP `uso_losa` (listar/asignar Uso_Losa en Revit) | `../revit-mcp-tools/src/tools/uso_losa.py` | **escrita, sin corrida en vivo** |
@@ -61,6 +62,13 @@ desplegable con las 45 opciones.
    `exportar_proyecto` con `marker="MCP:LOSA-ESQ"` → `proyecto.json`; o usar la
    tool `uso_losa` para listar/asignar `Uso_Losa` por Mark. El pushbutton
    `Uso_Losa` (pyRevit) hace lo mismo con ventana y desplegable.
+
+   `plugin-losas tipos --proyecto proyecto.json [--usos usos.json]` determina
+   el **tipo de losa según el tipo de apoyo** (el código TIPO del `.DL`:
+   bordes empotrados por continuidad con el vecino, un vuelo vecino no
+   empotra) y deja `tipos_pm.json` con el payload `asignar_en_revit`; la tool
+   `uso_losa` lo escribe en el parámetro `Tipo_Losa_PM`, visible en la paleta
+   de Propiedades de Revit.
 2. En local (sin BIM vivo):
 
    ```bash

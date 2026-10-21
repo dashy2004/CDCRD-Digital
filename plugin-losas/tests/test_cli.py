@@ -70,6 +70,19 @@ class TestCli(unittest.TestCase):
                 html = f.read()
             self.assertIn("F. Perdomo", html)
 
+    def test_tipos_por_apoyo(self):
+        with tempfile.TemporaryDirectory() as d:
+            proyecto = _escribir(EXPORT_INVENTADO, d, "proyecto.json")
+            usos = _escribir({"LE6": {"es_vuelo": True, "direccion": "1D"}}, d, "usos.json")
+            salida = os.path.join(d, "salidas")
+            rc = main(["tipos", "--proyecto", proyecto, "--usos", usos, "--salida", salida])
+            self.assertEqual(rc, 0)
+            with open(os.path.join(salida, "tipos_pm.json"), encoding="utf-8") as f:
+                datos = json.load(f)
+            self.assertEqual(datos["tipos"]["LE1"]["codigo"], 22)   # el vuelo no empotra
+            self.assertEqual(datos["tipos"]["LE6"]["codigo"], 72)
+            self.assertIn("LE2", datos["asignar_en_revit"])
+
     def test_usos_para_el_lisp(self):
         with tempfile.TemporaryDirectory() as d:
             rc = main(["usos", "--salida", d])

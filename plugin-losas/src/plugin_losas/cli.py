@@ -91,6 +91,25 @@ def _cmd_aligeradas(args) -> int:
     return 0
 
 
+def _cmd_tipos(args) -> int:
+    from puente_losas.contrato import aplicar_usos, panos_desde_dict
+
+    from plugin_losas.tipos_pm import escribir_tipos_json, tipos_de_panos
+
+    panos = panos_desde_dict(_cargar_json(args.proyecto))
+    if args.usos:
+        panos = aplicar_usos(panos, _cargar_json(args.usos))
+    tipos = tipos_de_panos(panos)
+    os.makedirs(args.salida, exist_ok=True)
+    ruta = os.path.join(args.salida, "tipos_pm.json")
+    escribir_tipos_json(tipos, ruta)
+    print(f"{len(tipos)} losas con tipo por apoyos (código DL).")
+    for t in tipos.values():
+        print(f"  {t.mark}: {t.texto_param}")
+    print(f"  {ruta}")
+    return 0
+
+
 def _cmd_usos(args) -> int:
     tabla = cargar_tabla4(args.tabla4)
     os.makedirs(args.salida, exist_ok=True)
@@ -141,6 +160,12 @@ def main(argv: list[str] | None = None) -> int:
     a.add_argument("--secciones", help="JSON {mark: seccion} para fijar secciones a mano")
     a.add_argument("--salida", default="salidas")
     a.set_defaults(func=_cmd_aligeradas)
+
+    tp = sub.add_parser("tipos", help="tipo de losa según apoyos (código DL) + payload para Revit")
+    tp.add_argument("--proyecto", required=True)
+    tp.add_argument("--usos", help="usos.json del puente (marca vuelos: cambian el tipo)")
+    tp.add_argument("--salida", default="salidas")
+    tp.set_defaults(func=_cmd_tipos)
 
     u = sub.add_parser("usos", help="lista numerada de los usos Tabla 4 (para el LISP/panel)")
     u.add_argument("--tabla4", default=None)
