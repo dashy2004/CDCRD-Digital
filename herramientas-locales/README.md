@@ -1,7 +1,7 @@
 # Herramientas locales AI + BIM + CDCRD
 
 Núcleo gratuito ejecutable en Windows, separado de las sesiones Revit/ETABS/SAFE.
-Incluye una CLI y un servidor MCP de 10 herramientas para que un cliente de IA
+Incluye una CLI y un servidor MCP de 12 herramientas para que un cliente de IA
 trabaje con archivos del repo. No incluye un modelo de IA ni una interfaz web.
 
 ## Instalación
@@ -25,6 +25,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\herramientas-locales\insta
 Para otros sistemas, desde esta carpeta: `uv sync --locked --python 3.13`,
 seguido de `uv run --frozen cdcrd-local doctor`. La instalación y las pruebas
 registradas en [VERIFICACION.md](VERIFICACION.md) corresponden a Windows.
+
+## Catalogo y diagnostico del ecosistema
+
+`capacidades` y `estado` comparten contratos de 12 modulos y reutilizan `doctor`.
+El diagnostico es offline: no activa aplicaciones ni declara conexiones vivas.
+[Comandos, estados, configuracion y limites](CAPACIDADES.md).
+
+```powershell
+.\herramientas-locales\cdcrd.ps1 capacidades --modulo civil3d
+.\herramientas-locales\cdcrd.ps1 estado --json
+```
 
 ## Funciones disponibles
 
@@ -123,7 +134,8 @@ esta máquina. Añadir la entrada `cdcrd-local` a la configuración MCP del clie
 que utilice servidores **stdio**, conservando sus entradas existentes. Esta
 instalación genera el fragmento; no activa automáticamente todos los clientes.
 
-Herramientas: `entorno_diagnosticar`, `cdcrd_buscar`, `cdcrd_verificar`,
+Herramientas: `ecosistema_capacidades`, `ecosistema_estado`,
+`entorno_diagnosticar`, `cdcrd_buscar`, `cdcrd_verificar`,
 `cad_generar_plano`, `cad_inspeccionar`, `cad_previsualizar`, `ifc_inspeccionar`,
 `ifc_validar_ids`, `pdf_inspeccionar`, `pdf_previsualizar`.
 
