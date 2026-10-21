@@ -40,6 +40,9 @@ el `.DL` de `dl_io.py`, las cargas de `cargas.py` y el informe de
 | Plan paramétrico de aligeradas: nervios, ejes locales, conexiones | `aligeradas.py` | testeado |
 | Tipo de losa según apoyos (código DL) + payload para Revit | `tipos_pm.py` | testeado |
 | Visor Pieper-Martens (DTO + HTML offline) | `resultados_pm.py` + `viz/` | testeado |
+| Acero comercial PM (barra # y separación) | `acero_pm.py` | testeado |
+| Trazos del armado en planta (principal/temperatura/bastones L/4) | `plano_acero.py` | testeado |
+| Dibujo en la planta de Revit + tabla de detalles (schedule) | `../revit-mcp-tools/src/tools/acero_losas_plano.py` | **escrita, sin corrida en vivo** |
 | CLI `plugin-losas` (tabla / usos / aligeradas / visor) | `cli.py` | testeado |
 | Tool MCP `uso_losa` (listar/asignar Uso_Losa en Revit) | `../revit-mcp-tools/src/tools/uso_losa.py` | **escrita, sin corrida en vivo** |
 | Panel pyRevit con desplegable (ventana arrastrable) | `revit/PanelLosas.extension/` | **escrito, sin corrida en vivo** |

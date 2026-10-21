@@ -133,6 +133,24 @@ def _cmd_renumerar(args) -> int:
     return 0
 
 
+def _cmd_plano(args) -> int:
+    from plugin_losas.plano_acero import escribir_plano_acero, plano_acero
+
+    proyecto = _cargar_json(args.proyecto)
+    resultados = _cargar_json(args.resultados)
+    acero = _cargar_json(args.acero) if args.acero else None
+    editados = _cargar_json(args.editados) if args.editados else None
+    plan = plano_acero(proyecto, resultados, acero, editados)
+    os.makedirs(args.salida, exist_ok=True)
+    ruta = os.path.join(args.salida, "plan_acero.json")
+    escribir_plano_acero(plan, ruta)
+    n_trazos = sum(len(x["trazos"]) for x in plan["losas"]) + len(plan["apoyos"])
+    print(f"Plano de acero: {len(plan['losas'])} losas, {len(plan['apoyos'])} bastones "
+          f"de apoyo, {n_trazos} trazos.")
+    print(f"  {ruta}")
+    return 0
+
+
 def _cmd_acero(args) -> int:
     from plugin_losas.acero_pm import acero_pm_de_resultados, escribir_acero_pm
 
@@ -245,6 +263,14 @@ def main(argv: list[str] | None = None) -> int:
     tp.add_argument("--usos", help="usos.json del puente (marca vuelos: cambian el tipo)")
     tp.add_argument("--salida", default="salidas")
     tp.set_defaults(func=_cmd_tipos)
+
+    pl = sub.add_parser("plano", help="trazos del armado en planta (principal/temp/bastones)")
+    pl.add_argument("--proyecto", required=True)
+    pl.add_argument("--resultados", required=True)
+    pl.add_argument("--acero", help="acero_pm.json (armado comercial calculado)")
+    pl.add_argument("--editados", help="JSON {mark: {x,y,apoyo}} con el acero editado (manda)")
+    pl.add_argument("--salida", default="salidas")
+    pl.set_defaults(func=_cmd_plano)
 
     ac = sub.add_parser("acero", help="acero comercial PM (barra y separación) de resultados.json")
     ac.add_argument("--resultados", required=True)
