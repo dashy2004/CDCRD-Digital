@@ -124,8 +124,9 @@
     const clave = selCampo.value || Object.keys(DATOS.campos)[0];
     const campo = DATOS.campos[clave];
     const rango = (campo.max - campo.min) || 1;
-    document.getElementById("leyenda-min").textContent = campo.min.toFixed(3);
-    document.getElementById("leyenda-max").textContent = campo.max.toFixed(3);
+    const dec = clave === "codigo_dl" ? 0 : 3;   // el código DL es entero
+    document.getElementById("leyenda-min").textContent = campo.min.toFixed(dec);
+    document.getElementById("leyenda-max").textContent = campo.max.toFixed(dec);
 
     const margen = 40;
     const w = lienzo.clientWidth || 960, h = lienzo.clientHeight || 640;
@@ -144,7 +145,7 @@
              '" data-mark="' + p.mark + '"/>';
       svg += '<text class="mark" x="' + px(cx) + '" y="' + (py(cy) - 4) + '">' + p.mark + "</text>";
       svg += '<text class="valor" x="' + px(cx) + '" y="' + (py(cy) + 12) + '">' +
-             v.toFixed(3) + "</text>";
+             v.toFixed(dec) + "</text>";
     }
     if (verApoyos.checked) {
       for (const a of DATOS.apoyos) {
