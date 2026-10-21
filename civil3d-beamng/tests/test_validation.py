@@ -48,7 +48,7 @@ def test_snapshot_report_is_read_only_and_does_not_claim_consumer_validation(sna
     assert result["module"] == "beamng" and result["ok"]
     assert result["units"] == "m" and result["coordinate_order"] == "E,N,Z"
     assert result["counts"]["road_triangles"] == 2
-    assert result["source_identity_checked"] is True
+    assert result["declared_source_ids_checked"] is True
     assert result["consumer_validation"] == "not_checked"
     assert result["crs"] == "not_verified"
     assert result["bounds_abs_m"]["min"] == [1000, 2000, 10]
@@ -83,7 +83,7 @@ def test_boundary_references_must_match_visible_mesh(snapshot, edges):
 def test_optional_legacy_metadata_is_distinguished_from_verified_identity(snapshot):
     change(snapshot, lambda d: d.pop("sources"))
     result = validate(snapshot=snapshot)
-    assert result["ok"] and result["source_identity_checked"] is False
+    assert result["ok"] and result["declared_source_ids_checked"] is False
     assert result["warnings"]
     change(snapshot, lambda d: d.update(sources={"terrain_handle": "A1"}))
     assert not validate(snapshot=snapshot)["ok"]
@@ -127,7 +127,7 @@ def landxml(tmp_path, points=None, face="p1 p2 p3", invisible="0", unit="meter")
 def test_landxml_reports_en_z_and_scoped_point_ids(tmp_path):
     path = landxml(tmp_path)
     result = validate(terrain_landxml=path, road_landxml=path)
-    assert result["ok"] and result["source_identity_checked"] is False
+    assert result["ok"] and result["declared_source_ids_checked"] is False
     assert result["bounds_abs_m"]["max"] == [1010, 2010, 12]
 
 
@@ -152,6 +152,22 @@ def test_invalid_files_and_mixed_modes_produce_failed_reports(snapshot):
     assert not validate(snapshot=snapshot)["ok"]
     snapshot.write_text('<!DOCTYPE LandXML [<!ENTITY e SYSTEM "file:///absent">]><LandXML>&e;</LandXML>')
     assert not validate(terrain_landxml=snapshot, road_landxml=snapshot)["ok"]
+
+
+def test_out_of_float64_station_is_a_validation_failure(snapshot):
+    change(snapshot, lambda d: d.update(alignment={
+        "nodes_abs_m": [[1001, 2001, 10, 4], [1002, 2002, 10, 4]],
+        "station_m": [0, 10 ** 400]}))
+    assert not validate(snapshot=snapshot)["ok"]
+
+
+def test_external_guide_is_checked_by_the_same_reader(snapshot):
+    guide = snapshot.parent / "guide.json"
+    guide.write_text(json.dumps({"nodes_abs_m": [[1001, 2001, 10, 4], [1002, 2002, 10, 4]],
+                                "station_m": [0, 2]}))
+    assert validate(snapshot=snapshot, road_guide=guide)["counts"]["guide_nodes"] == 2
+    guide.write_text('{"nodes_abs_m": []}')
+    assert not validate(snapshot=snapshot, road_guide=guide)["ok"]
 
 
 def cli(module, cwd, *args):
