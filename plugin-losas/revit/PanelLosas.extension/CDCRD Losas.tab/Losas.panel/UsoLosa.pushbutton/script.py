@@ -31,6 +31,11 @@ import os
 import clr
 clr.AddReference("System.Windows.Forms")
 clr.AddReference("System.Drawing")
+try:
+    # .NET Core (pyRevit 6.x): Process/ProcessStartInfo viven en este ensamblado
+    clr.AddReference("System.Diagnostics.Process")
+except Exception:
+    pass  # .NET Framework: ya vienen con System
 from System.Diagnostics import Process, ProcessStartInfo  # noqa: E402
 from System.Drawing import Size  # noqa: E402
 from System.Windows.Forms import (Button, DataGridView,                 # noqa: E402
