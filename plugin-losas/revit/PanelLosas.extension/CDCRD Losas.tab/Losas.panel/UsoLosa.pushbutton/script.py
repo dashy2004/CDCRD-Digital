@@ -243,6 +243,33 @@ def _exec_tool(raiz, nombres, P_tool, doc):
     return ns["run"](doc, revit.uidoc, DB, P_tool)
 
 
+def _registrar_error(texto):
+    import tempfile
+    try:
+        ruta_log = os.path.join(tempfile.gettempdir(), "plugin_losas_panel_error.log")
+        with io.open(ruta_log, "a", encoding="utf-8") as f:
+            import datetime
+            f.write("\n=== %s ===\n%s\n" % (datetime.datetime.now().isoformat(), texto))
+        return ruta_log
+    except Exception:
+        return "(no se pudo escribir el log)"
+
+
+def _seguro(metodo):
+    """Blinda un handler de boton: el traceback va al log + dialogo legible,
+    nunca al 'Unhandled exception' crudo de WinForms."""
+    def envoltura(self, remitente, evento):
+        try:
+            metodo(self, remitente, evento)
+        except Exception:
+            import traceback
+            texto = traceback.format_exc()
+            ruta = _registrar_error(texto)
+            MessageBox.Show("Error del panel (anotado en %s):\n\n%s" %
+                            (ruta, texto[-1200:]))
+    return envoltura
+
+
 # ----------------------------- esquema de aceros -----------------------------
 class EsquemaAceros(Form):
     """Mini esquema (como en los planos): que acero es cual."""
@@ -459,6 +486,7 @@ class PanelUsoLosa(Form):
             MessageBox.Show("Error (rollback): %s" % ex)
             return 0
 
+    @_seguro
     def guardar(self, remitente, evento):
         escrituras = {}
         usos = self._seleccion()
@@ -486,9 +514,11 @@ class PanelUsoLosa(Form):
                         (n, ", ".join(sorted(escrituras.keys()))))
 
     # ----------------------------- acciones -----------------------------
+    @_seguro
     def esquema(self, remitente, evento):
         EsquemaAceros().ShowDialog(self)
 
+    @_seguro
     def calcular(self, remitente, evento):
         if self.carpeta is None:
             dialogo = FolderBrowserDialog()
@@ -585,6 +615,7 @@ class PanelUsoLosa(Form):
                         "Salidas: %s\nEl .rvt NO se guarda a disco." %
                         (len(self.filas), n, carpeta))
 
+    @_seguro
     def dibujar_plano(self, remitente, evento):
         if self.carpeta is None or not os.path.isfile(
                 os.path.join(self.carpeta, "resultados.json")):
@@ -624,6 +655,7 @@ class PanelUsoLosa(Form):
                         ("\n".join(partes),
                          (res.get("tabla") or {}).get("nombre") or "sin cambios"))
 
+    @_seguro
     def abrir_visor(self, remitente, evento):
         if not self.visores:
             MessageBox.Show("Todavia no hay visor: usa CALCULAR.")
