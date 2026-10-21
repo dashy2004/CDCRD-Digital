@@ -16,18 +16,26 @@ Compatibilidad con otras versiones o plantillas, curvas de alineamiento, límite
 
 La prueba de sesión instalada se realiza manualmente con el ejemplo reproducible: los tests Python por sí solos no prueban una conexión con Civil 3D.
 
-## Comprobación de unidades pendiente en la demostración R2
+## Corrección 0.2.1 — 2026-10-20
 
-La etapa COGO/Survey detectó que una plantilla podía tener INSUNITS=6 y
-DrawingUnits=Feet, además de etiquetas en pies. Se corrigió y verificó la nueva
-demostración COGO. La copia privada de trabajo sí tiene DrawingUnits=Meters.
-La demostración sintética histórica de terreno R2 todavía no se ha inspeccionado
-para estas dos configuraciones adicionales. Sus comparaciones numéricas y la
-persistencia permanecen documentadas, pero la presentación métrica integral de
-esa demostración queda pendiente.
+La inspección nativa de una copia de la demo histórica confirmó INSUNITS=Meters, Civil DrawingUnits=Feet y expresiones Uft en los ejes y el título de estación. La corrección de las unidades y los estilos no escaló coordenadas: COGO, triángulos, volúmenes, alineamientos y puntos de las secciones permanecieron idénticos.
 
-El guard del plugin 0.2.0 solo comprueba INSUNITS. Antes de cerrar esta entrega:
-comprobar Civil DrawingUnits y unidades de estilos en una copia de la demo R2,
-añadir el guard correspondiente y repetir la comprobación nativa con una nueva
-versión del ensamblado. No interpretar una compilación como prueba de la DLL
-cargada, ni reiniciar una sesión que contenga un original con cambios sin guardar.
+- **23 pruebas Python**: las 17 geométricas previas y seis de recibos/unidades. Se rechazan recibos antiguos sin Civil DrawingUnits, discrepancias entre configuraciones, estilos imperiales y títulos de estación en pies aunque sus ejes sean métricos.
+- **Compilación Release x64**: cero errores y advertencias contra Civil 3D 2027.
+- **Cuatro rechazos nativos** de la DLL 0.2.1: Build y Sections con INSUNITS=Meters/Civil=Feet, y con INSUNITS=Feet/Civil=Meters. No se crearon objetos; la comparación de geometría posterior con el estado inicial fue exacta.
+- **Auditoría diagnóstica**: funciona aunque las unidades sean incompatibles e informa ambas configuraciones y expresiones de los estilos usados por las vistas.
+- **Demo nueva**: creada con la versión corregida; ocho superficies, dos alineamientos, 194 líneas, 485 secciones y 14 vistas. Volúmenes de corte/relleno 276 m³ y mixto 58/9 m³ por lado, dentro de 0,0001 m³.
+- **Persistencia**: se guardaron, cerraron y reabrieron tanto la copia corregida como la demo nueva. La comparación incluye geometría, ambas unidades, títulos y cotas de sección.
+- **Inspección visual**: PDF exportado por Civil 3D; la estación de 12 m ya muestra 0+12.00 m, no su equivalente en pies. La escala de anotación se ajustó explícitamente a 0,1 sólo en las demos; el plugin no modifica la escala global del usuario.
+
+Resumen saneado y SHA-256 de la DLL: [native-units-verification.json](native-units-verification.json). La galería 0.2.0 y su evidencia histórica se conservan; no deben usarse como prueba de verificación métrica integral. Esta revisión verifica los ejes y el título de las vistas creadas, no todos los estilos y etiquetas de una plantilla arbitraria.
+
+### Repetir la regresión en una copia sintética
+
+1. Preparar una demo mediante `examples/prepare_demo.py`; configurar las dos unidades en metros y ejecutar las cinco solicitudes con el ensamblado 0.2.1.
+2. Auditar; guardar/cerrar/reabrir y ejecutar otra auditoría con runId nuevo. Comparar con `examples/verify_demo.py`.
+3. Sobre una copia de ensayo, configurar Civil DrawingUnits=Feet manteniendo INSUNITS=6. Ejecutar Build y Sections con recibos nuevos: ambos deben rechazar Civil DrawingUnits antes de crear objetos. `audit` debe seguir disponible.
+4. Configurar Civil=Meters e INSUNITS=Feet. Repetir: el rechazo debe indicar INSUNITS. Restaurar ambas unidades, auditar y comparar geometría con el estado inicial.
+5. Revisar visualmente cotas **y estación del título**, además de la escala de anotación. Nunca corregir un proyecto real escalándolo automáticamente por el mero valor de INSUNITS.
+
+![Sección sintética: estación y cotas en metros, exportación PDF nativa](images/unidades-metricas.png)
