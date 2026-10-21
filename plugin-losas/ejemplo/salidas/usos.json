@@ -1,0 +1,20 @@
+{
+ "LE1": {
+  "uso": "entrepisos"
+ },
+ "LE2": {
+  "uso": "comun"
+ },
+ "LE3": {
+  "uso": "entrepisos"
+ },
+ "LE4": {
+  "uso": "gimnasio"
+ },
+ "LE5": {
+  "uso": "gimnasio"
+ },
+ "LE6": {
+  "es_vuelo": true
+ }
+}

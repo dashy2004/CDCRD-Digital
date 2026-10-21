@@ -1,0 +1,554 @@
+{
+ "meta": {
+  "proyecto": "Edificio Ejemplo PL",
+  "fecha": "2026-10-21",
+  "generador": "puente-losas/etabs_plan",
+  "unidades": "Ton, m, C",
+  "reglas": "Prompt 'Modelar en ETABS desde AutoCAD' — Ing. Arlette Ramírez, 14/10/2026",
+  "desviacion_max_ajuste_005_m": 0.0,
+  "requisitos": [
+   "Reclamar el turno/lock de ETABS en _coordinacion/locks antes de ejecutar.",
+   "Ejecutar los pasos EN ORDEN; confirmar cada 'verificar' con describe_oapi.",
+   "Releer del modelo cada asignación (un ret=0 no prueba que ETABS la conservó).",
+   "NO correr el análisis: el flujo se detiene antes de Run (regla §22)."
+  ]
+ },
+ "pasos": [
+  {
+   "tool": "set_units",
+   "args": {
+    "units": "Ton, m, C"
+   },
+   "nota": "Unidades de trabajo del flujo de Arlette; fijar ANTES de crear nada."
+  },
+  {
+   "tool": "define_concrete_material",
+   "args": {
+    "name": "C210",
+    "fc": 2100.0,
+    "E": 2188197.76,
+    "poisson": 0.2,
+    "unit_weight": 2.4028
+   },
+   "nota": "C210 del prompt (tonf/m²): f'c 2100, E 2 188 197.76, peso 2.4028 tonf/m³."
+  },
+  {
+   "tool": "add_load_pattern",
+   "args": {
+    "name": "Dead",
+    "pattern_type": "muerta",
+    "self_weight_multiplier": 1.0
+   }
+  },
+  {
+   "tool": "add_load_pattern",
+   "args": {
+    "name": "Live",
+    "pattern_type": "viva",
+    "self_weight_multiplier": 0.0
+   }
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "PropArea",
+    "method": "SetSlab",
+    "args_nombrados": {
+     "Name": "L20",
+     "SlabType": "Slab",
+     "ShellType": "ShellThick",
+     "MatProp": "C210",
+     "Thickness": 0.2
+    }
+   },
+   "nota": "Convertir los enums a sus enteros reales ANTES de llamar; ShellThick es obligatorio para TODAS las losas (nunca Membrane/Thin).",
+   "verificar": "describe_oapi('PropArea','SetSlab'); enums eSlabType y eShellType"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "PropArea",
+    "method": "SetSlab",
+    "args_nombrados": {
+     "Name": "L25A-2D",
+     "SlabType": "Waffle",
+     "ShellType": "ShellThick",
+     "MatProp": "C210",
+     "Thickness": 0.25
+    }
+   },
+   "nota": "Convertir los enums a sus enteros reales ANTES de llamar; ShellThick es obligatorio para TODAS las losas (nunca Membrane/Thin).",
+   "verificar": "describe_oapi('PropArea','SetSlab'); enums eSlabType y eShellType"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "PropArea",
+    "method": "SetSlabWaffle",
+    "args_nombrados": {
+     "Name": "L25A-2D",
+     "OverallDepth": 0.25,
+     "SlabThickness": 0.05,
+     "StemWidthTop": 0.2,
+     "StemWidthBot": 0.2,
+     "RibSpacing": 0.65
+    }
+   },
+   "nota": "Nervios de la biblioteca: anchos iguales arriba/abajo, separación eje a eje. En Ribbed los nervios siguen el eje local 1: validar con Show Slab Rib tras crear.",
+   "verificar": "describe_oapi('PropArea','SetSlabWaffle')"
+  },
+  {
+   "tool": "create_objects_by_coordinates",
+   "args": {
+    "objects": [
+     {
+      "type": "surface",
+      "xs": [
+       0.0,
+       5.0,
+       5.0,
+       0.0
+      ],
+      "ys": [
+       0.0,
+       0.0,
+       6.0,
+       6.0
+      ],
+      "zs": [
+       3.0,
+       3.0,
+       3.0,
+       3.0
+      ],
+      "ref": "LE1"
+     },
+     {
+      "type": "surface",
+      "xs": [
+       5.0,
+       10.0,
+       10.0,
+       5.0
+      ],
+      "ys": [
+       0.0,
+       0.0,
+       6.0,
+       6.0
+      ],
+      "zs": [
+       3.0,
+       3.0,
+       3.0,
+       3.0
+      ],
+      "ref": "LE2"
+     },
+     {
+      "type": "surface",
+      "xs": [
+       10.1,
+       15.1,
+       15.1,
+       10.1
+      ],
+      "ys": [
+       0.0,
+       0.0,
+       6.0,
+       6.0
+      ],
+      "zs": [
+       3.0,
+       3.0,
+       3.0,
+       3.0
+      ],
+      "ref": "LE3"
+     },
+     {
+      "type": "surface",
+      "xs": [
+       0.0,
+       5.0,
+       5.0,
+       0.0
+      ],
+      "ys": [
+       6.0,
+       6.0,
+       12.0,
+       12.0
+      ],
+      "zs": [
+       3.0,
+       3.0,
+       3.0,
+       3.0
+      ],
+      "ref": "LE4"
+     },
+     {
+      "type": "surface",
+      "xs": [
+       5.0,
+       10.0,
+       10.0,
+       5.0
+      ],
+      "ys": [
+       6.0,
+       6.0,
+       12.0,
+       12.0
+      ],
+      "zs": [
+       3.0,
+       3.0,
+       3.0,
+       3.0
+      ],
+      "ref": "LE5"
+     },
+     {
+      "type": "surface",
+      "xs": [
+       -1.8,
+       0.0,
+       0.0,
+       -1.8
+      ],
+      "ys": [
+       0.0,
+       0.0,
+       6.0,
+       6.0
+      ],
+      "zs": [
+       3.0,
+       3.0,
+       3.0,
+       3.0
+      ],
+      "ref": "LE6"
+     }
+    ]
+   },
+   "nota": "Anotar el nombre de área que devuelve cada 'ref': las asignaciones por paño lo necesitan."
+  },
+  {
+   "tool": "create_objects_by_coordinates",
+   "args": {
+    "objects": [
+     {
+      "type": "surface",
+      "xs": [
+       7.0,
+       8.2,
+       8.2,
+       7.0
+      ],
+      "ys": [
+       8.5,
+       8.5,
+       10.0,
+       10.0
+      ],
+      "zs": [
+       3.0,
+       3.0,
+       3.0,
+       3.0
+      ],
+      "ref": "LE5-HUECO1"
+     }
+    ]
+   },
+   "nota": "Superficies de los huecos; el paso siguiente las convierte en abertura."
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetOpening",
+    "args_nombrados": {
+     "Name": "<área creada para LE5-HUECO1>",
+     "IsOpening": true
+    }
+   },
+   "nota": "Hueco real: queda vacío, sin cargas (ver docs/HUECOS-ETABS-SAFE.md).",
+   "verificar": "describe_oapi('AreaObj','SetOpening')"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetProperty",
+    "args_nombrados": {
+     "Name": "<área creada para LE1>",
+     "PropName": "L25A-2D"
+    }
+   },
+   "nota": "LE1: sección L25A-2D.",
+   "verificar": "describe_oapi('AreaObj','SetProperty')"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetLoadUniform",
+    "args_nombrados": {
+     "Name": "<área creada para LE1>",
+     "LoadPat": "Dead",
+     "Value": 0.26,
+     "Dir": "Gravity",
+     "Replace": true
+    }
+   },
+   "nota": "LE1 (entrepisos): Dead acabados 0.16 + mampostería asignada 0.1 t/m² (calculada 0.100, redondeo ↑0.05); el peso propio lo pone el patrón Dead, NO duplicarlo.",
+   "verificar": "describe_oapi('AreaObj','SetLoadUniform'); Dir=Gravity como entero real"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetLoadUniform",
+    "args_nombrados": {
+     "Name": "<área creada para LE1>",
+     "LoadPat": "Live",
+     "Value": 0.2,
+     "Dir": "Gravity",
+     "Replace": true
+    }
+   },
+   "nota": "LE1 (entrepisos): Dead acabados 0.16 + mampostería asignada 0.1 t/m² (calculada 0.100, redondeo ↑0.05); el peso propio lo pone el patrón Dead, NO duplicarlo.",
+   "verificar": "describe_oapi('AreaObj','SetLoadUniform'); Dir=Gravity como entero real"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetProperty",
+    "args_nombrados": {
+     "Name": "<área creada para LE2>",
+     "PropName": "L25A-2D"
+    }
+   },
+   "nota": "LE2: sección L25A-2D.",
+   "verificar": "describe_oapi('AreaObj','SetProperty')"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetLoadUniform",
+    "args_nombrados": {
+     "Name": "<área creada para LE2>",
+     "LoadPat": "Dead",
+     "Value": 0.28,
+     "Dir": "Gravity",
+     "Replace": true
+    }
+   },
+   "nota": "LE2 (comun): Dead acabados 0.18 + mampostería asignada 0.1 t/m² (calculada 0.100, redondeo ↑0.05); el peso propio lo pone el patrón Dead, NO duplicarlo.",
+   "verificar": "describe_oapi('AreaObj','SetLoadUniform'); Dir=Gravity como entero real"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetLoadUniform",
+    "args_nombrados": {
+     "Name": "<área creada para LE2>",
+     "LoadPat": "Live",
+     "Value": 0.4,
+     "Dir": "Gravity",
+     "Replace": true
+    }
+   },
+   "nota": "LE2 (comun): Dead acabados 0.18 + mampostería asignada 0.1 t/m² (calculada 0.100, redondeo ↑0.05); el peso propio lo pone el patrón Dead, NO duplicarlo.",
+   "verificar": "describe_oapi('AreaObj','SetLoadUniform'); Dir=Gravity como entero real"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetProperty",
+    "args_nombrados": {
+     "Name": "<área creada para LE3>",
+     "PropName": "L25A-2D"
+    }
+   },
+   "nota": "LE3: sección L25A-2D.",
+   "verificar": "describe_oapi('AreaObj','SetProperty')"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetLoadUniform",
+    "args_nombrados": {
+     "Name": "<área creada para LE3>",
+     "LoadPat": "Dead",
+     "Value": 0.26,
+     "Dir": "Gravity",
+     "Replace": true
+    }
+   },
+   "nota": "LE3 (entrepisos): Dead acabados 0.16 + mampostería asignada 0.1 t/m² (calculada 0.100, redondeo ↑0.05); el peso propio lo pone el patrón Dead, NO duplicarlo.",
+   "verificar": "describe_oapi('AreaObj','SetLoadUniform'); Dir=Gravity como entero real"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetLoadUniform",
+    "args_nombrados": {
+     "Name": "<área creada para LE3>",
+     "LoadPat": "Live",
+     "Value": 0.2,
+     "Dir": "Gravity",
+     "Replace": true
+    }
+   },
+   "nota": "LE3 (entrepisos): Dead acabados 0.16 + mampostería asignada 0.1 t/m² (calculada 0.100, redondeo ↑0.05); el peso propio lo pone el patrón Dead, NO duplicarlo.",
+   "verificar": "describe_oapi('AreaObj','SetLoadUniform'); Dir=Gravity como entero real"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetProperty",
+    "args_nombrados": {
+     "Name": "<área creada para LE4>",
+     "PropName": "L25A-2D"
+    }
+   },
+   "nota": "LE4: sección L25A-2D.",
+   "verificar": "describe_oapi('AreaObj','SetProperty')"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetLoadUniform",
+    "args_nombrados": {
+     "Name": "<área creada para LE4>",
+     "LoadPat": "Dead",
+     "Value": 0.28,
+     "Dir": "Gravity",
+     "Replace": true
+    }
+   },
+   "nota": "LE4 (gimnasio): Dead acabados 0.18 + mampostería asignada 0.1 t/m² (calculada 0.100, redondeo ↑0.05); el peso propio lo pone el patrón Dead, NO duplicarlo.",
+   "verificar": "describe_oapi('AreaObj','SetLoadUniform'); Dir=Gravity como entero real"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetLoadUniform",
+    "args_nombrados": {
+     "Name": "<área creada para LE4>",
+     "LoadPat": "Live",
+     "Value": 0.5,
+     "Dir": "Gravity",
+     "Replace": true
+    }
+   },
+   "nota": "LE4 (gimnasio): Dead acabados 0.18 + mampostería asignada 0.1 t/m² (calculada 0.100, redondeo ↑0.05); el peso propio lo pone el patrón Dead, NO duplicarlo.",
+   "verificar": "describe_oapi('AreaObj','SetLoadUniform'); Dir=Gravity como entero real"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetProperty",
+    "args_nombrados": {
+     "Name": "<área creada para LE5>",
+     "PropName": "L25A-2D"
+    }
+   },
+   "nota": "LE5: sección L25A-2D.",
+   "verificar": "describe_oapi('AreaObj','SetProperty')"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetLoadUniform",
+    "args_nombrados": {
+     "Name": "<área creada para LE5>",
+     "LoadPat": "Dead",
+     "Value": 0.28,
+     "Dir": "Gravity",
+     "Replace": true
+    }
+   },
+   "nota": "LE5 (gimnasio): Dead acabados 0.18 + mampostería asignada 0.1 t/m² (calculada 0.100, redondeo ↑0.05); el peso propio lo pone el patrón Dead, NO duplicarlo.",
+   "verificar": "describe_oapi('AreaObj','SetLoadUniform'); Dir=Gravity como entero real"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetLoadUniform",
+    "args_nombrados": {
+     "Name": "<área creada para LE5>",
+     "LoadPat": "Live",
+     "Value": 0.5,
+     "Dir": "Gravity",
+     "Replace": true
+    }
+   },
+   "nota": "LE5 (gimnasio): Dead acabados 0.18 + mampostería asignada 0.1 t/m² (calculada 0.100, redondeo ↑0.05); el peso propio lo pone el patrón Dead, NO duplicarlo.",
+   "verificar": "describe_oapi('AreaObj','SetLoadUniform'); Dir=Gravity como entero real"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetProperty",
+    "args_nombrados": {
+     "Name": "<área creada para LE6>",
+     "PropName": "L20"
+    }
+   },
+   "nota": "LE6: sección L20.",
+   "verificar": "describe_oapi('AreaObj','SetProperty')"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetLoadUniform",
+    "args_nombrados": {
+     "Name": "<área creada para LE6>",
+     "LoadPat": "Dead",
+     "Value": 0.16,
+     "Dir": "Gravity",
+     "Replace": true
+    }
+   },
+   "nota": "LE6 VUELO: sin mampostería y sin mínimo de 0.10 (excepción obligatoria §13.1); solo acabados + viva.",
+   "verificar": "describe_oapi('AreaObj','SetLoadUniform'); Dir=Gravity como entero real"
+  },
+  {
+   "tool": "call_oapi",
+   "args": {
+    "path": "AreaObj",
+    "method": "SetLoadUniform",
+    "args_nombrados": {
+     "Name": "<área creada para LE6>",
+     "LoadPat": "Live",
+     "Value": 0.2,
+     "Dir": "Gravity",
+     "Replace": true
+    }
+   },
+   "nota": "LE6 VUELO: sin mampostería y sin mínimo de 0.10 (excepción obligatoria §13.1); solo acabados + viva.",
+   "verificar": "describe_oapi('AreaObj','SetLoadUniform'); Dir=Gravity como entero real"
+  }
+ ]
+}

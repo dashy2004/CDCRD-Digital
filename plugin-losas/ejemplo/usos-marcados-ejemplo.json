@@ -1,0 +1,9 @@
+{
+ "_nota": "Asignación de usos Tabla 4 INVENTADA para el Edificio Ejemplo PL de puente-losas (datos ficticios, ningún proyecto real). Los ids son los de plugin_losas.usos_tabla4.",
+ "LE1": "uso-residencial-todas-las-demas-areas",
+ "LE2": "edificios-para-oficinas-oficinas",
+ "LE3": "escuelas-y-colegios-aulas",
+ "LE4": "uso-residencial-corredores-y-escaleras",
+ "LE5": "restaurantes-y-comedores-restaurantes-y-comedores",
+ "LE6": "balcones-y-terrazas-balcones-y-terrazas"
+}

@@ -1,0 +1,31 @@
+$  ARCHIVO DE DATOS DEL PROGRAMA LOSA
+$
+Edificio Ejemplo PL
+$
+$   NLOSA       FC        FY     ADICIONALES
+$    [-]    [ton/cm2]  [ton/cm2]     [-]
+      6       0.210      4.200        0
+$
+$    ID    TIPO    CARGA   ESPESOR     LX       LY       REC
+$    [-]    [-]  [ton/m2]    [m]       [m]      [m]      [m]
+      1     40     1.353    0.250     5.000    6.000    0.025
+      2     40     1.697    0.250     5.000    6.000    0.025
+      3     10     1.353    0.250     5.000    6.000    0.025
+      4     40     1.857    0.250     5.000    6.000    0.025
+      5     40     1.857    0.250     5.000    6.000    0.025
+      6     72     1.089    0.200     1.800    6.000    0.025
+$
+$   ADIC. SEGUN X
+         3
+$
+$      B-I        B-J      BALANCEO
+         6         1         N
+         1         2         S
+         4         5         S
+$
+$   ADIC. SEGUN Y
+         2
+$
+$      B-I        B-J      BALANCEO
+         1         4         S
+         2         5         S

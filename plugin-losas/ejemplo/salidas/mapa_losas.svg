@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="699" viewBox="0 0 960 699" font-family="sans-serif">
+<rect width="100%" height="100%" fill="white"/>
+<polygon points="125.9,669.1 392.1,669.1 392.1,349.5 125.9,349.5" fill="#8fd19e" stroke="#333" stroke-width="1"/>
+<text x="259.0" y="509.3" font-size="14" text-anchor="middle">LE1</text>
+<polygon points="392.1,669.1 658.4,669.1 658.4,349.5 392.1,349.5" fill="#8fd19e" stroke="#333" stroke-width="1"/>
+<text x="525.3" y="509.3" font-size="14" text-anchor="middle">LE2</text>
+<polygon points="663.7,669.1 930.0,669.1 930.0,349.5 663.7,349.5" fill="#8fd19e" stroke="#333" stroke-width="1"/>
+<text x="796.9" y="509.3" font-size="14" text-anchor="middle">LE3</text>
+<polygon points="125.9,349.5 392.1,349.5 392.1,30.0 125.9,30.0" fill="#8fd19e" stroke="#333" stroke-width="1"/>
+<text x="259.0" y="189.8" font-size="14" text-anchor="middle">LE4</text>
+<polygon points="392.1,349.5 658.4,349.5 658.4,30.0 392.1,30.0" fill="#8fd19e" stroke="#333" stroke-width="1"/>
+<text x="525.3" y="189.8" font-size="14" text-anchor="middle">LE5</text>
+<polygon points="30.0,669.1 125.9,669.1 125.9,349.5 30.0,349.5" fill="#8fd19e" stroke="#333" stroke-width="1"/>
+<text x="77.9" y="509.3" font-size="14" text-anchor="middle">LE6</text>
+</svg>

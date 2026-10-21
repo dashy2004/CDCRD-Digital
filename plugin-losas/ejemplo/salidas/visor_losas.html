@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visor de losas — Pieper-Martens (puente-losas)</title>
+  <!-- Interfaz reciclada del visor de EstructurasRD (motor-fea/viz/static/index.html,
+       Emil Guillén De la Cruz, MIT): mismo estilo oscuro y panel flotante, pero el
+       render es 2D en planta (SVG puro, sin three.js ni CDN: 100% offline) y la
+       fuente de datos es la vía Pieper-Martens del puente-losas, NO el FEM. -->
+  <style>
+    html, body { margin: 0; height: 100%; background: #101418;
+                 font-family: system-ui, sans-serif; color: #fff; }
+    #msg { position: fixed; top: 8px; left: 8px; padding: 6px 10px;
+           background: rgba(0,0,0,.6); border-radius: 6px; font-size: 14px; }
+    #panel { position: fixed; top: 8px; right: 8px; padding: 8px 10px; width: 290px;
+             background: rgba(0,0,0,.6); border-radius: 6px;
+             font-size: 13px; display: flex; flex-direction: column; gap: 6px; }
+    #panel .fila { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    #panel select, #panel button { font-size: 13px; }
+    #leyenda { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+    #leyenda .barra { flex: 1; height: 10px; border-radius: 3px;
+                      background: linear-gradient(90deg, #2c7bb6, #ffffbf, #d7191c); }
+    #detalle { font-size: 12px; opacity: .9; min-height: 60px; white-space: pre-line; }
+    #apoyos-tabla { max-height: 28vh; overflow-y: auto; font-size: 12px; }
+    #apoyos-tabla table { border-collapse: collapse; width: 100%; }
+    #apoyos-tabla td, #apoyos-tabla th { border-bottom: 1px solid rgba(255,255,255,.15);
+                                         padding: 2px 4px; text-align: right; }
+    #apoyos-tabla th:first-child, #apoyos-tabla td:first-child { text-align: left; }
+    #creditos { position: fixed; bottom: 8px; left: 8px; right: 320px; padding: 8px 10px;
+                background: rgba(0,0,0,.6); border-radius: 6px; font-size: 12px;
+                opacity: .95; line-height: 1.5; }
+    #lienzo { position: absolute; inset: 0; }
+    svg { width: 100%; height: 100%; }
+    polygon { stroke: #333; stroke-width: 1; cursor: pointer; }
+    polygon:hover { stroke: #fff; stroke-width: 2; }
+    .mark { fill: #10181f; font-size: 13px; font-weight: 600; text-anchor: middle;
+            pointer-events: none; }
+    .valor { fill: #10181f; font-size: 11px; text-anchor: middle; pointer-events: none; }
+    .apoyo { stroke: #ff8c00; stroke-width: 4; opacity: .9; }
+    .apoyo-txt { fill: #ffb45e; font-size: 11px; text-anchor: middle; }
+  </style>
+</head>
+<body>
+  <div id="lienzo"></div>
+  <div id="msg">Visor de losas — método Pieper-Martens</div>
+  <div id="panel">
+    <div class="fila">
+      <label for="campo">campo</label>
+      <select id="campo" aria-label="campo a colorear"></select>
+    </div>
+    <div class="fila">
+      <label><input type="checkbox" id="ver-apoyos" checked> momentos de apoyo balanceados</label>
+    </div>
+    <div id="leyenda"><span id="leyenda-min"></span><div class="barra"></div><span id="leyenda-max"></span></div>
+    <div id="detalle">Clic en un paño para ver su detalle.</div>
+    <div id="apoyos-tabla"></div>
+  </div>
+  <div id="creditos"></div>
+
+  <script>
+  "use strict";
+  const DATOS = {"proyecto": "Edificio Ejemplo PL", "panos": [{"mark": "LE1", "contorno": [[0.0, 0.0], [5.0, 0.0], [5.0, 6.0], [0.0, 6.0]], "codigo_dl": 40, "nota": "", "uso": "entrepisos", "es_vuelo": false, "armaduras": {"x": "#3 @ 150 mm", "y": "#3 @ 150 mm", "apoyo": "#3 @ 150 mm"}}, {"mark": "LE2", "contorno": [[5.0, 0.0], [10.0, 0.0], [10.0, 6.0], [5.0, 6.0]], "codigo_dl": 40, "nota": "", "uso": "comun", "es_vuelo": false, "armaduras": {"x": "#3 @ 150 mm", "y": "#3 @ 150 mm", "apoyo": "#3 @ 150 mm"}}, {"mark": "LE3", "contorno": [[10.1, 0.0], [15.1, 0.0], [15.1, 6.0], [10.1, 6.0]], "codigo_dl": 10, "nota": "", "uso": "entrepisos", "es_vuelo": false, "armaduras": {"x": "#3 @ 150 mm", "y": "#3 @ 150 mm", "apoyo": "#3 @ 150 mm"}}, {"mark": "LE4", "contorno": [[0.0, 6.0], [5.0, 6.0], [5.0, 12.0], [0.0, 12.0]], "codigo_dl": 40, "nota": "", "uso": "gimnasio", "es_vuelo": false, "armaduras": {"x": "#3 @ 150 mm", "y": "#3 @ 150 mm", "apoyo": "#3 @ 150 mm"}}, {"mark": "LE5", "contorno": [[5.0, 6.0], [10.0, 6.0], [10.0, 12.0], [5.0, 12.0]], "codigo_dl": 40, "nota": "", "uso": "gimnasio", "es_vuelo": false, "armaduras": {"x": "#3 @ 150 mm", "y": "#3 @ 150 mm", "apoyo": "#3 @ 150 mm"}}, {"mark": "LE6", "contorno": [[-1.8, 0.0], [0.0, 0.0], [0.0, 6.0], [-1.8, 6.0]], "codigo_dl": 72, "nota": "voladizo: M_apoyo = q·L²/2 sobre la luz que vuela", "uso": "entrepisos", "es_vuelo": true, "armaduras": {"x": "#3 @ 190 mm", "y": "#3 @ 190 mm", "apoyo": "#3 @ 190 mm"}}], "campos": {"mfx": {"titulo": "PM Mf según X (vano)", "unidad": "ton·m/m", "min": 0.0, "max": 2.5550357732526137, "valores": {"LE1": 1.8615850302696748, "LE2": 2.3348926802421572, "LE3": 2.2963340122199587, "LE4": 2.5550357732526137, "LE5": 2.5550357732526137, "LE6": 0.0}}, "mfy": {"titulo": "PM Mf según Y (vano)", "unidad": "ton·m/m", "min": 0.0, "max": 1.7746748075391559, "valores": {"LE1": 1.2930183169631004, "LE2": 1.6217679851340587, "LE3": 1.5943698854337152, "LE4": 1.7746748075391559, "LE5": 1.7746748075391559, "LE6": 0.0}}, "msx": {"titulo": "PM Ms según X (apoyo)", "unidad": "ton·m/m", "min": 0.0, "max": 3.9144182124789206, "valores": {"LE1": 2.852023608768971, "LE2": 3.577150084317032, "LE3": 0.0, "LE4": 3.9144182124789206, "LE5": 3.9144182124789206, "LE6": 1.76418}}, "msy": {"titulo": "PM Ms según Y (apoyo)", "unidad": "ton·m/m", "min": 0.0, "max": 2.71866612444083, "valores": {"LE1": 1.9808052053680358, "LE2": 2.484424562830419, "LE3": 0.0, "LE4": 2.71866612444083, "LE5": 2.71866612444083, "LE6": 0.0}}, "as_x": {"titulo": "Acero franja X", "unidad": "mm²/m", "min": 360.0, "max": 450.0, "valores": {"LE1": 450.0, "LE2": 450.0, "LE3": 450.0, "LE4": 450.0, "LE5": 450.0, "LE6": 360.0}}, "as_y": {"titulo": "Acero franja Y", "unidad": "mm²/m", "min": 360.0, "max": 450.0, "valores": {"LE1": 450.0, "LE2": 450.0, "LE3": 450.0, "LE4": 450.0, "LE5": 450.0, "LE6": 360.0}}, "as_apoyo": {"titulo": "Acero franja apoyo", "unidad": "mm²/m", "min": 360.0, "max": 450.0, "valores": {"LE1": 450.0, "LE2": 450.0, "LE3": 450.0, "LE4": 450.0, "LE5": 450.0, "LE6": 360.0}}, "h_usado": {"titulo": "Espesor usado", "unidad": "m", "min": 0.2, "max": 0.25, "valores": {"LE1": 0.25, "LE2": 0.25, "LE3": 0.25, "LE4": 0.25, "LE5": 0.25, "LE6": 0.2}}, "q_ultima": {"titulo": "q última 1.2D+1.6L", "unidad": "t/m²", "min": 1.088672, "max": 1.8568399999999998, "valores": {"LE1": 1.35284, "LE2": 1.69684, "LE3": 1.35284, "LE4": 1.8568399999999998, "LE5": 1.8568399999999998, "LE6": 1.088672}}}, "apoyos": [{"losa_i": "LE6", "losa_j": "LE1", "direccion": "X", "mu_ij": 1.76418, "modo": "N"}, {"losa_i": "LE1", "losa_j": "LE2", "direccion": "X", "mu_ij": 3.2145868465430016, "modo": "S"}, {"losa_i": "LE4", "losa_j": "LE5", "direccion": "X", "mu_ij": 3.9144182124789206, "modo": "S"}, {"losa_i": "LE1", "losa_j": "LE4", "direccion": "Y", "mu_ij": 2.3497356649044328, "modo": "S"}, {"losa_i": "LE2", "losa_j": "LE5", "direccion": "Y", "mu_ij": 2.6015453436356246, "modo": "S"}], "creditos": ["Método Pieper-Martens: tablas del Ing. F. Perdomo (Losas.exe v5.21), portadas y validadas en puente-losas contra la salida real de Losas.exe.", "Cargas y biblioteca de losas: flujo AutoCAD↔Excel/ETABS de la Ing. Arlette Ramírez.", "Interfaz reciclada del visor de EstructurasRD (Emil Guillén De la Cruz, MIT)."]};
+
+  const lienzo = document.getElementById("lienzo");
+  const selCampo = document.getElementById("campo");
+  const verApoyos = document.getElementById("ver-apoyos");
+  const detalle = document.getElementById("detalle");
+
+  if (!DATOS || !DATOS.panos || !DATOS.panos.length) {
+    document.getElementById("msg").textContent = "Sin datos embebidos en el visor.";
+    throw new Error("sin datos");
+  }
+  document.getElementById("msg").textContent =
+    "Losas — " + DATOS.proyecto + " — método Pieper-Martens (" + DATOS.panos.length + " paños)";
+  document.getElementById("creditos").innerHTML =
+    DATOS.creditos.map(c => "• " + c).join("<br>");
+
+  for (const [clave, c] of Object.entries(DATOS.campos)) {
+    const op = document.createElement("option");
+    op.value = clave;
+    op.textContent = c.titulo + " [" + c.unidad + "]";
+    selCampo.appendChild(op);
+  }
+
+  // Escala de color azul→amarillo→rojo (misma intención que los mapas del visor FEM).
+  function color(t) {
+    const paradas = [[44,123,182],[255,255,191],[215,25,28]];
+    const s = Math.max(0, Math.min(1, t)) * (paradas.length - 1);
+    const i = Math.min(Math.floor(s), paradas.length - 2);
+    const f = s - i;
+    const m = paradas[i].map((v, k) => Math.round(v + (paradas[i+1][k] - v) * f));
+    return "rgb(" + m.join(",") + ")";
+  }
+
+  const todos = DATOS.panos.flatMap(p => p.contorno);
+  const x0 = Math.min(...todos.map(p => p[0])), x1 = Math.max(...todos.map(p => p[0]));
+  const y0 = Math.min(...todos.map(p => p[1])), y1 = Math.max(...todos.map(p => p[1]));
+
+  function bbox(contorno) {
+    const xs = contorno.map(p => p[0]), ys = contorno.map(p => p[1]);
+    return [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)];
+  }
+  const cajas = Object.fromEntries(DATOS.panos.map(p => [p.mark, bbox(p.contorno)]));
+
+  // Segmento del borde compartido entre dos paños (por sus cajas). dirección
+  // "X" = borde vertical compartido (armado según X); "Y" = horizontal.
+  function segmentoApoyo(a) {
+    const ci = cajas[a.losa_i], cj = cajas[a.losa_j];
+    if (!ci || !cj) return null;
+    if (a.direccion === "X") {
+      const x = (Math.max(ci[0], cj[0]) + Math.min(ci[2], cj[2])) / 2;
+      const ya = Math.max(ci[1], cj[1]), yb = Math.min(ci[3], cj[3]);
+      if (yb <= ya) return null;
+      return [[x, ya], [x, yb]];
+    }
+    const y = (Math.max(ci[1], cj[1]) + Math.min(ci[3], cj[3])) / 2;
+    const xa = Math.max(ci[0], cj[0]), xb = Math.min(ci[2], cj[2]);
+    if (xb <= xa) return null;
+    return [[xa, y], [xb, y]];
+  }
+
+  function dibujar() {
+    const clave = selCampo.value || Object.keys(DATOS.campos)[0];
+    const campo = DATOS.campos[clave];
+    const rango = (campo.max - campo.min) || 1;
+    document.getElementById("leyenda-min").textContent = campo.min.toFixed(3);
+    document.getElementById("leyenda-max").textContent = campo.max.toFixed(3);
+
+    const margen = 40;
+    const w = lienzo.clientWidth || 960, h = lienzo.clientHeight || 640;
+    const esc = Math.min((w - 2*margen) / Math.max(x1 - x0, 1e-6),
+                         (h - 2*margen) / Math.max(y1 - y0, 1e-6));
+    const px = x => margen + (x - x0) * esc;
+    const py = y => h - margen - (y - y0) * esc;   // Y hacia arriba, como en planta
+
+    let svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + w + ' ' + h + '">';
+    for (const p of DATOS.panos) {
+      const v = campo.valores[p.mark] ?? 0;
+      const pts = p.contorno.map(q => px(q[0]).toFixed(1) + "," + py(q[1]).toFixed(1)).join(" ");
+      const cx = p.contorno.reduce((s, q) => s + q[0], 0) / p.contorno.length;
+      const cy = p.contorno.reduce((s, q) => s + q[1], 0) / p.contorno.length;
+      svg += '<polygon points="' + pts + '" fill="' + color((v - campo.min) / rango) +
+             '" data-mark="' + p.mark + '"/>';
+      svg += '<text class="mark" x="' + px(cx) + '" y="' + (py(cy) - 4) + '">' + p.mark + "</text>";
+      svg += '<text class="valor" x="' + px(cx) + '" y="' + (py(cy) + 12) + '">' +
+             v.toFixed(3) + "</text>";
+    }
+    if (verApoyos.checked) {
+      for (const a of DATOS.apoyos) {
+        const seg = segmentoApoyo(a);
+        if (!seg) continue;
+        svg += '<line class="apoyo" x1="' + px(seg[0][0]) + '" y1="' + py(seg[0][1]) +
+               '" x2="' + px(seg[1][0]) + '" y2="' + py(seg[1][1]) + '"/>';
+        const mx = (seg[0][0] + seg[1][0]) / 2, my = (seg[0][1] + seg[1][1]) / 2;
+        svg += '<text class="apoyo-txt" x="' + px(mx) + '" y="' + (py(my) - 6) + '">' +
+               a.mu_ij.toFixed(3) + "</text>";
+      }
+    }
+    svg += "</svg>";
+    lienzo.innerHTML = svg;
+
+    for (const pol of lienzo.querySelectorAll("polygon")) {
+      pol.addEventListener("click", () => {
+        const p = DATOS.panos.find(q => q.mark === pol.dataset.mark);
+        const lineas = [
+          p.mark + " — tipo DL " + p.codigo_dl + (p.es_vuelo ? " (vuelo)" : ""),
+          "uso: " + (p.uso || "—"),
+          "Mfx " + DATOS.campos.mfx.valores[p.mark].toFixed(3) +
+            " · Mfy " + DATOS.campos.mfy.valores[p.mark].toFixed(3) + " ton·m/m",
+          "Msx " + DATOS.campos.msx.valores[p.mark].toFixed(3) +
+            " · Msy " + DATOS.campos.msy.valores[p.mark].toFixed(3) + " ton·m/m",
+          "armado X: " + (p.armaduras.x || "—"),
+          "armado Y: " + (p.armaduras.y || "—"),
+          "armado apoyo: " + (p.armaduras.apoyo || "—"),
+        ];
+        if (p.nota) lineas.push(p.nota);
+        detalle.textContent = lineas.join("\n");
+      });
+    }
+  }
+
+  function tablaApoyos() {
+    if (!DATOS.apoyos.length) return;
+    const filas = DATOS.apoyos.map(a =>
+      "<tr><td>" + a.losa_i + "–" + a.losa_j + "</td><td>" + a.direccion +
+      "</td><td>" + a.mu_ij.toFixed(3) + "</td><td>" + a.modo + "</td></tr>").join("");
+    document.getElementById("apoyos-tabla").innerHTML =
+      "<table><tr><th>apoyo</th><th>dir</th><th>Mu I-J</th><th>bal.</th></tr>" + filas + "</table>";
+  }
+
+  selCampo.addEventListener("change", dibujar);
+  verApoyos.addEventListener("change", dibujar);
+  window.addEventListener("resize", dibujar);
+  tablaApoyos();
+  dibujar();
+  </script>
+</body>
+</html>

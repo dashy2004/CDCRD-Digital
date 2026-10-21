@@ -44,3 +44,9 @@ jobs:
         run: python -m unittest discover -s herramientas-locales/tests -p test_ecosystem.py -v
         env:
           PYTHONPATH: herramientas-locales/src
+      - name: Plugin de losas (usos Tabla 4, extraccion, aligeradas, visor PM)
+        run: |
+          python -m pip install --quiet openpyxl
+          python -m unittest discover -s plugin-losas/tests -t plugin-losas -v
+        env:
+          PYTHONPATH: plugin-losas/src:puente-losas/src

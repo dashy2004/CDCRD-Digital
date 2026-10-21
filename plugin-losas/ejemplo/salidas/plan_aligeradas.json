@@ -1,0 +1,365 @@
+{
+ "catalogo": "Biblioteca de losas del flujo AutoCAD↔Excel/ETABS de la Ing. Arlette Ramírez (L20A/L25A, topping 0.05, nervios 0.15/0.20 @0.65)",
+ "panos": [
+  {
+   "mark": "LE1",
+   "seccion": "L25A-2D",
+   "tipo": "Waffle",
+   "h_m": 0.25,
+   "topping_m": 0.05,
+   "angulo_eje_local_1": null,
+   "nervios": [
+    {
+     "direccion": "X",
+     "n": 9,
+     "separacion_m": 0.65,
+     "ancho_m": 0.2,
+     "luz_m": 5.0,
+     "posiciones_m": [
+      0.4,
+      1.05,
+      1.7,
+      2.35,
+      3.0,
+      3.65,
+      4.3,
+      4.95,
+      5.6
+     ]
+    },
+    {
+     "direccion": "Y",
+     "n": 8,
+     "separacion_m": 0.65,
+     "ancho_m": 0.2,
+     "luz_m": 6.0,
+     "posiciones_m": [
+      0.225,
+      0.875,
+      1.525,
+      2.175,
+      2.825,
+      3.475,
+      4.125,
+      4.775
+     ]
+    }
+   ],
+   "chequeos": {
+    "topping_m": 0.05,
+    "topping_minimo_m": 0.05,
+    "topping_ok": true,
+    "luz_libre_nervios_m": 0.45,
+    "limite_12_topping_m": 0.6,
+    "luz_libre_ok": true,
+    "fuente": "CDCRD T05, losas nervadas (topping>=50 mm; libre<=12*topping)"
+   },
+   "notas": [
+    "2D (Waffle): nervios en ambas direcciones; el eje local no gobierna el reparto"
+   ]
+  },
+  {
+   "mark": "LE2",
+   "seccion": "L25A-2D",
+   "tipo": "Waffle",
+   "h_m": 0.25,
+   "topping_m": 0.05,
+   "angulo_eje_local_1": null,
+   "nervios": [
+    {
+     "direccion": "X",
+     "n": 9,
+     "separacion_m": 0.65,
+     "ancho_m": 0.2,
+     "luz_m": 5.0,
+     "posiciones_m": [
+      0.4,
+      1.05,
+      1.7,
+      2.35,
+      3.0,
+      3.65,
+      4.3,
+      4.95,
+      5.6
+     ]
+    },
+    {
+     "direccion": "Y",
+     "n": 8,
+     "separacion_m": 0.65,
+     "ancho_m": 0.2,
+     "luz_m": 6.0,
+     "posiciones_m": [
+      0.225,
+      0.875,
+      1.525,
+      2.175,
+      2.825,
+      3.475,
+      4.125,
+      4.775
+     ]
+    }
+   ],
+   "chequeos": {
+    "topping_m": 0.05,
+    "topping_minimo_m": 0.05,
+    "topping_ok": true,
+    "luz_libre_nervios_m": 0.45,
+    "limite_12_topping_m": 0.6,
+    "luz_libre_ok": true,
+    "fuente": "CDCRD T05, losas nervadas (topping>=50 mm; libre<=12*topping)"
+   },
+   "notas": [
+    "2D (Waffle): nervios en ambas direcciones; el eje local no gobierna el reparto"
+   ]
+  },
+  {
+   "mark": "LE3",
+   "seccion": "L25A-2D",
+   "tipo": "Waffle",
+   "h_m": 0.25,
+   "topping_m": 0.05,
+   "angulo_eje_local_1": null,
+   "nervios": [
+    {
+     "direccion": "X",
+     "n": 9,
+     "separacion_m": 0.65,
+     "ancho_m": 0.2,
+     "luz_m": 5.0,
+     "posiciones_m": [
+      0.4,
+      1.05,
+      1.7,
+      2.35,
+      3.0,
+      3.65,
+      4.3,
+      4.95,
+      5.6
+     ]
+    },
+    {
+     "direccion": "Y",
+     "n": 8,
+     "separacion_m": 0.65,
+     "ancho_m": 0.2,
+     "luz_m": 6.0,
+     "posiciones_m": [
+      0.225,
+      0.875,
+      1.525,
+      2.175,
+      2.825,
+      3.475,
+      4.125,
+      4.775
+     ]
+    }
+   ],
+   "chequeos": {
+    "topping_m": 0.05,
+    "topping_minimo_m": 0.05,
+    "topping_ok": true,
+    "luz_libre_nervios_m": 0.45,
+    "limite_12_topping_m": 0.6,
+    "luz_libre_ok": true,
+    "fuente": "CDCRD T05, losas nervadas (topping>=50 mm; libre<=12*topping)"
+   },
+   "notas": [
+    "2D (Waffle): nervios en ambas direcciones; el eje local no gobierna el reparto"
+   ]
+  },
+  {
+   "mark": "LE4",
+   "seccion": "L25A-2D",
+   "tipo": "Waffle",
+   "h_m": 0.25,
+   "topping_m": 0.05,
+   "angulo_eje_local_1": null,
+   "nervios": [
+    {
+     "direccion": "X",
+     "n": 9,
+     "separacion_m": 0.65,
+     "ancho_m": 0.2,
+     "luz_m": 5.0,
+     "posiciones_m": [
+      0.4,
+      1.05,
+      1.7,
+      2.35,
+      3.0,
+      3.65,
+      4.3,
+      4.95,
+      5.6
+     ]
+    },
+    {
+     "direccion": "Y",
+     "n": 8,
+     "separacion_m": 0.65,
+     "ancho_m": 0.2,
+     "luz_m": 6.0,
+     "posiciones_m": [
+      0.225,
+      0.875,
+      1.525,
+      2.175,
+      2.825,
+      3.475,
+      4.125,
+      4.775
+     ]
+    }
+   ],
+   "chequeos": {
+    "topping_m": 0.05,
+    "topping_minimo_m": 0.05,
+    "topping_ok": true,
+    "luz_libre_nervios_m": 0.45,
+    "limite_12_topping_m": 0.6,
+    "luz_libre_ok": true,
+    "fuente": "CDCRD T05, losas nervadas (topping>=50 mm; libre<=12*topping)"
+   },
+   "notas": [
+    "2D (Waffle): nervios en ambas direcciones; el eje local no gobierna el reparto"
+   ]
+  },
+  {
+   "mark": "LE5",
+   "seccion": "L25A-2D",
+   "tipo": "Waffle",
+   "h_m": 0.25,
+   "topping_m": 0.05,
+   "angulo_eje_local_1": null,
+   "nervios": [
+    {
+     "direccion": "X",
+     "n": 9,
+     "separacion_m": 0.65,
+     "ancho_m": 0.2,
+     "luz_m": 5.0,
+     "posiciones_m": [
+      0.4,
+      1.05,
+      1.7,
+      2.35,
+      3.0,
+      3.65,
+      4.3,
+      4.95,
+      5.6
+     ]
+    },
+    {
+     "direccion": "Y",
+     "n": 8,
+     "separacion_m": 0.65,
+     "ancho_m": 0.2,
+     "luz_m": 6.0,
+     "posiciones_m": [
+      0.225,
+      0.875,
+      1.525,
+      2.175,
+      2.825,
+      3.475,
+      4.125,
+      4.775
+     ]
+    }
+   ],
+   "chequeos": {
+    "topping_m": 0.05,
+    "topping_minimo_m": 0.05,
+    "topping_ok": true,
+    "luz_libre_nervios_m": 0.45,
+    "limite_12_topping_m": 0.6,
+    "luz_libre_ok": true,
+    "fuente": "CDCRD T05, losas nervadas (topping>=50 mm; libre<=12*topping)"
+   },
+   "notas": [
+    "2D (Waffle): nervios en ambas direcciones; el eje local no gobierna el reparto"
+   ]
+  },
+  {
+   "mark": "LE6",
+   "seccion": "L20",
+   "tipo": "Maciza",
+   "h_m": 0.2,
+   "topping_m": null,
+   "angulo_eje_local_1": null,
+   "nervios": [],
+   "chequeos": {},
+   "notas": [
+    "losa maciza: sin nervios"
+   ]
+  }
+ ],
+ "conexiones": [
+  {
+   "losa_i": "LE1",
+   "losa_j": "LE6",
+   "lado_de_i": "izq",
+   "borde": "vertical",
+   "nervios_cruzan_i": true,
+   "nervios_cruzan_j": true,
+   "continuidad": "momento",
+   "topping_igual": null,
+   "nota": "secciones distintas (L25A-2D / L20): revisar el detalle del borde"
+  },
+  {
+   "losa_i": "LE1",
+   "losa_j": "LE2",
+   "lado_de_i": "der",
+   "borde": "vertical",
+   "nervios_cruzan_i": true,
+   "nervios_cruzan_j": true,
+   "continuidad": "momento",
+   "topping_igual": true,
+   "nota": ""
+  },
+  {
+   "losa_i": "LE1",
+   "losa_j": "LE4",
+   "lado_de_i": "sup",
+   "borde": "horizontal",
+   "nervios_cruzan_i": true,
+   "nervios_cruzan_j": true,
+   "continuidad": "momento",
+   "topping_igual": true,
+   "nota": ""
+  },
+  {
+   "losa_i": "LE2",
+   "losa_j": "LE5",
+   "lado_de_i": "sup",
+   "borde": "horizontal",
+   "nervios_cruzan_i": true,
+   "nervios_cruzan_j": true,
+   "continuidad": "momento",
+   "topping_igual": true,
+   "nota": ""
+  },
+  {
+   "losa_i": "LE4",
+   "losa_j": "LE5",
+   "lado_de_i": "der",
+   "borde": "vertical",
+   "nervios_cruzan_i": true,
+   "nervios_cruzan_j": true,
+   "continuidad": "momento",
+   "topping_igual": true,
+   "nota": ""
+  }
+ ],
+ "normativa": {
+  "topping_minimo_m": 0.05,
+  "luz_libre_max": "12 x topping",
+  "fuente": "CDCRD Tomo 1, Titulo 5 (losas nervadas)"
+ }
+}
