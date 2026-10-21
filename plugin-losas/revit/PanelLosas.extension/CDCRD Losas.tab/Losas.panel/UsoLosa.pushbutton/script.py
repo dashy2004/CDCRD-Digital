@@ -612,13 +612,16 @@ class PanelUsoLosa(Form):
             res = _exec_tool(self.raiz, ("_common.py", "acero_losas_plano.py"),
                              {"plan": os.path.join(carpeta, "plan_acero.json")}, self.doc)
         except Exception as ex:
-            MessageBox.Show("No se pudo dibujar en la vista activa: %s\n"
-                            "(abre la planta del nivel y repite)" % ex)
+            MessageBox.Show("No se pudo dibujar: %s" % ex)
             return
-        MessageBox.Show("Dibujado en '%s': %d losas, %d bastones, %d trazos, %d notas"
-                        " (borrado previo: %d). Tabla: %s.\nEl .rvt NO se guarda." %
-                        (res["vista"], res["losas_dibujadas"], res["bastones"],
-                         res["trazos"], res["notas"], res["elementos_borrados"],
+        partes = []
+        for r in res["vistas"]:
+            partes.append("- %s: %d losas, %d bastones, %d trazos, %d notas "
+                          "(borrado previo %d)" %
+                          (r["vista"], r["losas_dibujadas"], r["bastones"],
+                           r["trazos"], r["notas"], r["elementos_borrados"]))
+        MessageBox.Show("Dibujado:\n%s\nTabla: %s.\nEl .rvt NO se guarda." %
+                        ("\n".join(partes),
                          (res.get("tabla") or {}).get("nombre") or "sin cambios"))
 
     def abrir_visor(self, remitente, evento):

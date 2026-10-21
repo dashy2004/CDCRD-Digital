@@ -25,11 +25,47 @@ NOMBRE_TABLA = "MCP Tabla de losas"
 M_A_FT = 1.0 / 0.3048
 
 
-def _vista(doc, uidoc, nombre):
-    v = active_or_named_view(doc, uidoc, nombre)
-    if not isinstance(v, DB.ViewPlan):
-        raise Exception("la vista '%s' no es de planta" % v.Name)
-    return v
+def _nivel_de(view):
+    try:
+        return view.GenLevel.Name
+    except Exception:
+        return None
+
+
+def _vistas(doc, uidoc, nombre, niveles):
+    """Las vistas de planta destino, emparejadas con su nivel.
+
+    Con ``view_name`` se usa esa vista; si no, la activa cuando es de planta;
+    y si la activa no sirve (p. ej. la Project View), se busca SOLA la primera
+    planta de cada nivel que tenga losas en el plan (preferencia a las que
+    empiezan por EST)."""
+    if nombre:
+        v = active_or_named_view(doc, uidoc, nombre)
+        if not isinstance(v, DB.ViewPlan):
+            raise Exception("la vista '%s' no es de planta" % v.Name)
+        return [(v, _nivel_de(v))]
+    try:
+        activa = uidoc.ActiveView if uidoc is not None else doc.ActiveView
+    except Exception:
+        activa = None
+    if isinstance(activa, DB.ViewPlan):
+        return [(activa, _nivel_de(activa))]
+    por_nivel = {}
+    for v in DB.FilteredElementCollector(doc).OfClass(DB.ViewPlan):
+        if v.IsTemplate:
+            continue
+        nv = _nivel_de(v)
+        if nv not in niveles:
+            continue
+        actual = por_nivel.get(nv)
+        if actual is None or (v.Name.upper().startswith("EST") and
+                              not actual.Name.upper().startswith("EST")):
+            por_nivel[nv] = v
+    if not por_nivel:
+        raise Exception("la vista activa no es de planta y no hay plantas de los "
+                        "niveles con losas (%s); abre o crea la planta del nivel" %
+                        sorted(niveles))
+    return [(por_nivel[nv], nv) for nv in sorted(por_nivel)]
 
 
 def _poner_marca(el):
@@ -133,26 +169,24 @@ def run(doc, uidoc, DB, P):
     if not ruta:
         raise Exception("falta 'plan' (plan_acero.json de `plugin-losas plano`)")
     plan = json.load(io.open(ruta, encoding="utf-8"))
-    view = _vista(doc, uidoc, P.get("view_name"))
-    nivel_vista = None
-    try:
-        nivel_vista = view.GenLevel.Name
-    except Exception:
-        pass
     e = errs()
-
-    losas = [x for x in plan.get("losas") or []
-             if nivel_vista is None or x.get("nivel") == nivel_vista]
-    apoyos = [x for x in plan.get("apoyos") or []
-              if nivel_vista is None or x.get("nivel") == nivel_vista]
-    if not losas:
-        raise Exception("el plan no trae losas del nivel de la vista ('%s')" % nivel_vista)
-
+    niveles_plan = set(x.get("nivel") for x in plan.get("losas") or [] if x.get("nivel"))
+    vistas = _vistas(doc, uidoc, P.get("view_name"), niveles_plan)
     tipo_texto = doc.GetDefaultElementTypeId(DB.ElementTypeGroup.TextNoteType)
 
-    def _todo():
-        borradas = _limpiar(doc, view) if P.get("limpiar", True) else 0
-        # la z valida del plano de la vista se descubre con el primer trazo
+    tandas = []     # (view, nivel, losas, apoyos)
+    for view, nivel_vista in vistas:
+        losas = [x for x in plan.get("losas") or []
+                 if nivel_vista is None or x.get("nivel") == nivel_vista]
+        apoyos = [x for x in plan.get("apoyos") or []
+                  if nivel_vista is None or x.get("nivel") == nivel_vista]
+        if losas:
+            tandas.append((view, nivel_vista, losas, apoyos))
+    if not tandas:
+        raise Exception("el plan no trae losas de los niveles de las vistas (%s)" %
+                        [v.Name for v, _ in vistas])
+
+    def _dibujar_en(view, losas, apoyos):
         lineas = [0]
         notas = [0]
         z_valida = [None]
@@ -167,8 +201,8 @@ def run(doc, uidoc, DB, P):
                         notas[0] += _nota(doc, view, trazo.get("texto"),
                                           trazo["pos_texto"], z, tipo_texto, e)
                         return
-                raise Exception("no se pudo trazar en el plano de la vista: %s" %
-                                e["items"][-3:])
+                raise Exception("no se pudo trazar en '%s': %s" %
+                                (view.Name, e["items"][-3:]))
             lineas[0] += _dibujar_trazo(doc, view, trazo, z_valida[0], e)
             notas[0] += _nota(doc, view, trazo.get("texto"), trazo["pos_texto"],
                               z_valida[0], tipo_texto, e)
@@ -178,13 +212,27 @@ def run(doc, uidoc, DB, P):
                 dibujar(trazo)
         for a in apoyos:
             dibujar(a["trazo"])
+        return lineas[0], notas[0]
+
+    def _todo():
+        resultados = []
+        for view, nivel_vista, losas, apoyos in tandas:
+            borradas = _limpiar(doc, view) if P.get("limpiar", True) else 0
+            lineas, notas = _dibujar_en(view, losas, apoyos)
+            resultados.append({"vista": view.Name, "nivel": nivel_vista,
+                               "losas_dibujadas": len(losas), "bastones": len(apoyos),
+                               "trazos": lineas, "notas": notas,
+                               "elementos_borrados": borradas})
         campos = _rehacer_tabla(doc, plan.get("tabla_parametros") or []) \
             if P.get("tabla", True) else []
-        return borradas, lineas[0], notas[0], campos
+        return resultados, campos
 
-    borradas, lineas, notas, campos = tx(doc, "MCP: acero de losas en planta", _todo)
-    return {"vista": view.Name, "nivel": nivel_vista,
-            "losas_dibujadas": len(losas), "bastones": len(apoyos),
-            "trazos": lineas, "notas": notas, "elementos_borrados": borradas,
+    resultados, campos = tx(doc, "MCP: acero de losas en planta", _todo)
+    try:    # abrir la primera planta dibujada (operacion de UI, fuera de transaccion)
+        if uidoc is not None:
+            uidoc.ActiveView = tandas[0][0]
+    except Exception:
+        pass
+    return {"vistas": resultados,
             "tabla": {"nombre": NOMBRE_TABLA, "campos": campos} if campos else None,
             "errores": e}
