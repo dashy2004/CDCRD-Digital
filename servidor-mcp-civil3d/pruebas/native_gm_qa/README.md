@@ -69,3 +69,10 @@ La acción `residues_fixture` crea un grupo vacío y tres definiciones GM identi
 `audit` incluye XYZ, cierre, sitio y longitudes de FeatureLine, más cantidades separadas de corte/relleno y superficies base/comparación de TinVolumeSurface.
 
 `platform_volume` es una fixture **sintética fija**: recibe `design` (handle del TIN llamado `CDX QA PLATFORM 0513`), añade un plano Z=100 m de 48 × 32 m en las coordenadas de `humo_plataformas.py` y crea su volumen. Rechaza nombres QA existentes y opera en una transacción. No es una herramienta de cubicación general ni interpreta un terreno de proyecto. Debe usarse después del humo y comparar con 0 m³ de corte y 2474,666666667 m³ de relleno.
+
+## Curvas 0.5.14
+
+- `curve_fixture`: fuentes sintéticas para un eje con dos arcos y tres casos inválidos.
+- `curve_audit`: parámetros nativos de arcos/parábolas y muestreo de XY/cotas.
+- `curve_fault`, con `stage` igual a `alignment-created` o `profile-curve-added`: arma una excepción de una sola vez mediante el callback privado del puente. Se desarma antes de lanzar; no existe parámetro RPC para habilitarla. Usar únicamente en la copia controlada y comprobar el inventario después.
+- `humo_curvas.py` verifica esas rutas y la compatibilidad de ejes rectos de más de 200 vértices. Las capturas siguen usando `capture` y son viewport nativo sin retoque.

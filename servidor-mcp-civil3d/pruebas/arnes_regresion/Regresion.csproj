@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>disable</Nullable></PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../puente/VerticalCurveContract.cs" Link="VerticalCurveContract.cs" />
     <Compile Include="../../puente/PlatformContract.cs" Link="PlatformContract.cs" />
     <Compile Include="../../puente/SiteDesignContract.cs" Link="SiteDesignContract.cs" />
     <Compile Include="../../puente/CommandReceipts.cs" Link="CommandReceipts.cs" />

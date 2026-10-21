@@ -1,0 +1,87 @@
+{
+  "version": "0.5.14",
+  "case": "synthetic only; no project design approval",
+  "python_tests": 157,
+  "dotnet_checks": 106,
+  "concurrency_races": 100,
+  "native_checks": 37,
+  "unit_refusals": 4,
+  "build_errors": 0,
+  "build_warnings": 0,
+  "geometry": {
+    "alignment_length_m": 365.6637061440777,
+    "arcs": [
+      {
+        "radio_m": 39.99999999963591,
+        "longitud_m": 62.831853071223954,
+        "inicio": 180.00000000034925,
+        "fin": 242.8318530715732,
+        "horario": false
+      },
+      {
+        "radio_m": 39.99999999963591,
+        "longitud_m": 62.83185307122397,
+        "inicio": 322.8318530725045,
+        "fin": 385.66370614372846,
+        "horario": true
+      }
+    ],
+    "max_xy_error_m": 5.820766091346741e-10,
+    "profile_curves": [
+      {
+        "tipo": "Crest",
+        "longitud_m": 40,
+        "pvi_estacion": 200,
+        "pvi_elevacion": 104,
+        "inicio": 180,
+        "fin": 220,
+        "pendiente_entrada": 0.039999999999999855,
+        "pendiente_salida": -0.039999999999999855
+      },
+      {
+        "tipo": "Sag",
+        "longitud_m": 60,
+        "pvi_estacion": 300,
+        "pvi_elevacion": 100,
+        "inicio": 270,
+        "fin": 330,
+        "pendiente_entrada": -0.0400000000000001,
+        "pendiente_salida": 0.012072650350225918
+      }
+    ],
+    "max_z_error_m": 1.4210854715202004e-14
+  },
+  "persistence": {
+    "saved_and_reopened": true,
+    "all_audited_collections_identical": true,
+    "curve_geometry_identical": true,
+    "previous_objects_preserved": 1247,
+    "final_objects": 1257
+  },
+  "captures": [
+    {
+      "file": "civil3d-curvas-planta-0514.png",
+      "width": 1780,
+      "height": 1000,
+      "sha256": "e670aa226a7e63018f8f2c55601e1048f2ba95f2e2ece7b96c7388950e712bfe",
+      "privacy_review": "Only synthetic geometry and QA annotations visible",
+      "source": "Native Document.CapturePreviewImage; drawing viewport, not full window",
+      "retouched": false
+    },
+    {
+      "file": "civil3d-curvas-perfil-0514.png",
+      "width": 1780,
+      "height": 1000,
+      "sha256": "5471d7d252a0b13c37d4113572c700371ceedf558ef456bb0b4bc04a12cdc097",
+      "privacy_review": "Only synthetic geometry and QA annotations visible",
+      "source": "Native Document.CapturePreviewImage; drawing viewport, not full window",
+      "retouched": false
+    }
+  ],
+  "limits": [
+    "Civil3D only",
+    "AutoCAD native validation remains 0.5.11",
+    "No corridor or native grading implemented in this block",
+    "Publishing a branch does not confirm merge or CI"
+  ]
+}
