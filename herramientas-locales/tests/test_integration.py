@@ -137,10 +137,19 @@ def test_real_mcp_stdio_search_path_boundaries_and_dxf(corpus, tmp_path):
                     initialized = await session.initialize()
                     assert initialized.serverInfo.name == "cdcrd-local"
                     listed = await session.list_tools()
-                    assert len(listed.tools) == 10
+                    assert len(listed.tools) == 12
                     assert {"cdcrd_buscar", "cad_generar_plano", "ifc_validar_ids"} <= {
                         tool.name for tool in listed.tools
                     }
+                    capabilities = await session.call_tool("ecosistema_capacidades", {
+                        "modulo": "civil3d",
+                    })
+                    assert not capabilities.isError
+                    assert capabilities.structuredContent["modules"][0]["id"] == "civil3d"
+                    state = await session.call_tool("ecosistema_estado", {"modulo": "civil3d"})
+                    assert not state.isError
+                    assert state.structuredContent["live_bim_connected"] is False
+                    assert state.structuredContent["modules"][0]["configured"] is None
                     found = await session.call_tool("cdcrd_buscar", {
                         "consulta": "2.10.8.2.1.2", "volumen": 2,
                     })

@@ -16,6 +16,13 @@ def parser() -> argparse.ArgumentParser:
     sub = cli.add_subparsers(dest="command", required=True)
     sub.add_parser("doctor", help="Verificar dependencias sin conectar BIM vivo")
     sub.add_parser("mcp", help="Iniciar servidor MCP stdio")
+    for command in ("capacidades", "estado"):
+        operation = sub.add_parser(command, help="Inventario y diagnostico offline del ecosistema")
+        operation.add_argument("--repo", type=Path)
+        operation.add_argument("--modulo")
+        operation.add_argument("--json", action="store_true", help="Salida JSON (predeterminada)")
+        if command == "estado":
+            operation.add_argument("--config", type=Path, help="Configuracion MCP JSON/TOML explicita")
     find = sub.add_parser("buscar", help="Consultar clausulas con pagina y procedencia")
     find.add_argument("query")
     find.add_argument("--repo", type=Path)
@@ -41,6 +48,12 @@ def parser() -> argparse.ArgumentParser:
 
 
 def execute(args: argparse.Namespace) -> dict:
+    if args.command in ("capacidades", "estado"):
+        from .capabilities import catalog, diagnose_ecosystem
+
+        if args.command == "capacidades":
+            return catalog(args.repo, args.modulo)
+        return diagnose_ecosystem(args.repo, args.modulo, args.config)
     if args.command == "doctor":
         return diagnose()
     if args.command == "buscar":
@@ -82,7 +95,7 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False), file=sys.stderr)
         return 2
     print(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))
-    if args.command == "doctor":
+    if args.command in ("doctor", "estado"):
         return 0 if result["ok"] else 1
     if args.command == "verificar":
         return result["exit_code"]

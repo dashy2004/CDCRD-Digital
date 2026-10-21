@@ -6,6 +6,7 @@ from pathlib import Path
 from mcp.server.fastmcp import FastMCP
 
 from .cad import generate_plan, inspect_dxf, preview_dxf
+from .capabilities import catalog, diagnose_ecosystem
 from .doctor import diagnose
 from .files import inspect_pdf, preview_pdf
 from .io import repository
@@ -41,6 +42,18 @@ def output_path(value: str) -> Path:
 def entorno_diagnosticar() -> dict:
     """Verifica paquetes; no conecta las sesiones Revit/ETABS/SAFE."""
     return diagnose()
+
+
+@mcp.tool()
+def ecosistema_capacidades(modulo: str | None = None) -> dict:
+    """Lista contratos y fuentes por modulo; no prueba instalaciones ni conexiones vivas."""
+    return catalog(root(), modulo)
+
+
+@mcp.tool()
+def ecosistema_estado(modulo: str | None = None) -> dict:
+    """Diagnostico offline; reutiliza doctor y no lee configuraciones privadas ni activa BIM."""
+    return diagnose_ecosystem(root(), modulo)
 
 
 @mcp.tool()
