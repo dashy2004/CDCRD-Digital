@@ -109,6 +109,28 @@ def _cmd_tipos(args) -> int:
     return 0
 
 
+def _cmd_secciones(args) -> int:
+    from puente_losas.contrato import aplicar_usos, panos_desde_dict
+
+    from plugin_losas.secciones_revit import (escribir_secciones_json,
+                                              resolver_secciones)
+
+    panos = panos_desde_dict(_cargar_json(args.proyecto))
+    if args.usos:
+        panos = aplicar_usos(panos, _cargar_json(args.usos))
+    fijadas = _cargar_json(args.secciones) if args.secciones else None
+    resueltas = resolver_secciones(panos, fijadas)
+    os.makedirs(args.salida, exist_ok=True)
+    ruta = os.path.join(args.salida, "secciones_losas.json")
+    escribir_secciones_json(resueltas, ruta)
+    autos = sum(1 for r in resueltas.values() if r.origen == "auto")
+    print(f"{len(resueltas)} losas con sección resuelta ({autos} por reglamento).")
+    for r in resueltas.values():
+        print(f"  {r.mark}: {r.seccion} ({r.espesor_m} m, {r.origen})")
+    print(f"  {ruta}")
+    return 0
+
+
 def _cmd_renumerar(args) -> int:
     from puente_losas.contrato import aplicar_usos, panos_desde_dict
 
@@ -147,6 +169,29 @@ def _cmd_plano(args) -> int:
     n_trazos = sum(len(x["trazos"]) for x in plan["losas"]) + len(plan["apoyos"])
     print(f"Plano de acero: {len(plan['losas'])} losas, {len(plan['apoyos'])} bastones "
           f"de apoyo, {n_trazos} trazos.")
+    print(f"  {ruta}")
+    return 0
+
+
+def _cmd_modelado(args) -> int:
+    from plugin_losas.modelado_acero import escribir_plan_modelado, plan_modelado
+
+    plan = plan_modelado(
+        _cargar_json(args.proyecto), _cargar_json(args.resultados),
+        acero_pm=_cargar_json(args.acero) if args.acero else None,
+        editados=_cargar_json(args.editados) if args.editados else None,
+        secciones=_cargar_json(args.secciones) if args.secciones else None,
+        aligeradas=_cargar_json(args.aligeradas) if args.aligeradas else None)
+    os.makedirs(args.salida, exist_ok=True)
+    ruta = os.path.join(args.salida, "plan_modelado.json")
+    escribir_plan_modelado(plan, ruta)
+    n_sets = sum(x["resumen"]["sets"] for x in plan["losas"]) + len(plan["bastones"])
+    n_barras = sum(x["resumen"]["barras"] for x in plan["losas"])
+    n_solapes = sum(x["resumen"]["solapes"] for x in plan["losas"])
+    print(f"Modelado 3D: {len(plan['losas'])} losas, {n_sets} sets, "
+          f"{n_barras} barras, {n_solapes} solapes, {len(plan['bastones'])} bastones.")
+    for aviso in plan["avisos"]:
+        print(f"  aviso: {aviso}")
     print(f"  {ruta}")
     return 0
 
@@ -258,6 +303,14 @@ def main(argv: list[str] | None = None) -> int:
     rn.add_argument("--salida", default="salidas")
     rn.set_defaults(func=_cmd_renumerar)
 
+    se = sub.add_parser("secciones", help="sección final por losa (fijada o reglamento) "
+                                          "+ payload de tipos de Floor para Revit")
+    se.add_argument("--proyecto", required=True)
+    se.add_argument("--usos", help="usos.json del puente (1D/2D, vuelos, bordes)")
+    se.add_argument("--secciones", help="JSON {mark: seccion} fijadas en el panel")
+    se.add_argument("--salida", default="salidas")
+    se.set_defaults(func=_cmd_secciones)
+
     tp = sub.add_parser("tipos", help="tipo de losa según apoyos (código DL) + payload para Revit")
     tp.add_argument("--proyecto", required=True)
     tp.add_argument("--usos", help="usos.json del puente (marca vuelos: cambian el tipo)")
@@ -271,6 +324,17 @@ def main(argv: list[str] | None = None) -> int:
     pl.add_argument("--editados", help="JSON {mark: {x,y,apoyo}} con el acero editado (manda)")
     pl.add_argument("--salida", default="salidas")
     pl.set_defaults(func=_cmd_plano)
+
+    md = sub.add_parser("modelado", help="plan de modelado 3D del acero (sets de Rebar, "
+                                         "solape 50db mitad y mitad, nervios y bastones)")
+    md.add_argument("--proyecto", required=True)
+    md.add_argument("--resultados", required=True)
+    md.add_argument("--acero", help="acero_pm.json (armado comercial calculado)")
+    md.add_argument("--editados", help="JSON {mark: {x,y,apoyo}} con el acero editado (manda)")
+    md.add_argument("--secciones", help="secciones_losas.json (sección/espesor final por losa)")
+    md.add_argument("--aligeradas", help="plan_aligeradas.json (posiciones de nervios)")
+    md.add_argument("--salida", default="salidas")
+    md.set_defaults(func=_cmd_modelado)
 
     ac = sub.add_parser("acero", help="acero comercial PM (barra y separación) de resultados.json")
     ac.add_argument("--resultados", required=True)

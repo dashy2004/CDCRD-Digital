@@ -42,7 +42,12 @@ el `.DL` de `dl_io.py`, las cargas de `cargas.py` y el informe de
 | Visor Pieper-Martens (DTO + HTML offline) | `resultados_pm.py` + `viz/` | testeado |
 | Acero comercial PM (barra # y separación) | `acero_pm.py` | testeado |
 | Trazos del armado en planta (principal/temperatura/bastones L/4) | `plano_acero.py` | testeado |
+| Sección final por losa (fijada o reglamento) + payload de tipos de Floor | `secciones_revit.py` | testeado |
+| Plan de modelado 3D del acero (sets, solape 50·db mitad y mitad, nervios, bastones) | `modelado_acero.py` | testeado |
 | Dibujo en la planta de Revit + tabla de detalles (schedule) | `../revit-mcp-tools/src/tools/acero_losas_plano.py` | **escrita, sin corrida en vivo** |
+| Espesor real: tipos de Floor por sección + cambio de tipo | `../revit-mcp-tools/src/tools/espesor_losas.py` | **escrita, sin corrida en vivo** |
+| Tags de losa (Mark arriba, espesor abajo; `.rfa` en `revit/familias/`) | `../revit-mcp-tools/src/tools/tag_losas.py` | **escrita, sin corrida en vivo** |
+| Modelado 3D del acero (Rebar reales, piloto 1 losa) | `../revit-mcp-tools/src/tools/acero_losas_modelar.py` | **escrita, sin corrida en vivo** |
 | CLI `plugin-losas` (tabla / usos / aligeradas / visor) | `cli.py` | testeado |
 | Tool MCP `uso_losa` (listar/asignar Uso_Losa en Revit) | `../revit-mcp-tools/src/tools/uso_losa.py` | **escrita, sin corrida en vivo** |
 | Panel pyRevit con desplegable (ventana arrastrable) | `revit/PanelLosas.extension/` | **escrito, sin corrida en vivo** |
@@ -51,7 +56,8 @@ el `.DL` de `dl_io.py`, las cargas de `cargas.py` y el informe de
 Separación verificado/supuesto: lo marcado "sin corrida en vivo" sigue la API
 estándar (Revit 2027/pyRevit, AutoLISP) pero nadie lo ha ejecutado dentro de
 una sesión viva todavía; la lógica que decide (usos, sets, geometría de
-nervios, conexiones) sí está cubierta por los 55 tests de `tests/`.
+nervios, conexiones, secciones, sets de modelado) sí está cubierta por los
+112 tests de `tests/`.
 
 Nota sobre "panel en propiedades": Revit no permite inyectar un desplegable
 dentro de su paleta nativa de Propiedades; el plugin lo resuelve con un
@@ -137,7 +143,7 @@ detalle (momentos PM, armado por franja y acero comercial PM).
 ```bash
 pip install -e ../puente-losas          # contrato, cargas, informe, PM
 pip install -e .                        # este plugin (CLI plugin-losas)
-python -m pytest tests                  # 55 tests
+python -m pytest tests                  # 112 tests
 ```
 
 El pushbutton se instala copiando `revit/PanelLosas.extension` a la carpeta de

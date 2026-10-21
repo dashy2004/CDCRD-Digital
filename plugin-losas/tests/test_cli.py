@@ -97,6 +97,45 @@ class TestCli(unittest.TestCase):
             self.assertEqual(datos["tipos"]["LE6"]["codigo"], 72)
             self.assertIn("LE2", datos["asignar_en_revit"])
 
+    def test_secciones_fijadas_y_reglamento(self):
+        with tempfile.TemporaryDirectory() as d:
+            proyecto = _escribir(EXPORT_INVENTADO, d, "proyecto.json")
+            fijadas = _escribir({"LE1": "L20"}, d, "secciones.json")
+            salida = os.path.join(d, "salidas")
+            rc = main(["secciones", "--proyecto", proyecto,
+                       "--secciones", fijadas, "--salida", salida])
+            self.assertEqual(rc, 0)
+            with open(os.path.join(salida, "secciones_losas.json"), encoding="utf-8") as f:
+                datos = json.load(f)
+            self.assertEqual(datos["secciones"]["LE1"]["origen"], "fijada")
+            payload = datos["asignar_en_revit"]
+            self.assertEqual(payload["asignar"]["LE1"], "L20")
+            self.assertEqual(payload["tipos_floor"]["L20"], 0.20)
+            # las no fijadas salen del reglamento
+            otras = [m for m in payload["asignar"] if m != "LE1"]
+            self.assertTrue(otras)
+            for m in otras:
+                self.assertEqual(datos["secciones"][m]["origen"], "auto")
+
+    def test_modelado_acero_3d(self):
+        with tempfile.TemporaryDirectory() as d:
+            proyecto = _escribir(PROYECTO, d, "proyecto.json")
+            resultados = _escribir(RESULTADOS, d, "resultados.json")
+            editados = _escribir({"LV1": {"x": "#3 @ 0.20", "y": "#3 @ 0.25",
+                                          "apoyo": "#3 @ 0.18"},
+                                  "LV2": {"x": "#3 @ 0.15", "y": "#3 @ 0.17"}},
+                                 d, "editados.json")
+            salida = os.path.join(d, "salidas")
+            rc = main(["modelado", "--proyecto", proyecto, "--resultados", resultados,
+                       "--editados", editados, "--salida", salida])
+            self.assertEqual(rc, 0)
+            with open(os.path.join(salida, "plan_modelado.json"), encoding="utf-8") as f:
+                plan = json.load(f)
+            self.assertEqual(len(plan["losas"]), 2)
+            self.assertEqual(len(plan["bastones"]), 1)
+            self.assertTrue(all(x["resumen"]["sets"] > 0 for x in plan["losas"]))
+            self.assertIn("50", plan["criterio_solape"])
+
     def test_usos_para_el_lisp(self):
         with tempfile.TemporaryDirectory() as d:
             rc = main(["usos", "--salida", d])

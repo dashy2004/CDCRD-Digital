@@ -34,7 +34,8 @@ from System.Windows.Forms import (Button, DataGridView,                 # noqa: 
                                   DataGridViewComboBoxColumn,
                                   DataGridViewTextBoxColumn, DialogResult,
                                   DockStyle, FolderBrowserDialog, Form,
-                                  FormStartPosition, MessageBox, Panel)
+                                  FormStartPosition, MessageBox,
+                                  MessageBoxButtons, Panel)
 
 from pyrevit import DB, revit  # noqa: E402
 
@@ -396,6 +397,9 @@ class PanelUsoLosa(Form):
                 ("Esquema: que acero es cual", self.esquema),
                 ("Abrir ultimo visor HTML", self.abrir_visor),
                 ("Dibujar acero en la PLANTA ACTIVA + tabla de detalles", self.dibujar_plano),
+                ("Aplicar ESPESOR real (tipos de Floor por seccion)", self.aplicar_espesor),
+                ("Etiquetar losas (tag Mark + espesor)", self.etiquetar),
+                ("MODELAR acero 3D (solape 50db; piloto 1 losa)", self.modelar),
                 ("CALCULAR (motor Pieper-Martens) y abrir visor", self.calcular),
                 ("Guardar en el modelo (uso, seccion y aceros editados)", self.guardar)):
             b = Button()
@@ -552,6 +556,8 @@ class PanelUsoLosa(Form):
             (proyecto, usos_json, carpeta),
             "plugin_losas.cli aligeradas --proyecto \"%s\" --usos \"%s\" --secciones \"%s\" "
             "--salida \"%s\"" % (proyecto, usos_json, ruta_secciones, carpeta),
+            "plugin_losas.cli secciones --proyecto \"%s\" --usos \"%s\" --secciones \"%s\" "
+            "--salida \"%s\"" % (proyecto, usos_json, ruta_secciones, carpeta),
             "plugin_losas.cli acero --resultados \"%s\" --salida \"%s\"" %
             (os.path.join(carpeta, "resultados.json"), carpeta),
         ]
@@ -654,6 +660,118 @@ class PanelUsoLosa(Form):
         MessageBox.Show("Dibujado:\n%s\nTabla: %s.\nEl .rvt NO se guarda." %
                         ("\n".join(partes),
                          (res.get("tabla") or {}).get("nombre") or "sin cambios"))
+
+    @_seguro
+    def aplicar_espesor(self, remitente, evento):
+        ruta = os.path.join(self.carpeta or "", "secciones_losas.json")
+        if self.carpeta is None or not os.path.isfile(ruta):
+            MessageBox.Show("Primero CALCULAR (hace falta secciones_losas.json).")
+            return
+        with io.open(ruta, encoding="utf-8") as f:
+            payload = json.load(f)["asignar_en_revit"]
+        marks = sorted(payload["asignar"].keys())
+        r = MessageBox.Show(
+            "Cambiar el tipo de Floor de %d losas segun su seccion (crea los "
+            "tipos que falten: %s).\n\nSi = TODAS; No = PILOTO (solo %s, "
+            "revisar y repetir); Cancelar = nada.\n\nOJO: cambiar el tipo "
+            "regenera la geometria; la tool verifica releyendo." %
+            (len(marks), ", ".join(sorted(payload["tipos_floor"])), marks[0]),
+            "Aplicar espesor real", MessageBoxButtons.YesNoCancel)
+        if r == DialogResult.Cancel:
+            return
+        P_tool = {"asignar": payload["asignar"],
+                  "tipos_floor": payload["tipos_floor"]}
+        if r == DialogResult.No:
+            P_tool["solo_marks"] = [marks[0]]
+        res = _exec_tool(self.raiz, ("_common.py", "espesor_losas.py"),
+                         P_tool, self.doc)
+        aviso = ""
+        if res["mal"]:
+            aviso = "\n\nNO COINCIDEN (revisar): %s" % json.dumps(res["mal"])
+        MessageBox.Show(
+            "%d losas verificadas releyendo; %d cambiadas de tipo.\n"
+            "Tipos creados: %s; ajustados: %s.%s\nEl .rvt NO se guarda." %
+            (res["total"], res["cambiadas"],
+             ", ".join(res["tipos_creados"]) or "ninguno",
+             ", ".join(res["tipos_ajustados"]) or "ninguno", aviso))
+
+    @_seguro
+    def modelar(self, remitente, evento):
+        if self.carpeta is None or not os.path.isfile(
+                os.path.join(self.carpeta, "resultados.json")):
+            MessageBox.Show("Primero CALCULAR (hace falta resultados.json).")
+            return
+        carpeta = self.carpeta
+        try:
+            ediciones = self._aceros()
+        except Exception as ex:
+            MessageBox.Show(str(ex))
+            return
+        ruta_editados = os.path.join(carpeta, "aceros_editados.json")
+        with io.open(ruta_editados, "w", encoding="utf-8") as f:
+            f.write(json.dumps(ediciones, indent=1))
+        paso = ("plugin_losas.cli modelado --proyecto \"%s\" --resultados \"%s\" "
+                "--editados \"%s\" --salida \"%s\"" %
+                (os.path.join(carpeta, "proyecto.json"),
+                 os.path.join(carpeta, "resultados.json"), ruta_editados, carpeta))
+        for bandera, nombre in (("--acero", "acero_pm.json"),
+                                ("--secciones", "secciones_losas.json"),
+                                ("--aligeradas", "plan_aligeradas.json")):
+            ruta_extra = os.path.join(carpeta, nombre)
+            if os.path.isfile(ruta_extra):
+                paso += " %s \"%s\"" % (bandera, ruta_extra)
+        errores = []
+        if not _correr_cpython(self.raiz, paso, errores):
+            MessageBox.Show("Fallo el plan de modelado:\n\n%s" % errores[-1])
+            return
+        r = MessageBox.Show(
+            "Modelar el acero 3D (parrilla, temperatura, bastones; solape 50db "
+            "mitad y mitad, barra de 9 m; una transaccion POR LOSA).\n\n"
+            "Si = TODAS las losas; No = PILOTO (1 losa, revisar en 3D y "
+            "repetir); Cancelar = nada.", "Modelar acero 3D",
+            MessageBoxButtons.YesNoCancel)
+        if r == DialogResult.Cancel:
+            return
+        P_tool = {"plan": os.path.join(carpeta, "plan_modelado.json")}
+        if r == DialogResult.Yes:
+            P_tool["todas"] = True
+        res = _exec_tool(self.raiz, ("_common.py", "acero_losas_modelar.py"),
+                         P_tool, self.doc)
+        partes = []
+        for x in res["losas"]:
+            partes.append("- %s: %d sets / %d barras (releido %s; %d previos "
+                          "borrados)" % (x["mark"], x["sets_leidos"],
+                                         x["barras_leidas"],
+                                         "OK" if x["ok"] else "NO COINCIDE",
+                                         x["previos_borrados"]))
+        aviso = ""
+        if res["fallos"]:
+            aviso = "\n\nFALLOS: %s" % json.dumps(res["fallos"])
+        if res["piloto"]:
+            aviso += ("\n\nPILOTO: %d losas pendientes; revisar en 3D y repetir "
+                      "con Si (todas)." % res["n_pendientes"])
+        MessageBox.Show("Acero 3D modelado:\n%s%s\nEl .rvt NO se guarda." %
+                        ("\n".join(partes), aviso))
+
+    @_seguro
+    def etiquetar(self, remitente, evento):
+        ruta_rfa = os.path.join(self.raiz, "plugin-losas", "revit", "familias",
+                                "CDCRD Tag Losa.rfa")
+        res = _exec_tool(self.raiz, ("_common.py", "tag_losas.py"),
+                         {"ruta_rfa": ruta_rfa}, self.doc)
+        partes = []
+        for r in res["vistas"]:
+            partes.append("- %s: %d tags en %d losas (%d previos borrados)" %
+                          (r["vista"], r["tags_puestos"], r["losas"],
+                           r["tags_borrados"]))
+        mal = [v for v in res["verificacion"] if not v["ok"]]
+        aviso = ""
+        if mal:
+            aviso = "\n\nNO COINCIDE la relectura: %s" % json.dumps(mal)
+        if res["familia_cargada"]:
+            aviso += "\n(familia '%s' cargada desde el repo)" % res["familia"]
+        MessageBox.Show("Etiquetado (familia %s):\n%s%s\nEl .rvt NO se guarda." %
+                        (res["familia"], "\n".join(partes), aviso))
 
     @_seguro
     def abrir_visor(self, remitente, evento):
