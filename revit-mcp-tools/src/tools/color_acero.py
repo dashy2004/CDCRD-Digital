@@ -9,7 +9,11 @@ solidas en 3D. Parametros:
   default_rgb:   [r,g,b] para tipos sin color (default [128,128,128]).
   straight_shapes: nombres de Shape considerados "recta" (default ["00","01"]).
   solid:         True intenta Rebar.SetSolidInView (default True).
-  host_category: "framing" | "columns" | "" para limitar a barras hospedadas en esa categoria.
+  host_category: "framing" | "columns" | "foundations" | "floors" | "walls" | "" para limitar
+                 a barras hospedadas en esa categoria.
+  host_ids:      lista de ElementId de hosts; si viene, solo esas barras (mas rapido que la categoria).
+  unobscured:    True (default) intenta Rebar.SetUnobscuredInView para que el acero se vea a
+                 traves del hormigon en la vista 3D. Sin esto, la barra existe pero no se ve.
 La leyenda devuelta (tipo -> rgb, n) es la que hay que poner en el plano.
 NO PROBADA en vivo en la conversion (el modelo de referencia no tenia acero).
 """
@@ -22,8 +26,12 @@ def run(doc, uidoc, DB, P):
     straight = set(P.get("straight_shapes") or ["00", "01"])
     solid = bool(P.get("solid", True))
     host_cat = P.get("host_category") or ""
-    HOST = {"framing": DB.BuiltInCategory.OST_StructuralFraming, "columns": DB.BuiltInCategory.OST_StructuralColumns}
+    HOST = {"framing": DB.BuiltInCategory.OST_StructuralFraming, "columns": DB.BuiltInCategory.OST_StructuralColumns,
+            "foundations": DB.BuiltInCategory.OST_StructuralFoundation, "floors": DB.BuiltInCategory.OST_Floors,
+            "walls": DB.BuiltInCategory.OST_Walls}
     host_bic = HOST.get(host_cat)
+    host_ids = set(int(i) for i in (P.get("host_ids") or []))
+    unobsc = bool(P.get("unobscured", True))
 
     def aclarar(rgb):
         return [int(c + (255 - c) * 0.45) for c in rgb]
@@ -31,7 +39,13 @@ def run(doc, uidoc, DB, P):
            "leyenda": {}, "errores": {}}
     barras = []
     for rb in collector(doc, DB.BuiltInCategory.OST_Rebar):
-        if host_bic is not None:
+        if host_ids:
+            try:
+                if eidv(rb.GetHostId()) not in host_ids:
+                    continue
+            except Exception:
+                continue
+        elif host_bic is not None:
             try:
                 h = doc.GetElement(rb.GetHostId())
                 if h is None or h.Category is None or eidv(h.Category.Id) != int(host_bic):
@@ -88,6 +102,14 @@ def run(doc, uidoc, DB, P):
                         try:
                             m(view, True)
                             out["solid_ok"] += 1
+                        except Exception:
+                            pass
+                if unobsc:
+                    m = getattr(rb, "SetUnobscuredInView", None)
+                    if m is not None:
+                        try:
+                            m(view, True)
+                            out["unobscured_ok"] = out.get("unobscured_ok", 0) + 1
                         except Exception:
                             pass
             except Exception as ex:

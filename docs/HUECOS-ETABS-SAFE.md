@@ -354,3 +354,93 @@ Antes de escribir el desempaquetado de cualquier llamada, correr
 `describe_oapi` sobre su namespace y **contar los valores del `py-> (...)`**.
 Los tres bugs corregidos hoy en el SAFE MCP y probablemente E-024 son todos
 la misma causa: asumir cuántos valores devuelve comtypes en vez de leerlo.
+
+---
+
+# Huecos confirmados en vivo el 2026-09-27 (corrida ING-CIV337)
+
+## E-001 · El `EccenRatio` del caso espectral nace en 0 y nada avisa
+
+**Dónde** ETABS 23.3.0, `LoadCases.ResponseSpectrum`.
+
+Un caso de respuesta espectral creado por API queda con `EccenRatio = 0`: sin
+excentricidad accidental. El CDCRD (T2 2.10.8.1.10) exige evaluar el coeficiente
+de irregularidad torsional **con** esa excentricidad, 5 % de la dimensión en
+planta, en ambos signos.
+
+Lo serio no es el valor por defecto: es que **ninguna tabla de resultados avisa**.
+`Story Max Over Avg Drifts` se calcula igual, da un número más bajo, y parece una
+verificación válida. En este proyecto el CIT sin excentricidad daba 1.619 en X;
+con ella, 1.606 en X y 1.478 en Y — el mismo veredicto, pero por casualidad: la
+diferencia podía haber caído del otro lado del 1.40.
+
+**Regla** un chequeo de irregularidad torsional que no verifique primero
+`EccenRatio` no vale. Leerlo de
+`Load Case Definitions - Response Spectrum`, columna `EccenRatio`.
+Fijarlo con `LoadCases.ResponseSpectrum.SetEccentricity(Name, 0.05)` con el
+modelo desbloqueado, y volver a correr análisis y diseño.
+
+## E-002 · `File.Save` sin ruta levanta un diálogo y bloquea el hilo COM
+
+**Dónde** ETABS 23.3.0 y SAFE 23.3.0.
+
+`File.Save()` sin argumento abre "Save Model File As" y **bloquea el hilo COM**
+hasta que alguien cierre el diálogo. Toda llamada OAPI posterior devuelve
+timeout, y desde el lado del agente parece que el programa se colgó. Pasó dos
+veces en la misma sesión: primero en SAFE, después en ETABS.
+
+**Regla** siempre `File.Save(ruta_completa)`. Si ya hay timeouts encadenados, el
+programa no está colgado: hay un diálogo abierto esperando. Se confirma mirando
+la pantalla, no la API.
+
+## R-001 · La API de Revit no coloca tags de acero en vista 3D
+
+**Dónde** Revit 2027, `DB.IndependentTag.Create`.
+
+En una vista 3D con orientación bloqueada, los tags de columna, viga y zapata se
+colocan sin problema. Los de acero (`OST_Rebar`) no: los 46 intentos devuelven
+`The reference can not be tagged` (`ArgumentException`, parámetro
+`referenceToTag`). No es cuestión del tipo de tag ni del bloqueo de la vista.
+
+**Vuelta** identificar el acero por color, con leyenda. `color_acero.py` aplica
+overrides por diámetro y forma, y con `unobscured = True` la barra se ve a través
+del hormigón — sin eso la barra existe en la vista pero queda tapada.
+
+## R-002 · Etiquetar en vista 3D exige orientación bloqueada
+
+**Dónde** Revit 2027, `DB.View3D`.
+
+Requisito de Revit, no defecto: en una vista 3D sin `SaveOrientationAndLock()`
+no se puede colocar ningún tag. Para reorientar una vista ya bloqueada hay que
+`Unlock()` primero. Está resuelto en `vista_3d_detalle.py`.
+
+## R-003 · La caja de sección recorta geometría, no el acero vecino
+
+**Dónde** Revit 2027, `View3D.SetSectionBox`.
+
+En un detalle de un elemento, la caja de sección deja fuera el hormigón vecino
+pero el acero de los elementos contiguos que cae dentro de la caja sigue
+apareciendo, y ensucia el detalle. La salida es aislamiento permanente:
+`IsolateElementsTemporary` con los ids del elemento **y de su acero hospedado**,
+seguido de `ConvertTemporaryHideIsolateToPermanent`, dentro de la transacción.
+Los tags creados después del aislamiento siguen siendo visibles.
+
+## E-003 · `File.Save(ruta)` se comporta como "Guardar como" y descarta los resultados
+
+**Dónde** ETABS 23.3.0, `File.Save`.
+
+Observado el 2026-09-27: después de `File.Save(ruta_completa)` sobre el mismo
+archivo que ya estaba abierto, `get_analysis_status` devolvió los 9 casos como
+"no corrido", y el cuadro **Choose Tables for Display** dejó de ofrecer la rama
+ANALYSIS RESULTS. Los resultados que se habían leído minutos antes por OAPI
+seguían siendo correctos: lo que se perdió fue el estado de resultados del
+modelo, no los números ya extraídos.
+
+No está aislado del todo del caso E-002: en la misma secuencia se había
+cancelado un diálogo "Save Model File As". Queda anotado como observación, no
+como certeza.
+
+**Regla de trabajo** extraer y guardar en JSON todo resultado que haga falta
+**antes** de guardar el modelo. Si después se necesitan los resultados en la
+interfaz, volver a correr análisis y diseño: en este modelo son menos de un
+minuto. No dar por hecho que un .EDB guardado conserva sus resultados.

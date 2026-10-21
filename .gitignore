@@ -61,3 +61,7 @@ revit-mcp-write/RevitWrite.extension/RevitWrite.tab/6-Vigas.panel/
 .env.*
 !.env.example
 herramientas-locales/salidas/
+
+# Ayuda oficial de CSI (derechos de autor): solo copia local
+servidor-mcp-safe/docs/CSI-API-SAFE-v1-chm-html.zip
+servidor-mcp-safe/docs/CSI-API-SAFE-v1-paginas-clave.md

@@ -10,7 +10,7 @@ import os
 logger = logging.getLogger('safe_mcp_server')
 
 DEFAULTS = {
-    "server": {"name": "SAFE MCP", "version": "0.1.0"},
+    "server": {"name": "SAFE MCP", "version": "0.2.1"},
     "safe": {
         # ProgID COM real: NO CONFIRMADO en esta sesion (sin Windows/SAFE
         # disponibles). Candidatos a probar, en orden, ver diagnose_safe.py

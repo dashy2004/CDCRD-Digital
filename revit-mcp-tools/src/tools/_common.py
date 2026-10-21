@@ -412,6 +412,8 @@ CAT = {"columnas": "OST_StructuralColumns", "vigas": "OST_StructuralFraming",
        "acero": "OST_Rebar", "ejes": "OST_Grids", "niveles": "OST_Levels", "rooms": "OST_Rooms",
        "puertas": "OST_Doors", "ventanas": "OST_Windows", "techos": "OST_Roofs",
        "escaleras": "OST_Stairs", "laminas": "OST_Sheets", "muebles": "OST_Furniture",
+       "importados": "OST_ImportObjectStyles", "cad": "OST_ImportObjectStyles",
+       "cotas": "OST_Dimensions", "textos": "OST_TextNotes", "topografia": "OST_Topography",
        "columns": "OST_StructuralColumns", "framing": "OST_StructuralFraming",
        "floors": "OST_Floors", "walls": "OST_Walls", "foundations": "OST_StructuralFoundation"}
 

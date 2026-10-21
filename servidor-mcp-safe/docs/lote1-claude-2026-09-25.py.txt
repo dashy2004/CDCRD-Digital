@@ -1,0 +1,389 @@
+    # ==================================================================
+    # LOTE 1 (claude, 2026-09-25). Herramientas que hoy obligaban a usar
+    # control total del PC. Base: docs\OAPI-SAFE-real.md. Cada metodo
+    # indica capa A (documentada por CSI para SAFE) o capa B (typelib
+    # compartido con ETABS; funciona solo si SAFE lo implementa) y su
+    # estado [T] typelib / [H] verificado en vivo / [X] falla en SAFE.
+    # Regla: un [T] pasa a [H] solo releyendo el efecto con otra llamada.
+    # ==================================================================
+
+    _OBJ_NAMESPACE = {
+        "point": "PointObj", "joint": "PointObj",
+        "frame": "FrameObj", "line": "FrameObj", "beam": "FrameObj",
+        "area": "AreaObj", "surface": "AreaObj", "slab": "AreaObj",
+        "footing": "AreaObj", "zapata": "AreaObj", "losa": "AreaObj",
+    }
+    _SELECT_TYPE_NAMES = {1: "point", 2: "frame", 3: "cable", 4: "tendon",
+                          5: "area", 6: "solid", 7: "link"}
+
+    def _ns(self, obj_type: str) -> str:
+        key = (obj_type or "").strip().lower()
+        ns = self._OBJ_NAMESPACE.get(key)
+        if ns is None:
+            raise SafeError(f"Tipo no reconocido: '{obj_type}'. "
+                            f"Use point, frame o area.")
+        return ns
+
+    # ---------------- Archivo (capa A, documentado) ----------------
+
+    @com_call
+    def open_model(self, path: str, units: str = "") -> str:
+        """Abre un .FDB / .F2K en la instancia activa de SAFE. [capa A]
+
+        El modelo que estuviera abierto se cierra SIN guardar (File.OpenFile
+        no pregunta). Guardar antes con save_model si hace falta. Para
+        pruebas de escritura usar SIEMPRE una copia (ver copy_model_file).
+
+        Args:
+            path: ruta absoluta del archivo.
+            units: opcional, unidades activas tras abrir (ej. "N, mm, C").
+        """
+        if not os.path.isfile(path):
+            raise SafeError(f"No existe: {path}")
+        model = self._model()
+        oapi.call_checked(model.File, "OpenFile", (path,),
+                          f"apertura de '{os.path.basename(path)}'")
+        if units:
+            self.set_units(units)
+        return "Abierto. " + self.get_model_info().replace("\n", " | ")
+
+    @com_call
+    def close_model(self, save: bool = False) -> str:
+        """Cierra el modelo actual dejando SAFE abierto en blanco. [capa A]
+
+        La OAPI no tiene 'cerrar'; File.NewBlank es el equivalente.
+        """
+        model = self._model()
+        try:
+            filename = model.GetModelFilename()
+        except Exception:
+            filename = "(sin nombre)"
+        if save:
+            oapi.call_checked(model.File, "Save", (), "guardado previo")
+        oapi.call_checked(model.File, "NewBlank", (), "modelo en blanco")
+        return (f"Cerrado {filename}{' (guardado)' if save else ' (sin guardar)'}. "
+                f"SAFE sigue abierto en blanco.")
+
+    @com_call
+    def copy_model_file(self, dest_path: str, overwrite: bool = False) -> str:
+        """Copia en disco el .FDB abierto a dest_path SIN cambiar el modelo activo.
+
+        Sirve para crear la copia de pruebas (_pruebas-mcp.FDB) antes de
+        cualquier escritura. Copia el archivo tal como esta guardado en disco:
+        si hay cambios sin guardar, guardarlos primero con save_model.
+        """
+        import shutil
+        model = self._model()
+        src = model.GetModelFilename()
+        if not src or not os.path.isfile(src):
+            raise SafeError(f"El modelo activo no tiene archivo en disco: {src!r}")
+        if os.path.exists(dest_path) and not overwrite:
+            raise SafeError(f"Ya existe {dest_path}; use overwrite=True.")
+        shutil.copy2(src, dest_path)
+        return f"Copiado {src} -> {dest_path} ({os.path.getsize(dest_path)} bytes)."
+
+    # ---------------- Llamada generica (capa A/B, [H] patron de ETABS) --
+
+    @com_call
+    def call_oapi(self, path: str, method: str,
+                  args: list[Any] | None = None) -> str:
+        """Invoca CUALQUIER metodo de la OAPI y devuelve ret y [out] crudos.
+
+        Consultar primero describe_oapi(path, method) para la firma real:
+        los argumentos [in] se pasan en orden; los [out] NO se pasan
+        (comtypes los devuelve). Arreglos [in] se pasan como listas JSON.
+        Puede ESCRIBIR en el modelo: cada llamada queda en el log. No hay
+        deshacer. Es la via para convertir cada [T] de OAPI-SAFE-real.md
+        en [H] o [X] sin escribir una tool por prueba.
+
+        Args:
+            path: namespace bajo SapModel, ej. "AreaObj", "File",
+                  "DesignConcreteSlab.DesignStrip". Vacio = SapModel.
+            method: nombre exacto del metodo, ej. "GetProperty".
+            args: lista de argumentos [in], ej. ["12"].
+        """
+        import json
+        model = self._model()
+        target = oapi.resolve_path(model, path) if path else model
+        fn = getattr(target, method, None)
+        if fn is None:
+            raise SafeError(f"'{method}' no existe en SapModel.{path or ''}. "
+                            f"Use describe_oapi.")
+        args = list(args or [])
+        logger.warning("call_oapi SapModel.%s.%s(%r)", path, method, args)
+        try:
+            result = fn(*args)
+        except Exception as e:
+            raise SafeError(f"SapModel.{path}.{method}{tuple(args)!r} fallo: {e}")
+        code = oapi.ret_code(result)
+        outs = [list(v) if isinstance(v, (tuple, list)) else v
+                for v in oapi.outs(result)]
+        return json.dumps({"ret": code, "outs": outs,
+                           "raw_type": type(result).__name__},
+                          ensure_ascii=False, default=str)
+
+    # ---------------- Seleccion (capa A SelectObj + capa B SetSelected) --
+
+    @com_call
+    def clear_selection(self) -> str:
+        """Deselecciona todo (SelectObj.ClearSelection). [capa A]"""
+        model = self._model()
+        oapi.call(model.SelectObj, [("ClearSelection", ())], "limpieza de seleccion")
+        return "Seleccion limpiada."
+
+    @com_call
+    def select_objects(self, obj_type: str, names: list[str],
+                       clear_first: bool = True) -> str:
+        """Selecciona objetos por tipo y nombre (AreaObj/PointObj/FrameObj.SetSelected). [capa B, T]
+
+        Args:
+            obj_type: "point", "frame" o "area".
+            names: IDs (los que devuelven get_points / get_areas).
+            clear_first: limpiar la seleccion previa (recomendado).
+        """
+        ns = self._ns(obj_type)
+        if not names:
+            raise SafeError("Debe indicar al menos un nombre.")
+        model = self._model()
+        if clear_first:
+            oapi.call(model.SelectObj, [("ClearSelection", ())], "limpieza previa")
+        owner = getattr(model, ns)
+        for name in names:
+            oapi.call(owner, [("SetSelected", (str(name), True)),
+                              ("SetSelected", (str(name), True, 0))],
+                      f"seleccion de {ns} '{name}'")
+        return f"{len(names)} {ns}(s) seleccionado(s)."
+
+    @com_call
+    def get_selection(self) -> str:
+        """Lista lo seleccionado ahora (SelectObj.GetSelected). [capa A]"""
+        model = self._model()
+        n, types, names, ret = model.SelectObj.GetSelected()
+        if ret != 0:
+            raise SafeError("GetSelected devolvio error.")
+        if n == 0:
+            return "Nada seleccionado."
+        rows = [f"{self._SELECT_TYPE_NAMES.get(types[i], types[i])} {names[i]}"
+                for i in range(n)]
+        return f"{n} objeto(s):\n" + "\n".join(rows)
+
+    # ---------------- Geometria: borrar / mover / editar (capa B, [T]) --
+
+    @com_call
+    def delete_object(self, obj_type: str, name: str) -> str:
+        """Borra un objeto por tipo y nombre (AreaObj/PointObj/FrameObj.Delete). [capa B, T]
+
+        Sin deshacer. Trabajar sobre copia. Un punto compartido por un
+        area no se borra hasta que el area deje de usarlo.
+        """
+        ns = self._ns(obj_type)
+        model = self._model()
+        owner = getattr(model, ns)
+        oapi.call(owner, [("Delete", (str(name), 0)), ("Delete", (str(name),))],
+                  f"borrado de {ns} '{name}'")
+        return f"{ns} '{name}' borrado."
+
+    @com_call
+    def move_objects(self, obj_type: str, names: list[str],
+                     dx: float = 0.0, dy: float = 0.0, dz: float = 0.0) -> str:
+        """Traslada objetos: SetSelected + EditGeneral.Move + ClearSelection. [capa B, T]
+
+        Args:
+            obj_type: "point", "frame" o "area".
+            names: IDs de los objetos.
+            dx, dy, dz: desplazamiento en unidades activas (get_units).
+        """
+        ns = self._ns(obj_type)
+        if not names:
+            raise SafeError("Debe indicar al menos un nombre.")
+        model = self._model()
+        oapi.call(model.SelectObj, [("ClearSelection", ())], "limpieza previa")
+        owner = getattr(model, ns)
+        for name in names:
+            oapi.call(owner, [("SetSelected", (str(name), True)),
+                              ("SetSelected", (str(name), True, 0))],
+                      f"seleccion de {ns} '{name}'")
+        oapi.call(model.EditGeneral,
+                  [("Move", (float(dx), float(dy), float(dz)))],
+                  "EditGeneral.Move")
+        oapi.call(model.SelectObj, [("ClearSelection", ())], "limpieza posterior")
+        return f"{len(names)} {ns}(s) desplazado(s): dx={dx:g}, dy={dy:g}, dz={dz:g}."
+
+    @com_call
+    def get_area_info(self, name: str) -> str:
+        """Propiedad, vertices, abertura y espesor de UN area (AreaObj.Get*). [capa B, T]"""
+        model = self._model()
+        ao = model.AreaObj
+        prop, r1 = ao.GetProperty(str(name))
+        npts, pts, r2 = ao.GetPoints(str(name))
+        try:
+            is_open, r3 = ao.GetOpening(str(name))
+        except Exception:
+            is_open, r3 = "?", -1
+        coords = []
+        for p in list(pts)[:npts]:
+            x, y, z, _r = model.PointObj.GetCoordCartesian(str(p))
+            coords.append(f"{p}:({x:g},{y:g},{z:g})")
+        return (f"Area {name}: seccion={prop} (ret {r1}); abertura={is_open} (ret {r3}); "
+                f"{npts} vertice(s) (ret {r2}): " + " ".join(coords))
+
+    @com_call
+    def set_area_property(self, name: str, section: str) -> str:
+        """Cambia la seccion de losa/zapata de un area (AreaObj.SetProperty). [capa B, T]
+
+        Args:
+            name: ID del area.
+            section: nombre de seccion existente (ver tabla 'Slab Property Definitions').
+        """
+        model = self._model()
+        oapi.call(model.AreaObj, [("SetProperty", (str(name), section, 0)),
+                                  ("SetProperty", (str(name), section))],
+                  f"SetProperty {name} -> {section}")
+        prop, _ = model.AreaObj.GetProperty(str(name))
+        if prop != section:
+            raise SafeError(f"Releido '{prop}', esperaba '{section}'.")
+        return f"Area {name}: seccion = {prop} (verificado releyendo)."
+
+    @com_call
+    def set_area_opening(self, name: str, is_opening: bool = True) -> str:
+        """Marca/desmarca un area como abertura (AreaObj.SetOpening). [capa B, T]"""
+        model = self._model()
+        oapi.call(model.AreaObj, [("SetOpening", (str(name), bool(is_opening), 0)),
+                                  ("SetOpening", (str(name), bool(is_opening)))],
+                  f"SetOpening {name}")
+        val, _ = model.AreaObj.GetOpening(str(name))
+        return f"Area {name}: abertura = {val} (releido)."
+
+    @com_call
+    def set_point_coordinates(self, name: str, x: float, y: float,
+                              z: float) -> str:
+        """Mueve UN punto a coordenadas absolutas (EditPoint.ChangeCoordinates). [capa B, T]
+
+        Arrastra las areas que comparten el punto: es la via limpia para
+        ajustar una esquina de zapata. Unidades activas.
+        """
+        model = self._model()
+        oapi.call(model.EditPoint,
+                  [("ChangeCoordinates", (str(name), float(x), float(y), float(z))),
+                   ("ChangeCoordinates_1", (str(name), float(x), float(y), float(z), False))],
+                  f"ChangeCoordinates {name}")
+        rx, ry, rz, _ = model.PointObj.GetCoordCartesian(str(name))
+        return f"Punto {name} ahora en ({rx:g}, {ry:g}, {rz:g}) (releido)."
+
+    @com_call
+    def set_area_points(self, name: str, point_names: list[str]) -> str:
+        """Redefine los vertices de un area por nombres de punto (EditArea.ChangeConnectivity). [capa B, T]
+
+        Args:
+            name: ID del area.
+            point_names: IDs de puntos existentes, en orden de contorno.
+        """
+        if len(point_names) < 3:
+            raise SafeError("Se necesitan al menos 3 puntos.")
+        model = self._model()
+        pts = [str(p) for p in point_names]
+        oapi.call(model.EditArea,
+                  [("ChangeConnectivity", (str(name), len(pts), pts))],
+                  f"ChangeConnectivity {name}")
+        n, got, _ = model.AreaObj.GetPoints(str(name))
+        got = [str(g) for g in list(got)[:n]]
+        return f"Area {name}: vertices ahora {got} (releido)."
+
+    # ---------------- Puntos y cargas puntuales (capa B, [T]) ----------
+
+    @com_call
+    def add_point(self, x: float, y: float, z: float = 0.0,
+                  user_name: str = "") -> str:
+        """Crea un punto (PointObj.AddCartesian). [capa B, T]"""
+        model = self._model()
+        res = oapi.call(model.PointObj,
+                        [("AddCartesian", (float(x), float(y), float(z), "", user_name)),
+                         ("AddCartesian", (float(x), float(y), float(z), ""))],
+                        "AddCartesian")
+        name = None
+        for v in oapi.outs(res):
+            if isinstance(v, str) and v:
+                name = v
+        return f"Punto '{name}' creado en ({x:g}, {y:g}, {z:g})."
+
+    @com_call
+    def assign_point_load(self, name: str, load_pattern: str,
+                          fx: float = 0.0, fy: float = 0.0, fz: float = 0.0,
+                          mx: float = 0.0, my: float = 0.0, mz: float = 0.0,
+                          replace: bool = True) -> str:
+        """Carga puntual de columna sobre un punto (PointObj.SetLoadForce). [capa B, T]
+
+        Fuerzas y momentos en el sistema Global, unidades activas.
+        fz negativo = hacia abajo (compresion sobre la zapata).
+        """
+        model = self._model()
+        vals = [float(v) for v in (fx, fy, fz, mx, my, mz)]
+        oapi.call(model.PointObj,
+                  [("SetLoadForce", (str(name), load_pattern, vals, bool(replace), "Global", 0)),
+                   ("SetLoadForce", (str(name), load_pattern, vals, bool(replace)))],
+                  f"SetLoadForce {name}/{load_pattern}")
+        res = model.PointObj.GetLoadForce(str(name))
+        n = res[0]
+        return (f"Carga {load_pattern} en punto {name}: F=({fx:g},{fy:g},{fz:g}) "
+                f"M=({mx:g},{my:g},{mz:g}). El punto tiene ahora {n} carga(s) (releido).")
+
+    # ---------------- Diseño: acero requerido por estacion (capa B) -----
+
+    @com_call
+    def get_strip_rebar_stations(self, strip_filter: str = "",
+                                 max_rows: int = 60, offset: int = 0) -> str:
+        """Acero requerido por estacion de franja (DesignConcreteSlab.GetFlexureAndShear). [capa B, T]
+
+        Requiere run_slab_design. Devuelve por estacion: ancho, combo y
+        momento/As arriba y abajo (con As minimo), cortante y estado.
+
+        Args:
+            strip_filter: subcadena del nombre de franja (vacio = todas).
+            max_rows, offset: paginacion sobre las filas filtradas.
+        """
+        model = self._model()
+        res = model.DesignConcreteSlab.GetFlexureAndShear()
+        ret = res[-1]
+        if ret != 0:
+            raise SafeError("GetFlexureAndShear devolvio error. ¿Diseño corrido?")
+        (story, strip, station, width, ftc, ftm, fta, ftmin, fbc, fbm, fba,
+         fbmin, axial, vc, vf, va, status, gx, gy, layer) = res[:20]
+        rows = []
+        for i in range(len(strip)):
+            if strip_filter and strip_filter.lower() not in str(strip[i]).lower():
+                continue
+            rows.append(f"{strip[i]}, {layer[i]}, {station[i]:g}, {width[i]:g}, "
+                        f"{ftc[i]}, {ftm[i]:g}, {fta[i]:g}, {ftmin[i]:g}, "
+                        f"{fbc[i]}, {fbm[i]:g}, {fba[i]:g}, {fbmin[i]:g}, "
+                        f"{vc[i]}, {vf[i]:g}, {va[i]:g}, {status[i]}, {gx[i]:g}, {gy[i]:g}")
+        total = len(rows)
+        page = rows[offset:offset + max_rows]
+        header = ("Strip, Layer, Station, Width, TopCombo, TopM, TopAs, TopAsMin, "
+                  "BotCombo, BotM, BotAs, BotAsMin, VCombo, V, VAs, Status, X, Y")
+        resto = total - (offset + len(page))
+        suf = f"\n... ({resto} mas; offset={offset + len(page)})" if resto > 0 else ""
+        return f"{total} estacion(es)\n{header}\n" + "\n".join(page) + suf
+
+    # ---------------- Tablas: campos y tipo de importacion (capa A) -----
+
+    @com_call
+    def get_table_fields(self, table_key: str) -> str:
+        """Campos de una tabla (DatabaseTables.GetAllFieldsInTable): clave, nombre, descripcion, importable. [capa A]"""
+        model = self._model()
+        res = model.DatabaseTables.GetAllFieldsInTable(table_key)
+        ret = res[-1]
+        if ret != 0:
+            raise SafeError(f"No se pudo leer los campos de '{table_key}'.")
+        # Firma ETABS: (TableVersion, NumberFields, FieldKey[], FieldName[],
+        # Description[], UnitsString[], IsImportable[], ret)
+        vals = list(res[:-1])
+        lists = [v for v in vals if isinstance(v, (tuple, list))]
+        if len(lists) < 2:
+            return f"Respuesta cruda: {res!r}"
+        keys, names = lists[0], lists[1]
+        desc = lists[2] if len(lists) > 2 else [""] * len(keys)
+        units = lists[3] if len(lists) > 3 else [""] * len(keys)
+        imp = lists[4] if len(lists) > 4 else [""] * len(keys)
+        rows = [f"{keys[i]} | {names[i]} | {units[i]} | importable={imp[i]} | {desc[i]}"
+                for i in range(len(keys))]
+        return f"{table_key}: {len(keys)} campo(s)\n" + "\n".join(rows)

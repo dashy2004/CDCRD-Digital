@@ -1,0 +1,28 @@
+{
+ "esquema": "corpus-inapa/0.1",
+ "clase": "norma",
+ "documento": "Reglamento Tecnico para Diseno de Obras e Instalaciones Hidro-Sanitario del INAPA",
+ "codigo": "DIG-PO-001",
+ "codigos_detectados": [
+  "DIG-PO-001"
+ ],
+ "version": "01",
+ "fecha_emision": "2018-07-04",
+ "organismo": "INAPA",
+ "fuente_oficial": "https://inapa.gob.do/wp-content/uploads/2024/11/ReglamentoTecnicoParaDisenoDeObrasEIstalacionesHidro.pdf",
+ "fuente_local": "REGLAMENTOS-TECNICOS-PARA-DISENO-E-INSTALACIONES-HIDRO-SANITARIO-DEL-INAPA.pdf",
+ "sha256_pdf": "b99dcb7faf97738ed00cb108d775208ea238944c0333869b0986db9ef06827b7",
+ "paginas_pdf": 414,
+ "totales_impresos_declarados": [
+  410,
+  413
+ ],
+ "paginas_sin_numero_impreso": [
+  1
+ ],
+ "extractor": "pdftotext version 22.02.0 -layout",
+ "extractor_version": "0.1.0",
+ "fecha_extraccion": "2026-10-11T04:15Z",
+ "revision_humana": false,
+ "alcance": "Texto OCR del reglamento, unidad = pagina. La cita obligatoria es por pagina impresa y PDF con la estructura vigente; no sustituye la lectura del PDF ni determina por si sola la aplicabilidad del reglamento a un proyecto."
+}
