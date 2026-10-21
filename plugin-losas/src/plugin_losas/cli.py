@@ -24,7 +24,6 @@ from plugin_losas.acad_dxf import export_para_puente, losas_desde_dxf
 from plugin_losas.extraccion import (escribir_tabla_excel, escribir_usos_json,
                                      filas_desde_export, usos_para_puente)
 from plugin_losas.usos_tabla4 import cargar_tabla4
-from plugin_losas.resultados_pm import visor_desde_archivos
 
 
 def _cargar_json(ruta: str) -> dict:
@@ -121,7 +120,7 @@ def _cmd_renumerar(args) -> int:
     cajas = [caja_desde_contorno(
         p.mark, p.contorno or [[0, 0], [p.lx, 0], [p.lx, p.ly], [0, p.ly]],
         es_vuelo=p.es_vuelo) for p in panos]
-    mapa = renumerar(cajas, args.prefijo, relleno=args.relleno)
+    mapa = renumerar(cajas, args.prefijo, inicio=args.inicio, relleno=args.relleno)
     os.makedirs(args.salida, exist_ok=True)
     ruta = os.path.join(args.salida, "renumeracion.json")
     with open(ruta, "w", encoding="utf-8") as f:
@@ -147,9 +146,43 @@ def _cmd_usos(args) -> int:
 
 
 def _cmd_visor(args) -> int:
+    from plugin_losas.resultados_pm import dto_visor, escribir_visor
+
+    proyecto = _cargar_json(args.proyecto)
+    resultados = _cargar_json(args.resultados)
+    if args.nivel:
+        marks = {str(rec.get("mark") or rec.get("id")) for rec in proyecto.get("losas") or []
+                 if (rec.get("nivel") or "") == args.nivel}
+        if not marks:
+            raise ValueError(f"ninguna losa en el nivel '{args.nivel}'.")
+        proyecto = dict(proyecto)
+        proyecto["losas"] = [rec for rec in proyecto["losas"]
+                             if str(rec.get("mark") or rec.get("id")) in marks]
+        pm = resultados["pieper_martens"]
+        resultados = {
+            "panos": [p for p in resultados.get("panos") or [] if p["mark"] in marks],
+            "pieper_martens": {
+                "metodo": pm.get("metodo"),
+                "losas": {k: v for k, v in pm["losas"].items() if k in marks},
+                "apoyos": [a for a in pm.get("apoyos") or []
+                           if a["losa_i"] in marks and a["losa_j"] in marks],
+            },
+        }
     os.makedirs(args.salida, exist_ok=True)
+
+    acero = None
+    try:
+        from plugin_losas.acero_pm import acero_pm_de_resultados, escribir_acero_pm
+        acero = acero_pm_de_resultados(resultados)
+        ruta_acero = os.path.join(args.salida, "acero_pm.json")
+        escribir_acero_pm(acero, ruta_acero)
+        print(f"Acero PM comercial calculado (motor EstructurasRD): {ruta_acero}")
+    except ImportError:
+        print("aviso: motor_fea no instalado — el visor sale sin acero comercial PM.")
+
     ruta = os.path.join(args.salida, "visor_losas.html")
-    dto = visor_desde_archivos(args.proyecto, args.resultados, ruta, nombre=args.nombre)
+    dto = dto_visor(proyecto, resultados, args.nombre, acero=acero)
+    escribir_visor(dto, ruta)
     print(f"Visor con {len(dto.panos)} paños y {len(dto.apoyos)} apoyos PM.")
     print(f"  {ruta}")
     return 0
@@ -189,7 +222,8 @@ def main(argv: list[str] | None = None) -> int:
                         help="marcas en orden de lectura (izq→der, arriba→abajo; vuelos fuera)")
     rn.add_argument("--proyecto", required=True)
     rn.add_argument("--prefijo", required=True, help="prefijo de la marca (T, N2-, L...)")
-    rn.add_argument("--relleno", type=int, default=0, help="ceros a la izquierda (2 → N2-01)")
+    rn.add_argument("--relleno", type=int, default=2, help="ceros a la izquierda (2 → L00)")
+    rn.add_argument("--inicio", type=int, default=0, help="primer número (ley: 0 → L00)")
     rn.add_argument("--usos", help="usos.json del puente (marca los vuelos, que no se renumeran)")
     rn.add_argument("--salida", default="salidas")
     rn.set_defaults(func=_cmd_renumerar)
@@ -210,6 +244,8 @@ def main(argv: list[str] | None = None) -> int:
     v.add_argument("--resultados", required=True, help="resultados.json del CLI puente-losas")
     v.add_argument("--salida", default="salidas")
     v.add_argument("--nombre", default="Proyecto Ejemplo")
+    v.add_argument("--nivel", default=None,
+                   help="limitar el visor a un nivel (nombre exacto del nivel de Revit)")
     v.set_defaults(func=_cmd_visor)
 
     args = parser.parse_args(argv)

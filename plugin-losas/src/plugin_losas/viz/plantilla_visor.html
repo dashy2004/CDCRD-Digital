@@ -175,6 +175,10 @@
           "armado Y: " + (p.armaduras.y || "—"),
           "armado apoyo: " + (p.armaduras.apoyo || "—"),
         ];
+        if (p.armado_pm) {
+          lineas.push("PM acero vano: X " + p.armado_pm.mfx + " · Y " + p.armado_pm.mfy);
+          lineas.push("PM acero apoyo: X " + p.armado_pm.msx + " · Y " + p.armado_pm.msy);
+        }
         if (p.nota) lineas.push(p.nota);
         detalle.textContent = lineas.join("\n");
       });
@@ -183,11 +187,14 @@
 
   function tablaApoyos() {
     if (!DATOS.apoyos.length) return;
+    const conAcero = DATOS.apoyos.some(a => a.disponer);
     const filas = DATOS.apoyos.map(a =>
       "<tr><td>" + a.losa_i + "–" + a.losa_j + "</td><td>" + a.direccion +
-      "</td><td>" + a.mu_ij.toFixed(3) + "</td><td>" + a.modo + "</td></tr>").join("");
+      "</td><td>" + a.mu_ij.toFixed(3) + "</td><td>" + a.modo + "</td>" +
+      (conAcero ? "<td>" + (a.disponer || "—") + "</td>" : "") + "</tr>").join("");
     document.getElementById("apoyos-tabla").innerHTML =
-      "<table><tr><th>apoyo</th><th>dir</th><th>Mu I-J</th><th>bal.</th></tr>" + filas + "</table>";
+      "<table><tr><th>apoyo</th><th>dir</th><th>Mu I-J</th><th>bal.</th>" +
+      (conAcero ? "<th>armadura</th>" : "") + "</tr>" + filas + "</table>";
   }
 
   selCampo.addEventListener("change", dibujar);

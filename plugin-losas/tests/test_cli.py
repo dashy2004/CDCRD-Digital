@@ -70,6 +70,20 @@ class TestCli(unittest.TestCase):
                 html = f.read()
             self.assertIn("F. Perdomo", html)
 
+    def test_visor_filtrado_por_nivel(self):
+        proyecto_niveles = dict(PROYECTO)
+        proyecto_niveles["losas"] = [dict(l, nivel="N1 +3.00") for l in PROYECTO["losas"]]
+        with tempfile.TemporaryDirectory() as d:
+            proyecto = _escribir(proyecto_niveles, d, "proyecto.json")
+            resultados = _escribir(RESULTADOS, d, "resultados.json")
+            rc = main(["visor", "--proyecto", proyecto, "--resultados", resultados,
+                       "--salida", os.path.join(d, "s1"), "--nivel", "N1 +3.00"])
+            self.assertEqual(rc, 0)
+            self.assertTrue(os.path.isfile(os.path.join(d, "s1", "visor_losas.html")))
+            rc = main(["visor", "--proyecto", proyecto, "--resultados", resultados,
+                       "--salida", os.path.join(d, "s2"), "--nivel", "NO-EXISTE"])
+            self.assertEqual(rc, 1)
+
     def test_tipos_por_apoyo(self):
         with tempfile.TemporaryDirectory() as d:
             proyecto = _escribir(EXPORT_INVENTADO, d, "proyecto.json")

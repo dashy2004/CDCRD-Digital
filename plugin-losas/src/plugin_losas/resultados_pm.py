@@ -61,7 +61,8 @@ def _contornos(proyecto: dict) -> dict[str, list[list[float]]]:
     return contornos
 
 
-def dto_visor(proyecto: dict, resultados: dict, nombre: str = "Proyecto Ejemplo") -> DtoVisor:
+def dto_visor(proyecto: dict, resultados: dict, nombre: str = "Proyecto Ejemplo",
+              acero: dict | None = None) -> DtoVisor:
     """Arma el DTO del visor desde ``proyecto.json`` + ``resultados.json``.
 
     ``resultados`` debe traer el bloque ``pieper_martens`` (lo escribe el CLI
@@ -96,6 +97,9 @@ def dto_visor(proyecto: dict, resultados: dict, nombre: str = "Proyecto Ejemplo"
                 "apoyo": (r.get("franja_apoyo") or {}).get("disponer", ""),
             },
         }
+        if acero and mark in (acero.get("losas") or {}):
+            armados = acero["losas"][mark]["armados"]
+            fila["armado_pm"] = {clave: armados[clave]["disponer"] for clave in armados}
         valores["codigo_dl"][mark] = float(m.get("codigo_dl") or 0)
         valores["mfx"][mark] = m.get("mfx", 0.0)
         valores["mfy"][mark] = m.get("mfy", 0.0)
@@ -115,8 +119,14 @@ def dto_visor(proyecto: dict, resultados: dict, nombre: str = "Proyecto Ejemplo"
                          "min": min(vs) if vs else 0.0, "max": max(vs) if vs else 0.0,
                          "valores": valores[clave]}
 
+    armado_apoyo = {}
+    if acero:
+        for a in acero.get("apoyos") or []:
+            armado_apoyo[(a["losa_i"], a["losa_j"], a["direccion"])] = a["armado"]["disponer"]
     apoyos = [{"losa_i": a["losa_i"], "losa_j": a["losa_j"], "direccion": a["direccion"],
-               "mu_ij": a["mu_ij"], "modo": a["modo"]} for a in pm.get("apoyos") or []]
+               "mu_ij": a["mu_ij"], "modo": a["modo"],
+               "disponer": armado_apoyo.get((a["losa_i"], a["losa_j"], a["direccion"]), "")}
+              for a in pm.get("apoyos") or []]
     return DtoVisor(nombre, panos, campos, apoyos, list(CREDITOS))
 
 

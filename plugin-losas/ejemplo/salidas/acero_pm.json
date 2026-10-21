@@ -1,0 +1,425 @@
+{
+ "metodo": "As por momentos Pieper-Martens con ACI 318-19 del motor de EstructurasRD (diseno_losa_franja); barra comercial y separación",
+ "materiales": {
+  "fc_mpa": 21.0,
+  "fy_mpa": 420.0,
+  "recubrimiento_mm": 25.0
+ },
+ "losas": {
+  "LE1": {
+   "h_m": 0.25,
+   "armados": {
+    "mfx": {
+     "as_requerido": 217.1,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    },
+    "mfy": {
+     "as_requerido": 150.3,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    },
+    "msx": {
+     "as_requerido": 334.7,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    },
+    "msy": {
+     "as_requerido": 231.2,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    }
+   }
+  },
+  "LE2": {
+   "h_m": 0.25,
+   "armados": {
+    "mfx": {
+     "as_requerido": 273.1,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    },
+    "mfy": {
+     "as_requerido": 188.9,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    },
+    "msx": {
+     "as_requerido": 421.8,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    },
+    "msy": {
+     "as_requerido": 290.9,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    }
+   }
+  },
+  "LE3": {
+   "h_m": 0.25,
+   "armados": {
+    "mfx": {
+     "as_requerido": 268.5,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    },
+    "mfy": {
+     "as_requerido": 185.6,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    },
+    "msx": {
+     "as_requerido": 0.0,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    },
+    "msy": {
+     "as_requerido": 0.0,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    }
+   }
+  },
+  "LE4": {
+   "h_m": 0.25,
+   "armados": {
+    "mfx": {
+     "as_requerido": 299.3,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    },
+    "mfy": {
+     "as_requerido": 206.9,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    },
+    "msx": {
+     "as_requerido": 462.5,
+     "as_minimo": 450.0,
+     "as_diseno": 462.5,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": false,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    },
+    "msy": {
+     "as_requerido": 318.8,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    }
+   }
+  },
+  "LE5": {
+   "h_m": 0.25,
+   "armados": {
+    "mfx": {
+     "as_requerido": 299.3,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    },
+    "mfy": {
+     "as_requerido": 206.9,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    },
+    "msx": {
+     "as_requerido": 462.5,
+     "as_minimo": 450.0,
+     "as_diseno": 462.5,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": false,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    },
+    "msy": {
+     "as_requerido": 318.8,
+     "as_minimo": 450.0,
+     "as_diseno": 450.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 150.0,
+     "as_provista": 473.3,
+     "cumple": true,
+     "disponer": "#3 @ 150 mm"
+    }
+   }
+  },
+  "LE6": {
+   "h_m": 0.2,
+   "armados": {
+    "mfx": {
+     "as_requerido": 0.0,
+     "as_minimo": 360.0,
+     "as_diseno": 360.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 190.0,
+     "as_provista": 373.7,
+     "cumple": true,
+     "disponer": "#3 @ 190 mm"
+    },
+    "mfy": {
+     "as_requerido": 0.0,
+     "as_minimo": 360.0,
+     "as_diseno": 360.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 190.0,
+     "as_provista": 373.7,
+     "cumple": true,
+     "disponer": "#3 @ 190 mm"
+    },
+    "msx": {
+     "as_requerido": 266.3,
+     "as_minimo": 360.0,
+     "as_diseno": 360.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 190.0,
+     "as_provista": 373.7,
+     "cumple": true,
+     "disponer": "#3 @ 190 mm"
+    },
+    "msy": {
+     "as_requerido": 0.0,
+     "as_minimo": 360.0,
+     "as_diseno": 360.0,
+     "seccion_insuficiente": false,
+     "gobierna_minimo": true,
+     "numero_barra": 3,
+     "espaciamiento": 190.0,
+     "as_provista": 373.7,
+     "cumple": true,
+     "disponer": "#3 @ 190 mm"
+    }
+   }
+  }
+ },
+ "apoyos": [
+  {
+   "losa_i": "LE6",
+   "losa_j": "LE1",
+   "direccion": "X",
+   "mu_ij": 1.76418,
+   "h_m": 0.2,
+   "armado": {
+    "as_requerido": 266.3,
+    "as_minimo": 360.0,
+    "as_diseno": 360.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 190.0,
+    "as_provista": 373.7,
+    "cumple": true,
+    "disponer": "#3 @ 190 mm"
+   }
+  },
+  {
+   "losa_i": "LE1",
+   "losa_j": "LE2",
+   "direccion": "X",
+   "mu_ij": 3.2145868465430016,
+   "h_m": 0.25,
+   "armado": {
+    "as_requerido": 378.1,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   }
+  },
+  {
+   "losa_i": "LE4",
+   "losa_j": "LE5",
+   "direccion": "X",
+   "mu_ij": 3.9144182124789206,
+   "h_m": 0.25,
+   "armado": {
+    "as_requerido": 462.5,
+    "as_minimo": 450.0,
+    "as_diseno": 462.5,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": false,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   }
+  },
+  {
+   "losa_i": "LE1",
+   "losa_j": "LE4",
+   "direccion": "Y",
+   "mu_ij": 2.3497356649044328,
+   "h_m": 0.25,
+   "armado": {
+    "as_requerido": 274.9,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   }
+  },
+  {
+   "losa_i": "LE2",
+   "losa_j": "LE5",
+   "direccion": "Y",
+   "mu_ij": 2.6015453436356246,
+   "h_m": 0.25,
+   "armado": {
+    "as_requerido": 304.8,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   }
+  }
+ ]
+}
