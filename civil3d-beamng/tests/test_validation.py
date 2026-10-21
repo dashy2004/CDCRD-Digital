@@ -161,6 +161,12 @@ def test_out_of_float64_station_is_a_validation_failure(snapshot):
     assert not validate(snapshot=snapshot)["ok"]
 
 
+def test_nonfinite_guide_distance_is_a_validation_failure(snapshot):
+    change(snapshot, lambda d: d.update(alignment={
+        "nodes_abs_m": [[-1e308, 0, 10, 4], [1e308, 0, 10, 4]]}))
+    assert not validate(snapshot=snapshot)["ok"]
+
+
 def test_external_guide_is_checked_by_the_same_reader(snapshot):
     guide = snapshot.parent / "guide.json"
     guide.write_text(json.dumps({"nodes_abs_m": [[1001, 2001, 10, 4], [1002, 2002, 10, 4]],
