@@ -46,6 +46,11 @@ permanece `null`. Las referencias simbólicas que salen del repositorio no se le
 
 ## Interpretar el diagnóstico
 
+El módulo `beamng` tiene además una validación previa de archivos:
+`validar-intercambio --modulo beamng --snapshot RUTA --json`.
+Es independiente de `estado`: este último sigue diagnosticando fuentes y entorno.
+[Contrato, dependencias y ejemplos](../civil3d-beamng/docs/VALIDACION-INTERCAMBIOS.md).
+
 `estado` reutiliza el `doctor` existente, que conserva su interfaz. Su bloque
 `environment` corresponde exclusivamente al entorno Python de
 `herramientas-locales`; no certifica los entornos Python de los otros conectores.

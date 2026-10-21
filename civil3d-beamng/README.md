@@ -34,6 +34,25 @@ El instalador genera `%APPDATA%\Autodesk\ApplicationPlugins\CDCRD-BeamNG.bundle`
 
 ## Flujo desde Civil 3D
 
+Antes de convertir, puede validar las fuentes sin crear un paquete ni abrir Civil 3D o BeamNG:
+
+```powershell
+python -m cdcrd_beamng validate --snapshot .\examples\snapshot-synthetic.json
+```
+
+Desde la raíz del repositorio, la CLI común delega en ese mismo validador:
+
+```powershell
+.\herramientas-locales\cdcrd.ps1 validar-intercambio --modulo beamng `
+  --snapshot .\civil3d-beamng\examples\snapshot-synthetic.json --json
+```
+
+Se reutilizan los lectores de snapshot/LandXML de `build`. El resultado es JSON
+`cdcrd.interchange-validation/1`: salida 0 si el contrato es válido y 1 si falla.
+Valida unidades, orden declarado de coordenadas, geometría numérica, IDs y
+referencias. No verifica CRS, coincidencia física del origen ni conexión con las
+aplicaciones. Véanse [alcance, casos rechazados y pruebas](docs/VALIDACION-INTERCAMBIOS.md).
+
 1. Ejecute `CDCRDBEAMNGEXPORT`; seleccione terreno y superficie final del corredor. El comando exige metros en AutoCAD y en los ajustes Civil.
 2. Incluya alineamiento/perfil cuando quiera una guia de materiales. El ancho indicado es informativo: no reconstruye ni modifica el peralte de la malla. La seleccion de superficies no identifica automaticamente los codigos del corredor.
 3. Guarde un JSON nuevo fuera del repositorio publico.
@@ -70,6 +89,14 @@ python tools/prepare_drive.py --package 'D:\proyecto\paquete_r01' `
 ```
 
 La guia es JSON: `{"nodes_abs_m":[[E,N,Z,ancho_total],...],"station_m":[...]}`. La lista de estaciones es opcional. El ancho se interpola para asignar materiales a triangulos; sus limites se aproximan por el centroide de cada cara. Sin guia, el corredor recibe tierra. Use `--road-is-drivable` solamente cuando toda la TIN seleccionada sea pavimento. La geometria/cota de la TIN se conserva en ambos casos.
+
+## Recibos de operaciones
+
+`validate`, `build` y `verify` aceptan `--receipt ARCHIVO` para guardar un recibo
+JSON nuevo con archivos, SHA256, resultado y evidencia. La CLI común ofrece
+`validar-intercambio --modulo beamng --recibo ARCHIVO`. Los adjuntos se registran
+como evidencia de archivo; no prueban una operación CAD o conducción nueva.
+[Uso, esquema, escritura y límites](docs/RECIBOS.md).
 
 ## Geometria y limites
 

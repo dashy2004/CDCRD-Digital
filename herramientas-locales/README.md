@@ -39,6 +39,25 @@ El diagnostico es offline: no activa aplicaciones ni declara conexiones vivas.
 
 ## Funciones disponibles
 
+La CLI también ofrece `validar-intercambio --modulo beamng` para comprobar las
+fuentes Civil 3D → BeamNG sin crear un mapa. Reutiliza el conversor del repositorio;
+sus dependencias deben estar disponibles en este mismo entorno Python:
+
+```powershell
+uv pip install --python .\herramientas-locales\.venv\Scripts\python.exe .\civil3d-beamng
+.\herramientas-locales\cdcrd.ps1 validar-intercambio --modulo beamng `
+  --snapshot .\civil3d-beamng\examples\snapshot-synthetic.json --json
+```
+
+Las opciones `--terrain-landxml`, `--terrain-surface`, `--road-landxml`,
+`--road-surface` y `--road-guide` conservan el contrato del conversor.
+[Comprobaciones y límites](../civil3d-beamng/docs/VALIDACION-INTERCAMBIOS.md).
+
+Añada `--recibo RUTA.json` para guardar un recibo nuevo de la validación, con
+archivos, hashes y resultado. `--evidencia ARCHIVO` adjunta evidencia existente
+con comprobación de hash, sin certificar sus afirmaciones.
+[Formato y límites de los recibos](../civil3d-beamng/docs/RECIBOS.md).
+
 | Operación | Implementación y alcance |
 |---|---|
 | JSON → DXF | ezdxf: polígonos, capas, cotas nativas y notas; unidades `m` o `mm` |

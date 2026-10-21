@@ -69,6 +69,7 @@ Pruebas sobre copias y datos hipotéticos. Capturas del área de dibujo; cada in
 | Como se verifico la digitalizacion | `verificacion-vols/` |
 | Reglamentos R-001, R-002, R-008, carreteras, geotecnia e INAPA | [Corpus complementario](corpus-reglamentos/README.md) — 12 documentos, 1.370 páginas, texto/OCR con referencia; revisión numérica pendiente |
 | Generar DXF, convertir previews, revisar IFC/IDS y consultar CDCRD localmente | [herramientas-locales/](herramientas-locales/README.md) — CLI, entorno reproducible y MCP de 12 herramientas |
+| Validar fuentes Civil 3D → BeamNG antes de convertir | [Validador de intercambios](civil3d-beamng/docs/VALIDACION-INTERCAMBIOS.md) — unidades, coordenadas, IDs y referencias; JSON sin activar aplicaciones |
 
 Los `.json` se abren con cualquier editor de texto (Bloc de notas incluido) o se arrastran a
 una conversacion con una IA. Cada valor trae su clausula, tomo y pagina de origen: **la cita
@@ -416,6 +417,8 @@ publicación en PyPI ni en GitHub Packages. Los conectores Revit, ETABS y SAFE t
 
 Las mejoras de herramientas, documentación y ejemplos se describen en
 [CONTRIBUTING.md](CONTRIBUTING.md).
+
+[Colaboradores y contribuciones](CONTRIBUTORS.md).
 
 **Desarrollo asistido: OpenAI Codex y Anthropic Claude**, según el historial de cada cambio.
 [Probar las herramientas con IA](docs/TRABAJAR-CON-IA.md). Las contribuciones concretas quedan
