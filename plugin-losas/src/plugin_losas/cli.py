@@ -110,6 +110,30 @@ def _cmd_tipos(args) -> int:
     return 0
 
 
+def _cmd_renumerar(args) -> int:
+    from puente_losas.contrato import aplicar_usos, panos_desde_dict
+
+    from plugin_losas.renumeracion import caja_desde_contorno, renumerar
+
+    panos = panos_desde_dict(_cargar_json(args.proyecto))
+    if args.usos:
+        panos = aplicar_usos(panos, _cargar_json(args.usos))
+    cajas = [caja_desde_contorno(
+        p.mark, p.contorno or [[0, 0], [p.lx, 0], [p.lx, p.ly], [0, p.ly]],
+        es_vuelo=p.es_vuelo) for p in panos]
+    mapa = renumerar(cajas, args.prefijo, relleno=args.relleno)
+    os.makedirs(args.salida, exist_ok=True)
+    ruta = os.path.join(args.salida, "renumeracion.json")
+    with open(ruta, "w", encoding="utf-8") as f:
+        json.dump(mapa, f, indent=1, ensure_ascii=False)
+    print(f"{len(mapa)} losas renumeradas en orden de lectura "
+          f"({len(cajas) - len(mapa)} vuelo(s) conservan su marca).")
+    for viejo, nuevo in mapa.items():
+        print(f"  {viejo} -> {nuevo}")
+    print(f"  {ruta}")
+    return 0
+
+
 def _cmd_usos(args) -> int:
     tabla = cargar_tabla4(args.tabla4)
     os.makedirs(args.salida, exist_ok=True)
@@ -160,6 +184,15 @@ def main(argv: list[str] | None = None) -> int:
     a.add_argument("--secciones", help="JSON {mark: seccion} para fijar secciones a mano")
     a.add_argument("--salida", default="salidas")
     a.set_defaults(func=_cmd_aligeradas)
+
+    rn = sub.add_parser("renumerar",
+                        help="marcas en orden de lectura (izq→der, arriba→abajo; vuelos fuera)")
+    rn.add_argument("--proyecto", required=True)
+    rn.add_argument("--prefijo", required=True, help="prefijo de la marca (T, N2-, L...)")
+    rn.add_argument("--relleno", type=int, default=0, help="ceros a la izquierda (2 → N2-01)")
+    rn.add_argument("--usos", help="usos.json del puente (marca los vuelos, que no se renumeran)")
+    rn.add_argument("--salida", default="salidas")
+    rn.set_defaults(func=_cmd_renumerar)
 
     tp = sub.add_parser("tipos", help="tipo de losa según apoyos (código DL) + payload para Revit")
     tp.add_argument("--proyecto", required=True)
