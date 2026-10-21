@@ -1,0 +1,149 @@
+{
+  "version": "0.5.12",
+  "application": "Civil 3D 2027",
+  "synthetic": true,
+  "dll_sha256": "866d2d26baea504e5ec3559e512eafbc9525ddbc54bc04e0ff91e5fa778a51a5",
+  "tests": {
+    "python": 132,
+    "dotnet": 82,
+    "races": 100,
+    "native_smoke_checks": 22,
+    "native_unit_rejections": 6
+  },
+  "checks": [
+    {
+      "name": "DLL Civil 0.5.12",
+      "pass": true
+    },
+    {
+      "name": "tres fuentes creadas",
+      "pass": true
+    },
+    {
+      "name": "poligono-cruzado rechazo explicito",
+      "pass": true
+    },
+    {
+      "name": "poligono-cruzado sin residuos",
+      "pass": true
+    },
+    {
+      "name": "parcela simulada 4000 m2",
+      "pass": true
+    },
+    {
+      "name": "parcela COM y sitio revierten",
+      "pass": true
+    },
+    {
+      "name": "parcela nativa 4000 m2",
+      "pass": true
+    },
+    {
+      "name": "sitio-duplicado rechazo explicito",
+      "pass": true
+    },
+    {
+      "name": "sitio-duplicado sin residuos",
+      "pass": true
+    },
+    {
+      "name": "eje simulado revierte",
+      "pass": true
+    },
+    {
+      "name": "eje longitud y estacion",
+      "pass": true
+    },
+    {
+      "name": "eje-duplicado rechazo explicito",
+      "pass": true
+    },
+    {
+      "name": "eje-duplicado sin residuos",
+      "pass": true
+    },
+    {
+      "name": "PVI-fuera rechazo explicito",
+      "pass": true
+    },
+    {
+      "name": "PVI-fuera sin residuos",
+      "pass": true
+    },
+    {
+      "name": "PVI-desorden rechazo explicito",
+      "pass": true
+    },
+    {
+      "name": "PVI-desorden sin residuos",
+      "pass": true
+    },
+    {
+      "name": "perfil simulado revierte",
+      "pass": true
+    },
+    {
+      "name": "cuatro PVI y pendientes",
+      "pass": true
+    },
+    {
+      "name": "perfil-duplicado rechazo explicito",
+      "pass": true
+    },
+    {
+      "name": "perfil-duplicado sin residuos",
+      "pass": true
+    },
+    {
+      "name": "fuentes validas conservadas",
+      "pass": true
+    }
+  ],
+  "parcel_area_m2": 4000,
+  "alignment_length_m": 164.72135954999578,
+  "profile_pvis": [
+    [
+      100,
+      100
+    ],
+    [
+      150,
+      101
+    ],
+    [
+      200,
+      99
+    ],
+    [
+      264.7213595499958,
+      100
+    ]
+  ],
+  "grades_m_per_m": [
+    0.02,
+    -0.04,
+    0.015450849718747373
+  ],
+  "saved_reopened_identical": true,
+  "original_objects_preserved": 1218,
+  "images": [
+    {
+      "file": "images/civil3d-parcela-eje-0512.png",
+      "sha256": "11baf7fe4ecc85bbd049dca9c69403f747f306a39899c2ae778696d316781b1e",
+      "source": "Civil 3D Document.CapturePreviewImage; viewport only; unedited"
+    },
+    {
+      "file": "images/civil3d-rasante-pvi-0512.png",
+      "sha256": "09e4f16ed2daf8ca3a84733297ad2eaab848e94cceb3c3796d308ccbe5db707d",
+      "source": "Civil 3D Document.CapturePreviewImage; viewport only; unedited"
+    }
+  ],
+  "limits": [
+    "Straight XY lightweight polylines only",
+    "Parcel requires new isolated site",
+    "No vertical curves or station equations",
+    "AutoCAD common adapter compiled; native AutoCAD validation remains 0.5.11",
+    "No client models or private native receipts published"
+  ]
+}

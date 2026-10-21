@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" AppVersion="0.1.0" Author="CDCRD-Digital"
+  Name="CDCRD Civil 3D to BeamNG" Description="Read-only TIN snapshot export for BeamNG.drive"
+  ProductCode="{5EE1C5F3-0D58-46DC-9A6B-93D4AF271B01}"
+  UpgradeCode="{5EE1C5F3-0D58-46DC-9A6B-93D4AF271B02}">
+  <CompanyDetails Name="CDCRD-Digital" Url="https://github.com/dashy2004/CDCRD-Digital" />
+  <Components>
+    <RuntimeRequirements SupportPath="./Contents" Platform="Civil3D" SeriesMin="R26.0" SeriesMax="R26.0" OS="Win64" />
+    <ComponentEntry AppName="CdcrdBeamngExport" AppDescription="Export complete visible TIN surfaces to JSON"
+      AppType=".NET" ModuleName="./Contents/Cdcrd.BeamngExport.dll" LoadOnAutoCADStartup="False" LoadOnRequest="True">
+      <Commands GroupName="CDCRD">
+        <Command Global="CDCRDBEAMNGEXPORT" Local="CDCRDBEAMNGEXPORT" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+  <DisplayInAppManager>false</DisplayInAppManager>
+</ApplicationPackage>

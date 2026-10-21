@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <AssemblyName>Cdcrd.BeamngExport</AssemblyName>
+    <RootNamespace>Cdcrd.BeamngExport</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <PlatformTarget>x64</PlatformTarget>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Version>0.1.0</Version>
+    <Company>CDCRD-Digital</Company>
+    <Product>Civil 3D to BeamNG export</Product>
+    <Civil3DPath Condition="'$(Civil3DPath)' == ''">C:\Program Files\Autodesk\AutoCAD 2027</Civil3DPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="tests\**\*.cs" />
+    <Reference Include="AcDbMgd">
+      <HintPath>$(Civil3DPath)\acdbmgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AcMgd">
+      <HintPath>$(Civil3DPath)\acmgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AcCoreMgd">
+      <HintPath>$(Civil3DPath)\accoremgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AecBaseMgd">
+      <HintPath>$(Civil3DPath)\ACA\AecBaseMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AeccDbMgd">
+      <HintPath>$(Civil3DPath)\C3D\AeccDbMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <Target Name="VerifyAutodeskReferences" BeforeTargets="BeforeBuild">
+    <Error Condition="!Exists('$(Civil3DPath)\acdbmgd.dll')" Text="Falta acdbmgd.dll. Use -p:Civil3DPath con la instalacion de AutoCAD/Civil 3D 2027." />
+    <Error Condition="!Exists('$(Civil3DPath)\C3D\AeccDbMgd.dll')" Text="Falta C3D/AeccDbMgd.dll. Se necesita Civil 3D 2027 instalado." />
+  </Target>
+</Project>

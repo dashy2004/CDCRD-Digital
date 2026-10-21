@@ -33,6 +33,24 @@ verificación de un proyecto. Cada informe identifica qué se comprobó y qué e
 
 **Guillen Rosa & Associados**
 
+## Civil 3D y AutoCAD: capturas y pruebas nativas
+
+[Civil 3D 0.5.16: calzada con capas, targets y daylight — capturas crudas](servidor-mcp-civil3d/docs/CALZADA-0516.md).
+
+[Civil 3D 0.5.15: ensamblaje, corredor y secciones — capturas crudas](servidor-mcp-civil3d/docs/CORREDOR-0515.md).
+
+[Civil 3D 0.5.14: arcos y curvas verticales — capturas crudas](servidor-mcp-civil3d/docs/CURVAS-0514.md).
+
+[Civil 3D 0.5.13: feature lines y plataforma — capturas crudas](servidor-mcp-civil3d/docs/PLATAFORMAS-0513.md).
+
+[Civil 3D 0.5.12: parcela, eje y rasante — capturas crudas](servidor-mcp-civil3d/docs/SITIO-0512.md).
+
+[Ver las capturas crudas y resultados de Civil 3D 0.5.11](servidor-mcp-civil3d/docs/CIERRE-0511.md) · [Perfil de sondeos y recuperación](servidor-mcp-civil3d/docs/RECUPERACION-GM-059.md) · [Adaptación común para AutoCAD](servidor-mcp-civil3d/docs/AUTOCAD-0511.md).
+
+![Superficies y fondo en Civil 3D, captura nativa sin retoque](servidor-mcp-civil3d/docs/images/gm-surfaces-bottom-0511.png)
+
+Pruebas sobre copias y datos hipotéticos. Capturas del área de dibujo; cada informe separa lo comprobado de lo pendiente.
+
 ## Que hay aqui (sin necesidad de programar)
 
 | Si usted busca... | Abra... |

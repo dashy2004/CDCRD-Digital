@@ -31,6 +31,16 @@ logger.info('Iniciando servidor MCP de Civil 3D')
 
 from mcp.server.fastmcp import FastMCP            # noqa: E402
 import puente_cliente as puente                   # noqa: E402
+import dibujo                                      # noqa: E402
+import sitio
+import plataformas
+import creacion                                    # noqa: E402
+import vistas                                      # noqa: E402
+import perfil_estratigrafico                       # noqa: E402
+import tridimensional                              # noqa: E402
+import gm                                         # noqa: E402
+import aplanar                                    # noqa: E402
+import puntos                                     # noqa: E402
 
 with open(os.path.join(SRC_DIR, 'config.json'), encoding='utf-8') as fh:
     CONFIG = json.load(fh)
@@ -46,7 +56,10 @@ def _ok(resultado):
 
 def _error(exc):
     if isinstance(exc, puente.PuenteError):
-        return _ok({'error': exc.mensaje, 'codigo': exc.codigo})
+        result = {'error': exc.mensaje, 'codigo': exc.codigo}
+        if exc.datos is not None:
+            result['datos'] = exc.datos
+        return _ok(result)
     logger.exception('fallo no esperado')
     return _ok({'error': f'{type(exc).__name__}: {exc}'})
 
@@ -173,7 +186,9 @@ def agregar_objetos(prop: str, op: str = 'suma', coleccion: str = '', tipo: str 
 
 
 @mcp.tool()
-def inspeccionar_objeto(handle: str, ruta: str = '', valores: bool = False) -> str:
+def inspeccionar_objeto(handle: str, ruta: str = '', valores: bool = False,
+                        patron: str = '', solo_escribibles: bool = False,
+                        incluir: str = '') -> str:
     """Lista propiedades y metodos reales de un objeto, con firma y si son de lectura.
 
     Es el paso previo a invocar_metodo o actualizar_objeto: la firma sale del
@@ -184,12 +199,22 @@ def inspeccionar_objeto(handle: str, ruta: str = '', valores: bool = False) -> s
       propiedad o un metodo sin argumentos, con indices opcionales:
       'Analysis.ElevationRanges[0]'.
     valores: ademas de la firma, trae el valor actual de cada propiedad legible.
+    patron: regex sobre el nombre del miembro (p. ej. 'Station|Elev') para no
+      recibir las decenas de KB de un ProfileView completo.
+    solo_escribibles: solo propiedades con escritura (y sin metodos).
+    incluir: 'props', 'metodos' o vacio/'ambos'.
     """
     parametros = {'handle': handle}
     if ruta:
         parametros['ruta'] = ruta
     if valores:
         parametros['valores'] = True
+    if patron:
+        parametros['patron'] = patron
+    if solo_escribibles:
+        parametros['solo_escribibles'] = True
+    if incluir:
+        parametros['incluir'] = incluir
     return _llamar('objects.props', parametros)
 
 
@@ -202,7 +227,9 @@ def leer_ruta(ruta: str, handle: str = '', profundidad: int = 1) -> str:
     la raiz es el CivilDocument.
 
     ruta: 'Analysis', 'Analysis.ElevationRanges[2].MaximumElevation',
-      'GetGeneralProperties()'.
+      'GetGeneralProperties()', y ademas metodos con argumentos y claves por
+      nombre: 'GetDisplayStyleProfile(Line).Color',
+      'Styles.ProfileStyles["GEO - TERRENO"].Name'.
     profundidad: 0 deja los objetos compuestos como {tipo, texto}; 1 a 3 los
       expande propiedad por propiedad. Suba solo si hace falta: expande rapido.
     """
@@ -308,6 +335,81 @@ def ejecutar_comando(linea: str, confirmar: bool = False) -> str:
     if not confirmar:
         return _ok({'error': 'operacion de escritura: repita con confirmar=True', 'linea': linea})
     return _llamar('cmd.run', {'linea': linea}, escribe=True)
+
+
+# --------------------------------------------------------------------------
+# Dibujo robusto por .lsp temporal (sin limite de ~256 car. ni problema de 'n~')
+# --------------------------------------------------------------------------
+
+def _cargar_lisp(codigo: str):
+    """Escribe el codigo en un .lsp temporal local y lo carga con (load ...).
+
+    Supone CDCRD_C3D_PERMITIR_COMANDOS=1 en Civil 3D, igual que ejecutar_comando.
+    El efecto es ASINCRONO: se verifica con una consulta posterior.
+    """
+    ruta = dibujo.escribir_lisp_temporal(codigo)
+    resultado = puente.llamar_con_aprobacion('cmd.run', {'linea': dibujo.ruta_load(ruta)})
+    return {'cargado': ruta, 'resultado': resultado}
+
+
+@mcp.tool()
+def ejecutar_lisp(codigo: str, confirmar: bool = False) -> str:
+    """Ejecuta codigo AutoLISP de cualquier longitud por un .lsp temporal.
+
+    En vez de enviar el codigo por la linea de comandos (que corta alrededor de
+    256 caracteres y rompe los acentos y la 'n~'), el servidor lo escribe en un
+    .lsp temporal local en ANSI y lo carga con (load ...). Requiere
+    CDCRD_C3D_PERMITIR_COMANDOS=1 en Civil 3D y confirmar=True. Es ASINCRONO:
+    verifique el efecto con una consulta posterior. No sirve para codigo que
+    abra dialogos modales (dejan el puente colgado hasta cerrarlos).
+    """
+    if not codigo or not codigo.strip():
+        return _ok({'error': 'codigo LISP vacio'})
+    if not confirmar:
+        return _ok({'error': 'operacion de escritura: repita con confirmar=True',
+                    'caracteres': len(codigo)})
+    try:
+        return _ok(_cargar_lisp(codigo))
+    except OSError as exc:
+        return _ok({'error': f'no se pudo escribir el .lsp temporal: {exc}'})
+    except Exception as exc:                        # noqa: BLE001
+        return _error(exc)
+
+
+@mcp.tool()
+def crear_entidades(entidades: str, confirmar: bool = False) -> str:
+    """Crea entidades de dibujo desde una descripcion JSON (sin escribir LISP a mano).
+
+    entidades: lista JSON de objetos; cada uno con 'tipo' y sus campos:
+      - capa:      {"tipo":"capa","nombre":"UBIC-LOTE","color":1}
+      - linea:     {"tipo":"linea","capa":"0","p1":[x,y],"p2":[x,y]}
+      - polilinea: {"tipo":"polilinea","capa":"0","puntos":[[x,y],...],"cerrada":true,"ancho":0.5}
+      - texto:     {"tipo":"texto","capa":"0","punto":[x,y],"altura":2.5,"texto":"N","centrado":true}
+      - circulo:   {"tipo":"circulo","capa":"0","centro":[x,y],"radio":10}
+      - solido:    {"tipo":"solido","capa":"0","p1":[x,y],"p2":[x,y],"p3":[x,y],"p4":[x,y]}
+      - punto:     {"tipo":"punto","capa":"0","punto":[x,y,z]}
+    Incluya las capas que use antes que las entidades en la misma lista. Exige
+    confirmar=True; sin el devuelve el conteo y un adelanto del LISP. El efecto
+    es ASINCRONO: verifique con una consulta posterior.
+    """
+    try:
+        datos = json.loads(entidades)
+    except json.JSONDecodeError as exc:
+        return _ok({'error': f'entidades no es JSON valido: {exc}'})
+    try:
+        codigo = dibujo.lisp_para_entidades(datos)
+    except (ValueError, TypeError) as exc:
+        return _ok({'error': f'entidad invalida: {exc}'})
+    if not confirmar:
+        n = len(datos) if isinstance(datos, list) else 1
+        return _ok({'error': 'operacion de escritura: repita con confirmar=True',
+                    'entidades': n, 'lisp_previo': codigo[:600]})
+    try:
+        return _ok(_cargar_lisp(codigo))
+    except OSError as exc:
+        return _ok({'error': f'no se pudo escribir el .lsp temporal: {exc}'})
+    except Exception as exc:                        # noqa: BLE001
+        return _error(exc)
 
 
 # --------------------------------------------------------------------------
@@ -428,6 +530,49 @@ def listar(area: str, limite: int = 0) -> str:
         return _ok({'error': 'area desconocida', 'areas': sorted(_ATAJOS)})
     coleccion, props = _ATAJOS[area]
     return consultar_objetos(coleccion=coleccion, props=props, limite=limite or LIMITE)
+
+
+creacion.registrar(mcp, _llamar, _ok)
+sitio.registrar(mcp, _llamar, _ok)
+import corredores
+corredores.registrar(mcp, _llamar, _ok)
+plataformas.registrar(mcp, _llamar, _ok)
+vistas.registrar(mcp, _llamar, _ok)
+tridimensional.registrar(mcp, _llamar, _ok)
+gm.registrar(mcp, _llamar, _ok)
+import comandos
+comandos.registrar(mcp, _llamar, _ok)
+aplanar.registrar(mcp, _llamar, _ok)
+puntos.registrar(mcp, _llamar, _ok)
+
+
+@mcp.tool()
+def generar_perfil_estratigrafico(spec: str) -> str:
+    """Genera un perfil estratigrafico completo de un corte, 100% nativo y repetible.
+
+    spec: JSON con alineamiento, superficie_terreno, lista de estratos
+    (cada uno: codigo, nombre, superficie, color_aci|color_rgb), sondeos,
+    origen [x,y], y opcionalmente db_sondeos o csv_ubicaciones/csv_estratigrafia,
+    elev_min/elev_max (se calculan si faltan), fondo, prefijo, mostrar
+    {spt, nivel_freatico, leyenda, columnas} y exportar {pdf, png, papel}.
+    Crea perfiles de estrato, vista de perfil, estilos de forma por estrato
+    (color), rellenos nativos (hatch), columnas de sondeo con SPT y nivel
+    freatico y leyenda; exporta sin dialogos. Todo con el prefijo indicado,
+    idempotente. Datos geotecnicos hipoteticos/preliminares.
+    """
+    try:
+        datos = json.loads(spec)
+    except json.JSONDecodeError as exc:
+        return _ok({'error': f'spec no es JSON valido: {exc}'})
+    import puente_cliente as _p
+    mensajes = []
+    try:
+        res = perfil_estratigrafico.generar(datos, _p, log=lambda m: mensajes.append(str(m)))
+        res['log'] = mensajes
+        return _ok(res)
+    except Exception as exc:                        # noqa: BLE001
+        logger.exception('generar_perfil_estratigrafico fallo')
+        return _ok({'error': f'{type(exc).__name__}: {exc}', 'log': mensajes})
 
 
 # Calculo hidraulico local; no llama al puente ni accede a CAD.

@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Puente MCP de CDCRD-Digital para Civil 3D 2027 (serie R26.0, .NET 10).
+       Las DLL de Autodesk NO se copian al repositorio: se referencian desde la
+       instalacion local. Cambie la ruta con -p:Civil3DPath="..." si hace falta. -->
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <AssemblyName>Cdcrd.GmRecoveryQa</AssemblyName>
+    <RootNamespace>Cdcrd.GmRecoveryQa</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Platforms>x64</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <!-- MSB3277: conflictos de version entre las DLL de Autodesk y el ref pack de .NET 10.
+         Los resuelve el runtime de Civil 3D en tiempo de carga; aqui solo ensucian la salida. -->
+    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
+    <Version>0.5.9</Version>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Company>CDCRD-Digital</Company>
+    <Product>Puente MCP Civil 3D</Product>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Civil3DPath)' == ''">
+    <Civil3DPath>C:\Program Files\Autodesk\AutoCAD 2027</Civil3DPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="acdbmgd">
+      <HintPath>$(Civil3DPath)\acdbmgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="acmgd">
+      <HintPath>$(Civil3DPath)\acmgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="accoremgd">
+      <HintPath>$(Civil3DPath)\accoremgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AecBaseMgd">
+      <HintPath>$(Civil3DPath)\ACA\AecBaseMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AeccDbMgd">
+      <HintPath>$(Civil3DPath)\C3D\AeccDbMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AeccPressurePipesMgd">
+      <HintPath>$(Civil3DPath)\C3D\AeccPressurePipesMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="AvisarSiFaltanReferencias" BeforeTargets="BeforeBuild">
+    <Error Condition="!Exists('$(Civil3DPath)\acdbmgd.dll')"
+           Text="No se encontro acdbmgd.dll en $(Civil3DPath). Pase -p:Civil3DPath=&quot;ruta de Civil 3D&quot;." />
+    <Error Condition="!Exists('$(Civil3DPath)\C3D\AeccDbMgd.dll')"
+           Text="No se encontro C3D\AeccDbMgd.dll en $(Civil3DPath): esa instalacion no es Civil 3D." />
+  </Target>
+
+</Project>

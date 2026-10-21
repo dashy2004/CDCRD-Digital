@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework><AssemblyName>Cdcrd.AutoCadBridge</AssemblyName>
+    <LangVersion>latest</LangVersion><Nullable>disable</Nullable><ImplicitUsings>disable</ImplicitUsings>
+    <PlatformTarget>x64</PlatformTarget><EnableDynamicLoading>true</EnableDynamicLoading>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath><Version>0.5.16</Version>
+    <AutoCADPath Condition="'$(AutoCADPath)' == ''">C:\Program Files\Autodesk\AutoCAD 2027</AutoCADPath>
+    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../puente/NativeCallContract.cs" Link="NativeCallContract.cs" />
+    <Compile Include="../puente/CommandReceipts.cs" Link="CommandReceipts.cs" />
+    <Compile Include="../puente/TrackedCommands.cs" Link="TrackedCommands.cs" />
+    <Compile Include="../puente/Bridge.cs" Link="Bridge.cs" />
+    <Compile Include="../puente/Rpc.cs" Link="Rpc.cs" />
+    <Compile Include="../puente/ReflectionRead.cs" Link="ReflectionRead.cs" />
+    <Compile Include="../puente/HandlersDialogos.cs" Link="HandlersDialogos.cs" />
+    <Compile Include="../puente/Handlers.cs" Link="Handlers.cs" />
+    <Compile Include="../puente/HandlersCadCreation.cs" Link="HandlersCadCreation.cs" />
+    <Compile Include="../puente/HandlersVista.cs" Link="HandlersVista.cs" />
+    <Reference Include="acdbmgd"><HintPath>$(AutoCADPath)\acdbmgd.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="acmgd"><HintPath>$(AutoCADPath)\acmgd.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="accoremgd"><HintPath>$(AutoCADPath)\accoremgd.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>

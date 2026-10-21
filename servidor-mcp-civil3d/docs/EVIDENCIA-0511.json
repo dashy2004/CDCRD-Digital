@@ -1,0 +1,60 @@
+{
+  "version": "0.5.11",
+  "date": "2026-10-20",
+  "python_tests": 120,
+  "dotnet_checks": 67,
+  "concurrency_races": 100,
+  "native_civil3d": {
+    "new_surfaces": 5,
+    "triangles_per_surface": 4,
+    "checked_vertices": 25,
+    "tolerance_m": 1e-07,
+    "failure_rollbacks": 2,
+    "new_objects_observed_per_failure": 8,
+    "explicit_residues_removed": 2,
+    "valid_and_ungrouped_references_preserved": true,
+    "command_end": [
+      "REGEN",
+      "LINE"
+    ],
+    "unknown_command": "failed",
+    "saved_and_reopened": true,
+    "inventory_after_reopen": {
+      "objects": 1218,
+      "surfaces": 11,
+      "groups": 18,
+      "cogo_points": 5
+    },
+    "data": "hypothetical/preliminary; not a geotechnical study"
+  },
+  "images": [
+    {
+      "file": "images/gm-surfaces-bottom-0511.png",
+      "sha256": "3d35d1d1d8114f73212b3fabeb0d1ef1730ea3a42bc3ad7738379dda2ec2c1c5",
+      "source": "Civil 3D 2027 Document.CapturePreviewImage, raw viewport; no retouching"
+    },
+    {
+      "file": "images/gm-bottom-only-0511.png",
+      "sha256": "ea367422df483887bdf4aab5e92b8fb61219cc3e00590e6876f4db161222610d",
+      "source": "Civil 3D 2027 Document.CapturePreviewImage, raw viewport; no retouching"
+    },
+    {
+      "file": "images/autocad-common-0511.png",
+      "sha256": "9defb851cc6b749816485324f166b43618fcfe2048c77a341116ee4ef651865b",
+      "source": "AutoCAD 2027 Document.CapturePreviewImage, raw viewport; no retouching"
+    }
+  ],
+  "native_autocad": {
+    "product": "AutoCAD 2027 base",
+    "civil_assemblies": [],
+    "insunits": 4,
+    "unit": "mm",
+    "entities": 6,
+    "rectangle_area_mm2": 21000000,
+    "rectangle_perimeter_mm": 19000,
+    "circle_radius_mm": 500,
+    "line_endpoints_verified": true,
+    "civil_methods_rejected": true,
+    "saved_and_reopened": true
+  }
+}

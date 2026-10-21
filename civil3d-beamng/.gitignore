@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.venv/
+build/
+dist/
+civil3d/bin/
+civil3d/obj/
+civil3d/tests/bin/
+civil3d/tests/obj/
+# Project data must stay outside this public repository.
+outputs/
+local-data/
+*.snapshot.json

@@ -17,10 +17,11 @@ TIMEOUT = float(os.environ.get('CDCRD_C3D_TIMEOUT_S', '70'))
 
 
 class PuenteError(RuntimeError):
-    def __init__(self, codigo, mensaje):
+    def __init__(self, codigo, mensaje, datos=None):
         super().__init__(f'[{codigo}] {mensaje}')
         self.codigo = codigo
         self.mensaje = mensaje
+        self.datos = datos
 
 
 _contador = {'n': 0}
@@ -56,7 +57,8 @@ def llamar(metodo, parametros=None):
         raise PuenteError(
             'timeout',
             'el puente no respondio en %.0f s: Civil 3D suele estar en un comando, un '
-            'dialogo modal o en modo edicion' % TIMEOUT)
+            'dialogo modal o en modo edicion. Resultado incierto: no reintente escrituras; '
+            'consulte diag.cola y verifique el dibujo' % TIMEOUT)
 
     linea = bytes(buf).split(b'\n', 1)[0].decode('utf-8', 'replace').strip()
     if not linea:
@@ -64,7 +66,7 @@ def llamar(metodo, parametros=None):
     respuesta = json.loads(linea)
     if 'error' in respuesta:
         err = respuesta['error']
-        raise PuenteError(err.get('code', -1), err.get('message', 'error sin mensaje'))
+        raise PuenteError(err.get('code', -1), err.get('message', 'error sin mensaje'), err.get('data'))
     return respuesta.get('result')
 
 
