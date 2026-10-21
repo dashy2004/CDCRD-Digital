@@ -1,0 +1,95 @@
+{
+  "id": "modeling_20261015",
+  "version": 1,
+  "basis": "Procedimiento aportado por el usuario; criterios particulares, no valores normativos universales.",
+  "units": "tonf_m_C",
+  "analysis_authorized": false,
+  "first_story_increment_m": 0.5,
+  "geometry_grid_m": 0.05,
+  "masonry_increment": 0.05,
+  "supported_slab_masonry_min_tfm2": 0.1,
+  "masonry_weight_tfm3": 1.8,
+  "water_weight_tfm3": 1.0,
+  "mass_source": {
+    "source_self": false, "source_added": false, "source_loads": true,
+    "lateral": true, "vertical": false,
+    "factors": {"Dead": 1.0, "Live": 0.15, "LiveT": 0.1}
+  },
+  "pdelta": {"method": "Iterative Based on Loads", "factors": {"Dead": 1.2, "Live": 1.6, "LiveT": 1.6}},
+  "load_sets": {
+    "Entrepisos": {"dead_tfm2": 0.16, "live_pattern": "Live", "live_tfm2": 0.2},
+    "Comun": {"dead_tfm2": 0.18, "live_pattern": "Live", "live_tfm2": 0.4},
+    "Techo": {"dead_tfm2": 0.16, "live_pattern": "LiveT", "live_tfm2": 0.1},
+    "Parqueos": {"dead_tfm2": 0.16, "live_pattern": "LiveP", "live_tfm2": null},
+    "Gimnasio": {"dead_tfm2": 0.18, "live_pattern": "Live", "live_tfm2": null}
+  },
+  "materials": {
+    "C210": {"type": "Concrete", "weight_tfm3": 2.4028, "E_tfm2": 2188197.76, "poisson": 0.2, "thermal_per_C": 0.0000099, "fc_tfm2": 2100, "stress_strain": "Mander", "hysteresis": "Concrete", "peak_strain": 0.00221914, "ultimate_strain": 0.005, "final_slope": -0.1, "material_damping": 0},
+    "A615Gr60": {"type": "Rebar", "weight_tfm3": 7.849, "E_tfm2": 20389021.32, "thermal_per_C": 0.0000117, "fy_tfm2": 42184.18, "fu_tfm2": 63276.27, "fye_tfm2": 46402.59, "fue_tfm2": 69603.90, "stress_strain": "Simple", "hysteresis": "Kinematic", "hardening_strain": 0.01, "ultimate_strain": 0.09, "final_slope": -0.1, "material_damping": 0}
+  },
+  "optional_materials": {
+    "C280": {"type": "Concrete", "weight_tfm3": 2.4028, "E_tfm2": 2526712.94, "fc_tfm2": 2800, "inherits": "C210"},
+    "A992Fy50": {"type": "Steel", "weight_tfm3": 7.849, "E_tfm2": 20389021.32, "poisson": 0.3, "thermal_per_C": 0.0000117, "fy_tfm2": 35153.48, "fu_tfm2": 45699.53, "fye_tfm2": 38668.83, "fue_tfm2": 50269.48, "stress_strain": "Simple", "hysteresis": "Kinematic", "hardening_strain": 0.015, "max_strain": 0.11, "rupture_strain": 0.17, "final_slope": -0.1},
+    "A416Gr270": {"type": "Tendon", "weight_tfm3": 7.849, "E_tfm2": 20037484.36, "thermal_per_C": 0.0000117, "fy_tfm2": 172322.35, "fu_tfm2": 189828.84, "stress_strain": "270 ksi", "hysteresis": "Kinematic", "final_slope": -0.1}
+  },
+  "rebar_definitions": {
+    "#6": {"diameter_mm": 19.05, "area_mm2": 283.8704},
+    "#3": {"diameter_mm": 9.525, "area_mm2": 70.9676}
+  },
+  "frame_preferences": {
+    "column": {"material": "C210", "rebar": "A615Gr60", "mode": "Checked", "cover_m": 0.04, "i22": 0.8, "i33": 0.8, "tie_spacing_m": 0.1, "bars_per_face": "dimension_cm / 10; entero ambiguo requiere decision"},
+    "beam": {"material": "C210", "width_m": 0.3, "depth_m": 0.7, "cover_m": 0.06, "i22": 0.6, "i33": 0.6},
+    "rigid_zone_factor": 1,
+    "panel_zone": "omitido; conservar asignaciones existentes",
+    "releases": "solo condicion de apoyo confirmada"
+  },
+  "slab_definitions": [
+    {"name": "L12", "type": "Slab", "h_m": 0.12, "bending_modifier": 1},
+    {"name": "L15", "type": "Slab", "h_m": 0.15, "bending_modifier": 1},
+    {"name": "L20", "type": "Slab", "h_m": 0.20, "bending_modifier": 1},
+    {"name": "L20A-1D", "type": "Ribbed", "h_m": 0.20, "topping_m": 0.05, "rib_width_m": 0.15, "rib_spacing_m": 0.65, "bending_modifier": 1},
+    {"name": "L20A-2D", "type": "Waffle", "h_m": 0.20, "topping_m": 0.05, "rib_width_m": 0.15, "rib_spacing_m": 0.65, "bending_modifier": 1},
+    {"name": "L25A-1D", "type": "Ribbed", "h_m": 0.25, "topping_m": 0.05, "rib_width_m": 0.20, "rib_spacing_m": 0.65, "bending_modifier": 0.25},
+    {"name": "L25A-2D", "type": "Waffle", "h_m": 0.25, "topping_m": 0.05, "rib_width_m": 0.20, "rib_spacing_m": 0.65, "bending_modifier": 0.25},
+    {"name": "L25A-1D-PARQ", "type": "Ribbed", "h_m": 0.25, "topping_m": 0.10, "rib_width_m": 0.15, "rib_spacing_m": 0.65, "bending_modifier": 1},
+    {"name": "L25A-2D-PARQ", "type": "Waffle", "h_m": 0.25, "topping_m": 0.10, "rib_width_m": 0.15, "rib_spacing_m": 0.65, "bending_modifier": 1}
+  ],
+  "slab_common": {"material": "C210", "modeling_type": "Shell-Thick", "f11": 1, "f22": 1, "f12": 1, "v13": 1, "v23": 1, "mass": 1, "weight": 1},
+  "seismic_policy": {
+    "code": "Dominican Republic R-001",
+    "pattern_ss_s1_units": "g",
+    "function_input_multiplier": 9.81,
+    "function_multiplier_basis": "instruccion del perfil; comprobar curva generada, no asumir escala lineal",
+    "pattern_eccentricity": 0.05,
+    "case_eccentricity": 0,
+    "damping": 0.05,
+    "modal_combination": "CQC",
+    "directional_combination": "SRSS",
+    "transverse_ratio": 0.3,
+    "main_scale": null
+  },
+  "steps": [
+    {"id": 1, "title": "Grids, stories y unidades", "tools": ["get_stories", "set_stories", "set_units"], "check": "Alturas y centros desde planos; Base=0; incremento inicial; coordenadas conectadas a 0.05 m. No redondeo independiente de nudos."},
+    {"id": 2, "title": "Respaldo y guardado inicial", "tools": ["get_model_info", "save_model"], "check": "Instancia y ruta EDB exactas, conservar cambios previos."},
+    {"id": 3, "title": "Libro del espectro", "tools": [], "check": "Copia de plantilla, macros/formulas y recalculo; datos del proyecto. Penalizaciones pendientes no equivalen a No."},
+    {"id": 4, "title": "Materiales y barras", "tools": ["get_materials", "define_concrete_material", "call_oapi"], "check": "Biblioteca seleccionada; peso y masa distintos. Propiedades equivalentes heredadas no se transfieren."},
+    {"id": 5, "title": "Secciones", "tools": ["get_frame_sections", "get_area_sections_full", "define_rect_section", "set_frame_modifiers", "set_area_modifiers"], "check": "Shell-Thick; topping dentro del peralte; eje local y recubrimiento; enteros de armado confirmados."},
+    {"id": 6, "title": "Funcion MOPC", "tools": ["get_spectrum", "describe_oapi", "call_oapi"], "check": "R-001 nativa; fuente y conversion separadas; curva por factor contra Excel. define_cdcrd_spectrum no es sustituto equivalente."},
+    {"id": 7, "title": "Patrones y casos", "tools": ["get_load_patterns", "add_load_pattern", "get_table_data"], "check": "Qx/Qy R-001, parametros del proyecto en g; LiveT tipo Live; LiveP condicional."},
+    {"id": 8, "title": "Fuente de masa", "tools": ["set_mass_source", "get_table_data"], "check": "Solo patrones; masa lateral; sin vertical ni duplicar masa propia."},
+    {"id": 9, "title": "Opciones P-Delta", "tools": ["describe_oapi", "get_table_data"], "check": "Iterative Based on Loads; add_pdelta_case crea otro tipo de objeto y no sustituye estas opciones."},
+    {"id": 10, "title": "Modal", "tools": ["describe_oapi", "call_oapi"], "check": "Tres modos por story; suficiencia de masa solo despues del analisis."},
+    {"id": 11, "title": "EX y EY", "tools": ["describe_oapi", "call_oapi"], "check": "Dos filas por caso, F/0.30F, MOPC, CQC/SRSS; helper actual de una direccion no basta."},
+    {"id": 12, "title": "Geometria, vuelos y rampas", "tools": ["get_all_geometries", "create_objects_by_coordinates"], "check": "Centros, continuidad, vacios, rectangulos, coplanaridad y pendientes desde planos; no interpretar simbolos como elementos."},
+    {"id": 13, "title": "Sets, mamposteria y agua", "tools": ["get_table_data", "assign_area_uniform_load"], "check": "Arquitectura/Excel/set coincidentes; vuelos sin mamposteria; no duplicar peso ni acabados; agua segun area mojada."},
+    {"id": 14, "title": "Muros sobre vigas", "tools": ["assign_frame_distributed_load"], "check": "Altura del espacio superior menos peralte; intervalos reales, extremos I/J y redondeo de intensidad."},
+    {"id": 15, "title": "Mallado", "tools": ["describe_oapi", "call_oapi"], "check": "1D No Auto Mesh incluso macizas; muros Auto Rectangular; conectividad comprobada."},
+    {"id": 16, "title": "Diafragmas", "tools": ["get_diaphragms", "get_table_data"], "check": "Una cota por story+diafragma; reutilizacion entre stories permitida; rampas sin diafragma horizontal; revisar nudos."},
+    {"id": 17, "title": "Liberaciones", "tools": ["set_frame_releases"], "check": "Solo apoyo confirmado; pendiente no autoriza articular."},
+    {"id": 18, "title": "Rigid Zone Factor", "tools": ["describe_oapi", "call_oapi"], "check": "Factor1 conservando offsets, releer."},
+    {"id": 19, "title": "Panel Zone omitido", "tools": [], "check": "No asignar automaticamente ni borrar lo existente."},
+    {"id": 20, "title": "Base", "tools": ["set_base_restraints", "get_restraints"], "check": "Seis restricciones, solo nudos de Base."},
+    {"id": 21, "title": "Check Model y persistencia", "tools": ["save_model"], "check": "Informe nativo completo, sin autocorreccion; guardar y releer. API ret0 no basta."},
+    {"id": 22, "title": "Detener antes del analisis", "tools": [], "check": "No invocar run_analysis, diseno ni SAFE por preparar el modelo."}
+  ]
+}

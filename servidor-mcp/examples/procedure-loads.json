@@ -1,0 +1,52 @@
+{
+  "profile": "modeling_20261015",
+  "data": {
+    "has_parking": false,
+    "slabs": [
+      {
+        "id": "A1",
+        "support": "supported",
+        "is_opening": false,
+        "set": "Entrepisos",
+        "architecture_set": "Entrepisos",
+        "excel_live": 0.2,
+        "excel_masonry": 0.121,
+        "unit": "tonf/m2",
+        "existing_components": []
+      },
+      {
+        "id": "A2",
+        "support": "cantilever",
+        "is_opening": false,
+        "set": "Comun",
+        "architecture_set": "Comun",
+        "excel_live": 0.4,
+        "unit": "tonf/m2",
+        "existing_components": []
+      }
+    ],
+    "walls_on_beams": [
+      {
+        "id": "W1",
+        "beam": "B1",
+        "start": 0.1,
+        "end": 0.4,
+        "beam_depth_m": 0.7,
+        "thickness_m": 0.15,
+        "space_above_start_m": 3.0,
+        "space_above_end_m": 3.5,
+        "reverse_ij": true
+      }
+    ],
+    "water": [
+      {
+        "id": "P1",
+        "wet_horizontal_area_m2": 10.0,
+        "mean_depth_m": 1.231,
+        "application_horizontal_area_m2": 10.0,
+        "equivalent_over_dry_area": false,
+        "existing_water_assigned": false
+      }
+    ]
+  }
+}

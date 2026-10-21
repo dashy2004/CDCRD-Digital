@@ -1,5 +1,16 @@
 # Huecos de ETABS y SAFE — especificación para implementar
 
+# Integración del procedimiento aportado — 2026-10-20
+
+El [perfil `modeling_20261015`](../servidor-mcp/docs/PROCEDIMIENTO-ETABS.md)
+incorpora configuración residencial, cargas, comprobaciones de snapshots y revisión
+de acero mediante ocho herramientas sin escritura CAD. Representa las 22 etapas,
+pero no acredita que todas tengan un ejecutor OAPI. En este perfil Panel Zone
+(paso 19) está omitido y la preparación se detiene antes de Run Analysis.
+El caso no lineal de `add_pdelta_case` no sustituye las opciones P-Delta globales,
+y el helper espectral de una dirección no satisface EX/EY con dos filas.
+Las observaciones históricas que siguen conservan su contexto.
+
 > Actualización ETABS 2026-10-17: esta especificación histórica no sustituye la
 > [validación nativa actual](../servidor-mcp/docs/VALIDACION-ETABS.md). Los lectores
 > de vigas/columnas/nudos ya devolvieron resultados reales; la fuente de masa
