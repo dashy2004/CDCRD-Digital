@@ -1,0 +1,5 @@
+{
+ "LE4": {"uso": "comun", "mamposteria_tm2": 0.121},
+ "LE5": {"uso": "comun"},
+ "LE6": {"uso": "comun", "es_vuelo": true, "direccion": "1D"}
+}

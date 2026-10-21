@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "puente-losas"
+version = "0.1.0"
+description = "Puente de losas Revit -> motor FEM (EstructurasRD) -> Excel/ETABS para CDCRD-Digital."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+# motor-fea es el motor de calculo de EstructurasRD (Emil Guillen De la Cruz,
+# @dashy2004, MIT). Se instala desde el repo publico; para desarrollo local
+# tambien sirve un clon en .vendor/EstructurasRD con pip install -e.
+dependencies = [
+    "motor-fea @ git+https://github.com/dashy2004/EstructurasRD#subdirectory=motor-fea",
+    "openpyxl>=3.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+puente-losas = "puente_losas.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"puente_losas.datos" = ["*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
