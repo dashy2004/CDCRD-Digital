@@ -177,8 +177,8 @@ procedimiento manual reproducible.
 
 [Estado y propuesta de protección](docs/PROTECCION-NORMATIVA.md): manifiesto de
 111 archivos, verificador local, CI de GitHub activa (desde 2026-10-21) y
-responsables de revisión. La protección de rama de `master` aún no está
-activada. Tampoco cambian las marcas
+responsables de revisión. `master` está protegida desde 2026-10-21: los cambios
+entran por pull request con los dos checks en verde. Tampoco cambian las marcas
 de fórmulas/tablas pendientes de cotejo.
 
 ## Los servidores MCP
