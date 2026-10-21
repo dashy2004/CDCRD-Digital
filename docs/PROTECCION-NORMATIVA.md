@@ -15,15 +15,15 @@ python tools/verify_normative.py
 ```
 
 El control rechaza modificaciones, archivos eliminados y archivos añadidos en los
-directorios fijados. La plantilla de CI compara además contra el manifiesto y
+directorios fijados. La CI compara además contra el manifiesto y
 verificador de la rama base: cambiar simultáneamente el contenido y su nuevo manifiesto no hace
 pasar ese control. El primer manifiesto requiere revisión del diff frente a la base.
 
-La credencial usada para publicar no tenía el permiso `workflow`: GitHub rechazó
-la subida del workflow activo. Para conservar el código sin cambiar permisos, se
-entrega como [plantilla](workflows/verify.yml.example). **La CI no está instalada
-ni ha ejecutado estos checks en GitHub.** El verificador y las 32 pruebas sí se
-ejecutaron localmente. El rechazo no afectó el contenido normativo.
+**CI instalada el 2026-10-21** en [.github/workflows/verify.yml](../.github/workflows/verify.yml),
+por decisión de Emil: corre `normative-integrity` y `portable-tests` en cada push y
+pull request. Antes de activarla se ejecutaron en local el verificador (111 archivos,
+sin cambios) y las 38 pruebas portables. La copia en
+[workflows/verify.yml.example](workflows/verify.yml.example) se conserva como referencia.
 
 ## Integridad no significa aprobación técnica
 
@@ -35,9 +35,7 @@ conservan; este trabajo no modifica cláusulas, cifras ni su estado de verificac
 
 ## Activación recomendada por el responsable
 
-1. Revisar el PR e instalar la plantilla como `.github/workflows/verify.yml`
-   mediante una sesión autorizada para workflows. Ejecutar y comprobar los checks;
-   después integrar en `master`, manteniendo una sola portada pública.
+1. Hecho el 2026-10-21: CI instalada en `master` (`.github/workflows/verify.yml`).
 2. Exigir PR y los checks `normative-integrity` y `portable-tests`; bloquear force
    push y borrado de la rama. Proteger también `.github/` y el manifiesto.
 3. Activar revisión de CODEOWNERS para contenido normativo. El archivo identifica

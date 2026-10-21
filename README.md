@@ -176,9 +176,9 @@ procedimiento manual reproducible.
 ## Conservar la normativa revisada
 
 [Estado y propuesta de protección](docs/PROTECCION-NORMATIVA.md): manifiesto de
-111 archivos, verificador local, plantilla de CI y responsables de revisión.
-La CI está pendiente de instalación; los controles preparados no equivalen a
-reglas de GitHub ya activadas. Tampoco cambian las marcas
+111 archivos, verificador local, CI de GitHub activa (desde 2026-10-21) y
+responsables de revisión. La protección de rama de `master` aún no está
+activada. Tampoco cambian las marcas
 de fórmulas/tablas pendientes de cotejo.
 
 ## Los servidores MCP
