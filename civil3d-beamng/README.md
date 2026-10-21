@@ -90,6 +90,14 @@ python tools/prepare_drive.py --package 'D:\proyecto\paquete_r01' `
 
 La guia es JSON: `{"nodes_abs_m":[[E,N,Z,ancho_total],...],"station_m":[...]}`. La lista de estaciones es opcional. El ancho se interpola para asignar materiales a triangulos; sus limites se aproximan por el centroide de cada cara. Sin guia, el corredor recibe tierra. Use `--road-is-drivable` solamente cuando toda la TIN seleccionada sea pavimento. La geometria/cota de la TIN se conserva en ambos casos.
 
+## Recibos de operaciones
+
+`validate`, `build` y `verify` aceptan `--receipt ARCHIVO` para guardar un recibo
+JSON nuevo con archivos, SHA256, resultado y evidencia. La CLI común ofrece
+`validar-intercambio --modulo beamng --recibo ARCHIVO`. Los adjuntos se registran
+como evidencia de archivo; no prueban una operación CAD o conducción nueva.
+[Uso, esquema, escritura y límites](docs/RECIBOS.md).
+
 ## Geometria y limites
 
 La calzada visual y su `Colmesh-1` contienen todos los vertices y triangulos del TIN exportado, con origen local comun, metros y Z arriba. Esto preserva bombeo, peralte y taludes en esa geometria. El resultado sigue limitado por el modelo Civil y por la conversion numerica del motor.

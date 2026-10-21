@@ -43,6 +43,8 @@ con una aplicación debe respaldarse además con evidencia de integración en es
 
 ## Reconocimientos
 
+[Colaboradores y contribuciones](CONTRIBUTORS.md).
+
 **Asistencia de desarrollo: OpenAI Codex y Anthropic Claude**, según el historial de cada cambio.
 
 [Cómo probar con cualquiera de los dos asistentes](docs/TRABAJAR-CON-IA.md).

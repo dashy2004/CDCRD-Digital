@@ -416,6 +416,8 @@ publicación en PyPI ni en GitHub Packages. Los conectores Revit, ETABS y SAFE t
 Las mejoras de herramientas, documentación y ejemplos se describen en
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
+[Colaboradores y contribuciones](CONTRIBUTORS.md).
+
 **Desarrollo asistido: OpenAI Codex y Anthropic Claude**, según el historial de cada cambio.
 [Probar las herramientas con IA](docs/TRABAJAR-CON-IA.md). Las contribuciones concretas quedan
 registradas en el historial del repositorio. Este reconocimiento no representa una cuenta

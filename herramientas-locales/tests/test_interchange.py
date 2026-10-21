@@ -65,3 +65,18 @@ class AdapterTests(unittest.TestCase):
                    side_effect=subprocess.TimeoutExpired("synthetic", 60)):
             with self.assertRaises(subprocess.TimeoutExpired):
                 validate_beamng(self.root)
+
+    def test_receipt_protocol_and_evidence_are_forwarded_explicitly(self):
+        response = self.response('{"schema":"cdcrd.operation-receipt/1","ok":true}')
+        with patch("cdcrd_local.interchange.subprocess.run", return_value=response) as run:
+            result = validate_beamng(self.root, receipt=Path("receipt.json"),
+                                     evidence=[Path("capture.png")])
+        self.assertTrue(result["ok"])
+        command = run.call_args.args[0]
+        self.assertIn("--receipt", command)
+        self.assertIn(str(Path("receipt.json").absolute()), command)
+        self.assertIn(str(Path("capture.png").resolve()), command)
+        with patch("cdcrd_local.interchange.subprocess.run") as run:
+            with self.assertRaises(ValueError):
+                validate_beamng(self.root, evidence=[Path("capture.png")])
+        run.assert_not_called()

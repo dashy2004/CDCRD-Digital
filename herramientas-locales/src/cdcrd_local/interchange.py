@@ -12,12 +12,19 @@ SOURCE_OPTIONS = ("snapshot", "terrain_landxml", "terrain_surface",
 PATH_OPTIONS = {"snapshot", "terrain_landxml", "road_landxml", "road_guide"}
 
 
-def validate_beamng(repo: Path | None = None, **sources) -> dict:
+def validate_beamng(repo: Path | None = None, *, receipt: Path | None = None,
+                    evidence: list[Path] | None = None, **sources) -> dict:
     root = repository(repo)
     folder = (root / "civil3d-beamng").resolve()
     if not folder.is_relative_to(root) or not (folder / "cdcrd_beamng/validation.py").is_file():
         raise ValueError("No se encontro el validador Civil3D-BeamNG en el repositorio.")
     command = [sys.executable, "-m", "cdcrd_beamng", "validate"]
+    if evidence and receipt is None:
+        raise ValueError("--evidencia requiere --recibo.")
+    if receipt is not None:
+        command.extend(["--receipt", str(receipt.absolute())])
+    for path in evidence or []:
+        command.extend(["--evidence", str(path.resolve())])
     for option, value in sources.items():
         if option not in SOURCE_OPTIONS:
             raise ValueError(f"Opcion de intercambio desconocida: {option}")
@@ -32,9 +39,12 @@ def validate_beamng(repo: Path | None = None, **sources) -> dict:
         result = json.loads(process.stdout)
     except json.JSONDecodeError as error:
         raise RuntimeError(
-            "El validador BeamNG no produjo JSON; compruebe sus dependencias."
+            f"BeamNG no produjo JSON (salida {process.returncode}); "
+            "revise argumentos, destino del recibo y dependencias."
         ) from error
-    if (not isinstance(result, dict) or result.get("schema") != "cdcrd.interchange-validation/1"
+    schema = ("cdcrd.operation-receipt/1" if receipt is not None
+              else "cdcrd.interchange-validation/1")
+    if (not isinstance(result, dict) or result.get("schema") != schema
             or type(result.get("ok")) is not bool
             or process.returncode != (0 if result["ok"] else 1)):
         raise RuntimeError("Respuesta o codigo de salida inesperado del validador BeamNG.")
