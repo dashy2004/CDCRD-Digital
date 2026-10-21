@@ -100,7 +100,12 @@ def validate_guide(data):
     nodes = numeric_array(data.get("nodes_abs_m"), 4, "Road guide nodes")
     if len(nodes) < 2 or (nodes[:, 3] <= 0).any():
         raise ValueError("Road guide needs two nodes and positive full widths")
-    if (np.linalg.norm(np.diff(nodes[:, :2], axis=0), axis=1) < 1e-9).any():
+    with np.errstate(over="ignore", invalid="ignore"):
+        differences = np.diff(nodes[:, :2], axis=0)
+        distances = np.hypot(differences[:, 0], differences[:, 1])
+    if not np.isfinite(distances).all():
+        raise ValueError("Road guide XY distances exceed finite numerical range")
+    if (distances < 1e-9).any():
         raise ValueError("Road guide has duplicate consecutive XY nodes")
     stations = data.get("station_m")
     if stations is not None:

@@ -1,10 +1,10 @@
 """Adapter failures must remain explicit; source data is passed without a shell."""
 import json
 import os
-from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 from cdcrd_local.interchange import validate_beamng
@@ -22,7 +22,8 @@ class AdapterTests(unittest.TestCase):
 
     def response(self, stdout=None, code=0):
         report = {"schema": "cdcrd.interchange-validation/1", "ok": code == 0}
-        return subprocess.CompletedProcess([], code, json.dumps(report) if stdout is None else stdout, "")
+        return subprocess.CompletedProcess(
+            [], code, json.dumps(report) if stdout is None else stdout, "")
 
     def test_paths_are_resolved_before_changing_directory_and_names_are_literal(self):
         with patch("cdcrd_local.interchange.subprocess.run", return_value=self.response()) as run, \
