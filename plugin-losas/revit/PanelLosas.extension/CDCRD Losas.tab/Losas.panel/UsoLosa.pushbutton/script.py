@@ -49,8 +49,14 @@ from pyrevit import DB, revit  # noqa: E402
 MARKER = "MCP:LOSA-ESQ"
 PARAM_USO = "Uso_Losa"
 PARAM_TIPO = "Tipo_Losa_PM"
+PARAM_SECCION = "Seccion_Losa"
+PARAM_ACERO_X = "Acero_X"
+PARAM_ACERO_Y = "Acero_Y"
+PARAM_ACERO_APOYO = "Acero_Apoyo"
 GRUPO_PARAMS = "CDCRD plugin-losas"
 FT_A_M = 0.3048
+SECCION_AUTO = "auto (reglamento)"
+SECCIONES = [SECCION_AUTO, "L12", "L15", "L20", "L20A-1D", "L20A-2D", "L25A-1D", "L25A-2D"]
 
 
 # ------------------------------ repo y datos ------------------------------
@@ -140,6 +146,10 @@ def _filas(doc):
             "area": round(p_area.AsDouble() * 0.09290304, 2) if p_area and p_area.HasValue else None,
             "uso": _param_texto(f, PARAM_USO),
             "tipo": _param_texto(f, PARAM_TIPO),
+            "seccion": _param_texto(f, PARAM_SECCION),
+            "acero_x": _param_texto(f, PARAM_ACERO_X),
+            "acero_y": _param_texto(f, PARAM_ACERO_Y),
+            "acero_apoyo": _param_texto(f, PARAM_ACERO_APOYO),
         })
     filas.sort(key=lambda x: x["mark"])
     return filas
@@ -208,8 +218,8 @@ class PanelUsoLosa(Form):
         self.por_etiqueta = dict((et, uid) for uid, et in opciones)
         self.por_id = dict((uid, et) for uid, et in opciones)
 
-        self.Text = "Losas - uso Tabla 4 y tipo por apoyo (plugin-losas, metodo Pieper-Martens)"
-        self.Size = Size(1180, 560)
+        self.Text = "Losas - uso, tipo por apoyo, seccion y acero (plugin-losas, Pieper-Martens)"
+        self.Size = Size(1560, 580)
         self.StartPosition = FormStartPosition.CenterScreen
 
         self.grid = DataGridView()
@@ -218,8 +228,8 @@ class PanelUsoLosa(Form):
         self.grid.AllowUserToDeleteRows = False
         self.grid.RowHeadersVisible = False
 
-        for titulo, ancho in (("Mark", 60), ("Nivel", 160), ("Lx [m]", 60),
-                              ("Ly [m]", 60), ("Area [m2]", 70)):
+        for titulo, ancho in (("Mark", 55), ("Nivel", 140), ("Lx [m]", 55),
+                              ("Ly [m]", 55), ("Area [m2]", 65)):
             c = DataGridViewTextBoxColumn()
             c.HeaderText = titulo
             c.Width = ancho
@@ -227,22 +237,33 @@ class PanelUsoLosa(Form):
             self.grid.Columns.Add(c)
         combo = DataGridViewComboBoxColumn()
         combo.HeaderText = "Uso (Tabla 4 CDCRD)"
-        combo.Width = 420
+        combo.Width = 330
         for _, etiqueta in opciones:
             combo.Items.Add(etiqueta)
-        self.grid.Columns.Add(combo)
+        self.grid.Columns.Add(combo)                              # col 5
         c_tipo = DataGridViewTextBoxColumn()
-        c_tipo.HeaderText = "Tipo (apoyo, cod. Losas.exe)"
-        c_tipo.Width = 280
+        c_tipo.HeaderText = "Tipo (apoyo)"
+        c_tipo.Width = 215
         c_tipo.ReadOnly = True
-        self.grid.Columns.Add(c_tipo)
+        self.grid.Columns.Add(c_tipo)                             # col 6
+        c_sec = DataGridViewComboBoxColumn()
+        c_sec.HeaderText = "Seccion"
+        c_sec.Width = 115
+        for s in SECCIONES:
+            c_sec.Items.Add(s)
+        self.grid.Columns.Add(c_sec)                              # col 7
+        for titulo in ("Acero X", "Acero Y", "Acero apoyo"):      # cols 8-10, EDITABLES
+            c = DataGridViewTextBoxColumn()
+            c.HeaderText = titulo + " (editable)"
+            c.Width = 125
+            self.grid.Columns.Add(c)
 
         self._poblar()
 
         for texto, manejador in (
                 ("Abrir ultimo visor HTML", self.abrir_visor),
                 ("CALCULAR (motor Pieper-Martens) y abrir visor", self.calcular),
-                ("Guardar usos en el modelo (Uso_Losa)", self.guardar)):
+                ("Guardar en el modelo (uso, seccion y aceros editados)", self.guardar)):
             b = Button()
             b.Text = texto
             b.Dock = DockStyle.Bottom
@@ -255,33 +276,62 @@ class PanelUsoLosa(Form):
     def _poblar(self):
         self.grid.Rows.Clear()
         for fila in self.filas:
-            idx = self.grid.Rows.Add(fila["mark"], fila["nivel"] or "", fila["lx"],
-                                     fila["ly"], fila["area"], None, fila["tipo"] or "")
+            idx = self.grid.Rows.Add(
+                fila["mark"], fila["nivel"] or "", fila["lx"], fila["ly"],
+                fila["area"], None, fila["tipo"] or "", None,
+                fila["acero_x"] or "", fila["acero_y"] or "", fila["acero_apoyo"] or "")
             if fila["uso"] and fila["uso"] in self.por_id:
                 self.grid.Rows[idx].Cells[5].Value = self.por_id[fila["uso"]]
+            seccion = fila["seccion"] if fila["seccion"] in SECCIONES else SECCION_AUTO
+            self.grid.Rows[idx].Cells[7].Value = seccion
+
+    def _celda(self, i, col):
+        v = self.grid.Rows[i].Cells[col].Value
+        return str(v) if v else ""
 
     def _seleccion(self):
         usos = {}
         for i in range(self.grid.Rows.Count):
-            etiqueta = self.grid.Rows[i].Cells[5].Value
-            mark = self.grid.Rows[i].Cells[0].Value
+            etiqueta = self._celda(i, 5)
+            mark = self._celda(i, 0)
             if etiqueta and mark:
-                usos[str(mark)] = self.por_etiqueta[str(etiqueta)]
+                usos[mark] = self.por_etiqueta[etiqueta]
         return usos
 
-    def _escribir_param(self, nombre, valores, titulo):
+    def _secciones(self, solo_fijadas=True):
+        out = {}
+        for i in range(self.grid.Rows.Count):
+            mark = self._celda(i, 0)
+            s = self._celda(i, 7)
+            if mark and s and (s != SECCION_AUTO or not solo_fijadas):
+                out[mark] = s
+        return out
+
+    def _aceros(self):
+        out = {}
+        for i in range(self.grid.Rows.Count):
+            mark = self._celda(i, 0)
+            x, y, apoyo = self._celda(i, 8), self._celda(i, 9), self._celda(i, 10)
+            if mark and (x or y or apoyo):
+                out[mark] = {"x": x, "y": y, "apoyo": apoyo}
+        return out
+
+    def _escribir_params(self, escrituras, titulo):
+        """escrituras = {nombre_param: {Mark: texto}}; UNA transaccion, rollback."""
         doc = self.doc
         t = DB.Transaction(doc, titulo)
         t.Start()
         try:
-            if self.filas and self.filas[0]["el"].LookupParameter(nombre) is None:
-                _crear_parametro_texto(doc, nombre)
-                doc.Regenerate()
+            for nombre in escrituras:
+                if self.filas and self.filas[0]["el"].LookupParameter(nombre) is None:
+                    _crear_parametro_texto(doc, nombre)
+            doc.Regenerate()
             n = 0
-            for fila in self.filas:
-                if fila["mark"] in valores:
-                    fila["el"].LookupParameter(nombre).Set(valores[fila["mark"]])
-                    n += 1
+            for nombre, valores in escrituras.items():
+                for fila in self.filas:
+                    if fila["mark"] in valores:
+                        fila["el"].LookupParameter(nombre).Set(valores[fila["mark"]])
+                        n += 1
             t.Commit()
             return n
         except Exception as ex:
@@ -290,12 +340,27 @@ class PanelUsoLosa(Form):
             return 0
 
     def guardar(self, remitente, evento):
+        escrituras = {}
         usos = self._seleccion()
-        if not usos:
-            MessageBox.Show("Ninguna fila tiene uso elegido.")
+        if usos:
+            escrituras[PARAM_USO] = usos
+        secciones = self._secciones(solo_fijadas=False)
+        if secciones:
+            escrituras[PARAM_SECCION] = secciones
+        aceros = self._aceros()
+        if aceros:
+            for clave, nombre in (("x", PARAM_ACERO_X), ("y", PARAM_ACERO_Y),
+                                  ("apoyo", PARAM_ACERO_APOYO)):
+                valores = dict((mk, a[clave]) for mk, a in aceros.items() if a[clave])
+                if valores:
+                    escrituras[nombre] = valores
+        if not escrituras:
+            MessageBox.Show("Nada que guardar: elige usos/seccion o edita aceros.")
             return
-        n = self._escribir_param(PARAM_USO, usos, "plugin-losas: Uso_Losa")
-        MessageBox.Show("%d losas con Uso_Losa guardado. El .rvt NO se guarda a disco." % n)
+        n = self._escribir_params(escrituras, "plugin-losas: uso, seccion y aceros")
+        MessageBox.Show("%d valores guardados en los parametros de las losas "
+                        "(%s). El .rvt NO se guarda a disco." %
+                        (n, ", ".join(sorted(escrituras.keys()))))
 
     def calcular(self, remitente, evento):
         if self.carpeta is None:
@@ -317,20 +382,30 @@ class PanelUsoLosa(Form):
         ns["run"](self.doc, revit.uidoc, DB,
                   {"path": proyecto, "marker": MARKER, "incluir": ["losas"]})
 
-        # 2) usos elegidos en el panel
+        # 2) usos y secciones elegidos en el panel
         marcados = os.path.join(carpeta, "usos_marcados.json")
         with io.open(marcados, "w", encoding="utf-8") as f:
             f.write(json.dumps(self._seleccion(), indent=1))
+        secciones = self._secciones()           # solo las fijadas a mano; el resto, reglamento
+        ruta_secciones = os.path.join(carpeta, "secciones.json")
+        with io.open(ruta_secciones, "w", encoding="utf-8") as f:
+            f.write(json.dumps(secciones, indent=1))
 
-        # 3) motor en CPython: tabla -> puente-losas (FEM+PM) -> tipos -> visor
+        # 3) motor en CPython: tabla -> puente-losas (FEM+PM) -> tipos ->
+        #    aligeradas (nervios/conexiones) -> acero comercial PM
         errores = []
+        usos_json = os.path.join(carpeta, "usos.json")
         pasos = [
             "plugin_losas.cli tabla --proyecto \"%s\" --usos-marcados \"%s\" --salida \"%s\"" %
             (proyecto, marcados, carpeta),
             "puente_losas.cli --proyecto \"%s\" --usos \"%s\" --salida \"%s\"" %
-            (proyecto, os.path.join(carpeta, "usos.json"), carpeta),
+            (proyecto, usos_json, carpeta),
             "plugin_losas.cli tipos --proyecto \"%s\" --usos \"%s\" --salida \"%s\"" %
-            (proyecto, os.path.join(carpeta, "usos.json"), carpeta),
+            (proyecto, usos_json, carpeta),
+            "plugin_losas.cli aligeradas --proyecto \"%s\" --usos \"%s\" --secciones \"%s\" "
+            "--salida \"%s\"" % (proyecto, usos_json, ruta_secciones, carpeta),
+            "plugin_losas.cli acero --resultados \"%s\" --salida \"%s\"" %
+            (os.path.join(carpeta, "resultados.json"), carpeta),
         ]
         for paso in pasos:
             if not _correr_cpython(raiz, paso, errores):
@@ -351,17 +426,44 @@ class PanelUsoLosa(Form):
                 return
             self.visores.append(os.path.join(salida_nivel, "visor_losas.html"))
 
-        # 5) tipo por apoyo al modelo y a la columna del panel
+        # 5) tipo por apoyo al modelo, y prefill de aceros/seccion en el panel
         with io.open(os.path.join(carpeta, "tipos_pm.json"), encoding="utf-8") as f:
             payload = json.load(f)["asignar_en_revit"]
-        n = self._escribir_param(PARAM_TIPO, payload, "plugin-losas: Tipo_Losa_PM")
+        n = self._escribir_params({PARAM_TIPO: payload}, "plugin-losas: Tipo_Losa_PM")
+        with io.open(os.path.join(carpeta, "acero_pm.json"), encoding="utf-8") as f:
+            acero = json.load(f)["losas"]
+        # lo elegido/tecleado por el usuario manda; el calculo rellena lo vacio
+        ediciones = self._aceros()
+        usos_grid = self._seleccion()
+        secciones_grid = self._secciones(solo_fijadas=False)
         for fila in self.filas:
-            fila["tipo"] = payload.get(fila["mark"], fila["tipo"])
+            mk = fila["mark"]
+            fila["tipo"] = payload.get(mk, fila["tipo"])
+            if mk in usos_grid:
+                fila["uso"] = usos_grid[mk]
+            if mk in secciones_grid:
+                fila["seccion"] = secciones_grid[mk]
+            editado = ediciones.get(mk, {})
+            for clave, campo in (("x", "acero_x"), ("y", "acero_y"), ("apoyo", "acero_apoyo")):
+                if editado.get(clave):
+                    fila[campo] = editado[clave]
+            armados = (acero.get(mk) or {}).get("armados")
+            if armados:
+                if not fila["acero_x"]:
+                    fila["acero_x"] = armados["mfx"]["disponer"]
+                if not fila["acero_y"]:
+                    fila["acero_y"] = armados["mfy"]["disponer"]
+                if not fila["acero_apoyo"]:
+                    peor = armados["msx"] if armados["msx"]["as_diseno"] >= \
+                        armados["msy"]["as_diseno"] else armados["msy"]
+                    fila["acero_apoyo"] = peor["disponer"]
         self._poblar()
 
         self.abrir_visor(None, None)
-        MessageBox.Show("Calculo completo: %d losas, tipo por apoyo escrito en %d.\n"
-                        "Salidas (Excel, .DL, visores): %s\n"
+        MessageBox.Show("Calculo completo: %d losas; tipo por apoyo escrito en %d.\n"
+                        "Acero comercial PM precargado en las columnas editables: "
+                        "ajusta lo que quieras y pulsa Guardar para reflejarlo en el modelo.\n"
+                        "Salidas (Excel, .DL, plan aligeradas, visores): %s\n"
                         "El .rvt NO se guarda a disco." % (len(self.filas), n, carpeta))
 
     def abrir_visor(self, remitente, evento):

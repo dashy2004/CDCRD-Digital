@@ -84,13 +84,29 @@ def dto_visor(proyecto: dict, resultados: dict, nombre: str = "Proyecto Ejemplo"
             lx = (r.get("params") or {}).get("a") or 1.0
             ly = (r.get("params") or {}).get("b") or 1.0
             contorno = [[0.0, 0.0], [lx, 0.0], [lx, ly], [0.0, ly]]
+        # dirección en la que trabaja el paño (símbolo del visor): 1D sobre la
+        # luz corta (relación > 2 o vuelo), 2D en ambos sentidos. Se mide del
+        # contorno real (los vuelos no llevan a/b en sus params).
+        xs = [p[0] for p in contorno]
+        ys = [p[1] for p in contorno]
+        ancho_x = max(xs) - min(xs)
+        ancho_y = max(ys) - min(ys)
+        eje_corto = "X" if ancho_x <= ancho_y else "Y"
+        es_vuelo = bool(r.get("es_vuelo"))
+        if es_vuelo:
+            trabajo = {"tipo": "vuelo", "eje": eje_corto}
+        elif max(ancho_x, ancho_y) / max(min(ancho_x, ancho_y), 1e-9) > 2.0:
+            trabajo = {"tipo": "1D", "eje": eje_corto}
+        else:
+            trabajo = {"tipo": "2D", "eje": None}
         fila = {
             "mark": mark,
             "contorno": contorno,
             "codigo_dl": m.get("codigo_dl"),
             "nota": m.get("nota") or "",
             "uso": r.get("uso") or "",
-            "es_vuelo": bool(r.get("es_vuelo")),
+            "trabajo": trabajo,
+            "es_vuelo": es_vuelo,
             "armaduras": {
                 "x": (r.get("franja_x") or {}).get("disponer", ""),
                 "y": (r.get("franja_y") or {}).get("disponer", ""),

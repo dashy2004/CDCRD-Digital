@@ -133,6 +133,18 @@ def _cmd_renumerar(args) -> int:
     return 0
 
 
+def _cmd_acero(args) -> int:
+    from plugin_losas.acero_pm import acero_pm_de_resultados, escribir_acero_pm
+
+    acero = acero_pm_de_resultados(_cargar_json(args.resultados))
+    os.makedirs(args.salida, exist_ok=True)
+    ruta = os.path.join(args.salida, "acero_pm.json")
+    escribir_acero_pm(acero, ruta)
+    print(f"Acero PM comercial de {len(acero['losas'])} losas y {len(acero['apoyos'])} apoyos.")
+    print(f"  {ruta}")
+    return 0
+
+
 def _cmd_usos(args) -> int:
     tabla = cargar_tabla4(args.tabla4)
     os.makedirs(args.salida, exist_ok=True)
@@ -233,6 +245,11 @@ def main(argv: list[str] | None = None) -> int:
     tp.add_argument("--usos", help="usos.json del puente (marca vuelos: cambian el tipo)")
     tp.add_argument("--salida", default="salidas")
     tp.set_defaults(func=_cmd_tipos)
+
+    ac = sub.add_parser("acero", help="acero comercial PM (barra y separación) de resultados.json")
+    ac.add_argument("--resultados", required=True)
+    ac.add_argument("--salida", default="salidas")
+    ac.set_defaults(func=_cmd_acero)
 
     u = sub.add_parser("usos", help="lista numerada de los usos Tabla 4 (para el LISP/panel)")
     u.add_argument("--tabla4", default=None)

@@ -1,26 +1,31 @@
 # -*- coding: utf-8 -*-
-"""uso_losa: lee las losas esquematicas (marker en Comments) con su Uso_Losa y
-Tipo_Losa_PM, y opcionalmente asigna por Mark el uso de la Tabla 4 y/o el tipo
-de losa segun apoyos calculado por plugin-losas.
+"""uso_losa: lee las losas esquematicas (marker en Comments) con sus parametros
+del plugin de losas, y asigna por Mark lo que el panel/CLI decidio.
 
 Parametros (P):
   marker:   prefijo de Comments de las losas a listar (default "MCP:LOSA-ESQ").
-  asignar:  {Mark: id_uso_tabla4} a escribir en el parametro Uso_Losa (opcional).
-  escribir_tipos: {Mark: texto} a escribir en Tipo_Losa_PM (opcional; el texto
-            sale de `plugin-losas tipos` -> tipos_pm.json["asignar_en_revit"]:
-            codigo DL por apoyos + bordes empotrados).
+  asignar:  {Mark: id_uso_tabla4} -> parametro Uso_Losa (opcional).
+  escribir_tipos: {Mark: texto} -> Tipo_Losa_PM (tipo segun apoyos; el texto
+            sale de `plugin-losas tipos` -> tipos_pm.json["asignar_en_revit"]).
+  escribir_secciones: {Mark: seccion} -> Seccion_Losa (L12/L15/L20 macizas,
+            L20A/L25A-1D/2D aligeradas, o "auto" si rige el reglamento).
+  escribir_aceros: {Mark: {"x": txt, "y": txt, "apoyo": txt}} -> Acero_X,
+            Acero_Y, Acero_Apoyo (armadura comercial, editable en el panel).
   crear_parametro: True para crear los parametros de proyecto que falten
-            (texto, instancia, categoria Floors). Sin la bandera y sin el
-            parametro, la escritura falla con aviso (default False).
+            (texto, instancia, categoria Floors; default False).
 
-Devuelve una fila por losa (mark, nivel, lx/ly/area en m, espesor, uso_losa,
-tipo_losa_pm) y los conteos. Esta tool no calcula el tipo (eso es de
-plugin_losas.tipos_pm, testeado): solo escribe texto. Escritura en UNA
-transaccion con rollback; no guarda (usar revit_guardar_modelo despues).
+Devuelve una fila por losa con todos esos parametros y los conteos escritos.
+Esta tool NO calcula nada (los calculos viven en plugin_losas/puente_losas,
+testeados): solo escribe texto. UNA transaccion con rollback; no guarda
+(usar revit_guardar_modelo despues).
 """
 
 PARAM_USO = "Uso_Losa"
 PARAM_TIPO = "Tipo_Losa_PM"
+PARAM_SECCION = "Seccion_Losa"
+PARAM_ACERO_X = "Acero_X"
+PARAM_ACERO_Y = "Acero_Y"
+PARAM_ACERO_APOYO = "Acero_Apoyo"
 GRUPO_PARAMS = "CDCRD plugin-losas"
 
 
@@ -104,10 +109,29 @@ def _crear_parametro_texto(doc, DB, nombre):
 
 def run(doc, uidoc, DB, P):
     marker = P.get("marker") or "MCP:LOSA-ESQ"
-    asignar = P.get("asignar") or {}
-    escribir_tipos = P.get("escribir_tipos") or {}
     crear = bool(P.get("crear_parametro"))
     e = errs()
+
+    # escrituras pedidas: (parametro, {Mark: texto})
+    escrituras = []
+    if P.get("asignar"):
+        escrituras.append((PARAM_USO, dict(P["asignar"])))
+    if P.get("escribir_tipos"):
+        escrituras.append((PARAM_TIPO, dict(P["escribir_tipos"])))
+    if P.get("escribir_secciones"):
+        escrituras.append((PARAM_SECCION, dict(P["escribir_secciones"])))
+    for mark, aceros in (P.get("escribir_aceros") or {}).items():
+        for clave, nombre in (("x", PARAM_ACERO_X), ("y", PARAM_ACERO_Y),
+                              ("apoyo", PARAM_ACERO_APOYO)):
+            if aceros.get(clave):
+                destino = None
+                for nom, valores in escrituras:
+                    if nom == nombre:
+                        destino = valores
+                if destino is None:
+                    destino = {}
+                    escrituras.append((nombre, destino))
+                destino[mark] = aceros[clave]
 
     losas = [f for f in collector(doc, DB.BuiltInCategory.OST_Floors)
              if has_mark(f, marker)]
@@ -115,27 +139,26 @@ def run(doc, uidoc, DB, P):
         raise Exception("ninguna losa con Comments '%s*'" % marker)
 
     parametros_creados = []
-    asignadas = 0
-    tipos_escritos = 0
+    conteos = {}
 
-    if asignar or escribir_tipos:
+    if escrituras:
         marks_modelo = {}
         for f in losas:
             mk = _mark_de(f)
             if mk:
                 marks_modelo[mk] = f
-        faltan = [k for k in list(asignar.keys()) + list(escribir_tipos.keys())
-                  if k not in marks_modelo]
+        faltan = set()
+        for _, valores in escrituras:
+            for mk in valores:
+                if mk not in marks_modelo:
+                    faltan.add(mk)
         if faltan:
-            raise Exception("marks sin losa en el modelo: %s" % sorted(set(faltan)))
+            raise Exception("marks sin losa en el modelo: %s" % sorted(faltan))
 
         def _escribir():
             creados = []
-            pendientes = []
-            if asignar and losas[0].LookupParameter(PARAM_USO) is None:
-                pendientes.append(PARAM_USO)
-            if escribir_tipos and losas[0].LookupParameter(PARAM_TIPO) is None:
-                pendientes.append(PARAM_TIPO)
+            pendientes = [nombre for nombre, _ in escrituras
+                          if losas[0].LookupParameter(nombre) is None]
             if pendientes:
                 if not crear:
                     raise Exception("faltan los parametros %s; repetir con "
@@ -144,18 +167,15 @@ def run(doc, uidoc, DB, P):
                     _crear_parametro_texto(doc, DB, nombre)
                     creados.append(nombre)
                 doc.Regenerate()
-            n_uso = 0
-            n_tipo = 0
-            for mk, f in marks_modelo.items():
-                if mk in asignar:
-                    set_param(f, PARAM_USO, asignar[mk])
-                    n_uso += 1
-                if mk in escribir_tipos:
-                    set_param(f, PARAM_TIPO, escribir_tipos[mk])
-                    n_tipo += 1
-            return n_uso, n_tipo, creados
-        asignadas, tipos_escritos, parametros_creados = \
-            tx(doc, "plugin-losas: Uso_Losa / Tipo_Losa_PM", _escribir)
+            cuenta = {}
+            for nombre, valores in escrituras:
+                n = 0
+                for mk, texto in valores.items():
+                    set_param(marks_modelo[mk], nombre, texto)
+                    n += 1
+                cuenta[nombre] = n
+            return cuenta, creados
+        conteos, parametros_creados = tx(doc, "plugin-losas: parametros de losa", _escribir)
 
     filas = []
     for f in losas:
@@ -173,11 +193,12 @@ def run(doc, uidoc, DB, P):
                       "area_m2": area, "espesor_m": _espesor_m(doc, f),
                       "uso_losa": _texto_param(f, PARAM_USO),
                       "tipo_losa_pm": _texto_param(f, PARAM_TIPO),
+                      "seccion_losa": _texto_param(f, PARAM_SECCION),
+                      "acero_x": _texto_param(f, PARAM_ACERO_X),
+                      "acero_y": _texto_param(f, PARAM_ACERO_Y),
+                      "acero_apoyo": _texto_param(f, PARAM_ACERO_APOYO),
                       "tipo_revit": type_name(doc, f)})
 
     return {"marker": marker, "losas": filas, "total": len(filas),
-            "parametro_uso_existe": losas[0].LookupParameter(PARAM_USO) is not None,
-            "parametro_tipo_existe": losas[0].LookupParameter(PARAM_TIPO) is not None,
             "parametros_creados": parametros_creados,
-            "asignadas": asignadas, "tipos_escritos": tipos_escritos,
-            "errores": e}
+            "escritos": conteos, "errores": e}

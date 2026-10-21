@@ -62,6 +62,7 @@ class TestDtoVisor(unittest.TestCase):
         self.assertEqual(dto.panos[1]["armaduras"]["apoyo"], "Ø1/2\" @0.22")
 
         self.assertEqual(dto.campos["codigo_dl"]["valores"]["LV1"], 22.0)
+        self.assertEqual(dto.panos[0]["trabajo"], {"tipo": "2D", "eje": None})
         mfx = dto.campos["mfx"]
         self.assertEqual(mfx.get("unidad"), "ton·m/m")
         self.assertAlmostEqual(mfx["min"], 0.95)
@@ -71,6 +72,22 @@ class TestDtoVisor(unittest.TestCase):
 
         self.assertEqual(len(dto.apoyos), 1)
         self.assertAlmostEqual(dto.apoyos[0]["mu_ij"], 1.59)
+
+    def test_direccion_de_trabajo_1d_y_vuelo(self):
+        proyecto = {"losas": [
+            {"id": "L1", "mark": "LV1", "lx": 2.0, "ly": 6.0,
+             "contorno": [[0, 0], [2, 0], [2, 6], [0, 6]], "espesor": {"h_usado": 0.25}}]}
+        panos = [dict(RESULTADOS["panos"][0], params={"a": 2.0, "b": 6.0})]
+        res = {"panos": panos,
+               "pieper_martens": {"losas": {"LV1": RESULTADOS["pieper_martens"]["losas"]["LV1"]},
+                                  "apoyos": []}}
+        dto = dto_visor(proyecto, res)
+        self.assertEqual(dto.panos[0]["trabajo"], {"tipo": "1D", "eje": "X"})
+
+        panos_v = [dict(panos[0], es_vuelo=True)]
+        res_v = {"panos": panos_v, "pieper_martens": res["pieper_martens"]}
+        dto_v = dto_visor(proyecto, res_v)
+        self.assertEqual(dto_v.panos[0]["trabajo"], {"tipo": "vuelo", "eje": "X"})
 
     def test_sin_contorno_usa_el_rectangulo_de_params(self):
         proyecto = {"losas": [{"id": "L1", "mark": "LV1", "lx": 5.0, "ly": 6.0,

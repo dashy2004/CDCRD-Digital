@@ -117,6 +117,18 @@ balanceados dibujados sobre el borde compartido, detalle por paño con su
 armado, y los créditos visibles al pie. Ejemplo generado con datos inventados:
 [`ejemplo/salidas/visor_losas.html`](ejemplo/salidas/visor_losas.html).
 
+## Capturas (datos inventados del ejemplo)
+
+Proceso retratado sobre el **Edificio Ejemplo PL** (ficticio): el visor abre
+coloreado por **tipo de losa según apoyos** con el **símbolo de la dirección
+de trabajo** de cada paño (cruz = 2D, doble flecha = 1D, discontinua = vuelo)
+y el **acero adicional de cada apoyo**; al hacer clic en un paño se ve su
+detalle (momentos PM, armado por franja y acero comercial PM).
+
+| Tipos por apoyo + direcciones | Momentos + detalle de acero | Planta Mf X |
+|---|---|---|
+| ![Tipos](docs/capturas/visor-tipos-apoyo.jpg) | ![Acero](docs/capturas/visor-momentos-acero.jpg) | ![Planta](docs/capturas/visor-planta-mfx.jpg) |
+
 ## Instalación y tests
 
 ```bash
