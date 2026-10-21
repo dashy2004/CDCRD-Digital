@@ -9,6 +9,7 @@ from xml.etree.ElementTree import ParseError
 from defusedxml.common import DefusedXmlException
 
 from .package import build_package, verify_package
+from .receipts import record_operation
 from .validation import validate_interchange
 
 
@@ -36,8 +37,22 @@ def main(argv=None):
     verify.add_argument("folder", type=Path)
     validate = commands.add_parser("validate", help="Check source units, coordinates, IDs and references without building")
     source_arguments(validate)
+    for operation in (build, verify, validate):
+        operation.add_argument("--receipt", type=Path, help="Save a new unified JSON receipt outside the package")
+        operation.add_argument("--evidence", type=Path, action="append", default=[],
+                               help="Attach an existing file as hash-only evidence; repeatable")
     args = vars(parser.parse_args(argv))
     command = args.pop("command")
+    receipt, evidence = args.pop("receipt"), args.pop("evidence")
+    if evidence and receipt is None:
+        parser.error("--evidence requires --receipt")
+    if receipt is not None:
+        try:
+            report = record_operation(command, receipt, evidence=evidence, **args)
+        except (ValueError, OSError) as error:
+            parser.exit(2, f"ERROR: {error}\n")
+        print(json.dumps(report, indent=2, allow_nan=False))
+        return 0 if report["ok"] else 1
     if command == "validate":
         report = validate_interchange(**args)
         print(json.dumps(report, indent=2, allow_nan=False))

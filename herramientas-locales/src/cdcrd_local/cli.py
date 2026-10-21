@@ -20,6 +20,9 @@ def parser() -> argparse.ArgumentParser:
                               help="Validar fuentes sin importar ni activar BIM")
     exchange.add_argument("--modulo", choices=["beamng"], required=True)
     exchange.add_argument("--repo", type=Path)
+    exchange.add_argument("--recibo", type=Path, help="Guardar recibo JSON nuevo")
+    exchange.add_argument("--evidencia", type=Path, action="append", default=[],
+                          help="Archivo adjunto; se registra su hash, sin validar sus afirmaciones")
     exchange.add_argument("--json", action="store_true", help="Salida JSON (predeterminada)")
     from .interchange import PATH_OPTIONS, SOURCE_OPTIONS
 
@@ -63,7 +66,8 @@ def execute(args: argparse.Namespace) -> dict:
     if args.command == "validar-intercambio":
         from .interchange import SOURCE_OPTIONS, validate_beamng
 
-        return validate_beamng(args.repo, **{name: getattr(args, name) for name in SOURCE_OPTIONS})
+        return validate_beamng(args.repo, receipt=args.recibo, evidence=args.evidencia,
+                               **{name: getattr(args, name) for name in SOURCE_OPTIONS})
     if args.command in ("capacidades", "estado"):
         from .capabilities import catalog, diagnose_ecosystem
 
