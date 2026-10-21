@@ -1,0 +1,55 @@
+{
+  "version": "0.5.15",
+  "synthetic": true,
+  "native_checks": 59,
+  "unit_refusals": 6,
+  "python_tests": 168,
+  "dotnet_checks": 127,
+  "concurrency_races": 100,
+  "applied_stations": 44,
+  "sample_lines": 8,
+  "section_views": 8,
+  "geometry_errors_m": {
+    "max_xy": 5.820766091346741e-10,
+    "max_z": 5.8690829973784275e-12,
+    "max_section_z": 5.300648808770347e-12
+  },
+  "saved_reopened": true,
+  "prior_objects_preserved": 1257,
+  "all_six_protected_files_unchanged": true,
+  "captures": [
+    {
+      "file": "civil3d-ensamblaje-0515.png",
+      "width": 1780,
+      "height": 1000,
+      "sha256": "2fff6cbf5ee2f695d2af3bffd3186a10d396e6a6d5d660309bfe2f0325fca4a0",
+      "source": "Native Document.CapturePreviewImage; graphic area, not full window",
+      "retouched": false,
+      "privacy_review": "Only synthetic QA geometry and annotations visible"
+    },
+    {
+      "file": "civil3d-corredor-0515.png",
+      "width": 1780,
+      "height": 1000,
+      "sha256": "30d862cc692b9253bf8586c3412ddbda0b1bb9914bb925bdf405e6dad3a89964",
+      "source": "Native Document.CapturePreviewImage; graphic area, not full window",
+      "retouched": false,
+      "privacy_review": "Only synthetic QA geometry and annotations visible"
+    },
+    {
+      "file": "civil3d-secciones-0515.png",
+      "width": 1780,
+      "height": 1000,
+      "sha256": "db1ab129045a566a3c61d265e6887c03d63b4be61f860b06030a5261a5f93b3d",
+      "source": "Native Document.CapturePreviewImage; graphic area, not full window",
+      "retouched": false,
+      "privacy_review": "Only synthetic QA geometry and annotations visible"
+    }
+  ],
+  "limits": [
+    "One baseline, region and Top surface",
+    "LinkWidthAndSlope assembly with two Edge feature lines",
+    "No pavement layers, targets, daylight, superelevation, spirals or quantities",
+    "AutoCAD adapter compiled only; previous native AutoCAD validation remains 0.5.11"
+  ]
+}

@@ -534,6 +534,8 @@ def listar(area: str, limite: int = 0) -> str:
 
 creacion.registrar(mcp, _llamar, _ok)
 sitio.registrar(mcp, _llamar, _ok)
+import corredores
+corredores.registrar(mcp, _llamar, _ok)
 plataformas.registrar(mcp, _llamar, _ok)
 vistas.registrar(mcp, _llamar, _ok)
 tridimensional.registrar(mcp, _llamar, _ok)

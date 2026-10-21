@@ -1,6 +1,8 @@
 # Próxima etapa: ensamblaje, corredor y secciones
 
-Estado: investigación de contratos instalados de Civil 3D 2027 y revisión del código existente. **No se ha creado ni probado un corredor con estas herramientas.** Curvas de ejes y perfiles se entregan por separado en [0.5.14](CURVAS-0514.md).
+Actualización: el flujo de un ensamblaje de enlaces, un corredor y secciones se implementó en [0.5.15](CORREDOR-0515.md). Se conserva abajo la preparación previa.
+
+Estado al preparar 0.5.14: investigación de contratos instalados de Civil 3D 2027 y revisión del código existente. **No se ha creado ni probado un corredor con estas herramientas.** Curvas de ejes y perfiles se entregan por separado en [0.5.14](CURVAS-0514.md).
 
 ## Contratos públicos comprobados en la instalación
 

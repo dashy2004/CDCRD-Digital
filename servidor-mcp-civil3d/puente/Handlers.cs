@@ -20,7 +20,7 @@ namespace Cdcrd.Civil3dBridge
 {
     internal static partial class Handlers
     {
-        public const string Version = "0.5.14";
+        public const string Version = "0.5.15";
         private const int MaxItems = 500;
 
         // Alias en espanol -> candidatos de miembro del CivilDocument, en orden.
@@ -1090,6 +1090,7 @@ namespace Cdcrd.Civil3dBridge
 
         private static object Invocar(object obj, string nombre, List<object> args)
         {
+            NativeCallContract.Validate(obj.GetType().FullName, nombre);
             if (args.Count == 0 && ReflectionRead.TryRead(obj, nombre, out var miembro)) return miembro;
             var candidatos = obj.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance)
                 .Where(m => string.Equals(m.Name, nombre, StringComparison.OrdinalIgnoreCase)

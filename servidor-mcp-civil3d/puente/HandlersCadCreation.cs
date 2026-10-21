@@ -22,6 +22,9 @@ namespace Cdcrd.Civil3dBridge
             switch (method)
             {
 #if CIVIL3D
+                case "civil.ensamblaje_enlaces": return PlatformOperation(() => CreateLinkAssembly(p, method));
+                case "civil.corredor": return PlatformOperation(() => CreateCorridor(p, method));
+                case "civil.secciones_corredor": return PlatformOperation(() => CreateCorridorSections(p, method));
                 case "civil.feature_line": return PlatformOperation(() => CreateFeatureLine(p, method));
                 case "civil.superficie_feature_lines": return PlatformOperation(() => CreateFeatureSurface(p, method));
                 case "civil.parcela_polilinea": return CrearParcelaPolilinea(p, method);

@@ -76,3 +76,7 @@ La acción `residues_fixture` crea un grupo vacío y tres definiciones GM identi
 - `curve_audit`: parámetros nativos de arcos/parábolas y muestreo de XY/cotas.
 - `curve_fault`, con `stage` igual a `alignment-created` o `profile-curve-added`: arma una excepción de una sola vez mediante el callback privado del puente. Se desarma antes de lanzar; no existe parámetro RPC para habilitarla. Usar únicamente en la copia controlada y comprobar el inventario después.
 - `humo_curvas.py` verifica esas rutas y la compatibilidad de ejes rectos de más de 200 vértices. Las capturas siguen usando `capture` y son viewport nativo sin retoque.
+
+## Corredores 0.5.15
+
+`humo_corredor.py` requiere la copia sintética de curvas 0.5.14 y este arnés opcional. Audita ensamblajes, estaciones/puntos del corredor y conectividad de secciones; arma fallos privados de una vez después del primer subensamblaje, de reconstruir el corredor y de crear una sección. También comprueba el rechazo seguro de GetSectionSources por reflexión. Guardar/reabrir y capturas son verificaciones separadas. No usar sobre un original ni reintentar escrituras tras timeout.

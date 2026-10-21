@@ -224,6 +224,8 @@ public partial class GmRecoveryQa
                 switch(action)
                 {
                     case "audit":result=Audit(doc.Database);break;
+                    case "corridor_audit":result=CorridorAudit(doc.Database);break;
+                    case "corridor_fault":result=ArmCorridorFailure(job);break;
                     case "curve_fixture":result=CurveFixture(doc.Database);break;
                     case "curve_fault":result=ArmCurveFailure(job);break;
                     case "curve_audit":result=CurveAudit(doc.Database);break;

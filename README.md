@@ -29,6 +29,8 @@ verificación de un proyecto. Cada informe identifica qué se comprobó y qué e
 
 ## Civil 3D y AutoCAD: capturas y pruebas nativas
 
+[Civil 3D 0.5.15: ensamblaje, corredor y secciones — capturas crudas](servidor-mcp-civil3d/docs/CORREDOR-0515.md).
+
 [Civil 3D 0.5.14: arcos y curvas verticales — capturas crudas](servidor-mcp-civil3d/docs/CURVAS-0514.md).
 
 [Civil 3D 0.5.13: feature lines y plataforma — capturas crudas](servidor-mcp-civil3d/docs/PLATAFORMAS-0513.md).
