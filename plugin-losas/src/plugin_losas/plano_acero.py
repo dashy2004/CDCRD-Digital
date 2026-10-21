@@ -197,8 +197,11 @@ def plano_acero(proyecto: dict, resultados: dict, acero_pm: dict | None = None,
             apoyos.append({"losa_i": i, "losa_j": j, "nivel": niveles.get(i),
                            "trazo": asdict(trazo)})
 
+    # el export de Revit traslada el origen: el dibujo debe deshacerlo
+    origen_mm = (proyecto.get("meta") or {}).get("traslacion_origen_mm") or [0.0, 0.0]
     return {
         "unidades": "m",
+        "origen_m": [origen_mm[0] / 1000.0, origen_mm[1] / 1000.0],
         "convencion": "principal = vano en la dirección de trabajo; temperatura = "
                       "retracción perpendicular (1D, discontinua); adicional = bastón "
                       "negativo sobre el apoyo, L/4 a cada paño",

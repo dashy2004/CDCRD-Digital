@@ -57,6 +57,7 @@ class TestPlanoCompleto(unittest.TestCase):
         editados = {"LV1": {"x": "#5 @ 0.10", "apoyo": "#6 @ 0.12"}}
         plan = plano_acero(PROYECTO, RESULTADOS, acero_pm=None, editados=editados)
         self.assertEqual(plan["unidades"], "m")
+        self.assertEqual(plan["origen_m"], [0.0, 0.0])      # sin meta no hay traslación
         self.assertEqual(len(plan["losas"]), 2)
         lv1 = next(x for x in plan["losas"] if x["mark"] == "LV1")
         textos = [t["texto"] for t in lv1["trazos"]]
@@ -64,6 +65,12 @@ class TestPlanoCompleto(unittest.TestCase):
         self.assertEqual(len(plan["apoyos"]), 1)
         self.assertEqual(plan["apoyos"][0]["trazo"]["texto"], "#6 @ 0.12")
         self.assertIn("Acero_Apoyo", plan["tabla_parametros"])
+
+    def test_origen_trasladado_del_export(self):
+        proyecto = dict(PROYECTO)
+        proyecto["meta"] = {"traslacion_origen_mm": [843100.0, 459900.0]}
+        plan = plano_acero(proyecto, RESULTADOS)
+        self.assertEqual(plan["origen_m"], [843.1, 459.9])
 
     def test_sin_editados_usa_las_franjas_de_la_corrida(self):
         plan = plano_acero(PROYECTO, RESULTADOS)

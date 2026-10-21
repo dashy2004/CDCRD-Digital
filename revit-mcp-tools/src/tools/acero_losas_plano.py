@@ -88,13 +88,14 @@ def _z_de_vista(doc, view):
     return candidatos
 
 
-def _dibujar_trazo(doc, view, trazo, z, e):
+def _dibujar_trazo(doc, view, trazo, z, e, origen):
+    ox, oy = origen
     puntos = trazo["puntos"]
     for k in range(len(puntos) - 1):
         x0, y0 = puntos[k]
         x1, y1 = puntos[k + 1]
-        linea = DB.Line.CreateBound(DB.XYZ(x0 * M_A_FT, y0 * M_A_FT, z),
-                                    DB.XYZ(x1 * M_A_FT, y1 * M_A_FT, z))
+        linea = DB.Line.CreateBound(DB.XYZ((x0 + ox) * M_A_FT, (y0 + oy) * M_A_FT, z),
+                                    DB.XYZ((x1 + ox) * M_A_FT, (y1 + oy) * M_A_FT, z))
         try:
             dc = doc.Create.NewDetailCurve(view, linea)
             _poner_marca(dc)
@@ -106,12 +107,13 @@ def _dibujar_trazo(doc, view, trazo, z, e):
     return 1
 
 
-def _nota(doc, view, texto, pos, z, tipo_texto, e):
+def _nota(doc, view, texto, pos, z, tipo_texto, e, origen):
     if not texto:
         return 0
+    ox, oy = origen
     try:
         tn = DB.TextNote.Create(doc, view.Id,
-                                DB.XYZ(pos[0] * M_A_FT, pos[1] * M_A_FT, z),
+                                DB.XYZ((pos[0] + ox) * M_A_FT, (pos[1] + oy) * M_A_FT, z),
                                 texto, tipo_texto)
         _poner_marca(tn)
         return 1
@@ -172,6 +174,7 @@ def run(doc, uidoc, DB, P):
     if not ruta:
         raise Exception("falta 'plan' (plan_acero.json de `plugin-losas plano`)")
     plan = json.load(io.open(ruta, encoding="utf-8"))
+    origen = plan.get("origen_m") or [0.0, 0.0]
     e = errs()
     niveles_plan = set(x.get("nivel") for x in plan.get("losas") or [] if x.get("nivel"))
     vistas = _vistas(doc, uidoc, P.get("view_name"), niveles_plan)
@@ -198,17 +201,17 @@ def run(doc, uidoc, DB, P):
             if z_valida[0] is None:
                 for z in _z_de_vista(doc, view):
                     antes = e["n"]
-                    if _dibujar_trazo(doc, view, trazo, z, e) and e["n"] == antes:
+                    if _dibujar_trazo(doc, view, trazo, z, e, origen) and e["n"] == antes:
                         z_valida[0] = z
                         lineas[0] += 1
                         notas[0] += _nota(doc, view, trazo.get("texto"),
-                                          trazo["pos_texto"], z, tipo_texto, e)
+                                          trazo["pos_texto"], z, tipo_texto, e, origen)
                         return
                 raise Exception("no se pudo trazar en '%s': %s" %
                                 (view.Name, e["items"][-3:]))
-            lineas[0] += _dibujar_trazo(doc, view, trazo, z_valida[0], e)
+            lineas[0] += _dibujar_trazo(doc, view, trazo, z_valida[0], e, origen)
             notas[0] += _nota(doc, view, trazo.get("texto"), trazo["pos_texto"],
-                              z_valida[0], tipo_texto, e)
+                              z_valida[0], tipo_texto, e, origen)
 
         for losa in losas:
             for trazo in losa["trazos"]:
