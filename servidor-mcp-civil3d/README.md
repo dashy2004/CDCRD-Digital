@@ -1,6 +1,6 @@
 # Servidor MCP de Civil 3D 2027
 
-Puente **0.5.15**: ensamblaje de enlaces, corredor sobre eje curvo y secciones nativas, probados en otra copia. [Capturas y pruebas](docs/CORREDOR-0515.md) · [Curvas 0.5.14](docs/CURVAS-0514.md) · [Plataformas 0.5.13](docs/PLATAFORMAS-0513.md) · [Sitio 0.5.12](docs/SITIO-0512.md) · [AutoCAD común](docs/AUTOCAD-0511.md).
+Puente **0.5.16**: calzada con capas de pavimento, targets y daylight nativos, probados en otra copia. [Capturas y pruebas](docs/CALZADA-0516.md) · [Corredor 0.5.15](docs/CORREDOR-0515.md) · [Curvas 0.5.14](docs/CURVAS-0514.md) · [Plataformas 0.5.13](docs/PLATAFORMAS-0513.md) · [Sitio 0.5.12](docs/SITIO-0512.md) · [AutoCAD común](docs/AUTOCAD-0511.md).
 
 Conecta un cliente MCP con el **dibujo abierto** en Civil 3D 2027. Dos piezas:
 

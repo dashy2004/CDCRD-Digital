@@ -13,6 +13,7 @@
     <Compile Include="../../puente/GmSurfaceContract.cs" Link="GmSurfaceContract.cs" />
     <Compile Include="../../puente/GmAtomicOperation.cs" Link="GmAtomicOperation.cs" />
     <Compile Include="../../puente/CorridorContract.cs" Link="CorridorContract.cs" />
+    <Compile Include="../../puente/CalzadaContract.cs" Link="CalzadaContract.cs" />
     <Compile Include="../../puente/NativeCallContract.cs" Link="NativeCallContract.cs" />
   </ItemGroup>
 </Project>

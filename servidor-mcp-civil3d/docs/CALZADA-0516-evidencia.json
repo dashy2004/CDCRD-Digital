@@ -1,0 +1,55 @@
+{
+  "entrega": "0.5.16",
+  "fecha": "2026-10-20",
+  "agente": "claude",
+  "herramientas": ["civil.ensamblaje_calzada", "civil.corredor_calzada"],
+  "subensamblajes_stock": {
+    "carril": "Subassembly.LaneSuperelevationAOR",
+    "daylight": "Subassembly.DaylightMaxWidth",
+    "parametros_carril": ["Width", "DefaultSlope", "Pave1Depth", "Pave2Depth", "BaseDepth", "SubBaseDepth"],
+    "parametros_daylight": ["CutSlope", "FillSlope", "MaxWidth"],
+    "lectura_talud": "valor del parametro = dz/dx observado (TransparentCmdSlope)"
+  },
+  "humo_nativo": {
+    "comprobaciones": 51,
+    "rechazos_explicitos_sin_residuos": 13,
+    "fallos_inyectados": ["calzada-part-added", "targets-assigned", "corridor-rebuilt"],
+    "estaciones_aplicadas": 44,
+    "targets": [{"logico": "TargetDTM", "lados": 2, "objetivo": "TIN sintetica z=102, 280x220 m"}],
+    "codigos_enlace": ["Top", "Pave", "Pave1", "Pave2", "Base", "SubBase", "Datum", "Daylight", "Daylight_Cut", "Daylight_Fill"]
+  },
+  "errores_maximos_m": {
+    "xy_vs_ecuacion_eje": 5.820766091346741e-10,
+    "cota_absoluta_vs_relativa_mas_perfil": 5.8690829973784275e-12,
+    "centro_y_borde_vs_formula": 0.0,
+    "capas_apiladas_vs_espesores": 1.1102230246251565e-16,
+    "daylight_vs_plano_terreno": 1.4210854715202004e-14
+  },
+  "taludes_observados": {
+    "corte_param_3": [2.9999999981729784, 3.000000001437337],
+    "relleno_param_4": [3.999999996860673, 4.0000000216749125]
+  },
+  "pruebas_offline": {
+    "python": 170,
+    "dotnet_comprobaciones": 144,
+    "dotnet_carreras": 100,
+    "compilaciones_sin_errores_ni_advertencias": 4
+  },
+  "persistencia": {
+    "guardado_cierre_reapertura": true,
+    "objetos_previos_0515_preservados": 1293,
+    "tolerancia_extents_etiquetas": 1e-06,
+    "estado_nativo_final": "Saved=true DBMOD=0 un documento",
+    "sha256_copia_final": "4f828d0939a0657bf78b78f46d0ba036c73a90c1d75154f936db5d4f30866d74"
+  },
+  "proteccion": {
+    "entrega_0515_sha256": "72d40dc4f1a8fb386b91439a574560ed6e997c758bdcb434bcda6cedafa5cf88",
+    "archivos_protegidos_intactos": 7,
+    "qa_codex_8764": "intacta, sin escrituras"
+  },
+  "limites": [
+    "Datos sinteticos; sin peraltes, cunetas, cantidades ni aprobacion de proyecto",
+    "La guarda de unidades es el SiteUnits compartido ensayado en 0.5.15; no se repitio",
+    "Los recibos crudos y el DWG permanecen privados; se publican codigo, pruebas, metricas y capturas revisadas"
+  ]
+}

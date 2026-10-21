@@ -28,6 +28,7 @@ class Program {
   ThreadPool.SetMinThreads(8,8);
   SiteDesignChecks.Run(Check);
   CorridorChecks.Run(Check);
+  CalzadaChecks.Run(Check);
   PlatformChecks.Run(Check);
   VerticalCurveChecks.Run(Check);
   long commandClock=0;
