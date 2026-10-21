@@ -135,9 +135,12 @@ def _limpiar(doc, view):
 
 
 def _rehacer_tabla(doc, parametros):
-    for vs in DB.FilteredElementCollector(doc).OfClass(DB.ViewSchedule):
-        if vs.Name == NOMBRE_TABLA:
-            doc.Delete(vs.Id)
+    # ids primero y borrar despues: eliminar dentro de la iteracion del
+    # collector invalida el iterador ("The iterator cannot proceed...")
+    previas = [vs.Id for vs in DB.FilteredElementCollector(doc).OfClass(DB.ViewSchedule)
+               if vs.Name == NOMBRE_TABLA]
+    for vid in previas:
+        doc.Delete(vid)
     tabla = DB.ViewSchedule.CreateSchedule(
         doc, DB.ElementId(DB.BuiltInCategory.OST_Floors))
     tabla.Name = NOMBRE_TABLA
