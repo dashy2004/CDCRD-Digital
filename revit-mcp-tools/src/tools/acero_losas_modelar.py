@@ -18,8 +18,11 @@ GUARDAS (las del criterio del proyecto):
 - UNA transaccion POR LOSA; un fallo no arrastra a las demas (va a 'fallos').
 - Marca su obra (Comments = "MCP:ACERO-LOSA-3D") y borra la previa de cada
   losa antes de recrear: idempotente.
-- Nunca inventa un RebarBarType: si el diametro pedido no esta cargado, esa
-  losa falla con diagnostico exacto.
+- Nunca SUSTITUYE un diametro por otro. Si el diametro pedido no esta
+  cargado, esa losa falla con diagnostico exacto; con crear_tipos_barra=true
+  la tool crea ANTES los RebarBarType del catalogo que falten (nombre del
+  despacho, diametro nominal exacto, transaccion propia, verificados
+  releyendo) -- necesario en modelos sin ningun tipo de barra (CLUB PN).
 - Verifica RELEYENDO: sets y barras hospedadas en cada losa tras el commit.
 - Los bastones cruzan al pano vecino (anfitrion = losa_i): pueden avisar de
   recubrimiento en el borde, es la geometria pedida (L/4 + L/4).
@@ -30,6 +33,8 @@ Parametros (P):
   todas:      True procesa todas las losas del plan (default False = piloto).
   solo_marks: lista de Marks concretos (anula el piloto).
   limpiar:    True (default) borra el acero MCP:ACERO-LOSA-3D previo por losa.
+  crear_tipos_barra: True crea los RebarBarType del catalogo que falten
+              (default False: sin tipos cargados, las losas fallan).
 
 No guarda (revit_guardar_modelo despues).
 """
@@ -44,6 +49,16 @@ ALIAS_DIAMETRO = {
     "#6": ["3/4\"", "#6", "N6", "20M"],
     "#8": ["1\"", "#8", "N8", "25M"],
 }
+
+# Nombre primario (convencion del despacho, la misma de GenerarAceroVigas y
+# PRIMIS) y diametro nominal [m] de cada barra del catalogo. Se usan SOLO
+# para crear el RebarBarType exacto cuando el modelo no trae ninguno
+# (crear_tipos_barra=true): crear el tipo con su diametro real NO es
+# sustituir un diametro por otro, que sigue prohibido.
+NOMBRE_TIPO = {"#3": "3/8\"", "#4": "1/2\"", "#5": "5/8\"",
+               "#6": "3/4\"", "#8": "1\""}
+DIAMETROS_CATALOGO = {"#3": 0.009525, "#4": 0.0127, "#5": 0.015875,
+                      "#6": 0.01905, "#8": 0.0254}
 
 
 def _mark_de(el):
@@ -64,8 +79,57 @@ def _resolver_barra(tipos, diam):
     for alias in ALIAS_DIAMETRO.get(diam, [diam]):
         if alias in tipos:
             return tipos[alias]
-    raise Exception("no hay RebarBarType para %s (alias probados %s; cargados: %s)"
+    raise Exception("no hay RebarBarType para %s (alias probados %s; cargados: %s); "
+                    "repetir con crear_tipos_barra=true para crear los del catalogo"
                     % (diam, ALIAS_DIAMETRO.get(diam, [diam]), sorted(tipos)[:20]))
+
+
+def _crear_tipos_barra(doc, faltantes):
+    """Crea los RebarBarType del catalogo que falten (CLUB PN no trae
+    ninguno), con su diametro nominal exacto, en transaccion propia, y
+    verifica releyendo el diametro."""
+    creados = []
+    t = DB.Transaction(doc, "MCP: tipos de barra del catalogo")
+    t.Start()
+    try:
+        for diam in sorted(faltantes):
+            if diam not in DIAMETROS_CATALOGO:
+                raise Exception("barra %s fuera del catalogo %s"
+                                % (diam, sorted(DIAMETROS_CATALOGO)))
+            d_ft = DIAMETROS_CATALOGO[diam] * M_A_FT
+            bt = DB.Structure.RebarBarType.Create(doc)
+            bt.Name = NOMBRE_TIPO[diam]
+            puesto = False
+            for prop in ("BarNominalDiameter", "BarModelDiameter", "BarDiameter"):
+                try:
+                    setattr(bt, prop, d_ft)
+                    puesto = True
+                except Exception:
+                    pass
+            if not puesto:
+                raise Exception("no se pudo fijar el diametro de %s" % NOMBRE_TIPO[diam])
+            creados.append(NOMBRE_TIPO[diam])
+        t.Commit()
+    except Exception:
+        t.RollBack()
+        raise
+    # verificacion releyendo: nombre y diametro (tolerancia 0.1 mm)
+    tipos = _tipos_barra(doc)
+    for diam in sorted(faltantes):
+        bt = tipos.get(NOMBRE_TIPO[diam])
+        if bt is None:
+            raise Exception("el tipo %s no aparece tras crearlo" % NOMBRE_TIPO[diam])
+        leido = None
+        for prop in ("BarNominalDiameter", "BarModelDiameter", "BarDiameter"):
+            try:
+                leido = getattr(bt, prop)
+                break
+            except Exception:
+                pass
+        if leido is None or abs(leido / M_A_FT - DIAMETROS_CATALOGO[diam]) > 0.0001:
+            raise Exception("diametro releido de %s no coincide (%s)"
+                            % (NOMBRE_TIPO[diam], leido))
+    return creados
 
 
 def _espesor_ft(doc, losa):
@@ -178,6 +242,18 @@ def run(doc, uidoc, DB, P):
         bastones_por_host.setdefault(b["set"]["mark"], []).append(b["set"])
 
     tipos = _tipos_barra(doc)
+    tipos_creados = []
+    necesarios = set()
+    for x in losas_plan:
+        for registro in x["sets"]:
+            necesarios.add(registro["diam"])
+    for b in plan.get("bastones") or []:
+        necesarios.add(b["set"]["diam"])
+    faltantes = set(d for d in necesarios
+                    if not any(a in tipos for a in ALIAS_DIAMETRO.get(d, [d])))
+    if faltantes and P.get("crear_tipos_barra"):
+        tipos_creados = _crear_tipos_barra(doc, faltantes)
+        tipos = _tipos_barra(doc)
 
     def _z_ft(losa, registro):
         bb = losa.get_BoundingBox(None)
@@ -225,6 +301,7 @@ def run(doc, uidoc, DB, P):
 
     pendientes = [m for m in marks_plan if m not in elegidos]
     return {"marca": MARCA, "piloto": not (P.get("todas") or P.get("solo_marks")),
+            "tipos_barra_creados": tipos_creados,
             "losas": resultados, "fallos": fallos,
             "pendientes": pendientes[:50], "n_pendientes": len(pendientes),
             "errores": e}

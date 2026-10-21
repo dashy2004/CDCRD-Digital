@@ -726,13 +726,16 @@ class PanelUsoLosa(Form):
             return
         r = MessageBox.Show(
             "Modelar el acero 3D (parrilla, temperatura, bastones; solape 50db "
-            "mitad y mitad, barra de 9 m; una transaccion POR LOSA).\n\n"
+            "mitad y mitad, barra de 9 m; una transaccion POR LOSA).\n"
+            "Si faltan tipos de barra (3/8\", 1/2\"...) se crean con su "
+            "diametro nominal del catalogo.\n\n"
             "Si = TODAS las losas; No = PILOTO (1 losa, revisar en 3D y "
             "repetir); Cancelar = nada.", "Modelar acero 3D",
             MessageBoxButtons.YesNoCancel)
         if r == DialogResult.Cancel:
             return
-        P_tool = {"plan": os.path.join(carpeta, "plan_modelado.json")}
+        P_tool = {"plan": os.path.join(carpeta, "plan_modelado.json"),
+                  "crear_tipos_barra": True}
         if r == DialogResult.Yes:
             P_tool["todas"] = True
         res = _exec_tool(self.raiz, ("_common.py", "acero_losas_modelar.py"),
@@ -745,8 +748,11 @@ class PanelUsoLosa(Form):
                                          "OK" if x["ok"] else "NO COINCIDE",
                                          x["previos_borrados"]))
         aviso = ""
+        if res.get("tipos_barra_creados"):
+            aviso = "\nTipos de barra creados: %s." % \
+                ", ".join(res["tipos_barra_creados"])
         if res["fallos"]:
-            aviso = "\n\nFALLOS: %s" % json.dumps(res["fallos"])
+            aviso += "\n\nFALLOS: %s" % json.dumps(res["fallos"])
         if res["piloto"]:
             aviso += ("\n\nPILOTO: %d losas pendientes; revisar en 3D y repetir "
                       "con Si (todas)." % res["n_pendientes"])
