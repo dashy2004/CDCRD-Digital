@@ -130,6 +130,12 @@ class StateTests(unittest.TestCase):
         module = self.state(config, "beamng")["modules"][0]
         self.assertIsNone(module["configured"])
 
+    def test_explicit_missing_or_invalid_configuration_is_not_ok(self):
+        for content in ['{"mcpServers":{}}', '{"mcpServers":{"cdcrd-local":{}}}']:
+            with self.subTest(content=content):
+                result = self.state(self.write("config.json", content))
+                self.assertFalse(result["ok"])
+
     def test_configuration_errors_are_explicit_and_do_not_echo_contents(self):
         for name, text in [("bad.json", "PRIVATE_INVALID_JSON"),
                            ("bad.toml", "PRIVATE_INVALID_TOML"),
