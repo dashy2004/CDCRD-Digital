@@ -86,7 +86,6 @@ READ_METHODS = frozenset(
         "LoadPatterns.GetLoadType",
         "LoadPatterns.GetSelfWTMultiplier",
         "PropArea.GetNameList",
-        "PropArea.GetTypeOAPI",
         "PropArea.GetSlab",
         "PropArea.GetSlabRibbed",
         "PropArea.GetSlabWaffle",
@@ -109,7 +108,6 @@ READ_METHODS = frozenset(
         "AreaObj.GetLabelFromName",
         "AreaObj.GetDesignOrientation",
         "AreaObj.GetLoadUniform",
-        "AreaObj.GetLoadUniformToFrame",
         "DatabaseTables.GetTableForDisplayArray",
     }
 )
@@ -119,6 +117,11 @@ def text(value):
     if type(value) is not str:
         raise ValueError("Se esperaba texto")
     return value
+
+
+def optional_text(value):
+    """COM may return a null BSTR for an inapplicable optional label."""
+    return None if value is None else text(value)
 
 
 def number(value):
@@ -192,8 +195,6 @@ def mass_source(result):
         "SourceLoads",
         "IncLateral",
         "IncVertical",
-        "LoadPattern",
-        "Multiplier",
     }
     if not rows or not fields <= rows[0].keys():
         raise ValueError("Fuente de masa vacia o esquema desconocido")
@@ -230,12 +231,14 @@ def mass_source(result):
             flags[out] = head[key] == "Yes"
         factors = {}
         for row in members:
-            pat = row["LoadPattern"]
-            if not pat and not flags["source_loads"] and not row["Multiplier"]:
+            pat, multiplier = row.get("LoadPattern"), row.get("Multiplier")
+            if not pat and not flags["source_loads"] and not multiplier:
                 continue
             if not pat or pat in factors:
                 raise ValueError("Patron de masa vacio o duplicado")
-            factor = number(float(row["Multiplier"]))
+            if multiplier is None:
+                raise ValueError("Falta multiplicador de carga en fuente de masa")
+            factor = number(float(multiplier))
             if factor < 0:
                 raise ValueError("Factor de masa negativo")
             factors[pat] = factor
@@ -337,7 +340,16 @@ class Collector:
                 array(a, n, conv)
                 for a, conv in zip(
                     v[2:],
-                    (text, number, number, boolean, text, boolean, number, integer),
+                    (
+                        text,
+                        number,
+                        number,
+                        boolean,
+                        optional_text,
+                        boolean,
+                        number,
+                        integer,
+                    ),
                 )
             ]
             if len(set(columns[0])) != n:
@@ -388,28 +400,42 @@ class Collector:
     def definitions(self, inventory, scale):
         if inventory is MISSING:
             return
-        rows, unknown = [], []
-        for name in inventory:
-            kind = self.probe(
-                "slab_definitions",
-                name,
-                "property_type",
-                "PropArea.GetTypeOAPI",
-                (name,),
-                lambda r: integer(outputs(r, 1)[0]),
-            )
-            if kind is MISSING:
-                unknown.append(name)
-                continue
-            if kind != 2:  # Wall=1, Slab=2, Deck=3. Never treat a wall as a slab.
-                continue
+
+        def slab_names(result):
+            table = display_rows(result)
+            if "Name" not in result[2] or len(table) > self.limit:
+                raise ValueError("Inventario de propiedades de losa invalido")
+            found = [text(row["Name"]) for row in table]
+            if (
+                any(not n for n in found)
+                or len(set(found)) != len(found)
+                or not set(found) <= set(inventory)
+            ):
+                raise ValueError(
+                    "Propiedades de losa duplicadas o fuera del inventario"
+                )
+            return found
+
+        # GetTypeOAPI distinguishes Shell/Plane/Asolid, not Slab/Wall/Deck.
+        selected = self.probe(
+            "slab_definitions",
+            "inventory",
+            "names",
+            "DatabaseTables.GetTableForDisplayArray",
+            ("Slab Property Definitions", ["Name"], "", 0),
+            slab_names,
+        )
+        if selected is MISSING:
+            return
+        rows = []
+        for name in selected:
             row = {"name": name}
 
             def slab(r):
                 t, shell, mat, thick, color, notes, guid = outputs(r, 7)
                 integer(color)
-                text(notes)
-                text(guid)
+                optional_text(notes)
+                optional_text(guid)
                 return {
                     "type": SLAB_TYPES.get(integer(t), f"Unknown({t})"),
                     "modeling_type": SHELL_TYPES.get(
@@ -443,8 +469,6 @@ class Collector:
                         row.update(h_m=vals[0] * scale, topping_m=vals[1] * scale)
             rows.append(row)
         self.snapshot["slab_definitions"] = rows
-        if unknown:
-            self.snapshot["unclassified_area_definitions"] = unknown
 
     def points(self, inventory, scale):
         if inventory is MISSING:
@@ -481,7 +505,7 @@ class Collector:
             def diaphragm(r):
                 option, label = outputs(r, 2)
                 integer(option)
-                text(label)
+                optional_text(label)
                 if option == 1:
                     return ""
                 if option == 2:
@@ -620,28 +644,19 @@ class Collector:
                 (name,),
                 lambda r: text(outputs(r, 1)[0]),
             )
-            for suffix, field, converters in (
-                ("", "uniform_loads", [text, text, text, integer, number]),
-                (
-                    "ToFrame",
-                    "uniform_to_frame_loads",
-                    [text, text, text, integer, number, integer],
-                ),
-            ):
-                keys = ["area", "pattern", "csys", "direction", "value"] + (
-                    ["distribution"] if suffix else []
-                )
-                self.put(
-                    row,
-                    "areas",
-                    name,
-                    field,
-                    "AreaObj.GetLoadUniform" + suffix,
-                    (name,),
-                    lambda r, keys=keys, conv=converters: [
-                        dict(zip(keys, vals)) for vals in counted(r, conv, self.limit)
-                    ],
-                )
+            keys = ["area", "pattern", "csys", "direction", "value"]
+            converters = [text, text, text, integer, number]
+            self.put(
+                row,
+                "areas",
+                name,
+                "uniform_loads",
+                "AreaObj.GetLoadUniform",
+                (name,),
+                lambda r, keys=keys, converters=converters: [
+                    dict(zip(keys, vals)) for vals in counted(r, converters, self.limit)
+                ],
+            )
             self.pending(
                 "areas",
                 name,
@@ -786,6 +801,10 @@ def collect_snapshot(
         ],
     )
     for field, reason in (
+        (
+            "uniform_to_frame_loads",
+            "GetLoadUniformToFrame no es aplicable en ETABS; no se asume carga cero",
+        ),
         (
             "pdelta",
             "Opciones P-Delta globales no leidas; un caso no lineal no las sustituye",

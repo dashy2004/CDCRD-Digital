@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from audit_report import write_report
+from audit_report import validate_reference, write_report
 
 
 def main():
@@ -29,9 +29,7 @@ def main():
             if Path(args.output).exists() or not Path(args.output).is_absolute():
                 raise ValueError("--output debe ser directorio absoluto nuevo")
             # Validate the reference BEFORE connecting to the application.
-            from etabs_procedure import prepare_modeling
-
-            prepare_modeling(payload["profile"], payload["project"])
+            validate_reference(payload["profile"], payload["project"])
             from Etabs import Etabs
 
             capture = Etabs(

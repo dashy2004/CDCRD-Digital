@@ -195,3 +195,40 @@ def test_known_absence_differs_from_failed_pattern_inventory(fake):
     assert any(
         f["status"] == "pending" and f["object"] == "patterns" for f in r["findings"]
     )
+
+
+def test_observational_report_never_invents_residential_reference(capture):
+    report = build_report("observational", {"model_path": MODEL}, capture)
+    assert report["overall"] == "incomplete"
+    assert report["summary"]["difference"] == 0
+    assert report["reference_status"] == "not_provided"
+    assert report["inventory"]["slabs"] == 1
+    assert any(f["code"] == "reference_missing" for f in report["findings"])
+    assert not any(f["code"] == "missing_pattern" for f in report["findings"])
+    assert "Sin referencia de diseño" in render_html(report, capture)
+
+
+@pytest.mark.parametrize(
+    "project",
+    [
+        {"model_path": "relative.edb"},
+        {"model_path": MODEL, "usage": "residential"},
+        None,
+    ],
+)
+def test_observational_reference_rejects_invalid_or_ignored_criteria(project, capture):
+    with pytest.raises((ValueError, TypeError)):
+        build_report("observational", project, capture)
+
+
+def test_observational_report_keeps_read_errors(capture):
+    capture["observations"][0].update(status="error", message="synthetic read failure")
+    report = build_report("observational", {"model_path": MODEL}, capture)
+    assert report["summary"]["error"] == 1
+
+
+def test_observational_report_still_rejects_wrong_identity(capture):
+    with pytest.raises(ValueError, match="modelos distintos"):
+        build_report(
+            "observational", {"model_path": r"C:\Synthetic\OTHER.EDB"}, capture
+        )
