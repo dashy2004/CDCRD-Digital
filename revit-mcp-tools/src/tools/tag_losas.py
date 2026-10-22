@@ -1,13 +1,20 @@
 # -*- coding: utf-8 -*-
-"""tag_losas: etiqueta cada losa con el tag personalizado de losa — Mark
-ARRIBA y ESPESOR debajo — en la planta de su nivel.
+"""tag_losas: etiqueta cada losa — Mark ARRIBA y ESPESOR (H=) debajo — en la
+planta de su nivel.
 
-La familia del tag NO se puede crear por API (limitacion conocida del API de
-Revit: FamilyItemFactory no crea labels); tiene que existir como .rfa. La tool
-(1) busca la familia cargada en el modelo, (2) si falta la carga de
-P["ruta_rfa"], y (3) coloca un IndependentTag por losa en el centroide de su
-bbox, borrando antes los tags previos de esa misma familia en la vista
-(idempotente). Verifica releyendo el conteo por vista.
+DOS MODOS (P["modo"], default "auto"):
+- "tag":   IndependentTag con la familia personalizada. La familia NO se
+  puede crear por API (limitacion del API de Revit: no hay creacion de
+  labels), tiene que existir como .rfa: se busca cargada o se carga de
+  P["ruta_rfa"].
+- "texto": SIN familia — una nota de texto de dos lineas por losa
+  ("L00" / "H=0.15", espesor REAL leido del tipo), marcada con Comments
+  MCP:TAG-LOSA para limpiar y regenerar (idempotente). No es parametrica
+  (re-correr el boton tras cambiar espesores), pero no depende de nada.
+- "auto":  tag si la familia esta disponible; si no, texto.
+
+En ambos modos: se colocan en el centroide del bbox en la planta del nivel,
+se borra lo previo de esta tool en la vista, y se verifica releyendo.
 
 Receta de la familia (UNA vez, a mano o la .rfa del despacho):
   Nueva familia -> plantilla "Metric Generic Tag" (tag generico metrico);
@@ -31,6 +38,7 @@ UNA transaccion con rollback; no guarda (revit_guardar_modelo despues).
 """
 
 FAMILIA_DEFAULT = "CDCRD Tag Losa"
+MARCA_TEXTO = "MCP:TAG-LOSA"
 
 RECETA = ("la familia de tag no esta en el modelo ni hay .rfa que cargar. "
           "Crearla UNA vez (o usar la del despacho): Nueva familia -> "
@@ -112,11 +120,38 @@ def _centro_bbox(el):
                   bb.Max.Z)
 
 
+def _espesor_m(doc, el):
+    try:
+        p = el.get_Parameter(DB.BuiltInParameter.FLOOR_ATTR_THICKNESS_PARAM)
+        if p is not None and p.HasValue:
+            return round(p.AsDouble() * 0.3048, 3)
+    except Exception:
+        pass
+    try:
+        t = doc.GetElement(el.GetTypeId())
+        p = t.get_Parameter(DB.BuiltInParameter.FLOOR_ATTR_DEFAULT_THICKNESS_PARAM)
+        if p is not None and p.HasValue:
+            return round(p.AsDouble() * 0.3048, 3)
+    except Exception:
+        pass
+    return None
+
+
+def _textos_marca(doc, view):
+    ids = []
+    for tn in DB.FilteredElementCollector(doc, view.Id).OfClass(DB.TextNote):
+        p = tn.get_Parameter(DB.BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS)
+        if p is not None and (p.AsString() or "") == MARCA_TEXTO:
+            ids.append(tn.Id)
+    return ids
+
+
 def run(doc, uidoc, DB, P):
     import os
     marker = P.get("marker") or "MCP:LOSA-ESQ"
     familia = P.get("familia") or FAMILIA_DEFAULT
     tipo = P.get("tipo")
+    modo = P.get("modo") or "auto"
     e = errs()
 
     losas = [f for f in collector(doc, DB.BuiltInCategory.OST_Floors)
@@ -130,24 +165,35 @@ def run(doc, uidoc, DB, P):
 
     vistas = _vistas(doc, uidoc, P.get("view_name"), set(por_nivel))
 
+    def _mark_de(f):
+        p = f.get_Parameter(DB.BuiltInParameter.ALL_MODEL_MARK)
+        return (p.AsString() or "") if p is not None else ""
+
     def _todo():
-        simbolo = _simbolo_tag(doc, familia, tipo)
+        simbolo = None
         cargada = False
-        if simbolo is None:
-            ruta = P.get("ruta_rfa")
-            if not ruta or not os.path.isfile(ruta):
-                raise Exception("'%s': %s" % (familia, RECETA))
-            if not doc.LoadFamily(ruta):
-                raise Exception("Revit no cargo la familia de '%s' (ya cargada "
-                                "con otro contenido? revisarla a mano)" % ruta)
-            doc.Regenerate()
+        if modo != "texto":
             simbolo = _simbolo_tag(doc, familia, tipo)
             if simbolo is None:
-                raise Exception("se cargo '%s' pero no aparece como tipo de tag "
-                                "de Floors '%s' (revisar Family Category)" %
-                                (ruta, familia))
-            cargada = True
-        activate(simbolo)
+                ruta = P.get("ruta_rfa")
+                if ruta and os.path.isfile(ruta):
+                    if not doc.LoadFamily(ruta):
+                        raise Exception("Revit no cargo la familia de '%s' (ya "
+                                        "cargada con otro contenido?)" % ruta)
+                    doc.Regenerate()
+                    simbolo = _simbolo_tag(doc, familia, tipo)
+                    if simbolo is None:
+                        raise Exception("se cargo '%s' pero no aparece como tipo "
+                                        "de tag de Floors '%s' (revisar Family "
+                                        "Category)" % (ruta, familia))
+                    cargada = True
+                elif modo == "tag":
+                    raise Exception("'%s': %s" % (familia, RECETA))
+            if simbolo is not None:
+                activate(simbolo)
+        usa_texto = simbolo is None
+        tipo_texto = doc.GetDefaultElementTypeId(DB.ElementTypeGroup.TextNoteType) \
+            if usa_texto else None
 
         resultados = []
         for view, nivel_vista in vistas:
@@ -156,41 +202,61 @@ def run(doc, uidoc, DB, P):
                 continue
             borrados = 0
             if P.get("limpiar", True):
-                for tid in _tags_de_familia(doc, view, familia):
+                previos = _tags_de_familia(doc, view, familia) + \
+                    _textos_marca(doc, view)
+                for tid in previos:
                     doc.Delete(tid)
                     borrados += 1
             puestos = 0
-            for f in sorted(en_nivel, key=lambda x: comment(x)):
+            for f in sorted(en_nivel, key=_mark_de):
                 centro = _centro_bbox(f)
                 if centro is None:
                     note(e, "losa sin bbox", Exception(str(f.Id)))
                     continue
                 try:
-                    DB.IndependentTag.Create(
-                        doc, simbolo.Id, view.Id, DB.Reference(f), False,
-                        DB.TagOrientation.Horizontal, centro)
+                    if usa_texto:
+                        esp = _espesor_m(doc, f)
+                        texto = _mark_de(f) or "?"
+                        if esp is not None:
+                            texto += "\nH=%.2f" % esp
+                        tn = DB.TextNote.Create(doc, view.Id, centro, texto,
+                                                tipo_texto)
+                        p = tn.get_Parameter(
+                            DB.BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS)
+                        if p is not None:
+                            p.Set(MARCA_TEXTO)
+                    else:
+                        DB.IndependentTag.Create(
+                            doc, simbolo.Id, view.Id, DB.Reference(f), False,
+                            DB.TagOrientation.Horizontal, centro)
                     puestos += 1
                 except Exception as ex:
-                    note(e, "tag en vista %s" % view.Name, ex)
+                    note(e, "etiqueta en vista %s" % view.Name, ex)
             resultados.append({"vista": view.Name, "nivel": nivel_vista,
                                "losas": len(en_nivel), "tags_puestos": puestos,
                                "tags_borrados": borrados})
         if not resultados:
             raise Exception("ninguna vista coincide con los niveles de las losas")
         # sin doc.Regenerate() explicito: el Commit ya regenera (E-137)
-        return resultados, cargada
+        return resultados, cargada, usa_texto
 
     exigir_ram("etiquetar las losas")
-    resultados, cargada = tx(doc, "plugin-losas: tags de losa (Mark + espesor)",
-                             _todo)
+    resultados, cargada, usa_texto = tx(
+        doc, "plugin-losas: tags de losa (Mark + espesor)", _todo)
 
-    # verificacion releyendo: tags de la familia realmente en cada vista
+    # verificacion releyendo lo realmente colocado en cada vista
     verificacion = []
     for r in resultados:
         v = find_view(doc, r["vista"])
-        n = len(_tags_de_familia(doc, v, familia)) if v is not None else None
+        if v is None:
+            n = None
+        elif usa_texto:
+            n = len(_textos_marca(doc, v))
+        else:
+            n = len(_tags_de_familia(doc, v, familia))
         verificacion.append({"vista": r["vista"], "tags_leidos": n,
                              "ok": n == r["tags_puestos"]})
 
     return {"marker": marker, "familia": familia, "familia_cargada": cargada,
+            "modo": "texto" if usa_texto else "tag",
             "vistas": resultados, "verificacion": verificacion, "errores": e}

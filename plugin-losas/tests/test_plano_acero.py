@@ -15,8 +15,8 @@ class TestTrazosDeLosa(unittest.TestCase):
     def test_2d_lleva_principal_en_ambas_direcciones(self):
         trazos = trazos_de_losa(RECT_2D, False, "#3 @ 0.15", "#4 @ 0.20")
         self.assertEqual([t.clase for t in trazos], ["principal", "principal"])
-        self.assertEqual(trazos[0].texto, "#3 @ 0.15")
-        self.assertEqual(trazos[1].texto, "#4 @ 0.20")
+        self.assertEqual(trazos[0].texto, "#3 @ 0.15 R")   # R = barra recta
+        self.assertEqual(trazos[1].texto, "#4 @ 0.20 R")
         # el principal X mide 0.5·Lx con ganchos en los extremos (4 puntos)
         xs = [p[0] for p in trazos[0].puntos]
         self.assertAlmostEqual(max(xs) - min(xs), 2.5)
@@ -28,7 +28,7 @@ class TestTrazosDeLosa(unittest.TestCase):
         principal, temp = trazos
         ys = [p[1] for p in principal.puntos]
         self.assertAlmostEqual(max(ys) - min(ys), 0.5 * 2.5)   # según Y
-        self.assertEqual(principal.texto, "#4 @ 0.15")
+        self.assertEqual(principal.texto, "#4 @ 0.15 R")
         self.assertTrue(temp.discontinua)
         self.assertIn("(temp)", temp.texto)
         self.assertIn("#3", temp.texto)
@@ -38,6 +38,19 @@ class TestTrazosDeLosa(unittest.TestCase):
                                 "#3 @ 0.20", "")
         self.assertEqual([t.clase for t in trazos], ["principal"])
 
+    def test_camellada_se_rotula_c_y_dibuja_bayoneta(self):
+        trazos = trazos_de_losa(RECT_2D, False, "#3 @ 0.15", "#4 @ 0.20",
+                                formas={"x": "camellada"})
+        cam = trazos[0]
+        self.assertEqual(cam.forma, "camellada")
+        self.assertEqual(cam.texto, "#3 @ 0.15 C")
+        self.assertEqual(len(cam.puntos), 6)           # bayoneta: dos quiebres
+        ys = {round(p[1], 3) for p in cam.puntos}
+        self.assertEqual(len(ys), 2)                   # vano abajo, apoyos arriba
+        # la de la otra dirección sigue recta
+        self.assertEqual(trazos[1].forma, "recta")
+        self.assertEqual(trazos[1].texto, "#4 @ 0.20 R")
+
 
 class TestTrazoDeApoyo(unittest.TestCase):
     def test_baston_cruza_el_borde_con_l4_a_cada_lado(self):
@@ -46,7 +59,7 @@ class TestTrazoDeApoyo(unittest.TestCase):
         xs = [p[0] for p in t.puntos]
         self.assertAlmostEqual(min(xs), 5 - 0.25 * 5)
         self.assertAlmostEqual(max(xs), 5 + 0.25 * 5)
-        self.assertEqual(t.texto, "#4 @ 0.18")
+        self.assertEqual(t.texto, "#4 @ 0.18 R")
 
     def test_sin_solape_no_hay_baston(self):
         self.assertIsNone(trazo_de_apoyo((0, 0, 5, 6), (5, 10, 10, 16), "X", "x"))
@@ -61,9 +74,9 @@ class TestPlanoCompleto(unittest.TestCase):
         self.assertEqual(len(plan["losas"]), 2)
         lv1 = next(x for x in plan["losas"] if x["mark"] == "LV1")
         textos = [t["texto"] for t in lv1["trazos"]]
-        self.assertIn("#5 @ 0.10", textos)              # el editado manda
+        self.assertIn("#5 @ 0.10 R", textos)            # el editado manda
         self.assertEqual(len(plan["apoyos"]), 1)
-        self.assertEqual(plan["apoyos"][0]["trazo"]["texto"], "#6 @ 0.12")
+        self.assertEqual(plan["apoyos"][0]["trazo"]["texto"], "#6 @ 0.12 R")
         self.assertIn("Acero_Apoyo", plan["tabla_parametros"])
 
     def test_origen_trasladado_del_export(self):

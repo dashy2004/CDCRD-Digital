@@ -244,6 +244,28 @@ def _exec_tool(raiz, nombres, P_tool, doc):
     return ns["run"](doc, revit.uidoc, DB, P_tool)
 
 
+def _ruta_config():
+    import tempfile
+    base = os.environ.get("APPDATA") or tempfile.gettempdir()
+    return os.path.join(base, "cdcrd_plugin_losas.json")
+
+
+def _leer_config():
+    try:
+        with io.open(_ruta_config(), encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def _guardar_config(datos):
+    try:
+        with io.open(_ruta_config(), "w", encoding="utf-8") as f:
+            f.write(json.dumps(datos, indent=1))
+    except Exception:
+        pass
+
+
 def _registrar_error(texto):
     import tempfile
     try:
@@ -393,6 +415,14 @@ class PanelUsoLosa(Form):
 
         self._poblar()
 
+        # carpeta recordada: si tiene una corrida completa, precargar las
+        # salidas (tipos, acero, visores) sin obligar a CALCULAR de nuevo
+        previa = _leer_config().get("carpeta")
+        if previa and os.path.isfile(os.path.join(previa, "resultados.json")):
+            self.carpeta = previa
+            self._precargar_salidas()
+            self.Text += "  [salidas cargadas de %s]" % previa
+
         for texto, manejador in (
                 ("Esquema: que acero es cual", self.esquema),
                 ("Abrir ultimo visor HTML", self.abrir_visor),
@@ -429,6 +459,50 @@ class PanelUsoLosa(Form):
                 if numero:
                     self.grid.Rows[idx].Cells[col].Value = _barra_combo(numero)
                     self.grid.Rows[idx].Cells[col + 1].Value = s
+
+    def _precargar_salidas(self):
+        """Rellena la grilla con la ultima corrida (carpeta recordada) sin
+        recalcular: tipo por apoyo, acero comercial PM/editado y visores."""
+        carpeta = self.carpeta
+
+        def _json(nombre, defecto):
+            ruta = os.path.join(carpeta, nombre)
+            if not os.path.isfile(ruta):
+                return defecto
+            try:
+                with io.open(ruta, encoding="utf-8") as f:
+                    return json.load(f)
+            except Exception:
+                return defecto
+
+        payload = (_json("tipos_pm.json", {}) or {}).get("asignar_en_revit") or {}
+        acero = (_json("acero_pm.json", {}) or {}).get("losas") or {}
+        ediciones = _json("aceros_editados.json", {}) or {}
+        for fila in self.filas:
+            mk = fila["mark"]
+            if payload.get(mk):
+                fila["tipo"] = payload[mk]
+            editado = ediciones.get(mk, {})
+            armados = (acero.get(mk) or {}).get("armados")
+            for clave, campo in (("x", "acero_x"), ("y", "acero_y"),
+                                 ("apoyo", "acero_apoyo")):
+                if editado.get(clave):
+                    fila[campo] = editado[clave]
+                elif armados and not fila[campo]:
+                    if clave == "x":
+                        fila[campo] = armados["mfx"]["disponer"]
+                    elif clave == "y":
+                        fila[campo] = armados["mfy"]["disponer"]
+                    else:
+                        peor = armados["msx"] if armados["msx"]["as_diseno"] >= \
+                            armados["msy"]["as_diseno"] else armados["msy"]
+                        fila[campo] = peor["disponer"]
+        self._poblar()
+        self.visores = []
+        for raiz_dir, _dirs, archivos in os.walk(carpeta):
+            if "visor_losas.html" in archivos:
+                self.visores.append(os.path.join(raiz_dir, "visor_losas.html"))
+        self.visores.sort()
 
     def _celda(self, i, col):
         v = self.grid.Rows[i].Cells[col].Value
@@ -470,19 +544,34 @@ class PanelUsoLosa(Form):
     # ---------------------------- escrituras ----------------------------
     def _escribir_params(self, escrituras, titulo):
         doc = self.doc
+        # detectar ANTES que hay que tocar: con el modelo fragil (E-137) una
+        # transaccion que no cambia nada es una regeneracion regalada
+        faltan = [n for n in escrituras
+                  if self.filas and self.filas[0]["el"].LookupParameter(n) is None]
+        cambios = []
+        for nombre, valores in escrituras.items():
+            for fila in self.filas:
+                if fila["mark"] not in valores:
+                    continue
+                if nombre in faltan:
+                    cambios.append((nombre, fila))
+                    continue
+                p = fila["el"].LookupParameter(nombre)
+                if p is None or (p.AsString() or "") != valores[fila["mark"]]:
+                    cambios.append((nombre, fila))
+        if not faltan and not cambios:
+            return 0
         t = DB.Transaction(doc, titulo)
         t.Start()
         try:
-            for nombre in escrituras:
-                if self.filas and self.filas[0]["el"].LookupParameter(nombre) is None:
-                    _crear_parametro_texto(doc, nombre)
-            doc.Regenerate()
+            for nombre in faltan:
+                _crear_parametro_texto(doc, nombre)
+            if faltan:
+                doc.Regenerate()
             n = 0
-            for nombre, valores in escrituras.items():
-                for fila in self.filas:
-                    if fila["mark"] in valores:
-                        fila["el"].LookupParameter(nombre).Set(valores[fila["mark"]])
-                        n += 1
+            for nombre, fila in cambios:
+                fila["el"].LookupParameter(nombre).Set(escrituras[nombre][fila["mark"]])
+                n += 1
             t.Commit()
             return n
         except Exception as ex:
@@ -534,6 +623,7 @@ class PanelUsoLosa(Form):
             self.carpeta = os.path.join(dialogo.SelectedPath, "salidas-losas")
         if not os.path.isdir(self.carpeta):
             os.makedirs(self.carpeta)
+        _guardar_config({"carpeta": self.carpeta})
         carpeta = self.carpeta
         raiz = self.raiz
 
@@ -792,8 +882,13 @@ class PanelUsoLosa(Form):
             aviso = "\n\nNO COINCIDE la relectura: %s" % json.dumps(mal)
         if res["familia_cargada"]:
             aviso += "\n(familia '%s' cargada desde el repo)" % res["familia"]
-        MessageBox.Show("Etiquetado (familia %s):\n%s%s\nEl .rvt NO se guarda." %
-                        (res["familia"], "\n".join(partes), aviso))
+        if res.get("modo") == "texto":
+            descripcion = ("notas de texto Mark + H= (sin familia de tag; si "
+                           "cambias espesores, re-corre este boton)")
+        else:
+            descripcion = "tags de la familia %s" % res["familia"]
+        MessageBox.Show("Etiquetado con %s:\n%s%s\nEl .rvt NO se guarda." %
+                        (descripcion, "\n".join(partes), aviso))
 
     @_seguro
     def abrir_visor(self, remitente, evento):

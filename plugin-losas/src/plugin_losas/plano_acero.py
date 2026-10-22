@@ -36,6 +36,7 @@ class Trazo:
     texto: str
     pos_texto: tuple               # [x, y]
     discontinua: bool = False
+    forma: str = "recta"           # "recta" | "camellada" (R/C en el rótulo)
 
 
 def _bbox(contorno):
@@ -45,23 +46,48 @@ def _bbox(contorno):
 
 
 def _linea_con_ganchos(x0, y0, x1, y1, gancho):
-    """Polilínea del símbolo de barra: gancho, tramo recto, gancho."""
+    """Polilínea del símbolo de barra RECTA: gancho, tramo recto, gancho."""
     if y0 == y1:    # horizontal → ganchos hacia arriba
         return ((x0, y0 + gancho), (x0, y0), (x1, y1), (x1, y1 + gancho))
     return ((x0 + gancho, y0), (x0, y0), (x1, y1), (x1 + gancho, y1))
 
 
-def _trazo_barra(clase, eje, cx, cy, largo, texto, desfase=0.0, discontinua=False):
+def _linea_camellada(x0, y0, x1, y1, quiebre):
+    """Polilínea del símbolo de barra CAMELLADA (bayoneta): el tramo central
+    va abajo (vano) y sube en diagonal cerca de cada extremo (apoyos)."""
+    if y0 == y1:    # horizontal
+        largo = x1 - x0
+        q = 0.2 * largo
+        return ((x0, y0 + quiebre), (x0 + q, y0 + quiebre),
+                (x0 + q + quiebre, y0), (x1 - q - quiebre, y1),
+                (x1 - q, y1 + quiebre), (x1, y1 + quiebre))
+    largo = y1 - y0
+    q = 0.2 * largo
+    return ((x0 + quiebre, y0), (x0 + quiebre, y0 + q),
+            (x0, y0 + q + quiebre), (x1, y1 - q - quiebre),
+            (x1 + quiebre, y1 - q), (x1 + quiebre, y1))
+
+
+def _rotular(texto, forma):
+    """Añade al rótulo la forma de la barra: R = recta, C = camellada."""
+    if not texto:
+        return texto
+    return "%s %s" % (texto, "C" if forma == "camellada" else "R")
+
+
+def _trazo_barra(clase, eje, cx, cy, largo, texto, desfase=0.0,
+                 discontinua=False, forma="recta"):
     medio = largo / 2.0
+    dibujar = _linea_camellada if forma == "camellada" else _linea_con_ganchos
     if eje == "X":
         y = cy + desfase
-        puntos = _linea_con_ganchos(cx - medio, y, cx + medio, y, GANCHO_M)
+        puntos = dibujar(cx - medio, y, cx + medio, y, GANCHO_M)
         pos = (cx, y + 0.15)
     else:
         x = cx + desfase
-        puntos = _linea_con_ganchos(x, cy - medio, x, cy + medio, GANCHO_M)
+        puntos = dibujar(x, cy - medio, x, cy + medio, GANCHO_M)
         pos = (x + 0.15, cy)
-    return Trazo(clase, puntos, texto, pos, discontinua)
+    return Trazo(clase, puntos, _rotular(texto, forma), pos, discontinua, forma)
 
 
 def _direccion(contorno, es_vuelo):
@@ -75,8 +101,17 @@ def _direccion(contorno, es_vuelo):
     return "2D", None
 
 
-def trazos_de_losa(contorno, es_vuelo: bool, acero_x: str, acero_y: str) -> list[Trazo]:
-    """Los trazos de armado de UN paño (principal y, si es 1D, temperatura)."""
+def trazos_de_losa(contorno, es_vuelo: bool, acero_x: str, acero_y: str,
+                   formas: dict | None = None) -> list[Trazo]:
+    """Los trazos de armado de UN paño (principal y, si es 1D, temperatura).
+
+    ``formas`` = {"x": "recta"|"camellada", "y": ...}: la forma de la barra en
+    cada dirección; el rótulo la marca con R/C y la camellada se dibuja con la
+    bayoneta (sube en los apoyos). El armado que genera el plugin hoy es todo
+    RECTO (criterio maestro: solape recto); la camellada queda disponible para
+    la simbología 1:1 de LosasPlus (REA).
+    """
+    formas = formas or {}
     x0, y0, x1, y1 = _bbox(contorno)
     w, h = x1 - x0, y1 - y0
     cx, cy = (x0 + x1) / 2.0, (y0 + y1) / 2.0
@@ -85,16 +120,19 @@ def trazos_de_losa(contorno, es_vuelo: bool, acero_x: str, acero_y: str) -> list
     if tipo == "2D":
         return [
             _trazo_barra("principal", "X", cx, cy, FRACCION_LUZ_PRINCIPAL * w,
-                         acero_x or "", desfase=-0.15 * h),
+                         acero_x or "", desfase=-0.15 * h,
+                         forma=formas.get("x", "recta")),
             _trazo_barra("principal", "Y", cx, cy, FRACCION_LUZ_PRINCIPAL * h,
-                         acero_y or "", desfase=0.15 * w),
+                         acero_y or "", desfase=0.15 * w,
+                         forma=formas.get("y", "recta")),
         ]
     acero_prin = acero_x if eje == "X" else acero_y
     acero_temp = acero_y if eje == "X" else acero_x
+    forma_prin = formas.get("x" if eje == "X" else "y", "recta")
     luz_prin = w if eje == "X" else h
     luz_temp = h if eje == "X" else w
     trazos = [_trazo_barra("principal", eje, cx, cy, FRACCION_LUZ_PRINCIPAL * luz_prin,
-                           acero_prin or "")]
+                           acero_prin or "", forma=forma_prin)]
     if tipo == "1D":
         trazos.append(_trazo_barra(
             "temperatura", "Y" if eje == "X" else "X", cx, cy,
@@ -121,7 +159,7 @@ def trazo_de_apoyo(caja_i, caja_j, direccion: str, texto: str) -> Trazo | None:
         b = borde + FRACCION_BASTON * (xj1 - xj0)
         # ganchos del bastón hacia abajo (barra superior)
         puntos = ((a, y - GANCHO_M), (a, y), (b, y), (b, y - GANCHO_M))
-        return Trazo("adicional", puntos, texto, (borde, y + 0.15))
+        return Trazo("adicional", puntos, _rotular(texto, "recta"), (borde, y + 0.15))
     borde = (max(yi0, yj0) + min(yi1, yj1)) / 2.0
     xa, xb = max(xi0, xj0), min(xi1, xj1)
     if xb <= xa:
@@ -130,7 +168,7 @@ def trazo_de_apoyo(caja_i, caja_j, direccion: str, texto: str) -> Trazo | None:
     a = borde - FRACCION_BASTON * (yi1 - yi0)
     b = borde + FRACCION_BASTON * (yj1 - yj0)
     puntos = ((x - GANCHO_M, a), (x, a), (x, b), (x - GANCHO_M, b))
-    return Trazo("adicional", puntos, texto, (x + 0.15, borde))
+    return Trazo("adicional", puntos, _rotular(texto, "recta"), (x + 0.15, borde))
 
 
 def plano_acero(proyecto: dict, resultados: dict, acero_pm: dict | None = None,
@@ -204,7 +242,9 @@ def plano_acero(proyecto: dict, resultados: dict, acero_pm: dict | None = None,
         "origen_m": [origen_mm[0] / 1000.0, origen_mm[1] / 1000.0],
         "convencion": "principal = vano en la dirección de trabajo; temperatura = "
                       "retracción perpendicular (1D, discontinua); adicional = bastón "
-                      "negativo sobre el apoyo, L/4 a cada paño",
+                      "negativo sobre el apoyo, L/4 a cada paño; rótulos R = barra "
+                      "recta, C = camellada (bayoneta); el armado del plugin es todo "
+                      "recto (solape recto del criterio maestro)",
         "losas": losas,
         "apoyos": apoyos,
         "tabla_parametros": ["Mark", "Uso_Losa", "Tipo_Losa_PM", "Seccion_Losa",
