@@ -128,7 +128,7 @@ class FakeModel:
         if path == "AreaObj.GetLoadUniformToFrame":
             return [0, None, None, None, None, None, None, 0]
         if path == "PropArea.GetTypeOAPI":
-            return [2, 0]
+            return [1, 0]
         if path == "PropArea.GetSlab":
             return [0, 2, "C210", 0.15 / scale, 0, "", "guid", 0]
         if path == "PropMaterial.GetMaterial":
@@ -142,6 +142,8 @@ class FakeModel:
         if path == "LoadCases.ModalEigen.GetNumberModes":
             return [3, 1, 0]
         if path == "DatabaseTables.GetTableForDisplayArray":
+            if args[0] == "Slab Property Definitions":
+                return [["Name"], 2, ["Name"], 1, ["L15"], 0]
             return mass_table()
         if path == "Analyze.GetCaseStatus":
             return [2, ["Dead", "Modal"], [4, 4], 0]
@@ -371,3 +373,106 @@ def test_adapter_dispatches_only_explicit_getters(fake):
     assert c["source"]["process_id"] == 123
     assert c["snapshot"]["modal_max_modes"] == 3
     assert not any(o["status"] == "error" for o in c["observations"])
+
+
+# Synthetic responses reproduce native COM edge cases without project data.
+def test_null_optional_story_and_diaphragm_labels(fake):
+    levels = fake.read("Story.GetStories_2")
+    levels[6] = [None]
+    fake.overrides["Story.GetStories_2"] = levels
+    fake.overrides["PointObj.GetDiaphragm"] = [2, None, 0]
+    c = collect_snapshot(fake.read, MODEL, 123)
+    assert c["snapshot"]["stories"][0]["height_m"] == 3.5
+    assert c["snapshot"]["joints"][0]["diaphragm"] == "From Shell Object"
+    assert not any(o["status"] == "error" for o in c["observations"])
+
+
+@pytest.mark.parametrize("option", [1, 3])
+def test_null_diaphragm_label_only_allowed_when_not_named(fake, option):
+    fake.overrides["PointObj.GetDiaphragm"] = [option, None, 0]
+    c = collect_snapshot(fake.read, MODEL, 123)
+    row = c["snapshot"]["joints"][0]
+    if option == 1:
+        assert row["diaphragm"] == ""
+    else:
+        assert "diaphragm" not in row
+        assert any(o["status"] == "error" for o in c["observations"])
+
+
+def test_shell_property_type_does_not_classify_a_slab(fake):
+    fake.overrides["PropArea.GetNameList"] = [2, ["L15", "W25"], 0]
+    fake.overrides["PropArea.GetTypeOAPI"] = [1, 0]  # Both are Shell.
+    c = collect_snapshot(fake.read, MODEL, 123)
+    assert [x["name"] for x in c["snapshot"]["slab_definitions"]] == ["L15"]
+    assert ("PropArea.GetSlab", ("W25",)) not in fake.calls
+    assert any(
+        o.get("arguments", [None])[0] == "Slab Property Definitions"
+        for o in c["observations"]
+        if o.get("arguments")
+    )
+
+
+def test_failed_slab_inventory_does_not_claim_no_slab_definitions(fake):
+    def tables(key, *args):
+        return (
+            [[], 2, ["Name"], 0, [], 1]
+            if key == "Slab Property Definitions"
+            else mass_table()
+        )
+
+    fake.overrides["DatabaseTables.GetTableForDisplayArray"] = tables
+    c = collect_snapshot(fake.read, MODEL, 123)
+    assert "slab_definitions" not in c["snapshot"]
+    assert any(
+        o["status"] == "error" and o["section"] == "slab_definitions"
+        for o in c["observations"]
+    )
+
+
+def test_unsupported_uniform_to_frame_is_not_called_or_assumed_empty(fake):
+    c = collect_snapshot(fake.read, MODEL, 123)
+    assert not any(p == "AreaObj.GetLoadUniformToFrame" for p, _ in fake.calls)
+    assert "uniform_to_frame_loads" not in c["snapshot"]["slabs"][0]
+    assert any(
+        o["field"] == "uniform_to_frame_loads" and o["status"] == "pending"
+        for o in c["observations"]
+    )
+
+
+@pytest.mark.parametrize("uses_loads", ["No", "Yes"])
+def test_mass_table_without_load_columns_requires_loads_disabled(uses_loads):
+    fields = [
+        "Name",
+        "IsDefault",
+        "SourceSelf",
+        "SourceAdded",
+        "SourceLoads",
+        "IncLateral",
+        "IncVertical",
+    ]
+    raw = [[], 1, fields, 1, ["M1", "Yes", "Yes", "Yes", uses_loads, "Yes", "No"], 0]
+    if uses_loads == "No":
+        result = mass_source(raw)
+        assert result["source_self"] and result["source_added"]
+        assert result["source_loads"] is False and result["factors"] == {}
+    else:
+        with pytest.raises(ValueError):
+            mass_source(raw)
+
+
+@pytest.mark.parametrize("rows", [["L15", "L15"], ["Missing"], [None]])
+def test_slab_table_invalid_names_do_not_become_definitions(fake, rows):
+    def tables(key, *args):
+        return (
+            [["Name"], 2, ["Name"], len(rows), rows, 0]
+            if key == "Slab Property Definitions"
+            else mass_table()
+        )
+
+    fake.overrides["DatabaseTables.GetTableForDisplayArray"] = tables
+    c = collect_snapshot(fake.read, MODEL, 123)
+    assert "slab_definitions" not in c["snapshot"]
+    assert any(
+        o["status"] == "error" and o["section"] == "slab_definitions"
+        for o in c["observations"]
+    )

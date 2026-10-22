@@ -7,6 +7,7 @@ from collections import Counter
 from hashlib import sha256
 from html import escape
 from pathlib import Path
+from typing import Any
 
 from audit_capture import SCHEMA, model_path
 from etabs_procedure import prepare_modeling
@@ -17,6 +18,15 @@ def json_bytes(value):
     return (
         json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
     ).encode("utf-8")
+
+
+def validate_reference(profile, project):
+    """Validate before COM; observational mode never infers design criteria."""
+    if profile != "observational":
+        return prepare_modeling(profile, project)
+    if not isinstance(project, dict) or set(project) != {"model_path"}:
+        raise ValueError("observational requiere solo model_path; no compara criterios")
+    return {"model_path": str(model_path(project["model_path"])), "stories": None}
 
 
 def build_report(profile, project, capture):
@@ -38,7 +48,7 @@ def build_report(profile, project, capture):
         or not isinstance(observations, list)
     ):
         raise TypeError("Captura sin snapshot, source u observations")
-    expected = prepare_modeling(profile, project)
+    expected = validate_reference(profile, project)
     if model_path(source.get("model_path")) != model_path(
         expected["model_path"]
     ) or model_path(snapshot.get("model_path")) != model_path(expected["model_path"]):
@@ -52,8 +62,18 @@ def build_report(profile, project, capture):
             raise ValueError("Observacion invalida")
     if len({x["id"] for x in observations}) != len(observations):
         raise ValueError("Identificadores de evidencia duplicados")
-    audit = audit_modeling(profile, project, snapshot)
-    findings = list(audit["findings"])
+    findings: list[dict[str, Any]]
+    if profile == "observational":
+        findings = [
+            {
+                "code": "reference_missing",
+                "object": "project",
+                "status": "pending",
+                "message": "Sin referencia de diseño: no se comparan uso, niveles, cargas ni criterios residenciales.",
+            }
+        ]
+    else:
+        findings = list(audit_modeling(profile, project, snapshot)["findings"])
     for obs in observations:
         if obs["status"] != "read":
             findings.append(
@@ -75,7 +95,7 @@ def build_report(profile, project, capture):
         index = {s["name"]: s for s in levels}
         if len(index) != len(levels):
             raise ValueError("Niveles duplicados")
-        for expected_story in expected["stories"]:
+        for expected_story in expected["stories"] or []:
             name = expected_story["name"]
             for key in ("elevation_m", "height_m"):
                 value = index.get(name, {}).get(key)
@@ -101,7 +121,12 @@ def build_report(profile, project, capture):
                             "unit": "m",
                         }
                     )
-        for name in index.keys() - {s["name"] for s in expected["stories"]}:
+        unexpected = (
+            index.keys() - {s["name"] for s in expected["stories"]}
+            if expected["stories"] is not None
+            else set()
+        )
+        for name in unexpected:
             findings.append(
                 {
                     "code": "unexpected_story",
@@ -182,6 +207,9 @@ def build_report(profile, project, capture):
             json_bytes({"profile": profile, "project": project})
         ).hexdigest(),
         "profile": profile,
+        "reference_status": "not_provided"
+        if profile == "observational"
+        else "provided_not_independently_verified",
         "source": source,
         "summary": {
             "findings": len(findings),
@@ -211,7 +239,9 @@ def build_report(profile, project, capture):
         "model_modified": False,
         "analysis_executed": False,
         "limitations": [
-            "Criterios del perfil seleccionado; no constituyen certificacion normativa integral.",
+            "Sin referencia de diseño: inventario y cobertura de lecturas; comparaciones de ingeniería pendientes."
+            if profile == "observational"
+            else "Criterios del perfil seleccionado; no constituyen certificacion normativa integral.",
             "Resultados historicos o JSON importado no autentican una sesion nativa.",
             "Finished informa estado del caso; no demuestra vigencia frente a todas las ediciones.",
             "No se ejecuta analisis, Check Model, guardado ni correccion automatica.",

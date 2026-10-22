@@ -1,8 +1,9 @@
 # Captura automática e informe del auditor ETABS
 
 La captura lee una instancia **ya abierta, fijada por PID y ruta absoluta del EDB**.
-El informe reutiliza `modeling_checks.audit_modeling` y el perfil existente
-`modeling_20261015`. Clasifica diferencias comprobadas, datos pendientes y errores de
+El informe compara con `modeling_checks.audit_modeling` y el perfil
+`modeling_20261015` cuando existe una referencia explícita. Con el perfil
+`observational` muestra inventario, cobertura y lecturas sin asumir criterios de diseño. Clasifica diferencias comprobadas, datos pendientes y errores de
 lectura. No aplica cambios, ejecuta análisis, selecciona resultados, cambia unidades,
 guarda ni abre otro modelo. La generación de informes también funciona sin Windows
 ni COM, a partir de un JSON capturado.
@@ -28,6 +29,17 @@ python servidor-mcp/tools/etabs_audit.py capture `
   --pid 12345 --project C:\Trabajo\project.json `
   --modal-case Modal --output C:\Trabajo\auditoria-001
 ```
+
+Si no hay una referencia de diseño confirmada, usar este JSON (solo admite
+`model_path`; no acepta criterios que después quedarían sin comparar):
+
+```json
+{"profile":"observational","project":{"model_path":"C:\\Trabajo\\COPIA.EDB"}}
+```
+
+Este modo conserva errores y pendientes, marca `reference_status=not_provided`
+y siempre produce `overall=incomplete`. No deduce alturas arquitectónicas,
+uso residencial, parqueos o cargas a partir del propio modelo para hacerlo coincidir.
 
 `--modal-case` es opcional: si se omite, los modos quedan pendientes. No se deduce
 el caso modal por su nombre. `--max-objects` limita cada inventario/array (10 000
@@ -96,7 +108,7 @@ leída permanece ausente. El HTML escapa nombres, mensajes y valores aportados.
 | Áreas, vértices, Floor/Wall, huecos, sección, nivel, diafragma | Áreas sin clasificación se conservan explícitamente |
 | Definiciones de losas, material, tipo shell y espesor; Ribbed/Waffle | Incluye propiedades sin asignar; no interpreta planos |
 | Materiales (nombre/tipo), patrones y peso propio | No se atribuyen propiedades mecánicas no leídas |
-| Cargas uniformes y uniformes a barras | Valores conservan fuerza/longitud² activas; no se adivinan acabados o mampostería |
+| Cargas uniformes de áreas | Valores conservan fuerza/longitud² activas; no se adivinan acabados o mampostería |
 | Fuente de masa predeterminada, máximo de modos del caso elegido | Tablas con esquema desconocido quedan como error |
 | Estado de casos de análisis | `Finished` no demuestra vigencia frente a todas las ediciones |
 
@@ -127,8 +139,7 @@ implementación descompilada ni el volcado privado de la inspección.
 Hallazgo relevante: `AreaObj.GetAutoMesh` existe en el catálogo de la API compartida,
 pero no en el contrato `ETABSv1.cAreaObj` inspeccionado. Por eso el mallado queda
 pendiente. Las firmas usadas incluyen `GetStories_2` con base separada,
-`GetLoadUniform` con cinco arrays, `GetLoadUniformToFrame` con seis y
-`PointObj.GetDiaphragm` con opción y nombre. No se reutilizan layouts de SAP2000 ni
+`GetLoadUniform` con cinco arrays y `PointObj.GetDiaphragm` con opción y nombre. No se reutilizan layouts de SAP2000 ni
 del antiguo `GetStories`. El contrato se rechaza si la versión de ejecución devuelve
 una forma diferente. La inspección de firmas **no demuestra una captura nativa**.
 
@@ -148,6 +159,34 @@ registro real del SDK MCP. No inicia ETABS, SAFE ni Revit.
 Validación inicial local: Windows/Python 3.14 con SDK MCP, 373 pruebas aprobadas;
 Linux/Python 3.12, 371 aprobadas y 2 omitidas por SDK MCP ausente. Cobertura de los
 módulos nuevos de captura/informe/MCP: 91%. Ruff y Pyright sin errores en los módulos
-nuevos. La aceptación nativa sigue pendiente: ejecutar en una copia identificada,
-cotejar conteos/propiedades contra ETABS y comprobar que el documento permaneció
-sin modificación. No confundir las pruebas sintéticas con esa aceptación.
+nuevos. Esos resultados iniciales preceden la prueba nativa descrita a continuación.
+
+
+## Correcciones comprobadas en ETABS 23.3.0
+
+La prueba en una copia privada detectó contratos que el doble inicial no reproducía:
+
+- `GetStories_2` puede devolver BSTR nulo en el nombre del nivel similar.
+  `PointObj.GetDiaphragm` puede devolverlo cuando la opción no usa un nombre.
+  Se aceptan solo esos campos opcionales; un diafragma asignado por nombre sigue
+  requiriendo texto no vacío.
+- `PropArea.GetTypeOAPI` distingue Shell/Plane/Asolid, **no** Slab/Wall/Deck.
+  La tabla `Slab Property Definitions`, campo `Name`, identifica las propiedades
+  antes de `GetSlab`. No se omiten silenciosamente las losas ni se consultan muros
+  como losas. Tabla fallida, duplicados o nombres fuera del inventario son errores.
+  Véase [contrato CSI de GetTypeOAPI](https://docs.csiamerica.com/help-files/etabs-api-2016/html/4d437489-552a-3dc8-c4ec-a3c8ebb857b6.htm).
+- `GetLoadUniformToFrame` aparece en la interfaz pero no es aplicable en ETABS;
+  retornó -100. Ya no se invoca y queda pendiente, sin convertirlo en carga cero.
+  CSI lo documenta en las [notas de ETABS 21](https://www.csiamerica.com/software/ETABS/21/ReleaseNotesETABSv2101plus2100.pdf).
+- La tabla de masa omite `LoadPattern`/`Multiplier` cuando `SourceLoads=No`.
+  Se admite esa variante; si usa cargas, siguen siendo obligatorios.
+
+Se contrastaron los metadatos REA existentes, el typelib COM instalado, las claves
+del XML de tablas de ETABS 23 y respuestas nativas. Las regresiones del repositorio
+son sintéticas y no contienen nombres, rutas ni resultados de clientes.
+
+Validación de esta revisión: 390 pruebas aprobadas en Windows/Python 3.14 con SDK
+MCP. La captura y CLI se ejecutaron sobre una copia, con cero errores de lectura;
+el informe observacional conserva referencias y verificaciones pendientes.
+Los datos y archivos nativos permanecen privados. Esto valida el recorrido de lectura
+ensayado, no la cobertura de todas las variantes de ETABS ni un diseño estructural.
