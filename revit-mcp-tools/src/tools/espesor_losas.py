@@ -57,6 +57,32 @@ def _tipos_floor_por_nombre(doc):
     return out
 
 
+def _espesor_tipo_m(tipo):
+    cs = tipo.GetCompoundStructure()
+    if cs is None:
+        return None
+    return cs.GetWidth() * 0.3048
+
+
+def _hay_trabajo(doc, asignar, tipos_floor, nombres, por_mark):
+    """True si algo cambiaria. E-137: en este modelo una transaccion + su
+    regeneracion es ruleta con la RAM justa; si no hay nada que hacer, no se
+    abre transaccion ninguna."""
+    existentes = _tipos_floor_por_nombre(doc)
+    for seccion in set(asignar.values()):
+        nombre = nombres.get(seccion) or seccion
+        tipo = existentes.get(nombre)
+        if tipo is None:
+            return True
+        leido = _espesor_tipo_m(tipo)
+        if leido is None or abs(leido - tipos_floor[seccion]) > TOL_M:
+            return True
+    for mk, seccion in asignar.items():
+        if type_name(doc, por_mark[mk]) != (nombres.get(seccion) or seccion):
+            return True
+    return False
+
+
 def _fijar_espesor_tipo(tipo, h_m):
     """Pone el espesor TOTAL del tipo en h_m cargando la diferencia a la capa
     estructural (core). Falla limpio si el tipo no tiene CompoundStructure."""
@@ -143,11 +169,16 @@ def run(doc, uidoc, DB, P):
             if f.GetTypeId() != destino.Id:
                 f.ChangeTypeId(destino.Id)
                 cambiadas += 1
-        doc.Regenerate()
+        # sin doc.Regenerate() explicito: el Commit ya regenera, y la
+        # regeneracion doble fue parte del crash E-137 (journal 0284)
         return creados, ajustados, renombrados, cambiadas
 
-    creados, ajustados, renombrados, cambiadas = tx(
-        doc, "plugin-losas: espesor real (tipos por seccion)", _aplicar)
+    if _hay_trabajo(doc, asignar, tipos_floor, nombres, por_mark):
+        exigir_ram("aplicar el espesor real")
+        creados, ajustados, renombrados, cambiadas = tx(
+            doc, "plugin-losas: espesor real (tipos por seccion)", _aplicar)
+    else:
+        creados, ajustados, renombrados, cambiadas = [], [], [], 0
 
     # verificacion releyendo (cambiar tipo regenera geometria)
     filas, mal = [], []

@@ -46,21 +46,9 @@ No guarda (revit_guardar_modelo despues).
 MARCA = "MCP:ACERO-LOSA-3D"
 M_A_FT = 1.0 / 0.3048
 
-# Guarda de memoria (E-133/E-134 + crash del 2026-10-22, journal 0283: Revit
-# murio sin excepcion en pleno comando del boton con 211-505 MB libres).
-# Bajo este umbral NO se arranca, y entre losas se PARA limpio en vez de
-# tumbar la sesion; lo hecho hasta ahi queda commiteado.
-RAM_MINIMA_MB = 700
-
-
-def _ram_disponible_mb():
-    try:
-        import clr
-        clr.AddReference("Microsoft.VisualBasic")
-        from Microsoft.VisualBasic.Devices import ComputerInfo
-        return int(ComputerInfo().AvailablePhysicalMemory / (1024 * 1024))
-    except Exception:
-        return None
+# Guarda de memoria: ram_disponible_mb / exigir_ram / RAM_MINIMA_MB viven en
+# _common.py (E-133/E-134/E-137). Bajo el umbral NO se arranca, y entre losas
+# se PARA limpio en vez de tumbar la sesion; lo hecho queda commiteado.
 
 
 def _log(linea):
@@ -305,13 +293,7 @@ def run(doc, uidoc, DB, P):
             return z_bot + _espesor_ft(doc, losa) - rec_ft - db_ft / 2.0 - desplome
         return z_bot + rec_ft + db_ft / 2.0 + desplome
 
-    ram = _ram_disponible_mb()
-    if ram is not None and ram < RAM_MINIMA_MB:
-        raise Exception("solo %d MB de RAM libre (minimo %d): cerrar "
-                        "aplicaciones (y la VM: wsl --shutdown) antes de "
-                        "modelar; con la maquina asi Revit se cae "
-                        "(E-133/E-134, crash del 2026-10-22)" %
-                        (ram, RAM_MINIMA_MB))
+    ram = exigir_ram("modelar el acero 3D")
 
     resultados, fallos = [], []
     procesados = set()
@@ -322,7 +304,7 @@ def run(doc, uidoc, DB, P):
         mk = x["mark"]
         if mk not in elegidos:
             continue
-        ram = _ram_disponible_mb()
+        ram = ram_disponible_mb()
         if ram is not None and ram < RAM_MINIMA_MB:
             detenido_por_ram = {"ram_mb": ram, "antes_de": mk}
             _log("DETENIDO por RAM (%d MB) antes de %s" % (ram, mk))

@@ -177,9 +177,10 @@ def run(doc, uidoc, DB, P):
                                "tags_borrados": borrados})
         if not resultados:
             raise Exception("ninguna vista coincide con los niveles de las losas")
-        doc.Regenerate()
+        # sin doc.Regenerate() explicito: el Commit ya regenera (E-137)
         return resultados, cargada
 
+    exigir_ram("etiquetar las losas")
     resultados, cargada = tx(doc, "plugin-losas: tags de losa (Mark + espesor)",
                              _todo)
 

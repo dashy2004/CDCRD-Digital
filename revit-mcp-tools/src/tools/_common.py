@@ -418,6 +418,45 @@ CAT = {"columnas": "OST_StructuralColumns", "vigas": "OST_StructuralFraming",
        "floors": "OST_Floors", "walls": "OST_Walls", "foundations": "OST_StructuralFoundation"}
 
 
+RAM_MINIMA_MB = 700
+
+
+def ram_disponible_mb():
+    """RAM libre del sistema en MB, o None si no se pudo medir.
+
+    E-137: con esta maquina al limite, una regeneracion por API puede tumbar
+    Revit sin excepcion. Microsoft.VisualBasic (ComputerInfo) no existe en el
+    .NET de Revit 2027: WMI es la via que funciona; se intentan ambas."""
+    import clr
+    try:
+        clr.AddReference("System.Management")
+        from System.Management import ManagementObjectSearcher
+        consulta = ManagementObjectSearcher(
+            "SELECT FreePhysicalMemory FROM Win32_OperatingSystem")
+        for o in consulta.Get():
+            return int(int(str(o["FreePhysicalMemory"])) / 1024)   # KB -> MB
+    except Exception:
+        pass
+    try:
+        clr.AddReference("Microsoft.VisualBasic")
+        from Microsoft.VisualBasic.Devices import ComputerInfo
+        return int(ComputerInfo().AvailablePhysicalMemory / (1024 * 1024))
+    except Exception:
+        return None
+
+
+def exigir_ram(contexto):
+    """Aborta ANTES de abrir transaccion si la RAM esta en zona de crash."""
+    ram = ram_disponible_mb()
+    if ram is not None and ram < RAM_MINIMA_MB:
+        raise Exception("solo %d MB de RAM libre (minimo %d) para %s: cerrar "
+                        "aplicaciones (Chrome, VM: wsl --shutdown) y GUARDAR "
+                        "el modelo antes de reintentar; con la maquina asi "
+                        "Revit se cae (E-133/E-134/E-137)" %
+                        (ram, RAM_MINIMA_MB, contexto))
+    return ram
+
+
 def bic_of(name):
     """BuiltInCategory desde alias en espanol/ingles o nombre OST_*."""
     key = CAT.get(name, name)
