@@ -40,6 +40,9 @@ tipos CAD o detalles. El panel no guarda el RVT en disco.
 ## Registro incremental local
 
 `%TEMP%\plugin_losas_parametros.jsonl` se abre y sincroniza a disco en cada evento.
+En IronPython usa `FileStream.Flush(true)` de .NET; en CPython, `os.fsync`.
+La comprobación aislada de IronPython detectó que `_io.fileno()` no funciona
+con `os.fsync` en ese motor.
 Incluye un identificador de corrida, UTC, título de operación, fase, nombre del
 parámetro e identificador/Mark de la losa; no registra los valores escritos.
 Permanece local: puede contener identificadores del modelo y no debe subirse a Git.

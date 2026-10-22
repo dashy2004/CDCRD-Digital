@@ -422,7 +422,9 @@ def test_real_log_appends_complete_json_lines(tmp_path, monkeypatch):
     import tempfile
 
     monkeypatch.setattr(tempfile, "gettempdir", lambda: str(tmp_path))
-    log = load_function("_log_parametros", {"os": os, "io": io, "json": json})
+    scope = {"os": os, "io": io, "json": json}
+    load_function("_anexar_log", scope)
+    log = load_function("_log_parametros", scope)
     log("commit_before", sesion="synthetic", parametro="Sección")
     log("commit_after", sesion="synthetic", estado="Committed")
     records = [
@@ -513,3 +515,66 @@ def test_guardar_reports_error_without_success_dialog():
     assert len(dialogs) == 1
     assert "Commit rejected" in dialogs[0]
     assert "valores guardados" not in dialogs[0]
+
+
+@pytest.mark.parametrize("fail_at", [None, "write", "flush"])
+def test_ironpython_log_flushes_and_closes_stream(monkeypatch, fail_at):
+    import sys
+
+    calls = []
+
+    class Stream:
+        def __init__(self, path, mode, access, sharing):
+            assert (path, mode, access, sharing) == (
+                "synthetic.jsonl",
+                "append",
+                "write",
+                "read",
+            )
+
+        def Write(self, data, start, length):
+            calls.append("write")
+            assert data.text == "synthetic\n" and start == 0 and length == 10
+            if fail_at == "write":
+                raise OSError("write failed")
+
+        def Flush(self, durable):
+            calls.append("flush")
+            assert durable is True
+            if fail_at == "flush":
+                raise OSError("flush failed")
+
+        def Close(self):
+            calls.append("close")
+
+    class Encoding:
+        def __init__(self, bom):
+            assert bom is False
+
+        def GetBytes(self, text):
+            return SimpleNamespace(text=text, Length=len(text))
+
+    monkeypatch.setitem(
+        sys.modules,
+        "System.IO",
+        SimpleNamespace(
+            FileStream=Stream,
+            FileMode=SimpleNamespace(Append="append"),
+            FileAccess=SimpleNamespace(Write="write"),
+            FileShare=SimpleNamespace(Read="read"),
+        ),
+    )
+    monkeypatch.setitem(
+        sys.modules, "System.Text", SimpleNamespace(UTF8Encoding=Encoding)
+    )
+    append = load_function("_anexar_log", {})
+    with monkeypatch.context() as platform_patch:
+        platform_patch.setattr(sys, "platform", "cli")
+        if fail_at:
+            with pytest.raises(OSError, match=fail_at + " failed"):
+                append("synthetic.jsonl", "synthetic\n")
+        else:
+            append("synthetic.jsonl", "synthetic\n")
+    assert calls == (
+        ["write", "close"] if fail_at == "write" else ["write", "flush", "close"]
+    )

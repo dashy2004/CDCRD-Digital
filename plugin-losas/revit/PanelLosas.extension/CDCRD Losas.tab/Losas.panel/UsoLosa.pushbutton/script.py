@@ -239,10 +239,27 @@ def _log_parametros(evento, **datos):
     import tempfile
     datos.update(evento=evento, utc=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()))
     ruta = os.path.join(tempfile.gettempdir(), "plugin_losas_parametros.jsonl")
-    with io.open(ruta, "a", encoding="utf-8") as f:
-        f.write(u"%s\n" % json.dumps(datos, ensure_ascii=True))
-        f.flush()
-        os.fsync(f.fileno())
+    _anexar_log(ruta, u"%s\n" % json.dumps(datos, ensure_ascii=True))
+
+
+def _anexar_log(ruta, texto):
+    import sys
+    if sys.platform == "cli":
+        # IronPython _io.fileno no es un descriptor valido para os.fsync.
+        from System.IO import FileStream, FileMode, FileAccess, FileShare
+        from System.Text import UTF8Encoding
+        flujo = FileStream(ruta, FileMode.Append, FileAccess.Write, FileShare.Read)
+        try:
+            datos = UTF8Encoding(False).GetBytes(texto)
+            flujo.Write(datos, 0, datos.Length)
+            flujo.Flush(True)
+        finally:
+            flujo.Close()
+    else:
+        with io.open(ruta, "a", encoding="utf-8") as f:
+            f.write(texto)
+            f.flush()
+            os.fsync(f.fileno())
 
 
 def _correr_cpython(raiz, argumentos, errores):
