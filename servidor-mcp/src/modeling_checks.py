@@ -11,8 +11,12 @@ def audit_modeling(profile: str, project: dict, snapshot: dict) -> dict:
         raise ValueError("snapshot debe ser un objeto")
     findings = []
 
-    def issue(code, obj, message):
-        findings.append({"code": code, "object": obj, "message": message})
+    def issue(code, obj, message, status=None, **details):
+        pending = {"missing", "geometry_missing", "spectrum_unverified", "seismic_pending",
+                   "missing_diaphragm", "persistence"}
+        findings.append({"code": code, "object": obj, "message": message,
+                         "status": status or ("pending" if code in pending else "difference"),
+                         **details})
 
     def matches(actual, desired):
         if isinstance(desired, bool):
@@ -30,7 +34,9 @@ def audit_modeling(profile: str, project: dict, snapshot: dict) -> dict:
 
     def equal(actual, desired, obj):
         if not matches(actual, desired):
-            issue("setting", obj, f"Esperado {desired!r}; recibido {actual!r}")
+            issue("setting", obj, f"Esperado {desired!r}; recibido {actual!r}",
+                  status="pending" if actual is None else "difference",
+                  expected=desired, observed=actual)
 
     def points(obj):
         vertices = obj.get("vertices_m")
@@ -76,6 +82,10 @@ def audit_modeling(profile: str, project: dict, snapshot: dict) -> dict:
     else:
         indexed = {row["name"]: row for row in unique(actual_patterns, "name")}
         for pat in expected["patterns"]:
+            if pat["name"] not in indexed:
+                issue("missing_pattern", pat["name"], "Patron requerido ausente del inventario leido",
+                      expected=pat["name"], observed="ausente")
+                continue
             observed = indexed.get(pat["name"], {})
             for key, value in pat.items():
                 equal(observed.get(key), value, f"{pat['name']}.{key}")
@@ -98,7 +108,8 @@ def audit_modeling(profile: str, project: dict, snapshot: dict) -> dict:
                 h, t = prop.get("h_m"), prop.get("topping_m")
                 if (type(h) not in (int, float) or type(t) not in (int, float) or
                         not math.isfinite(h) or not math.isfinite(t) or not 0 < t < h):
-                    issue("topping", prop["name"], "Topping debe estar incluido dentro del peralte")
+                    issue("topping", prop["name"], "Topping debe estar incluido dentro del peralte",
+                          status="pending" if h is None or t is None else "difference")
     slabs = snapshot.get("slabs")
     groups, shapes = {}, set()
     if not isinstance(slabs, list) or not slabs:
@@ -115,7 +126,8 @@ def audit_modeling(profile: str, project: dict, snapshot: dict) -> dict:
             shapes.add(shape)
             if slab.get("is_opening") is True:
                 if slab.get("load_components") != []:
-                    issue("loaded_opening", sid, "Hueco con carga o carga desconocida")
+                    issue("loaded_opening", sid, "Hueco con carga o carga desconocida",
+                          status="pending" if slab.get("load_components") is None else "difference")
                 continue
             equal(slab.get("is_opening"), False, sid + ".is_opening")
             zs = [v[2] for v in vertices]
@@ -141,7 +153,8 @@ def audit_modeling(profile: str, project: dict, snapshot: dict) -> dict:
             elif directions == 1:
                 equal(slab.get("mesh"), "No Auto Mesh", sid + ".mesh")
             elif slab.get("mesh") in (None, "", "Default", "No Auto Mesh"):
-                issue("mesh", sid, "Losa 2D requiere mallado y conexion verificados")
+                issue("mesh", sid, "Losa 2D requiere mallado y conexion verificados",
+                      status="pending" if slab.get("mesh") is None else "difference")
             components = slab.get("load_components")
             if not isinstance(components, list) or any(not isinstance(c, str) for c in components):
                 issue("missing", sid, "Falta inventario de componentes de carga")
@@ -186,7 +199,8 @@ def audit_modeling(profile: str, project: dict, snapshot: dict) -> dict:
     if not isinstance(check, dict):
         check = {}
     if check.get("completed") is not True or check.get("warnings") != []:
-        issue("check_model", "native", "Check Model ausente, incompleto o con avisos")
+        issue("check_model", "native", "Check Model ausente, incompleto o con avisos",
+              status="difference" if check.get("completed") is True else "pending")
     if snapshot.get("saved_readback_verified") is not True:
         issue("persistence", "native", "Persistencia no acreditada")
     return {"profile": profile, "findings": findings, "checked_snapshot_matches": not findings,
