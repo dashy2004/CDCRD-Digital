@@ -276,6 +276,33 @@ class Etabs:
     # ------------------------------------------------------------------
 
     @com_call
+    def capture_etabs_audit_snapshot(self, expected_model_path: str,
+                                     modal_case: str = "", max_objects: int = 10000) -> dict:
+        """Captura para el auditor, con PID configurado y EDB esperado explicitos.
+
+        Requiere turno exclusivo. Solo getters; no inicia ETABS, cambia unidades,
+        selecciona resultados, ejecuta analisis ni guarda. Fallos parciales quedan
+        como evidencia. Ver docs/AUDITOR-ETABS.md para cobertura y limites.
+        """
+        from audit_capture import collect_snapshot, model_path, READ_METHODS
+        model_path(expected_model_path)
+        if not self.process_id or self.auto_start:
+            raise EtabsError("Capture requiere process_id explicito y auto_start=False")
+        model = self._model()
+
+        def read(path, *args):
+            if path not in READ_METHODS:
+                raise EtabsError("Operacion fuera del contrato de lectura")
+            parts = path.split(".")
+            owner = model
+            for part in parts[:-1]:
+                owner = getattr(owner, part)
+            return getattr(owner, parts[-1])(*args)
+
+        return collect_snapshot(read, expected_model_path, self.process_id,
+                                modal_case=modal_case, max_objects=max_objects)
+
+    @com_call
     def get_model_info(self) -> str:
         """Devuelve archivo del modelo, version de ETABS y version de la OAPI."""
         model = self._model()

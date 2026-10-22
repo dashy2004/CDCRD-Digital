@@ -54,11 +54,14 @@ if config.feaName == "ETABS":
     from Etabs import Etabs
     from oapi_catalog import search_oapi_catalog
     from procedure_tools import register_procedure_tools
+    from audit_tools import register_audit_tools
     register_procedure_tools(mcp)
+    register_audit_tools(mcp)
     etabs = Etabs(auto_start=config.autoStart, exe_path=config.exePath, process_id=config.processId)
     logger.info("Registrando herramientas de ETABS...")
 
     get_model_info = mcp.tool()(etabs.get_model_info)
+    capture_etabs_audit_snapshot = mcp.tool()(etabs.capture_etabs_audit_snapshot)
     get_units = mcp.tool()(etabs.get_units)
     set_units = mcp.tool()(etabs.set_units)
     save_model = mcp.tool()(etabs.save_model)

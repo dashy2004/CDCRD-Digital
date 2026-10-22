@@ -1,0 +1,14 @@
+{
+  "profile": "modeling_20261015",
+  "project": {
+    "model_path": "C:\\Synthetic\\AUDIT_DEMO.EDB",
+    "usage": "residential",
+    "has_parking": false,
+    "stories": [
+      {
+        "name": "E1",
+        "architectural_height_m": 3.0
+      }
+    ]
+  }
+}

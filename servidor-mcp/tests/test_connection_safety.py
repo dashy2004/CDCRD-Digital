@@ -17,6 +17,7 @@ def adapter():
         node.decorator_list = []
     attempts = []
     helper = SimpleNamespace(GetObjectProcess=lambda *a: None)
+    helper.QueryInterface = lambda _interface: helper
     client = SimpleNamespace(CreateObject=lambda *a: helper,
                              GetActiveObject=lambda *a: attempts.append('ROT'))
     scope = {'comtypes': SimpleNamespace(client=client), 'EtabsError': RuntimeError,

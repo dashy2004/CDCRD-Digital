@@ -52,3 +52,7 @@ jobs:
         run: python -m pip install './civil3d-beamng[test]'
       - name: Civil3D to BeamNG preflight and converter regression
         run: python -m pytest civil3d-beamng/tests civil3d-beamng/tools/test_prepare_drive.py -q
+      - name: Install ETABS offline test dependencies
+        run: python -m pip install pytest "mcp>=1.10,<2"
+      - name: ETABS capture, audit and OAPI contract regression (no COM)
+        run: python -m pytest servidor-mcp/tests -q

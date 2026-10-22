@@ -1,0 +1,1199 @@
+{
+  "schema": "cdcrd-etabs-capture/1",
+  "capture_id": "synthetic-demo-v1",
+  "started_at": "2000-01-01T00:00:00+00:00",
+  "finished_at": "2000-01-01T00:00:00+00:00",
+  "source": {
+    "kind": "synthetic_fixture",
+    "process_id": 123,
+    "version": {
+      "version": "23.3.0",
+      "number": 23.3
+    },
+    "model_path": "C:\\Synthetic\\AUDIT_DEMO.EDB",
+    "units_enum": 12,
+    "locked": true
+  },
+  "snapshot": {
+    "model_path": "C:\\Synthetic\\AUDIT_DEMO.EDB",
+    "units": "tonf_m_C",
+    "base_elevation_m": 0.0,
+    "stories": [
+      {
+        "name": "E1",
+        "elevation_m": 3.5,
+        "height_m": 3.5
+      }
+    ],
+    "patterns": [
+      {
+        "name": "Dead",
+        "type": "Dead",
+        "self_weight": 1.0
+      },
+      {
+        "name": "Live",
+        "type": "Live",
+        "self_weight": 0.0
+      },
+      {
+        "name": "LiveT",
+        "type": "Live",
+        "self_weight": 0.0
+      }
+    ],
+    "slab_definitions": [
+      {
+        "name": "L15",
+        "type": "Slab",
+        "modeling_type": "Membrane",
+        "material": "C210",
+        "h_m": 0.15
+      }
+    ],
+    "joints": [
+      {
+        "id": "P1",
+        "xyz_m": [
+          0.0,
+          0.0,
+          3.5
+        ],
+        "z_m": 3.5,
+        "at_base": false,
+        "restraints": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "diaphragm": "From Shell Object",
+        "story": "E1"
+      },
+      {
+        "id": "P2",
+        "xyz_m": [
+          5.0,
+          0.0,
+          3.5
+        ],
+        "z_m": 3.5,
+        "at_base": false,
+        "restraints": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "diaphragm": "From Shell Object",
+        "story": "E1"
+      },
+      {
+        "id": "P3",
+        "xyz_m": [
+          5.0,
+          4.0,
+          3.5
+        ],
+        "z_m": 3.5,
+        "at_base": false,
+        "restraints": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "diaphragm": "From Shell Object",
+        "story": "E1"
+      },
+      {
+        "id": "P4",
+        "xyz_m": [
+          0.0,
+          4.0,
+          3.5
+        ],
+        "z_m": 3.5,
+        "at_base": false,
+        "restraints": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "diaphragm": "From Shell Object",
+        "story": "E1"
+      },
+      {
+        "id": "P0",
+        "xyz_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "z_m": 0.0,
+        "at_base": true,
+        "restraints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "diaphragm": "From Shell Object",
+        "story": "Base"
+      }
+    ],
+    "frames": [
+      {
+        "id": "B1",
+        "points": [
+          "P1",
+          "P2"
+        ],
+        "vertices_m": [
+          [
+            0.0,
+            0.0,
+            3.5
+          ],
+          [
+            5.0,
+            0.0,
+            3.5
+          ]
+        ],
+        "section": "B30x50",
+        "rigid_zone_factor": 1.0
+      }
+    ],
+    "slabs": [
+      {
+        "id": "A1",
+        "orientation": 2,
+        "points": [
+          "P1",
+          "P2",
+          "P3",
+          "P4"
+        ],
+        "vertices_m": [
+          [
+            0.0,
+            0.0,
+            3.5
+          ],
+          [
+            5.0,
+            0.0,
+            3.5
+          ],
+          [
+            5.0,
+            4.0,
+            3.5
+          ],
+          [
+            0.0,
+            4.0,
+            3.5
+          ]
+        ],
+        "section": "L15",
+        "is_opening": false,
+        "story": "E1",
+        "diaphragm": "D1",
+        "uniform_loads": [
+          {
+            "area": "A1",
+            "pattern": "Dead",
+            "csys": "Global",
+            "direction": 10,
+            "value": -0.16
+          }
+        ],
+        "uniform_to_frame_loads": []
+      }
+    ],
+    "walls": [],
+    "unclassified_areas": [],
+    "materials": [
+      {
+        "name": "C210",
+        "type_enum": 2
+      }
+    ],
+    "mass_source": {
+      "source_self": false,
+      "source_added": false,
+      "source_loads": true,
+      "lateral": true,
+      "vertical": false,
+      "factors": {
+        "Dead": 1.0,
+        "Live": 0.15,
+        "LiveT": 0.1
+      }
+    },
+    "modal_max_modes": 3,
+    "analysis_status": [
+      {
+        "name": "Dead",
+        "status": 4
+      },
+      {
+        "name": "Modal",
+        "status": 4
+      }
+    ]
+  },
+  "observations": [
+    {
+      "id": "E000001",
+      "section": "identity",
+      "object": "model",
+      "field": "model_path",
+      "operation": "GetModelFilename",
+      "arguments": [],
+      "status": "read",
+      "value": "C:\\Synthetic\\AUDIT_DEMO.EDB"
+    },
+    {
+      "id": "E000002",
+      "section": "identity",
+      "object": "model",
+      "field": "units",
+      "operation": "GetPresentUnits",
+      "arguments": [],
+      "status": "read",
+      "value": 12
+    },
+    {
+      "id": "E000003",
+      "section": "identity",
+      "object": "model",
+      "field": "locked",
+      "operation": "GetModelIsLocked",
+      "arguments": [],
+      "status": "read",
+      "value": true
+    },
+    {
+      "id": "E000004",
+      "section": "identity",
+      "object": "model",
+      "field": "version",
+      "operation": "GetVersion",
+      "arguments": [],
+      "status": "read",
+      "value": {
+        "version": "23.3.0",
+        "number": 23.3
+      }
+    },
+    {
+      "id": "E000005",
+      "section": "stories",
+      "object": "inventory",
+      "field": "levels",
+      "operation": "Story.GetStories_2",
+      "arguments": [],
+      "status": "read",
+      "value": {
+        "base_elevation_m": 0.0,
+        "stories": [
+          {
+            "name": "E1",
+            "elevation_m": 3.5,
+            "height_m": 3.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "E000006",
+      "section": "PointObj",
+      "object": "inventory",
+      "field": "names",
+      "operation": "PointObj.GetNameList",
+      "arguments": [],
+      "status": "read",
+      "value": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P0"
+      ]
+    },
+    {
+      "id": "E000007",
+      "section": "FrameObj",
+      "object": "inventory",
+      "field": "names",
+      "operation": "FrameObj.GetNameList",
+      "arguments": [],
+      "status": "read",
+      "value": [
+        "B1"
+      ]
+    },
+    {
+      "id": "E000008",
+      "section": "AreaObj",
+      "object": "inventory",
+      "field": "names",
+      "operation": "AreaObj.GetNameList",
+      "arguments": [],
+      "status": "read",
+      "value": [
+        "A1"
+      ]
+    },
+    {
+      "id": "E000009",
+      "section": "PropArea",
+      "object": "inventory",
+      "field": "names",
+      "operation": "PropArea.GetNameList",
+      "arguments": [],
+      "status": "read",
+      "value": [
+        "L15"
+      ]
+    },
+    {
+      "id": "E000010",
+      "section": "PropMaterial",
+      "object": "inventory",
+      "field": "names",
+      "operation": "PropMaterial.GetNameList",
+      "arguments": [],
+      "status": "read",
+      "value": [
+        "C210"
+      ]
+    },
+    {
+      "id": "E000011",
+      "section": "LoadPatterns",
+      "object": "inventory",
+      "field": "names",
+      "operation": "LoadPatterns.GetNameList",
+      "arguments": [],
+      "status": "read",
+      "value": [
+        "Dead",
+        "Live",
+        "LiveT"
+      ]
+    },
+    {
+      "id": "E000012",
+      "section": "patterns",
+      "object": "Dead",
+      "field": "type",
+      "operation": "LoadPatterns.GetLoadType",
+      "arguments": [
+        "Dead"
+      ],
+      "status": "read",
+      "value": "Dead"
+    },
+    {
+      "id": "E000013",
+      "section": "patterns",
+      "object": "Dead",
+      "field": "self_weight",
+      "operation": "LoadPatterns.GetSelfWTMultiplier",
+      "arguments": [
+        "Dead"
+      ],
+      "status": "read",
+      "value": 1.0
+    },
+    {
+      "id": "E000014",
+      "section": "patterns",
+      "object": "Live",
+      "field": "type",
+      "operation": "LoadPatterns.GetLoadType",
+      "arguments": [
+        "Live"
+      ],
+      "status": "read",
+      "value": "Live"
+    },
+    {
+      "id": "E000015",
+      "section": "patterns",
+      "object": "Live",
+      "field": "self_weight",
+      "operation": "LoadPatterns.GetSelfWTMultiplier",
+      "arguments": [
+        "Live"
+      ],
+      "status": "read",
+      "value": 0.0
+    },
+    {
+      "id": "E000016",
+      "section": "patterns",
+      "object": "LiveT",
+      "field": "type",
+      "operation": "LoadPatterns.GetLoadType",
+      "arguments": [
+        "LiveT"
+      ],
+      "status": "read",
+      "value": "Live"
+    },
+    {
+      "id": "E000017",
+      "section": "patterns",
+      "object": "LiveT",
+      "field": "self_weight",
+      "operation": "LoadPatterns.GetSelfWTMultiplier",
+      "arguments": [
+        "LiveT"
+      ],
+      "status": "read",
+      "value": 0.0
+    },
+    {
+      "id": "E000018",
+      "section": "slab_definitions",
+      "object": "L15",
+      "field": "property_type",
+      "operation": "PropArea.GetTypeOAPI",
+      "arguments": [
+        "L15"
+      ],
+      "status": "read",
+      "value": 2
+    },
+    {
+      "id": "E000019",
+      "section": "slab_definitions",
+      "object": "L15",
+      "field": "definition",
+      "operation": "PropArea.GetSlab",
+      "arguments": [
+        "L15"
+      ],
+      "status": "read",
+      "value": {
+        "type": "Slab",
+        "modeling_type": "Membrane",
+        "material": "C210",
+        "h_m": 0.15
+      }
+    },
+    {
+      "id": "E000020",
+      "section": "joints",
+      "object": "P1",
+      "field": "xyz_m",
+      "operation": "PointObj.GetCoordCartesian",
+      "arguments": [
+        "P1"
+      ],
+      "status": "read",
+      "value": [
+        0.0,
+        0.0,
+        3.5
+      ]
+    },
+    {
+      "id": "E000021",
+      "section": "joints",
+      "object": "P1",
+      "field": "restraints",
+      "operation": "PointObj.GetRestraint",
+      "arguments": [
+        "P1"
+      ],
+      "status": "read",
+      "value": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "E000022",
+      "section": "joints",
+      "object": "P1",
+      "field": "diaphragm",
+      "operation": "PointObj.GetDiaphragm",
+      "arguments": [
+        "P1"
+      ],
+      "status": "read",
+      "value": "From Shell Object"
+    },
+    {
+      "id": "E000023",
+      "section": "joints",
+      "object": "P1",
+      "field": "story",
+      "operation": "PointObj.GetLabelFromName",
+      "arguments": [
+        "P1"
+      ],
+      "status": "read",
+      "value": "E1"
+    },
+    {
+      "id": "E000024",
+      "section": "joints",
+      "object": "P2",
+      "field": "xyz_m",
+      "operation": "PointObj.GetCoordCartesian",
+      "arguments": [
+        "P2"
+      ],
+      "status": "read",
+      "value": [
+        5.0,
+        0.0,
+        3.5
+      ]
+    },
+    {
+      "id": "E000025",
+      "section": "joints",
+      "object": "P2",
+      "field": "restraints",
+      "operation": "PointObj.GetRestraint",
+      "arguments": [
+        "P2"
+      ],
+      "status": "read",
+      "value": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "E000026",
+      "section": "joints",
+      "object": "P2",
+      "field": "diaphragm",
+      "operation": "PointObj.GetDiaphragm",
+      "arguments": [
+        "P2"
+      ],
+      "status": "read",
+      "value": "From Shell Object"
+    },
+    {
+      "id": "E000027",
+      "section": "joints",
+      "object": "P2",
+      "field": "story",
+      "operation": "PointObj.GetLabelFromName",
+      "arguments": [
+        "P2"
+      ],
+      "status": "read",
+      "value": "E1"
+    },
+    {
+      "id": "E000028",
+      "section": "joints",
+      "object": "P3",
+      "field": "xyz_m",
+      "operation": "PointObj.GetCoordCartesian",
+      "arguments": [
+        "P3"
+      ],
+      "status": "read",
+      "value": [
+        5.0,
+        4.0,
+        3.5
+      ]
+    },
+    {
+      "id": "E000029",
+      "section": "joints",
+      "object": "P3",
+      "field": "restraints",
+      "operation": "PointObj.GetRestraint",
+      "arguments": [
+        "P3"
+      ],
+      "status": "read",
+      "value": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "E000030",
+      "section": "joints",
+      "object": "P3",
+      "field": "diaphragm",
+      "operation": "PointObj.GetDiaphragm",
+      "arguments": [
+        "P3"
+      ],
+      "status": "read",
+      "value": "From Shell Object"
+    },
+    {
+      "id": "E000031",
+      "section": "joints",
+      "object": "P3",
+      "field": "story",
+      "operation": "PointObj.GetLabelFromName",
+      "arguments": [
+        "P3"
+      ],
+      "status": "read",
+      "value": "E1"
+    },
+    {
+      "id": "E000032",
+      "section": "joints",
+      "object": "P4",
+      "field": "xyz_m",
+      "operation": "PointObj.GetCoordCartesian",
+      "arguments": [
+        "P4"
+      ],
+      "status": "read",
+      "value": [
+        0.0,
+        4.0,
+        3.5
+      ]
+    },
+    {
+      "id": "E000033",
+      "section": "joints",
+      "object": "P4",
+      "field": "restraints",
+      "operation": "PointObj.GetRestraint",
+      "arguments": [
+        "P4"
+      ],
+      "status": "read",
+      "value": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "E000034",
+      "section": "joints",
+      "object": "P4",
+      "field": "diaphragm",
+      "operation": "PointObj.GetDiaphragm",
+      "arguments": [
+        "P4"
+      ],
+      "status": "read",
+      "value": "From Shell Object"
+    },
+    {
+      "id": "E000035",
+      "section": "joints",
+      "object": "P4",
+      "field": "story",
+      "operation": "PointObj.GetLabelFromName",
+      "arguments": [
+        "P4"
+      ],
+      "status": "read",
+      "value": "E1"
+    },
+    {
+      "id": "E000036",
+      "section": "joints",
+      "object": "P0",
+      "field": "xyz_m",
+      "operation": "PointObj.GetCoordCartesian",
+      "arguments": [
+        "P0"
+      ],
+      "status": "read",
+      "value": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "E000037",
+      "section": "joints",
+      "object": "P0",
+      "field": "restraints",
+      "operation": "PointObj.GetRestraint",
+      "arguments": [
+        "P0"
+      ],
+      "status": "read",
+      "value": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "id": "E000038",
+      "section": "joints",
+      "object": "P0",
+      "field": "diaphragm",
+      "operation": "PointObj.GetDiaphragm",
+      "arguments": [
+        "P0"
+      ],
+      "status": "read",
+      "value": "From Shell Object"
+    },
+    {
+      "id": "E000039",
+      "section": "joints",
+      "object": "P0",
+      "field": "story",
+      "operation": "PointObj.GetLabelFromName",
+      "arguments": [
+        "P0"
+      ],
+      "status": "read",
+      "value": "Base"
+    },
+    {
+      "id": "E000040",
+      "section": "frames",
+      "object": "B1",
+      "field": "points",
+      "operation": "FrameObj.GetPoints",
+      "arguments": [
+        "B1"
+      ],
+      "status": "read",
+      "value": [
+        "P1",
+        "P2"
+      ]
+    },
+    {
+      "id": "E000041",
+      "section": "frames",
+      "object": "B1",
+      "field": "section",
+      "operation": "FrameObj.GetSection",
+      "arguments": [
+        "B1"
+      ],
+      "status": "read",
+      "value": "B30x50"
+    },
+    {
+      "id": "E000042",
+      "section": "frames",
+      "object": "B1",
+      "field": "rigid_zone_factor",
+      "operation": "FrameObj.GetEndLengthOffset",
+      "arguments": [
+        "B1"
+      ],
+      "status": "read",
+      "value": 1.0
+    },
+    {
+      "id": "E000043",
+      "section": "areas",
+      "object": "A1",
+      "field": "orientation",
+      "operation": "AreaObj.GetDesignOrientation",
+      "arguments": [
+        "A1"
+      ],
+      "status": "read",
+      "value": 2
+    },
+    {
+      "id": "E000044",
+      "section": "areas",
+      "object": "A1",
+      "field": "points",
+      "operation": "AreaObj.GetPoints",
+      "arguments": [
+        "A1"
+      ],
+      "status": "read",
+      "value": [
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "id": "E000045",
+      "section": "areas",
+      "object": "A1",
+      "field": "section",
+      "operation": "AreaObj.GetProperty",
+      "arguments": [
+        "A1"
+      ],
+      "status": "read",
+      "value": "L15"
+    },
+    {
+      "id": "E000046",
+      "section": "areas",
+      "object": "A1",
+      "field": "is_opening",
+      "operation": "AreaObj.GetOpening",
+      "arguments": [
+        "A1"
+      ],
+      "status": "read",
+      "value": false
+    },
+    {
+      "id": "E000047",
+      "section": "areas",
+      "object": "A1",
+      "field": "story",
+      "operation": "AreaObj.GetLabelFromName",
+      "arguments": [
+        "A1"
+      ],
+      "status": "read",
+      "value": "E1"
+    },
+    {
+      "id": "E000048",
+      "section": "areas",
+      "object": "A1",
+      "field": "diaphragm",
+      "operation": "AreaObj.GetDiaphragm",
+      "arguments": [
+        "A1"
+      ],
+      "status": "read",
+      "value": "D1"
+    },
+    {
+      "id": "E000049",
+      "section": "areas",
+      "object": "A1",
+      "field": "uniform_loads",
+      "operation": "AreaObj.GetLoadUniform",
+      "arguments": [
+        "A1"
+      ],
+      "status": "read",
+      "value": [
+        {
+          "area": "A1",
+          "pattern": "Dead",
+          "csys": "Global",
+          "direction": 10,
+          "value": -0.16
+        }
+      ]
+    },
+    {
+      "id": "E000050",
+      "section": "areas",
+      "object": "A1",
+      "field": "uniform_to_frame_loads",
+      "operation": "AreaObj.GetLoadUniformToFrame",
+      "arguments": [
+        "A1"
+      ],
+      "status": "read",
+      "value": []
+    },
+    {
+      "id": "E000051",
+      "section": "areas",
+      "object": "A1",
+      "field": "mesh",
+      "status": "pending",
+      "message": "Mallado no expuesto por AreaObj en este contrato ETABS; no inferido"
+    },
+    {
+      "id": "E000052",
+      "section": "slabs",
+      "object": "A1",
+      "field": "design_context",
+      "status": "pending",
+      "message": "Direccion resistente, apoyo, cuerpo estructural y componentes semanticos de carga requieren planos"
+    },
+    {
+      "id": "E000053",
+      "section": "materials",
+      "object": "C210",
+      "field": "type_enum",
+      "operation": "PropMaterial.GetMaterial",
+      "arguments": [
+        "C210"
+      ],
+      "status": "read",
+      "value": 2
+    },
+    {
+      "id": "E000054",
+      "section": "settings",
+      "object": "mass",
+      "field": "mass_source",
+      "operation": "DatabaseTables.GetTableForDisplayArray",
+      "arguments": [
+        "Mass Source Definition",
+        [],
+        "",
+        0
+      ],
+      "status": "read",
+      "value": {
+        "source_self": false,
+        "source_added": false,
+        "source_loads": true,
+        "lateral": true,
+        "vertical": false,
+        "factors": {
+          "Dead": 1.0,
+          "Live": 0.15,
+          "LiveT": 0.1
+        }
+      }
+    },
+    {
+      "id": "E000055",
+      "section": "settings",
+      "object": "Modal",
+      "field": "case_type",
+      "operation": "LoadCases.GetTypeOAPI",
+      "arguments": [
+        "Modal"
+      ],
+      "status": "read",
+      "value": [
+        3,
+        1
+      ]
+    },
+    {
+      "id": "E000056",
+      "section": "settings",
+      "object": "Modal",
+      "field": "modal_max_modes",
+      "operation": "LoadCases.ModalEigen.GetNumberModes",
+      "arguments": [
+        "Modal"
+      ],
+      "status": "read",
+      "value": 3
+    },
+    {
+      "id": "E000057",
+      "section": "analysis",
+      "object": "cases",
+      "field": "analysis_status",
+      "operation": "Analyze.GetCaseStatus",
+      "arguments": [],
+      "status": "read",
+      "value": [
+        {
+          "name": "Dead",
+          "status": 4
+        },
+        {
+          "name": "Modal",
+          "status": 4
+        }
+      ]
+    },
+    {
+      "id": "E000058",
+      "section": "settings",
+      "object": "model",
+      "field": "pdelta",
+      "status": "pending",
+      "message": "Opciones P-Delta globales no leidas; un caso no lineal no las sustituye"
+    },
+    {
+      "id": "E000059",
+      "section": "settings",
+      "object": "model",
+      "field": "spectrum_cases",
+      "status": "pending",
+      "message": "EX/EY y curva nativa no cotejados"
+    },
+    {
+      "id": "E000060",
+      "section": "settings",
+      "object": "model",
+      "field": "check_model",
+      "status": "pending",
+      "message": "No se ejecuta Check Model durante una captura de lectura"
+    },
+    {
+      "id": "E000061",
+      "section": "settings",
+      "object": "model",
+      "field": "saved_readback_verified",
+      "status": "pending",
+      "message": "No se guarda/reabre el EDB durante la captura"
+    },
+    {
+      "id": "E000062",
+      "section": "PointObj",
+      "object": "inventory",
+      "field": "names",
+      "operation": "PointObj.GetNameList",
+      "arguments": [],
+      "status": "read",
+      "value": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P0"
+      ]
+    },
+    {
+      "id": "E000063",
+      "section": "FrameObj",
+      "object": "inventory",
+      "field": "names",
+      "operation": "FrameObj.GetNameList",
+      "arguments": [],
+      "status": "read",
+      "value": [
+        "B1"
+      ]
+    },
+    {
+      "id": "E000064",
+      "section": "AreaObj",
+      "object": "inventory",
+      "field": "names",
+      "operation": "AreaObj.GetNameList",
+      "arguments": [],
+      "status": "read",
+      "value": [
+        "A1"
+      ]
+    },
+    {
+      "id": "E000065",
+      "section": "PropArea",
+      "object": "inventory",
+      "field": "names",
+      "operation": "PropArea.GetNameList",
+      "arguments": [],
+      "status": "read",
+      "value": [
+        "L15"
+      ]
+    },
+    {
+      "id": "E000066",
+      "section": "PropMaterial",
+      "object": "inventory",
+      "field": "names",
+      "operation": "PropMaterial.GetNameList",
+      "arguments": [],
+      "status": "read",
+      "value": [
+        "C210"
+      ]
+    },
+    {
+      "id": "E000067",
+      "section": "LoadPatterns",
+      "object": "inventory",
+      "field": "names",
+      "operation": "LoadPatterns.GetNameList",
+      "arguments": [],
+      "status": "read",
+      "value": [
+        "Dead",
+        "Live",
+        "LiveT"
+      ]
+    },
+    {
+      "id": "E000068",
+      "section": "identity",
+      "object": "model",
+      "field": "model_path",
+      "operation": "GetModelFilename",
+      "arguments": [],
+      "status": "read",
+      "value": "C:\\Synthetic\\AUDIT_DEMO.EDB"
+    },
+    {
+      "id": "E000069",
+      "section": "identity",
+      "object": "model",
+      "field": "units",
+      "operation": "GetPresentUnits",
+      "arguments": [],
+      "status": "read",
+      "value": 12
+    },
+    {
+      "id": "E000070",
+      "section": "identity",
+      "object": "model",
+      "field": "locked",
+      "operation": "GetModelIsLocked",
+      "arguments": [],
+      "status": "read",
+      "value": true
+    }
+  ],
+  "model_modified": false,
+  "analysis_executed": false,
+  "consistency": {
+    "identity_units_lock_stable": true,
+    "scope": "Controles de extremos; no garantiza instantanea atomica ni detecta toda edicion concurrente"
+  },
+  "units": {
+    "source_enum": 12,
+    "geometry": "m",
+    "uniform_load_values": "tonf_m_C",
+    "note": "Cargas conservan fuerza/longitud^2 activas; geometria convertida a metros"
+  },
+  "coverage": "partial",
+  "engineering_approval": false
+}
