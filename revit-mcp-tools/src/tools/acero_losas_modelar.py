@@ -24,6 +24,10 @@ GUARDAS (las del criterio del proyecto):
   despacho, diametro nominal exacto, transaccion propia, verificados
   releyendo) -- necesario en modelos sin ningun tipo de barra (CLUB PN).
 - Verifica RELEYENDO: sets y barras hospedadas en cada losa tras el commit.
+- GUARDA DE RAM (crash 2026-10-22): bajo RAM_MINIMA_MB no arranca, y entre
+  losas se detiene limpio dejando lo hecho; log incremental con fsync en
+  %TEMP%\\plugin_losas_modelado.log (la ultima losa intentada sobrevive a
+  un crash).
 - Los bastones cruzan al pano vecino (anfitrion = losa_i): pueden avisar de
   recubrimiento en el borde, es la geometria pedida (L/4 + L/4).
 
@@ -41,6 +45,42 @@ No guarda (revit_guardar_modelo despues).
 
 MARCA = "MCP:ACERO-LOSA-3D"
 M_A_FT = 1.0 / 0.3048
+
+# Guarda de memoria (E-133/E-134 + crash del 2026-10-22, journal 0283: Revit
+# murio sin excepcion en pleno comando del boton con 211-505 MB libres).
+# Bajo este umbral NO se arranca, y entre losas se PARA limpio en vez de
+# tumbar la sesion; lo hecho hasta ahi queda commiteado.
+RAM_MINIMA_MB = 700
+
+
+def _ram_disponible_mb():
+    try:
+        import clr
+        clr.AddReference("Microsoft.VisualBasic")
+        from Microsoft.VisualBasic.Devices import ComputerInfo
+        return int(ComputerInfo().AvailablePhysicalMemory / (1024 * 1024))
+    except Exception:
+        return None
+
+
+def _log(linea):
+    """Log incremental con fsync: un crash deja escrita la ultima losa."""
+    import datetime
+    import io
+    import os
+    import tempfile
+    ruta = os.path.join(tempfile.gettempdir(), "plugin_losas_modelado.log")
+    try:
+        f = io.open(ruta, "a", encoding="utf-8")
+        try:
+            f.write("%s %s\n" % (datetime.datetime.now().isoformat(), linea))
+            f.flush()
+            os.fsync(f.fileno())
+        finally:
+            f.close()
+    except Exception:
+        pass
+    return ruta
 
 ALIAS_DIAMETRO = {
     "#3": ["3/8\"", "#3", "N3", "10M"],
@@ -265,13 +305,31 @@ def run(doc, uidoc, DB, P):
             return z_bot + _espesor_ft(doc, losa) - rec_ft - db_ft / 2.0 - desplome
         return z_bot + rec_ft + db_ft / 2.0 + desplome
 
+    ram = _ram_disponible_mb()
+    if ram is not None and ram < RAM_MINIMA_MB:
+        raise Exception("solo %d MB de RAM libre (minimo %d): cerrar "
+                        "aplicaciones (y la VM: wsl --shutdown) antes de "
+                        "modelar; con la maquina asi Revit se cae "
+                        "(E-133/E-134, crash del 2026-10-22)" %
+                        (ram, RAM_MINIMA_MB))
+
     resultados, fallos = [], []
+    procesados = set()
+    detenido_por_ram = None
+    ruta_log = _log("CORRIDA: %d losas elegidas de %d; RAM %s MB" %
+                    (len(elegidos), len(marks_plan), ram))
     for x in losas_plan:
         mk = x["mark"]
         if mk not in elegidos:
             continue
+        ram = _ram_disponible_mb()
+        if ram is not None and ram < RAM_MINIMA_MB:
+            detenido_por_ram = {"ram_mb": ram, "antes_de": mk}
+            _log("DETENIDO por RAM (%d MB) antes de %s" % (ram, mk))
+            break
         losa = por_mark[mk]
         registros = list(x["sets"]) + bastones_por_host.get(mk, [])
+        _log("INICIO %s: %d sets (RAM %s MB)" % (mk, len(registros), ram))
         t = DB.Transaction(doc, "MCP: acero 3D losa %s" % mk)
         t.Start()
         try:
@@ -288,9 +346,13 @@ def run(doc, uidoc, DB, P):
             t.Commit()
         except Exception as ex:
             t.RollBack()
+            _log("FALLO %s: %s" % (mk, str(ex)[:200]))
             fallos.append({"mark": mk, "error": str(ex)[:300]})
+            procesados.add(mk)
             continue
+        procesados.add(mk)
         sets_leidos, barras_leidas = _contar_acero(doc, losa)   # releyendo
+        _log("OK %s: %d sets, %d barras" % (mk, sets_leidos, barras_leidas))
         resultados.append({"mark": mk, "sets_plan": len(registros),
                            "sets_leidos": sets_leidos,
                            "barras_plan": barras_plan,
@@ -299,9 +361,10 @@ def run(doc, uidoc, DB, P):
                            "ok": sets_leidos == len(registros) and
                                  barras_leidas == barras_plan})
 
-    pendientes = [m for m in marks_plan if m not in elegidos]
+    pendientes = [m for m in marks_plan if m not in procesados]
     return {"marca": MARCA, "piloto": not (P.get("todas") or P.get("solo_marks")),
             "tipos_barra_creados": tipos_creados,
             "losas": resultados, "fallos": fallos,
+            "detenido_por_ram": detenido_por_ram, "log": ruta_log,
             "pendientes": pendientes[:50], "n_pendientes": len(pendientes),
             "errores": e}

@@ -9,10 +9,14 @@ losa segun el payload de `plugin-losas secciones` (secciones_losas.json ->
 asignar_en_revit).
 
 Parametros (P):
-  asignar:     {Mark: seccion}   (payload "asignar")
-  tipos_floor: {seccion: h_m}    (payload "tipos_floor"; espesor total en m)
-  marker:      prefijo de Comments de las losas (default "MCP:LOSA-ESQ").
-  solo_marks:  lista de Marks (modo piloto: aplicar a una, revisar, seguir).
+  asignar:      {Mark: seccion}  (payload "asignar")
+  tipos_floor:  {seccion: h_m}   (payload "tipos_floor"; espesor total en m)
+  nombres_tipo: {seccion: nombre del tipo} (payload "nombres_tipo"; el nombre
+                lleva el espesor con "H=", p. ej. "L15 H=0.15" — pedido de
+                Emil. Default: la seccion a secas). Un tipo existente con el
+                nombre viejo (seccion a secas) se RENOMBRA al nuevo.
+  marker:       prefijo de Comments de las losas (default "MCP:LOSA-ESQ").
+  solo_marks:   lista de Marks (modo piloto: aplicar a una, revisar, seguir).
 
 Cambiar el tipo REGENERA la geometria: tras el commit la tool RELEE espesor y
 tipo de cada losa tocada y reporta en "mal" las que no coincidan (tolerancia
@@ -80,6 +84,7 @@ def run(doc, uidoc, DB, P):
     marker = P.get("marker") or "MCP:LOSA-ESQ"
     asignar = dict(P.get("asignar") or {})
     tipos_floor = dict(P.get("tipos_floor") or {})
+    nombres = dict(P.get("nombres_tipo") or {})
     solo = P.get("solo_marks")
     if not asignar:
         raise Exception("falta 'asignar' ({Mark: seccion} de secciones_losas.json)")
@@ -106,34 +111,43 @@ def run(doc, uidoc, DB, P):
 
     def _aplicar():
         existentes = _tipos_floor_por_nombre(doc)
-        creados, ajustados = [], []
+        creados, ajustados, renombrados = [], [], []
+        destinos = {}
         for seccion in sorted(set(asignar.values())):
             h_m = tipos_floor[seccion]
-            tipo = existentes.get(seccion)
+            nombre = nombres.get(seccion) or seccion
+            tipo = existentes.get(nombre)
+            if tipo is None and nombre != seccion and seccion in existentes:
+                # migracion: la corrida anterior creo el tipo sin "H="
+                tipo = existentes.pop(seccion)
+                tipo.Name = nombre
+                existentes[nombre] = tipo
+                renombrados.append("%s -> %s" % (seccion, nombre))
             if tipo is None:
                 base = None
                 for mk, s in sorted(asignar.items()):
                     if s == seccion:
                         base = doc.GetElement(por_mark[mk].GetTypeId())
                         break
-                tipo = dup_type(doc, base, seccion)
+                tipo = dup_type(doc, base, nombre)
                 _fijar_espesor_tipo(tipo, h_m)
-                existentes[seccion] = tipo
-                creados.append(seccion)
+                existentes[nombre] = tipo
+                creados.append(nombre)
             elif _fijar_espesor_tipo(tipo, h_m):
-                ajustados.append(seccion)
+                ajustados.append(nombre)
+            destinos[seccion] = tipo
         cambiadas = 0
         for mk, seccion in sorted(asignar.items()):
             f = por_mark[mk]
-            destino = existentes[seccion]
+            destino = destinos[seccion]
             if f.GetTypeId() != destino.Id:
                 f.ChangeTypeId(destino.Id)
                 cambiadas += 1
         doc.Regenerate()
-        return creados, ajustados, cambiadas
+        return creados, ajustados, renombrados, cambiadas
 
-    creados, ajustados, cambiadas = tx(doc, "plugin-losas: espesor real (tipos por seccion)",
-                                       _aplicar)
+    creados, ajustados, renombrados, cambiadas = tx(
+        doc, "plugin-losas: espesor real (tipos por seccion)", _aplicar)
 
     # verificacion releyendo (cambiar tipo regenera geometria)
     filas, mal = [], []
@@ -142,7 +156,8 @@ def run(doc, uidoc, DB, P):
         leido = _espesor_m(doc, f)
         tipo = type_name(doc, f)
         pedido = tipos_floor[seccion]
-        ok = (tipo == seccion and leido is not None and
+        esperado = nombres.get(seccion) or seccion
+        ok = (tipo == esperado and leido is not None and
               abs(leido - pedido) <= TOL_M)
         fila = {"mark": mk, "seccion": seccion, "espesor_pedido_m": pedido,
                 "tipo_leido": tipo, "espesor_leido_m": leido, "ok": ok}
@@ -152,4 +167,5 @@ def run(doc, uidoc, DB, P):
 
     return {"marker": marker, "losas": filas, "total": len(filas),
             "cambiadas": cambiadas, "tipos_creados": creados,
-            "tipos_ajustados": ajustados, "mal": mal}
+            "tipos_ajustados": ajustados, "tipos_renombrados": renombrados,
+            "mal": mal}

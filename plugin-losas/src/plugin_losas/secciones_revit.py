@@ -31,6 +31,15 @@ def espesores_de_secciones() -> dict[str, float]:
     return {nombre: d["h"] for nombre, d in BIBLIOTECA_LOSAS.items()}
 
 
+def nombre_tipo_floor(seccion: str, h_m: float) -> str:
+    """El nombre del tipo de Floor en Revit: sección + espesor con H=.
+
+    Pedido de Emil (2026-10-22): el espesor de las losas debe verse con
+    "H=" — p. ej. "L15 H=0.15" — en la paleta de tipos y en los tags.
+    """
+    return f"{seccion} H={h_m:.2f}"
+
+
 @dataclass(frozen=True)
 class SeccionResuelta:
     mark: str
@@ -91,6 +100,7 @@ def payload_revit(resueltas: dict[str, SeccionResuelta]) -> dict:
     return {
         "asignar": {mark: r.seccion for mark, r in sorted(resueltas.items())},
         "tipos_floor": {s: espesores[s] for s in usadas},
+        "nombres_tipo": {s: nombre_tipo_floor(s, espesores[s]) for s in usadas},
     }
 
 

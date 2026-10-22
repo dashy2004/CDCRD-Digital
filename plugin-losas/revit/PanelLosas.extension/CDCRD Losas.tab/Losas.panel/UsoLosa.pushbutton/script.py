@@ -526,10 +526,14 @@ class PanelUsoLosa(Form):
     def calcular(self, remitente, evento):
         if self.carpeta is None:
             dialogo = FolderBrowserDialog()
-            dialogo.Description = "Carpeta de salida del calculo (Excel, .DL, visores)"
+            dialogo.Description = ("Carpeta de trabajo (el calculo crea dentro "
+                                   "la subcarpeta 'salidas-losas')")
             if dialogo.ShowDialog() != DialogResult.OK:
                 return
-            self.carpeta = dialogo.SelectedPath
+            # no ensuciar la carpeta de trabajo: todo va a una subcarpeta
+            self.carpeta = os.path.join(dialogo.SelectedPath, "salidas-losas")
+        if not os.path.isdir(self.carpeta):
+            os.makedirs(self.carpeta)
         carpeta = self.carpeta
         raiz = self.raiz
 
@@ -669,18 +673,22 @@ class PanelUsoLosa(Form):
             return
         with io.open(ruta, encoding="utf-8") as f:
             payload = json.load(f)["asignar_en_revit"]
+        nombres = payload.get("nombres_tipo") or dict(
+            (s, "%s H=%.2f" % (s, h)) for s, h in payload["tipos_floor"].items())
         marks = sorted(payload["asignar"].keys())
         r = MessageBox.Show(
-            "Cambiar el tipo de Floor de %d losas segun su seccion (crea los "
-            "tipos que falten: %s).\n\nSi = TODAS; No = PILOTO (solo %s, "
-            "revisar y repetir); Cancelar = nada.\n\nOJO: cambiar el tipo "
-            "regenera la geometria; la tool verifica releyendo." %
-            (len(marks), ", ".join(sorted(payload["tipos_floor"])), marks[0]),
+            "Cambiar el tipo de Floor de %d losas segun su seccion (crea o "
+            "renombra los tipos que hagan falta: %s).\n\nSi = TODAS; No = "
+            "PILOTO (solo %s, revisar y repetir); Cancelar = nada.\n\nOJO: "
+            "cambiar el tipo regenera la geometria; la tool verifica "
+            "releyendo." %
+            (len(marks), ", ".join(sorted(nombres.values())), marks[0]),
             "Aplicar espesor real", MessageBoxButtons.YesNoCancel)
         if r == DialogResult.Cancel:
             return
         P_tool = {"asignar": payload["asignar"],
-                  "tipos_floor": payload["tipos_floor"]}
+                  "tipos_floor": payload["tipos_floor"],
+                  "nombres_tipo": nombres}
         if r == DialogResult.No:
             P_tool["solo_marks"] = [marks[0]]
         res = _exec_tool(self.raiz, ("_common.py", "espesor_losas.py"),
@@ -690,9 +698,11 @@ class PanelUsoLosa(Form):
             aviso = "\n\nNO COINCIDEN (revisar): %s" % json.dumps(res["mal"])
         MessageBox.Show(
             "%d losas verificadas releyendo; %d cambiadas de tipo.\n"
-            "Tipos creados: %s; ajustados: %s.%s\nEl .rvt NO se guarda." %
+            "Tipos creados: %s; renombrados: %s; ajustados: %s.%s\n"
+            "El .rvt NO se guarda." %
             (res["total"], res["cambiadas"],
              ", ".join(res["tipos_creados"]) or "ninguno",
+             ", ".join(res.get("tipos_renombrados") or []) or "ninguno",
              ", ".join(res["tipos_ajustados"]) or "ninguno", aviso))
 
     @_seguro
@@ -753,6 +763,12 @@ class PanelUsoLosa(Form):
                 ", ".join(res["tipos_barra_creados"])
         if res["fallos"]:
             aviso += "\n\nFALLOS: %s" % json.dumps(res["fallos"])
+        if res.get("detenido_por_ram"):
+            aviso += ("\n\nDETENIDO por RAM (%d MB libres) antes de %s: lo "
+                      "hecho queda commiteado; liberar memoria (cerrar apps, "
+                      "wsl --shutdown) y repetir para los pendientes." %
+                      (res["detenido_por_ram"]["ram_mb"],
+                       res["detenido_por_ram"]["antes_de"]))
         if res["piloto"]:
             aviso += ("\n\nPILOTO: %d losas pendientes; revisar en 3D y repetir "
                       "con Si (todas)." % res["n_pendientes"])

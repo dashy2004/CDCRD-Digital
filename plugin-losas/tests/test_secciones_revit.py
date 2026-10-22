@@ -87,6 +87,9 @@ class TestPayload(unittest.TestCase):
         self.assertEqual(payload["asignar"]["L00"], "L12")
         self.assertEqual(payload["asignar"]["L01"], "L15")
         self.assertEqual(payload["tipos_floor"], {"L12": 0.12, "L15": 0.15})
+        # el nombre del tipo lleva el espesor con H= (pedido de Emil)
+        self.assertEqual(payload["nombres_tipo"],
+                         {"L12": "L12 H=0.12", "L15": "L15 H=0.15"})
 
     def test_escribir_json(self):
         res = resolver_secciones([_pano("L00", 4.0, 5.0)], {"L00": "L20"})
