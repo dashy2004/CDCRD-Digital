@@ -59,7 +59,7 @@ reconciliar el estado antes de volver a pulsar el botón.
 Desde la raíz del repo:
 
 ```powershell
-py -m pip install openpyxl "pytest>=7.4"
+py -m pip install "./puente-losas[dev]"
 py -m pytest plugin-losas/tests puente-losas/tests -q
 ```
 
