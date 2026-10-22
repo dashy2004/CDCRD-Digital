@@ -1,0 +1,614 @@
+{
+ "panos": [
+  {
+   "mark": "LE1",
+   "nivel": "N1 +3.00",
+   "uso": "entrepisos",
+   "borde": "simple",
+   "es_vuelo": false,
+   "params_motor": {
+    "a": 5.0,
+    "b": 6.0,
+    "nx": 10,
+    "ny": 12,
+    "E": 21458890824.970818,
+    "nu": 0.2,
+    "t": 0.25,
+    "q": 13266.828386,
+    "fc": 21.0,
+    "fy": 420.0,
+    "recubrimiento": 25.0,
+    "borde": "simple"
+   },
+   "cargas_tm2": {
+    "peso_propio": 0.6007,
+    "acabados": 0.16,
+    "mamposteria_asignada": 0.1,
+    "patron_viva": "Live",
+    "viva": 0.2,
+    "q_servicio": 1.0607,
+    "q_ultima": 1.35284
+   },
+   "espesor": {
+    "h_min_normativo_m": 0.14102564102564105,
+    "h_usado_m": 0.25,
+    "criterio": "ACI 318-19 §8.3.1.2(b) (2D con vigas, supuesto αfm>2)",
+    "seccion_etabs": "L25A-2D",
+    "modelo_insuficiente": false
+   },
+   "w_servicio_m": 0.0012560019962114732,
+   "limite_flecha_m": 0.020833333333333332,
+   "momentos_tonf_m": {
+    "mx": 1.949156243979432,
+    "my": 1.4743930634851565,
+    "apoyo": 0.0135873684029053
+   },
+   "franja_x": {
+    "as_requerido": 227.45159597172415,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3333333333333,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   },
+   "franja_y": {
+    "as_requerido": 171.54285860161662,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3333333333333,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   },
+   "franja_apoyo": {
+    "as_requerido": 1.566813444473851,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3333333333333,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   }
+  },
+  {
+   "mark": "LE2",
+   "nivel": "N1 +3.00",
+   "uso": "comun",
+   "borde": "simple",
+   "es_vuelo": false,
+   "params_motor": {
+    "a": 5.0,
+    "b": 6.0,
+    "nx": 10,
+    "ny": 12,
+    "E": 21458890824.970818,
+    "nu": 0.2,
+    "t": 0.25,
+    "q": 16640.315985999998,
+    "fc": 21.0,
+    "fy": 420.0,
+    "recubrimiento": 25.0,
+    "borde": "simple"
+   },
+   "cargas_tm2": {
+    "peso_propio": 0.6007,
+    "acabados": 0.18,
+    "mamposteria_asignada": 0.1,
+    "patron_viva": "Live",
+    "viva": 0.4,
+    "q_servicio": 1.2807,
+    "q_ultima": 1.69684
+   },
+   "espesor": {
+    "h_min_normativo_m": 0.14102564102564105,
+    "h_usado_m": 0.25,
+    "criterio": "ACI 318-19 §8.3.1.2(b) (2D con vigas, supuesto αfm>2)",
+    "seccion_etabs": "L25A-2D",
+    "modelo_insuficiente": false
+   },
+   "w_servicio_m": 0.0015165096224644377,
+   "limite_flecha_m": 0.020833333333333332,
+   "momentos_tonf_m": {
+    "mx": 2.444787470088035,
+    "my": 1.8493015625233047,
+    "apoyo": 0.01704236288158736
+   },
+   "franja_x": {
+    "as_requerido": 286.1772811283693,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3333333333333,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   },
+   "franja_y": {
+    "as_requerido": 215.66480531298365,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3333333333333,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   },
+   "franja_apoyo": {
+    "as_requerido": 1.9652635350215062,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3333333333333,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   }
+  },
+  {
+   "mark": "LE3",
+   "nivel": "N1 +3.00",
+   "uso": "entrepisos",
+   "borde": "simple",
+   "es_vuelo": false,
+   "params_motor": {
+    "a": 5.0,
+    "b": 6.0,
+    "nx": 10,
+    "ny": 12,
+    "E": 21458890824.970818,
+    "nu": 0.2,
+    "t": 0.25,
+    "q": 13266.828386,
+    "fc": 21.0,
+    "fy": 420.0,
+    "recubrimiento": 25.0,
+    "borde": "simple"
+   },
+   "cargas_tm2": {
+    "peso_propio": 0.6007,
+    "acabados": 0.16,
+    "mamposteria_asignada": 0.1,
+    "patron_viva": "Live",
+    "viva": 0.2,
+    "q_servicio": 1.0607,
+    "q_ultima": 1.35284
+   },
+   "espesor": {
+    "h_min_normativo_m": 0.14102564102564105,
+    "h_usado_m": 0.25,
+    "criterio": "ACI 318-19 §8.3.1.2(b) (2D con vigas, supuesto αfm>2)",
+    "seccion_etabs": "L25A-2D",
+    "modelo_insuficiente": false
+   },
+   "w_servicio_m": 0.0012560019962114732,
+   "limite_flecha_m": 0.020833333333333332,
+   "momentos_tonf_m": {
+    "mx": 1.949156243979432,
+    "my": 1.4743930634851565,
+    "apoyo": 0.0135873684029053
+   },
+   "franja_x": {
+    "as_requerido": 227.45159597172415,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3333333333333,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   },
+   "franja_y": {
+    "as_requerido": 171.54285860161662,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3333333333333,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   },
+   "franja_apoyo": {
+    "as_requerido": 1.566813444473851,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3333333333333,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   }
+  },
+  {
+   "mark": "LE4",
+   "nivel": "N1 +3.00",
+   "uso": "gimnasio",
+   "borde": "simple",
+   "es_vuelo": false,
+   "params_motor": {
+    "a": 5.0,
+    "b": 6.0,
+    "nx": 10,
+    "ny": 12,
+    "E": 21458890824.970818,
+    "nu": 0.2,
+    "t": 0.25,
+    "q": 18209.379985999996,
+    "fc": 21.0,
+    "fy": 420.0,
+    "recubrimiento": 25.0,
+    "borde": "simple"
+   },
+   "cargas_tm2": {
+    "peso_propio": 0.6007,
+    "acabados": 0.18,
+    "mamposteria_asignada": 0.1,
+    "patron_viva": "Live",
+    "viva": 0.5,
+    "q_servicio": 1.3807,
+    "q_ultima": 1.8568399999999998
+   },
+   "espesor": {
+    "h_min_normativo_m": 0.14102564102564105,
+    "h_usado_m": 0.25,
+    "criterio": "ACI 318-19 §8.3.1.2(b) (2D con vigas, supuesto αfm>2)",
+    "seccion_etabs": "L25A-2D",
+    "modelo_insuficiente": false
+   },
+   "w_servicio_m": 0.0016349221798521625,
+   "limite_flecha_m": 0.020833333333333332,
+   "momentos_tonf_m": {
+    "mx": 2.6753136217666182,
+    "my": 2.0236776085877706,
+    "apoyo": 0.01864933705776419
+   },
+   "franja_x": {
+    "as_requerido": 313.6186012349313,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3333333333333,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   },
+   "franja_y": {
+    "as_requerido": 236.2577631010569,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3333333333333,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   },
+   "franja_apoyo": {
+    "as_requerido": 2.1505948167293094,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3333333333333,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   }
+  },
+  {
+   "mark": "LE5",
+   "nivel": "N1 +3.00",
+   "uso": "gimnasio",
+   "borde": "simple",
+   "es_vuelo": false,
+   "params_motor": {
+    "a": 5.0,
+    "b": 6.0,
+    "nx": 10,
+    "ny": 12,
+    "E": 21458890824.970818,
+    "nu": 0.2,
+    "t": 0.25,
+    "q": 18209.379985999996,
+    "fc": 21.0,
+    "fy": 420.0,
+    "recubrimiento": 25.0,
+    "borde": "simple"
+   },
+   "cargas_tm2": {
+    "peso_propio": 0.6007,
+    "acabados": 0.18,
+    "mamposteria_asignada": 0.1,
+    "patron_viva": "Live",
+    "viva": 0.5,
+    "q_servicio": 1.3807,
+    "q_ultima": 1.8568399999999998
+   },
+   "espesor": {
+    "h_min_normativo_m": 0.14102564102564105,
+    "h_usado_m": 0.25,
+    "criterio": "ACI 318-19 §8.3.1.2(b) (2D con vigas, supuesto αfm>2)",
+    "seccion_etabs": "L25A-2D",
+    "modelo_insuficiente": false
+   },
+   "w_servicio_m": 0.0016349221798521625,
+   "limite_flecha_m": 0.020833333333333332,
+   "momentos_tonf_m": {
+    "mx": 2.6753136217666182,
+    "my": 2.0236776085877706,
+    "apoyo": 0.01864933705776419
+   },
+   "franja_x": {
+    "as_requerido": 313.6186012349313,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3333333333333,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   },
+   "franja_y": {
+    "as_requerido": 236.2577631010569,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3333333333333,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   },
+   "franja_apoyo": {
+    "as_requerido": 2.1505948167293094,
+    "as_minimo": 450.0,
+    "as_diseno": 450.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 150.0,
+    "as_provista": 473.3333333333333,
+    "cumple": true,
+    "disponer": "#3 @ 150 mm"
+   }
+  },
+  {
+   "mark": "LE6",
+   "nivel": "N1 +3.00",
+   "uso": "entrepisos",
+   "borde": "simple",
+   "es_vuelo": true,
+   "params_motor": {
+    "modelo": "voladizo_analitico",
+    "l": 1.8,
+    "t": 0.2,
+    "q": 10676.2252688,
+    "E": 21458890824.970818,
+    "nu": 0.2,
+    "fc": 21.0,
+    "fy": 420.0,
+    "recubrimiento": 25.0,
+    "formulas": "M=q*l^2/2; w=q*l^4/(8D)"
+   },
+   "cargas_tm2": {
+    "peso_propio": 0.48056000000000004,
+    "acabados": 0.16,
+    "mamposteria_asignada": 0.0,
+    "patron_viva": "Live",
+    "viva": 0.2,
+    "q_servicio": 0.84056,
+    "q_ultima": 1.088672
+   },
+   "espesor": {
+    "h_min_normativo_m": 0.18,
+    "h_usado_m": 0.2,
+    "criterio": "ACI 318-19 T.7.3.1.1 (1D, voladizo l/10)",
+    "seccion_etabs": "L20",
+    "modelo_insuficiente": false
+   },
+   "w_servicio_m": 0.0007258462711715859,
+   "limite_flecha_m": 0.007500000000000001,
+   "momentos_tonf_m": {
+    "mx": 0.0,
+    "my": 0.0,
+    "apoyo": 1.7636486400000002
+   },
+   "franja_x": {
+    "as_requerido": 0.0,
+    "as_minimo": 360.0,
+    "as_diseno": 360.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 190.0,
+    "as_provista": 373.6842105263158,
+    "cumple": true,
+    "disponer": "#3 @ 190 mm"
+   },
+   "franja_y": {
+    "as_requerido": 0.0,
+    "as_minimo": 360.0,
+    "as_diseno": 360.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 190.0,
+    "as_provista": 373.6842105263158,
+    "cumple": true,
+    "disponer": "#3 @ 190 mm"
+   },
+   "franja_apoyo": {
+    "as_requerido": 266.2232725211332,
+    "as_minimo": 360.0,
+    "as_diseno": 360.0,
+    "seccion_insuficiente": false,
+    "gobierna_minimo": true,
+    "numero_barra": 3,
+    "espaciamiento": 190.0,
+    "as_provista": 373.6842105263158,
+    "cumple": true,
+    "disponer": "#3 @ 190 mm"
+   }
+  }
+ ],
+ "pieper_martens": {
+  "metodo": "Pieper-Martens (tablas de F. Perdomo, Losas v5.21)",
+  "losas": {
+   "LE1": {
+    "codigo_dl": 40,
+    "bordes_empotrados": [
+     "der",
+     "sup"
+    ],
+    "eps_recortado": false,
+    "nota": "",
+    "mfx": 1.8615850302696748,
+    "mfy": 1.2930183169631004,
+    "msx": 2.852023608768971,
+    "msy": 1.9808052053680358,
+    "unidades": "ton·m/m"
+   },
+   "LE2": {
+    "codigo_dl": 40,
+    "bordes_empotrados": [
+     "izq",
+     "sup"
+    ],
+    "eps_recortado": false,
+    "nota": "",
+    "mfx": 2.3348926802421572,
+    "mfy": 1.6217679851340587,
+    "msx": 3.577150084317032,
+    "msy": 2.484424562830419,
+    "unidades": "ton·m/m"
+   },
+   "LE3": {
+    "codigo_dl": 10,
+    "bordes_empotrados": [],
+    "eps_recortado": false,
+    "nota": "",
+    "mfx": 2.2963340122199587,
+    "mfy": 1.5943698854337152,
+    "msx": 0.0,
+    "msy": 0.0,
+    "unidades": "ton·m/m"
+   },
+   "LE4": {
+    "codigo_dl": 40,
+    "bordes_empotrados": [
+     "der",
+     "inf"
+    ],
+    "eps_recortado": false,
+    "nota": "",
+    "mfx": 2.5550357732526137,
+    "mfy": 1.7746748075391559,
+    "msx": 3.9144182124789206,
+    "msy": 2.71866612444083,
+    "unidades": "ton·m/m"
+   },
+   "LE5": {
+    "codigo_dl": 40,
+    "bordes_empotrados": [
+     "izq",
+     "inf"
+    ],
+    "eps_recortado": false,
+    "nota": "",
+    "mfx": 2.5550357732526137,
+    "mfy": 1.7746748075391559,
+    "msx": 3.9144182124789206,
+    "msy": 2.71866612444083,
+    "unidades": "ton·m/m"
+   },
+   "LE6": {
+    "codigo_dl": 72,
+    "bordes_empotrados": [
+     "der"
+    ],
+    "eps_recortado": false,
+    "nota": "voladizo: M_apoyo = q·L²/2 sobre la luz que vuela",
+    "mfx": 0.0,
+    "mfy": 0.0,
+    "msx": 1.76418,
+    "msy": 0.0,
+    "unidades": "ton·m/m"
+   }
+  },
+  "apoyos": [
+   {
+    "losa_i": "LE6",
+    "losa_j": "LE1",
+    "direccion": "X",
+    "mu_i": 1.76418,
+    "mu_j": 2.852023608768971,
+    "mu_ij": 1.76418,
+    "modo": "N"
+   },
+   {
+    "losa_i": "LE1",
+    "losa_j": "LE2",
+    "direccion": "X",
+    "mu_i": 2.852023608768971,
+    "mu_j": 3.577150084317032,
+    "mu_ij": 3.2145868465430016,
+    "modo": "S"
+   },
+   {
+    "losa_i": "LE4",
+    "losa_j": "LE5",
+    "direccion": "X",
+    "mu_i": 3.9144182124789206,
+    "mu_j": 3.9144182124789206,
+    "mu_ij": 3.9144182124789206,
+    "modo": "S"
+   },
+   {
+    "losa_i": "LE1",
+    "losa_j": "LE4",
+    "direccion": "Y",
+    "mu_i": 1.9808052053680358,
+    "mu_j": 2.71866612444083,
+    "mu_ij": 2.3497356649044328,
+    "modo": "S"
+   },
+   {
+    "losa_i": "LE2",
+    "losa_j": "LE5",
+    "direccion": "Y",
+    "mu_i": 2.484424562830419,
+    "mu_j": 2.71866612444083,
+    "mu_ij": 2.6015453436356246,
+    "modo": "S"
+   }
+  ]
+ }
+}

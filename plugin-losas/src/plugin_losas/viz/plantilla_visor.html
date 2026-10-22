@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visor de losas — Pieper-Martens (puente-losas)</title>
+  <!-- Interfaz reciclada del visor de EstructurasRD (motor-fea/viz/static/index.html,
+       Emil Guillén De la Cruz, MIT): mismo estilo oscuro y panel flotante, pero el
+       render es 2D en planta (SVG puro, sin three.js ni CDN: 100% offline) y la
+       fuente de datos es la vía Pieper-Martens del puente-losas, NO el FEM. -->
+  <style>
+    html, body { margin: 0; height: 100%; background: #101418;
+                 font-family: system-ui, sans-serif; color: #fff; }
+    #msg { position: fixed; top: 8px; left: 8px; padding: 6px 10px;
+           background: rgba(0,0,0,.6); border-radius: 6px; font-size: 14px; }
+    #panel { position: fixed; top: 8px; right: 8px; padding: 8px 10px; width: 290px;
+             background: rgba(0,0,0,.6); border-radius: 6px;
+             font-size: 13px; display: flex; flex-direction: column; gap: 6px; }
+    #panel .fila { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    #panel select, #panel button { font-size: 13px; }
+    #leyenda { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+    #leyenda .barra { flex: 1; height: 10px; border-radius: 3px;
+                      background: linear-gradient(90deg, #2c7bb6, #ffffbf, #d7191c); }
+    #detalle { font-size: 12px; opacity: .9; min-height: 60px; white-space: pre-line; }
+    #apoyos-tabla { max-height: 28vh; overflow-y: auto; font-size: 12px; }
+    #apoyos-tabla table { border-collapse: collapse; width: 100%; }
+    #apoyos-tabla td, #apoyos-tabla th { border-bottom: 1px solid rgba(255,255,255,.15);
+                                         padding: 2px 4px; text-align: right; }
+    #apoyos-tabla th:first-child, #apoyos-tabla td:first-child { text-align: left; }
+    #creditos { position: fixed; bottom: 8px; left: 8px; right: 320px; padding: 8px 10px;
+                background: rgba(0,0,0,.6); border-radius: 6px; font-size: 12px;
+                opacity: .95; line-height: 1.5; }
+    #lienzo { position: absolute; inset: 0; }
+    svg { width: 100%; height: 100%; }
+    polygon { stroke: #333; stroke-width: 1; cursor: pointer; }
+    polygon:hover { stroke: #fff; stroke-width: 2; }
+    .mark { fill: #10181f; font-size: 13px; font-weight: 600; text-anchor: middle;
+            pointer-events: none; }
+    .valor { fill: #10181f; font-size: 11px; text-anchor: middle; pointer-events: none; }
+    .apoyo { stroke: #ff8c00; stroke-width: 4; opacity: .9; }
+    .apoyo-txt { fill: #ffb45e; font-size: 11px; text-anchor: middle; }
+    .apoyo-arm { fill: #ffd9a8; font-size: 10px; text-anchor: middle; }
+    .flecha { stroke: #10181f; stroke-width: 2; fill: none; }
+    .flecha-v { stroke-dasharray: 5 3; }
+  </style>
+</head>
+<body>
+  <div id="lienzo"></div>
+  <div id="msg">Visor de losas — método Pieper-Martens</div>
+  <div id="panel">
+    <div class="fila">
+      <label for="campo">campo</label>
+      <select id="campo" aria-label="campo a colorear"></select>
+    </div>
+    <div class="fila">
+      <label><input type="checkbox" id="ver-apoyos" checked> momentos de apoyo balanceados</label>
+    </div>
+    <div id="leyenda"><span id="leyenda-min"></span><div class="barra"></div><span id="leyenda-max"></span></div>
+    <div id="detalle">Clic en un paño para ver su detalle.</div>
+    <div id="apoyos-tabla"></div>
+  </div>
+  <div id="creditos"></div>
+
+  <script>
+  "use strict";
+  const DATOS = /*__DATOS_VISOR__*/null;
+
+  const lienzo = document.getElementById("lienzo");
+  const selCampo = document.getElementById("campo");
+  const verApoyos = document.getElementById("ver-apoyos");
+  const detalle = document.getElementById("detalle");
+
+  if (!DATOS || !DATOS.panos || !DATOS.panos.length) {
+    document.getElementById("msg").textContent = "Sin datos embebidos en el visor.";
+    throw new Error("sin datos");
+  }
+  document.getElementById("msg").textContent =
+    "Losas — " + DATOS.proyecto + " — método Pieper-Martens (" + DATOS.panos.length + " paños)";
+  document.getElementById("creditos").innerHTML =
+    DATOS.creditos.map(c => "• " + c).join("<br>");
+
+  for (const [clave, c] of Object.entries(DATOS.campos)) {
+    const op = document.createElement("option");
+    op.value = clave;
+    op.textContent = c.titulo + " [" + c.unidad + "]";
+    selCampo.appendChild(op);
+  }
+
+  // Escala de color azul→amarillo→rojo (misma intención que los mapas del visor FEM).
+  function color(t) {
+    const paradas = [[44,123,182],[255,255,191],[215,25,28]];
+    const s = Math.max(0, Math.min(1, t)) * (paradas.length - 1);
+    const i = Math.min(Math.floor(s), paradas.length - 2);
+    const f = s - i;
+    const m = paradas[i].map((v, k) => Math.round(v + (paradas[i+1][k] - v) * f));
+    return "rgb(" + m.join(",") + ")";
+  }
+
+  const todos = DATOS.panos.flatMap(p => p.contorno);
+  const x0 = Math.min(...todos.map(p => p[0])), x1 = Math.max(...todos.map(p => p[0]));
+  const y0 = Math.min(...todos.map(p => p[1])), y1 = Math.max(...todos.map(p => p[1]));
+
+  function bbox(contorno) {
+    const xs = contorno.map(p => p[0]), ys = contorno.map(p => p[1]);
+    return [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)];
+  }
+  const cajas = Object.fromEntries(DATOS.panos.map(p => [p.mark, bbox(p.contorno)]));
+
+  // Segmento del borde compartido entre dos paños (por sus cajas). dirección
+  // "X" = borde vertical compartido (armado según X); "Y" = horizontal.
+  function segmentoApoyo(a) {
+    const ci = cajas[a.losa_i], cj = cajas[a.losa_j];
+    if (!ci || !cj) return null;
+    if (a.direccion === "X") {
+      const x = (Math.max(ci[0], cj[0]) + Math.min(ci[2], cj[2])) / 2;
+      const ya = Math.max(ci[1], cj[1]), yb = Math.min(ci[3], cj[3]);
+      if (yb <= ya) return null;
+      return [[x, ya], [x, yb]];
+    }
+    const y = (Math.max(ci[1], cj[1]) + Math.min(ci[3], cj[3])) / 2;
+    const xa = Math.max(ci[0], cj[0]), xb = Math.min(ci[2], cj[2]);
+    if (xb <= xa) return null;
+    return [[xa, y], [xb, y]];
+  }
+
+  // Símbolo de la dirección de trabajo del paño (como en los planos de
+  // losas): doble flecha sobre el eje en que trabaja; cruz si es 2D;
+  // discontinua si es vuelo. Coordenadas ya en pantalla.
+  function simboloTrabajo(p, pxc, pyc, wpx, hpx) {
+    if (!p.trabajo) return "";
+    const clase = "flecha" + (p.trabajo.tipo === "vuelo" ? " flecha-v" : "");
+    const y = pyc + 24;
+    const partes = [];
+    function doble(x0, y0, x1, y1, punta) {
+      const linea = '<line class="' + clase + '" x1="' + x0 + '" y1="' + y0 +
+                    '" x2="' + x1 + '" y2="' + y1 + '"/>';
+      const horizontal = y0 === y1;
+      let puntas;
+      if (horizontal) {
+        puntas = '<polyline class="' + clase + '" points="' +
+          (x0 + punta) + "," + (y0 - punta) + " " + x0 + "," + y0 + " " +
+          (x0 + punta) + "," + (y0 + punta) + '"/>' +
+          '<polyline class="' + clase + '" points="' +
+          (x1 - punta) + "," + (y1 - punta) + " " + x1 + "," + y1 + " " +
+          (x1 - punta) + "," + (y1 + punta) + '"/>';
+      } else {
+        puntas = '<polyline class="' + clase + '" points="' +
+          (x0 - punta) + "," + (y0 + punta) + " " + x0 + "," + y0 + " " +
+          (x0 + punta) + "," + (y0 + punta) + '"/>' +
+          '<polyline class="' + clase + '" points="' +
+          (x1 - punta) + "," + (y1 - punta) + " " + x1 + "," + y1 + " " +
+          (x1 + punta) + "," + (y1 - punta) + '"/>';
+      }
+      return linea + puntas;
+    }
+    const lx = Math.max(18, 0.3 * wpx);
+    const ly = Math.max(18, 0.3 * hpx);
+    if (p.trabajo.tipo === "2D") {
+      partes.push(doble(pxc - lx, y, pxc + lx, y, 5));
+      partes.push(doble(pxc, y - Math.min(ly, 20), pxc, y + Math.min(ly, 20), 5));
+    } else if (p.trabajo.eje === "X") {
+      partes.push(doble(pxc - lx, y, pxc + lx, y, 5));
+    } else {
+      partes.push(doble(pxc + 0.32 * wpx, pyc - ly, pxc + 0.32 * wpx, pyc + ly, 5));
+    }
+    return partes.join("");
+  }
+
+  function dibujar() {
+    const clave = selCampo.value || Object.keys(DATOS.campos)[0];
+    const campo = DATOS.campos[clave];
+    const rango = (campo.max - campo.min) || 1;
+    const dec = clave === "codigo_dl" ? 0 : 3;   // el código DL es entero
+    document.getElementById("leyenda-min").textContent = campo.min.toFixed(dec);
+    document.getElementById("leyenda-max").textContent = campo.max.toFixed(dec);
+
+    const margen = 40;
+    const w = lienzo.clientWidth || 960, h = lienzo.clientHeight || 640;
+    const esc = Math.min((w - 2*margen) / Math.max(x1 - x0, 1e-6),
+                         (h - 2*margen) / Math.max(y1 - y0, 1e-6));
+    const px = x => margen + (x - x0) * esc;
+    const py = y => h - margen - (y - y0) * esc;   // Y hacia arriba, como en planta
+
+    let svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + w + ' ' + h + '">';
+    for (const p of DATOS.panos) {
+      const v = campo.valores[p.mark] ?? 0;
+      const pts = p.contorno.map(q => px(q[0]).toFixed(1) + "," + py(q[1]).toFixed(1)).join(" ");
+      const cx = p.contorno.reduce((s, q) => s + q[0], 0) / p.contorno.length;
+      const cy = p.contorno.reduce((s, q) => s + q[1], 0) / p.contorno.length;
+      svg += '<polygon points="' + pts + '" fill="' + color((v - campo.min) / rango) +
+             '" data-mark="' + p.mark + '"/>';
+      svg += '<text class="mark" x="' + px(cx) + '" y="' + (py(cy) - 4) + '">' + p.mark + "</text>";
+      svg += '<text class="valor" x="' + px(cx) + '" y="' + (py(cy) + 12) + '">' +
+             v.toFixed(dec) + "</text>";
+      const xsP = p.contorno.map(q => q[0]), ysP = p.contorno.map(q => q[1]);
+      const wpx = (Math.max(...xsP) - Math.min(...xsP)) * esc;
+      const hpx = (Math.max(...ysP) - Math.min(...ysP)) * esc;
+      svg += simboloTrabajo(p, px(cx), py(cy), wpx, hpx);
+    }
+    if (verApoyos.checked) {
+      for (const a of DATOS.apoyos) {
+        const seg = segmentoApoyo(a);
+        if (!seg) continue;
+        svg += '<line class="apoyo" x1="' + px(seg[0][0]) + '" y1="' + py(seg[0][1]) +
+               '" x2="' + px(seg[1][0]) + '" y2="' + py(seg[1][1]) + '"/>';
+        const mx = (seg[0][0] + seg[1][0]) / 2, my = (seg[0][1] + seg[1][1]) / 2;
+        svg += '<text class="apoyo-txt" x="' + px(mx) + '" y="' + (py(my) - 6) + '">' +
+               a.mu_ij.toFixed(3) + "</text>";
+        if (a.disponer) {   // acero adicional sobre el apoyo (barra comercial)
+          svg += '<text class="apoyo-arm" x="' + px(mx) + '" y="' + (py(my) + 14) + '">' +
+                 a.disponer + "</text>";
+        }
+      }
+    }
+    svg += "</svg>";
+    lienzo.innerHTML = svg;
+
+    for (const pol of lienzo.querySelectorAll("polygon")) {
+      pol.addEventListener("click", () => {
+        const p = DATOS.panos.find(q => q.mark === pol.dataset.mark);
+        const lineas = [
+          p.mark + " — tipo DL " + p.codigo_dl + (p.es_vuelo ? " (vuelo)" : ""),
+          "uso: " + (p.uso || "—"),
+          "trabaja: " + (p.trabajo ? (p.trabajo.tipo === "2D" ? "2D (ambos sentidos)" :
+            p.trabajo.tipo + " según " + p.trabajo.eje) : "—"),
+          "Mfx " + DATOS.campos.mfx.valores[p.mark].toFixed(3) +
+            " · Mfy " + DATOS.campos.mfy.valores[p.mark].toFixed(3) + " ton·m/m",
+          "Msx " + DATOS.campos.msx.valores[p.mark].toFixed(3) +
+            " · Msy " + DATOS.campos.msy.valores[p.mark].toFixed(3) + " ton·m/m",
+          "armado X: " + (p.armaduras.x || "—"),
+          "armado Y: " + (p.armaduras.y || "—"),
+          "armado apoyo: " + (p.armaduras.apoyo || "—"),
+        ];
+        if (p.armado_pm) {
+          lineas.push("PM acero vano: X " + p.armado_pm.mfx + " · Y " + p.armado_pm.mfy);
+          lineas.push("PM acero apoyo: X " + p.armado_pm.msx + " · Y " + p.armado_pm.msy);
+        }
+        if (p.nota) lineas.push(p.nota);
+        detalle.textContent = lineas.join("\n");
+      });
+    }
+  }
+
+  function tablaApoyos() {
+    if (!DATOS.apoyos.length) return;
+    const conAcero = DATOS.apoyos.some(a => a.disponer);
+    const filas = DATOS.apoyos.map(a =>
+      "<tr><td>" + a.losa_i + "–" + a.losa_j + "</td><td>" + a.direccion +
+      "</td><td>" + a.mu_ij.toFixed(3) + "</td><td>" + a.modo + "</td>" +
+      (conAcero ? "<td>" + (a.disponer || "—") + "</td>" : "") + "</tr>").join("");
+    document.getElementById("apoyos-tabla").innerHTML =
+      "<table><tr><th>apoyo</th><th>dir</th><th>Mu I-J</th><th>bal.</th>" +
+      (conAcero ? "<th>armadura</th>" : "") + "</tr>" + filas + "</table>";
+  }
+
+  selCampo.addEventListener("change", dibujar);
+  verApoyos.addEventListener("change", dibujar);
+  window.addEventListener("resize", dibujar);
+  tablaApoyos();
+  dibujar();
+  </script>
+</body>
+</html>

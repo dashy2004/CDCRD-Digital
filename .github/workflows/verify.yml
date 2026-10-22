@@ -52,3 +52,9 @@ jobs:
         run: python -m pip install './civil3d-beamng[test]'
       - name: Civil3D to BeamNG preflight and converter regression
         run: python -m pytest civil3d-beamng/tests civil3d-beamng/tools/test_prepare_drive.py -q
+      - name: Plugin de losas (usos Tabla 4, extraccion, aligeradas, visor PM)
+        run: |
+          python -m pip install --quiet "./puente-losas[dev]"
+          python -m pytest plugin-losas/tests puente-losas/tests -q
+        env:
+          PYTHONPATH: plugin-losas/src:puente-losas/src

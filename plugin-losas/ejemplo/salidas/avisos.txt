@@ -1,0 +1,2 @@
+LE6: 'Balcones y terrazas' no tiene set directo — 1.5 veces la carga estipulada para el area a la que sirve el balcon o terraza.
+LE6: uso de balcón/terraza — se marca es_vuelo (verificar que el paño realmente vuela).

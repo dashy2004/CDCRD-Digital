@@ -1,0 +1,82 @@
+{
+ "parametro_revit": "Tipo_Losa_PM",
+ "metodo": "código de apoyos del .DL (Pieper-Martens, Losas.exe de F. Perdomo); empotramiento por adyacencia de paños, un vuelo vecino no empotra",
+ "tipos": {
+  "LE1": {
+   "mark": "LE1",
+   "codigo": 40,
+   "descripcion": "2 empotrados adyacentes",
+   "empotrados": [
+    "E",
+    "N"
+   ],
+   "borde_fem": "simple",
+   "es_vuelo": false,
+   "nota": ""
+  },
+  "LE2": {
+   "mark": "LE2",
+   "codigo": 40,
+   "descripcion": "2 empotrados adyacentes",
+   "empotrados": [
+    "N",
+    "W"
+   ],
+   "borde_fem": "simple",
+   "es_vuelo": false,
+   "nota": ""
+  },
+  "LE3": {
+   "mark": "LE3",
+   "codigo": 10,
+   "descripcion": "apoyada en 4 bordes",
+   "empotrados": [],
+   "borde_fem": "simple",
+   "es_vuelo": false,
+   "nota": ""
+  },
+  "LE4": {
+   "mark": "LE4",
+   "codigo": 40,
+   "descripcion": "2 empotrados adyacentes",
+   "empotrados": [
+    "E",
+    "S"
+   ],
+   "borde_fem": "simple",
+   "es_vuelo": false,
+   "nota": ""
+  },
+  "LE5": {
+   "mark": "LE5",
+   "codigo": 40,
+   "descripcion": "2 empotrados adyacentes",
+   "empotrados": [
+    "S",
+    "W"
+   ],
+   "borde_fem": "simple",
+   "es_vuelo": false,
+   "nota": ""
+  },
+  "LE6": {
+   "mark": "LE6",
+   "codigo": 72,
+   "descripcion": "voladizo (vuela según X)",
+   "empotrados": [
+    "E"
+   ],
+   "borde_fem": "simple",
+   "es_vuelo": true,
+   "nota": "voladizo: M_apoyo = q·L²/2 sobre la luz que vuela"
+  }
+ },
+ "asignar_en_revit": {
+  "LE1": "40 2 empotrados adyacentes | empotrados: E,N",
+  "LE2": "40 2 empotrados adyacentes | empotrados: N,W",
+  "LE3": "10 apoyada en 4 bordes | empotrados: ninguno",
+  "LE4": "40 2 empotrados adyacentes | empotrados: E,S",
+  "LE5": "40 2 empotrados adyacentes | empotrados: S,W",
+  "LE6": "72 voladizo (vuela según X) | empotrados: E"
+ }
+}

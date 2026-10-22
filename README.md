@@ -194,6 +194,8 @@ de fórmulas/tablas pendientes de cotejo.
 | `servidor-mcp-civil3d/` | Civil 3D 2027 (serie R26.0) via puente .NET 10 propio en el proceso | v0.5.16; lectura y escritura **probadas en vivo** sobre copias sinteticas: sitio, plataformas, curvas, corredor, secciones y calzada con capas/targets/daylight ([evidencias](servidor-mcp-civil3d/docs/CALZADA-0516.md)) |
 | `corpus-inapa/` | Reglamento Tecnico INAPA DIG-PO-001 (2018) por pagina, con pagina impresa, estructura, hash y fuente; busqueda FTS5 y referencias `norma` vs `hipotesis` | corpus generado (414 pag.), 21 pruebas sinteticas; OCR sin revision humana |
 | `puente-autocad-etabs/` | Extraccion de geometria desde DWG por convencion de capas | Inventario y convencion definidos (`docs/CONVENCION-CAPAS-CAD.md`) |
+| [puente-losas/](puente-losas/README.md) | Losas de Revit → motor FEM de EstructurasRD + via Pieper-Martens (Losas.exe, Ing. F. Perdomo) → Excel/.DL/plan ETABS, con las reglas de la Ing. Arlette Ramirez | 54 tests; momentos PM validados contra la salida real de Losas.exe v5.21 |
+| [plugin-losas/](plugin-losas/README.md) | Extraccion de losas (numeracion+dimensiones+uso) para Revit y AutoCAD con desplegable de usos Tabla 4 CDCRD, plan parametrico de aligeradas y visor Pieper-Martens | 55 tests (nucleo); panel pyRevit y LISP escritos sin corrida en vivo |
 
 Como encajan entre si: [arquitectura del ecosistema](docs/ARQUITECTURA-ECOSISTEMA.md).
 Capacidades pendientes y su estado: [huecos ETABS/SAFE](docs/HUECOS-ETABS-SAFE.md).

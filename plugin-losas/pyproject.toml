@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plugin-losas"
+version = "0.1.0"
+description = "Plugin de extraccion de losas (Revit/AutoCAD), usos Tabla 4 CDCRD, aligeradas y visor Pieper-Martens para CDCRD-Digital."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+# Depende de puente-losas (mismo repo): contrato PanoLosa, dl_io, informe_excel
+# y biblioteca de secciones. Para desarrollo: pip install -e ../puente-losas -e .
+dependencies = [
+    "openpyxl>=3.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+plugin-losas = "plugin_losas.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"plugin_losas.viz" = ["*.html"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "../puente-losas/src"]
