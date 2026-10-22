@@ -16,8 +16,12 @@ Parametros (P):
 
 Devuelve una fila por losa con todos esos parametros y los conteos escritos.
 Esta tool NO calcula nada (los calculos viven en plugin_losas/puente_losas,
-testeados): solo escribe texto. UNA transaccion con rollback; no guarda
-(usar revit_guardar_modelo despues).
+testeados): solo escribe texto. SIN doc.Regenerate() explicito (cura del
+crash E-137/claude-752: en modelos con cientos de imports DWG la
+regeneracion completa tumba Revit): el binding va en su propia transaccion,
+los elementos se reobtienen, los valores iguales se saltan (cero cambios =
+cero transacciones) y lo escrito se verifica releyendo. No guarda (usar
+revit_guardar_modelo despues).
 """
 
 PARAM_USO = "Uso_Losa"
@@ -155,27 +159,49 @@ def run(doc, uidoc, DB, P):
         if faltan:
             raise Exception("marks sin losa en el modelo: %s" % sorted(faltan))
 
-        def _escribir():
-            creados = []
-            pendientes = [nombre for nombre, _ in escrituras
-                          if losas[0].LookupParameter(nombre) is None]
-            if pendientes:
-                if not crear:
-                    raise Exception("faltan los parametros %s; repetir con "
-                                    "crear_parametro=true" % pendientes)
+        # CURA E-137/claude-752: nada de doc.Regenerate() explicito (sobre el
+        # CLUB PN, con ~1500 imports DWG, la regeneracion completa tumba
+        # Revit). El binding va en SU transaccion (el commit regenera lo
+        # justo), los elementos se REOBTIENEN para ver el parametro nuevo, y
+        # si no hay cambios reales no se abre transaccion ninguna.
+        pendientes = [nombre for nombre, _ in escrituras
+                      if losas[0].LookupParameter(nombre) is None]
+        if pendientes:
+            if not crear:
+                raise Exception("faltan los parametros %s; repetir con "
+                                "crear_parametro=true" % pendientes)
+
+            def _crear():
                 for nombre in pendientes:
                     _crear_parametro_texto(doc, DB, nombre)
-                    creados.append(nombre)
-                doc.Regenerate()
-            cuenta = {}
-            for nombre, valores in escrituras:
-                n = 0
-                for mk, texto in valores.items():
+                return list(pendientes)
+            parametros_creados = tx(doc, "plugin-losas: parametros de losa "
+                                         "(binding)", _crear)
+            for mk in list(marks_modelo):
+                marks_modelo[mk] = doc.GetElement(marks_modelo[mk].Id)
+
+        cambios = []
+        for nombre, valores in escrituras:
+            for mk, texto in valores.items():
+                p = marks_modelo[mk].LookupParameter(nombre)
+                if p is None:
+                    raise Exception("la losa %s sigue sin el parametro %s tras "
+                                    "el binding" % (mk, nombre))
+                if (p.AsString() or "") != texto:
+                    cambios.append((nombre, mk, texto))
+        if cambios:
+            def _escribir():
+                cuenta = {}
+                for nombre, mk, texto in cambios:
                     set_param(marks_modelo[mk], nombre, texto)
-                    n += 1
-                cuenta[nombre] = n
-            return cuenta, creados
-        conteos, parametros_creados = tx(doc, "plugin-losas: parametros de losa", _escribir)
+                    cuenta[nombre] = cuenta.get(nombre, 0) + 1
+                return cuenta
+            conteos = tx(doc, "plugin-losas: parametros de losa", _escribir)
+            # verificacion releyendo lo escrito
+            mal = [(nombre, mk) for nombre, mk, texto in cambios
+                   if (marks_modelo[mk].LookupParameter(nombre).AsString() or "") != texto]
+            if mal:
+                raise Exception("parametros no releidos tras el commit: %s" % mal)
 
     filas = []
     for f in losas:

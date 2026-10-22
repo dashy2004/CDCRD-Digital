@@ -180,7 +180,8 @@ def run(doc, uidoc, DB, P):
                     if not doc.LoadFamily(ruta):
                         raise Exception("Revit no cargo la familia de '%s' (ya "
                                         "cargada con otro contenido?)" % ruta)
-                    doc.Regenerate()
+                    # sin doc.Regenerate(): LoadFamily ya materializa los
+                    # simbolos (E-137: la regeneracion completa tumba el modelo)
                     simbolo = _simbolo_tag(doc, familia, tipo)
                     if simbolo is None:
                         raise Exception("se cargo '%s' pero no aparece como tipo "
