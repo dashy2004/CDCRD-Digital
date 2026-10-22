@@ -193,6 +193,8 @@ def _crear_parametro_texto(doc, nombre):
     app.SharedParametersFilename = ruta
     try:
         archivo = app.OpenSharedParameterFile()
+        if archivo is None:
+            raise Exception("No se pudo abrir el archivo temporal de parametros")
         grupo = None
         for g in archivo.Groups:
             if g.Name == GRUPO_PARAMS:
@@ -205,11 +207,42 @@ def _crear_parametro_texto(doc, nombre):
                 DB.ExternalDefinitionCreationOptions(nombre, DB.SpecTypeId.String.Text))
         cats = app.Create.NewCategorySet()
         cats.Insert(doc.Settings.Categories.get_Item(DB.BuiltInCategory.OST_Floors))
-        doc.ParameterBindings.Insert(definicion, app.Create.NewInstanceBinding(cats),
-                                     DB.GroupTypeId.Data)
+        if not doc.ParameterBindings.Insert(definicion, app.Create.NewInstanceBinding(cats),
+                                            DB.GroupTypeId.Data):
+            raise Exception("Binding rechazado para %s; revisar definicion/categorias existentes" % nombre)
     finally:
-        if anterior:
-            app.SharedParametersFilename = anterior
+        app.SharedParametersFilename = anterior
+
+
+def _parametro_escritura(doc, identidad, nombre, permitir_falta=False):
+    # Reobtener el elemento, especialmente despues de confirmar bindings.
+    el = doc.GetElement(identidad)
+    if el is None:
+        raise Exception("La losa %s ya no existe" % identidad)
+    parametros = list(el.GetParameters(nombre))
+    if len(parametros) > 1:
+        raise Exception("Parametro ambiguo %s en losa %s" % (nombre, identidad))
+    if not parametros:
+        if permitir_falta:
+            return None
+        raise Exception("Parametro %s no disponible en losa %s despues del binding" %
+                        (nombre, identidad))
+    p = parametros[0]
+    if p.StorageType != DB.StorageType.String or p.IsReadOnly:
+        raise Exception("Parametro %s no es texto editable en losa %s" % (nombre, identidad))
+    return p
+
+
+def _log_parametros(evento, **datos):
+    """Durable BEFORE native calls; failure to open the log stops new writes."""
+    import time
+    import tempfile
+    datos.update(evento=evento, utc=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()))
+    ruta = os.path.join(tempfile.gettempdir(), "plugin_losas_parametros.jsonl")
+    with io.open(ruta, "a", encoding="utf-8") as f:
+        f.write(u"%s\n" % json.dumps(datos, ensure_ascii=True))
+        f.flush()
+        os.fsync(f.fileno())
 
 
 def _correr_cpython(raiz, argumentos, errores):
@@ -543,41 +576,110 @@ class PanelUsoLosa(Form):
 
     # ---------------------------- escrituras ----------------------------
     def _escribir_params(self, escrituras, titulo):
+        import uuid
         doc = self.doc
-        # detectar ANTES que hay que tocar: con el modelo fragil (E-137) una
-        # transaccion que no cambia nada es una regeneracion regalada
-        faltan = [n for n in escrituras
-                  if self.filas and self.filas[0]["el"].LookupParameter(n) is None]
-        cambios = []
+        sesion = uuid.uuid4().hex
+        if getattr(self, "_params_pending", None) is not None:
+            raise Exception("Hay una transaccion pendiente. Resolverla en Revit y cerrar el panel; "
+                            "no reintentar automaticamente.")
+
+        def log(evento, **datos):
+            datos.update(sesion=sesion, titulo=titulo)
+            _log_parametros(evento, **datos)
+
+        def iniciar(tx):
+            log("start_before")
+            estado = tx.Start()
+            log("start_after", estado=str(estado))
+            if estado != DB.TransactionStatus.Started:
+                raise Exception("Transaction.Start devolvio %s" % estado)
+            opciones = tx.GetFailureHandlingOptions()
+            opciones.SetClearAfterRollback(True)
+            opciones.SetForcedModalHandling(True)
+            tx.SetFailureHandlingOptions(opciones)
+
+        def confirmar(tx, fase):
+            # Commit regenera implicitamente. No es una garantia contra crashes.
+            log("commit_before", fase=fase)
+            estado = tx.Commit()
+            final = tx.GetStatus()
+            log("commit_after", fase=fase, estado=str(estado), final=str(final))
+            if estado != DB.TransactionStatus.Committed or final != DB.TransactionStatus.Committed:
+                raise Exception("Commit de %s no confirmado: %s / %s" % (fase, estado, final))
+
+        log("begin")
+        por_mark = {}
+        for fila in self.filas:
+            por_mark.setdefault(fila["mark"], []).append(fila)
+        cambios, faltan = [], set()
         for nombre, valores in escrituras.items():
-            for fila in self.filas:
-                if fila["mark"] not in valores:
-                    continue
-                if nombre in faltan:
-                    cambios.append((nombre, fila))
-                    continue
-                p = fila["el"].LookupParameter(nombre)
-                if p is None or (p.AsString() or "") != valores[fila["mark"]]:
-                    cambios.append((nombre, fila))
-        if not faltan and not cambios:
+            for mark, valor in valores.items():
+                filas = por_mark.get(mark, [])
+                if len(filas) != 1:
+                    raise Exception("Mark %s inexistente o duplicado; no se escribe" % mark)
+                if not isinstance(valor, (str, type(u""))):
+                    raise Exception("Valor no textual para %s / %s" % (mark, nombre))
+                identidad = filas[0]["el"].Id
+                p = _parametro_escritura(doc, identidad, nombre, permitir_falta=True)
+                if p is None:
+                    faltan.add(nombre)
+                if p is None or (p.AsString() or "") != valor:
+                    cambios.append((nombre, identidad, mark, valor))
+        if not cambios:
+            log("no_changes")
             return 0
+
+        log("plan", parametros=sorted(faltan), cambios=len(cambios))
         t = DB.Transaction(doc, titulo)
-        t.Start()
         try:
-            for nombre in faltan:
+            iniciar(t)
+            for nombre in sorted(faltan):
+                log("binding_before", parametro=nombre)
                 _crear_parametro_texto(doc, nombre)
-            if faltan:
-                doc.Regenerate()
-            n = 0
-            for nombre, fila in cambios:
-                fila["el"].LookupParameter(nombre).Set(escrituras[nombre][fila["mark"]])
-                n += 1
-            t.Commit()
-            return n
-        except Exception as ex:
-            t.RollBack()
-            MessageBox.Show("Error (rollback): %s" % ex)
-            return 0
+                log("binding_after", parametro=nombre)
+            # Preferir un solo commit. Si el binding aun no es visible, confirmar
+            # SOLO los bindings y reobtener parametros antes de escribir valores.
+            invisibles = [nombre for nombre, identidad, mark, valor in cambios
+                          if _parametro_escritura(doc, identidad, nombre, True) is None]
+            if invisibles:
+                confirmar(t, "bindings")
+                t.Dispose()
+                t = None
+                log("bindings_committed_values_pending")
+                for nombre, identidad, mark, valor in cambios:
+                    _parametro_escritura(doc, identidad, nombre)
+                t = DB.Transaction(doc, titulo + ": valores")
+                iniciar(t)
+            for nombre, identidad, mark, valor in cambios:
+                p = _parametro_escritura(doc, identidad, nombre)
+                log("set_before", parametro=nombre, elemento=str(identidad), mark=mark)
+                if not p.Set(valor):
+                    raise Exception("Set rechazado para %s / %s" % (mark, nombre))
+                log("set_after", parametro=nombre, elemento=str(identidad))
+            confirmar(t, "valores")
+            # No afirmar exito por haber llegado a Commit: releer el dato nativo.
+            for nombre, identidad, mark, valor in cambios:
+                p = _parametro_escritura(doc, identidad, nombre)
+                if (p.AsString() or "") != valor:
+                    raise Exception("Commit confirmado pero relectura distinta: %s / %s. "
+                                    "Reconciliar antes de reintentar." % (mark, nombre))
+            log("verified", valores=len(cambios))
+            return len(cambios)
+        except Exception:
+            # Nunca devolver 0 como si hubiese sido exito ni continuar CALCULAR.
+            # No inspeccionar elementos despues de un error de regeneracion.
+            if t is not None and t.GetStatus() == DB.TransactionStatus.Started:
+                estado = t.RollBack()
+                if estado != DB.TransactionStatus.RolledBack:
+                    raise Exception("Rollback no confirmado: %s; reconciliar en Revit" % estado)
+            raise
+        finally:
+            if t is not None:
+                estado = t.GetStatus()
+                if estado == DB.TransactionStatus.Pending:
+                    self._params_pending = t  # no Dispose/reintento durante failure handling
+                else:
+                    t.Dispose()
 
     @_seguro
     def guardar(self, remitente, evento):

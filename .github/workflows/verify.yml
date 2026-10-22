@@ -54,7 +54,7 @@ jobs:
         run: python -m pytest civil3d-beamng/tests civil3d-beamng/tools/test_prepare_drive.py -q
       - name: Plugin de losas (usos Tabla 4, extraccion, aligeradas, visor PM)
         run: |
-          python -m pip install --quiet openpyxl
-          python -m unittest discover -s plugin-losas/tests -t plugin-losas -v
+          python -m pip install --quiet openpyxl "pytest>=7.4"
+          python -m pytest plugin-losas/tests puente-losas/tests -q
         env:
           PYTHONPATH: plugin-losas/src:puente-losas/src

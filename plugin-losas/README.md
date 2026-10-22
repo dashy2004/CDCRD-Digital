@@ -67,6 +67,8 @@ desplegable con las 45 opciones.
 
 ## Flujo Revit
 
+Guardado del panel: [transacciones, registro y prueba nativa pendiente](docs/USOLOSA-PARAMETROS.md).
+
 1. En la sesión viva (con turno/lock), exportar las losas esquemáticas:
    `exportar_proyecto` con `marker="MCP:LOSA-ESQ"` → `proyecto.json`; o usar la
    tool `uso_losa` para listar/asignar `Uso_Losa` por Mark. El pushbutton
