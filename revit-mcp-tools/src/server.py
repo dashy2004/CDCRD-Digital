@@ -50,12 +50,25 @@ def _post(port: int, code: str, description: str) -> dict:
     url = "http://localhost:%d/%s/execute_code/" % (port, API)
     payload = json.dumps({"code": code, "description": description,
                           "use_transaction": False}).encode("utf-8")
-    # text/plain: pyRevit 6.5 sobre IronPython hace json.loads(bytes) con
-    # application/json y falla antes de llegar al handler (ver revit-mcp-write).
+    # Match the native Python bridge. text/plain leaves request.data as bytes
+    # in current pyRevit, so the handler fails before reading data.get('code').
     req = urllib.request.Request(url, data=payload, method="POST",
-                                 headers={"Content-Type": "text/plain; charset=utf-8"})
-    with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
-        raw = resp.read().decode("utf-8")
+                                 headers={"Content-Type": "application/json; charset=utf-8"})
+    try:
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+            raw = resp.read().decode("utf-8")
+    except urllib.error.HTTPError as error:
+        # Never retry an execution: the model may already have been changed.
+        # Exclude code_attempted/traceback, which may contain private model data.
+        with error:
+            body = error.read(65536).decode('utf-8', errors='replace')
+        try:
+            detail = json.loads(body)
+        except (ValueError, TypeError):
+            detail = {}
+        return {'error': 'HTTP %s' % error.code,
+                'message': str(detail.get('error', 'Native request failed'))[:2000] if isinstance(detail, dict) else 'Native request failed',
+                'retry_safe': False}
     try:
         return json.loads(raw)
     except json.JSONDecodeError:
@@ -169,6 +182,11 @@ def revit_documentar_losas(config: dict) -> dict:
 @mcp.tool(description=_doc("dimensiones_losas"))
 def revit_dimensiones_losas(config: dict) -> dict:
     return _run_tool("dimensiones_losas", config)
+
+
+@mcp.tool(description=_doc("detalles_losas"))
+def revit_detalles_losas(config: dict) -> dict:
+    return _run_tool("detalles_losas", config)
 
 
 @mcp.tool(description=_doc("aligerado_propuesta"))

@@ -38,6 +38,9 @@ def test_exact_copy_and_owner_required(tmp_path):
     with pytest.raises(ValueError): module.validate_scope(cfg,cfg['expected_path'],10,lock)
     with pytest.raises(ValueError): module.validate_scope(cfg,cfg['expected_path'],9,dict(lock,session='other'))
     with pytest.raises(ValueError): module.validate_scope(dict(cfg,floor_ids=[1,1]),cfg['expected_path'],9,lock)
+    original = cfg['protected_paths'][0]
+    with pytest.raises(ValueError):
+        module.validate_scope(dict(cfg,expected_path=original,protected_paths=original),original,9,lock)
 
 
 def test_rotated_rectangle_requires_declared_axes():

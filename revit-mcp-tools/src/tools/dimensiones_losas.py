@@ -10,6 +10,7 @@ Se actualizan al ejecutar la herramienta; no instala un updater permanente.
 import io
 import json
 import math
+import ntpath
 import os
 
 GUIDS = {'Lx': '2c4ca27b-a552-47a2-b412-849c249a50c1',
@@ -47,7 +48,11 @@ def rectangle_lengths(points, angle_degrees=0.0, tolerance=1e-6):
 
 def validate_scope(P, path, pid, lock):
     normal = lambda s: os.path.normcase(os.path.realpath(s))
-    if not P.get('expected_path') or not P.get('protected_paths'):
+    paths = P.get('protected_paths')
+    if (not isinstance(paths, (list, tuple)) or not paths or
+            any(not isinstance(x, str) or not (ntpath.isabs(x) or os.path.isabs(x)) for x in paths) or
+            not isinstance(P.get('expected_path'), str) or
+            not (ntpath.isabs(P['expected_path']) or os.path.isabs(P['expected_path']))):
         raise ValueError('Faltan copia y fuentes protegidas')
     if normal(path) != normal(P['expected_path']) or normal(path) in [normal(s) for s in P['protected_paths']]:
         raise ValueError('Documento no autorizado o protegido')

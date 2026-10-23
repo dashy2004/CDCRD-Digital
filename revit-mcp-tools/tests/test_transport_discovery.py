@@ -2,6 +2,8 @@ import importlib.util
 from pathlib import Path
 import types
 import sys
+import io
+import json
 
 import pytest
 
@@ -63,3 +65,27 @@ def test_malformed_response_does_not_count_as_available_native_api(server, monke
     with pytest.raises(RuntimeError, match='/routes/status'):
         server._port()
     assert server._port_cache is None
+
+
+def test_execution_uses_json_content_type_and_no_automatic_transaction(server, monkeypatch):
+    calls = []
+    def open_url(request, timeout):
+        calls.append(request)
+        assert request.get_header('Content-type') == 'application/json; charset=utf-8'
+        assert json.loads(request.data) == {'code': 'print(1)', 'description': 'probe', 'use_transaction': False}
+        return Response(b'{"status":"success"}')
+    monkeypatch.setattr(server.urllib.request, 'urlopen', open_url)
+    assert server._post(48884, 'print(1)', 'probe') == {'status': 'success'}
+    assert len(calls) == 1
+
+
+def test_http_failure_is_not_retried_or_returned_with_attempted_code(server, monkeypatch):
+    calls = []
+    def open_url(request, timeout):
+        calls.append(request)
+        raise server.urllib.error.HTTPError(request.full_url, 500, 'failure', {},
+            io.BytesIO(b'{"error":"handler failed","code_attempted":"private source"}'))
+    monkeypatch.setattr(server.urllib.request, 'urlopen', open_url)
+    result = server._post(48884, 'print(1)', 'probe')
+    assert result == {'error': 'HTTP 500', 'message': 'handler failed', 'retry_safe': False}
+    assert len(calls) == 1 and 'private source' not in json.dumps(result)
