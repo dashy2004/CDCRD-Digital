@@ -230,3 +230,9 @@ El bloqueo anterior no se reprodujo en la nueva instancia de Civil: la sonda
 del despachador y consultas respondieron. No se modifico el dispatcher ni se
 atribuye una causa raiz no demostrada. Consulte `docs/DIAGNOSTICO.md` del
 servidor Civil para no repetir escrituras tras un timeout.
+
+### Incremento siguiente: suelo hacia SAFE
+
+El [piloto de geotecnia](SUELO-CIVIL-SAFE.md) agrega un plan con k independiente
+y su aplicacion verificada a areas sinteticas. Mantiene el calculo manual y
+la presion admisible separada; no modifica este contrato de coordenadas.

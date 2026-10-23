@@ -5,9 +5,10 @@ Servidor MCP de CSI SAFE 23.3.0, OAPI 2.016. ProgID confirmado:
 inventario ampliado: `docs/BACKLOG-HERRAMIENTAS.md`; enums y fuentes locales:
 `docs/ENUMS-SAFE.md`.
 
-El catálogo tiene **52 funciones implementadas: 51 tools registradas y una
+El catálogo tiene **55 funciones implementadas: 54 tools registradas y una
 [X] deshabilitada**. Son las 31 iniciales, las 18 del lote 1 de Claude y las
-3 por tabla del lote 2. `set_area_points` fue retirada por Claude tras
+3 por tabla del lote 2, el snapshot CSI y dos tools de transferencia de suelo.
+`set_area_points` fue retirada por Claude tras
 `EditArea.ChangeConnectivity → -99`; sigue bajo test para detectar regresiones.
 No debe anunciarse como tool disponible.
 
@@ -15,17 +16,32 @@ No debe anunciarse como tool disponible.
 
 - **[T]**: firma/esquema documentado o presente en typelib. Los mocks comprueban
   argumentos, retornos y verificaciones del cliente; no prueban la implementación SAFE.
-- **[H]**: corrida viva de Claude con `ret=0` y efecto releído, con fecha y evidencia
+- **[H]**: corrida viva autorizada con `ret=0` y efecto releído, con fecha y evidencia
   en `docs/OAPI-SAFE-real.md`. Un resultado histórico no verifica una revisión nueva.
 - **[X]**: falla confirmada en SAFE, con retorno y versión. No se sustituye por un
   nombre supuesto ni se reintenta una escritura después de un retorno de error.
 
-**Nada es [H] sin corrida viva de Claude.** Las tres tools nuevas y todas las
-verificaciones añadidas en este lote quedan [T] hasta esa corrida. `claude-212`
-confirma la corrida del lote 1 y los enums; v0.2.1 y este lote requieren reiniciar
-Claude Desktop desde la bandeja y revalidar los cambios.
+**Nada es [H] sin corrida viva autorizada, version y recibos.** Las tres tools
+por tabla del lote 2 conservan su estado [T]; `claude-212` confirma la corrida
+del lote 1 y los enums. La transferencia Civil/suelo tiene una corrida nueva
+de Codex en modelos sinteticos, documentada abajo. Reiniciar los servidores
+MCP y comprobar `list_tools` despues de actualizar el codigo.
 
 ## Catálogo
+
+### Civil 3D -> suelo SAFE: piloto nativo, 2026-10-23
+
+`get_soil_transfer_context` y `apply_soil_transfer` se verificaron por MCP
+stdio en SAFE 23.3 y Civil 3D 2027: 12 cotas de TIN coincidieron con un plano
+independiente; dos areas recibieron `k=18000 kN/m3 = 0.018 N/mm3`, compresion
+unicamente, y una tercera conservo su ausencia de asignacion. Geometria y
+unidades permanecieron iguales; propiedad y asignaciones persistieron tras
+guardar/reabrir. Se rechazaron hash incorrecto, falta de confirmacion de copia,
+unidades distintas, vertice sin cota y repeticion del plan. Sin analisis/diseno.
+
+La escritura queda limitada a modelos nuevos `SYNTHETIC_*.FDB`: los apoyos
+de modelos heredados requieren otra validacion. QA/geotecnia de proyecto no
+se infieren. [Contrato, fuentes y pasos](../herramientas-locales/docs/SUELO-CIVIL-SAFE.md).
 
 | Grupo | Tools registradas | Cantidad |
 |---|---|---:|
@@ -39,6 +55,7 @@ Claude Desktop desde la bandeja y revalidar los cambios.
 | Geometría y cargas lote 1 | `delete_object`, `move_objects`, `get_area_info`, `set_area_property`, `set_area_opening`, `set_point_coordinates`, `add_point`, `assign_point_load` | 8 |
 | Lecturas lote 1 | `get_strip_rebar_stations`, `get_table_fields` | 2 |
 | Tablas lote 2 [T] | `add_design_strip`, `set_strip_widths`, `set_punching_overwrite` | 3 |
+| Intercambio Civil/CSI | `get_coordinate_snapshot`, `get_soil_transfer_context`, `apply_soil_transfer` | 3 |
 
 Función conservada sin registro: `set_area_points` **[X]**. Para cambiar una esquina,
 Claude verificó mover sus puntos; mover un área puede crear otros IDs de vértices.
@@ -88,7 +105,7 @@ retorno no cero, errores de importación o efecto distinto producen `SafeError`.
 `ApplyEditedTables` puede haber aplicado cambios parciales antes del error:
 **no hay rollback automático**. Inspeccionar la copia antes de repetir.
 
-## Copia de pruebas y corrida viva
+## Copia de pruebas y corrida viva (procedimiento historico del lote 2)
 
 1. Claude comprueba `get_model_info()` y `get_units()`. Para incorporar cambios
    pendientes al archivo, guardar explícitamente con `save_model()`.
@@ -102,8 +119,10 @@ retorno no cero, errores de importación o efecto distinto producen `SafeError`.
    relee tablas/geometría y devuelve [H]/[P]/[X] por buzón. Procedimiento concreto
    en `docs/PRUEBA-VIVA-LOTE2.md`.
 
-Codex implementa, prueba mocks y documenta. Claude es el único operador de la
-sesión viva. Los tests no abren SAFE, no cargan COM y no leen/escriben ningún .FDB.
+Este reparto describe aquel lote; cada corrida posterior requiere autorizacion
+del usuario y un unico operador con turno exclusivo. La corrida Civil/suelo
+2026-10-23 fue autorizada a Codex. Los tests offline no abren SAFE, no cargan
+COM y no leen/escriben ningun .FDB.
 
 ## Tests
 

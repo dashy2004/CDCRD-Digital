@@ -68,6 +68,8 @@ define_slab_section = mcp.tool()(safe.define_slab_section)
 # Resorte de suelo
 define_soil_spring = mcp.tool()(safe.define_soil_spring)
 assign_area_spring = mcp.tool()(safe.assign_area_spring)
+get_soil_transfer_context = mcp.tool()(safe.get_soil_transfer_context)
+apply_soil_transfer = mcp.tool()(safe.apply_soil_transfer)
 
 # Cargas y combinaciones
 add_load_pattern = mcp.tool()(safe.add_load_pattern)

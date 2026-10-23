@@ -139,6 +139,16 @@ def cimentacion_revisar_cotas(consulta_json: str, muestras_json: str, salida_jso
                      output_path(salida_json), input_path(geotecnia_json) if geotecnia_json else None)
 
 
+@mcp.tool()
+def cimentacion_preparar_suelo_safe(contexto_json: str, consulta_json: str, muestras_json: str,
+                                    geotecnia_json: str, configuracion_json: str,
+                                    salida_json: str) -> dict:
+    """Plan de resortes SAFE con k independiente, cobertura TIN y areas explicitas. Sin escrituras."""
+    from .safe_soil_plan import run_files
+    return run_files(input_path(contexto_json), input_path(consulta_json), input_path(muestras_json),
+                     input_path(geotecnia_json), input_path(configuracion_json), output_path(salida_json))
+
+
 def main() -> None:
     mcp.run(transport="stdio")
 

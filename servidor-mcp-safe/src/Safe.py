@@ -1,7 +1,7 @@
 # SAFE MCP — lote 1 Claude (v0.2.1) + lote 2 CDX (2026-09-25).
 # Fuente de firmas/estados: docs/OAPI-SAFE-real.md, docs/ENUMS-SAFE.md.
 # Capa A: documentada por CSI para SAFE; capa B: typelib compartido.
-# Tests mock no equivalen a verificacion viva. Solo Claude opera SAFE.
+# Tests mock no equivalen a verificacion viva. Operacion requiere autorizacion y turno exclusivo.
 # Los comentarios historicos de cada metodo no reemplazan el registro de
 # corrida por version. Ver README y docs/PRUEBA-VIVA-LOTE2.md.
 
@@ -570,6 +570,10 @@ class Safe:
                            factor: float = 1.2, compression_only: bool = True) -> str:
         """Define un resorte de area para el suelo (SOP Safe 3.6).
 
+        LEGADO: factor es dimensional y dependiente de unidades; no es una
+        correlacion geotecnica general. Para Civil -> SAFE usar
+        get_soil_transfer_context / apply_soil_transfer con k independiente.
+
         k = factor * esfuerzo_admisible (factor=1.2 es el valor del SOP).
 
         Firma confirmada en SAFE 23.3.0. NonlinearOption3 verificado por
@@ -613,6 +617,23 @@ class Safe:
                 f"{'compresion unicamente' if compression_only else 'lineal'}. "
                 f"Verificar comportamiento con get_table_data o "
                 f"describe_oapi si el resultado no coincide con lo esperado.")
+
+    @com_call
+    def get_soil_transfer_context(self, expected_path: str, frame_id: str) -> dict:
+        """Lee geometria, unidades, ejes y asignaciones para un plan Civil -> SAFE. Sin cambios."""
+        from soil_transfer import capture_context
+        return capture_context(self._model(), expected_path, frame_id)
+
+    @com_call
+    def apply_soil_transfer(self, plan: dict, expected_sha256: str,
+                            confirmed_copy: bool = False) -> dict:
+        """Aplica plan de k explicito sobre copia; relee rigidez y areas. No guarda ni calcula.
+
+        Requiere turno exclusivo. Solo agrega propiedad y asigna areas sin resorte.
+        No es transaccion: ok=false puede dejar escrituras parciales, no reintentar.
+        """
+        from soil_transfer import apply_plan
+        return apply_plan(self._model(), self._read_table, plan, expected_sha256, confirmed_copy)
 
     @com_call
     def assign_area_spring(self, area_ids: list[str], spring_name: str) -> str:
