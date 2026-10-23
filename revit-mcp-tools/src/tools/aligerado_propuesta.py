@@ -5,6 +5,8 @@ P incluye copia/PID/turno, floor_id, h_m, bounds_m, section (1D/2D), topping_m,
 rib_m, pitch_m, border_m, family_template, family_dir y receipt_path.
 El umbral de 0.16 m es una regla del procedimiento elegido, no un calculo.
 No modifica vigas ni arma losas. Rechaza hosts con Rebar o vacios previos.
+Excepcion explicita: operation=supplement completa hasta25rectangulos de la
+misma reticula, con expected_void_ids exactos; conserva tipo y cortes previos.
 Omite cavidades que no quepan completamente en el solido real (shafts/uniones).
 Conserva una familia de vacios y una de EPS por pano: geometria editable en
 familia, sin crear una instancia de proyecto por cada bloque.
@@ -67,6 +69,31 @@ def memory_floor_mb(config):
     return 768 if count<=150 else 1000
 
 
+def selected_cavity_rectangles(config):
+    all_rectangles=cavity_rectangles(config['bounds_m'],config['section'],config['rib_m'],config['pitch_m'],config['border_m'])
+    operation=config.get('operation','new')
+    if operation=='new':
+        if config.get('supplement_rectangles_m') or config.get('expected_void_ids'):
+            raise ValueError('Complemento exige operation=supplement')
+        return all_rectangles
+    if operation!='supplement':raise ValueError('Operacion desconocida')
+    requested=config.get('supplement_rectangles_m') or []
+    expected=config.get('expected_void_ids') or []
+    if not 1<=len(requested)<=25 or not 1<=len(expected)<=10 or len(set(expected))!=len(expected) or any(not isinstance(i,int) or isinstance(i,bool) or i<=0 for i in expected):
+        raise ValueError('Complemento exige rectangulos y vacios previos explicitos')
+    used=set();result=[]
+    for rect in requested:
+        if len(rect)!=4 or any(not _finite_rectangle_number(v) for v in rect):raise ValueError('Rectangulo invalido')
+        matches=[i for i,r in enumerate(all_rectangles) if all(abs(a-b)<1e-7 for a,b in zip(r,rect))]
+        if len(matches)!=1 or matches[0] in used:raise ValueError('Rectangulo duplicado o fuera de la reticula declarada')
+        used.add(matches[0]);result.append(all_rectangles[matches[0]])
+    return result
+
+
+def _finite_rectangle_number(value):
+    return not math.isnan(float(value)) and not math.isinf(float(value))
+
+
 def run(doc, uidoc, DB, P):
     owned=[]
     try:return _run(doc,uidoc,DB,P,owned)
@@ -95,11 +122,14 @@ def _run(doc, uidoc, DB, P, owned):
     if int(ComputerInfo().AvailablePhysicalMemory/1048576)<memory_floor:
         raise ValueError('RAM libre <%s MB; inspeccion geometrica no iniciada' % memory_floor)
     if os.path.exists(P['receipt_path']):raise ValueError('Ya hay recibo: inspeccionar, no repetir')
+    rectangles=selected_cavity_rectangles(P)
+    supplement=P.get('operation')=='supplement'
     host=doc.GetElement(DB.ElementId(System.Int64(P['floor_id'])))
     if not isinstance(host,DB.Floor):raise ValueError('Host no es Floor')
     if DB.PartUtils.HasAssociatedParts(doc,host.Id):raise ValueError('Host con Parts: requiere auditoria de sus armados')
-    if list(DB.InstanceVoidCutUtils.GetCuttingVoidInstances(host)):
-        raise ValueError('Host ya aligerado o con corte de familia')
+    old_voids=set(int(i.Value) for i in DB.InstanceVoidCutUtils.GetCuttingVoidInstances(host))
+    if old_voids!=set(P.get('expected_void_ids',[])):
+        raise ValueError('Cortes de familia distintos del estado esperado')
     host_data=DB.Structure.RebarHostData.GetRebarHostData(host)
     reinforcement_methods=['GetRebarsInHost','GetAreaReinforcementsInHost','GetPathReinforcementsInHost',
                            'GetFabricAreasInHost','GetFabricSheetsInHost','GetRebarContainersInHost']
@@ -141,7 +171,8 @@ def _run(doc, uidoc, DB, P, owned):
     top=faces[0].Origin.Z
     if any(abs(f.Origin.Z-top)>1e-7 for f in faces):raise ValueError('Caras superiores no coplanares')
     bottom=[host.GetGeometryObjectFromReference(r) for r in DB.HostObjectUtils.GetBottomFaces(host)]
-    if not bottom or any(not isinstance(f,DB.PlanarFace) or abs(f.FaceNormal.Z+1)>1e-9 or abs(f.Origin.Z-(top-h/.3048))>1e-7 for f in bottom):
+    bottom_levels=[top-h/.3048]+([top-P['topping_m']/.3048] if supplement else [])
+    if not bottom or any(not isinstance(f,DB.PlanarFace) or abs(f.FaceNormal.Z+1)>1e-9 or min(abs(f.Origin.Z-z_) for z_ in bottom_levels)>1e-7 for f in bottom):
         raise ValueError('Cara inferior no confirma espesor uniforme')
     z=top-h/.3048;depth=(h-P['topping_m'])/.3048
     warnings_before=set((w.GetDescriptionText(),tuple(sorted(int(i.Value) for i in w.GetFailingElements()))) for w in doc.GetWarnings())
@@ -206,7 +237,7 @@ def _run(doc, uidoc, DB, P, owned):
         intersection=DB.BooleanOperationsUtils.ExecuteBooleanOperation(a,b_,DB.BooleanOperationsType.Intersect)
         try:return intersection.Volume
         finally:intersection.Dispose()
-    for rect in cavity_rectangles(b,P['section'],P['rib_m'],P['pitch_m'],P['border_m']):
+    for rect in rectangles:
         cube=DB.GeometryCreationUtilities.CreateExtrusionGeometry(List[DB.CurveLoop]([loop(rect)]),DB.XYZ.BasisZ,depth)
         try:
             volume=cube.Volume
@@ -221,6 +252,7 @@ def _run(doc, uidoc, DB, P, owned):
             (excluded if reason else accepted).append({'rect':rect,'reason':reason} if reason else rect)
         finally:cube.Dispose()
     if not accepted:raise ValueError('Ninguna cavidad segura')
+    if supplement and excluded:raise ValueError('Complemento incompleto: alguna celda no es segura')
     before=host.get_Parameter(DB.BuiltInParameter.HOST_VOLUME_COMPUTED).AsDouble()
     removed=sum((r[2]-r[0])*(r[3]-r[1])*(h-P['topping_m'])/.3048**3 for r in accepted)
     receipt={'host_id':P['floor_id'],'mark':host.get_Parameter(DB.BuiltInParameter.ALL_MODEL_MARK).AsString(),'section':section,
@@ -228,6 +260,8 @@ def _run(doc, uidoc, DB, P, owned):
         'geometry_reference_only':True,'rebar_created':False,'project_instances_per_floor':2}
     receipt['reinforcement_audit']=reinforcement_audit
     receipt['memory_floor_mb']=memory_floor
+    receipt['operation']='supplement' if supplement else 'new'
+    receipt['previous_void_ids']=sorted(old_voids)
     def write():
         with io.open(P['receipt_path'],'w',encoding='utf8') as f:f.write(text_type(json.dumps(receipt,indent=2)))
     if P.get('inspect_only',True):return receipt
@@ -244,6 +278,7 @@ def _run(doc, uidoc, DB, P, owned):
         # Close each temporary family immediately. No multiple family documents held.
         for solid in [False,True]:
             name='CDX_ALIG_%s_%s' % (P['floor_id'],'EPS' if solid else 'VOID')
+            if supplement:name+='_SUP_'+hashlib.sha256(json.dumps(rectangles).encode('utf8')).hexdigest()[:12]
             path=os.path.join(P['family_dir'],name+'.rfa')
             if os.path.exists(path):raise ValueError('Familia ya existe: inspeccionar antes de reintentar')
             fd=doc.Application.NewFamilyDocument(P['family_template']);ft=None
@@ -295,14 +330,16 @@ def _run(doc, uidoc, DB, P, owned):
             instance.get_Parameter(DB.BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS).Set('CDX:ALIGERADO:PROPUESTA;host=%s;cavidades=%s' % (P['floor_id'],len(accepted)))
             instances.append(instance)
         DB.InstanceVoidCutUtils.AddInstanceVoidCut(doc,host,instances[0])
-        type_name=section+' H=%.2f PROPUESTA host%s' % (h,P['floor_id'])
-        floor_type=next((t for t in DB.FilteredElementCollector(doc).OfClass(DB.FloorType) if t.get_Parameter(DB.BuiltInParameter.SYMBOL_NAME_PARAM).AsString()==type_name),None)
-        if floor_type is not None:raise ValueError('Tipo de propuesta ya existe: inspeccionar antes de reutilizar')
-        floor_type=doc.GetElement(host.GetTypeId()).Duplicate(type_name)
-        host.ChangeTypeId(floor_type.Id)
+        original_type_id=host.GetTypeId()
+        if not supplement:
+            type_name=section+' H=%.2f PROPUESTA host%s' % (h,P['floor_id'])
+            floor_type=next((t for t in DB.FilteredElementCollector(doc).OfClass(DB.FloorType) if t.get_Parameter(DB.BuiltInParameter.SYMBOL_NAME_PARAM).AsString()==type_name),None)
+            if floor_type is not None:raise ValueError('Tipo de propuesta ya existe: inspeccionar antes de reutilizar')
+            floor_type=doc.GetElement(host.GetTypeId()).Duplicate(type_name)
+            host.ChangeTypeId(floor_type.Id)
         receipt['new_families_autojoin_disabled']=True
         cp=host.get_Parameter(DB.BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS)
-        cp.Set((cp.AsString() or '')+' | CDX PROPUESTA ALIGERADA >16cm; topping5cm; ARMADO Y PESO POR REVALIDAR')
+        cp.Set((cp.AsString() or '')+(' | CDX COMPLEMENTO %s CELDAS; ARMADO Y PESO POR REVALIDAR' % len(accepted) if supplement else ' | CDX PROPUESTA ALIGERADA >16cm; topping5cm; ARMADO Y PESO POR REVALIDAR'))
         if tx.Commit()!=DB.TransactionStatus.Committed:raise ValueError('Corte no confirmado')
         # Structural floors can auto-join framing/columns during commit. Restore
         # only the newly introduced relations; never remove a pre-existing join.
@@ -321,6 +358,9 @@ def _run(doc, uidoc, DB, P, owned):
         after=host.get_Parameter(DB.BuiltInParameter.HOST_VOLUME_COMPUTED).AsDouble()
         if abs(after-(before-removed))>max(1e-6,removed*1e-6):raise ValueError('Volumen nativo distinto del esperado')
         if not DB.InstanceVoidCutUtils.InstanceVoidCutExists(host,instances[0]):raise ValueError('Corte ausente')
+        if set(int(i.Value) for i in DB.InstanceVoidCutUtils.GetCuttingVoidInstances(host))!=old_voids|{int(instances[0].Id.Value)}:
+            raise ValueError('Cortes previos modificados')
+        if supplement and host.GetTypeId()!=original_type_id:raise ValueError('Tipo de losa cambiado por complemento')
         receipt['cut_host_ids']=sorted(int(i.Value) for i in DB.InstanceVoidCutUtils.GetElementsBeingCut(instances[0]))
         if receipt['cut_host_ids']!=[P['floor_id']]:raise ValueError('El vacio corta un elemento ajeno')
         if host.get_Parameter(DB.BuiltInParameter.FLOOR_PARAM_IS_STRUCTURAL).AsInteger()!=structural_before:

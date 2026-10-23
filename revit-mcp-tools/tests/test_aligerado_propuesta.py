@@ -74,3 +74,27 @@ def test_restore_only_new_host_joins_without_discarding_existing_relations():
     assert tool.new_host_join_ids([1],[1],[1])==[]
     with pytest.raises(ValueError,match='previa'):tool.new_host_join_ids([1],[2],[1,2])
     with pytest.raises(ValueError,match='auditados'):tool.new_host_join_ids([1],[1,9],[1,2])
+
+
+def supplement_config():
+    config={'bounds_m':[0,0,4,4],'section':'2D','rib_m':.15,'pitch_m':.65,'border_m':.30,
+            'operation':'supplement','expected_void_ids':[123]}
+    config['supplement_rectangles_m']=tool.cavity_rectangles(config['bounds_m'],'2D',.15,.65,.30)[:2]
+    return config
+
+
+def test_supplement_only_selects_explicit_original_grid_cells():
+    config=supplement_config()
+    assert tool.selected_cavity_rectangles(config)==config['supplement_rectangles_m']
+
+
+@pytest.mark.parametrize('change', ['foreign','duplicate','missing_previous','unexpected_mode','new_with_previous','too_many'])
+def test_invalid_supplement_fails_before_model_change(change):
+    config=supplement_config()
+    if change=='foreign':config['supplement_rectangles_m'][0]=[.4,.4,.9,.9]
+    if change=='duplicate':config['supplement_rectangles_m']*=2
+    if change=='missing_previous':config['expected_void_ids']=[]
+    if change=='unexpected_mode':config['operation']='unknown'
+    if change=='new_with_previous':config['operation']='new'
+    if change=='too_many':config['supplement_rectangles_m']*=13
+    with pytest.raises(ValueError):tool.selected_cavity_rectangles(config)

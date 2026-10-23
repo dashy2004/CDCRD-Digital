@@ -5,9 +5,10 @@ varios volúmenes y propone sustituirla por instancias de familia independientes
 No sustituye familias VOID ni modifica los cortes de la losa. Cada pieza tiene
 un ElementId propio, dimensiones de tipo fijas y trazabilidad en Comentarios.
 
-Estado: implementación y pruebas de partición fuera de Revit. **Pendiente de
-ensayo nativo**; un test Python no acredita carga de RFA, geometría guardada ni
-cantidades visibles en una tabla de Revit.
+Estado: partición probada fuera de Revit y ejecución nativa en copias privadas
+de Revit 2027. Se verificaron simulación revertida, aplicación por paño,
+geometría protegida y guardado. La tabla consolidada también se creó y guardó
+con igualdad exacta entre sus elementos y el inventario nativo EPS.
 
 ## Contrato
 
@@ -41,9 +42,15 @@ geometría de todas las losas, vigas, columnas, muros, cimentaciones y otros
 modelos genéricos y se rechazan advertencias nuevas. El recibo diferencia
 inspección, simulación revertida, aplicación sin guardar y guardado confirmado.
 
-En una tabla de Modelos genéricos, filtrar familias `CDX_EPS_PIEZA_…`, mostrar
-Familia/Tipo, Comentarios, Recuento y Volumen. No incluir VOID. Las bovedillas
-anteriores que ya sean individuales necesitan otro filtro o tabla consolidada.
+`revit_eps_tabla(config)` inspecciona por defecto el inventario EPS de Modelos
+genéricos, incluidas familias anteriores, excluyendo VOID. Para crear una tabla
+nueva `CDX ...`, usar `apply: true`, `expected_digest` de esa inspección y
+`receipt_path` nuevo, además de las guardas de documento/PID/turno y originales.
+Exige una copia guardada. Agrupa por Familia/Tipo y muestra Recuento y Volumen
+en m3; comprueba que los IDs visibles sean exactamente los del inventario antes
+y después del commit. Guarda la copia. Un recibo existente bloquea reintentos.
+No altera tablas previas ni elementos físicos. Debe ejecutarse después de
+comprobar que cada EPS representa una sola pieza; no descompone conjuntos.
 La densidad/material comercial y el diseño estructural requieren validación
 independiente; esta operación conserva el volumen geométrico del EPS.
 
@@ -67,3 +74,24 @@ que Revit haya terminado de cargar ni que haya atendido una consulta nativa.
 Después de un timeout, conciliar el recibo y las solicitudes pendientes antes
 de reintentar. Este cambio no cancela eventos ya encolados ni instala una cura
 en caliente dentro de pyRevit.
+
+## Completar celdas omitidas
+
+`revit_aligerado_propuesta` admite `operation: "supplement"` para completar
+hasta 25 celdas explícitas de un paño previamente aligerado. Exige
+`supplement_rectangles_m` coincidentes con la retícula declarada y
+`expected_void_ids` iguales al conjunto de vacíos existente. Conserva el tipo
+de losa y sus vacíos anteriores; rechaza el lote completo si alguna celda no
+está contenida en hormigón o invade geometría protegida. Un ensayo nativo con
+rollback y una aplicación guardada confirmaron el complemento, sus volúmenes
+y la ausencia de cambios en vigas y vecinos. El armado y el cálculo siguen
+siendo una validación separada.
+
+Si la guarda de RAM detiene lotes, conciliar los recibos antes de reintentar.
+En la prueba nativa, guardar, cerrar y reabrir únicamente la copia liberó
+memoria temporal sin reducir la guarda. Esto exige confirmar que no haya
+cambios sin guardar ni transacciones pendientes y verificar persistencia.
+
+Las herramientas registradas en el código necesitan despliegue y recarga del
+servidor MCP para aparecer en otro cliente; ejecutar el módulo por el puente
+Python no demuestra que el catálogo del cliente ya se haya actualizado.

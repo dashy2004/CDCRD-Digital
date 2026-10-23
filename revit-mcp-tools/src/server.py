@@ -181,6 +181,11 @@ def revit_eps_individualizar(config: dict) -> dict:
     return _run_tool("eps_individualizar", config)
 
 
+@mcp.tool(description=_doc("eps_tabla"))
+def revit_eps_tabla(config: dict) -> dict:
+    return _run_tool("eps_tabla", config)
+
+
 @mcp.tool(description=_doc("inventario"))
 def revit_inventario(categories: list[str] = None, by_level: bool = False) -> dict:
     return _run_tool("inventario", {"categories": categories, "by_level": by_level})
