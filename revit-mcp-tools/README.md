@@ -12,6 +12,11 @@ Las herramientas `revit_dimensiones_losas`, `revit_aligerado_propuesta` y
 [Losas, dimensiones y coronaciones](docs/losas-muros-copia.md) para sus contratos,
 simulación, limitaciones geométricas y evidencia de validación requerida.
 
+`revit_eps_individualizar` prepara piezas EPS contables con controles de copia,
+dependencias y geometría. Es experimental y todavía requiere ensayo nativo:
+[contrato y límites](docs/eps-individuales.md). El descubrimiento del puerto usa
+`GET /routes/status`, sin encolar código de prueba en el hilo de Revit.
+
 ```
 cliente MCP --stdio--> src/server.py --HTTP--> pyRevit Routes (Revit.exe)
                                               /revit_mcp/execute_code/

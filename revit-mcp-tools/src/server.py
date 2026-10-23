@@ -25,10 +25,9 @@ Agregar una tool nueva = agregar el archivo y registrarla abajo en TOOLS.
 import json
 import os
 import re
-import sys
 import urllib.error
 import urllib.request
-from typing import Any, Optional
+from typing import Optional
 
 from mcp.server.fastmcp import FastMCP
 
@@ -65,31 +64,31 @@ def _post(port: int, code: str, description: str) -> dict:
 
 def _port() -> int:
     global _port_cache
-    probe = "print('__revit_tools_ok__')"
-    if _port_cache is not None:
-        try:
-            r = _post(_port_cache, probe, "sonda")
-            if "__revit_tools_ok__" in json.dumps(r):
-                return _port_cache
-        except Exception:
-            pass
-        _port_cache = None
+    # Transport discovery must not enqueue a Revit ExternalEvent. A loading
+    # model may accept HTTP while its native event loop is unavailable.
+    ports = list(range(BASE_PORT, BASE_PORT + PORT_SCAN))
+    if _port_cache in ports:
+        ports.remove(_port_cache)
+        ports.insert(0, _port_cache)
+    _port_cache = None
     errors = []
-    for p in range(BASE_PORT, BASE_PORT + PORT_SCAN):
+    for p in ports:
         try:
-            r = _post(p, probe, "sonda")
-            if "__revit_tools_ok__" in json.dumps(r):
+            req = urllib.request.Request("http://127.0.0.1:%d/routes/status" % p)
+            with urllib.request.urlopen(req, timeout=3) as response:
+                status = json.loads(response.read().decode("utf-8"))
+            if isinstance(status, dict) and status.get("session_id") and "Revit" in str(status.get("host", "")):
                 _port_cache = p
                 return p
-            errors.append("%d: respuesta inesperada" % p)
+            errors.append("%d: estado de transporte no reconocido" % p)
         except urllib.error.HTTPError as e:
             errors.append("%d: HTTP %s" % (p, e.code))
         except Exception as e:
             errors.append("%d: %s" % (p, type(e).__name__))
     raise RuntimeError(
-        "No responde /%s/execute_code/ en %d-%d. Verificar: Revit abierto con "
+        "No responde /routes/status en %d-%d. Verificar: Revit abierto con "
         "un documento, extension mcp-server-for-revit-python cargada, routes "
-        "habilitadas. Sondeo: %s" % (API, BASE_PORT, BASE_PORT + PORT_SCAN - 1, "; ".join(errors)))
+        "habilitadas. Sondeo: %s" % (BASE_PORT, BASE_PORT + PORT_SCAN - 1, "; ".join(errors)))
 
 
 # ----------------------------------------------------------------------
@@ -175,6 +174,11 @@ def revit_dimensiones_losas(config: dict) -> dict:
 @mcp.tool(description=_doc("aligerado_propuesta"))
 def revit_aligerado_propuesta(config: dict) -> dict:
     return _run_tool("aligerado_propuesta", config)
+
+
+@mcp.tool(description=_doc("eps_individualizar"))
+def revit_eps_individualizar(config: dict) -> dict:
+    return _run_tool("eps_individualizar", config)
 
 
 @mcp.tool(description=_doc("inventario"))
