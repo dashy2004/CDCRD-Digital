@@ -97,6 +97,15 @@ lote. Ambos tipos de transacción usan tratamiento de fallos sin diálogos; un
 fallo de limpieza/rollback se registra como `rollback_unverified` y exige revisar
 el estado antes de repetir. Ningún modo admite cortar hosts con acero existente.
 
+Las losas estructurales pueden crear uniones automáticas con hormigón durante el
+commit. Se registra el conjunto inicial de uniones y su sentido de corte. Si
+aparecen uniones nuevas, solo se deshacen las que pertenecen a vecinos auditados;
+se exige recuperar las relaciones iniciales y la geometría protegida antes de
+confirmar. Una unión previa perdida o un vecino ajeno al conjunto auditado
+rechaza el lote. El vacío debe cortar exclusivamente al host y su clasificación
+estructural debe conservarse. Las familias geométricas nuevas desactivan su
+unión automática con muros; esto es independiente de las autouniones de la losa.
+
 Los tests Python cubren contratos y guardas que no requieren Revit. La prueba real
 requiere una copia respaldada, simulación con rollback, aplicación, guardado,
 reapertura, auditoría de geometría y exportación de vistas inspeccionadas. Los RVT,

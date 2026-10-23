@@ -67,3 +67,10 @@ def test_low_memory_requires_bounded_complexity_and_explicit_opt_in():
     config['bounds_m']=[0,0,10,10]
     assert tool.memory_floor_mb(config)==1000
     with pytest.raises(ValueError):tool.memory_floor_mb({'memory_mode':'unlimited'})
+
+
+def test_restore_only_new_host_joins_without_discarding_existing_relations():
+    assert tool.new_host_join_ids([1],[1,2,3],[1,2,3])==[2,3]
+    assert tool.new_host_join_ids([1],[1],[1])==[]
+    with pytest.raises(ValueError,match='previa'):tool.new_host_join_ids([1],[2],[1,2])
+    with pytest.raises(ValueError,match='auditados'):tool.new_host_join_ids([1],[1,9],[1,2])

@@ -51,6 +51,14 @@ def cavity_rectangles(bounds, direction, rib, pitch, border):
     return result
 
 
+def new_host_join_ids(previous,current,protected_ids):
+    previous=set(previous);current=set(current)
+    if not previous.issubset(current):raise ValueError('Se perdio una union previa del host')
+    added=current-previous
+    if not added.issubset(set(protected_ids)):raise ValueError('Nueva union fuera de vecinos auditados')
+    return sorted(added)
+
+
 def memory_floor_mb(config):
     mode=config.get('memory_mode','normal')
     if mode not in ('normal','bounded'):raise ValueError('Modo de memoria desconocido')
@@ -111,6 +119,7 @@ def _run(doc, uidoc, DB, P, owned):
         reinforcement_audit[str(cls)]=count
     hp=host.get_Parameter(DB.BuiltInParameter.FLOOR_ATTR_THICKNESS_PARAM)
     h=hp.AsDouble()*.3048
+    structural_before=host.get_Parameter(DB.BuiltInParameter.FLOOR_PARAM_IS_STRUCTURAL).AsInteger()
     if abs(h-P['h_m'])>1e-6:raise ValueError('Espesor cambio')
     section=section_for_existing_thickness(h,P['section'])
     if section is None:raise ValueError('No supera umbral 0.16 m')
@@ -159,6 +168,7 @@ def _run(doc, uidoc, DB, P, owned):
     # the clones are disposed by run(), including on rejection/rollback.
     protected=[];neighbors=[];host_box=host.get_BoundingBox(None)
     joined=set(int(i.Value) for i in DB.JoinGeometryUtils.GetJoinedElements(doc,host))
+    join_order_before={i:bool(DB.JoinGeometryUtils.IsCuttingElementInJoin(doc,host,doc.GetElement(DB.ElementId(System.Int64(i))))) for i in joined}
     for bic in (DB.BuiltInCategory.OST_Floors,DB.BuiltInCategory.OST_StructuralFraming,
                 DB.BuiltInCategory.OST_StructuralColumns,DB.BuiltInCategory.OST_Walls,
                 DB.BuiltInCategory.OST_StructuralFoundation,DB.BuiltInCategory.OST_GenericModel,
@@ -241,6 +251,9 @@ def _run(doc, uidoc, DB, P, owned):
                 ft=DB.Transaction(fd,'CDX: paquete geometrico');ft.Start()
                 ft.SetFailureHandlingOptions(ft.GetFailureHandlingOptions().SetFailuresPreprocessor(Reject()).SetClearAfterRollback(True))
                 fd.FamilyManager.NewType('PROPUESTA_'+section)
+                autojoin=fd.OwnerFamily.get_Parameter(DB.BuiltInParameter.FAMILY_AUTOJOIN)
+                if autojoin is None or autojoin.IsReadOnly:raise ValueError('Plantilla no permite desactivar union automatica')
+                autojoin.Set(0)
                 if not solid:fd.OwnerFamily.get_Parameter(DB.BuiltInParameter.FAMILY_ALLOW_CUT_WITH_VOIDS).Set(1)
                 sp=DB.SketchPlane.Create(fd,DB.Plane.CreateByNormalAndOrigin(DB.XYZ.BasisZ,DB.XYZ.Zero))
                 profile=DB.CurveArrArray()
@@ -287,14 +300,35 @@ def _run(doc, uidoc, DB, P, owned):
         if floor_type is not None:raise ValueError('Tipo de propuesta ya existe: inspeccionar antes de reutilizar')
         floor_type=doc.GetElement(host.GetTypeId()).Duplicate(type_name)
         host.ChangeTypeId(floor_type.Id)
+        receipt['new_families_autojoin_disabled']=True
         cp=host.get_Parameter(DB.BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS)
         cp.Set((cp.AsString() or '')+' | CDX PROPUESTA ALIGERADA >16cm; topping5cm; ARMADO Y PESO POR REVALIDAR')
         if tx.Commit()!=DB.TransactionStatus.Committed:raise ValueError('Corte no confirmado')
+        # Structural floors can auto-join framing/columns during commit. Restore
+        # only the newly introduced relations; never remove a pre-existing join.
+        added_joins=new_host_join_ids(joined,[int(i.Value) for i in DB.JoinGeometryUtils.GetJoinedElements(doc,host)],
+            [i for i,ss,fp in protected])
+        receipt['restored_new_host_joins']=added_joins
+        if added_joins:
+            tx.Dispose();tx=DB.Transaction(doc,'CDX: restaurar relaciones previas del host');tx.Start()
+            tx.SetFailureHandlingOptions(tx.GetFailureHandlingOptions().SetFailuresPreprocessor(Reject()).SetClearAfterRollback(True))
+            for i in added_joins:DB.JoinGeometryUtils.UnjoinGeometry(doc,host,doc.GetElement(DB.ElementId(System.Int64(i))))
+            if tx.Commit()!=DB.TransactionStatus.Committed:raise ValueError('Restauracion de uniones no confirmada')
+        if set(int(i.Value) for i in DB.JoinGeometryUtils.GetJoinedElements(doc,host))!=joined:
+            raise ValueError('Relaciones del host distintas a las previas')
+        if any(bool(DB.JoinGeometryUtils.IsCuttingElementInJoin(doc,host,doc.GetElement(DB.ElementId(System.Int64(i)))))!=cutting for i,cutting in join_order_before.items()):
+            raise ValueError('Orden de union previa modificado')
         after=host.get_Parameter(DB.BuiltInParameter.HOST_VOLUME_COMPUTED).AsDouble()
         if abs(after-(before-removed))>max(1e-6,removed*1e-6):raise ValueError('Volumen nativo distinto del esperado')
         if not DB.InstanceVoidCutUtils.InstanceVoidCutExists(host,instances[0]):raise ValueError('Corte ausente')
+        receipt['cut_host_ids']=sorted(int(i.Value) for i in DB.InstanceVoidCutUtils.GetElementsBeingCut(instances[0]))
+        if receipt['cut_host_ids']!=[P['floor_id']]:raise ValueError('El vacio corta un elemento ajeno')
+        if host.get_Parameter(DB.BuiltInParameter.FLOOR_PARAM_IS_STRUCTURAL).AsInteger()!=structural_before:
+            raise ValueError('Clasificacion estructural modificada')
+        receipt['structural_flag']=structural_before
         receipt['protected_neighbors']=[i for i,ss,fp in protected]
         receipt['protected_geometry_changed']=[]
+        receipt['protected_geometry_deltas']=[]
         for i,old,fp in protected:
             e=doc.GetElement(DB.ElementId(System.Int64(i)))
             if e is None:raise ValueError('Vecino eliminado por regeneracion')
@@ -302,6 +336,10 @@ def _run(doc, uidoc, DB, P, owned):
             if fingerprint(current)==fp:continue
             common=sum(intersect_volume(a_,b_) for a_ in old for b_ in current)
             delta=sum(s.Volume for s in old)+sum(s.Volume for s in current)-2*common
+            joined_now=DB.JoinGeometryUtils.AreElementsJoined(doc,host,e)
+            receipt['protected_geometry_deltas'].append({'id':i,'delta_m3':delta*.3048**3,'before_m3':sum(s.Volume for s in old)*.3048**3,'after_m3':sum(s.Volume for s in current)*.3048**3,
+                'joined_host':bool(joined_now),'host_cuts_neighbor':bool(DB.JoinGeometryUtils.IsCuttingElementInJoin(doc,host,e)) if joined_now else None,
+                'cutting_voids':[int(v.Value) for v in DB.InstanceVoidCutUtils.GetCuttingVoidInstances(e)]})
             if abs(delta)>.00000001/.3048**3:receipt['protected_geometry_changed'].append(i)
         if receipt['protected_geometry_changed']:raise ValueError('Corte cambia geometria protegida; revertido')
         eps=element_solids(instances[1]);eps_box=instances[1].get_BoundingBox(None)
