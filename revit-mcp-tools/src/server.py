@@ -311,6 +311,21 @@ def revit_vistas_planta(levels: list[str] = None, kind: str = "estructural", pre
     return _run_tool("vistas_planta", p)
 
 
+@mcp.tool(description=_doc("encuentros_viga_muro"))
+def revit_encuentros_viga_muro(pairs: list[list[int]], expected_document: str,
+                               expected_pid: int, protected_documents: list[str],
+                               lock: dict, dry_run: bool = True,
+                               allowed_column_floor_joins: list[list[int]] = None,
+                               allowed_native_cleanup_ids: list[int] = None) -> dict:
+    return _run_tool("encuentros_viga_muro", {
+        "pairs": pairs, "expected_document": expected_document,
+        "expected_pid": expected_pid, "protected_documents": protected_documents,
+        "lock": lock, "dry_run": dry_run,
+        "allowed_column_floor_joins": allowed_column_floor_joins or [],
+        "allowed_native_cleanup_ids": allowed_native_cleanup_ids or [],
+    })
+
+
 @mcp.tool(description=_doc("laminas"))
 def revit_laminas(sheets: list[dict], titleblock: str = "", layout: str = "principal", strip_frac: float = 0.22,
                   margin_mm: float = 15.0, reserved_right_mm: float = 120.0, auto_scale: bool = True,

@@ -49,9 +49,11 @@ cliente MCP --stdio--> src/server.py --HTTP--> pyRevit Routes (Revit.exe)
 | `revit_acero_columnas` | nueva (regla por caras; `AceroColumnasC6` solo copiaba) | `dry_run` verificado; creación sin verificar |
 | `revit_ejecutar_tool` | genérica: cualquier `tools/<name>.py` | verificada por el harness |
 | `revit_listar_tools` | — | — |
+| `revit_encuentros_viga_muro` | aberturas nativas y uniones verificadas | nucleo probado en copia; [contrato y limites](ENCUENTROS_VIGA_MURO.md) |
 
-Todas las tools de escritura abren una sola transacción con rollback y
-devuelven conteos verificables. Ninguna guarda: llamar `revit_guardar_modelo`
+Las tools de escritura gestionan sus transacciones con rollback y
+devuelven conteos verificables. Encuentros viga-muro usa un grupo atomico de
+transacciones y compara solidos antes/despues. Ninguna guarda: llamar `revit_guardar_modelo`
 después de cada escritura (regla heredada del pushbutton GuardarModelo).
 
 ## Herramientas agregadas 2026-09-06: modelar, verificar, documentar, exportar
