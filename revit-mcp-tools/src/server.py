@@ -167,6 +167,16 @@ def revit_documentar_losas(config: dict) -> dict:
     return _run_tool("documentar_losas", config)
 
 
+@mcp.tool(description=_doc("dimensiones_losas"))
+def revit_dimensiones_losas(config: dict) -> dict:
+    return _run_tool("dimensiones_losas", config)
+
+
+@mcp.tool(description=_doc("aligerado_propuesta"))
+def revit_aligerado_propuesta(config: dict) -> dict:
+    return _run_tool("aligerado_propuesta", config)
+
+
 @mcp.tool(description=_doc("inventario"))
 def revit_inventario(categories: list[str] = None, by_level: bool = False) -> dict:
     return _run_tool("inventario", {"categories": categories, "by_level": by_level})
@@ -461,6 +471,12 @@ def revit_ejecutar_tool(name: str, params: dict = None) -> dict:
     parametros. Es la via para tools nuevas que todavia no tienen wrapper:
     basta con crear tools/<name>.py con run(doc, uidoc, DB, P)."""
     return _run_tool(name, params or {})
+
+
+@mcp.tool(description=_doc("coronar_muros"))
+def revit_coronar_muros(config: dict) -> dict:
+    """Inspecciona, ensaya o aplica coronaciones en la copia y turno declarados."""
+    return _run_tool("coronar_muros", config)
 
 
 @mcp.tool()

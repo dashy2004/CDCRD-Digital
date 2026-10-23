@@ -7,6 +7,11 @@ funciones puras `run(doc, uidoc, DB, P) -> dict`, enviadas por el canal
 `mcp-server-for-revit-python`). No requiere tocar pyRevit ni reiniciar Revit
 para agregar una herramienta.
 
+Las herramientas `revit_dimensiones_losas`, `revit_aligerado_propuesta` y
+`revit_coronar_muros` trabajan con copias y guardas explícitas. Véase
+[Losas, dimensiones y coronaciones](docs/losas-muros-copia.md) para sus contratos,
+simulación, limitaciones geométricas y evidencia de validación requerida.
+
 ```
 cliente MCP --stdio--> src/server.py --HTTP--> pyRevit Routes (Revit.exe)
                                               /revit_mcp/execute_code/
