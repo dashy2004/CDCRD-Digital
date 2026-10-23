@@ -16,7 +16,7 @@ jobs:
       - run: python -m pytest servidor-mcp-safe/tests -q
       - run: python -m pytest servidor-mcp-civil3d/tests -q
       - name: Civil3D / CSI coordinate exchange contracts (no live applications)
-        run: python -m pytest herramientas-locales/tests/test_foundation_exchange.py -q
+        run: python -m pytest herramientas-locales/tests/test_foundation_exchange.py herramientas-locales/tests/test_civil_csi_mcp_runner.py -q
         env:
           PYTHONPATH: herramientas-locales/src
   normative-integrity:

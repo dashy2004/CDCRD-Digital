@@ -40,7 +40,8 @@ def get_config() -> str:
 
 
 safe = Safe(auto_start=config.autoStart, exe_path=config.exePath,
-           prog_id=config.progId, helper_prog_id=config.helperProgId)
+           prog_id=config.progId, helper_prog_id=config.helperProgId,
+           process_id=config.processId)
 logger.info("Registrando herramientas de SAFE...")
 
 # Conexion / introspeccion

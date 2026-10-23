@@ -112,7 +112,10 @@ IMPORT_TYPES = {
 
 class Safe:
     def __init__(self, auto_start: bool = False, exe_path: str = "",
-                 prog_id: str = "", helper_prog_id: str = ""):
+                 prog_id: str = "", helper_prog_id: str = "", process_id: int = 0):
+        if type(process_id) is not int or process_id < 0:
+            raise ValueError('process_id debe ser 0 (automatico) o un PID positivo')
+        self.process_id = process_id
         self.SapModel = None
         self._safe_object = None
         self.auto_start = auto_start
@@ -123,6 +126,8 @@ class Safe:
         # unico; si no, se sondea la lista completa de candidatos.
         self._prog_id_list = [prog_id] if prog_id else list(_PROGID_CANDIDATES)
         self._helper_list = [helper_prog_id] if helper_prog_id else list(_HELPER_CANDIDATES)
+        self._process_prog_id = prog_id or "CSI.SAFE.API.ETABSObject"
+        self._process_helper_id = helper_prog_id or "SAFEv1.Helper"
         # Conexion perezosa: el servidor debe poder arrancar aunque SAFE
         # todavia no este abierto.
 
@@ -140,6 +145,37 @@ class Safe:
                 logger.warning("Referencia a SAFE invalida (%s). Reconectando.", e)
                 self.SapModel = None
                 self._safe_object = None
+
+        # Un PID explicito nunca permite ROT, GetObject ni auto_start: esas
+        # rutas podrian seleccionar otro modelo abierto.
+        if self.process_id:
+            try:
+                helper = comtypes.client.CreateObject(self._process_helper_id)
+                try:
+                    import comtypes.gen.SAFEv1 as SAFEv1
+                    helper = helper.QueryInterface(SAFEv1.cHelper)
+                except ImportError:
+                    pass
+                safe_object = helper.GetObjectProcess(self._process_prog_id, self.process_id)
+                if not safe_object:
+                    raise SafeError('GetObjectProcess no devolvio instancia')
+                model = safe_object.SapModel
+                model.GetModelFilename()
+            except Exception as exc:
+                self.SapModel = None
+                self._safe_object = None
+                raise SafeError(f'No se pudo conectar al PID SAFE {self.process_id}; '
+                                f'no se usara otra instancia: {exc}') from exc
+            self.SapModel = model
+            self._safe_object = safe_object
+            self._prog_id_used = self._process_prog_id
+            try:
+                self.version_string = str(safe_object.GetOAPIVersionNumber())
+            except Exception:
+                self.version_string = "desconocida"
+            logger.info("SAFE conectado al PID %s (ProgID '%s'). OAPI version: %s",
+                        self.process_id, self._prog_id_used, self.version_string)
+            return
 
         safe_object = None
         intentos: list[str] = []
