@@ -9,7 +9,7 @@ Omite cavidades que no quepan completamente en el solido real (shafts/uniones).
 Conserva una familia de vacios y una de EPS por pano: geometria editable en
 familia, sin crear una instancia de proyecto por cada bloque.
 """
-import io,json,math,os
+import io,json,math,os,hashlib
 try:
     text_type=unicode
 except NameError:
@@ -51,7 +51,22 @@ def cavity_rectangles(bounds, direction, rib, pitch, border):
     return result
 
 
+def memory_floor_mb(config):
+    mode=config.get('memory_mode','normal')
+    if mode not in ('normal','bounded'):raise ValueError('Modo de memoria desconocido')
+    if mode=='normal':return 1000
+    count=len(cavity_rectangles(config['bounds_m'],config['section'],config['rib_m'],config['pitch_m'],config['border_m']))
+    return 768 if count<=150 else 1000
+
+
 def run(doc, uidoc, DB, P):
+    owned=[]
+    try:return _run(doc,uidoc,DB,P,owned)
+    finally:
+        for solid in owned:solid.Dispose()
+
+
+def _run(doc, uidoc, DB, P, owned):
     import clr,System
     from System.Collections.Generic import List
     clr.AddReference('Microsoft.VisualBasic')
@@ -64,12 +79,13 @@ def run(doc, uidoc, DB, P):
         raise ValueError('PID diferente')
     with io.open(P['lock_path'],encoding='utf-8-sig') as stream:
         lock=json.load(stream)
-    if lock.get('state')!='active' or not all(P.get('lock_identity',{}).get(k) and P['lock_identity'][k]==lock.get(k) for k in ['owner','session','task']):
+    if lock.get('state')!='active' or lock.get('process_id')!=P['expected_pid'] or not all(P.get('lock_identity',{}).get(k) and P['lock_identity'][k]==lock.get(k) for k in ['owner','session','task']):
         raise ValueError('Turno diferente')
-    if P.get('geometry_reference_authorized') is not True or doc.IsModifiable or doc.IsReadOnly:
+    if P.get('geometry_reference_authorized') is not True or doc.IsModifiable or doc.IsReadOnly or doc.IsWorkshared:
         raise ValueError('Se requiere propuesta autorizada y documento editable')
-    if int(ComputerInfo().AvailablePhysicalMemory/1048576)<1000:
-        raise ValueError('RAM libre <1000 MB; inspeccion geometrica no iniciada')
+    memory_floor=memory_floor_mb(P)
+    if int(ComputerInfo().AvailablePhysicalMemory/1048576)<memory_floor:
+        raise ValueError('RAM libre <%s MB; inspeccion geometrica no iniciada' % memory_floor)
     if os.path.exists(P['receipt_path']):raise ValueError('Ya hay recibo: inspeccionar, no repetir')
     host=doc.GetElement(DB.ElementId(System.Int64(P['floor_id'])))
     if not isinstance(host,DB.Floor):raise ValueError('Host no es Floor')
@@ -128,6 +144,39 @@ def run(doc, uidoc, DB, P):
                 for s in solids(g.GetInstanceGeometry()):yield s
     host_solids=list(solids(host.get_Geometry(options)))
     if not host_solids:raise ValueError('Sin solido nativo')
+    def element_solids(e):
+        geo=e.get_Geometry(options)
+        return list(solids(geo)) if geo else []
+    def fingerprint(ss):
+        rows=[]
+        for s in ss:
+            pts=sorted(set(tuple(round(float(v),7) for v in (p.X,p.Y,p.Z)) for edge in s.Edges for p in edge.Tessellate()))
+            rows.append([round(s.Volume,7),pts,sorted(round(f.Area,7) for f in s.Faces)])
+        return hashlib.sha256(json.dumps(sorted(rows),sort_keys=True).encode('utf8')).hexdigest()
+    def overlaps(a,b_):
+        return a and b_ and all(min(getattr(a.Max,c),getattr(b_.Max,c))-max(getattr(a.Min,c),getattr(b_.Min,c))>1e-8 for c in ('X','Y','Z'))
+    # Clone only adjacent structure. Family documents are closed sequentially and
+    # the clones are disposed by run(), including on rejection/rollback.
+    protected=[];neighbors=[];host_box=host.get_BoundingBox(None)
+    joined=set(int(i.Value) for i in DB.JoinGeometryUtils.GetJoinedElements(doc,host))
+    for bic in (DB.BuiltInCategory.OST_Floors,DB.BuiltInCategory.OST_StructuralFraming,
+                DB.BuiltInCategory.OST_StructuralColumns,DB.BuiltInCategory.OST_Walls,
+                DB.BuiltInCategory.OST_StructuralFoundation,DB.BuiltInCategory.OST_GenericModel,
+                DB.BuiltInCategory.OST_Rebar):
+        for e in DB.FilteredElementCollector(doc).OfCategory(bic).WhereElementIsNotElementType():
+            if e.Id==host.Id:continue
+            eb=e.get_BoundingBox(None)
+            contact=host_box and eb and all(min(getattr(host_box.Max,c),getattr(eb.Max,c))-max(getattr(host_box.Min,c),getattr(eb.Min,c))>=-1e-7 for c in ('X','Y','Z'))
+            if not contact and int(e.Id.Value) not in joined:continue
+            neighbors.append(e)
+    if memory_floor<1000 and len(neighbors)>40:
+        raise ValueError('Modo acotado admite hasta 40 vecinos; usar modo normal')
+    for e in neighbors:
+        ss=[]
+        for s in element_solids(e):
+            clone=DB.SolidUtils.CreateTransformed(s,DB.Transform.Identity)
+            owned.append(clone);ss.append(clone)
+        protected.append((int(e.Id.Value),ss,fingerprint(ss)))
     def loop(rect, local=False):
         a,c,b_,d=rect;ox=b[0] if local else 0;oy=b[1] if local else 0
         pts=[DB.XYZ((x-ox)/.3048,(y-oy)/.3048,0 if local else z) for x,y in [(a,c),(b_,c),(b_,d),(a,d)]]
@@ -149,17 +198,18 @@ def run(doc, uidoc, DB, P):
         finally:intersection.Dispose()
     for rect in cavity_rectangles(b,P['section'],P['rib_m'],P['pitch_m'],P['border_m']):
         cube=DB.GeometryCreationUtilities.CreateExtrusionGeometry(List[DB.CurveLoop]([loop(rect)]),DB.XYZ.BasisZ,depth)
-        volume=cube.Volume
-        intersection=sum(intersect_volume(s,cube) for s in host_solids)
-        reason=None
-        if abs(intersection-volume)>max(1e-7,volume*1e-6):reason='hueco_o_borde_fuera_del_host'
-        if reason is None:
-            for eb,ss in nearby:
-                if eb.Max.X<=rect[0]/.3048 or eb.Min.X>=rect[2]/.3048 or eb.Max.Y<=rect[1]/.3048 or eb.Min.Y>=rect[3]/.3048:continue
-                if any(intersect_volume(s,cube)>1e-7 for s in ss):
-                    reason='interferencia_con_elemento_existente';break
-        (excluded if reason else accepted).append({'rect':rect,'reason':reason} if reason else rect)
-        cube.Dispose()
+        try:
+            volume=cube.Volume
+            intersection=sum(intersect_volume(s,cube) for s in host_solids)
+            reason=None
+            if abs(intersection-volume)>max(1e-7,volume*1e-6):reason='hueco_o_borde_fuera_del_host'
+            if reason is None:
+                for eb,ss in nearby:
+                    if eb.Max.X<=rect[0]/.3048 or eb.Min.X>=rect[2]/.3048 or eb.Max.Y<=rect[1]/.3048 or eb.Min.Y>=rect[3]/.3048:continue
+                    if any(intersect_volume(s,cube)>1e-7 for s in ss):
+                        reason='interferencia_con_elemento_existente';break
+            (excluded if reason else accepted).append({'rect':rect,'reason':reason} if reason else rect)
+        finally:cube.Dispose()
     if not accepted:raise ValueError('Ninguna cavidad segura')
     before=host.get_Parameter(DB.BuiltInParameter.HOST_VOLUME_COMPUTED).AsDouble()
     removed=sum((r[2]-r[0])*(r[3]-r[1])*(h-P['topping_m'])/.3048**3 for r in accepted)
@@ -167,12 +217,18 @@ def run(doc, uidoc, DB, P):
         'cavities':len(accepted),'excluded':excluded,'before_m3':before*.3048**3,'expected_after_m3':(before-removed)*.3048**3,'status':'inspected',
         'geometry_reference_only':True,'rebar_created':False,'project_instances_per_floor':2}
     receipt['reinforcement_audit']=reinforcement_audit
+    receipt['memory_floor_mb']=memory_floor
     def write():
         with io.open(P['receipt_path'],'w',encoding='utf8') as f:f.write(text_type(json.dumps(receipt,indent=2)))
     if P.get('inspect_only',True):return receipt
-    if int(ComputerInfo().AvailablePhysicalMemory/1048576)<1000:
-        raise ValueError('RAM libre <1000 MB; lote no iniciado')
+    if int(ComputerInfo().AvailablePhysicalMemory/1048576)<memory_floor:
+        raise ValueError('RAM libre <%s MB; lote no iniciado' % memory_floor)
     receipt['status']='started';write()
+    failures=[]
+    class Reject(DB.IFailuresPreprocessor):
+        def PreprocessFailures(self,accessor):
+            messages=list(accessor.GetFailureMessages());failures.extend(m.GetDescriptionText() for m in messages)
+            return DB.FailureProcessingResult.ProceedWithRollBack if messages else DB.FailureProcessingResult.Continue
     files=[];tx=None;group=None
     try:
         # Close each temporary family immediately. No multiple family documents held.
@@ -183,6 +239,7 @@ def run(doc, uidoc, DB, P):
             fd=doc.Application.NewFamilyDocument(P['family_template']);ft=None
             try:
                 ft=DB.Transaction(fd,'CDX: paquete geometrico');ft.Start()
+                ft.SetFailureHandlingOptions(ft.GetFailureHandlingOptions().SetFailuresPreprocessor(Reject()).SetClearAfterRollback(True))
                 fd.FamilyManager.NewType('PROPUESTA_'+section)
                 if not solid:fd.OwnerFamily.get_Parameter(DB.BuiltInParameter.FAMILY_ALLOW_CUT_WITH_VOIDS).Set(1)
                 sp=DB.SketchPlane.Create(fd,DB.Plane.CreateByNormalAndOrigin(DB.XYZ.BasisZ,DB.XYZ.Zero))
@@ -199,10 +256,23 @@ def run(doc, uidoc, DB, P):
                 if ft.Commit()!=DB.TransactionStatus.Committed:raise ValueError('Familia no confirmada')
                 save=DB.SaveAsOptions();save.OverwriteExistingFile=False;fd.SaveAs(path,save);files.append((name,path))
             finally:
-                if ft is not None and ft.GetStatus()==DB.TransactionStatus.Started:ft.RollBack()
-                fd.Close(False)
+                cleanup_errors=[]
+                try:
+                    if ft is not None and ft.GetStatus()==DB.TransactionStatus.Started and ft.RollBack()!=DB.TransactionStatus.RolledBack:
+                        cleanup_errors.append('Rollback de familia no confirmado')
+                except Exception as cleanup_error:cleanup_errors.append(str(cleanup_error))
+                try:
+                    if ft is not None:ft.Dispose()
+                except Exception as cleanup_error:cleanup_errors.append(str(cleanup_error))
+                try:
+                    if not fd.Close(False):cleanup_errors.append('Familia no cerrada')
+                except Exception as cleanup_error:cleanup_errors.append(str(cleanup_error))
+                if cleanup_errors:
+                    receipt['family_cleanup_errors']=cleanup_errors
+                    raise ValueError('Estado de familia no confirmado: '+'; '.join(cleanup_errors))
         group=DB.TransactionGroup(doc,'CDX: propuesta aligerada acotada');group.Start()
         tx=DB.Transaction(doc,'CDX: familias y corte de un solo host');tx.Start()
+        tx.SetFailureHandlingOptions(tx.GetFailureHandlingOptions().SetFailuresPreprocessor(Reject()).SetClearAfterRollback(True))
         instances=[]
         for name,path in files:
             ref=clr.Reference[DB.Family]()
@@ -223,14 +293,49 @@ def run(doc, uidoc, DB, P):
         after=host.get_Parameter(DB.BuiltInParameter.HOST_VOLUME_COMPUTED).AsDouble()
         if abs(after-(before-removed))>max(1e-6,removed*1e-6):raise ValueError('Volumen nativo distinto del esperado')
         if not DB.InstanceVoidCutUtils.InstanceVoidCutExists(host,instances[0]):raise ValueError('Corte ausente')
+        receipt['protected_neighbors']=[i for i,ss,fp in protected]
+        receipt['protected_geometry_changed']=[]
+        for i,old,fp in protected:
+            e=doc.GetElement(DB.ElementId(System.Int64(i)))
+            if e is None:raise ValueError('Vecino eliminado por regeneracion')
+            current=element_solids(e)
+            if fingerprint(current)==fp:continue
+            common=sum(intersect_volume(a_,b_) for a_ in old for b_ in current)
+            delta=sum(s.Volume for s in old)+sum(s.Volume for s in current)-2*common
+            if abs(delta)>.00000001/.3048**3:receipt['protected_geometry_changed'].append(i)
+        if receipt['protected_geometry_changed']:raise ValueError('Corte cambia geometria protegida; revertido')
+        eps=element_solids(instances[1]);eps_box=instances[1].get_BoundingBox(None)
+        if abs(sum(s.Volume for s in eps)-removed)>max(1e-6,removed*1e-6):raise ValueError('EPS nativo distinto de las cavidades')
+        receipt['eps_structure_collisions']=[]
+        for bic in (DB.BuiltInCategory.OST_Walls,DB.BuiltInCategory.OST_StructuralFraming,
+                    DB.BuiltInCategory.OST_StructuralColumns,DB.BuiltInCategory.OST_Floors,
+                    DB.BuiltInCategory.OST_StructuralFoundation):
+            for e in DB.FilteredElementCollector(doc).OfCategory(bic).WhereElementIsNotElementType():
+                if not overlaps(eps_box,e.get_BoundingBox(None)):continue
+                volume=sum(intersect_volume(a_,b_) for a_ in eps for b_ in element_solids(e))*.3048**3
+                if volume>1e-8:receipt['eps_structure_collisions'].append({'id':int(e.Id.Value),'m3':volume})
+        if receipt['eps_structure_collisions']:raise ValueError('EPS invade estructura; revertido')
         warnings_after=set((w.GetDescriptionText(),tuple(sorted(int(i.Value) for i in w.GetFailingElements()))) for w in doc.GetWarnings())
         if warnings_after-warnings_before:raise ValueError('Nuevas advertencias; lote revertido')
+        receipt['family_paths']=[p for n,p in files]
+        if P.get('simulate_only') is True:
+            if group.RollBack()!=DB.TransactionStatus.RolledBack:raise ValueError('Simulacion no revertida')
+            receipt.update(status='simulation_passed_rolled_back',after_m3=after*.3048**3);write()
+            return receipt
         if group.Assimilate()!=DB.TransactionStatus.Committed:raise ValueError('Grupo no confirmado')
         receipt.update(status='applied',after_m3=after*.3048**3,instance_ids=[int(e.Id.Value) for e in instances],family_paths=[p for n,p in files])
         write()
         doc.Save();receipt['saved']=not doc.IsModified;write()
         return receipt
     except Exception as exc:
-        if tx is not None and tx.GetStatus()==DB.TransactionStatus.Started:tx.RollBack()
-        if group is not None and group.GetStatus()==DB.TransactionStatus.Started:group.RollBack()
-        receipt.update(status='error_inspect_before_retry',error=str(exc));write();raise
+        rollback_errors=[]
+        for item in (tx,group):
+            try:
+                if item is not None and item.GetStatus()==DB.TransactionStatus.Started and item.RollBack()!=DB.TransactionStatus.RolledBack:
+                    rollback_errors.append('Estado de rollback no confirmado')
+            except Exception as rollback_error:rollback_errors.append(str(rollback_error))
+        status='rollback_unverified' if rollback_errors or receipt.get('family_cleanup_errors') else 'applied_unsaved' if receipt.get('status')=='applied' else 'error_inspect_before_retry'
+        receipt.update(status=status,error=str(exc),failures=failures,rollback_errors=rollback_errors);write();raise
+    finally:
+        if tx is not None:tx.Dispose()
+        if group is not None:group.Dispose()

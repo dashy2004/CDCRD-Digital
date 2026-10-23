@@ -41,3 +41,29 @@ def test_one_way_cavities_run_along_short_span():
 @pytest.mark.parametrize('bounds,rib,pitch,border',[([0,0,8,3],.15,.1,.3),([0,0,8,3],.15,.65,0),([0,0,8,.5],.15,.65,.3)])
 def test_invalid_modulation_rejected(bounds,rib,pitch,border):
     with pytest.raises(ValueError):tool.cavity_rectangles(bounds,'2D',rib,pitch,border)
+
+
+@pytest.mark.parametrize('reject',[False,True])
+def test_owned_geometry_disposed_after_success_or_rejection(monkeypatch,reject):
+    disposed=[]
+    class Solid:
+        def Dispose(self):disposed.append(True)
+    def native_run(doc,uidoc,db,config,owned):
+        owned.append(Solid())
+        if reject:raise ValueError('geometry rejected')
+        return {'status':'applied'}
+    monkeypatch.setattr(tool,'_run',native_run)
+    if reject:
+        with pytest.raises(ValueError,match='geometry rejected'):tool.run(None,None,None,{})
+    else:
+        assert tool.run(None,None,None,{})=={'status':'applied'}
+    assert disposed==[True]
+
+
+def test_low_memory_requires_bounded_complexity_and_explicit_opt_in():
+    assert tool.memory_floor_mb({})==1000
+    config={'memory_mode':'bounded','bounds_m':[0,0,7,5],'section':'2D','rib_m':.15,'pitch_m':.65,'border_m':.30}
+    assert tool.memory_floor_mb(config)==768
+    config['bounds_m']=[0,0,10,10]
+    assert tool.memory_floor_mb(config)==1000
+    with pytest.raises(ValueError):tool.memory_floor_mb({'memory_mode':'unlimited'})

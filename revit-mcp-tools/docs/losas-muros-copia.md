@@ -79,6 +79,24 @@ indica cambios confirmados cuyo guardado no se pudo verificar. Solo `applied` co
 
 ## Alcance de las pruebas
 
+El aligerado conserva instantáneas de los vecinos que se solapan, tocan o están
+unidos al host. Tras el corte compara sólidos nativos; si solo cambia la
+partición de caras, contrasta la diferencia booleana. Comprueba además el volumen
+real del EPS y sus intersecciones con muros, vigas, columnas, cimentaciones y
+losas. Un cambio protegido o una interferencia revierte el grupo completo.
+`simulate_only=true` ejecuta estas comprobaciones y revierte el proyecto; las RFA
+del ensayo permanecen en la carpeta declarada y se listan en el recibo.
+
+El modo de memoria predeterminado exige 1000 MiB libres. `memory_mode="bounded"`
+permite 768 MiB únicamente para hasta 150 cavidades y 40 vecinos. El recuento de
+vecinos precede a la extracción/clonado de sólidos. Un paño mayor conserva el
+umbral de 1000 MiB; demasiados vecinos rechazan el modo acotado. Sigue siendo una
+losa por operación, con dos instancias y documentos de familia cerrados de forma
+secuencial. No hay modo sin límite. Los clones se liberan también al rechazar un
+lote. Ambos tipos de transacción usan tratamiento de fallos sin diálogos; un
+fallo de limpieza/rollback se registra como `rollback_unverified` y exige revisar
+el estado antes de repetir. Ningún modo admite cortar hosts con acero existente.
+
 Los tests Python cubren contratos y guardas que no requieren Revit. La prueba real
 requiere una copia respaldada, simulación con rollback, aplicación, guardado,
 reapertura, auditoría de geometría y exportación de vistas inspeccionadas. Los RVT,
