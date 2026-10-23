@@ -46,6 +46,7 @@ logger.info("Registrando herramientas de SAFE...")
 # Conexion / introspeccion
 get_model_info = mcp.tool()(safe.get_model_info)
 get_units = mcp.tool()(safe.get_units)
+get_coordinate_snapshot = mcp.tool()(safe.get_coordinate_snapshot)
 set_units = mcp.tool()(safe.set_units)
 save_model = mcp.tool()(safe.save_model)
 refresh_view = mcp.tool()(safe.refresh_view)

@@ -17,6 +17,13 @@ rasterizar con pdftoppm (o usar ver_vista sobre la lamina) y leerlo con vision (
 """
 
 
+def _pdf_paper_enum_name(paper):
+    """ISO A sizes only; ARCH_D/ANSI_D also start with A but are not ISO."""
+    import re
+    paper = str(paper).upper()
+    return 'ISO_' + paper if re.match(r'^A[0-9]+$', paper) else paper
+
+
 def run(doc, uidoc, DB, P):
     import os
     folder = P.get("folder")
@@ -51,7 +58,7 @@ def run(doc, uidoc, DB, P):
     paper = str(P.get("paper", "default"))
     if paper.lower() != "default":
         try:
-            o.PaperFormat = getattr(DB.ExportPaperFormat, "ISO_" + paper) if paper.startswith("A") else getattr(DB.ExportPaperFormat, paper)
+            o.PaperFormat = getattr(DB.ExportPaperFormat, _pdf_paper_enum_name(paper))
         except Exception:
             raise Exception("paper no reconocido: %s" % paper)
     else:

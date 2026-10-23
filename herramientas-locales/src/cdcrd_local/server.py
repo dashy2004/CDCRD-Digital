@@ -121,6 +121,24 @@ def pdf_previsualizar(entrada_pdf: str, salida_png: str, pagina: int = 1, dpi: i
     return preview_pdf(input_path(entrada_pdf), output_path(salida_png), pagina, dpi)
 
 
+@mcp.tool()
+def cimentacion_preparar_consulta(snapshot_json: str, configuracion_json: str,
+                                  salida_json: str) -> dict:
+    """Transforma puntos CSI con controles explicitos; genera consulta TIN, sin modelos vivos."""
+    from .foundation_exchange import run_files
+    return run_files("prepare", input_path(snapshot_json), input_path(configuracion_json),
+                     output_path(salida_json))
+
+
+@mcp.tool()
+def cimentacion_revisar_cotas(consulta_json: str, muestras_json: str, salida_json: str,
+                             geotecnia_json: str | None = None) -> dict:
+    """Compara cotas TIN/joints; qa y k independientes y con fuente. No disena ni escribe CSI."""
+    from .foundation_exchange import run_files
+    return run_files("review", input_path(consulta_json), input_path(muestras_json),
+                     output_path(salida_json), input_path(geotecnia_json) if geotecnia_json else None)
+
+
 def main() -> None:
     mcp.run(transport="stdio")
 

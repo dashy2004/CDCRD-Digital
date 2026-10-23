@@ -130,7 +130,9 @@ def _run_tool(name: str, params: dict) -> dict:
     import base64
     p64 = base64.b64encode(json.dumps(params or {}).encode("utf-8")).decode("ascii")
     helpers = _read("_mep") if name in ("mep_inventario", "mep_conectividad") else ""
-    code = _common() + "\n\n" + helpers + "\n" + _read(name) + "\n" + _FOOTER % p64
+    module_path = os.path.join(TOOLS_DIR, name + '.py')
+    code = (_common() + "\n\n" + helpers + "\n__file__ = %r\n" % module_path
+            + _read(name) + "\n" + _FOOTER % p64)
     r = _post(_port(), code, "revit-tools: " + name)
     text = r if isinstance(r, str) else json.dumps(r)
     m = re.search(r"__RT__([A-Za-z0-9+/=]+)__RT_END__", text)
@@ -158,6 +160,11 @@ def _doc(name: str) -> str:
 @mcp.tool(description=_doc("estado"))
 def revit_estado() -> dict:
     return _run_tool("estado", {})
+
+
+@mcp.tool(description=_doc("documentar_losas"))
+def revit_documentar_losas(config: dict) -> dict:
+    return _run_tool("documentar_losas", config)
 
 
 @mcp.tool(description=_doc("inventario"))

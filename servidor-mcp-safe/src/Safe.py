@@ -256,6 +256,17 @@ class Safe:
         return f"Unidades activas: {PRESET_UNITS[my_units - 1]}"
 
     @com_call
+    def get_coordinate_snapshot(self, expected_path: str, frame_id: str,
+                                max_points: int = 10000) -> dict:
+        """Lee joints Global con unidades e identidad verificadas; no cambia el modelo.
+
+        Seleccionar los puntos de cimentacion al preparar la consulta Civil 3D.
+        No transforma coordenadas ni interpreta apoyos/cargas.
+        """
+        from coordinate_snapshot import capture_points
+        return capture_points(self._model(), 'SAFE', expected_path, frame_id, max_points)
+
+    @com_call
     def set_units(self, units: str) -> str:
         """Fija las unidades activas del modelo (ver get_units para opciones)."""
         model = self._model()

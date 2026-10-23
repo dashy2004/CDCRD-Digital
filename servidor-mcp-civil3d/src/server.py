@@ -544,6 +544,8 @@ import comandos
 comandos.registrar(mcp, _llamar, _ok)
 aplanar.registrar(mcp, _llamar, _ok)
 puntos.registrar(mcp, _llamar, _ok)
+import cimentaciones
+cimentaciones.registrar(mcp, puente.llamar, _ok)
 
 
 @mcp.tool()

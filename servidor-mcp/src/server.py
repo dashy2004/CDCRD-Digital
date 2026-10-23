@@ -60,6 +60,7 @@ if config.feaName == "ETABS":
 
     get_model_info = mcp.tool()(etabs.get_model_info)
     get_units = mcp.tool()(etabs.get_units)
+    get_coordinate_snapshot = mcp.tool()(etabs.get_coordinate_snapshot)
     set_units = mcp.tool()(etabs.set_units)
     save_model = mcp.tool()(etabs.save_model)
     refresh_view = mcp.tool()(etabs.refresh_view)
