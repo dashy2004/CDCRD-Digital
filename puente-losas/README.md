@@ -149,6 +149,9 @@ puente-losas --proyecto ejemplo/edificio-ejemplo.json --usos ejemplo/usos-ejempl
 
 ## Verificación
 
+Las nuevas [comprobaciones de nervios y placas ortótropas](NERVIOS.md) separan
+resistencia, deformaciones y geometría; no escriben cambios en Revit.
+
 `tests/` (pytest) incluye un caso de referencia contra la **solución analítica
 de Navier** (placa simplemente apoyada con carga uniforme, serie doble de
 Timoshenko): la flecha central del FEM queda dentro del 3–4 % y el momento de

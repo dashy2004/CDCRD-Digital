@@ -20,6 +20,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=7.4"]
+calculo = ["numpy>=1.26,<3"]
 
 [project.scripts]
 puente-losas = "puente_losas.cli:main"

@@ -44,8 +44,10 @@ def h_min_dos_direcciones(luz_larga_m: float, relacion_luces: float,
                           fy_mpa: float = FY_MPA_DEFECTO) -> float:
     """§8.3.1.2 ec. (b) en metros, con piso absoluto de 0.090 m.
 
-    Usa las luces entre ejes como aproximación de las luces libres (el export
-    esquemático no trae anchos de viga): queda del lado conservador.
+    En esta tabla ln se mide entre CARAS DE VIGAS, no entre caras de columnas.
+    El llamador esquemático usa ejes como aproximación cuando no exporta anchos;
+    una auditoría nativa debe suministrar las luces libres medidas. Esta función
+    supone alpha_fm > 2 y no verifica por sí sola una sección aligerada.
     """
     h = luz_larga_m * (0.8 + fy_mpa / 1400.0) / (36.0 + 9.0 * relacion_luces)
     return max(h, 0.090)
