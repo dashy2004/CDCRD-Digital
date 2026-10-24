@@ -26,6 +26,7 @@ class Program {
  }
  static async Task Main() {
   ThreadPool.SetMinThreads(8,8);
+  SpiralChecks.Run(Check);
   PeralteChecks.Run(Check);
   SiteDesignChecks.Run(Check);
   CorridorChecks.Run(Check);

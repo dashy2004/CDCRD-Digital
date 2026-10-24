@@ -1,0 +1,509 @@
+{
+  "delivery": "0.5.19",
+  "date": "2026-10-24",
+  "pr35_merged": "eee0acf8629fb28074286bdd4d6d17ad53a4dcae",
+  "production": {
+    "spiral_module": "0.1.0",
+    "peralte_module": "0.1.2",
+    "bridge_live": "0.5.17",
+    "bridge_staged": "0.5.18",
+    "mcp_tools": 75,
+    "module_sha256": "f7115d2e034e091f5544450665bc7dd766bf076ce00d054013f910ea7abe36ae",
+    "autostart_verified": false
+  },
+  "offline": {
+    "python_tests": 206,
+    "dotnet_checks": 213,
+    "race_checks": 100,
+    "module_build_errors": 0,
+    "module_build_warnings": 0
+  },
+  "native": {
+    "passed_checks": 90,
+    "suites": {
+      "spirals-preflight-smoke": [
+        {
+          "name": "simulacion completada sin commit",
+          "pass": true
+        },
+        {
+          "name": "rollback inventario y geometria",
+          "pass": true
+        }
+      ],
+      "spirals-smoke": [
+        {
+          "name": "fit rechazo nativo",
+          "pass": true
+        },
+        {
+          "name": "fit sin residuos",
+          "pass": true
+        },
+        {
+          "name": "collinear rechazo nativo",
+          "pass": true
+        },
+        {
+          "name": "collinear sin residuos",
+          "pass": true
+        },
+        {
+          "name": "no-arc rechazo nativo",
+          "pass": true
+        },
+        {
+          "name": "no-arc sin residuos",
+          "pass": true
+        },
+        {
+          "name": "simulacion coordenadas por serie Fresnel",
+          "pass": true
+        },
+        {
+          "name": "simulacion orientacion nativa por offsets normales",
+          "pass": true
+        },
+        {
+          "name": "simulacion longitud y cinco subentidades",
+          "pass": true
+        },
+        {
+          "name": "simulacion uniones sin salto",
+          "pass": true
+        },
+        {
+          "name": "simulacion parametros A independientes",
+          "pass": true
+        },
+        {
+          "name": "simulacion sin commit",
+          "pass": true
+        },
+        {
+          "name": "simulacion revertida",
+          "pass": true
+        },
+        {
+          "name": "tangents-created fallo controlado",
+          "pass": true
+        },
+        {
+          "name": "tangents-created rollback completo",
+          "pass": true
+        },
+        {
+          "name": "scs-created fallo controlado",
+          "pass": true
+        },
+        {
+          "name": "scs-created rollback completo",
+          "pass": true
+        },
+        {
+          "name": "geometry-verified fallo controlado",
+          "pass": true
+        },
+        {
+          "name": "geometry-verified rollback completo",
+          "pass": true
+        },
+        {
+          "name": "left commit confirmado",
+          "pass": true
+        },
+        {
+          "name": "left coordenadas por serie Fresnel",
+          "pass": true
+        },
+        {
+          "name": "left orientacion nativa por offsets normales",
+          "pass": true
+        },
+        {
+          "name": "left longitud y cinco subentidades",
+          "pass": true
+        },
+        {
+          "name": "left uniones sin salto",
+          "pass": true
+        },
+        {
+          "name": "left parametros A independientes",
+          "pass": true
+        },
+        {
+          "name": "left relectura contrato Xrecord nativo",
+          "pass": true
+        },
+        {
+          "name": "right commit confirmado",
+          "pass": true
+        },
+        {
+          "name": "right coordenadas por serie Fresnel",
+          "pass": true
+        },
+        {
+          "name": "right orientacion nativa por offsets normales",
+          "pass": true
+        },
+        {
+          "name": "right longitud y cinco subentidades",
+          "pass": true
+        },
+        {
+          "name": "right uniones sin salto",
+          "pass": true
+        },
+        {
+          "name": "right parametros A independientes",
+          "pass": true
+        },
+        {
+          "name": "right relectura contrato Xrecord nativo",
+          "pass": true
+        },
+        {
+          "name": "duplicado rechazado",
+          "pass": true
+        },
+        {
+          "name": "duplicado sin residuos",
+          "pass": true
+        }
+      ],
+      "spirals-variants-smoke": [
+        {
+          "name": "rotated coordenadas por serie Fresnel",
+          "pass": true
+        },
+        {
+          "name": "rotated orientacion nativa por offsets normales",
+          "pass": true
+        },
+        {
+          "name": "rotated longitud y cinco subentidades",
+          "pass": true
+        },
+        {
+          "name": "rotated uniones sin salto",
+          "pass": true
+        },
+        {
+          "name": "rotated parametros A independientes",
+          "pass": true
+        },
+        {
+          "name": "rotated rollback",
+          "pass": true
+        },
+        {
+          "name": "symmetric coordenadas por serie Fresnel",
+          "pass": true
+        },
+        {
+          "name": "symmetric orientacion nativa por offsets normales",
+          "pass": true
+        },
+        {
+          "name": "symmetric longitud y cinco subentidades",
+          "pass": true
+        },
+        {
+          "name": "symmetric uniones sin salto",
+          "pass": true
+        },
+        {
+          "name": "symmetric parametros A independientes",
+          "pass": true
+        },
+        {
+          "name": "symmetric rollback",
+          "pass": true
+        }
+      ],
+      "spirals-corridor-smoke": [
+        {
+          "name": "peraltes aplicados al eje con clotoides",
+          "pass": true
+        },
+        {
+          "name": "XY corredor contra Fresnel independiente",
+          "pass": true
+        },
+        {
+          "name": "rasante y peraltes independientes",
+          "pass": true
+        },
+        {
+          "name": "bermas cunetas y encuentro terreno",
+          "pass": true
+        },
+        {
+          "name": "ocho secciones nativas",
+          "pass": true
+        },
+        {
+          "name": "normal al eje 172.7849028664641",
+          "pass": true
+        },
+        {
+          "name": "vertices Top 172.7849028664641",
+          "pass": true
+        },
+        {
+          "name": "normal al eje 187.7849028664641",
+          "pass": true
+        },
+        {
+          "name": "vertices Top 187.7849028664641",
+          "pass": true
+        },
+        {
+          "name": "normal al eje 200.2849028664641",
+          "pass": true
+        },
+        {
+          "name": "vertices Top 200.2849028664641",
+          "pass": true
+        },
+        {
+          "name": "normal al eje 212.7849028664641",
+          "pass": true
+        },
+        {
+          "name": "vertices Top 212.7849028664641",
+          "pass": true
+        },
+        {
+          "name": "normal al eje 223.9648416463015",
+          "pass": true
+        },
+        {
+          "name": "vertices Top 223.9648416463015",
+          "pass": true
+        },
+        {
+          "name": "normal al eje 235.14478042613888",
+          "pass": true
+        },
+        {
+          "name": "vertices Top 235.14478042613888",
+          "pass": true
+        },
+        {
+          "name": "normal al eje 252.64478042613888",
+          "pass": true
+        },
+        {
+          "name": "vertices Top 252.64478042613888",
+          "pass": true
+        },
+        {
+          "name": "normal al eje 285.1447804261389",
+          "pass": true
+        },
+        {
+          "name": "vertices Top 285.1447804261389",
+          "pass": true
+        },
+        {
+          "name": "vistas H=V",
+          "pass": true
+        }
+      ],
+      "spirals-captures-freeze-smoke": [
+        {
+          "name": "estado de capas restaurado",
+          "pass": true
+        }
+      ],
+      "spirals-persistence-verified-smoke": [
+        {
+          "name": "colecciones originales conservadas",
+          "pass": true
+        },
+        {
+          "name": "peraltes anteriores conservados",
+          "pass": true
+        },
+        {
+          "name": "corredores actualizados antes de guardar",
+          "pass": true
+        },
+        {
+          "name": "guardado nativo DBMOD=0",
+          "pass": true
+        },
+        {
+          "name": "reabierto en mismo PID",
+          "pass": true
+        },
+        {
+          "name": "reapertura DBMOD=0",
+          "pass": true
+        },
+        {
+          "name": "inventario persistido",
+          "pass": true
+        },
+        {
+          "name": "geometria Civil persistida",
+          "pass": true
+        },
+        {
+          "name": "espirales y tablas persistidas",
+          "pass": true
+        },
+        {
+          "name": "seis estaciones de peralte en espirales",
+          "pass": true
+        },
+        {
+          "name": "corredores actualizados tras reabrir",
+          "pass": true
+        },
+        {
+          "name": "guardado final sin comandos",
+          "pass": true
+        }
+      ],
+      "spirals-closeout-smoke": [
+        {
+          "name": "mismo proceso Civil",
+          "pass": true
+        },
+        {
+          "name": "todos los corredores actualizados",
+          "pass": true
+        },
+        {
+          "name": "guardado sin cambios pendientes",
+          "pass": true
+        },
+        {
+          "name": "diez archivos protegidos intactos",
+          "pass": true
+        },
+        {
+          "name": "solo copia cerrada; Civil sigue abierto",
+          "pass": true
+        },
+        {
+          "name": "sin cola ni modal",
+          "pass": true
+        }
+      ]
+    },
+    "independent_axes": {
+      "simulacion": {
+        "xy_m": 4.656612873077393e-10,
+        "heading_rad": 5.746580988841288e-11,
+        "length_m": 2.660840436874423e-10,
+        "sample_count": 105
+      },
+      "left": {
+        "xy_m": 4.656612873077393e-10,
+        "heading_rad": 5.746580988841288e-11,
+        "length_m": 2.660840436874423e-10,
+        "sample_count": 105
+      },
+      "right": {
+        "xy_m": 4.656612873077393e-10,
+        "heading_rad": 5.746625397762273e-11,
+        "length_m": 2.660556219780119e-10,
+        "sample_count": 105
+      }
+    },
+    "variants": {
+      "rotated": {
+        "xy_m": 9.313225746154785e-10,
+        "heading_rad": 6.365841187516708e-11,
+        "length_m": 1.185185283247847e-10,
+        "sample_count": 105
+      },
+      "symmetric": {
+        "xy_m": 9.313225746154785e-10,
+        "heading_rad": 4.752764848348079e-11,
+        "length_m": 3.015827587660169e-10,
+        "sample_count": 106
+      }
+    },
+    "corridor_errors": {
+      "xy_m": 2.890384264304622e-07,
+      "z_m": 2.1038726316646716e-14,
+      "roadside_m": 1.1934897514720433e-14,
+      "daylight_m": 1.4210854715202004e-14,
+      "sections_m": 4.780087436984104e-10
+    },
+    "corridor_stations": 61,
+    "sections": 8,
+    "peralte_rows": 6,
+    "prior_objects": 1397,
+    "preserved_collections": {
+      "objects": true,
+      "groups": true,
+      "surfaces": true,
+      "volumes": true,
+      "points": true,
+      "pointGroups": true,
+      "surfaceStyles": true,
+      "layers": true,
+      "sites": true,
+      "alignments": true
+    },
+    "persisted_collections": {
+      "objects": true,
+      "groups": true,
+      "surfaces": true,
+      "volumes": true,
+      "points": true,
+      "pointGroups": true,
+      "surfaceStyles": true,
+      "layers": true,
+      "sites": true,
+      "alignments": true
+    },
+    "primary_paper_viewports_with_display_bounds_refreshed": 2,
+    "saved": true,
+    "dbmod": 0,
+    "all_corridors_up_to_date": true,
+    "save_reopen_same_process": true,
+    "protected_files_unchanged": 10,
+    "additional_cad_instances_opened": 0,
+    "native_crashes_observed": 0,
+    "drawing_sha256": "0b625b7a0157d6b97c1c367372bc6eb3c351e7f00413657c978ebb99eca01dc2"
+  },
+  "observations": [
+    "Three initial preservation checks stopped before saving: paper-space alias, annotation scale, then display bounds. Alias and scale restored; only two primary paper viewports (DXF69=1) have refreshed screen bounds. All other audited properties and collections preserved.",
+    "Layer off/isolation did not remove all corridor graphics; temporary freeze produced the selected raw images, with states restored.",
+    "Immediate COM document listing after closing the copy was busy. Later read confirmed zero documents in the same Civil process; close was not repeated."
+  ],
+  "images": [
+    {
+      "file": "images/civil3d-espirales-left-0519.png",
+      "sha256": "255389d131ac27ca22b46ae83dbf9af529cffe848fbe30c8b2e8ad49d6d208ef",
+      "native_graphics_area": true,
+      "edited": false
+    },
+    {
+      "file": "images/civil3d-espirales-right-0519.png",
+      "sha256": "302132f3d7e83a0eb6f8b07e19a1df631d46f60c902fdc1988c4d07f1bd4aab4",
+      "native_graphics_area": true,
+      "edited": false
+    },
+    {
+      "file": "images/civil3d-espirales-transicion-0519.png",
+      "sha256": "fcc540f47dd715cc04731fbaed288db77148592697510f28a56269473eb35ab8",
+      "native_graphics_area": true,
+      "edited": false
+    },
+    {
+      "file": "images/civil3d-espirales-arco-0519.png",
+      "sha256": "72591b180aa2fb5e61338d75e316a833c09322936903b89dea62bcc937896351",
+      "native_graphics_area": true,
+      "edited": false
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" AppVersion="0.1.0" Author="CDCRD-Digital"
+  Name="CDCRD Espirales" Description="Native clothoid SCS alignments for Civil 3D 2027"
+  ProductCode="{A70BBF72-3B50-4D4D-BB9E-38C0852E41A8}" UpgradeCode="{2561A6B6-6648-4F5B-A37D-0FA3A690DF2A}">
+  <CompanyDetails Name="CDCRD-Digital" Url="https://github.com/dashy2004/CDCRD-Digital" />
+  <Components>
+    <RuntimeRequirements Platform="Civil3D" SeriesMin="R26.0" SeriesMax="R26.0" OS="Win64" />
+    <ComponentEntry AppName="CdcrdEspiralesV1" AppDescription="Clothoid spiral module"
+      AppType=".NET" ModuleName="./Contents/Cdcrd.Espirales.V1.dll" LoadOnAutoCADStartup="True" LoadOnRequest="True">
+      <Commands GroupName="CDCRDESPIRALES">
+        <Command Global="CDCRDESPIRALESV1" Local="CDCRDESPIRALESV1" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+</ApplicationPackage>
