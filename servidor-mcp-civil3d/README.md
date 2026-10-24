@@ -1,6 +1,6 @@
 # Servidor MCP de Civil 3D 2027
 
-Entrega **0.5.19**: clotoides nativas SCS por API, giros izquierdo/derecho y longitudes distintas, con mÃ³dulo opcional de espirales **0.1.0**. Probadas en otra copia con peraltes, corredor y ocho secciones: 90 controles nativos, guardado/reapertura y diez archivos protegidos intactos. Puente vivo 0.5.17; el 0.5.18 sigue preparado para el prÃ³ximo arranque, aÃºn sin prueba de carga. [Espirales: capturas, pruebas y lÃ­mites](docs/ESPIRALES-0519.md) Â· [Peraltes 0.5.18](docs/PERALTES-0518.md) Â· [Cunetas y bermas 0.5.17](docs/CUNETAS-BERMAS-0517.md) Â· [Calzada 0.5.16](docs/CALZADA-0516.md) Â· [Corredor 0.5.15](docs/CORREDOR-0515.md) Â· [Curvas 0.5.14](docs/CURVAS-0514.md) Â· [Plataformas 0.5.13](docs/PLATAFORMAS-0513.md) Â· [Sitio 0.5.12](docs/SITIO-0512.md) Â· [AutoCAD comÃºn](docs/AUTOCAD-0511.md).
+Entrega **0.5.20**: múltiples baselines y regiones por API, con ensamblajes/targets por región y secciones sobre un eje explícito. Probada en otra copia: dos baselines, cuatro regiones, once secciones, guardado/reapertura, 1.474 objetos previos y once archivos protegidos conservados. Módulo opcional **0.1.3**, puente vivo **0.5.17** y catálogo MCP de **78 herramientas**. [Capturas, pruebas y límites](docs/MULTIBASELINE-0520.md) · [Espirales 0.5.19](docs/ESPIRALES-0519.md) · [Peraltes 0.5.18](docs/PERALTES-0518.md) · [Cunetas y bermas 0.5.17](docs/CUNETAS-BERMAS-0517.md).
 
 Conecta un cliente MCP con el **dibujo abierto** en Civil 3D 2027. Dos piezas:
 
@@ -46,6 +46,7 @@ suponerlo a partir de la documentacion.
 py src\prueba_humo.py              # prueba de humo completa
 .\instalar-peraltes.ps1           # mÃ³dulo opcional; no abre ni reinicia Civil
 .\instalar-espirales.ps1          # clotoides SCS; tampoco inicia otra instancia
+.\instalar-corredores.ps1         # múltiples baselines/regiones; misma instancia
 ```
 
 El bundle queda en `%APPDATA%\Autodesk\ApplicationPlugins\CDCRD-Civil3D.bundle`, que

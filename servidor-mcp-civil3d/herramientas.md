@@ -162,3 +162,11 @@ v0.5.4 `Coerce` construye argumentos que antes eran inexpresables:
 Ojo: `JsonToClr` del puente revienta con un objeto JSON crudo dentro de `args`
 ("The node must be of type 'JsonValue'") hasta v0.5.5 inclusive; por eso la query
 va como texto. Corregido en fuente despues de 0.5.5.
+
+## Múltiples baselines y regiones (0.5.20)
+
+- `crear_corredor_multibaseline`: corredor nuevo, perfiles/ejes independientes y lista ordenada de regiones; cada una define ensamblaje, intervalo, frecuencia, extras y target TIN. Simulación por defecto, confirmación requerida.
+- `leer_corredor_multibaseline`: verifica contrato Xrecord propio, muestras y Top; marca el ensamblaje devuelto en límites compartidos.
+- `crear_secciones_multibaseline`: baseline explícita, normales y estaciones verificadas, H=V; rechaza huecos/límites compartidos.
+
+Requiere módulo `Cdcrd.Corredores.V4`0.1.3 en la instancia existente. Catálogo total78. [Contrato, ejemplos y evidencia](docs/MULTIBASELINE-0520.md).
