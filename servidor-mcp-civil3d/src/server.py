@@ -596,6 +596,9 @@ def calcular_seccion_si(units: StrictStr, q_m3_s: StrictFloat, b_m: StrictFloat,
                           available_head_m=available_head_m, losses_m=losses_m))
 
 
+import peraltes
+peraltes.registrar(mcp, _ok)
+
 if __name__ == '__main__':
     logger.info('Herramientas registradas; esperando al cliente MCP por stdio')
     try:

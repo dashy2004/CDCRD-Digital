@@ -1,0 +1,265 @@
+{
+  "date": "2026-10-24",
+  "application": "Civil 3D 2027",
+  "live_bridge": "0.5.17",
+  "live_module": "0.1.2",
+  "bridge_0518_load_verified": false,
+  "optional_bundle_autoload_verified": false,
+  "previous_pr": 34,
+  "previous_pr_merged": true,
+  "final_result_verified": true,
+  "native_checks_passed": 52,
+  "initial_failed_checks": [
+    {
+      "name": "lectura independiente de peraltes coincide",
+      "pass": false
+    }
+  ],
+  "resolution": "Geometry and table equal; deferred IsOutOfDate required explicit rebuild. Save/reopen passed with all corridors current.",
+  "final_smoke_script_rerun_from_empty_fixture": false,
+  "input_table": [
+    [
+      100,
+      -0.02,
+      -0.02
+    ],
+    [
+      140,
+      -0.02,
+      -0.02
+    ],
+    [
+      180,
+      0.06,
+      -0.06
+    ],
+    [
+      240,
+      0.06,
+      -0.06
+    ],
+    [
+      280,
+      -0.02,
+      -0.02
+    ],
+    [
+      320,
+      -0.05,
+      0.05
+    ],
+    [
+      380,
+      -0.05,
+      0.05
+    ],
+    [
+      420,
+      -0.02,
+      -0.02
+    ],
+    [
+      465.663706144078,
+      -0.02,
+      -0.02
+    ]
+  ],
+  "sample_count": 44,
+  "max_errors": {
+    "xyz_m": 5.820766091346741e-10,
+    "slope": 1.249000902703301e-16,
+    "roadside_m": 1.4210854715202004e-14,
+    "daylight_m": 1.4210854715202004e-14
+  },
+  "max_section_error_m": 2.552305033987068e-10,
+  "sections": [
+    {
+      "name": "ocho secciones nativas",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 110",
+      "pass": true
+    },
+    {
+      "name": "peralte y cuneta en superficie 110",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 160",
+      "pass": true
+    },
+    {
+      "name": "peralte y cuneta en superficie 160",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 180",
+      "pass": true
+    },
+    {
+      "name": "peralte y cuneta en superficie 180",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 260",
+      "pass": true
+    },
+    {
+      "name": "peralte y cuneta en superficie 260",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 300",
+      "pass": true
+    },
+    {
+      "name": "peralte y cuneta en superficie 300",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 340",
+      "pass": true
+    },
+    {
+      "name": "peralte y cuneta en superficie 340",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 400",
+      "pass": true
+    },
+    {
+      "name": "peralte y cuneta en superficie 400",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 450",
+      "pass": true
+    },
+    {
+      "name": "peralte y cuneta en superficie 450",
+      "pass": true
+    },
+    {
+      "name": "vistas sin exageracion H=V",
+      "pass": true
+    }
+  ],
+  "persistence": [
+    {
+      "name": "colecciones originales conservadas",
+      "pass": true
+    },
+    {
+      "name": "corredores actualizados antes de guardar",
+      "pass": true
+    },
+    {
+      "name": "guardado nativo DBMOD=0",
+      "pass": true
+    },
+    {
+      "name": "reabierto en mismo PID",
+      "pass": true
+    },
+    {
+      "name": "reapertura DBMOD=0",
+      "pass": true
+    },
+    {
+      "name": "inventario persistido",
+      "pass": true
+    },
+    {
+      "name": "geometria Civil persistida",
+      "pass": true
+    },
+    {
+      "name": "tabla y puntos peraltes persistidos",
+      "pass": true
+    },
+    {
+      "name": "nueve estaciones configuradas",
+      "pass": true
+    },
+    {
+      "name": "corredores actualizados tras reabrir",
+      "pass": true
+    },
+    {
+      "name": "guardado final sin comandos",
+      "pass": true
+    }
+  ],
+  "closure": [
+    {
+      "name": "persistencia y lectura MCP confirmadas",
+      "pass": true
+    },
+    {
+      "name": "nueve archivos protegidos intactos",
+      "pass": true
+    },
+    {
+      "name": "copia guardada DBMOD cero",
+      "pass": true
+    },
+    {
+      "name": "solo copia cerrada misma instancia abierta",
+      "pass": true
+    },
+    {
+      "name": "sin cola ni modal",
+      "pass": true
+    }
+  ],
+  "previous_objects": 1352,
+  "preserved_collections": {
+    "objects": true,
+    "groups": true,
+    "surfaces": true,
+    "volumes": true,
+    "points": true,
+    "pointGroups": true,
+    "surfaceStyles": true,
+    "layers": true,
+    "sites": true,
+    "alignments": true
+  },
+  "protected_files_count": 9,
+  "protected_files_unchanged": true,
+  "final_dwg_sha256": "46a58f1f1ff766de3f0949188847cfd725717c309ad5600fbaf13bea5e1ad807",
+  "native_state": {
+    "Saved": true,
+    "DBMOD": 0,
+    "CMDNAMES": ""
+  },
+  "python_tests": 189,
+  "dotnet_checks": 197,
+  "concurrency_races": 100,
+  "mcp_tools": 73,
+  "mcp_native_read_verified": true,
+  "module_sha256": "4ff276ec1a86dca7ae4f0a3b6681e222266d838a816bbfdbfad5dbe162f3652f",
+  "native_crash_recorded": true,
+  "exact_native_crash_getter_identified": false,
+  "transport_exception_corrected": true,
+  "rea_executed": false,
+  "images": [
+    {
+      "file": "civil3d-peraltes-transicion-0518.png",
+      "sha256": "97b86269a5b6ebbd20dd5c11f5f1dc2b4c663a23179f8768655e64ee32796bdc",
+      "source": "native Document.CapturePreviewImage; unedited graphic area"
+    },
+    {
+      "file": "civil3d-peraltes-seis-por-ciento-0518.png",
+      "sha256": "14ad69e6be6cbeff9ce52c860c97b46ea2229babed2ee20c3f4bee1ce63041d5",
+      "source": "native Document.CapturePreviewImage; unedited graphic area"
+    },
+    {
+      "file": "civil3d-peraltes-cinco-contrario-0518.png",
+      "sha256": "fc67cad05c39be24b6b70277b1a572d43ee64a38d785f6d50c8224a4052c7d3f",
+      "source": "native Document.CapturePreviewImage; unedited graphic area"
+    }
+  ]
+}

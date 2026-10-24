@@ -24,7 +24,7 @@ class NativeQa:
         self.prefix = prefix
         if not re.fullmatch(r"[a-z0-9-]+", prefix):
             raise ValueError("Receipt prefix must contain only lowercase letters, digits and hyphens")
-        if Path(self.drawing).parent != self.out or not Path(self.drawing).name.startswith("CDCRD_GM_RECOVERY_CUNETAS_BERMAS"):
+        if Path(self.drawing).parent != self.out or not Path(self.drawing).name.startswith(("CDCRD_GM_RECOVERY_CUNETAS_BERMAS", "CDCRD_GM_RECOVERY_PERALTES")):
             raise ValueError("An identified disposable copy in the output directory is required")
         self.receipt = self.out / (prefix + "-smoke.json")
         if self.receipt.exists():

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" AppVersion="0.1.2" Author="CDCRD-Digital"
+  Name="CDCRD Peraltes" Description="Explicit superelevation tables for Civil 3D 2027"
+  ProductCode="{514851C1-18C6-4EED-8AC3-051800000001}" UpgradeCode="{514851C1-18C6-4EED-8AC3-051800000002}">
+  <CompanyDetails Name="CDCRD-Digital" Url="https://github.com/dashy2004/CDCRD-Digital" />
+  <Components>
+    <RuntimeRequirements Platform="Civil3D" SeriesMin="R26.0" SeriesMax="R26.0" OS="Win64" />
+    <ComponentEntry AppName="CdcrdPeraltesV1" AppDescription="Superelevation module"
+      AppType=".NET" ModuleName="./Contents/Cdcrd.Peraltes.V1.dll" LoadOnAutoCADStartup="True" LoadOnRequest="True">
+      <Commands GroupName="CDCRDPERALTES">
+        <Command Global="CDCRDPERALTESV1" Local="CDCRDPERALTESV1" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+</ApplicationPackage>
