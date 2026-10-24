@@ -5,7 +5,8 @@
   "native_checks": {
     "assembly_corridor": 37,
     "sections": 20,
-    "persistence": 8
+    "persistence": 8,
+    "final_closeout": 5
   },
   "offline_checks": {
     "python": 175,
@@ -54,7 +55,7 @@
     "DBMOD": 0,
     "CMDNAMES": ""
   },
-  "sha256_dwg": "bccabbdc2924deeae27bcc15a5cd37d9617ee4491621c191cdeb9b2a1335b12c",
+  "sha256_dwg": "bbb0ed8fecc20f08b6777a35250fea0f4b5a2482b30fdce12198d69404cce453",
   "protected_files_unchanged": 8,
   "image_source": "Document.CapturePreviewImage; raw drawing viewport",
   "sha256_images": {
@@ -323,6 +324,27 @@
     {
       "name": "estado final guardado sin comandos",
       "pass": true
+    },
+    {
+      "name": "inventario y geometria aun iguales",
+      "pass": true
+    },
+    {
+      "name": "corredores aun actualizados",
+      "pass": true
+    },
+    {
+      "name": "segunda reapertura guardada",
+      "pass": true
+    },
+    {
+      "name": "geometria y colecciones persistidas de nuevo",
+      "pass": true
+    },
+    {
+      "name": "guardado final antes de cerrar",
+      "pass": true
     }
-  ]
+  ],
+  "working_copy_closed": true
 }

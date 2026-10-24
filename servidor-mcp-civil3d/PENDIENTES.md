@@ -2,7 +2,7 @@
 
 ## Estado vigente 0.5.17 — 2026-10-24
 
-Ver [cunetas y bermas 0.5.17](docs/CUNETAS-BERMAS-0517.md): ensamblaje de doce piezas, corredor con targets y ocho secciones; 65 comprobaciones nativas y persistencia tras guardar/reabrir. Originales protegidos. Calzada/capas/targets ya se completaron en 0.5.16; curvas, plataformas y sitio están documentados en las versiones enlazadas desde README.
+Ver [cunetas y bermas 0.5.17](docs/CUNETAS-BERMAS-0517.md): ensamblaje de doce piezas, corredor con targets y ocho secciones; 70 comprobaciones nativas y persistencia tras guardar/reabrir. Originales protegidos. Calzada/capas/targets ya se completaron en 0.5.16; curvas, plataformas y sitio están documentados en las versiones enlazadas desde README.
 
 Quedan cunetas condicionales y revestimiento, hidráulica, peraltes, espirales, múltiples baselines/regiones, targets ancho/cota, QTO y barrido; además grading, escritura de redes y producción de planos. Las listas inferiores son antecedentes históricos y no sustituyen este estado.
 
