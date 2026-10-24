@@ -20,7 +20,7 @@ namespace Cdcrd.Civil3dBridge
 {
     internal static partial class Handlers
     {
-        public const string Version = "0.5.16";
+        public const string Version = "0.5.17";
         private const int MaxItems = 500;
 
         // Alias en espanol -> candidatos de miembro del CivilDocument, en orden.

@@ -35,6 +35,8 @@ verificación de un proyecto. Cada informe identifica qué se comprobó y qué e
 
 ## Civil 3D y AutoCAD: capturas y pruebas nativas
 
+[Civil 3D 0.5.17: cunetas, bermas y secciones — 70 comprobaciones nativas y capturas crudas](servidor-mcp-civil3d/docs/CUNETAS-BERMAS-0517.md).
+
 [Civil 3D 0.5.16: calzada con capas, targets y daylight — capturas crudas](servidor-mcp-civil3d/docs/CALZADA-0516.md).
 
 [Civil 3D 0.5.15: ensamblaje, corredor y secciones — capturas crudas](servidor-mcp-civil3d/docs/CORREDOR-0515.md).

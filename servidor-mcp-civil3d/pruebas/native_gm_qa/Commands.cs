@@ -206,6 +206,17 @@ public partial class GmRecoveryQa
         }
         tr.Commit();return new {handles=result};
     }
+    // Explicit opt-in for a manually started Civil session. Only a named QA copy.
+    [CommandMethod("CDCRDGMQAENTER",CommandFlags.Session)]
+    public void EnterQa()
+    {
+        var doc=App.DocumentManager.MdiActiveDocument;
+        if(doc==null || !Path.GetFileName(doc.Name).StartsWith("CDCRD_GM_RECOVERY_",StringComparison.Ordinal))
+            throw new Exception("Open an identified QA copy before enabling the harness");
+        Environment.SetEnvironmentVariable("CDCRD_GM_QA_ROOT",Path.GetDirectoryName(Path.GetFullPath(doc.Name)));
+        doc.Editor.WriteMessage("\nQA root set to the active QA copy directory.\n");
+    }
+
     [CommandMethod("CDCRDGMRECOVERYQA",CommandFlags.Session)]
     public void Run()
     {

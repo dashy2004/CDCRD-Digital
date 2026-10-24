@@ -1,0 +1,350 @@
+{
+  "date": "2026-10-24",
+  "version": "0.5.17",
+  "native_build": "51dd196e1423",
+  "native_checks": {
+    "assembly_corridor": 37,
+    "sections": 20,
+    "persistence": 8,
+    "final_closeout": 5
+  },
+  "offline_checks": {
+    "python": 175,
+    "dotnet": 187,
+    "races": 100
+  },
+  "stations": 44,
+  "parts": 12,
+  "sections": 8,
+  "max_errors_m": {
+    "xy": 9.313225746154785e-10,
+    "profile": 5.873634911779391e-12,
+    "berm_ditch": 1.1102230246251565e-16,
+    "daylight": 1.4210854715202004e-14,
+    "daylight_grade": 2.725777936696261e-10,
+    "layers": 1.1102230246251565e-16,
+    "section_surface": 6.884910419557855e-10
+  },
+  "previous_objects": 1303,
+  "preserved_by_collection": {
+    "objects": true,
+    "groups": true,
+    "surfaces": true,
+    "volumes": true,
+    "points": true,
+    "pointGroups": true,
+    "surfaceStyles": true,
+    "layers": true,
+    "sites": true,
+    "alignments": true
+  },
+  "same_after_reopen": {
+    "objects": true,
+    "groups": true,
+    "surfaces": true,
+    "volumes": true,
+    "points": true,
+    "pointGroups": true,
+    "surfaceStyles": true,
+    "layers": true,
+    "sites": true,
+    "alignments": true
+  },
+  "native_state": {
+    "Saved": true,
+    "DBMOD": 0,
+    "CMDNAMES": ""
+  },
+  "sha256_dwg": "bbb0ed8fecc20f08b6777a35250fea0f4b5a2482b30fdce12198d69404cce453",
+  "protected_files_unchanged": 8,
+  "image_source": "Document.CapturePreviewImage; raw drawing viewport",
+  "sha256_images": {
+    "civil3d-cunetas-ensamblaje-0517.png": "1d910b5dc7d138bdcb98448f26c923b23073be64f4e43e2f32e7e690e274dff5",
+    "civil3d-cunetas-planta-0517.png": "821e7c3680627984ecfe72a620133766cfca552e2443d15487ca36143629ae22",
+    "civil3d-cunetas-corte-0517.png": "e93daca8cff1c0ad24fcb9ef64b4e7540fd016c723580b68ce5e5752ddf31d96",
+    "civil3d-cunetas-relleno-0517.png": "89598f8c66fd716d329114811985bd4f37d34daea22ac07d1c16ee6cc8bb41bb"
+  },
+  "checks": [
+    {
+      "name": "Civil DLL 0.5.17",
+      "pass": true
+    },
+    {
+      "name": "invalid-ancho_berma_izq rechazo explicito",
+      "pass": true
+    },
+    {
+      "name": "invalid-ancho_berma_izq sin residuos",
+      "pass": true
+    },
+    {
+      "name": "invalid-pendiente_berma_der rechazo explicito",
+      "pass": true
+    },
+    {
+      "name": "invalid-pendiente_berma_der sin residuos",
+      "pass": true
+    },
+    {
+      "name": "invalid-profundidad_cuneta rechazo explicito",
+      "pass": true
+    },
+    {
+      "name": "invalid-profundidad_cuneta sin residuos",
+      "pass": true
+    },
+    {
+      "name": "invalid-ancho_fondo_cuneta rechazo explicito",
+      "pass": true
+    },
+    {
+      "name": "invalid-ancho_fondo_cuneta sin residuos",
+      "pass": true
+    },
+    {
+      "name": "invalid-talud_cuneta_interior_hv rechazo explicito",
+      "pass": true
+    },
+    {
+      "name": "invalid-talud_cuneta_interior_hv sin residuos",
+      "pass": true
+    },
+    {
+      "name": "invalid-talud_cuneta_exterior_hv rechazo explicito",
+      "pass": true
+    },
+    {
+      "name": "invalid-talud_cuneta_exterior_hv sin residuos",
+      "pass": true
+    },
+    {
+      "name": "simulacion de 12 piezas",
+      "pass": true
+    },
+    {
+      "name": "simulacion sin residuos",
+      "pass": true
+    },
+    {
+      "name": "failure-berma rechazo explicito",
+      "pass": true
+    },
+    {
+      "name": "failure-berma sin residuos",
+      "pass": true
+    },
+    {
+      "name": "12 subensamblajes creados",
+      "pass": true
+    },
+    {
+      "name": "cadena de enganches Left",
+      "pass": true
+    },
+    {
+      "name": "cadena de enganches Right",
+      "pass": true
+    },
+    {
+      "name": "duplicado rechazo explicito",
+      "pass": true
+    },
+    {
+      "name": "duplicado sin residuos",
+      "pass": true
+    },
+    {
+      "name": "corredor simulado con geometria",
+      "pass": true
+    },
+    {
+      "name": "corredor simulado sin residuos",
+      "pass": true
+    },
+    {
+      "name": "failure-corridor rechazo explicito",
+      "pass": true
+    },
+    {
+      "name": "failure-corridor sin residuos",
+      "pass": true
+    },
+    {
+      "name": "targets de terreno",
+      "pass": true
+    },
+    {
+      "name": "ecuacion independiente xy",
+      "pass": true
+    },
+    {
+      "name": "ecuacion independiente profile",
+      "pass": true
+    },
+    {
+      "name": "ecuacion independiente berm_ditch",
+      "pass": true
+    },
+    {
+      "name": "ecuacion independiente daylight",
+      "pass": true
+    },
+    {
+      "name": "ecuacion independiente daylight_grade",
+      "pass": true
+    },
+    {
+      "name": "ecuacion independiente layers",
+      "pass": true
+    },
+    {
+      "name": "corte y relleno ejercitados",
+      "pass": true
+    },
+    {
+      "name": "corredor al dia",
+      "pass": true
+    },
+    {
+      "name": "superficie Top triangulada",
+      "pass": true
+    },
+    {
+      "name": "objetos originales conservados",
+      "pass": true
+    },
+    {
+      "name": "ocho secciones simuladas",
+      "pass": true
+    },
+    {
+      "name": "simulacion sin residuos",
+      "pass": true
+    },
+    {
+      "name": "ocho vistas y lineas nativas",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 110",
+      "pass": true
+    },
+    {
+      "name": "vertices de cuneta presentes 110",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 180",
+      "pass": true
+    },
+    {
+      "name": "vertices de cuneta presentes 180",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 200",
+      "pass": true
+    },
+    {
+      "name": "vertices de cuneta presentes 200",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 240",
+      "pass": true
+    },
+    {
+      "name": "vertices de cuneta presentes 240",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 300",
+      "pass": true
+    },
+    {
+      "name": "vertices de cuneta presentes 300",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 330",
+      "pass": true
+    },
+    {
+      "name": "vertices de cuneta presentes 330",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 360",
+      "pass": true
+    },
+    {
+      "name": "vertices de cuneta presentes 360",
+      "pass": true
+    },
+    {
+      "name": "normal al eje 450",
+      "pass": true
+    },
+    {
+      "name": "vertices de cuneta presentes 450",
+      "pass": true
+    },
+    {
+      "name": "vistas H=V",
+      "pass": true
+    },
+    {
+      "name": "todas las colecciones previas conservadas",
+      "pass": true
+    },
+    {
+      "name": "corredores actualizados antes de guardar",
+      "pass": true
+    },
+    {
+      "name": "guardado nativo DBMOD=0",
+      "pass": true
+    },
+    {
+      "name": "reapertura nativa DBMOD=0",
+      "pass": true
+    },
+    {
+      "name": "colecciones persistidas",
+      "pass": true
+    },
+    {
+      "name": "geometria Civil persistida",
+      "pass": true
+    },
+    {
+      "name": "corredores actualizados al reabrir",
+      "pass": true
+    },
+    {
+      "name": "estado final guardado sin comandos",
+      "pass": true
+    },
+    {
+      "name": "inventario y geometria aun iguales",
+      "pass": true
+    },
+    {
+      "name": "corredores aun actualizados",
+      "pass": true
+    },
+    {
+      "name": "segunda reapertura guardada",
+      "pass": true
+    },
+    {
+      "name": "geometria y colecciones persistidas de nuevo",
+      "pass": true
+    },
+    {
+      "name": "guardado final antes de cerrar",
+      "pass": true
+    }
+  ],
+  "working_copy_closed": true
+}

@@ -14,7 +14,7 @@ public partial class GmRecoveryQa
  static object ArmCorridorFailure(JsonElement job)
  {
   string stage=job.GetProperty("stage").GetString();
-  if(!new[]{"assembly-part-added","corridor-rebuilt","section-created","calzada-part-added","targets-assigned"}.Contains(stage))throw new ArgumentException("Invalid corridor QA stage");
+  if(!new[]{"assembly-part-added","corridor-rebuilt","section-created","calzada-part-added","targets-assigned","berma-cuneta-part-added"}.Contains(stage))throw new ArgumentException("Invalid corridor QA stage");
   var assembly=AppDomain.CurrentDomain.GetAssemblies().Single(a=>a.GetName().Name=="Cdcrd.Civil3dBridge");
   var field=assembly.GetType("Cdcrd.Civil3dBridge.Handlers").GetField("CorridorQaCheckpoint",BindingFlags.Static|BindingFlags.NonPublic);
   if(field==null||field.GetValue(null)!=null)throw new InvalidOperationException("QA failure already armed or unavailable");
