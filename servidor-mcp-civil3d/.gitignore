@@ -17,3 +17,9 @@ modulo-corredores/bin/
 modulo-corredores/obj/
 modulo-targets/bin/
 modulo-targets/obj/
+modulo-qto/bin/
+modulo-qto/obj/
+pruebas/native_qto_qa/bin/
+pruebas/native_qto_qa/obj/
+pruebas/native_qto_views/bin/
+pruebas/native_qto_views/obj/

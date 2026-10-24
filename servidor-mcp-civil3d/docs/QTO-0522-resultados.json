@@ -1,0 +1,1230 @@
+{
+  "delivery": "0.5.22",
+  "module": "Cdcrd.Qto.V8 0.1.7",
+  "civil": "2027",
+  "native_acceptance_checks": 55,
+  "region_checks": 8,
+  "persistence_checks": 12,
+  "original_objects": 1665,
+  "protected_files": 13,
+  "same_cad_process": true,
+  "volume": {
+    "handle": "99A2",
+    "name": "CDX QA QTO VOLUME 0522",
+    "base_surface": "97CF",
+    "comparison_surface": "97D0",
+    "unit": "m3",
+    "cut": 399.9999999999999,
+    "fill": 399.9999999999999,
+    "net": 0,
+    "cut_factor": 1.1,
+    "fill_factor": 1.2,
+    "adjusted_cut": 439.9999999999999,
+    "adjusted_fill": 479.99999999999983,
+    "adjusted_net": 39.99999999999994,
+    "out_of_date": false,
+    "simulation": false
+  },
+  "earth": {
+    "name": "CDX QA QTO EARTHWORK 0522",
+    "stations": [
+      100,
+      110,
+      120,
+      130,
+      140
+    ],
+    "method": "AverageEndArea",
+    "materials": [
+      {
+        "name": "Earthwork",
+        "type": "Earthwork",
+        "items": [
+          {
+            "name": "CDX QA QTO BASE 0522",
+            "type": "Surface",
+            "condition": "Base"
+          },
+          {
+            "name": "CDX QA QTO DESIGN 0522",
+            "type": "Surface",
+            "condition": "Compare"
+          }
+        ]
+      }
+    ],
+    "totals": [
+      {
+        "station": 100,
+        "cut_area": 40,
+        "fill_area": 0,
+        "cut": 0,
+        "fill": 0,
+        "cumulative_cut": 0,
+        "cumulative_fill": 0
+      },
+      {
+        "station": 110,
+        "cut_area": 20,
+        "fill_area": 0,
+        "cut": 300,
+        "fill": 0,
+        "cumulative_cut": 300,
+        "cumulative_fill": 0
+      },
+      {
+        "station": 120,
+        "cut_area": 0,
+        "fill_area": 0,
+        "cut": 100,
+        "fill": 0,
+        "cumulative_cut": 400,
+        "cumulative_fill": 0
+      },
+      {
+        "station": 130,
+        "cut_area": 0,
+        "fill_area": 20,
+        "cut": 0,
+        "fill": 100,
+        "cumulative_cut": 400,
+        "cumulative_fill": 100
+      },
+      {
+        "station": 140,
+        "cut_area": 0,
+        "fill_area": 40,
+        "cut": 0,
+        "fill": 300,
+        "cumulative_cut": 400,
+        "cumulative_fill": 400
+      }
+    ],
+    "quantities": [
+      {
+        "station": 100,
+        "materials": [
+          {
+            "name": "Earthwork(Cut)",
+            "area": 40,
+            "volume": 0,
+            "cumulative": 0
+          },
+          {
+            "name": "Earthwork(Fill)",
+            "area": 0,
+            "volume": 0,
+            "cumulative": 0
+          }
+        ]
+      },
+      {
+        "station": 110,
+        "materials": [
+          {
+            "name": "Earthwork(Cut)",
+            "area": 20,
+            "volume": 300,
+            "cumulative": 300
+          },
+          {
+            "name": "Earthwork(Fill)",
+            "area": 0,
+            "volume": 0,
+            "cumulative": 0
+          }
+        ]
+      },
+      {
+        "station": 120,
+        "materials": [
+          {
+            "name": "Earthwork(Cut)",
+            "area": 0,
+            "volume": 100,
+            "cumulative": 400
+          },
+          {
+            "name": "Earthwork(Fill)",
+            "area": 0,
+            "volume": 0,
+            "cumulative": 0
+          }
+        ]
+      },
+      {
+        "station": 130,
+        "materials": [
+          {
+            "name": "Earthwork(Cut)",
+            "area": 0,
+            "volume": 0,
+            "cumulative": 400
+          },
+          {
+            "name": "Earthwork(Fill)",
+            "area": 20,
+            "volume": 100,
+            "cumulative": 100
+          }
+        ]
+      },
+      {
+        "station": 140,
+        "materials": [
+          {
+            "name": "Earthwork(Cut)",
+            "area": 0,
+            "volume": 0,
+            "cumulative": 400
+          },
+          {
+            "name": "Earthwork(Fill)",
+            "area": 40,
+            "volume": 300,
+            "cumulative": 400
+          }
+        ]
+      }
+    ],
+    "unit": "m3"
+  },
+  "groups": [
+    {
+      "baseline": "A",
+      "region": "A1",
+      "stations": [
+        110,
+        120,
+        130,
+        140,
+        150,
+        160,
+        170
+      ],
+      "materials": [
+        {
+          "name": "Pave1",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 Pave1",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        },
+        {
+          "name": "Pave2",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 Pave2",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        },
+        {
+          "name": "Base",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 Base",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        },
+        {
+          "name": "SubBase",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 SubBase",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        }
+      ],
+      "quantities": [
+        {
+          "station": 110,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.373999999999029,
+              "volume": 0,
+              "cumulative": 0
+            },
+            {
+              "name": "Pave2",
+              "area": 0.523599999998737,
+              "volume": 0,
+              "cumulative": 0
+            },
+            {
+              "name": "Base",
+              "area": 1.49599999999617,
+              "volume": 0,
+              "cumulative": 0
+            },
+            {
+              "name": "SubBase",
+              "area": 2.24399999999451,
+              "volume": 0,
+              "cumulative": 0
+            }
+          ]
+        },
+        {
+          "station": 120,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.386000000010227,
+              "volume": 3.80000000004628,
+              "cumulative": 3.80000000004628
+            },
+            {
+              "name": "Pave2",
+              "area": 0.540400000014387,
+              "volume": 5.32000000006562,
+              "cumulative": 5.32000000006562
+            },
+            {
+              "name": "Base",
+              "area": 1.54400000004088,
+              "volume": 15.2000000001853,
+              "cumulative": 15.2000000001853
+            },
+            {
+              "name": "SubBase",
+              "area": 2.31600000006156,
+              "volume": 22.8000000002804,
+              "cumulative": 22.8000000002804
+            }
+          ]
+        },
+        {
+          "station": 130,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.398000000021426,
+              "volume": 3.92000000015827,
+              "cumulative": 7.72000000020455
+            },
+            {
+              "name": "Pave2",
+              "area": 0.557200000030065,
+              "volume": 5.48800000022226,
+              "cumulative": 10.8080000002879
+            },
+            {
+              "name": "Base",
+              "area": 1.59200000008553,
+              "volume": 15.6800000006321,
+              "cumulative": 30.8800000008173
+            },
+            {
+              "name": "SubBase",
+              "area": 2.38800000012867,
+              "volume": 23.5200000009512,
+              "cumulative": 46.3200000012316
+            }
+          ]
+        },
+        {
+          "station": 140,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.410000000009319,
+              "volume": 4.04000000015373,
+              "cumulative": 11.7600000003583
+            },
+            {
+              "name": "Pave2",
+              "area": 0.574000000013115,
+              "volume": 5.6560000002159,
+              "cumulative": 16.4640000005038
+            },
+            {
+              "name": "Base",
+              "area": 1.64000000003713,
+              "volume": 16.1600000006133,
+              "cumulative": 47.0400000014307
+            },
+            {
+              "name": "SubBase",
+              "area": 2.460000000056,
+              "volume": 24.2400000009233,
+              "cumulative": 70.5600000021549
+            }
+          ]
+        },
+        {
+          "station": 150,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.426250000018598,
+              "volume": 4.18125000013958,
+              "cumulative": 15.9412500004979
+            },
+            {
+              "name": "Pave2",
+              "area": 0.596750000026162,
+              "volume": 5.85375000019638,
+              "cumulative": 22.3177500007002
+            },
+            {
+              "name": "Base",
+              "area": 1.70500000007439,
+              "volume": 16.7250000005576,
+              "cumulative": 63.7650000019883
+            },
+            {
+              "name": "SubBase",
+              "area": 2.55750000011187,
+              "volume": 25.0875000008394,
+              "cumulative": 95.6475000029943
+            }
+          ]
+        },
+        {
+          "station": 160,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.442500000004657,
+              "volume": 4.34375000011627,
+              "cumulative": 20.2850000006141
+            },
+            {
+              "name": "Pave2",
+              "area": 0.619500000006553,
+              "volume": 6.08125000016358,
+              "cumulative": 28.3990000008637
+            },
+            {
+              "name": "Base",
+              "area": 1.77000000001857,
+              "volume": 17.3750000004648,
+              "cumulative": 81.1400000024531
+            },
+            {
+              "name": "SubBase",
+              "area": 2.655000000028,
+              "volume": 26.0625000006993,
+              "cumulative": 121.710000003694
+            }
+          ]
+        },
+        {
+          "station": 170,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.45874999999063,
+              "volume": 4.50624999997643,
+              "cumulative": 24.7912500005906
+            },
+            {
+              "name": "Pave2",
+              "area": 0.64224999998703,
+              "volume": 6.30874999996792,
+              "cumulative": 34.7077500008317
+            },
+            {
+              "name": "Base",
+              "area": 1.83499999996266,
+              "volume": 18.0249999999062,
+              "cumulative": 99.1650000023593
+            },
+            {
+              "name": "SubBase",
+              "area": 2.75249999994421,
+              "volume": 27.037499999861,
+              "cumulative": 148.747500003555
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "baseline": "A",
+      "region": "A2",
+      "stations": [
+        190,
+        200,
+        210,
+        220,
+        230,
+        240,
+        250
+      ],
+      "materials": [
+        {
+          "name": "Pave1",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 Pave1",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        },
+        {
+          "name": "Pave2",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 Pave2",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        },
+        {
+          "name": "Base",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 Base",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        },
+        {
+          "name": "SubBase",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 SubBase",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        }
+      ],
+      "quantities": [
+        {
+          "station": 190,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.481249999999989,
+              "volume": 0,
+              "cumulative": 0
+            },
+            {
+              "name": "Pave2",
+              "area": 0.673750000000041,
+              "volume": 0,
+              "cumulative": 0
+            },
+            {
+              "name": "Base",
+              "area": 1.9249999999999,
+              "volume": 0,
+              "cumulative": 0
+            },
+            {
+              "name": "SubBase",
+              "area": 2.8875000000001,
+              "volume": 0,
+              "cumulative": 0
+            }
+          ]
+        },
+        {
+          "station": 200,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.487500000000011,
+              "volume": 4.84375,
+              "cumulative": 4.84375
+            },
+            {
+              "name": "Pave2",
+              "area": 0.682500000000061,
+              "volume": 6.78125000000051,
+              "cumulative": 6.78125000000051
+            },
+            {
+              "name": "Base",
+              "area": 1.94999999999987,
+              "volume": 19.3749999999989,
+              "cumulative": 19.3749999999989
+            },
+            {
+              "name": "SubBase",
+              "area": 2.92500000000013,
+              "volume": 29.0625000000011,
+              "cumulative": 29.0625000000011
+            }
+          ]
+        },
+        {
+          "station": 210,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.493749999999977,
+              "volume": 4.90624999999994,
+              "cumulative": 9.74999999999994
+            },
+            {
+              "name": "Pave2",
+              "area": 0.691250000000139,
+              "volume": 6.868750000001,
+              "cumulative": 13.6500000000015
+            },
+            {
+              "name": "Base",
+              "area": 1.97499999999985,
+              "volume": 19.6249999999986,
+              "cumulative": 38.9999999999975
+            },
+            {
+              "name": "SubBase",
+              "area": 2.96250000000015,
+              "volume": 29.4375000000014,
+              "cumulative": 58.5000000000025
+            }
+          ]
+        },
+        {
+          "station": 220,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.499999999999943,
+              "volume": 4.9687499999996,
+              "cumulative": 14.7187499999995
+            },
+            {
+              "name": "Pave2",
+              "area": 0.700000000000102,
+              "volume": 6.95625000000121,
+              "cumulative": 20.6062500000027
+            },
+            {
+              "name": "Base",
+              "area": 1.99999999999989,
+              "volume": 19.8749999999987,
+              "cumulative": 58.8749999999962
+            },
+            {
+              "name": "SubBase",
+              "area": 3.00000000000011,
+              "volume": 29.8125000000013,
+              "cumulative": 88.3125000000038
+            }
+          ]
+        },
+        {
+          "station": 230,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.494999999995287,
+              "volume": 4.97499999997615,
+              "cumulative": 19.6937499999757
+            },
+            {
+              "name": "Pave2",
+              "area": 0.692999999993617,
+              "volume": 6.9649999999686,
+              "cumulative": 27.5712499999713
+            },
+            {
+              "name": "Base",
+              "area": 1.97999999998123,
+              "volume": 19.8999999999056,
+              "cumulative": 78.7749999999018
+            },
+            {
+              "name": "SubBase",
+              "area": 2.9699999999722,
+              "volume": 29.8499999998616,
+              "cumulative": 118.162499999865
+            }
+          ]
+        },
+        {
+          "station": 240,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.48999999999063,
+              "volume": 4.92499999992958,
+              "cumulative": 24.6187499999053
+            },
+            {
+              "name": "Pave2",
+              "area": 0.685999999987047,
+              "volume": 6.89499999990332,
+              "cumulative": 34.4662499998746
+            },
+            {
+              "name": "Base",
+              "area": 1.9599999999626,
+              "volume": 19.6999999997192,
+              "cumulative": 98.474999999621
+            },
+            {
+              "name": "SubBase",
+              "area": 2.93999999994426,
+              "volume": 29.5499999995823,
+              "cumulative": 147.712499999448
+            }
+          ]
+        },
+        {
+          "station": 250,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.485000000009308,
+              "volume": 4.87499999999969,
+              "cumulative": 29.493749999905
+            },
+            {
+              "name": "Pave2",
+              "area": 0.679000000013104,
+              "volume": 6.82500000000076,
+              "cumulative": 41.2912499998754
+            },
+            {
+              "name": "Base",
+              "area": 1.94000000003717,
+              "volume": 19.4999999999989,
+              "cumulative": 117.97499999962
+            },
+            {
+              "name": "SubBase",
+              "area": 2.91000000005596,
+              "volume": 29.2500000000011,
+              "cumulative": 176.962499999449
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "baseline": "B",
+      "region": "B1",
+      "stations": [
+        110,
+        120,
+        130,
+        140,
+        150
+      ],
+      "materials": [
+        {
+          "name": "Pave1",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 Pave1",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        },
+        {
+          "name": "Pave2",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 Pave2",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        },
+        {
+          "name": "Base",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 Base",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        },
+        {
+          "name": "SubBase",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 SubBase",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        }
+      ],
+      "quantities": [
+        {
+          "station": 110,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.364999999990687,
+              "volume": 0,
+              "cumulative": 0
+            },
+            {
+              "name": "Pave2",
+              "area": 0.510999999987007,
+              "volume": 0,
+              "cumulative": 0
+            },
+            {
+              "name": "Base",
+              "area": 1.45999999996269,
+              "volume": 0,
+              "cumulative": 0
+            },
+            {
+              "name": "SubBase",
+              "area": 2.18999999994418,
+              "volume": 0,
+              "cumulative": 0
+            }
+          ]
+        },
+        {
+          "station": 120,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.385000000009285,
+              "volume": 3.74999999999986,
+              "cumulative": 3.74999999999986
+            },
+            {
+              "name": "Pave2",
+              "area": 0.53900000001309,
+              "volume": 5.25000000000048,
+              "cumulative": 5.25000000000048
+            },
+            {
+              "name": "Base",
+              "area": 1.54000000003717,
+              "volume": 14.9999999999993,
+              "cumulative": 14.9999999999993
+            },
+            {
+              "name": "SubBase",
+              "area": 2.31000000005596,
+              "volume": 22.5000000000007,
+              "cumulative": 22.5000000000007
+            }
+          ]
+        },
+        {
+          "station": 130,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.405000000004662,
+              "volume": 3.95000000006974,
+              "cumulative": 7.70000000006959
+            },
+            {
+              "name": "Pave2",
+              "area": 0.567000000006573,
+              "volume": 5.53000000009831,
+              "cumulative": 10.7800000000988
+            },
+            {
+              "name": "Base",
+              "area": 1.62000000001856,
+              "volume": 15.8000000002787,
+              "cumulative": 30.8000000002779
+            },
+            {
+              "name": "SubBase",
+              "area": 2.430000000028,
+              "volume": 23.7000000004198,
+              "cumulative": 46.2000000004205
+            }
+          ]
+        },
+        {
+          "station": 140,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.424999999999983,
+              "volume": 4.15000000002323,
+              "cumulative": 11.8500000000928
+            },
+            {
+              "name": "Pave2",
+              "area": 0.595000000000056,
+              "volume": 5.81000000003314,
+              "cumulative": 16.5900000001319
+            },
+            {
+              "name": "Base",
+              "area": 1.6999999999999,
+              "volume": 16.6000000000923,
+              "cumulative": 47.4000000003703
+            },
+            {
+              "name": "SubBase",
+              "area": 2.5500000000001,
+              "volume": 24.9000000001405,
+              "cumulative": 71.100000000561
+            }
+          ]
+        },
+        {
+          "station": 150,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.412499999999994,
+              "volume": 4.18749999999989,
+              "cumulative": 16.0375000000927
+            },
+            {
+              "name": "Pave2",
+              "area": 0.577500000000072,
+              "volume": 5.86250000000064,
+              "cumulative": 22.4525000001326
+            },
+            {
+              "name": "Base",
+              "area": 1.64999999999992,
+              "volume": 16.7499999999991,
+              "cumulative": 64.1500000003694
+            },
+            {
+              "name": "SubBase",
+              "area": 2.47500000000008,
+              "volume": 25.1250000000009,
+              "cumulative": 96.2250000005619
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "baseline": "B",
+      "region": "B2",
+      "stations": [
+        190,
+        200,
+        210,
+        220,
+        230,
+        240,
+        250
+      ],
+      "materials": [
+        {
+          "name": "Pave1",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 Pave1",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        },
+        {
+          "name": "Pave2",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 Pave2",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        },
+        {
+          "name": "Base",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 Base",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        },
+        {
+          "name": "SubBase",
+          "type": "Structure",
+          "items": [
+            {
+              "name": "CDX QA TARGETS VARIABLE 0521 SubBase",
+              "type": "CorridorShape",
+              "condition": "Include"
+            }
+          ]
+        }
+      ],
+      "quantities": [
+        {
+          "station": 190,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.399999999999949,
+              "volume": 0,
+              "cumulative": 0
+            },
+            {
+              "name": "Pave2",
+              "area": 0.560000000000031,
+              "volume": 0,
+              "cumulative": 0
+            },
+            {
+              "name": "Base",
+              "area": 1.59999999999994,
+              "volume": 0,
+              "cumulative": 0
+            },
+            {
+              "name": "SubBase",
+              "area": 2.40000000000006,
+              "volume": 0,
+              "cumulative": 0
+            }
+          ]
+        },
+        {
+          "station": 200,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.42500000000004,
+              "volume": 4.12499999999994,
+              "cumulative": 4.12499999999994
+            },
+            {
+              "name": "Pave2",
+              "area": 0.594999999999999,
+              "volume": 5.77500000000015,
+              "cumulative": 5.77500000000015
+            },
+            {
+              "name": "Base",
+              "area": 1.69999999999996,
+              "volume": 16.4999999999995,
+              "cumulative": 16.4999999999995
+            },
+            {
+              "name": "SubBase",
+              "area": 2.55000000000004,
+              "volume": 24.7500000000005,
+              "cumulative": 24.7500000000005
+            }
+          ]
+        },
+        {
+          "station": 210,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.44999999999996,
+              "volume": 4.375,
+              "cumulative": 8.49999999999994
+            },
+            {
+              "name": "Pave2",
+              "area": 0.630000000000081,
+              "volume": 6.1250000000004,
+              "cumulative": 11.9000000000005
+            },
+            {
+              "name": "Base",
+              "area": 1.79999999999993,
+              "volume": 17.4999999999994,
+              "cumulative": 33.9999999999989
+            },
+            {
+              "name": "SubBase",
+              "area": 2.70000000000007,
+              "volume": 26.2500000000006,
+              "cumulative": 51.0000000000011
+            }
+          ]
+        },
+        {
+          "station": 220,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.474999999999937,
+              "volume": 4.62499999999949,
+              "cumulative": 13.1249999999994
+            },
+            {
+              "name": "Pave2",
+              "area": 0.665000000000049,
+              "volume": 6.47500000000065,
+              "cumulative": 18.3750000000012
+            },
+            {
+              "name": "Base",
+              "area": 1.89999999999995,
+              "volume": 18.4999999999994,
+              "cumulative": 52.4999999999983
+            },
+            {
+              "name": "SubBase",
+              "area": 2.85000000000005,
+              "volume": 27.7500000000006,
+              "cumulative": 78.7500000000017
+            }
+          ]
+        },
+        {
+          "station": 230,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.449999999999989,
+              "volume": 4.62499999999963,
+              "cumulative": 17.7499999999991
+            },
+            {
+              "name": "Pave2",
+              "area": 0.630000000000052,
+              "volume": 6.47500000000051,
+              "cumulative": 24.8500000000017
+            },
+            {
+              "name": "Base",
+              "area": 1.79999999999995,
+              "volume": 18.4999999999995,
+              "cumulative": 70.9999999999978
+            },
+            {
+              "name": "SubBase",
+              "area": 2.70000000000005,
+              "volume": 27.7500000000005,
+              "cumulative": 106.500000000002
+            }
+          ]
+        },
+        {
+          "station": 240,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.424999999999983,
+              "volume": 4.37499999999986,
+              "cumulative": 22.1249999999989
+            },
+            {
+              "name": "Pave2",
+              "area": 0.595000000000056,
+              "volume": 6.12500000000054,
+              "cumulative": 30.9750000000022
+            },
+            {
+              "name": "Base",
+              "area": 1.6999999999999,
+              "volume": 17.4999999999993,
+              "cumulative": 88.4999999999971
+            },
+            {
+              "name": "SubBase",
+              "area": 2.5500000000001,
+              "volume": 26.2500000000007,
+              "cumulative": 132.750000000003
+            }
+          ]
+        },
+        {
+          "station": 250,
+          "materials": [
+            {
+              "name": "Pave1",
+              "area": 0.399999999999977,
+              "volume": 4.1249999999998,
+              "cumulative": 26.2499999999987
+            },
+            {
+              "name": "Pave2",
+              "area": 0.560000000000002,
+              "volume": 5.77500000000029,
+              "cumulative": 36.7500000000025
+            },
+            {
+              "name": "Base",
+              "area": 1.59999999999997,
+              "volume": 16.4999999999993,
+              "cumulative": 104.999999999996
+            },
+            {
+              "name": "SubBase",
+              "area": 2.40000000000003,
+              "volume": 24.7500000000007,
+              "cumulative": 157.500000000004
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "independent_errors": {
+    "area": 1.286699635727473e-10,
+    "increment": 9.511964549346885e-10,
+    "cumulative": 3.6939979963790393e-09
+  },
+  "independent_volumes": {
+    "A1": {
+      "Pave1": 24.79125,
+      "Pave2": 34.70775,
+      "Base": 99.165,
+      "SubBase": 148.7475
+    },
+    "A2": {
+      "Pave1": 29.493750000000002,
+      "Pave2": 41.29125000000001,
+      "Base": 117.97500000000001,
+      "SubBase": 176.9625
+    },
+    "B1": {
+      "Pave1": 16.0375,
+      "Pave2": 22.452500000000004,
+      "Base": 64.15,
+      "SubBase": 96.225
+    },
+    "B2": {
+      "Pave1": 26.25,
+      "Pave2": 36.75000000000001,
+      "Base": 105.0,
+      "SubBase": 157.5
+    }
+  },
+  "sampled_length_m": 220,
+  "shape_station_count": 26,
+  "limits": [
+    "Synthetic straight axes in meters; no design approval.",
+    "Only interior sample intervals: 220 m, not full corridor volume.",
+    "No pay items, prices, curved correction or material criteria import.",
+    "TIN volume uses source intersection; earth sections require complete cross-section coverage.",
+    "Corridor shapes require separate prepare and complete commands."
+  ]
+}

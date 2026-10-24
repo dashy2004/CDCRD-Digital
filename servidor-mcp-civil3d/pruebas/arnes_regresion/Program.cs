@@ -29,6 +29,7 @@ class Program {
   SpiralChecks.Run(Check);
   MultiChecks.Run(Check);
   TargetChecks.Run(Check);
+  QtoChecks.Run(Check);
   PeralteChecks.Run(Check);
   SiteDesignChecks.Run(Check);
   CorridorChecks.Run(Check);

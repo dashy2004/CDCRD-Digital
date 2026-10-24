@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" AppVersion="0.1.7" Author="CDCRD-Digital"
+  Name="CDCRD QTO" Description="TIN volumes and sectional QTO for Civil 3D 2027"
+  ProductCode="{8EC14AED-641E-4880-BB91-D048235D57BF}" UpgradeCode="{8C1E971A-7BA0-4DA7-B986-21B68D70A6EC}">
+  <CompanyDetails Name="CDCRD-Digital" Url="https://github.com/dashy2004/CDCRD-Digital" />
+  <Components>
+    <RuntimeRequirements Platform="Civil3D" SeriesMin="R26.0" SeriesMax="R26.0" OS="Win64" />
+    <ComponentEntry AppName="CdcrdQtoV8" AppDescription="TIN volumes and sectional QTO module"
+      AppType=".NET" ModuleName="./Contents/Cdcrd.Qto.V8.dll" LoadOnAutoCADStartup="True" LoadOnRequest="True">
+      <Commands GroupName="CDCRDQTO">
+        <Command Global="CDCRDQTOV8" Local="CDCRDQTOV8" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+</ApplicationPackage>
