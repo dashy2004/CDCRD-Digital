@@ -608,6 +608,8 @@ targets.registrar(mcp, _ok)
 
 import qto
 qto.registrar(mcp, _ok)
+import partidas
+partidas.registrar(mcp, _ok)
 
 if __name__ == '__main__':
     logger.info('Herramientas registradas; esperando al cliente MCP por stdio')

@@ -10,7 +10,7 @@ entrada y limitaciones conocidas.
 2. Mantener las referencias de cláusula, volumen y página cuando se usen datos normativos.
 3. Añadir una prueba que compruebe el comportamiento modificado cuando corresponda.
 4. Indicar versión del programa y entorno de prueba, distinguiendo pruebas offline de
-   ejecución real en Revit, ETABS o SAFE.
+   ejecución real en Civil 3D, AutoCAD, Revit, ETABS o SAFE.
 5. Documentar resultados y limitaciones en la propuesta de cambio.
 
 No incluir credenciales, rutas personales, modelos, planos, miniaturas ni resultados de

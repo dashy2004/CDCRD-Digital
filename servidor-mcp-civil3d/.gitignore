@@ -23,3 +23,8 @@ pruebas/native_qto_qa/bin/
 pruebas/native_qto_qa/obj/
 pruebas/native_qto_views/bin/
 pruebas/native_qto_views/obj/
+
+modulo-partidas/bin/
+modulo-partidas/obj/
+pruebas/native_partidas_qa/bin/
+pruebas/native_partidas_qa/obj/

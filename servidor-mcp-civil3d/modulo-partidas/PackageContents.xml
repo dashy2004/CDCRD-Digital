@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" AppVersion="0.1.2" Author="CDCRD-Digital"
+  Name="CDCRD Partidas" Description="Pay item catalog, assignments and QTO reports for Civil 3D 2027"
+  ProductCode="{D8CEFDF7-4375-4183-92B6-03AF0B44CF64}" UpgradeCode="{C1D260AF-CFE9-4BBD-AB0E-B39DA737D73D}">
+  <CompanyDetails Name="CDCRD-Digital" Url="https://github.com/dashy2004/CDCRD-Digital" />
+  <Components>
+    <RuntimeRequirements Platform="Civil3D" SeriesMin="R26.0" SeriesMax="R26.0" OS="Win64" />
+    <ComponentEntry AppName="CdcrdPARTIDASV3" AppDescription="Pay item catalog, assignments and QTO reports module"
+      AppType=".NET" ModuleName="./Contents/Cdcrd.Partidas.V3.dll" LoadOnAutoCADStartup="True" LoadOnRequest="True">
+      <Commands GroupName="CDCRDPartidas">
+        <Command Global="CDCRDPARTIDASV3" Local="CDCRDPARTIDASV3" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+</ApplicationPackage>

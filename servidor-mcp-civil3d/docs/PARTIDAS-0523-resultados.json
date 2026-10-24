@@ -1,0 +1,40 @@
+{
+  "delivery": "0.5.23",
+  "module": "0.1.2",
+  "civil": "2027",
+  "python_tests": 338,
+  "native_final_checks": 22,
+  "native_persistence_checks": 13,
+  "previous_objects": 1942,
+  "protected_files": 14,
+  "quantities": [
+    {
+      "code": "CDX-EA",
+      "unit": "EA",
+      "quantity": 3
+    },
+    {
+      "code": "CDX-M",
+      "unit": "M",
+      "quantity": 35
+    },
+    {
+      "code": "CDX-M2",
+      "unit": "M2",
+      "quantity": 200
+    },
+    {
+      "code": "CDX-M3",
+      "unit": "M3",
+      "quantity": 24
+    }
+  ],
+  "scope": "synthetic fixture; whole-drawing report; no prices",
+  "catalog_loader_simulation": "validation only; nontransactional loader",
+  "assignment_failure_rollback_verified": true,
+  "raw_xml_header": "english; row units EA/M/M2/M3 verified",
+  "screenshots": {
+    "plan": "69e15502126b9068e0fd979aa8cbe6533b8df979cc5ddccdf0c7b44d4c3cdeff",
+    "report": "980eb5a69cf668fbef475b5f789cd906e8745ef2a7afddcd7c219e8293f5a1c8"
+  }
+}
