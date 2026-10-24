@@ -15,20 +15,19 @@ agregar una tool. Cada tool es un archivo en tools/<nombre>.py con
 
 El servidor concatena tools/_common.py + el modulo + un pie que llama run()
 con los parametros en JSON y hace print(json.dumps(resultado)). Todo ese
-texto corre como IronPython dentro de Revit, asi que los modulos son 2.7:
+texto corre como IronPython 3.4 dentro de Revit:
 sin f-strings, sin anotaciones. El puerto se descubre por sondeo (pyRevit
 sube al siguiente libre si el base esta ocupado) y se cachea.
 
-Agregar una tool nueva = agregar el archivo y registrarla abajo en TOOLS.
+Agregar una tool nueva = agregar el archivo y un wrapper con @mcp.tool.
 """
 
 import json
 import os
 import re
-import sys
 import urllib.error
 import urllib.request
-from typing import Any, Optional
+from typing import Optional
 
 from mcp.server.fastmcp import FastMCP
 
@@ -51,12 +50,25 @@ def _post(port: int, code: str, description: str) -> dict:
     url = "http://localhost:%d/%s/execute_code/" % (port, API)
     payload = json.dumps({"code": code, "description": description,
                           "use_transaction": False}).encode("utf-8")
-    # text/plain: pyRevit 6.5 sobre IronPython hace json.loads(bytes) con
-    # application/json y falla antes de llegar al handler (ver revit-mcp-write).
+    # Match the native Python bridge. text/plain leaves request.data as bytes
+    # in current pyRevit, so the handler fails before reading data.get('code').
     req = urllib.request.Request(url, data=payload, method="POST",
-                                 headers={"Content-Type": "text/plain; charset=utf-8"})
-    with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
-        raw = resp.read().decode("utf-8")
+                                 headers={"Content-Type": "application/json; charset=utf-8"})
+    try:
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+            raw = resp.read().decode("utf-8")
+    except urllib.error.HTTPError as error:
+        # Never retry an execution: the model may already have been changed.
+        # Exclude code_attempted/traceback, which may contain private model data.
+        with error:
+            body = error.read(65536).decode('utf-8', errors='replace')
+        try:
+            detail = json.loads(body)
+        except (ValueError, TypeError):
+            detail = {}
+        return {'error': 'HTTP %s' % error.code,
+                'message': str(detail.get('error', 'Native request failed'))[:2000] if isinstance(detail, dict) else 'Native request failed',
+                'retry_safe': False}
     try:
         return json.loads(raw)
     except json.JSONDecodeError:
@@ -65,31 +77,31 @@ def _post(port: int, code: str, description: str) -> dict:
 
 def _port() -> int:
     global _port_cache
-    probe = "print('__revit_tools_ok__')"
-    if _port_cache is not None:
-        try:
-            r = _post(_port_cache, probe, "sonda")
-            if "__revit_tools_ok__" in json.dumps(r):
-                return _port_cache
-        except Exception:
-            pass
-        _port_cache = None
+    # Transport discovery must not enqueue a Revit ExternalEvent. A loading
+    # model may accept HTTP while its native event loop is unavailable.
+    ports = list(range(BASE_PORT, BASE_PORT + PORT_SCAN))
+    if _port_cache in ports:
+        ports.remove(_port_cache)
+        ports.insert(0, _port_cache)
+    _port_cache = None
     errors = []
-    for p in range(BASE_PORT, BASE_PORT + PORT_SCAN):
+    for p in ports:
         try:
-            r = _post(p, probe, "sonda")
-            if "__revit_tools_ok__" in json.dumps(r):
+            req = urllib.request.Request("http://127.0.0.1:%d/routes/status" % p)
+            with urllib.request.urlopen(req, timeout=3) as response:
+                status = json.loads(response.read().decode("utf-8"))
+            if isinstance(status, dict) and status.get("session_id") and "Revit" in str(status.get("host", "")):
                 _port_cache = p
                 return p
-            errors.append("%d: respuesta inesperada" % p)
+            errors.append("%d: estado de transporte no reconocido" % p)
         except urllib.error.HTTPError as e:
             errors.append("%d: HTTP %s" % (p, e.code))
         except Exception as e:
             errors.append("%d: %s" % (p, type(e).__name__))
     raise RuntimeError(
-        "No responde /%s/execute_code/ en %d-%d. Verificar: Revit abierto con "
+        "No responde /routes/status en %d-%d. Verificar: Revit abierto con "
         "un documento, extension mcp-server-for-revit-python cargada, routes "
-        "habilitadas. Sondeo: %s" % (API, BASE_PORT, BASE_PORT + PORT_SCAN - 1, "; ".join(errors)))
+        "habilitadas. Sondeo: %s" % (BASE_PORT, BASE_PORT + PORT_SCAN - 1, "; ".join(errors)))
 
 
 # ----------------------------------------------------------------------
@@ -130,7 +142,9 @@ def _run_tool(name: str, params: dict) -> dict:
     import base64
     p64 = base64.b64encode(json.dumps(params or {}).encode("utf-8")).decode("ascii")
     helpers = _read("_mep") if name in ("mep_inventario", "mep_conectividad") else ""
-    code = _common() + "\n\n" + helpers + "\n" + _read(name) + "\n" + _FOOTER % p64
+    module_path = os.path.join(TOOLS_DIR, name + '.py')
+    code = (_common() + "\n\n" + helpers + "\n__file__ = %r\n" % module_path
+            + _read(name) + "\n" + _FOOTER % p64)
     r = _post(_port(), code, "revit-tools: " + name)
     text = r if isinstance(r, str) else json.dumps(r)
     m = re.search(r"__RT__([A-Za-z0-9+/=]+)__RT_END__", text)
@@ -158,6 +172,41 @@ def _doc(name: str) -> str:
 @mcp.tool(description=_doc("estado"))
 def revit_estado() -> dict:
     return _run_tool("estado", {})
+
+
+@mcp.tool(description=_doc("documentar_losas"))
+def revit_documentar_losas(config: dict) -> dict:
+    return _run_tool("documentar_losas", config)
+
+
+@mcp.tool(description=_doc("dimensiones_losas"))
+def revit_dimensiones_losas(config: dict) -> dict:
+    return _run_tool("dimensiones_losas", config)
+
+
+@mcp.tool(description=_doc("detalles_losas"))
+def revit_detalles_losas(config: dict) -> dict:
+    return _run_tool("detalles_losas", config)
+
+
+@mcp.tool(description=_doc("apoyos_losa"))
+def revit_apoyos_losa(config: dict) -> dict:
+    return _run_tool("apoyos_losa", config)
+
+
+@mcp.tool(description=_doc("aligerado_propuesta"))
+def revit_aligerado_propuesta(config: dict) -> dict:
+    return _run_tool("aligerado_propuesta", config)
+
+
+@mcp.tool(description=_doc("eps_individualizar"))
+def revit_eps_individualizar(config: dict) -> dict:
+    return _run_tool("eps_individualizar", config)
+
+
+@mcp.tool(description=_doc("eps_tabla"))
+def revit_eps_tabla(config: dict) -> dict:
+    return _run_tool("eps_tabla", config)
 
 
 @mcp.tool(description=_doc("inventario"))
@@ -454,6 +503,12 @@ def revit_ejecutar_tool(name: str, params: dict = None) -> dict:
     parametros. Es la via para tools nuevas que todavia no tienen wrapper:
     basta con crear tools/<name>.py con run(doc, uidoc, DB, P)."""
     return _run_tool(name, params or {})
+
+
+@mcp.tool(description=_doc("coronar_muros"))
+def revit_coronar_muros(config: dict) -> dict:
+    """Inspecciona, ensaya o aplica coronaciones en la copia y turno declarados."""
+    return _run_tool("coronar_muros", config)
 
 
 @mcp.tool()

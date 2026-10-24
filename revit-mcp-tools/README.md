@@ -7,6 +7,21 @@ funciones puras `run(doc, uidoc, DB, P) -> dict`, enviadas por el canal
 `mcp-server-for-revit-python`). No requiere tocar pyRevit ni reiniciar Revit
 para agregar una herramienta.
 
+`revit_detalles_losas` genera seccion, modulacion y encuentro muro/bovedilla
+en Drafting Views nativas con estilos GR: [contrato y ejemplo](docs/detalles-nativos.md).
+Los wrappers nuevos requieren recargar el servidor MCP del cliente; no Revit.
+
+Las herramientas `revit_dimensiones_losas`, `revit_aligerado_propuesta` y
+`revit_coronar_muros` trabajan con copias y guardas explícitas. Véase
+[Losas, dimensiones y coronaciones](docs/losas-muros-copia.md) para sus contratos,
+simulación, limitaciones geométricas y evidencia de validación requerida.
+
+`revit_eps_individualizar` crea piezas EPS contables con controles de copia,
+dependencias y geometría; `revit_eps_tabla` verifica el inventario de su tabla.
+Ambas se ensayaron en copias nativas de Revit 2027:
+[contrato y límites](docs/eps-individuales.md). El descubrimiento del puerto usa
+`GET /routes/status`, sin encolar código de prueba en el hilo de Revit.
+
 ```
 cliente MCP --stdio--> src/server.py --HTTP--> pyRevit Routes (Revit.exe)
                                               /revit_mcp/execute_code/
@@ -109,6 +124,9 @@ tocar el resto. Los `except` que silencian cuentan y se devuelven en
 después no aparece en el reporte.
 
 ## Agregar una herramienta
+
+Auditoría de apoyos, propuesta virtual de nervios y compatibilidad del puente:
+[APOYOS_LOSA.md](APOYOS_LOSA.md). Solo lectura; no selecciona espesores ni armado.
 
 1. Crear `src/tools/<nombre>.py` con docstring y `def run(doc, uidoc, DB, P)`.
    IronPython 3.4: sin f-strings ni anotaciones. Helpers de `_common.py`

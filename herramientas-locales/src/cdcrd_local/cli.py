@@ -16,6 +16,13 @@ def parser() -> argparse.ArgumentParser:
     sub = cli.add_subparsers(dest="command", required=True)
     sub.add_parser("doctor", help="Verificar dependencias sin conectar BIM vivo")
     sub.add_parser("mcp", help="Iniciar servidor MCP stdio")
+    for command in ("preparar-cimentacion", "revisar-cimentacion"):
+        operation = sub.add_parser(command, help="Intercambio Civil3D/CSI sin escribir modelos")
+        operation.add_argument("source", type=Path)
+        operation.add_argument("config", type=Path)
+        operation.add_argument("output", type=Path)
+        if command == "revisar-cimentacion":
+            operation.add_argument("--geotecnia", type=Path)
     exchange = sub.add_parser("validar-intercambio",
                               help="Validar fuentes sin importar ni activar BIM")
     exchange.add_argument("--modulo", choices=["beamng"], required=True)
@@ -63,6 +70,11 @@ def parser() -> argparse.ArgumentParser:
 
 
 def execute(args: argparse.Namespace) -> dict:
+    if args.command in ("preparar-cimentacion", "revisar-cimentacion"):
+        from .foundation_exchange import run_files
+        operation = "prepare" if args.command == "preparar-cimentacion" else "review"
+        return run_files(operation, args.source, args.config, args.output,
+                         getattr(args, "geotecnia", None))
     if args.command == "validar-intercambio":
         from .interchange import SOURCE_OPTIONS, validate_beamng
 
@@ -115,7 +127,7 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False), file=sys.stderr)
         return 2
     print(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))
-    if args.command in ("doctor", "estado", "validar-intercambio"):
+    if args.command in ("doctor", "estado", "validar-intercambio", "revisar-cimentacion"):
         return 0 if result["ok"] else 1
     if args.command == "verificar":
         return result["exit_code"]

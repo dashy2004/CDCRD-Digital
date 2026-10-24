@@ -349,6 +349,17 @@ class Etabs:
     # Conversion de unidades
     # ------------------------------------------------------------------
 
+    @com_call
+    def get_coordinate_snapshot(self, expected_path: str, frame_id: str,
+                                max_points: int = 10000) -> dict:
+        """Lee joints Global con unidades e identidad verificadas; no cambia el modelo.
+
+        Seleccionar los puntos de cimentacion al preparar la consulta Civil 3D.
+        No transforma coordenadas ni interpreta apoyos/cargas.
+        """
+        from coordinate_snapshot import capture_points
+        return capture_points(self._model(), 'ETABS', expected_path, frame_id, max_points)
+
     _FORCE_TO_N = {"lb": 4.4482216, "kip": 4448.2216, "kN": 1000.0,
                    "kgf": 9.80665, "N": 1.0, "Ton": 9806.65}
     _LENGTH_TO_MM = {"in": 25.4, "ft": 304.8, "mm": 1.0, "m": 1000.0, "cm": 10.0}

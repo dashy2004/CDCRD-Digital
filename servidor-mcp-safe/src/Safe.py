@@ -1,7 +1,7 @@
 # SAFE MCP — lote 1 Claude (v0.2.1) + lote 2 CDX (2026-09-25).
 # Fuente de firmas/estados: docs/OAPI-SAFE-real.md, docs/ENUMS-SAFE.md.
 # Capa A: documentada por CSI para SAFE; capa B: typelib compartido.
-# Tests mock no equivalen a verificacion viva. Solo Claude opera SAFE.
+# Tests mock no equivalen a verificacion viva. Operacion requiere autorizacion y turno exclusivo.
 # Los comentarios historicos de cada metodo no reemplazan el registro de
 # corrida por version. Ver README y docs/PRUEBA-VIVA-LOTE2.md.
 
@@ -112,7 +112,10 @@ IMPORT_TYPES = {
 
 class Safe:
     def __init__(self, auto_start: bool = False, exe_path: str = "",
-                 prog_id: str = "", helper_prog_id: str = ""):
+                 prog_id: str = "", helper_prog_id: str = "", process_id: int = 0):
+        if type(process_id) is not int or process_id < 0:
+            raise ValueError('process_id debe ser 0 (automatico) o un PID positivo')
+        self.process_id = process_id
         self.SapModel = None
         self._safe_object = None
         self.auto_start = auto_start
@@ -123,6 +126,8 @@ class Safe:
         # unico; si no, se sondea la lista completa de candidatos.
         self._prog_id_list = [prog_id] if prog_id else list(_PROGID_CANDIDATES)
         self._helper_list = [helper_prog_id] if helper_prog_id else list(_HELPER_CANDIDATES)
+        self._process_prog_id = prog_id or "CSI.SAFE.API.ETABSObject"
+        self._process_helper_id = helper_prog_id or "SAFEv1.Helper"
         # Conexion perezosa: el servidor debe poder arrancar aunque SAFE
         # todavia no este abierto.
 
@@ -140,6 +145,37 @@ class Safe:
                 logger.warning("Referencia a SAFE invalida (%s). Reconectando.", e)
                 self.SapModel = None
                 self._safe_object = None
+
+        # Un PID explicito nunca permite ROT, GetObject ni auto_start: esas
+        # rutas podrian seleccionar otro modelo abierto.
+        if self.process_id:
+            try:
+                helper = comtypes.client.CreateObject(self._process_helper_id)
+                try:
+                    import comtypes.gen.SAFEv1 as SAFEv1
+                    helper = helper.QueryInterface(SAFEv1.cHelper)
+                except ImportError:
+                    pass
+                safe_object = helper.GetObjectProcess(self._process_prog_id, self.process_id)
+                if not safe_object:
+                    raise SafeError('GetObjectProcess no devolvio instancia')
+                model = safe_object.SapModel
+                model.GetModelFilename()
+            except Exception as exc:
+                self.SapModel = None
+                self._safe_object = None
+                raise SafeError(f'No se pudo conectar al PID SAFE {self.process_id}; '
+                                f'no se usara otra instancia: {exc}') from exc
+            self.SapModel = model
+            self._safe_object = safe_object
+            self._prog_id_used = self._process_prog_id
+            try:
+                self.version_string = str(safe_object.GetOAPIVersionNumber())
+            except Exception:
+                self.version_string = "desconocida"
+            logger.info("SAFE conectado al PID %s (ProgID '%s'). OAPI version: %s",
+                        self.process_id, self._prog_id_used, self.version_string)
+            return
 
         safe_object = None
         intentos: list[str] = []
@@ -254,6 +290,17 @@ class Safe:
         if my_units < 1 or my_units > len(PRESET_UNITS):
             return "Unidades desconocidas."
         return f"Unidades activas: {PRESET_UNITS[my_units - 1]}"
+
+    @com_call
+    def get_coordinate_snapshot(self, expected_path: str, frame_id: str,
+                                max_points: int = 10000) -> dict:
+        """Lee joints Global con unidades e identidad verificadas; no cambia el modelo.
+
+        Seleccionar los puntos de cimentacion al preparar la consulta Civil 3D.
+        No transforma coordenadas ni interpreta apoyos/cargas.
+        """
+        from coordinate_snapshot import capture_points
+        return capture_points(self._model(), 'SAFE', expected_path, frame_id, max_points)
 
     @com_call
     def set_units(self, units: str) -> str:
@@ -523,6 +570,10 @@ class Safe:
                            factor: float = 1.2, compression_only: bool = True) -> str:
         """Define un resorte de area para el suelo (SOP Safe 3.6).
 
+        LEGADO: factor es dimensional y dependiente de unidades; no es una
+        correlacion geotecnica general. Para Civil -> SAFE usar
+        get_soil_transfer_context / apply_soil_transfer con k independiente.
+
         k = factor * esfuerzo_admisible (factor=1.2 es el valor del SOP).
 
         Firma confirmada en SAFE 23.3.0. NonlinearOption3 verificado por
@@ -566,6 +617,23 @@ class Safe:
                 f"{'compresion unicamente' if compression_only else 'lineal'}. "
                 f"Verificar comportamiento con get_table_data o "
                 f"describe_oapi si el resultado no coincide con lo esperado.")
+
+    @com_call
+    def get_soil_transfer_context(self, expected_path: str, frame_id: str) -> dict:
+        """Lee geometria, unidades, ejes y asignaciones para un plan Civil -> SAFE. Sin cambios."""
+        from soil_transfer import capture_context
+        return capture_context(self._model(), expected_path, frame_id)
+
+    @com_call
+    def apply_soil_transfer(self, plan: dict, expected_sha256: str,
+                            confirmed_copy: bool = False) -> dict:
+        """Aplica plan de k explicito sobre copia; relee rigidez y areas. No guarda ni calcula.
+
+        Requiere turno exclusivo. Solo agrega propiedad y asigna areas sin resorte.
+        No es transaccion: ok=false puede dejar escrituras parciales, no reintentar.
+        """
+        from soil_transfer import apply_plan
+        return apply_plan(self._model(), self._read_table, plan, expected_sha256, confirmed_copy)
 
     @com_call
     def assign_area_spring(self, area_ids: list[str], spring_name: str) -> str:

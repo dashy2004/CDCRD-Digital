@@ -40,12 +40,14 @@ def get_config() -> str:
 
 
 safe = Safe(auto_start=config.autoStart, exe_path=config.exePath,
-           prog_id=config.progId, helper_prog_id=config.helperProgId)
+           prog_id=config.progId, helper_prog_id=config.helperProgId,
+           process_id=config.processId)
 logger.info("Registrando herramientas de SAFE...")
 
 # Conexion / introspeccion
 get_model_info = mcp.tool()(safe.get_model_info)
 get_units = mcp.tool()(safe.get_units)
+get_coordinate_snapshot = mcp.tool()(safe.get_coordinate_snapshot)
 set_units = mcp.tool()(safe.set_units)
 save_model = mcp.tool()(safe.save_model)
 refresh_view = mcp.tool()(safe.refresh_view)
@@ -66,6 +68,8 @@ define_slab_section = mcp.tool()(safe.define_slab_section)
 # Resorte de suelo
 define_soil_spring = mcp.tool()(safe.define_soil_spring)
 assign_area_spring = mcp.tool()(safe.assign_area_spring)
+get_soil_transfer_context = mcp.tool()(safe.get_soil_transfer_context)
+apply_soil_transfer = mcp.tool()(safe.apply_soil_transfer)
 
 # Cargas y combinaciones
 add_load_pattern = mcp.tool()(safe.add_load_pattern)

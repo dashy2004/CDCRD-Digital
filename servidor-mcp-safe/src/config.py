@@ -21,6 +21,7 @@ DEFAULTS = {
         "helper_prog_id": "",
         "auto_start": False,
         "exe_path": "",
+        "process_id": 0,
     },
 }
 
@@ -64,6 +65,15 @@ class Config:
     @property
     def exePath(self) -> str:
         return str(self.data['safe'].get('exe_path', ""))
+
+    @property
+    def processId(self) -> int:
+        raw = os.environ.get('SAFE_PROCESS_ID', self.data['safe'].get('process_id', 0))
+        if isinstance(raw, str) and raw.isdecimal():
+            raw = int(raw)
+        if type(raw) is not int or raw < 0:
+            raise ValueError('SAFE_PROCESS_ID / safe.process_id debe ser un entero no negativo')
+        return raw
 
 
 if __name__ == "__main__":
