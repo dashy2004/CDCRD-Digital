@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" AppVersion="0.1.1" Author="CDCRD-Digital"
+  Name="CDCRD Targets" Description="Width and elevation targets for Civil 3D 2027"
+  ProductCode="{2C942D81-8A54-4A99-8A36-BC966561FDD6}" UpgradeCode="{071139FB-DA56-4A9D-B5A4-53137F58FC44}">
+  <CompanyDetails Name="CDCRD-Digital" Url="https://github.com/dashy2004/CDCRD-Digital" />
+  <Components>
+    <RuntimeRequirements Platform="Civil3D" SeriesMin="R26.0" SeriesMax="R26.0" OS="Win64" />
+    <ComponentEntry AppName="CdcrdTargetsV2" AppDescription="Width and elevation target module"
+      AppType=".NET" ModuleName="./Contents/Cdcrd.Targets.V2.dll" LoadOnAutoCADStartup="True" LoadOnRequest="True">
+      <Commands GroupName="CDCRDTARGETS">
+        <Command Global="CDCRDTARGETSV2" Local="CDCRDTARGETSV2" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+</ApplicationPackage>

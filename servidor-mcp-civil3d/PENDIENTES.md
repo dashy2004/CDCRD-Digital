@@ -1,6 +1,12 @@
 # Pendientes del puente MCP de Civil 3D
 
-## Estado vigente 0.5.20 — 2026-10-24
+## Estado vigente 0.5.21 - 2026-10-24
+
+[Targets de ancho/cota](docs/TARGETS-0521.md): corredor nuevo desde origen multibaseline de solo lectura, slots de carril Width/Outside Elevation, ancho y cota independientes. PR37 integrada. 8 asignaciones, 74 muestras de carril, 8 secciones, 792 triángulos/3 contornos. Guardado/reapertura, 1.559 objetos previos y 12 archivos protegidos conservados. 243 Python, 243 .NET+100 carreras, MCP81. Misma instancia; sin modal observado. El prototipo de edición existente falló el rollback; V2 crea objetos nuevos y sus cinco fallos inyectados revierten por completo.
+
+Pendientes: edición segura de targets/corredores, varios targets por slot, feature lines/polilíneas, bermas/cunetas y otras geometrías; QTO/barrido, normativa de peraltes, varios PI/espirales, hidráulica, grading, redes y planos. Autocarga/puente preparado 0.5.18 sin verificar. Las entradas inferiores son históricas.
+
+## Antecedente 0.5.20 — 2026-10-24
 
 [Baselines y regiones](docs/MULTIBASELINE-0520.md): creación de corredor nuevo con varios ejes/perfiles, regiones contiguas o con huecos, ensamblajes y TIN por región; lectura y secciones por baseline explícita. PR36 integrada. 2 baselines,4 regiones,61 muestras,11 secciones,1.385 triángulos y3 contornos; guardado/reapertura,1.474 objetos previos y11 archivos protegidos conservados. 225 Python,227.NET+100 carreras; MCP78tools. Módulo0.1.3 probado con puente0.5.17. Dos avisos auxiliares de prueba corregidos y documentados; no se observó cierre de Civil.
 

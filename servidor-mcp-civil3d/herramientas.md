@@ -1,10 +1,8 @@
 # Herramientas del servidor MCP de Civil 3D
 
-47 herramientas (19 base + 11 creacion + 5 vista/export + recetas 3.2/3.4 +
-gm_* y diagnostico de la v0.5.0; ver docs/CREACION.md, docs/VISTAS.md,
-docs/PERFIL_ESTRATIGRAFICO.md, docs/TRIDIMENSIONAL.md, docs/GM.md,
-docs/DIAGNOSTICO.md, docs/DIBUJO.md; limites en docs/LIMITACIONES.md). Las de
-escritura exigen `confirmar=True`; el servidor pide entonces el token de
+81 herramientas en la entrega 0.5.21. Los apartados describen los módulos
+incorporados en cada etapa; consultar el catálogo MCP para las firmas vigentes.
+Las de escritura exigen `confirmar=True`; el servidor pide entonces el token de
 aprobacion ligado a esos parametros exactos.
 
 ## Estado y descubrimiento
@@ -170,3 +168,11 @@ va como texto. Corregido en fuente despues de 0.5.5.
 - `crear_secciones_multibaseline`: baseline explícita, normales y estaciones verificadas, H=V; rechaza huecos/límites compartidos.
 
 Requiere módulo `Cdcrd.Corredores.V4`0.1.3 en la instancia existente. Catálogo total78. [Contrato, ejemplos y evidencia](docs/MULTIBASELINE-0520.md).
+
+## Targets de ancho y cota (0.5.21)
+
+- `listar_targets_corredor(dibujo, pid, corredor)`: slots por baseline/región/subensamblaje, tipo y referencias.
+- `crear_corredor_con_targets(dibujo, pid, corredor_origen, nombre, asignaciones, simular=True, confirmar=False)`: nuevo corredor y Top; origen propio multibaseline de solo lectura. Ancho con alineamiento lateral; cota con perfil de ese eje, o del eje baseline si no hay target de ancho.
+- `leer_targets_ancho_cota(dibujo, pid, corredor)`: contrato propio y verificación de ETW/Top. Usar este lector para el nuevo corredor, cuyo target no vacío rechaza el lector multibaseline anterior.
+
+Requiere `Cdcrd.Targets.V2` 0.1.1. Un target por slot, metros, sin ecuaciones, objetos locales y carriles de corona. Simulación por defecto y confirmación requerida. Tras timeout consultar recibo; no reenviar. [Contrato, reproducción y evidencia](docs/TARGETS-0521.md).
