@@ -1,6 +1,12 @@
 # Pendientes del puente MCP de Civil 3D
 
-## Estado vigente 0.5.19 â€” 2026-10-24
+## Estado vigente 0.5.20 — 2026-10-24
+
+[Baselines y regiones](docs/MULTIBASELINE-0520.md): creación de corredor nuevo con varios ejes/perfiles, regiones contiguas o con huecos, ensamblajes y TIN por región; lectura y secciones por baseline explícita. PR36 integrada. 2 baselines,4 regiones,61 muestras,11 secciones,1.385 triángulos y3 contornos; guardado/reapertura,1.474 objetos previos y11 archivos protegidos conservados. 225 Python,227.NET+100 carreras; MCP78tools. Módulo0.1.3 probado con puente0.5.17. Dos avisos auxiliares de prueba corregidos y documentados; no se observó cierre de Civil.
+
+Quedan edición de corredores/regiones, feature-line baselines, targets ancho/cota, QTO y barrido; varios PI/espirales encadenadas, cálculo normativo y edición de peraltes, cunetas condicionales/hidráulica, grading, redes y planos. El límite compartido tiene lectura nativa ambigua identificada y se rechaza como estación de sección. Autocarga y puente0.5.18 al próximo arranque aún sin verificar. Las listas inferiores son antecedentes.
+
+## Antecedente 0.5.19 â€” 2026-10-24
 
 Ver [espirales 0.5.19](docs/ESPIRALES-0519.md): un PI con grupo SCS de clotoides, giros izquierdo/derecho, longitudes distintas y lectura validada mediante contrato Xrecord. MÃ³dulo0.1.0 probado con puente0.5.17 y peraltes0.1.2; 61 estaciones del corredor, ocho secciones,90 controles nativos,206 Python,213.NET+100 carreras. Guardado/reapertura en el mismo PID, diez archivos protegidos intactos y cuatro capturas nativas. PR35 integrada. MCP75tools; puente0.5.18 y autocarga preparados, aÃºn sin prueba del prÃ³ximo arranque. Las diferencias de presentaciÃ³n de dos vistas generales de papel estÃ¡n documentadas en el informe.
 

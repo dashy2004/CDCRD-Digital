@@ -1,0 +1,169 @@
+{
+  "axes": [
+    {
+      "inicio": [
+        620010,
+        2100010
+      ],
+      "pi": [
+        620100,
+        2100010
+      ],
+      "fin": [
+        620177.9422863406,
+        2100055
+      ],
+      "radio": 50,
+      "longitud_entrada": 10,
+      "longitud_salida": 15,
+      "estacion_inicial": 100
+    },
+    {
+      "inicio": [
+        620010,
+        2100100
+      ],
+      "pi": [
+        620100,
+        2100100
+      ],
+      "fin": [
+        620177.9422863406,
+        2100145
+      ],
+      "radio": 50,
+      "longitud_entrada": 10,
+      "longitud_salida": 15,
+      "estacion_inicial": 100
+    }
+  ],
+  "assemblies": [
+    {
+      "ancho_izq": 3.5,
+      "ancho_der": 3.5,
+      "pendiente_izq": -0.02,
+      "pendiente_der": -0.02,
+      "espesores": [
+        0.05,
+        0.07,
+        0.2,
+        0.3
+      ],
+      "talud_corte": 3,
+      "talud_relleno": 4,
+      "ancho_daylight_max": 50,
+      "ancho_berma_izq": 1.5,
+      "ancho_berma_der": 2,
+      "pendiente_berma_izq": -0.04,
+      "pendiente_berma_der": -0.03,
+      "profundidad_cuneta": 0.6,
+      "ancho_fondo_cuneta": 0.5,
+      "talud_cuneta_interior_hv": 2,
+      "talud_cuneta_exterior_hv": 1.5,
+      "nombre": "CDX QA MULTI ASSEMBLY A 0520",
+      "origen": [
+        620300,
+        2100400,
+        0
+      ],
+      "capa": "CDX-QA-MULTI-ASSEMBLY"
+    },
+    {
+      "ancho_izq": 4.5,
+      "ancho_der": 3.0,
+      "pendiente_izq": -0.02,
+      "pendiente_der": -0.02,
+      "espesores": [
+        0.05,
+        0.07,
+        0.2,
+        0.3
+      ],
+      "talud_corte": 3,
+      "talud_relleno": 4,
+      "ancho_daylight_max": 50,
+      "ancho_berma_izq": 2.0,
+      "ancho_berma_der": 1.5,
+      "pendiente_berma_izq": -0.04,
+      "pendiente_berma_der": -0.03,
+      "profundidad_cuneta": 0.6,
+      "ancho_fondo_cuneta": 0.5,
+      "talud_cuneta_interior_hv": 2,
+      "talud_cuneta_exterior_hv": 1.5,
+      "nombre": "CDX QA MULTI ASSEMBLY B 0520",
+      "origen": [
+        620300,
+        2100430,
+        0
+      ],
+      "capa": "CDX-QA-MULTI-ASSEMBLY"
+    }
+  ],
+  "baselines": [
+    {
+      "nombre": "A",
+      "alineamiento": "CDX QA MULTI AXIS A 0520",
+      "perfil": "CDX QA MULTI PROFILE A 0520",
+      "regiones": [
+        {
+          "nombre": "A1",
+          "ensamblaje": "CDX QA MULTI ASSEMBLY A 0520",
+          "superficie_objetivo": "MCP QA TERRENO 0516",
+          "inicio": 100,
+          "fin": 180,
+          "frecuencia": 10,
+          "estaciones_extra": [
+            120,
+            160,
+            179
+          ]
+        },
+        {
+          "nombre": "A2",
+          "ensamblaje": "CDX QA MULTI ASSEMBLY B 0520",
+          "superficie_objetivo": "MCP QA TERRENO 0516",
+          "inicio": 180,
+          "fin": 279.3197859788749,
+          "frecuencia": 5,
+          "estaciones_extra": [
+            181,
+            220,
+            260
+          ]
+        }
+      ]
+    },
+    {
+      "nombre": "B",
+      "alineamiento": "CDX QA MULTI AXIS B 0520",
+      "perfil": "CDX QA MULTI PROFILE B 0520",
+      "regiones": [
+        {
+          "nombre": "B1",
+          "ensamblaje": "CDX QA MULTI ASSEMBLY B 0520",
+          "superficie_objetivo": "MCP QA TERRENO 0516",
+          "inicio": 100,
+          "fin": 165,
+          "frecuencia": 7.5,
+          "estaciones_extra": [
+            120,
+            150
+          ]
+        },
+        {
+          "nombre": "B2",
+          "ensamblaje": "CDX QA MULTI ASSEMBLY A 0520",
+          "superficie_objetivo": "MCP QA TERRENO 0516",
+          "inicio": 185,
+          "fin": 279.3197859788749,
+          "frecuencia": 10,
+          "estaciones_extra": [
+            200,
+            240,
+            260
+          ]
+        }
+      ]
+    }
+  ]
+}

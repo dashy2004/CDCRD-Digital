@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" AppVersion="0.1.3" Author="CDCRD-Digital"
+  Name="CDCRD Corredores" Description="Multiple baselines and regions for Civil 3D 2027"
+  ProductCode="{915EECCE-FD37-44BA-A2D8-536D22FDEDEF}" UpgradeCode="{7B21B190-D4E1-480E-8C37-6874BF7E85E7}">
+  <CompanyDetails Name="CDCRD-Digital" Url="https://github.com/dashy2004/CDCRD-Digital" />
+  <Components>
+    <RuntimeRequirements Platform="Civil3D" SeriesMin="R26.0" SeriesMax="R26.0" OS="Win64" />
+    <ComponentEntry AppName="CdcrdCorredoresV4" AppDescription="Multi-baseline corridor module"
+      AppType=".NET" ModuleName="./Contents/Cdcrd.Corredores.V4.dll" LoadOnAutoCADStartup="True" LoadOnRequest="True">
+      <Commands GroupName="CDCRDCORREDORES">
+        <Command Global="CDCRDCORREDORESV4" Local="CDCRDCORREDORESV4" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+</ApplicationPackage>
