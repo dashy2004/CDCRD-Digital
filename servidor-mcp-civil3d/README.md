@@ -1,6 +1,6 @@
 # Servidor MCP de Civil 3D 2027
 
-Entrega **0.5.18**: peraltes por tabla explícita con el módulo opcional **0.1.2**, probados en otra copia con el puente 0.5.17, ocho secciones y guardado/reapertura. El puente 0.5.18 añade una protección de inspección nativa; está compilado y preparado para el próximo arranque, aún sin prueba de carga. [Peraltes: capturas, pruebas y límites](docs/PERALTES-0518.md) · [Cunetas y bermas 0.5.17](docs/CUNETAS-BERMAS-0517.md) · [Calzada 0.5.16](docs/CALZADA-0516.md) · [Corredor 0.5.15](docs/CORREDOR-0515.md) · [Curvas 0.5.14](docs/CURVAS-0514.md) · [Plataformas 0.5.13](docs/PLATAFORMAS-0513.md) · [Sitio 0.5.12](docs/SITIO-0512.md) · [AutoCAD común](docs/AUTOCAD-0511.md).
+Entrega **0.5.19**: clotoides nativas SCS por API, giros izquierdo/derecho y longitudes distintas, con módulo opcional de espirales **0.1.0**. Probadas en otra copia con peraltes, corredor y ocho secciones: 90 controles nativos, guardado/reapertura y diez archivos protegidos intactos. Puente vivo 0.5.17; el 0.5.18 sigue preparado para el próximo arranque, aún sin prueba de carga. [Espirales: capturas, pruebas y límites](docs/ESPIRALES-0519.md) · [Peraltes 0.5.18](docs/PERALTES-0518.md) · [Cunetas y bermas 0.5.17](docs/CUNETAS-BERMAS-0517.md) · [Calzada 0.5.16](docs/CALZADA-0516.md) · [Corredor 0.5.15](docs/CORREDOR-0515.md) · [Curvas 0.5.14](docs/CURVAS-0514.md) · [Plataformas 0.5.13](docs/PLATAFORMAS-0513.md) · [Sitio 0.5.12](docs/SITIO-0512.md) · [AutoCAD común](docs/AUTOCAD-0511.md).
 
 Conecta un cliente MCP con el **dibujo abierto** en Civil 3D 2027. Dos piezas:
 
@@ -45,6 +45,7 @@ suponerlo a partir de la documentacion.
 .\instalar.ps1 -MostrarRegistroMCP # JSON para el cliente MCP
 py src\prueba_humo.py              # prueba de humo completa
 .\instalar-peraltes.ps1           # módulo opcional; no abre ni reinicia Civil
+.\instalar-espirales.ps1          # clotoides SCS; tampoco inicia otra instancia
 ```
 
 El bundle queda en `%APPDATA%\Autodesk\ApplicationPlugins\CDCRD-Civil3D.bundle`, que

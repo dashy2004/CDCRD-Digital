@@ -598,6 +598,8 @@ def calcular_seccion_si(units: StrictStr, q_m3_s: StrictFloat, b_m: StrictFloat,
 
 import peraltes
 peraltes.registrar(mcp, _ok)
+import espirales
+espirales.registrar(mcp, _ok)
 
 if __name__ == '__main__':
     logger.info('Herramientas registradas; esperando al cliente MCP por stdio')

@@ -1,6 +1,12 @@
 # Pendientes del puente MCP de Civil 3D
 
-## Estado vigente 0.5.18 — 2026-10-24
+## Estado vigente 0.5.19 — 2026-10-24
+
+Ver [espirales 0.5.19](docs/ESPIRALES-0519.md): un PI con grupo SCS de clotoides, giros izquierdo/derecho, longitudes distintas y lectura validada mediante contrato Xrecord. Módulo0.1.0 probado con puente0.5.17 y peraltes0.1.2; 61 estaciones del corredor, ocho secciones,90 controles nativos,206 Python,213.NET+100 carreras. Guardado/reapertura en el mismo PID, diez archivos protegidos intactos y cuatro capturas nativas. PR35 integrada. MCP75tools; puente0.5.18 y autocarga preparados, aún sin prueba del próximo arranque. Las diferencias de presentación de dos vistas generales de papel están documentadas en el informe.
+
+Quedan varios PI/espirales encadenadas, otras familias de espirales, edición de ejes y ecuaciones de estación; cálculo normativo/edición de tablas de peralte, suavizado y otros ejes de giro; múltiples baselines/regiones, targets ancho/cota, QTO y barrido. Además cunetas condicionales/revestimiento/hidráulica, grading, redes y planos. Las listas inferiores son antecedentes históricos.
+
+## Antecedente 0.5.18 — 2026-10-24
 
 Ver [peraltes 0.5.18](docs/PERALTES-0518.md): tabla explícita de nueve estaciones, dos carriles exteriores, interpolación lineal, corredor independiente y ocho secciones. Módulo 0.1.2 probado con puente 0.5.17: 52 controles nativos aprobados en la cadena de pruebas y seguimiento; 1 comparación inicial falló por el indicador diferido de reconstrucción y fue resuelta mediante reconstrucción y reapertura. Nueve archivos protegidos intactos. PR #34 de cunetas/bermas integrada. Protección adicional del puente 0.5.18 compilada y preparada; su carga en próximo arranque sigue sin verificar.
 
