@@ -1,3 +1,8 @@
+<!-- QTO-0522 -->
+## Actualización 0.5.22: cubicaciones/QTO
+
+Cuatro herramientas nuevas (catálogo85): volumen TIN y materiales por secciones, con dos fases para formas de corredor. Probadas en Civil3D2027 sobre otra copia, misma instancia. [Contrato, resultados, límites y cinco capturas reales](docs/QTO-0522.md). Targets0.21/PR38 integrada. Pendientes QTO de pago/precios, criterios externos, otras geometrías y verificación de autocarga al próximo arranque normal.
+
 # Pendientes del puente MCP de Civil 3D
 
 ## Estado vigente 0.5.21 - 2026-10-24

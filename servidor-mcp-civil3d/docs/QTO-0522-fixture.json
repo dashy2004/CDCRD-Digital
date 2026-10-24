@@ -1,0 +1,48 @@
+{
+  "volume": {
+    "nombre": "CDX QA QTO VOLUME 0522",
+    "base": "CDX QA QTO BASE 0522",
+    "comparacion": "CDX QA QTO DESIGN 0522",
+    "factor_corte": 1.1,
+    "factor_relleno": 1.2
+  },
+  "earth": {
+    "nombre": "CDX QA QTO EARTHWORK 0522",
+    "alineamiento": "CDX QA QTO AXIS 0522",
+    "estaciones": [
+      100,
+      110,
+      120,
+      130,
+      140
+    ],
+    "semiancho": 10,
+    "modo": "tierras",
+    "base": "CDX QA QTO BASE 0522",
+    "comparacion": "CDX QA QTO DESIGN 0522"
+  },
+  "shape": {
+    "nombre": "CDX QA QTO PAVEMENT A1 0522",
+    "alineamiento": "CDX QA TARGET BASE A 0521",
+    "corredor": "CDX QA TARGETS VARIABLE 0521",
+    "baseline": "A",
+    "region": "A1",
+    "modo": "formas",
+    "estaciones": [
+      110,
+      120,
+      130,
+      140,
+      150,
+      160,
+      170
+    ],
+    "semiancho": 12,
+    "codigos": [
+      "Pave1",
+      "Pave2",
+      "Base",
+      "SubBase"
+    ]
+  }
+}

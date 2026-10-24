@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>disable</Nullable></PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../modulo-qto/QtoCoverage.cs" Link="QtoCoverage.cs" />
     <Compile Include="../../modulo-espirales/SpiralContract.cs" Link="SpiralContract.cs" />
     <Compile Include="../../modulo-corredores/MultiContract.cs" Link="MultiContract.cs" />
     <Compile Include="../../modulo-targets/TargetContract.cs" Link="TargetContract.cs" />

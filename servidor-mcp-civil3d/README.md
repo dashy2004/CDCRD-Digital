@@ -1,3 +1,8 @@
+<!-- QTO-0522 -->
+## Actualización 0.5.22: cubicaciones/QTO
+
+Cuatro herramientas nuevas (catálogo85): volumen TIN y materiales por secciones, con dos fases para formas de corredor. Probadas en Civil3D2027 sobre otra copia, misma instancia. [Contrato, resultados, límites y cinco capturas reales](docs/QTO-0522.md). Targets0.21/PR38 integrada. Pendientes QTO de pago/precios, criterios externos, otras geometrías y verificación de autocarga al próximo arranque normal.
+
 # Servidor MCP de Civil 3D 2027
 
 Entrega **0.5.21**: targets de ancho y cota por API en un corredor nuevo, con origen de solo lectura. Prueba en otra copia: 8 asignaciones, 74 muestras de carril, 8 secciones, guardado/reapertura y 12 archivos protegidos. M�dulo opcional **0.1.1**, puente vivo **0.5.17** y cat�logo MCP de **81 herramientas**. [Capturas, contrato y resultados](docs/TARGETS-0521.md) - [Baselines 0.5.20](docs/MULTIBASELINE-0520.md) - [Espirales 0.5.19](docs/ESPIRALES-0519.md) - [Peraltes 0.5.18](docs/PERALTES-0518.md).
