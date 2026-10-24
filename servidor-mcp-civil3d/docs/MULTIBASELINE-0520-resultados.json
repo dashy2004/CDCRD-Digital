@@ -1,0 +1,85 @@
+{
+  "delivery": "0.5.20",
+  "module": "Cdcrd.Corredores.V4",
+  "module_version": "0.1.3",
+  "module_sha256": "7056fe317a7e7f2dc719ce341f7486bb8ae5553b190b27d8e3d03a79ef602ba7",
+  "bridge_live": "0.5.17",
+  "bridge_staged_unverified": "0.5.18",
+  "tools": 78,
+  "python_tests": 225,
+  "dotnet_checks": 227,
+  "races": 100,
+  "baselines": 2,
+  "regions": 4,
+  "region_station_counts": [
+    11,
+    26,
+    10,
+    14
+  ],
+  "region_samples": 61,
+  "sections": 11,
+  "top_visible_triangles": 1385,
+  "top_boundary_loops": 3,
+  "independent_errors_m": {
+    "xy": 3.48859640993643e-08,
+    "z": 1.762479051592436e-14,
+    "daylight": 1.4210854715202004e-14,
+    "width": 0.0
+  },
+  "preserved_objects": 1474,
+  "preserved_collections": {
+    "objects": true,
+    "groups": true,
+    "surfaces": true,
+    "volumes": true,
+    "points": true,
+    "pointGroups": true,
+    "surfaceStyles": true,
+    "layers": true,
+    "sites": true,
+    "alignments": true
+  },
+  "protected_files": 11,
+  "save_reopen_same_process": true,
+  "final_dwg_sha256": "4a623f4cb71c645fc7ccd766907d33b4f894f93642cee389cfef4328039787e0",
+  "final_dbmod": 0,
+  "final_saved": true,
+  "cad_restarted": false,
+  "autostart_verified": false,
+  "auxiliary_modals": 2,
+  "crash_observed": false,
+  "shared_boundary": "Native preceding assembly explicitly identified; section sampling at shared station rejected",
+  "images": [
+    {
+      "file": "images/civil3d-multibaseline-planta-0520.png",
+      "sha256": "380dcfd75fc4a7255b5d878f5bc91db17a3d862951d84ec38786f255c40f7d55",
+      "source": "Document.CapturePreviewImage",
+      "edited": false
+    },
+    {
+      "file": "images/civil3d-multibaseline-hueco-0520.png",
+      "sha256": "d17870b452b70fc9e442423712d9425a67dd770f705d7792de582bc8d2683f78",
+      "source": "Document.CapturePreviewImage",
+      "edited": false
+    },
+    {
+      "file": "images/civil3d-multibaseline-region-a1-0520.png",
+      "sha256": "b6f9cad9e8491a13495989b41a811b10588c00b795ab619e926476b89255d689",
+      "source": "Document.CapturePreviewImage",
+      "edited": false
+    },
+    {
+      "file": "images/civil3d-multibaseline-region-a2-0520.png",
+      "sha256": "17e3ef5da520fe86f364f2a831b7d28b23cbac65fe5bfb93442d3da149672859",
+      "source": "Document.CapturePreviewImage",
+      "edited": false
+    },
+    {
+      "file": "images/civil3d-multibaseline-baseline-b-0520.png",
+      "sha256": "38c2d8d3987e1e823267748c03d58ec6337269dda1aca359d2ed9ec474974e45",
+      "source": "Document.CapturePreviewImage",
+      "edited": false
+    }
+  ]
+}
