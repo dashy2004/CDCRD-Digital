@@ -1,0 +1,97 @@
+{
+  "alignment": {
+    "nombre": "CDX QA PERALTES AXIS 0518",
+    "estacion_inicial": 100,
+    "capa": "CDX-QA-PERALTES-AXIS"
+  },
+  "profile": {
+    "nombre": "CDX QA PERALTES PROFILE 0518",
+    "pvis": [
+      [
+        100,
+        100
+      ],
+      [
+        200,
+        104
+      ],
+      [
+        300,
+        100
+      ],
+      [
+        465.6637061440777,
+        102
+      ]
+    ],
+    "curvas": [
+      {
+        "pvi": 1,
+        "longitud": 40
+      },
+      {
+        "pvi": 2,
+        "longitud": 60
+      }
+    ],
+    "capa": "CDX-QA-PERALTES-PROFILE"
+  },
+  "assembly": {
+    "ancho_izq": 3.5,
+    "ancho_der": 3.5,
+    "pendiente_izq": -0.02,
+    "pendiente_der": -0.02,
+    "espesores": [
+      0.05,
+      0.07,
+      0.2,
+      0.3
+    ],
+    "talud_corte": 3,
+    "talud_relleno": 4,
+    "ancho_daylight_max": 50,
+    "ancho_berma_izq": 1.5,
+    "ancho_berma_der": 2,
+    "pendiente_berma_izq": -0.04,
+    "pendiente_berma_der": -0.03,
+    "profundidad_cuneta": 0.6,
+    "ancho_fondo_cuneta": 0.5,
+    "talud_cuneta_interior_hv": 2,
+    "talud_cuneta_exterior_hv": 1.5,
+    "nombre": "CDX QA PERALTES ASSEMBLY 0518",
+    "origen": [
+      620300,
+      2100270,
+      0
+    ],
+    "capa": "CDX-QA-PERALTES-ASSEMBLY"
+  },
+  "corridor": {
+    "nombre": "CDX QA PERALTES CORRIDOR 0518",
+    "superficie_objetivo": "MCP QA TERRENO 0516",
+    "inicio": 100,
+    "fin": 465.6637061440777,
+    "frecuencia": 10,
+    "estaciones_extra": [
+      110,
+      140,
+      160,
+      170,
+      180,
+      200,
+      220,
+      240,
+      260,
+      280,
+      300,
+      320,
+      340,
+      360,
+      380,
+      400,
+      420,
+      450
+    ],
+    "capa": "CDX-QA-PERALTES-CORRIDOR"
+  }
+}

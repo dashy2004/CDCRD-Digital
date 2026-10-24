@@ -8,3 +8,5 @@ src/*.log
 # salida de compilacion del adaptador AutoCAD
 puente-autocad/bin/
 puente-autocad/obj/
+modulo-peraltes/bin/
+modulo-peraltes/obj/

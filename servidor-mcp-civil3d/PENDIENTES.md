@@ -1,10 +1,10 @@
 # Pendientes del puente MCP de Civil 3D
 
-## Estado vigente 0.5.17 — 2026-10-24
+## Estado vigente 0.5.18 — 2026-10-24
 
-Ver [cunetas y bermas 0.5.17](docs/CUNETAS-BERMAS-0517.md): ensamblaje de doce piezas, corredor con targets y ocho secciones; 70 comprobaciones nativas y persistencia tras guardar/reabrir. Originales protegidos. Calzada/capas/targets ya se completaron en 0.5.16; curvas, plataformas y sitio están documentados en las versiones enlazadas desde README.
+Ver [peraltes 0.5.18](docs/PERALTES-0518.md): tabla explícita de nueve estaciones, dos carriles exteriores, interpolación lineal, corredor independiente y ocho secciones. Módulo 0.1.2 probado con puente 0.5.17: 52 controles nativos aprobados en la cadena de pruebas y seguimiento; 1 comparación inicial falló por el indicador diferido de reconstrucción y fue resuelta mediante reconstrucción y reapertura. Nueve archivos protegidos intactos. PR #34 de cunetas/bermas integrada. Protección adicional del puente 0.5.18 compilada y preparada; su carga en próximo arranque sigue sin verificar.
 
-Quedan cunetas condicionales y revestimiento, hidráulica, peraltes, espirales, múltiples baselines/regiones, targets ancho/cota, QTO y barrido; además grading, escritura de redes y producción de planos. Las listas inferiores son antecedentes históricos y no sustituyen este estado.
+Quedan cálculo normativo y edición de tablas de peraltes existentes, suavizado, otros ejes de giro y carriles interiores, cunetas condicionales y revestimiento, hidráulica, espirales, múltiples baselines/regiones, targets ancho/cota, QTO y barrido; además grading, escritura de redes y producción de planos. Las listas inferiores son antecedentes históricos y no sustituyen este estado.
 
 
 ## Actualizacion local 0.5.6 — 2026-10-20

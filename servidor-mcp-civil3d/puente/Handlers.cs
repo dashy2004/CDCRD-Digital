@@ -20,7 +20,7 @@ namespace Cdcrd.Civil3dBridge
 {
     internal static partial class Handlers
     {
-        public const string Version = "0.5.17";
+        public const string Version = "0.5.18";
         private const int MaxItems = 500;
 
         // Alias en espanol -> candidatos de miembro del CivilDocument, en orden.
@@ -409,6 +409,7 @@ namespace Cdcrd.Civil3dBridge
                                                                   string patron = null, bool soloEscribibles = false, string incluir = null)
         {
             var t = o.GetType();
+            NativeCallContract.ValidateInspection(t.FullName,valores);
             Regex rxm = null;
             if (!string.IsNullOrWhiteSpace(patron))
             {
