@@ -1,6 +1,6 @@
 # Servidor MCP de Civil 3D 2027
 
-Entrega **0.5.20**: múltiples baselines y regiones por API, con ensamblajes/targets por región y secciones sobre un eje explícito. Probada en otra copia: dos baselines, cuatro regiones, once secciones, guardado/reapertura, 1.474 objetos previos y once archivos protegidos conservados. Módulo opcional **0.1.3**, puente vivo **0.5.17** y catálogo MCP de **78 herramientas**. [Capturas, pruebas y límites](docs/MULTIBASELINE-0520.md) · [Espirales 0.5.19](docs/ESPIRALES-0519.md) · [Peraltes 0.5.18](docs/PERALTES-0518.md) · [Cunetas y bermas 0.5.17](docs/CUNETAS-BERMAS-0517.md).
+Entrega **0.5.21**: targets de ancho y cota por API en un corredor nuevo, con origen de solo lectura. Prueba en otra copia: 8 asignaciones, 74 muestras de carril, 8 secciones, guardado/reapertura y 12 archivos protegidos. Módulo opcional **0.1.1**, puente vivo **0.5.17** y catálogo MCP de **81 herramientas**. [Capturas, contrato y resultados](docs/TARGETS-0521.md) - [Baselines 0.5.20](docs/MULTIBASELINE-0520.md) - [Espirales 0.5.19](docs/ESPIRALES-0519.md) - [Peraltes 0.5.18](docs/PERALTES-0518.md).
 
 Conecta un cliente MCP con el **dibujo abierto** en Civil 3D 2027. Dos piezas:
 

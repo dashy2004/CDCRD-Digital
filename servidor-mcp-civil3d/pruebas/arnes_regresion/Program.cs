@@ -28,6 +28,7 @@ class Program {
   ThreadPool.SetMinThreads(8,8);
   SpiralChecks.Run(Check);
   MultiChecks.Run(Check);
+  TargetChecks.Run(Check);
   PeralteChecks.Run(Check);
   SiteDesignChecks.Run(Check);
   CorridorChecks.Run(Check);

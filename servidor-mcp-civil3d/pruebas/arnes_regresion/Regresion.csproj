@@ -3,6 +3,7 @@
   <ItemGroup>
     <Compile Include="../../modulo-espirales/SpiralContract.cs" Link="SpiralContract.cs" />
     <Compile Include="../../modulo-corredores/MultiContract.cs" Link="MultiContract.cs" />
+    <Compile Include="../../modulo-targets/TargetContract.cs" Link="TargetContract.cs" />
     <Compile Include="../../modulo-peraltes/PeralteContract.cs" Link="PeralteContract.cs" />
     <Compile Include="../../puente/VerticalCurveContract.cs" Link="VerticalCurveContract.cs" />
     <Compile Include="../../puente/PlatformContract.cs" Link="PlatformContract.cs" />

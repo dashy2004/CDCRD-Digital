@@ -603,6 +603,8 @@ espirales.registrar(mcp, _ok)
 
 import multibaseline
 multibaseline.registrar(mcp, _ok)
+import targets
+targets.registrar(mcp, _ok)
 
 if __name__ == '__main__':
     logger.info('Herramientas registradas; esperando al cliente MCP por stdio')

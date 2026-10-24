@@ -1,0 +1,87 @@
+{
+  "delivery": "0.5.21",
+  "module": "Cdcrd.Targets.V2",
+  "module_version": "0.1.1",
+  "module_sha256": "5752dc6fed9ef983ece3d9bd80deffb0d24ae7ffe6c310b11456da9ff22df970",
+  "merged_pr": 37,
+  "merge_commit": "b89575443208f1f408ee10ccb8049ef7f0d51ed0",
+  "native": {
+    "baselines": 2,
+    "regions": 4,
+    "bindings": 8,
+    "applied_stations": 37,
+    "verified_lane_samples": 74,
+    "sections": 8,
+    "triangles": 792,
+    "boundary_loops": 3,
+    "independent_errors": {
+      "width": 0.0,
+      "elevation": 1.2789769243681803e-13,
+      "target_station": 1.318767317570746e-11,
+      "xy": 0.0,
+      "daylight": 1.4210854715202004e-14
+    },
+    "source_read_only": true,
+    "same_process": true,
+    "original_objects": 1559,
+    "protected_files": 12,
+    "reopen_verified": true,
+    "final_state": {
+      "Saved": true,
+      "DBMOD": 0,
+      "CMDNAMES": "",
+      "pid": 66360
+    },
+    "drawing_sha256": "c99544e91357830f72d6582870cd5c3e09efca43dd0e346d579f5634a10130c5",
+    "no_modal_observed": true
+  },
+  "checks": {
+    "python": 243,
+    "dotnet": 243,
+    "races": 100,
+    "mcp_tools": 81,
+    "simulation_without_residue": true,
+    "injected_failure_stages": [
+      "copy-created",
+      "targets-assigned:3",
+      "corridor-rebuilt",
+      "surface-rebuilt",
+      "target-record-written"
+    ],
+    "native_rejections": [
+      "foreign-profile",
+      "central-width-axis",
+      "missing-region",
+      "foreign-subassembly",
+      "duplicate-name"
+    ]
+  },
+  "screenshots": [
+    {
+      "file": "civil3d-targets-a-120-0521.png",
+      "sha256": "a4e513ccc75c1e2e25968065f0188a05bcbcbdd62b017ee56af92a737f393e29"
+    },
+    {
+      "file": "civil3d-targets-a-200-0521.png",
+      "sha256": "6d2d63480b6dd337940c22bca181253573ba29a7eec496de6434ca37fa46e668"
+    },
+    {
+      "file": "civil3d-targets-b-120-0521.png",
+      "sha256": "32b823a284461ec0e6ed8849a4d36dc01eb4c4195f5a3b644f77ef98beb6f969"
+    },
+    {
+      "file": "civil3d-targets-b-200-0521.png",
+      "sha256": "1ed401391e85621bc14ce83d25ebb13e4f2fd68e4711ff5764b986f0f62d222a"
+    },
+    {
+      "file": "civil3d-targets-planta-0521.png",
+      "sha256": "a2e6a06bc56a412f1c1ae1539da36fe872fd24344398a6ebfc8eee9ee7a65740"
+    }
+  ],
+  "limitations": [
+    "Experimental V1 mutation simulation failed and was replaced by new-corridor V2.",
+    "Only synthetic straight baseline fixture is validated.",
+    "Next-start autoload and staged bridge 0.5.18 unverified.",
+    "No engineering design approval."
+  ]
+}
