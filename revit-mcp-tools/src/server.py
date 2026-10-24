@@ -15,11 +15,11 @@ agregar una tool. Cada tool es un archivo en tools/<nombre>.py con
 
 El servidor concatena tools/_common.py + el modulo + un pie que llama run()
 con los parametros en JSON y hace print(json.dumps(resultado)). Todo ese
-texto corre como IronPython dentro de Revit, asi que los modulos son 2.7:
+texto corre como IronPython 3.4 dentro de Revit:
 sin f-strings, sin anotaciones. El puerto se descubre por sondeo (pyRevit
 sube al siguiente libre si el base esta ocupado) y se cachea.
 
-Agregar una tool nueva = agregar el archivo y registrarla abajo en TOOLS.
+Agregar una tool nueva = agregar el archivo y un wrapper con @mcp.tool.
 """
 
 import json
@@ -187,6 +187,11 @@ def revit_dimensiones_losas(config: dict) -> dict:
 @mcp.tool(description=_doc("detalles_losas"))
 def revit_detalles_losas(config: dict) -> dict:
     return _run_tool("detalles_losas", config)
+
+
+@mcp.tool(description=_doc("apoyos_losa"))
+def revit_apoyos_losa(config: dict) -> dict:
+    return _run_tool("apoyos_losa", config)
 
 
 @mcp.tool(description=_doc("aligerado_propuesta"))

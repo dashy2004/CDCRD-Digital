@@ -125,6 +125,9 @@ después no aparece en el reporte.
 
 ## Agregar una herramienta
 
+Auditoría de apoyos, propuesta virtual de nervios y compatibilidad del puente:
+[APOYOS_LOSA.md](APOYOS_LOSA.md). Solo lectura; no selecciona espesores ni armado.
+
 1. Crear `src/tools/<nombre>.py` con docstring y `def run(doc, uidoc, DB, P)`.
    IronPython 3.4: sin f-strings ni anotaciones. Helpers de `_common.py`
    disponibles sin importar (`collector`, `tx`, `find_view`, `eidv`, `mm`,
