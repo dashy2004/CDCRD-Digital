@@ -35,11 +35,14 @@ namespace Cdcrd.Civil3dBridge
    var depths=CalzadaContract.Depths(StationArray(p,"espesores"));
    double cut=CalzadaContract.Talud(RequiredNumber(p,"talud_corte"),"talud_corte"),fill=CalzadaContract.Talud(RequiredNumber(p,"talud_relleno"),"talud_relleno");
    double maxWidth=CorridorContract.Range(RequiredNumber(p,"ancho_daylight_max"),1,200,"ancho_daylight_max");
+   var roadside=method=="civil.ensamblaje_cunetas_bermas"?CunetaBermaContract.Parse(p):null;
    var doc=Doc();var db=doc.Database;var civil=Civil();
    using(doc.LockDocument())using(var tr=db.TransactionManager.StartTransaction())
    {
     NewCivilName(tr,civil.AssemblyCollection,name);
     foreach(string suffix in new[]{"_L","_R","_DL_L","_DL_R"})NewCivilName(tr,civil.SubassemblyCollection,name+suffix);
+    if(roadside!=null)foreach(string side in new[]{"_L","_R"})foreach(var spec in roadside.Links(side=="_L"))
+     NewCivilName(tr,civil.SubassemblyCollection,name+"_"+spec.Role+side);
     var layer=CapaId(tr,db,Txt(p,"capa"),true);
     var id=civil.AssemblyCollection.Add(name,AssemblyType.UndividedCrownedRoad,origin);
     var assembly=(CivAssembly)tr.GetObject(id,OpenMode.ForWrite);assembly.LayerId=layer;
@@ -57,8 +60,14 @@ namespace Cdcrd.Civil3dBridge
      if(lane.AssemblyId!=id||lane.Side!=side.Side||Math.Abs(CalzadaParam(lane,"Width").Value-side.Width)>1e-9||Math.Abs(slope.Value-side.Slope)>1e-9||
         Enumerable.Range(0,4).Any(i=>Math.Abs(layerParams[i].Value-depths[i])>1e-9)||lane.Shapes.Cast<Autodesk.Civil.DatabaseServices.Shape>().Count()<4)
       throw new InvalidOperationException("Carril no coincide con parametros solicitados o sin las cuatro capas");
-     // Daylight hooks at the outermost, lowest lane point (subgrade edge).
+     // Default daylight starts at subgrade; roadside geometry replaces this hook.
      var hook=lane.Points.Cast<CivPoint>().OrderByDescending(pt=>Math.Abs(pt.Offset)).ThenBy(pt=>pt.Elevation).First();
+     var daylightParent=lid;
+     if(roadside!=null)
+     {
+      var lateral=AddBermDitch(tr,assembly,layer,name,side.Suffix,side.Side,origin,lane,roadside,parts);
+      daylightParent=lateral.Id;hook=lateral.Hook;
+     }
      var did=civil.SubassemblyCollection.ImportStockSubassembly(name+"_DL"+side.Suffix,"Subassembly.DaylightMaxWidth",origin);
      var daylight=(Subassembly)tr.GetObject(did,OpenMode.ForWrite);daylight.LayerId=layer;daylight.Side=side.Side;
      var cutParam=CalzadaParam(daylight,"CutSlope");cutParam.Value=cut;
@@ -66,12 +75,12 @@ namespace Cdcrd.Civil3dBridge
      var widthParam=CalzadaParam(daylight,"MaxWidth");widthParam.Value=maxWidth;
      assembly.AddSubassembly(did,hook);daylight.Run();
      CorridorQaCheckpoint?.Invoke("calzada-part-added");
-     if(daylight.AssemblyId!=id||daylight.Side!=side.Side||daylight.SubassemblyHookTo!=lid||
+     if(daylight.AssemblyId!=id||daylight.Side!=side.Side||daylight.SubassemblyHookTo!=daylightParent||
         Math.Abs(cutParam.Value-cut)>1e-9||Math.Abs(fillParam.Value-fill)>1e-9||Math.Abs(widthParam.Value-maxWidth)>1e-9)
-      throw new InvalidOperationException("Daylight no quedo enganchado al carril con los taludes solicitados");
+      throw new InvalidOperationException("Daylight no quedo enganchado al elemento previsto con los taludes solicitados");
      parts.Add(new{handle=HandleOf(lid),rol="carril",lado=lane.Side.ToString(),
       parametros=new[]{CalzadaParam(lane,"Width"),slope}.Concat(layerParams).Select(CalzadaParamRow).ToArray()});
-     parts.Add(new{handle=HandleOf(did),rol="daylight",lado=daylight.Side.ToString(),engancha_a=HandleOf(lid),punto_enganche=hook.Index,
+     parts.Add(new{handle=HandleOf(did),rol="daylight",lado=daylight.Side.ToString(),engancha_a=HandleOf(daylightParent),punto_enganche=hook.Index,
       codigos_enganche=hook.Codes.Cast<string>().ToArray(),parametros=new[]{cutParam,fillParam,widthParam}.Select(CalzadaParamRow).ToArray()});
     }
     bool sim=p["simular"]?.GetValue<bool>()??false;

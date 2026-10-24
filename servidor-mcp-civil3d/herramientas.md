@@ -129,6 +129,8 @@ actualizar_objeto(handle='7F3C', cambios='{"Name":"EJE-PRINCIPAL"}', confirmar=T
 
 ## Scripts sobre el puente
 
+Desde 0.5.17: `crear_ensamblaje_cunetas_bermas` crea carriles con cuatro capas, bermas sin capas y cunetas trapezoidales a ambos lados. Pendientes de berma m/m y caras de cuneta H/V; requiere `confirmar=True`, admite `simular=True`. Se conecta con `crear_corredor_calzada` y `crear_secciones_corredor`. [Parámetros, límites, capturas y pruebas](docs/CUNETAS-BERMAS-0517.md).
+
 | Script | Que hace |
 |---|---|
 | `src/perfil.py` | cota de superficie por progresiva sobre un alineamiento y comparacion contra un perfil nativo; CSV/JSON; `tests/test_perfil.py` sin CAD |

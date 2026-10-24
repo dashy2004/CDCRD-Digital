@@ -58,6 +58,42 @@ def registrar(mcp, llamar, ok):
                    ancho_daylight_max=ancho_daylight_max, capa=capa, simular=simular), confirmar)
 
     @mcp.tool()
+    def crear_ensamblaje_cunetas_bermas(
+        nombre: str, origen: str, ancho_izq: float, ancho_der: float,
+        pendiente_izq: float, pendiente_der: float, espesores: str,
+        ancho_berma_izq: float, ancho_berma_der: float,
+        pendiente_berma_izq: float, pendiente_berma_der: float,
+        profundidad_cuneta: float, ancho_fondo_cuneta: float,
+        talud_cuneta_interior_hv: float, talud_cuneta_exterior_hv: float,
+        talud_corte: float, talud_relleno: float, ancho_daylight_max: float,
+        capa: str = "", simular: bool = False, confirmar: bool = False,
+    ) -> str:
+        """Carriles con cuatro capas, bermas sin capas y cunetas trapezoidales nativas.
+
+        Geometria explicita a AMBOS lados, tanto en corte como en relleno.
+        Metros; pendientes de carril/berma m/m hacia afuera; taludes de cuneta
+        H/V positivos. Daylight usa dz/dx positivo y parte del borde exterior
+        de la cuneta. Fondo horizontal transversal; sin revestimiento, calculo
+        hidraulico, peraltes ni seleccion automatica corte/relleno de cuneta.
+        Usar crear_corredor_calzada para targets TIN. simular crea y revierte.
+        """
+        params = dict(nombre=nombre, ancho_izq=ancho_izq, ancho_der=ancho_der,
+                      pendiente_izq=pendiente_izq, pendiente_der=pendiente_der,
+                      ancho_berma_izq=ancho_berma_izq, ancho_berma_der=ancho_berma_der,
+                      pendiente_berma_izq=pendiente_berma_izq, pendiente_berma_der=pendiente_berma_der,
+                      profundidad_cuneta=profundidad_cuneta, ancho_fondo_cuneta=ancho_fondo_cuneta,
+                      talud_cuneta_interior_hv=talud_cuneta_interior_hv,
+                      talud_cuneta_exterior_hv=talud_cuneta_exterior_hv,
+                      talud_corte=talud_corte, talud_relleno=talud_relleno,
+                      ancho_daylight_max=ancho_daylight_max, capa=capa, simular=simular)
+        try:
+            params["origen"] = numeros(origen, 3)
+            params["espesores"] = numeros(espesores, 4)
+        except (ValueError, TypeError, OverflowError) as exc:
+            return ok({"error": str(exc)})
+        return run("civil.ensamblaje_cunetas_bermas", params, confirmar)
+
+    @mcp.tool()
     def crear_corredor_calzada(alineamiento: str, perfil: str, ensamblaje: str, nombre: str,
                               superficie_objetivo: str, inicio: float, fin: float, frecuencia: float,
                               estaciones_extra: str = "[]", capa: str = "", simular: bool = False,
