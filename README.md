@@ -20,6 +20,7 @@ rastrearse desde la fuente normativa hasta los datos y la evidencia del modelo.
 | **Normativa** | Cláusulas, tablas y referencias al PDF oficial | [Índice del código](datos/INDICE.md) |
 | **BIM y cálculo** | Lectura, modelado y documentación mediante herramientas especializadas | [Arquitectura del ecosistema](docs/ARQUITECTURA-ECOSISTEMA.md) |
 | **Verificación** | Evidencia, hallazgos y límites de cada caso | [Ejemplo de revisión BIM](docs/ejemplos/revision-bim.md) |
+| **Memorias de diseño** | Expediente trazable, Word/HTML/PDF y anexos desde fuentes existentes | [Generador de memorias](memoria-calculo/README.md) |
 
 La cobertura del texto normativo y la disponibilidad de herramientas son distintas de la
 verificación de un proyecto. Cada informe identifica qué se comprobó y qué evidencia falta.

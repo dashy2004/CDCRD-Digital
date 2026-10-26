@@ -1,0 +1,42 @@
+{
+  "schema": "cdcrd-design-memory/1",
+  "project": {
+    "id": "EJEMPLO-001",
+    "name": "Edificio de ejemplo",
+    "revision": "R00",
+    "description": "Datos inventados para probar la memoria. No corresponde a un proyecto real."
+  },
+  "source_roots": [
+    "inputs"
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "path": "inputs/datos.json",
+      "title": "Datos ficticios",
+      "kind": "table",
+      "sha256": "ed5e30e65d1dcc1f28a4429d0c501358ce38587a11a23639371788a7c1b032e9"
+    }
+  ],
+  "observations": [
+    {
+      "id": "O1",
+      "topic": "geometry",
+      "label": "Altura ficticia",
+      "value": 3.75,
+      "unit": "m",
+      "acquisition": "imported",
+      "source_id": "S1",
+      "locator": "height"
+    },
+    {
+      "id": "O2",
+      "topic": "geotechnical",
+      "label": "Presion admisible",
+      "value": null,
+      "unit": "kPa",
+      "acquisition": "unavailable",
+      "reason": "Estudio geotecnico no aportado"
+    }
+  ]
+}
