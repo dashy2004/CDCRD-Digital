@@ -1,0 +1,64 @@
+{
+  "version_documental": "0.1",
+  "estado": "especificacion_sin_validacion_nativa",
+  "proyecto_ejemplo": "EDIFICIO DEMO",
+  "consumidor_del_perfil_completo": null,
+  "papel": {
+    "formato": "ARCH_D",
+    "ancho_mm": 914.4,
+    "alto_mm": 609.6,
+    "cajetin": "lateral",
+    "dimensiones_de_composicion": "provisionales_medir_familia"
+  },
+  "texto_papel_mm": {
+    "notas_cotas_etiquetas": 2.5,
+    "titulo_vista": 3.5,
+    "encabezado": 5.0
+  },
+  "lineas_papel_mm": {
+    "fondo": 0.1,
+    "ejes_cotas": 0.13,
+    "proyeccion_secundaria": 0.18,
+    "contorno_principal": 0.25,
+    "corte_refuerzo_destacado": 0.35,
+    "marco": 0.5
+  },
+  "vistas_previas_requeridas": [
+    {
+      "nombre": "DEMO-CIMIENTOS-N00",
+      "plantilla": "EST-CIMIENTOS",
+      "escala": 75,
+      "origen": "modelo_del_encargo"
+    },
+    {
+      "nombre": "DEMO-DETALLE-UNION",
+      "plantilla": "EST-DETALLES",
+      "escala": 20,
+      "origen": "biblioteca_revisada_para_el_encargo"
+    }
+  ],
+  "parametros_laminas": {
+    "titleblock": "DEMO 24x36 lateral",
+    "layout": "principal",
+    "strip_frac": 0.28,
+    "margin_mm": 15,
+    "reserved_right_mm": 120,
+    "auto_scale": false,
+    "replace": false,
+    "dry_run": true,
+    "sheets": [
+      {
+        "number": "ES-02",
+        "name": "CIMIENTOS Y DETALLE - DEMO",
+        "views": ["DEMO-CIMIENTOS-N00", "DEMO-DETALLE-UNION"]
+      }
+    ]
+  },
+  "datos_de_diseno": null,
+  "aceptacion": {
+    "png_revisado": false,
+    "pdf_revisado": false,
+    "relectura_nativa": false,
+    "reapertura_verificada": false
+  }
+}

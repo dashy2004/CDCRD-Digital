@@ -1,5 +1,10 @@
 # revit-mcp-tools
 
+Para producir planos, consultar el [estándar de documentación](../docs/ESTANDAR-PLANOS-REVIT.md)
+y su [perfil de ejemplo](ejemplos/documentacion-estructural/README.md). Definen
+presentación y aceptación; la plantilla RTE/RFA y la prueba nativa del perfil
+siguen pendientes.
+
 Herramientas MCP para Revit que un agente puede ejecutar sin interfaz. Son la
 conversión de los pushbuttons de `revit-mcp-write/RevitWrite.extension` a
 funciones puras `run(doc, uidoc, DB, P) -> dict`, enviadas por el canal

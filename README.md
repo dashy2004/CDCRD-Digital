@@ -67,6 +67,7 @@ Pruebas sobre copias y datos hipotéticos. Capturas del área de dibujo; cada in
 | Conectar la IA con ETABS, SAFE o Revit | [ETABS](servidor-mcp/), [SAFE](servidor-mcp-safe/), [Revit](revit-mcp-tools/) + [instalacion](instalacion/INSTALACION.md) |
 | Conectar la IA con Civil 3D 2027 | [Civil 3D](servidor-mcp-civil3d/) — puente .NET 10 propio, alineamientos, corredores, superficies, redes, planos |
 | Que la IA modele un edificio en Revit desde cero y saque planos | `revit-mcp-tools/ejemplos/residencial-4n/` — receta de 30 pasos, corrida verificada |
+| Definir cómo presentar plantas, detalles y láminas en Revit | [Estándar de planos](docs/ESTANDAR-PLANOS-REVIT.md) — criterios gráficos, perfil de ejemplo y aceptación; plantilla nativa pendiente |
 | Un edificio completo modelado y verificado por IA, paso a paso | `revision/` — 10 bloques con capturas de pantalla de ETABS |
 | Como se verifico la digitalizacion | `verificacion-vols/` |
 | Reglamentos R-001, R-002, R-008, carreteras, geotecnia e INAPA | [Corpus complementario](corpus-reglamentos/README.md) — 12 documentos, 1.370 páginas, texto/OCR con referencia; revisión numérica pendiente |
