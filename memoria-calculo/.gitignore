@@ -1,0 +1,9 @@
+output*/
+.venv/
+*.pdf
+*.docx
+*.png
+*.egg-info/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
