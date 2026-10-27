@@ -258,8 +258,12 @@ def _cmd_visor(args) -> int:
     ruta = os.path.join(args.salida, "visor_losas.html")
     dto = dto_visor(proyecto, resultados, args.nombre, acero=acero)
     escribir_visor(dto, ruta)
+    from plugin_losas.exportacion_pm import escribir_exportacion_pm
+    ruta_excel = os.path.join(args.salida, "exportacion_pm.xlsx")
+    escribir_exportacion_pm(proyecto, resultados, ruta_excel, args.nombre, acero=acero)
     print(f"Visor con {len(dto.panos)} paños y {len(dto.apoyos)} apoyos PM.")
     print(f"  {ruta}")
+    print(f"  {ruta_excel}")
     return 0
 
 

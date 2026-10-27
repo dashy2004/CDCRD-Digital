@@ -178,20 +178,23 @@
     const w = lienzo.clientWidth || 960, h = lienzo.clientHeight || 640;
     const esc = Math.min((w - 2*margen) / Math.max(x1 - x0, 1e-6),
                          (h - 2*margen) / Math.max(y1 - y0, 1e-6));
-    const px = x => margen + (x - x0) * esc;
-    const py = y => h - margen - (y - y0) * esc;   // Y hacia arriba, como en planta
+    const ox = (w - (x1 - x0) * esc) / 2;
+    const oy = (h - (y1 - y0) * esc) / 2;
+    const px = x => ox + (x - x0) * esc;
+    const py = y => h - oy - (y - y0) * esc;   // Y hacia arriba, como en planta
 
     let svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + w + ' ' + h + '">';
     for (const p of DATOS.panos) {
-      const v = campo.valores[p.mark] ?? 0;
+      const v = campo.valores[p.mark];
+      const disponible = Number.isFinite(v);
       const pts = p.contorno.map(q => px(q[0]).toFixed(1) + "," + py(q[1]).toFixed(1)).join(" ");
       const cx = p.contorno.reduce((s, q) => s + q[0], 0) / p.contorno.length;
       const cy = p.contorno.reduce((s, q) => s + q[1], 0) / p.contorno.length;
-      svg += '<polygon points="' + pts + '" fill="' + color((v - campo.min) / rango) +
+      svg += '<polygon points="' + pts + '" fill="' + (disponible ? color((v - campo.min) / rango) : '#ddd') +
              '" data-mark="' + p.mark + '"/>';
       svg += '<text class="mark" x="' + px(cx) + '" y="' + (py(cy) - 4) + '">' + p.mark + "</text>";
       svg += '<text class="valor" x="' + px(cx) + '" y="' + (py(cy) + 12) + '">' +
-             v.toFixed(dec) + "</text>";
+             (disponible ? v.toFixed(dec) : 'PENDIENTE') + "</text>";
       const xsP = p.contorno.map(q => q[0]), ysP = p.contorno.map(q => q[1]);
       const wpx = (Math.max(...xsP) - Math.min(...xsP)) * esc;
       const hpx = (Math.max(...ysP) - Math.min(...ysP)) * esc;
@@ -230,6 +233,7 @@
           "armado X: " + (p.armaduras.x || "—"),
           "armado Y: " + (p.armaduras.y || "—"),
           "armado apoyo: " + (p.armaduras.apoyo || "—"),
+          p.base_acero || "",
         ];
         if (p.armado_pm) {
           lineas.push("PM acero vano: X " + p.armado_pm.mfx + " · Y " + p.armado_pm.mfy);

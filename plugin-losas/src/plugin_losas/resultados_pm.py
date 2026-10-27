@@ -30,9 +30,9 @@ CAMPOS_VISOR = {
     "mfy": ("PM Mf según Y (vano)", "ton·m/m"),
     "msx": ("PM Ms según X (apoyo)", "ton·m/m"),
     "msy": ("PM Ms según Y (apoyo)", "ton·m/m"),
-    "as_x": ("Acero franja X", "mm²/m"),
-    "as_y": ("Acero franja Y", "mm²/m"),
-    "as_apoyo": ("Acero franja apoyo", "mm²/m"),
+    "as_x": ("Acero PM franja maciza X", "mm²/m"),
+    "as_y": ("Acero PM franja maciza Y", "mm²/m"),
+    "as_apoyo": ("Acero PM franja maciza apoyo (máx. X/Y)", "mm²/m"),
     "h_usado": ("Espesor usado", "m"),
     "q_ultima": ("q última 1.2D+1.6L", "t/m²"),
 }
@@ -113,24 +113,33 @@ def dto_visor(proyecto: dict, resultados: dict, nombre: str = "Proyecto Ejemplo"
                 "apoyo": (r.get("franja_apoyo") or {}).get("disponer", ""),
             },
         }
+        armados = {}
         if acero and mark in (acero.get("losas") or {}):
             armados = acero["losas"][mark]["armados"]
             fila["armado_pm"] = {clave: armados[clave]["disponer"] for clave in armados}
+            fila["armaduras"] = {"x": armados["mfx"]["disponer"],
+                                  "y": armados["mfy"]["disponer"],
+                                  "apoyo": max((armados["msx"], armados["msy"]),
+                                               key=lambda a: a["as_diseno"])["disponer"]}
+        else:
+            fila["armaduras"] = {"x": "PM pendiente", "y": "PM pendiente", "apoyo": "PM pendiente"}
+        fila["base_acero"] = "Franja maciza de 1 m; no es armado por nervio"
         valores["codigo_dl"][mark] = float(m.get("codigo_dl") or 0)
         valores["mfx"][mark] = m.get("mfx", 0.0)
         valores["mfy"][mark] = m.get("mfy", 0.0)
         valores["msx"][mark] = m.get("msx", 0.0)
         valores["msy"][mark] = m.get("msy", 0.0)
-        valores["as_x"][mark] = (r.get("franja_x") or {}).get("as_diseno", 0.0)
-        valores["as_y"][mark] = (r.get("franja_y") or {}).get("as_diseno", 0.0)
-        valores["as_apoyo"][mark] = (r.get("franja_apoyo") or {}).get("as_diseno", 0.0)
+        valores["as_x"][mark] = armados.get("mfx", {}).get("as_diseno")
+        valores["as_y"][mark] = armados.get("mfy", {}).get("as_diseno")
+        apoyos_as = [armados[k]["as_diseno"] for k in ("msx", "msy") if k in armados]
+        valores["as_apoyo"][mark] = max(apoyos_as) if apoyos_as else None
         valores["h_usado"][mark] = (r.get("espesor") or {}).get("h_usado_m", 0.0)
         valores["q_ultima"][mark] = (r.get("cargas_tm2") or {}).get("q_ultima", 0.0)
         panos.append(fila)
 
     campos = {}
     for clave, (titulo, unidad) in CAMPOS_VISOR.items():
-        vs = list(valores[clave].values())
+        vs = [v for v in valores[clave].values() if v is not None]
         campos[clave] = {"titulo": titulo, "unidad": unidad,
                          "min": min(vs) if vs else 0.0, "max": max(vs) if vs else 0.0,
                          "valores": valores[clave]}

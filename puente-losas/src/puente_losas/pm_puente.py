@@ -74,6 +74,7 @@ def pm_a_dict(pm: ResultadoPM) -> dict:
                 "eps_recortado": pm.clasificacion[mark].eps_recortado,
                 "nota": pm.clasificacion[mark].nota,
                 "mfx": m.mfx, "mfy": m.mfy, "msx": m.msx, "msy": m.msy,
+                "q_pm_tm2": next(l.carga for l in pm.sistema.losas if l.mark == mark),
                 "unidades": "ton·m/m",
             }
             for mark, m in pm.momentos.items()
