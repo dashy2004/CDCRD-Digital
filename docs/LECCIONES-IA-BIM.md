@@ -33,6 +33,8 @@ nuevos sin clasificar que puedan aparecer indebidamente en las primeras etapas.
 | Completar datos de un croquis no acotados | Buscar en detalles aprobados; mantener variables o pendientes explícitos | Procedencia de cada valor; ausencia de geometría definitiva inventada |
 | Duplicar un piloto antes de terminar su ajuste | Inventariar instancias y conservar un piloto único hasta la indicación de réplica | Correspondencia de hosts, orientación, marcas, cantidades y ausencia de duplicados |
 | Añadir el nombre del asistente a recursos de producción | Reutilizar las convenciones y estilos existentes; guardar autoría en la bitácora | Inventario de nombres y verificación visual del recurso reutilizado |
+| Copiar cotas pero omitir el criterio de las etiquetas editadas por el responsable | Comparar familia/tipo, líder, flecha, orientación y posición respecto al perfil o vuelo; conservar la vista de referencia | Piloto y hojas exportadas cotejados con la referencia, no solo conteo de etiquetas |
+| Asignar un material de tierra sin comprobar su hatch en los cortes | Revisar patrón de corte, proyección y overrides efectivos por vista; mantener el propósito gráfico declarado | Patrón Earth visible y legible en el PDF a escala, con huecos y anotaciones claros |
 | Dibujar cotas con texto sustituido o sin referencia real | Usar referencias de ejes, caras y centros nativos; conservar el estilo de unidades elegido | Referencias válidas, valores medidos y actualización al cambiar el elemento |
 | Mezclar ejes con caras de una cimentación en una cadena ilegible | Ordenar parciales y generales; no dividir innecesariamente una dimensión por su eje central; separar burbujas y textos | PDF a escala y ampliación sin solapes de anotación |
 | Mostrar tabiques en un esquema resistente de pórticos | Aplicar la visibilidad por propósito de la vista, sin borrar muros del modelo | Planos estructurales y vistas de coordinación revisados por separado |
@@ -47,7 +49,8 @@ nuevos sin clasificar que puedan aparecer indebidamente en las primeras etapas.
 1. Conservar original y copia de trabajo; inventariar ejes, vistas, láminas,
    tablas, familias, estilos y anotaciones existentes.
 2. Identificar una vista editada y aceptada como referencia gráfica. Leer sus
-   tipos de cota, unidades, posiciones, recorte, profundidad y categorías.
+   tipos de cota y etiqueta, líderes/flechas, unidades, posiciones respecto a los
+   perfiles, patrones de corte, recorte, profundidad y categorías.
 3. Aplicar el criterio a un piloto manteniendo los cambios humanos. Una sección
    debe cortar el modelo correcto; un detalle genérico debe identificarse como tal.
 4. Generalizar solo lo comprobado. Las marcas de modelo, tabla, etiqueta y

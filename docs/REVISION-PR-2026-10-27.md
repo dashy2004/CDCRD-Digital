@@ -37,3 +37,16 @@ pública hasta su publicación y verificación en la revisión correspondiente.
 
 Las [lecciones de IA/BIM](LECCIONES-IA-BIM.md) explican los controles reutilizables.
 Los archivos y resultados de proyectos reales permanecen privados.
+
+## Trabajo ya fusionado según GitHub
+
+La consulta también encontró 17 PR fusionados: #1–#5, #7, #8, #10–#13 y
+#34–#39. Abarcan auditoría MEP y separación de expedientes privados; unidades,
+COGO/Survey y ampliaciones de Civil 3D; puente de losas; catálogo, validación y
+recibos de intercambios; captura/contratos de ETABS y corrección de UsoLosa.
+Son registros de integración, no una repetición de sus pruebas nativas.
+
+El #12 se fusionó sobre la rama de #9: su estado «merged» no acredita que todo
+ese desarrollo esté en master. La consulta de issues cerrados devolvió cero;
+los avances implementados dentro de issues abiertos deben conservar sus
+criterios de aceptación pendientes, sin cerrarlos por asociación con un PR.
