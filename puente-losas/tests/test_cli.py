@@ -12,7 +12,8 @@ EJEMPLO = os.path.join(os.path.dirname(__file__), "..", "ejemplo")
 def test_cli_ejemplo_completo(tmp_path, capsys):
     ret = main(["--proyecto", os.path.join(EJEMPLO, "edificio-ejemplo.json"),
                 "--usos", os.path.join(EJEMPLO, "usos-ejemplo.json"),
-                "--salida", str(tmp_path), "--nombre", "Edificio Ejemplo PL"])
+                "--salida", str(tmp_path), "--nombre", "Edificio Ejemplo PL",
+                "--ruta-corta", str(tmp_path/'corto')])
     assert ret == 0
     assert "6 paños analizados" in capsys.readouterr().out
 
@@ -44,6 +45,11 @@ def test_cli_ejemplo_completo(tmp_path, capsys):
     sistema = cargar_dl(str(tmp_path / "sistema_losas.DL"))
     assert len(sistema.losas) == 6
     assert sistema.fc_ton_cm2 == 0.210
+    from pathlib import Path
+    legacy=json.loads((tmp_path/'LOSAS_EXE.json').read_text(encoding='utf-8'))
+    assert Path(legacy['dl']).read_bytes()==(tmp_path/'sistema_losas.DL').read_bytes()
+    manifest=json.loads(Path(legacy['manifiesto']).read_text(encoding='utf-8'))
+    assert set(manifest['marcas'].values())==set(por_mark)
 
 
 def test_cli_version(capsys):
