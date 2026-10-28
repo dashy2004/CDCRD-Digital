@@ -27,7 +27,7 @@ from plugin_losas.usos_tabla4 import cargar_tabla4
 
 
 def _cargar_json(ruta: str) -> dict:
-    with open(ruta, encoding="utf-8") as f:
+    with open(ruta, encoding="utf-8-sig") as f:
         return json.load(f)
 
 
@@ -49,6 +49,7 @@ def _cmd_tabla(args) -> int:
                 continue
             filas = asignar_uso(filas, mark, uso_id, tabla)
 
+    exportado = export_para_puente(filas) if args.dxf else None
     os.makedirs(args.salida, exist_ok=True)
     ruta_xlsx = os.path.join(args.salida, "tabla_losas.xlsx")
     ruta_usos = os.path.join(args.salida, "usos.json")
@@ -60,7 +61,7 @@ def _cmd_tabla(args) -> int:
     if args.dxf:
         ruta_exp = os.path.join(args.salida, "losas_acad.json")
         with open(ruta_exp, "w", encoding="utf-8") as f:
-            json.dump(export_para_puente(filas), f, indent=1, ensure_ascii=False)
+            json.dump(exportado, f, indent=1, ensure_ascii=False)
         rutas.append(ruta_exp)
     if avisos:
         ruta_avisos = os.path.join(args.salida, "avisos.txt")
@@ -267,12 +268,84 @@ def _cmd_visor(args) -> int:
     return 0
 
 
+def _cmd_dxf_salida(args) -> int:
+    from pathlib import Path
+    from plugin_losas.acad_dxf_out import EspesorRotulo, escribir_dxf, guardar_dxf
+    offset=(0.,0.)
+    if args.proyecto:
+        data=_cargar_json(args.proyecto)
+        records=data.get('losas') or []
+        selected=[r for r in records if not args.nivel or r.get('nivel')==args.nivel]
+        if any(r.get('huecos') for r in selected):
+            raise ValueError('Esta salida no admite huecos; no se omiten del contorno silenciosamente.')
+        filas=filas_desde_export({**data,'losas':selected})
+        if args.usar_origen_modelo:
+            origin=data.get('meta',{}).get('traslacion_origen_mm')
+            if not origin or len(origin)!=2:raise ValueError('Sin traslacion_origen_mm XY en el proyecto')
+            offset=tuple(float(v)/1000 for v in origin)
+    else:
+        if args.usar_origen_modelo:raise ValueError('--usar-origen-modelo requiere --proyecto')
+        text=Path(args.dxf).read_text(encoding=args.codificacion)
+        filas,avisos=losas_desde_dxf(text,args.capa,args.capa_textos,escala_a_m=args.escala)
+        for aviso in avisos:print('aviso: '+aviso)
+        if args.nivel:filas=[f for f in filas if f.nivel==args.nivel]
+    if not filas:raise ValueError('No hay losas en el nivel seleccionado')
+    espesores={}
+    if args.espesores:
+        try:
+            espesores={mark:EspesorRotulo(**r) for mark,r in _cargar_json(args.espesores).items()}
+        except TypeError as ex:
+            raise ValueError('Formato de --espesores invalido: '+str(ex)) from ex
+    elif args.secciones:
+        data=_cargar_json(args.secciones)
+        for mark,r in data['secciones'].items():
+            h=r.get('espesor_m');origen=r.get('criterio') or r.get('origen') or ''
+            estado='pendiente' if h is None else 'fijado' if r.get('origen')=='fijada' else 'calculado'
+            espesores[mark]=EspesorRotulo(h,origen,estado)
+    elif args.resultados:
+        for r in _cargar_json(args.resultados).get('panos',[]):
+            e=r.get('espesor') or {};h=e.get('h_usado_m')
+            espesores[r['mark']]=EspesorRotulo(h,e.get('criterio') or '','pendiente' if h is None else 'calculado')
+    else:
+        # Solo reusar un dato de DXF que ya trae procedencia; h de Revit es geometria.
+        for f in filas:
+            if f.fuente=='acad' and f.espesor_m is not None and f.criterio_espesor:
+                espesores[f.mark]=EspesorRotulo(f.espesor_m,f.criterio_espesor,h_modelo_m=f.espesor_referencia_m)
+            elif f.fuente=='acad' and (f.criterio_espesor or '').startswith('pendiente:'):
+                espesores[f.mark]=EspesorRotulo(f.espesor_candidato_m,f.criterio_espesor.removeprefix('pendiente: '),
+                                               'pendiente',f.espesor_referencia_m)
+    text=escribir_dxf(filas,espesores,unidad=args.unidad,desplazamiento_m=offset,
+                      altura_texto_m=args.altura_texto)
+    path=Path(args.salida);path.parent.mkdir(parents=True,exist_ok=True)
+    guardar_dxf(text,path)
+    pendientes=sum(f.mark not in espesores or espesores[f.mark].estado=='pendiente' for f in filas)
+    print(f'{len(filas)} contornos originales y rotulos GR; {pendientes} espesores pendientes: {path}')
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="plugin-losas",
         description="Extracción de losas (Revit/AutoCAD), usos Tabla 4, aligeradas y visor PM.")
     parser.add_argument("--version", action="version", version=__version__)
     sub = parser.add_subparsers(dest="comando", required=True)
+
+    dx=sub.add_parser('dxf-salida',help='DXF GR con contorno original, Mark y espesor con procedencia')
+    source=dx.add_mutually_exclusive_group(required=True)
+    source.add_argument('--proyecto');source.add_argument('--dxf')
+    heights=dx.add_mutually_exclusive_group()
+    heights.add_argument('--espesores',help='JSON {Mark:{h_m,origen,estado,h_modelo_m}}')
+    heights.add_argument('--secciones',help='secciones_losas.json')
+    heights.add_argument('--resultados',help='resultados.json con panos/espesor/criterio')
+    dx.add_argument('--nivel');dx.add_argument('--capa',default='GR_LOSAS_CONTORNO')
+    dx.add_argument('--capa-textos',default='GR_LOSAS_ROTULOS')
+    dx.add_argument('--escala',type=float,default=.001,help='unidades del DXF de entrada a m')
+    dx.add_argument('--codificacion',default='cp1252')
+    dx.add_argument('--unidad',choices=['m','mm'],default='mm')
+    dx.add_argument('--usar-origen-modelo',action='store_true',help='sumar traslacion_origen_mm del export Revit')
+    dx.add_argument('--altura-texto',type=float,default=.18,help='altura del Mark en m de modelo')
+    dx.add_argument('--salida',required=True,help='archivo DXF nuevo')
+    dx.set_defaults(func=_cmd_dxf_salida)
 
     t = sub.add_parser("tabla", help="tabla de losas + usos.json para puente-losas")
     origen = t.add_mutually_exclusive_group(required=True)

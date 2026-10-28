@@ -40,6 +40,9 @@ class FilaLosa:
     es_vuelo: bool = False
     revit_id: int | None = None
     contorno: tuple[tuple[float, float], ...] = field(default_factory=tuple)
+    criterio_espesor: str | None = None
+    espesor_candidato_m: float | None = None
+    espesor_referencia_m: float | None = None
 
     def __post_init__(self) -> None:
         if self.fuente not in FUENTES_VALIDAS:

@@ -12,6 +12,7 @@ TEXT y MTEXT, que es todo lo que esta extracción necesita. Sin dependencias.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 
 from plugin_losas.extraccion import FilaLosa
 
@@ -27,6 +28,9 @@ class EntidadDxf:
     puntos: tuple[tuple[float, float], ...]    # vértices (polilínea) o inserción (texto)
     cerrada: bool = False
     texto: str = ""
+    datos_gr: tuple[str, ...] = ()
+    curva: bool = False
+    ocs_no_xy: bool = False
 
 
 def _grupos(texto: str):
@@ -50,7 +54,7 @@ def leer_entidades(texto: str) -> list[EntidadDxf]:
         if actual is not None:
             puntos = tuple(zip(actual["xs"], actual["ys"]))
             entidades.append(EntidadDxf(actual["tipo"], actual["capa"], puntos,
-                                        actual["cerrada"], actual["texto"]))
+                                        actual["cerrada"], actual["texto"], tuple(actual['gr']), actual['curva'],actual['ocs_no_xy']))
         actual = None
 
     for codigo, valor in _grupos(texto):
@@ -66,7 +70,7 @@ def leer_entidades(texto: str) -> list[EntidadDxf]:
                 cerrar()
                 if valor in ("LWPOLYLINE", "TEXT", "MTEXT"):
                     actual = {"tipo": valor, "capa": "", "xs": [], "ys": [],
-                              "cerrada": False, "texto": ""}
+                              "cerrada": False, "texto": "", 'gr':[], 'app':None, 'curva':False, 'ocs_no_xy':False}
             continue
         if actual is None:
             continue
@@ -78,6 +82,14 @@ def leer_entidades(texto: str) -> list[EntidadDxf]:
             actual["ys"].append(float(valor))
         elif codigo == 70 and actual["tipo"] == "LWPOLYLINE":
             actual["cerrada"] = bool(int(valor) & 1)
+        elif codigo == 42 and actual['tipo']=='LWPOLYLINE' and float(valor)!=0:
+            actual['curva']=True
+        elif codigo in (210,220,230) and actual['tipo']=='LWPOLYLINE':
+            actual['ocs_no_xy'] |= abs(float(valor)-(1 if codigo==230 else 0))>1e-12
+        elif codigo == 1001:
+            actual['app']=valor
+        elif codigo == 1000 and actual['app']=='GR_LOSAS':
+            actual['gr'].append(valor)
         elif codigo == 1:
             actual["texto"] += valor
         elif codigo == 3 and actual["tipo"] == "MTEXT":   # continuación de texto largo
@@ -129,6 +141,7 @@ class RecuadroLosa:
     ly: float
     area_m2: float
     es_rectangular: bool
+    datos_gr: tuple[str, ...] = ()
 
 
 def recuadros_losa(entidades: list[EntidadDxf], capa: str) -> list[RecuadroLosa]:
@@ -138,6 +151,10 @@ def recuadros_losa(entidades: list[EntidadDxf], capa: str) -> list[RecuadroLosa]
         if e.tipo != "LWPOLYLINE" or e.capa != capa or not e.cerrada or len(e.puntos) < 3:
             continue
         pts = e.puntos
+        if e.curva:
+            raise ValueError('Contorno DXF con arcos/bulge: no se convierte en segmentos rectos silenciosamente.')
+        if e.ocs_no_xy:
+            raise ValueError('Contorno DXF con OCS distinto de XY: transformar a WCS antes de importar.')
         if len(pts) > 3 and pts[0] == pts[-1]:
             pts = pts[:-1]
         xs = [p[0] for p in pts]
@@ -148,7 +165,7 @@ def recuadros_losa(entidades: list[EntidadDxf], capa: str) -> list[RecuadroLosa]
             continue
         area = _area_poligono(pts)
         es_rect = abs(area - lx * ly) <= TOL_RECTANGULO * lx * ly
-        out.append(RecuadroLosa(tuple(pts), lx, ly, area, es_rect))
+        out.append(RecuadroLosa(tuple(pts), lx, ly, area, es_rect,e.datos_gr))
     return out
 
 
@@ -160,6 +177,8 @@ def textos_numeracion(entidades: list[EntidadDxf], capa: str | None = None
         if e.tipo not in ("TEXT", "MTEXT") or not e.puntos:
             continue
         if capa is not None and e.capa != capa:
+            continue
+        if 'rol:espesor' in e.datos_gr:
             continue
         contenido = _limpiar_mtext(e.texto) if e.tipo == "MTEXT" else e.texto.strip()
         if contenido:
@@ -187,6 +206,19 @@ def losas_desde_dxf(texto_dxf: str, capa_losas: str = "LOSAS",
     usados: set[int] = set()
     vistos: dict[str, int] = {}
     for n, r in enumerate(recuadros, start=1):
+        meta=dict(v.split(':',1) for v in r.datos_gr if ':' in v)
+        extras={key:float(meta[key]) for key in ('h_candidato_m','h_referencia_m') if key in meta}
+        if any(not math.isfinite(v) or v<=0 for v in extras.values()):
+            raise ValueError('Espesor candidato/referencia DXF invalido')
+        h=espesor_m
+        criterio='declarado al importar DXF' if h is not None else None
+        if h is None and meta.get('estado')=='pendiente':
+            criterio='pendiente: '+meta.get('origen','sin resultado')
+        if h is None and 'h_m' in meta and meta.get('estado') in ('calculado','fijado'):
+            h=float(meta['h_m'])
+            if not math.isfinite(h) or h<=0 or not meta.get('origen'):
+                raise ValueError('Espesor DXF sin valor/procedencia validos')
+            criterio=meta['origen']
         marks = []
         for k, (x, y, t) in enumerate(textos):
             if k not in usados and _punto_en_poligono(x, y, r.contorno):
@@ -208,11 +240,15 @@ def losas_desde_dxf(texto_dxf: str, capa_losas: str = "LOSAS",
             vistos[mark] = 1
         if not r.es_rectangular:
             avisos.append(f"{mark}: el contorno no es rectangular (área {r.area_m2:.2f} ≠ "
-                          f"{r.lx:.2f}×{r.ly:.2f}); se usa el rectángulo equivalente del bbox.")
+                          f"{r.lx:.2f}×{r.ly:.2f}); se conserva el contorno, Lx/Ly son del bbox.")
         e = escala_a_m
         filas.append(FilaLosa(
-            mark=mark, nivel=None, lx=r.lx * e, ly=r.ly * e,
-            area_m2=r.area_m2 * e * e, espesor_m=espesor_m, fuente="acad",
+            mark=mark, nivel=meta.get('nivel'), lx=r.lx * e, ly=r.ly * e,
+            area_m2=r.area_m2 * e * e, espesor_m=h, fuente="acad",
+            revit_id=int(meta['id_revit']) if 'id_revit' in meta else None,
+            criterio_espesor=criterio,
+            espesor_candidato_m=extras.get('h_candidato_m'),
+            espesor_referencia_m=extras.get('h_referencia_m'),
             contorno=tuple((x * e, y * e) for x, y in r.contorno)))
     sobran = len(textos) - len(usados)
     if sobran > 0:
@@ -229,13 +265,17 @@ def export_para_puente(filas: list[FilaLosa], espesor_defecto: float = 0.20) -> 
     """
     losas = []
     for f in filas:
+        if f.espesor_m is None and (f.criterio_espesor or '').startswith('pendiente:'):
+            raise ValueError(f'{f.mark}: espesor pendiente; no se aplica un espesor por defecto.')
         losas.append({
             "id": f.mark, "mark": f.mark, "nivel": f.nivel, "z_tope": 0.0,
+            "revit_id":f.revit_id,
             "contorno": [[x, y] for x, y in f.contorno] or
                         [[0.0, 0.0], [f.lx, 0.0], [f.lx, f.ly], [0.0, f.ly]],
             "huecos": [], "lx": round(f.lx, 3), "ly": round(f.ly, 3),
             "area_m2": round(f.area_m2, 2) if f.area_m2 is not None else None,
-            "espesor": {"h_usado": f.espesor_m or espesor_defecto},
+            "espesor": {"h_usado": f.espesor_m or espesor_defecto,
+                        "criterio":f.criterio_espesor},
         })
     return {"meta": {"fuente": "plugin-losas/acad_dxf", "unidades": {"longitud": "m"}},
             "losas": losas}

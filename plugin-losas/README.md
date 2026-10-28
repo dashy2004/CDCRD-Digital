@@ -13,8 +13,9 @@ atribuible.
 
 - **Ing. F. Perdomo** — método **Pieper-Martens** de `Losas.exe` (v5.21): es el
   flujo de cálculo que este plugin presenta. Las tablas y el balanceo están
-  portados y validados en [`puente-losas`](../puente-losas/README.md) contra la
-  salida real de `Losas.exe` (fixture RESTAURANTE 2).
+  portados en [`puente-losas`](../puente-losas/README.md). El fixture de oro
+  RESTAURANTE 2 contrasta los codigos 40/71; no acredita equivalencia numerica
+  para todos los codigos. Las salidas nativas se importan como fuente separada.
 - **Ing. Arlette Ramírez** — puente **AutoCAD ↔ Excel/ETABS**: su convención de
   recuadros/numeración, los sets de carga, la biblioteca de losas
   (L12/L15/L20, L20A-1D/2D, L25A-1D/2D) y la extracción de la Tabla 4
@@ -182,3 +183,48 @@ El exportador incluye la carga última y la carga PM redondeada a 0.001 tf/m²,
 que es la que consume el método y viaja al DL. `informe_losas.xlsx` del puente
 continúa siendo el informe combinado histórico FEM/PM; para consultar la vía
 PM exclusivamente se usa `exportacion_pm.xlsx`.
+
+
+## Salida AutoCAD con capas GR
+
+`plugin-losas dxf-salida` genera un DXF R2000/cp1252 nuevo con contornos
+cerrados en `GR_LOSAS_CONTORNO` y marcas/espesores en `GR_LOSAS_ROTULOS`.
+Requiere ezdxf, incluido en las dependencias del plugin. No controla AutoCAD.
+
+```powershell
+plugin-losas dxf-salida --proyecto proyecto.json --nivel "Nivel ficticio" --secciones secciones_losas.json --salida planos/nivel.dxf
+plugin-losas dxf-salida --dxf planos/nivel.dxf --escala 0.001 --salida planos/copia.dxf
+```
+
+Se conservan vertices, orden y orientacion originales. No se fabrica un
+rectangulo si faltan vertices. Se rechazan autointersecciones, arcos/bulges
+y OCS distinto de XY; en la entrada Revit, huecos que esta version no representa. Las salidas
+son en mm por defecto; `--unidad m` selecciona metros. `--usar-origen-modelo`
+suma explicitamente `meta.traslacion_origen_mm`; sin esa opcion se mantienen
+las coordenadas del export. Un nivel por archivo evita superposiciones.
+
+El espesor procede de **una** fuente explicita: `--secciones`, `--resultados`
+o `--espesores`. Esta ultima acepta JSON como:
+
+```json
+{
+  "LA0": {"h_m": 0.20, "origen": "Calculo de ejemplo", "estado": "calculado"},
+  "LA1": {"h_m": 0.33, "h_modelo_m": 0.20, "origen": "Excel de ejemplo", "estado": "pendiente"}
+}
+```
+
+El segundo caso muestra ambos valores y `por conciliar`; no exporta un
+espesor utilizable para calculo. Sin resultado con procedencia se escribe
+`h pendiente`. El espesor geometrico de Revit no se convierte por defecto
+en espesor calculado. Los estados son `calculado`, `fijado` y `pendiente`;
+no implican aprobacion del armado.
+
+XDATA `GR_LOSAS` distingue el texto de espesor de la marca y conserva Mark,
+ID Revit, nivel y procedencia. El lector recupera esa identidad y el espesor
+cuando corresponde. Una marca visible editada en AutoCAD prevalece sobre
+el texto historico de XDATA. `tabla --dxf` rechaza espesores GR pendientes
+sin aplicarles silenciosamente el valor historico por defecto.
+
+Pruebas: DXF auditado con ezdxf, ida/vuelta en m/mm, cp1252 con Ø, contornos
+en L y rotados, identidad, traslacion y ausencia/conflicto de espesores.
+Estas pruebas no sustituyen una apertura en AutoCAD ni validan el LISP vivo.

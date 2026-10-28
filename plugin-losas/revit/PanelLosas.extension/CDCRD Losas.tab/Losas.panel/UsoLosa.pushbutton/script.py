@@ -921,8 +921,8 @@ class PanelUsoLosa(Form):
         pasos = [
             "plugin_losas.cli tabla --proyecto \"%s\" --usos-marcados \"%s\" --salida \"%s\"" %
             (proyecto, marcados, carpeta),
-            "puente_losas.cli --proyecto \"%s\" --usos \"%s\" --salida \"%s\" --ruta-corta \"%s\"" %
-            (proyecto, usos_json, carpeta, os.path.join(os.path.expanduser("~"), "LosasRD")),
+            "puente_losas.cli --proyecto \"%s\" --usos \"%s\" --salida \"%s\" --ruta-corta \"%s\" --nombre \"%s\"" %
+            (proyecto, usos_json, carpeta, os.path.join(os.path.expanduser("~"), "LosasRD"), revit.doc.Title),
             "plugin_losas.cli tipos --proyecto \"%s\" --usos \"%s\" --salida \"%s\"" %
             (proyecto, usos_json, carpeta),
             "plugin_losas.cli aligeradas --proyecto \"%s\" --usos \"%s\" --secciones \"%s\" "
