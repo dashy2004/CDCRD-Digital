@@ -83,8 +83,14 @@ def cargas_de_pano(p: PanoLosa, espesor: float | None = None) -> CargasPano:
     if p.uso not in SETS_CARGA:
         raise ValueError(f"{p.mark}: uso '{p.uso}' sin set de carga.")
     acabados, patron, viva = SETS_CARGA[p.uso]
+    if p.acabados_tm2 is not None:
+        acabados = p.acabados_tm2
+    if p.viva_tm2 is not None:
+        viva = p.viva_tm2
     h = espesor if espesor is not None else p.espesor
     pp = h * PESO_HORMIGON_T_M3
+    if p.peso_propio_tm2 is not None:
+        pp = p.peso_propio_tm2
 
     if p.es_vuelo:
         mamp_calc = 0.0

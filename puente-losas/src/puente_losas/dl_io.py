@@ -69,7 +69,9 @@ def escribir_dl(s: SistemaDL) -> str:
 
 
 def guardar_dl(s: SistemaDL, ruta: str) -> None:
-    with open(ruta, "w", encoding="ascii", newline="\r\n") as f:
+    # Mismo encoding que DLFileService de EstructurasRD y Losas.exe.
+    # No usar UTF-8/BOM: el programa original lee texto Windows.
+    with open(ruta, "w", encoding="cp1252", newline="\r\n") as f:
         f.write(escribir_dl(s))
 
 

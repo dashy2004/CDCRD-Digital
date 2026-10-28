@@ -22,6 +22,7 @@ import sys
 from puente_losas import __version__
 from puente_losas.contrato import aplicar_usos, asignar_bordes, panos_desde_json
 from puente_losas.dl_io import guardar_dl
+from puente_losas.losas_legacy import preparar_legacy
 from puente_losas.etabs_plan import escribir_plan
 from puente_losas.informe_excel import escribir_informe, escribir_mapa_svg
 from puente_losas.motor import analizar_panos
@@ -58,6 +59,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--salida", default="salidas", help="carpeta de salida (default: salidas/).")
     parser.add_argument("--nombre", default="Proyecto Ejemplo",
                         help="nombre para el informe (NO usar nombres de cliente en repo público).")
+    parser.add_argument("--ruta-corta", metavar="CARPETA",
+                        help="copia DL con nombre 8.3 para Losas.exe, sin cambiar entradas.")
     args = parser.parse_args(argv)
 
     if args.version:
@@ -90,6 +93,13 @@ def main(argv: list[str] | None = None) -> int:
     escribir_mapa_svg(resultados, ruta_svg)
     escribir_plan(resultados, ruta_plan, proyecto=args.nombre)
     guardar_dl(pm.sistema, ruta_dl)
+    if args.ruta_corta:
+        caso = preparar_legacy(ruta_dl, args.ruta_corta,
+                              {l.id: l.mark or str(l.id) for l in pm.sistema.losas})
+        with open(os.path.join(args.salida, 'LOSAS_EXE.json'), 'w', encoding='utf-8') as f:
+            json.dump({'dl': str(caso.dl), 'txt': str(caso.txt),
+                       'manifiesto': str(caso.manifiesto), 'advertencias': caso.advertencias}, f, indent=2)
+        print('Abrir en Losas.exe: ' + str(caso.dl))
     datos = {"panos": [_resultado_a_dict(r) for r in resultados],
              "pieper_martens": pm_a_dict(pm)}
     with open(ruta_res, "w", encoding="utf-8") as f:

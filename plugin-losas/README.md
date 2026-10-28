@@ -162,3 +162,23 @@ salidas commiteadas en `ejemplo/salidas/` (`usos.json`, avisos,
 se regeneran con ellos; los dos Excel (`tabla_losas.xlsx`,
 `informe_losas.xlsx`) también se generan pero no se commitean (el repo no sube
 binarios `*.xlsx`).
+
+### Exportación exclusiva Pieper–Martens
+
+`plugin-losas visor` escribe también `exportacion_pm.xlsx`, desde la misma
+instantánea que usa el visor. Separa momentos PM, acero PM de franja maciza de
+1 m y apoyos balanceados. No usa acero FEM como sustituto cuando falta acero
+PM; esos campos quedan pendientes. Este acero no constituye armado por nervio.
+Para plantas de niveles superpuestos, usar `--nivel` y una salida por nivel.
+
+El contrato del puente acepta `viva_tm2`, `acabados_tm2` y `peso_propio_tm2`
+opcionales por paño, también en `usos.json`. Deben ser números finitos no
+negativos; un cero explícito se respeta. Si se omiten, se conserva la biblioteca
+por uso. Un peso propio medido solo afecta cargas: no sustituye el espesor de
+rigidez por V/A ni modifica el modelo Revit. Las fuentes e hipótesis de esas
+entradas deben quedar documentadas en el proyecto privado.
+
+El exportador incluye la carga última y la carga PM redondeada a 0.001 tf/m²,
+que es la que consume el método y viaja al DL. `informe_losas.xlsx` del puente
+continúa siendo el informe combinado histórico FEM/PM; para consultar la vía
+PM exclusivamente se usa `exportacion_pm.xlsx`.

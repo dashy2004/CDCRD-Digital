@@ -11,6 +11,7 @@ Ing. Arlette Ramírez). La conversión a SI del motor vive en ``motor.py``.
 from __future__ import annotations
 
 import json
+import math
 from dataclasses import dataclass, field, replace
 
 USOS_VALIDOS = ("entrepisos", "comun", "techo", "parqueos", "gimnasio")
@@ -42,6 +43,9 @@ class PanoLosa:
     direccion: str | None = None    # "1D" | "2D" | None = por relación de luces
     tipo_revit: str | None = None
     revit_id: int | None = None
+    viva_tm2: float | None = None
+    acabados_tm2: float | None = None
+    peso_propio_tm2: float | None = None  # peso medido; no cambia el espesor de rigidez
 
     @property
     def luz_corta(self) -> float:
@@ -72,6 +76,11 @@ def _validar(p: PanoLosa) -> PanoLosa:
         raise ValueError(f"{p.mark}: uso '{p.uso}' no está en {USOS_VALIDOS}.")
     if p.borde is not None and p.borde not in BORDES_VALIDOS:
         raise ValueError(f"{p.mark}: borde '{p.borde}' no está en {BORDES_VALIDOS}.")
+    for campo in ("viva_tm2", "acabados_tm2", "peso_propio_tm2"):
+        valor = getattr(p, campo)
+        if valor is not None and (isinstance(valor, bool) or not isinstance(valor, (int, float))
+                                  or not math.isfinite(valor) or valor < 0):
+            raise ValueError(f"{p.mark}: {campo} debe ser un número finito no negativo.")
     return p
 
 
@@ -97,6 +106,9 @@ def _pano_desde_losa_export(rec: dict) -> PanoLosa:
         direccion=rec.get("direccion"),
         tipo_revit=rec.get("tipo_revit"),
         revit_id=rec.get("revit_id"),
+        viva_tm2=rec.get("viva_tm2"),
+        acabados_tm2=rec.get("acabados_tm2"),
+        peso_propio_tm2=rec.get("peso_propio_tm2"),
     ))
 
 
@@ -119,7 +131,8 @@ def aplicar_usos(panos: list[PanoLosa], usos: dict[str, dict]) -> list[PanoLosa]
     ``usos`` = {"L1": {"uso": "comun", "mamposteria_tm2": 0.12, "es_vuelo": false,
                 "borde": "simple", "direccion": "1D", "espesor": 0.20}, ...}
     """
-    campos = ("uso", "mamposteria_tm2", "es_vuelo", "borde", "direccion", "espesor")
+    campos = ("uso", "mamposteria_tm2", "es_vuelo", "borde", "direccion", "espesor",
+              "viva_tm2", "acabados_tm2", "peso_propio_tm2")
     out = []
     for p in panos:
         extra = usos.get(p.mark)

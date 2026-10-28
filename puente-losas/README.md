@@ -5,6 +5,41 @@ de Revit, los analiza con el motor FEM abierto de **EstructurasRD** y entrega
 un informe Excel por losa más un **plan de export a ETABS** que respeta las
 reglas de modelado del flujo AutoCAD ↔ Excel/ETABS de la Ing. Arlette Ramírez.
 
+## Intercambio con Losas.exe y plantilla XLSM
+
+El panel de Revit genera el DL canónico y una copia de ejecución con nombre
+8.3 en `%USERPROFILE%/LosasRD/<hash>/SISTEMA.DL`. `LOSAS_EXE.json` en la carpeta
+de resultados identifica la ruta corta y el TXT esperado. Se conservan los
+bytes del DL; el cambio de ruta no altera cargas ni geometría. Es texto
+Windows-1252, sin BOM y con finales CRLF, compatible con el contrato histórico
+de [EstructurasRD](https://github.com/dashy2004/EstructurasRD/tree/archive/dotnet-suite).
+
+Para ejecutar desde la terminal o preparar un DL existente:
+
+```powershell
+puente-losas --proyecto proyecto.json --salida salidas --ruta-corta C:/LosasRD
+python -m puente_losas.losas_legacy preparar --dl salidas/sistema_losas.DL --ruta-corta C:/LosasRD --mapa mapa.csv
+python -m puente_losas.losas_legacy importar --dl C:/LosasRD/XXXXXXXX/SISTEMA.DL --txt C:/LosasRD/XXXXXXXX/SISTEMA.TXT --salida nativo.json
+python -m puente_losas.losas_legacy plantilla --origen plantilla.xlsm --entradas entradas.json --salida copia.xlsm
+```
+
+`mapa.csv` lleva columnas `id,mark`. `entradas.json` declara explícitamente
+`{"Nombre de hoja":{"B143":3.6,"H143":4}}`; use las celdas de su plantilla.
+El importador exige todas las losas, vanos y apoyos, valida las entradas
+publicadas en el TXT y conserva las disposiciones nativas. El TXT no publica
+todos los datos de entrada (por ejemplo materiales/recubrimientos): conservar
+juntos DL, TXT y manifiesto de la ejecución. `As > As max` queda como fallo
+y área nula, nunca como acero cero. Los resultados nativos se identifican
+separadamente del motor PM del puente, sin afirmar equivalencia numérica.
+
+`barras_por_nervio(As_cm2_m, paso_m, area_mm2)` calcula
+`techo(As × 100 × paso / área_barra)`. Es una conversión de unidades y cantidad;
+no verifica la sección T. Las alternativas de diámetro son excluyentes: no
+rellenar todas las alternativas si la plantilla las suma como acero colocado.
+El escritor XLSM conserva las partes ajenas a la hoja editada, incluido VBA;
+rechaza sobrescribir fórmulas, el original o una salida existente. No ejecuta
+macros ni recalcula cachés: abrir y recalcular la copia en Excel.
+
 ## Agradecimiento
 
 Este puente replica, para losas en Revit, el patrón del puente

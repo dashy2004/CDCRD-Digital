@@ -35,7 +35,8 @@ from System.Windows.Forms import (Button, DataGridView,                 # noqa: 
                                   DataGridViewTextBoxColumn, DialogResult,
                                   DockStyle, FolderBrowserDialog, Form,
                                   FormStartPosition, MessageBox,
-                                  MessageBoxButtons, Panel)
+                                  MessageBoxButtons, Panel, Keys, MouseButtons,
+                                  DataGridViewSelectionMode, DataGridViewColumnSortMode)
 
 from pyrevit import DB, revit  # noqa: E402
 
@@ -168,6 +169,8 @@ def _filas(doc):
             pass
         filas.append({
             "el": f,
+            "tipo_nativo": doc.GetElement(f.GetTypeId()).get_Parameter(
+                DB.BuiltInParameter.SYMBOL_NAME_PARAM).AsString() or "",
             "mark": (p_mark.AsString() or "") if p_mark else "",
             "nivel": nivel,
             "lx": round((bb.Max.X - bb.Min.X) * FT_A_M, 3) if bb else None,
@@ -181,6 +184,18 @@ def _filas(doc):
         })
     filas.sort(key=lambda x: x["mark"])
     return filas
+
+
+def _es_aligerada(fila, seccion=None):
+    """El tipo real prevalece aunque el selector siga en auto."""
+    texto = "%s %s" % (fila.get("tipo_nativo", ""), seccion or fila.get("seccion", ""))
+    return bool(re.search(r"L\d+A(?:\b|-)|ALIGER|NERVAD", texto.upper()))
+
+
+def _indices_relleno(inicio, fin, total):
+    if min(inicio, fin) < 0 or max(inicio, fin) >= total:
+        return []
+    return list(range(min(inicio, fin), max(inicio, fin) + 1))
 
 
 def _crear_parametro_texto(doc, nombre):
@@ -421,6 +436,16 @@ class PanelUsoLosa(Form):
         self.grid.AllowUserToDeleteRows = False
         self.grid.RowHeadersVisible = False
         self.grid.ShowCellToolTips = True
+        self.grid.SelectionMode = DataGridViewSelectionMode.CellSelect
+        self.grid.MultiSelect = True
+        self._relleno = None
+        self.grid.CellPainting += self._pintar_relleno
+        self.grid.MouseDown += self._inicio_relleno
+        self.grid.MouseMove += self._mover_relleno
+        self.grid.MouseUp += self._fin_relleno
+        self.grid.KeyDown += self._tecla_relleno
+        self.Deactivate += self._cancelar_captura
+        self.grid.CurrentCellChanged += self._refrescar_relleno
 
         def _col_texto(titulo, ancho, solo_lectura, ayuda=None):
             c = DataGridViewTextBoxColumn()
@@ -462,6 +487,15 @@ class PanelUsoLosa(Form):
         _col_texto("S Y [m]", 58, False, AYUDA_Y)                             # 10
         _col_combo("# Apoyo", 80, BARRAS, AYUDA_APOYO)                        # 11
         _col_texto("S Ap [m]", 58, False, AYUDA_APOYO)                        # 12
+        _col_texto("Base del acero", 220, True)                             # 13
+        # Mantener el orden estable durante un relleno por arrastre.
+        for columna in self.grid.Columns:
+            columna.SortMode = DataGridViewColumnSortMode.NotSortable
+        self.grid.CellValueChanged += self._actualizar_base_acero
+        self.grid.Columns[4].ToolTipText = (
+            "Elige un uso; arrastra el cuadro verde inferior izquierdo. "
+            "O selecciona celdas de Uso y pulsa Ctrl+D: copia la superior. "
+            "Solo edita el panel; Guardar aplica los cambios al modelo.")
 
         self._poblar()
 
@@ -474,6 +508,7 @@ class PanelUsoLosa(Form):
             self.Text += "  [salidas cargadas de %s]" % previa
 
         for texto, manejador in (
+                ("Uso: arrastrar cuadro verde / Ctrl+D rellena desde arriba", self.rellenar_uso),
                 ("Esquema: que acero es cual", self.esquema),
                 ("Abrir ultimo visor HTML", self.abrir_visor),
                 ("Dibujar acero en la PLANTA ACTIVA + tabla de detalles", self.dibujar_plano),
@@ -492,13 +527,135 @@ class PanelUsoLosa(Form):
         self.grid.BringToFront()
 
     # ------------------------------ grilla ------------------------------
+    def _refrescar_relleno(self, sender, e):
+        self.grid.Invalidate()
+
+    def _pintar_relleno(self, sender, e):
+        actual = self.grid.CurrentCell
+        if actual is None or e.ColumnIndex != 4 or e.RowIndex != actual.RowIndex or actual.ColumnIndex != 4:
+            return
+        e.Paint(e.ClipBounds, e.PaintParts)
+        brocha = SolidBrush(Color.ForestGreen)
+        try:
+            # Izquierda: no cubrir el desplegable situado a la derecha.
+            e.Graphics.FillRectangle(brocha, e.CellBounds.Left + 1,
+                                     e.CellBounds.Bottom - 8, 7, 7)
+        finally:
+            brocha.Dispose()
+        e.Handled = True
+
+    def _inicio_relleno(self, sender, e):
+        if e.Button != MouseButtons.Left:
+            return
+        h = self.grid.HitTest(e.X, e.Y)
+        if h.ColumnIndex != 4 or h.RowIndex < 0:
+            return
+        caja = self.grid.GetCellDisplayRectangle(4, h.RowIndex, False)
+        if not (caja.Left <= e.X <= caja.Left + 9 and caja.Bottom - 10 <= e.Y < caja.Bottom):
+            return
+        if not self.grid.EndEdit():
+            return
+        valor = self._celda(h.RowIndex, 4)
+        if valor not in self.por_etiqueta:
+            return
+        self._relleno = (h.RowIndex, valor)
+        self.grid.Capture = True
+
+    def _mover_relleno(self, sender, e):
+        if self._relleno is None:
+            return
+        # Desplazamiento al llegar a los bordes de la grilla.
+        primera = self.grid.FirstDisplayedScrollingRowIndex
+        if e.Y < self.grid.ColumnHeadersHeight and primera > 0:
+            self.grid.FirstDisplayedScrollingRowIndex = primera - 1
+        elif e.Y > self.grid.ClientSize.Height - 20 and primera < self.grid.Rows.Count - 1:
+            self.grid.FirstDisplayedScrollingRowIndex = primera + 1
+        h = self.grid.HitTest(e.X, e.Y)
+        if h.RowIndex < 0:
+            return
+        self.grid.ClearSelection()
+        for i in _indices_relleno(self._relleno[0], h.RowIndex, self.grid.Rows.Count):
+            self.grid.Rows[i].Cells[4].Selected = True
+
+    def _fin_relleno(self, sender, e):
+        origen = self._relleno
+        self._relleno = None
+        self.grid.Capture = False
+        if origen is None or e.Button != MouseButtons.Left:
+            return
+        h = self.grid.HitTest(e.X, e.Y)
+        if h.ColumnIndex != 4 or h.RowIndex < 0:
+            return  # soltar fuera de Uso cancela, sin escribir celdas
+        for i in _indices_relleno(origen[0], h.RowIndex, self.grid.Rows.Count):
+            self.grid.Rows[i].Cells[4].Value = origen[1]
+
+    def _cancelar_captura(self, sender, e):
+        self._relleno = None
+        self.grid.Capture = False
+
+    def _tecla_relleno(self, sender, e):
+        if e.KeyCode == Keys.Escape:
+            self._relleno = None
+            self.grid.Capture = False
+        elif e.Control and e.KeyCode == Keys.D:
+            self.rellenar_uso(sender, e)
+            e.Handled = True
+            e.SuppressKeyPress = True
+
+    @_seguro
+    def rellenar_uso(self, sender, e):
+        if not self.grid.EndEdit():
+            return
+        indices = sorted(set(c.RowIndex for c in self.grid.SelectedCells if c.ColumnIndex == 4))
+        if not indices:
+            return
+        valor = self._celda(indices[0], 4)
+        if valor in self.por_etiqueta:
+            for i in indices:
+                self.grid.Rows[i].Cells[4].Value = valor
+
+    def _aligeradas_grid(self):
+        por_mark = dict((f["mark"], f) for f in self.filas)
+        return [self._celda(i, 0) for i in range(self.grid.Rows.Count)
+                if _es_aligerada(por_mark.get(self._celda(i, 0), {}), self._celda(i, 6))]
+
+    def _actualizar_base_acero(self, sender, e):
+        if e.RowIndex < 0 or e.ColumnIndex != 6:
+            return
+        mark = self._celda(e.RowIndex, 0)
+        fila = next((f for f in self.filas if f["mark"] == mark), {})
+        aligerada = _es_aligerada(fila, self._celda(e.RowIndex, 6))
+        row = self.grid.Rows[e.RowIndex]
+        row.Cells[13].Value = "NERVIOS: armado pendiente" if aligerada else "Franja maciza de 1 m"
+        for col in range(7, 13):
+            row.Cells[col].ReadOnly = aligerada
+            row.Cells[col].Style.BackColor = Color.LightGray if aligerada else Color.White
+
+    def _requiere_armado_nervios(self):
+        marks = self._aligeradas_grid()
+        if marks:
+            MessageBox.Show("El acero PM disponible es de franja maciza de 1 m. "
+                            "Falta verificar barras POR NERVIO, capa superior y apoyos "
+                            "de las aligeradas: %s. No se genera un plano/armado 3D "
+                            "con esa equivalencia sin verificar." % ", ".join(marks))
+        return bool(marks)
+
     def _poblar(self):
         self.grid.Rows.Clear()
         for fila in self.filas:
             idx = self.grid.Rows.Add(fila["mark"], fila["nivel"] or "",
                                      fila["lx"], fila["ly"], None,
                                      fila["tipo"] or "", None,
-                                     "", "", "", "", "", "")
+                                     "", "", "", "", "", "", "")
+            aligerada = _es_aligerada(fila)
+            self.grid.Rows[idx].Cells[13].Value = (
+                "NERVIOS: armado pendiente" if aligerada else "Franja maciza de 1 m")
+            if aligerada:
+                for col in range(7, 13):
+                    celda = self.grid.Rows[idx].Cells[col]
+                    celda.ReadOnly = True
+                    celda.Style.BackColor = Color.LightGray
+                    celda.ToolTipText = "Texto heredado del modelo: no acredita barras por nervio."
             if fila["uso"] and fila["uso"] in self.por_id:
                 self.grid.Rows[idx].Cells[4].Value = self.por_id[fila["uso"]]
             seccion = fila["seccion"] if fila["seccion"] in SECCIONES else SECCION_AUTO
@@ -538,7 +695,7 @@ class PanelUsoLosa(Form):
                                  ("apoyo", "acero_apoyo")):
                 if editado.get(clave):
                     fila[campo] = editado[clave]
-                elif armados and not fila[campo]:
+                elif armados and not fila[campo] and not _es_aligerada(fila):
                     if clave == "x":
                         fila[campo] = armados["mfx"]["disponer"]
                     elif clave == "y":
@@ -578,9 +735,10 @@ class PanelUsoLosa(Form):
 
     def _aceros(self):
         out = {}
+        aligeradas = set(self._aligeradas_grid())
         for i in range(self.grid.Rows.Count):
             mark = self._celda(i, 0)
-            if not mark:
+            if not mark or mark in aligeradas:
                 continue
             entrada = {}
             for clave, col in (("x", 7), ("y", 9), ("apoyo", 11)):
@@ -763,8 +921,8 @@ class PanelUsoLosa(Form):
         pasos = [
             "plugin_losas.cli tabla --proyecto \"%s\" --usos-marcados \"%s\" --salida \"%s\"" %
             (proyecto, marcados, carpeta),
-            "puente_losas.cli --proyecto \"%s\" --usos \"%s\" --salida \"%s\"" %
-            (proyecto, usos_json, carpeta),
+            "puente_losas.cli --proyecto \"%s\" --usos \"%s\" --salida \"%s\" --ruta-corta \"%s\"" %
+            (proyecto, usos_json, carpeta, os.path.join(os.path.expanduser("~"), "LosasRD")),
             "plugin_losas.cli tipos --proyecto \"%s\" --usos \"%s\" --salida \"%s\"" %
             (proyecto, usos_json, carpeta),
             "plugin_losas.cli aligeradas --proyecto \"%s\" --usos \"%s\" --secciones \"%s\" "
@@ -816,7 +974,7 @@ class PanelUsoLosa(Form):
             for clave, campo in (("x", "acero_x"), ("y", "acero_y"), ("apoyo", "acero_apoyo")):
                 if editado.get(clave):
                     fila[campo] = editado[clave]
-                elif armados and not fila[campo]:
+                elif armados and not fila[campo] and not _es_aligerada(fila):
                     if clave == "x":
                         fila[campo] = armados["mfx"]["disponer"]
                     elif clave == "y":
@@ -836,6 +994,8 @@ class PanelUsoLosa(Form):
 
     @_seguro
     def dibujar_plano(self, remitente, evento):
+        if self._requiere_armado_nervios():
+            return
         if self.carpeta is None or not os.path.isfile(
                 os.path.join(self.carpeta, "resultados.json")):
             MessageBox.Show("Primero CALCULAR (hace falta resultados.json).")
@@ -916,6 +1076,8 @@ class PanelUsoLosa(Form):
 
     @_seguro
     def modelar(self, remitente, evento):
+        if self._requiere_armado_nervios():
+            return
         if self.carpeta is None or not os.path.isfile(
                 os.path.join(self.carpeta, "resultados.json")):
             MessageBox.Show("Primero CALCULAR (hace falta resultados.json).")

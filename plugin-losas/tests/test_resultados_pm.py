@@ -59,7 +59,7 @@ class TestDtoVisor(unittest.TestCase):
         self.assertEqual([p["mark"] for p in dto.panos], ["LV1", "LV2"])
         self.assertEqual(dto.panos[0]["contorno"][2], [5.0, 6.0])
         self.assertEqual(dto.panos[0]["codigo_dl"], 22)
-        self.assertEqual(dto.panos[1]["armaduras"]["apoyo"], "Ø1/2\" @0.22")
+        self.assertEqual(dto.panos[1]["armaduras"]["apoyo"], "PM pendiente")
 
         self.assertEqual(dto.campos["codigo_dl"]["valores"]["LV1"], 22.0)
         self.assertEqual(dto.panos[0]["trabajo"], {"tipo": "2D", "eje": None})
@@ -67,7 +67,7 @@ class TestDtoVisor(unittest.TestCase):
         self.assertEqual(mfx.get("unidad"), "ton·m/m")
         self.assertAlmostEqual(mfx["min"], 0.95)
         self.assertAlmostEqual(mfx["max"], 1.19)
-        self.assertAlmostEqual(dto.campos["as_apoyo"]["valores"]["LV2"], 500.0)
+        self.assertIsNone(dto.campos["as_apoyo"]["valores"]["LV2"])
         self.assertAlmostEqual(dto.campos["q_ultima"]["valores"]["LV1"], 1.234)
 
         self.assertEqual(len(dto.apoyos), 1)
