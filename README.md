@@ -1,8 +1,21 @@
-# CDCRD-Digital
+<h1 align="center">CDCRD-Digital</h1>
+<p align="center"><strong>Normativa trazable · Automatización BIM · Evidencia de ingeniería</strong></p>
+
+<p align="center">
+  <a href="#instalación-y-paquetes"><img src="docs/assets/nav/instalar.svg" alt="INSTALAR" height="34"></a>
+  <a href="servidor-mcp-civil3d/README.md"><img src="docs/assets/nav/civil3d.svg" alt="CIVIL 3D" height="34"></a>
+  <a href="#civil-3d-resultados-reproducibles"><img src="docs/assets/nav/galeria.svg" alt="CAPTURAS" height="34"></a>
+  <a href="datos/INDICE.md"><img src="docs/assets/nav/normativa.svg" alt="NORMATIVA" height="34"></a>
+  <a href="#documentacion-tecnica"><img src="docs/assets/nav/docs.svg" alt="DOCUMENTACIÓN" height="34"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/dashy2004/CDCRD-Digital/actions/workflows/verify.yml"><img src="https://github.com/dashy2004/CDCRD-Digital/actions/workflows/verify.yml/badge.svg" alt="Verificaciones del repositorio"></a>
+  <a href="datos/INDICE.md"><img src="https://img.shields.io/badge/CDCRD-5_volúmenes_·_6%2C580_cláusulas-176349" alt="Normativa: 5 volúmenes y 6,580 cláusulas"></a>
+  <a href="servidor-mcp-civil3d/docs/QTO-0522.md"><img src="https://img.shields.io/badge/Civil_3D-entrega_0.5.22-165c85" alt="Civil 3D: entrega 0.5.22"></a>
+</p>
 
 [![CDCRD Digital: normativa trazable y APIs para Revit, ETABS, SAFE, Civil 3D y AutoCAD](docs/assets/banner-cdcrd-digital.png)](https://www.canva.com/design/DAHYTip4pJ8/Cw9S-5IRfy_MZrj0EXIeaA/edit)
-
-**Normativa trazable · Automatización BIM · Evidencia de ingeniería**
 
 **Consulta el Código de Construcción de la República Dominicana con referencia a su página
 de origen y conecta sus datos con flujos de trabajo en Revit, ETABS, SAFE, Civil 3D y AutoCAD.**
@@ -11,10 +24,9 @@ El proyecto reúne **5 volúmenes, 34 títulos y 6,580 cláusulas**, tablas list
 herramientas MCP y revisiones documentadas. Su propósito es hacer que cada decisión pueda
 rastrearse desde la fuente normativa hasta los datos y la evidencia del modelo.
 
-[Explorar la norma](datos/INDICE.md) · [Instalar](#instalación-y-paquetes) ·
-[Instalar Civil 3D](#instalar-el-servidor-mcp-de-civil-3d-2027) · [Civil 3D a BeamNG.drive](#instalar-el-puente-de-civil-3d-a-beamngdrive) ·
-[Civil 3D](#civil-3d-resultados-reproducibles) · [Herramientas](#los-servidores-mcp) · [Ejemplos](#ejemplos-de-herramientas) ·
-[Documentación técnica](#documentacion-tecnica) · [Contribuir](CONTRIBUTING.md)
+[Explorar la norma](datos/INDICE.md) · [Instalar el servidor MCP de Civil 3D](#instalar-el-servidor-mcp-de-civil-3d-2027) ·
+[Civil 3D a BeamNG.drive](#instalar-el-puente-de-civil-3d-a-beamngdrive) · [Herramientas](#los-servidores-mcp) ·
+[Ejemplos](#ejemplos-de-herramientas) · [Contribuir](CONTRIBUTING.md)
 
 | Capa | Qué aporta | Punto de entrada |
 |---|---|---|
