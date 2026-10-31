@@ -1,5 +1,12 @@
 # CDCRD-Digital
 
+[![Verificación del repositorio](https://github.com/dashy2004/CDCRD-Digital/actions/workflows/verify.yml/badge.svg?branch=master)](https://github.com/dashy2004/CDCRD-Digital/actions/workflows/verify.yml)
+[![Licencia Apache 2.0](https://img.shields.io/badge/licencia-Apache%202.0-blue.svg)](LICENSE)
+[![Última versión](https://img.shields.io/github/v/release/dashy2004/CDCRD-Digital?include_prereleases&label=versi%C3%B3n&color=informational)](https://github.com/dashy2004/CDCRD-Digital/releases)
+[![Último commit en master](https://img.shields.io/github/last-commit/dashy2004/CDCRD-Digital/master?label=%C3%BAltimo%20commit)](https://github.com/dashy2004/CDCRD-Digital/commits/master)
+[![Python 3.11 a 3.13](https://img.shields.io/badge/python-3.11%20%E2%80%93%203.13-3776AB.svg?logo=python&logoColor=white)](herramientas-locales/pyproject.toml)
+[![Citar este repositorio](https://img.shields.io/badge/citar-CITATION.cff-6f42c1.svg)](CITATION.cff)
+
 [![CDCRD Digital: normativa trazable y APIs para Revit, ETABS, SAFE, Civil 3D y AutoCAD](docs/assets/banner-cdcrd-digital.png)](https://www.canva.com/design/DAHYTip4pJ8/Cw9S-5IRfy_MZrj0EXIeaA/edit)
 
 **Normativa trazable · Automatización BIM · Evidencia de ingeniería**
@@ -424,3 +431,16 @@ Las mejoras de herramientas, documentación y ejemplos se describen en
 [Probar las herramientas con IA](docs/TRABAJAR-CON-IA.md). Las contribuciones concretas quedan
 registradas en el historial del repositorio. Este reconocimiento no representa una cuenta
 personal de GitHub ni una certificación de los resultados de ingeniería.
+
+Los cambios publicados se resumen en [CHANGELOG.md](CHANGELOG.md). Para reportar un fallo
+de seguridad sin exponerlo en público, siga [SECURITY.md](SECURITY.md).
+
+## Licencia y cita
+
+El código, las herramientas MCP, los scripts y la documentación técnica se distribuyen bajo la
+[Licencia Apache 2.0](LICENSE). El texto normativo no está cubierto por esa licencia: es obra
+del MIVHED y se reproduce citando la fuente conforme al artículo 41 de la Ley 65-00, como
+detalla [NOTICE](NOTICE).
+
+Para citar el proyecto use [CITATION.cff](CITATION.cff) o el botón "Cite this repository"
+de GitHub.

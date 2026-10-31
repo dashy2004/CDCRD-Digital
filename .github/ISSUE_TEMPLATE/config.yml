@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Reportar una vulnerabilidad
+    url: https://github.com/dashy2004/CDCRD-Digital/security/advisories/new
+    about: Fallos de seguridad en servidores MCP, plugins o integridad normativa. No use un issue público.
+  - name: Guía para contribuir
+    url: https://github.com/dashy2004/CDCRD-Digital/blob/master/CONTRIBUTING.md
+    about: Cómo preparar un cambio, qué pruebas aportar y qué no incluir.
