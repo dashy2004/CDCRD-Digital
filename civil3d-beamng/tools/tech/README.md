@@ -50,3 +50,31 @@ Guardar estos archivos en una carpeta privada ignorada, nunca en Git ni en BRAIN
 
 El número de conexiones admite 1–8. Antes de ejecutarlo, comprobar espacio para
 las partes, ZIP ensamblado, instalación y margen. No instalar encima de Drive.
+
+`--connections` fija la partición del archivo y debe mantenerse al reanudar.
+`--workers` controla las peticiones simultáneas (por defecto, hasta dos). Así se
+puede reducir la concurrencia sin descartar partes. `download-partition.json`
+impide reutilizar partes con otra partición. No ejecutar dos instaladores sobre
+el mismo trabajo. Tras un HTTP 503, conservar las partes y comprobar primero si
+ya existe un ZIP completo en el equipo o en la Papelera.
+
+## Usar un ZIP local recuperado
+
+Recuperar solo el archivo identificado, conservando el original de la Papelera.
+Comprobar tamaño, SHA256 de origen/copia y CRC del ZIP antes de utilizarlo. El
+hash comprueba integridad de la copia; no sustituye la verificación de origen.
+El instalador acepta el archivo recuperado sin consultar la URL personal:
+
+```powershell
+python civil3d-beamng/tools/tech/descargar_build.py `
+  --job .local/tech-job --archive .local/BeamNG.tech.zip `
+  --sha256 <SHA256_VERIFICADO> --license <RUTA_PRIVADA_TECH_KEY> `
+  --destination <DIRECTORIO_NUEVO>
+```
+
+Esta modalidad requiere `archive-size.json` con los tamaños inspeccionados,
+revalida el SHA256, rechaza rutas inseguras y comprueba CRC al extraer. Conserva
+el ZIP y las partes de descargas anteriores; no usa `build-download.private.json`.
+Exige espacio para el contenido descomprimido y 5 GB de margen. Si falla, conserva
+la instalación parcial para inspección y rechaza sobrescribirla en otro intento.
+No inicia el ejecutable: comprobar su versión y firma del editor antes de abrirlo.
