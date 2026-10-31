@@ -46,9 +46,17 @@ Las vistas PNG pasan `rotacion="0"` explícitamente al exportador.
   esta demostración: no son una dependencia dinámica completa del corredor.
 - La profundidad nominal es 0.0635 m. La envolvente de referencia mide
   2.75 × 1.79 m; el contorno irregular queda dentro de ella.
-- La versión previa del ejemplo se construyó y releyó en Civil 3D.
-  La nueva ejecución completa con las herramientas 0.5.19 está pendiente de
-  recargar el puente y realizar la prueba nativa; no se presenta como ya validada.
+- El 2026-10-31 se completó la nueva generación en Civil 3D 2027 con puente
+  activo 0.5.19: 61 bloques, profundidad releída de 0.06350000000000477 m,
+  13 comprobaciones de eje/rasante y corredor reconstruido, `IsOutOfDate=false`.
+  Se revisaron las imágenes generales y de detalle y se grabó el proceso con OBS.
+- La revisión visual detectó estilos de planta heredados y etiquetas del eje
+  fuera de la escena. Se corrigieron por API y en el generador: triángulos con
+  colores propios también en Plan, contornos ocultos y grupos de etiquetas
+  auxiliares invisibles. Las tomas iniciales se conservan como antecedente.
 - La exportación y conducción de esta revisión en BeamNG siguen pendientes.
 
 Consultar [APIs, repositorios y atribución de BeamNG](../../docs/REFERENCIAS-BEAMNG.md).
+
+[Grabación por API de OBS](../../docs/CAPTURAS-OBS.md): `filmar.py` registra
+la generación por etapas y las vistas de inspección en archivos separados.

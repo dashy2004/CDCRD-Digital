@@ -64,7 +64,7 @@ def verify_and_export(base, model):
                                    "papel": "FHD_(1920.00_x_1080.00_Pixels)",
                                    "nombre_vista": name, "sombreado": "AsDisplayed",
                                    "rotacion": "0"}, True)
-    base.call("vista.activar", {"nombre": "CDX2_GENERAL"})
+    base.call("vista.activar", {"nombre": "CDX2_GENERAL"}, True)
     base.call("doc.save", {"ruta": str(base.OUT / "CALLE_REALISTA_R02.dwg")}, True)
 
 

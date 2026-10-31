@@ -36,9 +36,13 @@ relee los límites Z de una esfera y exporta vistas a 0/90 grados. Conserva
 recibo y DWG sintéticos. Revisar las dos imágenes. Un puente anterior se rechaza
 antes de crear el dibujo.
 
-**Estado de esta revisión:** compilación y pruebas automatizadas comprobadas;
-la prueba nativa y el resultado visual de las exportaciones nuevas están
-pendientes de recargar la DLL. No se equipara compilar con validar en CAD.
+**Comprobación nativa, 2026-10-31:** después de reiniciar Civil 3D 2027 se
+confirmó el puente activo 0.5.19. El arnés terminó con PASS: bloque inválido
+revertido, nombre reutilizable, tres referencias y límites Z entre 2.3 y 5.9 m.
+Se revisaron visualmente los PNG de 0° y 90°: disposición horizontal y vertical
+respectivamente, sin giro heredado imprevisto. El recibo y DWG permanecen en
+la salida local de QA. Un primer intento se detuvo al cambiar el dibujo activo;
+se conservó como parcial y se realizó una nueva prueba en otro dibujo.
 
 [Ejemplo de calle](../../civil3d-beamng/examples/calle_demo/README.md) ·
 [Referencias originales de BeamNG](../../civil3d-beamng/docs/REFERENCIAS-BEAMNG.md).

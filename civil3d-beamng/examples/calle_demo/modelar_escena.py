@@ -59,8 +59,9 @@ def invoke(h,method,args=None,path=None):
 
 def style(name,color):
     r=call('estilos.crear',{'familia':'SurfaceStyles','nombre':name,'base':'Border Only'},True)
-    call('estilos.display',{'familia':'SurfaceStyles','estilo':name,'vista':'Model','componente':'Triangles','visible':True,'color_rgb':color},True)
-    call('estilos.display',{'familia':'SurfaceStyles','estilo':name,'vista':'Model','componente':'Boundary','visible':False},True)
+    for view in ['Model', 'Plan']:
+        call('estilos.display',{'familia':'SurfaceStyles','estilo':name,'vista':view,'componente':'Triangles','visible':True,'color_rgb':color},True)
+        call('estilos.display',{'familia':'SurfaceStyles','estilo':name,'vista':view,'componente':'Boundary','visible':False},True)
     return r
 
 def surface(key,name,layer,pts,style_name,boundary=None,kind='Outer'):
@@ -132,6 +133,14 @@ def finish():
     auxiliary += [state['corredor']['superficie']] + [item['handle'] for item in state['ensamblaje']['subensamblajes']]
     for handle in auxiliary:
         call('objects.update', {'handle':handle, 'props':{'Visible':False}}, True)
+    # Civil alignment label groups are independent entities on a template layer.
+    # This example owns the previously empty drawing; hide their graphics too.
+    labels = call('objects.query', {'tipo':'Alignment', 'limite':500})
+    if labels.get('truncado'):
+        raise RuntimeError('Inspeccione las etiquetas antes de ocultarlas: consulta truncada.')
+    for label in labels['objetos']:
+        if label['tipo'].endswith('LabelGroup'):
+            call('objects.update', {'handle':label['handle'], 'props':{'Visible':False}}, True)
     call('layers.set',{'nombres':['CDX2-AUX','CDX2-EJE','CDX2-RASANTE','CDX2-CORREDOR'],'apagada':True},True)
     call('vista.3d',{'direccion':[1,-1,.8],'objetivo':[15,107,101],'ancho':260,'alto':180,'estilo_visual':'Shaded'},True)
     call('doc.save',{'ruta':str(OUT/'CALLE_REALISTA_R02.dwg')},True)
