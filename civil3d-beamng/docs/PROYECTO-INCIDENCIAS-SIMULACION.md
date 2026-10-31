@@ -65,3 +65,66 @@ Objetivo: conectar documentación, simulación y análisis estructural.
 Crédito del fotograma: tutorial propio en BeamNG.drive. El fotograma ilustra
 el antecedente del curso, no una ejecución de Tech ni el caso de la calle R02.
 El slide y el post quedan como borradores; no se han publicado en redes.
+
+## Enfoque editorial acordado: problema, procedimiento y resultados
+
+Actualización del 31 de octubre de 2026: el primer carrusel abre con los videos
+originales de denuncias de Cambita. La demostración debe enseñar cómo el código
+de CDCRD-Digital crea los objetos en Civil 3D y ETABS, con qué datos los crea y
+qué comprobaciones devuelve. La edición final y la integración del canal de
+reportes continuarán en Linux; los archivos nativos se producen en Windows.
+
+Gancho propuesto: **«¿Qué podemos hacer con una denuncia, además de publicarla?»**
+Primero se escucha el problema; luego se muestra el proceso y una respuesta
+comprobable. El detalle de código puede ocupar una franja breve; el objeto que
+aparece en la aplicación y el dato que devuelve deben dominar la imagen.
+
+| Lámina | Imagen o clip | Mensaje y evidencia necesaria |
+|---|---|---|
+| 1. El problema | Denuncia original de Cambita, con voz y subtítulos | Fecha y lugar contrastados. Un testimonio se presenta como testimonio. |
+| 2. Dar seguimiento | Ficha, mapa e historial de la incidencia | ID del caso y fecha de corte. Separar reportes, personas, duplicados y reparaciones verificadas. |
+| 3. Los parámetros | Entrada del generador y vista Civil 3D | Unidades, procedencia de geometría, eje, rasante, sección y relieve. |
+| 4. Lo que genera el código | Aparición de corredor, superficies y bloques 3D | Mostrar objetos nativos y consulta de resultados; indicar qué acabados son TIN muestreados. |
+| 5. Experimentar | Recorrido de vehículo, cámaras y datos | La nueva corrida de la calle R02 está pendiente. El video del curso en Drive solo ilustra el antecedente. |
+| 6. Análisis didáctico | Modelo ETABS y tabla de resultados | Cuatro vigas independientes: carga, apoyos, reacciones y desplazamiento. Identificar el caso estático y sus supuestos. |
+| 7. Información para actuar | Extracto de solicitud y lista de documentos | Identificar la entidad responsable del tramo y pedir planos, inspecciones, mantenimiento y programación. Carta y recepción deben tener estados distintos. |
+| 8. Próximo paso | Hoja de ruta y agradecimiento | Canal de reportes cuando esté comprobado; ampliación SAP2000/CSiBridge y validación del intercambio. |
+
+## Parámetros que pueden aparecer en pantalla
+
+Estos valores corresponden a ejemplos de demostración. No acreditan un diseño
+normativo ni una reconstrucción topográfica del tramo de Cambita.
+
+| Etapa | Entrada | Resultado comprobado | Límite que debe acompañar la toma |
+|---|---|---|---|
+| Civil 3D R02 | Eje curvo, dos carriles de 3.60 m y relieve sintético | Longitud de eje 215.663706 m; corredor, rasante y 61 referencias a bloques 3D | No es levantamiento de una calle real; los acabados muestreados no implican dependencia dinámica completa del corredor. |
+| Bache R02 | Envolvente de referencia 2.75 × 1.79 m y contorno irregular | Profundidad central 0.0635 m respecto al pavimento sin bache | La envolvente no equivale al borde medido. No atribuir estas dimensiones a otro punto del testimonio. |
+| ETABS | Cuatro vigas de 20 m; sección 0.45 × 1.00 m; 10 kN/m por viga; peso propio desactivado | Ocho elementos y apoyos; reacción vertical 100 kN por apoyo, total 800 kN | Modelo didáctico sin losa distribuidora ni cargas móviles. |
+| ETABS: desplazamiento | Caso estático DEMO_STATIC; módulo E = 25 GPa | Desplazamiento central −22.350222 mm, cotejado con referencia analítica | No es comprobación de capacidad, límite de servicio o aprobación de puente. |
+| BeamNG.tech | Vehículo, velocidad, ruta y escenario con revisión identificable | Pendiente de ejecutar la nueva escena | No presentar sensores, aceleraciones, impactos o reparación comparada como resultados obtenidos. |
+
+Para cada toma técnica conservar una cadena simple: **entrada → llamada API →
+objeto nativo → consulta de resultado → recibo**. La generación programática y
+el análisis numérico no acreditan por sí solos cumplimiento del reglamento.
+Cuando se muestre una comprobación normativa, deberá tener requisito, edición,
+artículo, datos de entrada y resultado trazables. El ejemplo del puente no
+incorpora todavía ese módulo de comprobación.
+
+## Continuación de campaña en Linux
+
+1. Reunir originales de Cambita, seleccionar testimonios y contrastar el punto
+   de cada medición. Respetar las restricciones de imagen de quienes aparecen.
+2. Revisar servidor, acceso y registros antes de conectar la recepción de
+   incidencias. Registrar hallazgos y correcciones; disponibilidad y ausencia
+   de intrusión son comprobaciones diferentes.
+3. Identificar cuenta, canal y número de Bird; verificar recepción, autenticidad,
+   deduplicación y creación de un registro revisable en IncidenciasRD. Una
+   conexión MCP del asistente no demuestra que exista ese flujo persistente.
+4. Actualizar cifras con fecha de corte y filtros, revisar destinatario y
+   documentos de la carta y registrar separadamente borrador, envío y respuesta.
+5. Terminar capturas nativas, simulación, voz, subtítulos y montaje. Mostrar en
+   el cierre agradecimiento, canal probado y siguiente objetivo alcanzable.
+
+La solicitud a BeamNG contempla agradecimiento, prórroga y orientación técnica.
+El borrador permanece sin enviar; los requisitos de licencia para el uso
+promocional y para distribuir datos se consultan con el fabricante.
