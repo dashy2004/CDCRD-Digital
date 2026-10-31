@@ -4,11 +4,20 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 Cada entrada enlaza el pull request que la introdujo; el detalle técnico y las
 pruebas están en la descripción del PR y en el README del módulo.
 
-Todavía no hay versiones etiquetadas. La primera (`v0.1.0`) se cortará desde `master`
-cuando se cierre la conciliación de PRs abiertos; todo lo anterior queda aquí como
-"Sin publicar".
+Las versiones se etiquetan en `master` con el prefijo `v` y se publican como releases de
+GitHub con estas mismas notas. Lo que aún no tiene versión va bajo "Sin publicar".
 
 ## Sin publicar
+
+Nada todavía.
+
+## [0.1.0] - 2026-10-31
+
+Primera versión etiquetada. Reúne todo lo fusionado en `master` desde la apertura del
+repositorio: la capa normativa con verificación de integridad, los servidores MCP de
+Revit, ETABS, SAFE, Civil 3D y AutoCAD, el puente Civil 3D a BeamNG y la base documental
+del repositorio. Los PRs abiertos en esta fecha (losas, memorias de diseño, estándar de
+planos, README de instalación) quedan para la siguiente versión.
 
 ### Base del repositorio
 
@@ -64,3 +73,5 @@ cuando se cierre la conciliación de PRs abiertos; todo lo anterior queda aquí 
   ([#7](https://github.com/dashy2004/CDCRD-Digital/pull/7)).
 - Ejemplos de herramientas publicados; expedientes BIM privados separados del repo
   ([#2](https://github.com/dashy2004/CDCRD-Digital/pull/2)).
+
+[0.1.0]: https://github.com/dashy2004/CDCRD-Digital/releases/tag/v0.1.0
