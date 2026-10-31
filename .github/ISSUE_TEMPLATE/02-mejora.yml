@@ -1,0 +1,52 @@
+name: Propuesta de mejora
+description: Una capacidad nueva o un cambio en una herramienta, un flujo o la documentación.
+title: "[Módulo][P?] Resumen de la mejora"
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: modulo
+    attributes:
+      label: Módulo
+      options:
+        - Revit
+        - ETABS
+        - SAFE
+        - Civil 3D / AutoCAD
+        - Civil 3D → BeamNG
+        - Losas
+        - Normativa y datos
+        - Instalación y documentación
+        - Otro
+    validations:
+      required: true
+  - type: textarea
+    id: problema
+    attributes:
+      label: Problema que resuelve
+      description: Qué no se puede hacer hoy, o qué se hace a mano, y a quién afecta.
+    validations:
+      required: true
+  - type: textarea
+    id: propuesta
+    attributes:
+      label: Propuesta
+      description: Qué cambiaría, con qué entradas y salidas, y cómo se probaría.
+    validations:
+      required: true
+  - type: textarea
+    id: normativa
+    attributes:
+      label: Referencia normativa (si aplica)
+      description: Volumen, título, cláusula y página del PDF del MIVHED que sustenta el cambio.
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: Alternativas consideradas
+  - type: dropdown
+    id: prioridad
+    attributes:
+      label: Prioridad propuesta
+      options:
+        - P1 (bloquea una entrega)
+        - P2 (mejora un flujo en uso)
+        - P3 (deseable)

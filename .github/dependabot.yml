@@ -1,0 +1,45 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    labels: ["dependencias"]
+    commit-message:
+      prefix: "chore(ci)"
+
+  - package-ecosystem: pip
+    directories:
+      - /herramientas-locales
+      - /servidor-mcp
+      - /servidor-mcp-safe
+      - /servidor-mcp-civil3d
+      - /civil3d-beamng
+      - /civil3d-terrain-tools
+      - /puente-losas
+      - /corpus-reglamentos
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    labels: ["dependencias"]
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      python-menores:
+        update-types: ["minor", "patch"]
+
+  - package-ecosystem: nuget
+    directories:
+      - /servidor-mcp-civil3d/puente
+      - /servidor-mcp-civil3d/puente-autocad
+      - /civil3d-beamng/civil3d
+      - /civil3d-terrain-tools/plugin
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    labels: ["dependencias"]
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      nuget-menores:
+        update-types: ["minor", "patch"]

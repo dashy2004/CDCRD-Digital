@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: >-
+  Si usa este repositorio en un trabajo académico o profesional, cite el proyecto
+  con los datos siguientes. El texto normativo pertenece al MIVHED y debe citarse
+  por su fuente oficial (véase NOTICE).
+type: software
+title: "CDCRD-Digital: Código de Construcción de la República Dominicana con fuentes trazables y herramientas BIM"
+authors:
+  - family-names: "Guillen De la Cruz"
+    given-names: "Emil"
+    alias: dashy2004
+repository-code: "https://github.com/dashy2004/CDCRD-Digital"
+url: "https://github.com/dashy2004/CDCRD-Digital"
+license: Apache-2.0
+keywords:
+  - building-codes
+  - dominican-republic
+  - structural-engineering
+  - bim
+  - revit
+  - etabs
+  - safe
+  - civil-3d
+  - mcp
+abstract: >-
+  Transcripción trazable del Código de Construcción de la República Dominicana
+  (5 volúmenes, 34 títulos, 6,580 cláusulas) con referencia a la página de origen,
+  tablas listas para cálculo y servidores MCP que conectan la norma con Revit,
+  ETABS, SAFE, Civil 3D y AutoCAD.
+references:
+  - type: standard
+    title: "Código de Construcción de la República Dominicana (CDCRD)"
+    authors:
+      - name: "Ministerio de la Vivienda, Habitat y Edificaciones (MIVHED)"
+    notes: "Fuente oficial del texto normativo reproducido en este repositorio."

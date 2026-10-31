@@ -1,0 +1,62 @@
+name: Error en el texto normativo
+description: Una cláusula, tabla o referencia de página no coincide con el PDF oficial del MIVHED.
+title: "[Normativa] Vol. ? Tít. ? Cláusula ?: resumen"
+labels: ["normativa"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        El texto normativo se verifica contra `normativa-lock.json`. Cualquier
+        corrección pasa por revisión del propietario y por la verificación en CI.
+  - type: input
+    id: ubicacion
+    attributes:
+      label: Volumen, título y cláusula
+      placeholder: "Vol. 2, Tít. 4, cláusula 4.3.2.1"
+    validations:
+      required: true
+  - type: input
+    id: pagina
+    attributes:
+      label: Página del PDF oficial
+      placeholder: "p. 128 del PDF del MIVHED"
+    validations:
+      required: true
+  - type: input
+    id: archivo
+    attributes:
+      label: Archivo del repositorio
+      placeholder: "md/vol2/titulo-04.md o datos/..."
+    validations:
+      required: true
+  - type: textarea
+    id: en_repo
+    attributes:
+      label: Texto como aparece en el repositorio
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: en_pdf
+    attributes:
+      label: Texto como aparece en el PDF oficial
+      render: text
+    validations:
+      required: true
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo de diferencia
+      options:
+        - Error de transcripción (texto)
+        - Error en una tabla o valor numérico
+        - Referencia de página o cláusula incorrecta
+        - Unidad o símbolo incorrecto
+        - Omisión (falta contenido)
+    validations:
+      required: true
+  - type: textarea
+    id: impacto
+    attributes:
+      label: Impacto en cálculo o herramientas
+      description: Qué tabla, herramienta o flujo usa este dato.

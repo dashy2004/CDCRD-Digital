@@ -1,0 +1,16 @@
+CDCRD-Digital
+Copyright 2026 Emil Guillen De la Cruz y colaboradores (véase CONTRIBUTORS.md)
+
+El código fuente, las herramientas MCP, los scripts y la documentación técnica de
+este repositorio se distribuyen bajo la Licencia Apache 2.0 (archivo LICENSE).
+
+Esa licencia NO cubre el texto normativo:
+
+  El Código de Construcción de la República Dominicana (CDCRD) y sus reglamentos
+  son obra del MIVHED (Ministerio de la Vivienda, Habitat y Edificaciones). Este
+  repositorio reproduce su texto citando la fuente, conforme al artículo 41 de la
+  Ley 65-00 sobre Derecho de Autor, con fines de consulta y trazabilidad. No es un
+  documento oficial: ante cualquier diferencia, manda el PDF publicado por el MIVHED.
+
+Las carpetas con contenido normativo (datos/, md/, corpus-reglamentos/,
+verificacion-vols/) conservan esa condición aunque se redistribuyan junto al código.

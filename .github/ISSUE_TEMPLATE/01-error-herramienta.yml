@@ -1,0 +1,80 @@
+name: Error en una herramienta
+description: Una herramienta MCP, un plugin o un script hace algo distinto a lo documentado.
+title: "[Módulo][P?] Resumen del error"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por reportarlo. Use datos sintéticos en los pasos y en las capturas;
+        no adjunte modelos, planos ni resultados de proyectos reales.
+  - type: dropdown
+    id: modulo
+    attributes:
+      label: Módulo afectado
+      options:
+        - Revit (servidor-mcp, revit-mcp-tools, revit-mcp-write, plugin-losas)
+        - ETABS (servidor-mcp, auditor, puente-autocad-etabs)
+        - SAFE (servidor-mcp-safe)
+        - Civil 3D / AutoCAD (servidor-mcp-civil3d, civil3d-*)
+        - Civil 3D → BeamNG (civil3d-beamng)
+        - Losas (puente-losas, plugin-losas)
+        - Instalación (instalar-cdcrd.ps1, herramientas-locales)
+        - Otro
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Programa y versión
+      description: Por ejemplo "Revit 2025.2", "ETABS 22.1.0", "Civil 3D 2027".
+    validations:
+      required: true
+  - type: dropdown
+    id: entorno
+    attributes:
+      label: Tipo de prueba
+      options:
+        - Prueba offline (sin el programa abierto)
+        - Ejecución real sobre una copia del modelo
+        - Ejecución real sobre el modelo de trabajo
+    validations:
+      required: true
+  - type: textarea
+    id: pasos
+    attributes:
+      label: Pasos para reproducir
+      placeholder: |
+        1. Abrir ...
+        2. Ejecutar la herramienta ... con los argumentos ...
+        3. Observar ...
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Comportamiento esperado
+    validations:
+      required: true
+  - type: textarea
+    id: obtenido
+    attributes:
+      label: Comportamiento obtenido
+      description: Pegue el mensaje de error o el log en un bloque de código.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: evidencia
+    attributes:
+      label: Evidencia
+      description: Capturas o archivos de ejemplo revisados antes de publicarlos.
+  - type: checkboxes
+    id: confirmacion
+    attributes:
+      label: Confirmación
+      options:
+        - label: Revisé el README del módulo y sus limitaciones conocidas.
+          required: true
+        - label: No incluí credenciales, rutas personales ni datos de proyectos reales.
+          required: true
