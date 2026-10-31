@@ -11,7 +11,7 @@ mcp>=1.10,<2
 # Evitar 1.2.0 (regresion en la generacion de wrappers de typelib).
 comtypes>=1.4.0
 
-pydantic>=2.7
+pydantic>=2.14.1
 
 # pywin32 NO es requerido por este codigo. Se omite a proposito porque no
 # siempre tiene wheels para las versiones mas recientes de Python.
