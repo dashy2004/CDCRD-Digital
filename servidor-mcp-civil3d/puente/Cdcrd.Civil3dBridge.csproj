@@ -19,7 +19,7 @@
     <!-- MSB3277: conflictos de version entre las DLL de Autodesk y el ref pack de .NET 10.
          Los resuelve el runtime de Civil 3D en tiempo de carga; aqui solo ensucian la salida. -->
     <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
-    <Version>0.5.19</Version>
+    <Version>0.5.20</Version>
     <Company>CDCRD-Digital</Company>
     <Product>Puente MCP Civil 3D</Product>
   </PropertyGroup>
@@ -29,6 +29,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\civil3d-beamng\civil3d\Cdcrd.BeamngExport.csproj" />
     <Reference Include="acdbmgd">
       <HintPath>$(Civil3DPath)\acdbmgd.dll</HintPath>
       <Private>false</Private>

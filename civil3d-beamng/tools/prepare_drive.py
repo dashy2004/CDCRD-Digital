@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import shutil
 import sys
 import uuid
@@ -60,15 +61,24 @@ def prepare(package: Path, user_folder: Path, game_folder: Path, *, auto_import:
         textures = staging / "art/textures"
         textures.mkdir(parents=True, exist_ok=True)
         Image.new("RGB", (32, 32), (95, 80, 55)).save(textures / "road_earth.png")
-        Image.new("RGB", (32, 32), (115, 115, 115)).save(textures / "road_asphalt.png")
+        Image.new("RGB", (32, 32), (69, 72, 76)).save(textures / "road_asphalt.png")
         materials = {}
         for name, ground in [("road_asphalt", "ASPHALT"), ("road_earth", "DIRT")]:
+            tint = [.25, .25, .25, 1] if name == "road_asphalt" else [1, 1, 1, 1]
             materials[name] = {"name": name, "mapTo": name, "class": "Material", "version": 1.5,
-                "groundType": ground, "doubleSided": True, "Stages": [{"baseColorFactor": [1,1,1,1],
+                "groundType": ground, "doubleSided": True, "Stages": [{"baseColorFactor": tint,
                 "baseColorMap": f"/levels/{level_id}/art/textures/{name}.png", "roughnessFactor": 1, "metallicFactor": 0}]}
+        for material in data.get("scene_materials", []):
+            name = material["name"]
+            if not re.fullmatch(r'cdx_scene_[0-9]{3,}|cdx_terrain', name):
+                raise ValueError("Invalid scene material name")
+            color = material["color"]
+            materials[name] = {"name": name, "mapTo": name, "class": "Material", "version": 1.5,
+                "groundType": material["ground_type"], "doubleSided": True,
+                "Stages": [{"baseColorFactor": color, "roughnessFactor": 1, "metallicFactor": 0}]}
         (staging / "main.materials.json").write_text(json.dumps(materials, indent=2), encoding="utf-8")
         terrain_name = "cdx_" + level_id + "_dirt"
-        terrain_material = {terrain_name: {"class": "TerrainMaterial", "internalName": terrain_name,
+        terrain_material = {terrain_name: {"name": terrain_name, "class": "TerrainMaterial", "internalName": terrain_name,
             "diffuseMap": f"/levels/{level_id}/art/textures/road_earth.png", "diffuseSize": 100,
             "detailMap": f"/levels/{level_id}/art/textures/road_earth.png", "detailSize": 5,
             "groundmodelName": "DIRT"}}

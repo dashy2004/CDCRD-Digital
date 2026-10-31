@@ -28,13 +28,16 @@ def select_window(items, title_fragment, executable="acad.exe"):
 class CaptureSession:
     """One isolated OBS profile/collection with receipts and explicit restoration."""
 
-    def __init__(self, config, directory, name):
+    def __init__(self, config, directory, name, application="Civil3D"):
         import obsws_python
         if not re.fullmatch(r"CDCRD-[A-Za-z0-9_-]+", name):
             raise ValueError("Use a unique CDCRD- prefixed session name.")
+        if not re.fullmatch(r"[A-Za-z0-9_-]+", application):
+            raise ValueError("Invalid application label.")
+        self.application = application
         self.directory = Path(directory).resolve()
         self.name = name
-        self.scene = name + "-Civil3D"
+        self.scene = name + "-" + application
         self.source = name + "-Window"
         settings = json.loads(Path(config).read_text(encoding="utf-8-sig"))
         if not settings.get("auth_required") or not settings.get("server_password"):
@@ -50,6 +53,8 @@ class CaptureSession:
             self.state = json.loads(self.state_path.read_text(encoding="utf-8"))
             if self.state["session"] != name or Path(self.state["directory"]) != self.directory:
                 raise ValueError("Session receipt does not match this directory/name.")
+            if self.state.get("application", "Civil3D") != application:
+                raise ValueError("Application does not match this session.")
 
     def call(self, request, **data):
         return self.client.send(request, data or None, raw=True)
@@ -111,6 +116,7 @@ class CaptureSession:
             raise ValueError("OBS session name already exists.")
         self.directory.mkdir(parents=True)
         self.state = {"session": self.name, "directory": str(self.directory),
+                      "application": self.application,
                       "created_utc": datetime.now(timezone.utc).isoformat(),
                       "previous_profile": profiles["currentProfileName"],
                       "previous_collection": collections["currentSceneCollectionName"],
@@ -165,10 +171,10 @@ class CaptureSession:
         return self.call("GetInputPropertiesListPropertyItems", inputName=self.source,
                          propertyName="window")["propertyItems"]
 
-    def target(self, title_fragment):
+    def target(self, title_fragment, executable="acad.exe"):
         self.guard()
         self.idle()
-        selected = select_window(self.windows(), title_fragment)
+        selected = select_window(self.windows(), title_fragment, executable)
         methods = self.call("GetInputPropertiesListPropertyItems", inputName=self.source,
                             propertyName="method")["propertyItems"]
         if not any(item["itemValue"] == 2 and item.get("itemEnabled", True) for item in methods):

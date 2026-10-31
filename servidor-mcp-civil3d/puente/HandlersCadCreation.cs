@@ -22,6 +22,9 @@ namespace Cdcrd.Civil3dBridge
             switch (method)
             {
 #if CIVIL3D
+                case "scene.snapshot": return Cdcrd.BeamngExport.ExportCommands.ReadSnapshot(
+                    Txt(p,"expected_document"), Txt(p,"terrain_handle"), Txt(p,"road_handle"),
+                    Txt(p,"alignment_handle"), p["width_m"]?.GetValue<double>() ?? 7.2, Txt(p,"scene_layer_prefix"));
                 case "civil.ensamblaje_enlaces": return PlatformOperation(() => CreateLinkAssembly(p, method));
                 case "civil.corredor": return PlatformOperation(() => CreateCorridor(p, method));
                 case "civil.secciones_corredor": return PlatformOperation(() => CreateCorridorSections(p, method));

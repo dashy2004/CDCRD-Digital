@@ -14,7 +14,7 @@ using CivilEntity = Autodesk.Civil.DatabaseServices.Entity;
 
 namespace Cdcrd.BeamngExport;
 
-public sealed class ExportCommands
+public sealed partial class ExportCommands
 {
     private const double SampleStepMetres = 5;
 

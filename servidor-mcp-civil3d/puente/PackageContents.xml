@@ -7,7 +7,7 @@
        - ComponentEntry con AppType=".NET" y LoadOnRequest="True" -->
 <ApplicationPackage
   SchemaVersion="1.0"
-  AppVersion="0.5.19"
+  AppVersion="0.5.20"
   Author="CDCRD-Digital"
   Name="CDCRD Puente MCP Civil 3D"
   Description="Expone el dibujo activo de Civil 3D a un servidor MCP local"

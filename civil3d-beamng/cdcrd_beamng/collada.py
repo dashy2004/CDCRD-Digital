@@ -33,7 +33,7 @@ def source(mesh, identifier, values, parameters):
         element(accessor, "param", name=name, type="float")
 
 
-def write_road_dae(path, road, origin, asphalt):
+def write_road_dae(path, road, origin, asphalt, *, material_names=("road_asphalt", "road_earth"), collision=True):
     root = ET.Element(f"{{{NS}}}COLLADA", version="1.4.1")
     asset = element(root, "asset")
     contributor = element(asset, "contributor")
@@ -47,9 +47,9 @@ def write_road_dae(path, road, origin, asphalt):
     materials = element(root, "library_materials")
     names = []
     if asphalt.any():
-        names.append("road_asphalt")
+        names.append(material_names[0])
     if (~asphalt).any():
-        names.append("road_earth")
+        names.append(material_names[1])
     for name in names:
         effect = element(effects, "effect", id=name + "-effect")
         profile = element(effect, "profile_COMMON")
@@ -72,7 +72,7 @@ def write_road_dae(path, road, origin, asphalt):
     vertex_node = element(mesh, "vertices", id="road-vertices")
     element(vertex_node, "input", semantic="POSITION", source="#road-positions")
     for name in names:
-        face_indices = np.flatnonzero(asphalt if name == "road_asphalt" else ~asphalt)
+        face_indices = np.flatnonzero(asphalt if name == material_names[0] else ~asphalt)
         triangles = element(mesh, "triangles", count=len(face_indices), material=name)
         element(triangles, "input", semantic="VERTEX", source="#road-vertices", offset=0)
         element(triangles, "input", semantic="NORMAL", source="#road-normals", offset=1)
@@ -90,15 +90,19 @@ def write_road_dae(path, road, origin, asphalt):
             if key in ("id", "source") and (value.startswith("road-") or value.startswith("#road-")):
                 node.set(key, value.replace("road-", "collision-", 1))
     collision_geometry.set("name", "Colmesh-1")
-    library.append(collision_geometry)
+    if collision:
+        library.append(collision_geometry)
     scenes = element(root, "library_visual_scenes")
     visual = element(scenes, "visual_scene", id="Scene", name="Scene")
     base = element(visual, "node", id="base00", name="base00", type="NODE")
     start = element(base, "node", id="start01", name="start01", type="NODE")
     visible = element(start, "node", id="cdx_road_a100", name="cdx_road_a100", type="NODE")
-    collision_group = element(base, "node", id="collision-1", name="collision-1", type="NODE")
-    collision = element(collision_group, "node", id="Colmesh-1", name="Colmesh-1", type="NODE")
-    for parent, geometry_id in ((visible, "road-geometry"), (collision, "collision-geometry")):
+    instances = [(visible, "road-geometry")]
+    if collision:
+        collision_group = element(base, "node", id="collision-1", name="collision-1", type="NODE")
+        collision_node = element(collision_group, "node", id="Colmesh-1", name="Colmesh-1", type="NODE")
+        instances.append((collision_node, "collision-geometry"))
+    for parent, geometry_id in instances:
         instance = element(parent, "instance_geometry", url="#" + geometry_id)
         binding = element(instance, "bind_material")
         common = element(binding, "technique_common")

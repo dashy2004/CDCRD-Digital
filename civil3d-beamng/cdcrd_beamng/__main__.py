@@ -33,6 +33,10 @@ def main(argv=None):
     build.add_argument("--size", type=int, help="Power-of-two samples, 128..8192; automatic when omitted")
     build.add_argument("--square-size", type=float, default=1.0, help="Metres per sample, default 1")
     build.add_argument("--margin", type=float, default=2.0, help="Bounding margin in metres, default 2")
+    build.add_argument("--exact-terrain", action="store_true",
+                       help="Preserve terrain TIN as a mesh; source must already exclude the road and sidewalks")
+    build.add_argument("--scene-visual-layer", dest="scene_visual_layers", action="append", default=[],
+                       help="Native scene layer to render without collision; repeatable")
     verify = commands.add_parser("verify", help="Validate manifest, safe paths, PNG formats and SHA256 hashes")
     verify.add_argument("folder", type=Path)
     validate = commands.add_parser("validate", help="Check source units, coordinates, IDs and references without building")

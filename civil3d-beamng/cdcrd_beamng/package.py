@@ -22,6 +22,7 @@ from .geometry import (
     spawn_on_road,
 )
 from .sources import load_sources, read_json
+from .scene import write_scene_meshes
 
 SCHEMA = "cdcrd.beamng.package/1"
 LEVEL_ID = re.compile(r"^[a-z][a-z0-9_]{0,47}$")
@@ -84,6 +85,13 @@ def verify_package(folder):
     meshes = manifest.get("meshes")
     if not isinstance(meshes, list) or not meshes or any(not isinstance(mesh, dict) for mesh in meshes):
         raise ValueError("Package requires road meshes")
+    representation = terrain.get("representation", "heightmap")
+    if representation not in ("heightmap", "mesh"):
+        raise ValueError("Unknown terrain representation")
+    if representation == "mesh" and not any(
+            mesh.get("role") == "terrain" and mesh.get("collision_type") == "Collision Mesh"
+            for mesh in meshes):
+        raise ValueError("Exact terrain requires a physical terrain mesh")
     references = [terrain.get(name) for name in ("heightmap", "holemap", "coverage", "material_mask")]
     references.extend(mesh.get("file") for mesh in meshes)
     if any(not isinstance(ref, str) for ref in references):
@@ -148,7 +156,7 @@ def _publish_new(staging, destination):
 def build_package(*, output, level_id, snapshot=None, terrain_landxml=None,
                   terrain_surface=None, road_landxml=None, road_surface=None,
                   road_guide=None, road_is_drivable=False, size=None,
-                  square_size=1.0, margin=2.0):
+                  square_size=1.0, margin=2.0, scene_visual_layers=(), exact_terrain=False):
     """Build a new package; road coordinates/faces never pass through a raster."""
     if not isinstance(level_id, str) or not LEVEL_ID.fullmatch(level_id):
         raise ValueError("level_id must start with a lowercase letter and contain only a-z, 0-9, _ (max 48)")
@@ -190,8 +198,9 @@ def build_package(*, output, level_id, snapshot=None, terrain_landxml=None,
     terrain_center_coverage = raster_tin(terrain, center_origin, size, square_size, coverage_only=True)
     terrain_cells = complete_terrain_cells(coverage, terrain_boundary_cells, terrain_center_coverage)
     holes = (~terrain_cells) | road_cells
-    warnings.append(f"Terrain holes remove complete cells intersecting the road TIN; the hole edge can extend up to "
-                    f"{math.sqrt(2) * square_size:.6g} m beyond its mesh. Road/terrain seams require live validation.")
+    if not exact_terrain:
+        warnings.append(f"Terrain holes remove complete cells intersecting the road TIN; the hole edge can extend up to "
+                        f"{math.sqrt(2) * square_size:.6g} m beyond its mesh. Road/terrain seams require live validation.")
     z_top = float(max(terrain.vertices[:, 2].max(), road.vertices[:, 2].max()) - origin[2])
     max_height = max(1.0, z_top) * 65536 / 65535
     encoded = np.rint(np.where(coverage, grid, 0.0) * 65536 / max_height)
@@ -217,17 +226,38 @@ def build_package(*, output, level_id, snapshot=None, terrain_landxml=None,
                 "materials": materials, "collision": "Colmesh-1", "collision_type": "Collision Mesh"}
         if len(materials) == 1:
             mesh["material"] = materials[0]["name"]
+        snapshot_data = read_json(snapshot) if snapshot else {}
+        scene_meshes, scene_materials, degenerate = write_scene_meshes(
+            staging, snapshot_data.get("scene_meshes", []), origin, scene_visual_layers)
+        if exact_terrain:
+            # Use only when the source terrain already excludes the pavement:
+            # unlike a heightmap, this preserves its exact native boundaries.
+            write_road_dae(staging / "art/shapes/terrain.dae", terrain, origin,
+                           np.ones(len(terrain.triangles), dtype=bool),
+                           material_names=("cdx_terrain", "cdx_terrain_unused"))
+            scene_meshes.append({"file": "art/shapes/terrain.dae", "role": "terrain",
+                                 "name": "cdx_terrain", "material": "cdx_terrain",
+                                 "collision_type": "Collision Mesh"})
+            scene_materials.append({"name": "cdx_terrain", "color": [.29, .39, .17, 1],
+                                    "ground_type": "DIRT"})
+            warnings.append("Exact terrain TIN enabled: source must already exclude the road and sidewalks; check overlap in the consumer.")
+        if degenerate:
+            warnings.append(f"Scene meshes omitted {degenerate} zero-area triangles; road TIN unchanged.")
+        if snapshot_data.get("scene_skipped"):
+            warnings.append(f"Native scene export skipped {len(snapshot_data['scene_skipped'])} unsupported entities; see snapshot.")
         manifest = {
             "schema": SCHEMA, "units": "m", "level_id": level_id,
             "origin_abs_m": origin.tolist(),
             "terrain": {"heightmap": "terrain/heightmap.png", "holemap": "terrain/holemap.png",
+                        "representation": "mesh" if exact_terrain else "heightmap",
                         "coverage": "terrain/coverage.png", "material_mask": "terrain/dirt.png",
                         "size": size, "square_size": square_size, "max_height": max_height,
                         "row0": "maxY", "flip_y": False, "height_scale_divisor": 65536,
                         "quantization_m": max_height / 65536,
                         "hole_strategy": "unknown-corners-or-center-TIN-boundary-crossing-and-road-TIN-cell-intersection",
                         "hole_boundary_uncertainty_m": math.sqrt(2) * square_size},
-            "meshes": [mesh], "spawn_local_m": spawn_on_road(road, asphalt, origin, guide),
+            "meshes": [mesh, *scene_meshes], "scene_materials": scene_materials,
+            "spawn_local_m": spawn_on_road(road, asphalt, origin, guide),
             "counts": {"terrain_vertices": len(terrain.vertices), "terrain_triangles": len(terrain.triangles),
                        "road_vertices": len(road.vertices), "road_triangles": len(road.triangles),
                        "asphalt_triangles": int(asphalt.sum()), "earth_triangles": int((~asphalt).sum()),

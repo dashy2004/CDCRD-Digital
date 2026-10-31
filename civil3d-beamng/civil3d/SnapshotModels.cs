@@ -19,6 +19,22 @@ public sealed class CivilSnapshot
 
     [JsonPropertyName("sources")]
     public Dictionary<string, string> Sources { get; init; } = [];
+
+    [JsonPropertyName("scene_meshes")]
+    public List<SceneMeshSnapshot> SceneMeshes { get; init; } = [];
+
+    [JsonPropertyName("scene_skipped")]
+    public List<string> SceneSkipped { get; init; } = [];
+}
+
+public sealed class SceneMeshSnapshot
+{
+    public required string Handle { get; init; }
+    public required string Layer { get; init; }
+    public required string Kind { get; init; }
+    public required double[] Color { get; init; }
+    public required List<double[]> Vertices { get; init; }
+    public required List<int[]> Triangles { get; init; }
 }
 
 public sealed class SnapshotSurfaces

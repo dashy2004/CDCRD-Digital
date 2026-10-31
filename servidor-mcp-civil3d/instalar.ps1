@@ -105,7 +105,7 @@ $destino = Join-Path $contents $carpetaBuild
 New-Item -ItemType Directory -Path $destino -Force | Out-Null
 # Solo lo propio: las DLL de Autodesk no se copian (se referencian desde la instalacion)
 Get-ChildItem $salida -File | Where-Object {
-  $_.Name -like "Cdcrd.Civil3dBridge.*"
+  $_.Name -like "Cdcrd.Civil3dBridge.*" -or $_.Name -like "Cdcrd.BeamngExport.*"
 } | ForEach-Object { Copy-Item $_.FullName $destino -Force }
 $manifiesto = Get-Content (Join-Path $raiz "puente\PackageContents.xml") -Raw
 $manifiesto = $manifiesto -replace 'SupportPath="\./Contents"', ('SupportPath="./Contents/' + $carpetaBuild + '"')

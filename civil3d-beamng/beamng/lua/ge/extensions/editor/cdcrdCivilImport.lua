@@ -56,10 +56,16 @@ local function readPackage(manifestPath)
   if t.holemap then checkFile(t.holemap) end
   if t.material_mask then checkFile(t.material_mask) end
   if type(data.meshes) ~= 'table' or #data.meshes == 0 then fail('Paquete sin mallas') end
+  if t.representation and t.representation ~= 'mesh' and t.representation ~= 'heightmap' then
+    fail('Representacion de terreno desconocida')
+  end
+  local exactTerrain = false
   for _, mesh in ipairs(data.meshes) do
     if not mesh.file:match('%.dae$') then fail('La malla debe ser DAE') end
     checkFile(mesh.file)
+    if mesh.role == 'terrain' and mesh.collision_type == 'Collision Mesh' then exactTerrain = true end
   end
+  if t.representation == 'mesh' and not exactTerrain then fail('Falta malla fisica del terreno') end
   local p = data.spawn_local_m
   if type(p) ~= 'table' or #p ~= 3 or not finite(p[1]) or not finite(p[2]) or not finite(p[3]) then
     fail('Posicion inicial invalida')
@@ -93,6 +99,8 @@ local function importPackage(manifestPath)
     scenetree.MissionGroup:addObject(group)
     createMaterial('road_asphalt', root, '0.13 0.13 0.13 1', 'ASPHALT')
     createMaterial('road_earth', root, '0.32 0.27 0.19 1', 'DIRT')
+    local terrainFile
+    if data.terrain.representation ~= 'mesh' then
     local matName = 'cdx_' .. data.level_id .. '_dirt'
     local terrainMaterial = scenetree.findObject(matName)
     if not terrainMaterial then
@@ -122,14 +130,16 @@ local function importPackage(manifestPath)
       data.terrain.max_height, data.terrain.holemap and root .. data.terrain.holemap or '',
       {matName}, maps, false)
     if imported ~= true then fail('BeamNG rechazo la importacion del terreno') end
-    local terrainFile = root .. 'cdx_civil_terrain.ter'
+    terrainFile = root .. 'cdx_civil_terrain.ter'
     if terrain:save(terrainFile) == false then fail('No se pudo guardar el terreno') end
     terrain:setField('terrainFile', 0, terrainFile)
+    end
     for i, mesh in ipairs(data.meshes) do
       local obj = createObject('TSStatic')
       obj.shapeName = root .. mesh.file
-      obj:setField('collisionType', 0, 'Collision Mesh')
-      obj:setField('decalType', 0, 'Collision Mesh')
+      local collisionType = mesh.collision_type == 'None' and 'None' or 'Collision Mesh'
+      obj:setField('collisionType', 0, collisionType)
+      obj:setField('decalType', 0, collisionType)
       obj:setField('prebuildCollisionData', 0, '1')
       obj:setPosition(vec3(0,0,0))
       obj:setScale(vec3(1,1,1))
@@ -137,6 +147,9 @@ local function importPackage(manifestPath)
       table.insert(created, obj)
       group:addObject(obj)
     end
+    -- Runtime imports create static shapes after the level's physics load.
+    -- Rebuild collision before teleporting a vehicle onto those new shapes.
+    be:reloadCollision()
     local spawn = scenetree.findObject('spawn_default')
     if spawn then spawn:setPosition(vec3(unpack(data.spawn_local_m))) end
     if editor and editor.setDirty then editor.setDirty() end
@@ -166,7 +179,9 @@ local function saveImportedLevel()
     if content:find('"cdx_civil_road_1"', 1, true) then savedRoad = true end
     if content:find('"cdx_civil_import"', 1, true) then savedGroup = true end
   end
-  if not (savedTerrain and savedRoad and savedGroup) then fail('La escena no quedo serializada; revise el registro del editor') end
+  local manifest = jsonReadFile(root .. 'manifest.json') or {}
+  local meshTerrain = manifest.terrain and manifest.terrain.representation == 'mesh'
+  if not ((savedTerrain or meshTerrain) and savedRoad and savedGroup) then fail('La escena no quedo serializada; revise el registro del editor') end
   local result = jsonReadFile(root .. 'import_result.json') or {}
   result.saved_scene = true
   jsonWriteFile(root .. 'import_result.json', result, true)
