@@ -118,3 +118,38 @@ abierto y VR en su estado actual. Las tomas y recibos anteriores no se sobrescri
 `--pov-vehicle` elige otro vehículo configurado para la cámara de conductor.
 Los mods se obtienen de sus autores y se instalan privadamente: este repositorio
 no redistribuye vehículos ni recursos del fabricante.
+# Repeticiones con AdvancedIMU
+
+`film_events.py` acepta `imu.defaults` y `imu.vehicles` en la configuración local.
+Conserva todos los lotes de AdvancedIMU en el recibo de la toma y el origen del
+reloj de simulación. Ejemplo de montaje (parámetros de BeamNGpy):
+
+```json
+{"imu":{"defaults":{"physics_update_time":0.005,"gfx_update_time":0.05,
+ "pos":[0,0,0.7],"dir":[0,-1,0],"up":[0,0,1],"is_using_gravity":false,
+ "is_send_immediately":false,"is_allow_wheel_nodes":false,
+ "is_visualised":false,"is_snapping_desired":true,"is_force_inside_triangle":true}}}
+```
+
+`imu_report.py recibo.json salida_nueva` necesita NumPy y Matplotlib. Exporta CSV,
+PNG, SVG, resumen JSON y picos. Comprueba reloj creciente, huecos, finitud y base
+ortonormal. Los ejes del montaje anterior son **longitudinal, vertical, lateral**,
+en ese orden; no XYZ longitudinal/lateral/vertical. La aceleración se expresa en
+m/s² y g (9.80665 m/s²). El giro se conserva en mundo y se proyecta a la base local:
+en la implementación Tech 0.39, `angVel`/`angAccel` son vectores globales.
+
+La media de cinco muestras es un filtro editorial explícito (25 ms a 200 Hz), no
+una clase de filtrado para homologación de choques. Se excluyen los primeros 0.5 s
+de los picos, conservándolos en el CSV. La masa de la lectura corresponde al punto
+interpolado del sensor, no a toda la masa del vehículo. No se obtiene fuerza de
+choque multiplicando esa masa ni se infieren lesiones de la aceleración de carrocería.
+La marca de daño es una observación del sondeo de telemetría, no el instante exacto
+del contacto. El video y el tiempo de simulación tienen relojes distintos; el recibo
+actual no certifica sincronización a nivel de fotograma.
+
+Prueba viva: dos vehículos por escena, 200 Hz sin huecos, calibración en reposo y
+dos choques programados sin VR. La captura visual requiere revisión: un video
+codificado correctamente puede contener una ventana minimizada o una imagen vacía.
+
+Fuentes: [Advanced IMU](https://www.docs.beamng.com/beamng_tech/sensors/advanced-imu/),
+[BeamNGpy](https://github.com/BeamNG/BeamNGpy/blob/master/src/beamngpy/sensors/advanced_IMU.py).

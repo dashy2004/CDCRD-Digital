@@ -65,7 +65,7 @@ class RoadAxis:
 
 def run(config, event, camera, label, record, vr=False, ready_file=None, pov_vehicle=None):
     from beamngpy import BeamNGpy, Scenario, Vehicle
-    from beamngpy.sensors import Damage, Electrics
+    from beamngpy.sensors import AdvancedIMU, Damage, Electrics
     from capturas_obs import CaptureSession
     if ready_file and ready_file.exists():
         raise FileExistsError('Readiness file must not exist before preparing the take')
@@ -81,6 +81,8 @@ def run(config, event, camera, label, record, vr=False, ready_file=None, pov_veh
     b = BeamNGpy('127.0.0.1', config['port'], quit_on_close=False, socket_timeout=120)
     c = None
     cars = {}
+    imus, imu_readings = {}, {}
+    imu_settings = config.get('imu')
     rows, events = [], []
     try:
         b.open(launch=False)
@@ -128,6 +130,12 @@ def run(config, event, camera, label, record, vr=False, ready_file=None, pov_veh
             target, _ = axis.point(*spec.get('camera_target',[107,1.7,1]))
             b.camera.set_free(position,tuple(np.array(target)-position))
         b.control.pause()
+        if imu_settings:
+            for name, v in cars.items():
+                settings = dict(imu_settings.get('defaults', {}))
+                settings.update(imu_settings.get('vehicles', {}).get(name, {}))
+                imus[name] = AdvancedIMU('cdx_imu_' + name, b, v, **settings)
+                imu_readings[name] = []
         if vr:
             b.control.queue_lua_command('settings.setValue("fpsLimitEnabled",false); '
                 'settings.setValue("fpsLimitBackgroundEnabled",false); extensions.load("render_openxr"); '
@@ -189,6 +197,11 @@ def run(config, event, camera, label, record, vr=False, ready_file=None, pov_veh
                         'speed':float(np.linalg.norm(state['vel'])),
                         'damage':float(v.sensors['damage'].get('damage',0)),
                         'brake':e.get('brake',0),'gear':e.get('gear',None)}
+                    if name in imus:
+                        batch = imus[name].poll()
+                        if not isinstance(batch, list):
+                            raise TypeError('Expected a bulk IMU list, not a latest-only sample')
+                        imu_readings[name].extend(batch)
                 current = row['vehicles'][lead.vid]
                 if not triggered and current['station']>=spec.get('brake_station',math.inf):
                     lead.queue_lua_command('ai.stopFollowing(true,false);ai.setMode("disabled")',response=True)
@@ -213,12 +226,18 @@ def run(config, event, camera, label, record, vr=False, ready_file=None, pov_veh
                 if damage_started is not None and row['wall']-damage_started>=spec.get('hold_after_damage',5):break
                 time.sleep(.12)
             b.control.pause()
+            for name, sensor in imus.items():
+                # Let the final physics buffer reach GE Lua after pausing.
+                time.sleep(.1)
+                imu_readings[name].extend(sensor.poll())
             if c:
                 c.snapshot(label+'_end')
             time.sleep(.4)
         result={'schema':'cdcrd.incident-take/1','event':event,'camera':camera,'illustrative':True,
                 'vr':vr,'pov_vehicle':pov.vid,'participant_ready':bool(ready_file),
                 'parameters':spec,'events':events,'telemetry':rows,
+                'simulation_time_origin':first_sim_time,
+                'imu_settings':imu_settings,'imu_readings':imu_readings,
                 'video':c.state['recordings'][-1] if c else None}
         receipt_path.write_text(json.dumps(result,indent=2),encoding='utf-8')
         print(json.dumps({'receipt':str(receipt_path),'events':events,'last':rows[-1] if rows else None}),flush=True)
@@ -228,6 +247,8 @@ def run(config, event, camera, label, record, vr=False, ready_file=None, pov_veh
                 b.control.pause()
                 for v in cars.values():
                     if v.is_connected():v.queue_lua_command('ai.stopFollowing(true,true);ai.setMode("disabled")',response=True)
+                for sensor in imus.values():
+                    sensor.remove()
             finally:b.disconnect()
         if c:c.close()
 
