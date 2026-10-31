@@ -39,14 +39,17 @@ escena CAD; no constituyen un entorno fotogramétrico.
   65 rayos de colisión contra la carretera, error máximo 0.00000769 m frente a
   las cotas de origen. Esta prueba compara geometría, no valida accidentes ni lesiones.
 - Dos pasadas con conducción programada y una toma de detalle: H.264 1080p/30,
-  aproximadamente 54 s en conjunto. Decodificación completa sin errores;
+  aproximadamente 54 s en conjunto. Se añadió una toma corta del espejo VR.
+  Decodificación completa sin errores;
   comprobación visual por fotogramas, no reproducción humana continua.
 - OBS usa un perfil y una colección propios, captura WGC de `BeamNG.tech.x64.exe`
   y NVENC. `CaptureSession(..., application="BeamNG")` conserva el perfil previo
   y permite restaurarlo. La autenticación permanece en la configuración local.
-- Quest 3S: usuario confirmó imagen y seguimiento mediante SteamVR en la prueba
-  previa. La validación dentro de R03 es un paso separado; no se deduce de grabar
-  la ventana 2D. VR requiere Vulkan en esta versión instalada de Tech.
+- Quest 3S: usuario confirmó también R03 desde la cabina, seguimiento y fluidez
+  percibida mediante SteamVR. OpenXR devolvió sesión Focused, visor activo y
+  renderizado 1769 x 1892 por ojo al 70%; la última lectura fue 45 Hz frente a
+  objetivo de 90 Hz, sin acreditar 90 fotogramas nativos. La toma es el espejo
+  2D del visor, no un video de 360 grados. VR requiere Vulkan en esta versión.
 
 Los recibos, DWG, niveles instalados y videos permanecen fuera de Git. No se
 redistribuyen DLL de Autodesk, recursos del motor, claves ni configuraciones OBS.
