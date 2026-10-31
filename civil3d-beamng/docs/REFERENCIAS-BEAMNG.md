@@ -24,7 +24,8 @@ BeamNGpy declara BeamNG.tech como requisito. La tabla consultada relaciona Tech
 0.39 con BeamNGpy 1.36; esa relación **no certifica Drive 0.40.4**. Verificar la
 [tabla oficial de compatibilidad](https://github.com/BeamNG/BeamNGpy/blob/master/COMPATIBILITY.md)
 al integrar una versión. Este módulo conserva Drive como destino y no añade
-BeamNGpy a sus dependencias.
+BeamNGpy a las dependencias del conversor. El entorno opcional de
+[herramientas Tech](../tools/tech/README.md) instala el SDK por separado.
 
 ## Licencias y atribución
 
@@ -33,6 +34,7 @@ BeamNGpy a sus dependencias.
 | BeamNGpy | BeamNG GmbH | [MIT](https://github.com/BeamNG/BeamNGpy/blob/master/LICENSE.txt) | Referencia; si se integra Tech, instalar como dependencia externa y fijar versión compatible. |
 | BeamNG ROS 2 | BeamNG GmbH | [MIT](https://github.com/BeamNG/beamng-ros2-integration/blob/main/LICENSE.txt) | Referencia, sin copiar sus paquetes. |
 | obs-websocket | OBS Project y colaboradores | [GPL-2.0, según el repositorio](https://github.com/obsproject/obs-websocket/blob/master/LICENSE) | Referencia a su API; sin importar su implementación. |
+| obsws-python | aatikturk y colaboradores | [GPL-3.0-only](https://github.com/aatikturk/obsws-python/blob/main/LICENSE) | Cliente Python externo para OBS, instalado como dependencia opcional; no se copia su código. |
 | Motor, Lua instalado y recursos del juego | BeamNG GmbH y autores de cada recurso | No se asigna la licencia MIT de BeamNGpy al juego | No incluir código del motor, vehículos, mapas ni texturas originales en este repositorio. |
 
 Enlazar reconoce la fuente; si más adelante se incorpora código ajeno, se deberá

@@ -2,6 +2,9 @@
 
 [APIs y repositorios originales de BeamNG](docs/REFERENCIAS-BEAMNG.md) · [Ejemplo de calle por API](examples/calle_demo/README.md)
 
+[Proyecto IncidenciasRD y simulación](docs/PROYECTO-INCIDENCIAS-SIMULACION.md) ·
+[Herramientas Tech](tools/tech/README.md) · [Puente didáctico ETABS](examples/puente_didactico/README.md)
+
 Puente determinista para exportar superficies Civil 3D y preparar un mapa propio de BeamNG.drive. Se ejecuta sin modelo de IA, cuenta IA ni servidor MCP. BeamNG.tech no es una dependencia del producto.
 
 Version inicial 0.1.0. Compilacion y pruebas numericas disponibles; importacion manual, guardado, recarga, colision fisica y recorrido corto comprobados en drive 0.39.4. La evidencia de proyectos reales se conserva en sus carpetas privadas. La carga y exportacion del plugin dentro de Civil 3D siguen pendientes; el puente completo aun no tiene validacion de extremo a extremo.

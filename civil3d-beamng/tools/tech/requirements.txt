@@ -1,0 +1,4 @@
+# Official API. This version matches BeamNG.tech 0.39, not Drive.
+beamngpy==1.36
+# External OBS client; GPL-3.0-only, maintained by its original authors.
+obsws-python==1.8.1
