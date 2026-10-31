@@ -9,7 +9,7 @@ mcp>=1.10,<2
 
 # comtypes: Python puro, unica dependencia COM que el codigo importa.
 # Evitar 1.2.0 (regresion en la generacion de wrappers de typelib).
-comtypes>=1.4.0
+comtypes>=1.4.17
 
 pydantic>=2.7
 
