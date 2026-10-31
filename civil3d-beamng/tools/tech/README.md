@@ -78,3 +78,43 @@ el ZIP y las partes de descargas anteriores; no usa `build-download.private.json
 Exige espacio para el contenido descomprimido y 5 GB de margen. Si falla, conserva
 la instalación parcial para inspección y rechaza sobrescribirla en otro intento.
 No inicia el ejecutable: comprobar su versión y firma del editor antes de abrirlo.
+
+## Filmar incidentes ilustrativos
+
+`film_events.py` conecta una instancia Tech ya abierta, comprueba su carpeta de
+usuario y nivel autorizado, y crea un escenario nuevo con trayectorias ScriptAI.
+Registra posición, velocidad, orientación, freno y daño del vehículo junto con el
+recibo OBS. Las trayectorias usan estaciones y offsets del eje exportado; el viaje
+en sentido contrario conserva tiempos crecientes. No reconstruye un accidente
+real ni acredita lesiones, causalidad o exactitud física de un mod.
+
+La configuración JSON privada necesita `snapshot`, `manifest`, `user`, `port`,
+`allowed_levels`, `output` y `events`. Cada evento define `vehicles` (id, model,
+start, end, speed en m/s; config, offset, offsets y color opcionales), además de
+`brake_station`, `max_seconds`, `hold_after_damage` y `stop_after_damage` cuando
+corresponda. `camera_pos` y `camera_target` son [estación, offset derecho, altura].
+Para OBS: `obs_config`, `obs_directory` y `obs_name` deben identificar una sesión
+aislada preparada con `CaptureSession`; `game_audio: true` captura únicamente el
+audio de la ventana seleccionada. El micrófono y el audio global siguen como estén
+configurados en esa colección: comprobar que permanezcan silenciados.
+
+```powershell
+python civil3d-beamng/tools/tech/film_events.py .local/incident-config.json `
+  --event rear --camera driver --label CDX_VR_TAKE01 --record --vr `
+  --ready-file .local/ready-take01.flag
+```
+
+`--vr` requiere Vulkan, un runtime OpenXR previamente seleccionado y una escena
+OBS `<obs_name>-VR` con una referencia al mismo origen de ventana. Desactiva los
+límites de FPS, activa OpenXR y comprueba una sesión ejecutándose antes de grabar.
+Se conserva la selección de runtime del sistema. `--ready-file` debe ser una ruta
+nueva: el operador crea el archivo **después** de recibir confirmación de quien
+lleva el visor. El escenario espera pausado hasta 15 minutos, centra la vista y
+deja tres segundos antes de mover los vehículos. Nunca crear el marcador por el
+mero paso del tiempo. Sin marcador, el ejecutor comienza de inmediato.
+
+Al terminar, detiene OBS, pausa la física y desactiva ScriptAI; conserva el motor
+abierto y VR en su estado actual. Las tomas y recibos anteriores no se sobrescriben.
+`--pov-vehicle` elige otro vehículo configurado para la cámara de conductor.
+Los mods se obtienen de sus autores y se instalan privadamente: este repositorio
+no redistribuye vehículos ni recursos del fabricante.
