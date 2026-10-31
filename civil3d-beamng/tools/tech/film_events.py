@@ -40,7 +40,9 @@ class RoadAxis:
         p = a+(z-a)*(station-self.stations[i])/(self.stations[i+1]-self.stations[i])
         p[:2] += offset*np.array([direction[1], -direction[0]])
         p[2] += lift
-        yaw = math.pi-math.atan2(direction[0], direction[1])
+        # BeamNG scenario rotation convention: zero faces -Y, positive yaw
+        # turns the vehicle toward -X. Confirm against live state before motion.
+        yaw = math.atan2(-direction[0], -direction[1])
         return tuple(p-self.origin), (0, 0, math.sin(yaw/2), math.cos(yaw/2))
 
     def station(self, local_position):
@@ -63,6 +65,41 @@ class RoadAxis:
         return result
 
 
+def vehicle_motion(axis, item):
+    """Resolve an alignment route or a native CAD-coordinate crossing route.
+
+    Explicit paths use metres in the same absolute frame as the CAD snapshot.
+    Speed is a target for the simulator's AI, not a measured accident speed.
+    """
+    if 'path_abs_m' not in item:
+        pos, rot = axis.point(item['start'], item.get('offset', 1.7), item.get('lift', .55))
+        end = item.get('end', 160)
+        if end < item['start']:
+            rot = (0, 0, rot[3], -rot[2])
+        script = axis.script(item['start'], end, item['speed'], item.get('offset', 1.7),
+                             item.get('offsets')) if item.get('speed', 0) > 0 else None
+        return pos, rot, script
+    points = np.asarray(item['path_abs_m'], dtype=float)
+    speed = float(item['speed'])
+    lift = float(item.get('lift', .55))
+    if (points.ndim != 2 or points.shape[1] != 3 or len(points) < 3
+            or not np.isfinite(points).all() or not math.isfinite(speed) or speed <= 0
+            or not math.isfinite(lift)):
+        raise ValueError('Crossing path requires finite XYZ points, lift and positive speed')
+    delta = np.diff(points, axis=0)
+    lengths = np.linalg.norm(delta, axis=1)
+    if (np.linalg.norm(delta[:, :2], axis=1) < 1e-6).any():
+        raise ValueError('Crossing path has a zero horizontal segment')
+    local = points - axis.origin
+    local[:, 2] += lift
+    yaw = math.atan2(-delta[0, 0], -delta[0, 1])
+    rot = (0, 0, math.sin(yaw / 2), math.cos(yaw / 2))
+    times = np.concatenate(([0.], np.cumsum(lengths) / speed))
+    script = [dict(x=float(p[0]), y=float(p[1]), z=float(p[2]), t=float(t))
+              for p, t in zip(local, times)]
+    return tuple(local[0]), rot, script
+
+
 def run(config, event, camera, label, record, vr=False, ready_file=None, pov_vehicle=None):
     from beamngpy import BeamNGpy, Scenario, Vehicle
     from beamngpy.sensors import AdvancedIMU, Damage, Electrics
@@ -78,10 +115,14 @@ def run(config, event, camera, label, record, vr=False, ready_file=None, pov_veh
     manifest = json.loads(Path(config['manifest']).read_text())
     axis = RoadAxis(source, manifest['origin_abs_m'])
     spec = config['events'][event]
+    motions = {item['id']: vehicle_motion(axis, item) for item in spec['vehicles']}
+    if len(motions) != len(spec['vehicles']):
+        raise ValueError('Vehicle IDs must be unique')
     b = BeamNGpy('127.0.0.1', config['port'], quit_on_close=False, socket_timeout=120)
     c = None
     cars = {}
     imus, imu_readings = {}, {}
+    background = {item['id'] for item in spec['vehicles'] if item.get('background', False)}
     imu_settings = config.get('imu')
     rows, events = [], []
     try:
@@ -101,9 +142,7 @@ def run(config, event, camera, label, record, vr=False, ready_file=None, pov_veh
                         color=item.get('color', 'Blue'))
             v.sensors.attach('damage', Damage())
             v.sensors.attach('electrics', Electrics())
-            pos, rot = axis.point(item['start'], item.get('offset',1.7), item.get('lift',.55))
-            if item.get('end',160) < item['start']:
-                rot = (0, 0, rot[3], -rot[2])
+            pos, rot, _ = motions[item['id']]
             scenario.add_vehicle(v, pos=pos, rot_quat=rot)
             cars[v.vid] = v
         scenario.make(b)
@@ -113,11 +152,29 @@ def run(config, event, camera, label, record, vr=False, ready_file=None, pov_veh
         b.control.queue_lua_command('local s=scenetree.findObject("sunsky"); '
             'if s then s.flareScale=0; s:postApply() end; '
             'local p=scenetree.findObject("PostEffectBloomObject"); if p then p:disable() end',response=True)
+        if config.get('illustrative_daylight', False):
+            b.env.set_tod(tod=0, play=False)
+            b.control.queue_lua_command('local s=scenetree.findObject("sunsky"); '
+                'if s then s.castShadows=false; s.azimuth=180; s.elevation=55; '
+                's.brightness=3; s.exposure=2; s:setField("ambientScale",0,"2 2 2 1"); '
+                's:postApply() end; local c=scenetree.findObject("CloudLayer_1"); '
+                'if c then c:setHidden(true) end', response=True)
         lead = cars[spec['vehicles'][0]['id']]
         for v in cars.values():
             if not v.is_connected():
                 v.connect(b)
             v.set_shift_mode('realistic_automatic')
+            if v.vid in background:
+                v.control(throttle=0, brake=1, parkingbrake=1)
+            script = motions[v.vid][2]
+            if script:
+                v.sensors.poll()
+                direction = np.array([script[1]['x']-script[0]['x'],
+                                      script[1]['y']-script[0]['y']])
+                direction /= np.linalg.norm(direction)
+                actual = np.asarray(v.state['dir'])[:2]
+                if float(np.dot(actual, direction)) < .9:
+                    raise RuntimeError('Spawn heading differs from route: '+v.vid)
         pov = cars[pov_vehicle] if pov_vehicle else lead
         b.vehicles.switch(pov)
         b.control.queue_lua_command('ui_visibility.set(false)', response=True)
@@ -130,8 +187,15 @@ def run(config, event, camera, label, record, vr=False, ready_file=None, pov_veh
             target, _ = axis.point(*spec.get('camera_target',[107,1.7,1]))
             b.camera.set_free(position,tuple(np.array(target)-position))
         b.control.pause()
+        people = spec.get('visual_people')
+        if people:
+            payload = json.dumps(json.dumps(people, allow_nan=False))
+            b.control.queue_lua_command('extensions.load("cdcrdVisualPeople"); '
+                'cdcrdVisualPeople.setup(jsonDecode('+payload+'))', response=True)
         if imu_settings:
             for name, v in cars.items():
+                if name in background:
+                    continue
                 settings = dict(imu_settings.get('defaults', {}))
                 settings.update(imu_settings.get('vehicles', {}).get(name, {}))
                 imus[name] = AdvancedIMU('cdx_imu_' + name, b, v, **settings)
@@ -177,9 +241,11 @@ def run(config, event, camera, label, record, vr=False, ready_file=None, pov_veh
                 time.sleep(3)
             start = time.monotonic()
             for item in spec['vehicles']:
-                if item.get('speed',0)>0:
-                    cars[item['id']].ai.set_script(axis.script(item['start'],item.get('end',160),
-                        item['speed'],item.get('offset',1.7),item.get('offsets')), cling=True)
+                script = motions[item['id']][2]
+                if script:
+                    cars[item['id']].ai.set_script(script, cling=True)
+            if people:
+                b.control.queue_lua_command('cdcrdVisualPeople.start()', response=True)
             b.control.resume()
             triggered = False
             first_sim_time = None
@@ -213,7 +279,13 @@ def run(config, event, camera, label, record, vr=False, ready_file=None, pov_veh
                     print('BRAKE '+json.dumps(events[-1]),flush=True)
                 if triggered:
                     lead.control(throttle=0,brake=spec.get('brake_force',1),parkingbrake=0)
-                if damage_started is None and any(v['damage']>50 for v in row['vehicles'].values()):
+                if people:
+                    if triggered and current['speed'] < .2 and people.get('wait_for_stop'):
+                        b.control.queue_lua_command('cdcrdVisualPeople.beginCrossing()', response=True)
+                    row['visual_people'] = json.loads(b.control.queue_lua_command(
+                        'return jsonEncode(cdcrdVisualPeople.readback())', response=True))
+                if damage_started is None and any(v['damage']>50 for name,v in row['vehicles'].items()
+                                                  if name not in background):
                     damage_started=row['wall'];events.append({'event':'damage','wall':row['wall']})
                     if spec.get('stop_after_damage'):
                         for v in cars.values():
@@ -234,7 +306,9 @@ def run(config, event, camera, label, record, vr=False, ready_file=None, pov_veh
                 c.snapshot(label+'_end')
             time.sleep(.4)
         result={'schema':'cdcrd.incident-take/1','event':event,'camera':camera,'illustrative':True,
-                'vr':vr,'pov_vehicle':pov.vid,'participant_ready':bool(ready_file),
+                'vr':vr,'pov_vehicle':pov.vid,'participant_ready':bool(ready_file and vr),
+                'inspection_gate':bool(ready_file),
+                'illustrative_daylight':bool(config.get('illustrative_daylight', False)),
                 'parameters':spec,'events':events,'telemetry':rows,
                 'simulation_time_origin':first_sim_time,
                 'imu_settings':imu_settings,'imu_readings':imu_readings,

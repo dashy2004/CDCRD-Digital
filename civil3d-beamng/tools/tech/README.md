@@ -93,6 +93,19 @@ La configuración JSON privada necesita `snapshot`, `manifest`, `user`, `port`,
 start, end, speed en m/s; config, offset, offsets y color opcionales), además de
 `brake_station`, `max_seconds`, `hold_after_damage` y `stop_after_damage` cuando
 corresponda. `camera_pos` y `camera_target` son [estación, offset derecho, altura].
+Para una calle lateral, un vehículo puede sustituir `start`, `end` y los offsets
+por `path_abs_m: [[E,N,Z], ...]`. Son coordenadas absolutas del mismo dibujo CAD;
+el ejecutor resta el origen del paquete, orienta el vehículo según el primer
+segmento y calcula tiempos acumulados a partir de `speed` (m/s). Rechaza puntos
+no finitos, segmentos sin longitud horizontal y velocidades no positivas antes
+de conectarse al motor. `lift` desplaza verticalmente la aparición y la ruta.
+La velocidad configurada es un objetivo de ScriptAI: usar la telemetría para
+informar la velocidad realmente alcanzada.
+`background: true` deja un vehículo nativo estacionado con frenos aplicados,
+sin IMU y fuera del criterio de fin por daño. La orientación de aparición usa
+la convención del motor (cero hacia -Y); se comprueba contra el primer segmento
+antes de comenzar. `illustrative_daylight: true` aplica iluminación uniforme
+al nivel de la toma para facilitar una presentación didáctica.
 Para OBS: `obs_config`, `obs_directory` y `obs_name` deben identificar una sesión
 aislada preparada con `CaptureSession`; `game_audio: true` captura únicamente el
 audio de la ventana seleccionada. El micrófono y el audio global siguen como estén
@@ -108,8 +121,11 @@ python civil3d-beamng/tools/tech/film_events.py .local/incident-config.json `
 OBS `<obs_name>-VR` con una referencia al mismo origen de ventana. Desactiva los
 límites de FPS, activa OpenXR y comprueba una sesión ejecutándose antes de grabar.
 Se conserva la selección de runtime del sistema. `--ready-file` debe ser una ruta
-nueva: el operador crea el archivo **después** de recibir confirmación de quien
-lleva el visor. El escenario espera pausado hasta 15 minutos, centra la vista y
+nueva: con VR, el operador crea el archivo **después** de recibir confirmación de quien
+lleva el visor. Sin VR sirve como puerta de inspección visual y puede crearlo
+el operador después de revisar el encuadre. `participant_ready` solo acredita
+la confirmación del participante cuando también se utiliza `--vr`.
+El escenario espera pausado hasta 15 minutos, centra la vista en VR y
 deja tres segundos antes de mover los vehículos. Nunca crear el marcador por el
 mero paso del tiempo. Sin marcador, el ejecutor comienza de inmediato.
 
@@ -118,6 +134,27 @@ abierto y VR en su estado actual. Las tomas y recibos anteriores no se sobrescri
 `--pov-vehicle` elige otro vehículo configurado para la cámara de conductor.
 Los mods se obtienen de sus autores y se instalan privadamente: este repositorio
 no redistribuye vehículos ni recursos del fabricante.
+
+### Personajes visuales en escenas sin contacto
+
+`people_meshes.py` convierte un JSON privado de poses inspeccionadas en Blender
+en fotogramas COLLADA y materiales. El JSON contiene `vertices`, `triangles`
+y un nombre de material por triángulo en cada pose. Revisar escala, orientación,
+pies, desplazamiento y licencia del modelo antes de exportar; no se incluyen
+modelos de terceros en el repositorio.
+
+`cdcrdVisualPeople.lua` carga `art/actors/poses.json` dentro de un nivel `cdx_`
+coincidente con la configuración. `visual_people` coloca un adulto y estudiantes
+genéricos; los estudiantes caminan 7.9 m hacia -Y a 1.25 m/s, con un ciclo de
+25 poses a 24 fps y transición de altura a la acera. Estos parámetros son de
+puesta en escena. `start_s` inicia el cruce por tiempo; `wait_for_stop: true`
+espera la orden de freno y una velocidad del vehículo inferior a 0.2 m/s.
+Las posiciones y el reloj se guardan junto a la telemetría.
+
+Los actores tienen colisión desactivada: permiten ilustrar cruces sin contacto,
+pero no simular atropellos, fuerzas sobre peatones ni lesiones. La propuesta
+de señalización y la conducta de los participantes no constituyen un diseño
+vial validado. Al terminar el nivel se eliminan solo los actores de esta extensión.
 # Repeticiones con AdvancedIMU
 
 `film_events.py` acepta `imu.defaults` y `imu.vehicles` en la configuración local.

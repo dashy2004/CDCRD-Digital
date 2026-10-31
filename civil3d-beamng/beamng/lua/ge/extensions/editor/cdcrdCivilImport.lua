@@ -170,6 +170,9 @@ local function saveImportedLevel()
   local root = '/levels/' .. getCurrentLevelIdentifier() .. '/'
   if not scenetree.findObject('cdx_civil_import') then fail('No hay importacion para guardar') end
   if not editor or not editor.saveLevel then fail('Active el World Editor para guardar') end
+  if editor.levelPath ~= root then
+    fail('El editor conserva otra carpeta de nivel; sincronice y verifique editor.levelPath antes de guardar')
+  end
   editor.saveLevel()
   local paths = FS:findFiles(root .. 'main/', 'items.level.json', -1, true, false)
   local savedTerrain, savedRoad, savedGroup = false, false, false

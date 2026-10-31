@@ -43,3 +43,29 @@ class RoadAxisTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             module.RoadAxis({'alignment':{'nodes_abs_m':[[0,0,0,7],[0,0,0,7]],
                                          'station_m':[0,1]}},[0,0,0])
+
+    def test_crossing_path_uses_cad_origin_and_distance_timing(self):
+        pos, rot, script = module.vehicle_motion(self.axis(), {
+            'path_abs_m': [[100,220,12],[110,220,12],[110,240,12]],
+            'speed': 5, 'lift': .4})
+        self.assertEqual(pos, (10,30,2.4))
+        self.assertAlmostEqual(rot[2], -2**-.5)
+        self.assertEqual([p['t'] for p in script], [0,2,6])
+        self.assertEqual(script[-1]['y'], 50)
+
+    def test_invalid_crossing_paths_fail_before_connecting(self):
+        for points, speed in [([[0,0,0],[0,0,1]],5),
+                              ([[0,0,0],[1,0,float('nan')]],5),
+                              ([[0,0,0],[1,0,0]],0),
+                              ([[0,0,0],[1,0,0]],5),
+                              ([[0,0],[1,0]],5)]:
+            with self.subTest(points=points, speed=speed), self.assertRaises(ValueError):
+                module.vehicle_motion(self.axis(), {'path_abs_m':points,'speed':speed})
+
+    def test_heading_faces_route_instead_of_driving_in_reverse(self):
+        import math
+        for start, end, expected in [(0,40,(0,1)),(40,0,(0,-1))]:
+            _, q, _ = module.vehicle_motion(self.axis(), {'start':start,'end':end,'speed':5})
+            yaw = 2 * math.atan2(q[2], q[3])
+            self.assertAlmostEqual(-math.sin(yaw), expected[0])
+            self.assertAlmostEqual(-math.cos(yaw), expected[1])
