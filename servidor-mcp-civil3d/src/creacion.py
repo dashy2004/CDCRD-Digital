@@ -245,6 +245,35 @@ def registrar(mcp, llamar, ok):
         return llamar('entity.create', {'entidades': lista}, escribe=True)
 
     @mcp.tool()
+    def crear_dibujo(plantilla: str, confirmar: bool = False) -> str:
+        """Abre un dibujo nuevo desde un DWT absoluto, conservando los anteriores.
+
+        Requiere puente 0.5.19. Devuelve nombre activo y unidades; comprobar
+        unidades Civil antes de crear geometria. No cierra ni guarda otros DWG.
+        """
+        if not confirmar:
+            return pendiente(plantilla=plantilla)
+        return llamar('doc.new', {'plantilla': plantilla}, escribe=True)
+
+    @mcp.tool()
+    def crear_bloque_3d(nombre: str, entidades: str, confirmar: bool = False) -> str:
+        """Crea una definicion de bloque nativa, atomica, en coordenadas locales.
+
+        Acepta primitivas de crear_entidad (incluida esfera {centro,radio}),
+        excepto capas, hatch y referencias a otros bloques. Origen [0,0,0].
+        No selecciona objetos en pantalla ni borra fuentes. Un nombre existente
+        se rechaza. Insertar luego con crear_entidad tipo='bloque'.
+        Requiere puente 0.5.19; toda la definicion se revierte si falla un elemento.
+        """
+        try:
+            rows = parsear_entidades(entidades)
+        except (ValueError, json.JSONDecodeError) as exc:
+            return ok({'error': str(exc)})
+        if not confirmar:
+            return pendiente(nombre=nombre, entidades=len(rows))
+        return llamar('blocks.create', {'nombre': nombre, 'entidades': rows}, escribe=True)
+
+    @mcp.tool()
     def borrar_objeto(handles: str, confirmar: bool = False) -> str:
         """Borra objetos por handle (entidades, perfiles, vistas, estilos...).
 

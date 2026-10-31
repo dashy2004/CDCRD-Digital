@@ -26,6 +26,7 @@ class Program {
  }
  static async Task Main() {
   ThreadPool.SetMinThreads(8,8);
+  PlotRotationChecks.Run(Check);
   SpiralChecks.Run(Check);
   MultiChecks.Run(Check);
   TargetChecks.Run(Check);

@@ -43,6 +43,8 @@ namespace Cdcrd.Civil3dBridge
                 case "estilos.purgar": return EstilosPurgar(p, method);
 #endif
                 case "entity.create": return CrearEntidadesNativo(p, method);
+                case "blocks.create": return CrearBloqueNativo(p, method);
+                case "doc.new": return CrearDocumento(p, method);
                 case "entity.draworder": return OrdenDibujo(p, method);
                 case "objects.erase": return BorrarObjetos(p, method);
                 case "vista.exportar": return VistaExportar(p, method);
@@ -255,6 +257,20 @@ namespace Cdcrd.Civil3dBridge
                                      PuntoDe(e["p3"], "p3"), PuntoDe(e["p4"], "p4"));
                 case "punto":
                     return new DBPoint(PuntoDe(e["punto"], "punto"));
+                case "esfera":
+                {
+                    var center = PuntoDe(e["centro"], "centro");
+                    double radius = Num(e, "radio") ?? 1.0;
+                    if (!double.IsFinite(radius) || radius <= 0 ||
+                        !double.IsFinite(center.X) || !double.IsFinite(center.Y) || !double.IsFinite(center.Z))
+                        throw new ArgumentException("esfera requiere centro finito y radio positivo finito");
+                    var sphere = new Solid3d();
+                    sphere.SetDatabaseDefaults();
+                    sphere.RecordHistory = false;
+                    sphere.CreateSphere(radius);
+                    sphere.TransformBy(Matrix3d.Displacement(center - Point3d.Origin));
+                    return sphere;
+                }
                 case "cilindro":
                 {
                     // base = centro de la cara inferior; eje vertical (Z)

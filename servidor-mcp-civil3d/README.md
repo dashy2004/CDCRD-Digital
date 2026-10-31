@@ -1,3 +1,6 @@
+Herramientas de escena del puente **0.5.19**: bloques 3D, documentos desde DWT
+y giro explicito al exportar por API. [Contrato y prueba nativa pendiente](docs/ESCENAS-0519.md).
+
 <!-- QTO-0522 -->
 ## Actualización 0.5.22: cubicaciones/QTO
 
