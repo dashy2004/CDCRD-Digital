@@ -327,5 +327,8 @@ def test_cobertura_de_catalogo_y_no_registrar_metodo_x():
                 and node.value.args and isinstance(node.value.args[0],ast.Attribute)
                 and isinstance(node.value.args[0].value,ast.Name)
                 and node.value.args[0].value.id=='safe'}
-    assert registered == names-{'set_area_points'} | {'add_design_strip','set_strip_widths','set_punching_overwrite'}
-    assert len(registered)==51
+    # Lote 2 (codex, 3 por tabla) + pilotes (claude 2026-11-02, 2 de lectura).
+    assert registered == names-{'set_area_points'} | {'add_design_strip','set_strip_widths','set_punching_overwrite',
+                                                       'get_pile_spacing','get_pile_axial_reactions','export_pile_check_xlsx',
+                                                       'suggest_pile_changes','trial_pile_changes'}
+    assert len(registered)==56

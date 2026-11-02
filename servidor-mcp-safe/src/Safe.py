@@ -17,6 +17,8 @@ from pydantic import BaseModel, Field
 
 from comthread import com_call as _com_call
 import oapi
+import pilotes
+import pilotes_xlsx
 
 logger = logging.getLogger('safe_mcp_server')
 
@@ -1764,3 +1766,684 @@ class Safe:
         rows = [f"{keys[i]} | {names[i]} | {units[i]} | importable={imp[i]} | {desc[i]}"
                 for i in range(len(keys))]
         return f"{table_key}: {len(keys)} campo(s)\n" + "\n".join(rows)
+
+    # ==================================================================
+    # PILOTES (claude, 2026-11-02). Separacion S/B con el factor de grupo de
+    # la tabla 5.1 del MOPC R-024 y reaccion axial por pilote. SOLO LECTURA:
+    # nunca File.Save (sin ruta cuelga el hilo COM; con ruta descarta
+    # resultados). El criterio vive en src/pilotes.py (puro, sin COM).
+    #
+    # Via elegida para leer frames: OAPI directa, no tablas ni call_oapi.
+    #   FrameObj.GetAllFrames() py-> (n, Name[], PropName[], Story[], P1[],
+    #     P2[], X1[], Y1[], Z1[], X2[], Y2[], Z2[], Angle[], Offset..[6],
+    #     CardinalPoint[], ret)  -- UNA llamada COM para los 1112 pilotes,
+    #     con extremos y seccion; por tabla serian 3 lecturas + parseo.
+    #   PropFrame.GetNameList(n, names, PropType=9) + GetTypeOAPI(Name)
+    #     py-> (PropType, ret): 9 = Circle (enum eFramePropType, typelib).
+    #   PropFrame.GetCircle(Name) py-> (FileName, MatProp, T3, Color, notes,
+    #     GUID, ret): T3 es el diametro.
+    #   Results.Setup.DeselectAllCasesAndCombosForOutput / Set*SelectedForOutput
+    #   Results.JointReact(Name, 0) py-> (n, Obj, Elm, LoadCase, StepType,
+    #     StepNum, F1, F2, F3, M1, M2, M3, ret)
+    #   Results.FrameForce(Name, 0) py-> (n, Obj, ObjSta, Elm, ElmSta,
+    #     LoadCase, StepType, StepNum, P, V2, V3, T, M2, M3, ret)
+    # Firmas del typelib SAFEv1 real (SAFE 23 NativeAPI). Estado [T] hasta
+    # corrida viva de Claude; ver docs/PRUEBA-VIVA-PILOTES.md.
+    # ==================================================================
+
+    _FRAME_PROP_CIRCLE = 9       # eFramePropType_Circle
+    _ITEM_TYPE_OBJECT = 0        # eItemTypeElm_ObjectElm
+    _CASE_FINISHED = 4           # Analyze.GetCaseStatus
+    _LENGTH_MM = {"in": 25.4, "ft": 304.8, "mm": 1.0, "m": 1000.0, "cm": 10.0}
+    _SLAB_TYPES = {"slab": 0, "drop": 1, "stiff": 2, "ribbed": 3, "waffle": 4, "mat": 5, "footing": 6}
+
+    def _unidades_activas(self) -> tuple[int, str, str, str]:
+        idx = self._model().GetPresentUnits()
+        if not (1 <= idx <= len(PRESET_UNITS)):
+            raise SafeError("No se pudieron determinar las unidades activas.")
+        force, length, _t = [s.strip() for s in PRESET_UNITS[idx - 1].split(",")]
+        return idx, PRESET_UNITS[idx - 1], force, length
+
+    def _con_unidades(self, units: str, fn):
+        """Fija unidades, ejecuta fn y restaura las previas (lectura sin huella)."""
+        model = self._model()
+        previo = model.GetPresentUnits()
+        try:
+            self.set_units(units)
+            return fn()
+        finally:
+            # set_units puede fallar DESPUES de cambiar las unidades: restaurar siempre.
+            if 1 <= previo <= len(PRESET_UNITS) and model.GetPresentUnits() != previo:
+                if model.SetPresentUnits(previo) != 0 or model.GetPresentUnits() != previo:
+                    logger.error("No se pudieron restaurar las unidades previas (%s).", PRESET_UNITS[previo - 1])
+
+    def _frames_todos(self) -> list[dict]:
+        outs = _result(self._model().FrameObj.GetAllFrames(), "FrameObj.GetAllFrames")
+        if len(outs) < 12:
+            raise SafeError(f"GetAllFrames: forma inesperada ({len(outs)} salidas).")
+        n, names, props, _story, p1, p2, x1, y1, z1, x2, y2, z2 = outs[:12]
+        arrays = (names, props, p1, p2, x1, y1, z1, x2, y2, z2)
+        if any(len(a) != n for a in arrays):
+            raise SafeError("GetAllFrames: longitud de arreglos incoherente con NumberNames.")
+        return [{"id": str(names[i]), "seccion": str(props[i]), "p1": str(p1[i]), "p2": str(p2[i]),
+                 "x1": float(x1[i]), "y1": float(y1[i]), "z1": float(z1[i]),
+                 "x2": float(x2[i]), "y2": float(y2[i]), "z2": float(z2[i])} for i in range(n)]
+
+    def _secciones_circulares(self) -> dict[str, dict]:
+        pf = self._model().PropFrame
+        n, names = _result(pf.GetNameList(0, [], self._FRAME_PROP_CIRCLE), "PropFrame.GetNameList")[:2]
+        if len(names) != n:
+            raise SafeError(f"PropFrame.GetNameList: {len(names)} nombres para NumberNames={n}.")
+        out: dict[str, dict] = {}
+        for name in names:
+            # ret=0 fuera de rango es falso exito: se confirma el tipo de cada una.
+            tipo, = _result(pf.GetTypeOAPI(name), f"PropFrame.GetTypeOAPI({name})")
+            if int(tipo) != self._FRAME_PROP_CIRCLE:
+                continue
+            _file, material, t3, *_rest = _result(pf.GetCircle(name), f"PropFrame.GetCircle({name})")
+            if float(t3) <= 0:
+                raise SafeError(f"PropFrame.GetCircle({name}): diametro {t3!r} no valido.")
+            out[str(name)] = {"diametro": float(t3), "material": str(material)}
+        return out
+
+    def _cabezales(self, cap_types: str) -> list[dict]:
+        """Areas cuya seccion es de los tipos pedidos (eSlabType 6=Footing, 5=Mat...)."""
+        tipos = set()
+        for t in cap_types.split(","):
+            key = t.strip().lower()
+            if key not in self._SLAB_TYPES:
+                raise SafeError(f"cap_types: '{t}' no es un tipo de losa ({', '.join(self._SLAB_TYPES)}).")
+            tipos.add(self._SLAB_TYPES[key])
+        model = self._model()
+        cache: dict[str, int | None] = {}
+        out = []
+        for area in self.get_areas():
+            prop, = _result(model.AreaObj.GetProperty(area.id), f"AreaObj.GetProperty({area.id})")
+            if prop not in cache:
+                if not prop or prop == "None":
+                    cache[prop] = None
+                else:
+                    cache[prop] = int(_result(model.PropArea.GetSlab(prop), f"PropArea.GetSlab({prop})")[0])
+            if cache[prop] in tipos:
+                out.append({"id": area.id, "seccion": prop, "xs": list(area.xs), "ys": list(area.ys)})
+        return out
+
+    def _pilotes_leidos(self, sections, diameter: float, mm: float, necesita_diametro: bool):
+        frames = self._frames_todos()
+        secciones = self._secciones_circulares()
+        try:
+            pil, avisos = pilotes.pilotes_desde_frames(
+                frames, secciones, sections, diameter, tol_inclinacion=1.0 / mm,
+                necesita_diametro=necesita_diametro)
+        except pilotes.PilotesError as e:
+            raise SafeError(str(e)) from e
+        if not pil:
+            raise SafeError(f"Ningun frame usa las secciones {sections!r}. Secciones circulares del "
+                            f"modelo: {sorted(secciones) or 'ninguna'}; frames: {len(frames)}.")
+        return pil, avisos, secciones, len(frames)
+
+    @com_call
+    def get_pile_spacing(self, sections: str | list[str] = "auto", diameter_mm: float = 0.0,
+                         scope: str = "nearest_neighbor", neighbors: int = 1,
+                         interpolation: str = "step_down", units: str = "kN, m, C",
+                         cap_types: str = "footing", q_ult: float = 0.0, fs: float = 0.0,
+                         q_adm: float = 0.0, max_detail: int = 300) -> str:
+        """Separacion entre pilotes, S/B y factor de grupo de la tabla 5.1 del MOPC R-024. [T, solo lectura]
+
+        Lee los frames de pilote (FrameObj.GetAllFrames) y sus secciones circulares
+        (PropFrame), toma la cabeza como el extremo de Z mayor y mide la distancia
+        en planta al vecino mas cercano por grilla espacial. Devuelve JSON con cada
+        pilote, resumen (min/p5/mediana/p95/max, histograma <3,3-4,4-5,5-6,>=6),
+        lista de S/B < 3, factor minimo y capacidad de grupo por R-024 5.1.7.1.
+        La tool reporta y senala; no decide ni propone cambios.
+
+        Args:
+            sections: "auto" = todas las secciones de frame circulares del modelo, o
+                lista explicita de nombres de seccion. No se filtra por nombre de frame.
+            diameter_mm: override del diametro en mm (secciones no circulares o malla
+                mixta). 0 = diametro T3 de cada seccion circular.
+            scope: "nearest_neighbor" (barrido rapido, vecino mas cercano global) o
+                "by_footing" (grupo = pilotes dentro de la misma area de cabezal por
+                punto-en-poligono; el concepto de grupo del R-024).
+            neighbors: k vecinos a reportar por pilote.
+            interpolation: "step_down" (defecto, escalon inferior de la tabla; la
+                norma no autoriza interpolar) o "linear" (declarado en la salida).
+            units: unidades activas durante la lectura (se restauran al terminar).
+            cap_types: tipos de losa que cuentan como cabezal en by_footing
+                (footing; p.ej. "footing,mat").
+            q_ult: capacidad ULTIMA de un pilote (unidades de fuerza de `units`); el
+                factor reduce esta, y Qadm = Qult_reducida / fs.
+            fs: factor de seguridad para Qadm (R-024 5.2).
+            q_adm: alternativa si solo se tiene la admisible ya dividida por su FS;
+                aplicar el factor equivale solo si el FS no cambia (se declara).
+            max_detail: maximo de pilotes con detalle en la salida (el resumen y la
+                lista de S/B < 3 siempre van completos).
+        """
+        import json
+
+        return json.dumps(self._con_unidades(units, lambda: self._informe_separacion(sections, diameter_mm, scope, neighbors, interpolation, cap_types, q_ult, fs, q_adm, max_detail)),
+                          ensure_ascii=False, default=str)
+
+    def _informe_separacion(self, sections, diameter_mm, scope, neighbors, interpolation, cap_types, q_ult, fs, q_adm, max_detail) -> dict:
+        """Cuerpo de la tool, con las unidades ya fijadas; lo reutiliza export_pile_check_xlsx."""
+        _idx, preset, force, length = self._unidades_activas()
+        mm = self._LENGTH_MM[length]
+        pil, avisos, secciones, n_frames = self._pilotes_leidos(sections, diameter_mm / mm, mm, True)
+        try:
+            cabezales = self._cabezales(cap_types) if scope == "by_footing" else None
+            out = pilotes.evaluar_separacion(pil, scope, neighbors, interpolation, cabezales,
+                                             q_ult, fs, q_adm)
+        except pilotes.PilotesError as e:
+            raise SafeError(str(e)) from e
+        detalle = [pilotes.pilote_a_dict(p, mm) for p in out["pilotes"]]
+        try:
+            modelo = self._model().GetModelFilename()
+        except Exception:
+            modelo = "(sin nombre)"
+        return {
+            "herramienta": "get_pile_spacing", "solo_lectura": True, "modelo": modelo,
+            "unidades": {"preset": preset, "fuerza": force, "longitud": length},
+            "criterio": {
+                "norma": "MOPC R-024 5.1.7.1, tabla 5.1 (S/B 6->1.0, 5->0.9, 4->0.8, 3->0.7)",
+                "interpolacion": out["interpolacion"],
+                "fuera_de_tabla": "S/B < 3 devuelve factor null; no se extrapola.",
+                "diametros_mezclados": "S/B de cada pareja usa el mayor de los dos diametros.",
+                "factor_reduce": "la capacidad ULTIMA; Qadm = Qult_reducida / FS.",
+                "s_b_del_pilote": "menor S/B entre sus parejas a menos de 6*Dmax (pareja_s_b).",
+                "sin_vecino": "pilote solo en su cabezal o en el modelo: sin interaccion, factor 1.0.",
+                "capacidad_de_grupo": "solo por cabezal (scope by_footing); el barrido global no es un grupo.",
+                "sections_auto": "todo frame con seccion circular; columnas circulares se excluyen con sections explicito.",
+                "cabeza": "extremo de Z mayor; inclinados usan su proyeccion en planta."},
+            "alcance": out["alcance"],
+            "secciones_circulares": {k: {**v, "diametro_mm": round(v["diametro"] * mm, 3)}
+                                     for k, v in secciones.items()},
+            "n_frames_modelo": n_frames, "n_pilotes": len(detalle),
+            "resumen": out["resumen"], "grupos": out["grupos"], "capacidad": out["capacidad"],
+            "pilotes": detalle[:max(0, max_detail)],
+            "pilotes_omitidos_en_detalle": max(0, len(detalle) - max(0, max_detail)),
+            "avisos": avisos + out["avisos"],
+            "pendiente": ["(b) capacidad de la pila equivalente del grupo: parametros de suelo",
+                          "pilote mas cargado: ver get_pile_axial_reactions",
+                          "estado [T]: firmas del typelib, sin corrida viva"],
+        }
+
+    def _exigir_analisis(self) -> list[str]:
+        n, names, status, ret = self._model().Analyze.GetCaseStatus(0, [], [])
+        if ret != 0:
+            raise SafeError("Analyze.GetCaseStatus fallo (ret != 0).")
+        if len(names) != n or len(status) != n:
+            raise SafeError("Analyze.GetCaseStatus: longitud incoherente.")
+        listos = [str(names[i]) for i in range(n) if status[i] == self._CASE_FINISHED]
+        if not listos:
+            raise SafeError("Ningun caso de carga tiene resultados: correr run_analysis y "
+                            "sondear con get_analysis_status.")
+        return listos
+
+    def _seleccionar_salida(self, combos, cases, listos) -> tuple[list[str], list[str]]:
+        model = self._model()
+        setup = model.Results.Setup
+        n, nombres = _result(model.RespCombo.GetNameList(), "RespCombo.GetNameList")[:2]
+        if len(nombres) != n:
+            raise SafeError(f"RespCombo.GetNameList: {len(nombres)} nombres para NumberNames={n}.")
+        disponibles = [str(c) for c in nombres]
+        if combos is None and cases is None:
+            combos = disponibles
+            cases = [] if disponibles else listos
+        combos, cases = [str(c) for c in (combos or [])], [str(c) for c in (cases or [])]
+        if not combos and not cases:
+            raise SafeError("Sin combinaciones ni casos que leer.")
+        faltan = [c for c in combos if c not in disponibles]
+        if faltan:
+            raise SafeError(f"Combinaciones inexistentes: {faltan}. Disponibles: {disponibles}.")
+        faltan = [c for c in cases if c not in listos]
+        if faltan:
+            raise SafeError(f"Casos sin resultados o inexistentes: {faltan}. Listos: {listos}.")
+        oapi.call_checked(setup, "DeselectAllCasesAndCombosForOutput", (), "limpieza de salida")
+        for c in combos:
+            oapi.call_checked(setup, "SetComboSelectedForOutput", (c,), f"salida combo {c}")
+        for c in cases:
+            oapi.call_checked(setup, "SetCaseSelectedForOutput", (c,), f"salida caso {c}")
+        return combos, cases
+
+    def _axial_pilote(self, p, source: str) -> list[dict]:
+        res = self._model().Results
+        if source == "joint":
+            outs = _result(res.JointReact(p.punto_punta, self._ITEM_TYPE_OBJECT),
+                           f"Results.JointReact({p.punto_punta})")
+            n, _obj, _elm, casos, pasos, stepnum, _f1, _f2, f3 = outs[:9]
+            if any(len(a) != n for a in (casos, pasos, stepnum, f3)):
+                raise SafeError(f"JointReact({p.punto_punta}): longitud incoherente.")
+            return [{"pilote": p.id, "punto": p.punto_punta, "caso": str(casos[i]),
+                     "paso": self._paso(pasos[i], stepnum[i]), "axial": float(f3[i])} for i in range(n)]
+        outs = _result(res.FrameForce(p.id, self._ITEM_TYPE_OBJECT), f"Results.FrameForce({p.id})")
+        n, _obj, objsta, _elm, _elmsta, casos, pasos, stepnum, axial_p = outs[:9]
+        if any(len(a) != n for a in (objsta, casos, pasos, stepnum, axial_p)):
+            raise SafeError(f"FrameForce({p.id}): longitud incoherente.")
+        # Por (caso, paso): la estacion mas comprimida y, si existe, la mas traccionada.
+        extremos: dict[tuple[str, str], list[dict]] = {}
+        for i in range(n):
+            clave = (str(casos[i]), self._paso(pasos[i], stepnum[i]))
+            reg = {"pilote": p.id, "caso": clave[0], "paso": clave[1],
+                   "axial": -float(axial_p[i]), "estacion": float(objsta[i])}   # CSI: P<0 comprime
+            par = extremos.setdefault(clave, [reg, reg])
+            if reg["axial"] > par[0]["axial"]:
+                par[0] = reg
+            if reg["axial"] < par[1]["axial"]:
+                par[1] = reg
+        salida = []
+        for mayor, menor in extremos.values():
+            salida.append(mayor)
+            if menor["axial"] < 0 and menor is not mayor:
+                salida.append(menor)
+        return salida
+
+    @staticmethod
+    def _paso(step_type, step_num) -> str:
+        """'Max' / 'Min' en combos; en casos multipaso conserva el numero de paso."""
+        paso = str(step_type or "")
+        try:
+            num = float(step_num)
+        except (TypeError, ValueError):
+            return paso
+        return f"{paso} {num:g}".strip() if num else paso
+
+    @com_call
+    def get_pile_axial_reactions(self, sections: str | list[str] = "auto",
+                                 combos: list[str] | None = None, cases: list[str] | None = None,
+                                 source: str = "joint", units: str = "kN, m, C",
+                                 q_adm: float = 0.0, max_detail: int = 300) -> str:
+        """Carga axial por pilote y combinacion, envolvente y pilote critico. [T, solo lectura]
+
+        El control del R-024 es el pilote mas cargado, no el promedio: esta tool da
+        ese dato para que get_pile_spacing cierre una verificacion. Requiere analisis
+        corrido. Devuelve JSON con registros por pilote/caso/paso, la compresion
+        maxima de cada pilote (caso y paso), traccion si existe, ratio contra q_adm
+        si se da, y la lista de los que no cumplen. No propone nada.
+
+        Args:
+            sections: "auto" (secciones circulares) o lista explicita de secciones.
+            combos: combinaciones a leer; None = todas las definidas (RespCombo).
+            cases: casos de carga a leer ademas; None = ninguno salvo que no haya combos.
+            source: "joint" = reaccion F3 en el nudo de punta (Results.JointReact,
+                F3 positivo = compresion en el pilote; convencion a confirmar en
+                vivo con un caso gravitatorio) o "frame" = fuerza axial del frame
+                (Results.FrameForce, compresion = -P, la peor estacion).
+            units: unidades activas durante la lectura (se restauran al terminar).
+            q_adm: carga admisible por pilote en unidades de `units`; si aplica el
+                factor de grupo, debe venir ya reducido (ver get_pile_spacing). Es
+                una carga de SERVICIO: compararla solo con combinaciones de servicio
+                (pasar `combos` explicitos); contra combos mayoradas de diseno el
+                ratio no significa nada.
+            max_detail: maximo de registros crudos en la salida.
+        """
+        import json
+        if source not in ("joint", "frame"):
+            raise SafeError("source debe ser \"joint\" o \"frame\".")
+
+        return json.dumps(self._con_unidades(units, lambda: self._informe_reacciones(sections, combos, cases, source, q_adm, max_detail)),
+                          ensure_ascii=False, default=str)
+
+    def _informe_reacciones(self, sections, combos, cases, source, q_adm, max_detail) -> dict:
+        """Cuerpo de la tool, con las unidades ya fijadas; lo reutiliza export_pile_check_xlsx."""
+        _idx, preset, force, length = self._unidades_activas()
+        mm = self._LENGTH_MM[length]
+        listos = self._exigir_analisis()
+        pil, avisos, secciones, n_frames = self._pilotes_leidos(sections, 0.0, mm, False)
+        combos_sel, cases_sel = self._seleccionar_salida(combos, cases, listos)
+        # Se leen TODOS los frames (duplicados incluidos: cada uno tiene su punta),
+        # pero se avisa igual que en get_pile_spacing.
+        _unicos, dup = pilotes.separar_duplicados(pil)
+        avisos += [a.replace("excluido del analisis", "incluido en la lectura") for a in dup]
+        if q_adm > 0 and (combos is None or combos):
+            avisos.append("q_adm es carga de servicio: el ratio solo vale contra combinaciones "
+                          "de servicio; con combos mayoradas (diseno) no significa nada.")
+        registros, sin_resultado = [], []
+        for p in pil:
+            regs = self._axial_pilote(p, source)
+            if not regs:
+                sin_resultado.append(p.id)
+            registros.extend(regs)
+        if sin_resultado:
+            avisos.append(f"{len(sin_resultado)} pilote(s) sin reaccion/fuerza para la salida "
+                          f"seleccionada (punta sin restriccion ni resorte?): "
+                          f"{sin_resultado[:20]}{'...' if len(sin_resultado) > 20 else ''}")
+        try:
+            env = pilotes.envolvente_axial(registros, q_adm)
+        except pilotes.PilotesError as e:
+            raise SafeError(str(e)) from e
+        try:
+            modelo = self._model().GetModelFilename()
+        except Exception:
+            modelo = "(sin nombre)"
+        return {
+            "herramienta": "get_pile_axial_reactions", "solo_lectura": True, "modelo": modelo,
+            "unidades": {"preset": preset, "fuerza": force, "longitud": length},
+            "fuente": source,
+            "convencion": ("Results.JointReact F3 positivo = compresion en el pilote (reaccion "
+                           "hacia arriba); confirmar en corrida viva." if source == "joint" else
+                           "Results.FrameForce: compresion = -P (CSI, P negativo comprime)."),
+            "salida_seleccionada": {"combos": combos_sel, "casos": cases_sel,
+                                    "nota": "Results.Setup queda con esta seleccion activa."},
+            "casos_con_resultados": listos,
+            "secciones": sorted(secciones), "n_frames_modelo": n_frames, "n_pilotes": len(pil),
+            "envolvente": env,
+            "registros": registros[:max(0, max_detail)],
+            "registros_omitidos": max(0, len(registros) - max(0, max_detail)),
+            "avisos": avisos,
+            "pendiente": ["estado [T]: firmas del typelib, sin corrida viva",
+                          "q_adm con factor de grupo: ver get_pile_spacing"],
+        }
+
+    # ---------------- Libro de verificacion (claude, 2026-11-02) ----------
+
+    def _combos_definidos(self) -> dict[str, dict]:
+        """RespCombo.GetCaseList(Name) py-> (n, CNameType[], CName[], SF[], ret); 0=caso, 1=combo.
+
+        Anade por miembro caso tipos_caso (eLoadCaseType: 4 = espectro) y tipos_patron
+        (eLoadPatternType del DesignType: 5 = Quake, 6 = Wind) via LoadCases.GetTypeOAPI_1
+        py-> (CaseType, SubType, DesignType, DesignTypeOption, Auto, ret); 0 para miembros
+        combo. Asi un caso estatico equivalente de sismo cuenta como lateral, no como
+        gravedad. Confirmado en vivo 2026-11-02 (Qx(1/2): CaseType 1, DesignType 5).
+        """
+        model = self._model()
+        n, nombres = _result(model.RespCombo.GetNameList(), "RespCombo.GetNameList")[:2]
+        if len(nombres) != n:
+            raise SafeError(f"RespCombo.GetNameList: {len(nombres)} nombres para NumberNames={n}.")
+        tipo_caso: dict[str, tuple[int, int]] = {}
+        out = {}
+        for nombre in nombres:
+            m, tipos, casos, sf = _result(model.RespCombo.GetCaseList(nombre), f"RespCombo.GetCaseList({nombre})")[:4]
+            if any(len(a) != m for a in (tipos, casos, sf)):
+                raise SafeError(f"RespCombo.GetCaseList({nombre}): longitud incoherente.")
+            tipos_caso, tipos_patron = [], []
+            for t, c in zip(tipos, casos):
+                if int(t) != 0:
+                    tipos_caso.append(0)
+                    tipos_patron.append(0)
+                    continue
+                if str(c) not in tipo_caso:
+                    ct, _sub, dt = _result(model.LoadCases.GetTypeOAPI_1(str(c)), f"LoadCases.GetTypeOAPI_1({c})")[:3]
+                    tipo_caso[str(c)] = (int(ct), int(dt))
+                tipos_caso.append(tipo_caso[str(c)][0])
+                tipos_patron.append(tipo_caso[str(c)][1])
+            out[str(nombre)] = {"tipos": [int(t) for t in tipos], "casos": [str(c) for c in casos],
+                                "sf": [float(f) for f in sf], "tipos_caso": tipos_caso,
+                                "tipos_patron": tipos_patron}
+        return out
+
+    @com_call
+    def export_pile_check_xlsx(self, path: str, q_adm: float = 0.0, q_ult: float = 0.0, fs: float = 0.0,
+                               service_combos: str | list[str] = "auto", sections: str | list[str] = "auto",
+                               diameter_mm: float = 0.0, cap_types: str = "footing",
+                               interpolation: str = "step_down", margen_candidato: float = 0.9,
+                               units: str = "kN, m, C", overwrite: bool = False) -> str:
+        """Libro .xlsx de verificacion de pilotes: geometria (R-024 tabla 5.1), demanda y candidatos. [solo lectura del modelo]
+
+        Cruza get_pile_spacing(scope=by_footing) con get_pile_axial_reactions(source=joint)
+        sobre todas las combinaciones definidas, clasificadas por su definicion
+        (RespCombo.GetCaseList). Hojas: Resumen (conformidad geometrica SI/NO, critico,
+        conteos, (b) pendiente), Pilotes, Cabezales, Candidatos, Combos, Criterios.
+        Requiere analisis corrido. No guarda el modelo. Los candidatos a eliminar son
+        una lista con motivo para el ingeniero firmante; toda eliminacion exige reanalisis.
+
+        Args:
+            path: ruta del .xlsx a escribir (no sobrescribe salvo overwrite=True).
+            q_adm: carga admisible de SERVICIO por pilote (FS incluido), en la fuerza de `units`.
+            q_ult, fs: alternativa: capacidad ultima y FS (q_adm = q_ult / fs).
+            service_combos: "auto" (factores de gravedad <= 1.2 y sin prefijo DCon) o lista explicita.
+            sections, diameter_mm, cap_types, interpolation: como en get_pile_spacing.
+            margen_candidato: fraccion de (a) que el cabezal no debe superar con un pilote menos.
+            units: unidades activas durante la lectura (se restauran); el libro las declara.
+            overwrite: permitir sobrescribir un archivo existente.
+        """
+        import json
+        if not path.lower().endswith(".xlsx"):
+            raise SafeError("path debe terminar en .xlsx.")
+        if os.path.exists(path) and not overwrite:
+            raise SafeError(f"Ya existe {path}; use overwrite=True.")
+        if q_adm > 0 and (q_ult > 0 or fs > 0):
+            raise SafeError("Indique q_adm o (q_ult y fs), no ambos.")
+        if q_adm <= 0:
+            if q_ult <= 0 or fs <= 0:
+                raise SafeError("Indique q_adm > 0, o q_ult > 0 y fs > 0.")
+            q_adm = q_ult / fs
+        parent = os.path.dirname(path)
+        if parent and not os.path.isdir(parent):
+            raise SafeError(f"No existe la carpeta {parent}.")
+
+        def leer():
+            ver, sep, rea, a_leer = self._verificacion_dict(sections, diameter_mm, cap_types, interpolation,
+                                                            q_adm, service_combos, margen_candidato)
+            hojas = self._escribir_libro(ver, sep, path)
+            return {"herramienta": "export_pile_check_xlsx", "solo_lectura_del_modelo": True,
+                    "archivo": path, "bytes": os.path.getsize(path), "hojas": hojas,
+                    "unidades": sep["unidades"], "resumen": ver["resumen"],
+                    "propuesta": ver["propuesta"],
+                    "combos_leidas": a_leer, "avisos": sep["avisos"] + rea["avisos"],
+                    "pendiente": ["(b) pila equivalente: parametros de suelo",
+                                  "candidatos y propuesta: reanalisis obligatorio (ver trial_pile_changes)",
+                                  "frames REVISAR MODELO: decision del ingeniero"]}
+        return json.dumps(self._con_unidades(units, leer), ensure_ascii=False, default=str)
+
+    def _verificacion_dict(self, sections, diameter_mm, cap_types, interpolation, q_adm,
+                           service_combos, margen_candidato):
+        """Geometria por cabezal + reacciones de todas las combos no envolventes + cruce. Unidades ya fijadas."""
+        sep = self._informe_separacion(sections, diameter_mm, "by_footing", 1, interpolation,
+                                       cap_types, 0.0, 0.0, 0.0, 10 ** 9)
+        combos = self._combos_definidos()
+        clase = pilotes_xlsx.clasificar_combos(combos)
+        a_leer = [c for c, k in clase.items() if k != pilotes_xlsx.CLASE_ENVOLVENTE]
+        if not isinstance(service_combos, str):
+            a_leer = sorted(set(a_leer) | {str(c) for c in service_combos})
+        rea = self._informe_reacciones(sections, a_leer, [], "joint", 0.0, 10 ** 9)
+        try:
+            ver = pilotes_xlsx.armar_verificacion(sep, rea, combos, q_adm, service_combos, margen_candidato)
+        except pilotes.PilotesError as e:
+            raise SafeError(str(e)) from e
+        return ver, sep, rea, a_leer
+
+    def _escribir_libro(self, ver, sep, path) -> list[str]:
+        try:
+            hojas = pilotes_xlsx.escribir_libro(ver, path, {
+                "modelo": sep["modelo"], "unidades": sep["unidades"]["preset"],
+                "origen": "SAFE-MCP export_pile_check_xlsx: get_pile_spacing(by_footing) + "
+                          "get_pile_axial_reactions(joint) + RespCombo.GetCaseList"})
+        except pilotes.PilotesError as e:
+            raise SafeError(str(e)) from e
+        if not os.path.isfile(path) or os.path.getsize(path) == 0:
+            raise SafeError(f"El libro no quedo escrito en {path}.")
+        return hojas
+
+    @staticmethod
+    def _q_adm_base(q_adm, q_ult, fs) -> float:
+        if q_adm > 0 and (q_ult > 0 or fs > 0):
+            raise SafeError("Indique q_adm o (q_ult y fs), no ambos.")
+        if q_adm <= 0:
+            if q_ult <= 0 or fs <= 0:
+                raise SafeError("Indique q_adm > 0, o q_ult > 0 y fs > 0.")
+            return q_ult / fs
+        return q_adm
+
+    @com_call
+    def suggest_pile_changes(self, q_adm: float = 0.0, q_ult: float = 0.0, fs: float = 0.0,
+                             service_combos: str | list[str] = "auto", sections: str | list[str] = "auto",
+                             diameter_mm: float = 0.0, cap_types: str = "footing",
+                             interpolation: str = "step_down", margen_candidato: float = 0.9,
+                             units: str = "kN, m, C") -> str:
+        """Propuesta de cambios por cabezal (anadir / quitar / reespaciar) desde la verificacion. [solo lectura]
+
+        Misma lectura que export_pile_check_xlsx (geometria por cabezal, reacciones de todas las
+        combos, clasificacion por definicion) y la hoja Propuesta en JSON: por cabezal, pilotes
+        hoy, demanda, factor, (a), ratio, n minimo con el factor actual y con malla de 5 diametros,
+        accion y pilotes a quitar (los menos cargados). Es una sugerencia por capacidad (a) con
+        margen: exige reanalisis (trial_pile_changes) y decision del ingeniero firmante.
+        """
+        import json
+        q = self._q_adm_base(q_adm, q_ult, fs)
+
+        def leer():
+            ver, sep, rea, a_leer = self._verificacion_dict(sections, diameter_mm, cap_types, interpolation,
+                                                            q, service_combos, margen_candidato)
+            return {"herramienta": "suggest_pile_changes", "solo_lectura": True, "modelo": sep["modelo"],
+                    "unidades": sep["unidades"], "resumen": ver["resumen"], "propuesta": ver["propuesta"],
+                    "avisos": sep["avisos"] + rea["avisos"]}
+        return json.dumps(self._con_unidades(units, leer), ensure_ascii=False, default=str)
+
+    # ---------------- Ensayo de cambios en COPIA (claude, 2026-11-02) -----
+
+    @staticmethod
+    def _mtime(path):
+        try:
+            return os.path.getmtime(path)
+        except OSError:
+            return None
+
+    def _exigir_modelo(self, esperado: str) -> None:
+        actual = self._model().GetModelFilename()
+        if not actual or os.path.normcase(os.path.abspath(str(actual))) != os.path.normcase(os.path.abspath(esperado)):
+            raise SafeError(f"El modelo activo es {actual!r}, no la copia {esperado!r}: no se escribe nada.")
+
+    @staticmethod
+    def _asignacion_opcional(result, what):
+        """outs si ret=0; None si ret=1 (CSI: sin asignacion); error en cualquier otro caso."""
+        code = oapi.ret_code(result)
+        if code == 0:
+            return oapi.outs(result)
+        if code == 1:
+            return None
+        raise SafeError(f"{what}: ret={code}; resultado={result!r}")
+
+    def _borrar_frames(self, copia: str, nombres: list[str]) -> list[str]:
+        model = self._model()
+        existentes = {f["id"] for f in self._frames_todos()}
+        faltan = [n for n in nombres if n not in existentes]
+        if faltan:
+            raise SafeError(f"Frames inexistentes en la copia: {faltan}.")
+        for n in nombres:
+            self._exigir_modelo(copia)
+            oapi.call_checked(model.FrameObj, "Delete", (str(n), 0), f"borrado del frame {n}")
+        quedan = {f["id"] for f in self._frames_todos()}
+        no_borrados = [n for n in nombres if n in quedan]
+        if no_borrados:
+            raise SafeError(f"FrameObj.Delete ret=0 pero siguen en el modelo: {no_borrados}.")
+        return list(nombres)
+
+    def _anadir_pilote(self, copia: str, x: float, y: float, ref: str, section: str = "") -> dict:
+        """AddByCoord entre la Z de cabeza y de punta del pilote de referencia; copia sus apoyos de punta."""
+        model = self._model()
+        frames = {f["id"]: f for f in self._frames_todos()}
+        if ref not in frames:
+            raise SafeError(f"Pilote de referencia {ref!r} no existe en la copia.")
+        r = frames[ref]
+        z_cab, z_pun = max(r["z1"], r["z2"]), min(r["z1"], r["z2"])
+        punta_ref = r["p1"] if r["z1"] < r["z2"] else r["p2"]
+        prop = section or r["seccion"]
+        self._exigir_modelo(copia)
+        res = oapi.call_checked(model.FrameObj, "AddByCoord",
+                                (float(x), float(y), z_cab, float(x), float(y), z_pun, "", prop),
+                                f"AddByCoord pilote en ({x:g}, {y:g})")
+        nombre = next((v for v in oapi.outs(res) if isinstance(v, str) and v), None)
+        if not nombre:
+            raise SafeError("AddByCoord no devolvio el nombre del frame nuevo.")
+        nuevo = {f["id"]: f for f in self._frames_todos()}.get(nombre)
+        if nuevo is None or not all(_equal_number(a, b) for a, b in
+                                    ((nuevo["x1"], x), (nuevo["y1"], y), (nuevo["x2"], x), (nuevo["y2"], y))):
+            raise SafeError(f"Frame {nombre}: coordenadas distintas al releer.")
+        punta = nuevo["p1"] if nuevo["z1"] < nuevo["z2"] else nuevo["p2"]
+        copiado = []
+        # Los getters de asignacion devuelven ret=1 cuando NO hay asignacion (visto en vivo
+        # 2026-11-02 con GetSpring): se toma como "sin asignacion", no como error.
+        restr = self._asignacion_opcional(model.PointObj.GetRestraint(punta_ref), f"GetRestraint({punta_ref})")
+        if restr and any(bool(v) for v in restr[0]):
+            oapi.call_checked(model.PointObj, "SetRestraint", (punta, [bool(v) for v in restr[0]], 0), "restriccion de punta")
+            copiado.append("restraint")
+        k = self._asignacion_opcional(model.PointObj.GetSpring(punta_ref), f"GetSpring({punta_ref})")
+        if k and any(float(v) != 0 for v in k[0]):
+            oapi.call_checked(model.PointObj, "SetSpring", (punta, [float(v) for v in k[0]], 0, True, True), "resorte de punta")
+            copiado.append("point_spring")
+        sp = self._asignacion_opcional(model.PointObj.GetSpringAssignment(punta_ref), f"GetSpringAssignment({punta_ref})")
+        if sp and sp[0] and sp[0] != "None":
+            oapi.call_checked(model.PointObj, "SetSpringAssignment", (punta, str(sp[0]), 0), "resorte puntual asignado")
+            copiado.append(f"point_spring_prop:{sp[0]}")
+        ls = self._asignacion_opcional(model.FrameObj.GetSpringAssignment(ref), f"FrameObj.GetSpringAssignment({ref})")
+        if ls and ls[0] and ls[0] != "None":
+            oapi.call_checked(model.FrameObj, "SetSpringAssignment", (nombre, str(ls[0]), 0), "resorte de linea")
+            copiado.append(f"line_spring_prop:{ls[0]}")
+        return {"frame": nombre, "x": x, "y": y, "z_cabeza": z_cab, "z_punta": z_pun, "seccion": prop,
+                "punta": punta, "referencia": ref, "apoyos_copiados": copiado}
+
+    @com_call
+    def trial_pile_changes(self, copy_path: str, q_adm: float = 0.0, q_ult: float = 0.0, fs: float = 0.0,
+                           delete_frames: list[str] | None = None, add_piles: list[dict] | None = None,
+                           xlsx_path: str = "", service_combos: str | list[str] = "auto",
+                           sections: str | list[str] = "auto", diameter_mm: float = 0.0,
+                           cap_types: str = "footing", interpolation: str = "step_down",
+                           margen_candidato: float = 0.9, units: str = "kN, m, C",
+                           overwrite: bool = False) -> str:
+        """Ensaya cambios de pilotes en una COPIA: copia, borra/anade, reanaliza y compara antes/despues. [escribe solo en la copia]
+
+        El original NUNCA se guarda ni se modifica (se comprueba su fecha en disco al final).
+        La copia si se guarda (el analisis la guarda) y queda abierta en SAFE. Pasos: baseline
+        sobre el modelo activo (requiere analisis corrido) -> copy_model_file -> open_model(copia)
+        -> FrameObj.Delete de delete_frames -> AddByCoord de add_piles copiando los apoyos de
+        punta del pilote de referencia -> run_analysis -> verificacion de nuevo -> comparacion.
+
+        Args:
+            copy_path: ruta .FDB de la copia (no sobrescribe salvo overwrite=True).
+            q_adm | q_ult+fs: carga admisible de servicio por pilote.
+            delete_frames: nombres de frames a borrar en la copia.
+            add_piles: [{"x":, "y":, "ref": "<pilote de referencia>", "section": opcional}] en
+                unidades de `units`; Z de cabeza y punta, seccion y apoyos de punta se copian de ref.
+            xlsx_path: si se indica, escribe el libro de verificacion DESPUES del cambio.
+            resto: como export_pile_check_xlsx.
+        """
+        import json
+        q = self._q_adm_base(q_adm, q_ult, fs)
+        delete_frames = [str(n) for n in (delete_frames or [])]
+        add_piles = list(add_piles or [])
+        if not delete_frames and not add_piles:
+            raise SafeError("Indique delete_frames y/o add_piles.")
+        for a in add_piles:
+            if not all(k in a for k in ("x", "y", "ref")):
+                raise SafeError("Cada add_piles necesita x, y y ref (pilote de referencia).")
+        if not copy_path.lower().endswith(".fdb"):
+            raise SafeError("copy_path debe terminar en .fdb.")
+        if xlsx_path and os.path.exists(xlsx_path) and not overwrite:
+            raise SafeError(f"Ya existe {xlsx_path}; use overwrite=True.")
+        model = self._model()
+        original = model.GetModelFilename()
+        if not original or not os.path.isfile(str(original)):
+            raise SafeError("El modelo activo no tiene archivo en disco; no hay original que copiar.")
+        if os.path.normcase(os.path.abspath(copy_path)) == os.path.normcase(os.path.abspath(str(original))):
+            raise SafeError("copy_path no puede ser el original.")
+        mtime0 = self._mtime(str(original))
+
+        def ensayar():
+            antes, _sep0, _rea0, _ = self._verificacion_dict(sections, diameter_mm, cap_types, interpolation,
+                                                             q, service_combos, margen_candidato)
+            self.copy_model_file(copy_path, overwrite)
+            self.open_model(copy_path)
+            self._exigir_modelo(copy_path)
+            borrados = self._borrar_frames(copy_path, delete_frames) if delete_frames else []
+            anadidos = [self._anadir_pilote(copy_path, float(a["x"]), float(a["y"]), str(a["ref"]),
+                                            str(a.get("section", ""))) for a in add_piles]
+            self._exigir_modelo(copy_path)
+            self.run_analysis()
+            self._exigir_analisis()
+            despues, sep, rea, a_leer = self._verificacion_dict(sections, diameter_mm, cap_types, interpolation,
+                                                                q, service_combos, margen_candidato)
+            hojas = self._escribir_libro(despues, sep, xlsx_path) if xlsx_path else []
+            comparacion = pilotes_xlsx.comparar_verificaciones(antes, despues)
+            if self._mtime(str(original)) != mtime0:
+                raise SafeError(f"El ORIGINAL cambio en disco durante el ensayo: {original}. Revisar.")
+            return {"herramienta": "trial_pile_changes", "original": str(original), "original_intacto": True,
+                    "copia": copy_path, "copia_abierta_en_safe": True, "unidades": sep["unidades"],
+                    "cambios": {"borrados": borrados, "anadidos": anadidos},
+                    "comparacion": comparacion,
+                    "resumen_despues": despues["resumen"], "propuesta_despues": despues["propuesta"],
+                    "libro_despues": xlsx_path or None, "hojas": hojas,
+                    "avisos": sep["avisos"] + rea["avisos"],
+                    "pendiente": ["(b) pila equivalente: parametros de suelo",
+                                  "capacidad a traccion no evaluada: ver traccion_max antes/despues",
+                                  "decision del ingeniero firmante"]}
+        return json.dumps(self._con_unidades(units, ensayar), ensure_ascii=False, default=str)

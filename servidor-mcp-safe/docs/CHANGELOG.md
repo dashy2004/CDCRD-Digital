@@ -53,3 +53,57 @@ Primera version, 31 tools, probada en vivo contra TORRE A.
   PRUEBA-VIVA-LOTE2.md contiene el procedimiento de verificación y límites heredados.
 - No se editaron config.py/config.json ni servidor-mcp (ETABS). Los cambios de Claude
   presentes en Safe.py/server.py y este CHANGELOG se conservan en el mismo archivo.
+
+## 0.3.0 — 2026-11-02 [claude, Fable local] pilotes: S/B y reacción axial, pendiente de corrida viva
+
+- Dos tools nuevas de SOLO LECTURA (53 registradas): `get_pile_spacing` (separación entre
+  pilotes, S/B y factor de grupo de la tabla 5.1 del MOPC R-024) y `get_pile_axial_reactions`
+  (carga axial por pilote y combinación, envolvente y pilote crítico). Spec de Cowork en
+  `_coordinacion/PROMPTS/2026-11-02 safe-mcp separacion de pilotes S-sobre-D (local, Fable).md`.
+- Nuevo `src/pilotes.py`: criterio puro sin COM (tabla 5.1 step_down/linear, fuera de tabla sin
+  extrapolar, grilla espacial 8Ø, punto-en-polígono por cabezal, capacidad de grupo (a)/(b),
+  envolvente axial). Lectura COM en el bloque PILOTES de `Safe.py`.
+- Vía de lectura de frames: `FrameObj.GetAllFrames` + `PropFrame.GetNameList/GetTypeOAPI/GetCircle`
+  (typelib SAFEv1 real). No se añadió `get_frames` genérico ni lectura por tablas.
+- Unidades fijadas con `set_units` y restauradas; `ret=0` verificado (tipo Circle=9 confirmado por
+  sección, longitudes de arreglos); nunca `File.Save`.
+- Tests: `tests/test_pilotes.py` (43, fixtures sintéticas: malla 3×3 a 2.25 m Ø450 → S/B 5.00 /
+  0.90; pareja a 1.20 m → 2.67 fuera de tabla; diámetros mezclados; duplicado; sin circulares;
+  pilote solo; punto aislado) y `tests/test_pilotes_safe.py` (23, capa COM sobre el mock).
+  258 verdes (`tests/ULTIMA-CORRIDA.txt`). `test_lote1` actualizado a 53 registradas.
+- Revisión de código (agente code-reviewer, misma sesión) y correcciones aplicadas: un pilote solo
+  en su cabezal ya no cuenta como S/B<3 (estado `sin_vecino`, factor 1.0); el barrido de anillos
+  recorre solo el perímetro y cae a fuerza bruta para puntos aislados (antes cúbico); el S/B del
+  pilote es el de su pareja más desfavorable a menos de 6·Dmax (`pareja_s_b`), no la más cercana en
+  distancia; capacidad de grupo solo en `by_footing` (el barrido global no es un grupo); `q_ult` y
+  `q_adm` excluyentes; ratio comparado sin redondear y traccion pura sin "cumple"; longitudes de
+  arreglos verificadas en GetNameList/GetCaseStatus; unidades restauradas aunque falle la lectura;
+  `FrameForce` conserva la estación traccionada y el número de paso.
+- Docs: README (catálogo y sección Pilotes), ENUMS-SAFE.md (eFramePropType, eItemTypeElm, firmas),
+  BACKLOG (dos filas + `scan_sf_model` pendiente), `docs/PRUEBA-VIVA-PILOTES.md`.
+- `config.json` 0.2.1 → 0.3.0.
+- Corrida viva el mismo día (SAFE 23.3.0, modelo real de 847 frames / 561 pilotes, conexión COM
+  directa con el código nuevo): `get_pile_spacing` **[H]** en ambos alcances, unidades restauradas,
+  firmas de `GetAllFrames` / `PropFrame` confirmadas, 0.2-0.6 s por llamada. Con el análisis corrido
+  (autorizado), `get_pile_axial_reactions` también **[H]** por `joint` y por `frame`: signo confirmado
+  con el caso Dead (misma cifra por las dos vías), envolvente de 39 combos en 1.7 s. Tras la corrida:
+  aviso de frames duplicados también en reacciones (se leen todos) y aviso de que `q_adm` es carga de
+  servicio cuando se combina con todas las combos. 259 tests. Ver `docs/PRUEBA-VIVA-PILOTES.md`.
+- Tercera tool (54 registradas): `export_pile_check_xlsx` — libro de verificación geometría + demanda +
+  candidatos a eliminar. Nuevo `src/pilotes_xlsx.py` (puro; openpyxl solo al escribir, dependencia nueva
+  en `requirements.txt`). Refactor: los cuerpos de `get_pile_spacing` y `get_pile_axial_reactions`
+  pasan a `_informe_separacion` / `_informe_reacciones` para reutilizarlos. Lectura nueva
+  `_combos_definidos` (`RespCombo.GetCaseList` + `LoadCases.GetTypeOAPI_1`, [H]): las combos se
+  clasifican por sus miembros (patrón Quake/Wind o caso dinámico = lateral), no por el nombre.
+  Tests: `tests/test_pilotes_xlsx.py` (6) y uno más en `test_pilotes_safe.py`; 266 verdes. Corrida viva
+  el mismo día sobre el modelo analizado: 3 s, cifras idénticas al prototipo manual **[H]**.
+- Cuarta y quinta tools (56 registradas): `suggest_pile_changes` (propuesta por cabezal: añadir /
+  quitar / redistribuir / reespaciar / mantener; hoja Propuesta en el libro) y `trial_pile_changes`
+  (ensayo en COPIA: copia, borra/añade pilotes copiando apoyos de punta, reanaliza, compara
+  antes/después; el original no se guarda y se verifica su fecha). `proponer_cambios` y
+  `comparar_verificaciones` en `pilotes_xlsx.py`. Getters de asignación tolerantes a ret=1 (sin
+  asignación, visto en vivo con `PointObj.GetSpring`). 272 tests. Corrida viva: propuesta 557→546
+  pilotes (19 cabezales "redistribuir"), ensayo de 12 borrados + 1 añadido en 30 s **[H]**.
+- Corrección documental: `Analyze.RunAnalysis` GUARDA el modelo activo en disco antes de analizar
+  (comprobado por la fecha del FDB). "Solo lectura" de las tools de pilotes sigue siendo cierto; lo
+  que no es cierto es que correr el análisis deje el archivo intacto.

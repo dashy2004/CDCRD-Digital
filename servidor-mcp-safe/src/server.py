@@ -122,5 +122,14 @@ add_design_strip = mcp.tool()(safe.add_design_strip)
 set_strip_widths = mcp.tool()(safe.set_strip_widths)
 set_punching_overwrite = mcp.tool()(safe.set_punching_overwrite)
 
+# PILOTES (claude, 2026-11-02): S/B y factor de grupo R-024 tabla 5.1; reaccion
+# axial por pilote. Solo lectura, [T] hasta corrida viva. Criterio en pilotes.py.
+get_pile_spacing = mcp.tool()(safe.get_pile_spacing)
+get_pile_axial_reactions = mcp.tool()(safe.get_pile_axial_reactions)
+export_pile_check_xlsx = mcp.tool()(safe.export_pile_check_xlsx)
+suggest_pile_changes = mcp.tool()(safe.suggest_pile_changes)
+# Escribe SOLO en la copia que crea; el original no se guarda.
+trial_pile_changes = mcp.tool()(safe.trial_pile_changes)
+
 if __name__ == "__main__":
     mcp.run(transport='stdio')

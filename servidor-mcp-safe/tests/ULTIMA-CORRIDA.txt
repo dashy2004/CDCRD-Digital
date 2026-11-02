@@ -1,21 +1,20 @@
-CDX: SAFE-MCP lote 2 — 2026-09-25T16:44:44.806398-04:00
-Comando: python -m pytest tests/
-Interprete: C:\Users\emilg\Documents\Codex\2026-09-25\sos-codex-trabajando-en-c-users\work\safe-lote2\venv\Scripts\python.exe
-Python: Python 3.14.6
-PYTEST_ADDOPTS=-p no:cacheprovider (sin cache local)
-COM sustituido; Safe._model parcheado; sin SAFE ni FDB.
+claude (Fable local): SAFE-MCP pilotes v0.3.0 (5 tools de pilotes) — 2026-11-02T17:09:38-04:00
+Comando: python -m pytest tests/ -p no:cacheprovider
+Interprete: C:\Users\emilg\AppData\Local\Python\pythoncore-3.14-64\python.exe
+COM sustituido; Safe._model parcheado; sin SAFE ni FDB. Fixtures sinteticas; openpyxl 3.1.5.
 
 ============================= test session starts =============================
-platform win32 -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0
+platform win32 -- Python 3.14.6, pytest-9.1.1, pluggy-1.7.0
 rootdir: C:\Users\emilg\Artificial IQ\CDCRD-Digital\servidor-mcp-safe
 plugins: anyio-4.14.2
-collected 192 items
+collected 272 items
 
-tests\test_lote1.py .................................................... [ 27%]
-........................................................................ [ 64%]
-......................                                                   [ 76%]
+tests\test_lote1.py .................................................... [ 19%]
+........................................................................ [ 45%]
+......................                                                   [ 53%]
+tests\test_pilotes.py ...........................................        [ 69%]
+tests\test_pilotes_safe.py ...........................                   [ 79%]
+tests\test_pilotes_xlsx.py ..........                                    [ 83%]
 tests\test_tablas.py ..............................................      [100%]
 
-============================= 192 passed in 1.01s =============================
-
-Exit code: 0
+============================= 272 passed in 2.26s =============================
