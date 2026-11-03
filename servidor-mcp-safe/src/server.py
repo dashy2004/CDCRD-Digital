@@ -130,6 +130,8 @@ export_pile_check_xlsx = mcp.tool()(safe.export_pile_check_xlsx)
 suggest_pile_changes = mcp.tool()(safe.suggest_pile_changes)
 # Escribe SOLO en la copia que crea; el original no se guarda.
 trial_pile_changes = mcp.tool()(safe.trial_pile_changes)
+# Escribe grupos (datos del modelo); guarda solo con save=True.
+assign_pile_groups = mcp.tool()(safe.assign_pile_groups)
 
 if __name__ == "__main__":
     mcp.run(transport='stdio')

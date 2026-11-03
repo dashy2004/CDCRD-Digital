@@ -5,9 +5,9 @@ Servidor MCP de CSI SAFE 23.3.0, OAPI 2.016. ProgID confirmado:
 inventario ampliado: `docs/BACKLOG-HERRAMIENTAS.md`; enums y fuentes locales:
 `docs/ENUMS-SAFE.md`.
 
-El catálogo tiene **57 funciones implementadas: 56 tools registradas y una
+El catálogo tiene **58 funciones implementadas: 57 tools registradas y una
 [X] deshabilitada**. Son las 31 iniciales, las 18 del lote 1 de Claude, las
-3 por tabla del lote 2 y las 5 de pilotes (2026-11-02, ver más abajo).
+3 por tabla del lote 2 y las 6 de pilotes (2026-11-02/03, ver más abajo).
 `set_area_points` fue retirada por Claude tras
 `EditArea.ChangeConnectivity → -99`; sigue bajo test para detectar regresiones.
 No debe anunciarse como tool disponible.
@@ -40,7 +40,7 @@ Claude Desktop desde la bandeja y revalidar los cambios.
 | Geometría y cargas lote 1 | `delete_object`, `move_objects`, `get_area_info`, `set_area_property`, `set_area_opening`, `set_point_coordinates`, `add_point`, `assign_point_load` | 8 |
 | Lecturas lote 1 | `get_strip_rebar_stations`, `get_table_fields` | 2 |
 | Tablas lote 2 [T] | `add_design_strip`, `set_strip_widths`, `set_punching_overwrite` | 3 |
-| Pilotes [H] | `get_pile_spacing`, `get_pile_axial_reactions`, `export_pile_check_xlsx`, `suggest_pile_changes` (solo lectura); `trial_pile_changes` (escribe solo en una copia) | 5 |
+| Pilotes [H] | `get_pile_spacing`, `get_pile_axial_reactions`, `export_pile_check_xlsx`, `suggest_pile_changes` (solo lectura); `trial_pile_changes` (escribe solo en una copia); `assign_pile_groups` (escribe grupos; guarda solo con `save=True`) | 6 |
 
 ## Pilotes: separación S/B y reacción axial, solo lectura [H] (claude, 2026-11-02)
 
@@ -116,6 +116,16 @@ de gravedad y de sismo) y el ratio mayor manda en estado, candidatos y propuesta
 combinación envolvente (miembros que son combos) solo se lee si se indica así; de lo
 contrario queda fuera como "no se compara". Los mismos parámetros existen en
 `suggest_pile_changes` y `trial_pile_changes`.
+
+**Cabezales por sección y grupos de SAFE.** `cap_types` admite, además de tipos de losa
+(`footing`, `mat`), nombres de sección de área (`"Z50"`): cada token que no sea un tipo se
+toma como sección y debe existir en el modelo. `assign_pile_groups(cap_types="Z50",
+save=False)` crea en SAFE un grupo por cabezal, `CAB-<área>`, con el área y sus pilotes
+(y los nudos con `include_points=True`), releyendo cada grupo con `GroupDef.GetAssignments`;
+los mismos nombres van en la hoja **Grupos** y en la columna "Grupo SAFE" del libro, para
+revisar cabezal a cabezal (Select > Groups) en vez de pilote a pilote. Los grupos son datos
+del modelo: sin `save=True` se pierden al cerrar; `save=True` llama `File.Save` (solo sobre
+copia o con autorización). Corrida viva 2026-11-03: 158 grupos y 897 pilotes en 15 s.
 
 ### `suggest_pile_changes` y `trial_pile_changes`: proponer y ensayar en copia [H]
 

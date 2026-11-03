@@ -113,6 +113,11 @@ Primera version, 31 tools, probada en vivo contra TORRE A.
   Pilotes y Cabezales; conteos por causa en Resumen. 276 tests. Corrida viva 2026-11-03 sobre copia de
   un tercer modelo (897 pilotes, 158 cabezales): 6 s con dos combos seleccionadas (el tiempo depende
   de las combos de salida, no solo de los pilotes); `PRUEBA-VIVA-PILOTES.md`.
+- Sexta tool (57 registradas): `assign_pile_groups` — un grupo de SAFE por cabezal (`CAB-<área>`,
+  `GroupDef.SetGroup` + `SetGroupAssign` de área y pilotes, releído con `GetAssignments`), para
+  revisar por grupo; `save=True` guarda (solo copia o con autorización). `cap_types` admite
+  nombres de sección de área (`"Z50"`); hoja **Grupos** y columna "Grupo SAFE" en el libro.
+  279 tests. Corrida viva 2026-11-03 sobre la copia del tercer modelo: 158 grupos, 897 pilotes, 15 s.
 - Corrida de aceptación antes del PR sobre una copia de un segundo modelo (~1100 pilotes, 174
   cabezales) en instancia SAFE arrancada por COM: las cinco tools **[H]**; 114 pilotes con S/B < 3,
   igual que el conteo independiente del mismo día. Tiempos con 1112 pilotes: 88 s reacciones,

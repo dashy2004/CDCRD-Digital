@@ -139,7 +139,7 @@ def test_escribe_libro_legible(tmp_path):
     ver = px.armar_verificacion(separacion(malla(), CAB9), reacciones(cargas), COMBOS, q_adm=800.0)
     path = str(tmp_path / "v.xlsx")
     hojas = px.escribir_libro(ver, path, {"modelo": "m.fdb", "unidades": "kN, m, C"})
-    assert hojas == ["Resumen", "Pilotes", "Cabezales", "Candidatos", "Propuesta", "Combos", "Criterios"]
+    assert hojas == ["Resumen", "Pilotes", "Grupos", "Cabezales", "Candidatos", "Propuesta", "Combos", "Criterios"]
     wbp = load_workbook(path)["Propuesta"]
     assert wbp["A1"].value == "Cabezal" and wbp["A2"].value == "C9" and wbp["K2"].value == "quitar"
     assert any("reanalizar" in str(c.value) or "Reanaliz" in str(c.value) or "reanalisis" in str(c.value).lower()
@@ -149,7 +149,7 @@ def test_escribe_libro_legible(tmp_path):
     assert resumen["GEOMETRIA CONFORME A TABLA 5.1"] == "SI" and resumen["Modelo"] == "m.fdb"
     assert "PENDIENTE" in resumen["Capacidad (b) pila equivalente"] and "cumple" in resumen["Capacidad (b) pila equivalente"]
     p = wb["Pilotes"]
-    assert p["A1"].value == "Pilote" and p.max_row == 10 and p["L2"].value == 0.9
+    assert p["A1"].value == "Pilote" and p.max_row == 10 and p["M2"].value == 0.9  # M: factor (C = Grupo SAFE)
     assert wb["Cabezales"]["A2"].value == "C9" and wb["Combos"].max_row == 7
     assert any("reanalizar" in str(c.value) for row in wb["Candidatos"].iter_rows() for c in row)
 
@@ -280,3 +280,16 @@ def test_libro_con_columnas_de_sismo(tmp_path):
     assert "P max sismo (kN)" in cab and "Ratio sismo" in cab and "Ratio (mayor)" in cab
     resumen = {r[0].value: r[1].value for r in wb["Resumen"].iter_rows() if r[0].value}
     assert "ENV" in resumen["Combinaciones sismicas y factor sobre la admisible"] and "1.33333" in resumen["Combinaciones sismicas y factor sobre la admisible"]
+
+
+def test_hoja_grupos_y_columna_grupo():
+    cargas = {f"F{i}{j}": 300.0 for i in range(3) for j in range(3)}
+    ver = px.armar_verificacion(separacion(malla(), CAB9), reacciones(cargas), COMBOS, q_adm=800.0)
+    assert ver["filas"][0]["grupo"] == "CAB-C9" and ver["cabezales"][0]["grupo"] == "CAB-C9"
+    assert ver["cabezales"][0]["pilotes"].count("F") == 9 and ver["cabezales"][0]["no_cumplen"] == ""
+    import tempfile, os
+    path = os.path.join(tempfile.mkdtemp(), "g.xlsx")
+    hojas = px.escribir_libro(ver, path, {"modelo": "m.fdb", "unidades": "kN, m, C"})
+    assert hojas == ["Resumen", "Pilotes", "Grupos", "Cabezales", "Candidatos", "Propuesta", "Combos", "Criterios"]
+    wb = load_workbook(path)
+    assert wb["Grupos"]["A2"].value == "CAB-C9" and wb["Pilotes"]["C1"].value == "Grupo SAFE" and wb["Cabezales"]["B2"].value == "CAB-C9"

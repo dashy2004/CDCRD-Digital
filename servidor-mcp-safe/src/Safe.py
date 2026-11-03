@@ -1847,18 +1847,34 @@ class Safe:
         return out
 
     def _cabezales(self, cap_types: str) -> list[dict]:
-        """Areas cuya seccion es de los tipos pedidos (eSlabType 6=Footing, 5=Mat...)."""
-        tipos = set()
+        """Areas de cabezal: por tipo de losa (footing, mat...) o por NOMBRE de seccion (p. ej. Z50).
+
+        cap_types es una lista separada por comas; cada token que no sea un tipo de losa se
+        toma como nombre de seccion de area y debe existir en el modelo.
+        """
+        tipos, secciones = set(), set()
         for t in cap_types.split(","):
-            key = t.strip().lower()
-            if key not in self._SLAB_TYPES:
-                raise SafeError(f"cap_types: '{t}' no es un tipo de losa ({', '.join(self._SLAB_TYPES)}).")
-            tipos.add(self._SLAB_TYPES[key])
+            key = t.strip()
+            if not key:
+                continue
+            if key.lower() in self._SLAB_TYPES:
+                tipos.add(self._SLAB_TYPES[key.lower()])
+            else:
+                secciones.add(key)
+        if not tipos and not secciones:
+            raise SafeError("cap_types vacio: indique tipos de losa (footing, mat...) o nombres de seccion (Z50).")
         model = self._model()
         cache: dict[str, int | None] = {}
-        out = []
+        out, vistas = [], set()
         for area in self.get_areas():
             prop, = _result(model.AreaObj.GetProperty(area.id), f"AreaObj.GetProperty({area.id})")
+            prop = str(prop)
+            vistas.add(prop)
+            if prop in secciones:
+                out.append({"id": area.id, "seccion": prop, "xs": list(area.xs), "ys": list(area.ys)})
+                continue
+            if not tipos:
+                continue
             if prop not in cache:
                 if not prop or prop == "None":
                     cache[prop] = None
@@ -1866,6 +1882,10 @@ class Safe:
                     cache[prop] = int(_result(model.PropArea.GetSlab(prop), f"PropArea.GetSlab({prop})")[0])
             if cache[prop] in tipos:
                 out.append({"id": area.id, "seccion": prop, "xs": list(area.xs), "ys": list(area.ys)})
+        faltan = sorted(secciones - vistas)
+        if faltan:
+            raise SafeError(f"cap_types: ninguna area usa la(s) seccion(es) {faltan}. Secciones de area del "
+                            f"modelo: {sorted(v for v in vistas if v)}.")
         return out
 
     def _pilotes_leidos(self, sections, diameter: float, mm: float, necesita_diametro: bool):
@@ -1909,8 +1929,8 @@ class Safe:
             interpolation: "step_down" (defecto, escalon inferior de la tabla; la
                 norma no autoriza interpolar) o "linear" (declarado en la salida).
             units: unidades activas durante la lectura (se restauran al terminar).
-            cap_types: tipos de losa que cuentan como cabezal en by_footing
-                (footing; p.ej. "footing,mat").
+            cap_types: areas que cuentan como cabezal en by_footing: tipos de losa
+                (footing; p.ej. "footing,mat") o nombres de seccion de area (p.ej. "Z50").
             q_ult: capacidad ULTIMA de un pilote (unidades de fuerza de `units`); el
                 factor reduce esta, y Qadm = Qult_reducida / fs.
             fs: factor de seguridad para Qadm (R-024 5.2).
@@ -2470,3 +2490,86 @@ class Safe:
                                   "capacidad a traccion no evaluada: ver traccion_max antes/despues",
                                   "decision del ingeniero firmante"]}
         return json.dumps(self._con_unidades(units, ensayar), ensure_ascii=False, default=str)
+
+    # ---------------- Grupos de SAFE por cabezal (claude, 2026-11-03) ---
+
+    _GROUP_OBJ_TYPES = {1: "point", 2: "frame", 3: "cable", 4: "tendon", 5: "area", 6: "solid", 7: "link"}
+
+    @com_call
+    def assign_pile_groups(self, cap_types: str = "footing", sections: str | list[str] = "auto",
+                           diameter_mm: float = 0.0, prefix: str = "", include_points: bool = False,
+                           save: bool = False, units: str = "kN, m, C") -> str:
+        """Crea en SAFE un grupo por cabezal (CAB-<area>) con el area y sus pilotes, para revisar por grupo. [escribe grupos en el modelo activo]
+
+        Mismo agrupamiento que get_pile_spacing(scope=by_footing): el pilote pertenece al
+        cabezal cuya area contiene su cabeza. Los grupos son datos del modelo: sin
+        save=True se pierden al cerrar; con save=True se llama File.Save (hacerlo solo
+        sobre una copia o con autorizacion). Un grupo existente con el mismo nombre se
+        reutiliza (no se vacia): los objetos se agregan.
+
+        Args:
+            cap_types: areas de cabezal por tipo de losa o por seccion (p. ej. "Z50").
+            sections, diameter_mm: filtro de pilotes como en get_pile_spacing.
+            prefix: prefijo del nombre del grupo (vacio = "CAB-", el mismo que usa el libro).
+            include_points: agregar tambien los nudos de cabeza y punta de cada pilote.
+            save: guardar el modelo activo tras asignar.
+            units: unidades activas durante la lectura (se restauran).
+        """
+        import json
+        prefix = prefix or pilotes_xlsx.GROUP_PREFIX
+        if not prefix.strip():
+            raise SafeError("prefix no puede estar vacio.")
+
+        def asignar():
+            _idx, preset, _f, length = self._unidades_activas()
+            mm = self._LENGTH_MM[length]
+            pil, avisos, _secciones, n_frames = self._pilotes_leidos(sections, diameter_mm / mm, mm, True)
+            cabezales = self._cabezales(cap_types)
+            try:
+                out = pilotes.evaluar_separacion(pil, "by_footing", 1, "step_down", cabezales)
+            except pilotes.PilotesError as e:
+                raise SafeError(str(e)) from e
+            model = self._model()
+            existentes = set(_result(model.GroupDef.GetNameList(), "GroupDef.GetNameList")[1])
+            por_cab: dict[str, list] = {}
+            for p in out["pilotes"]:
+                if p.grupo is not None:
+                    por_cab.setdefault(str(p.grupo), []).append(p)
+            grupos, reutilizados = [], []
+            for cab in cabezales:
+                cid = str(cab["id"])
+                nombre = f"{prefix}{cid}"
+                miembros = por_cab.get(cid, [])
+                if nombre in existentes:
+                    reutilizados.append(nombre)
+                else:
+                    oapi.call_checked(model.GroupDef, "SetGroup", (nombre,), f"grupo {nombre}")
+                oapi.call_checked(model.AreaObj, "SetGroupAssign", (cid, nombre, False, 0), f"area {cid} -> {nombre}")
+                for p in miembros:
+                    oapi.call_checked(model.FrameObj, "SetGroupAssign", (p.id, nombre, False, 0), f"pilote {p.id} -> {nombre}")
+                    if include_points:
+                        for pt in (p.punto_cabeza, p.punto_punta):
+                            oapi.call_checked(model.PointObj, "SetGroupAssign", (pt, nombre, False, 0), f"punto {pt} -> {nombre}")
+                n, tipos, nombres = _result(model.GroupDef.GetAssignments(nombre), f"GroupDef.GetAssignments({nombre})")[:3]
+                if len(tipos) != n or len(nombres) != n:
+                    raise SafeError(f"GetAssignments({nombre}): longitud incoherente.")
+                asignados = {(int(t), str(o)) for t, o in zip(tipos, nombres)}
+                esperados = {(5, cid)} | {(2, p.id) for p in miembros}
+                if not esperados <= asignados:
+                    raise SafeError(f"Grupo {nombre}: faltan al releer {sorted(esperados - asignados)[:5]}.")
+                grupos.append({"grupo": nombre, "cabezal": cid, "seccion": cab["seccion"], "n_pilotes": len(miembros),
+                               "pilotes": [p.id for p in miembros], "objetos_en_grupo": n})
+            sueltos = [p.id for p in out["pilotes"] if p.grupo is None]
+            guardado = False
+            if save:
+                oapi.call_checked(model.File, "Save", (), "guardado del modelo con grupos")
+                guardado = True
+            return {"herramienta": "assign_pile_groups", "modelo": model.GetModelFilename(),
+                    "unidades": {"preset": preset},
+                    "cap_types": cap_types, "prefijo": prefix, "n_grupos": len(grupos),
+                    "n_pilotes_agrupados": sum(g["n_pilotes"] for g in grupos),
+                    "pilotes_sin_cabezal": sueltos, "grupos_reutilizados": reutilizados,
+                    "guardado": guardado, "grupos": grupos, "avisos": avisos + out["avisos"],
+                    "nota": "Los grupos coinciden con la columna 'Grupo SAFE' y la hoja Grupos del libro. "
+                            "Sin save=True se pierden al cerrar el modelo."}
+        return json.dumps(self._con_unidades(units, asignar), ensure_ascii=False, default=str)

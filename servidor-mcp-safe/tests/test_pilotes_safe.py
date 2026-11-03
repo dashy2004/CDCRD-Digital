@@ -419,3 +419,50 @@ def test_export_con_seismic_combos_lee_la_envolvente_y_compara_con_el_factor(pil
     with pytest.raises(SafeError, match="seismic_combos inexistentes"):
         safe.export_pile_check_xlsx(str(tmp_path / "x.xlsx"), q_adm=800.0, seismic_combos=["NOPE"])
     model.File.Save.assert_not_called()
+
+
+def test_assign_pile_groups_crea_grupo_por_cabezal_y_relee(pile_api):
+    safe, model, state = pile_api
+    model.GroupDef.GetNameList.return_value = (1, ["All"], 0)
+    model.GroupDef.SetGroup.return_value = 0
+    model.AreaObj.SetGroupAssign.return_value = 0
+    model.FrameObj.SetGroupAssign.return_value = 0
+    model.PointObj.SetGroupAssign.return_value = 0
+    asignados = {}
+    def set_assign(ns_type):
+        def f(name, group, remove=False, item=0):
+            asignados.setdefault(group, set()).add((ns_type, name))
+            return 0
+        return f
+    model.AreaObj.SetGroupAssign.side_effect = set_assign(5)
+    model.FrameObj.SetGroupAssign.side_effect = set_assign(2)
+    model.PointObj.SetGroupAssign.side_effect = set_assign(1)
+    model.GroupDef.GetAssignments.side_effect = lambda g: (len(asignados.get(g, ())), [t for t, _ in asignados.get(g, ())],
+                                                           [n for _, n in asignados.get(g, ())], 0)
+    out = salida(safe.assign_pile_groups(cap_types="S1"))   # por NOMBRE de seccion (conftest: area A1 con S1)
+    assert out["n_grupos"] == 1 and out["grupos"][0]["grupo"] == "CAB-A1" and out["grupos"][0]["n_pilotes"] == 9
+    assert out["grupos"][0]["objetos_en_grupo"] == 10 and out["guardado"] is False and out["pilotes_sin_cabezal"] == []
+    model.GroupDef.SetGroup.assert_called_once_with("CAB-A1")
+    model.AreaObj.SetGroupAssign.assert_called_once_with("A1", "CAB-A1", False, 0)
+    assert model.FrameObj.SetGroupAssign.call_count == 9 and model.PointObj.SetGroupAssign.call_count == 0
+    model.File.Save.assert_not_called()
+    # Reutiliza el grupo si ya existe, agrega puntos y guarda solo con save=True.
+    model.GroupDef.GetNameList.return_value = (2, ["All", "CAB-A1"], 0)
+    out = salida(safe.assign_pile_groups(cap_types="footing", include_points=True, save=True))
+    assert out["grupos_reutilizados"] == ["CAB-A1"] and out["guardado"] is True
+    assert model.GroupDef.SetGroup.call_count == 1 and model.PointObj.SetGroupAssign.call_count == 18
+    model.File.Save.assert_called_once_with()
+    with pytest.raises(SafeError, match="ninguna area usa"):
+        safe.assign_pile_groups(cap_types="Z99")
+    model.GroupDef.GetAssignments.side_effect = lambda g: (0, [], [], 0)
+    with pytest.raises(SafeError, match="faltan al releer"):
+        safe.assign_pile_groups(cap_types="S1")
+
+
+def test_cap_types_por_seccion_en_el_libro(pile_api, tmp_path):
+    safe, model, state = pile_api
+    for f in state["frames"]:
+        state["react"][f[3]] = [("COMB1", "", 300.0)]
+    out = salida(safe.export_pile_check_xlsx(str(tmp_path / "g.xlsx"), q_adm=800.0, cap_types="S1"))
+    assert out["resumen"]["n_cabezales"] == 1 and "Grupos" in out["hojas"]
+    model.PropArea.GetSlab.assert_not_called()   # por nombre de seccion no hace falta el tipo

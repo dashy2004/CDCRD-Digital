@@ -25,6 +25,11 @@ from pilotes import PilotesError
 
 MAX_FACTOR_SERVICIO = 1.2
 MARGEN_CANDIDATO = 0.9
+GROUP_PREFIX = "CAB-"     # nombre del grupo de SAFE por cabezal: CAB-<area>; igual en Excel y en SAFE
+
+
+def nombre_grupo(cabezal) -> str | None:
+    return f"{GROUP_PREFIX}{cabezal}" if cabezal is not None else None
 _T_POR_UNIDAD = {"kN": 1 / 9.80665, "N": 1 / 9806.65, "kgf": 1 / 1000.0, "Ton": 1.0,
                  "lb": 0.000453592, "kip": 0.453592}
 
@@ -195,7 +200,7 @@ def armar_verificacion(sep: dict, rea: dict, combos: dict[str, dict], q_adm: flo
         ratio_s = (ss["p_max"] / q_red_s) if (ss and q_red_s) else None
         vecino = (g or {}).get("vecinos") or [{}]
         filas.append({
-            "id": pid, "cabezal": cab, "x": (g or {}).get("x"), "y": (g or {}).get("y"),
+            "id": pid, "cabezal": cab, "grupo": nombre_grupo(cab), "x": (g or {}).get("x"), "y": (g or {}).get("y"),
             "z_cabeza": (g or {}).get("z_cabeza"), "z_punta": (g or {}).get("z_punta"),
             "revisar": "; ".join(revisar), "vecino": vecino[0].get("id"), "dist": vecino[0].get("distancia"),
             "pareja": (g or {}).get("pareja_s_b"), "s_b": (g or {}).get("s_b"), "factor": factor, "geom": geom,
@@ -274,7 +279,9 @@ def armar_verificacion(sep: dict, rea: dict, combos: dict[str, dict], q_adm: flo
                                       " (gravedad y sismo)" if sismo else "")
         else:
             estado = "OK frente a (a); (b) PENDIENTE"
-        cab_filas.append({"cabezal": cid, "n": len(miembros), "n_sanos": n,
+        cab_filas.append({"cabezal": cid, "grupo": nombre_grupo(cid), "n": len(miembros), "n_sanos": n,
+                          "pilotes": ", ".join(f["id"] for f in miembros),
+                          "no_cumplen": ", ".join(f["id"] for f in sanos if f["estado"].startswith("NO CUMPLE")),
                           "excluidos": ", ".join(f["id"] for f in miembros if f["revisar"]),
                           "s_b_min": g["s_b_min"], "f_min": f_min, "suma_f": round(suma_f, 3),
                           "fuera": ", ".join(fuera), "cap_a": cap_a, "cap_a_t": cap_a * a_t if cap_a else None,
@@ -538,7 +545,7 @@ def escribir_libro(ver: dict, path: str, meta: dict) -> list[str]:
             cell.alignment = Alignment(wrap_text=True, vertical="top")
 
     hoja(wb.create_sheet("Pilotes"), [
-        ("Pilote", "id", 9), ("Cabezal", "cabezal", 9), ("X", "x", 9, "0.000"), ("Y", "y", 9, "0.000"),
+        ("Pilote", "id", 9), ("Cabezal", "cabezal", 9), ("Grupo SAFE", "grupo", 11), ("X", "x", 9, "0.000"), ("Y", "y", 9, "0.000"),
         ("Z cabeza", "z_cabeza", 8, "0.00"), ("Z punta", "z_punta", 8, "0.00"), ("Revisar modelo", "revisar", 22),
         ("Vecino", "vecino", 8), ("Dist.", "dist", 9, "0.000"), ("Pareja S/B", "pareja", 9), ("S/B", "s_b", 8, "0.000"),
         ("Factor (5.1)", "factor", 9, "0.00"), ("Geometria", "geom", 30),
@@ -552,8 +559,18 @@ def escribir_libro(ver: dict, path: str, meta: dict) -> list[str]:
         ("Ratio (mayor)", "ratio", 10, "0.00"), ("Ratio P/q_adm", "ratio_sin_factor", 10, "0.00"),
         ("Estado", "estado", 36), ("Candidato a eliminar", "candidato", 40),
     ], ver["filas"], color_estado)
+    hoja(wb.create_sheet("Grupos"), [
+        ("Grupo SAFE", "grupo", 12), ("Cabezal (area)", "cabezal", 10), ("Pilotes", "n", 8),
+        ("Estado del cabezal", "estado", 36), ("Ratio (mayor)", "ratio", 10, "0.00"),
+        ("Pilotes que no cumplen", "no_cumplen", 40), ("Candidatos a eliminar", "candidatos", 30),
+        ("Pilotes del grupo", "pilotes", 90),
+    ], ver["cabezales"], lambda r: rojo if r["estado"].startswith("NO") else amarillo if r["estado"].startswith("SIN") else verde)
+    wsg = wb["Grupos"]
+    wsg.append([])
+    wsg.append([f"Un grupo de SAFE por cabezal ({GROUP_PREFIX}<area>): el area y sus pilotes. Revisar por grupo "
+                "(Select > Groups en SAFE) en vez de pilote a pilote. assign_pile_groups los crea en el modelo."])
     hoja(wb.create_sheet("Cabezales"), [
-        ("Cabezal", "cabezal", 9), ("Pilotes", "n", 8), ("Sanos", "n_sanos", 8), ("Excluidos (revisar)", "excluidos", 18),
+        ("Cabezal", "cabezal", 9), ("Grupo SAFE", "grupo", 11), ("Pilotes", "n", 8), ("Sanos", "n_sanos", 8), ("Excluidos (revisar)", "excluidos", 18),
         ("S/B min", "s_b_min", 8, "0.000"), ("f min", "f_min", 7, "0.00"), ("Suma f", "suma_f", 8, "0.000"), ("S/B<3", "fuera", 18),
         (f"(a) Suma q_adm·f ({u})", "cap_a", 12, "0.0"), ("(a) (t)", "cap_a_t", 9, "0.0"),
         (f"Demanda servicio ({u})", "dem", 12, "0.0"), ("Demanda (t)", "dem_t", 9, "0.0"), ("Combo", "combo_dem", 16),
