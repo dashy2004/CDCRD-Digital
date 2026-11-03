@@ -133,6 +133,9 @@ Primera version, 31 tools, probada en vivo contra TORRE A.
   restaura las quitas a menos de 6 D de cada pilote que pasa a no cumplir y reanaliza. Corrida viva
   (tercer modelo): 897 → 670 pilotes sin fallos nuevos, 136 → 135 que no cumplen. "Añadir" con respaldo
   a 4 D solo colocó 2 de 91: en 17 cabezales no hay hueco (agrandar cabezal, fila en BACKLOG). 286 tests.
+- Ciclo completo (quitar iterativo + añadir) sobre los tres modelos de la firma, en copias: 897 → 672,
+  564 → 480 y 1112 → 879 pilotes sin fallos nuevos en ninguno; `apply_pile_proposal` devuelve
+  `sin_cambios` (sin crear copia) cuando la propuesta no deja nada automatizable.
 - Corrida de aceptación antes del PR sobre una copia de un segundo modelo (~1100 pilotes, 174
   cabezales) en instancia SAFE arrancada por COM: las cinco tools **[H]**; 114 pilotes con S/B < 3,
   igual que el conteo independiente del mismo día. Tiempos con 1112 pilotes: 88 s reacciones,

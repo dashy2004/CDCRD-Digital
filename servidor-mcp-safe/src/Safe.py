@@ -2610,7 +2610,13 @@ class Safe:
                 elif fila["accion"] in ("redistribuir", "reespaciar"):
                     no_auto.append({"cabezal": cid, "accion": fila["accion"], "motivo": fila["detalle"]})
             if not borrar and not anadir:
-                raise SafeError("La propuesta no deja ningun cambio automatizable (quitar/anadir/modelo).")
+                # Nada que aplicar (p. ej. tras optimize_pile_removal ya no queda cabezal por reforzar):
+                # respuesta limpia sin crear copia, no un error.
+                return {"herramienta": "apply_pile_proposal", "original": str(original), "original_intacto": True,
+                        "sin_cambios": True, "copia": None, "acciones": sorted(acciones), "plan": plan,
+                        "no_automatizado": no_auto,
+                        "resumen_antes": {k: antes["resumen"][k] for k in ("n_pilotes", "n_no_cumplen", "cabezales_no_cumplen", "n_candidatos")},
+                        "nota": "La propuesta no deja ningun cambio automatizable con las acciones pedidas; no se creo copia."}
             self.copy_model_file(copy_path, overwrite)
             self.open_model(copy_path)
             self._exigir_modelo(copy_path)

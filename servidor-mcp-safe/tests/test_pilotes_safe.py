@@ -502,6 +502,9 @@ def test_apply_pile_proposal_quita_candidatos_anade_y_reanaliza(pile_api, tmp_pa
     assert out["comparacion"]["global"]["n_pilotes"][1] == 10 - out["cambios"]["n_borrados"] + 1
     with pytest.raises(SafeError, match="acciones"):
         safe.apply_pile_proposal(str(tmp_path / "x.fdb"), q_adm=800.0, acciones=["mover"])
+    # Sin duplicados que borrar: respuesta limpia sin copia.
+    nada = salida(safe.apply_pile_proposal(str(tmp_path / "nada.fdb"), q_adm=800.0, acciones=["modelo"]))
+    assert nada["sin_cambios"] is True and nada["copia"] is None and model.File.OpenFile.call_count == 1
 
 
 def test_optimize_pile_removal_quita_de_uno_en_uno_y_deja_copia_valida(pile_api, tmp_path):
