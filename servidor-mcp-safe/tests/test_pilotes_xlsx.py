@@ -207,3 +207,76 @@ def test_propuesta_redistribuir_cuando_la_suma_cumple_pero_un_pilote_no():
     f = ver["propuesta"]["filas"][0]
     assert f["accion"] == "redistribuir" and f["delta"] == 0 and "F22" in f["detalle"] and f["n_min_xi"] < 9
     assert ver["propuesta"]["totales"]["redistribuir"] == 1 and ver["propuesta"]["n_pilotes_propuesta"] == 9
+
+
+# ------------------------------------------------------ criterio doble (sismo x 4/3)
+
+def reacciones_sismo(cargas, cargas_sismo):
+    """D y DL como gravedad; una envolvente 'ENV' (Max/Min) como sismica."""
+    regs = []
+    for p, v in cargas.items():
+        regs += [{"pilote": p, "punto": f"B{p}", "caso": "D", "paso": "", "axial": v * 0.6},
+                 {"pilote": p, "punto": f"B{p}", "caso": "DL", "paso": "", "axial": v}]
+    for p, v in cargas_sismo.items():
+        regs += [{"pilote": p, "punto": f"B{p}", "caso": "ENV", "paso": "Max", "axial": v},
+                 {"pilote": p, "punto": f"B{p}", "caso": "ENV", "paso": "Min", "axial": -0.3 * v}]
+    return {"unidades": {"preset": "kN, m, C", "fuerza": "kN", "longitud": "m"}, "registros": regs, "avisos": []}
+
+
+COMBOS_ENV = {**COMBOS, "ENV": {"tipos": [1, 1], "casos": ["DLS", "DL"], "sf": [1.0, 1.0]}}
+
+
+def test_sismo_contra_cuatro_tercios_y_gravedad_contra_admisible():
+    cargas = {f"F{i}{j}": 600.0 for i in range(3) for j in range(3)}      # 600 < 720 OK gravedad
+    sismo = {f"F{i}{j}": 900.0 for i in range(3) for j in range(3)}       # 900 < 960 OK sismo (720 x 4/3)
+    sismo["F00"] = 1000.0                                                 # 1000 > 960: NO CUMPLE sismo
+    cargas["F22"] = 800.0                                                 # 800 > 720: NO CUMPLE gravedad
+    ver = px.armar_verificacion(separacion(malla(), CAB9), reacciones_sismo(cargas, sismo), COMBOS_ENV, q_adm=800.0,
+                                service_combos=["D", "DL"], seismic_combos=["ENV"], seismic_factor=4 / 3)
+    r = ver["resumen"]
+    assert r["servicio"] == ["D", "DL"] and r["sismo"] == ["ENV"] and r["factor_sismo"] == pytest.approx(4 / 3)
+    por = {f["id"]: f for f in ver["filas"]}
+    assert por["F00"]["estado"] == "NO CUMPLE 1.33333 x q_adm reducida (sismo)" and por["F00"]["ratio_sismo"] == pytest.approx(1000 / 960)
+    assert por["F00"]["ratio_gravedad"] == pytest.approx(600 / 720) and por["F00"]["ratio"] == por["F00"]["ratio_sismo"]
+    assert por["F22"]["estado"] == "NO CUMPLE q_adm reducida (gravedad)" and por["F22"]["p_sismo"] == 900.0
+    assert por["F11"]["estado"] == "OK" and por["F11"]["q_red_sismo"] == pytest.approx(960.0)
+    assert por["F11"]["p_trac"] == 270.0 and por["F11"]["c_trac"] == "ENV Min"   # la traccion sale de la sismica
+    assert r["n_no_cumplen"] == 2 and r["n_no_cumplen_gravedad"] == 1 and r["n_no_cumplen_sismo"] == 1
+    cab = ver["cabezales"][0]
+    assert cab["dem"] == pytest.approx(8 * 600 + 800) and cab["dem_sismo"] == pytest.approx(8 * 900 + 1000)
+    assert cab["cap_a_sismo"] == pytest.approx(6480 * 4 / 3) and cab["ratio_sismo"] == pytest.approx(8200 / 8640)
+    assert cab["ratio"] == pytest.approx(max(5600 / 6480, 8200 / 8640)) and cab["estado"].startswith("OK")
+    assert ver["clase_combos"]["ENV"].startswith("sismico (indicada")
+
+
+def test_sismo_manda_en_la_propuesta_y_en_los_candidatos():
+    cargas = {f"F{i}{j}": 300.0 for i in range(3) for j in range(3)}      # gravedad holgada
+    sismo = {f"F{i}{j}": 900.0 for i in range(3) for j in range(3)}       # sismo ajustado
+    ver = px.armar_verificacion(separacion(malla(), CAB9), reacciones_sismo(cargas, sismo), COMBOS_ENV, q_adm=800.0,
+                                service_combos=["D", "DL"], seismic_combos=["ENV"], seismic_factor=4 / 3)
+    cab = ver["cabezales"][0]
+    # por gravedad sobrarian 4 (2700 <= 0.9*4*720=2592? no: 0.9*5*720=3240 -> 4 sobran); por sismo:
+    # 8100 <= 0.9*(n-1)*720*4/3 = 864(n-1) -> n-1 >= 9.4 -> ninguno sobra
+    assert cab["sobran"] == 0 and ver["resumen"]["n_candidatos"] == 0
+    f = ver["propuesta"]["filas"][0]
+    assert f["accion"] == "anadir" and f["n_min_xi"] == 10 and f["delta"] == 1
+    with pytest.raises(pl.PilotesError, match="seismic_combos"):
+        px.armar_verificacion(separacion(malla(), CAB9), reacciones_sismo(cargas, sismo), COMBOS_ENV, 800.0,
+                              seismic_combos=["NOPE"])
+    with pytest.raises(pl.PilotesError, match="seismic_factor"):
+        px.armar_verificacion(separacion(malla(), CAB9), reacciones_sismo(cargas, sismo), COMBOS_ENV, 800.0,
+                              seismic_combos=["ENV"], seismic_factor=0)
+
+
+def test_libro_con_columnas_de_sismo(tmp_path):
+    cargas = {f"F{i}{j}": 300.0 for i in range(3) for j in range(3)}
+    sismo = {f"F{i}{j}": 500.0 for i in range(3) for j in range(3)}
+    ver = px.armar_verificacion(separacion(malla(), CAB9), reacciones_sismo(cargas, sismo), COMBOS_ENV, q_adm=800.0,
+                                service_combos=["D", "DL"], seismic_combos=["ENV"], seismic_factor=4 / 3)
+    path = str(tmp_path / "s.xlsx")
+    px.escribir_libro(ver, path, {"modelo": "m.fdb", "unidades": "kN, m, C"})
+    wb = load_workbook(path)
+    cab = [c.value for c in wb["Pilotes"][1]]
+    assert "P max sismo (kN)" in cab and "Ratio sismo" in cab and "Ratio (mayor)" in cab
+    resumen = {r[0].value: r[1].value for r in wb["Resumen"].iter_rows() if r[0].value}
+    assert "ENV" in resumen["Combinaciones sismicas y factor sobre la admisible"] and "1.33333" in resumen["Combinaciones sismicas y factor sobre la admisible"]

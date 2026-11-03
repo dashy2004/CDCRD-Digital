@@ -107,6 +107,12 @@ Primera version, 31 tools, probada en vivo contra TORRE A.
 - Corrección documental: `Analyze.RunAnalysis` GUARDA el modelo activo en disco antes de analizar
   (comprobado por la fecha del FDB). "Solo lectura" de las tools de pilotes sigue siendo cierto; lo
   que no es cierto es que correr el análisis deje el archivo intacto.
+- Criterio doble en el libro, la propuesta y el ensayo: `seismic_combos` + `seismic_factor` (4/3).
+  Las combos de gravedad (`service_combos`, p. ej. Comb2) se comparan con q_adm·ξ y las sísmicas
+  (p. ej. la envolvente E / Envelope) con 4/3·q_adm·ξ; el ratio mayor manda. Columnas nuevas en
+  Pilotes y Cabezales; conteos por causa en Resumen. 276 tests. Corrida viva 2026-11-03 sobre copia de
+  un tercer modelo (897 pilotes, 158 cabezales): 6 s con dos combos seleccionadas (el tiempo depende
+  de las combos de salida, no solo de los pilotes); `PRUEBA-VIVA-PILOTES.md`.
 - Corrida de aceptación antes del PR sobre una copia de un segundo modelo (~1100 pilotes, 174
   cabezales) en instancia SAFE arrancada por COM: las cinco tools **[H]**; 114 pilotes con S/B < 3,
   igual que el conteo independiente del mismo día. Tiempos con 1112 pilotes: 88 s reacciones,

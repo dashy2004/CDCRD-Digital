@@ -106,3 +106,21 @@ Límite encontrado: con ~1100 pilotes, `export_pile_check_xlsx` y `suggest_pile_
 más de 2 min por las 1112 llamadas individuales a `Results.JointReact`; el cliente MCP puede
 cortar por timeout antes (E-035) aunque el servidor termine. Mitigación anotada en BACKLOG:
 leer las reacciones de todas las puntas con una sola llamada (grupo o `SelectionElm`).
+**Matiz (tercer modelo, 2026-11-03):** el tiempo depende sobre todo de cuántas combos hay
+seleccionadas para salida, no solo del número de pilotes: con `service_combos=["Comb2"]` y
+`seismic_combos=["Envelope"]` (dos combos) el libro completo de 897 pilotes tardó **6 s**.
+Para modelos grandes conviene indicar las combos explícitas.
+
+## Tercer modelo — criterio doble Comb2 / Envelope (2026-11-03)
+
+Pedido del usuario: la combinación de gravedad se compara con la admisible tal cual y la
+envolvente sísmica con 4/3 de la admisible. Implementado como `seismic_combos` +
+`seismic_factor` (4/3) en libro, propuesta y ensayo (276 tests). Corrida sobre una **copia** de
+un tercer modelo (935 frames, 897 pilotes Ø600, 158 cabezales) en instancia SAFE arrancada por
+COM; la ventana del usuario con el original no estaba registrada en COM.
+
+| Paso | Estado | Evidencia |
+|---|---|---|
+| arranque | **[H]** con la misma salvedad | De nuevo el primer `run_analysis` tras `ApplicationStart` no devolvió la llamada aunque el solver terminó (LOG); al matar el cliente y reconectar, SAFE ya reportaba "todos los casos listos" (ayer no). Reproducido dos veces: queda como comportamiento conocido en BACKLOG. |
+| criterio doble | **[H]** | `Comb2` (D+L+LT) contra q_adm·ξ y `Envelope` (envolvente de las combos sísmicas de servicio, miembros tipo combo) contra 4/3·q_adm·ξ. 136 pilotes no cumplen (86 por gravedad, 134 por sismo, la mayoría por los dos); 16 sin factor; 138 con tracción; 19 cabezales sobre (a). Crítico con ratio 2.4 en Comb2. 6 s en total. |
+| lectura selectiva | **[H]** | `Envelope` se clasifica como envolvente (no se leería sola) y se lee solo porque va en `seismic_combos`; las DCon quedan fuera. Unidades restauradas; original del proyecto intacto. |

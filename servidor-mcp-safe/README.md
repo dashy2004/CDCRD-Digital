@@ -107,6 +107,16 @@ Nunca sobrescribe sin `overwrite=True` ni guarda el modelo. Corrida viva 2026-11
 3 s sobre 564 pilotes y 36 combinaciones, cifras idénticas al prototipo manual.
 Incluye la hoja **Propuesta** (abajo).
 
+**Criterio doble (gravedad / sismo).** Con `service_combos=["Comb2"]` y
+`seismic_combos=["Envelope"]` (o `["E"]`), la combinación de gravedad se compara con la
+admisible tal cual (q_adm·ξ) y la envolvente sísmica con `seismic_factor` × q_adm·ξ
+(4/3 por defecto: aumento de un tercio para cargas transitorias). Un pilote o cabezal no
+cumple si falla cualquiera de las dos; el libro trae las dos columnas (P, combo y ratio
+de gravedad y de sismo) y el ratio mayor manda en estado, candidatos y propuesta. Una
+combinación envolvente (miembros que son combos) solo se lee si se indica así; de lo
+contrario queda fuera como "no se compara". Los mismos parámetros existen en
+`suggest_pile_changes` y `trial_pile_changes`.
+
 ### `suggest_pile_changes` y `trial_pile_changes`: proponer y ensayar en copia [H]
 
 `suggest_pile_changes` devuelve, por cabezal, cuántos pilotes exige la demanda con la

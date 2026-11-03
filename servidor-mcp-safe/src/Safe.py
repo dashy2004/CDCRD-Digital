@@ -2176,7 +2176,9 @@ class Safe:
                                service_combos: str | list[str] = "auto", sections: str | list[str] = "auto",
                                diameter_mm: float = 0.0, cap_types: str = "footing",
                                interpolation: str = "step_down", margen_candidato: float = 0.9,
-                               units: str = "kN, m, C", overwrite: bool = False) -> str:
+                               units: str = "kN, m, C", overwrite: bool = False,
+                               seismic_combos: list[str] | None = None,
+                               seismic_factor: float = 4.0 / 3.0) -> str:
         """Libro .xlsx de verificacion de pilotes: geometria (R-024 tabla 5.1), demanda y candidatos. [solo lectura del modelo]
 
         Cruza get_pile_spacing(scope=by_footing) con get_pile_axial_reactions(source=joint)
@@ -2195,6 +2197,11 @@ class Safe:
             margen_candidato: fraccion de (a) que el cabezal no debe superar con un pilote menos.
             units: unidades activas durante la lectura (se restauran); el libro las declara.
             overwrite: permitir sobrescribir un archivo existente.
+            seismic_combos: combinaciones sismicas (p. ej. ["Envelope"] o ["E"]) que se comparan con
+                seismic_factor x q_adm x xi en vez de con q_adm x xi; se restan de las de servicio.
+                Criterio doble: gravedad (service_combos, p. ej. ["Comb2"]) contra la admisible tal
+                cual y sismo contra 4/3 de la admisible.
+            seismic_factor: 4/3 por defecto (aumento de un tercio para cargas transitorias).
         """
         import json
         if not path.lower().endswith(".xlsx"):
@@ -2213,7 +2220,8 @@ class Safe:
 
         def leer():
             ver, sep, rea, a_leer = self._verificacion_dict(sections, diameter_mm, cap_types, interpolation,
-                                                            q_adm, service_combos, margen_candidato)
+                                                            q_adm, service_combos, margen_candidato,
+                                                            seismic_combos, seismic_factor)
             hojas = self._escribir_libro(ver, sep, path)
             return {"herramienta": "export_pile_check_xlsx", "solo_lectura_del_modelo": True,
                     "archivo": path, "bytes": os.path.getsize(path), "hojas": hojas,
@@ -2226,8 +2234,12 @@ class Safe:
         return json.dumps(self._con_unidades(units, leer), ensure_ascii=False, default=str)
 
     def _verificacion_dict(self, sections, diameter_mm, cap_types, interpolation, q_adm,
-                           service_combos, margen_candidato):
-        """Geometria por cabezal + reacciones de todas las combos no envolventes + cruce. Unidades ya fijadas."""
+                           service_combos, margen_candidato, seismic_combos=None, seismic_factor=1.0):
+        """Geometria por cabezal + reacciones de todas las combos no envolventes + cruce. Unidades ya fijadas.
+
+        Con seismic_combos (p. ej. ["Envelope"]) se leen tambien esas combos aunque sean
+        envolventes y se comparan con seismic_factor x q_adm x xi.
+        """
         sep = self._informe_separacion(sections, diameter_mm, "by_footing", 1, interpolation,
                                        cap_types, 0.0, 0.0, 0.0, 10 ** 9)
         combos = self._combos_definidos()
@@ -2235,9 +2247,15 @@ class Safe:
         a_leer = [c for c, k in clase.items() if k != pilotes_xlsx.CLASE_ENVOLVENTE]
         if not isinstance(service_combos, str):
             a_leer = sorted(set(a_leer) | {str(c) for c in service_combos})
+        if seismic_combos:
+            faltan = [str(c) for c in seismic_combos if str(c) not in combos]
+            if faltan:
+                raise SafeError(f"seismic_combos inexistentes: {faltan}. Definidas: {sorted(combos)}.")
+            a_leer = sorted(set(a_leer) | {str(c) for c in seismic_combos})
         rea = self._informe_reacciones(sections, a_leer, [], "joint", 0.0, 10 ** 9)
         try:
-            ver = pilotes_xlsx.armar_verificacion(sep, rea, combos, q_adm, service_combos, margen_candidato)
+            ver = pilotes_xlsx.armar_verificacion(sep, rea, combos, q_adm, service_combos, margen_candidato,
+                                                  seismic_combos, seismic_factor)
         except pilotes.PilotesError as e:
             raise SafeError(str(e)) from e
         return ver, sep, rea, a_leer
@@ -2269,7 +2287,8 @@ class Safe:
                              service_combos: str | list[str] = "auto", sections: str | list[str] = "auto",
                              diameter_mm: float = 0.0, cap_types: str = "footing",
                              interpolation: str = "step_down", margen_candidato: float = 0.9,
-                             units: str = "kN, m, C") -> str:
+                             units: str = "kN, m, C", seismic_combos: list[str] | None = None,
+                             seismic_factor: float = 4.0 / 3.0) -> str:
         """Propuesta de cambios por cabezal (anadir / quitar / reespaciar) desde la verificacion. [solo lectura]
 
         Misma lectura que export_pile_check_xlsx (geometria por cabezal, reacciones de todas las
@@ -2283,7 +2302,8 @@ class Safe:
 
         def leer():
             ver, sep, rea, a_leer = self._verificacion_dict(sections, diameter_mm, cap_types, interpolation,
-                                                            q, service_combos, margen_candidato)
+                                                            q, service_combos, margen_candidato,
+                                                            seismic_combos, seismic_factor)
             return {"herramienta": "suggest_pile_changes", "solo_lectura": True, "modelo": sep["modelo"],
                     "unidades": sep["unidades"], "resumen": ver["resumen"], "propuesta": ver["propuesta"],
                     "avisos": sep["avisos"] + rea["avisos"]}
@@ -2379,7 +2399,8 @@ class Safe:
                            sections: str | list[str] = "auto", diameter_mm: float = 0.0,
                            cap_types: str = "footing", interpolation: str = "step_down",
                            margen_candidato: float = 0.9, units: str = "kN, m, C",
-                           overwrite: bool = False) -> str:
+                           overwrite: bool = False, seismic_combos: list[str] | None = None,
+                           seismic_factor: float = 4.0 / 3.0) -> str:
         """Ensaya cambios de pilotes en una COPIA: copia, borra/anade, reanaliza y compara antes/despues. [escribe solo en la copia]
 
         El original NUNCA se guarda ni se modifica (se comprueba su fecha en disco al final).
@@ -2420,7 +2441,8 @@ class Safe:
 
         def ensayar():
             antes, _sep0, _rea0, _ = self._verificacion_dict(sections, diameter_mm, cap_types, interpolation,
-                                                             q, service_combos, margen_candidato)
+                                                             q, service_combos, margen_candidato,
+                                                             seismic_combos, seismic_factor)
             self.copy_model_file(copy_path, overwrite)
             self.open_model(copy_path)
             self._exigir_modelo(copy_path)
@@ -2431,7 +2453,8 @@ class Safe:
             self.run_analysis()
             self._exigir_analisis()
             despues, sep, rea, a_leer = self._verificacion_dict(sections, diameter_mm, cap_types, interpolation,
-                                                                q, service_combos, margen_candidato)
+                                                                q, service_combos, margen_candidato,
+                                                                seismic_combos, seismic_factor)
             hojas = self._escribir_libro(despues, sep, xlsx_path) if xlsx_path else []
             comparacion = pilotes_xlsx.comparar_verificaciones(antes, despues)
             if self._mtime(str(original)) != mtime0:

@@ -101,8 +101,16 @@ def _avisos_modelo(avisos: list[str]) -> tuple[dict[str, str], set[str]]:
 
 def armar_verificacion(sep: dict, rea: dict, combos: dict[str, dict], q_adm: float,
                        service_combos: str | list[str] = "auto",
-                       margen_candidato: float = MARGEN_CANDIDATO) -> dict:
-    """Cruza geometria (sep, scope by_footing) y reacciones (rea, joint) en filas de hoja."""
+                       margen_candidato: float = MARGEN_CANDIDATO,
+                       seismic_combos: list[str] | None = None,
+                       seismic_factor: float = 1.0) -> dict:
+    """Cruza geometria (sep, scope by_footing) y reacciones (rea, joint) en filas de hoja.
+
+    Criterio doble opcional: las combos de servicio (gravedad) se comparan con q_adm*xi tal
+    cual; las seismic_combos (p. ej. la envolvente sismica E) con seismic_factor*q_adm*xi
+    (4/3 = aumento de un tercio para cargas transitorias). Un pilote o cabezal no cumple si
+    falla cualquiera de las dos; el ratio reportado es el mayor.
+    """
     if q_adm <= 0 or not math.isfinite(q_adm):
         raise PilotesError("q_adm debe ser positiva (carga admisible de servicio por pilote, FS incluido).")
     if not (0 < margen_candidato <= 1):
@@ -121,6 +129,17 @@ def armar_verificacion(sep: dict, rea: dict, combos: dict[str, dict], q_adm: flo
             raise PilotesError(f"service_combos inexistentes: {faltan}.")
         for c in servicio:
             clase[c] = "servicio (indicada por el usuario)"
+    sismo = {str(c) for c in (seismic_combos or [])}
+    if sismo:
+        if seismic_factor <= 0 or not math.isfinite(seismic_factor):
+            raise PilotesError("seismic_factor debe ser positivo (p. ej. 4/3).")
+        faltan = sorted(sismo - set(combos))
+        if faltan:
+            raise PilotesError(f"seismic_combos inexistentes: {faltan}.")
+        servicio -= sismo
+        for c in sismo:
+            clase[c] = f"sismico (indicada por el usuario; admisible x {seismic_factor:g})"
+    fs_ = seismic_factor if sismo else None
     diseno = {k for k, v in clase.items() if v.startswith("diseno")}
     if not servicio:
         raise PilotesError("Ninguna combinacion de servicio: indique service_combos.")
@@ -138,7 +157,11 @@ def armar_verificacion(sep: dict, rea: dict, combos: dict[str, dict], q_adm: flo
         factor = g["factor"] if g else None
         q_red = q_adm * factor if factor is not None else None
         es = _extremos(regs.get(pid, []), servicio)
+        ss = _extremos(regs.get(pid, []), sismo) if sismo else None
         ed = _extremos(regs.get(pid, []), diseno)
+        q_red_s = q_red * fs_ if (q_red is not None and fs_) else None
+        falla_g = bool(es and q_red is not None and es["p_max"] > q_red)
+        falla_s = bool(ss and q_red_s is not None and ss["p_max"] > q_red_s)
         revisar = []
         if pid in dup_de:
             revisar.append(f"duplicado de {dup_de[pid]}")
@@ -154,14 +177,22 @@ def armar_verificacion(sep: dict, rea: dict, combos: dict[str, dict], q_adm: flo
             geom = "OK"
         if revisar:
             estado = "REVISAR MODELO"
-        elif es is None:
+        elif es is None and ss is None:
             estado = "SIN RESULTADO"
         elif q_red is None:
             estado = "SIN FACTOR (S/B < 3): criterio del geotecnista"
-        elif es["p_max"] > q_red:
-            estado = "NO CUMPLE q_adm reducida"
+        elif falla_g and falla_s:
+            estado = "NO CUMPLE q_adm reducida (gravedad y sismo)"
+        elif falla_g:
+            estado = "NO CUMPLE q_adm reducida (gravedad)"
+        elif falla_s:
+            estado = f"NO CUMPLE {fs_:g} x q_adm reducida (sismo)"
         else:
             estado = "OK"
+        p_min = min([x["p_min"] for x in (es, ss) if x], default=None)
+        c_min = next((x["c_min"] for x in sorted([x for x in (es, ss) if x], key=lambda x: x["p_min"])), "")
+        ratio_g = (es["p_max"] / q_red) if (es and q_red) else None
+        ratio_s = (ss["p_max"] / q_red_s) if (ss and q_red_s) else None
         vecino = (g or {}).get("vecinos") or [{}]
         filas.append({
             "id": pid, "cabezal": cab, "x": (g or {}).get("x"), "y": (g or {}).get("y"),
@@ -170,10 +201,13 @@ def armar_verificacion(sep: dict, rea: dict, combos: dict[str, dict], q_adm: flo
             "pareja": (g or {}).get("pareja_s_b"), "s_b": (g or {}).get("s_b"), "factor": factor, "geom": geom,
             "q_adm": q_adm, "q_red": q_red, "q_red_t": q_red * a_t if q_red else None,
             "p_serv": es["p_max"] if es else None, "c_serv": es["c_max"] if es else None,
-            "p_trac": -es["p_min"] if (es and es["p_min"] < 0) else 0.0,
-            "c_trac": es["c_min"] if (es and es["p_min"] < 0) else "",
+            "q_red_sismo": q_red_s, "p_sismo": ss["p_max"] if ss else None, "c_sismo": ss["c_max"] if ss else None,
+            "ratio_sismo": ratio_s,
+            "p_trac": -p_min if (p_min is not None and p_min < 0) else 0.0,
+            "c_trac": c_min if (p_min is not None and p_min < 0) else "",
             "p_dis": ed["p_max"] if ed else None, "c_dis": ed["c_max"] if ed else None,
-            "ratio": (es["p_max"] / q_red) if (es and q_red) else None,
+            "ratio": max([r for r in (ratio_g, ratio_s) if r is not None], default=None),
+            "ratio_gravedad": ratio_g,
             "ratio_sin_factor": (es["p_max"] / q_adm) if es else None,
             "estado": estado, "candidato": "",
         })
@@ -184,26 +218,39 @@ def armar_verificacion(sep: dict, rea: dict, combos: dict[str, dict], q_adm: flo
         cid = g["cabezal"]
         miembros = [f for f in filas if f["cabezal"] == cid]
         sanos = [f for f in miembros if not f["revisar"]]
-        por_combo = defaultdict(float)
+        por_combo, por_combo_s = defaultdict(float), defaultdict(float)
         for f in sanos:
             for r in regs.get(f["id"], []):
                 if r["caso"] in servicio:
                     por_combo[(r["caso"], r["paso"])] += r["axial"]
+                elif r["caso"] in sismo:
+                    por_combo_s[(r["caso"], r["paso"])] += r["axial"]
         if por_combo:
             (cc, cp), dem = max(por_combo.items(), key=lambda t: t[1])
             combo_dem = f"{cc} {cp}".strip()
         else:
             dem, combo_dem = None, None
+        if por_combo_s:
+            (cc, cp), dem_s = max(por_combo_s.items(), key=lambda t: t[1])
+            combo_dem_s = f"{cc} {cp}".strip()
+        else:
+            dem_s, combo_dem_s = None, None
         n = len(sanos)
         factores = [f["factor"] for f in sanos if f["factor"] is not None]
         fuera = [f["id"] for f in sanos if f["factor"] is None]
         suma_f = sum(factores)
         cap_a = q_adm * suma_f if (factores and not fuera) else None
-        ratio = dem / cap_a if (dem is not None and cap_a) else None
+        cap_a_s = cap_a * fs_ if (cap_a and fs_) else None
+        ratio_g = dem / cap_a if (dem is not None and cap_a) else None
+        ratio_s = dem_s / cap_a_s if (dem_s is not None and cap_a_s) else None
+        ratio = max([r for r in (ratio_g, ratio_s) if r is not None], default=None)
         f_min = min(factores) if factores else None
         sobran = 0
-        if dem is not None and f_min and not fuera and n > 1:
-            while n - sobran - 1 >= 1 and dem <= margen_candidato * (n - sobran - 1) * f_min * q_adm:
+        if (dem is not None or dem_s is not None) and f_min and not fuera and n > 1:
+            def cabe(k):
+                base = margen_candidato * (n - k - 1) * f_min * q_adm
+                return (dem is None or dem <= base) and (dem_s is None or dem_s <= base * fs_)
+            while n - sobran - 1 >= 1 and cabe(sobran):
                 sobran += 1
         orden = sorted([f for f in sanos if f["p_serv"] is not None], key=lambda f: f["p_serv"])
         cands = orden[:sobran]
@@ -219,10 +266,12 @@ def armar_verificacion(sep: dict, rea: dict, combos: dict[str, dict], q_adm: flo
                                    "motivo": f"geometria: S/B {f['s_b']:.2f} < 3 con {f['pareja']}; eliminar uno de los dos repone la separacion (decidir cual)"})
         if fuera:
             estado = "SIN FACTOR: criterio del geotecnista"
-        elif dem is None:
+        elif ratio is None:
             estado = "SIN RESULTADO"
         elif ratio > 1:
-            estado = "NO CUMPLE (a)"
+            estado = "NO CUMPLE (a)" + (" (sismo)" if (ratio_s or 0) > 1 and not (ratio_g or 0) > 1 else
+                                      " (gravedad)" if (ratio_g or 0) > 1 and not (ratio_s or 0) > 1 else
+                                      " (gravedad y sismo)" if sismo else "")
         else:
             estado = "OK frente a (a); (b) PENDIENTE"
         cab_filas.append({"cabezal": cid, "n": len(miembros), "n_sanos": n,
@@ -230,6 +279,8 @@ def armar_verificacion(sep: dict, rea: dict, combos: dict[str, dict], q_adm: flo
                           "s_b_min": g["s_b_min"], "f_min": f_min, "suma_f": round(suma_f, 3),
                           "fuera": ", ".join(fuera), "cap_a": cap_a, "cap_a_t": cap_a * a_t if cap_a else None,
                           "dem": dem, "dem_t": dem * a_t if dem else None, "combo_dem": combo_dem,
+                          "dem_sismo": dem_s, "combo_dem_sismo": combo_dem_s, "cap_a_sismo": cap_a_s,
+                          "ratio_gravedad": ratio_g, "ratio_sismo": ratio_s,
                           "ratio": ratio, "estado": estado, "sobran": sobran,
                           "candidatos": ", ".join(f["id"] for f in cands)})
     for f in filas:
@@ -254,6 +305,9 @@ def armar_verificacion(sep: dict, rea: dict, combos: dict[str, dict], q_adm: flo
         "revisar_modelo": [f"{f['id']} ({f['revisar']})" for f in filas if f["revisar"]],
         "geometria_conforme": not (sep["resumen"]["fuera_de_tabla"]["n"] or n_rev),
         "servicio": sorted(servicio, key=lambda s: (len(s), s)),
+        "sismo": sorted(sismo, key=lambda s: (len(s), s)), "factor_sismo": fs_,
+        "n_no_cumplen_gravedad": sum(1 for f in filas if "gravedad" in f["estado"]),
+        "n_no_cumplen_sismo": sum(1 for f in filas if "sismo" in f["estado"]),
         "q_adm": q_adm, "unidad_fuerza": unidad_f,
         "critico": ({"id": critico["id"], "cabezal": critico["cabezal"], "p_serv": round(critico["p_serv"], 3),
                      "combo": critico["c_serv"], "ratio": round(critico["ratio"], 4) if critico["ratio"] else None}
@@ -305,20 +359,28 @@ def proponer_cambios(ver: dict, q_adm: float, margen_candidato: float = MARGEN_C
     n_hoy = n_prop = 0
     for c in ver["cabezales"]:
         n, dem, xi = c["n_sanos"], c["dem"], c["f_min"]
+        dem_s, f_s = c.get("dem_sismo"), (c["cap_a_sismo"] / c["cap_a"]) if (c.get("cap_a_sismo") and c.get("cap_a")) else None
+        if dem is None and dem_s is not None:
+            dem = 0.0
         fila = {"cabezal": c["cabezal"], "n_hoy": n, "excluidos": c["excluidos"], "dem": dem,
                 "xi_min": xi, "cap_a": c["cap_a"], "ratio": c["ratio"], "s_b_min": c["s_b_min"],
                 "n_min_xi": None, "n_min_malla": None, "accion": "", "delta": 0, "pilotes": "", "detalle": ""}
         if dem is None:
             fila["accion"], fila["detalle"] = "sin_resultado", "sin reacciones en la salida seleccionada"
         else:
-            n_malla = math.ceil(dem / (margen_candidato * q_adm * xi_malla))
+            def n_min(f_grupo):
+                k = math.ceil(dem / (margen_candidato * q_adm * f_grupo))
+                if dem_s is not None and f_s:
+                    k = max(k, math.ceil(dem_s / (margen_candidato * q_adm * f_grupo * f_s)))
+                return k
+            n_malla = n_min(xi_malla)
             fila["n_min_malla"] = n_malla
             if xi is None or c["fuera"]:
                 fila["accion"], fila["delta"] = "reespaciar", n_malla - n
                 fila["detalle"] = (f"pareja(s) con S/B < 3 ({c['fuera']}): reespaciar a >= 5 diametros y dejar "
                                    f"{n_malla} pilote(s) (hoy {n})")
             else:
-                n_xi = math.ceil(dem / (margen_candidato * q_adm * xi))
+                n_xi = n_min(xi)
                 fila["n_min_xi"] = n_xi
                 if n_xi > n:
                     fila["accion"], fila["delta"] = "anadir", n_xi - n
@@ -447,11 +509,14 @@ def escribir_libro(ver: dict, path: str, meta: dict) -> list[str]:
         ("Frames a revisar en el modelo (duplicados / inclinados)", f"{len(res['revisar_modelo'])}: {', '.join(res['revisar_modelo'])}"),
         ("GEOMETRIA CONFORME A TABLA 5.1", "SI" if res["geometria_conforme"] else "NO"),
         ("", ""),
-        ("DEMANDA (combinaciones de servicio)", ", ".join(res["servicio"])),
+        ("DEMANDA (combinaciones de servicio / gravedad)", ", ".join(res["servicio"])),
+        ("Combinaciones sismicas y factor sobre la admisible",
+         (", ".join(res["sismo"]) + f"  ->  admisible x {res['factor_sismo']:g}") if res["sismo"] else "no indicadas (criterio simple)"),
         (f"Carga admisible por pilote ({u}, FS incluido)", f"{res['q_adm']:g}; reducida por grupo = q_adm x factor (equivale solo si el FS no cambia, R-024 5.2)"),
         ("Pilote critico en servicio (sin frames a revisar)",
          f"{crit['id']} (cabezal {crit['cabezal']}): {crit['p_serv']} {u} en {crit['combo']}; ratio {crit['ratio']} frente a q_adm reducida" if crit else "sin resultados"),
-        ("Pilotes que NO CUMPLEN q_adm reducida en servicio", str(res["n_no_cumplen"])),
+        ("Pilotes que NO CUMPLEN q_adm reducida en servicio", str(res["n_no_cumplen"]) +
+         (f" (gravedad: {res['n_no_cumplen_gravedad']}, sismo: {res['n_no_cumplen_sismo']})" if res["sismo"] else "")),
         ("Pilotes sin factor (S/B < 3): criterio del geotecnista", str(res["n_sin_factor"])),
         ("Pilotes con traccion en servicio", str(res["n_con_traccion"])),
         ("Cabezales que NO CUMPLEN (a)", f"{len(res['cabezales_no_cumplen'])}: {', '.join(map(str, res['cabezales_no_cumplen']))}"),
@@ -479,9 +544,12 @@ def escribir_libro(ver: dict, path: str, meta: dict) -> list[str]:
         ("Factor (5.1)", "factor", 9, "0.00"), ("Geometria", "geom", 30),
         (f"q_adm ({u})", "q_adm", 9, "0.0"), (f"q_adm·f ({u})", "q_red", 10, "0.0"), ("q_adm·f (t)", "q_red_t", 9, "0.0"),
         (f"P max servicio ({u})", "p_serv", 11, "0.0"), ("Combo", "c_serv", 16),
+        ("Ratio gravedad", "ratio_gravedad", 9, "0.00"),
+        (f"q_adm·f x factor sismo ({u})", "q_red_sismo", 11, "0.0"),
+        (f"P max sismo ({u})", "p_sismo", 11, "0.0"), ("Combo sismo", "c_sismo", 16), ("Ratio sismo", "ratio_sismo", 9, "0.00"),
         (f"Traccion max servicio ({u})", "p_trac", 11, "0.0"), ("Combo traccion", "c_trac", 16),
         (f"P max diseno ({u})", "p_dis", 11, "0.0"), ("Combo diseno", "c_dis", 14),
-        ("Ratio P/q_adm·f", "ratio", 10, "0.00"), ("Ratio P/q_adm", "ratio_sin_factor", 10, "0.00"),
+        ("Ratio (mayor)", "ratio", 10, "0.00"), ("Ratio P/q_adm", "ratio_sin_factor", 10, "0.00"),
         ("Estado", "estado", 36), ("Candidato a eliminar", "candidato", 40),
     ], ver["filas"], color_estado)
     hoja(wb.create_sheet("Cabezales"), [
@@ -489,7 +557,10 @@ def escribir_libro(ver: dict, path: str, meta: dict) -> list[str]:
         ("S/B min", "s_b_min", 8, "0.000"), ("f min", "f_min", 7, "0.00"), ("Suma f", "suma_f", 8, "0.000"), ("S/B<3", "fuera", 18),
         (f"(a) Suma q_adm·f ({u})", "cap_a", 12, "0.0"), ("(a) (t)", "cap_a_t", 9, "0.0"),
         (f"Demanda servicio ({u})", "dem", 12, "0.0"), ("Demanda (t)", "dem_t", 9, "0.0"), ("Combo", "combo_dem", 16),
-        ("Ratio dem/(a)", "ratio", 10, "0.00"), ("Estado", "estado", 36),
+        ("Ratio gravedad", "ratio_gravedad", 9, "0.00"),
+        (f"(a) x factor sismo ({u})", "cap_a_sismo", 12, "0.0"), (f"Demanda sismo ({u})", "dem_sismo", 12, "0.0"),
+        ("Combo sismo", "combo_dem_sismo", 16), ("Ratio sismo", "ratio_sismo", 9, "0.00"),
+        ("Ratio (mayor)", "ratio", 10, "0.00"), ("Estado", "estado", 36),
         ("Pilotes que sobran por capacidad", "sobran", 10), ("Candidatos", "candidatos", 30),
     ], ver["cabezales"], lambda r: rojo if r["estado"].startswith("NO") else amarillo if r["estado"].startswith("SIN") else verde)
     hoja(wb.create_sheet("Candidatos"), [

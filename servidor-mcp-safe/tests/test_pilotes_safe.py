@@ -398,3 +398,24 @@ def test_trial_pile_changes_copia_borra_anade_reanaliza_y_compara(pile_api, tmp_
     with pytest.raises(SafeError, match="no la copia"):
         safe.trial_pile_changes(str(tmp_path / "y.fdb"), q_adm=800.0, delete_frames=["F01"])
     model.FrameObj.Delete.assert_called_with("F22", 0)  # no se borro nada mas
+
+
+def test_export_con_seismic_combos_lee_la_envolvente_y_compara_con_el_factor(pile_api, tmp_path):
+    safe, model, state = pile_api
+    state["combos"]["E"] = ([1, 1], ["ENV", "COMB1"], [1.0, 1.0])     # envolvente de combos: no se leeria sola
+    model.RespCombo.GetNameList.return_value = (3, ["COMB1", "ENV", "E"], 0)
+    for f in state["frames"]:
+        state["react"][f[3]] = [("COMB1", "", 300.0), ("ENV", "Max", 330.0), ("ENV", "Min", 20.0),
+                                ("E", "Max", 900.0), ("E", "Min", -50.0)]
+    path = str(tmp_path / "s.xlsx")
+    out = salida(safe.export_pile_check_xlsx(path, q_adm=800.0, service_combos=["COMB1"], seismic_combos=["E"]))
+    assert "E" in out["combos_leidas"] and out["resumen"]["servicio"] == ["COMB1"] and out["resumen"]["sismo"] == ["E"]
+    assert out["resumen"]["factor_sismo"] == pytest.approx(4 / 3)
+    # 900 < 720*4/3 = 960: cumple; con factor 1.0 no cumpliria
+    assert out["resumen"]["n_no_cumplen"] == 0
+    out2 = salida(safe.export_pile_check_xlsx(path, q_adm=800.0, service_combos=["COMB1"], seismic_combos=["E"],
+                                              seismic_factor=1.0, overwrite=True))
+    assert out2["resumen"]["n_no_cumplen"] == 9 and out2["resumen"]["n_no_cumplen_sismo"] == 9
+    with pytest.raises(SafeError, match="seismic_combos inexistentes"):
+        safe.export_pile_check_xlsx(str(tmp_path / "x.xlsx"), q_adm=800.0, seismic_combos=["NOPE"])
+    model.File.Save.assert_not_called()
