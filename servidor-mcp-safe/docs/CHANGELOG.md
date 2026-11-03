@@ -129,6 +129,10 @@ Primera version, 31 tools, probada en vivo contra TORRE A.
   y no desde la copia activa; `_analizar_tolerante` acepta `RunAnalysis` ret≠0 cuando `GetCaseStatus`
   reporta todos los casos listos (visto en vivo); `progress_path` escribe una línea JSON por iteración.
   285 tests.
+- Fase de reparación del efecto vecino en `optimize_pile_removal` (`max_reparaciones`, `radio_reparacion_d`):
+  restaura las quitas a menos de 6 D de cada pilote que pasa a no cumplir y reanaliza. Corrida viva
+  (tercer modelo): 897 → 670 pilotes sin fallos nuevos, 136 → 135 que no cumplen. "Añadir" con respaldo
+  a 4 D solo colocó 2 de 91: en 17 cabezales no hay hueco (agrandar cabezal, fila en BACKLOG). 286 tests.
 - Corrida de aceptación antes del PR sobre una copia de un segundo modelo (~1100 pilotes, 174
   cabezales) en instancia SAFE arrancada por COM: las cinco tools **[H]**; 114 pilotes con S/B < 3,
   igual que el conteo independiente del mismo día. Tiempos con 1112 pilotes: 88 s reacciones,
