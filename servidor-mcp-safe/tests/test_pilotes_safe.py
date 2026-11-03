@@ -339,6 +339,13 @@ def _mock_edicion(model, state):
         state["frames"] = [f for f in state["frames"] if f[0] != name]
         return 0
     model.FrameObj.Delete.side_effect = delete
+    # open_model(copia) parte siempre del archivo base: restaurar los frames de la base.
+    base_frames = list(state["frames"])
+    old_open = model.File.OpenFile.side_effect
+    def openfile(path):
+        state["frames"] = list(base_frames)
+        return old_open(path)
+    model.File.OpenFile.side_effect = openfile
     def add(x1, y1, z1, x2, y2, z2, name="", prop="Default", user="", csys="Global"):
         n = f"N{len(state['frames'])}"
         state["frames"].append((n, prop, f"T{n}", f"B{n}", x1, y1, z1, x2, y2, z2))
@@ -466,3 +473,69 @@ def test_cap_types_por_seccion_en_el_libro(pile_api, tmp_path):
     out = salida(safe.export_pile_check_xlsx(str(tmp_path / "g.xlsx"), q_adm=800.0, cap_types="S1"))
     assert out["resumen"]["n_cabezales"] == 1 and "Grupos" in out["hojas"]
     model.PropArea.GetSlab.assert_not_called()   # por nombre de seccion no hace falta el tipo
+
+
+def test_apply_pile_proposal_quita_candidatos_anade_y_reanaliza(pile_api, tmp_path):
+    safe, model, state = pile_api
+    # Malla 3x3 holgada (quitar) + cabezal "C1" de un pilote sobrecargado (anadir) en un area grande.
+    state["frames"].append(("SOLO", "P45", "TS", "BS", 30.0, 30.0, 0.0, 30.0, 30.0, -12.0))
+    _mock_edicion(model, state)
+    model.AreaObj.GetAllAreas.return_value = (2, ["A1", "A2"], [1, 1], 8, [3, 7], ["P1", "P2", "P3", "P4", "Q1", "Q2", "Q3", "Q4"],
+                                              [-0.5, 5.0, 5.0, -0.5, 27.0, 33.0, 33.0, 27.0],
+                                              [-0.5, -0.5, 5.0, 5.0, 27.0, 27.0, 33.0, 33.0], [0.] * 8, 0)
+    for f in state["frames"]:
+        state["react"][f[3]] = [("COMB1", "", 200.0)]
+    state["react"]["BS"] = [("COMB1", "", 1000.0)]   # 1000 > 800*1.0: anadir 1 (n_min 2)
+    copia = str(tmp_path / "prop.fdb")
+    out = salida(safe.apply_pile_proposal(copia, q_adm=800.0, xlsx_path=str(tmp_path / "prop.xlsx")))
+    plan = {(p["cabezal"], p["accion"]): p for p in out["plan"]}
+    assert ("A1", "quitar") in plan and plan[("A1", "quitar")]["borrar"]   # 9 x 200 = 1800 << 0.9*8*0.9*800
+    assert plan[("A2", "anadir")]["pedidos"] == 1 and plan[("A2", "anadir")]["colocados"] == 1 and plan[("A2", "anadir")]["faltan"] == 0
+    assert out["cambios"]["n_borrados"] == len(plan[("A1", "quitar")]["borrar"]) and out["cambios"]["n_anadidos"] == 1
+    nuevo = out["cambios"]["anadidos"][0]
+    assert nuevo["cabezal"] == "A2" and nuevo["referencia"] == "SOLO" and nuevo["s_b_min_previsto"] >= 5.0
+    assert 27.45 <= nuevo["x"] <= 32.55 and 27.45 <= nuevo["y"] <= 32.55
+    model.File.OpenFile.assert_called_once_with(copia)
+    model.Analyze.RunAnalysis.assert_called_once()
+    model.File.Save.assert_not_called()
+    assert out["original_intacto"] and out["hojas"][0] == "Resumen" and out["no_automatizado"] == []
+    assert out["comparacion"]["global"]["n_pilotes"][1] == 10 - out["cambios"]["n_borrados"] + 1
+    with pytest.raises(SafeError, match="acciones"):
+        safe.apply_pile_proposal(str(tmp_path / "x.fdb"), q_adm=800.0, acciones=["mover"])
+
+
+def test_optimize_pile_removal_quita_de_uno_en_uno_y_deja_copia_valida(pile_api, tmp_path):
+    safe, model, state = pile_api
+    _mock_edicion(model, state)
+    for f in state["frames"]:
+        state["react"][f[3]] = [("COMB1", "", 200.0)]      # malla holgada: la propuesta dice quitar
+    copia = str(tmp_path / "opt.fdb")
+    out = salida(safe.optimize_pile_removal(copia, q_adm=800.0, max_iter=3, xlsx_path=str(tmp_path / "opt.xlsx")))
+    assert out["iteraciones"] == 3 and out["cabezales_congelados"] == []
+    assert len(out["quitados_por_cabezal"]["A1"]) == 3 and out["n_borrados"] == 3
+    assert [h["aceptados"] for h in out["historial"]] == [["A1"], ["A1"], ["A1"]]
+    assert out["comparacion"]["global"]["n_pilotes"] == [9, 6] and out["original_intacto"]
+    # una copia nueva por iteracion mas la final: 4 copias desde la BASE, 4 analisis; nunca Save.
+    # Aperturas: la primera iteracion parte de la base ya activa (1), las demas reabren base + copia (2 x 3).
+    import shutil
+    assert shutil.copy2.call_count == 4 and model.File.OpenFile.call_count == 7 and model.Analyze.RunAnalysis.call_count == 4
+    assert all(c.args == ("modelo.fdb", copia) for c in shutil.copy2.call_args_list)
+    model.File.Save.assert_not_called()
+    assert out["hojas"][0] == "Resumen"
+
+
+def test_optimize_congela_el_cabezal_cuando_un_pilote_deja_de_cumplir(pile_api, tmp_path):
+    safe, model, state = pile_api
+    _mock_edicion(model, state)
+    for f in state["frames"]:
+        state["react"][f[3]] = [("COMB1", "", 200.0)]
+    # Al borrar un frame, el mock sube la carga del F11 por encima de la admisible reducida (720).
+    original_delete = model.FrameObj.Delete.side_effect
+    def delete(name, item=0):
+        r = original_delete(name, item)
+        state["react"]["B11"] = [("COMB1", "", 750.0)]
+        return r
+    model.FrameObj.Delete.side_effect = delete
+    out = salida(safe.optimize_pile_removal(str(tmp_path / "opt.fdb"), q_adm=800.0, max_iter=3))
+    assert out["iteraciones"] == 1 and out["cabezales_congelados"] == ["A1"] and out["n_borrados"] == 0
+    assert out["historial"][0]["revertidos"] == ["A1"] and out["quitados_por_cabezal"] == {}

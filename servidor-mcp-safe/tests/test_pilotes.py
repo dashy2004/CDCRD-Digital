@@ -284,3 +284,32 @@ def test_envolvente_ratio_sin_redondear_y_traccion_pura_no_cumple_por_defecto():
     assert a["ratio"] == 1.0 and a["cumple_q_adm"] is False and out["no_cumplen"] == ["A"]
     t = next(f for f in out["pilotes"] if f["pilote"] == "T")
     assert t["cumple_q_adm"] is None and out["solo_traccion_sin_evaluar"] == ["T"]
+
+
+# ------------------------------------------------- colocacion automatica
+
+def test_colocar_pilotes_en_cabezal_cuadrado():
+    # Cabezal 6x6 m, Ø0.45, un pilote en el centro: caben 4 mas a >= 5D (2.25 m) en las esquinas.
+    xs, ys = [0, 6, 6, 0], [0, 0, 6, 6]
+    r = pl.colocar_pilotes(xs, ys, [(3.0, 3.0)], 4, 0.45, s_min_d=5.0, borde_d=1.0)
+    assert len(r["puestos"]) == 4 and r["faltan"] == 0 and r["n_candidatos"] > 0
+    for p in r["puestos"]:
+        assert 0.45 <= p["x"] <= 5.55 and 0.45 <= p["y"] <= 5.55 and p["s_b_min"] >= 5.0
+        assert math.hypot(p["x"] - 3.0, p["y"] - 3.0) >= 2.25 - 1e-9
+    # entre si tambien >= 5D
+    for a in r["puestos"]:
+        for b in r["puestos"]:
+            if a is not b:
+                assert math.hypot(a["x"] - b["x"], a["y"] - b["y"]) >= 2.25 - 1e-9
+
+
+def test_colocar_pilotes_reporta_lo_que_no_cabe():
+    xs, ys = [0, 2.0, 2.0, 0], [0, 0, 2.0, 2.0]   # cabezal 2x2 con un pilote al centro: no cabe otro a 5D
+    r = pl.colocar_pilotes(xs, ys, [(1.0, 1.0)], 2, 0.45)
+    assert r["puestos"] == [] and r["faltan"] == 2 and r["mejor_s_b_disponible"] is not None and r["mejor_s_b_disponible"] < 5
+    r2 = pl.colocar_pilotes(xs, ys, [], 1, 0.45)       # vacio: el primero cabe donde sea
+    assert len(r2["puestos"]) == 1 and r2["faltan"] == 0
+    with pytest.raises(pl.PilotesError):
+        pl.colocar_pilotes(xs, ys, [], -1, 0.45)
+    with pytest.raises(pl.PilotesError):
+        pl.colocar_pilotes([0, 1], [0, 1], [], 1, 0.45)

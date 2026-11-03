@@ -466,6 +466,65 @@ def pilote_a_dict(p: Pilote, factor_mm: float) -> dict:
             "inclinado": p.inclinado, "cabezal": p.grupo}
 
 
+
+# ---------------------------------------------------------------------------
+# Colocacion automatica de pilotes nuevos dentro de un cabezal
+# ---------------------------------------------------------------------------
+
+def _dist_punto_segmento(x, y, x1, y1, x2, y2) -> float:
+    dx, dy = x2 - x1, y2 - y1
+    if dx == 0 and dy == 0:
+        return math.hypot(x - x1, y - y1)
+    t = max(0.0, min(1.0, ((x - x1) * dx + (y - y1) * dy) / (dx * dx + dy * dy)))
+    return math.hypot(x - (x1 + t * dx), y - (y1 + t * dy))
+
+
+def colocar_pilotes(xs: list[float], ys: list[float], existentes: list[tuple[float, float]], k: int,
+                    diametro: float, s_min_d: float = 5.0, borde_d: float = 1.0,
+                    paso_d: float = 0.5) -> dict:
+    """Propone k posiciones dentro del poligono del cabezal, lo mas lejos posible de los
+    pilotes existentes y entre si (greedy sobre una malla de paso paso_d*D), a >= borde_d*D
+    de los bordes. Cada posicion aceptada cumple distancia >= s_min_d*D a todo pilote; si
+    no cabe mas, se devuelve el deficit y la mejor separacion disponible (en diametros).
+    No decide: la posicion final la fija el ingeniero.
+    """
+    if k < 0 or diametro <= 0 or s_min_d <= 0 or paso_d <= 0:
+        raise PilotesError("colocar_pilotes: k >= 0, diametro, s_min_d y paso_d positivos.")
+    if len(xs) < 3 or len(xs) != len(ys):
+        raise PilotesError("colocar_pilotes: poligono invalido.")
+    n = len(xs)
+    lados = [(xs[i], ys[i], xs[(i + 1) % n], ys[(i + 1) % n]) for i in range(n)]
+    paso = paso_d * diametro
+    x0, x1, y0, y1 = min(xs), max(xs), min(ys), max(ys)
+    candidatos = []
+    nx, ny = int((x1 - x0) / paso) + 1, int((y1 - y0) / paso) + 1
+    for i in range(nx + 1):
+        for j in range(ny + 1):
+            x, y = x0 + i * paso, y0 + j * paso
+            if not punto_en_poligono(x, y, xs, ys):
+                continue
+            if min(_dist_punto_segmento(x, y, *l) for l in lados) < borde_d * diametro - 1e-9:
+                continue
+            candidatos.append((x, y))
+    puestos: list[dict] = []
+    ocupados = list(existentes)
+    mejor_fallido = None
+    for _ in range(k):
+        mejor = None
+        for (x, y) in candidatos:
+            dmin = min((math.hypot(x - ox, y - oy) for ox, oy in ocupados), default=math.inf)
+            if mejor is None or dmin > mejor[0]:
+                mejor = (dmin, x, y)
+        if mejor is None or mejor[0] < s_min_d * diametro - 1e-9:
+            mejor_fallido = mejor
+            break
+        dmin, x, y = mejor
+        puestos.append({"x": round(x, 4), "y": round(y, 4), "s_b_min": round(dmin / diametro, 3)})
+        ocupados.append((x, y))
+    return {"puestos": puestos, "faltan": k - len(puestos),
+            "mejor_s_b_disponible": round(mejor_fallido[0] / diametro, 3) if (mejor_fallido and math.isfinite(mejor_fallido[0])) else None,
+            "n_candidatos": len(candidatos)}
+
 # ---------------------------------------------------------------------------
 # Reacciones axiales: envolvente y pilote critico
 # ---------------------------------------------------------------------------

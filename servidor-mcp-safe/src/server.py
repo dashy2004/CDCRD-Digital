@@ -132,6 +132,10 @@ suggest_pile_changes = mcp.tool()(safe.suggest_pile_changes)
 trial_pile_changes = mcp.tool()(safe.trial_pile_changes)
 # Escribe grupos (datos del modelo); guarda solo con save=True.
 assign_pile_groups = mcp.tool()(safe.assign_pile_groups)
+# Escribe SOLO en la copia que crea; aplica la hoja Propuesta y reanaliza.
+apply_pile_proposal = mcp.tool()(safe.apply_pile_proposal)
+# Quita de uno en uno con reanalisis por paso; escribe SOLO en la copia.
+optimize_pile_removal = mcp.tool()(safe.optimize_pile_removal)
 
 if __name__ == "__main__":
     mcp.run(transport='stdio')

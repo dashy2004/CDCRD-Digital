@@ -5,9 +5,9 @@ Servidor MCP de CSI SAFE 23.3.0, OAPI 2.016. ProgID confirmado:
 inventario ampliado: `docs/BACKLOG-HERRAMIENTAS.md`; enums y fuentes locales:
 `docs/ENUMS-SAFE.md`.
 
-El catálogo tiene **58 funciones implementadas: 57 tools registradas y una
+El catálogo tiene **60 funciones implementadas: 59 tools registradas y una
 [X] deshabilitada**. Son las 31 iniciales, las 18 del lote 1 de Claude, las
-3 por tabla del lote 2 y las 6 de pilotes (2026-11-02/03, ver más abajo).
+3 por tabla del lote 2 y las 8 de pilotes (2026-11-02/03, ver más abajo).
 `set_area_points` fue retirada por Claude tras
 `EditArea.ChangeConnectivity → -99`; sigue bajo test para detectar regresiones.
 No debe anunciarse como tool disponible.
@@ -40,7 +40,7 @@ Claude Desktop desde la bandeja y revalidar los cambios.
 | Geometría y cargas lote 1 | `delete_object`, `move_objects`, `get_area_info`, `set_area_property`, `set_area_opening`, `set_point_coordinates`, `add_point`, `assign_point_load` | 8 |
 | Lecturas lote 1 | `get_strip_rebar_stations`, `get_table_fields` | 2 |
 | Tablas lote 2 [T] | `add_design_strip`, `set_strip_widths`, `set_punching_overwrite` | 3 |
-| Pilotes [H] | `get_pile_spacing`, `get_pile_axial_reactions`, `export_pile_check_xlsx`, `suggest_pile_changes` (solo lectura); `trial_pile_changes` (escribe solo en una copia); `assign_pile_groups` (escribe grupos; guarda solo con `save=True`) | 6 |
+| Pilotes [H] | `get_pile_spacing`, `get_pile_axial_reactions`, `export_pile_check_xlsx`, `suggest_pile_changes` (solo lectura); `trial_pile_changes`, `apply_pile_proposal`, `optimize_pile_removal` (escriben solo en una copia); `assign_pile_groups` (escribe grupos; guarda solo con `save=True`) | 8 |
 
 ## Pilotes: separación S/B y reacción axial, solo lectura [H] (claude, 2026-11-02)
 
@@ -126,6 +126,26 @@ los mismos nombres van en la hoja **Grupos** y en la columna "Grupo SAFE" del li
 revisar cabezal a cabezal (Select > Groups) en vez de pilote a pilote. Los grupos son datos
 del modelo: sin `save=True` se pierden al cerrar; `save=True` llama `File.Save` (solo sobre
 copia o con autorización). Corrida viva 2026-11-03: 158 grupos y 897 pilotes en 15 s.
+
+### Aplicar la propuesta en copia: `apply_pile_proposal` y `optimize_pile_removal`
+
+`apply_pile_proposal(copy_path, q_adm, acciones=["quitar","anadir","modelo"], s_min_d=5,
+s_fallback_d=0)` generaliza el ensayo: toma la hoja Propuesta del modelo activo, copia el
+FDB, borra los candidatos de baja demanda y los frames duplicados, coloca los pilotes que
+faltan dentro del área del cabezal (`pilotes.colocar_pilotes`: malla de candidatos a
+≥ `borde_d` del borde, elegidos lo más lejos posible de los existentes, a ≥ `s_min_d`
+diámetros y, si no caben, a `s_fallback_d`), reanaliza y compara antes/después. Lo que no
+cabe o es "redistribuir"/"reespaciar" se reporta en `no_automatizado`.
+
+**Lección de la corrida 2026-11-03 (tercer modelo):** aplicar "quitar" en bloque, aunque
+cada cabezal siga cumpliendo por suma (a), **empeoró** el modelo: 275 pilotes menos y los
+que no cumplen subieron de 136 a 246, porque la carga se redistribuye hacia los pilotes de
+borde. Por eso existe `optimize_pile_removal(copy_path, q_adm, max_iter=6, por_iteracion=1)`:
+quita un pilote por cabezal y por iteración, partiendo cada vez de una copia nueva de la
+base, reanaliza y verifica; en cuanto un pilote del cabezal deja de cumplir, o su suma (a)
+pasa de 1, ese cabezal se congela y su última quita se revierte. Termina dejando la copia
+en la última configuración válida y el libro de esa configuración. Cada iteración es un
+análisis completo. Las posiciones de pilotes nuevos son propuestas: las fija el ingeniero.
 
 ### `suggest_pile_changes` y `trial_pile_changes`: proponer y ensayar en copia [H]
 

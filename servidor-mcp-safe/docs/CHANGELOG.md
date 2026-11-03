@@ -118,6 +118,13 @@ Primera version, 31 tools, probada en vivo contra TORRE A.
   revisar por grupo; `save=True` guarda (solo copia o con autorización). `cap_types` admite
   nombres de sección de área (`"Z50"`); hoja **Grupos** y columna "Grupo SAFE" en el libro.
   279 tests. Corrida viva 2026-11-03 sobre la copia del tercer modelo: 158 grupos, 897 pilotes, 15 s.
+- Séptima y octava tools (59 registradas): `apply_pile_proposal` (aplica la hoja Propuesta en copia:
+  quitar, borrar duplicados y añadir con colocación automática `pilotes.colocar_pilotes`, separación
+  mínima y de respaldo en diámetros, reanálisis y comparación) y `optimize_pile_removal` (quita de
+  uno en uno por cabezal, copia nueva por iteración, reanálisis y congelación del cabezal en cuanto
+  un pilote deja de cumplir). 284 tests. Hallazgo de la corrida viva: aplicar "quitar" en bloque
+  empeora el modelo (275 pilotes menos, 136 → 246 que no cumplen) aunque la suma (a) siga
+  cumpliendo; añadir a 5 diámetros no cupo en ninguno de los 19 cabezales pedidos (hueco 2.6-4.8 D).
 - Corrida de aceptación antes del PR sobre una copia de un segundo modelo (~1100 pilotes, 174
   cabezales) en instancia SAFE arrancada por COM: las cinco tools **[H]**; 114 pilotes con S/B < 3,
   igual que el conteo independiente del mismo día. Tiempos con 1112 pilotes: 88 s reacciones,

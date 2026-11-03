@@ -2491,6 +2491,311 @@ class Safe:
                                   "decision del ingeniero firmante"]}
         return json.dumps(self._con_unidades(units, ensayar), ensure_ascii=False, default=str)
 
+
+    # ---------------- Aplicar la Propuesta en COPIA (claude, 2026-11-03) --
+
+    @com_call
+    def apply_pile_proposal(self, copy_path: str, q_adm: float = 0.0, q_ult: float = 0.0, fs: float = 0.0,
+                            xlsx_path: str = "", acciones: list[str] | None = None,
+                            solo_cabezales: list[str] | None = None, s_min_d: float = 5.0,
+                            s_fallback_d: float = 0.0, borde_d: float = 1.0,
+                            service_combos: str | list[str] = "auto",
+                            seismic_combos: list[str] | None = None, seismic_factor: float = 4.0 / 3.0,
+                            sections: str | list[str] = "auto", diameter_mm: float = 0.0,
+                            cap_types: str = "footing", interpolation: str = "step_down",
+                            margen_candidato: float = 0.9, units: str = "kN, m, C",
+                            overwrite: bool = False) -> str:
+        """Aplica la hoja Propuesta en una COPIA del modelo y la reanaliza: quita los candidatos y anade pilotes colocados automaticamente. [escribe solo en la copia]
+
+        Generaliza trial_pile_changes: la lista de cambios sale de suggest_pile_changes.
+        - "quitar": borra los pilotes de baja demanda listados por cabezal.
+        - "modelo": borra los frames duplicados (artefactos).
+        - "anadir": coloca los pilotes que faltan dentro del area del cabezal, lo mas lejos
+          posible de los existentes, a >= s_min_d diametros entre ejes y >= borde_d del borde
+          (colocar_pilotes); copia seccion, Z y apoyos de punta de un pilote del cabezal.
+          Si no caben a s_min_d, lo reporta ("no cabe") y no fuerza nada.
+        - "redistribuir" y "reespaciar" NO se automatizan: se reportan para el ingeniero.
+        Despues corre el analisis de la copia y compara antes/despues (comparar_verificaciones).
+        El original no se guarda; se verifica su fecha en disco.
+
+        Args:
+            copy_path: .FDB de la copia (no sobrescribe salvo overwrite=True).
+            acciones: subconjunto de ["quitar", "anadir", "modelo"]; None = las tres.
+            solo_cabezales: limitar a estos cabezales (None = todos).
+            s_min_d, borde_d: separacion minima entre ejes y al borde, en diametros.
+            s_fallback_d: si > 0, lo que no cabe a s_min_d se intenta a esta separacion menor
+                (p. ej. 4 = factor 0.8); se reporta con que separacion quedo cada pilote.
+            resto: como export_pile_check_xlsx / trial_pile_changes.
+
+        AVISO (corrida 2026-11-03): aplicar "quitar" por capacidad en bloque puede EMPEORAR el
+        modelo (la carga se redistribuye peor que la suma); usar optimize_pile_removal, que
+        quita de uno en uno y valida cada paso con reanalisis.
+        """
+        import json
+        q = self._q_adm_base(q_adm, q_ult, fs)
+        acciones = set(acciones or ["quitar", "anadir", "modelo"])
+        if not acciones <= {"quitar", "anadir", "modelo"}:
+            raise SafeError("acciones admite solo quitar, anadir y modelo.")
+        if not copy_path.lower().endswith(".fdb"):
+            raise SafeError("copy_path debe terminar en .fdb.")
+        if xlsx_path and os.path.exists(xlsx_path) and not overwrite:
+            raise SafeError(f"Ya existe {xlsx_path}; use overwrite=True.")
+        model = self._model()
+        original = model.GetModelFilename()
+        if not original or not os.path.isfile(str(original)):
+            raise SafeError("El modelo activo no tiene archivo en disco; no hay original que copiar.")
+        if os.path.normcase(os.path.abspath(copy_path)) == os.path.normcase(os.path.abspath(str(original))):
+            raise SafeError("copy_path no puede ser el original.")
+        mtime0 = self._mtime(str(original))
+        filtro = {str(c) for c in solo_cabezales} if solo_cabezales else None
+
+        def aplicar():
+            antes, sep0, _rea0, _ = self._verificacion_dict(sections, diameter_mm, cap_types, interpolation,
+                                                            q, service_combos, margen_candidato,
+                                                            seismic_combos, seismic_factor)
+            _idx, _preset, _f, length = self._unidades_activas()
+            mm = self._LENGTH_MM[length]
+            poligonos = {str(c["id"]): c for c in self._cabezales(cap_types)}
+            por_cab: dict[str, list[dict]] = {}
+            for f in antes["filas"]:
+                if f["cabezal"] is not None and not f["revisar"]:
+                    por_cab.setdefault(str(f["cabezal"]), []).append(f)
+            diametro = {k: v["diametro"] for k, v in sep0["secciones_circulares"].items()}
+            plan, borrar, anadir, no_auto = [], [], [], []
+            if "modelo" in acciones:
+                dup = [c["id"] for c in antes["candidatos"] if c["motivo"].startswith("modelo")]
+                borrar += dup
+                if dup:
+                    plan.append({"cabezal": None, "accion": "modelo", "borrar": dup})
+            for fila in antes["propuesta"]["filas"]:
+                cid = str(fila["cabezal"])
+                if filtro and cid not in filtro:
+                    continue
+                if fila["accion"] == "quitar" and "quitar" in acciones:
+                    ids = [x for x in fila["pilotes"].split(", ") if x]
+                    borrar += ids
+                    plan.append({"cabezal": cid, "accion": "quitar", "borrar": ids})
+                elif fila["accion"] == "anadir" and "anadir" in acciones:
+                    miembros = por_cab.get(cid, [])
+                    pol = poligonos.get(cid)
+                    if not miembros or pol is None:
+                        no_auto.append({"cabezal": cid, "accion": "anadir", "motivo": "sin pilotes o sin area"})
+                        continue
+                    sec = next((p["seccion"] for p in sep0["pilotes"] if p["id"] == miembros[0]["id"]), None)
+                    d = diametro.get(sec) or max(diametro.values())
+                    existentes = [(p["x"], p["y"]) for p in miembros]
+                    col = pilotes.colocar_pilotes(pol["xs"], pol["ys"], existentes, int(fila["delta"]), d, s_min_d, borde_d)
+                    puestos = list(col["puestos"])
+                    separacion_usada = s_min_d
+                    if col["faltan"] and s_fallback_d > 0 and s_fallback_d < s_min_d:
+                        col2 = pilotes.colocar_pilotes(pol["xs"], pol["ys"],
+                                                       existentes + [(p["x"], p["y"]) for p in puestos],
+                                                       col["faltan"], d, s_fallback_d, borde_d)
+                        puestos += col2["puestos"]
+                        col = {**col2, "mejor_s_b_disponible": col2["mejor_s_b_disponible"] or col["mejor_s_b_disponible"]}
+                        separacion_usada = s_fallback_d if col2["puestos"] else s_min_d
+                    for pt in puestos:
+                        anadir.append({"cabezal": cid, "x": pt["x"], "y": pt["y"], "ref": miembros[0]["id"],
+                                       "s_b_min": pt["s_b_min"]})
+                    plan.append({"cabezal": cid, "accion": "anadir", "pedidos": int(fila["delta"]),
+                                 "colocados": len(puestos), "faltan": col["faltan"],
+                                 "separacion_minima_usada_d": separacion_usada,
+                                 "mejor_s_b_disponible": col["mejor_s_b_disponible"]})
+                    if col["faltan"]:
+                        no_auto.append({"cabezal": cid, "accion": "anadir", "faltan": col["faltan"],
+                                        "motivo": f"no caben a {s_fallback_d or s_min_d:g} diametros; mejor separacion "
+                                                  f"disponible {col['mejor_s_b_disponible']} D: ampliar el cabezal o reespaciar"})
+                elif fila["accion"] in ("redistribuir", "reespaciar"):
+                    no_auto.append({"cabezal": cid, "accion": fila["accion"], "motivo": fila["detalle"]})
+            if not borrar and not anadir:
+                raise SafeError("La propuesta no deja ningun cambio automatizable (quitar/anadir/modelo).")
+            self.copy_model_file(copy_path, overwrite)
+            self.open_model(copy_path)
+            self._exigir_modelo(copy_path)
+            borrados = self._borrar_frames(copy_path, sorted(set(borrar), key=lambda s: (len(s), s))) if borrar else []
+            anadidos = []
+            for a in anadir:
+                r = self._anadir_pilote(copy_path, float(a["x"]), float(a["y"]), str(a["ref"]))
+                r["cabezal"], r["s_b_min_previsto"] = a["cabezal"], a["s_b_min"]
+                anadidos.append(r)
+            self._exigir_modelo(copy_path)
+            self.run_analysis()
+            self._exigir_analisis()
+            despues, sep, rea, _ = self._verificacion_dict(sections, diameter_mm, cap_types, interpolation,
+                                                           q, service_combos, margen_candidato,
+                                                           seismic_combos, seismic_factor)
+            hojas = self._escribir_libro(despues, sep, xlsx_path) if xlsx_path else []
+            comparacion = pilotes_xlsx.comparar_verificaciones(antes, despues)
+            if self._mtime(str(original)) != mtime0:
+                raise SafeError(f"El ORIGINAL cambio en disco durante la aplicacion: {original}. Revisar.")
+            return {"herramienta": "apply_pile_proposal", "original": str(original), "original_intacto": True,
+                    "copia": copy_path, "copia_abierta_en_safe": True, "unidades": sep["unidades"],
+                    "acciones": sorted(acciones), "s_min_d": s_min_d, "borde_d": borde_d,
+                    "plan": plan, "no_automatizado": no_auto,
+                    "cambios": {"n_borrados": len(borrados), "borrados": borrados,
+                                "n_anadidos": len(anadidos), "anadidos": anadidos},
+                    "comparacion": comparacion,
+                    "resumen_antes": {k: antes["resumen"][k] for k in ("n_pilotes", "n_no_cumplen", "cabezales_no_cumplen", "n_candidatos")},
+                    "resumen_despues": despues["resumen"], "propuesta_despues": despues["propuesta"],
+                    "libro_despues": xlsx_path or None, "hojas": hojas,
+                    "avisos": sep["avisos"] + rea["avisos"],
+                    "pendiente": ["redistribuir y reespaciar: a mano (ver no_automatizado)",
+                                  "posiciones de pilotes nuevos: propuestas, las fija el ingeniero",
+                                  "(b) pila equivalente y capacidad a traccion: sin evaluar"]}
+        return json.dumps(self._con_unidades(units, aplicar), ensure_ascii=False, default=str)
+
+    def _copia_desde_base(self, base: str, copia: str) -> None:
+        """Reabre la base (cierra la copia sin guardar), copia el archivo base y abre la copia."""
+        import shutil
+        activo = str(self._model().GetModelFilename() or "")
+        if os.path.normcase(os.path.abspath(activo)) != os.path.normcase(os.path.abspath(base)):
+            self.open_model(base)
+        shutil.copy2(base, copia)
+        self.open_model(copia)
+
+    # ---------------- Quitar iterativo validado por reanalisis -------------
+
+    @com_call
+    def optimize_pile_removal(self, copy_path: str, q_adm: float = 0.0, q_ult: float = 0.0, fs: float = 0.0,
+                              xlsx_path: str = "", max_iter: int = 6, por_iteracion: int = 1,
+                              solo_cabezales: list[str] | None = None, incluir_modelo: bool = True,
+                              service_combos: str | list[str] = "auto",
+                              seismic_combos: list[str] | None = None, seismic_factor: float = 4.0 / 3.0,
+                              sections: str | list[str] = "auto", diameter_mm: float = 0.0,
+                              cap_types: str = "footing", interpolation: str = "step_down",
+                              margen_candidato: float = 0.9, units: str = "kN, m, C",
+                              overwrite: bool = False) -> str:
+        """Quita pilotes de baja demanda de uno en uno por cabezal, reanalizando y validando cada paso. [escribe solo en la copia]
+
+        Cada iteracion parte del modelo base (copia nueva), borra el conjunto acumulado,
+        reanaliza y verifica. Un cabezal se CONGELA (se revierte su ultima quita) en cuanto
+        algun pilote suyo deja de cumplir, su suma (a) supera 1 o su propuesta ya no dice
+        "quitar". Termina cuando no queda cabezal activo o al llegar a max_iter. Deja la copia
+        con la ultima configuracion valida y el libro de esa configuracion.
+
+        Args:
+            max_iter: iteraciones maximas (cada una = un analisis).
+            por_iteracion: pilotes a quitar por cabezal en cada iteracion (1 = conservador).
+            incluir_modelo: borrar tambien los frames duplicados (artefactos) desde la primera iteracion.
+            resto: como apply_pile_proposal.
+        """
+        import json
+        q = self._q_adm_base(q_adm, q_ult, fs)
+        if max_iter < 1 or por_iteracion < 1:
+            raise SafeError("max_iter y por_iteracion deben ser >= 1.")
+        if not copy_path.lower().endswith(".fdb"):
+            raise SafeError("copy_path debe terminar en .fdb.")
+        if xlsx_path and os.path.exists(xlsx_path) and not overwrite:
+            raise SafeError(f"Ya existe {xlsx_path}; use overwrite=True.")
+        model = self._model()
+        original = model.GetModelFilename()
+        if not original or not os.path.isfile(str(original)):
+            raise SafeError("El modelo activo no tiene archivo en disco; no hay base que copiar.")
+        if os.path.normcase(os.path.abspath(copy_path)) == os.path.normcase(os.path.abspath(str(original))):
+            raise SafeError("copy_path no puede ser el original.")
+        mtime0 = self._mtime(str(original))
+        filtro = {str(c) for c in solo_cabezales} if solo_cabezales else None
+
+        def verificar():
+            return self._verificacion_dict(sections, diameter_mm, cap_types, interpolation, q,
+                                           service_combos, margen_candidato, seismic_combos, seismic_factor)
+
+        def optimizar():
+            base, _s, _r, _ = verificar()
+            estado_cab = {c["cabezal"]: c for c in base["cabezales"]}
+            quitados: dict[str, list[str]] = {}
+            congelados: set = set()
+            borrar_modelo = [c["id"] for c in base["candidatos"] if c["motivo"].startswith("modelo")] if incluir_modelo else []
+            historial = []
+            ultima_valida = base
+            ultima_borrados: list[str] = list(borrar_modelo)
+            actual = base
+            for it in range(1, max_iter + 1):
+                # 1) proponer una quita por cabezal activo a partir de la verificacion actual
+                nuevos: dict[str, list[str]] = {}
+                for fila in actual["propuesta"]["filas"]:
+                    cid = str(fila["cabezal"])
+                    if cid in congelados or (filtro and cid not in filtro) or fila["accion"] != "quitar":
+                        continue
+                    cands = [x for x in fila["pilotes"].split(", ") if x and x not in quitados.get(cid, [])][:por_iteracion]
+                    if cands:
+                        nuevos[cid] = cands
+                if not nuevos:
+                    break
+                conjunto = list(borrar_modelo)
+                for cid, lst in quitados.items():
+                    conjunto += lst
+                for cid, lst in nuevos.items():
+                    conjunto += lst
+                # 2) copia nueva desde la BASE (no desde la copia activa), borrar, reanalizar, verificar
+                self._copia_desde_base(str(original), copy_path)
+                self._exigir_modelo(copy_path)
+                self._borrar_frames(copy_path, sorted(set(conjunto), key=lambda s: (len(s), s)))
+                self.run_analysis()
+                self._exigir_analisis()
+                ver, _s, _r, _ = verificar()
+                por_cab = {c["cabezal"]: c for c in ver["cabezales"]}
+                fallan = {str(f["cabezal"]) for f in ver["filas"] if f["estado"].startswith("NO CUMPLE")}
+                fallan_a = {str(c["cabezal"]) for c in ver["cabezales"] if c["estado"].startswith("NO CUMPLE")}
+                aceptados, revertidos = [], []
+                for cid, lst in nuevos.items():
+                    antes_c = estado_cab.get(cid)
+                    ya_fallaba = bool(antes_c and (antes_c["estado"].startswith("NO CUMPLE") or antes_c.get("no_cumplen")))
+                    if (cid in fallan or cid in fallan_a) and not ya_fallaba:
+                        revertidos.append(cid)
+                        congelados.add(cid)
+                    elif cid in fallan or cid in fallan_a:
+                        # ya fallaba antes: no se toca
+                        revertidos.append(cid)
+                        congelados.add(cid)
+                    else:
+                        quitados.setdefault(cid, []).extend(lst)
+                        aceptados.append(cid)
+                historial.append({"iteracion": it, "propuestos": {k: v for k, v in nuevos.items()},
+                                  "aceptados": aceptados, "revertidos": revertidos,
+                                  "n_borrados_total_valido": len(borrar_modelo) + sum(len(v) for v in quitados.values()),
+                                  "no_cumplen_tras": ver["resumen"]["n_no_cumplen"],
+                                  "n_pilotes_tras": ver["resumen"]["n_pilotes"]})
+                if not revertidos:
+                    ultima_valida, ultima_borrados = ver, list(set(conjunto))
+                    actual = ver
+                else:
+                    # el modelo de esta iteracion incluye quitas revertidas: la configuracion
+                    # valida es la acumulada sin ellas; se reconstruye en la siguiente vuelta o al final
+                    actual = ver
+                    for cid in revertidos:
+                        for f in actual["propuesta"]["filas"]:
+                            if str(f["cabezal"]) == cid:
+                                f["accion"] = "congelado"
+            # 3) dejar la copia en la ultima configuracion VALIDA (sin las quitas revertidas)
+            final = list(borrar_modelo)
+            for cid, lst in quitados.items():
+                final += lst
+            self._copia_desde_base(str(original), copy_path)
+            self._exigir_modelo(copy_path)
+            if final:
+                self._borrar_frames(copy_path, sorted(set(final), key=lambda s: (len(s), s)))
+            self.run_analysis()
+            self._exigir_analisis()
+            despues, sep, rea, _ = verificar()
+            hojas = self._escribir_libro(despues, sep, xlsx_path) if xlsx_path else []
+            comparacion = pilotes_xlsx.comparar_verificaciones(base, despues)
+            if self._mtime(str(original)) != mtime0:
+                raise SafeError(f"El ORIGINAL cambio en disco durante la optimizacion: {original}. Revisar.")
+            return {"herramienta": "optimize_pile_removal", "original": str(original), "original_intacto": True,
+                    "copia": copy_path, "copia_abierta_en_safe": True, "unidades": sep["unidades"],
+                    "iteraciones": len(historial), "historial": historial,
+                    "quitados_por_cabezal": quitados, "frames_modelo_borrados": borrar_modelo,
+                    "n_borrados": len(set(final)), "cabezales_congelados": sorted(congelados),
+                    "comparacion": comparacion,
+                    "resumen_antes": {k: base["resumen"][k] for k in ("n_pilotes", "n_no_cumplen", "cabezales_no_cumplen")},
+                    "resumen_despues": despues["resumen"], "libro_despues": xlsx_path or None, "hojas": hojas,
+                    "avisos": sep["avisos"] + rea["avisos"],
+                    "pendiente": ["anadir / redistribuir / reespaciar: apply_pile_proposal o a mano",
+                                  "(b) pila equivalente y capacidad a traccion: sin evaluar",
+                                  "cada iteracion es un analisis completo de la copia"]}
+        return json.dumps(self._con_unidades(units, optimizar), ensure_ascii=False, default=str)
+
     # ---------------- Grupos de SAFE por cabezal (claude, 2026-11-03) ---
 
     _GROUP_OBJ_TYPES = {1: "point", 2: "frame", 3: "cable", 4: "tendon", 5: "area", 6: "solid", 7: "link"}
