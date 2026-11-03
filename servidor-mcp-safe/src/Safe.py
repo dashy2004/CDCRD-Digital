@@ -2460,6 +2460,7 @@ class Safe:
         mtime0 = self._mtime(str(original))
 
         def ensayar():
+            avisos_analisis: list[str] = []
             antes, _sep0, _rea0, _ = self._verificacion_dict(sections, diameter_mm, cap_types, interpolation,
                                                              q, service_combos, margen_candidato,
                                                              seismic_combos, seismic_factor)
@@ -2470,7 +2471,7 @@ class Safe:
             anadidos = [self._anadir_pilote(copy_path, float(a["x"]), float(a["y"]), str(a["ref"]),
                                             str(a.get("section", ""))) for a in add_piles]
             self._exigir_modelo(copy_path)
-            self.run_analysis()
+            avisos_analisis.append(self._analizar_tolerante())
             self._exigir_analisis()
             despues, sep, rea, a_leer = self._verificacion_dict(sections, diameter_mm, cap_types, interpolation,
                                                                 q, service_combos, margen_candidato,
@@ -2485,7 +2486,7 @@ class Safe:
                     "comparacion": comparacion,
                     "resumen_despues": despues["resumen"], "propuesta_despues": despues["propuesta"],
                     "libro_despues": xlsx_path or None, "hojas": hojas,
-                    "avisos": sep["avisos"] + rea["avisos"],
+                    "avisos": sep["avisos"] + rea["avisos"] + [a for a in avisos_analisis if a],
                     "pendiente": ["(b) pila equivalente: parametros de suelo",
                                   "capacidad a traccion no evaluada: ver traccion_max antes/despues",
                                   "decision del ingeniero firmante"]}
@@ -2550,6 +2551,7 @@ class Safe:
         filtro = {str(c) for c in solo_cabezales} if solo_cabezales else None
 
         def aplicar():
+            avisos_analisis: list[str] = []
             antes, sep0, _rea0, _ = self._verificacion_dict(sections, diameter_mm, cap_types, interpolation,
                                                             q, service_combos, margen_candidato,
                                                             seismic_combos, seismic_factor)
@@ -2619,7 +2621,7 @@ class Safe:
                 r["cabezal"], r["s_b_min_previsto"] = a["cabezal"], a["s_b_min"]
                 anadidos.append(r)
             self._exigir_modelo(copy_path)
-            self.run_analysis()
+            avisos_analisis.append(self._analizar_tolerante())
             self._exigir_analisis()
             despues, sep, rea, _ = self._verificacion_dict(sections, diameter_mm, cap_types, interpolation,
                                                            q, service_combos, margen_candidato,
@@ -2638,11 +2640,27 @@ class Safe:
                     "resumen_antes": {k: antes["resumen"][k] for k in ("n_pilotes", "n_no_cumplen", "cabezales_no_cumplen", "n_candidatos")},
                     "resumen_despues": despues["resumen"], "propuesta_despues": despues["propuesta"],
                     "libro_despues": xlsx_path or None, "hojas": hojas,
-                    "avisos": sep["avisos"] + rea["avisos"],
+                    "avisos": sep["avisos"] + rea["avisos"] + [a for a in avisos_analisis if a],
                     "pendiente": ["redistribuir y reespaciar: a mano (ver no_automatizado)",
                                   "posiciones de pilotes nuevos: propuestas, las fija el ingeniero",
                                   "(b) pila equivalente y capacidad a traccion: sin evaluar"]}
         return json.dumps(self._con_unidades(units, aplicar), ensure_ascii=False, default=str)
+
+    def _analizar_tolerante(self) -> str:
+        """run_analysis para bucles: si RunAnalysis devuelve ret != 0 pero GetCaseStatus dice que todos
+        los casos quedaron listos (visto en vivo 2026-11-03 tras reabrir modelos en la misma
+        instancia), se acepta con aviso en vez de abortar; si no, se propaga el error."""
+        model = self._model()
+        ret = model.Analyze.RunAnalysis()
+        if ret == 0:
+            return ""
+        try:
+            self._exigir_analisis()
+        except SafeError as e:
+            raise SafeError(f"RunAnalysis ret={ret} y casos sin terminar: {e}") from e
+        aviso = f"RunAnalysis devolvio ret={ret} pero GetCaseStatus reporta todos los casos listos; se acepta."
+        logger.warning(aviso)
+        return aviso
 
     def _copia_desde_base(self, base: str, copia: str) -> None:
         """Reabre la base (cierra la copia sin guardar), copia el archivo base y abre la copia."""
@@ -2664,7 +2682,7 @@ class Safe:
                               sections: str | list[str] = "auto", diameter_mm: float = 0.0,
                               cap_types: str = "footing", interpolation: str = "step_down",
                               margen_candidato: float = 0.9, units: str = "kN, m, C",
-                              overwrite: bool = False) -> str:
+                              overwrite: bool = False, progress_path: str = "") -> str:
         """Quita pilotes de baja demanda de uno en uno por cabezal, reanalizando y validando cada paso. [escribe solo en la copia]
 
         Cada iteracion parte del modelo base (copia nueva), borra el conjunto acumulado,
@@ -2701,6 +2719,7 @@ class Safe:
                                            service_combos, margen_candidato, seismic_combos, seismic_factor)
 
         def optimizar():
+            avisos_analisis: list[str] = []
             base, _s, _r, _ = verificar()
             estado_cab = {c["cabezal"]: c for c in base["cabezales"]}
             quitados: dict[str, list[str]] = {}
@@ -2731,7 +2750,7 @@ class Safe:
                 self._copia_desde_base(str(original), copy_path)
                 self._exigir_modelo(copy_path)
                 self._borrar_frames(copy_path, sorted(set(conjunto), key=lambda s: (len(s), s)))
-                self.run_analysis()
+                avisos_analisis.append(self._analizar_tolerante())
                 self._exigir_analisis()
                 ver, _s, _r, _ = verificar()
                 por_cab = {c["cabezal"]: c for c in ver["cabezales"]}
@@ -2756,6 +2775,9 @@ class Safe:
                                   "n_borrados_total_valido": len(borrar_modelo) + sum(len(v) for v in quitados.values()),
                                   "no_cumplen_tras": ver["resumen"]["n_no_cumplen"],
                                   "n_pilotes_tras": ver["resumen"]["n_pilotes"]})
+                if progress_path:
+                    with open(progress_path, "a", encoding="utf-8") as fh:
+                        fh.write(json.dumps(historial[-1], ensure_ascii=False) + "\n")
                 if not revertidos:
                     ultima_valida, ultima_borrados = ver, list(set(conjunto))
                     actual = ver
@@ -2775,7 +2797,7 @@ class Safe:
             self._exigir_modelo(copy_path)
             if final:
                 self._borrar_frames(copy_path, sorted(set(final), key=lambda s: (len(s), s)))
-            self.run_analysis()
+            avisos_analisis.append(self._analizar_tolerante())
             self._exigir_analisis()
             despues, sep, rea, _ = verificar()
             hojas = self._escribir_libro(despues, sep, xlsx_path) if xlsx_path else []
@@ -2790,7 +2812,7 @@ class Safe:
                     "comparacion": comparacion,
                     "resumen_antes": {k: base["resumen"][k] for k in ("n_pilotes", "n_no_cumplen", "cabezales_no_cumplen")},
                     "resumen_despues": despues["resumen"], "libro_despues": xlsx_path or None, "hojas": hojas,
-                    "avisos": sep["avisos"] + rea["avisos"],
+                    "avisos": sep["avisos"] + rea["avisos"] + [a for a in avisos_analisis if a],
                     "pendiente": ["anadir / redistribuir / reespaciar: apply_pile_proposal o a mano",
                                   "(b) pila equivalente y capacidad a traccion: sin evaluar",
                                   "cada iteracion es un analisis completo de la copia"]}

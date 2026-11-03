@@ -539,3 +539,18 @@ def test_optimize_congela_el_cabezal_cuando_un_pilote_deja_de_cumplir(pile_api, 
     out = salida(safe.optimize_pile_removal(str(tmp_path / "opt.fdb"), q_adm=800.0, max_iter=3))
     assert out["iteraciones"] == 1 and out["cabezales_congelados"] == ["A1"] and out["n_borrados"] == 0
     assert out["historial"][0]["revertidos"] == ["A1"] and out["quitados_por_cabezal"] == {}
+
+
+def test_analisis_tolerante_acepta_ret_no_cero_si_los_casos_quedan_listos(pile_api, tmp_path):
+    safe, model, state = pile_api
+    _mock_edicion(model, state)
+    for f in state["frames"]:
+        state["react"][f[3]] = [("COMB1", "", 200.0)]
+    model.Analyze.RunAnalysis.return_value = 7           # ret != 0 pero GetCaseStatus (conftest) dice listo
+    out = salida(safe.optimize_pile_removal(str(tmp_path / "t.fdb"), q_adm=800.0, max_iter=1,
+                                            progress_path=str(tmp_path / "progreso.jsonl")))
+    assert out["iteraciones"] == 1 and any("ret=7" in a for a in out["avisos"])
+    assert (tmp_path / "progreso.jsonl").read_text(encoding="utf-8").count("\n") == 1
+    model.Analyze.GetCaseStatus.return_value = (2, ["Dead", "Live"], [1, 1], 0)
+    with pytest.raises(SafeError, match="ret=7"):
+        safe._analizar_tolerante()   # ret != 0 y casos sin terminar: error, no se acepta

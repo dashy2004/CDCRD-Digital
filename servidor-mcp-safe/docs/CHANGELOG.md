@@ -125,6 +125,10 @@ Primera version, 31 tools, probada en vivo contra TORRE A.
   un pilote deja de cumplir). 284 tests. Hallazgo de la corrida viva: aplicar "quitar" en bloque
   empeora el modelo (275 pilotes menos, 136 → 246 que no cumplen) aunque la suma (a) siga
   cumpliendo; añadir a 5 diámetros no cupo en ninguno de los 19 cabezales pedidos (hueco 2.6-4.8 D).
+  Correcciones tras las primeras corridas del bucle: cada iteración copia desde la BASE (reabriéndola)
+  y no desde la copia activa; `_analizar_tolerante` acepta `RunAnalysis` ret≠0 cuando `GetCaseStatus`
+  reporta todos los casos listos (visto en vivo); `progress_path` escribe una línea JSON por iteración.
+  285 tests.
 - Corrida de aceptación antes del PR sobre una copia de un segundo modelo (~1100 pilotes, 174
   cabezales) en instancia SAFE arrancada por COM: las cinco tools **[H]**; 114 pilotes con S/B < 3,
   igual que el conteo independiente del mismo día. Tiempos con 1112 pilotes: 88 s reacciones,

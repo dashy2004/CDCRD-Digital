@@ -1,4 +1,4 @@
-claude (Fable local): SAFE-MCP pilotes v0.3.0 + apply/optimize — 2026-11-03T12:07:36-04:00
+claude (Fable local): SAFE-MCP pilotes v0.3.0 + apply/optimize (analisis tolerante) — 2026-11-03T12:15:18-04:00
 Comando: python -m pytest tests/ -p no:cacheprovider
 Interprete: C:\Users\emilg\AppData\Local\Python\pythoncore-3.14-64\python.exe
 COM sustituido; Safe._model parcheado; sin SAFE ni FDB. Fixtures sinteticas; openpyxl 3.1.5.
@@ -7,14 +7,14 @@ COM sustituido; Safe._model parcheado; sin SAFE ni FDB. Fixtures sinteticas; ope
 platform win32 -- Python 3.14.6, pytest-9.1.1, pluggy-1.7.0
 rootdir: C:\Users\emilg\Artificial IQ\CDCRD-Digital\servidor-mcp-safe
 plugins: anyio-4.14.2
-collected 284 items
+collected 285 items
 
 tests\test_lote1.py .................................................... [ 18%]
 ........................................................................ [ 43%]
 ......................                                                   [ 51%]
 tests\test_pilotes.py .............................................      [ 67%]
-tests\test_pilotes_safe.py .................................             [ 78%]
+tests\test_pilotes_safe.py ..................................            [ 78%]
 tests\test_pilotes_xlsx.py ..............                                [ 83%]
 tests\test_tablas.py ..............................................      [100%]
 
-============================= 284 passed in 3.46s =============================
+============================= 285 passed in 2.81s =============================
