@@ -86,3 +86,23 @@ Footing, 39 combinaciones, análisis sin correr). Nombre y coordenadas quedan en
 | 16 ensayo en copia | **[H]** | `trial_pile_changes`: copia `_ensayo-mcp.FDB`, 12 `FrameObj.Delete` verificados por relectura, 1 `AddByCoord` (frame nuevo con la sección y las Z del de referencia, restricción de punta copiada; `GetSpring` devolvió ret=1 = sin resorte), `run_analysis` 20 s, verificación y comparación en 30 s totales. Original con la misma fecha y tamaño antes y después. Un cabezal pasó de NO CUMPLE a OK al añadir el tercer pilote y otro recuperó factor al borrar la pareja con S/B < 3; el crítico bajó un 21 %. |
 
 Tiempos: 0.2 s el barrido global, 0.6 s por cabezal (una llamada `GetAllFrames` + 240 `GetProperty`/`GetSlab` cacheados por sección), 1.5-1.7 s las reacciones de 564 pilotes, 3.2 s el libro completo, 30 s el ensayo en copia.
+
+## Segundo modelo — ~1100 pilotes, corrida de aceptación antes del PR (2026-11-02, tarde)
+
+Sobre una **copia** del segundo modelo de pilotes de la firma (1123 frames, 1112 pilotes de una
+sección circular Ø600 en malla a 2.4 m, 174 cabezales), en una instancia de SAFE arrancada por
+COM (`auto_start`), porque la ventana de SAFE abierta por el usuario no estaba registrada en COM
+(segunda instancia). Código del commit `1d36851`, sin cambios.
+
+| Paso | Estado | Evidencia |
+|---|---|---|
+| arranque | **[H]** con salvedad | `SAFEv1.Helper.CreateObjectProgID` + `ApplicationStart` + `open_model(copia)` funcionan. El **primer** `run_analysis` tras arrancar la instancia dejó el solver completo (LOG "ANALYSIS COMPLETE") pero SAFE reportó los casos "no corrido" y la llamada COM no regresó; matado el proceso cliente y relanzado, el análisis terminó en 74 s y quedó "listo". Pendiente de reproducir. |
+| 1 separación | **[H]** | 1.1 s el barrido global, 29.5 s por cabezal (174 áreas). Mediana S/B 4.0, mínimo 2.33, 114 pilotes con S/B < 3 en barrido global: **coincide exactamente** con el conteo independiente hecho ese mismo día con otro script sobre el `.$sf`. Promedio step_down 0.793 frente a 0.78 del conteo manual (misma explicación que en el primer modelo). Dos pilotes caen en dos cabezales solapados: avisado y asignado al primero. |
+| 2 reacciones | **[H]** | 88 s por `joint` y 88 s por `frame` (1112 llamadas a `JointReact`/`FrameForce`); mismo crítico y misma cifra por las dos vías. |
+| 3-4 libro y propuesta | **[H]** | 126-128 s cada uno (incluyen las dos lecturas). 22 combos de servicio clasificadas por definición; 163 pilotes sobre q_adm·ξ; 16 sin factor; 266 candidatos (250 baja demanda, 16 geometría). Propuesta: 6 añadir, 109 quitar, 9 redistribuir, 4 reespaciar, 46 mantener. |
+| 5 ensayo | **[H]** | `trial_pile_changes` sobre copia de la copia: 1 `FrameObj.Delete` (candidato de baja demanda) y 1 `AddByCoord` en un cabezal a reforzar (restricción de punta copiada del de referencia), `run_analysis` y dos verificaciones completas: 456 s en total con 1112 pilotes. Antes/después: 163 → 161 pilotes sobre q_adm·ξ, crítico sin cambio (otro cabezal), 2 cabezales mejoran y 1 empeora. Archivo base de la copia con la misma fecha y tamaño; el original del proyecto con su fecha de marzo. |
+
+Límite encontrado: con ~1100 pilotes, `export_pile_check_xlsx` y `suggest_pile_changes` tardan
+más de 2 min por las 1112 llamadas individuales a `Results.JointReact`; el cliente MCP puede
+cortar por timeout antes (E-035) aunque el servidor termine. Mitigación anotada en BACKLOG:
+leer las reacciones de todas las puntas con una sola llamada (grupo o `SelectionElm`).

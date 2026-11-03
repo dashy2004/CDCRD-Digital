@@ -107,3 +107,8 @@ Primera version, 31 tools, probada en vivo contra TORRE A.
 - Corrección documental: `Analyze.RunAnalysis` GUARDA el modelo activo en disco antes de analizar
   (comprobado por la fecha del FDB). "Solo lectura" de las tools de pilotes sigue siendo cierto; lo
   que no es cierto es que correr el análisis deje el archivo intacto.
+- Corrida de aceptación antes del PR sobre una copia de un segundo modelo (~1100 pilotes, 174
+  cabezales) en instancia SAFE arrancada por COM: las cinco tools **[H]**; 114 pilotes con S/B < 3,
+  igual que el conteo independiente del mismo día. Tiempos con 1112 pilotes: 88 s reacciones,
+  126 s libro (fila de rendimiento en BACKLOG). El primer `run_analysis` tras `ApplicationStart`
+  quedó colgado una vez (solver completo, casos "no corrido"); al relanzar, 74 s.
