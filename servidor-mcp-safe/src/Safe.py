@@ -2682,7 +2682,8 @@ class Safe:
                               sections: str | list[str] = "auto", diameter_mm: float = 0.0,
                               cap_types: str = "footing", interpolation: str = "step_down",
                               margen_candidato: float = 0.9, units: str = "kN, m, C",
-                              overwrite: bool = False, progress_path: str = "") -> str:
+                              overwrite: bool = False, progress_path: str = "",
+                              max_reparaciones: int = 2, radio_reparacion_d: float = 6.0) -> str:
         """Quita pilotes de baja demanda de uno en uno por cabezal, reanalizando y validando cada paso. [escribe solo en la copia]
 
         Cada iteracion parte del modelo base (copia nueva), borra el conjunto acumulado,
@@ -2691,10 +2692,16 @@ class Safe:
         "quitar". Termina cuando no queda cabezal activo o al llegar a max_iter. Deja la copia
         con la ultima configuracion valida y el libro de esa configuracion.
 
+        Fase de reparacion (efecto vecino, visto en vivo 2026-11-03: quitar en un cabezal carga
+        al de al lado): tras las iteraciones, los pilotes que NO cumplen y si cumplian en la
+        base se tratan restaurando las quitas a menos de radio_reparacion_d diametros de cada
+        uno y reanalizando, hasta max_reparaciones veces o hasta que no quede fallo nuevo.
+
         Args:
             max_iter: iteraciones maximas (cada una = un analisis).
             por_iteracion: pilotes a quitar por cabezal en cada iteracion (1 = conservador).
             incluir_modelo: borrar tambien los frames duplicados (artefactos) desde la primera iteracion.
+            max_reparaciones, radio_reparacion_d: fase de reparacion (0 = sin reparar).
             resto: como apply_pile_proposal.
         """
         import json
@@ -2800,6 +2807,51 @@ class Safe:
             avisos_analisis.append(self._analizar_tolerante())
             self._exigir_analisis()
             despues, sep, rea, _ = verificar()
+            # 4) reparacion del efecto vecino: fallos nuevos -> restaurar quitas cercanas
+            fallaban_base = {f["id"] for f in base["filas"] if f["estado"].startswith("NO CUMPLE")}
+            xy = {f["id"]: (f["x"], f["y"]) for f in base["filas"] if f["x"] is not None}
+            d_ref = max(sep["secciones_circulares"][k]["diametro"] for k in sep["secciones_circulares"]) if sep["secciones_circulares"] else 0.0
+            reparaciones = []
+            for rep in range(1, max_reparaciones + 1):
+                nuevos_fallos = [f["id"] for f in despues["filas"]
+                                 if f["estado"].startswith("NO CUMPLE") and f["id"] not in fallaban_base]
+                if not nuevos_fallos or d_ref <= 0:
+                    break
+                restaurar = set()
+                for pid in nuevos_fallos:
+                    px_, py_ = xy.get(pid, (None, None))
+                    if px_ is None:
+                        continue
+                    for q in final:
+                        if q in borrar_modelo or q not in xy:
+                            continue
+                        if math.hypot(xy[q][0] - px_, xy[q][1] - py_) <= radio_reparacion_d * d_ref:
+                            restaurar.add(q)
+                if not restaurar:
+                    reparaciones.append({"reparacion": rep, "fallos_nuevos": nuevos_fallos, "restaurados": [],
+                                         "nota": "sin quitas dentro del radio; fallos no atribuibles a las quitas"})
+                    break
+                final = [q for q in final if q not in restaurar]
+                for cid in list(quitados):
+                    quitados[cid] = [q for q in quitados[cid] if q not in restaurar]
+                    if not quitados[cid]:
+                        del quitados[cid]
+                self._copia_desde_base(str(original), copy_path)
+                self._exigir_modelo(copy_path)
+                if final:
+                    self._borrar_frames(copy_path, sorted(set(final), key=lambda s: (len(s), s)))
+                avisos_analisis.append(self._analizar_tolerante())
+                self._exigir_analisis()
+                despues, sep, rea, _ = verificar()
+                reparaciones.append({"reparacion": rep, "fallos_nuevos": nuevos_fallos,
+                                     "restaurados": sorted(restaurar, key=lambda s: (len(s), s)),
+                                     "no_cumplen_tras": despues["resumen"]["n_no_cumplen"],
+                                     "n_pilotes_tras": despues["resumen"]["n_pilotes"]})
+                if progress_path:
+                    with open(progress_path, "a", encoding="utf-8") as fh:
+                        fh.write(json.dumps(reparaciones[-1], ensure_ascii=False) + "\n")
+            fallos_restantes = [f["id"] for f in despues["filas"]
+                                if f["estado"].startswith("NO CUMPLE") and f["id"] not in fallaban_base]
             hojas = self._escribir_libro(despues, sep, xlsx_path) if xlsx_path else []
             comparacion = pilotes_xlsx.comparar_verificaciones(base, despues)
             if self._mtime(str(original)) != mtime0:
@@ -2807,6 +2859,7 @@ class Safe:
             return {"herramienta": "optimize_pile_removal", "original": str(original), "original_intacto": True,
                     "copia": copy_path, "copia_abierta_en_safe": True, "unidades": sep["unidades"],
                     "iteraciones": len(historial), "historial": historial,
+                    "reparaciones": reparaciones, "fallos_nuevos_restantes": fallos_restantes,
                     "quitados_por_cabezal": quitados, "frames_modelo_borrados": borrar_modelo,
                     "n_borrados": len(set(final)), "cabezales_congelados": sorted(congelados),
                     "comparacion": comparacion,

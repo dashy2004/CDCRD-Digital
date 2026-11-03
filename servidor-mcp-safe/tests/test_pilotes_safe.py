@@ -554,3 +554,30 @@ def test_analisis_tolerante_acepta_ret_no_cero_si_los_casos_quedan_listos(pile_a
     model.Analyze.GetCaseStatus.return_value = (2, ["Dead", "Live"], [1, 1], 0)
     with pytest.raises(SafeError, match="ret=7"):
         safe._analizar_tolerante()   # ret != 0 y casos sin terminar: error, no se acepta
+
+
+def test_optimize_repara_el_efecto_vecino_restaurando_quitas_cercanas(pile_api, tmp_path):
+    safe, model, state = pile_api
+    # Cabezal A1 (malla) y cabezal A2 con un pilote SOLO a 1.5 m del F20: quitar F20 hace fallar a SOLO.
+    state["frames"].append(("SOLO", "P45", "TS", "BS", 6.0, 0.0, 0.0, 6.0, 0.0, -12.0))
+    _mock_edicion(model, state)
+    model.AreaObj.GetAllAreas.return_value = (2, ["A1", "A2"], [1, 1], 8, [3, 7], ["P1", "P2", "P3", "P4", "Q1", "Q2", "Q3", "Q4"],
+                                              [-0.5, 5.0, 5.0, -0.5, 5.2, 7.0, 7.0, 5.2],
+                                              [-0.5, -0.5, 5.0, 5.0, -1.0, -1.0, 1.0, 1.0], [0.] * 8, 0)
+    for f in state["frames"]:
+        state["react"][f[3]] = [("COMB1", "", 200.0)]
+    state["react"]["B20"] = [("COMB1", "", 100.0)]      # el menos cargado: primer candidato a quitar
+    state["react"]["BS"] = [("COMB1", "", 300.0)]
+    original_delete = model.FrameObj.Delete.side_effect
+    def delete(name, item=0):
+        r = original_delete(name, item)
+        if name == "F20":
+            state["react"]["BS"] = [("COMB1", "", 1000.0)]   # vecino sobrecargado
+        return r
+    model.FrameObj.Delete.side_effect = delete
+    out = salida(safe.optimize_pile_removal(str(tmp_path / "r.fdb"), q_adm=800.0, max_iter=1, max_reparaciones=1))
+    assert out["historial"][0]["aceptados"] == ["A1"]          # A1 sigue cumpliendo: la quita se acepta
+    assert out["reparaciones"] and out["reparaciones"][0]["fallos_nuevos"] == ["SOLO"]
+    assert out["reparaciones"][0]["restaurados"] == ["F20"]    # a 1.5 m < 6 D = 2.7 m
+    assert "F20" not in out["quitados_por_cabezal"].get("A1", []) and out["n_borrados"] == 0
+    assert out["fallos_nuevos_restantes"] == ["SOLO"]          # el mock no revierte la carga: queda reportado
