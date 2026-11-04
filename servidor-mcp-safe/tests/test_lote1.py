@@ -331,5 +331,5 @@ def test_cobertura_de_catalogo_y_no_registrar_metodo_x():
     assert registered == names-{'set_area_points'} | {'add_design_strip','set_strip_widths','set_punching_overwrite',
                                                        'get_pile_spacing','get_pile_axial_reactions','export_pile_check_xlsx',
                                                        'suggest_pile_changes','trial_pile_changes','assign_pile_groups',
-                                                       'apply_pile_proposal','optimize_pile_removal'}
-    assert len(registered)==59
+                                                       'apply_pile_proposal','optimize_pile_removal','optimize_pile_addition'}
+    assert len(registered)==60

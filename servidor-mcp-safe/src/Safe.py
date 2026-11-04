@@ -2877,6 +2877,274 @@ class Safe:
                                   "cada iteracion es un analisis completo de la copia"]}
         return json.dumps(self._con_unidades(units, optimizar), ensure_ascii=False, default=str)
 
+    # ---------------- Densificar: anadir junto a los que fallan, ampliando el cabezal (claude, 2026-11-04) --
+
+    def _vertices_cabezal(self, cid: str, xs, ys) -> list[str]:
+        """Nombres de los puntos del area en el orden del poligono (xs, ys) leido con GetAllAreas."""
+        nombres = self._area_points(cid)
+        coords = {n: self._coords(n) for n in nombres}
+        out: list[str] = []
+        for x, y in zip(xs, ys):
+            n = next((n for n, (cx, cy, _z) in coords.items()
+                      if n not in out and _equal_number(cx, x) and _equal_number(cy, y)), None)
+            if n is None:
+                raise SafeError(f"Cabezal {cid}: el vertice ({x:g}, {y:g}) no corresponde a ningun punto del area.")
+            out.append(n)
+        return out
+
+    def _lados_fijos(self, cid: str, nombres: list[str]) -> set[int]:
+        """Indices de lado del cabezal con algun vertice conectado a OTRO objeto (no se mueven)."""
+        model = self._model()
+        compartidos = set()
+        for k, n in enumerate(nombres):
+            res = self._asignacion_opcional(model.PointObj.GetConnectivity(n), f"GetConnectivity({n})")
+            if res is None:
+                continue
+            num, tipos, objs = int(res[0]), list(res[1]), list(res[2])
+            pares = [(int(t), str(o)) for t, o in zip(tipos[:num], objs[:num])]
+            if any(p != (5, str(cid)) for p in pares):
+                compartidos.add(k)
+        n = len(nombres)
+        return {i for i in range(n) if i in compartidos or (i + 1) % n in compartidos}
+
+    def _ampliar_cabezal(self, copia: str, cid: str, puntos: list[str], dx: float, dy: float) -> dict:
+        """Mueve los dos vertices de un lado del cabezal (SetSelected + EditGeneral.Move) y relee."""
+        self._exigir_modelo(copia)
+        self.move_objects("point", list(puntos), float(dx), float(dy), 0.0)
+        return {"cabezal": cid, "puntos": list(puntos), "dx": dx, "dy": dy}
+
+    def _aplicar_cambios(self, copia: str, cambios: list[dict]) -> list[dict]:
+        """Reaplica en orden una lista de cambios (ampliar / anadir) sobre la copia recien creada."""
+        hechos = []
+        for c in cambios:
+            if c["tipo"] == "ampliar":
+                hechos.append({**c, **self._ampliar_cabezal(copia, c["cabezal"], c["puntos"], c["dx"], c["dy"])})
+            elif c["tipo"] == "anadir":
+                r = self._anadir_pilote(copia, float(c["x"]), float(c["y"]), str(c["ref"]))
+                hechos.append({**c, "frame": r["frame"], "apoyos_copiados": r["apoyos_copiados"]})
+            else:
+                raise SafeError(f"cambio desconocido: {c!r}")
+        return hechos
+
+    @com_call
+    def optimize_pile_addition(self, copy_path: str, q_adm: float = 0.0, q_ult: float = 0.0, fs: float = 0.0,
+                               xlsx_path: str = "", max_iter: int = 8, pasos: list[str] | None = None,
+                               borde_d: float = 1.0, holgura_d: float = 2.0, max_por_cabezal: int = 0,
+                               solo_cabezales: list[str] | None = None,
+                               service_combos: str | list[str] = "auto",
+                               seismic_combos: list[str] | None = None, seismic_factor: float = 4.0 / 3.0,
+                               sections: str | list[str] = "auto", diameter_mm: float = 0.0,
+                               cap_types: str = "footing", interpolation: str = "step_down",
+                               margen_candidato: float = 0.9, units: str = "kN, m, C",
+                               overwrite: bool = False, progress_path: str = "") -> str:
+        """Anade pilotes junto a cada pilote que NO cumple, ampliando el cabezal si no hay hueco, con reanalisis por iteracion hasta que todos cumplan. [escribe solo en la copia]
+
+        Criterio pilote por pilote: gravedad contra q_adm x factor de grupo y sismo contra
+        seismic_factor x q_adm x factor. Cada iteracion: para cada pilote que falla (peor ratio
+        primero) se busca UNA posicion nueva a s diametros de el siguiendo `pasos`:
+          "5i" dentro del cabezal a 5 D, "4i" a 4 D, "5a" ampliando el cabezal (mover un lado
+          hacia fuera lo justo) a 5 D, "4a" idem a 4 D, "3i" dentro a 3 D (factor 0.7).
+        La posicion debe quedar a >= s D de todos los pilotes y a >= borde_d D del borde; la
+        ampliacion no puede invadir otros cabezales (holgura_d D) ni mover vertices compartidos
+        con otros objetos. Luego copia nueva desde la base, reaplica todo lo aceptado + lo nuevo,
+        reanaliza y verifica: un cabezal cuyo numero de fallos o ratio maximo NO mejora se
+        CONGELA y sus cambios de esa iteracion se descartan. Termina cuando no queda pilote
+        que falle (fuera de los congelados), cuando no hay posicion para ninguno o en max_iter.
+        Deja la copia con la ultima configuracion aceptada y el libro de verificacion.
+        `cumple_todo` exige ademas que ningun pilote nuevo quede SIN FACTOR (S/B < 3); los que ya
+        estaban sin factor en la base se listan en sin_factor_base (reespaciar a mano).
+
+        Args:
+            max_iter: iteraciones maximas (cada una = un analisis completo de la copia).
+            pasos: orden de busqueda; None = ["5i", "4i", "5a", "4a", "3i"]. Minimo 3 D.
+            borde_d, holgura_d: margen al borde y holgura entre cabezales, en diametros.
+            max_por_cabezal: pilotes nuevos por cabezal e iteracion (0 = uno por pilote que falla).
+            resto: como optimize_pile_removal.
+        """
+        import json
+        from collections import Counter
+        q = self._q_adm_base(q_adm, q_ult, fs)
+        if max_iter < 1 or max_por_cabezal < 0 or borde_d < 0 or holgura_d < 0:
+            raise SafeError("max_iter >= 1; max_por_cabezal, borde_d y holgura_d >= 0.")
+        try:
+            pasos_l = pilotes.parsear_pasos(pasos)
+        except pilotes.PilotesError as e:
+            raise SafeError(str(e)) from e
+        if not copy_path.lower().endswith(".fdb"):
+            raise SafeError("copy_path debe terminar en .fdb.")
+        if xlsx_path and os.path.exists(xlsx_path) and not overwrite:
+            raise SafeError(f"Ya existe {xlsx_path}; use overwrite=True.")
+        model = self._model()
+        original = model.GetModelFilename()
+        if not original or not os.path.isfile(str(original)):
+            raise SafeError("El modelo activo no tiene archivo en disco; no hay base que copiar.")
+        if os.path.normcase(os.path.abspath(copy_path)) == os.path.normcase(os.path.abspath(str(original))):
+            raise SafeError("copy_path no puede ser el original.")
+        mtime0 = self._mtime(str(original))
+        filtro = {str(c) for c in solo_cabezales} if solo_cabezales else None
+
+        def verificar():
+            return self._verificacion_dict(sections, diameter_mm, cap_types, interpolation, q,
+                                           service_combos, margen_candidato, seismic_combos, seismic_factor)
+
+        def falla(f):
+            return f["estado"].startswith("NO CUMPLE") and f["cabezal"] is not None and not f["revisar"]
+
+        def estado_por_cabezal(ver):
+            out: dict[str, list] = {}
+            for f in ver["filas"]:
+                if falla(f):
+                    e = out.setdefault(str(f["cabezal"]), [0, 0.0])
+                    e[0] += 1
+                    e[1] = max(e[1], f["ratio"] or 0.0)
+            return {k: tuple(v) for k, v in out.items()}
+
+        def anotar(path, fila):
+            if path:
+                with open(path, "a", encoding="utf-8") as fh:
+                    fh.write(json.dumps(fila, ensure_ascii=False) + "\n")
+
+        def densificar():
+            avisos_analisis: list[str] = []
+            base, sep, _r, _ = verificar()
+            diam = {k: v["diametro"] for k, v in sep["secciones_circulares"].items()}
+            if not diam:
+                raise SafeError("Sin secciones circulares: no hay diametro para separar los pilotes nuevos.")
+            fallaban_base = {f["id"] for f in base["filas"] if falla(f)}
+            cambios: list[dict] = []
+            congelados: dict[str, str] = {}
+            sin_posicion: list[dict] = []
+            historial: list[dict] = []
+            actual = base
+            for it in range(1, max_iter + 1):
+                fallan = [f for f in actual["filas"] if falla(f) and str(f["cabezal"]) not in congelados
+                          and (not filtro or str(f["cabezal"]) in filtro) and f["x"] is not None]
+                if not fallan:
+                    break
+                fallan.sort(key=lambda f: -(f["ratio"] or 0.0))
+                poligonos = {str(c["id"]): {"id": str(c["id"]), "xs": list(c["xs"]), "ys": list(c["ys"])}
+                             for c in self._cabezales(cap_types)}
+                seccion_de = {p["id"]: p["seccion"] for p in sep["pilotes"]}
+                pil_cab: dict[str, list[tuple]] = {}
+                for f in actual["filas"]:
+                    if f["cabezal"] is not None and f["x"] is not None:
+                        pil_cab.setdefault(str(f["cabezal"]), []).append((f["id"], f["x"], f["y"]))
+                antes_cab = estado_por_cabezal(actual)
+                nuevos: list[dict] = []
+                cuenta: Counter = Counter()
+                lados_cache: dict[str, tuple] = {}
+                for f in fallan:
+                    cid = str(f["cabezal"])
+                    if max_por_cabezal and cuenta[cid] >= max_por_cabezal:
+                        continue
+                    pol = poligonos.get(cid)
+                    if pol is None:
+                        sin_posicion.append({"iteracion": it, "pilote": f["id"], "cabezal": cid, "motivo": "cabezal sin area"})
+                        continue
+                    d = diam.get(seccion_de.get(f["id"])) or max(diam.values())
+                    otros = [(x, y) for pid, x, y in pil_cab.get(cid, []) if pid != f["id"]]
+                    otros += [(c["x"], c["y"]) for c in nuevos if c["tipo"] == "anadir" and c["cabezal"] == cid]
+                    vecinos = [p for k, p in poligonos.items() if k != cid]
+                    pos = None
+                    try:
+                        for s, modo in pasos_l:
+                            if modo == "dentro":
+                                pos = pilotes.posicion_junto_a(f["x"], f["y"], pol["xs"], pol["ys"], otros, d, s, borde_d)
+                            else:
+                                if cid not in lados_cache:
+                                    nombres = self._vertices_cabezal(cid, pol["xs"], pol["ys"])
+                                    lados_cache[cid] = (nombres, self._lados_fijos(cid, nombres))
+                                nombres, fijos = lados_cache[cid]
+                                pos = pilotes.posicion_ampliando(f["x"], f["y"], pol["xs"], pol["ys"], otros, d, s,
+                                                                 borde_d, vecinos, holgura_d * d, fijos)
+                            if pos:
+                                pos["s_d"] = s
+                                break
+                    except pilotes.PilotesError as e:
+                        raise SafeError(str(e)) from e
+                    if pos is None:
+                        sin_posicion.append({"iteracion": it, "pilote": f["id"], "cabezal": cid, "ratio": f["ratio"],
+                                             "motivo": "sin posicion en ningun paso (ni ampliando el cabezal)"})
+                        continue
+                    if pos["modo"] == "ampliando":
+                        nombres, _fijos = lados_cache[cid]
+                        i, j = pos["lado"], (pos["lado"] + 1) % len(nombres)
+                        nuevos.append({"tipo": "ampliar", "iteracion": it, "cabezal": cid, "lado": i,
+                                       "puntos": [nombres[i], nombres[j]], "dx": pos["dx"], "dy": pos["dy"], "delta": pos["delta"]})
+                        pol["xs"], pol["ys"] = pos["xs"], pos["ys"]
+                    nuevos.append({"tipo": "anadir", "iteracion": it, "cabezal": cid, "x": pos["x"], "y": pos["y"],
+                                   "ref": f["id"], "junto_a": f["id"], "s_d": pos["s_d"], "modo": pos["modo"],
+                                   "s_b_min_previsto": pos["s_b_min"]})
+                    cuenta[cid] += 1
+                if not nuevos:
+                    break
+                self._copia_desde_base(str(original), copy_path)
+                self._exigir_modelo(copy_path)
+                self._aplicar_cambios(copy_path, cambios + nuevos)
+                avisos_analisis.append(self._analizar_tolerante())
+                self._exigir_analisis()
+                ver, sep, _r, _ = verificar()
+                despues_cab = estado_por_cabezal(ver)
+                aceptados, rechazados = [], []
+                for cid in sorted({c["cabezal"] for c in nuevos}, key=lambda s: (len(s), s)):
+                    n0, r0 = antes_cab.get(cid, (0, 0.0))
+                    n1, r1 = despues_cab.get(cid, (0, 0.0))
+                    if n1 < n0 or (n1 == n0 and r1 < r0 - 1e-6):
+                        aceptados.append(cid)
+                    else:
+                        rechazados.append(cid)
+                        congelados[cid] = f"sin mejora al anadir: fallan {n0} -> {n1}, ratio max {r0:.3f} -> {r1:.3f}"
+                cambios += [c for c in nuevos if c["cabezal"] in aceptados]
+                historial.append({"iteracion": it, "pilotes_que_fallaban": len(fallan),
+                                  "propuestos": {cid: sum(1 for c in nuevos if c["cabezal"] == cid and c["tipo"] == "anadir") for cid in sorted({c["cabezal"] for c in nuevos})},
+                                  "ampliaciones": [{k: c[k] for k in ("cabezal", "lado", "delta")} for c in nuevos if c["tipo"] == "ampliar"],
+                                  "aceptados": aceptados, "rechazados": rechazados,
+                                  "n_anadidos_total_valido": sum(1 for c in cambios if c["tipo"] == "anadir"),
+                                  "no_cumplen_tras": ver["resumen"]["n_no_cumplen"], "n_pilotes_tras": ver["resumen"]["n_pilotes"]})
+                anotar(progress_path, historial[-1])
+                actual = ver
+            # copia final con SOLO lo aceptado
+            self._copia_desde_base(str(original), copy_path)
+            self._exigir_modelo(copy_path)
+            hechos = self._aplicar_cambios(copy_path, cambios)
+            avisos_analisis.append(self._analizar_tolerante())
+            self._exigir_analisis()
+            despues, sep, rea, _ = verificar()
+            hojas = self._escribir_libro(despues, sep, xlsx_path) if xlsx_path else []
+            comparacion = pilotes_xlsx.comparar_verificaciones(base, despues)
+            if self._mtime(str(original)) != mtime0:
+                raise SafeError(f"El ORIGINAL cambio en disco durante la densificacion: {original}. Revisar.")
+            fallan_final = [{"id": f["id"], "cabezal": f["cabezal"], "ratio": f["ratio"], "estado": f["estado"]}
+                            for f in despues["filas"] if falla(f)]
+            sin_factor_base = {f["id"] for f in base["filas"] if f["estado"].startswith("SIN FACTOR")}
+            sin_factor_nuevos = [f["id"] for f in despues["filas"]
+                                 if f["estado"].startswith("SIN FACTOR") and f["id"] not in sin_factor_base]
+            anadidos = [h for h in hechos if h["tipo"] == "anadir"]
+            ampliaciones = [h for h in hechos if h["tipo"] == "ampliar"]
+            por_cab: dict[str, int] = Counter(h["cabezal"] for h in anadidos)
+            return {"herramienta": "optimize_pile_addition", "original": str(original), "original_intacto": True,
+                    "copia": copy_path, "copia_abierta_en_safe": True, "unidades": sep["unidades"],
+                    "criterio": {"pasos": [f"{s:g}{'i' if m == 'dentro' else 'a'}" for s, m in pasos_l],
+                                 "borde_d": borde_d, "holgura_d": holgura_d, "seismic_factor": seismic_factor},
+                    "iteraciones": len(historial), "historial": historial,
+                    "n_anadidos": len(anadidos), "anadidos_por_cabezal": dict(por_cab), "anadidos": anadidos,
+                    "n_ampliaciones": len(ampliaciones), "ampliaciones": ampliaciones,
+                    "cabezales_congelados": congelados, "sin_posicion": sin_posicion,
+                    "cumple_todo": not fallan_final and not sin_factor_nuevos,
+                    "pilotes_que_siguen_fallando": fallan_final,
+                    "sin_factor_nuevos": sin_factor_nuevos,
+                    "sin_factor_base": sorted(sin_factor_base, key=lambda s: (len(s), s)),
+                    "fallos_nuevos": [f["id"] for f in fallan_final if f["id"] not in fallaban_base],
+                    "comparacion": comparacion,
+                    "resumen_antes": {k: base["resumen"][k] for k in ("n_pilotes", "n_no_cumplen", "cabezales_no_cumplen")},
+                    "resumen_despues": despues["resumen"], "libro_despues": xlsx_path or None, "hojas": hojas,
+                    "avisos": sep["avisos"] + rea["avisos"] + [a for a in avisos_analisis if a],
+                    "pendiente": ["posiciones y ampliaciones: propuesta automatica, las fija el ingeniero",
+                                  "reubicar los pilotes existentes en malla uniforme: no automatizado",
+                                  "(b) pila equivalente y capacidad a traccion: sin evaluar",
+                                  "cada iteracion es un analisis completo de la copia"]}
+        return json.dumps(self._con_unidades(units, densificar), ensure_ascii=False, default=str)
+
     # ---------------- Grupos de SAFE por cabezal (claude, 2026-11-03) ---
 
     _GROUP_OBJ_TYPES = {1: "point", 2: "frame", 3: "cable", 4: "tendon", 5: "area", 6: "solid", 7: "link"}

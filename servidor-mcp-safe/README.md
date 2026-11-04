@@ -40,7 +40,7 @@ Claude Desktop desde la bandeja y revalidar los cambios.
 | Geometría y cargas lote 1 | `delete_object`, `move_objects`, `get_area_info`, `set_area_property`, `set_area_opening`, `set_point_coordinates`, `add_point`, `assign_point_load` | 8 |
 | Lecturas lote 1 | `get_strip_rebar_stations`, `get_table_fields` | 2 |
 | Tablas lote 2 [T] | `add_design_strip`, `set_strip_widths`, `set_punching_overwrite` | 3 |
-| Pilotes [H] | `get_pile_spacing`, `get_pile_axial_reactions`, `export_pile_check_xlsx`, `suggest_pile_changes` (solo lectura); `trial_pile_changes`, `apply_pile_proposal`, `optimize_pile_removal` (escriben solo en una copia); `assign_pile_groups` (escribe grupos; guarda solo con `save=True`) | 8 |
+| Pilotes [H] | `get_pile_spacing`, `get_pile_axial_reactions`, `export_pile_check_xlsx`, `suggest_pile_changes` (solo lectura); `trial_pile_changes`, `apply_pile_proposal`, `optimize_pile_removal`, `optimize_pile_addition` (escriben solo en una copia); `assign_pile_groups` (escribe grupos; guarda solo con `save=True`) | 9 |
 
 ## Pilotes: separación S/B y reacción axial, solo lectura [H] (claude, 2026-11-02)
 
@@ -146,6 +146,24 @@ base, reanaliza y verifica; en cuanto un pilote del cabezal deja de cumplir, o s
 pasa de 1, ese cabezal se congela y su última quita se revierte. Termina dejando la copia
 en la última configuración válida y el libro de esa configuración. Cada iteración es un
 análisis completo. Las posiciones de pilotes nuevos son propuestas: las fija el ingeniero.
+
+### Densificar hasta cumplir pilote por pilote: `optimize_pile_addition`
+
+`optimize_pile_addition(copy_path, q_adm, max_iter=8, pasos=["5i","4i","5a","4a","3i"],
+borde_d=1, holgura_d=2)` es la fase que faltaba: parte del modelo activo (normalmente la copia
+ya reducida por `optimize_pile_removal`) y, en cada iteración, busca **una posición nueva junto
+a cada pilote que no cumple** (peor ratio primero) siguiendo `pasos`: dentro del cabezal a 5 D
+(`5i`), a 4 D (`4i`), **ampliando el cabezal** a 5 D (`5a`: `pilotes.extender_lado` mueve el
+lado más cercano hacia fuera lo justo para que el pilote quepa con margen, y
+`_ampliar_cabezal` desplaza sus dos vértices con `EditGeneral.Move`), ampliando a 4 D (`4a`) y,
+por último, dentro a 3 D (`3i`, factor 0,7). Toda posición queda a ≥ s D de todos los pilotes
+y a ≥ `borde_d` D del borde; una ampliación no puede invadir otro cabezal (`holgura_d` D) ni
+mover un vértice conectado a otro objeto (`PointObj.GetConnectivity`). Cada iteración copia
+de nuevo la base, reaplica lo aceptado más lo nuevo, reanaliza y verifica: el cabezal cuyo
+número de fallos o ratio máximo no mejora se congela y sus cambios se descartan. Termina
+cuando ningún pilote falla (`cumple_todo`), cuando no hay posición para ninguno o en
+`max_iter`; deja la copia con lo aceptado y el libro. Lo que no se automatiza: reubicar los
+pilotes existentes en malla uniforme y decidir hasta dónde puede crecer un cabezal.
 
 ### `suggest_pile_changes` y `trial_pile_changes`: proponer y ensayar en copia [H]
 

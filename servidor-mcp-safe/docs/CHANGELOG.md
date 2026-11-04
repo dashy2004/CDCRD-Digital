@@ -136,6 +136,13 @@ Primera version, 31 tools, probada en vivo contra TORRE A.
 - Ciclo completo (quitar iterativo + añadir) sobre los tres modelos de la firma, en copias: 897 → 672,
   564 → 480 y 1112 → 879 pilotes sin fallos nuevos en ninguno; `apply_pile_proposal` devuelve
   `sin_cambios` (sin crear copia) cuando la propuesta no deja nada automatizable.
+- Novena tool (60 registradas): `optimize_pile_addition` — densificar hasta cumplir pilote por pilote:
+  una posición nueva junto a cada pilote que no cumple (dentro a 5 D / 4 D, ampliando el cabezal a
+  5 D / 4 D moviendo el lado más cercano con `EditGeneral.Move`, dentro a 3 D), copia nueva por
+  iteración, reanálisis y congelación del cabezal que no mejora. Geometría pura en `pilotes.py`
+  (`anillo`, `posicion_junto_a`, `extender_lado`, `ampliacion_separada`, `posicion_ampliando`,
+  `parsear_pasos`). 293 tests. Corridas vivas sobre las copias reducidas de los tres modelos:
+  ver `PRUEBA-VIVA-PILOTES.md`.
 - Corrida de aceptación antes del PR sobre una copia de un segundo modelo (~1100 pilotes, 174
   cabezales) en instancia SAFE arrancada por COM: las cinco tools **[H]**; 114 pilotes con S/B < 3,
   igual que el conteo independiente del mismo día. Tiempos con 1112 pilotes: 88 s reacciones,

@@ -313,3 +313,60 @@ def test_colocar_pilotes_reporta_lo_que_no_cabe():
         pl.colocar_pilotes(xs, ys, [], -1, 0.45)
     with pytest.raises(pl.PilotesError):
         pl.colocar_pilotes([0, 1], [0, 1], [], 1, 0.45)
+
+
+# ------------------------------------------------------------ densificar (junto a / ampliando)
+
+def test_posicion_junto_a_elige_el_hueco_mas_libre_dentro_del_cabezal():
+    xs, ys = [0, 6, 6, 0], [0, 0, 6, 6]
+    # pilote que falla en (3, 3) con otro en (3, 5.25): a 5D (2.25 m) el mejor hueco es hacia abajo (3, 0.75)
+    r = pl.posicion_junto_a(3.0, 3.0, xs, ys, [(3.0, 5.25)], 0.45, 5.0, borde_d=1.0)
+    assert r["modo"] == "dentro" and abs(r["x"] - 3.0) < 1e-3 and abs(r["y"] - 0.749) < 1e-3 and 5.0 <= r["s_b_min"] <= 5.003
+    # holgura de redondeo: el pilote nuevo queda a 1 mm MAS de 5 D, nunca por debajo
+    assert math.hypot(r["x"] - 3.0, r["y"] - 3.0) >= 2.25
+    # cabezal 2x2 con el pilote al centro: nada cabe a 5D ni a 3D con margen de borde
+    assert pl.posicion_junto_a(1.0, 1.0, [0, 2, 2, 0], [0, 0, 2, 2], [], 0.45, 5.0) is None
+    assert pl.posicion_junto_a(1.0, 1.0, [0, 2, 2, 0], [0, 0, 2, 2], [], 0.45, 3.0) is None
+    with pytest.raises(pl.PilotesError):
+        pl.posicion_junto_a(1.0, 1.0, [0, 2], [0, 0], [], 0.45, 5.0)
+
+
+def test_extender_lado_mueve_el_lado_mas_cercano_y_respeta_lados_fijos():
+    xs, ys = [0, 6, 6, 0], [0, 0, 6, 6]
+    ext = pl.extender_lado(xs, ys, 7.0, 3.0, margen=0.45)
+    assert ext["lado"] == 1 and abs(ext["delta"] - 1.45) < 1e-9 and abs(ext["dx"] - 1.45) < 1e-9 and abs(ext["dy"]) < 1e-9
+    assert [round(v, 6) for v in ext["xs"]] == [0, 7.45, 7.45, 0] and ext["ys"] == [0, 0, 6, 6]
+    assert pl.poligono_simple(ext["xs"], ext["ys"])
+    # el punto ya esta dentro con margen: nada que extender
+    assert pl.extender_lado(xs, ys, 3.0, 3.0, 0.45) is None
+    # lado derecho fijo: lo resuelve otro lado (mas desplazamiento) o nada
+    ext2 = pl.extender_lado(xs, ys, 7.0, 3.0, 0.45, lados_fijos={1})
+    assert ext2 is None or ext2["lado"] != 1
+
+
+def test_posicion_ampliando_prefiere_el_menor_desplazamiento_y_no_invade_vecinos():
+    xs, ys = [0, 6, 6, 0], [0, 0, 6, 6]
+    # pilote que falla en (5.25, 3): a 5D hacia la derecha hay que ampliar 1.95 m (x = 7.5 + 0.45)
+    r = pl.posicion_ampliando(5.25, 3.0, xs, ys, [(3.0, 3.0)], 0.45, 5.0, borde_d=1.0)
+    # el candidato elegido es el de MENOR desplazamiento: un punto del anillo casi dentro (a 75 grados)
+    # al que le falta margen al borde derecho -> ampliar 0.28 m, no 1.95 m como el punto a 0 grados.
+    assert r["modo"] == "ampliando" and r["lado"] == 1 and 0 < r["delta"] < 1.95 and 5.0 <= r["s_b_min"] <= 5.003
+    assert pl.punto_en_poligono(r["x"], r["y"], r["xs"], r["ys"]) and pl.distancia_a_borde(r["x"], r["y"], r["xs"], r["ys"]) >= 0.45 - 1e-6
+    assert 2.25 <= math.hypot(r["x"] - 5.25, r["y"] - 3.0) < 2.253   # redondeo a 4 decimales, nunca por debajo de 5 D
+    # un cabezal vecino pegado a la derecha (x de 7 a 10) impide esa ampliacion: sale por otro lado o nada
+    vecino = {"id": "V", "xs": [7, 10, 10, 7], "ys": [0, 0, 6, 6]}
+    r2 = pl.posicion_ampliando(5.25, 3.0, xs, ys, [(3.0, 3.0)], 0.45, 5.0, 1.0, [vecino], holgura=0.9)
+    assert r2 is None or r2["lado"] != 1
+    # los pilotes existentes siguen dentro del poligono ampliado
+    assert pl.punto_en_poligono(3.0, 3.0, r["xs"], r["ys"])
+
+
+def test_parsear_pasos_y_poligono_simple():
+    assert pl.parsear_pasos(None) == [(5.0, "dentro"), (4.0, "dentro"), (5.0, "ampliando"), (4.0, "ampliando"), (3.0, "dentro")]
+    assert pl.parsear_pasos(["4.5A"]) == [(4.5, "ampliando")]
+    assert pl.parsear_pasos([]) == pl.parsear_pasos(None)
+    for malo in (["2i"], ["5"], ["xi"]):
+        with pytest.raises(pl.PilotesError):
+            pl.parsear_pasos(malo)
+    assert pl.poligono_simple([0, 6, 6, 0], [0, 0, 6, 6])
+    assert not pl.poligono_simple([0, 6, 0, 6], [0, 6, 6, 0])   # lazo

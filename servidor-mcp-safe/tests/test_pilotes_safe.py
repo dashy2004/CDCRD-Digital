@@ -584,3 +584,102 @@ def test_optimize_repara_el_efecto_vecino_restaurando_quitas_cercanas(pile_api, 
     assert out["reparaciones"][0]["restaurados"] == ["F20"]    # a 1.5 m < 6 D = 2.7 m
     assert "F20" not in out["quitados_por_cabezal"].get("A1", []) and out["n_borrados"] == 0
     assert out["fallos_nuevos_restantes"] == ["SOLO"]          # el mock no revierte la carga: queda reportado
+
+
+# ------------------------------------------------------------ optimize_pile_addition
+
+def _mock_geometria_viva(model, state, areas):
+    """GetAllAreas / GetPoints / GetCoordCartesian / GetConnectivity leidos del estado: los vertices
+    movidos con EditGeneral.Move (conftest) se reflejan en la siguiente lectura de cabezales."""
+    state["areas"] = {k: list(v) for k, v in areas.items()}
+    def all_areas():
+        names, delim, pnames, xs, ys, zs = [], [], [], [], [], []
+        for a, pts in state["areas"].items():
+            names.append(a)
+            for p in pts:
+                x, y, z = state["coords"][p]
+                pnames.append(p); xs.append(x); ys.append(y); zs.append(z)
+            delim.append(len(pnames) - 1)
+        return (len(names), names, [1] * len(names), len(pnames), delim, pnames, xs, ys, zs, 0)
+    model.AreaObj.GetAllAreas.side_effect = lambda *a: all_areas()
+    model.AreaObj.GetPoints.side_effect = lambda name: (len(state["areas"][name]), list(state["areas"][name]), 0)
+    def conectividad(name):
+        duenos = [a for a, pts in state["areas"].items() if name in pts]
+        return (len(duenos), [5] * len(duenos), duenos, [1] * len(duenos), 0)
+    model.PointObj.GetConnectivity.side_effect = conectividad
+
+
+def _preparar_densificar(model, state, carga_tras_anadir):
+    """Malla 3x3 en un cabezal ajustado (-0.5..5.0); el pilote de borde F20 (4.5, 0) falla por gravedad.
+    No cabe nada a 5 D ni 4 D dentro (la malla ya esta a 5 D): hay que ampliar el cabezal."""
+    _mock_edicion(model, state)
+    state["coords"].update({"P1": (-0.5, -0.5, 0.0), "P2": (5.0, -0.5, 0.0), "P3": (5.0, 5.0, 0.0), "P4": (-0.5, 5.0, 0.0)})
+    _mock_geometria_viva(model, state, {"A1": ["P1", "P2", "P3", "P4"]})
+    for f in state["frames"]:
+        state["react"][f[3]] = [("COMB1", "", 300.0)]
+    state["react"]["B20"] = [("COMB1", "", 1000.0)]        # > 800 x 0.9 = 720: NO CUMPLE
+    old_add = model.FrameObj.AddByCoord.side_effect
+    def add(*a, **k):
+        r = old_add(*a, **k)
+        state["react"][f"B{r[0]}"] = [("COMB1", "", 300.0)]
+        state["react"]["B20"] = [("COMB1", "", carga_tras_anadir)]
+        return r
+    model.FrameObj.AddByCoord.side_effect = add
+    # OpenFile restaura los frames de la base: restaurar tambien la carga del F20 y los vertices
+    old_open = model.File.OpenFile.side_effect
+    def openfile(path):
+        state["react"]["B20"] = [("COMB1", "", 1000.0)]
+        state["coords"].update({"P1": (-0.5, -0.5, 0.0), "P2": (5.0, -0.5, 0.0), "P3": (5.0, 5.0, 0.0), "P4": (-0.5, 5.0, 0.0)})
+        return old_open(path)
+    model.File.OpenFile.side_effect = openfile
+
+
+def test_optimize_pile_addition_amplia_el_cabezal_y_anade_junto_al_que_falla(pile_api, tmp_path):
+    safe, model, state = pile_api
+    _preparar_densificar(model, state, carga_tras_anadir=500.0)   # con el pilote nuevo, F20 pasa a cumplir
+    copia = str(tmp_path / "dens.fdb")
+    out = salida(safe.optimize_pile_addition(copia, q_adm=800.0, max_iter=4, xlsx_path=str(tmp_path / "dens.xlsx"),
+                                             progress_path=str(tmp_path / "p.jsonl")))
+    assert out["cumple_todo"] and out["iteraciones"] == 1 and out["n_anadidos"] == 1 and out["n_ampliaciones"] == 1
+    nuevo, amp = out["anadidos"][0], out["ampliaciones"][0]
+    assert nuevo["junto_a"] == "F20" and nuevo["modo"] == "ampliando" and nuevo["s_d"] == 5.0 and nuevo["frame"].startswith("N")
+    assert 2.25 <= ((nuevo["x"] - 4.5) ** 2 + (nuevo["y"] - 0.0) ** 2) ** 0.5 < 2.253     # a 5 D del F20 (+1 mm de holgura)
+    assert out["sin_factor_nuevos"] == [] and out["sin_factor_base"] == []
+    assert amp["cabezal"] == "A1" and amp["lado"] in (0, 1) and 0 < amp["delta"] <= 2.2 + 1e-6 and len(amp["puntos"]) == 2
+    # los vertices movidos quedaron desplazados en el modelo (mock de EditGeneral.Move) y el nuevo cabezal contiene al pilote
+    xs = [state["coords"][p][0] for p in state["areas"]["A1"]]
+    ys = [state["coords"][p][1] for p in state["areas"]["A1"]]
+    import pilotes as pl
+    assert pl.punto_en_poligono(nuevo["x"], nuevo["y"], xs, ys) and pl.distancia_a_borde(nuevo["x"], nuevo["y"], xs, ys) >= 0.45 - 1e-6
+    assert out["historial"][0]["aceptados"] == ["A1"] and out["cabezales_congelados"] == {} and out["sin_posicion"] == []
+    assert out["resumen_antes"]["n_no_cumplen"] == 1 and out["resumen_despues"]["n_no_cumplen"] == 0
+    assert out["comparacion"]["global"]["n_pilotes"] == [9, 10] and out["original_intacto"] and out["hojas"][0] == "Resumen"
+    # una copia por iteracion + la final; nunca Save
+    import shutil
+    assert shutil.copy2.call_count == 2 and model.Analyze.RunAnalysis.call_count == 2
+    model.File.Save.assert_not_called()
+    assert (tmp_path / "p.jsonl").read_text(encoding="utf-8").count("\n") == 1
+
+
+def test_optimize_pile_addition_congela_el_cabezal_sin_mejora_y_deja_la_copia_limpia(pile_api, tmp_path):
+    safe, model, state = pile_api
+    _preparar_densificar(model, state, carga_tras_anadir=1000.0)   # anadir no cambia nada: se congela
+    out = salida(safe.optimize_pile_addition(str(tmp_path / "d.fdb"), q_adm=800.0, max_iter=3))
+    assert not out["cumple_todo"] and out["iteraciones"] == 1 and out["n_anadidos"] == 0 and out["n_ampliaciones"] == 0
+    assert list(out["cabezales_congelados"]) == ["A1"] and "sin mejora" in out["cabezales_congelados"]["A1"]
+    assert out["historial"][0]["rechazados"] == ["A1"] and out["pilotes_que_siguen_fallando"][0]["id"] == "F20"
+    assert out["fallos_nuevos"] == [] and out["comparacion"]["global"]["n_pilotes"] == [9, 9]
+    # la copia final se reconstruye desde la base sin los cambios rechazados: vertices en su sitio
+    assert state["coords"]["P2"] == (5.0, -0.5, 0.0) and state["coords"]["P1"] == (-0.5, -0.5, 0.0)
+
+
+def test_optimize_pile_addition_no_mueve_vertices_compartidos(pile_api, tmp_path):
+    safe, model, state = pile_api
+    _preparar_densificar(model, state, carga_tras_anadir=500.0)
+    # todos los vertices compartidos con otra area: no se puede ampliar; con pasos solo "a" no hay posicion
+    model.PointObj.GetConnectivity.side_effect = lambda name: (2, [5, 5], ["A1", "OTRA"], [1, 1], 0)
+    out = salida(safe.optimize_pile_addition(str(tmp_path / "c.fdb"), q_adm=800.0, max_iter=2, pasos=["5i", "5a", "4a"]))
+    assert out["n_anadidos"] == 0 and out["iteraciones"] == 0 and out["sin_posicion"][0]["pilote"] == "F20"
+    assert not out["cumple_todo"]
+    with pytest.raises(SafeError, match="3 diametros"):
+        safe.optimize_pile_addition(str(tmp_path / "e.fdb"), q_adm=800.0, pasos=["2i"])

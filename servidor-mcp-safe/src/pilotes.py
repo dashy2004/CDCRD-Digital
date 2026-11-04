@@ -564,3 +564,188 @@ def envolvente_axial(registros: list[dict], q_adm: float = 0.0) -> dict:
         out["solo_traccion_sin_evaluar"] = [f["pilote"] for f in filas if f["cumple_q_adm"] is None]
         out["ratio_max"] = critico["ratio"] if critico else None
     return out
+
+# ---------------------------------------------------------------------------
+# Densificar: posicion de un pilote nuevo junto a uno que no cumple, dentro del
+# cabezal o ampliando el cabezal (mover un lado hacia fuera)
+# ---------------------------------------------------------------------------
+
+def anillo(px: float, py: float, radio: float, n_ang: int = 24) -> list[tuple[float, float]]:
+    """n_ang puntos equiespaciados sobre la circunferencia de radio `radio` centrada en (px, py)."""
+    if radio <= 0 or n_ang < 4:
+        raise PilotesError("anillo: radio positivo y n_ang >= 4.")
+    return [(px + radio * math.cos(2 * math.pi * k / n_ang), py + radio * math.sin(2 * math.pi * k / n_ang))
+            for k in range(n_ang)]
+
+
+def distancia_a_borde(x: float, y: float, xs: list[float], ys: list[float]) -> float:
+    n = len(xs)
+    return min(_dist_punto_segmento(x, y, xs[i], ys[i], xs[(i + 1) % n], ys[(i + 1) % n]) for i in range(n))
+
+
+# Las coordenadas devueltas se redondean a 4 decimales: sin esta holgura un pilote puesto a
+# exactamente 3 D queda a S/B 2.99993 y cae fuera de la tabla (visto en vivo 2026-11-04).
+HOLGURA_REDONDEO = 1e-3
+
+
+def _dmin(x: float, y: float, otros: list[tuple[float, float]]) -> float:
+    return min((math.hypot(x - ox, y - oy) for ox, oy in otros), default=math.inf)
+
+
+def _validar_cabezal(xs, ys, diametro, s_d, borde_d):
+    if len(xs) < 3 or len(xs) != len(ys):
+        raise PilotesError("poligono invalido.")
+    if diametro <= 0 or s_d <= 0 or borde_d < 0:
+        raise PilotesError("diametro y s_d positivos; borde_d >= 0.")
+
+
+def posicion_junto_a(px: float, py: float, xs: list[float], ys: list[float],
+                     otros: list[tuple[float, float]], diametro: float, s_d: float,
+                     borde_d: float = 1.0, n_ang: int = 24) -> dict | None:
+    """Mejor punto a s_d*D del pilote (px, py), DENTRO del cabezal (a >= borde_d*D del borde)
+    y a >= s_d*D de todos los otros pilotes; entre los validos, el mas lejano de los otros.
+    None si no cabe ninguno."""
+    _validar_cabezal(xs, ys, diametro, s_d, borde_d)
+    r = s_d * diametro + HOLGURA_REDONDEO
+    mejor = None
+    for x, y in anillo(px, py, r, n_ang):
+        if not punto_en_poligono(x, y, xs, ys) or distancia_a_borde(x, y, xs, ys) < borde_d * diametro - 1e-9:
+            continue
+        d = _dmin(x, y, otros)
+        if d < r:
+            continue
+        if mejor is None or d > mejor[0]:
+            mejor = (d, x, y)
+    if mejor is None:
+        return None
+    d, x, y = mejor
+    return {"x": round(x, 4), "y": round(y, 4), "s_b_min": round(min(r, d) / diametro, 3), "modo": "dentro"}
+
+
+def _se_cruzan(ax, ay, bx, by, cx, cy, dx, dy) -> bool:
+    def orient(px, py, qx, qy, rx, ry):
+        v = (qx - px) * (ry - py) - (qy - py) * (rx - px)
+        return 0 if abs(v) < 1e-12 else (1 if v > 0 else -1)
+    o1, o2 = orient(ax, ay, bx, by, cx, cy), orient(ax, ay, bx, by, dx, dy)
+    o3, o4 = orient(cx, cy, dx, dy, ax, ay), orient(cx, cy, dx, dy, bx, by)
+    return o1 != o2 and o3 != o4 and 0 not in (o1, o2, o3, o4)
+
+
+def poligono_simple(xs: list[float], ys: list[float]) -> bool:
+    """True si ningun par de lados no adyacentes se cruza."""
+    n = len(xs)
+    for i in range(n):
+        for j in range(i + 2, n):
+            if i == 0 and j == n - 1:
+                continue
+            if _se_cruzan(xs[i], ys[i], xs[(i + 1) % n], ys[(i + 1) % n], xs[j], ys[j], xs[(j + 1) % n], ys[(j + 1) % n]):
+                return False
+    return True
+
+
+def extender_lado(xs: list[float], ys: list[float], x: float, y: float, margen: float,
+                  lados_fijos: set[int] | None = None) -> dict | None:
+    """Mueve UN lado del poligono hacia fuera (por su normal) lo justo para que el punto (x, y)
+    quede dentro a >= margen del borde. Prueba todos los lados movibles y devuelve el de menor
+    desplazamiento cuyo poligono resultante sea simple y contenga al punto. None si ninguno sirve.
+    lados_fijos: indices de lado que no se pueden mover (vertice compartido con otro objeto)."""
+    n = len(xs)
+    if n < 3 or len(ys) != n or margen < 0:
+        raise PilotesError("extender_lado: poligono invalido o margen negativo.")
+    cx, cy = sum(xs) / n, sum(ys) / n
+    mejor = None
+    for i in range(n):
+        if lados_fijos and i in lados_fijos:
+            continue
+        j = (i + 1) % n
+        ex, ey = xs[j] - xs[i], ys[j] - ys[i]
+        L = math.hypot(ex, ey)
+        if L == 0:
+            continue
+        nx, ny = ey / L, -ex / L
+        if (cx - xs[i]) * nx + (cy - ys[i]) * ny > 0:   # la normal apuntaba hacia dentro
+            nx, ny = -nx, -ny
+        delta = (x - xs[i]) * nx + (y - ys[i]) * ny + margen   # signo +: el punto esta fuera por este lado
+        if delta <= 1e-9:
+            continue
+        xs2, ys2 = list(xs), list(ys)
+        for k in (i, j):
+            xs2[k] += delta * nx
+            ys2[k] += delta * ny
+        if not poligono_simple(xs2, ys2) or not punto_en_poligono(x, y, xs2, ys2) \
+                or distancia_a_borde(x, y, xs2, ys2) < margen - 1e-9:
+            continue
+        if mejor is None or delta < mejor["delta"]:
+            mejor = {"xs": xs2, "ys": ys2, "lado": i, "dx": delta * nx, "dy": delta * ny, "delta": delta}
+    return mejor
+
+
+def ampliacion_separada(ext: dict, xs: list[float], ys: list[float], vecinos: list[dict], holgura: float) -> bool:
+    """La ampliacion `ext` (de extender_lado) no invade otros cabezales: los dos vertices movidos y
+    el centro del lado nuevo quedan fuera de todo vecino y a >= holgura de sus bordes, y ningun
+    vertice de un vecino que estaba fuera del cabezal queda dentro del ampliado."""
+    i, j = ext["lado"], (ext["lado"] + 1) % len(xs)
+    puntos = [(ext["xs"][i], ext["ys"][i]), (ext["xs"][j], ext["ys"][j]),
+              ((ext["xs"][i] + ext["xs"][j]) / 2, (ext["ys"][i] + ext["ys"][j]) / 2)]
+    for v in vecinos:
+        vx, vy = v["xs"], v["ys"]
+        for x, y in puntos:
+            if punto_en_poligono(x, y, vx, vy) or distancia_a_borde(x, y, vx, vy) < holgura - 1e-9:
+                return False
+        for k in range(len(vx)):
+            if punto_en_poligono(vx[k], vy[k], ext["xs"], ext["ys"]) and not punto_en_poligono(vx[k], vy[k], xs, ys):
+                return False
+    return True
+
+
+def posicion_ampliando(px: float, py: float, xs: list[float], ys: list[float],
+                       otros: list[tuple[float, float]], diametro: float, s_d: float,
+                       borde_d: float = 1.0, vecinos: list[dict] | None = None, holgura: float = 0.0,
+                       lados_fijos: set[int] | None = None, n_ang: int = 24) -> dict | None:
+    """Punto a s_d*D del pilote (px, py) que NO cabe dentro del cabezal, con la ampliacion de un
+    lado que lo haga caber (extender_lado). Exige separacion >= s_d*D a los otros pilotes, que
+    todos los pilotes del cabezal sigan dentro del poligono ampliado y que la ampliacion no
+    invada los cabezales vecinos (holgura). Devuelve el candidato de menor desplazamiento."""
+    _validar_cabezal(xs, ys, diametro, s_d, borde_d)
+    r, margen = s_d * diametro + HOLGURA_REDONDEO, borde_d * diametro
+    mejor = None
+    for x, y in anillo(px, py, r, n_ang):
+        d = _dmin(x, y, otros)
+        if d < r:
+            continue
+        if punto_en_poligono(x, y, xs, ys) and distancia_a_borde(x, y, xs, ys) >= margen - 1e-9:
+            continue   # cabe sin ampliar: eso lo resuelve posicion_junto_a
+        ext = extender_lado(xs, ys, x, y, margen, lados_fijos)
+        if ext is None:
+            continue
+        if any(not punto_en_poligono(ox, oy, ext["xs"], ext["ys"]) for ox, oy in otros + [(px, py)]):
+            continue
+        if vecinos and not ampliacion_separada(ext, xs, ys, vecinos, holgura):
+            continue
+        if mejor is None or (ext["delta"], -d) < (mejor["delta"], -mejor["d_otros"]):
+            mejor = {**ext, "x": x, "y": y, "d_otros": d}
+    if mejor is None:
+        return None
+    return {"x": round(mejor["x"], 4), "y": round(mejor["y"], 4), "s_b_min": round(min(r, mejor["d_otros"]) / diametro, 3),
+            "modo": "ampliando", "lado": mejor["lado"], "dx": round(mejor["dx"], 4), "dy": round(mejor["dy"], 4),
+            "delta": round(mejor["delta"], 4), "xs": [round(v, 4) for v in mejor["xs"]], "ys": [round(v, 4) for v in mejor["ys"]]}
+
+
+def parsear_pasos(pasos: list[str] | None) -> list[tuple[float, str]]:
+    """["5i", "4i", "5a", "4a", "3i"] -> [(5.0, "dentro"), (4.0, "dentro"), (5.0, "ampliando"), ...].
+    Sufijo i = dentro del cabezal, a = ampliando el cabezal. S/B < 3 no se admite (fuera de tabla)."""
+    out = []
+    for p in (pasos or ["5i", "4i", "5a", "4a", "3i"]):
+        s = str(p).strip().lower()
+        if len(s) < 2 or s[-1] not in "ia":
+            raise PilotesError(f"paso {p!r}: use <separacion en diametros><i|a>, p. ej. 5i o 4a.")
+        try:
+            sep = float(s[:-1])
+        except ValueError as e:
+            raise PilotesError(f"paso {p!r}: separacion no numerica.") from e
+        if sep < 3:
+            raise PilotesError(f"paso {p!r}: la separacion minima admitida es 3 diametros (tabla 5.1).")
+        out.append((sep, "dentro" if s[-1] == "i" else "ampliando"))
+    if not out:
+        raise PilotesError("pasos vacio.")
+    return out

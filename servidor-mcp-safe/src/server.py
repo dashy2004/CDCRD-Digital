@@ -136,6 +136,8 @@ assign_pile_groups = mcp.tool()(safe.assign_pile_groups)
 apply_pile_proposal = mcp.tool()(safe.apply_pile_proposal)
 # Quita de uno en uno con reanalisis por paso; escribe SOLO en la copia.
 optimize_pile_removal = mcp.tool()(safe.optimize_pile_removal)
+# Anade junto a los que fallan, ampliando el cabezal si no hay hueco; escribe SOLO en la copia.
+optimize_pile_addition = mcp.tool()(safe.optimize_pile_addition)
 
 if __name__ == "__main__":
     mcp.run(transport='stdio')
