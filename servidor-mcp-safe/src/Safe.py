@@ -2371,7 +2371,20 @@ class Safe:
             return None
         raise SafeError(f"{what}: ret={code}; resultado={result!r}")
 
+    def _desbloquear_copia(self, copia: str) -> bool:
+        """La copia de un modelo analizado se abre BLOQUEADA y AddByCoord devuelve ret=1 mientras lo este
+        (visto en vivo 2026-11-04; tras SetModelIsLocked(False) el alta funciona). Solo sobre la copia."""
+        self._exigir_modelo(copia)
+        model = self._model()
+        if not model.GetModelIsLocked():
+            return False
+        oapi.call_checked(model, "SetModelIsLocked", (False,), "desbloqueo de la copia")
+        if model.GetModelIsLocked():
+            raise SafeError("SetModelIsLocked(False) ret=0 pero el modelo sigue bloqueado.")
+        return True
+
     def _borrar_frames(self, copia: str, nombres: list[str]) -> list[str]:
+        self._desbloquear_copia(copia)
         model = self._model()
         existentes = {f["id"] for f in self._frames_todos()}
         faltan = [n for n in nombres if n not in existentes]
@@ -2396,7 +2409,7 @@ class Safe:
         z_cab, z_pun = max(r["z1"], r["z2"]), min(r["z1"], r["z2"])
         punta_ref = r["p1"] if r["z1"] < r["z2"] else r["p2"]
         prop = section or r["seccion"]
-        self._exigir_modelo(copia)
+        self._desbloquear_copia(copia)
         res = oapi.call_checked(model.FrameObj, "AddByCoord",
                                 (float(x), float(y), z_cab, float(x), float(y), z_pun, "", prop),
                                 f"AddByCoord pilote en ({x:g}, {y:g})")
@@ -2963,7 +2976,7 @@ class Safe:
 
     def _ampliar_cabezal(self, copia: str, cid: str, puntos: list[str], dx: float, dy: float) -> dict:
         """Mueve los dos vertices de un lado del cabezal (SetSelected + EditGeneral.Move) y relee."""
-        self._exigir_modelo(copia)
+        self._desbloquear_copia(copia)
         self.move_objects("point", list(puntos), float(dx), float(dy), 0.0)
         return {"cabezal": cid, "puntos": list(puntos), "dx": dx, "dy": dy}
 

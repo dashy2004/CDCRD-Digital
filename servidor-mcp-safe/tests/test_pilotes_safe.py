@@ -708,6 +708,28 @@ def test_optimize_pile_addition_pone_mas_de_un_pilote_si_el_ratio_lo_pide(pile_a
     assert out1["historial"][0]["propuestos"] == {"A1": 1}
 
 
+def test_las_escrituras_en_la_copia_desbloquean_el_modelo_y_nunca_el_original(pile_api, tmp_path):
+    safe, model, state = pile_api
+    _mock_edicion(model, state)
+    model.GetModelIsLocked.side_effect = lambda: state.get("locked", False)
+    def unlock(flag):
+        state["locked"] = bool(flag)
+        return 0
+    model.SetModelIsLocked.side_effect = unlock
+    state["locked"] = True
+    copia = str(tmp_path / "l.fdb")
+    state["filename"] = copia
+    safe._anadir_pilote(copia, 9.0, 9.0, "F00")
+    model.SetModelIsLocked.assert_called_once_with(False)
+    assert state["locked"] is False
+    # original activo: no se desbloquea ni se escribe
+    state["filename"] = "modelo.fdb"
+    state["locked"] = True
+    with pytest.raises(SafeError, match="no la copia"):
+        safe._borrar_frames(copia, ["F00"])
+    model.SetModelIsLocked.assert_called_once()
+
+
 def test_frame_en_resuelve_por_coordenadas_y_exige_unicidad(pile_api):
     safe, model, state = pile_api
     assert safe._frame_en(4.5, 0.0) == "F20"
