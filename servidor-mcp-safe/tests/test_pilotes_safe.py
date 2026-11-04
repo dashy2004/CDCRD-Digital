@@ -643,6 +643,8 @@ def test_optimize_pile_addition_amplia_el_cabezal_y_anade_junto_al_que_falla(pil
     assert out["cumple_todo"] and out["iteraciones"] == 1 and out["n_anadidos"] == 1 and out["n_ampliaciones"] == 1
     nuevo, amp = out["anadidos"][0], out["ampliaciones"][0]
     assert nuevo["junto_a"] == "F20" and nuevo["modo"] == "ampliando" and nuevo["s_d"] == 5.0 and nuevo["frame"].startswith("N")
+    assert nuevo["ref_xy"] == [4.5, 0.0] and nuevo["ref_usada"] == "F20"     # la referencia se resuelve por coordenadas al rehacer la copia
+    assert out["historial"][0]["cabezales"]["A1"]["fallaban"] == 1 and out["historial"][0]["cabezales"]["A1"]["fallan_tras"] == 0
     assert 2.25 <= ((nuevo["x"] - 4.5) ** 2 + (nuevo["y"] - 0.0) ** 2) ** 0.5 < 2.253     # a 5 D del F20 (+1 mm de holgura)
     assert out["sin_factor_nuevos"] == [] and out["sin_factor_base"] == []
     assert amp["cabezal"] == "A1" and amp["lado"] in (0, 1) and 0 < amp["delta"] <= 2.2 + 1e-6 and len(amp["puntos"]) == 2
@@ -683,3 +685,60 @@ def test_optimize_pile_addition_no_mueve_vertices_compartidos(pile_api, tmp_path
     assert not out["cumple_todo"]
     with pytest.raises(SafeError, match="3 diametros"):
         safe.optimize_pile_addition(str(tmp_path / "e.fdb"), q_adm=800.0, pasos=["2i"])
+    with pytest.raises(SafeError, match="max_por_pilote"):
+        safe.optimize_pile_addition(str(tmp_path / "e.fdb"), q_adm=800.0, max_por_pilote=0)
+
+
+def test_optimize_pile_addition_pone_mas_de_un_pilote_si_el_ratio_lo_pide(pile_api, tmp_path):
+    safe, model, state = pile_api
+    _preparar_densificar(model, state, carga_tras_anadir=500.0)
+    state["react"]["B20"] = [("COMB1", "", 1600.0)]       # ratio 1600/720 = 2.2 -> ceil(1.2) = 2 pilotes nuevos
+    old_open = model.File.OpenFile.side_effect
+    def openfile(path):
+        r = old_open(path)
+        state["react"]["B20"] = [("COMB1", "", 1600.0)]
+        return r
+    model.File.OpenFile.side_effect = openfile
+    out = salida(safe.optimize_pile_addition(str(tmp_path / "k.fdb"), q_adm=800.0, max_iter=2, max_por_pilote=3))
+    assert out["historial"][0]["propuestos"] == {"A1": 2} and out["n_anadidos"] == 2
+    assert all(a["junto_a"] == "F20" for a in out["anadidos"])
+    # con max_por_pilote=1 solo uno (la carga del F20 vuelve a 1600 antes de la segunda corrida)
+    state["react"]["B20"] = [("COMB1", "", 1600.0)]
+    out1 = salida(safe.optimize_pile_addition(str(tmp_path / "k1.fdb"), q_adm=800.0, max_iter=1, max_por_pilote=1))
+    assert out1["historial"][0]["propuestos"] == {"A1": 1}
+
+
+def test_frame_en_resuelve_por_coordenadas_y_exige_unicidad(pile_api):
+    safe, model, state = pile_api
+    assert safe._frame_en(4.5, 0.0) == "F20"
+    with pytest.raises(SafeError, match="0 frame"):
+        safe._frame_en(9.9, 9.9)
+    state["frames"].append(("DUP", "P45", "TD", "BD", 4.5, 0.0, 0.0, 4.5, 0.0, -12.0))
+    with pytest.raises(SafeError, match="2 frame"):
+        safe._frame_en(4.5, 0.0)
+
+
+def test_leer_con_reintento_espera_resultados_y_log_rancio_no_engana(pile_api, tmp_path, monkeypatch):
+    safe, model, state = pile_api
+    import time as _t
+    monkeypatch.setattr(_t, "sleep", lambda s: None)
+    llamadas = iter([(0, (), 1), (0, (), 1), (1, ["P"], 0)])
+    out = safe._leer_con_reintento(lambda: next(llamadas), "prueba")
+    assert out == (1, ["P"])
+    with pytest.raises(SafeError, match="ret=7"):
+        safe._leer_con_reintento(lambda: (0, 7), "prueba")        # otro codigo: error inmediato
+    # _analizar_tolerante: con archivo de modelo y LOG viejo, ret != 0 NO se acepta aunque GetCaseStatus diga listo
+    fdb = tmp_path / "m.fdb"; fdb.write_bytes(b"x")
+    log = tmp_path / "m.LOG"; log.write_text("A N A L Y S I S   C O M P L E T E", encoding="latin-1")
+    import os as _os
+    viejo = _os.path.getmtime(log) - 100
+    _os.utime(log, (viejo, viejo))
+    state["filename"] = str(fdb)
+    model.Analyze.RunAnalysis.return_value = 7
+    monkeypatch.setattr(safe, "_ESPERA_LOG_S", 0.0)
+    with pytest.raises(SafeError, match="LOG"):
+        safe._analizar_tolerante()
+    # LOG nuevo con ANALYSIS COMPLETE: se acepta con aviso
+    ahora = _t.time() + 5
+    _os.utime(log, (ahora, ahora))
+    assert "LOG dice ANALYSIS COMPLETE" in safe._analizar_tolerante()

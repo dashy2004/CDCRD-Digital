@@ -2025,11 +2025,29 @@ class Safe:
             oapi.call_checked(setup, "SetCaseSelectedForOutput", (c,), f"salida caso {c}")
         return combos, cases
 
+    _REINTENTOS_RESULTADOS = (15, 2.0)   # intentos, segundos entre ellos
+
+    def _leer_con_reintento(self, fn, what: str):
+        """ret=1 en una lectura de resultados justo despues de RunAnalysis significa que SAFE aun no
+        termino de volcarlos (visto en vivo 2026-11-04: la primera JointReact tras el analisis dio
+        ret=1 y 2 min despues la misma llamada devolvia n=1). Se reintenta un rato antes de abortar."""
+        import time
+        intentos, pausa = self._REINTENTOS_RESULTADOS
+        for k in range(intentos):
+            result = fn()
+            if oapi.ret_code(result) == 0:
+                return oapi.outs(result)
+            if oapi.ret_code(result) != 1 or k == intentos - 1:
+                return _result(result, what)
+            logger.warning("%s: ret=1 (resultados aun no disponibles); reintento %d/%d", what, k + 1, intentos)
+            time.sleep(pausa)
+        return _result(fn(), what)
+
     def _axial_pilote(self, p, source: str) -> list[dict]:
         res = self._model().Results
         if source == "joint":
-            outs = _result(res.JointReact(p.punto_punta, self._ITEM_TYPE_OBJECT),
-                           f"Results.JointReact({p.punto_punta})")
+            outs = self._leer_con_reintento(lambda: res.JointReact(p.punto_punta, self._ITEM_TYPE_OBJECT),
+                                            f"Results.JointReact({p.punto_punta})")
             n, _obj, _elm, casos, pasos, stepnum, _f1, _f2, f3 = outs[:9]
             if any(len(a) != n for a in (casos, pasos, stepnum, f3)):
                 raise SafeError(f"JointReact({p.punto_punta}): longitud incoherente.")
@@ -2656,17 +2674,53 @@ class Safe:
         """run_analysis para bucles: si RunAnalysis devuelve ret != 0 pero GetCaseStatus dice que todos
         los casos quedaron listos (visto en vivo 2026-11-03 tras reabrir modelos en la misma
         instancia), se acepta con aviso en vez de abortar; si no, se propaga el error."""
+        import time
         model = self._model()
+        t0 = time.time()
         ret = model.Analyze.RunAnalysis()
         if ret == 0:
             return ""
+        # GetCaseStatus puede estar RANCIO (la copia hereda los resultados de la base): exigir ademas
+        # que el LOG del modelo diga ANALYSIS COMPLETE con fecha posterior al arranque.
+        log_ok = self._esperar_log_analisis(t0)
         try:
             self._exigir_analisis()
         except SafeError as e:
             raise SafeError(f"RunAnalysis ret={ret} y casos sin terminar: {e}") from e
-        aviso = f"RunAnalysis devolvio ret={ret} pero GetCaseStatus reporta todos los casos listos; se acepta."
+        if log_ok is False:
+            raise SafeError(f"RunAnalysis ret={ret} y el LOG del modelo no reporta ANALYSIS COMPLETE posterior al arranque.")
+        aviso = (f"RunAnalysis devolvio ret={ret} pero GetCaseStatus reporta todos los casos listos"
+                 + (" y el LOG dice ANALYSIS COMPLETE" if log_ok else "") + "; se acepta.")
         logger.warning(aviso)
         return aviso
+
+    _ESPERA_LOG_S = 900.0
+
+    def _esperar_log_analisis(self, t0: float) -> bool | None:
+        """True si <modelo>.LOG tiene fecha >= t0 y termina en ANALYSIS COMPLETE (esperando hasta
+        _ESPERA_LOG_S); False si no llega; None si el modelo no tiene archivo/LOG que consultar."""
+        import time
+        activo = str(self._model().GetModelFilename() or "")
+        if not activo:
+            return None
+        log = os.path.splitext(activo)[0] + ".LOG"
+        try:
+            os.stat(log)
+        except OSError:
+            return None          # sin LOG en disco (modelo sin archivo, mock...): nada que esperar
+        limite = time.time() + self._ESPERA_LOG_S
+        while True:
+            try:
+                if os.path.getmtime(log) >= t0 - 1.0:
+                    with open(log, "r", encoding="latin-1", errors="replace") as fh:
+                        cola = fh.read()[-600:]
+                    if "A N A L Y S I S   C O M P L E T E" in cola:
+                        return True
+            except OSError:
+                pass
+            if time.time() >= limite:
+                return False
+            time.sleep(3.0)
 
     def _copia_desde_base(self, base: str, copia: str) -> None:
         """Reabre la base (cierra la copia sin guardar), copia el archivo base y abre la copia."""
@@ -2913,6 +2967,21 @@ class Safe:
         self.move_objects("point", list(puntos), float(dx), float(dy), 0.0)
         return {"cabezal": cid, "puntos": list(puntos), "dx": dx, "dy": dy}
 
+    def _frame_en(self, x: float, y: float, seccion: str = "") -> str:
+        """Nombre del frame cuya cabeza (extremo de Z mayor) esta en (x, y). Los nombres que SAFE asigna
+        a los frames nuevos dependen del orden de creacion (visto en vivo 2026-11-04: al rehacer la copia
+        sin los cambios rechazados, la referencia '289' ya no existia), asi que el replay resuelve la
+        referencia por coordenadas."""
+        cands = []
+        for f in self._frames_todos():
+            hx, hy = (f["x1"], f["y1"]) if f["z1"] >= f["z2"] else (f["x2"], f["y2"])
+            if math.isclose(float(hx), x, abs_tol=1e-4) and math.isclose(float(hy), y, abs_tol=1e-4):
+                if not seccion or f["seccion"] == seccion:
+                    cands.append(f["id"])
+        if len(cands) != 1:
+            raise SafeError(f"Pilote de referencia en ({x:g}, {y:g}): {len(cands)} frame(s) con cabeza ahi: {cands[:5]}.")
+        return cands[0]
+
     def _aplicar_cambios(self, copia: str, cambios: list[dict]) -> list[dict]:
         """Reaplica en orden una lista de cambios (ampliar / anadir) sobre la copia recien creada."""
         hechos = []
@@ -2920,8 +2989,9 @@ class Safe:
             if c["tipo"] == "ampliar":
                 hechos.append({**c, **self._ampliar_cabezal(copia, c["cabezal"], c["puntos"], c["dx"], c["dy"])})
             elif c["tipo"] == "anadir":
-                r = self._anadir_pilote(copia, float(c["x"]), float(c["y"]), str(c["ref"]))
-                hechos.append({**c, "frame": r["frame"], "apoyos_copiados": r["apoyos_copiados"]})
+                ref = self._frame_en(float(c["ref_xy"][0]), float(c["ref_xy"][1])) if c.get("ref_xy") else str(c["ref"])
+                r = self._anadir_pilote(copia, float(c["x"]), float(c["y"]), ref)
+                hechos.append({**c, "ref_usada": ref, "frame": r["frame"], "apoyos_copiados": r["apoyos_copiados"]})
             else:
                 raise SafeError(f"cambio desconocido: {c!r}")
         return hechos
@@ -2930,7 +3000,7 @@ class Safe:
     def optimize_pile_addition(self, copy_path: str, q_adm: float = 0.0, q_ult: float = 0.0, fs: float = 0.0,
                                xlsx_path: str = "", max_iter: int = 8, pasos: list[str] | None = None,
                                borde_d: float = 1.0, holgura_d: float = 2.0, max_por_cabezal: int = 0,
-                               solo_cabezales: list[str] | None = None,
+                               max_por_pilote: int = 2, solo_cabezales: list[str] | None = None,
                                service_combos: str | list[str] = "auto",
                                seismic_combos: list[str] | None = None, seismic_factor: float = 4.0 / 3.0,
                                sections: str | list[str] = "auto", diameter_mm: float = 0.0,
@@ -2958,14 +3028,16 @@ class Safe:
             max_iter: iteraciones maximas (cada una = un analisis completo de la copia).
             pasos: orden de busqueda; None = ["5i", "4i", "5a", "4a", "3i"]. Minimo 3 D.
             borde_d, holgura_d: margen al borde y holgura entre cabezales, en diametros.
-            max_por_cabezal: pilotes nuevos por cabezal e iteracion (0 = uno por pilote que falla).
+            max_por_cabezal: tope de pilotes nuevos por cabezal e iteracion (0 = sin tope).
+            max_por_pilote: pilotes nuevos junto a cada pilote que falla, por iteracion: se ponen
+                ceil(ratio - 1) acotados a este valor (ratio 1.3 -> 1, ratio 2.4 -> 2).
             resto: como optimize_pile_removal.
         """
         import json
         from collections import Counter
         q = self._q_adm_base(q_adm, q_ult, fs)
-        if max_iter < 1 or max_por_cabezal < 0 or borde_d < 0 or holgura_d < 0:
-            raise SafeError("max_iter >= 1; max_por_cabezal, borde_d y holgura_d >= 0.")
+        if max_iter < 1 or max_por_cabezal < 0 or max_por_pilote < 1 or borde_d < 0 or holgura_d < 0:
+            raise SafeError("max_iter >= 1; max_por_pilote >= 1; max_por_cabezal, borde_d y holgura_d >= 0.")
         try:
             pasos_l = pilotes.parsear_pasos(pasos)
         except pilotes.PilotesError as e:
@@ -3033,7 +3105,11 @@ class Safe:
                 nuevos: list[dict] = []
                 cuenta: Counter = Counter()
                 lados_cache: dict[str, tuple] = {}
+                pendientes = []
                 for f in fallan:
+                    k = max(1, min(max_por_pilote, math.ceil((f["ratio"] or 1.0) - 1.0 - 1e-9)))
+                    pendientes += [f] * k
+                for f in pendientes:
                     cid = str(f["cabezal"])
                     if max_por_cabezal and cuenta[cid] >= max_por_cabezal:
                         continue
@@ -3073,8 +3149,8 @@ class Safe:
                                        "puntos": [nombres[i], nombres[j]], "dx": pos["dx"], "dy": pos["dy"], "delta": pos["delta"]})
                         pol["xs"], pol["ys"] = pos["xs"], pos["ys"]
                     nuevos.append({"tipo": "anadir", "iteracion": it, "cabezal": cid, "x": pos["x"], "y": pos["y"],
-                                   "ref": f["id"], "junto_a": f["id"], "s_d": pos["s_d"], "modo": pos["modo"],
-                                   "s_b_min_previsto": pos["s_b_min"]})
+                                   "ref": f["id"], "ref_xy": [f["x"], f["y"]], "junto_a": f["id"], "s_d": pos["s_d"],
+                                   "modo": pos["modo"], "s_b_min_previsto": pos["s_b_min"]})
                     cuenta[cid] += 1
                 if not nuevos:
                     break
@@ -3095,7 +3171,13 @@ class Safe:
                         rechazados.append(cid)
                         congelados[cid] = f"sin mejora al anadir: fallan {n0} -> {n1}, ratio max {r0:.3f} -> {r1:.3f}"
                 cambios += [c for c in nuevos if c["cabezal"] in aceptados]
-                historial.append({"iteracion": it, "pilotes_que_fallaban": len(fallan),
+                detalle = {cid: {"fallaban": antes_cab.get(cid, (0, 0.0))[0], "ratio_max": round(antes_cab.get(cid, (0, 0.0))[1], 3),
+                                 "fallan_tras": despues_cab.get(cid, (0, 0.0))[0], "ratio_max_tras": round(despues_cab.get(cid, (0, 0.0))[1], 3),
+                                 "anadidos": sum(1 for c in nuevos if c["cabezal"] == cid and c["tipo"] == "anadir"),
+                                 "ampliaciones": sum(1 for c in nuevos if c["cabezal"] == cid and c["tipo"] == "ampliar"),
+                                 "resultado": "aceptado" if cid in aceptados else "rechazado"}
+                           for cid in sorted({c["cabezal"] for c in nuevos}, key=lambda s: (len(s), s))}
+                historial.append({"iteracion": it, "pilotes_que_fallaban": len(fallan), "cabezales": detalle,
                                   "propuestos": {cid: sum(1 for c in nuevos if c["cabezal"] == cid and c["tipo"] == "anadir") for cid in sorted({c["cabezal"] for c in nuevos})},
                                   "ampliaciones": [{k: c[k] for k in ("cabezal", "lado", "delta")} for c in nuevos if c["tipo"] == "ampliar"],
                                   "aceptados": aceptados, "rechazados": rechazados,
