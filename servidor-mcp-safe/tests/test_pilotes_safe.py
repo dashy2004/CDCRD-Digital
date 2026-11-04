@@ -743,6 +743,18 @@ def test_las_escrituras_en_la_copia_desbloquean_el_modelo_y_nunca_el_original(pi
     model.SetModelIsLocked.assert_called_once()
 
 
+def test_aplicar_cambios_dice_que_cambio_fallo(pile_api, tmp_path):
+    safe, model, state = pile_api
+    _mock_edicion(model, state)
+    copia = str(tmp_path / "x.fdb")
+    state["filename"] = copia
+    model.EditGeneral.Move.side_effect = None
+    model.EditGeneral.Move.return_value = 1
+    with pytest.raises(SafeError, match="cambio 1/2.*'cabezal': 'A1'.*'puntos'"):
+        safe._aplicar_cambios(copia, [{"tipo": "ampliar", "iteracion": 1, "cabezal": "A1", "puntos": ["P1", "P2"], "dx": 1.0, "dy": 0.0},
+                                      {"tipo": "anadir", "iteracion": 1, "cabezal": "A1", "x": 9.0, "y": 9.0, "ref": "F00", "ref_xy": [0.0, 0.0]}])
+
+
 def test_frame_en_resuelve_por_coordenadas_y_exige_unicidad(pile_api):
     safe, model, state = pile_api
     assert safe._frame_en(4.5, 0.0) == "F20"

@@ -143,6 +143,15 @@ Primera version, 31 tools, probada en vivo contra TORRE A.
   (`anillo`, `posicion_junto_a`, `extender_lado`, `ampliacion_separada`, `posicion_ampliando`,
   `parsear_pasos`). 293 tests. Corridas vivas sobre las copias reducidas de los tres modelos:
   ver `PRUEBA-VIVA-PILOTES.md`.
+- Correcciones de `optimize_pile_addition` tras las corridas vivas (299 tests): holgura de 1 mm en
+  la separación (un pilote a 3 D exactos caía fuera de la tabla por el redondeo); referencia del
+  pilote nuevo por coordenadas (`_frame_en`) porque los nombres que asigna SAFE cambian al rehacer
+  la copia; `_leer_con_reintento` (JointReact ret=1 justo tras el análisis) y espera al LOG
+  "ANALYSIS COMPLETE" posterior al arranque en `_analizar_tolerante`; `_desbloquear_copia`
+  (AddByCoord ret=1 con la copia bloqueada); separación contra todos los pilotes cercanos
+  (sueltos y de otros cabezales) y `max_por_pilote` por ratio. Resultado: primer modelo cumple
+  pilote por pilote (480 → 498); segundo y tercero no pueden resolverse añadiendo pilotes del
+  mismo diámetro (límite de la tabla 5.1 en mallas a 4 D; fila "reespaciar" en BACKLOG).
 - Corrida de aceptación antes del PR sobre una copia de un segundo modelo (~1100 pilotes, 174
   cabezales) en instancia SAFE arrancada por COM: las cinco tools **[H]**; 114 pilotes con S/B < 3,
   igual que el conteo independiente del mismo día. Tiempos con 1112 pilotes: 88 s reacciones,

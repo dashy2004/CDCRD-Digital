@@ -2999,14 +2999,18 @@ class Safe:
         """Reaplica en orden una lista de cambios (ampliar / anadir) sobre la copia recien creada."""
         hechos = []
         for c in cambios:
-            if c["tipo"] == "ampliar":
-                hechos.append({**c, **self._ampliar_cabezal(copia, c["cabezal"], c["puntos"], c["dx"], c["dy"])})
-            elif c["tipo"] == "anadir":
-                ref = self._frame_en(float(c["ref_xy"][0]), float(c["ref_xy"][1])) if c.get("ref_xy") else str(c["ref"])
-                r = self._anadir_pilote(copia, float(c["x"]), float(c["y"]), ref)
-                hechos.append({**c, "ref_usada": ref, "frame": r["frame"], "apoyos_copiados": r["apoyos_copiados"]})
-            else:
-                raise SafeError(f"cambio desconocido: {c!r}")
+            try:
+                if c["tipo"] == "ampliar":
+                    hechos.append({**c, **self._ampliar_cabezal(copia, c["cabezal"], c["puntos"], c["dx"], c["dy"])})
+                elif c["tipo"] == "anadir":
+                    ref = self._frame_en(float(c["ref_xy"][0]), float(c["ref_xy"][1])) if c.get("ref_xy") else str(c["ref"])
+                    r = self._anadir_pilote(copia, float(c["x"]), float(c["y"]), ref)
+                    hechos.append({**c, "ref_usada": ref, "frame": r["frame"], "apoyos_copiados": r["apoyos_copiados"]})
+                else:
+                    raise SafeError(f"cambio desconocido: {c!r}")
+            except SafeError as e:
+                resumen = {k: c.get(k) for k in ("tipo", "iteracion", "cabezal", "puntos", "dx", "dy", "x", "y", "junto_a", "s_d", "modo")}
+                raise SafeError(f"{e} | cambio {len(hechos) + 1}/{len(cambios)}: {resumen}") from e
         return hechos
 
     @com_call
