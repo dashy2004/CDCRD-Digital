@@ -359,6 +359,10 @@ def test_posicion_ampliando_prefiere_el_menor_desplazamiento_y_no_invade_vecinos
     assert r2 is None or r2["lado"] != 1
     # los pilotes existentes siguen dentro del poligono ampliado
     assert pl.punto_en_poligono(3.0, 3.0, r["xs"], r["ys"])
+    # un pilote de OTRO cabezal en `otros` solo exige separacion; no tiene que quedar dentro
+    r3 = pl.posicion_ampliando(5.25, 3.0, xs, ys, [(3.0, 3.0), (12.0, 12.0)], 0.45, 5.0, 1.0, propios=[(3.0, 3.0)])
+    assert r3 is not None and r3["lado"] == r["lado"]
+    assert pl.posicion_ampliando(5.25, 3.0, xs, ys, [(3.0, 3.0), (12.0, 12.0)], 0.45, 5.0, 1.0) is None
 
 
 def test_parsear_pasos_y_poligono_simple():

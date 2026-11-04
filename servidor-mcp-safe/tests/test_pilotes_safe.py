@@ -689,6 +689,19 @@ def test_optimize_pile_addition_no_mueve_vertices_compartidos(pile_api, tmp_path
         safe.optimize_pile_addition(str(tmp_path / "e.fdb"), q_adm=800.0, max_por_pilote=0)
 
 
+def test_optimize_pile_addition_respeta_los_pilotes_sueltos_y_de_otros_cabezales(pile_api, tmp_path):
+    safe, model, state = pile_api
+    # pilote SUELTO (fuera de todo cabezal) justo donde iria el candidato a 0 grados del F20: (6.75, 0)
+    state["frames"].append(("SUELTO", "P45", "TU", "BU", 6.75, 0.0, 0.0, 6.75, 0.0, -12.0))
+    _preparar_densificar(model, state, carga_tras_anadir=500.0)
+    state["react"]["BU"] = [("COMB1", "", 300.0)]
+    out = salida(safe.optimize_pile_addition(str(tmp_path / "s.fdb"), q_adm=800.0, max_iter=2))
+    assert out["n_anadidos"] == 1
+    nuevo = out["anadidos"][0]
+    assert ((nuevo["x"] - 6.75) ** 2 + nuevo["y"] ** 2) ** 0.5 >= 2.25     # a >= 5 D tambien del suelto
+    assert ((nuevo["x"] - 4.5) ** 2 + nuevo["y"] ** 2) ** 0.5 >= 2.25
+
+
 def test_optimize_pile_addition_pone_mas_de_un_pilote_si_el_ratio_lo_pide(pile_api, tmp_path):
     safe, model, state = pile_api
     _preparar_densificar(model, state, carga_tras_anadir=500.0)

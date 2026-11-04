@@ -701,13 +701,16 @@ def ampliacion_separada(ext: dict, xs: list[float], ys: list[float], vecinos: li
 def posicion_ampliando(px: float, py: float, xs: list[float], ys: list[float],
                        otros: list[tuple[float, float]], diametro: float, s_d: float,
                        borde_d: float = 1.0, vecinos: list[dict] | None = None, holgura: float = 0.0,
-                       lados_fijos: set[int] | None = None, n_ang: int = 24) -> dict | None:
+                       lados_fijos: set[int] | None = None, n_ang: int = 24,
+                       propios: list[tuple[float, float]] | None = None) -> dict | None:
     """Punto a s_d*D del pilote (px, py) que NO cabe dentro del cabezal, con la ampliacion de un
-    lado que lo haga caber (extender_lado). Exige separacion >= s_d*D a los otros pilotes, que
-    todos los pilotes del cabezal sigan dentro del poligono ampliado y que la ampliacion no
-    invada los cabezales vecinos (holgura). Devuelve el candidato de menor desplazamiento."""
+    lado que lo haga caber (extender_lado). Exige separacion >= s_d*D a `otros` (todos los pilotes
+    cercanos, de este u otros cabezales), que los pilotes PROPIOS del cabezal (`propios`; si no se
+    dan, `otros`) sigan dentro del poligono ampliado y que la ampliacion no invada los cabezales
+    vecinos (holgura). Devuelve el candidato de menor desplazamiento."""
     _validar_cabezal(xs, ys, diametro, s_d, borde_d)
     r, margen = s_d * diametro + HOLGURA_REDONDEO, borde_d * diametro
+    dentro_tras = list(otros if propios is None else propios) + [(px, py)]
     mejor = None
     for x, y in anillo(px, py, r, n_ang):
         d = _dmin(x, y, otros)
@@ -718,7 +721,7 @@ def posicion_ampliando(px: float, py: float, xs: list[float], ys: list[float],
         ext = extender_lado(xs, ys, x, y, margen, lados_fijos)
         if ext is None:
             continue
-        if any(not punto_en_poligono(ox, oy, ext["xs"], ext["ys"]) for ox, oy in otros + [(px, py)]):
+        if any(not punto_en_poligono(ox, oy, ext["xs"], ext["ys"]) for ox, oy in dentro_tras):
             continue
         if vecinos and not ampliacion_separada(ext, xs, ys, vecinos, holgura):
             continue

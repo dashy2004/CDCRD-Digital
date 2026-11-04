@@ -3110,10 +3110,8 @@ class Safe:
                 poligonos = {str(c["id"]): {"id": str(c["id"]), "xs": list(c["xs"]), "ys": list(c["ys"])}
                              for c in self._cabezales(cap_types)}
                 seccion_de = {p["id"]: p["seccion"] for p in sep["pilotes"]}
-                pil_cab: dict[str, list[tuple]] = {}
-                for f in actual["filas"]:
-                    if f["cabezal"] is not None and f["x"] is not None:
-                        pil_cab.setdefault(str(f["cabezal"]), []).append((f["id"], f["x"], f["y"]))
+                todos_xy = [(f["id"], f["x"], f["y"], str(f["cabezal"])) for f in actual["filas"] if f["x"] is not None]
+                radio_otros = 8.0 * max(diam.values())
                 antes_cab = estado_por_cabezal(actual)
                 nuevos: list[dict] = []
                 cuenta: Counter = Counter()
@@ -3131,8 +3129,12 @@ class Safe:
                         sin_posicion.append({"iteracion": it, "pilote": f["id"], "cabezal": cid, "motivo": "cabezal sin area"})
                         continue
                     d = diam.get(seccion_de.get(f["id"])) or max(diam.values())
-                    otros = [(x, y) for pid, x, y in pil_cab.get(cid, []) if pid != f["id"]]
-                    otros += [(c["x"], c["y"]) for c in nuevos if c["tipo"] == "anadir" and c["cabezal"] == cid]
+                    otros = [(x, y) for pid, x, y, _c in todos_xy
+                             if pid != f["id"] and math.hypot(x - f["x"], y - f["y"]) <= radio_otros]
+                    otros += [(c["x"], c["y"]) for c in nuevos if c["tipo"] == "anadir"
+                              and math.hypot(c["x"] - f["x"], c["y"] - f["y"]) <= radio_otros]
+                    propios = [(x, y) for pid, x, y, c_ in todos_xy if pid != f["id"] and c_ == cid]
+                    propios += [(c["x"], c["y"]) for c in nuevos if c["tipo"] == "anadir" and c["cabezal"] == cid]
                     vecinos = [p for k, p in poligonos.items() if k != cid]
                     pos = None
                     try:
@@ -3145,7 +3147,7 @@ class Safe:
                                     lados_cache[cid] = (nombres, self._lados_fijos(cid, nombres))
                                 nombres, fijos = lados_cache[cid]
                                 pos = pilotes.posicion_ampliando(f["x"], f["y"], pol["xs"], pol["ys"], otros, d, s,
-                                                                 borde_d, vecinos, holgura_d * d, fijos)
+                                                                 borde_d, vecinos, holgura_d * d, fijos, propios=propios)
                             if pos:
                                 pos["s_d"] = s
                                 break
