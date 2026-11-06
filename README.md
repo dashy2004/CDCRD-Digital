@@ -1,4 +1,19 @@
-# CDCRD-Digital
+<h1 align="center">CDCRD-Digital</h1>
+<p align="center"><strong>Normativa trazable · Automatización BIM · Evidencia de ingeniería</strong></p>
+
+<p align="center">
+  <a href="#instalación-y-paquetes"><img src="docs/assets/nav/instalar.svg" alt="INSTALAR" height="34"></a>
+  <a href="servidor-mcp-civil3d/README.md"><img src="docs/assets/nav/civil3d.svg" alt="CIVIL 3D" height="34"></a>
+  <a href="#civil-3d-resultados-reproducibles"><img src="docs/assets/nav/galeria.svg" alt="CAPTURAS" height="34"></a>
+  <a href="datos/INDICE.md"><img src="docs/assets/nav/normativa.svg" alt="NORMATIVA" height="34"></a>
+  <a href="#documentacion-tecnica"><img src="docs/assets/nav/docs.svg" alt="DOCUMENTACIÓN" height="34"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/dashy2004/CDCRD-Digital/actions/workflows/verify.yml"><img src="https://github.com/dashy2004/CDCRD-Digital/actions/workflows/verify.yml/badge.svg" alt="Verificaciones del repositorio"></a>
+  <a href="datos/INDICE.md"><img src="https://img.shields.io/badge/CDCRD-5_volúmenes_·_6%2C580_cláusulas-176349" alt="Normativa: 5 volúmenes y 6,580 cláusulas"></a>
+  <a href="servidor-mcp-civil3d/docs/QTO-0522.md"><img src="https://img.shields.io/badge/Civil_3D-entrega_0.5.22-165c85" alt="Civil 3D: entrega 0.5.22"></a>
+</p>
 
 [![Verificación del repositorio](https://github.com/dashy2004/CDCRD-Digital/actions/workflows/verify.yml/badge.svg?branch=master)](https://github.com/dashy2004/CDCRD-Digital/actions/workflows/verify.yml)
 [![Licencia Apache 2.0](https://img.shields.io/badge/licencia-Apache%202.0-blue.svg)](LICENSE)
@@ -9,8 +24,6 @@
 
 [![CDCRD Digital: normativa trazable y APIs para Revit, ETABS, SAFE, Civil 3D y AutoCAD](docs/assets/banner-cdcrd-digital.png)](https://www.canva.com/design/DAHYTip4pJ8/Cw9S-5IRfy_MZrj0EXIeaA/edit)
 
-**Normativa trazable · Automatización BIM · Evidencia de ingeniería**
-
 **Consulta el Código de Construcción de la República Dominicana con referencia a su página
 de origen y conecta sus datos con flujos de trabajo en Revit, ETABS, SAFE, Civil 3D y AutoCAD.**
 
@@ -18,9 +31,9 @@ El proyecto reúne **5 volúmenes, 34 títulos y 6,580 cláusulas**, tablas list
 herramientas MCP y revisiones documentadas. Su propósito es hacer que cada decisión pueda
 rastrearse desde la fuente normativa hasta los datos y la evidencia del modelo.
 
-[Explorar la norma](datos/INDICE.md) · [Instalar](#instalación-y-paquetes) ·
-[Civil 3D](#civil-3d-resultados-reproducibles) · [Herramientas](#los-servidores-mcp) · [Ejemplos](#ejemplos-de-herramientas) ·
-[Documentación técnica](#documentacion-tecnica) · [Contribuir](CONTRIBUTING.md)
+[Explorar la norma](datos/INDICE.md) · [Instalar el servidor MCP de Civil 3D](#instalar-el-servidor-mcp-de-civil-3d-2027) ·
+[Civil 3D a BeamNG.drive](#instalar-el-puente-de-civil-3d-a-beamngdrive) · [Herramientas](#los-servidores-mcp) ·
+[Ejemplos](#ejemplos-de-herramientas) · [Contribuir](CONTRIBUTING.md)
 
 | Capa | Qué aporta | Punto de entrada |
 |---|---|---|
@@ -41,6 +54,16 @@ verificación de un proyecto. Cada informe identifica qué se comprobó y qué e
 **Guillen Rosa & Associados**
 
 ## Civil 3D y AutoCAD: capturas y pruebas nativas
+
+[Civil 3D 0.5.22: cubicaciones y QTO por API — volumen TIN y materiales por secciones, cinco capturas reales](servidor-mcp-civil3d/docs/QTO-0522.md).
+
+[Civil 3D 0.5.21: targets de ancho y cota en un corredor nuevo — 8 asignaciones, 74 muestras de carril, 8 secciones](servidor-mcp-civil3d/docs/TARGETS-0521.md).
+
+[Civil 3D 0.5.20: corredores con varios baselines y regiones, secciones nativas](servidor-mcp-civil3d/docs/MULTIBASELINE-0520.md).
+
+[Civil 3D 0.5.19: espirales clotoide espiral-curva-espiral con evidencia de corredor](servidor-mcp-civil3d/docs/ESPIRALES-0519.md).
+
+[Civil 3D 0.5.18: tablas de peralte explícitas con evidencia nativa](servidor-mcp-civil3d/docs/PERALTES-0518.md).
 
 [Civil 3D 0.5.17: cunetas, bermas y secciones — 70 comprobaciones nativas y capturas crudas](servidor-mcp-civil3d/docs/CUNETAS-BERMAS-0517.md).
 
@@ -79,6 +102,7 @@ Pruebas sobre copias y datos hipotéticos. Capturas del área de dibujo; cada in
 | Reglamentos R-001, R-002, R-008, carreteras, geotecnia e INAPA | [Corpus complementario](corpus-reglamentos/README.md) — 12 documentos, 1.370 páginas, texto/OCR con referencia; revisión numérica pendiente |
 | Generar DXF, convertir previews, revisar IFC/IDS y consultar CDCRD localmente | [herramientas-locales/](herramientas-locales/README.md) — CLI, entorno reproducible y MCP de 12 herramientas |
 | Validar fuentes Civil 3D → BeamNG antes de convertir | [Validador de intercambios](civil3d-beamng/docs/VALIDACION-INTERCAMBIOS.md) — unidades, coordenadas, IDs y referencias; JSON sin activar aplicaciones |
+| Recorrer en BeamNG.drive una carretera diseñada en Civil 3D | [Puente Civil 3D → BeamNG.drive](instalacion/BEAMNG-DRIVE.md) — exporta terreno y calzada a un nivel propio del juego; sin IA ni MCP; [instalación copiar y pegar](#instalar-el-puente-de-civil-3d-a-beamngdrive) |
 
 Los `.json` se abren con cualquier editor de texto (Bloc de notas incluido) o se arrastran a
 una conversacion con una IA. Cada valor trae su clausula, tomo y pagina de origen: **la cita
@@ -200,7 +224,7 @@ de fórmulas/tablas pendientes de cotejo.
 | `servidor-mcp-safe/` | SAFE — losas, zapatas, franjas, punzonamiento, presion de suelo | v0.1.0, probado en vivo contra un modelo real de fundacion |
 | [revit-mcp-tools/](revit-mcp-tools/README.md) | Revit 2027 via pyRevit Routes — modelar, documentar, armado, exportacion a ETABS y auditoría MEP de solo lectura | Modelado y documentacion probados en la receta `residencial-4n`; [alcance y validación MEP](revit-mcp-tools/MEP.md) |
 | `revit-mcp-write/` | Revit 2027 via pyRevit Routes — lectura e inventario, y escritura (pushbuttons) | 9 herramientas; las tres que **mutan** el modelo aun sin corridas reales |
-| `servidor-mcp-civil3d/` | Civil 3D 2027 (serie R26.0) via puente .NET 10 propio en el proceso | v0.5.16; lectura y escritura **probadas en vivo** sobre copias sinteticas: sitio, plataformas, curvas, corredor, secciones y calzada con capas/targets/daylight ([evidencias](servidor-mcp-civil3d/docs/CALZADA-0516.md)) |
+| `servidor-mcp-civil3d/` | Civil 3D 2027 (serie R26.0) via puente .NET 10 propio en el proceso | v0.5.22, **85 herramientas**; lectura y escritura **probadas en vivo** sobre copias sinteticas: sitio, plataformas, curvas, corredor, secciones, calzada con capas/targets/daylight, cunetas y bermas, peraltes, espirales, varios baselines, targets de ancho y cota y cubicaciones/QTO ([ultima evidencia](servidor-mcp-civil3d/docs/QTO-0522.md)); [como instalarlo](#instalar-el-servidor-mcp-de-civil-3d-2027) |
 | `corpus-inapa/` | Reglamento Tecnico INAPA DIG-PO-001 (2018) por pagina, con pagina impresa, estructura, hash y fuente; busqueda FTS5 y referencias `norma` vs `hipotesis` | corpus generado (414 pag.), 21 pruebas sinteticas; OCR sin revision humana |
 | `puente-autocad-etabs/` | Extraccion de geometria desde DWG por convencion de capas | Inventario y convencion definidos (`docs/CONVENCION-CAPAS-CAD.md`) |
 
@@ -365,13 +389,52 @@ del modelo abierto, están excluidas por `.gitignore`. Véase el
 
 ## Instalación y paquetes
 
-**Un solo comando abre un menú que hace todo lo demás.** Descargue el repositorio
-(botón verde **Code → Download ZIP**, o `git clone`), abra la carpeta en
-PowerShell y escriba:
+Todo se instala en **Windows, desde PowerShell, sin privilegios de administrador**.
+Cada bloque de esta sección se copia y se pega tal cual en la terminal; los comandos
+que necesitan una ruta suya la llevan marcada en el ejemplo. Lo que exige programas
+de pago (ETABS, SAFE, Revit, Civil 3D, BeamNG.drive) se instala solo donde esos
+programas existen; el corpus normativo y las herramientas locales funcionan en
+cualquier equipo.
+
+[Requisitos](#requisitos-solo-si-faltan) ·
+[Tres comandos](#descargar-e-instalar-en-tres-comandos) ·
+[Civil 3D 2027](#instalar-el-servidor-mcp-de-civil-3d-2027) ·
+[Civil 3D a BeamNG.drive](#instalar-el-puente-de-civil-3d-a-beamngdrive) ·
+[Manual](#instalación-manual-paso-a-paso) · [Fallos frecuentes](#fallos-frecuentes-y-su-causa-real)
+
+### Requisitos (solo si faltan)
+
+Git, Python de 64 bits y `uv`. Si ya los tiene, salte al siguiente bloque. Con
+`winget` (viene con Windows 10/11):
 
 ```powershell
+winget install --id Git.Git -e
+winget install --id Python.Python.3.13 -e
+winget install --id astral-sh.uv -e
+```
+
+Cierre y vuelva a abrir PowerShell para que tome el PATH nuevo. Compruebe:
+
+```powershell
+git --version
+py -c "import sys,struct; print(sys.version.split()[0], struct.calcsize('P')*8, 'bits')"
+uv --version
+```
+
+Python debe decir `64 bits`. Si en vez de eso aparece `Python was not found; run
+without arguments to install from the Microsoft Store`, es el alias de la Tienda:
+desactívelo en Configuración → Aplicaciones → Alias de ejecución de aplicaciones.
+
+### Descargar e instalar en tres comandos
+
+```powershell
+git clone https://github.com/dashy2004/CDCRD-Digital.git
+cd CDCRD-Digital
 powershell -NoProfile -ExecutionPolicy Bypass -File .\instalar-cdcrd.ps1
 ```
+
+Sin git: botón verde **Code → Download ZIP**, descomprima, abra la carpeta, clic
+derecho en un espacio vacío → **Abrir en Terminal** y pegue solo el tercer comando.
 
 ```
    ####  ####   ####  ####   ####
@@ -390,19 +453,227 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\instalar-cdcrd.ps1
   0  Salir
 ```
 
-El menú detecta qué hay en el equipo (Python, `uv`, git, ETABS, SAFE, Revit,
-Civil 3D y qué asistente de IA tiene instalado), instala solo lo que falta y
-escribe la configuración de su asistente **sin borrar lo que ya tuviera**. No
-pide privilegios de administrador y respalda cada archivo antes de tocarlo.
+Empiece por la **1** para ver qué detecta y siga con la **6**. El menú detecta qué
+hay en el equipo (Python, `uv`, git, ETABS, SAFE, Revit, Civil 3D y qué asistente de
+IA tiene instalado), instala solo lo que falta y escribe la configuración de su
+asistente **sin borrar lo que ya tuviera**. No descarga programas por su cuenta y
+respalda cada archivo antes de tocarlo.
 
-¿Prefiere que lo haga su asistente? Páguele el enlace de este repositorio y
+**Sin menú, todo de una vez** (lo mismo que la opción 6):
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\instalar-cdcrd.ps1 -Accion todo
+```
+
+Para elegir qué asistentes configurar: `-Cliente claude-desktop,claude-code,codex,cursor,vscode`
+(uno o varios, separados por coma). `-Json` imprime el resultado para que lo lea un script o una IA.
+
+**Comprobar que funciona**, sin tener ningún programa BIM instalado:
+
+```powershell
+.\herramientas-locales\cdcrd.ps1 doctor
+.\herramientas-locales\cdcrd.ps1 buscar "carga viva" --limite 3
+```
+
+Después cierre el asistente **desde el icono de la bandeja del sistema** (clic
+derecho → Quit) y vuelva a abrirlo: cerrar la ventana no reinicia el proceso y las
+herramientas no aparecen.
+
+**Ya lo tenía descargado:** entre a la carpeta, actualice y repita el instalador.
+
+```powershell
+git pull
+powershell -NoProfile -ExecutionPolicy Bypass -File .\instalar-cdcrd.ps1 -Accion todo
+```
+
+¿Prefiere que lo haga su asistente? Pásele el enlace de este repositorio y
 pídale que siga [INSTALAR-CON-IA.md](INSTALAR-CON-IA.md): ahí están los mismos
 pasos sin menú (`-Accion diagnostico|locales|bim|clientes|todo`, con `-Json`),
 los archivos de configuración de Claude Desktop, Claude Code, Codex, Cursor y
 VS Code, y los fallos conocidos con su causa real.
 
+### Instalar el servidor MCP de Civil 3D 2027
+
+Conecta la IA con el **dibujo abierto** en Civil 3D 2027: alineamientos,
+perfiles, corredores, superficies, redes, secciones y cubicaciones. Son dos piezas:
+un servidor MCP en Python (lo instala y registra el menú anterior cuando detecta
+Civil 3D) y un **puente .NET 10 que corre dentro de Civil 3D** y que hay que
+compilar una vez en su equipo, porque las DLL de Autodesk se referencian desde su
+instalación y no se redistribuyen. Esta parte **no la hace el menú**; son los
+comandos de abajo.
+
+**Requisitos:** Civil 3D 2027 (serie R26.0) en Windows x64 y el **SDK de .NET 10**.
+El *runtime* 10 llega con Civil 3D; el SDK no, y el runtime solo no alcanza.
+
+```powershell
+winget install --id Microsoft.DotNet.SDK.10 -e
+dotnet --list-sdks
+```
+
+Debe listar una versión `10.x`. Luego, desde la raíz del repositorio:
+
+```powershell
+cd .\servidor-mcp-civil3d
+py -m pip install -r requirements.txt
+.\instalar.ps1
+```
+
+Si Civil 3D no está en `C:\Program Files\Autodesk\AutoCAD 2027`, indique la ruta:
+`.\instalar.ps1 -Civil3DPath "D:\Autodesk\AutoCAD 2027"`.
+
+El bundle queda en `%APPDATA%\Autodesk\ApplicationPlugins\CDCRD-Civil3D.bundle`,
+que Civil 3D carga solo al arrancar: no hace falta `NETLOAD` ni Startup Suite, que la
+seguridad de AutoCAD puede bloquear en silencio. **Reinicie Civil 3D**, abra un dibujo
+(trabaje sobre una copia) y, si el puente no arrancó solo, escriba `CDCRDMCP` en su
+línea de comandos. Compruebe desde PowerShell:
+
+```powershell
+.\instalar.ps1 -Probar
+```
+
+Debe responder el puente en `127.0.0.1:8760`. Si "nadie responde", Civil 3D no está
+abierto o falta ejecutar `CDCRDMCP`. Prueba de humo completa, con un dibujo abierto:
+
+```powershell
+py src\prueba_humo.py
+```
+
+**Registrar en el asistente.** Si corrió el menú con Civil 3D instalado, la entrada
+`civil3d` ya está escrita. Para hacerlo a mano (Claude Desktop) o ver el bloque JSON
+que se pega en otro cliente:
+
+```powershell
+.\registrar-mcp.ps1            # muestra la entrada; no escribe nada
+.\registrar-mcp.ps1 -Aplicar   # escribe con respaldo del archivo
+```
+
+**Módulos opcionales.** Cada uno compila y despliega su DLL sin abrir ni reiniciar
+Civil 3D; el programa los toma en el siguiente arranque. Instale solo los que vaya a usar:
+
+```powershell
+.\instalar-peraltes.ps1      # tablas de peralte explícitas
+.\instalar-espirales.ps1     # clotoides espiral-curva-espiral
+.\instalar-corredores.ps1    # corredores con varios baselines y regiones
+.\instalar-targets.ps1       # targets de ancho y cota
+.\instalar-qto.ps1           # cubicaciones: volumen TIN y materiales por secciones
+```
+
+Solo AutoCAD 2027, sin Civil 3D: `.\instalar-autocad.ps1` despliega la adaptación
+común en el puerto `8764` ([detalle](servidor-mcp-civil3d/docs/AUTOCAD-0511.md)).
+
+**Permisos.** El puente escucha solo en `127.0.0.1`. Toda escritura exige
+`confirmar=True` y un token de un solo uso ligado a esos parámetros exactos;
+`CDCRD_C3D_SOLO_LECTURA=1` apaga toda escritura y `ejecutar_comando` está apagado
+salvo `CDCRD_C3D_PERMITIR_COMANDOS=1`. Log del puente:
+`%LOCALAPPDATA%\CdcrdCivil3dBridge\puente.log`.
+
+| Síntoma | Causa |
+|---|---|
+| `Falta .NET SDK 10 (no basta tener el runtime)` | Instalar el SDK con el `winget` de arriba; Civil 3D solo trae el runtime. |
+| `ModuleNotFoundError: No module named 'mcp.server.fastmcp'` | SDK `mcp` 2.x. Corregir: `py -m pip install "mcp>=1.10,<2" --force-reinstall`. |
+| La petición vuelve con `-32000` a los 55 s | Civil 3D está dentro de un comando o un diálogo modal. Ciérrelo y repita; el puente no reintenta en bucle. |
+| El asistente no muestra las herramientas | Reiniciar el asistente desde la bandeja del sistema; o el `command` de la configuración apunta a `"python"` a secas en vez de la ruta real del intérprete. |
+
+Catálogo de las 85 herramientas: [herramientas.md](servidor-mcp-civil3d/herramientas.md).
+Límites verificados en vivo: [LIMITACIONES.md](servidor-mcp-civil3d/docs/LIMITACIONES.md).
+Guía completa del servidor: [servidor-mcp-civil3d/README.md](servidor-mcp-civil3d/README.md).
+
+### Instalar el puente de Civil 3D a BeamNG.drive
+
+Lleva la superficie del terreno y la superficie final de un corredor desde Civil 3D
+2027 hasta un **nivel propio de BeamNG.drive** para recorrer la carretera. No usa IA,
+ni servidor MCP, ni BeamNG.tech. **No lo instala el menú**: son los comandos de abajo.
+
+**Estado (versión 0.1.0):** importación, guardado, recarga y colisión física
+comprobados en BeamNG.drive 0.39.4 con un nivel de prueba; en 0.40 no se ha probado.
+La exportación en vivo desde Civil 3D 2027 y los empalmes carretera-terreno a lo largo
+de una vía completa aún no están validados de extremo a extremo.
+
+**Requisitos:** Civil 3D 2027 y el SDK de .NET 10 (mismo `winget` de la sección
+anterior) para compilar el exportador; Python 3.10 o superior; BeamNG.drive con su
+World Editor. Blender es opcional.
+
+**Paso 1 · Exportador dentro de Civil 3D.** Desde la raíz del repositorio:
+
+```powershell
+cd .\civil3d-beamng
+.\civil3d\instalar.ps1
+```
+
+Crea `%APPDATA%\Autodesk\ApplicationPlugins\CDCRD-BeamNG.bundle`, separado del
+puente MCP, y conserva las versiones anteriores. Reinicie Civil 3D y compruebe que el
+comando `CDCRDBEAMNGEXPORT` responde en su línea de comandos. Si Civil 3D está en
+otra ruta: `.\civil3d\instalar.ps1 -Civil3DPath "D:\Autodesk\AutoCAD 2027"`.
+
+**Paso 2 · Conversor en Python**, en un entorno virtual para no tocar el Python del
+sistema (siga dentro de `civil3d-beamng`):
+
+```powershell
+py -3 -m venv "$env:USERPROFILE\cdcrd-beamng-venv"
+& "$env:USERPROFILE\cdcrd-beamng-venv\Scripts\python.exe" -m pip install --upgrade pip
+& "$env:USERPROFILE\cdcrd-beamng-venv\Scripts\python.exe" -m pip install .
+& "$env:USERPROFILE\cdcrd-beamng-venv\Scripts\python.exe" -m cdcrd_beamng --help
+```
+
+Pase siempre la ruta completa de ese intérprete: el `python` del PATH puede ser el
+alias de la Tienda, sin las dependencias.
+
+**Paso 3 · Ruta del juego.** La plantilla de nivel sale de la instalación de
+BeamNG.drive; debe devolver `True`:
+
+```powershell
+Test-Path 'C:\Program Files (x86)\Steam\steamapps\common\BeamNG.drive\content\levels\smallgrid.zip'
+```
+
+Si su Steam está en otro disco, en el paso 5 añada `-GameFolder 'D:\SteamLibrary\steamapps\common\BeamNG.drive'`
+(Steam → clic derecho sobre el juego → Administrar → Explorar los archivos locales).
+
+**Paso 4 · Probar el conversor sin abrir nada**, con el ejemplo sintético del repositorio:
+
+```powershell
+& "$env:USERPROFILE\cdcrd-beamng-venv\Scripts\python.exe" -m cdcrd_beamng validate --snapshot .\examples\snapshot-synthetic.json
+```
+
+Valida unidades, orden de coordenadas, geometría, IDs y referencias, y sale con
+código 0 si el contrato es válido ([alcance](civil3d-beamng/docs/VALIDACION-INTERCAMBIOS.md)).
+
+**Paso 5 · Primer nivel.**
+
+1. En Civil 3D, con el dibujo **en metros** (`INSUNITS=6` y Drawing Settings → Units
+   and Zone → Meters), ejecute `CDCRDBEAMNGEXPORT`, seleccione la TIN del terreno y la
+   TIN final de la calzada, y guarde el JSON **fuera de este repositorio**: contiene
+   geometría y nombres del proyecto.
+2. Convierta e instale el nivel. Cambie las tres rutas; la carpeta de salida no debe
+   existir y el id del nivel (minúsculas, números y guion bajo) cambia en cada revisión:
+
+```powershell
+& '.\tools\convertir-e-instalar.ps1' `
+  -Snapshot 'D:\proyecto\exportacion.json' `
+  -Output   'D:\proyecto\paquete_r01' `
+  -LevelId  'mi_carretera_r01' `
+  -Python   "$env:USERPROFILE\cdcrd-beamng-venv\Scripts\python.exe"
+```
+
+3. Reinicie BeamNG.drive, abra el nivel `mi_carretera_r01` desde **Freeroam** y pulse
+   **F11** para el World Editor.
+4. **Window → Importar Civil 3D**, ruta `/levels/mi_carretera_r01/manifest.json`,
+   importe, **guarde** y vuelva a cargar el nivel desde el menú del juego antes de conducir.
+
+Cada actualización mayor de BeamNG mueve la carpeta de usuario a un respaldo y con ella
+se van el importador y los niveles: si desaparece el menú **Importar Civil 3D**, repita el
+paso 5.2. No cambie de nivel con scripts ni por la API con el juego abierto: forzar una
+transición pendiente de la interfaz provocó un fallo C++ durante las pruebas.
+
+Lo que esta versión no incluye: texturas del CAD, señales, tráfico, puentes ni túneles;
+la frontera entre asfalto y talud es aproximada y los huecos del terreno se recortan por
+celdas completas. Guía pieza por pieza con una comprobación al final de cada una:
+[instalacion/BEAMNG-DRIVE.md](instalacion/BEAMNG-DRIVE.md). Flujo con LandXML, recibos
+y pruebas: [civil3d-beamng/README.md](civil3d-beamng/README.md).
+
+### Instalación manual, paso a paso
+
 <details>
-<summary>Instalación manual, paso a paso</summary>
+<summary>Herramientas locales sin el menú, y conectores ETABS, SAFE y Revit</summary>
 
 El módulo local se distribuye en este repositorio como el paquete Python `cdcrd-local`
 (versionado en [pyproject.toml](herramientas-locales/pyproject.toml)), con CLI y servidor MCP.
@@ -415,10 +686,26 @@ La instalación documentada utiliza el código fuente y `uv.lock`:
 
 Requiere `uv`; el instalador prepara Python 3.13 y un entorno aislado. Véanse los
 [requisitos e instalación](herramientas-locales/README.md#instalación). No se presupone
-publicación en PyPI ni en GitHub Packages. Los conectores Revit, ETABS y SAFE tienen sus
-[propias instrucciones](instalacion/INSTALACION.md) y requieren las aplicaciones correspondientes.
+publicación en PyPI ni en GitHub Packages.
+
+Los conectores de ETABS, SAFE y Revit requieren las aplicaciones correspondientes y
+tienen sus [propias instrucciones](instalacion/INSTALACION.md), escritas a partir de los
+fallos reales de la primera instalación. El índice por herramienta está en
+[instalacion/README.md](instalacion/README.md).
 
 </details>
+
+### Fallos frecuentes y su causa real
+
+| Síntoma | Causa |
+|---|---|
+| `Python was not found; run without arguments to install from the Microsoft Store` | Es el alias de la Tienda, no Python. Instalar desde python.org o con el `winget` de arriba y desactivar los alias en Configuración → Aplicaciones → Alias de ejecución. |
+| El asistente no encuentra los paquetes aunque `pip` los instaló | Hay dos Python: el shim del launcher y el intérprete real. La configuración debe apuntar al real, nunca a `"python"` a secas. El instalador ya resuelve la ruta real. |
+| `ModuleNotFoundError: No module named 'mcp.server.fastmcp'` | El SDK `mcp` 2.x eliminó ese módulo. El instalador reinstala `mcp>=1.10,<2`. |
+| `GetActiveObject` falla con ETABS abierto | ETABS y el asistente corren con distinto nivel de privilegio; COM los aísla. Los dos como administrador, o ninguno. |
+| JSON de configuración corrupto tras editarlo a mano | PowerShell 5.1 escribe BOM con `Set-Content`. El instalador escribe UTF-8 sin BOM. |
+| El servidor BIM no aparece en una sesión en la nube | Estos servidores hablan por COM o por un puerto local: solo funcionan en un asistente que corra en la misma máquina que el programa. |
+| `Falta uv` al elegir la opción 2 | `winget install --id astral-sh.uv -e`, o `powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://astral.sh/uv/install.ps1 | iex"`; reabrir PowerShell. |
 
 ## Contribuir y reconocimientos
 
