@@ -1,5 +1,10 @@
 # Errores verificados del servidor MCP — registro y reglas
 
+Para operación BIM y producción de planos, ver también las
+[lecciones anonimizadas de IA/BIM](../docs/LECCIONES-IA-BIM.md).
+El seguimiento de integración figura en la
+[revisión de PR y pendientes](../docs/REVISION-PR-2026-10-27.md).
+
 Este archivo complementa `AUDITORIA-2026-08-07.md` (auditoría de código) y las "Limitaciones
 conocidas" del README principal. Ahí está el diagnóstico final; acá está **cómo se llegó a
 cada uno**: el error real, cómo se detectó, y la regla que deja para quien use o extienda este

@@ -1,5 +1,9 @@
 # revit-mcp-tools
 
+Antes de operar modelos o producir planos, leer las
+[lecciones de IA/BIM](../docs/LECCIONES-IA-BIM.md): continuidad entre asistentes,
+turnos, fallos, recursos nativos, revisión visual y pendientes explícitos.
+
 Herramientas MCP para Revit que un agente puede ejecutar sin interfaz. Son la
 conversión de los pushbuttons de `revit-mcp-write/RevitWrite.extension` a
 funciones puras `run(doc, uidoc, DB, P) -> dict`, enviadas por el canal
