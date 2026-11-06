@@ -1,0 +1,25 @@
+# Plantillas métricas, ensamblajes y control de corredores en Civil 3D
+
+La plantilla métrica del dibujo, la paleta métrica de ensamblajes y los subensamblajes individuales son recursos distintos. La DWT aporta estilos, unidades, juegos de códigos y configuraciones. El ensamblaje de paleta aporta una sección editable y sus relaciones de enganche. Los componentes originales se pueden parametrizar según la función de cada tramo. Los archivos de catálogo se consultan en la instalación local de Autodesk.
+
+## De la base al anteproyecto
+
+Iniciar con la DWT métrica original y verificar las unidades antes de importar ejes, rasantes o terreno. Conservar la procedencia, resolución, sistema de referencia horizontal y datum vertical de cada superficie. Si el TIN procede de un modelo global de elevaciones, identificarlo como simulado o referencial en el dibujo y las hojas. Separar el terreno de las superficies de diseño y conservar una copia de la revisión de partida.
+
+En la paleta métrica instalada, `Primary Road - Through Intersection` aporta dos carriles `LaneSuperelevationAOR` sin un bordillo continuo. Permite adaptar tramos cuya superficie debe seguir abierta al encuentro con otra calzada. `Secondary Road Full Section` aporta dos carriles, dos componentes `UrbanCurbGutterGeneral` y dos `BasicSideSlopeCutDitch`. Es candidato cuando corresponde modelar el borde y su encuentro con el terreno. Elegir por función, continuidad y espacio disponible. Las capas que trae el catálogo requieren revisión en el diseño de pavimento.
+
+Cuando se automatice la importación, registrar el archivo que referencia el catálogo, el nombre del ensamblaje fuente, la versión del producto y los componentes importados. La API permite importar por identificador de catálogo o desde la base de datos del DWG instalado. Si el identificador no resuelve, abrir como fuente el DWG referenciado por la paleta y comprobar los componentes en el dibujo receptor. [Autodesk · Importar ensamblajes](https://help.autodesk.com/cloudhelp/2024/ENU/Civil3D-DevGuide/files/GUID-657B4322-7203-4E70-B22F-27D3789B8A73.htm)
+
+## Sustitución de una región
+
+Inventariar el eje, el perfil, el rango, las frecuencias, las estaciones adicionales, las transiciones, los targets y el Top de la región. Registrar el ancho, el bombeo y los bordes aplicados antes del cambio. Asignar el ensamblaje candidato a la región en una copia. Remapear objetivos por lado, tipo y función. Los nombres lógicos de un vínculo genérico pueden diferir de los de un carril. Recuperar después de la sustitución la colección de objetivos del ensamblaje nuevo. Reconstruir las transiciones con los nombres de sus componentes nuevos. [Autodesk · Región de línea base](https://help.autodesk.com/cloudhelp/2026/ENU/Civil3D-API/files/html/cb144b46-f3f4-4368-1014-9092c0722dda.htm) · [Autodesk · Asignación de objetivos](https://help.autodesk.com/cloudhelp/2026/ENU/Civil3D-UserGuide/files/GUID-62445E31-49A2-4C29-9F79-5A0E11410273.htm)
+
+Reconstruir el corredor y revisar el límite de superficie. Una sección de vínculos genéricos puede exponer `Edge` y un carril nativo, `ETW`. Cuando corresponde, delimitar el Top por el punto de encuentro `Daylight`. Elegir el código según la superficie que se necesita y comprobar las caras visibles. Un Top que incluye taludes tiene un alcance distinto de una superficie de pavimento. [Autodesk · Códigos estándar de puntos](https://help.autodesk.com/cloudhelp/2022/ENU/Civil3D-UserGuide/files/GUID-E1D629AE-7E78-466F-99E9-623A8444D43D.htm) · [Autodesk · Límites de superficies de corredor](https://help.autodesk.com/cloudhelp/2026/ENU/Civil3D-API/files/html/444645d2-cb75-9f31-3ca0-e335f63f896a.htm)
+
+## Verificación antes de publicar planos
+
+Comparar bordes en XY y Z en las mismas estaciones aplicadas, incluidas transiciones, zonas estrechas y empalmes. Verificar los objetivos releyendo los objetos asignados. En los taludes, comparar la cota del punto de encuentro con la cota del TIN en el mismo XY. Volver a extraer los triángulos visibles del Top y comparar su cobertura planimétrica con la revisión anterior. La suma de los triángulos y la superficie de su unión ayudan a detectar caras degeneradas, huecos o triangulación fuera del borde.
+
+Contrastar las envolventes de maniobra archivadas contra la unión de las caras de pavimento que gobiernan cada recorrido. Medir el área de la envolvente fuera de esa unión y su distancia al borde cuando queda contenida. Distinguir un cambio de la superficie de una simulación nueva del vehículo. La comprobación en planta y por estaciones aplicadas tiene ese alcance. El despeje vertical, la flota real y los criterios de pavimento requieren verificaciones propias.
+
+Guardar y reabrir la revisión. Trazar las láminas desde Civil 3D y comprobar en el PDF el tamaño de papel, el encuadre de cada viewport y el contenido anunciado. Revisar las capas globales y las congeladas en cada viewport. Un plano puede tener la escala correcta y omitir el barrido, una cota lateral o el extremo de un rótulo. Mantener registros de origen, objetivos, estaciones, superficie, ensayos y trazado junto al modelo de trabajo.
