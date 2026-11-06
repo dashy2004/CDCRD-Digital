@@ -16,6 +16,18 @@ Inventariar el eje, el perfil, el rango, las frecuencias, las estaciones adicion
 
 Reconstruir el corredor y revisar el límite de superficie. Una sección de vínculos genéricos puede exponer `Edge` y un carril nativo, `ETW`. Cuando corresponde, delimitar el Top por el punto de encuentro `Daylight`. Elegir el código según la superficie que se necesita y comprobar las caras visibles. Un Top que incluye taludes tiene un alcance distinto de una superficie de pavimento. [Autodesk · Códigos estándar de puntos](https://help.autodesk.com/cloudhelp/2022/ENU/Civil3D-UserGuide/files/GUID-E1D629AE-7E78-466F-99E9-623A8444D43D.htm) · [Autodesk · Límites de superficies de corredor](https://help.autodesk.com/cloudhelp/2026/ENU/Civil3D-API/files/html/444645d2-cb75-9f31-3ca0-e335f63f896a.htm)
 
+## Tipología por tramo: no usar la pieza de intersección como sección típica
+
+`Primary Road - Through Intersection` es la pieza de paleta para la región de paso dentro de una intersección. Trae solo los carriles. Si se asigna a un corredor completo, el resultado es una calzada sin bordillo, cuneta ni talud. Eso solo se ve igual al modelo anterior porque el borde de calzada no cambia. Antes de elegir un ensamblaje, abrir su DWG en la biblioteca métrica instalada y leer qué subensamblajes trae; el nombre no basta.
+
+Para decidir dónde va cada pieza, clasificar los bordes lado por lado. En cada estación aplicada, tomar un punto a una distancia corta fuera del borde de calzada y comprobar si cae sobre otra superficie de pavimento vigente. Un borde que cae fuera es libre y lleva bordillo y cuneta (por ejemplo `UrbanCurbGutterGeneral`, con los parámetros que trae `Primary Road Full Section`). Un borde que cae sobre otro pavimento es una unión y se deja abierto. Filtrar los tramos muy cortos para no generar piezas de bordillo sin sentido. Dividir la región en esos puntos (`BaselineRegion.Split`) y asignar a cada tramo su variante. En las aproximaciones que necesitan talud, usar el ensamblaje completo de paleta con su componente de encuentro al terreno y su objetivo de superficie. Si otro corredor ya modelaba ese talud sobre el mismo eje, retirarlo del juego vigente para no pavimentar dos veces la misma franja.
+
+Después de dividir, volver a asignar en cada región los objetivos de ancho y de superficie, y recortar las transiciones por región interpolando sus valores en los cortes. Conviene nombrar los carriles de las variantes igual que los originales para que objetivos y transiciones se reconozcan por nombre.
+
+## Estado de reconstrucción
+
+Una transacción revertida, o un cambio de capa en ensamblajes o subensamblajes, puede dejar corredores sin estaciones calculadas o fuera de fecha aunque su geometría no se haya tocado. Reconstruir el corredor antes de capturar los bordes de referencia y exigir que el conteo de estaciones coincida con el inventario previo. Después del cambio, reconstruir todos los corredores dependientes y las superficies compuestas que los pegan, y comprobar que ninguno quede fuera de fecha antes de guardar. En las estaciones de frontera entre regiones, el ensamblaje aplicado es el de una sola de las dos regiones. Excluirlas al contar qué componentes debería tener cada tramo.
+
 ## Verificación antes de publicar planos
 
 Comparar bordes en XY y Z en las mismas estaciones aplicadas, incluidas transiciones, zonas estrechas y empalmes. Verificar los objetivos releyendo los objetos asignados. En los taludes, comparar la cota del punto de encuentro con la cota del TIN en el mismo XY. Volver a extraer los triángulos visibles del Top y comparar su cobertura planimétrica con la revisión anterior. La suma de los triángulos y la superficie de su unión ayudan a detectar caras degeneradas, huecos o triangulación fuera del borde.
