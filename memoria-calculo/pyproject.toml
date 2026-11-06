@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling>=1.26,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cdcrd-memoria"
+version = "0.1.0"
+description = "Memorias de diseño trazables desde expedientes y anexos existentes"
+requires-python = ">=3.11,<3.15"
+dependencies = ["pydantic>=2.10,<3", "python-docx>=1.1,<2", "reportlab>=4,<5", "pypdf>=6,<7", "mcp>=1.13,<2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.12,<1"]
+
+[project.scripts]
+cdcrd-memoria = "cdcrd_memoria.cli:main"
+cdcrd-memoria-mcp = "cdcrd_memoria.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cdcrd_memoria"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 110
