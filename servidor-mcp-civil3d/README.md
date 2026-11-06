@@ -5,6 +5,8 @@ Cuatro herramientas nuevas (catálogo85): volumen TIN y materiales por secciones
 
 # Servidor MCP de Civil 3D 2027
 
+[Guía de plantillas, paleta métrica y verificación de corredores](docs/PALETA-METRICA-CORREDORES.md)
+
 Entrega **0.5.21**: targets de ancho y cota por API en un corredor nuevo, con origen de solo lectura. Prueba en otra copia: 8 asignaciones, 74 muestras de carril, 8 secciones, guardado/reapertura y 12 archivos protegidos. M�dulo opcional **0.1.1**, puente vivo **0.5.17** y cat�logo MCP de **81 herramientas**. [Capturas, contrato y resultados](docs/TARGETS-0521.md) - [Baselines 0.5.20](docs/MULTIBASELINE-0520.md) - [Espirales 0.5.19](docs/ESPIRALES-0519.md) - [Peraltes 0.5.18](docs/PERALTES-0518.md).
 
 Conecta un cliente MCP con el **dibujo abierto** en Civil 3D 2027. Dos piezas:
