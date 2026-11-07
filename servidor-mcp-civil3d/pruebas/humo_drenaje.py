@@ -96,6 +96,8 @@ def main():
                 for fam in pl["estructuras"]: print("  estructura", fam["nombre"], fam["tipo"], [s["nombre"] for s in fam["tamanios"]][:6])
             print("redes", r["result"]["redes"])
         elif a.etapa == "cuencas":
+            raw = drenaje.ejecutar(a.drawing, a.pid, accion="cuneta", corredor=a.corredor, codigo=a.codigo)
+            report["cuneta"] = raw["result"]; record()   # raw feature-line points, for independent checks
             r = drenaje.proponer(a.drawing, a.pid, a.corredor, intensidad_mm_h=a.intensidad, espaciamiento_max_m=a.espaciamiento, ancho_aporte_m=a.ancho, coeficiente_c=a.coeficiente, codigo=a.codigo)
             report["results"].append(r); record()
             print(json.dumps(dict(lineas=r["lineas"], puntos=r["puntos"], codigos=r["codigos_disponibles"], resumen=r["propuesta"]["resumen"]), ensure_ascii=False))
@@ -112,6 +114,7 @@ def main():
                                  pendiente_min=a.pendiente_min, profundidad_min_m=a.profundidad_min, estructuras=structures, tuberias=pipes)
             report["results"].append(r); record()
             v = r["result"]["verificacion"]
+            print("tamanios agregados", r["result"]["tamanios_agregados"])
             print("committed", r["committed"], json.dumps({k: v[k] for k in v if not k.startswith("detalle")}, ensure_ascii=False))
         else:
             r = drenaje.ejecutar(a.drawing, a.pid, accion="verificar", red=a.red)

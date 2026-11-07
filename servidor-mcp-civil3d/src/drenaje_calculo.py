@@ -191,7 +191,7 @@ def disenar_red(nodos, diametros_mm=(300, 375, 450, 525, 600), pendiente_min=.00
     the catalog part is not added.
     """
     nodes = {n["id"]: n for n in validar_nodos(nodos)}
-    diam = sorted({int(_num("diametros_mm", d, 100, 3000)) for d in diametros_mm})
+    diam = sorted({_num("diametros_mm", d, 100, 3000) for d in diametros_mm})  # floats: catalog diameters such as 304.8 mm
     if not 1 <= len(diam) <= 20: raise ValueError("diametros_mm: 1..20 valores")
     s_min = _num("pendiente_min", pendiente_min, .0005, .2); cover = _num("profundidad_min_m", profundidad_min_m, 0, 10)
     n_m = _num("n_manning", n_manning, .008, .05); sump = _num("sumidero_m", sumidero_m, 0, 3)

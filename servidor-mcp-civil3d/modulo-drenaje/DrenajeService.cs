@@ -128,13 +128,54 @@ internal static class DrenajeService
         if (found.Length != 1) throw new ArgumentException("Tamanio inexistente o ambiguo en " + f.Name + ": " + key);
         return found[0];
     }
-    private static ObjectId ResolvePipeSize(Transaction tr, ObjectId famId, double diameter)
+    private static string Mm(double d) => (d * 1000).ToString("F1") + " mm";
+    private static double FromMetres(double value, string units) => value / ToMetres(1, units);
+    private static ObjectId FindPipeSize(Transaction tr, ObjectId famId, double diameter)
     {
         var f = (PartFamily)tr.GetObject(famId, OpenMode.ForRead);
         var matches = Enumerable.Range(0, f.PartSizeCount).Select(i => f[i])
             .Where(id => { var d = Field(((PartSize)tr.GetObject(id, OpenMode.ForRead)).SizeDataRecord, PartContextType.PipeInnerDiameter); return d.HasValue && Math.Abs(d.Value - diameter) < 5e-4; }).ToArray();
-        if (matches.Length != 1) throw new ArgumentException("Sin tamanio unico de diametro interior " + (diameter * 1000).ToString("F0") + " mm en " + f.Name + "; consultar catalogo");
-        return matches[0];
+        if (matches.Length > 1) throw new ArgumentException("Varios tamanios con diametro interior " + Mm(diameter) + " en " + f.Name);
+        return matches.Length == 1 ? matches[0] : ObjectId.Null;
+    }
+    // Brings the catalog size with that inner diameter into the family of the drawing's parts list.
+    // The drawing's active part catalog (imperial or metric) decides which diameters exist.
+    private static ObjectId AddPipeSize(Transaction tr, ObjectId famId, double diameter, List<object> log)
+    {
+        var f = (PartFamily)tr.GetObject(famId, OpenMode.ForWrite);
+        var filter = f.PartSizeFilter;
+        var field = filter.GetParamByContextAndIndex(PartContextType.PipeInnerDiameter, 0) ?? throw new ArgumentException("La familia " + f.Name + " no filtra por diametro interior");
+        object chosen = null; var offered = new List<double>();
+        if (field.IsFromList)
+        {
+            var list = field.ValueList;
+            for (int i = 0; i < list.Count; i++)
+            {
+                double v = ToMetres(Convert.ToDouble(list[i]), field.Units); offered.Add(v);
+                if (Math.Abs(v - diameter) < 5e-4) chosen = list[i];
+            }
+        }
+        else if (field.IsFromRange)
+        {
+            double lo = ToMetres(Convert.ToDouble(field.ValueRange.RangeMin), field.Units), hi = ToMetres(Convert.ToDouble(field.ValueRange.RangeMax), field.Units);
+            if (diameter >= lo - 5e-4 && diameter <= hi + 5e-4) chosen = FromMetres(diameter, field.Units);
+            offered.Add(lo); offered.Add(hi);
+        }
+        if (chosen == null) throw new ArgumentException("El catalogo activo no ofrece " + Mm(diameter) + " para " + f.Name + " (ofrece: " + string.Join(", ", offered.Select(Mm)) + ")");
+        field.IsMultipleSelect = false; field.Value = chosen;
+        f.AddPartSize(filter);
+        var id = FindPipeSize(tr, famId, diameter);
+        if (id.IsNull) throw new InvalidOperationException("El tamanio " + Mm(diameter) + " no quedo en " + f.Name);
+        log.Add(new { familia = f.Name, tamanio = ((PartSize)tr.GetObject(id, OpenMode.ForRead)).Name, diametro_m = diameter, valor_catalogo = chosen.ToString(), unidades = field.Units });
+        return id;
+    }
+
+    // The placed part's size name can carry suffixes the parts-list size name lacks: compare ids, names only as fallback.
+    private static bool SamePart(Part part, JsonObject spec)
+    {
+        string fam = spec["familia_handle"]?.GetValue<string>(), size = spec["tamanio_handle"]?.GetValue<string>();
+        if (fam != null && size != null) return string.Equals(H(part.PartFamilyId), fam, StringComparison.OrdinalIgnoreCase) && string.Equals(H(part.GetPartSizeId()), size, StringComparison.OrdinalIgnoreCase);
+        return string.Equals(part.PartFamilyName, spec["familia"].GetValue<string>(), StringComparison.Ordinal) && string.Equals(part.PartSizeName, spec["tamanio"].GetValue<string>(), StringComparison.Ordinal);
     }
 
     private static JsonObject Record(Network n, Transaction tr)
@@ -200,8 +241,12 @@ internal static class DrenajeService
             handle = H(n.ObjectId), nombre = n.Name, lista_partes = n.PartsListName, tuberias = n.GetPipeIds().Count, estructuras = n.GetStructureIds().Count,
             contrato = !n.ExtensionDictionary.IsNull && ((DBDictionary)tr.GetObject(n.ExtensionDictionary, OpenMode.ForRead)).Contains(RecordName)
         }).ToArray();
+        // Families the drawing's active part catalog offers (imperial or metric): what AddPartFamily could bring in.
+        object Available(DomainType dom) => PartsList.GetAvailablePartFamilies(dom)
+            .Select(f => new { descripcion = f.Description, guid = f.GUID, tipo = f.PartType.ToString(), forma = f.BoundingShape.ToString() }).ToArray();
         return new
         {
+            catalogo_activo = new { tuberias = Available(DomainType.Pipe), estructuras = Available(DomainType.Structure) },
             listas_partes = lists.Select(pl => new
             {
                 handle = H(pl.ObjectId), nombre = pl.Name,
@@ -253,7 +298,18 @@ internal static class DrenajeService
         var structFam = o.Structures.ToDictionary(s => s.Id, s => ResolveFamily(tr, pl, DomainType.Structure, s.Family));
         var structSize = o.Structures.ToDictionary(s => s.Id, s => ResolveStructureSize(tr, structFam[s.Id], s.Size));
         var pipeFam = o.Pipes.ToDictionary(x => x.Id, x => ResolveFamily(tr, pl, DomainType.Pipe, x.Family));
-        var pipeSize = o.Pipes.ToDictionary(x => x.Id, x => ResolvePipeSize(tr, pipeFam[x.Id], x.Diameter));
+        var sizeLog = new List<object>(); var pipeSize = new Dictionary<string, ObjectId>();
+        foreach (var x in o.Pipes)
+        {
+            var id = FindPipeSize(tr, pipeFam[x.Id], x.Diameter);
+            if (id.IsNull)
+            {
+                if (!o.AddSizes) throw new ArgumentException("Sin tamanio de diametro interior " + Mm(x.Diameter) + " en la familia de " + x.Id + "; consultar catalogo o agregar_tamanios");
+                id = AddPipeSize(tr, pipeFam[x.Id], x.Diameter, sizeLog);
+            }
+            pipeSize[x.Id] = id;
+        }
+        QaCheckpoint?.Invoke("sizes-ready");
         string name = o.Name;
         var nid = Network.Create(civil, ref name);
         var net = (Network)tr.GetObject(nid, OpenMode.ForWrite);
@@ -268,6 +324,9 @@ internal static class DrenajeService
             if (sid.IsNull) throw new InvalidOperationException("Civil no creo la estructura " + s.Id);
             var st = (Structure)tr.GetObject(sid, OpenMode.ForWrite);
             st.LayerId = layer; st.RimElevation = s.Rim; st.ControlSumpBy = StructureControlSumpType.ByElevation; st.SumpElevation = s.SumpElevation;
+            // A part with frame/cone/floor cannot be shallower than its own minimum: Civil then raises the rim.
+            if (Math.Abs(st.RimElevation - s.Rim) > o.Tolerance || Math.Abs(st.SumpElevation - s.SumpElevation) > o.Tolerance)
+                throw new ArgumentException("La estructura " + s.Id + " (" + st.PartSizeName + ") exige " + (st.RimElevation - st.SumpElevation).ToString("F3") + " m entre fondo y rasante y el diseno deja " + (s.Rim - s.SumpElevation).ToString("F3") + " m: aumente profundidad_min_m o sumidero_m, o elija otra pieza");
             st.Description = "CDCRD " + s.Kind + " " + s.Id;
             structIds[s.Id] = sid;
         }
@@ -297,21 +356,22 @@ internal static class DrenajeService
         var record = new JsonObject
         {
             ["version"] = 1, ["nombre"] = o.Name, ["capa"] = o.Layer, ["lista_partes"] = pl.Name, ["pendiente_min"] = o.MinSlope, ["profundidad_min_m"] = o.MinCover, ["tolerancia_m"] = o.Tolerance,
+            ["tamanios_agregados"] = JsonSerializer.SerializeToNode(sizeLog),
             ["estructuras"] = new JsonArray(o.Structures.Select(s => (JsonNode)new JsonObject
             {
-                ["id"] = s.Id, ["tipo"] = s.Kind, ["handle"] = H(structIds[s.Id]), ["familia"] = ((PartFamily)tr.GetObject(structFam[s.Id], OpenMode.ForRead)).Name,
-                ["tamanio"] = ((PartSize)tr.GetObject(structSize[s.Id], OpenMode.ForRead)).Name, ["xyz"] = new JsonArray(s.Xyz[0], s.Xyz[1], s.Xyz[2]),
+                ["id"] = s.Id, ["tipo"] = s.Kind, ["handle"] = H(structIds[s.Id]), ["familia"] = ((PartFamily)tr.GetObject(structFam[s.Id], OpenMode.ForRead)).Name, ["familia_handle"] = H(structFam[s.Id]),
+                ["tamanio"] = ((PartSize)tr.GetObject(structSize[s.Id], OpenMode.ForRead)).Name, ["tamanio_handle"] = H(structSize[s.Id]), ["xyz"] = new JsonArray(s.Xyz[0], s.Xyz[1], s.Xyz[2]),
                 ["rasante"] = s.Rim, ["cota_fondo"] = s.SumpElevation, ["rotacion"] = s.Rotation
             }).ToArray()),
             ["tuberias"] = new JsonArray(o.Pipes.Select(x => (JsonNode)new JsonObject
             {
-                ["id"] = x.Id, ["handle"] = H(pipeIds[x.Id]), ["desde"] = x.From, ["hasta"] = x.To, ["familia"] = ((PartFamily)tr.GetObject(pipeFam[x.Id], OpenMode.ForRead)).Name,
-                ["tamanio"] = ((PartSize)tr.GetObject(pipeSize[x.Id], OpenMode.ForRead)).Name, ["diametro_m"] = x.Diameter, ["cota_inicio"] = x.StartInvert, ["cota_fin"] = x.EndInvert
+                ["id"] = x.Id, ["handle"] = H(pipeIds[x.Id]), ["desde"] = x.From, ["hasta"] = x.To, ["familia"] = ((PartFamily)tr.GetObject(pipeFam[x.Id], OpenMode.ForRead)).Name, ["familia_handle"] = H(pipeFam[x.Id]),
+                ["tamanio"] = ((PartSize)tr.GetObject(pipeSize[x.Id], OpenMode.ForRead)).Name, ["tamanio_handle"] = H(pipeSize[x.Id]), ["diametro_m"] = x.Diameter, ["cota_inicio"] = x.StartInvert, ["cota_fin"] = x.EndInvert
             }).ToArray())
         };
         var verification = Verify(tr, db, net, record);
         Store(net, tr, record); QaCheckpoint?.Invoke("record-written");
-        return new { red = sim ? null : H(nid), nombre = o.Name, simulacion = sim, capa = o.Layer, lista_partes = pl.Name, estructuras = o.Structures.Length, tuberias = o.Pipes.Length, verificacion = verification };
+        return new { red = sim ? null : H(nid), nombre = o.Name, simulacion = sim, capa = o.Layer, lista_partes = pl.Name, tamanios_agregados = sizeLog, estructuras = o.Structures.Length, tuberias = o.Pipes.Length, verificacion = verification };
     }
 
     // ---------- verificar ----------
@@ -348,14 +408,15 @@ internal static class DrenajeService
             double exy = Dist2d(xyz, st.Position), erim = Math.Abs(st.RimElevation - s["rasante"].GetValue<double>()), esump = Math.Abs(st.SumpElevation - s["cota_fondo"].GetValue<double>());
             xyMax = Math.Max(xyMax, exy); rimMax = Math.Max(rimMax, erim); sumpMax = Math.Max(sumpMax, esump);
             if (exy > tol) Fail("posicion de " + id + " " + exy.ToString("R"));
-            if (erim > tol) Fail("rasante de " + id + " " + erim.ToString("R"));
+            // Civil raises the rim of a part that cannot be as shallow as designed (frame + cone + floor minimum).
+            if (erim > tol) Fail("rasante de " + id + " " + erim.ToString("R") + " (Civil la fijo en " + st.RimElevation.ToString("F3") + ": la pieza exige " + (st.RimElevation - st.SumpElevation).ToString("F3") + " m entre fondo y rasante)");
             if (esump > tol) Fail("fondo de " + id + " " + esump.ToString("R"));
-            if (!string.Equals(st.PartFamilyName, s["familia"].GetValue<string>(), StringComparison.Ordinal) || !string.Equals(st.PartSizeName, s["tamanio"].GetValue<string>(), StringComparison.Ordinal)) Fail("familia/tamanio de " + id);
+            if (!SamePart(st, s)) Fail("familia/tamanio de " + id + ": " + st.PartFamilyName + " / " + st.PartSizeName);
             if (!string.Equals(st.Layer, layer, StringComparison.OrdinalIgnoreCase)) Fail("capa de " + id + " " + st.Layer);
             int expected = pipes.Count(x => x["desde"].GetValue<string>() == id || x["hasta"].GetValue<string>() == id);
             if (st.ConnectedPipesCount != expected) Fail("conexiones de " + id + " " + st.ConnectedPipesCount + " != " + expected);
             // The largest connected pipe must fit the structure: its outer diameter against the largest inner dimension.
-            double inner = Math.Max(st.InnerDiameterOrWidth, st.InnerLength), largest = 0;
+            double inner = st.BoundingShape == BoundingShapeType.Box ? Math.Max(st.InnerDiameterOrWidth, st.InnerLength) : st.InnerDiameterOrWidth, largest = 0; // InnerLength only exists on box shapes
             for (int k = 0; k < st.ConnectedPipesCount; k++) largest = Math.Max(largest, ((Pipe)tr.GetObject(st.get_ConnectedPipe(k), OpenMode.ForRead)).OuterDiameterOrWidth);
             if (largest > inner + tol) Fail("tuberia de " + largest.ToString("F3") + " m no cabe en " + id + " (interior " + inner.ToString("F3") + " m)");
             byId[id] = (st, s);
@@ -389,7 +450,7 @@ internal static class DrenajeService
             coverMin = Math.Min(coverMin, cover);
             if (cover < minCover - tol) Fail("profundidad sobre clave de " + id + " " + cover.ToString("R"));
             if (sa.st.SumpElevation > invStart + tol || sb.st.SumpElevation > invEnd + tol) Fail("fondo de estructura sobre el radier de " + id);
-            if (!string.Equals(pipe.PartFamilyName, x["familia"].GetValue<string>(), StringComparison.Ordinal) || !string.Equals(pipe.PartSizeName, x["tamanio"].GetValue<string>(), StringComparison.Ordinal)) Fail("familia/tamanio de " + id);
+            if (!SamePart(pipe, x)) Fail("familia/tamanio de " + id + ": " + pipe.PartFamilyName + " / " + pipe.PartSizeName);
             if (!string.Equals(pipe.Layer, layer, StringComparison.OrdinalIgnoreCase)) Fail("capa de " + id + " " + pipe.Layer);
             pipeRows.Add(new { id, handle = H(oid), nombre = pipe.Name, desde = from, hasta = to, diametro_interior_m = pipe.InnerDiameterOrWidth, diametro_exterior_m = pipe.OuterDiameterOrWidth, cota_inicio = invStart, cota_fin = invEnd, longitud_2d_m = len, pendiente = double.IsFinite(slope) ? slope : (double?)null, pendiente_nativa = pipe.Slope, profundidad_clave_min_m = cover, profundidad_clave_exterior_min_m = outerCover, familia = pipe.PartFamilyName, tamanio = pipe.PartSizeName, flujo = pipe.FlowDirection.ToString() });
         }

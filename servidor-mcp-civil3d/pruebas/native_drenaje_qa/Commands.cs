@@ -15,7 +15,7 @@ using Exception = System.Exception;
 public class DrenajeQa : IExtensionApplication
 {
     const string BaseName = "Cdcrd.DrenajeV1Qa", BaseCommand = "CDCRDDRENAJEV1QA";
-    static readonly string[] Stages = { "network-created", "structures-added", "pipes-added", "pipes-connected", "record-written" };
+    static readonly string[] Stages = { "sizes-ready", "network-created", "structures-added", "pipes-added", "pipes-connected", "record-written" };
 
     // Command name follows the assembly name (Cdcrd.DrenajeV1QaB -> CDCRDDRENAJEV1QAB) so a
     // rebuilt harness can be loaded next to an earlier build in the same process.

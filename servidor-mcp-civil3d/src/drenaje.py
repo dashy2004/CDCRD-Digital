@@ -60,7 +60,8 @@ def validar_creacion(datos):
     out = dict(nombre=_texto(datos.get("nombre"), "nombre"), capa=_texto(datos.get("capa", "CDCRD-DRENAJE"), "capa"),
                pendiente_min=_numero(datos.get("pendiente_min", .005), "pendiente_min", .0005, .2),
                profundidad_min_m=_numero(datos.get("profundidad_min_m", 1.0), "profundidad_min_m", 0, 10),
-               tolerancia_m=_numero(datos.get("tolerancia_m", .005), "tolerancia_m", 1e-6, .1))
+               tolerancia_m=_numero(datos.get("tolerancia_m", .005), "tolerancia_m", 1e-6, .1), agregar_tamanios=datos.get("agregar_tamanios", True))
+    if not isinstance(out["agregar_tamanios"], bool): raise ValueError("agregar_tamanios debe ser booleano")
     if datos.get("lista_partes"): out["lista_partes"] = _texto(datos["lista_partes"], "lista_partes")
     structures = datos.get("estructuras"); pipes = datos.get("tuberias")
     if not isinstance(structures, list) or not 1 <= len(structures) <= 200: raise ValueError("estructuras: lista de 1..200")
@@ -216,7 +217,7 @@ def registrar(mcp, ok):
                           familia_salida: str = "", tamanio_imbornal: str = "", tamanio_pozo: str = "", tamanio_salida: str = "", lista_partes: str = "",
                           diametros_mm: str = "[300, 375, 450, 525, 600]", pendiente_min: float = .005, profundidad_min_m: float = 1.0,
                           n_manning: float = .013, sumidero_m: float = 0.0, capa: str = "CDCRD-DRENAJE", tolerancia_m: float = .005,
-                          simular: bool = True, confirmar: bool = False) -> str:
+                          agregar_tamanios: bool = True, simular: bool = True, confirmar: bool = False) -> str:
         """Dimensiona y crea una red de tuberias de gravedad (PipeNetwork) con el catalogo metrico instalado.
 
         nodos JSON [{id, tipo (imbornal|pozo|salida), xyz [x, y, rasante], q_m3_s, hacia}]:
@@ -228,8 +229,10 @@ def registrar(mcp, ok):
         diametro = el menor del catalogo (nunca menor que uno entrante) cuya
         capacidad a seccion llena por Manning cubre el caudal acumulado. Luego crea
         la red nativa: estructuras por tipo con la familia/tamanio indicados (rasante
-        y fondo explicitos), tuberias con familia_tuberia y el tamanio del catalogo
-        cuyo diametro interior coincide, conectadas y en la capa propia; verifica
+        y fondo explicitos), tuberias con familia_tuberia y el tamanio de la lista de
+        partes cuyo diametro interior coincide (con agregar_tamanios, los que falten
+        se traen del catalogo activo del dibujo, metrico o imperial, o es error con
+        los diametros que ofrece), conectadas y en la capa propia; verifica
         posiciones, cotas, pendientes, diametros y conexiones y guarda el contrato
         CDCRD_DRENAJE_V1 en la red. Simula por defecto (crea y aborta). Las familias
         aceptan nombre exacto o fragmento unico (ver listar_catalogo_drenaje).
@@ -246,7 +249,8 @@ def registrar(mcp, ok):
         except (ValueError, TypeError, KeyError) as exc: return ok({"error": str(exc)})
         def run():
             receipt = ejecutar(dibujo, pid, accion="crear", simular=simular, nombre=nombre, capa=capa, lista_partes=lista_partes or None,
-                               pendiente_min=pendiente_min, profundidad_min_m=profundidad_min_m, tolerancia_m=tolerancia_m, estructuras=structures, tuberias=pipes)
+                               pendiente_min=pendiente_min, profundidad_min_m=profundidad_min_m, tolerancia_m=tolerancia_m, agregar_tamanios=agregar_tamanios,
+                               estructuras=structures, tuberias=pipes)
             return dict(diseno=design, recibo=receipt)
         return call(run)
 

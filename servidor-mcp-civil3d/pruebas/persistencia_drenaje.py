@@ -10,7 +10,7 @@ Never run on a project drawing; the copy name must start with CDCRD_QA_DRENAJE.
 import argparse, json, os, sys, time
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-import win32com.client, win32process
+import pywintypes, win32com.client, win32process
 import puente_cliente as bridge
 import drenaje
 from humo_drenaje import guard, qa_job
@@ -32,12 +32,13 @@ def main():
     p.add_argument("--diametros", default="[300, 375, 450, 525, 600]"); p.add_argument("--lista-partes", default="")
     p.add_argument("--fallo", default="pipes-connected"); p.add_argument("--comando"); p.add_argument("--qa-comando", default="CDCRDDRENAJEV1QA")
     p.add_argument("--reanudar", action="store_true", help="skip fault and creation: the network already exists")
+    p.add_argument("--etiqueta", default="", help="receipt suffix: drenaje-persistencia-<etiqueta>.json")
     a = p.parse_args()
     if a.comando: drenaje.COMMAND = a.comando
     import humo_drenaje; humo_drenaje.QA_COMMAND = a.qa_comando
     bridge.TIMEOUT = 120
     folder = Path(a.drawing).resolve().parent
-    dest = folder / "drenaje-persistencia.json"
+    dest = folder / ("drenaje-persistencia" + ("-" + a.etiqueta if a.etiqueta else "") + ".json")
     if dest.exists(): raise FileExistsError(dest)
     report = {"ok": False, "steps": []}
     def record(): dest.write_text(json.dumps(report, indent=1, ensure_ascii=False), encoding="utf-8")
@@ -74,8 +75,15 @@ def main():
     if os.path.normcase(doc.FullName) != os.path.normcase(str(Path(a.drawing).resolve())) or not app.GetAcadState().IsQuiescent:
         raise RuntimeError("Wrong document or active command")
     doc.Save(); doc.Close(False)
-    time.sleep(2)
-    app.Documents.Open(str(Path(a.drawing).resolve()))
+    # Civil rejects COM calls for a moment after closing a document: retry the reopen, never the save.
+    # The dispatch object can also lose its type info after the close: re-acquire the application each attempt.
+    for attempt in range(60):
+        try:
+            app = win32com.client.GetActiveObject("AutoCAD.Application")
+            app.Documents.Open(str(Path(a.drawing).resolve())); break
+        except (pywintypes.com_error, AttributeError) as exc:
+            if attempt == 59: raise RuntimeError("Civil rejected the reopen for 60 s; inspect the session, do not retry blindly") from exc
+            time.sleep(1)
     for _ in range(300):
         try:
             if app.GetAcadState().IsQuiescent and os.path.normcase(app.ActiveDocument.FullName) == os.path.normcase(str(Path(a.drawing).resolve())): break

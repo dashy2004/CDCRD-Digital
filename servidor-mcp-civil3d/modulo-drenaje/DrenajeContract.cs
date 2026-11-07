@@ -12,7 +12,7 @@ internal sealed record StructureSpec(string Id, string Kind, string Family, stri
 // One pipe between two structures; inverts are the inside-bottom elevations at each end.
 internal sealed record PipeSpec(string Id, string From, string To, string Family, double Diameter, double StartInvert, double EndInvert);
 
-internal sealed record CreateOptions(string Name, string Layer, string PartsList, double MinSlope, double MinCover, double Tolerance,
+internal sealed record CreateOptions(string Name, string Layer, string PartsList, double MinSlope, double MinCover, double Tolerance, bool AddSizes,
     StructureSpec[] Structures, PipeSpec[] Pipes);
 
 internal static class DrenajeContract
@@ -107,6 +107,7 @@ internal static class DrenajeContract
             }
         }
         return new CreateOptions(Text(p, "nombre"), Text(p, "capa", false) ?? "CDCRD-DRENAJE", Text(p, "lista_partes", false),
-            Range(p, "pendiente_min", .005, .0005, .2), Range(p, "profundidad_min_m", 1.0, 0, 10), Range(p, "tolerancia_m", .005, 1e-6, .1), structures, pipes);
+            Range(p, "pendiente_min", .005, .0005, .2), Range(p, "profundidad_min_m", 1.0, 0, 10), Range(p, "tolerancia_m", .005, 1e-6, .1),
+            p["agregar_tamanios"]?.GetValue<bool>() ?? true, structures, pipes);
     }
 }

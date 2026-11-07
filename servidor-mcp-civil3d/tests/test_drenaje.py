@@ -166,7 +166,9 @@ def test_bad_parameters_rejected():
 def test_creation_payload_validation():
     design, structures, pipes = drenaje.disenar(NODES, dict(tuberia=dict(familia='Concrete Pipe'), imbornal=dict(familia='Rect'), pozo=dict(familia='Cyl', tamanio='1200 mm'), salida=dict(familia='Cyl')))
     out = drenaje.validar_creacion(dict(nombre='RED QA', estructuras=structures, tuberias=pipes))
-    assert out['capa'] == 'CDCRD-DRENAJE' and out['pendiente_min'] == .005 and len(out['tuberias']) == 3
+    assert out['capa'] == 'CDCRD-DRENAJE' and out['pendiente_min'] == .005 and len(out['tuberias']) == 3 and out['agregar_tamanios'] is True
+    assert drenaje.validar_creacion(dict(nombre='RED QA', estructuras=structures, tuberias=pipes, agregar_tamanios=False))['agregar_tamanios'] is False
+    with pytest.raises(ValueError): drenaje.validar_creacion(dict(nombre='RED QA', estructuras=structures, tuberias=pipes, agregar_tamanios='si'))
     assert next(s for s in out['estructuras'] if s['id'] == 'P1')['tamanio'] == '1200 mm'
     for change in (lambda d: d['tuberias'].__setitem__(0, dict(d['tuberias'][0], cota_fin=1e4)), lambda d: d['estructuras'].pop(),
                    lambda d: d['tuberias'].__setitem__(0, dict(d['tuberias'][0], diametro_m=.05)), lambda d: d['estructuras'].__setitem__(0, dict(d['estructuras'][0], cota_fondo=200)),
