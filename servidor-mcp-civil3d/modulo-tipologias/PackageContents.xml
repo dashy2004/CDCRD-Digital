@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" AppVersion="0.1.0" Author="CDCRD-Digital"
+  Name="CDCRD Tipologias" Description="Edge classification and per-stretch palette typologies for Civil 3D 2027 corridors"
+  ProductCode="{2BC6FBE5-728A-4FE3-97F3-E0003980C239}" UpgradeCode="{EF3DC2FD-71BA-46DF-81F0-70A9AACC39B4}">
+  <CompanyDetails Name="CDCRD-Digital" Url="https://github.com/dashy2004/CDCRD-Digital" />
+  <Components>
+    <RuntimeRequirements Platform="Civil3D" SeriesMin="R26.0" SeriesMax="R26.0" OS="Win64" />
+    <ComponentEntry AppName="CdcrdTipologiasV1" AppDescription="Corridor edge classification and per-stretch typology module"
+      AppType=".NET" ModuleName="./Contents/Cdcrd.Tipologias.V1.dll" LoadOnAutoCADStartup="True" LoadOnRequest="True">
+      <Commands GroupName="CDCRDTIPOLOGIAS">
+        <Command Global="CDCRDTIPOLOGIASV1" Local="CDCRDTIPOLOGIASV1" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+</ApplicationPackage>
