@@ -1,6 +1,6 @@
 # Herramientas del servidor MCP de Civil 3D
 
-81 herramientas en la entrega 0.5.21. Los apartados describen los m�dulos
+89 herramientas en la entrega 0.5.24. Los apartados describen los m�dulos
 incorporados en cada etapa; consultar el cat�logo MCP para las firmas vigentes.
 Las de escritura exigen `confirmar=True`; el servidor pide entonces el token de
 aprobacion ligado a esos parametros exactos.
@@ -176,3 +176,12 @@ Requiere m�dulo `Cdcrd.Corredores.V4`0.1.3 en la instancia existente. Cat�logo t
 - `leer_targets_ancho_cota(dibujo, pid, corredor)`: contrato propio y verificaci�n de ETW/Top. Usar este lector para el nuevo corredor, cuyo target no vac�o rechaza el lector multibaseline anterior.
 
 Requiere `Cdcrd.Targets.V2` 0.1.1. Un target por slot, metros, sin ecuaciones, objetos locales y carriles de corona. Simulaci�n por defecto y confirmaci�n requerida. Tras timeout consultar recibo; no reenviar. [Contrato, reproducci�n y evidencia](docs/TARGETS-0521.md).
+
+## Drenaje de corredores (0.5.24)
+
+- `listar_catalogo_drenaje(dibujo, pid, lista_partes="")`: listas de partes, familias y tamaños en metros (diámetro interior, dimensiones, rasante-fondo) y redes existentes.
+- `proponer_imbornales_corredor(dibujo, pid, corredor, intensidad_mm_h, espaciamiento_max_m=60, ancho_aporte_m=8, coeficiente_c=0.9, codigo="Flowline_Gutter", lados="ambos")`: feature lines de cuneta por lado y tramo, crestas y puntos bajos, imbornales en puntos bajos más intermedios por espaciamiento, aporte por longitud×ancho y Q = C·i·A/3,6·10⁶.
+- `crear_red_drenaje(dibujo, pid, nombre, nodos, familia_tuberia, familia_imbornal, familia_pozo, ..., diametros_mm="[300, 375, 450, 525, 600]", pendiente_min=0.005, profundidad_min_m=1.0, capa="CDCRD-DRENAJE", simular=True, confirmar=False)`: árbol de nodos hacia una salida; radieres por profundidad mínima sobre clave y pendiente mínima, diámetro mínimo del catálogo por Manning; red nativa con estructuras, tuberías conectadas, capa propia y contrato.
+- `verificar_red_drenaje(dibujo, pid, red)`: relee el contrato `CDCRD_DRENAJE_V1` y compara posiciones, cotas, pendientes, diámetros, conexiones y capa.
+
+Requiere `Cdcrd.Drenaje.V1` 0.1.0. Cálculo hidráulico en Python (`src/drenaje_calculo.py`), sin CAD; el módulo nativo lee, crea lo que se le pasa y verifica. Simulación por defecto y confirmación requerida. [Contrato, reproducción y evidencia](docs/DRENAJE-0524.md).
