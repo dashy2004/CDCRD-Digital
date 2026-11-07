@@ -80,6 +80,7 @@ def validar_creacion(datos):
         if s.get("tamanio"): row["tamanio"] = _texto(s["tamanio"], "tamanio de " + sid)
         out_s.append(row)
     if sum(1 for s in out_s if s["tipo"] == "salida") != 1: raise ValueError("Se requiere exactamente una estructura de salida")
+    outlet = next(s["id"] for s in out_s if s["tipo"] == "salida")
     pids = set(); out_p = []
     for p in pipes:
         if not isinstance(p, dict): raise ValueError("Cada tuberia es un objeto")
@@ -92,6 +93,18 @@ def validar_creacion(datos):
         z0 = _numero(p.get("cota_inicio"), "cota_inicio de " + pid, -1e5, 1e5); z1 = _numero(p.get("cota_fin"), "cota_fin de " + pid, -1e5, 1e5)
         if z1 > z0: raise ValueError("Tuberia " + pid + " no desciende")
         out_p.append(dict(id=pid, desde=a, hasta=b, familia=_texto(p.get("familia"), "familia de " + pid), diametro_m=d, cota_inicio=z0, cota_fin=z1))
+    # A tree: every structure but the outlet has exactly one outgoing pipe and reaches the outlet.
+    downstream = {}
+    for p in out_p:
+        if p["desde"] in downstream: raise ValueError("Mas de una tuberia sale de " + p["desde"])
+        downstream[p["desde"]] = p["hasta"]
+    if outlet in downstream: raise ValueError("La salida no puede tener tuberia saliente")
+    for sid in ids:
+        if sid == outlet: continue
+        seen = set(); cur = sid
+        while cur != outlet:
+            if cur not in downstream or cur in seen: raise ValueError("La estructura " + sid + " no drena a la salida")
+            seen.add(cur); cur = downstream[cur]
     out["estructuras"] = out_s; out["tuberias"] = out_p
     return out
 

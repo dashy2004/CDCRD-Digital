@@ -354,8 +354,12 @@ internal static class DrenajeService
             if (!string.Equals(st.Layer, layer, StringComparison.OrdinalIgnoreCase)) Fail("capa de " + id + " " + st.Layer);
             int expected = pipes.Count(x => x["desde"].GetValue<string>() == id || x["hasta"].GetValue<string>() == id);
             if (st.ConnectedPipesCount != expected) Fail("conexiones de " + id + " " + st.ConnectedPipesCount + " != " + expected);
+            // The largest connected pipe must fit the structure: its outer diameter against the largest inner dimension.
+            double inner = Math.Max(st.InnerDiameterOrWidth, st.InnerLength), largest = 0;
+            for (int k = 0; k < st.ConnectedPipesCount; k++) largest = Math.Max(largest, ((Pipe)tr.GetObject(st.ConnectedPipe[k], OpenMode.ForRead)).OuterDiameterOrWidth);
+            if (largest > inner + tol) Fail("tuberia de " + largest.ToString("F3") + " m no cabe en " + id + " (interior " + inner.ToString("F3") + " m)");
             byId[id] = (st, s);
-            structRows.Add(new { id, handle = H(oid), nombre = st.Name, tipo = s["tipo"].GetValue<string>(), posicion = Pt(st.Position), rasante = st.RimElevation, cota_fondo = st.SumpElevation, conexiones = st.ConnectedPipesCount, familia = st.PartFamilyName, tamanio = st.PartSizeName });
+            structRows.Add(new { id, handle = H(oid), nombre = st.Name, tipo = s["tipo"].GetValue<string>(), posicion = Pt(st.Position), rasante = st.RimElevation, cota_fondo = st.SumpElevation, conexiones = st.ConnectedPipesCount, interior_max_m = inner, tuberia_exterior_max_m = largest, familia = st.PartFamilyName, tamanio = st.PartSizeName });
         }
         var pipeRows = new List<object>();
         foreach (var x in pipes)
@@ -379,13 +383,15 @@ internal static class DrenajeService
             double exyA = Dist2d(Pt(sa.st.Position), pipe.StartPoint), exyB = Dist2d(Pt(sb.st.Position), pipe.EndPoint);
             xyMax = Math.Max(xyMax, Math.Max(exyA, exyB));
             if (exyA > tol || exyB > tol) Fail("extremos en planta de " + id + " " + Math.Max(exyA, exyB).ToString("R"));
+            // Cover is measured to the inner crown, as designed; the outer-crown value is reported alongside.
             double cover = Math.Min(sa.st.RimElevation - (invStart + pipe.InnerDiameterOrWidth), sb.st.RimElevation - (invEnd + pipe.InnerDiameterOrWidth));
+            double outerCover = cover - (pipe.OuterDiameterOrWidth - pipe.InnerDiameterOrWidth) / 2;
             coverMin = Math.Min(coverMin, cover);
             if (cover < minCover - tol) Fail("profundidad sobre clave de " + id + " " + cover.ToString("R"));
             if (sa.st.SumpElevation > invStart + tol || sb.st.SumpElevation > invEnd + tol) Fail("fondo de estructura sobre el radier de " + id);
             if (!string.Equals(pipe.PartFamilyName, x["familia"].GetValue<string>(), StringComparison.Ordinal) || !string.Equals(pipe.PartSizeName, x["tamanio"].GetValue<string>(), StringComparison.Ordinal)) Fail("familia/tamanio de " + id);
             if (!string.Equals(pipe.Layer, layer, StringComparison.OrdinalIgnoreCase)) Fail("capa de " + id + " " + pipe.Layer);
-            pipeRows.Add(new { id, handle = H(oid), nombre = pipe.Name, desde = from, hasta = to, diametro_interior_m = pipe.InnerDiameterOrWidth, cota_inicio = invStart, cota_fin = invEnd, longitud_2d_m = len, pendiente = slope, pendiente_nativa = pipe.Slope, profundidad_clave_min_m = cover, familia = pipe.PartFamilyName, tamanio = pipe.PartSizeName, flujo = pipe.FlowDirection.ToString() });
+            pipeRows.Add(new { id, handle = H(oid), nombre = pipe.Name, desde = from, hasta = to, diametro_interior_m = pipe.InnerDiameterOrWidth, diametro_exterior_m = pipe.OuterDiameterOrWidth, cota_inicio = invStart, cota_fin = invEnd, longitud_2d_m = len, pendiente = double.IsFinite(slope) ? slope : (double?)null, pendiente_nativa = pipe.Slope, profundidad_clave_min_m = cover, profundidad_clave_exterior_min_m = outerCover, familia = pipe.PartFamilyName, tamanio = pipe.PartSizeName, flujo = pipe.FlowDirection.ToString() });
         }
         var result = new
         {

@@ -8,6 +8,7 @@ import math
 RATIONAL_DIVISOR = 3.6e6   # Q [m3/s] = C * i [mm/h] * A [m2] / 3.6e6
 FLAT_TOLERANCE_M = 1e-3    # elevation differences below this are a plateau
 MIN_PIPE_LENGTH_M = .5
+MAX_SLOPE = .5           # steeper reaches need drop structures, not a pipe
 
 
 def _num(name, value, lo, hi):
@@ -56,6 +57,8 @@ def extremos_cuneta(puntos):
     Returns (crests, sags, flat) with indices in station order. Every run has at least one
     crest and one sag: a run that only descends has its crest at the start and its sag at the
     end; a flat run is reported as flat with the crest at the start and the sag at the end.
+    The ends of a run are treated as physical boundaries: where a gutter is cut by a driveway
+    or an open junction, the end inlet of the run must be reviewed by the designer.
     """
     z = [p["xyz"][2] for p in puntos]
     groups = []  # [first_index, last_index, z]
@@ -183,7 +186,9 @@ def disenar_red(nodos, diametros_mm=(300, 375, 450, 525, 600), pendiente_min=.00
     the incoming inverts; the downstream invert is the lower of (invert - L * minimum slope)
     and the downstream rim constraint, so the slope is never below the minimum. The diameter
     is the smallest catalog diameter, never smaller than an incoming one, whose full-flow
-    Manning capacity at that slope carries the accumulated rational flow.
+    Manning capacity at that slope carries the accumulated rational flow. The cover is
+    measured from the rim to the inner crown (invert + inner diameter); the wall thickness of
+    the catalog part is not added.
     """
     nodes = {n["id"]: n for n in validar_nodos(nodos)}
     diam = sorted({int(_num("diametros_mm", d, 100, 3000)) for d in diametros_mm})
@@ -217,6 +222,7 @@ def disenar_red(nodos, diametros_mm=(300, 375, 450, 525, 600), pendiente_min=.00
             inv_up = min([n["xyz"][2] - cover - d] + [inv for inv, _, _ in incoming[node_id]])
             inv_down = min(inv_up - length * s_min, v["xyz"][2] - cover - d)
             slope = (inv_up - inv_down) / length
+            if slope > MAX_SLOPE: raise ValueError(f"Tramo {node_id}->{v['id']}: pendiente {slope:.3f} supera {MAX_SLOPE}; revisar cotas o intercalar pozos")
             cap = capacidad_manning(d, slope, n_m)
             if cap >= q or q == 0:
                 chosen = (d_mm, d, inv_up, inv_down, slope, cap); break

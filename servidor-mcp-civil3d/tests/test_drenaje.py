@@ -126,6 +126,20 @@ def test_smallest_sufficient_diameter_and_catalog_overflow():
     assert {p['id']: p['diametro_mm'] for p in sized['tuberias']}['T-I1-P1'] > 300
 
 
+def test_too_steep_reach_names_the_pipe():
+    nodes = [dict(id='A', tipo='imbornal', xyz=[0, 0, 100.0], q_m3_s=.01, hacia='S'), dict(id='S', tipo='salida', xyz=[1, 0, 95.0])]
+    with pytest.raises(ValueError, match='Tramo A->S: pendiente'): calc.disenar_red(nodes)
+
+
+def test_explicit_payload_must_be_a_tree():
+    design, structures, pipes = drenaje.disenar(NODES, dict(tuberia=dict(familia='Concrete Pipe'), imbornal=dict(familia='Rect'), pozo=dict(familia='Cyl'), salida=dict(familia='Cyl')))
+    for change in (lambda d: d['tuberias'].append(dict(d['tuberias'][0], id='X', hasta='I2')),            # two pipes leaving I1
+                   lambda d: d['tuberias'].__setitem__(2, dict(d['tuberias'][2], desde='S', hasta='P1')),  # outlet drains out
+                   lambda d: d['tuberias'].pop(2)):                                                          # P1 never reaches S
+        data = dict(nombre='RED QA', estructuras=copy.deepcopy(structures), tuberias=copy.deepcopy(pipes)); change(data)
+        with pytest.raises(ValueError): drenaje.validar_creacion(data)
+
+
 def test_steep_downstream_rim_forces_steeper_slope():
     nodes = [dict(id='A', tipo='imbornal', xyz=[0, 0, 100.0], q_m3_s=.01, hacia='S'), dict(id='S', tipo='salida', xyz=[50, 0, 95.0])]
     p = calc.disenar_red(nodes)['tuberias'][0]

@@ -87,6 +87,25 @@ internal static class DrenajeContract
             if (b > a) throw new ArgumentException("La tuberia " + id + " no desciende hacia aguas abajo");
             return new PipeSpec(id, from, to, Text(o, "familia"), d, a, b);
         }).ToArray();
+        // A tree: every structure but the outlet has exactly one outgoing pipe and reaches the outlet.
+        string outlet = structures.Single(s => s.Kind == "salida").Id;
+        var downstream = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var x in pipes)
+        {
+            if (downstream.ContainsKey(x.From)) throw new ArgumentException("Mas de una tuberia sale de " + x.From);
+            downstream[x.From] = x.To;
+        }
+        if (downstream.ContainsKey(outlet)) throw new ArgumentException("La salida no puede tener tuberia saliente");
+        foreach (var s in structures)
+        {
+            if (s.Id == outlet) continue;
+            var seen = new HashSet<string>(StringComparer.Ordinal); string cur = s.Id;
+            while (cur != outlet)
+            {
+                if (!downstream.TryGetValue(cur, out var next) || !seen.Add(cur)) throw new ArgumentException("La estructura " + s.Id + " no drena a la salida");
+                cur = next;
+            }
+        }
         return new CreateOptions(Text(p, "nombre"), Text(p, "capa", false) ?? "CDCRD-DRENAJE", Text(p, "lista_partes", false),
             Range(p, "pendiente_min", .005, .0005, .2), Range(p, "profundidad_min_m", 1.0, 0, 10), Range(p, "tolerancia_m", .005, 1e-6, .1), structures, pipes);
     }
