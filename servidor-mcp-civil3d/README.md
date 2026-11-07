@@ -1,11 +1,14 @@
+<!-- TIPOLOGIAS-0523 -->
+## Actualizaci贸n 0.5.23: clasificaci贸n de bordes y tipolog铆a por tramo
+
+Cuatro herramientas nuevas (cat谩logo 90): clasificar cada borde de calzada como libre o uni贸n sondeando contra el pavimento vecino, dividir la regi贸n en tramos con variantes de la paleta m茅trica (bordillo-cuneta, uni贸n abierta, talud), reconstruir en comando propio y verificar el contrato. M贸dulo opcional `Cdcrd.Tipologias.V1` 0.1.0, `instalar-tipologias.ps1`. Probado en una copia privada: 13 corredores clasificados, 4 aplicaciones simuladas, 2 fallos inyectados sin residuos y 2 aplicadas con guardado y reapertura. Incluye la causa reproducida del aviso `Add param returned null` del visor de eventos. [Contrato, resultados y l铆mites](docs/TIPOLOGIAS-0523.md).
+
 <!-- QTO-0522 -->
 ## Actualizaci贸n 0.5.22: cubicaciones/QTO
 
 Cuatro herramientas nuevas (cat谩logo85): volumen TIN y materiales por secciones, con dos fases para formas de corredor. Probadas en Civil3D2027 sobre otra copia, misma instancia. [Contrato, resultados, l铆mites y cinco capturas reales](docs/QTO-0522.md). Targets0.21/PR38 integrada. Pendientes QTO de pago/precios, criterios externos, otras geometr铆as y verificaci贸n de autocarga al pr贸ximo arranque normal.
 
 # Servidor MCP de Civil 3D 2027
-
-[Gu铆a de plantillas, paleta m茅trica y verificaci贸n de corredores](docs/PALETA-METRICA-CORREDORES.md)
 
 Entrega **0.5.21**: targets de ancho y cota por API en un corredor nuevo, con origen de solo lectura. Prueba en otra copia: 8 asignaciones, 74 muestras de carril, 8 secciones, guardado/reapertura y 12 archivos protegidos. M骴ulo opcional **0.1.1**, puente vivo **0.5.17** y cat醠ogo MCP de **81 herramientas**. [Capturas, contrato y resultados](docs/TARGETS-0521.md) - [Baselines 0.5.20](docs/MULTIBASELINE-0520.md) - [Espirales 0.5.19](docs/ESPIRALES-0519.md) - [Peraltes 0.5.18](docs/PERALTES-0518.md).
 

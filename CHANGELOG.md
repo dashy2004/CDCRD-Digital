@@ -9,7 +9,11 @@ GitHub con estas mismas notas. Lo que aún no tiene versión va bajo "Sin public
 
 ## Sin publicar
 
-Nada todavía.
+### Civil 3D y AutoCAD
+
+- Clasificación de bordes de calzada y tipología por tramo con la paleta métrica (0.5.23),
+  módulo opcional `Cdcrd.Tipologias.V1`, con la causa reproducida del aviso
+  `Add param returned null` del visor de eventos.
 
 ## [0.1.0] - 2026-10-31
 
