@@ -17,7 +17,7 @@ crear_red_drenaje(dibujo=r"C:\QA\copia.dwg", pid=PID_VERIFICADO, nombre="RED PLU
 verificar_red_drenaje(dibujo=r"C:\QA\copia.dwg", pid=PID_VERIFICADO, red="RED PLUVIAL")
 ```
 
-Transporte igual al de los módulos de targets y tipologías: solicitud inmutable con SHA-256, PID y documento exactos, vencimiento de 3 minutos, archivo `.started` y recibo ligado a la solicitud. Ante timeout se consulta el recibo y la cola; **no se reenvía**. Toda escritura exige `confirmar=True` y simula por defecto (`simular=True` crea y aborta la transacción).
+`agregar_tamanios=True` (por defecto) trae a la familia de la lista de partes, desde el catálogo activo del dibujo, los diámetros que falten; la simulación también revierte esos tamaños. Transporte igual al de los módulos de targets y tipologías: solicitud inmutable con SHA-256, PID y documento exactos, vencimiento de 3 minutos, archivo `.started` y recibo ligado a la solicitud. Ante timeout se consulta el recibo y la cola; **no se reenvía**. Toda escritura exige `confirmar=True` y simula por defecto (`simular=True` crea y aborta la transacción).
 
 ## Contrato
 
@@ -43,16 +43,35 @@ El módulo nativo recibe estructuras (id, tipo, familia, tamaño opcional, XYZ, 
 
 **Verificar** (lectura). Relee el contrato de la red y cada pieza por handle: pertenencia a la red, posición XY (tolerancia 5 mm), rasante y fondo de estructuras, conexiones por estructura, familia y tamaño, capa; de cada tubería radier inicial/final (centro − D/2), diámetro interior (±1 mm), conectividad inicio/fin, extremos sobre las estructuras, pendiente ≥ mínima, profundidad sobre clave ≥ mínima en ambos extremos, fondo de estructura no sobre el radier. Devuelve máximos de error, pendiente y profundidad mínimas reales, detalle por pieza y lista de fallos; cualquier fallo es error. La misma verificación corre dentro de `crear` antes de guardar el contrato.
 
-## Resultados en una copia privada
+## Resultados en una copia privada y en un dibujo métrico nuevo
 
-Pendiente de la prueba nativa (ver abajo).
+Misma instancia de Civil 3D 2027, puente vivo 0.5.20, módulo cargado por `NETLOAD` con alias (`V1b`…`V1g`) a medida que la prueba nativa obligaba a corregirlo; el código final es el de `V1g`, idéntico al de la compilación canónica. Dos dibujos de prueba, ambos cerrados al terminar; el modelo del proyecto, abierto en la misma sesión, no se tocó ni se guardó.
+
+**Copia del modelo de proyecto** (`CDCRD_QA_DRENAJE_R11.dwg`, copia de la copia R11 de tipologías con bordillos aplicados; 32 corredores, 63 superficies, 193 capas). Nombres y coordenadas no se publican.
+
+- Catálogo: la lista de partes `Standard` del modelo viene del catálogo **US Imperial** (los GUID de sus familias coinciden con los archivos `US Imperial Pipes/Structures`), con una sola medida por familia (`12 inch Concrete Pipe`, 0,3048 m). La conversión de unidades del catálogo (pulgadas → metros) quedó verificada en ese dibujo; no hay API gestionada para cambiar el catálogo del dibujo (eso es `SETNETWORKCATALOG`, un diálogo).
+- Cuencas, corredor simple (tipología bordillo ambos lados): 2 líneas `Flowline_Gutter` (derecha 79,1 m e izquierda 36,9 m; 190 puntos; 14 códigos disponibles), crestas al inicio y puntos bajos en 53,0 m (derecha) y 43,9 m (izquierda). Con i = 120 mm/h, C = 0,90, ancho 8 m y espaciamiento 60 m: 3 imbornales (derecha: intermedio a 26,1 m y punto bajo a 53,0 m con 35,7 m de aporte cada uno, 285,7 m², 0,00857 m³/s; izquierda: punto bajo a 43,9 m, 27,7 m, 221,5 m², 0,00664 m³/s); total 0,0238 m³/s.
+- Cuencas, corredor con bandas (código de borde `Edge`): 1 línea de 141,0 m y 114 puntos que baja de forma monótona hacia su inicio (cresta en 141,0, punto bajo en 0,0): 3 imbornales a 0, 47 y 94 m (141/3), 0,0113 m³/s cada uno, 0,0338 m³/s en total.
+- Red sobre los 3 imbornales más un pozo y una salida (`I1-1→I1-2→P1`, `I2-1→P1`, `P1→S`; 86,1 m), con los diámetros que ofrece ese catálogo (304,8/381/457,2/533,4/609,6 mm = 12–24 in): 4 tramos de 304,8 mm, pendiente 0,500 %, profundidad sobre clave 1,00–1,43 m. Simulación verificada con error **0** en posición, rasante, fondo y radier (diámetro 5,6·10⁻¹⁷ m) y sin residuo: 0 redes y lista de partes sin cambios después de abortar.
+- Fallo inyectado en `pipes-connected`: error explícito `CDCRD_QA_DRENAJE_FAILURE` e inventario idéntico antes y después (0 redes, 32 corredores, 63 superficies, 193 capas). Creación confirmada (red `436E`, 5 estructuras y 4 tuberías), `verificar` sin fallos, guardado por COM, cierre, reapertura en el mismo proceso y nueva verificación: detalle de estructuras y tuberías idéntico.
+
+**Dibujo métrico nuevo** (`CDCRD_QA_DRENAJE_METRICO.dwg`, creado en la misma sesión desde `_Autodesk Civil 3D (Metric) NCS.dwt`, 221 capas, sin corredores): listas `Storm Sewer`, `Sanitary Sewer` y `Standard`; `Concrete Pipe SI` de 100 a 4.000 mm en `Storm Sewer`; estructuras métricas (`Rectangular Structure Slab Top Rectangular Frame SI` 1,5 × 0,75 m, `Cylindrical Junction Structure NF SI` 1,2 m, etc.). Mismos nodos de la copia R11.
+
+- Red de 300 mm en `Storm Sewer`: verificada con error 0. Con el pozo `Concentric Cylindrical Structure SI` (marco 530 + cono 900) la pieza exige 2,21 m y 1,88 m entre fondo y rasante, Civil sube la rasante 0,433 m y 0,147 m al conectar las tuberías y la verificación lo rechaza con ese mensaje; con `Cylindrical Junction Structure NF SI` (sin marco) pasa. La profundidad de diseño tiene que respetar la altura mínima de la pieza; el módulo no la calcula.
+- Caudales × 10 (0,0857 + 0,0857 + 0,0664 = 0,238 m³/s): diámetros 375, 450, 300 y 525 mm a 0,5 %. Con `Corrugated Metal Pipe SI` en `Standard` (solo 300 mm en la lista), `agregar_tamanios` trajo 375, 450 y 525 mm del catálogo métrico activo (`PartFamily.AddPartSize`, valores de lista en mm) y la simulación los revirtió: la lista volvió a tener solo 300 mm.
+- Fallo inyectado en `structures-added` sin residuo (0 redes, 221 capas); creación confirmada (red `7A4C`, 375/450/300/525 mm), verificación, guardado, reapertura y nueva verificación idénticas.
+
+Offline: **48 pruebas Python** del módulo (338 en la carpeta `tests`), compilación de módulo y arnés con **0 errores y 0 advertencias**; SHA-256 de la DLL canónica `aeb0a5bd…dba6`. `instalar-drenaje.ps1` no se ejecutó en esta sesión: Civil mantiene cargadas las DLL de desarrollo de la carpeta `bin` y bloquea la recompilación en sitio; instalar y verificar la autocarga en el próximo arranque normal.
+
+Incidencias corregidas durante la prueba: `Structure.InnerLength` solo existe en piezas de forma caja (una cilíndrica lanza "bounding shape should be box"); `PartSizeName` de la pieza colocada lleva sufijos (`125 wall 150 floor`) que el nombre del tamaño de la lista no tiene, así que la verificación compara `PartFamilyId` y `GetPartSizeId`; `PartFamily.PartSizeFilter` está obsoleto (`new SizeFilterRecord(familia)`); tras `Document.Close` por COM, Civil rechaza unos segundos la reapertura y el objeto de aplicación pierde su información de tipo: el script reintenta reobteniendo la aplicación, nunca el guardado.
 
 ## Límites
 
 - Solo feature lines de la baseline principal con un código; los tramos sin bordillo cortan la línea y se tratan como cunetas independientes, sin trasvase entre ellas ni hacia las intersecciones.
-- Imbornales sobre la línea de cuneta; no se ofrecen a la calzada, no se calcula captación de reja ni caudal de paso (by-pass), ni tiempo de concentración: la intensidad entra como dato.
+- Imbornales sobre la línea de cuneta; no se ofrecen a la calzada, no se calcula captación de reja ni caudal de paso (by-pass), ni tiempo de concentración: la intensidad entra como dato. Los extremos de cada línea se tratan como frontera física (cresta o punto bajo); donde la cuneta la corta un acceso o una unión abierta, el imbornal del extremo debe revisarse.
+- La profundidad mínima se mide a la **clave interior** (radier + diámetro interior); el espesor de pared no se suma, y `verificar` informa además la profundidad a la clave exterior. Una pieza con marco y cono tiene altura mínima propia: si el diseño la deja más baja, Civil sube la rasante y la verificación lo rechaza.
 - Red en árbol con una salida; tuberías rectas, sección llena por Manning, sin perfil hidráulico, sin reglas de Civil, sin sumideros/caídas calculados más allá de `sumidero_m`; sin etiquetas ni vistas de perfil.
-- Familias y tamaños son los de la lista de partes del dibujo; el módulo no importa familias del catálogo. `listar_catalogo_drenaje` muestra lo disponible.
+- Familias son las de la lista de partes del dibujo; el módulo no importa familias. Los tamaños que falten los trae del catálogo **activo del dibujo** (`agregar_tamanios`, por defecto), que puede ser el imperial aunque el dibujo esté en metros: cambiar el catálogo es `SETNETWORKCATALOG` (diálogo, sin API). `listar_catalogo_drenaje` muestra listas, tamaños y las familias del catálogo activo.
 - No edita redes existentes ni reemplaza un contrato ya guardado.
 - `CDCRDDRENAJEV1` se declara por atributo (carga por demanda del bundle). Una compilación `-p:AssemblyName=Cdcrd.Drenaje.V1b` registra además el alias `CDCRDDRENAJEV1B` para ensayar junto a la compilación ya cargada (igual el arnés `Cdcrd.DrenajeV1Qa` → `CDCRDDRENAJEV1QA` + sufijo); `humo_drenaje.py --comando/--modulo-dll` eligen cuál usar.
 
