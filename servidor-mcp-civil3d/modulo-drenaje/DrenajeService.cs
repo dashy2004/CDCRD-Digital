@@ -143,7 +143,7 @@ internal static class DrenajeService
     private static ObjectId AddPipeSize(Transaction tr, ObjectId famId, double diameter, List<object> log)
     {
         var f = (PartFamily)tr.GetObject(famId, OpenMode.ForWrite);
-        var filter = f.PartSizeFilter;
+        using var filter = new SizeFilterRecord(f);  // PartFamily.PartSizeFilter is obsolete
         var field = filter.GetParamByContextAndIndex(PartContextType.PipeInnerDiameter, 0) ?? throw new ArgumentException("La familia " + f.Name + " no filtra por diametro interior");
         object chosen = null; var offered = new List<double>();
         if (field.IsFromList)
