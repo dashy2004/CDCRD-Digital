@@ -609,6 +609,9 @@ targets.registrar(mcp, _ok)
 import qto
 qto.registrar(mcp, _ok)
 
+import cubicacion
+cubicacion.registrar(mcp, _ok)
+
 if __name__ == '__main__':
     logger.info('Herramientas registradas; esperando al cliente MCP por stdio')
     try:

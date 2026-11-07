@@ -176,3 +176,11 @@ Requiere m骴ulo `Cdcrd.Corredores.V4`0.1.3 en la instancia existente. Cat醠ogo t
 - `leer_targets_ancho_cota(dibujo, pid, corredor)`: contrato propio y verificaci髇 de ETW/Top. Usar este lector para el nuevo corredor, cuyo target no vac韔 rechaza el lector multibaseline anterior.
 
 Requiere `Cdcrd.Targets.V2` 0.1.1. Un target por slot, metros, sin ecuaciones, objetos locales y carriles de corona. Simulaci髇 por defecto y confirmaci髇 requerida. Tras timeout consultar recibo; no reenviar. [Contrato, reproducci髇 y evidencia](docs/TARGETS-0521.md).
+
+## Espesores de pavimento, Datum y cubicaci贸n (0.5.24)
+
+- `asignar_espesores_pavimento(dibujo, pid, corredor, espesores, subensamblajes="[]", regiones="[]", tolerancia_m=0.001, simular=True, confirmar=False)`: escribe `{parametro: metros}` en los carriles (`Width`, `DefaultSlope`, `Pave1Depth`) de los ensamblajes del corredor, relee cada valor, mide el espesor de `Pave1`/`Pave2`/`Base`/`SubBase` en la geometr铆a propia y, al confirmar, en las secciones aplicadas (segunda transacci贸n) y env铆a `reconstruir` en comando propio. Rechaza ensamblajes compartidos. Guarda `CDCRD_CUBICACION_V1`.
+- `crear_datum_corredor(dibujo, pid, corredor, nombre="", codigo="Datum", simular=True, confirmar=False)`: superficie de corredor con el enlace como l铆nea de rotura, correcci贸n por enlaces inferiores y contorno por extensi贸n; verifica tri谩ngulos y cobertura de los puntos de enlace.
+- `cubicar_corredor(dibujo, pid, corredor, terreno, datum="", codigos="[]", nombre_volumen="", factor_corte=1, factor_relleno=1, simular=True, confirmar=False)`: `TinVolumeSurface` terreno鈥揇atum (corte, relleno, neto brutos y ajustados) y vol煤menes por capa por 谩reas medias de las formas en las estaciones aplicadas de cada regi贸n; `simular=True` calcula y aborta sin dejar objetos.
+
+Requiere `Cdcrd.Cubicacion.V1` 0.1.0 en la instancia existente. Simulaci贸n por defecto y confirmaci贸n requerida; tras timeout consultar recibo, no reenviar. [Contrato, resultados y l铆mites](docs/CUBICACION-0524.md).

@@ -9,7 +9,11 @@ GitHub con estas mismas notas. Lo que aún no tiene versión va bajo "Sin public
 
 ## Sin publicar
 
-Nada todavía.
+### Civil 3D y AutoCAD
+
+- Espesores de pavimento en carriles, superficie Datum y cubicación de corredores (0.5.24),
+  módulo opcional `Cdcrd.Cubicacion.V1`, con el hallazgo de que la reconstrucción dentro de
+  la transacción que escribe los parámetros conserva los espesores anteriores.
 
 ## [0.1.0] - 2026-10-31
 
