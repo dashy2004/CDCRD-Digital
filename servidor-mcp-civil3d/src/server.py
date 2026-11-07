@@ -611,6 +611,8 @@ tipologias.registrar(mcp, _ok)
 import qto
 qto.registrar(mcp, _ok)
 
+import drenaje
+drenaje.registrar(mcp, _ok)
 import cubicacion
 cubicacion.registrar(mcp, _ok)
 

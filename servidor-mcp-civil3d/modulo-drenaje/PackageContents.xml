@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" AppVersion="0.1.0" Author="CDCRD-Digital"
+  Name="CDCRD Drenaje" Description="Gutter flowlines, inlet proposal and gravity pipe networks for Civil 3D 2027 corridors"
+  ProductCode="{7D1A4C2E-5B63-4F0A-9C4E-2B8F0D6A1E57}" UpgradeCode="{A3E9B7C1-0F24-4D8B-8E6A-5C7D2F9B3A10}">
+  <CompanyDetails Name="CDCRD-Digital" Url="https://github.com/dashy2004/CDCRD-Digital" />
+  <Components>
+    <RuntimeRequirements Platform="Civil3D" SeriesMin="R26.0" SeriesMax="R26.0" OS="Win64" />
+    <ComponentEntry AppName="CdcrdDrenajeV1" AppDescription="Corridor gutter drainage module"
+      AppType=".NET" ModuleName="./Contents/Cdcrd.Drenaje.V1.dll" LoadOnAutoCADStartup="True" LoadOnRequest="True">
+      <Commands GroupName="CDCRDDRENAJE">
+        <Command Global="CDCRDDRENAJEV1" Local="CDCRDDRENAJEV1" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+</ApplicationPackage>

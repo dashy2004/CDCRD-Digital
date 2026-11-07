@@ -11,6 +11,7 @@ GitHub con estas mismas notas. Lo que aún no tiene versión va bajo "Sin public
 
 ### Civil 3D y AutoCAD
 
+- Drenaje de corredores: cunetas `Flowline_Gutter`, imbornales por método racional y red de tuberías de gravedad con catálogo métrico y contrato verificable (0.5.24, módulo opcional `Cdcrd.Drenaje.V1`).
 - Espesores de pavimento en carriles, superficie Datum y cubicación de corredores (0.5.24),
   módulo opcional `Cdcrd.Cubicacion.V1`, con el hallazgo de que la reconstrucción dentro de
   la transacción que escribe los parámetros conserva los espesores anteriores.
