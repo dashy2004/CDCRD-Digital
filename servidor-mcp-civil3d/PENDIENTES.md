@@ -1,3 +1,7 @@
+<!-- CUBICACION-0524 -->
+## Actualización 0.5.24: espesores, Datum y cubicación
+
+[Espesores de pavimento, Datum y cubicación](docs/CUBICACION-0524.md): módulo `Cdcrd.Cubicacion.V1` 0.1.0, tres herramientas, contrato `CDCRD_CUBICACION_V1`. Probado sobre una copia privada en la misma instancia (puente 0.5.20): espesores confirmados y verificados en 349 estaciones, Datum, cubicación (1.181,5 m³ corte / 124,6 m³ relleno; capas 95,9 / 63,9 / 319,5 / 515,9 m³), dos fallos inyectados revertidos, guardado y reapertura. Pendientes: autocarga del bundle en un arranque normal, descuento de la estructura de pavimento en el corte/relleno, corrección de curvatura y fixture sintético público.
 <!-- TIPOLOGIAS-0523 -->
 ## Actualización 0.5.23: tipología por tramo
 

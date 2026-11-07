@@ -11,6 +11,9 @@ GitHub con estas mismas notas. Lo que aún no tiene versión va bajo "Sin public
 
 ### Civil 3D y AutoCAD
 
+- Espesores de pavimento en carriles, superficie Datum y cubicación de corredores (0.5.24),
+  módulo opcional `Cdcrd.Cubicacion.V1`, con el hallazgo de que la reconstrucción dentro de
+  la transacción que escribe los parámetros conserva los espesores anteriores.
 - Clasificación de bordes de calzada y tipología por tramo con la paleta métrica (0.5.23),
   módulo opcional `Cdcrd.Tipologias.V1`, con la causa reproducida del aviso
   `Add param returned null` del visor de eventos.

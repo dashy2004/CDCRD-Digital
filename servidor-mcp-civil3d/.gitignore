@@ -23,6 +23,11 @@ pruebas/native_qto_qa/bin/
 pruebas/native_qto_qa/obj/
 pruebas/native_qto_views/bin/
 pruebas/native_qto_views/obj/
+
+modulo-cubicacion/bin/
+modulo-cubicacion/obj/
+pruebas/native_cubicacion_qa/bin/
+pruebas/native_cubicacion_qa/obj/
 modulo-tipologias/bin/
 modulo-tipologias/obj/
 pruebas/native_tipologias_qa/bin/
