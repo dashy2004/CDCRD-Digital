@@ -2,6 +2,10 @@
 ## Actualización 0.5.24: drenaje de corredores
 
 Cuatro herramientas nuevas (catálogo 89): lectura de cunetas `Flowline_Gutter` con propuesta de imbornales por puntos bajos y espaciamiento (método racional, C=0,90), red de tuberías de gravedad `PipeNetwork` dimensionada por Manning con el catálogo métrico, pendiente y profundidad mínimas, y verificación contra el contrato `CDCRD_DRENAJE_V1`. Módulo opcional `Cdcrd.Drenaje.V1` 0.1.0, `instalar-drenaje.ps1`. [Contrato, resultados y límites](docs/DRENAJE-0524.md). Probado en una copia del modelo (catálogo imperial, 3 imbornales, red de 4 tramos, fallo inyectado, guardado/reapertura) y en un dibujo métrico nuevo (300–525 mm, tamaños traídos del catálogo). Pendientes: instalar el bundle y verificar la autocarga al próximo arranque, captación de reja y caudal de paso, tiempo de concentración/IDF, perfil hidráulico y líneas de energía, reglas de Civil, altura mínima de piezas en el diseño, etiquetas y vistas de perfil, edición de redes existentes.
+<!-- CUBICACION-0524 -->
+## Actualización 0.5.24: espesores, Datum y cubicación
+
+[Espesores de pavimento, Datum y cubicación](docs/CUBICACION-0524.md): módulo `Cdcrd.Cubicacion.V1` 0.1.0, tres herramientas, contrato `CDCRD_CUBICACION_V1`. Probado sobre una copia privada en la misma instancia (puente 0.5.20): espesores confirmados y verificados en 349 estaciones, Datum, cubicación (1.181,5 m³ corte / 124,6 m³ relleno; capas 95,9 / 63,9 / 319,5 / 515,9 m³), dos fallos inyectados revertidos, guardado y reapertura. Pendientes: autocarga del bundle en un arranque normal, descuento de la estructura de pavimento en el corte/relleno, corrección de curvatura y fixture sintético público.
 <!-- TIPOLOGIAS-0523 -->
 ## Actualización 0.5.23: tipología por tramo
 

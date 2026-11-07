@@ -2,6 +2,10 @@
 ## Actualización 0.5.24: drenaje de corredores
 
 Cuatro herramientas nuevas (catálogo 89): lectura de cunetas `Flowline_Gutter` con propuesta de imbornales por puntos bajos y espaciamiento (método racional, C=0,90), red de tuberías de gravedad `PipeNetwork` dimensionada por Manning con el catálogo métrico, pendiente y profundidad mínimas, y verificación contra el contrato `CDCRD_DRENAJE_V1`. Módulo opcional `Cdcrd.Drenaje.V1` 0.1.0, `instalar-drenaje.ps1`. [Contrato, resultados y límites](docs/DRENAJE-0524.md).
+<!-- CUBICACION-0524 -->
+## Actualización 0.5.24: espesores de pavimento, Datum y cubicación
+
+Tres herramientas nuevas (catálogo 88 sobre `master`; 93 con tipologías 0.5.23): escribir espesores de capa calculados en los carriles de todos los ensamblajes de un corredor con lectura previa, relectura y medida geométrica; crear la superficie Datum (enlace `Datum`, contorno por extensión, corrección por enlaces inferiores); y cubicar corte/relleno terreno–Datum y volúmenes por capa a partir de las áreas de las formas en las estaciones aplicadas. Módulo opcional `Cdcrd.Cubicacion.V1` 0.1.0, `instalar-cubicacion.ps1`. Probado en una copia privada: corredor dividido en 7 regiones, 2.792 formas verificadas, Datum de 5.161 triángulos, 1.181,5 m³ de corte y 995 m³ de capas, 2 fallos inyectados sin residuos, guardado y reapertura. Hallazgo: dentro de la transacción que escribe los parámetros, el corredor reconstruido conserva los espesores anteriores; la verificación aplicada va en segunda transacción y `reconstruir` en comando propio. [Contrato, resultados y límites](docs/CUBICACION-0524.md).
 <!-- TIPOLOGIAS-0523 -->
 ## Actualización 0.5.23: clasificación de bordes y tipología por tramo
 

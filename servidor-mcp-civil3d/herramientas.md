@@ -185,6 +185,13 @@ Requiere `Cdcrd.Targets.V2` 0.1.1. Un target por slot, metros, sin ecuaciones, o
 - `verificar_red_drenaje(dibujo, pid, red)`: relee el contrato `CDCRD_DRENAJE_V1` y compara posiciones, cotas, pendientes, diámetros, conexiones y capa.
 
 Requiere `Cdcrd.Drenaje.V1` 0.1.0. Cálculo hidráulico en Python (`src/drenaje_calculo.py`), sin CAD; el módulo nativo lee, crea lo que se le pasa y verifica. Simulación por defecto y confirmación requerida. [Contrato, reproducción y evidencia](docs/DRENAJE-0524.md).
+## Espesores de pavimento, Datum y cubicación (0.5.24)
+
+- `asignar_espesores_pavimento(dibujo, pid, corredor, espesores, subensamblajes="[]", regiones="[]", tolerancia_m=0.001, simular=True, confirmar=False)`: escribe `{parametro: metros}` en los carriles (`Width`, `DefaultSlope`, `Pave1Depth`) de los ensamblajes del corredor, relee cada valor, mide el espesor de `Pave1`/`Pave2`/`Base`/`SubBase` en la geometría propia y, al confirmar, en las secciones aplicadas (segunda transacción) y envía `reconstruir` en comando propio. Rechaza ensamblajes compartidos. Guarda `CDCRD_CUBICACION_V1`.
+- `crear_datum_corredor(dibujo, pid, corredor, nombre="", codigo="Datum", simular=True, confirmar=False)`: superficie de corredor con el enlace como línea de rotura, corrección por enlaces inferiores y contorno por extensión; verifica triángulos y cobertura de los puntos de enlace.
+- `cubicar_corredor(dibujo, pid, corredor, terreno, datum="", codigos="[]", nombre_volumen="", factor_corte=1, factor_relleno=1, simular=True, confirmar=False)`: `TinVolumeSurface` terreno–Datum (corte, relleno, neto brutos y ajustados) y volúmenes por capa por áreas medias de las formas en las estaciones aplicadas de cada región; `simular=True` calcula y aborta sin dejar objetos.
+
+Requiere `Cdcrd.Cubicacion.V1` 0.1.0 en la instancia existente. Simulación por defecto y confirmación requerida; tras timeout consultar recibo, no reenviar. [Contrato, resultados y límites](docs/CUBICACION-0524.md).
 ## Clasificación de bordes y tipología por tramo (0.5.23)
 
 - `clasificar_bordes_corredor(dibujo, pid, corredor, sonda_m=1.0, superficies_pavimento="[]", superficies_excluidas="[]", codigo_borde="", union_min_m=2.0, libre_min_m=5.0)`: en cada estación aplicada sondea a `sonda_m` fuera del borde contra las superficies de pavimento vigentes (por defecto las Top de los demás corredores); devuelve muestras, inventario de la región y `segmentos` propuestos. Lectura.

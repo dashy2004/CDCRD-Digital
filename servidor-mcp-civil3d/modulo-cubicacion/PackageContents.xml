@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" AppVersion="0.1.0" Author="CDCRD-Digital"
+  Name="CDCRD Cubicacion" Description="Pavement thicknesses, Datum surface and volumes for Civil 3D 2027 corridors"
+  ProductCode="{7D1C3B2A-9E64-4C58-B1F2-3A6D0E5C8F41}" UpgradeCode="{A4F8E2D1-6B37-4F9C-8E25-1C7B9D3A5E60}">
+  <CompanyDetails Name="CDCRD-Digital" Url="https://github.com/dashy2004/CDCRD-Digital" />
+  <Components>
+    <RuntimeRequirements Platform="Civil3D" SeriesMin="R26.0" SeriesMax="R26.0" OS="Win64" />
+    <ComponentEntry AppName="CdcrdCubicacionV1" AppDescription="Corridor pavement thickness, Datum and volume module"
+      AppType=".NET" ModuleName="./Contents/Cdcrd.Cubicacion.V1.dll" LoadOnAutoCADStartup="True" LoadOnRequest="True">
+      <Commands GroupName="CDCRDCUBICACION">
+        <Command Global="CDCRDCUBICACIONV1" Local="CDCRDCUBICACIONV1" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+</ApplicationPackage>
