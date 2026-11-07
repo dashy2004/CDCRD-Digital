@@ -177,6 +177,15 @@ Requiere m�dulo `Cdcrd.Corredores.V4`0.1.3 en la instancia existente. Cat�logo t
 
 Requiere `Cdcrd.Targets.V2` 0.1.1. Un target por slot, metros, sin ecuaciones, objetos locales y carriles de corona. Simulaci�n por defecto y confirmaci�n requerida. Tras timeout consultar recibo; no reenviar. [Contrato, reproducci�n y evidencia](docs/TARGETS-0521.md).
 
+## Redes a presión (0.5.25)
+
+- `listar_catalogo_presion(dibujo, pid, lista_partes="")`: listas de partes de presión del dibujo con tuberías, accesorios y aparatos (descripción, tipo, GUID y propiedades de catálogo en sus unidades: el imperial guarda pulgadas) y redes de presión existentes.
+- `cotas_superficie(dibujo, pid, superficie, puntos)`: cota de una superficie TIN en puntos `[[x, y], ...]` (`null` fuera de ella).
+- `crear_red_presion(dibujo, pid, nombre, nodos, tuberias, lista_partes="", superficie="", capa="CDCRD-PRESION", conectar=True, rotar=True, simular=True, confirmar=False)`: nodos `libre|codo|te|cruz|tapon|reduccion|union|valvula|hidrante|bomba` con XYZ del eje y tuberías rectas entre nodos; piezas por tipo, fragmento de descripción, diámetro nominal del catálogo y ángulo; gira cada pieza para alinear sus bocas con las tuberías, conecta, verifica y guarda el contrato `CDCRD_PRESION_V1`.
+- `verificar_red_presion(dibujo, pid, red)`: relee el contrato y compara posiciones, piezas, conexiones y capa.
+
+Requiere `Cdcrd.Presion.V1` 0.1.0. Sin hidráulica ni profundidades: las cotas del eje las decide el llamador (por ejemplo, rasante de `cotas_superficie` menos cobertura y medio diámetro). Simulación por defecto y confirmación requerida. [Contrato, reproducción y evidencia](docs/PRESION-0525.md).
+
 ## Drenaje de corredores (0.5.24)
 
 - `listar_catalogo_drenaje(dibujo, pid, lista_partes="")`: listas de partes, familias y tamaños en metros (diámetro interior, dimensiones, rasante-fondo) y redes existentes.

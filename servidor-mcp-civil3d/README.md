@@ -1,3 +1,8 @@
+<!-- PRESION-0525 -->
+## Actualización 0.5.25: redes de tuberías a presión
+
+Cuatro herramientas nuevas (catálogo 93): listas de partes de presión con sus piezas y propiedades de catálogo, cotas de una superficie en una lista de puntos, red de presión `PressurePipeNetwork` creada exactamente como se describe (tuberías rectas entre nodos; codos, tes, cruces y válvulas giradas para alinear sus bocas y conectadas) con contrato `CDCRD_PRESION_V1`, y verificación contra ese contrato. Módulo opcional `Cdcrd.Presion.V1` 0.1.0, `instalar-presion.ps1`. Probado en una copia privada: red de 5 tuberías y 3 piezas en simulación, confirmación, guardado, reapertura y nueva verificación con 0 fallos, y dos redes de proyecto de 4 y 15 tuberías. [Contrato, resultados y límites](docs/PRESION-0525.md).
+
 <!-- DRENAJE-0524 -->
 ## Actualización 0.5.24: drenaje de corredores
 
