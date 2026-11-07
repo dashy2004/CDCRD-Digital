@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" AppVersion="0.1.0" Author="CDCRD-Digital"
+  Name="CDCRD Presion" Description="Pressure pipe networks (water supply) with explicit contract for Civil 3D 2027"
+  ProductCode="{3C7E9A51-2D84-4B6F-9E1A-7F2C5D8B4A63}" UpgradeCode="{9B4D2F7A-6E13-4C85-A2D7-1E8F3B6C9D50}">
+  <CompanyDetails Name="CDCRD-Digital" Url="https://github.com/dashy2004/CDCRD-Digital" />
+  <Components>
+    <RuntimeRequirements Platform="Civil3D" SeriesMin="R26.0" SeriesMax="R26.0" OS="Win64" />
+    <ComponentEntry AppName="CdcrdPresionV1" AppDescription="Pressure pipe network module"
+      AppType=".NET" ModuleName="./Contents/Cdcrd.Presion.V1.dll" LoadOnAutoCADStartup="True" LoadOnRequest="True">
+      <Commands GroupName="CDCRDPRESION">
+        <Command Global="CDCRDPRESIONV1" Local="CDCRDPRESIONV1" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+</ApplicationPackage>

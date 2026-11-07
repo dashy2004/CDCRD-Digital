@@ -613,6 +613,8 @@ qto.registrar(mcp, _ok)
 
 import drenaje
 drenaje.registrar(mcp, _ok)
+import presion
+presion.registrar(mcp, _ok)
 import cubicacion
 cubicacion.registrar(mcp, _ok)
 
