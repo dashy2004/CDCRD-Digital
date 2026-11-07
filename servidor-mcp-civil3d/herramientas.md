@@ -184,3 +184,11 @@ Requiere `Cdcrd.Targets.V2` 0.1.1. Un target por slot, metros, sin ecuaciones, o
 - `cubicar_corredor(dibujo, pid, corredor, terreno, datum="", codigos="[]", nombre_volumen="", factor_corte=1, factor_relleno=1, simular=True, confirmar=False)`: `TinVolumeSurface` terreno–Datum (corte, relleno, neto brutos y ajustados) y volúmenes por capa por áreas medias de las formas en las estaciones aplicadas de cada región; `simular=True` calcula y aborta sin dejar objetos.
 
 Requiere `Cdcrd.Cubicacion.V1` 0.1.0 en la instancia existente. Simulación por defecto y confirmación requerida; tras timeout consultar recibo, no reenviar. [Contrato, resultados y límites](docs/CUBICACION-0524.md).
+## Clasificación de bordes y tipología por tramo (0.5.23)
+
+- `clasificar_bordes_corredor(dibujo, pid, corredor, sonda_m=1.0, superficies_pavimento="[]", superficies_excluidas="[]", codigo_borde="", union_min_m=2.0, libre_min_m=5.0)`: en cada estación aplicada sondea a `sonda_m` fuera del borde contra las superficies de pavimento vigentes (por defecto las Top de los demás corredores); devuelve muestras, inventario de la región y `segmentos` propuestos. Lectura.
+- `aplicar_tipologia_por_tramo(dibujo, pid, corredor, segmentos, superficie_terreno="", biblioteca="", ensamblaje_carriles="", ensamblaje_bordillo="", subensamblaje_bordillo="", ensamblaje_talud="", origen="", separacion_m=30, capa="", codigo_borde="", tolerancia_m=0.005, simular=True, confirmar=False)`: divide la única región por tramos `LR`/`L`/`R`/`-`/`talud`, importa variantes de la paleta métrica, remapea objetivos y transiciones, cambia el Top a extensión y verifica bordes, bordillos y taludes. Guarda el contrato `CDCRD_TIPOLOGIAS_V1`.
+- `reconstruir_tipologia_por_tramo(dibujo, pid, corredor, confirmar=False)`: reconstruye corredor y Top en comando propio (Civil deja el corredor fuera de fecha al terminar el comando que aplicó) y verifica.
+- `verificar_tipologia_por_tramo(dibujo, pid, corredor)`: relee el contrato y repite la verificación.
+
+Requiere `Cdcrd.Tipologias.V1` 0.1.0 en la instancia existente. Catálogo total 90. Simulación por defecto y confirmación requerida; tras timeout consultar recibo, no reenviar. [Contrato, resultados y causa del aviso `Add param returned null`](docs/TIPOLOGIAS-0523.md).

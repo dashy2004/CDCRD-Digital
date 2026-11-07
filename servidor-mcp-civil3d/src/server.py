@@ -605,6 +605,8 @@ import multibaseline
 multibaseline.registrar(mcp, _ok)
 import targets
 targets.registrar(mcp, _ok)
+import tipologias
+tipologias.registrar(mcp, _ok)
 
 import qto
 qto.registrar(mcp, _ok)

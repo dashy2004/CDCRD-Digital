@@ -2,6 +2,10 @@
 ## Actualización 0.5.24: espesores, Datum y cubicación
 
 [Espesores de pavimento, Datum y cubicación](docs/CUBICACION-0524.md): módulo `Cdcrd.Cubicacion.V1` 0.1.0, tres herramientas, contrato `CDCRD_CUBICACION_V1`. Probado sobre una copia privada en la misma instancia (puente 0.5.20): espesores confirmados y verificados en 349 estaciones, Datum, cubicación (1.181,5 m³ corte / 124,6 m³ relleno; capas 95,9 / 63,9 / 319,5 / 515,9 m³), dos fallos inyectados revertidos, guardado y reapertura. Pendientes: autocarga del bundle en un arranque normal, descuento de la estructura de pavimento en el corte/relleno, corrección de curvatura y fixture sintético público.
+<!-- TIPOLOGIAS-0523 -->
+## Actualización 0.5.23: tipología por tramo
+
+[Clasificación de bordes y tipología por tramo](docs/TIPOLOGIAS-0523.md): módulo `Cdcrd.Tipologias.V1` 0.1.0. Autocarga del bundle verificada en dos arranques normales de Civil 3D 2027 (también respondió `Cdcrd.Targets.V2` 0.1.1 sin `NETLOAD`). Pendientes: aceras como subensamblaje, intersecciones nativas con radios de bordillo, corredores con varias regiones o baselines, elección automática de tramos `talud` y un fixture sintético público (las pruebas nativas corrieron sobre una copia privada).
 
 <!-- QTO-0522 -->
 ## Actualización 0.5.22: cubicaciones/QTO
