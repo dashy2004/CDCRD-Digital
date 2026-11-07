@@ -2,6 +2,10 @@
 ## Actualización 0.5.24: drenaje de corredores
 
 Cuatro herramientas nuevas (catálogo 89): lectura de cunetas `Flowline_Gutter` con propuesta de imbornales por puntos bajos y espaciamiento (método racional, C=0,90), red de tuberías de gravedad `PipeNetwork` dimensionada por Manning con el catálogo métrico, pendiente y profundidad mínimas, y verificación contra el contrato `CDCRD_DRENAJE_V1`. Módulo opcional `Cdcrd.Drenaje.V1` 0.1.0, `instalar-drenaje.ps1`. [Contrato, resultados y límites](docs/DRENAJE-0524.md).
+<!-- TIPOLOGIAS-0523 -->
+## Actualización 0.5.23: clasificación de bordes y tipología por tramo
+
+Cuatro herramientas nuevas (catálogo 90): clasificar cada borde de calzada como libre o unión sondeando contra el pavimento vecino, dividir la región en tramos con variantes de la paleta métrica (bordillo-cuneta, unión abierta, talud), reconstruir en comando propio y verificar el contrato. Módulo opcional `Cdcrd.Tipologias.V1` 0.1.0, `instalar-tipologias.ps1`. Probado en una copia privada: 13 corredores clasificados, 4 aplicaciones simuladas, 2 fallos inyectados sin residuos, 2 aplicadas con guardado y reapertura, y autocarga del bundle verificada en un arranque normal. Incluye la causa reproducida del aviso `Add param returned null` del visor de eventos. [Contrato, resultados y límites](docs/TIPOLOGIAS-0523.md).
 
 <!-- QTO-0522 -->
 ## Actualización 0.5.22: cubicaciones/QTO
@@ -9,8 +13,6 @@ Cuatro herramientas nuevas (catálogo 89): lectura de cunetas `Flowline_Gutter` 
 Cuatro herramientas nuevas (catálogo85): volumen TIN y materiales por secciones, con dos fases para formas de corredor. Probadas en Civil3D2027 sobre otra copia, misma instancia. [Contrato, resultados, límites y cinco capturas reales](docs/QTO-0522.md). Targets0.21/PR38 integrada. Pendientes QTO de pago/precios, criterios externos, otras geometrías y verificación de autocarga al próximo arranque normal.
 
 # Servidor MCP de Civil 3D 2027
-
-[Guía de plantillas, paleta métrica y verificación de corredores](docs/PALETA-METRICA-CORREDORES.md)
 
 Entrega **0.5.21**: targets de ancho y cota por API en un corredor nuevo, con origen de solo lectura. Prueba en otra copia: 8 asignaciones, 74 muestras de carril, 8 secciones, guardado/reapertura y 12 archivos protegidos. M�dulo opcional **0.1.1**, puente vivo **0.5.17** y cat�logo MCP de **81 herramientas**. [Capturas, contrato y resultados](docs/TARGETS-0521.md) - [Baselines 0.5.20](docs/MULTIBASELINE-0520.md) - [Espirales 0.5.19](docs/ESPIRALES-0519.md) - [Peraltes 0.5.18](docs/PERALTES-0518.md).
 

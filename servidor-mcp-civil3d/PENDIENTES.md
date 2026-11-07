@@ -2,6 +2,10 @@
 ## Actualización 0.5.24: drenaje de corredores
 
 Cuatro herramientas nuevas (catálogo 89): lectura de cunetas `Flowline_Gutter` con propuesta de imbornales por puntos bajos y espaciamiento (método racional, C=0,90), red de tuberías de gravedad `PipeNetwork` dimensionada por Manning con el catálogo métrico, pendiente y profundidad mínimas, y verificación contra el contrato `CDCRD_DRENAJE_V1`. Módulo opcional `Cdcrd.Drenaje.V1` 0.1.0, `instalar-drenaje.ps1`. [Contrato, resultados y límites](docs/DRENAJE-0524.md). Probado en una copia del modelo (catálogo imperial, 3 imbornales, red de 4 tramos, fallo inyectado, guardado/reapertura) y en un dibujo métrico nuevo (300–525 mm, tamaños traídos del catálogo). Pendientes: instalar el bundle y verificar la autocarga al próximo arranque, captación de reja y caudal de paso, tiempo de concentración/IDF, perfil hidráulico y líneas de energía, reglas de Civil, altura mínima de piezas en el diseño, etiquetas y vistas de perfil, edición de redes existentes.
+<!-- TIPOLOGIAS-0523 -->
+## Actualización 0.5.23: tipología por tramo
+
+[Clasificación de bordes y tipología por tramo](docs/TIPOLOGIAS-0523.md): módulo `Cdcrd.Tipologias.V1` 0.1.0. Autocarga del bundle verificada en dos arranques normales de Civil 3D 2027 (también respondió `Cdcrd.Targets.V2` 0.1.1 sin `NETLOAD`). Pendientes: aceras como subensamblaje, intersecciones nativas con radios de bordillo, corredores con varias regiones o baselines, elección automática de tramos `talud` y un fixture sintético público (las pruebas nativas corrieron sobre una copia privada).
 
 <!-- QTO-0522 -->
 ## Actualización 0.5.22: cubicaciones/QTO
