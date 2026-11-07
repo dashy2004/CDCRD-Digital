@@ -1,7 +1,7 @@
 <!-- TIPOLOGIAS-0523 -->
 ## Actualización 0.5.23: tipología por tramo
 
-[Clasificación de bordes y tipología por tramo](docs/TIPOLOGIAS-0523.md): módulo `Cdcrd.Tipologias.V1` 0.1.0. Pendientes: aceras como subensamblaje, intersecciones nativas con radios de bordillo, corredores con varias regiones o baselines, elección automática de tramos `talud`, verificación de autocarga del bundle en el próximo arranque normal y un fixture sintético público (las pruebas nativas corrieron sobre una copia privada).
+[Clasificación de bordes y tipología por tramo](docs/TIPOLOGIAS-0523.md): módulo `Cdcrd.Tipologias.V1` 0.1.0. Autocarga del bundle verificada en dos arranques normales de Civil 3D 2027 (también respondió `Cdcrd.Targets.V2` 0.1.1 sin `NETLOAD`). Pendientes: aceras como subensamblaje, intersecciones nativas con radios de bordillo, corredores con varias regiones o baselines, elección automática de tramos `talud` y un fixture sintético público (las pruebas nativas corrieron sobre una copia privada).
 
 <!-- QTO-0522 -->
 ## Actualización 0.5.22: cubicaciones/QTO

@@ -1,7 +1,7 @@
 <!-- TIPOLOGIAS-0523 -->
 ## Actualización 0.5.23: clasificación de bordes y tipología por tramo
 
-Cuatro herramientas nuevas (catálogo 90): clasificar cada borde de calzada como libre o unión sondeando contra el pavimento vecino, dividir la región en tramos con variantes de la paleta métrica (bordillo-cuneta, unión abierta, talud), reconstruir en comando propio y verificar el contrato. Módulo opcional `Cdcrd.Tipologias.V1` 0.1.0, `instalar-tipologias.ps1`. Probado en una copia privada: 13 corredores clasificados, 4 aplicaciones simuladas, 2 fallos inyectados sin residuos y 2 aplicadas con guardado y reapertura. Incluye la causa reproducida del aviso `Add param returned null` del visor de eventos. [Contrato, resultados y límites](docs/TIPOLOGIAS-0523.md).
+Cuatro herramientas nuevas (catálogo 90): clasificar cada borde de calzada como libre o unión sondeando contra el pavimento vecino, dividir la región en tramos con variantes de la paleta métrica (bordillo-cuneta, unión abierta, talud), reconstruir en comando propio y verificar el contrato. Módulo opcional `Cdcrd.Tipologias.V1` 0.1.0, `instalar-tipologias.ps1`. Probado en una copia privada: 13 corredores clasificados, 4 aplicaciones simuladas, 2 fallos inyectados sin residuos, 2 aplicadas con guardado y reapertura, y autocarga del bundle verificada en un arranque normal. Incluye la causa reproducida del aviso `Add param returned null` del visor de eventos. [Contrato, resultados y límites](docs/TIPOLOGIAS-0523.md).
 
 <!-- QTO-0522 -->
 ## Actualización 0.5.22: cubicaciones/QTO

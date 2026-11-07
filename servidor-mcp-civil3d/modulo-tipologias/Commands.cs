@@ -23,24 +23,35 @@ public class Commands : IExtensionApplication
     internal const string BaseCommand = "CDCRDTIPOLOGIASV1";
     // The exchange directory is the DWG directory, shared with the bridge and the QA harness.
     internal static string Root => Path.GetDirectoryName(App.DocumentManager.MdiActiveDocument.Name);
-    // The command name follows the assembly name: a build compiled as Cdcrd.Tipologias.V1b
-    // registers CDCRDTIPOLOGIASV1B, so a rebuilt module can load next to an earlier one
-    // in the same Civil process during QA. The normal build registers CDCRDTIPOLOGIASV1.
-    internal static string CommandName
+    // The canonical command is declared by attribute so the bundle's demand-load entry
+    // resolves it at startup. A build compiled as Cdcrd.Tipologias.V1b additionally
+    // registers CDCRDTIPOLOGIASV1B when it loads, so a rebuilt module can be exercised
+    // next to the one already loaded in the same Civil process during QA.
+    internal static string AliasSuffix
     {
         get
         {
             string name = typeof(Commands).Assembly.GetName().Name;
             string suffix = name.StartsWith(BaseName, StringComparison.Ordinal) ? name.Substring(BaseName.Length) : "";
             if (!Regex.IsMatch(suffix, "^[A-Za-z0-9]{0,8}$")) throw new InvalidOperationException("Nombre de ensamblado no admitido: " + name);
-            return BaseCommand + suffix.ToUpperInvariant();
+            return suffix.ToUpperInvariant();
         }
     }
 
+    [CommandMethod("CDCRDTIPOLOGIAS", BaseCommand, CommandFlags.Session)]
+    public void Run() => RunCore();
+
     public void Initialize()
     {
-        string name = CommandName;
-        Autodesk.AutoCAD.Internal.Utils.AddCommand("CDCRDTIPOLOGIAS", name, name, CommandFlags.Session, RunCore);
+        try
+        {
+            string suffix = AliasSuffix;
+            if (suffix.Length > 0) Autodesk.AutoCAD.Internal.Utils.AddCommand("CDCRDTIPOLOGIAS", BaseCommand + suffix, BaseCommand + suffix, CommandFlags.Session, RunCore);
+        }
+        catch (Exception ex)
+        {
+            try { App.DocumentManager.MdiActiveDocument?.Editor.WriteMessage("\nTipologias: alias no registrado: " + ex.Message + "\n"); } catch (Exception) { }
+        }
     }
     public void Terminate() { }
 
