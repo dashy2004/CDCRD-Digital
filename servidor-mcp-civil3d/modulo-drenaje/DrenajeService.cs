@@ -356,7 +356,7 @@ internal static class DrenajeService
             if (st.ConnectedPipesCount != expected) Fail("conexiones de " + id + " " + st.ConnectedPipesCount + " != " + expected);
             // The largest connected pipe must fit the structure: its outer diameter against the largest inner dimension.
             double inner = Math.Max(st.InnerDiameterOrWidth, st.InnerLength), largest = 0;
-            for (int k = 0; k < st.ConnectedPipesCount; k++) largest = Math.Max(largest, ((Pipe)tr.GetObject(st.ConnectedPipe[k], OpenMode.ForRead)).OuterDiameterOrWidth);
+            for (int k = 0; k < st.ConnectedPipesCount; k++) largest = Math.Max(largest, ((Pipe)tr.GetObject(st.get_ConnectedPipe(k), OpenMode.ForRead)).OuterDiameterOrWidth);
             if (largest > inner + tol) Fail("tuberia de " + largest.ToString("F3") + " m no cabe en " + id + " (interior " + inner.ToString("F3") + " m)");
             byId[id] = (st, s);
             structRows.Add(new { id, handle = H(oid), nombre = st.Name, tipo = s["tipo"].GetValue<string>(), posicion = Pt(st.Position), rasante = st.RimElevation, cota_fondo = st.SumpElevation, conexiones = st.ConnectedPipesCount, interior_max_m = inner, tuberia_exterior_max_m = largest, familia = st.PartFamilyName, tamanio = st.PartSizeName });
