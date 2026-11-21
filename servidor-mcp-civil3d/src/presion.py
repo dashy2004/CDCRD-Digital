@@ -7,14 +7,16 @@ only reads the pressure parts lists and surfaces, creates exactly the network it
 (pipes between nodes, fittings/appurtenances at nodes, ports connected) and verifies it
 against the stored contract CDCRD_PRESION_V1.
 """
-import hashlib, json, math, ntpath, time, uuid
+import hashlib, json, math, ntpath, re, time, uuid
 from pathlib import Path
 from datetime import datetime, timedelta, timezone
 import puente_cliente as bridge
+import transporte
 
 MODULE = "cdcrd-presion"
 COMMAND = "CDCRDPRESIONV1"
-ACCIONES = ("catalogo", "cotas", "crear", "verificar", "trazado")
+VERSION_MINIMA = "0.2.0"
+ACCIONES = ("catalogo", "cotas", "crear", "verificar", "trazado", "leer", "inspeccionar")
 KINDS = {"libre": 0, "codo": 2, "te": 3, "cruz": 4, "tapon": 1, "reduccion": 2, "union": 2, "valvula": 2, "hidrante": 1, "bomba": 2}
 
 
@@ -88,15 +90,43 @@ def validar_cotas(datos):
     return dict(superficie=_texto(datos.get("superficie"), "superficie"), puntos=[[_numero(p[0], "x", -1e8, 1e8), _numero(p[1], "y", -1e8, 1e8)] for p in pts])
 
 
+def _handle(value, key):
+    if not isinstance(value, str) or not re.fullmatch(r"[0-9A-Fa-f]{1,16}", value): raise ValueError(key + " debe ser un handle hexadecimal")
+    return value.upper()
+
+
+def _punto_xy(p):
+    if not isinstance(p, (list, tuple)) or len(p) < 2: raise ValueError("Cada punto de la ruta es [x, y]")
+    return [_numero(p[0], "x", -1e8, 1e8), _numero(p[1], "y", -1e8, 1e8)]
+
+
 def validar_trazado(datos):
-    ruta = datos.get("ruta")
-    if not isinstance(ruta, list) or not 2 <= len(ruta) <= 500: raise ValueError("ruta: lista de 2..500 puntos")
+    """Route from vertices or from an existing polyline (never both); design cover is required, not assumed."""
+    ruta, polilinea = datos.get("ruta"), datos.get("polilinea")
+    if (ruta is None) == (polilinea is None): raise ValueError("Indique ruta (vertices) o polilinea (handle), una sola")
+    codos = datos.get("codos_automaticos", True)
+    if not isinstance(codos, bool): raise ValueError("codos_automaticos debe ser booleano")
     out = dict(nombre=_texto(datos.get("nombre"), "nombre"), capa=_texto(datos.get("capa", "CDCRD-PRESION"), "capa"), superficie=_texto(datos.get("superficie"), "superficie"),
-               cobertura_m=_numero(datos.get("cobertura_m", 1.0), "cobertura_m", 0, 10), familia=_texto(datos.get("familia"), "familia"),
-               diametro_nominal=_numero(datos.get("diametro_nominal"), "diametro_nominal", .01, 1e4), codos_automaticos=bool(datos.get("codos_automaticos", True)),
-               ruta=[[_numero(p[0], "x", -1e8, 1e8), _numero(p[1], "y", -1e8, 1e8)] for p in ruta])
+               cobertura_m=_numero(datos.get("cobertura_m"), "cobertura_m", 0, 10), familia=_texto(datos.get("familia"), "familia"),
+               diametro_nominal=_numero(datos.get("diametro_nominal"), "diametro_nominal", .01, 1e4), codos_automaticos=codos,
+               paso_m=_numero(datos.get("paso_m", 5.0), "paso_m", .1, 100))
+    if ruta is not None:
+        if not isinstance(ruta, list) or not 2 <= len(ruta) <= 500: raise ValueError("ruta: lista de 2..500 puntos")
+        out["ruta"] = [_punto_xy(p) for p in ruta]
+    else:
+        out["polilinea"] = _handle(polilinea, "polilinea")
+    if datos.get("cobertura_min_m") is not None:
+        out["cobertura_min_m"] = _numero(datos["cobertura_min_m"], "cobertura_min_m", 0, 10)
+        if out["cobertura_min_m"] > out["cobertura_m"]: raise ValueError("cobertura_min_m no puede superar cobertura_m")
     for k in ("lista_partes", "tramo"):
         if datos.get(k): out[k] = _texto(datos[k], k)
+    return out
+
+
+def validar_inspeccion(datos):
+    out = dict(red=_texto(datos.get("red"), "red"), paso_m=_numero(datos.get("paso_m", 5.0), "paso_m", .1, 100))
+    if datos.get("superficie"): out["superficie"] = _texto(datos["superficie"], "superficie")
+    if datos.get("cobertura_min_m") is not None: out["cobertura_min_m"] = _numero(datos["cobertura_min_m"], "cobertura_min_m", 0, 20)
     return out
 
 
@@ -109,6 +139,8 @@ def ejecutar(dibujo, pid, *, accion, simular=True, timeout=180, **datos):
     elif accion == "cotas": datos = validar_cotas(datos)
     elif accion == "crear": datos = validar_creacion(datos)
     elif accion == "trazado": datos = validar_trazado(datos)
+    elif accion == "leer": datos = dict(red=_texto(datos["red"], "red")) if datos.get("red") else {}
+    elif accion == "inspeccionar": datos = validar_inspeccion(datos)
     else: datos = dict(red=_texto(datos.get("red"), "red"))
     request = dict(datos, dibujo=dibujo, pid=pid, accion=accion, simular=simular,
                    vence_utc=(datetime.now(timezone.utc) + timedelta(minutes=3)).isoformat())
@@ -118,6 +150,8 @@ def ejecutar(dibujo, pid, *, accion, simular=True, timeout=180, **datos):
     if bridge.llamar("diag.dialogos")["modal_abierto"] or bridge.llamar("diag.cola")["activas"]:
         raise RuntimeError("Civil ocupado; revisar cola/dialogo antes de enviar")
     root = Path(dibujo).parent
+    # A 0.1.0 module still loaded would run 'trazado' without inspection and ignore the new fields.
+    transporte.exigir_version(MODULE, COMMAND, root, pid, VERSION_MINIMA)
     key = uuid.uuid4().hex
     data = json.dumps(request, ensure_ascii=False, allow_nan=False, separators=(",", ":")).encode("utf-8")
     digest = hashlib.sha256(data).hexdigest()
@@ -194,3 +228,56 @@ def registrar(mcp, ok):
     def verificar_red_presion(dibujo: str, pid: int, red: str) -> str:
         """Relee el contrato CDCRD_PRESION_V1 de la red de presion y comprueba tuberias, piezas, posiciones, conexiones y capa."""
         return call(ejecutar, dibujo, pid, accion="verificar", red=red)
+
+    @mcp.tool()
+    def leer_redes_presion(dibujo: str, pid: int, red: str = "") -> str:
+        """Lee las redes de tuberias a presion del dibujo, tengan o no contrato propio.
+
+        Sin red: resumen de cada una (tuberias, accesorios, aparatos, tramos,
+        longitud 2D/3D, cotas minima y maxima, longitud por diametro). Con red
+        (nombre o handle): ademas el detalle de cada tuberia (pieza, material y
+        diametro nominal del catalogo, diametros interior/exterior, extremos XYZ,
+        longitudes, pendiente, cobertura minima y maxima segun Civil, piezas en
+        cada extremo) y de cada accesorio o aparato (tipo, posicion y bocas con
+        lo que tienen conectado). Metros; lectura sin cambios.
+        """
+        return call(ejecutar, dibujo, pid, accion="leer", red=red or None)
+
+    @mcp.tool()
+    def trazar_red_presion(dibujo: str, pid: int, nombre: str, superficie: str, familia: str, diametro_nominal: float, cobertura_m: float,
+                           ruta: str = "", polilinea: str = "", cobertura_min_m: float = -1.0, lista_partes: str = "", capa: str = "CDCRD-PRESION",
+                           codos_automaticos: bool = True, paso_m: float = 5.0, simular: bool = True, confirmar: bool = False) -> str:
+        """Crea una red a presion nueva con un tramo que sigue una ruta en planta a una cobertura dada bajo una superficie TIN.
+
+        La ruta es `ruta` (JSON [[x, y], ...]) o `polilinea` (handle de una
+        polilinea ligera o 3D abierta y sin arcos; de la 3D se toma solo la
+        planta y no se consume). La tuberia sale de la lista de partes del dibujo
+        (familia y diametro_nominal como en listar_catalogo_presion). Civil
+        coloca el eje a cobertura_m bajo la superficie y anade los codos en los
+        vertices. Despues se inspecciona: una sola componente conectada y, si se
+        da cobertura_min_m (>= 0), cobertura por muestras cada paso_m. Simula por
+        defecto (crea, inspecciona y aborta); al confirmar, si la inspeccion no
+        cumple no se guarda nada. No calcula hidraulica.
+        """
+        if not confirmar: return ok({"error": "Operacion de escritura: requiere confirmar=True"})
+        if bool(ruta) == bool(polilinea): return ok({"error": "Indique ruta o polilinea, una sola"})
+        try: pts = json.loads(ruta) if ruta else None
+        except ValueError as exc: return ok({"error": str(exc)})
+        return call(ejecutar, dibujo, pid, accion="trazado", simular=simular, nombre=nombre, superficie=superficie, familia=familia, diametro_nominal=diametro_nominal,
+                    cobertura_m=cobertura_m, cobertura_min_m=cobertura_min_m if cobertura_min_m >= 0 else None, ruta=pts, polilinea=polilinea or None,
+                    lista_partes=lista_partes or None, capa=capa, codos_automaticos=codos_automaticos, paso_m=paso_m, timeout=600)
+
+    @mcp.tool()
+    def inspeccionar_red_presion(dibujo: str, pid: int, red: str, superficie: str = "", cobertura_min_m: float = -1.0, paso_m: float = 5.0) -> str:
+        """Comprueba una red a presion existente sin depender de contrato: conectividad y cobertura por muestras.
+
+        Conectividad: componentes conectados (1 = toda la red unida), extremos
+        de tuberia sin pieza y bocas abiertas de accesorios y aparatos.
+        Cobertura: cada paso_m sobre cada tuberia, cota de la superficie menos
+        (eje + diametro exterior / 2), contra la superficie indicada o la de
+        referencia de la red; con cobertura_min_m (>= 0) lista las muestras por
+        debajo y dice si cumple (una muestra fuera de la superficie no cumple).
+        Lectura sin cambios.
+        """
+        return call(ejecutar, dibujo, pid, accion="inspeccionar", red=red, superficie=superficie or None,
+                    cobertura_min_m=cobertura_min_m if cobertura_min_m >= 0 else None, paso_m=paso_m)

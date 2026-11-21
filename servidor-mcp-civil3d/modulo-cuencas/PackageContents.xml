@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" AppVersion="0.2.0" Author="CDCRD-Digital"
+  Name="CDCRD Cuencas" Description="Catchments: list, create from boundary and surface, hydrological parameters and discharge structure for Civil 3D 2027"
+  ProductCode="{8D3B6F12-5C47-4A9E-B360-2F7E1C9A4D85}" UpgradeCode="{E4A91C73-2B58-4F06-9D1E-7C3A5B8F6E24}">
+  <CompanyDetails Name="CDCRD-Digital" Url="https://github.com/dashy2004/CDCRD-Digital" />
+  <Components>
+    <RuntimeRequirements Platform="Civil3D" SeriesMin="R26.0" SeriesMax="R26.0" OS="Win64" />
+    <ComponentEntry AppName="CdcrdCuencasV1" AppDescription="Catchments module"
+      AppType=".NET" ModuleName="./Contents/Cdcrd.Cuencas.V1.dll" LoadOnAutoCADStartup="True" LoadOnRequest="True">
+      <Commands GroupName="CDCRDCUENCAS">
+        <Command Global="CDCRDCUENCASV1" Local="CDCRDCUENCASV1" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+</ApplicationPackage>

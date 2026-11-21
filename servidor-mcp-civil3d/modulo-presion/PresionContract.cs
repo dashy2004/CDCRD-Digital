@@ -49,7 +49,8 @@ internal static class PresionContract
     internal static double Range(JsonObject p, string key, double fallback, double lo, double hi)
     {
         double v = p[key] == null ? fallback : Number(p[key], key);
-        if (v < lo || v > hi) throw new ArgumentException(key + " debe estar entre " + lo + " y " + hi);
+        // A NaN fallback marks the key as required: the negated test rejects it.
+        if (!(v >= lo && v <= hi)) throw new ArgumentException(key + " debe estar entre " + lo + " y " + hi);
         return v;
     }
 

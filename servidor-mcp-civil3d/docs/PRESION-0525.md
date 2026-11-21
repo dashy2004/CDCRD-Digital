@@ -32,7 +32,53 @@ verificar_red_presion(dibujo=r"C:\QA\copia.dwg", pid=PID_VERIFICADO, red="RED AG
 
 **Verificar** (lectura). Relee el contrato y cada pieza por handle: pertenencia a la red, conteos, lista de partes; de cada tubería extremos iguales a los registrados (tolerancia 5 mm), pieza (GUID), diámetro nominal, capa y pieza conectada en cada extremo; de cada nodo con pieza posición registrada, desvío respecto del nodo de diseño (≤ `tolerancia_conexion_m`, 1 m), pieza, capa, bocas abiertas y que cada tubería del nodo esté conectada a esa pieza y la pieza la registre; de cada nodo libre que el extremo esté sobre el punto de diseño y sin conectar. Devuelve máximos de desvío, bocas abiertas, longitud 2D y el detalle por pieza; cualquier fallo es error.
 
-**Tramo** (escritura, experimental). `trazado`: una polilínea de ruta `[[x, y], ...]`, una tubería y una superficie con cobertura; Civil crea el tramo (`PipeRuns.createPipeRun`) con codos automáticos en los vértices y el perfil a la cobertura pedida. Devuelve tuberías y codos creados con sus extremos y coberturas; no guarda contrato ni verifica. Expuesto solo por `presion.ejecutar(accion="trazado")`, no como herramienta MCP.
+## Adenda 0.5.26 — módulo 0.2.0: lectura, trazado con cobertura e inspección
+
+Tres herramientas más: `leer_redes_presion`, `trazar_red_presion` e `inspeccionar_red_presion`. [fable], 2026-11-21.
+
+```python
+leer_redes_presion(dibujo=r"C:\QA\copia.dwg", pid=PID_VERIFICADO, red="")            # resumen; con red="..." el detalle
+trazar_red_presion(dibujo=r"C:\QA\copia.dwg", pid=PID_VERIFICADO, nombre="AGUA POTABLE", superficie="TERRENO",
+    familia="pipe-150 mm", diametro_nominal=150, cobertura_m=1.2, cobertura_min_m=1.0, polilinea="71B5",
+    lista_partes="Water", simular=True, confirmar=True)
+inspeccionar_red_presion(dibujo=r"C:\QA\copia.dwg", pid=PID_VERIFICADO, red="AGUA POTABLE", cobertura_min_m=1.0, paso_m=5)
+```
+
+**Leer** (lectura). De cualquier red de presión, tenga o no contrato. Sin `red`: por red, conteos, tramos (`PipeRuns`), longitud 2D y 3D, cotas mínima y máxima y longitud por pieza de tubería. Con `red`: además cada tubería (descripción y familia, `material` y `norma` leídos de los datos de catálogo de la pieza colocada —`ID_MATERIAL`, `COMPATIBLE_STANDARD`—, diámetro nominal del catálogo, diámetros nominal/interior/exterior y espesor en metros, extremos XYZ, longitudes, pendiente, cobertura mínima y máxima según Civil, pieza conectada en cada extremo, capa) y cada accesorio o aparato (tipo, posición, bocas con estado y objeto conectado). Hasta 2 000 partes en detalle.
+
+**Trazado** (escritura). Ruta en planta por `ruta` (vértices) o `polilinea` (handle de una polilínea ligera o 3D abierta, sin arcos y sin ajuste de curva; de la 3D se toma solo la planta, y la polilínea no se consume: el tramo guarda su propia copia). Tubería de la lista de partes del dibujo, elegida como en la red explícita. Civil crea el tramo (`PipeRuns.createPipeRun`) con el eje a `cobertura_m` bajo la superficie y los codos en los vértices. `cobertura_m` es obligatoria: no hay valor por defecto. Después se inspecciona (abajo) y:
+
+- simulando, se devuelve el resultado con `cumple` y se aborta;
+- confirmando, si la red no queda en una sola componente conectada o no alcanza `cobertura_min_m`, es error y no se guarda nada.
+
+El trazado no guarda contrato `CDCRD_PRESION_V1`; se comprueba con la inspección.
+
+**Inspección** (lectura). Sin depender de contrato:
+
+- *Conectividad.* Tuberías y piezas son nodos de un grafo unidos por la pieza de cada extremo de tubería y por cada boca cerrada. Devuelve `componentes_conectados` (1 = toda la red unida), `extremos_abiertos` (extremos de tubería sin pieza) y `bocas_abiertas`.
+- *Cobertura.* Cada `paso_m` sobre la cuerda de cada tubería: cota de la superficie menos (eje + diámetro exterior / 2). Usa la superficie indicada o la de referencia de la red. Con `cobertura_min_m` lista las muestras por debajo y `cumple`; una muestra fuera de la superficie no cumple, porque no prueba la cobertura. El mínimo por tubería coincide con `MinimumCover` de Civil (se devuelven los dos).
+- *Codos.* `codos_fuera_de_angulo`: codos cuyo ángulo de catálogo difiere más de 2° de la deflexión real entre sus dos tuberías. Civil coloca el codo de catálogo más cercano al quiebre de la ruta; la junta queda forzada. Se informa y no se rechaza: si esa deflexión es admisible es decisión de diseño.
+
+### Resultados en un dibujo sintético
+
+Dibujo desechable de la plantilla métrica del producto (lista de partes `Water`: hierro dúctil push-on, tuberías de 150 a 400 mm, codos de 11,25°, 22,5°, 45° y 90°, tes y válvulas de compuerta) con una superficie TIN de 200 × 120 m.
+
+| Caso | Resultado |
+|---|---|
+| Trazado simulado desde 4 vértices, cobertura 1,2 m | 3 tuberías, 2 codos, 1 componente, 2 extremos abiertos (los del tramo); cobertura por 46 muestras 1,2000 a 1,2874 m, igual a `MinimumCover`; tras abortar no queda red |
+| El mismo desde una polilínea existente | resultado idéntico; la polilínea sigue en el dibujo |
+| Confirmado con `cobertura_min_m=1.0` | red guardada, 212,6 m |
+| Quiebre de 71,5° en la ruta | Civil colocó un codo de 90°: informado en `codos_fuera_de_angulo` (−18,5°) |
+| Leer | resumen y detalle con `material: ductile iron`, `norma: AWWA C151` |
+| Inspección exigiendo 1,25 m | `cumple: false`, 21 de 25 muestras bajo el mínimo, con su posición |
+| Nombre de red repetido; `verificar` sobre una red sin contrato | rechazados con mensaje claro |
+| Red explícita (5 tuberías, codo, te, válvula): simular, confirmar, `verificar` e `inspeccionar` | 0 fallos; 1 componente; cobertura mínima 0,83 m |
+
+Offline: 19 pruebas Python del módulo; compilación con 0 errores y 0 advertencias.
+
+### Versión cargada
+
+Cada compilación registra el comando canónico; en una sesión que ya cargó la 0.1.0 la nueva solo entra al reiniciar Civil 3D. Como la 0.1.0 ejecutaría `trazado` sin inspección e ignoraría los campos nuevos, el servidor pregunta primero la versión del módulo cargado (el recibo la trae siempre) y se niega con una anterior a 0.2.0.
 
 ## Resultados en una copia privada
 
@@ -52,6 +98,8 @@ Offline: 14 pruebas Python del módulo (`tests/test_presion.py`), compilación c
 - La asignación de bocas supone piezas con bocas coplanares en planta; piezas de más bocas que tuberías dejan bocas abiertas (se informan).
 - `TransformBy` gira la pieza sobre su nodo; si Civil la recoloca al conectar, la verificación lo detecta por el desvío al nodo de diseño.
 - No edita redes existentes ni reemplaza un contrato ya guardado. El `trazado` no deja contrato.
+- El `trazado` crea un solo tramo sin derivaciones; el perfil lo fija la cobertura (las cotas de una polilínea 3D no se usan). Rutas con arcos se rechazan.
+- La cobertura se muestrea sobre la cuerda: en una tubería curva es aproximada y la inspección lo advierte. `cumple` vale para las muestras tomadas: un punto bajo entre dos muestras no se ve, así que conviene un `paso_m` menor que la longitud de onda del terreno. La inspección admite hasta 200 000 muestras por llamada; una tubería sin diámetro exterior legible no acredita la cobertura mínima.
 - `CDCRDPRESIONV1` se declara por atributo (carga por demanda del bundle); una compilación `-p:AssemblyName=Cdcrd.Presion.V1b` registra además `CDCRDPRESIONV1B` para ensayar junto a la ya cargada.
 
 ## Reproducción
@@ -64,7 +112,10 @@ py pruebas/humo_presion.py --drawing <copia> --pid <PID> --etapa catalogo
 py pruebas/humo_presion.py --drawing <copia> --pid <PID> --etapa cotas --superficie <nombre> --puntos puntos.json
 py pruebas/humo_presion.py --drawing <copia> --pid <PID> --etapa red --nodos nodos.json [--confirmar]
 py pruebas/humo_presion.py --drawing <copia> --pid <PID> --etapa verificar --red "CDCRD QA PRESION"
-py pruebas/humo_presion.py --drawing <copia> --pid <PID> --etapa trazado --ruta ruta.json --superficie <nombre> --familia pipe --diametro 6
+py pruebas/humo_presion.py --drawing <copia> --pid <PID> --etapa trazado --ruta ruta.json --superficie <nombre> --familia pipe --diametro 6 --cobertura 1.2 --cobertura-min 1.0 [--confirmar]
+py pruebas/humo_presion.py --drawing <copia> --pid <PID> --etapa trazado --polilinea <handle> --superficie <nombre> --familia pipe --diametro 6 --cobertura 1.2
+py pruebas/humo_presion.py --drawing <copia> --pid <PID> --etapa leer [--red <nombre>]
+py pruebas/humo_presion.py --drawing <copia> --pid <PID> --etapa inspeccionar --red <nombre> --cobertura-min 1.0
 ```
 
 Los scripts rechazan recibos existentes y nunca reenvían una escritura.

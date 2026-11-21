@@ -6,7 +6,9 @@ Stages (one per invocation, receipts next to the copy; never retries a write):
   cotas      Surface elevations at points given in a JSON file [[x, y], ...].
   red        Simulate (default) or commit the explicit network from a JSON file {nodos, tuberias}.
   verificar  Re-read the stored contract of one pressure network.
-  trazado    Experimental pipe run from a path JSON file [[x, y], ...] with bends added by Civil.
+  trazado    Pipe run from a path JSON file [[x, y], ...] or a polyline handle, at a design cover under a surface.
+  leer       Summary of every pressure network, or the detail of one (--red).
+  inspeccionar  Connectivity and sampled cover of one network, with or without contract.
 The copy name must start with CDCRD_QA_PRESION; the drawing must be the active document.
 """
 import argparse, json, sys
@@ -29,14 +31,24 @@ def guard(drawing):
         raise RuntimeError("Busy; inspect state before any further write")
 
 
+def resumen_inspeccion(v):
+    print("inspeccion", json.dumps({k: v[k] for k in v if k != "cobertura"}, ensure_ascii=False)[:1500])
+    c = v["cobertura"]
+    if c:
+        print("cobertura", json.dumps({k: c[k] for k in c if k not in ("por_tuberia", "muestras_bajo_minimo")}, ensure_ascii=False))
+        for row in c["por_tuberia"]: print("  ", json.dumps(row, ensure_ascii=False))
+        for row in c["muestras_bajo_minimo"][:10]: print("   bajo minimo", json.dumps(row, ensure_ascii=False))
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--drawing", required=True); p.add_argument("--pid", type=int, required=True)
-    p.add_argument("--etapa", required=True, choices=["cargar", "catalogo", "cotas", "red", "verificar", "trazado"])
+    p.add_argument("--etapa", required=True, choices=["cargar", "catalogo", "cotas", "red", "verificar", "trazado", "leer", "inspeccionar"])
     p.add_argument("--lista-partes", default=""); p.add_argument("--superficie", default=""); p.add_argument("--puntos"); p.add_argument("--red", default="")
     p.add_argument("--nodos", help="JSON file {nodos, tuberias}"); p.add_argument("--nombre", default="CDCRD QA PRESION"); p.add_argument("--capa", default="CDCRD-PRESION")
     p.add_argument("--sin-conectar", action="store_true"); p.add_argument("--sin-rotar", action="store_true"); p.add_argument("--confirmar", action="store_true")
     p.add_argument("--ruta"); p.add_argument("--familia", default="PVC"); p.add_argument("--diametro", type=float, default=6); p.add_argument("--cobertura", type=float, default=1.0)
+    p.add_argument("--polilinea", default=""); p.add_argument("--cobertura-min", type=float); p.add_argument("--paso", type=float, default=5.0)
     p.add_argument("--etiqueta", default=""); p.add_argument("--modulo-dll"); p.add_argument("--comando")
     a = p.parse_args()
     global MODULE
@@ -83,8 +95,23 @@ def main():
             print(json.dumps({k: v[k] for k in v if not k.startswith("detalle")}, ensure_ascii=False))
         elif a.etapa == "trazado":
             r = presion.ejecutar(a.drawing, a.pid, accion="trazado", simular=not a.confirmar, nombre=a.nombre, capa=a.capa, lista_partes=a.lista_partes or None,
-                                 superficie=a.superficie, cobertura_m=a.cobertura, familia=a.familia, diametro_nominal=a.diametro, ruta=json.load(open(a.ruta, encoding="utf-8")), timeout=600)
-            report["result"] = r; record(); print(json.dumps(r["result"], ensure_ascii=False)[:3000])
+                                 superficie=a.superficie, cobertura_m=a.cobertura, cobertura_min_m=a.cobertura_min, paso_m=a.paso, familia=a.familia, diametro_nominal=a.diametro,
+                                 ruta=json.load(open(a.ruta, encoding="utf-8")) if a.ruta else None, polilinea=a.polilinea or None, timeout=600)
+            report["result"] = r; record(); v = r["result"]
+            print("committed", r["committed"], json.dumps({k: v[k] for k in v if k not in ("tuberias", "accesorios", "inspeccion")}, ensure_ascii=False))
+            resumen_inspeccion(v["inspeccion"])
+            for t in v["tuberias"]: print("  tub", t["nombre"], [round(c, 3) for c in t["inicio"]], [round(c, 3) for c in t["fin"]], "L3D", round(t["longitud_3d_m"], 3), "cob civil", t["cobertura_min_m"], t["cobertura_max_m"], "piezas", t["inicio_pieza"], t["fin_pieza"])
+            for f in v["accesorios"]: print("  acc", f["nombre"], f["tipo"], f["descripcion"], [round(c, 3) for c in f["posicion"]], [(c["boca"], c["abierta"], c["conectada_a"]) for c in f["conexiones"]])
+        elif a.etapa == "leer":
+            r = presion.ejecutar(a.drawing, a.pid, accion="leer", red=a.red or None)
+            report["result"] = r; record()
+            for n in r["result"]["redes"]:
+                print(json.dumps({k: n[k] for k in n if not k.startswith("detalle")}, ensure_ascii=False))
+                for t in n["detalle_tuberias"] or []: print("  tub", json.dumps(t, ensure_ascii=False)[:600])
+                for f in n["detalle_piezas"] or []: print("  pieza", json.dumps(f, ensure_ascii=False)[:500])
+        elif a.etapa == "inspeccionar":
+            r = presion.ejecutar(a.drawing, a.pid, accion="inspeccionar", red=a.red, superficie=a.superficie or None, cobertura_min_m=a.cobertura_min, paso_m=a.paso)
+            report["result"] = r; record(); resumen_inspeccion(r["result"])
         report["ok"] = True; record()
     except presion.PresionError as exc:
         report["error"] = str(exc); report["receipt"] = exc.receipt; record(); print("ERROR", str(exc)[:3000]); sys.exit(1)

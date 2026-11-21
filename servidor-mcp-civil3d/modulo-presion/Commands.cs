@@ -17,7 +17,7 @@ namespace Cdcrd.Presion;
 
 public class Commands : IExtensionApplication
 {
-    internal const string Version = "0.1.0";
+    internal const string Version = "0.2.0";
     internal const string Module = "cdcrd-presion";
     internal const string BaseName = "Cdcrd.Presion.V1";
     internal const string BaseCommand = "CDCRDPRESIONV1";
@@ -50,7 +50,7 @@ public class Commands : IExtensionApplication
         }
         catch (Exception ex)
         {
-            try { App.DocumentManager.MdiActiveDocument?.Editor.WriteMessage("\nDrenaje: alias no registrado: " + ex.Message + "\n"); } catch (Exception) { }
+            try { App.DocumentManager.MdiActiveDocument?.Editor.WriteMessage("\nPresion:alias no registrado: " + ex.Message + "\n"); } catch (Exception) { }
         }
     }
     public void Terminate() { }
@@ -61,7 +61,7 @@ public class Commands : IExtensionApplication
         try { ExecuteCommand(); }
         catch (Exception ex)
         {
-            try { App.DocumentManager.MdiActiveDocument?.Editor.WriteMessage("\nDrenaje: sin recibo final; no reintentar. " + ex.Message + "\n"); }
+            try { App.DocumentManager.MdiActiveDocument?.Editor.WriteMessage("\nPresion:sin recibo final; no reintentar. " + ex.Message + "\n"); }
             catch (Exception) { /* CAD may already be closing; no further calls. */ }
         }
     }
@@ -101,6 +101,6 @@ public class Commands : IExtensionApplication
         string temp = receipt + ".tmp";
         File.WriteAllText(temp, JsonSerializer.Serialize(payload), new UTF8Encoding(false));
         File.Move(temp, receipt, false);
-        ed.WriteMessage("\nDrenaje: " + (error ?? (committed ? "aplicado" : "leido/simulado")) + "\n");
+        ed.WriteMessage("\nPresion:" + (error ?? (committed ? "aplicado" : "leido/simulado")) + "\n");
     }
 }

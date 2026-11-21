@@ -1,3 +1,14 @@
+<!-- DOCUMENTOS-CUENCAS-0526 -->
+## Actualización 0.5.26: documentos de la sesión, cuencas y cierre de redes a presión
+
+Diez herramientas nuevas en tres módulos opcionales, cargados en la instancia existente y con el mismo transporte de solicitud y recibo inmutables:
+
+- **Documentos** (`Cdcrd.Documentos.V1` 0.1.0, `instalar-documentos.ps1`): `listar_documentos`, `abrir_documento` (con solo lectura), `activar_documento` y `cerrar_documento` sin guardar, sin diálogos, por `DocumentCollection` en contexto de aplicación. Se niega a cerrar un dibujo con cambios sin guardar salvo `descartar_cambios=True`. [docs/DOCUMENTOS-0526.md](docs/DOCUMENTOS-0526.md).
+- **Cuencas** (`Cdcrd.Cuencas.V1` 0.2.0, `instalar-cuencas.ps1`): `listar_cuencas`, `crear_cuenca` desde contorno y superficie y `actualizar_cuenca` (coeficiente de escorrentía, tc, trayectoria de flujo, estructura de descarga). Ningún coeficiente se supone. [docs/CUENCAS-0526.md](docs/CUENCAS-0526.md).
+- **Presión** (`Cdcrd.Presion.V1` 0.2.0): `leer_redes_presion`, `trazar_red_presion` (desde vértices o polilínea, con cobertura respecto a una superficie) e `inspeccionar_red_presion` (conectividad y cobertura por muestras). [docs/PRESION-0525.md](docs/PRESION-0525.md).
+
+Documentos y cuencas guardan solicitudes y recibos en `%LOCALAPPDATA%\CdcrdCivil3dBridge\`, no junto al dibujo. El servidor comprueba la versión del módulo cargado antes de enviar datos y se niega con una anterior: un módulo ya cargado no se reemplaza hasta reiniciar Civil 3D. El núcleo del puente no cambia; `estado_puente` sigue informando la versión del núcleo y cada recibo la del módulo.
+
 <!-- PRESION-0525 -->
 ## Actualización 0.5.25: redes de tuberías a presión
 

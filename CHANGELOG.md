@@ -11,6 +11,7 @@ GitHub con estas mismas notas. Lo que aún no tiene versión va bajo "Sin public
 
 ### Civil 3D y AutoCAD
 
+- Documentos de la sesión (listar, abrir, activar y cerrar sin guardar, sin diálogos), cuencas de aportación (crear desde contorno y superficie, parámetros hidrológicos, estructura de descarga) y cierre de redes a presión: lectura de cualquier red, trazado desde polilínea o vértices con cobertura e inspección de conectividad y cobertura (0.5.26, módulos opcionales `Cdcrd.Documentos.V1`, `Cdcrd.Cuencas.V1` y `Cdcrd.Presion.V1` 0.2.0).
 - Redes de tuberías a presión: catálogo de listas de presión, cotas sobre superficie, red explícita `PressurePipeNetwork` (tuberías, codos, tes, cruces, válvulas) con bocas alineadas y conectadas, tramo con codos automáticos y contrato verificable `CDCRD_PRESION_V1` (0.5.25, módulo opcional `Cdcrd.Presion.V1`).
 - Drenaje de corredores: cunetas `Flowline_Gutter`, imbornales por método racional y red de tuberías de gravedad con catálogo métrico y contrato verificable (0.5.24, módulo opcional `Cdcrd.Drenaje.V1`).
 - Espesores de pavimento en carriles, superficie Datum y cubicación de corredores (0.5.24),

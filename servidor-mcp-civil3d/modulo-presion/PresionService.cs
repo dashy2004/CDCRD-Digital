@@ -148,7 +148,7 @@ internal static class PresionService
         if (Convert.ToInt32(App.GetSystemVariable("INSUNITS")) != 6 || CivilApp.ActiveDocument.Settings.DrawingSettings.UnitZoneSettings.DrawingUnits.ToString() != "Meters")
             throw new ArgumentException("Se requieren unidades Civil y AutoCAD en metros");
         string action = Text(p, "accion");
-        if (!new[] { "catalogo", "cotas", "crear", "verificar", "trazado" }.Contains(action)) throw new ArgumentException("Accion desconocida");
+        if (!new[] { "catalogo", "cotas", "crear", "verificar", "trazado", "leer", "inspeccionar" }.Contains(action)) throw new ArgumentException("Accion desconocida");
         bool write = action == "crear" || action == "trazado", sim = write && (p["simular"]?.GetValue<bool>() ?? true);
         if (write && (Environment.GetEnvironmentVariable("CDCRD_C3D_SOLO_LECTURA") == "1" || Environment.GetEnvironmentVariable("CDCRD_C3D_PERMITIR_COMANDOS") != "1"))
             throw new InvalidOperationException("Escritura/comandos deshabilitados");
@@ -162,6 +162,8 @@ internal static class PresionService
                 "cotas" => Elevations(tr, civil, p),
                 "crear" => Create(tr, doc.Database, civil, PresionContract.ParseCreate(p), sim),
                 "trazado" => PipeRun(tr, doc.Database, civil, p, sim),
+                "leer" => ReadNetworks(tr, civil, PresionContract.Text(p, "red", false)),
+                "inspeccionar" => InspectNetwork(tr, civil, p),
                 _ => VerifyNetwork(tr, doc.Database, civil, Text(p, "red"))
             };
             if (write && !sim) { tr.Commit(); committed = true; } else tr.Abort();
@@ -328,7 +330,235 @@ internal static class PresionService
         return new { red = sim ? null : H(nid), nombre = o.Name, simulacion = sim, capa = o.Layer, lista_partes = pl.Name, superficie = surf?.Name, nodos = o.Nodes.Length, piezas = partIds.Count, tuberias = o.Pipes.Length, verificacion = verification };
     }
 
-    // ---------- trazado (experimental): one pipe run from a path, bends added by Civil, depth of cover from a surface ----------
+    // ---------- lectura de cualquier red (con o sin contrato) ----------
+    private const int MaxDetail = 2000;
+    private const long MaxSamples = 200000;
+    private static double? Safe(Func<double> f)
+    {
+        // Some part properties throw when the network has no reference surface or alignment: report them as absent.
+        try { double v = f(); return double.IsFinite(v) ? v : null; } catch (Exception) { return null; }
+    }
+    private static string SafeText(Func<string> f) { try { return f(); } catch (Exception) { return null; } }
+    // The placed part carries the catalog texts (ID_MATERIAL = "ductile iron"); the part size only has their numeric ids.
+    private static string DataText(PressurePart x, string name)
+    {
+        try
+        {
+            foreach (var prop in x.PartData)
+                if (prop.HasValue && string.Equals(prop.Name, name, StringComparison.OrdinalIgnoreCase) && prop.Value is string s && s.Length > 0) return s;
+        }
+        catch (Exception) { /* part without catalog data: reported as absent */ }
+        return null;
+    }
+    private static PressurePipe[] PipesOf(Transaction tr, PressurePipeNetwork n) => n.GetPipeIds().Cast<ObjectId>().Select(id => (PressurePipe)tr.GetObject(id, OpenMode.ForRead)).ToArray();
+    private static PressurePart[] PartsOf(Transaction tr, PressurePipeNetwork n) =>
+        n.GetFittingIds().Cast<ObjectId>().Concat(n.GetAppurtenanceIds().Cast<ObjectId>()).Select(id => (PressurePart)tr.GetObject(id, OpenMode.ForRead)).ToArray();
+    private static object PipeRow(PressurePipe x) => new
+    {
+        handle = H(x.ObjectId), nombre = x.Name, descripcion = SafeText(() => x.GetPartSize().Description), familia = SafeText(() => x.PartFamilyName),
+        material = DataText(x, "ID_MATERIAL"), norma = DataText(x, "COMPATIBLE_STANDARD"),
+        diametro_nominal_catalogo = SafeText(() => Prop(x.GetPartSize(), PressurePartContextType.DiameterNominal)?.ToString()),
+        nominal_m = Safe(() => x.NominalDiameter), interior_m = Safe(() => x.InnerDiameter), exterior_m = Safe(() => x.OuterDiameter), espesor_m = Safe(() => x.WallThickness),
+        inicio = Pt(x.StartPoint), fin = Pt(x.EndPoint), longitud_2d_m = Safe(() => x.Length2DCenterToCenter), longitud_3d_m = Safe(() => x.Length3DCenterToCenter),
+        pendiente = Safe(() => x.Slope), curva = x.IsCurve, cobertura_min_m = Safe(() => x.MinimumCover), cobertura_max_m = Safe(() => x.MaximumCover),
+        inicio_pieza = H(x.StartPartId), fin_pieza = H(x.EndPartId), capa = x.Layer
+    };
+    private static object PartRow(PressurePart f)
+    {
+        var conns = new List<object>();
+        for (int i = 0; i < f.ConnectionCount; i++)
+        {
+            using var c = f.GetConnectionAt(i);
+            conns.Add(new { boca = i, abierta = c.Open, conectada_a = H(c.ConnectedId), posicion = Pt(c.Position) });
+        }
+        return new
+        {
+            handle = H(f.ObjectId), nombre = f.Name, dominio = f.PartDomain.ToString(), tipo = f.PartType.ToString(), descripcion = SafeText(() => f.GetPartSize().Description),
+            familia = SafeText(() => f.PartFamilyName), material = DataText(f, "ID_MATERIAL"), norma = DataText(f, "COMPATIBLE_STANDARD"),
+            diametro_nominal_catalogo = SafeText(() => Prop(f.GetPartSize(), PressurePartContextType.DiameterNominal)?.ToString()),
+            posicion = Pt(f.Position), bocas = f.ConnectionCount, conexiones = conns, capa = f.Layer
+        };
+    }
+    private static object ReadNetworks(Transaction tr, CivilDocument civil, string key)
+    {
+        var nets = (key == null ? Networks(civil) : new[] { ResolveNetwork(tr, civil, key).ObjectId }).Select(id => (PressurePipeNetwork)tr.GetObject(id, OpenMode.ForRead)).ToArray();
+        return new
+        {
+            nota = "Longitudes, cotas y diametros en metros (unidad del dibujo); diametro_nominal_catalogo y material vienen del catalogo de la lista de partes. Sin 'red' solo se devuelve el resumen de cada red.",
+            redes = nets.Select(n => DescribeNetwork(tr, n, key != null)).ToArray()
+        };
+    }
+    private static object DescribeNetwork(Transaction tr, PressurePipeNetwork n, bool detail)
+    {
+        var pipes = PipesOf(tr, n); var parts = PartsOf(tr, n);
+        if (detail && pipes.Length + parts.Length > MaxDetail) throw new ArgumentException("La red tiene " + (pipes.Length + parts.Length) + " partes; el detalle admite hasta " + MaxDetail);
+        var sizes = pipes.GroupBy(x => SafeText(() => x.GetPartSize().Description) ?? "?").Select(g => new
+        {
+            descripcion = g.Key, nominal_m = Safe(() => g.First().NominalDiameter), tuberias = g.Count(), longitud_2d_m = g.Sum(x => Safe(() => x.Length2DCenterToCenter) ?? 0)
+        }).ToArray();
+        return new
+        {
+            handle = H(n.ObjectId), nombre = n.Name, lista_partes = SafeText(() => n.PartsListName), superficie = SafeText(() => n.ReferenceSurfaceName), alineamiento = SafeText(() => n.ReferenceAlignmentName),
+            tuberias = pipes.Length, accesorios = parts.Count(x => x is PressureFitting), aparatos = parts.Count(x => x is PressureAppurtenance), tramos = n.PipeRuns.Count,
+            longitud_2d_m = pipes.Sum(x => Safe(() => x.Length2DCenterToCenter) ?? 0), longitud_3d_m = pipes.Sum(x => Safe(() => x.Length3DCenterToCenter) ?? 0),
+            cota_min = Safe(() => n.MinimumElevation), cota_max = Safe(() => n.MaximumElevation), por_diametro = sizes,
+            contrato = !n.ExtensionDictionary.IsNull && ((DBDictionary)tr.GetObject(n.ExtensionDictionary, OpenMode.ForRead)).Contains(RecordName),
+            detalle_tuberias = detail ? pipes.Select(PipeRow).ToArray() : null, detalle_piezas = detail ? parts.Select(PartRow).ToArray() : null
+        };
+    }
+
+    // ---------- inspeccion: conectividad y cobertura por muestras, sin depender del contrato ----------
+    private static object InspectNetwork(Transaction tr, CivilDocument civil, JsonObject p)
+    {
+        var net = ResolveNetwork(tr, civil, Text(p, "red"));
+        string key = PresionContract.Text(p, "superficie", false);
+        var surf = key != null ? ResolveSurface(tr, civil, key) : net.ReferenceSurfaceId.IsNull ? null : tr.GetObject(net.ReferenceSurfaceId, OpenMode.ForRead) as TinSurface;
+        return Inspect(tr, net, surf, PresionContract.Optional(p, "cobertura_min_m", 0, 20), PresionContract.Range(p, "paso_m", 5, .1, 100)).Report;
+    }
+
+    internal sealed record Inspection(object Report, bool Connected, bool CoverOk);
+
+    // Connectivity: pipes and parts are graph nodes joined by the part at each pipe end and by each closed port.
+    // Cover: samples every paso_m along the chord of each pipe; cover = surface - (centreline + outer diameter / 2).
+    private static Inspection Inspect(Transaction tr, PressurePipeNetwork net, TinSurface surf, double? minCover, double step)
+    {
+        if (minCover.HasValue && surf == null) throw new ArgumentException("cobertura_min_m requiere una superficie (la de referencia de la red o 'superficie')");
+        var pipes = PipesOf(tr, net); var parts = PartsOf(tr, net);
+        var parent = pipes.Select(x => x.ObjectId).Concat(parts.Select(x => x.ObjectId)).ToDictionary(id => id, id => id);
+        ObjectId Find(ObjectId a) { while (parent[a] != a) { parent[a] = parent[parent[a]]; a = parent[a]; } return a; }
+        void Union(ObjectId a, ObjectId b) { if (!parent.ContainsKey(a) || !parent.ContainsKey(b)) return; var ra = Find(a); var rb = Find(b); if (ra != rb) parent[ra] = rb; }
+        var openEnds = new List<object>(); var openPorts = new List<object>(); var warnings = new List<string>();
+        foreach (var x in pipes)
+            foreach (var (id, end, pt) in new[] { (x.StartPartId, "inicio", x.StartPoint), (x.EndPartId, "fin", x.EndPoint) })
+            {
+                if (id.IsNull) openEnds.Add(new { tuberia = H(x.ObjectId), nombre = x.Name, extremo = end, xyz = Pt(pt) });
+                else if (!parent.ContainsKey(id)) warnings.Add("tuberia " + x.Name + " conectada en " + end + " a un objeto fuera de la red: " + H(id));
+                else Union(x.ObjectId, id);
+            }
+        foreach (var f in parts)
+            for (int i = 0; i < f.ConnectionCount; i++)
+            {
+                using var c = f.GetConnectionAt(i);
+                if (c.Open || c.ConnectedId.IsNull) openPorts.Add(new { pieza = H(f.ObjectId), nombre = f.Name, tipo = f.PartType.ToString(), boca = i, xyz = Pt(c.Position) });
+                else Union(f.ObjectId, c.ConnectedId);
+            }
+        int components = parent.Keys.Select(Find).Distinct().Count();
+        bool connected = pipes.Length > 0 && components == 1;
+        var bends = BendMismatches(pipes, parts);
+        object coverReport = null; bool coverOk = true;
+        if (surf != null)
+        {
+            var rows = new List<object>(); var below = new List<object>(); double gmin = double.PositiveInfinity, gmax = double.NegativeInfinity; int samples = 0, noElevation = 0, belowCount = 0, noDiameter = 0;
+            // Every sample is a surface query on the UI thread: refuse a request that would freeze the session.
+            long planned = pipes.Sum(x => (long)Math.Max(1, Math.Ceiling(Math.Sqrt(Math.Pow(x.EndPoint.X - x.StartPoint.X, 2) + Math.Pow(x.EndPoint.Y - x.StartPoint.Y, 2)) / step)) + 1);
+            if (planned > MaxSamples) throw new ArgumentException("La inspeccion pide " + planned + " muestras y admite hasta " + MaxSamples + "; aumente paso_m");
+            foreach (var x in pipes)
+            {
+                if (x.IsCurve) warnings.Add("tuberia " + x.Name + " es curva: la cobertura se muestrea sobre la cuerda");
+                Point3d a = x.StartPoint, b = x.EndPoint; double? outer = Safe(() => x.OuterDiameter);
+                if (outer == null) { noDiameter++; warnings.Add("tuberia " + x.Name + " sin diametro exterior legible: su cobertura se mide al eje y no acredita el minimo"); }
+                double radius = (outer ?? 0) / 2;
+                double len = Math.Sqrt((b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y));
+                int n = Math.Max(1, (int)Math.Ceiling(len / step)); double pmin = double.PositiveInfinity, pmax = double.NegativeInfinity;
+                for (int i = 0; i <= n; i++)
+                {
+                    double t = (double)i / n, px = a.X + (b.X - a.X) * t, py = a.Y + (b.Y - a.Y) * t, pz = a.Z + (b.Z - a.Z) * t;
+                    samples++;
+                    double zs; try { zs = surf.FindElevationAtXY(px, py); } catch (Exception) { noElevation++; continue; }
+                    double cover = zs - (pz + radius); pmin = Math.Min(pmin, cover); pmax = Math.Max(pmax, cover);
+                    if (minCover.HasValue && cover < minCover.Value - 1e-6)
+                    {
+                        belowCount++;
+                        if (below.Count < 60) below.Add(new { tuberia = H(x.ObjectId), nombre = x.Name, xyz = new[] { px, py, pz }, cota_superficie = zs, cobertura_m = cover });
+                    }
+                }
+                gmin = Math.Min(gmin, pmin); gmax = Math.Max(gmax, pmax);
+                rows.Add(new { tuberia = H(x.ObjectId), nombre = x.Name, muestras = n + 1, cobertura_min_m = double.IsFinite(pmin) ? pmin : (double?)null, cobertura_max_m = double.IsFinite(pmax) ? pmax : (double?)null,
+                    cobertura_min_civil_m = Safe(() => x.MinimumCover), cobertura_max_civil_m = Safe(() => x.MaximumCover) });
+            }
+            // A sample outside the surface, or a pipe without a readable outer diameter, cannot prove the required cover.
+            coverOk = !minCover.HasValue || (belowCount == 0 && noElevation == 0 && noDiameter == 0);
+            coverReport = new
+            {
+                superficie = surf.Name, criterio = "cota de superficie - (eje de tuberia + diametro exterior / 2)", paso_m = step, muestras = samples, sin_cota = noElevation,
+                min_m = double.IsFinite(gmin) ? gmin : (double?)null, max_m = double.IsFinite(gmax) ? gmax : (double?)null, minima_exigida_m = minCover, bajo_minimo = belowCount,
+                cumple = minCover.HasValue ? coverOk : (bool?)null, muestras_bajo_minimo = below, por_tuberia = rows
+            };
+        }
+        var report = new
+        {
+            red = H(net.ObjectId), nombre = net.Name, tuberias = pipes.Length, piezas = parts.Length, componentes_conectados = components, conectada = connected,
+            extremos_abiertos = openEnds, bocas_abiertas = openPorts, codos_fuera_de_angulo = bends, cobertura = coverReport, advertencias = warnings
+        };
+        return new Inspection(report, connected, coverOk);
+    }
+
+    private const double BendToleranceDegrees = 2.0;
+
+    // Civil places the nearest catalog elbow at a bend; when the route deflects by another angle the joint is forced.
+    // Reported, never failed: whether the joint deflection is admissible is a design decision.
+    private static List<object> BendMismatches(PressurePipe[] pipes, PressurePart[] parts)
+    {
+        var rows = new List<object>();
+        foreach (var f in parts.Where(x => x.PartType.ToString() == "Elbow"))
+        {
+            double? catalog = Num(Prop(f.GetPartSize(), PressurePartContextType.FittingAngle));
+            // Direction of each connected pipe leaving the elbow.
+            var away = pipes.Where(x => x.StartPartId == f.ObjectId || x.EndPartId == f.ObjectId)
+                .Select(x => x.StartPartId == f.ObjectId ? x.StartPoint.GetVectorTo(x.EndPoint) : x.EndPoint.GetVectorTo(x.StartPoint)).Where(v => v.Length > 1e-9).ToArray();
+            if (catalog == null || away.Length != 2) continue;
+            double deflection = 180.0 - away[0].GetAngleTo(away[1]) * 180.0 / Math.PI;
+            if (Math.Abs(deflection - catalog.Value) > BendToleranceDegrees)
+                rows.Add(new { pieza = H(f.ObjectId), nombre = f.Name, descripcion = SafeText(() => f.GetPartSize().Description), posicion = Pt(f.Position),
+                    angulo_catalogo_grados = catalog, deflexion_real_grados = deflection, diferencia_grados = deflection - catalog.Value });
+        }
+        return rows;
+    }
+
+    // ---------- trazado: one pipe run from vertices or an existing polyline, bends added by Civil, depth of cover from a surface ----------
+    private static (Point2d[] Points, string Source) Route(Transaction tr, Database db, JsonObject p)
+    {
+        string handle = PresionContract.Text(p, "polilinea", false);
+        if ((handle == null) == (p["ruta"] == null)) throw new ArgumentException("Indique 'ruta' (vertices) o 'polilinea' (handle), una sola");
+        var pts = new List<Point2d>(); string source;
+        if (handle == null)
+        {
+            if (p["ruta"] is not JsonArray ra) throw new ArgumentException("ruta: lista de puntos [x, y]");
+            foreach (var n in ra)
+            {
+                if (n is not JsonArray a || a.Count < 2) throw new ArgumentException("Cada punto de la ruta es [x, y]");
+                pts.Add(new Point2d(PresionContract.Number(a[0], "x"), PresionContract.Number(a[1], "y")));
+            }
+            source = "vertices";
+        }
+        else
+        {
+            var ent = tr.GetObject(FromHandle(db, handle), OpenMode.ForRead);
+            if (ent is Polyline lw)
+            {
+                if (lw.Closed || !lw.Normal.IsEqualTo(Vector3d.ZAxis, new Tolerance(1e-9, 1e-9))) throw new ArgumentException("La polilinea debe ser abierta y estar en el plano XY universal");
+                for (int i = 0; i < lw.NumberOfVertices; i++)
+                {
+                    if (i < lw.NumberOfVertices - 1 && Math.Abs(lw.GetBulgeAt(i)) > 1e-9) throw new ArgumentException("La polilinea tiene arcos; el trazado admite solo tramos rectos");
+                    pts.Add(lw.GetPoint2dAt(i));
+                }
+                source = "polilinea 2D " + handle;
+            }
+            else if (ent is Polyline3d p3)
+            {
+                if (p3.Closed || p3.PolyType != Poly3dType.SimplePoly) throw new ArgumentException("La polilinea 3D debe ser abierta y sin ajuste de curva");
+                foreach (ObjectId vid in p3) { var v = (PolylineVertex3d)tr.GetObject(vid, OpenMode.ForRead); pts.Add(new Point2d(v.Position.X, v.Position.Y)); }
+                source = "polilinea 3D " + handle + " (solo planta; el perfil lo fija la cobertura)";
+            }
+            else throw new ArgumentException("El handle no es una polilinea ligera ni una polilinea 3D: " + ent.GetType().Name);
+        }
+        var clean = new List<Point2d>();
+        foreach (var q in pts) if (clean.Count == 0 || clean[^1].GetDistanceTo(q) > 1e-6) clean.Add(q);
+        if (clean.Count < 2 || clean.Count > 500) throw new ArgumentException("La ruta requiere de 2 a 500 vertices distintos");
+        if (clean.Any(q => Math.Abs(q.X) > 1e8 || Math.Abs(q.Y) > 1e8)) throw new ArgumentException("Ruta fuera de rango");
+        return (clean.ToArray(), source);
+    }
+
     private static object PipeRun(Transaction tr, Database db, CivilDocument civil, JsonObject p, bool sim)
     {
         string name = Text(p, "nombre"); string layerName = PresionContract.Text(p, "capa", false) ?? "CDCRD-PRESION";
@@ -336,21 +566,36 @@ internal static class PresionService
             throw new ArgumentException("Ya existe la red de presion " + name);
         var pl = ResolvePartsList(tr, db, PresionContract.Text(p, "lista_partes", false));
         var surf = ResolveSurface(tr, civil, Text(p, "superficie"));
-        double cover = PresionContract.Range(p, "cobertura_m", 1.0, 0, 10);
+        double cover = PresionContract.Range(p, "cobertura_m", double.NaN, 0, 10);
+        double? minCover = PresionContract.Optional(p, "cobertura_min_m", 0, 10);
+        if (minCover > cover) throw new ArgumentException("cobertura_min_m no puede superar cobertura_m");
+        double step = PresionContract.Range(p, "paso_m", 5, .1, 100);
         var size = ResolvePart(pl, "Pipe", "PressurePipe", Text(p, "familia"), PresionContract.Range(p, "diametro_nominal", double.NaN, .01, 10000), null, null, "tuberia");
-        if (p["ruta"] is not JsonArray ra || ra.Count < 2 || ra.Count > 500) throw new ArgumentException("ruta: lista de 2..500 puntos [x, y]");
+        var route = Route(tr, db, p);
         var layer = LayerId(tr, db, layerName);
+        // The run keeps its own path: an existing polyline is read, never consumed.
         var poly = new Polyline(); poly.SetDatabaseDefaults(); poly.LayerId = layer;
-        for (int i = 0; i < ra.Count; i++) { var a = ra[i] as JsonArray ?? throw new ArgumentException("Cada punto es [x, y]"); poly.AddVertexAt(i, new Point2d(PresionContract.Number(a[0], "x"), PresionContract.Number(a[1], "y")), 0, 0, 0); }
+        for (int i = 0; i < route.Points.Length; i++) poly.AddVertexAt(i, route.Points[i], 0, 0, 0);
         var ms = (BlockTableRecord)tr.GetObject(SymbolUtilityServices.GetBlockModelSpaceId(db), OpenMode.ForWrite);
         var polyId = ms.AppendEntity(poly); tr.AddNewlyCreatedDBObject(poly, true);
         var nid = PressurePipeNetwork.Create(db, name);
         var net = (PressurePipeNetwork)tr.GetObject(nid, OpenMode.ForWrite);
         net.PartsListId = pl.ObjectId; net.LayerId = layer; net.ReferenceSurfaceId = surf.ObjectId;
+        QaCheckpoint?.Invoke("run-network-created");
         net.PipeRuns.createPipeRun(PresionContract.Text(p, "tramo", false) ?? "T1", poly, size, cover, p["codos_automaticos"]?.GetValue<bool>() ?? true);
-        var pipes = net.GetPipeIds().Cast<ObjectId>().Select(id => (PressurePipe)tr.GetObject(id, OpenMode.ForRead)).Select(x => new { handle = H(x.ObjectId), nombre = x.Name, inicio = Pt(x.StartPoint), fin = Pt(x.EndPoint), nominal_m = x.NominalDiameter, cobertura_min_m = x.MinimumCover, cobertura_max_m = x.MaximumCover, inicio_conectado = !x.StartPartId.IsNull, fin_conectado = !x.EndPartId.IsNull }).ToArray();
-        var fittings = net.GetFittingIds().Cast<ObjectId>().Select(id => (PressureFitting)tr.GetObject(id, OpenMode.ForRead)).Select(f => new { handle = H(f.ObjectId), nombre = f.Name, tipo = f.PartType.ToString(), posicion = Pt(f.Position), bocas = f.ConnectionCount }).ToArray();
-        return new { red = sim ? null : H(nid), nombre = name, simulacion = sim, ruta_handle = H(polyId), tramos = net.PipeRuns.Count, tuberias = pipes, accesorios = fittings };
+        var pipeIds = net.GetPipeIds().Cast<ObjectId>().ToArray();
+        if (pipeIds.Length == 0) throw new InvalidOperationException("Civil no creo ninguna tuberia para el tramo");
+        foreach (ObjectId id in pipeIds.Concat(net.GetFittingIds().Cast<ObjectId>())) ((CivEntity)tr.GetObject(id, OpenMode.ForWrite)).LayerId = layer;
+        QaCheckpoint?.Invoke("run-created");
+        var inspection = Inspect(tr, net, surf, minCover, step);
+        bool ok = inspection.Connected && inspection.CoverOk;
+        if (!sim && !ok) throw new InvalidOperationException("El trazado no cumple conectividad o cobertura; no se guardo nada: " + JsonSerializer.Serialize(inspection.Report));
+        return new
+        {
+            red = sim ? null : H(nid), nombre = name, simulacion = sim, cumple = ok, origen_ruta = route.Source, vertices = route.Points.Length, ruta_handle = sim ? null : H(polyId), capa = layerName,
+            lista_partes = pl.Name, superficie = surf.Name, pieza = size.Description, cobertura_diseno_m = cover, tramos = net.PipeRuns.Count,
+            tuberias = PipesOf(tr, net).Select(PipeRow).ToArray(), accesorios = PartsOf(tr, net).Select(PartRow).ToArray(), inspeccion = inspection.Report
+        };
     }
 
     // ---------- verificar ----------
