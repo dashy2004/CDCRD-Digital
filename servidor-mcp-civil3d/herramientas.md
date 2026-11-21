@@ -177,6 +177,55 @@ Requiere m�dulo `Cdcrd.Corredores.V4`0.1.3 en la instancia existente. Cat�logo t
 
 Requiere `Cdcrd.Targets.V2` 0.1.1. Un target por slot, metros, sin ecuaciones, objetos locales y carriles de corona. Simulaci�n por defecto y confirmaci�n requerida. Tras timeout consultar recibo; no reenviar. [Contrato, reproducci�n y evidencia](docs/TARGETS-0521.md).
 
+## Documentos de la sesión (0.5.26)
+
+- `listar_documentos(pid)`: dibujos abiertos en la sesión de Civil 3D: ruta, si tiene archivo, solo lectura, activo, modificado (cambios sin guardar, por `DBMOD`) y comando en curso; dice cuál está activo.
+- `abrir_documento(pid, ruta, solo_lectura=False, confirmar=False)`: abre un `.dwg` en la instancia existente, sin diálogos, y lo deja activo. Si ya está abierto en el mismo modo solo lo activa; en modo distinto es error. Sin `solo_lectura` rechaza un archivo en uso por otro proceso en vez de dejar que aparezca un diálogo.
+- `activar_documento(pid, ruta, confirmar=False)`: activa un dibujo ya abierto (ruta completa, o nombre si no tiene archivo).
+- `cerrar_documento(pid, ruta, descartar_cambios=False, activar_despues="", confirmar=False)`: cierra **sin guardar**. Se niega si el dibujo tiene cambios sin guardar salvo `descartar_cambios=True`, si es el único documento abierto o si tiene un comando en curso. Si era el activo, antes activa `activar_despues` u otro documento.
+
+```python
+abrir_documento(pid=PID_VERIFICADO, ruta=r"C:\QA\copia.dwg", solo_lectura=True, confirmar=True)
+cerrar_documento(pid=PID_VERIFICADO, ruta=r"C:\QA\copia.dwg", activar_despues=r"C:\QA\otro.dwg", confirmar=True)
+```
+
+Requiere `Cdcrd.Documentos.V1` 0.1.0 (comando de sesión: `DocumentCollection` en contexto de aplicación). Cada respuesta trae la lista de documentos y la ruta activa. Nunca guarda. Necesita al menos un dibujo abierto, porque el puente despacha comandos a través de un documento. [Contrato, límites y evidencia](docs/DOCUMENTOS-0526.md).
+
+## Cuencas de aportación (0.5.26)
+
+- `listar_cuencas(dibujo, pid, cuenca="")`: cuencas (`Catchment`) con grupo, área (m² y ha), perímetro, superficie, coeficiente de escorrentía y método, `tc_min` y método de tc, longitud de flujo, punto de descarga y punto más distante, red y estructura de descarga y segmentos de la trayectoria de flujo.
+- `crear_cuenca(dibujo, pid, nombre, grupo, superficie, contorno="", polilinea="", coeficiente_escorrentia=-1, tc_min=-1, metodo_tc="", trayectoria="", estructura="", numero_curva=0, estilo="", simular=True, confirmar=False)`: cuenca desde un contorno (`contorno` `[[x, y], ...]` o `polilinea`, handle de una polilínea cerrada sin arcos) y una superficie. El grupo se crea si no existe. Verifica que el área de la cuenca sea la del contorno y relee cada parámetro pedido.
+- `actualizar_cuenca(dibujo, pid, cuenca, coeficiente_escorrentia=-1, tc_min=-1, metodo_tc="", trayectoria="", estructura="", numero_curva=0, superficie="", simular=True, confirmar=False)`: escribe solo lo indicado y devuelve la lectura de antes y de después; `estructura` (handle, nombre o `red/estructura`) asocia la cuenca a una estructura de red de gravedad.
+
+```python
+crear_cuenca(dibujo=r"C:\QA\copia.dwg", pid=PID_VERIFICADO, nombre="C-01", grupo="PLUVIAL", superficie="TERRENO",
+    polilinea="71B3", coeficiente_escorrentia=0.85, trayectoria="[[190,110],[120,70],[60,30],[10,5]]",
+    simular=True, confirmar=True)
+actualizar_cuenca(dibujo=r"C:\QA\copia.dwg", pid=PID_VERIFICADO, cuenca="C-01", tc_min=12, estructura="RED PLUVIAL/Structure - (3)",
+    simular=False, confirmar=True)
+```
+
+Requiere `Cdcrd.Cuencas.V1` 0.2.0. Ningún coeficiente se supone: lo que no se indica queda con el valor que asignó Civil y la respuesta lo lista en `parametros_de_civil`. `tc_min` va en minutos (la API guarda horas, sea cual sea la unidad de tiempo del dibujo). Área, perímetro y longitud de flujo son resultados de la geometría. Simulación por defecto y confirmación requerida. [Contrato, límites y evidencia](docs/CUENCAS-0526.md).
+
+## Redes a presión (0.5.25)
+
+- `listar_catalogo_presion(dibujo, pid, lista_partes="")`: listas de partes de presión del dibujo con tuberías, accesorios y aparatos (descripción, tipo, GUID y propiedades de catálogo en sus unidades: el imperial guarda pulgadas) y redes de presión existentes.
+- `cotas_superficie(dibujo, pid, superficie, puntos)`: cota de una superficie TIN en puntos `[[x, y], ...]` (`null` fuera de ella).
+- `crear_red_presion(dibujo, pid, nombre, nodos, tuberias, lista_partes="", superficie="", capa="CDCRD-PRESION", conectar=True, rotar=True, simular=True, confirmar=False)`: nodos `libre|codo|te|cruz|tapon|reduccion|union|valvula|hidrante|bomba` con XYZ del eje y tuberías rectas entre nodos; piezas por tipo, fragmento de descripción, diámetro nominal del catálogo y ángulo; gira cada pieza para alinear sus bocas con las tuberías, conecta, verifica y guarda el contrato `CDCRD_PRESION_V1`.
+- `verificar_red_presion(dibujo, pid, red)`: relee el contrato y compara posiciones, piezas, conexiones y capa.
+- `leer_redes_presion(dibujo, pid, red="")`: sin `red`, resumen de cada red de presión del dibujo (tuberías, accesorios, aparatos, tramos, longitud 2D/3D, cotas mínima y máxima, longitud por diámetro), tenga o no contrato; con `red`, además el detalle de cada tubería (pieza, material y norma del catálogo, diámetros nominal/interior/exterior, extremos XYZ, longitudes, pendiente, cobertura mínima y máxima según Civil, pieza en cada extremo) y de cada accesorio o aparato (tipo, posición, bocas y a qué están conectadas).
+- `trazar_red_presion(dibujo, pid, nombre, superficie, familia, diametro_nominal, cobertura_m, ruta="", polilinea="", cobertura_min_m=-1, lista_partes="", capa="CDCRD-PRESION", codos_automaticos=True, paso_m=5, simular=True, confirmar=False)`: red nueva con un tramo que sigue una ruta en planta (`ruta` `[[x, y], ...]` o `polilinea`, handle de una polilínea ligera o 3D abierta y sin arcos, que no se consume) a `cobertura_m` bajo una superficie TIN, con la tubería de la lista de partes del dibujo y los codos que añade Civil. Después inspecciona; al confirmar, si la red no queda en una sola componente o no alcanza `cobertura_min_m`, no guarda nada.
+- `inspeccionar_red_presion(dibujo, pid, red, superficie="", cobertura_min_m=-1, paso_m=5)`: comprobación de una red existente sin depender de contrato: componentes conectados, extremos de tubería sin pieza, bocas abiertas, codos cuyo ángulo de catálogo difiere de la deflexión real y cobertura por muestras cada `paso_m` (cota de la superficie menos eje más medio diámetro exterior).
+
+```python
+trazar_red_presion(dibujo=r"C:\QA\copia.dwg", pid=PID_VERIFICADO, nombre="AGUA POTABLE", superficie="TERRENO",
+    familia="pipe-150 mm", diametro_nominal=150, cobertura_m=1.2, cobertura_min_m=1.0, polilinea="71B5",
+    lista_partes="Water", simular=True, confirmar=True)   # simular primero; repetir con simular=False
+inspeccionar_red_presion(dibujo=r"C:\QA\copia.dwg", pid=PID_VERIFICADO, red="AGUA POTABLE", cobertura_min_m=1.0)
+```
+
+Requiere `Cdcrd.Presion.V1` 0.2.0 (el servidor comprueba la versión cargada y se niega con una anterior). Sin hidráulica ni profundidades: las cotas del eje las decide el llamador (por ejemplo, rasante de `cotas_superficie` menos cobertura y medio diámetro). Simulación por defecto y confirmación requerida. [Contrato, reproducción y evidencia](docs/PRESION-0525.md).
+
 ## Drenaje de corredores (0.5.24)
 
 - `listar_catalogo_drenaje(dibujo, pid, lista_partes="")`: listas de partes, familias y tamaños en metros (diámetro interior, dimensiones, rasante-fondo) y redes existentes.
