@@ -472,6 +472,19 @@ rechazaba como «no entero»; ahora lo acepta.
    con sanitario y agua fría: sin fallos en dos pruebas). Sin probar con aparatos de varios
    conectores del mismo sistema.
 
+   **Caso de prueba pendiente** (sobre una copia sintética, nunca sobre un modelo de trabajo):
+
+   - Aparato: una familia con dos conectores de tubería del mismo sistema, por ejemplo un
+     lavamanos doble con dos bocas de agua fría o un colector con dos entradas.
+   - Operación: `revit_mep_conectar` con ese aparato y un ramal, primero en ensayo y luego con
+     `confirmar=True`, en un lote donde otro aparato falle para que haya una subtransacción
+     revertida entre los dos conectores.
+   - Se espera: una fila por conector, cada una con su propio `conector` y estado; los dos
+     conectores quedan unidos al ramal al releerlos con `revit_mep_conectores`, y ninguna fila
+     informa un conector que ya no existe o que pertenece a la subtransacción revertida.
+   - Hasta que pase, los aparatos con varios conectores del mismo sistema se conectan de uno en
+     uno y se relee cada resultado.
+
 Condición de uso que sí importa: el tipo de tubería debe tener en sus preferencias de
 enrutamiento la te, el codo, la transición y, si se pide, el takeoff. Si falta, el conector
 queda `fallido` con el mensaje de Revit y no se crea nada.
