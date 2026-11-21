@@ -22,6 +22,9 @@ namespace Cdcrd.Civil3dBridge
             switch (method)
             {
 #if CIVIL3D
+                case "scene.snapshot": return Cdcrd.BeamngExport.ExportCommands.ReadSnapshot(
+                    Txt(p,"expected_document"), Txt(p,"terrain_handle"), Txt(p,"road_handle"),
+                    Txt(p,"alignment_handle"), p["width_m"]?.GetValue<double>() ?? 7.2, Txt(p,"scene_layer_prefix"));
                 case "civil.ensamblaje_enlaces": return PlatformOperation(() => CreateLinkAssembly(p, method));
                 case "civil.corredor": return PlatformOperation(() => CreateCorridor(p, method));
                 case "civil.secciones_corredor": return PlatformOperation(() => CreateCorridorSections(p, method));
@@ -43,6 +46,8 @@ namespace Cdcrd.Civil3dBridge
                 case "estilos.purgar": return EstilosPurgar(p, method);
 #endif
                 case "entity.create": return CrearEntidadesNativo(p, method);
+                case "blocks.create": return CrearBloqueNativo(p, method);
+                case "doc.new": return CrearDocumento(p, method);
                 case "entity.draworder": return OrdenDibujo(p, method);
                 case "objects.erase": return BorrarObjetos(p, method);
                 case "vista.exportar": return VistaExportar(p, method);
@@ -255,6 +260,20 @@ namespace Cdcrd.Civil3dBridge
                                      PuntoDe(e["p3"], "p3"), PuntoDe(e["p4"], "p4"));
                 case "punto":
                     return new DBPoint(PuntoDe(e["punto"], "punto"));
+                case "esfera":
+                {
+                    var center = PuntoDe(e["centro"], "centro");
+                    double radius = Num(e, "radio") ?? 1.0;
+                    if (!double.IsFinite(radius) || radius <= 0 ||
+                        !double.IsFinite(center.X) || !double.IsFinite(center.Y) || !double.IsFinite(center.Z))
+                        throw new ArgumentException("esfera requiere centro finito y radio positivo finito");
+                    var sphere = new Solid3d();
+                    sphere.SetDatabaseDefaults();
+                    sphere.RecordHistory = false;
+                    sphere.CreateSphere(radius);
+                    sphere.TransformBy(Matrix3d.Displacement(center - Point3d.Origin));
+                    return sphere;
+                }
                 case "cilindro":
                 {
                     // base = centro de la cara inferior; eje vertical (Z)

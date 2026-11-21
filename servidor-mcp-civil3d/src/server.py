@@ -533,6 +533,8 @@ def listar(area: str, limite: int = 0) -> str:
 
 
 creacion.registrar(mcp, _llamar, _ok)
+import escena
+escena.registrar(mcp, _llamar)
 sitio.registrar(mcp, _llamar, _ok)
 import corredores
 corredores.registrar(mcp, _llamar, _ok)

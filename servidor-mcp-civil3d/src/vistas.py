@@ -31,6 +31,15 @@ def parsear_direccion(crudo):
     return str(crudo).strip()
 
 
+def parsear_rotacion(value):
+    if value is None or value == '':
+        return None
+    text = str(value)
+    if text not in ('0', '90', '180', '270'):
+        raise ValueError('rotacion debe ser 0, 90, 180 o 270 grados')
+    return text
+
+
 def registrar(mcp, llamar, ok):
     """Registra las herramientas de vistas/exportacion en el servidor MCP."""
 
@@ -57,7 +66,7 @@ def registrar(mcp, llamar, ok):
     def exportar_vista(ruta: str, dispositivo: str = 'DWG To PDF.pc3', papel: str = '',
                        ventana: str = '', handles: str = '', nombre_vista: str = '',
                        layout: str = '', estilo_plot: str = '', sombreado: str = '',
-                       margen: str = '', confirmar: bool = False) -> str:
+                       margen: str = '', confirmar: bool = False, rotacion: str = '') -> str:
         """Exporta el modelo a PDF/PNG/DWF por PlotEngine, SINCRONO y sin dialogos.
 
         Area a plotear, en orden de prioridad: layout (una presentacion, a 1:1),
@@ -67,6 +76,8 @@ def registrar(mcp, llamar, ok):
         completa. papel acepta el nombre canonico, el visible o un pedazo
         ('A3', 'ISO full bleed A3'); vacio = el del dispositivo por defecto.
         sombreado: Wireframe|HiddenLine|Rendered|AsDisplayed (vistas 3D).
+        rotacion: 0|90|180|270 grados; vacio conserva la del layout. Para PNG
+        horizontal use 0 con papel horizontal. No abre dialogos ni cambia el layout.
         La respuesta vuelve cuando el archivo existe, con su tamano en bytes.
         """
         try:
@@ -74,7 +85,8 @@ def registrar(mcp, llamar, ok):
                                               nombre_vista=nombre_vista, layout=layout,
                                               estilo_plot=estilo_plot,
                                               sombreado=sombreado,
-                                              margen=parsear_num(margen, 'margen'))),
+                                              margen=parsear_num(margen, 'margen'),
+                                              rotacion=parsear_rotacion(rotacion))),
                               ventana, handles)
         except ValueError as exc:
             return ok({'error': str(exc)})

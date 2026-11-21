@@ -26,6 +26,11 @@ Tres herramientas nuevas (cat谩logo 88 sobre `master`; 93 con tipolog铆as 0.5.23
 ## Actualizaci贸n 0.5.23: clasificaci贸n de bordes y tipolog铆a por tramo
 
 Cuatro herramientas nuevas (cat谩logo 90): clasificar cada borde de calzada como libre o uni贸n sondeando contra el pavimento vecino, dividir la regi贸n en tramos con variantes de la paleta m茅trica (bordillo-cuneta, uni贸n abierta, talud), reconstruir en comando propio y verificar el contrato. M贸dulo opcional `Cdcrd.Tipologias.V1` 0.1.0, `instalar-tipologias.ps1`. Probado en una copia privada: 13 corredores clasificados, 4 aplicaciones simuladas, 2 fallos inyectados sin residuos, 2 aplicadas con guardado y reapertura, y autocarga del bundle verificada en un arranque normal. Incluye la causa reproducida del aviso `Add param returned null` del visor de eventos. [Contrato, resultados y l铆mites](docs/TIPOLOGIAS-0523.md).
+<!-- ESCENAS-0520 -->
+## Actualizaci贸n 0.5.19-0.5.20: herramientas de escena del n煤cleo
+
+Herramientas de escena del puente **0.5.19**: bloques 3D, documentos desde DWT
+y giro explicito al exportar por API. [Contrato y prueba nativa validada](docs/ESCENAS-0519.md).
 
 <!-- QTO-0522 -->
 ## Actualizaci贸n 0.5.22: cubicaciones/QTO
@@ -34,7 +39,7 @@ Cuatro herramientas nuevas (cat谩logo85): volumen TIN y materiales por secciones
 
 # Servidor MCP de Civil 3D 2027
 
-Entrega **0.5.21**: targets de ancho y cota por API en un corredor nuevo, con origen de solo lectura. Prueba en otra copia: 8 asignaciones, 74 muestras de carril, 8 secciones, guardado/reapertura y 12 archivos protegidos. M骴ulo opcional **0.1.1**, puente vivo **0.5.17** y cat醠ogo MCP de **81 herramientas**. [Capturas, contrato y resultados](docs/TARGETS-0521.md) - [Baselines 0.5.20](docs/MULTIBASELINE-0520.md) - [Espirales 0.5.19](docs/ESPIRALES-0519.md) - [Peraltes 0.5.18](docs/PERALTES-0518.md).
+Entrega **0.5.21**: targets de ancho y cota por API en un corredor nuevo, con origen de solo lectura. Prueba en otra copia: 8 asignaciones, 74 muestras de carril, 8 secciones, guardado/reapertura y 12 archivos protegidos. M锟絛ulo opcional **0.1.1**, puente vivo **0.5.17** y cat锟絣ogo MCP de **81 herramientas**. [Capturas, contrato y resultados](docs/TARGETS-0521.md) - [Baselines 0.5.20](docs/MULTIBASELINE-0520.md) - [Espirales 0.5.19](docs/ESPIRALES-0519.md) - [Peraltes 0.5.18](docs/PERALTES-0518.md).
 
 Conecta un cliente MCP con el **dibujo abierto** en Civil 3D 2027. Dos piezas:
 
@@ -80,7 +85,7 @@ suponerlo a partir de la documentacion.
 py src\prueba_humo.py              # prueba de humo completa
 .\instalar-peraltes.ps1           # m贸dulo opcional; no abre ni reinicia Civil
 .\instalar-espirales.ps1          # clotoides SCS; tampoco inicia otra instancia
-.\instalar-corredores.ps1         # m鷏tiples baselines/regiones; misma instancia
+.\instalar-corredores.ps1         # m锟絣tiples baselines/regiones; misma instancia
 ```
 
 El bundle queda en `%APPDATA%\Autodesk\ApplicationPlugins\CDCRD-Civil3D.bundle`, que

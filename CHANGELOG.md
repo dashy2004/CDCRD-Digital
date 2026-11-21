@@ -11,6 +11,7 @@ GitHub con estas mismas notas. Lo que aún no tiene versión va bajo "Sin public
 
 ### Civil 3D y AutoCAD
 
+- Núcleo del puente 0.5.20 (AutoCAD 0.5.19): herramientas de escena `crear_bloque_3d`, `crear_dibujo` desde DWT, esfera en `crear_entidad`, giro explícito en `exportar_vista` y lectura de escena `scene.snapshot`. Ya estaba instalado desde una rama; con esto `master` vuelve a compilar la versión instalada.
 - Documentos de la sesión (listar, abrir, activar y cerrar sin guardar, sin diálogos), cuencas de aportación (crear desde contorno y superficie, parámetros hidrológicos, estructura de descarga) y cierre de redes a presión: lectura de cualquier red, trazado desde polilínea o vértices con cobertura e inspección de conectividad y cobertura (0.5.26, módulos opcionales `Cdcrd.Documentos.V1`, `Cdcrd.Cuencas.V1` y `Cdcrd.Presion.V1` 0.2.0).
 - Redes de tuberías a presión: catálogo de listas de presión, cotas sobre superficie, red explícita `PressurePipeNetwork` (tuberías, codos, tes, cruces, válvulas) con bocas alineadas y conectadas, tramo con codos automáticos y contrato verificable `CDCRD_PRESION_V1` (0.5.25, módulo opcional `Cdcrd.Presion.V1`).
 - Drenaje de corredores: cunetas `Flowline_Gutter`, imbornales por método racional y red de tuberías de gravedad con catálogo métrico y contrato verificable (0.5.24, módulo opcional `Cdcrd.Drenaje.V1`).
