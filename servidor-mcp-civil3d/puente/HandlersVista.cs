@@ -102,6 +102,7 @@ namespace Cdcrd.Civil3dBridge
             string estiloPlot = Txt(p, "estilo_plot");
             string nombreVista = Txt(p, "nombre_vista");
             string sombreado = Txt(p, "sombreado");
+            int? rotation = PlotRotationContract.Parse(Txt(p, "rotacion"));
             double margen = Num(p, "margen") ?? 0.03;
 
             if (PlotFactory.ProcessPlotState != ProcessPlotState.NotPlotting)
@@ -146,6 +147,10 @@ namespace Cdcrd.Civil3dBridge
                         ps.CopyFrom(layout);
                         psv.SetPlotConfigurationName(ps, dispositivo, null);
                         psv.RefreshLists(ps);
+                        if (rotation.HasValue)
+                            psv.SetPlotRotation(ps, rotation.Value switch
+                            { 0 => PlotRotation.Degrees000, 90 => PlotRotation.Degrees090,
+                              180 => PlotRotation.Degrees180, _ => PlotRotation.Degrees270 });
 
                         // papel: se acepta el nombre canonico, el visible o un pedazo
                         var canonicos = psv.GetCanonicalMediaNameList(ps);
@@ -246,7 +251,8 @@ namespace Cdcrd.Civil3dBridge
             return new Dictionary<string, object>
             {
                 { "ruta", fi.FullName }, { "bytes", fi.Length },
-                { "dispositivo", dispositivo }, { "papel", papelUsado ?? "(por defecto)" }
+                { "dispositivo", dispositivo }, { "papel", papelUsado ?? "(por defecto)" },
+                { "rotacion_solicitada", rotation }
             };
         }
 

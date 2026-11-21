@@ -90,7 +90,7 @@ class Registro(unittest.TestCase):
             'crear_perfil_desde_superficie', 'crear_perfil_constante', 'crear_vista_perfil',
             'agregar_hatch_vista_perfil', 'listar_estilos', 'crear_estilo',
             'editar_estilo_display', 'purgar_estilos', 'crear_entidad',
-            'borrar_objeto', 'orden_dibujo']))
+            'borrar_objeto', 'orden_dibujo', 'crear_bloque_3d', 'crear_dibujo']))
 
     def test_escritura_exige_confirmar(self):
         registradas = {}
