@@ -457,6 +457,12 @@ La vista 3D exportada se revisó en imagen. Lo que la prueba corrigió o confirm
 7. Lotes grandes (cientos de elementos): costo de una `SubTransaction` con `Regenerate` por
    conector.
 
+Hallazgos de revisión abiertos, que solo se pueden cerrar con esas pruebas: los conectores del
+aparato se leen una vez por aparato y se reutilizan tras las subtransacciones de sus otros
+conectores (en la prueba, con dos conectores de sistemas distintos, no falló); y no hay
+`Regenerate` entre fijar el diámetro del tramo nuevo y comparar su radio con el del conector
+para elegir entre `ConnectTo` y transición.
+
 ## Contrato de diseño
 
 Derivado de errores reales, no de estilo:
