@@ -439,29 +439,63 @@ La vista 3D exportada se revisó en imagen. Lo que la prueba corrigió o confirm
   definido en IronPython 3.4 funcionan sobre un documento en segundo plano.
 - `Connector.ConnectTo` basta para unir al aparato cuando dirección y diámetro coinciden.
 
+### Segunda prueba en vivo (2026-11-21, copia sintética ampliada)
+
+Misma sesión y mismo método (documento en segundo plano), sobre una copia del modelo con tres
+ramales más, 41 rociadores y 12 luminarias añadidos para la prueba.
+
+| Caso | Resultado |
+|---|---|
+| Lote de 32 rociadores en una llamada (`lote=40`), te | ensayo 1,9 s y confirmación 2,3 s; 32 de 32 conectados, 0 sueltos; lectura propia: ningún rociador con conector libre y solo los dos extremos del ramal abiertos |
+| `union="takeoff"` con un tipo de tubería **sin** takeoff en sus preferencias de enrutamiento | 4 de 4 `fallido` con el mensaje de Revit («No routing preference for takeoff set for this PipeType»); nada creado |
+| `union="takeoff"` con un tipo que sí lo tiene (accesorio de la biblioteca del producto) | 4 de 4 conectados; cada takeoff refiere al ramal pedido y el rociador queda en el sistema del ramal |
+| Conector realmente suelto (se desconectó el aparato tras la unión, dentro de la subtransacción) | con `revertir_sueltos=True`: `suelto_revertido`, dos filas en `sueltos` (aparato y tramo) y ninguna tubería nueva de ese aparato; con `False`: estado `suelto` y los demás conectados |
+| `diametro_mm=25` con conector de 15 mm | **falló** como estaba escrito: Revit rechaza `NewTransitionFitting` contra el conector de un aparato («The owner should be (flex) duct or pipe»). Corregido: tramo corto del diámetro del conector y transición entre dos tuberías. Tras el cambio, 2 de 2 conectados con tubos de 15, 25 y 25 mm |
+| Rociador a la cota del ramal (codo junto al aparato) | conectado con `NewElbowFitting` |
+| Herramientas MCP reales (`revit_mep_conectores`, `revit_mep_conectar`, `revit_mep_circuitos`) por un cliente MCP contra `src/server.py`, con `documento` apuntando al modelo en segundo plano | auditoría, ensayo y confirmación de 2 rociadores, error 400 con motivo para una pendiente fuera de rango, y 12 luminarias en 3 circuitos de 400 VA; comprobado con lectura propia |
+
+La corrida MCP usó los endpoints `/mep/*` de este `startup.py` registrados en la sesión abierta,
+sin reiniciar Revit. La carga normal al arrancar Revit sigue sin observarse.
+
+Otro hallazgo de la prueba: `ElementId.Value` es `System.Int64` en IronPython y el paquete lo
+rechazaba como «no entero»; ahora lo acepta.
+
+### Estado de los hallazgos de revisión
+
+1. *La verificación del takeoff no probaba la unión con el ramal.* **Cerrado**: además de
+   `IsConnected`, se exige que un conector del takeoff refiera al ramal pedido; si no, el
+   conector se informa como suelto. No bloquea.
+2. *No hay `Regenerate` entre fijar el diámetro y comparar radios.* **Cerrado**: la decisión
+   ya no lee el radio del tramo nuevo; compara el diámetro pedido con el del conector.
+3. *Los conectores del aparato se leen una vez y se reutilizan tras las subtransacciones.*
+   **Abierto, no bloquea** el uso con aparatos de un conector por sistema (rociadores, inodoros
+   con sanitario y agua fría: sin fallos en dos pruebas). Sin probar con aparatos de varios
+   conectores del mismo sistema.
+
+   **Caso de prueba pendiente** (sobre una copia sintética, nunca sobre un modelo de trabajo):
+
+   - Aparato: una familia con dos conectores de tubería del mismo sistema, por ejemplo un
+     lavamanos doble con dos bocas de agua fría o un colector con dos entradas.
+   - Operación: `revit_mep_conectar` con ese aparato y un ramal, primero en ensayo y luego con
+     `confirmar=True`, en un lote donde otro aparato falle para que haya una subtransacción
+     revertida entre los dos conectores.
+   - Se espera: una fila por conector, cada una con su propio `conector` y estado; los dos
+     conectores quedan unidos al ramal al releerlos con `revit_mep_conectores`, y ninguna fila
+     informa un conector que ya no existe o que pertenece a la subtransacción revertida.
+   - Hasta que pase, los aparatos con varios conectores del mismo sistema se conectan de uno en
+     uno y se relee cada resultado.
+
+Condición de uso que sí importa: el tipo de tubería debe tener en sus preferencias de
+enrutamiento la te, el codo, la transición y, si se pide, el takeoff. Si falta, el conector
+queda `fallido` con el mensaje de Revit y no se crea nada.
+
 ### Sigue sin probar en vivo
 
-1. Los endpoints de Routes (`/mep/*`) y las herramientas MCP que los usan: exigen reiniciar
-   Revit y corren en el hilo del servidor (ver «Routes deprecado»). Lo probado es el paquete por
-   el canal de código suelto.
-2. `union="takeoff"` (`NewTakeoffFitting`); su verificación no comprueba todavía que el
-   accesorio quede unido al ramal, solo que sus conectores estén conectados.
-3. `NewElbowFitting` y `NewTransitionFitting` junto al aparato (conector no vertical o de otro
-   diámetro), tramos cortos y un conector que quede realmente suelto.
-4. Aparatos con varios conectores del **mismo** sistema, ramales con pendiente propia y tipos
-   de tubería sin te o sin reducción en sus preferencias de enrutamiento.
-5. Que el preprocesador de fallos reciba advertencias en el `RollBack` del ensayo: en la prueba
-   no hubo ninguna advertencia que observar.
-6. Luminarias de 277 V o de dos y tres polos, y la regla de compatibilidad tensión/polos frente
-   a la que aplica Revit en `SelectPanel`.
-7. Lotes grandes (cientos de elementos): costo de una `SubTransaction` con `Regenerate` por
-   conector.
-
-Hallazgos de revisión abiertos, que solo se pueden cerrar con esas pruebas: los conectores del
-aparato se leen una vez por aparato y se reutilizan tras las subtransacciones de sus otros
-conectores (en la prueba, con dos conectores de sistemas distintos, no falló); y no hay
-`Regenerate` entre fijar el diámetro del tramo nuevo y comparar su radio con el del conector
-para elegir entre `ConnectTo` y transición.
+1. La carga de los endpoints al arrancar Revit (lo probado es su registro en la sesión abierta).
+2. Aparatos con varios conectores del **mismo** sistema y ramales con pendiente propia.
+3. Que el preprocesador de fallos reciba advertencias en el `RollBack` del ensayo.
+4. Luminarias de 277 V o de dos y tres polos.
+5. Lotes de cientos de elementos (32 aparatos tardan unos 2 s).
 
 ## Contrato de diseño
 

@@ -444,7 +444,7 @@ internal static class PresionService
             }
         int components = parent.Keys.Select(Find).Distinct().Count();
         bool connected = pipes.Length > 0 && components == 1;
-        var bends = BendMismatches(pipes, parts);
+        var bends = BendMismatches(pipes, parts, warnings);
         object coverReport = null; bool coverOk = true;
         if (surf != null)
         {
@@ -497,7 +497,7 @@ internal static class PresionService
 
     // Civil places the nearest catalog elbow at a bend; when the route deflects by another angle the joint is forced.
     // Reported, never failed: whether the joint deflection is admissible is a design decision.
-    private static List<object> BendMismatches(PressurePipe[] pipes, PressurePart[] parts)
+    private static List<object> BendMismatches(PressurePipe[] pipes, PressurePart[] parts, List<string> warnings)
     {
         var rows = new List<object>();
         foreach (var f in parts.Where(x => x.PartType.ToString() == "Elbow"))
@@ -508,7 +508,10 @@ internal static class PresionService
                 .Select(x => x.StartPartId == f.ObjectId ? x.StartPoint.GetVectorTo(x.EndPoint) : x.EndPoint.GetVectorTo(x.StartPoint)).Where(v => v.Length > 1e-9).ToArray();
             if (catalog == null || away.Length != 2) continue;
             double deflection = 180.0 - away[0].GetAngleTo(away[1]) * 180.0 / Math.PI;
-            if (Math.Abs(deflection - catalog.Value) > BendToleranceDegrees)
+            if (Math.Abs(deflection - catalog.Value) <= BendToleranceDegrees) continue;
+            warnings.Add(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                "codo {0} de catalogo {1:0.##} grados colocado en un quiebre de {2:0.##} grados (diferencia {3:0.##}): la union queda forzada; cambie el trazado o use una pieza del angulo correcto",
+                f.Name, catalog.Value, deflection, deflection - catalog.Value));
                 rows.Add(new { pieza = H(f.ObjectId), nombre = f.Name, descripcion = SafeText(() => f.GetPartSize().Description), posicion = Pt(f.Position),
                     angulo_catalogo_grados = catalog, deflexion_real_grados = deflection, diferencia_grados = deflection - catalog.Value });
         }

@@ -57,6 +57,11 @@ class Conector(object):
         return bool(self.refs)
 
     diario = None  # pila de deshacer del documento en uso
+    ids_referidos = ()  # ElementId de los elementos a los que esta unido
+
+    @property
+    def AllRefs(self):
+        return [ns(Owner=ns(Id=valor)) for valor in self.ids_referidos]
 
     def ConnectTo(self, otro):
         self.refs.add(otro)
@@ -229,7 +234,10 @@ class Creacion(object):
         return self._accesorio("NewTransitionFitting", [c1, c2])
 
     def NewTakeoffFitting(self, conector, curva):
-        return self._accesorio("NewTakeoffFitting", [conector], extra=1)
+        accesorio = self._accesorio("NewTakeoffFitting", [conector], extra=1)
+        if accesorio is not None and "takeoff_sin_ramal" not in self.doc.suelta:
+            accesorio.conectores[-1].ids_referidos = [curva.Id]
+        return accesorio
 
 
 class Transaccion(object):

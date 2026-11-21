@@ -190,12 +190,26 @@ def _unir_aparato(DB, doc, conector, tubo, origen, direccion, siguiente):
     if not geometria.son_colineales(direccion, geometria.resta(siguiente, origen)):
         return "NewElbowFitting", _exigir(
             crear.NewElbowFitting(conector, extremo), "NewElbowFitting(aparato)")
-    if abs(float(conector.Radius) - float(extremo.Radius)) > 1e-6:
-        return "NewTransitionFitting", _exigir(
-            crear.NewTransitionFitting(conector, extremo),
-            "NewTransitionFitting(aparato)")
     conector.ConnectTo(extremo)
     return "ConnectTo", None
+
+
+def _tramo_de_transicion(DB, doc, cfg, conector, puntos, diametro):
+    """Diametro pedido distinto al del conector: Revit 2027 rechaza
+    NewTransitionFitting contra el conector de un aparato ("The owner
+    should be (flex) duct or pipe"), asi que el aparato recibe un tramo
+    corto de su propio diametro y la transicion va entre dos tuberias.
+    Devuelve (tramo_corto, punto_de_transicion)."""
+    largo = geometria.distancia(puntos[0], puntos[1])
+    corto = min(cfg["salida"], largo / 2.0)
+    if corto < cfg["minimo"]:
+        raise ErrorApi("el primer tramo (%.3f pies) no admite la transicion "
+                       "de diametro junto al aparato" % largo)
+    corte = geometria.suma(puntos[0], geometria.escala(
+        geometria.versor(geometria.resta(puntos[1], puntos[0])), corto))
+    tramo = _crear_tuberia(DB, doc, cfg, puntos[0], corte,
+                           2.0 * float(conector.Radius))
+    return tramo, corte
 
 
 def _codos(doc, tuberias, puntos):
@@ -277,6 +291,15 @@ def sueltos_de(DB, doc, implicados):
     return sueltos
 
 
+def _unido_a(accesorio, elemento_id):
+    """True si algun conector del accesorio refiere al elemento dado."""
+    for conector in base.conectores(accesorio):
+        for referido in conector.AllRefs:
+            if base.eid_valor(referido.Owner.Id) == elemento_id:
+                return True
+    return False
+
+
 def _implicados(aparato_id, indice, tuberias, accesorios, piezas, entronque):
     lista = [{"id": aparato_id, "rol": "aparato", "modo": "indice",
               "indice": indice}]
@@ -292,6 +315,32 @@ def _implicados(aparato_id, indice, tuberias, accesorios, piezas, entronque):
 
 # ------------------------------------------------------------- ejecucion
 
+def _tender(DB, doc, cfg, conector, puntos, direccion, diametro):
+    """Tuberias y accesorios del aparato hasta el entronque, sin unir al
+    ramal. Devuelve (metodo_de_union_al_aparato, tuberias, accesorios)."""
+    origen, corto = puntos[0], None
+    if abs(diametro - 2.0 * float(conector.Radius)) > 1e-6:
+        corto, corte = _tramo_de_transicion(DB, doc, cfg, conector, puntos,
+                                            diametro)
+        puntos = [corte] + list(puntos[1:])
+    tuberias = [_crear_tuberia(DB, doc, cfg, puntos[i], puntos[i + 1], diametro)
+                for i in range(len(puntos) - 1)]
+    metodo, primero = _unir_aparato(DB, doc, conector, corto or tuberias[0],
+                                    origen, direccion, puntos[1])
+    accesorios = [] if primero is None else [primero]
+    if corto is not None:
+        metodo = "NewTransitionFitting"
+        accesorios.append(_exigir(doc.Create.NewTransitionFitting(
+            _conector_en(corto, puntos[0], "tramo corto"),
+            _conector_en(tuberias[0], puntos[0], "primer tramo")),
+            "NewTransitionFitting"))
+        tuberias_todas = [corto] + tuberias
+    else:
+        tuberias_todas = tuberias
+    accesorios.extend(_codos(doc, tuberias, puntos))
+    return metodo, tuberias_todas, accesorios
+
+
 def _trazar_conector(DB, doc, cfg, ramales, aparato, conector):
     """Crea y une el trazado de un conector. Devuelve (mantener, ficha)."""
     if not base.es_redondo(conector):
@@ -303,13 +352,9 @@ def _trazar_conector(DB, doc, cfg, ramales, aparato, conector):
     ruta = geometria.calcular_ruta(
         origen, direccion, a, b, cfg["pendiente"], cfg["salida"],
         cfg["minimo"], cfg["margen"], base.TOL_PIES)
-    puntos, entronque = ruta["puntos"], ruta["entronque"]
-    tuberias = [_crear_tuberia(DB, doc, cfg, puntos[i], puntos[i + 1], diametro)
-                for i in range(len(puntos) - 1)]
-    metodo, primero = _unir_aparato(DB, doc, conector, tuberias[0], origen,
-                                    direccion, puntos[1])
-    accesorios = [] if primero is None else [primero]
-    accesorios.extend(_codos(doc, tuberias, puntos))
+    entronque = ruta["entronque"]
+    metodo, tuberias, accesorios = _tender(
+        DB, doc, cfg, conector, ruta["puntos"], direccion, diametro)
     union, nuevos = _unir_ramal(DB, doc, cfg, ramal, tuberias[-1], entronque)
     accesorios.append(union)
     doc.Regenerate()
@@ -327,6 +372,12 @@ def _trazar_conector(DB, doc, cfg, ramales, aparato, conector):
         base.eid_valor(aparato.Id), int(conector.Id), ficha["tuberias"],
         ficha["accesorios"], piezas, entronque)
     ficha["sueltos"] = sueltos_de(DB, doc, ficha["implicados"])
+    if cfg["union"] == "takeoff" and not _unido_a(union, ficha["ramal"]):
+        # IsConnected del accesorio no dice a que quedo unido: se exige
+        # que alguno de sus conectores refiera al ramal pedido.
+        ficha["sueltos"].append(_fila_suelto(
+            DB, base.eid_valor(union.Id), "accesorio", None,
+            "el takeoff no quedo unido al ramal %s" % ficha["ramal"]))
     mantener = not (ficha["sueltos"] and cfg["revertir_sueltos"])
     return mantener, ficha
 

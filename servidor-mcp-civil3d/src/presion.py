@@ -15,7 +15,7 @@ import transporte
 
 MODULE = "cdcrd-presion"
 COMMAND = "CDCRDPRESIONV1"
-VERSION_MINIMA = "0.2.0"
+VERSION_MINIMA = "0.2.1"
 ACCIONES = ("catalogo", "cotas", "crear", "verificar", "trazado", "leer", "inspeccionar")
 KINDS = {"libre": 0, "codo": 2, "te": 3, "cruz": 4, "tapon": 1, "reduccion": 2, "union": 2, "valvula": 2, "hidrante": 1, "bomba": 2}
 
