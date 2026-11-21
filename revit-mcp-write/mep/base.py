@@ -76,7 +76,13 @@ def lista_ids(DB, element_ids):
     return salida
 
 
+ENTEROS_NET = ("Int64", "Int32")
+
+
 def entero(valor, nombre, minimo=None, maximo=None):
+    # ElementId.Value llega como System.Int64 en IronPython, que no es 'int'.
+    if type(valor).__name__ in ENTEROS_NET:
+        valor = int(valor)
     if isinstance(valor, bool) or not isinstance(valor, int):
         raise ErrorEntrada("'%s' debe ser un entero" % nombre)
     if minimo is not None and valor < minimo:

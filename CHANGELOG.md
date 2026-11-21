@@ -20,6 +20,15 @@ GitHub con estas mismas notas. Lo que aún no tiene versión va bajo "Sin public
 - Clasificación de bordes de calzada y tipología por tramo con la paleta métrica (0.5.23),
   módulo opcional `Cdcrd.Tipologias.V1`, con la causa reproducida del aviso
   `Add param returned null` del visor de eventos.
+- Redes a presión 0.2.1: cada codo de catálogo colocado en un quiebre de otro ángulo sale
+  también como texto en `advertencias` de la inspección.
+
+### Revit
+
+- Trazado MEP: la transición de diámetro junto al aparato va entre dos tuberías (Revit la
+  rechaza contra el conector del aparato), el takeoff se verifica contra el ramal pedido y
+  los ids `Int64` de `ElementId.Value` se aceptan. Probado en vivo con un lote de 32
+  aparatos, takeoff, un conector suelto y las herramientas MCP `revit_mep_*`.
 
 ## [0.1.0] - 2026-10-31
 

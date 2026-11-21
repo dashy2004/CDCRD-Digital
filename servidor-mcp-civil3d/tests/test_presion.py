@@ -98,7 +98,7 @@ def test_request_carries_only_validated_fields(monkeypatch, tmp_path):
     def despachar(method, params):
         key = params["linea"].split("\n")[1]
         sent.clear(); sent.update(json.loads((tmp_path / f"cdcrd-presion-{key}.request.json").read_text(encoding="utf-8")))
-        (tmp_path / f"cdcrd-presion-{key}.result.json").write_text(json.dumps(dict(id=key, sha256=params["linea"].split("\n")[2], module="cdcrd-presion", version="0.2.0", pid=7, ok=True, committed=False, result={})), encoding="utf-8")
+        (tmp_path / f"cdcrd-presion-{key}.result.json").write_text(json.dumps(dict(id=key, sha256=params["linea"].split("\n")[2], module="cdcrd-presion", version="0.2.1", pid=7, ok=True, committed=False, result={})), encoding="utf-8")
     presion.transporte._versiones.clear()
     monkeypatch.setattr(presion.bridge, "llamar", llamar); monkeypatch.setattr(presion.bridge, "llamar_con_aprobacion", despachar)
     presion.ejecutar(str(tmp_path / "a.dwg"), 7, accion="inspeccionar", red="RED", cobertura_min_m=1.0, basura="x")
@@ -145,7 +145,7 @@ def test_an_older_loaded_module_is_refused_before_the_write_request(monkeypatch,
         (tmp_path / f"cdcrd-presion-{key}.result.json").write_text(json.dumps(dict(id=key, sha256=digest, module="cdcrd-presion", version="0.1.0", pid=7, ok=False, committed=False, error="Accion desconocida")), encoding="utf-8")
     presion.transporte._versiones.clear()
     monkeypatch.setattr(presion.bridge, "llamar", llamar); monkeypatch.setattr(presion.bridge, "llamar_con_aprobacion", despachar)
-    with pytest.raises(RuntimeError, match="requiere 0.2.0"):
+    with pytest.raises(RuntimeError, match="requiere 0.2.1"):
         presion.ejecutar(str(tmp_path / "a.dwg"), 7, accion="trazado", simular=False, **trazado(cobertura_min_m=1.0))
     assert [r["accion"] for r in sent] == ["version"]
     presion.transporte._versiones.clear()

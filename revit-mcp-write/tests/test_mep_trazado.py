@@ -138,7 +138,30 @@ def test_trazado_con_pendiente_bajante_y_te():
 def test_diametro_distinto_usa_transicion():
     doc, db = modelo_sanitario()
     r = correr(doc, db, diametro_mm=75)
-    assert r["conexiones"][0]["union_aparato"] == "NewTransitionFitting"
+    fila = r["conexiones"][0]
+    assert fila["union_aparato"] == "NewTransitionFitting"
+    # Revit rechaza la transicion contra el conector del aparato: va entre
+    # un tramo corto del diametro del conector y el primer tramo pedido.
+    assert doc.bitacora.count("NewTransitionFitting") == 1
+    assert len(fila["tuberias"]) >= 2 and fila["estado"] == "conectado"
+
+
+def test_entero_admite_el_int64_de_elementid_value():
+    from mep import base
+
+    class Int64(object):
+        def __int__(self):
+            return 1001
+
+    assert base.entero(Int64(), "aparatos") == 1001
+
+
+def test_takeoff_que_no_refiere_al_ramal_es_suelto():
+    doc, db = modelo_sanitario()
+    doc.suelta.add("takeoff_sin_ramal")
+    r = correr(doc, db, union="takeoff")
+    assert r["conexiones"][0]["estado"] == "suelto_revertido"
+    assert any("no quedo unido al ramal" in s["motivo"] for s in r["sueltos"])
 
 
 def test_conector_a_la_cota_del_ramal_usa_codo_en_el_aparato():

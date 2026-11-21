@@ -57,7 +57,7 @@ El trazado no guarda contrato `CDCRD_PRESION_V1`; se comprueba con la inspecció
 
 - *Conectividad.* Tuberías y piezas son nodos de un grafo unidos por la pieza de cada extremo de tubería y por cada boca cerrada. Devuelve `componentes_conectados` (1 = toda la red unida), `extremos_abiertos` (extremos de tubería sin pieza) y `bocas_abiertas`.
 - *Cobertura.* Cada `paso_m` sobre la cuerda de cada tubería: cota de la superficie menos (eje + diámetro exterior / 2). Usa la superficie indicada o la de referencia de la red. Con `cobertura_min_m` lista las muestras por debajo y `cumple`; una muestra fuera de la superficie no cumple, porque no prueba la cobertura. El mínimo por tubería coincide con `MinimumCover` de Civil (se devuelven los dos).
-- *Codos.* `codos_fuera_de_angulo`: codos cuyo ángulo de catálogo difiere más de 2° de la deflexión real entre sus dos tuberías. Civil coloca el codo de catálogo más cercano al quiebre de la ruta; la junta queda forzada. Se informa y no se rechaza: si esa deflexión es admisible es decisión de diseño.
+- *Codos.* `codos_fuera_de_angulo`: codos cuyo ángulo de catálogo difiere más de 2° de la deflexión real entre sus dos tuberías. Civil coloca el codo de catálogo más cercano al quiebre de la ruta; la junta queda forzada. Se informa y no se rechaza: si esa deflexión es admisible es decisión de diseño. Desde el módulo 0.2.1 cada caso sale además como texto en `advertencias` («codo … de catálogo 90 grados colocado en un quiebre de 71,5 grados…»), y el servidor exige esa versión.
 
 ### Resultados en un dibujo sintético
 

@@ -17,7 +17,7 @@ namespace Cdcrd.Presion;
 
 public class Commands : IExtensionApplication
 {
-    internal const string Version = "0.2.0";
+    internal const string Version = "0.2.1";
     internal const string Module = "cdcrd-presion";
     internal const string BaseName = "Cdcrd.Presion.V1";
     internal const string BaseCommand = "CDCRDPRESIONV1";
