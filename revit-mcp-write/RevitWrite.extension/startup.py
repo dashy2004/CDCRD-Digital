@@ -15,6 +15,7 @@ Contrato de diseno (derivado de ERRORES-IA E-027, E-041, E-043, E-044, E-045):
 """
 
 import os
+import sys
 import json
 import traceback
 import datetime
@@ -548,7 +549,76 @@ try:
             (cat_name, fam_filter, type_filter, level_filter, len(out)))
         return ok(count=len(out), elements=out)
 
-    log("RevitWrite registrado: 8 endpoints en /revitwrite/")
+    # -------------------------------------------------------------------- MEP
+    # Los endpoints solo adaptan request -> paquete 'mep' (Python puro, con
+    # la API inyectada). Toda la logica y sus pruebas viven en ese paquete.
+
+    def mep_carpetas():
+        """Carpetas donde puede estar el paquete 'mep', en orden: variable
+        de entorno, junto a la extension (repo), dentro de ella y en lib/."""
+        aqui = os.path.dirname(os.path.abspath(__file__))
+        real = os.path.dirname(os.path.realpath(__file__))
+        vistas = []
+        for carpeta in (os.environ.get("REVITWRITE_MEP_DIR"),
+                        os.path.dirname(aqui), os.path.dirname(real),
+                        aqui, os.path.join(aqui, "lib")):
+            if carpeta and carpeta not in vistas:
+                vistas.append(carpeta)
+        return vistas
+
+    def mep_modulo():
+        """Importa mep.ejecutar agregando su carpeta a sys.path. Falla con
+        la lista de carpetas revisadas si el paquete no aparece."""
+        carpetas = mep_carpetas()
+        for carpeta in carpetas:
+            if os.path.isfile(os.path.join(carpeta, "mep", "__init__.py")):
+                if carpeta not in sys.path:
+                    sys.path.insert(0, carpeta)
+                from mep import ejecutar
+                return ejecutar
+        raise ImportError("no se encontro el paquete 'mep' en: %s"
+                          % "; ".join(carpetas))
+
+    def mep_endpoint(operacion, doc, request):
+        try:
+            data = body(request)
+            ejecutar = mep_modulo()
+        except Exception as ex:
+            log("mep/%s sin ejecutar | %s" % (operacion, traceback.format_exc()))
+            return fail("mep/%s no pudo iniciar: %s" % (operacion, ex), status=500)
+        referencia = data.pop("documento", None)
+        try:
+            destino = ejecutar.resolver_documento(doc, referencia)
+        except ValueError as ex:
+            return fail(str(ex), status=404)
+        log("mep/%s: inicio en '%s' | claves=%s"
+            % (operacion, destino.Title, sorted(data.keys())))
+        res = ejecutar.correr(operacion, data, destino, DB)
+        if not res.get("ok"):
+            status = 400 if res.get("tipo_error") == "entrada" else 500
+            return fail(res.get("error"), status=status)
+        res["documento"] = destino.Title
+        log("mep/%s: fin | ensayo=%s confirmado=%s errores=%d"
+            % (operacion, res.get("ensayo"), res.get("confirmado"),
+               len(res.get("errores") or [])))
+        return res
+
+    @api.route("/mep/conectores", methods=["POST"])
+    def mep_conectores(doc, request):
+        """Auditoria de conectores MEP. Solo lectura."""
+        return mep_endpoint("conectores", doc, request)
+
+    @api.route("/mep/conectar", methods=["POST"])
+    def mep_conectar(doc, request):
+        """Conecta aparatos a un ramal. Ensayo salvo confirmar=true."""
+        return mep_endpoint("conectar", doc, request)
+
+    @api.route("/mep/circuitos", methods=["POST"])
+    def mep_circuitos(doc, request):
+        """Circuitos de iluminacion. Ensayo salvo confirmar=true."""
+        return mep_endpoint("circuitos", doc, request)
+
+    log("RevitWrite registrado: 11 endpoints en /revitwrite/")
 
 except Exception:
     log("FALLO FATAL EN CARGA DE startup.py\n%s" % traceback.format_exc())

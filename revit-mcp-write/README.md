@@ -117,6 +117,9 @@ datos contrastados"**. La tabla dice lo segundo.
 | 7 | `revit_delete` | POST | ⚠️ **sin corridas reales** |
 | 8 | `revit_copy` | POST | ✅ verificado |
 | 9 | `revit_set_param` | POST | ✅ verificado |
+| 10 | `revit_mep_conectores` | POST | ⚠️ paquete probado en un RVT sintético por código suelto; **endpoint sin corridas reales** |
+| 11 | `revit_mep_conectar` | POST | ⚠️ paquete probado en un RVT sintético por código suelto; **endpoint sin corridas reales** |
+| 12 | `revit_mep_circuitos` | POST | ⚠️ paquete probado en un RVT sintético por código suelto; **endpoint sin corridas reales** |
 
 **`revit_delete` no corrió nunca. No lo uses contra un modelo que te importe.**
 
@@ -201,6 +204,265 @@ Notas de uso:
 - **`revit_set_param` relee después de escribir** y devuelve `verified`. Una escritura que no
   lanza excepción no es una escritura que aplicó.
 
+## Trazado MEP con conexión verificada
+
+Paquete `mep/`: Python puro, con la API de Revit **inyectada** (`DB` y `doc` llegan como
+argumentos), válido a la vez para IronPython 3.4 dentro de pyRevit y para CPython en las
+pruebas. Los endpoints y las herramientas MCP solo adaptan la entrada; la lógica vive en el
+paquete.
+
+> **Alcance de la verificación.** Las firmas se leyeron del binario instalado
+> (`mep/API-REVIT-2027.md`), el comportamiento se probó con dobles de la API (`tests/`) y el
+> paquete se corrió en Revit 2027 sobre un RVT sintético por el canal de código suelto. Los
+> endpoints de Routes y varios caminos del trazado siguen sin probar en vivo: la evidencia y la
+> lista de lo pendiente están al final de la sección.
+
+| Herramienta MCP | Endpoint | Función del paquete | Escribe |
+|---|---|---|---|
+| `revit_mep_conectores` | `POST /mep/conectores` | `auditar_conectores(DB, doc, categorias, ids)` | No |
+| `revit_mep_conectar` | `POST /mep/conectar` | `conectar_a_ramal(DB, doc, opciones)` | Sí, con ensayo por defecto |
+| `revit_mep_circuitos` | `POST /mep/circuitos` | `crear_circuitos(DB, doc, opciones)` | Sí, con ensayo por defecto |
+
+Las tres aceptan `documento` (título o ruta de un documento **ya abierto**, también en segundo
+plano; por defecto el activo). No se abren archivos y no se opera sobre vínculos.
+
+### Contrato de las dos escrituras
+
+- **Ensayo por defecto.** Con `confirmar=false` todo se ejecuta dentro de la transacción, se
+  verifica **dentro de ella** (tras `doc.Regenerate()`) y se hace `RollBack`. Solo
+  `confirmar=true` explícito hace `Commit`. La respuesta trae `ensayo`, `confirmado` y `estado`
+  (el `TransactionStatus` que devolvió Revit). `confirmado` es `true` únicamente si Revit
+  devolvió `Committed`. Nada se lee después del `RollBack`: tras un ensayo los ids de la
+  respuesta ya no existen (`ids_efimeros: true`).
+- **Nunca se guarda el documento.** No hay `Save` ni `SaveAs` en ningún camino; una prueba lo
+  comprueba sobre el código fuente.
+- **Por lotes.** `lote` (25 por defecto, 1–200) y `desde`. **Una llamada = un lote = una
+  transacción con nombre** (`MEP - conectar a ramal`, `MEP - crear circuitos de iluminacion`).
+  La respuesta trae `siguiente` (valor de `desde` para continuar, o `null`).
+- **Validación antes de abrir transacción.** Ids inexistentes, tipo ambiguo o inexistente,
+  pendiente o límites fuera de rango, opción desconocida: error 400 con el motivo y el modelo
+  intacto. Un conjunto parcial de ids aborta la llamada.
+- **`None` es fallo.** Todo retorno `None` de la API (`Pipe.Create`, `BreakCurve`,
+  `New*Fitting`, `ElectricalSystem.Create`…) se convierte en fallo explícito de ese elemento.
+- **Un fallo no deja piezas a medias.** Cada conector (o cada circuito) va en su propia
+  `SubTransaction`; si algo falla o queda suelto, se revierte solo ese intento y el lote sigue.
+- **Sin diálogos.** Un `IFailuresPreprocessor` anota cada advertencia o error de la
+  transacción, borra las advertencias y, si hay errores, ordena revertir. Todo vuelve en
+  `advertencias`.
+- **Ninguna excepción se traga.** Las atrapadas quedan en `errores` (etapa, elemento, tipo,
+  mensaje).
+- **`ok: true` significa que la operación corrió**, no que todo quedó conectado. Mirar
+  `resumen`, `sueltos`, `sin_circuito`, `errores` y `confirmado`.
+
+### Unidades
+
+La API trabaja en pies; el paquete convierte solo con `UnitUtils` y `UnitTypeId`.
+
+| Campo | Sentido | Unidad |
+|---|---|---|
+| `pendiente` | entrada | m/m, adimensional (`0.02` = 2 %); `0` para redes a presión. De 0 a 0.5 |
+| `diametro_mm`, `salida_mm`, `tramo_minimo_mm`, `margen_extremo_mm` | entrada | mm |
+| `limite_va` | entrada | VA. **Obligatorio, sin valor por defecto** |
+| `diametro_mm` | salida | mm (solo tubería redonda) |
+| `radio_interno_pies` | salida | pies (valor interno sin convertir) |
+| `posicion_m`, `entronque_m` | salida | m, `[x, y, z]` en coordenadas internas del modelo |
+| `carga_va`, `carga_va_calculada` | salida | VA |
+| `tension_v`, `linea_linea_v`, `linea_tierra_v` | salida | V |
+
+### `revit_mep_conectores` — auditoría (solo lectura)
+
+Por elemento y en total: conectores, libres, dominio (`tuberia`, `electrico`, `ducto`),
+clasificación y nombre del sistema, y diámetro. `IsConnected` se consulta solo en conectores
+físicos (`End`, `Curve`, `Physical`); los lógicos se cuentan con `conectado: null`. El detalle
+se limita con `max_elementos`; los totales recorren siempre todo el alcance.
+
+Complementa a `revit_mep_conectividad` de `revit-mcp-tools` (hallazgos por disciplina): aquí
+el detalle es por conector y admite una lista de ids.
+
+```python
+revit_mep_conectores(categorias=["OST_PlumbingFixtures", "OST_Sprinklers"])
+# {"totales": {"elementos": 12, "conectores": 30, "libres": 12,
+#              "por_dominio": {"tuberia": {"total": 30, "libres": 12}},
+#              "por_diametro_mm": {"50.00": 12, "15.00": 18}, ...},
+#  "elementos": [{"id": 1001, "total": 3, "libres": 1, "conectores": [
+#      {"indice": 0, "dominio": "tuberia", "clasificacion": "Sanitary",
+#       "libre": true, "diametro_mm": 50.0, "posicion_m": [2.0, 1.0, 0.6], ...}]}]}
+```
+
+### `revit_mep_conectar` — aparatos o rociadores a un ramal
+
+Por cada conector físico de tubería del aparato que esté libre y cuya clasificación
+(`PipeSystemType`) coincida con la del tipo de sistema pedido:
+
+1. Elige el ramal candidato más cercano y calcula el **entronque**: el punto del eje del
+   ramal más próximo en planta. Si cae fuera del tramo o a menos de `margen_extremo_mm` de un
+   extremo, falla con motivo; no lo desplaza.
+2. Traza: tramo de salida recto (solo si el conector no es vertical), **bajante o montante**
+   hasta la cota que da la pendiente, y tramo horizontal hasta el entronque. La pendiente se
+   construye con la cota de los extremos: el tramo **sube al alejarse del ramal**.
+3. Une al aparato con `Connector.ConnectTo` (misma dirección y diámetro),
+   `NewTransitionFitting` (distinto diámetro) o `NewElbowFitting` (distinta dirección); une los
+   tramos con codos; une al ramal con **te** (`PlumbingUtils.BreakCurve` + `NewTeeFitting`) o
+   con `NewTakeoffFitting` si `union="takeoff"`.
+4. `doc.Regenerate()` y verificación de `IsConnected` en **cada** conector implicado: el del
+   aparato, los dos extremos de cada tramo nuevo, todos los de cada accesorio y los del ramal
+   en el entronque. Al final del lote se regenera y se verifica todo otra vez.
+
+`sueltos` lista cada conector sin conectar: `elemento`, `rol` (`aparato`, `tramo_nuevo`,
+`accesorio`, `ramal`), `conector` (índice), `posicion_m`, `motivo` y `revertido`. Con
+`revertir_sueltos=true` (por defecto) el trazado de un conector con algo suelto se deshace y
+no se confirma; con `false` se conserva para inspeccionarlo.
+
+La te parte el ramal: para el lote siguiente hay que pasar `ramales=<ramales_siguientes>`.
+
+```python
+# 1) ensayo: nada queda en el modelo
+r = revit_mep_conectar(categoria="OST_PlumbingFixtures", ramal=345678,
+                       tipo_tuberia="PVC sanitario", tipo_sistema="Sanitario",
+                       pendiente=0.02, lote=10)
+# r["resumen"]  -> {"conectado": 9, "fallido": 1, "sueltos": 0}
+# r["conexiones"][i] -> {"aparato": 1001, "conector": 0, "estado": "conectado",
+#     "ramal": 345678, "tuberias": [..], "accesorios": [..],
+#     "union_aparato": "ConnectTo", "entronque_m": [2.0, 0.0, 0.0], "diametro_mm": 50.0}
+
+# 2) confirmar el mismo lote y seguir con el siguiente
+r = revit_mep_conectar(categoria="OST_PlumbingFixtures", ramal=345678,
+                       tipo_tuberia="PVC sanitario", tipo_sistema="Sanitario",
+                       pendiente=0.02, lote=10, confirmar=True)
+revit_mep_conectar(categoria="OST_PlumbingFixtures", ramales=r["ramales_siguientes"],
+                   tipo_tuberia="PVC sanitario", tipo_sistema="Sanitario",
+                   pendiente=0.02, lote=10, desde=r["siguiente"], confirmar=True)
+```
+
+Lo que **no** hace: no dimensiona, no evita interferencias, no entronca en ramales verticales,
+no resuelve un aparato situado sobre el eje del ramal, no ajusta el entronque para que quepa
+y no crea el sistema ni el ramal. Cada uno de esos casos devuelve un fallo con motivo.
+
+### `revit_mep_circuitos` — luminarias a circuitos de potencia
+
+1. Lee cada luminaria: conector eléctrico de potencia, circuito existente, **carga aparente**
+   (`RBS_ELEC_APPARENT_LOAD`, buscada en el conector, la instancia y el tipo, en ese orden),
+   tensión y polos. **No se inventa ninguna carga.**
+2. Descarta con motivo: `sin_conector_electrico`, `ya_en_circuito`, `sin_carga`,
+   `sin_tension_o_polos`, `incompatible_con_tablero` (tensión o polos fuera del sistema de
+   distribución del tablero), `excede_limite` (una sola supera `limite_va`),
+   `supera_max_circuitos`, `error_api`.
+3. Agrupa en el orden recibido sin superar `limite_va` ni `max_luminarias`; solo comparten
+   circuito las de iguales polos y tensión.
+4. Por circuito: `ElectricalSystem.Create(doc, ids, PowerCircuit)`, `SelectPanel(tablero)`,
+   `Regenerate` y verificación: el circuito quedó en el tablero pedido y contiene todas sus
+   luminarias. Devuelve `id`, `numero`, `carga_va` (leída del circuito), `carga_va_calculada`,
+   `dentro_del_limite` y `elementos`. Si la carga que calcula Revit supera `limite_va`, el
+   circuito se revierte y sus luminarias quedan en `sin_circuito` con motivo.
+
+**Lotes al confirmar.** Cada llamada recalcula el plan sin las luminarias que ya tienen
+circuito. Por eso `desde` solo sirve en ensayo: al confirmar hay que repetir la misma llamada
+con `desde=0` hasta que `siguiente` sea `null` (con `confirmar=True`, `siguiente` vale `0`
+mientras queden circuitos por crear, y un `desde` distinto de cero se rechaza).
+`max_circuitos` se aplica al plan de cada llamada.
+
+```python
+revit_mep_circuitos(tablero="TA-1", limite_va=1440.0, nivel="Nivel 2",
+                    max_luminarias=12)               # ensayo
+# {"ensayo": true, "confirmado": false, "circuitos_planeados": 4,
+#  "circuitos": [{"id": 9001, "numero": "1", "carga_va": 1400.0,
+#                 "dentro_del_limite": true, "elementos": [..]}, ...],
+#  "sin_circuito": [{"id": 2002, "motivo": "sin_carga", "detalle": "..."}]}
+```
+
+### Canal de código suelto, sin reiniciar Revit
+
+Los endpoints nuevos viven en `startup.py` y exigen reiniciar Revit. El paquete no: cualquier
+canal que ejecute IronPython con `doc` disponible puede importarlo en el momento.
+
+```python
+import sys
+carpeta = r"<ruta-del-repo>/revit-mcp-write"      # la carpeta que contiene 'mep'
+if carpeta not in sys.path:
+    sys.path.insert(0, carpeta)
+from Autodesk.Revit import DB
+from mep import ejecutar
+
+resultado = ejecutar.correr("conectar", {
+    "aparatos": [1001, 1002], "ramal": 345678, "tipo_tuberia": "PVC sanitario",
+    "tipo_sistema": "Sanitario", "pendiente": 0.02}, doc, DB)    # ensayo
+```
+
+`correr(operacion, opciones, doc, DB)` admite `"conectores"`, `"conectar"` y `"circuitos"`, y
+nunca lanza: una entrada inválida devuelve `{"ok": false, "error": ...}`. Tras editar el
+paquete, `ejecutar.recargar()` descarta los módulos importados para que el siguiente `import`
+lea el código del disco.
+
+`startup.py` busca la carpeta que contiene `mep/` en este orden: variable de entorno
+`REVITWRITE_MEP_DIR`, la carpeta que contiene a `RevitWrite.extension` (el repo), la propia
+extensión y su `lib/`. Si la extensión se **copió** en vez de enlazarse, hay que copiar
+también `mep/` o definir la variable.
+
+### Pruebas
+
+```console
+py -m pytest revit-mcp-write/tests -q
+```
+
+Con dobles de la API (`tests/dobles.py`: conectores con `IsConnected` controlable,
+transacciones con deshacer real, llamadas configurables para devolver `None`, lanzar o dejar
+una unión suelta). Cubren validación, auditoría, ensayo y confirmación, sueltos, `None`,
+lotes, nombre de transacción, ausencia de `Save` y agrupación por VA.
+
+### Prueba en vivo sobre un RVT sintético (2026-11-21)
+
+Revit 2027, canal de código suelto, documento abierto **en segundo plano** (no el activo).
+Modelo creado para la prueba desde la plantilla métrica de sistemas del producto con familias de
+su biblioteca: tres ramales (contra incendios 50 mm, sanitario 100 mm, agua fría 25 mm), 6
+rociadores colgantes, 3 inodoros de tanque, 12 luminarias de 100 VA a 120 V y un tablero
+120/208 V sobre un muro. Cada resultado se comprobó además con una lectura propia, fuera del
+paquete.
+
+| Caso | Resultado |
+|---|---|
+| Auditoría de 22 elementos | 30 conectores, 25 libres; dominio, clasificación y diámetro correctos |
+| 6 rociadores al ramal, ensayo | 6 conectados con te (`BreakCurve` + `NewTeeFitting`), 0 sueltos; `RolledBack`, documento sin modificar y sin tuberías nuevas |
+| Los mismos, `confirmar=True` | `Committed`; 6 de 6 conectores con `IsConnected` y en el sistema del ramal; `ramales_siguientes` con los 7 tramos |
+| 3 inodoros al colector sanitario, pendiente 0,02 | conectados; tramo horizontal de 1,214 m con 0,0243 m de desnivel (0,0200); el conector de agua fría se omite con motivo |
+| 3 inodoros al ramal de agua fría, pendiente 0 | conectados; el conector sanitario, ya unido, se omite con motivo |
+| Extremos de tubería abiertos tras todo | 6: solo los dos de cada ramal original |
+| Circuitos, `limite_va=400`, ensayo | 3 circuitos planeados de 4 luminarias y 400,0 VA según Revit; `RolledBack`, 0 sistemas en el modelo |
+| Circuitos confirmados en dos llamadas (`lote=2`, luego el resto con `desde=0`) | 3 circuitos en el tablero, 400,0 VA cada uno; ninguna luminaria sin circuito |
+
+La vista 3D exportada se revisó en imagen. Lo que la prueba corrigió o confirmó:
+
+- `DistributionSysType.VoltageLineToGround/LineToLine` guardan **voltios**, no unidades
+  internas (el tipo «120» da mínimo 110 y máximo 130); convertirlos descartaba todas las
+  luminarias por «tensión fuera de rango». Los valores del conector (`GetMEPConnectorInfo`) sí
+  son internos: 1291,67 = 120 V y 1076,39 = 100 VA.
+- Las transacciones, las `SubTransaction` con `Regenerate` y el `IFailuresPreprocessor`
+  definido en IronPython 3.4 funcionan sobre un documento en segundo plano.
+- `Connector.ConnectTo` basta para unir al aparato cuando dirección y diámetro coinciden.
+
+### Sigue sin probar en vivo
+
+1. Los endpoints de Routes (`/mep/*`) y las herramientas MCP que los usan: exigen reiniciar
+   Revit y corren en el hilo del servidor (ver «Routes deprecado»). Lo probado es el paquete por
+   el canal de código suelto.
+2. `union="takeoff"` (`NewTakeoffFitting`); su verificación no comprueba todavía que el
+   accesorio quede unido al ramal, solo que sus conectores estén conectados.
+3. `NewElbowFitting` y `NewTransitionFitting` junto al aparato (conector no vertical o de otro
+   diámetro), tramos cortos y un conector que quede realmente suelto.
+4. Aparatos con varios conectores del **mismo** sistema, ramales con pendiente propia y tipos
+   de tubería sin te o sin reducción en sus preferencias de enrutamiento.
+5. Que el preprocesador de fallos reciba advertencias en el `RollBack` del ensayo: en la prueba
+   no hubo ninguna advertencia que observar.
+6. Luminarias de 277 V o de dos y tres polos, y la regla de compatibilidad tensión/polos frente
+   a la que aplica Revit en `SelectPanel`.
+7. Lotes grandes (cientos de elementos): costo de una `SubTransaction` con `Regenerate` por
+   conector.
+
+Hallazgos de revisión abiertos, que solo se pueden cerrar con esas pruebas: los conectores del
+aparato se leen una vez por aparato y se reutilizan tras las subtransacciones de sus otros
+conectores (en la prueba, con dos conectores de sistemas distintos, no falló); y no hay
+`Regenerate` entre fijar el diámetro del tramo nuevo y comparar su radio con el del conector
+para elegir entre `ConnectTo` y transición.
+
 ## Contrato de diseño
 
 Derivado de errores reales, no de estilo:
@@ -282,12 +544,20 @@ alcanzada es un dato; un archivo ausente no dice nada.
 
 ```
 revit-mcp-write/
-├── src/server.py              # servidor MCP: 9 herramientas, descubre el puerto
+├── src/server.py              # servidor MCP: 12 herramientas, descubre el puerto
 ├── RevitWrite.extension/
 │   ├── startup.py             # endpoints de Routes (cambios = reiniciar Revit)
-│   └── RevitWrite.tab/Servidor.panel/
-│       ├── Estado.pushbutton/         # puerto real y endpoints registrados
-│       └── Constraints.pushbutton/    # volcado de constraints de Rebar a JSON
+│   └── RevitWrite.tab/        # paneles de pushbuttons (Leer, Columnas, Acero…)
+├── mep/                       # trazado MEP: Python puro, API de Revit inyectada
+│   ├── auditoria.py           # auditar_conectores (solo lectura)
+│   ├── trazado.py             # conectar_a_ramal
+│   ├── circuitos.py           # crear_circuitos
+│   ├── geometria.py           # cálculo del trazado, sin API
+│   ├── transaccion.py         # ensayo/confirmar, subtransacciones, fallos sin diálogo
+│   ├── base.py                # ids, unidades, conectores, validación
+│   ├── ejecutar.py            # correr(operacion, opciones, doc, DB)
+│   └── API-REVIT-2027.md      # firmas leídas del binario instalado
+├── tests/                     # pytest con dobles de la API (sin Revit)
 └── _log/                      # log de la extensión y salidas JSON
 ```
 

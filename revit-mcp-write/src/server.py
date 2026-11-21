@@ -201,5 +201,136 @@ def revit_set_param(name: str, ids: list[int] = None, value: Any = None,
     return _go("/set_param", "POST", payload)
 
 
+# ---------------------------------------------------------------------- MEP
+
+def _sin_nulos(**campos) -> dict:
+    return {k: v for k, v in campos.items() if v is not None}
+
+
+@mcp.tool()
+def revit_mep_conectores(categorias: list[str] = None, ids: list[int] = None,
+                         max_elementos: int = None,
+                         documento: str = None) -> dict:
+    """Audita conectores MEP. SOLO LECTURA: no abre transacciones.
+
+    Por elemento y en total: conectores, libres (IsConnected=False en
+    conectores fisicos), dominio (tuberia/electrico/ducto), clasificacion y
+    nombre del sistema, y diametro.
+
+    Unidades: diametro_mm en mm (solo tuberia redonda), radio_interno_pies
+    en pies (valor interno), posicion_m en metros.
+
+    Args:
+        categorias: BuiltInCategory, ej. ['OST_PlumbingFixtures']. Sin
+            categorias ni ids recorre las categorias MEP con conectores.
+        ids: ids de elementos (excluyente con categorias).
+        max_elementos: tope del detalle por elemento; los totales no se recortan.
+        documento: titulo o ruta de un documento YA abierto; por defecto el activo.
+    """
+    return _go("/mep/conectores", "POST", _sin_nulos(
+        categorias=categorias, ids=ids, max_elementos=max_elementos,
+        documento=documento))
+
+
+@mcp.tool()
+def revit_mep_conectar(tipo_tuberia: Any, tipo_sistema: Any, pendiente: float,
+                       ramal: int = None, ramales: list[int] = None,
+                       aparatos: list[int] = None, categoria: str = None,
+                       union: str = "te", nivel: Any = None,
+                       diametro_mm: float = None, salida_mm: float = None,
+                       tramo_minimo_mm: float = None,
+                       margen_extremo_mm: float = None,
+                       clasificaciones: list[str] = None,
+                       revertir_sueltos: bool = True, lote: int = 25,
+                       desde: int = 0, confirmar: bool = False,
+                       documento: str = None) -> dict:
+    """Conecta aparatos sanitarios o rociadores a un ramal y VERIFICA cada
+    conector (IsConnected tras Regenerate, dentro de la transaccion).
+
+    ENSAYO POR DEFECTO: con confirmar=False todo se ejecuta y se verifica
+    dentro de la transaccion y luego se revierte (RollBack); los ids de la
+    respuesta son efimeros. Solo confirmar=True hace Commit. Nunca guarda el
+    documento. Revisar 'sueltos', 'conexiones', 'errores' y 'advertencias'
+    del ensayo antes de confirmar. 'ok' solo dice que la operacion corrio.
+
+    Un lote de aparatos por llamada y una transaccion por lote. Para seguir:
+    desde=<siguiente> y ramales=<ramales_siguientes> de la respuesta anterior
+    (la te parte el ramal en tramos nuevos).
+
+    Unidades: pendiente en m/m (0.02 = 2 %; 0 para presion); diametro_mm,
+    salida_mm, tramo_minimo_mm y margen_extremo_mm en mm; entronque_m y
+    posicion_m (salida) en metros.
+
+    Args:
+        tipo_tuberia: id o nombre exacto del PipeType.
+        tipo_sistema: id o nombre exacto del PipingSystemType.
+        pendiente: m/m, de 0 a 0.5. El tramo sube al alejarse del ramal.
+        ramal: id de la tuberia destino (o 'ramales').
+        ramales: ids candidatos; cada conector usa el tramo mas cercano.
+        aparatos: ids de aparatos (o 'categoria').
+        categoria: 'OST_PlumbingFixtures' u 'OST_Sprinklers'.
+        union: 'te' (BreakCurve + NewTeeFitting) o 'takeoff'.
+        nivel: id o nombre; por defecto el nivel de referencia del ramal.
+        diametro_mm: diametro de los tramos nuevos; por defecto el del conector.
+        salida_mm: tramo recto inicial si el conector no es vertical (300).
+        tramo_minimo_mm: tramo mas corto que se intenta construir (50).
+        margen_extremo_mm: distancia minima del entronque a un extremo (150).
+        clasificaciones: PipeSystemType aceptados en el conector del aparato;
+            por defecto la clasificacion del tipo de sistema.
+        revertir_sueltos: deshace el trazado de un conector si algo queda suelto.
+        lote: aparatos por llamada (1-200). desde: indice inicial.
+        confirmar: True hace Commit; False (defecto) es ensayo con RollBack.
+        documento: titulo o ruta de un documento YA abierto; por defecto el activo.
+    """
+    return _go("/mep/conectar", "POST", _sin_nulos(
+        tipo_tuberia=tipo_tuberia, tipo_sistema=tipo_sistema,
+        pendiente=pendiente, ramal=ramal, ramales=ramales, aparatos=aparatos,
+        categoria=categoria, union=union, nivel=nivel, diametro_mm=diametro_mm,
+        salida_mm=salida_mm, tramo_minimo_mm=tramo_minimo_mm,
+        margen_extremo_mm=margen_extremo_mm, clasificaciones=clasificaciones,
+        revertir_sueltos=revertir_sueltos, lote=lote, desde=desde,
+        confirmar=confirmar, documento=documento))
+
+
+@mcp.tool()
+def revit_mep_circuitos(tablero: Any, limite_va: float,
+                        luminarias: list[int] = None, nivel: Any = None,
+                        max_luminarias: int = None, max_circuitos: int = None,
+                        lote: int = 25, desde: int = 0,
+                        confirmar: bool = False,
+                        documento: str = None) -> dict:
+    """Agrupa luminarias en circuitos de potencia hacia un tablero
+    (ElectricalSystem.Create + SelectPanel) y verifica cada circuito.
+
+    ENSAYO POR DEFECTO: con confirmar=False los circuitos se crean y se leen
+    dentro de la transaccion y luego se revierten (RollBack); los ids son
+    efimeros. Solo confirmar=True hace Commit. Nunca guarda el documento.
+
+    limite_va es OBLIGATORIO (no hay valor por defecto). La carga de cada
+    luminaria se lee del modelo; la que no tiene dato queda en 'sin_circuito'
+    con motivo: sin_conector_electrico, ya_en_circuito, sin_carga,
+    sin_tension_o_polos, incompatible_con_tablero, excede_limite,
+    supera_max_circuitos o error_api.
+
+    Unidades: limite_va y carga_va en VA; tension_v en V.
+
+    Args:
+        tablero: id del tablero o nombre exacto del panel.
+        limite_va: carga aparente maxima por circuito, en VA.
+        luminarias: ids; por defecto todas las de OST_LightingFixtures.
+        nivel: id o nombre de nivel para filtrar luminarias.
+        max_luminarias: maximo de luminarias por circuito.
+        max_circuitos: maximo de circuitos a planear.
+        lote: circuitos por llamada (1-200). desde: indice del primer circuito.
+        confirmar: True hace Commit; False (defecto) es ensayo con RollBack.
+        documento: titulo o ruta de un documento YA abierto; por defecto el activo.
+    """
+    return _go("/mep/circuitos", "POST", _sin_nulos(
+        tablero=tablero, limite_va=limite_va, luminarias=luminarias,
+        nivel=nivel, max_luminarias=max_luminarias,
+        max_circuitos=max_circuitos, lote=lote, desde=desde,
+        confirmar=confirmar, documento=documento))
+
+
 if __name__ == "__main__":
     mcp.run()
