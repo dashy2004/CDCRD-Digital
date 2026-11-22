@@ -71,7 +71,8 @@ def despachar(operacion, opciones, doc, DB):
 
 def correr(operacion, opciones, doc, DB):
     """Igual que despachar, pero nunca lanza: devuelve siempre un dict con
-    'ok'. Una entrada invalida da ok=False y 'error', sin tocar el modelo."""
+    'ok'. Una entrada invalida da ok=False y 'error', sin tocar el modelo.
+    Con confirmar=True, ok=False si la transaccion no quedo Committed."""
     try:
         resultado = despachar(operacion, opciones, doc, DB)
     except ErrorEntrada as exc:
@@ -79,8 +80,16 @@ def correr(operacion, opciones, doc, DB):
     except Exception as exc:
         return {"ok": False, "tipo_error": "interno",
                 "error": "%s: %s" % (type(exc).__name__, exc)}
-    resultado["ok"] = True
+    resultado["ok"] = _corrio(resultado)
     return resultado
+
+
+def _corrio(resultado):
+    """False cuando se pidio confirmar y Revit no dejo la transaccion en
+    Committed: el modelo no cambio y 'errores' dice por que."""
+    if resultado.get("ensayo") is not False:
+        return True
+    return resultado.get("estado") in ("Committed", "sin_transaccion")
 
 
 def recargar():

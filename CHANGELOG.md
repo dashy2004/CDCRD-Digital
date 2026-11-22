@@ -28,6 +28,11 @@ GitHub con estas mismas notas. Lo que aún no tiene versión va bajo "Sin public
 
 ### Revit
 
+- MEP: el ensayo de `revit_mep_conectar` y `revit_mep_circuitos` hace `Commit` real dentro
+  de un `TransactionGroup` que se revierte, para ver los fallos que Revit solo evalúa al
+  confirmar (`commit_de_ensayo`, `ensayo_valido`); los fallos de Revit van a `errores` con
+  su texto y `ok` es `false` si se pidió confirmar y la transacción no quedó `Committed`.
+
 - Trazado MEP: la transición de diámetro junto al aparato va entre dos tuberías (Revit la
   rechaza contra el conector del aparato), el takeoff se verifica contra el ramal pedido y
   los ids `Int64` de `ElementId.Value` se aceptan. Probado en vivo con un lote de 32

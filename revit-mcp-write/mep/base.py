@@ -49,6 +49,15 @@ class Registro(object):
         self.errores.append({"etapa": etapa, "elemento": elemento,
                              "tipo": type(exc).__name__, "mensaje": str(exc)})
 
+    def fallo(self, dato):
+        """Fallo de Revit que impide el Commit, con su texto y sus elementos."""
+        elementos = dato.get("elementos") or []
+        self.errores.append({"etapa": "fallo_de_revit",
+                             "elemento": elementos[0] if elementos else None,
+                             "tipo": dato.get("severidad"),
+                             "mensaje": dato.get("descripcion"),
+                             "elementos": elementos})
+
     def nota(self, etapa, mensaje, elemento=None):
         self.errores.append({"etapa": etapa, "elemento": elemento,
                              "tipo": "nota", "mensaje": mensaje})

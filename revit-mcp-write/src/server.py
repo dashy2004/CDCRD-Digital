@@ -247,11 +247,13 @@ def revit_mep_conectar(tipo_tuberia: Any, tipo_sistema: Any, pendiente: float,
     """Conecta aparatos sanitarios o rociadores a un ramal y VERIFICA cada
     conector (IsConnected tras Regenerate, dentro de la transaccion).
 
-    ENSAYO POR DEFECTO: con confirmar=False todo se ejecuta y se verifica
-    dentro de la transaccion y luego se revierte (RollBack); los ids de la
-    respuesta son efimeros. Solo confirmar=True hace Commit. Nunca guarda el
-    documento. Revisar 'sueltos', 'conexiones', 'errores' y 'advertencias'
-    del ensayo antes de confirmar. 'ok' solo dice que la operacion corrio.
+    ENSAYO POR DEFECTO: con confirmar=False todo se ejecuta, se verifica y
+    se confirma dentro de un grupo de transacciones que luego se revierte
+    entero; los ids de la respuesta son efimeros. 'ensayo_valido' dice si
+    Revit acepto ese Commit y 'errores' trae sus fallos. Solo confirmar=True
+    deja el Commit. Nunca guarda el documento. Revisar 'ensayo_valido',
+    'sueltos', 'conexiones', 'errores' y 'advertencias' antes de confirmar.
+    Con confirmar=True, 'ok' es False si la transaccion no quedo Committed.
 
     Un lote de aparatos por llamada y una transaccion por lote. Para seguir:
     desde=<siguiente> y ramales=<ramales_siguientes> de la respuesta anterior

@@ -284,6 +284,30 @@ class Transaccion(object):
         return self._cerrar("RolledBack")
 
 
+class GrupoDeTransacciones(object):
+    """TransactionGroup: al revertirlo deshace tambien lo ya confirmado dentro."""
+
+    def __init__(self, doc, nombre=None):
+        self.doc, self.nombre = doc, nombre
+        self.iniciado = self.terminado = False
+
+    def Start(self):
+        self.iniciado, self.marca = True, len(self.doc.deshacer)
+        self.doc.bitacora.append("GroupStart")
+
+    def HasStarted(self):
+        return self.iniciado
+
+    def HasEnded(self):
+        return self.terminado
+
+    def RollBack(self):
+        self.doc.revertir_hasta(self.marca)
+        self.terminado = True
+        self.doc.bitacora.append("GroupRolledBack")
+        return "RolledBack"
+
+
 class SubTransaccion(Transaccion):
     def Start(self):
         self.iniciada, self.marca = True, len(self.doc.deshacer)
@@ -509,7 +533,8 @@ def crear_db():
         UnitTypeId=_Nombres(), BuiltInParameter=_Nombres(),
         BuiltInCategory=_Nombres(ausentes=("OST_NoExiste",)),
         FilteredElementCollector=Colector, Transaction=Transaccion,
-        SubTransaction=SubTransaccion, IFailuresPreprocessor=object,
+        SubTransaction=SubTransaccion, TransactionGroup=GrupoDeTransacciones,
+        IFailuresPreprocessor=object,
         FailureProcessingResult=ns(Continue="Continue",
                                    ProceedWithRollBack="ProceedWithRollBack"),
         Level=Nivel,
