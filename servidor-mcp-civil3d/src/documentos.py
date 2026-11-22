@@ -86,6 +86,32 @@ def ejecutar(pid, *, accion, timeout=120, **datos):
     return transporte.despachar(MODULE, COMMAND, carpeta, pid, request, timeout)
 
 
+OCUPADO = "drawing is busy"
+NOTA_REINTENTO = ("Civil informo 'Drawing is busy' con el dibujo inactivo (abrio otro documento y no se volvio a activar); "
+                  "se activo y se cerro en un segundo intento")
+
+
+def cerrar(pid, *, ruta, descartar_cambios=False, activar_despues=None):
+    """Cierra sin guardar; si Civil dice que el dibujo esta ocupado, lo activa y reintenta una vez.
+
+    Un dibujo desde el que se abrio otro documento queda ocupado para Civil
+    hasta que vuelve a estar activo, aunque no informe comando en curso.
+    Activarlo lo libera; el segundo cierre deja activo activar_despues o, si
+    no se indico, el documento que estaba activo al fallar el primero.
+    """
+    try:
+        return ejecutar(pid, accion="cerrar", ruta=ruta, descartar_cambios=descartar_cambios, activar_despues=activar_despues)
+    except ReciboError as exc:
+        if OCUPADO not in str(exc).lower():
+            raise
+        activo = (exc.receipt or {}).get("activo")
+    mismo = activo and ntpath.normcase(activo) == ntpath.normcase(ruta)
+    volver = activar_despues or (None if mismo else activo)
+    ejecutar(pid, accion="activar", ruta=ruta)
+    recibo = ejecutar(pid, accion="cerrar", ruta=ruta, descartar_cambios=descartar_cambios, activar_despues=volver)
+    return dict(recibo, reintento=NOTA_REINTENTO)
+
+
 def registrar(mcp, ok):
     def call(accion, pid, **datos):
         try:
@@ -134,8 +160,16 @@ def registrar(mcp, ok):
         descartar_cambios=True (los cambios se pierden). Se niega tambien si es
         el unico documento abierto o si tiene un comando en curso. Si era el
         activo, antes activa activar_despues o, si no se indica, otro documento
-        abierto. Devuelve la lista de documentos y la ruta activa.
+        abierto. Devuelve la lista de documentos y la ruta activa. Si Civil
+        responde 'Drawing is busy' (dibujo desde el que se abrio otro y que no
+        volvio a estar activo), lo activa y reintenta una vez; el recibo lo
+        dice en 'reintento'.
         """
         if not confirmar:
             return ok({"error": "Cierra un documento de la sesion: requiere confirmar=True"})
-        return call("cerrar", pid, ruta=ruta, descartar_cambios=descartar_cambios, activar_despues=activar_despues or None)
+        try:
+            return ok(cerrar(pid, ruta=ruta, descartar_cambios=descartar_cambios, activar_despues=activar_despues or None))
+        except ReciboError as exc:
+            return ok({"error": str(exc), "receipt": exc.receipt})
+        except (ValueError, TypeError, KeyError, OSError, RuntimeError) as exc:
+            return ok({"error": str(exc)})

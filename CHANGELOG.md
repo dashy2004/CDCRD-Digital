@@ -23,6 +23,8 @@ GitHub con estas mismas notas. Lo que aún no tiene versión va bajo "Sin public
   `Add param returned null` del visor de eventos.
 - Redes a presión 0.2.1: cada codo de catálogo colocado en un quiebre de otro ángulo sale
   también como texto en `advertencias` de la inspección.
+- Documentos: `cerrar_documento` reintenta una vez, activando antes el dibujo, cuando Civil
+  responde «Drawing is busy» con un dibujo inactivo desde el que se abrió otro documento.
 
 ### Revit
 
