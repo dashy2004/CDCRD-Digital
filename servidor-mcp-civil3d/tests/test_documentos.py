@@ -89,3 +89,48 @@ def test_mcp_tools_require_confirmation_except_listing(monkeypatch, tmp_path):
     assert json.loads(tools["listar_documentos"](7))["ok"] is True
     assert "error" in json.loads(tools["abrir_documento"](7, "relativo.dwg", confirmar=True))
     assert json.loads(tools["cerrar_documento"](7, DWG, confirmar=True))["committed"] is True
+
+def guion(monkeypatch, respuestas):
+    """Sustituye ejecutar por una lista de respuestas (dict = recibo, excepcion = fallo) y anota las llamadas."""
+    llamadas = []
+    def ejecutar(pid, *, accion, **datos):
+        llamadas.append(dict(datos, accion=accion))
+        r = respuestas.pop(0)
+        if isinstance(r, Exception): raise r
+        return r
+    monkeypatch.setattr(documentos, "ejecutar", ejecutar)
+    return llamadas
+
+
+def ocupado(activo):
+    return transporte.ReciboError("Drawing is busy.", dict(ok=False, error="Drawing is busy.", activo=activo))
+
+
+def test_cerrar_activates_a_busy_inactive_drawing_and_retries_once(monkeypatch):
+    otro = r"C:\QA\otro.dwg"
+    llamadas = guion(monkeypatch, [ocupado(otro), dict(ok=True), dict(ok=True, abiertos=1)])
+    recibo = documentos.cerrar(7, ruta=DWG)
+    assert [c["accion"] for c in llamadas] == ["cerrar", "activar", "cerrar"]
+    assert llamadas[1]["ruta"] == DWG and llamadas[2]["activar_despues"] == otro
+    assert recibo["abiertos"] == 1 and "busy" in recibo["reintento"]
+
+
+def test_cerrar_retry_keeps_the_requested_next_document_and_never_points_to_itself(monkeypatch):
+    pedido = r"C:\QA\pedido.dwg"
+    llamadas = guion(monkeypatch, [ocupado(r"C:\QA\otro.dwg"), dict(ok=True), dict(ok=True)])
+    documentos.cerrar(7, ruta=DWG, activar_despues=pedido)
+    assert llamadas[2]["activar_despues"] == pedido
+    llamadas = guion(monkeypatch, [ocupado(DWG.upper()), dict(ok=True), dict(ok=True)])
+    documentos.cerrar(7, ruta=DWG)
+    assert llamadas[2]["activar_despues"] is None
+
+
+def test_cerrar_does_not_retry_other_refusals_and_reports_a_second_busy(monkeypatch):
+    llamadas = guion(monkeypatch, [transporte.ReciboError("El documento tiene cambios sin guardar", dict(ok=False))])
+    with pytest.raises(transporte.ReciboError, match="cambios sin guardar"):
+        documentos.cerrar(7, ruta=DWG)
+    assert len(llamadas) == 1
+    llamadas = guion(monkeypatch, [ocupado(r"C:\QA\otro.dwg"), dict(ok=True), ocupado(DWG)])
+    with pytest.raises(transporte.ReciboError, match="busy"):
+        documentos.cerrar(7, ruta=DWG, descartar_cambios=False)
+    assert len(llamadas) == 3 and all(c.get("descartar_cambios", False) is False for c in llamadas)

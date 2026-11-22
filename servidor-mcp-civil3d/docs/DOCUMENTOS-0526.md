@@ -47,9 +47,11 @@ Instancia existente de Civil 3D 2027 con el puente 0.5.20 y un dibujo de trabajo
 | Cerrar uno que no está abierto | rechazado |
 | Abrir con escritura un archivo en uso por otro proceso | rechazado sin diálogo |
 
-No probado en vivo: la negativa a cerrar el único documento (habría exigido cerrar el dibujo ajeno) y dibujos que disparan otros diálogos al abrir.
+Probado después en una sesión recién iniciada: la negativa a cerrar el único documento. No probado en vivo: dibujos que disparan otros diálogos al abrir.
 
-Offline: 8 pruebas Python (`tests/test_documentos.py`), compilación con 0 errores y 0 advertencias.
+**«Drawing is busy» al cerrar un dibujo inactivo.** Reproducido con tres dibujos sintéticos: con A activo se abre B, desde B se abre C, se cierra C dejando activo A y se pide cerrar B. `CloseAndDiscard` responde «Drawing is busy» aunque B no informe comando en curso: el dibujo desde el que se abrió otro documento queda ocupado para Civil hasta que vuelve a estar activo. Activar B y cerrarlo entonces funciona. El servidor lo hace solo: ante ese error activa el dibujo, repite el cierre una vez dejando activo `activar_despues` o el que lo estaba, y lo dice en `reintento`. Ese reintento automático tiene pruebas unitarias; en vivo se hizo la misma secuencia a mano (activar y cerrar).
+
+Offline: 11 pruebas Python (`tests/test_documentos.py`), compilación con 0 errores y 0 advertencias.
 
 ## Límites
 
