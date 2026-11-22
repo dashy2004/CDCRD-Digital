@@ -241,8 +241,14 @@ plano; por defecto el activo). No se abren archivos y no se opera sobre vínculo
   `etapa: "fallo_de_revit"`, su texto y sus elementos, y la transacción se revierte sin
   diálogo (`ProceedWithRollBack`, `SetForcedModalHandling(False)`). Los `Warning` van a
   `advertencias`.
+- **El grupo del ensayo se cierra siempre**, también si la transacción no llega a abrirse
+  (documento de solo lectura, otra transacción abierta): un `TransactionGroup` abierto impide
+  cerrar el documento. `estado_del_grupo` vale `RolledBack`, `sin_iniciar` o `abierto`, y
+  `ensayo_revertido` es `false` solo en el último caso; entonces `estado` dice lo que quedó en
+  el modelo y `ensayo_valido` es `false`.
 - **`ok`.** Con `confirmar=true` es `false` si la transacción no quedó `Committed`. En un
-  ensayo `ok` dice que la operación corrió; el veredicto es `ensayo_valido`.
+  ensayo es `false` si el grupo no se pudo revertir; en los demás casos dice que la operación
+  corrió y el veredicto es `ensayo_valido`.
 - **Nunca se guarda el documento.** No hay `Save` ni `SaveAs` en ningún camino; una prueba lo
   comprueba sobre el código fuente.
 - **Por lotes.** `lote` (25 por defecto, 1–200) y `desde`. **Una llamada = un lote = una

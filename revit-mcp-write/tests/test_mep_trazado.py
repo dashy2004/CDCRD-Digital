@@ -355,3 +355,35 @@ def test_ok_sigue_verdadero_en_un_ensayo_aunque_no_sea_valido():
     doc.fallos = [("Error", "error sintetico")]
     r = ejecutar.correr("conectar", opciones_conectar(), doc, db)
     assert r["ok"] is True and r["ensayo_valido"] is False
+
+
+# --------------------------------- el grupo del ensayo se cierra siempre
+
+def test_si_la_transaccion_no_inicia_el_grupo_no_queda_abierto():
+    from mep import ejecutar
+    doc, db = modelo_sanitario()
+    doc.suelta.add("transaccion_no_inicia")
+    r = ejecutar.correr("conectar", opciones_conectar(), doc, db)
+    assert doc.grupos_abiertos == 0 and doc.bitacora[-1] == "GroupRolledBack"
+    assert r["estado_del_grupo"] == "RolledBack" and r["ensayo_revertido"] is True
+    assert r["ensayo_valido"] is False and r["commit_de_ensayo"] == "RolledBack"
+    assert r["errores"][-1]["etapa"] == "transaccion"
+    r = ejecutar.correr("conectar", opciones_conectar(confirmar=True), doc, db)
+    assert r["ok"] is False and r["estado"] == "RolledBack" and doc.grupos_abiertos == 0
+
+
+def test_ensayo_que_no_se_pudo_revertir_no_sale_ok_ni_valido():
+    from mep import ejecutar
+    doc, db = modelo_sanitario()
+    doc.suelta.add("grupo_no_revierte")
+    r = ejecutar.correr("conectar", opciones_conectar(), doc, db)
+    assert r["ok"] is False and r["ensayo"] is True
+    assert r["ensayo_revertido"] is False and r["estado_del_grupo"] == "abierto"
+    assert r["ensayo_valido"] is False and r["estado"] == "Committed"
+    assert r["commit_de_ensayo"] == "Committed"
+    assert r["errores"][-1]["etapa"] == "rollback_del_ensayo"
+
+
+def test_ensayo_normal_informa_el_grupo_revertido():
+    r = correr(*modelo_sanitario())
+    assert r["estado_del_grupo"] == "RolledBack" and r["ensayo_revertido"] is True

@@ -86,9 +86,10 @@ def correr(operacion, opciones, doc, DB):
 
 def _corrio(resultado):
     """False cuando se pidio confirmar y Revit no dejo la transaccion en
-    Committed: el modelo no cambio y 'errores' dice por que."""
+    Committed (el modelo no cambio y 'errores' dice por que), y cuando un
+    ensayo no se pudo revertir (el modelo pudo quedar modificado)."""
     if resultado.get("ensayo") is not False:
-        return True
+        return resultado.get("ensayo_revertido") is not False
     return resultado.get("estado") in ("Committed", "sin_transaccion")
 
 

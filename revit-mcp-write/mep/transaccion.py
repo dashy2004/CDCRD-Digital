@@ -71,21 +71,34 @@ def _revertir(transaccion, registro):
         registro.error("rollback", exc)
 
 
-def _abrir_grupo(DB, doc, nombre):
-    grupo = DB.TransactionGroup(doc, nombre + " (ensayo)")
-    grupo.Start()
-    return grupo
-
-
 def _cerrar_grupo(grupo, registro):
-    """Revierte el grupo del ensayo; si no se puede, lo dice en 'errores'."""
+    """Revierte el grupo del ensayo y devuelve su estado: 'RolledBack',
+    'sin_iniciar' (no llego a abrirse, nada que deshacer) o 'abierto' (no se
+    pudo revertir: el modelo pudo quedar modificado; va tambien a 'errores')."""
     try:
-        if grupo.HasStarted() and not grupo.HasEnded():
+        if not grupo.HasStarted():
+            return "sin_iniciar"
+        if not grupo.HasEnded():
             grupo.RollBack()
-            return True
+        return "RolledBack"
     except Exception as exc:
         registro.error("rollback_del_ensayo", exc)
-    return False
+        return "abierto"
+
+
+def _confirmar(DB, doc, nombre, registro, trabajo, salida):
+    """Abre la transaccion, corre trabajo() y hace Commit. Devuelve el
+    TransactionStatus como texto; cualquier fallo revierte y da RolledBack."""
+    transaccion = DB.Transaction(doc, nombre)
+    try:
+        transaccion.Start()
+        opciones = _opciones(DB, transaccion, registro)
+        salida["datos"] = trabajo()
+        return nombre_enum(transaccion.Commit(opciones))
+    except Exception as exc:
+        registro.error("transaccion", exc)
+        _revertir(transaccion, registro)
+        return "RolledBack"
 
 
 def ejecutar(DB, doc, nombre, confirmar, registro, trabajo):
@@ -93,30 +106,33 @@ def ejecutar(DB, doc, nombre, confirmar, registro, trabajo):
 
     trabajo() debe crear, regenerar y verificar; lo que devuelve se copia
     en 'datos'. Devuelve {"ensayo", "confirmado", "transaccion", "estado",
-    "datos"} y, en un ensayo, 'commit_de_ensayo' y 'ensayo_valido'; si
-    trabajo() lanza, se revierte y 'datos' es None.
+    "datos"} y, en un ensayo, 'commit_de_ensayo', 'ensayo_valido',
+    'estado_del_grupo' y 'ensayo_revertido'; si trabajo() o el inicio de la
+    transaccion lanzan, se revierte y 'datos' es None. El grupo del ensayo
+    se cierra siempre, tambien si la transaccion no llega a abrirse: un
+    TransactionGroup abierto impide cerrar el documento.
     """
     salida = {"ensayo": not confirmar, "confirmado": False,
               "transaccion": nombre, "estado": None, "datos": None}
-    grupo = None if confirmar else _abrir_grupo(DB, doc, nombre)
-    transaccion = DB.Transaction(doc, nombre)
-    transaccion.Start()
+    if confirmar:
+        salida["estado"] = _confirmar(DB, doc, nombre, registro, trabajo, salida)
+        salida["confirmado"] = salida["estado"] == "Committed"
+        return salida
+    grupo = DB.TransactionGroup(doc, nombre + " (ensayo)")
     commit = "RolledBack"
     try:
-        opciones = _opciones(DB, transaccion, registro)
-        salida["datos"] = trabajo()
-        commit = nombre_enum(transaccion.Commit(opciones))
+        grupo.Start()
+        commit = _confirmar(DB, doc, nombre, registro, trabajo, salida)
     except Exception as exc:
-        registro.error("transaccion", exc)
-        _revertir(transaccion, registro)
-    if grupo is None:
-        salida["estado"] = commit
-        salida["confirmado"] = commit == "Committed"
-        return salida
-    revertido = _cerrar_grupo(grupo, registro)
-    salida["commit_de_ensayo"] = commit
-    salida["ensayo_valido"] = commit == "Committed"
-    salida["estado"] = "RolledBack" if (revertido or commit != "Committed") else commit
+        registro.error("grupo_del_ensayo", exc)
+    finally:
+        del_grupo = _cerrar_grupo(grupo, registro)
+    revertido = del_grupo != "abierto"
+    salida.update({"commit_de_ensayo": commit, "estado_del_grupo": del_grupo,
+                   "ensayo_revertido": revertido,
+                   "ensayo_valido": commit == "Committed" and revertido})
+    # Si el grupo no se pudo revertir, 'estado' dice lo que quedo en el modelo.
+    salida["estado"] = "RolledBack" if revertido else commit
     return salida
 
 
