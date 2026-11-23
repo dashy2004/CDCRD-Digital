@@ -4,8 +4,9 @@ Recetas sobre primitivas ya verificadas (entity.create con cilindro/caja,
 vista.3d, vista.guardada, vista.exportar, layout.crear). Helpers puros arriba.
 """
 import math
+import re
 
-from perfil_estratigrafico import cargar_sondeos, AVISO
+from perfil_estratigrafico import cargar_sondeos, borrar_anotaciones, AVISO
 
 
 def estaciones_muestreo(inicio, fin, paso):
@@ -21,21 +22,45 @@ def estaciones_muestreo(inicio, fin, paso):
     return ests
 
 
-def cilindros_de_sondeo(sid, s, colores, radio=3.0, exag_z=1.0, capa='SOND-3D'):
-    """Entidades (cilindros apilados + rotulo) de un sondeo en coordenadas reales.
+def cilindros_de_sondeo(sid, s, colores, radio=3.0, exag_z=1.0, capa='SOND-3D', desde_cero=False):
+    """Entidades (cilindros apilados + rotulo) de un sondeo.
 
-    exag_z escala las profundidades desde la cota del terreno (la boca del
-    sondeo se queda en su sitio; el fondo baja exag_z veces mas).
+    desde_cero=False: exag_z escala las profundidades desde la cota del terreno
+    (la boca del sondeo se queda en su sitio; el fondo baja exag_z veces mas).
+    desde_cero=True: exag_z escala la cota completa desde Z=0, que es lo que hace
+    la exageracion del estilo de una superficie; asi columnas y superficies coinciden.
     """
+    def z(prof):
+        return (s['elev'] - prof) * exag_z if desde_cero else s['elev'] - prof * exag_z
+
     ents = []
     for e in s['estratos']:
-        z_top = s['elev'] - e['top'] * exag_z
-        z_base = s['elev'] - e['base'] * exag_z
+        z_top, z_base = z(e['top']), z(e['base'])
         ents.append({'tipo': 'cilindro', 'capa': capa, 'color': colores.get(e['codigo'], 7),
                      'base': [s['x'], s['y'], z_base], 'radio': radio, 'altura': z_top - z_base})
-    ents.append({'tipo': 'mtexto', 'capa': capa, 'punto': [s['x'] + radio * 1.2, s['y'], s['elev'] + radio],
+    ents.append({'tipo': 'mtexto', 'capa': capa, 'punto': [s['x'] + radio * 1.2, s['y'], z(0) + radio],
                  'altura': radio, 'texto': sid})
     return ents
+
+
+def modo_exageracion(exag_z):
+    """Valores de SurfaceStyle.TriangleStyle para ver la superficie con exag_z."""
+    if abs(exag_z - 1.0) < 1e-9:
+        return {'DisplayMode': 'UseSurfaceElevation'}
+    return {'DisplayMode': 'ExaggerateElevations', 'ExaggerateElevationBy': float(exag_z)}
+
+
+def parametros_export(exp, nombre_vista, formato):
+    """Parametros de vista.exportar del isometrico; apaisado (rotacion 0) por defecto."""
+    params = {'ruta': exp[formato], 'nombre_vista': nombre_vista, 'sombreado': 'AsDisplayed',
+              'rotacion': str(exp.get('rotacion', 0))}
+    if formato == 'png':
+        params['dispositivo'] = 'PublishToWeb PNG.pc3'
+        if exp.get('papel_png'):
+            params['papel'] = exp['papel_png']
+    else:
+        params['papel'] = exp.get('papel', 'A3')
+    return params
 
 
 # ---------------------------------------------------------------------------
@@ -61,12 +86,21 @@ def isometrico_sondeos(spec, puente, log=print):
     radio = spec.get('radio', 3.0)
     exag = spec.get('exageracion_z', 1.0)
     capa = pref + '-SOND3D'
+    # Con superficies a la vista, columnas y superficies llevan la misma exageracion
+    # (desde Z=0); sin ellas, la boca de cada sondeo se queda en su cota real.
+    con_superficies = bool(spec.get('mostrar_superficies', True))
+    if spec.get('reemplazar', True):
+        n_borradas = borrar_anotaciones(puente, [capa], res)
+        if n_borradas:
+            res['reemplazado'] = n_borradas
+            log('solidos anteriores borrados: %d' % n_borradas)
     ents = [{'tipo': 'capa', 'nombre': capa, 'color': 7}]
     for sid in ids:
         if sid not in sondeos:
             res['advertencias'].append({sid: 'no esta en la base'})
             continue
-        ents += cilindros_de_sondeo(sid, sondeos[sid], colores, radio, exag, capa)
+        ents += cilindros_de_sondeo(sid, sondeos[sid], colores, radio, exag, capa,
+                                    desde_cero=con_superficies)
     r = _esc(puente, 'entity.create', {'entidades': ents})
     handles = [c['handle'] for c in r['creados'] if c['tipo'] != 'capa']
     res['creado']['entidades'] = handles
@@ -81,14 +115,40 @@ def isometrico_sondeos(spec, puente, log=print):
         sup_nombres.append(spec['superficie_terreno'])
     sup_handles = _handles_por_nombre(puente, 'superficies', sup_nombres) if sup_nombres else []
     res['creado']['superficies'] = sup_handles
-    if spec.get('mostrar_superficies', True):
+    if con_superficies:
+        color_por_superficie = {str(e['superficie']).lower(): e.get('color_aci')
+                                for e in spec.get('estratos', []) if e.get('superficie')}
+        estilos_vistos = {}
         for h in sup_handles:
             try:
+                nombre_sup = puente.llamar('objects.read', {'handle': h, 'ruta': 'Name'})['valor']
                 estilo = puente.llamar('objects.read', {'handle': h, 'ruta': 'StyleName'})['valor']
-                _esc(puente, 'estilos.display', {'familia': 'SurfaceStyles', 'estilo': estilo,
-                                                  'vista': 'Model', 'componente': 'Triangles', 'visible': True})
+                if estilo in estilos_vistos:
+                    # un estilo compartido no puede llevar dos colores: gana la primera superficie
+                    res['advertencias'].append({'superficie_%s' % h: "comparte el estilo '%s' con %s; conserva su color"
+                                                % (estilo, estilos_vistos[estilo])})
+                    continue
+                estilos_vistos[estilo] = nombre_sup
+                display = {'familia': 'SurfaceStyles', 'estilo': estilo, 'vista': 'Model',
+                           'componente': 'Triangles', 'visible': True}
+                color = color_por_superficie.get(str(nombre_sup).lower())
+                if color is not None and spec.get('colorear_superficies', True):
+                    display['color_aci'] = str(color)
+                _esc(puente, 'estilos.display', display)
+                q = puente.llamar('estilos.listar', {'familia': 'SurfaceStyles',
+                                                     'patron': '^' + re.escape(estilo) + '$'})
+                h_estilo = next((e['handle'] for e in q.get('estilos', []) if e.get('nombre') == estilo), None)
+                if h_estilo is None:
+                    res['advertencias'].append({'exageracion_%s' % h: "no se encontro el estilo '%s'" % estilo})
+                    continue
+                # solo cambia como se dibuja: la superficie y sus cotas no se tocan
+                ru = _esc(puente, 'objects.update', {'handle': h_estilo, 'ruta': 'TriangleStyle',
+                                                     'props': modo_exageracion(exag)})
+                if ru.get('fallidos'):
+                    res['advertencias'].append({'exageracion_%s' % h: ru['fallidos']})
             except Exception as exc:
                 res['advertencias'].append({'superficie_%s' % h: str(exc)})
+        res['exageracion_superficies'] = exag
 
     # vista isometrica guardada + export
     direccion = spec.get('direccion', 'SE')
@@ -102,18 +162,12 @@ def isometrico_sondeos(spec, puente, log=print):
     exp = spec.get('exportar', {})
     if exp.get('png'):
         try:
-            params = {'ruta': exp['png'], 'dispositivo': 'PublishToWeb PNG.pc3',
-                      'nombre_vista': nombre_vista, 'sombreado': 'AsDisplayed'}
-            if exp.get('papel_png'):
-                params['papel'] = exp['papel_png']
-            res['exportado']['png'] = _esc(puente, 'vista.exportar', params)
+            res['exportado']['png'] = _esc(puente, 'vista.exportar', parametros_export(exp, nombre_vista, 'png'))
         except Exception as exc:
             res['advertencias'].append({'export_png': str(exc)})
     if exp.get('pdf'):
         try:
-            res['exportado']['pdf'] = _esc(puente, 'vista.exportar', {
-                'ruta': exp['pdf'], 'papel': exp.get('papel', 'A3'), 'nombre_vista': nombre_vista,
-                'sombreado': 'AsDisplayed'})
+            res['exportado']['pdf'] = _esc(puente, 'vista.exportar', parametros_export(exp, nombre_vista, 'pdf'))
         except Exception as exc:
             res['advertencias'].append({'export_pdf': str(exc)})
     return res
@@ -198,7 +252,12 @@ def registrar(mcp, llamar, ok):
         direccion (SE|SW|NE|NW|[x,y,z]), estilo_visual (X-Ray por defecto: deja
         ver las columnas bajo las superficies), mostrar_superficies,
         mostrar_terreno (false: el terreno opaco tapa todo), encuadrar_superficies,
-        exportar {png, pdf, papel, papel_png}. Datos hipoteticos/preliminares.
+        colorear_superficies (true: color_aci del estrato en su superficie),
+        reemplazar (true: borra los solidos de una corrida anterior del prefijo),
+        exportar {png, pdf, papel, papel_png, rotacion (0 = apaisado)}.
+        Con mostrar_superficies la exageracion_z se aplica tambien al estilo de
+        cada superficie (solo el dibujo, no sus cotas) y las columnas se escalan
+        desde Z=0 para coincidir. Datos hipoteticos/preliminares.
         """
         try:
             datos = json.loads(spec)
