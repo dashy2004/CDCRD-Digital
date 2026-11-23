@@ -27,7 +27,7 @@ internal static class ClosePolicy
 internal static class DocumentosService
 {
     internal static Action<string> QaCheckpoint = null;
-    private static readonly string[] Actions = { "listar", "abrir", "activar", "cerrar" };
+    private static readonly string[] Actions = { "listar", "abrir", "activar", "cerrar", "guardar_como" };
 
     private static string Text(JsonObject p, string key, bool required = true)
     {
@@ -107,6 +107,7 @@ internal static class DocumentosService
             {
                 "abrir" => Open(docs, p),
                 "activar" => ActivateByKey(docs, Text(p, "ruta")),
+                "guardar_como" => SaveAs(docs, p, commandName),
                 _ => Close(docs, p, commandName)
             };
             return new { accion = action, detalle = detail, estado = State(docs) };
@@ -154,6 +155,46 @@ internal static class DocumentosService
         Activate(docs, doc);
         if (doc.IsReadOnly != readOnly) throw new InvalidOperationException("El documento quedo abierto " + (doc.IsReadOnly ? "en solo lectura" : "con escritura") + ", distinto de lo pedido; revise y cierrelo");
         return new { ruta = doc.Name, ya_abierto = false, solo_lectura = doc.IsReadOnly };
+    }
+
+    // Saves an open drawing under a path and leaves the DOCUMENT with that name and path, with no dialog.
+    // Database.SaveAs writes the file but the document keeps its old name (Drawing1.dwg); the document's own
+    // SaveAs, reached through its COM object, renames it. The same path as the current one is a plain save.
+    private static object SaveAs(DocumentCollection docs, JsonObject p, string commandName)
+    {
+        var doc = Find(docs, Text(p, "ruta"), true);
+        string raw = Text(p, "destino");
+        if (!Path.IsPathFullyQualified(raw)) throw new ArgumentException("destino debe ser absoluto");
+        string dest = Path.GetFullPath(raw);
+        if (!string.Equals(Path.GetExtension(dest), ".dwg", StringComparison.OrdinalIgnoreCase)) throw new ArgumentException("destino debe ser un .dwg");
+        if (!Directory.Exists(Path.GetDirectoryName(dest))) throw new DirectoryNotFoundException("No existe la carpeta de destino: " + Path.GetDirectoryName(dest));
+        bool same = doc.IsNamedDrawing && string.Equals(Path.GetFullPath(doc.Name), dest, StringComparison.OrdinalIgnoreCase);
+        if (same && doc.IsReadOnly) throw new InvalidOperationException("El documento esta abierto en solo lectura; indique otro destino");
+        if (!same)
+        {
+            if (All(docs).Any(d => d != doc && d.IsNamedDrawing && string.Equals(Path.GetFullPath(d.Name), dest, StringComparison.OrdinalIgnoreCase)))
+                throw new InvalidOperationException("El destino esta abierto en esta sesion como otro documento");
+            if (File.Exists(dest) && !Flag(p, "sobrescribir")) throw new InvalidOperationException("El destino ya existe; para reemplazarlo repita con sobrescribir=true");
+        }
+        bool wasActive = doc.IsActive;
+        if (!string.IsNullOrEmpty(doc.CommandInProgress) && !(wasActive && string.Equals(doc.CommandInProgress, commandName, StringComparison.OrdinalIgnoreCase)))
+            throw new InvalidOperationException("El documento tiene un comando en curso (" + doc.CommandInProgress + "); no se guarda");
+        string before = doc.Name;
+        // This command runs inside the active document: step out of it while it is saved, then come back.
+        bool stepOut = wasActive && docs.Count > 1;
+        if (stepOut) Activate(docs, All(docs).First(d => d != doc));
+        try
+        {
+            QaCheckpoint?.Invoke("before-save");
+            dynamic com = DocumentExtension.GetAcadDocument(doc);
+            if (same) com.Save(); else com.SaveAs(dest);
+        }
+        finally { if (stepOut) Activate(docs, doc); }
+        if (!string.Equals(Path.GetFullPath(doc.Name), dest, StringComparison.OrdinalIgnoreCase))
+            throw new InvalidOperationException("El documento quedo como " + doc.Name + ", no como " + dest);
+        if (!File.Exists(dest)) throw new FileNotFoundException("Civil no dejo el archivo", dest);
+        var (modified, dbmod) = Dirty(doc);
+        return new { antes = before, despues = doc.Name, mismo_archivo = same, guardado = true, bytes = new FileInfo(dest).Length, modificado = modified, dbmod, activo = doc.IsActive };
     }
 
     private static object ActivateByKey(DocumentCollection docs, string key)

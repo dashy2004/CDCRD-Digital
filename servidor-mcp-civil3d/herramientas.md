@@ -201,6 +201,7 @@ gm_vincular_proyecto(pid=PID_VERIFICADO, proyecto_id="QA GM", confirmar=True)
 - `abrir_documento(pid, ruta, solo_lectura=False, confirmar=False)`: abre un `.dwg` en la instancia existente, sin diálogos, y lo deja activo. Si ya está abierto en el mismo modo solo lo activa; en modo distinto es error. Sin `solo_lectura` rechaza un archivo en uso por otro proceso en vez de dejar que aparezca un diálogo.
 - `activar_documento(pid, ruta, confirmar=False)`: activa un dibujo ya abierto (ruta completa, o nombre si no tiene archivo).
 - `cerrar_documento(pid, ruta, descartar_cambios=False, activar_despues="", confirmar=False)`: cierra **sin guardar**. Se niega si el dibujo tiene cambios sin guardar salvo `descartar_cambios=True`, si es el único documento abierto o si tiene un comando en curso. Si era el activo, antes activa `activar_despues` u otro documento.
+- `guardar_como(pid, ruta, destino, sobrescribir=False, confirmar=False)`: guarda un dibujo abierto en otra ruta y deja el **documento** con ese nombre, sin diálogos (módulo 0.2.0). Con la misma ruta es un guardado normal.
 
 ```python
 abrir_documento(pid=PID_VERIFICADO, ruta=r"C:\QA\copia.dwg", solo_lectura=True, confirmar=True)

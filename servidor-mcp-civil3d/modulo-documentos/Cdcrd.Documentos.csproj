@@ -3,7 +3,7 @@
     <Civil3DPath Condition="'$(Civil3DPath)' == ''">C:\Program Files\Autodesk\AutoCAD 2027</Civil3DPath>
     <TargetFramework>net10.0-windows</TargetFramework>
     <AssemblyName>Cdcrd.Documentos.V1</AssemblyName>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <PlatformTarget>x64</PlatformTarget>
     <Nullable>disable</Nullable>
     <EnableDynamicLoading>true</EnableDynamicLoading>
