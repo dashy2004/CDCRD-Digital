@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" AppVersion="0.1.0" Author="CDCRD-Digital"
+  Name="CDCRD Geotecnia" Description="List, create, import CSV and link Geotechnical Modeler projects without dialogs for Civil 3D 2027"
+  ProductCode="{557B4EA4-32B8-4D4A-B21B-636D00CC4B4B}" UpgradeCode="{870866EE-4819-4F54-807F-5F18B8220DF4}">
+  <CompanyDetails Name="CDCRD-Digital" Url="https://github.com/dashy2004/CDCRD-Digital" />
+  <Components>
+    <RuntimeRequirements Platform="Civil3D" SeriesMin="R26.0" SeriesMax="R26.0" OS="Win64" />
+    <ComponentEntry AppName="CdcrdGeotecniaV1" AppDescription="Geotechnical Modeler projects module"
+      AppType=".NET" ModuleName="./Contents/Cdcrd.Geotecnia.V1.dll" LoadOnAutoCADStartup="True" LoadOnRequest="True">
+      <Commands GroupName="CDCRDGEOTECNIA">
+        <Command Global="CDCRDGEOTECNIAV1" Local="CDCRDGEOTECNIAV1" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+</ApplicationPackage>
