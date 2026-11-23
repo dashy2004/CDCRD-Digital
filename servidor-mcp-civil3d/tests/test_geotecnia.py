@@ -82,7 +82,7 @@ def test_mcp_tools_default_to_simulation(monkeypatch, tmp_path):
             def deco(fn): tools[fn.__name__] = fn; return fn
             return deco
     geotecnia.registrar(Fake(), lambda x: json.dumps(x))
-    assert set(tools) == {"gm_listar_proyectos", "gm_crear_proyecto", "gm_importar_csv", "gm_vincular_proyecto",
+    assert set(tools) == {"gm_iniciar", "gm_listar_proyectos", "gm_crear_proyecto", "gm_importar_csv", "gm_vincular_proyecto",
                           "gm_agregar_sondeos_al_dibujo", "gm_superficie_superior", "gm_sistema_coord"}
     tools["gm_crear_proyecto"](7, "QA")
     assert sent["request"]["confirmar"] is False and sent["request"]["accion"] == "crear"
@@ -103,3 +103,8 @@ def test_sistema_coord_reads_without_code_and_writes_only_when_confirmed():
     assert geotecnia.validar("sistema_coord", dict()) == dict(confirmar=False)
     assert geotecnia.validar("sistema_coord", dict(codigo="UTM84-19N", confirmar=True)) == dict(confirmar=True, codigo="UTM84-19N")
     with pytest.raises(ValueError): geotecnia.validar("sistema_coord", dict(codigo="x" * 61))
+
+def test_iniciar_solo_lleva_confirmar_y_simula_por_defecto():
+    assert geotecnia.validar("iniciar", dict(proyecto_id="X", basura=1)) == {"confirmar": False}
+    assert geotecnia.validar("iniciar", dict(confirmar=True)) == {"confirmar": True}
+    with pytest.raises(ValueError, match="booleano"): geotecnia.validar("iniciar", dict(confirmar="si"))

@@ -181,6 +181,7 @@ Requiere `Cdcrd.Targets.V2` 0.1.1. Un target por slot, metros, sin ecuaciones, o
 
 Módulo opcional `Cdcrd.Geotecnia.V1`. Hace sin diálogos lo que pide el panel Manage Data del Geotechnical Modeler. Detalle y límites en `docs/GEOTECNIA-0527.md`.
 
+- `gm_iniciar(pid, confirmar=False)`: inicia el Geotechnical Modeler en una sesion donde nadie ha abierto su panel, sin abrirlo. Si ya estaba iniciado no hace nada.
 - `gm_listar_proyectos(pid)`: proyectos de la base, con sondeos y estratos, y el proyecto vinculado al dibujo activo. Lectura.
 - `gm_crear_proyecto(pid, proyecto_id, nombre="", ubicacion="", sistema_coord="", confirmar=False)`: crea un proyecto vacío. Simula por defecto; al confirmar respalda antes la base.
 - `gm_importar_csv(pid, proyecto_id, ubicaciones, litologia, orientacion="", delimitador=",", confirmar=False)`: importa sondeos y estratos con el mapeo automático del formato del Geotechnical Modeler. Simula por defecto; al confirmar respalda antes la base.
