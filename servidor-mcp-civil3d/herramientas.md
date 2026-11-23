@@ -1,7 +1,7 @@
 # Herramientas del servidor MCP de Civil 3D
 
-89 herramientas en la entrega 0.5.24. Los apartados describen los mï¿½dulos
-incorporados en cada etapa; consultar el catï¿½logo MCP para las firmas vigentes.
+89 herramientas en la entrega 0.5.24. Los apartados describen los módulos
+incorporados en cada etapa; consultar el catálogo MCP para las firmas vigentes.
 Las de escritura exigen `confirmar=True`; el servidor pide entonces el token de
 aprobacion ligado a esos parametros exactos.
 
@@ -161,21 +161,21 @@ Ojo: `JsonToClr` del puente revienta con un objeto JSON crudo dentro de `args`
 ("The node must be of type 'JsonValue'") hasta v0.5.5 inclusive; por eso la query
 va como texto. Corregido en fuente despues de 0.5.5.
 
-## Mï¿½ltiples baselines y regiones (0.5.20)
+## Múltiples baselines y regiones (0.5.20)
 
-- `crear_corredor_multibaseline`: corredor nuevo, perfiles/ejes independientes y lista ordenada de regiones; cada una define ensamblaje, intervalo, frecuencia, extras y target TIN. Simulaciï¿½n por defecto, confirmaciï¿½n requerida.
-- `leer_corredor_multibaseline`: verifica contrato Xrecord propio, muestras y Top; marca el ensamblaje devuelto en lï¿½mites compartidos.
-- `crear_secciones_multibaseline`: baseline explï¿½cita, normales y estaciones verificadas, H=V; rechaza huecos/lï¿½mites compartidos.
+- `crear_corredor_multibaseline`: corredor nuevo, perfiles/ejes independientes y lista ordenada de regiones; cada una define ensamblaje, intervalo, frecuencia, extras y target TIN. Simulación por defecto, confirmación requerida.
+- `leer_corredor_multibaseline`: verifica contrato Xrecord propio, muestras y Top; marca el ensamblaje devuelto en límites compartidos.
+- `crear_secciones_multibaseline`: baseline explícita, normales y estaciones verificadas, H=V; rechaza huecos/límites compartidos.
 
-Requiere mï¿½dulo `Cdcrd.Corredores.V4`0.1.3 en la instancia existente. Catï¿½logo total78. [Contrato, ejemplos y evidencia](docs/MULTIBASELINE-0520.md).
+Requiere módulo `Cdcrd.Corredores.V4`0.1.3 en la instancia existente. Catálogo total78. [Contrato, ejemplos y evidencia](docs/MULTIBASELINE-0520.md).
 
 ## Targets de ancho y cota (0.5.21)
 
-- `listar_targets_corredor(dibujo, pid, corredor)`: slots por baseline/regiï¿½n/subensamblaje, tipo y referencias.
+- `listar_targets_corredor(dibujo, pid, corredor)`: slots por baseline/región/subensamblaje, tipo y referencias.
 - `crear_corredor_con_targets(dibujo, pid, corredor_origen, nombre, asignaciones, simular=True, confirmar=False)`: nuevo corredor y Top; origen propio multibaseline de solo lectura. Ancho con alineamiento lateral; cota con perfil de ese eje, o del eje baseline si no hay target de ancho.
-- `leer_targets_ancho_cota(dibujo, pid, corredor)`: contrato propio y verificaciï¿½n de ETW/Top. Usar este lector para el nuevo corredor, cuyo target no vacï¿½o rechaza el lector multibaseline anterior.
+- `leer_targets_ancho_cota(dibujo, pid, corredor)`: contrato propio y verificación de ETW/Top. Usar este lector para el nuevo corredor, cuyo target no vacío rechaza el lector multibaseline anterior.
 
-Requiere `Cdcrd.Targets.V2` 0.1.1. Un target por slot, metros, sin ecuaciones, objetos locales y carriles de corona. Simulaciï¿½n por defecto y confirmaciï¿½n requerida. Tras timeout consultar recibo; no reenviar. [Contrato, reproducciï¿½n y evidencia](docs/TARGETS-0521.md).
+Requiere `Cdcrd.Targets.V2` 0.1.1. Un target por slot, metros, sin ecuaciones, objetos locales y carriles de corona. Simulación por defecto y confirmación requerida. Tras timeout consultar recibo; no reenviar. [Contrato, reproducción y evidencia](docs/TARGETS-0521.md).
 
 ## Proyectos del Geotechnical Modeler (0.5.27)
 
@@ -194,6 +194,7 @@ gm_crear_proyecto(pid=PID_VERIFICADO, proyecto_id="QA GM", confirmar=True)
 gm_importar_csv(pid=PID_VERIFICADO, proyecto_id="QA GM", ubicaciones=r"C:\QA\qa_ubicaciones.csv", litologia=r"C:\QA\qa_litologia.csv", confirmar=True)
 gm_vincular_proyecto(pid=PID_VERIFICADO, proyecto_id="QA GM", confirmar=True)
 ```
+
 ## Documentos de la sesiÃ³n (0.5.26)
 
 - `listar_documentos(pid)`: dibujos abiertos en la sesiÃ³n de Civil 3D: ruta, si tiene archivo, solo lectura, activo, modificado (cambios sin guardar, por `DBMOD`) y comando en curso; dice cuÃ¡l estÃ¡ activo.
