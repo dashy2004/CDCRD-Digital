@@ -559,8 +559,12 @@ def generar_perfil_estratigrafico(spec: str) -> str:
     {spt, nivel_freatico, leyenda, columnas} y exportar {pdf, png, papel}.
     Crea perfiles de estrato, vista de perfil, estilos de forma por estrato
     (color), rellenos nativos (hatch), columnas de sondeo con SPT y nivel
-    freatico y leyenda; exporta sin dialogos. Todo con el prefijo indicado,
-    idempotente. Datos geotecnicos hipoteticos/preliminares.
+    freatico y leyenda; exporta sin dialogos. Todo con el prefijo indicado.
+    Repetible: borra antes lo que una corrida anterior dejo en las capas
+    <prefijo>-SOND, -TXT y -LEG (reemplazar_anotaciones=false lo evita). Sin
+    'banda' deja la vista sin bandas (juego_bandas_vacio, por defecto
+    '_No Bands'). exportar.rotacion: 0 por defecto (PNG apaisado).
+    Datos geotecnicos hipoteticos/preliminares.
     """
     try:
         datos = json.loads(spec)

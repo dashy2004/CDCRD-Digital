@@ -170,6 +170,73 @@ def _handle_por_nombre(puente, coleccion, nombre):
     return None
 
 
+def capas_anotacion(pref):
+    """Capas que la receta llena con entidades sueltas (columnas, textos, leyenda)."""
+    return [pref + '-SOND', pref + '-TXT', pref + '-LEG']
+
+
+def arg_handle(handle):
+    """Un handle como argumento de objects.invoke, igual que lo manda invocar_metodo."""
+    texto = str(handle)
+    return int(texto) if texto.isdigit() else texto
+
+
+def borrar_anotaciones(puente, capas, resultado):
+    """Borra lo que una corrida anterior dejo en las capas de anotacion.
+
+    Sin esto, repetir la receta duplica leyenda, columnas y textos. Devuelve
+    cuantas entidades borro; un fallo queda en advertencias y no detiene la receta.
+    """
+    borradas = 0
+    for capa in capas:
+        try:
+            r = puente.llamar('objects.query', {'capa': capa, 'limite': 5000})
+            handles = [o['handle'] for o in r.get('objetos', [])]
+            if handles:
+                rb = _esc(puente, 'objects.erase', {'handles': handles})
+                borradas += len(rb.get('borrados', handles))
+                if rb.get('fallidos'):
+                    resultado['advertencias'].append({'borrar_%s' % capa: rb['fallidos']})
+        except Exception as exc:
+            resultado['advertencias'].append({'borrar_%s' % capa: str(exc)})
+    return borradas
+
+
+def quitar_bandas(puente, pv, nombre_juego, resultado):
+    """Deja la vista sin bandas importando el juego de bandas vacio del dibujo.
+
+    Una vista de perfil nueva hereda el juego de bandas por defecto del dibujo
+    aunque su estilo no tenga ninguna. Devuelve True si lo aplico.
+    """
+    try:
+        r = puente.llamar('estilos.listar', {'familia': 'ProfileViewBandSetStyles',
+                                             'patron': '^' + re.escape(nombre_juego) + '$'})
+        juegos = [e for e in r.get('estilos', []) if e.get('familia') == 'ProfileViewBandSetStyles']
+        if not juegos:
+            resultado['advertencias'].append(
+                {'bandas': "no existe el juego de bandas '%s'; la vista conserva las bandas por defecto" % nombre_juego})
+            return False
+        _esc(puente, 'objects.invoke', {'handle': pv, 'ruta': 'Bands', 'metodo': 'ImportBandSetStyle',
+                                        'args': [arg_handle(juegos[0]['handle'])]})
+        return True
+    except Exception as exc:
+        resultado['advertencias'].append({'bandas': str(exc)})
+        return False
+
+
+def parametros_png(exp, vista_nombre, pv):
+    """Parametros de vista.exportar para el PNG; apaisado (rotacion 0) salvo que el spec diga otra cosa."""
+    params = {'ruta': exp['png'], 'dispositivo': 'PublishToWeb PNG.pc3',
+              'rotacion': str(exp.get('rotacion', 0))}
+    if exp.get('papel_png'):
+        params['papel'] = exp['papel_png']
+    if vista_nombre:
+        params['nombre_vista'] = vista_nombre
+    else:
+        params['handles'] = [pv]
+    return params
+
+
 GRILLA_MENOR = ('GridHorizontalMinor', 'GridVerticalMinor')
 GRILLA_MAYOR = ('GridHorizontalMajor', 'GridVerticalMajor')
 
@@ -271,6 +338,9 @@ def generar(spec, puente, log=print):
     if vista.get('fallidos'):
         resultado['advertencias'].append({'vista_perfil': vista['fallidos']})
     log('vista de perfil: %s' % pv)
+    if not spec.get('banda') and spec.get('sin_bandas', True):
+        if quitar_bandas(puente, pv, spec.get('juego_bandas_vacio', '_No Bands'), resultado):
+            log('vista sin bandas')
 
     for e in perfiles_estrato:
         nombre_forma = '%s-FORMA-%s' % (pref, e['nombre'])
@@ -282,8 +352,9 @@ def generar(spec, puente, log=print):
                 {'forma_%s' % e['nombre']: 'CopyAsSibling devolvio nulo (nombre recien purgado?)'})
         e['forma'] = nombre_forma
         if e.get('color_rgb') or e.get('color_aci') is not None:
+            # visible explicito: un estilo base sin relleno visible dejaba el estrato en blanco
             params = {'familia': 'ShapeStyles', 'estilo': nombre_forma, 'vista': 'Profile',
-                      'componente': e.get('componente_relleno', 'AreaFill')}
+                      'componente': e.get('componente_relleno', 'AreaFill'), 'visible': 'true'}
             if e.get('color_rgb'):
                 params['color_rgb'] = e['color_rgb']
             else:
@@ -312,6 +383,12 @@ def generar(spec, puente, log=print):
             log('hatch %s: %s -> %s' % (etiqueta, superior, inferior))
         except Exception as exc:
             resultado['advertencias'].append({'hatch_%s' % etiqueta: str(exc)})
+
+    if spec.get('reemplazar_anotaciones', True):
+        n_borradas = borrar_anotaciones(puente, capas_anotacion(pref), resultado)
+        if n_borradas:
+            resultado['reemplazado'] = n_borradas
+            log('anotaciones anteriores borradas: %d' % n_borradas)
 
     entidades = [{'tipo': 'capa', 'nombre': pref + '-SOND', 'color': 7},
                  {'tipo': 'capa', 'nombre': pref + '-TXT', 'color': 7}]
@@ -391,14 +468,8 @@ def generar(spec, puente, log=print):
             resultado['advertencias'].append({'export_pdf': str(exc)})
     if exp.get('png'):
         try:
-            params = {'ruta': exp['png'], 'dispositivo': 'PublishToWeb PNG.pc3'}
-            if exp.get('papel_png'):
-                params['papel'] = exp['papel_png']
-            if vista_nombre:
-                params['nombre_vista'] = vista_nombre
-            else:
-                params['handles'] = [pv]
-            resultado['exportado']['png'] = _esc(puente, 'vista.exportar', params)
+            resultado['exportado']['png'] = _esc(puente, 'vista.exportar',
+                                                 parametros_png(exp, vista_nombre, pv))
         except Exception as exc:
             resultado['advertencias'].append({'export_png': str(exc)})
 
