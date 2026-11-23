@@ -177,6 +177,24 @@ Requiere m�dulo `Cdcrd.Corredores.V4`0.1.3 en la instancia existente. Cat�logo t
 
 Requiere `Cdcrd.Targets.V2` 0.1.1. Un target por slot, metros, sin ecuaciones, objetos locales y carriles de corona. Simulaci�n por defecto y confirmaci�n requerida. Tras timeout consultar recibo; no reenviar. [Contrato, reproducci�n y evidencia](docs/TARGETS-0521.md).
 
+## Proyectos del Geotechnical Modeler (0.5.27)
+
+Módulo opcional `Cdcrd.Geotecnia.V1`. Hace sin diálogos lo que pide el panel Manage Data del Geotechnical Modeler. Detalle y límites en `docs/GEOTECNIA-0527.md`.
+
+- `gm_listar_proyectos(pid)`: proyectos de la base, con sondeos y estratos, y el proyecto vinculado al dibujo activo. Lectura.
+- `gm_crear_proyecto(pid, proyecto_id, nombre="", ubicacion="", sistema_coord="", confirmar=False)`: crea un proyecto vacío. Simula por defecto; al confirmar respalda antes la base.
+- `gm_importar_csv(pid, proyecto_id, ubicaciones, litologia, orientacion="", delimitador=",", confirmar=False)`: importa sondeos y estratos con el mapeo automático del formato del Geotechnical Modeler. Simula por defecto; al confirmar respalda antes la base.
+- `gm_vincular_proyecto(pid, proyecto_id, confirmar=False)`: escribe el proyecto en los ajustes del dibujo activo y lo relee. No guarda el dibujo.
+- `gm_agregar_sondeos_al_dibujo(pid, confirmar=False)`: inserta en el dibujo activo los sondeos de su proyecto como puntos, con los estilos del módulo.
+- `gm_superficie_superior(pid, recortar_bordes=False, largo_maximo_m=0.0, confirmar=False)`: crea «GM - Top Surface» desde las bocas de los sondeos; se niega si existe o si quedaría vacía.
+- `gm_sistema_coord(pid, codigo="", confirmar=False)`: lee o asigna el sistema de coordenadas del dibujo activo.
+
+```python
+gm_crear_proyecto(pid=PID_VERIFICADO, proyecto_id="QA GM", confirmar=True)
+gm_importar_csv(pid=PID_VERIFICADO, proyecto_id="QA GM", ubicaciones=r"C:\QA\qa_ubicaciones.csv", litologia=r"C:\QA\qa_litologia.csv", confirmar=True)
+gm_vincular_proyecto(pid=PID_VERIFICADO, proyecto_id="QA GM", confirmar=True)
+```
+
 ## Documentos de la sesión (0.5.26)
 
 - `listar_documentos(pid)`: dibujos abiertos en la sesión de Civil 3D: ruta, si tiene archivo, solo lectura, activo, modificado (cambios sin guardar, por `DBMOD`) y comando en curso; dice cuál está activo.
