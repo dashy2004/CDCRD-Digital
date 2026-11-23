@@ -619,6 +619,8 @@ import presion
 presion.registrar(mcp, _ok)
 import documentos
 documentos.registrar(mcp, _ok)
+import geotecnia
+geotecnia.registrar(mcp, _ok)
 import cuencas
 cuencas.registrar(mcp, _ok)
 import cubicacion
