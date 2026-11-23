@@ -12,6 +12,7 @@ GitHub con estas mismas notas. Lo que aún no tiene versión va bajo "Sin public
 ### Civil 3D y AutoCAD
 
 - Geotecnia 0.2.0: `gm_iniciar` arranca el Geotechnical Modeler en una sesión nueva sin abrir su panel; las demás herramientas `gm_*` ya no exigen haberlo abierto a mano.
+- Recetas `generar_perfil_estratigrafico` e `isometrico_sondeos_3d` repetibles y coherentes: repetirlas ya no duplica leyenda, columnas ni sólidos; la vista de perfil sale sin las bandas por defecto del dibujo; el relleno por estrato queda visible aunque el estilo base no lo traiga; el isométrico exagera igual columnas y superficies y colorea cada superficie; los PNG salen apaisados.
 - Documentos 0.2.0: `guardar_como` guarda un dibujo abierto en otra ruta y deja el documento con ese nombre, sin diálogos ni cerrar y reabrir.
 - Proyectos del Geotechnical Modeler sin diálogos: listar, crear, importar los CSV de sondeos y vincular el proyecto al dibujo, con respaldo de la base antes de cada escritura (0.5.27, módulo opcional `Cdcrd.Geotecnia.V1`).
 - Núcleo del puente 0.5.20 (AutoCAD 0.5.19): herramientas de escena `crear_bloque_3d`, `crear_dibujo` desde DWT, esfera en `crear_entidad`, giro explícito en `exportar_vista` y lectura de escena `scene.snapshot`. Ya estaba instalado desde una rama; con esto `master` vuelve a compilar la versión instalada.

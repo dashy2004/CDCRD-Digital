@@ -69,6 +69,29 @@ dibuja por encima de los HatchAreas nativos y ese orden no es controlable
 por API: atenuarla es la salida. Ojo: `"Standard"` en este dibujo es la
 plantilla imperial del GM — no usarla de base.
 
+## Repetir la receta, bandas y salida apaisada
+- **Repetible.** Antes de dibujar, la receta borra lo que una corrida anterior
+  dejó en las capas `<prefijo>-SOND`, `<prefijo>-TXT` y `<prefijo>-LEG`; el
+  resultado trae `reemplazado` con la cuenta. Con `reemplazar_anotaciones:
+  false` no borra nada (y entonces repetir duplica). Solo toca esas tres
+  capas: no ponga en ellas nada propio.
+- **Sin bandas.** Una vista de perfil nueva hereda el juego de bandas por
+  defecto del dibujo aunque su estilo no tenga ninguna. Si el spec no pide
+  `banda`, la receta importa en la vista el juego vacío (`juego_bandas_vacio`,
+  por defecto `"_No Bands"`). Si el dibujo no lo tiene, queda una advertencia
+  y la vista conserva las bandas. `sin_bandas: false` lo desactiva.
+- **Relleno visible.** Al dar color a un estrato se enciende también el
+  componente de relleno de su estilo de forma: con un `estilo_forma_base` sin
+  relleno visible el estrato salía en blanco.
+- **PNG apaisado.** `exportar.rotacion` (0, 90, 180, 270; por defecto 0).
+- No cambie el intervalo de marcas del eje del estilo de vista después de
+  generar: mueve el rango automático de estaciones y descuadra columnas y
+  leyenda. Para rótulos más cortos, cambie el formato de la etiqueta.
+
+```
+generar_perfil_estratigrafico(spec='{"prefijo":"AA","alineamiento":"Corte A","superficie_terreno":"TN","estratos":[...],"origen":[0,0],"leyenda_estacion":585,"exportar":{"png":"C:/tmp/aa.png"}}')
+```
+
 ## Suite de humo
 `pruebas/humo_perfil.py` (lanzada con `_diag/humo-perfil.ps1`): limpia,
 genera el corte A-A' completo y verifica 0 advertencias, estaciones exactas,
