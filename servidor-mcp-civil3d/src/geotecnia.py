@@ -139,8 +139,9 @@ def registrar(mcp, ok):
                           confirmar: bool = False) -> str:
         """Crea un proyecto vacio en la base del Geotechnical Modeler, sin su dialogo.
 
-        Se niega si ya existe un proyecto con ese identificador. Sin
-        confirmar=True simula y no escribe. Al confirmar copia antes la base
+        Se niega si ya existe un proyecto con ese identificador. Con
+        confirmar=False (por defecto) simula y no escribe. Con confirmar=True
+        copia antes la base
         de datos junto a ella y devuelve la ruta del respaldo. No vincula el
         proyecto a ningun dibujo: use gm_vincular_proyecto.
         """
@@ -155,9 +156,9 @@ def registrar(mcp, ok):
         ubicaciones y litologia son rutas absolutas; orientacion es opcional.
         El mapeo de campos es el automatico del modulo de Autodesk para sus
         propias cabeceras (Location ID, Easting, Northing, Ground Level, Final
-        Depth; Depth Top, Depth Base, Legend Code, Geology Code...). Sin
-        confirmar=True comprueba el mapeo y cuenta las filas, sin escribir. Al
-        confirmar respalda la base y devuelve los sondeos y estratos antes y
+        Depth; Depth Top, Depth Base, Legend Code, Geology Code...). Con
+        confirmar=False (por defecto) comprueba el mapeo y cuenta las filas,
+        sin escribir. Con confirmar=True respalda la base y devuelve los sondeos y estratos antes y
         despues, mas el informe del importador. No agrega los sondeos al
         dibujo ni importa muestras SPT.
         """

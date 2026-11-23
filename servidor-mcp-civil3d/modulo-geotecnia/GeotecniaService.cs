@@ -251,11 +251,18 @@ internal static class GeotecniaService
     private static Dictionary<string, object> Fila(object repo, object proyecto)
     {
         string id = (string)Gm.Prop(proyecto, "ProjectId");
-        int Cuenta(string metodo) { try { return ((IList)Gm.Llamar(repo, metodo, id)).Count; } catch (Exception) { return -1; } }
+        // A count that cannot be read is reported as null with its reason in 'avisos', never as a silent number.
+        var avisos = new List<string>();
+        int? Cuenta(string metodo)
+        {
+            try { return ((IList)Gm.Llamar(repo, metodo, id)).Count; }
+            catch (Exception ex) { avisos.Add(metodo + ": " + ex.GetBaseException().Message); return null; }
+        }
         return new Dictionary<string, object>
         {
             ["proyecto_id"] = id, ["nombre"] = Gm.Prop(proyecto, "ProjectName"), ["ubicacion"] = Gm.Prop(proyecto, "ProjectLocation"),
-            ["sistema_coord"] = Gm.Prop(proyecto, "CSCode"), ["sondeos"] = Cuenta("GetBoreholes"), ["estratos"] = Cuenta("GetStrata")
+            ["sistema_coord"] = Gm.Prop(proyecto, "CSCode"), ["sondeos"] = Cuenta("GetBoreholes"), ["estratos"] = Cuenta("GetStrata"),
+            ["avisos"] = avisos
         };
     }
 
