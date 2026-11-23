@@ -62,7 +62,8 @@ internal static class Gm
 
 internal static class GeotecniaService
 {
-    private static readonly string[] Actions = { "listar", "crear", "importar", "vincular" };
+    private static readonly string[] Actions = { "listar", "crear", "importar", "vincular", "agregar_sondeos", "superficie_superior", "sistema_coord" };
+    internal const string TopSurface = "GM - Top Surface";
 
     private static string Text(JsonObject p, string key, bool required = true, int max = 260)
     {
@@ -104,9 +105,132 @@ internal static class GeotecniaService
                 case "listar": return Listar(repo, settingsRepo, docService);
                 case "crear": return Crear(repo, p, confirm, ref changed);
                 case "importar": return Importar(repo, p, confirm, ref changed);
-                default: return Vincular(repo, settingsRepo, docService, p, confirm, ref changed);
+                case "vincular": return Vincular(repo, settingsRepo, docService, p, confirm, ref changed);
+                case "sistema_coord": return SistemaCoord(cont, docService, p, confirm, ref changed);
+                default: return EnDibujo(cont, repo, settingsRepo, docService, action, p, confirm, ref changed);
             }
         }
+    }
+
+    // Boreholes as COGO points and the top surface: BoreholeManager, the object behind "Add Boreholes To Drawing".
+    private static object EnDibujo(object cont, object repo, object settingsRepo, object docService, string action, JsonObject p, bool confirm, ref bool changed)
+    {
+        var doc = App.DocumentManager.MdiActiveDocument ?? throw new InvalidOperationException("No hay dibujo activo");
+        string id = EnTransaccion(docService, () => Vinculado(settingsRepo));
+        if (string.IsNullOrEmpty(id)) throw new InvalidOperationException("El dibujo activo no esta vinculado a un proyecto del Geotechnical Modeler; use gm_vincular_proyecto");
+        var proyecto = Existente(repo, id) ?? throw new InvalidOperationException("El proyecto del dibujo no existe en la base: " + id);
+        var sondeos = (IList)Gm.Llamar(repo, "GetBoreholes", id);
+        if (sondeos.Count == 0) throw new InvalidOperationException("El proyecto no tiene sondeos: " + id);
+        var land = Gm.Resolver(cont, Gm.Cad, Gm.Cad + ".LandServices");
+        bool SuperficieExiste() => EnTransaccion(docService, () => Existe(land));
+        bool antes = SuperficieExiste();
+        if (action == "superficie_superior")
+        {
+            bool recortar = p["recortar_bordes"]?.GetValue<bool>() ?? false;
+            double largo = p["largo_maximo_m"]?.GetValue<double>() ?? 0.0;
+            if (largo < 0 || largo > 100000) throw new ArgumentException("largo_maximo_m fuera de rango");
+            if (antes) throw new InvalidOperationException("Ya existe la superficie '" + TopSurface + "'; no se reemplaza");
+            if (!confirm) return new { simulacion = true, dibujo = doc.Name, proyecto_id = id, sondeos = sondeos.Count, superficie = TopSurface, existe = false };
+            var manager = Gm.Resolver(cont, Gm.Cad, Gm.Cad + ".BoreholeManager");
+            int puntos;
+            using (doc.LockDocument())
+                puntos = EnTransaccion(docService, () =>
+                {
+                    ImportarEstilos(cont, land);
+                    Gm.Llamar(manager, "CreateTopSurfaceFromAllBoreholes", recortar, largo);
+                    // Without boreholes in the drawing the GM still creates the surface, empty: throwing here aborts it.
+                    int n = Puntos(Gm.Llamar(land, "GetSurface", TopSurface));
+                    if (n < 3) throw new InvalidOperationException("La superficie '" + TopSurface + "' quedaria con " + n + " puntos; agregue antes los sondeos al dibujo (gm_agregar_sondeos_al_dibujo). No se creo");
+                    return n;
+                });
+            changed = true;
+            return new { simulacion = false, dibujo = doc.Name, proyecto_id = id, sondeos = sondeos.Count, superficie = TopSurface, existe = true, puntos, guardado = false };
+        }
+        string cs = (string)Gm.Prop(proyecto, "CSCode") ?? "";
+        if (!confirm) return new { simulacion = true, dibujo = doc.Name, proyecto_id = id, sondeos = sondeos.Count, sistema_coord_del_proyecto = cs };
+        var mgr = Gm.Resolver(cont, Gm.Cad, Gm.Cad + ".BoreholeManager");
+        using (doc.LockDocument())
+            EnTransaccion(docService, () =>
+            {
+                ImportarEstilos(cont, land);
+                // InsertAllBoreholes also creates the point group "GM - All Boreholes".
+                Gm.Llamar(mgr, "InsertAllBoreholes", ListaPara(mgr, "InsertAllBoreholes", repo, id), cs);
+                return 0;
+            });
+        changed = true;
+        return new { simulacion = false, dibujo = doc.Name, proyecto_id = id, sondeos = sondeos.Count, sistema_coord_del_proyecto = cs, guardado = false };
+    }
+
+    // The GM draws with its own styles ("GM - Hidden", "GM - Standard"...), copied from its template drawing the first
+    // time its panel opens on a drawing. Existing styles are kept (replaceExistingStyles = false).
+    private static void ImportarEstilos(object cont, object land)
+    {
+        var tipo = Gm.Tipo(Gm.Cad, Gm.Cad + ".StyleImporter.StyleImporter");
+        var config = Gm.Resolver(cont, Gm.Domain, Gm.Domain + ".IApplicationConfig");
+        var importer = Activator.CreateInstance(tipo, config, land);
+        var metodo = tipo.GetMethod("ImportStylesFromTemplate") ?? throw new MissingMethodException("StyleImporter", "ImportStylesFromTemplate");
+        var cuales = metodo.GetParameters()[0].ParameterType;
+        var valores = Enum.IsDefined(cuales, "All") ? new[] { Enum.Parse(cuales, "All") } : Enum.GetValues(cuales).Cast<object>().ToArray();
+        foreach (var v in valores)
+        {
+            try { metodo.Invoke(importer, new[] { v, (object)false }); }
+            catch (TargetInvocationException ex) { throw new InvalidOperationException("Estilos del Geotechnical Modeler (" + v + "): " + ex.GetBaseException().Message); }
+        }
+    }
+
+    // InsertAllBoreholes takes the repository's own list type: ask the repository for whichever list fits its first parameter.
+    private static object ListaPara(object manager, string metodo, object repo, string id)
+    {
+        var tipo = manager.GetType().GetMethods().First(m => m.Name == metodo).GetParameters()[0].ParameterType;
+        foreach (string fuente in new[] { "GetBoreholes", "GetBoreholeLocations" })
+        {
+            var lista = Gm.Llamar(repo, fuente, id);
+            if (tipo.IsInstanceOfType(lista)) return lista;
+        }
+        throw new InvalidOperationException("El repositorio no ofrece la lista que pide " + metodo + " (" + tipo + ")");
+    }
+
+    // Number of points of a Civil TIN surface, read by reflection (this module does not reference the Civil assemblies).
+    private static int Puntos(object superficie)
+    {
+        if (superficie == null) return 0;
+        try
+        {
+            var general = superficie.GetType().GetMethod("GetGeneralProperties", Type.EmptyTypes)?.Invoke(superficie, null);
+            object n = general?.GetType().GetProperty("NumberOfPoints")?.GetValue(general);
+            return n == null ? 0 : Convert.ToInt32(n);
+        }
+        // Civil refuses the statistics of an empty surface ("The surface has no point or triangle").
+        catch (TargetInvocationException) { return 0; }
+    }
+
+    // Must run inside EnTransaccion.
+    private static bool Existe(object land)
+    {
+        try { return Gm.Llamar(land, "GetSurface", TopSurface) != null; }
+        catch (InvalidOperationException) { return false; }
+    }
+
+    // Coordinate system of the active drawing, through the GM's own manager (the one its panel calls).
+    private static object SistemaCoord(object cont, object docService, JsonObject p, bool confirm, ref bool changed)
+    {
+        var doc = App.DocumentManager.MdiActiveDocument ?? throw new InvalidOperationException("No hay dibujo activo");
+        string codigo = Text(p, "codigo", false, 60);
+        // Not registered in the GM container: built the way its presenter receives it, from the map services.
+        var csm = Activator.CreateInstance(Gm.Tipo(Gm.Cad, Gm.Cad + ".CoordinateSystemManager"), Gm.Resolver(cont, Gm.Cad, Gm.Cad + ".MapServices"));
+        string Actual() => EnTransaccion(docService, () => (string)Gm.Llamar(csm, "GetCurrentCoordinateSystem"));
+        string antes = Actual();
+        if (codigo == null) return new { dibujo = doc.Name, sistema_coord = antes };
+        if (!confirm) return new { simulacion = true, dibujo = doc.Name, antes, despues = codigo };
+        using (doc.LockDocument())
+        {
+            try { EnTransaccion(docService, () => { Gm.Llamar(csm, "SetCurrentCoordinateSystem", codigo); return 0; }); }
+            catch (InvalidOperationException ex) { throw new InvalidOperationException("Civil no acepto el codigo de sistema de coordenadas '" + codigo + "': " + ex.Message); }
+        }
+        string despues = Actual();
+        if (!string.Equals(despues, codigo, StringComparison.OrdinalIgnoreCase)) throw new InvalidOperationException("El dibujo quedo con el sistema '" + despues + "', no con '" + codigo + "'");
+        changed = true;
+        return new { simulacion = false, dibujo = doc.Name, antes, despues, guardado = false };
     }
 
     // The drawing's GM settings are only readable or writable inside a GM transaction on the active document,

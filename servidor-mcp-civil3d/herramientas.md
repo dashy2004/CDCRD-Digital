@@ -185,6 +185,9 @@ Módulo opcional `Cdcrd.Geotecnia.V1`. Hace sin diálogos lo que pide el panel M
 - `gm_crear_proyecto(pid, proyecto_id, nombre="", ubicacion="", sistema_coord="", confirmar=False)`: crea un proyecto vacío. Simula por defecto; al confirmar respalda antes la base.
 - `gm_importar_csv(pid, proyecto_id, ubicaciones, litologia, orientacion="", delimitador=",", confirmar=False)`: importa sondeos y estratos con el mapeo automático del formato del Geotechnical Modeler. Simula por defecto; al confirmar respalda antes la base.
 - `gm_vincular_proyecto(pid, proyecto_id, confirmar=False)`: escribe el proyecto en los ajustes del dibujo activo y lo relee. No guarda el dibujo.
+- `gm_agregar_sondeos_al_dibujo(pid, confirmar=False)`: inserta en el dibujo activo los sondeos de su proyecto como puntos, con los estilos del módulo.
+- `gm_superficie_superior(pid, recortar_bordes=False, largo_maximo_m=0.0, confirmar=False)`: crea «GM - Top Surface» desde las bocas de los sondeos; se niega si existe o si quedaría vacía.
+- `gm_sistema_coord(pid, codigo="", confirmar=False)`: lee o asigna el sistema de coordenadas del dibujo activo.
 
 ```python
 gm_crear_proyecto(pid=PID_VERIFICADO, proyecto_id="QA GM", confirmar=True)

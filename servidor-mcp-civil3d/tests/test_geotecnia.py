@@ -82,9 +82,24 @@ def test_mcp_tools_default_to_simulation(monkeypatch, tmp_path):
             def deco(fn): tools[fn.__name__] = fn; return fn
             return deco
     geotecnia.registrar(Fake(), lambda x: json.dumps(x))
-    assert set(tools) == {"gm_listar_proyectos", "gm_crear_proyecto", "gm_importar_csv", "gm_vincular_proyecto"}
+    assert set(tools) == {"gm_listar_proyectos", "gm_crear_proyecto", "gm_importar_csv", "gm_vincular_proyecto",
+                          "gm_agregar_sondeos_al_dibujo", "gm_superficie_superior", "gm_sistema_coord"}
     tools["gm_crear_proyecto"](7, "QA")
     assert sent["request"]["confirmar"] is False and sent["request"]["accion"] == "crear"
     tools["gm_vincular_proyecto"](7, "QA", confirmar=True)
     assert sent["request"]["confirmar"] is True
     assert "error" in json.loads(tools["gm_importar_csv"](7, "QA", "relativo.csv", LIT))
+
+
+def test_drawing_actions_take_no_project_and_simulate_by_default():
+    assert geotecnia.validar("agregar_sondeos", dict(proyecto_id="otro", basura=1)) == dict(confirmar=False)
+    assert geotecnia.validar("superficie_superior", dict(confirmar=True)) == dict(confirmar=True, recortar_bordes=False, largo_maximo_m=0.0)
+    assert geotecnia.validar("superficie_superior", dict(recortar_bordes=True, largo_maximo_m=25))["largo_maximo_m"] == 25.0
+    for malo in (dict(recortar_bordes="si"), dict(largo_maximo_m=-1), dict(largo_maximo_m=True), dict(largo_maximo_m="5")):
+        with pytest.raises(ValueError): geotecnia.validar("superficie_superior", malo)
+
+
+def test_sistema_coord_reads_without_code_and_writes_only_when_confirmed():
+    assert geotecnia.validar("sistema_coord", dict()) == dict(confirmar=False)
+    assert geotecnia.validar("sistema_coord", dict(codigo="UTM84-19N", confirmar=True)) == dict(confirmar=True, codigo="UTM84-19N")
+    with pytest.raises(ValueError): geotecnia.validar("sistema_coord", dict(codigo="x" * 61))

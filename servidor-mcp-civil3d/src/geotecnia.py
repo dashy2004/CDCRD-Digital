@@ -21,7 +21,8 @@ from transporte import ReciboError
 
 MODULE = "cdcrd-geotecnia"
 COMMAND = "CDCRDGEOTECNIAV1"
-ACCIONES = ("listar", "crear", "importar", "vincular")
+ACCIONES = ("listar", "crear", "importar", "vincular", "agregar_sondeos", "superficie_superior", "sistema_coord")
+SIN_PROYECTO = ("agregar_sondeos", "superficie_superior", "sistema_coord")
 ID_VALIDO = re.compile(r"^[\w \-\.\(\)]{1,100}$")
 
 
@@ -67,6 +68,8 @@ def validar(accion, datos):
     confirmar = datos.get("confirmar", False)
     if not isinstance(confirmar, bool):
         raise ValueError("confirmar debe ser booleano")
+    if accion in SIN_PROYECTO:
+        return _en_dibujo(accion, datos, confirmar)
     out = dict(proyecto_id=_proyecto(datos.get("proyecto_id")), confirmar=confirmar)
     if accion == "crear":
         campos = (("nombre", 200), ("ubicacion", 200), ("sistema_coord", 60))
@@ -80,6 +83,24 @@ def validar(accion, datos):
         if delimitador not in (",", ";", "\t", "|"):
             raise ValueError("delimitador debe ser coma, punto y coma, tabulador o barra")
         out["delimitador"] = delimitador
+    return out
+
+
+def _en_dibujo(accion, datos, confirmar):
+    """Acciones sobre el dibujo activo: su proyecto es el que tiene vinculado."""
+    out = dict(confirmar=confirmar)
+    if accion == "sistema_coord":
+        codigo = _opcional(datos.get("codigo"), "codigo", 60)
+        if codigo:
+            out["codigo"] = codigo
+    elif accion == "superficie_superior":
+        recortar = datos.get("recortar_bordes", False)
+        largo = datos.get("largo_maximo_m", 0.0)
+        if not isinstance(recortar, bool):
+            raise ValueError("recortar_bordes debe ser booleano")
+        if isinstance(largo, bool) or not isinstance(largo, (int, float)) or not 0 <= largo <= 100000:
+            raise ValueError("largo_maximo_m debe estar entre 0 y 100000")
+        out.update(recortar_bordes=recortar, largo_maximo_m=float(largo))
     return out
 
 
@@ -153,3 +174,38 @@ def registrar(mcp, ok):
         falla si no coincide. No guarda el dibujo.
         """
         return call("vincular", pid, proyecto_id=proyecto_id, confirmar=confirmar)
+
+    @mcp.tool()
+    def gm_agregar_sondeos_al_dibujo(pid: int, confirmar: bool = False) -> str:
+        """Agrega al dibujo activo los sondeos del proyecto que tiene vinculado, como hace "Add Boreholes To Drawing".
+
+        Inserta todos los sondeos del proyecto como puntos y crea su grupo de
+        puntos con los estilos del Geotechnical Modeler. Exige que el dibujo
+        este vinculado (gm_vincular_proyecto) y que el proyecto tenga sondeos.
+        Sin confirmar=True solo informa cuantos agregaria. No guarda el dibujo.
+        """
+        return call("agregar_sondeos", pid, confirmar=confirmar)
+
+    @mcp.tool()
+    def gm_superficie_superior(pid: int, recortar_bordes: bool = False, largo_maximo_m: float = 0.0,
+                               confirmar: bool = False) -> str:
+        """Crea la superficie 'GM - Top Surface' desde las bocas de los sondeos del dibujo.
+
+        Es la superficie que el perfil nativo del Geotechnical Modeler exige
+        por ese nombre exacto. Requiere los sondeos ya agregados al dibujo. Se
+        niega si la superficie ya existe. recortar_bordes y largo_maximo_m son
+        los del propio modulo de Autodesk para descartar triangulos largos del
+        borde. Sale de las cotas de boca, no de un levantamiento. No guarda.
+        """
+        return call("superficie_superior", pid, recortar_bordes=recortar_bordes, largo_maximo_m=largo_maximo_m,
+                    confirmar=confirmar)
+
+    @mcp.tool()
+    def gm_sistema_coord(pid: int, codigo: str = "", confirmar: bool = False) -> str:
+        """Lee o asigna el sistema de coordenadas del dibujo activo con el gestor del Geotechnical Modeler.
+
+        Sin codigo devuelve el sistema actual (lectura). Con codigo (el de la
+        biblioteca de Autodesk, por ejemplo 'UTM84-19N') simula salvo
+        confirmar=True; relee el valor y falla si no coincide. No guarda.
+        """
+        return call("sistema_coord", pid, codigo=codigo, confirmar=confirmar)
