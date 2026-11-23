@@ -21,13 +21,40 @@ internal static class Gm
     internal static Type Tipo(string asm, string nombre)
     {
         var a = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(x => string.Equals(x.GetName().Name, asm, StringComparison.OrdinalIgnoreCase))
-            ?? throw new InvalidOperationException("El Geotechnical Modeler no esta cargado en esta sesion (falta " + asm + "); abra su panel una vez");
+            ?? throw new InvalidOperationException("El Geotechnical Modeler no esta cargado en esta sesion (falta " + asm + "); use gm_iniciar o abra su panel una vez");
         return a.GetType(nombre, false) ?? throw new InvalidOperationException("Tipo no encontrado en " + asm + ": " + nombre);
     }
 
     internal static object Contenedor() =>
         Tipo(Domain, Domain + ".IoC").GetProperty("Container", BindingFlags.Public | BindingFlags.Static)?.GetValue(null)
-        ?? throw new InvalidOperationException("El Geotechnical Modeler aun no se ha iniciado en esta sesion; abra su panel una vez");
+        ?? throw new InvalidOperationException("El Geotechnical Modeler aun no se ha iniciado en esta sesion; use gm_iniciar o abra su panel una vez");
+
+    internal const string Plugin = "Aecc.Gtm.AutoCADPlugin";
+
+    internal static bool Cargado(string asm) =>
+        AppDomain.CurrentDomain.GetAssemblies().Any(x => string.Equals(x.GetName().Name, asm, StringComparison.OrdinalIgnoreCase));
+
+    // True only when the GM has built its container: the state every other action needs.
+    internal static bool Iniciado()
+    {
+        if (!Cargado(Domain)) return false;
+        try { return Tipo(Domain, Domain + ".IoC").GetProperty("Container", BindingFlags.Public | BindingFlags.Static)?.GetValue(null) != null; }
+        catch (Exception) { return false; }
+    }
+
+    // The GM plug-in inside Autodesk's own bundle; it is registered to load on the first GM command.
+    internal static string RutaPlugin()
+    {
+        var raices = new[] { Environment.SpecialFolder.ProgramFiles, Environment.SpecialFolder.CommonApplicationData, Environment.SpecialFolder.ApplicationData }
+            .Select(f => Path.Combine(Environment.GetFolderPath(f), "Autodesk", "ApplicationPlugins")).Where(Directory.Exists);
+        foreach (var raiz in raices)
+            foreach (var bundle in Directory.GetDirectories(raiz, "C3D-GeoTechModeler-*.bundle").OrderByDescending(x => x, StringComparer.OrdinalIgnoreCase))
+            {
+                string dll = Path.Combine(bundle, "Contents", Plugin + ".dll");
+                if (File.Exists(dll)) return dll;
+            }
+        return null;
+    }
 
     // Castle Windsor scope, as the GM presenters open one per operation.
     internal static IDisposable Ambito(object contenedor)
@@ -62,7 +89,7 @@ internal static class Gm
 
 internal static class GeotecniaService
 {
-    private static readonly string[] Actions = { "listar", "crear", "importar", "vincular", "agregar_sondeos", "superficie_superior", "sistema_coord" };
+    private static readonly string[] Actions = { "iniciar", "listar", "crear", "importar", "vincular", "agregar_sondeos", "superficie_superior", "sistema_coord" };
     internal const string TopSurface = "GM - Top Surface";
 
     private static string Text(JsonObject p, string key, bool required = true, int max = 260)
@@ -94,6 +121,7 @@ internal static class GeotecniaService
         bool confirm = p["confirmar"]?.GetValue<bool>() ?? false;
         if (action != "listar" && confirm && Environment.GetEnvironmentVariable("CDCRD_C3D_SOLO_LECTURA") == "1")
             throw new InvalidOperationException("Sesion en solo lectura");
+        if (action == "iniciar") return Iniciar(confirm, ref changed);
         var cont = Gm.Contenedor();
         using (Gm.Ambito(cont))
         {
@@ -110,6 +138,21 @@ internal static class GeotecniaService
                 default: return EnDibujo(cont, repo, settingsRepo, docService, action, p, confirm, ref changed);
             }
         }
+    }
+
+    // Loads Autodesk's GM plug-in the way its first command would, without running any command or opening its panel.
+    private static object Iniciar(bool confirm, ref bool changed)
+    {
+        if (Gm.Iniciado()) return new Dictionary<string, object> { ["ya_iniciado"] = true, ["iniciado"] = true };
+        string dll = Gm.RutaPlugin() ?? throw new FileNotFoundException("No se encontro el Geotechnical Modeler instalado (C3D-GeoTechModeler-*.bundle)");
+        var estado = new Dictionary<string, object> { ["ya_iniciado"] = false, ["plugin"] = dll, ["ensamblado_cargado"] = Gm.Cargado(Gm.Plugin) };
+        if (!confirm) { estado["simulado"] = true; estado["iniciado"] = false; return estado; }
+        Autodesk.AutoCAD.Runtime.ExtensionLoader.Load(dll);
+        if (!Gm.Iniciado())
+            throw new InvalidOperationException("El modulo de Autodesk se cargo pero no inicio sus servicios; abra su panel una vez");
+        changed = true;
+        estado["iniciado"] = true;
+        return estado;
     }
 
     // Boreholes as COGO points and the top surface: BoreholeManager, the object behind "Add Boreholes To Drawing".

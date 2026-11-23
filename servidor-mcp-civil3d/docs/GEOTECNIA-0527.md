@@ -1,12 +1,13 @@
 # Proyectos del Geotechnical Modeler sin diálogos — 0.5.27
 
-Módulo opcional `Cdcrd.Geotecnia.V1` 0.1.0 (`modulo-geotecnia/`, `src/geotecnia.py`). Hace sin pantalla lo que el panel **Manage Data** del Geotechnical Modeler (GM) de Civil 3D 2027 pide con diálogos: crear un proyecto, importar los CSV de sondeos y vincular el proyecto al dibujo.
+Módulo opcional `Cdcrd.Geotecnia.V1` 0.2.0 (`modulo-geotecnia/`, `src/geotecnia.py`). Hace sin pantalla lo que el panel **Manage Data** del Geotechnical Modeler (GM) de Civil 3D 2027 pide con diálogos: crear un proyecto, importar los CSV de sondeos y vincular el proyecto al dibujo.
 
 El GM no publica una API. El módulo llega a sus servicios por reflexión, a través de su propio contenedor (`Aecc.Gtm.Domain.IoC`): son los mismos objetos que usa el panel. No abre ninguna ventana del GM.
 
 ## Uso
 
 ```python
+gm_iniciar(pid=PID_VERIFICADO, confirmar=True)   # solo si nadie ha abierto el panel del GM en esta sesion
 gm_listar_proyectos(pid=PID_VERIFICADO)
 gm_crear_proyecto(pid=PID_VERIFICADO, proyecto_id="QA GM", nombre="Proyecto sintetico", confirmar=True)
 gm_importar_csv(pid=PID_VERIFICADO, proyecto_id="QA GM", ubicaciones=r"C:\QA\qa_ubicaciones.csv",
@@ -73,3 +74,12 @@ Offline: 12 pruebas Python (`tests/test_geotecnia.py`), compilación con 0 error
 .\instalar-geotecnia.ps1 -SoloCompilar
 py -m pytest tests/test_geotecnia.py -q
 ```
+
+## Iniciar el GM sin abrir su panel (0.2.0)
+
+Autodesk registra el Geotechnical Modeler para cargarse con su primer comando: en una sesión recién abierta sus servicios no existen y toda herramienta `gm_*` responde «no está cargado en esta sesión». `gm_iniciar(pid, confirmar=True)` carga el módulo de Autodesk desde su propia instalación (`C3D-GeoTechModeler-*.bundle`, `Aecc.Gtm.AutoCADPlugin.dll`) y comprueba que su contenedor de servicios quedó creado. No ejecuta ningún comando del GM, no abre su panel y no toca el dibujo ni la base de datos.
+
+- Sin `confirmar` informa si hace falta y qué archivo cargaría.
+- Si ya estaba iniciado devuelve `ya_iniciado: true` y no hace nada.
+- El recibo marca `committed: true` cuando lo inició: lo que cambia es la sesión, no el dibujo.
+- Sigue haciendo falta un dibujo abierto, porque el puente despacha comandos a través de un documento.

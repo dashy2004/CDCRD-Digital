@@ -21,7 +21,7 @@ from transporte import ReciboError
 
 MODULE = "cdcrd-geotecnia"
 COMMAND = "CDCRDGEOTECNIAV1"
-ACCIONES = ("listar", "crear", "importar", "vincular", "agregar_sondeos", "superficie_superior", "sistema_coord")
+ACCIONES = ("iniciar", "listar", "crear", "importar", "vincular", "agregar_sondeos", "superficie_superior", "sistema_coord")
 SIN_PROYECTO = ("agregar_sondeos", "superficie_superior", "sistema_coord")
 ID_VALIDO = re.compile(r"^[\w \-\.\(\)]{1,100}$")
 
@@ -68,6 +68,8 @@ def validar(accion, datos):
     confirmar = datos.get("confirmar", False)
     if not isinstance(confirmar, bool):
         raise ValueError("confirmar debe ser booleano")
+    if accion == "iniciar":
+        return dict(confirmar=confirmar)
     if accion in SIN_PROYECTO:
         return _en_dibujo(accion, datos, confirmar)
     out = dict(proyecto_id=_proyecto(datos.get("proyecto_id")), confirmar=confirmar)
@@ -123,6 +125,19 @@ def registrar(mcp, ok):
             return ok({"error": str(exc), "receipt": exc.receipt})
         except (ValueError, TypeError, KeyError, OSError, RuntimeError) as exc:
             return ok({"error": str(exc)})
+
+    @mcp.tool()
+    def gm_iniciar(pid: int, confirmar: bool = False) -> str:
+        """Inicia el Geotechnical Modeler en una sesion donde nadie ha abierto su panel, sin abrirlo.
+
+        Carga el modulo de Autodesk desde su propia instalacion, como lo haria
+        su primer comando, y comprueba que sus servicios quedaron listos. No
+        ejecuta ningun comando del Geotechnical Modeler ni toca el dibujo ni
+        la base de datos. Si ya estaba iniciado lo dice y no hace nada. Con
+        confirmar=False (por defecto) solo informa si hace falta y que
+        cargaria. Las demas herramientas gm_* lo necesitan iniciado.
+        """
+        return call("iniciar", pid, confirmar=confirmar)
 
     @mcp.tool()
     def gm_listar_proyectos(pid: int) -> str:

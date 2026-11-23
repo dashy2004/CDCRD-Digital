@@ -18,7 +18,7 @@ namespace Cdcrd.Geotecnia;
 
 public class Commands : IExtensionApplication
 {
-    internal const string Version = "0.1.0";
+    internal const string Version = "0.2.0";
     internal const string Module = "cdcrd-geotecnia";
     internal const string BaseName = "Cdcrd.Geotecnia.V1";
     internal const string BaseCommand = "CDCRDGEOTECNIAV1";
@@ -94,7 +94,7 @@ public class Commands : IExtensionApplication
         catch (Exception ex) { error = ex.GetBaseException().Message; }
         string active = null; int open = -1;
         try { active = App.DocumentManager.MdiActiveDocument?.Name; open = App.DocumentManager.Count; } catch (Exception ex) { error ??= "Estado final no legible: " + ex.Message; }
-        // committed: true when the GM database or the drawing's GM settings changed.
+        // committed: true when the GM database, the drawing's GM settings or the session (GM started) changed.
         var payload = new { id = key, sha256 = digest, module = Module, version = Version, pid = Environment.ProcessId, ok = error == null, committed = changed, error,
             activo = active, abiertos = open, result };
         string temp = receipt + ".tmp";
