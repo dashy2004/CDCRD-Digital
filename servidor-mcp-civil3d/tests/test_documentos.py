@@ -83,7 +83,8 @@ def test_mcp_tools_require_confirmation_except_listing(monkeypatch, tmp_path):
             def deco(fn): tools[fn.__name__] = fn; return fn
             return deco
     documentos.registrar(Fake(), lambda x: json.dumps(x))
-    assert set(tools) == {"listar_documentos", "abrir_documento", "activar_documento", "cerrar_documento"}
+    assert set(tools) == {"listar_documentos", "abrir_documento", "activar_documento", "cerrar_documento", "guardar_como"}
+    assert "confirmar=True" in json.loads(tools["guardar_como"](7, DWG, r"C:\QA\otro.dwg"))["error"]
     for name in ("abrir_documento", "activar_documento", "cerrar_documento"):
         assert "confirmar=True" in json.loads(tools[name](7, DWG))["error"]
     assert json.loads(tools["listar_documentos"](7))["ok"] is True
@@ -134,3 +135,11 @@ def test_cerrar_does_not_retry_other_refusals_and_reports_a_second_busy(monkeypa
     with pytest.raises(transporte.ReciboError, match="busy"):
         documentos.cerrar(7, ruta=DWG, descartar_cambios=False)
     assert len(llamadas) == 3 and all(c.get("descartar_cambios", False) is False for c in llamadas)
+
+
+def test_guardar_como_names_the_document_and_an_absolute_dwg_destination():
+    out = documentos.validar("guardar_como", dict(ruta="Drawing1.dwg", destino=r"C:\QA\nuevo.dwg", basura=1))
+    assert out == dict(ruta="Drawing1.dwg", destino=r"C:\QA\nuevo.dwg", sobrescribir=False)
+    assert documentos.validar("guardar_como", dict(ruta=DWG, destino=DWG, sobrescribir=True))["sobrescribir"] is True
+    for malo in (dict(destino="nuevo.dwg"), dict(destino=r"C:\QA\nuevo.dxf"), dict(destino=""), dict(sobrescribir="si"), dict(ruta=r"sub\x.dwg")):
+        with pytest.raises(ValueError): documentos.validar("guardar_como", dict(dict(ruta=DWG, destino=r"C:\QA\nuevo.dwg"), **malo))

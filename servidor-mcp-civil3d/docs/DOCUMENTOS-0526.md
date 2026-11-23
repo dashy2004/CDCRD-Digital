@@ -53,10 +53,37 @@ Probado después en una sesión recién iniciada: la negativa a cerrar el único
 
 Offline: 11 pruebas Python (`tests/test_documentos.py`), compilación con 0 errores y 0 advertencias.
 
+## Guardar como con renombre del documento (módulo 0.2.0)
+
+`guardar_dibujo(ruta)` del núcleo escribe el archivo con `Database.SaveAs`, pero el documento abierto conserva su nombre (`Drawing1.dwg`): había que cerrarlo y reabrirlo. `guardar_como` usa el `SaveAs` del propio documento (por su objeto COM), que lo deja con el nombre y la ruta nuevos, sin diálogo.
+
+```python
+guardar_como(pid=PID_VERIFICADO, ruta="Drawing1.dwg", destino=r"C:\QA\nuevo.dwg", confirmar=True)
+```
+
+- Si `destino` es la ruta que el documento ya tiene, es un guardado normal.
+- Se niega si el destino existe (salvo `sobrescribir=True`), si está abierto en la sesión como otro documento, si la carpeta no existe, si el documento está en solo lectura y se pide su misma ruta, o si tiene un comando en curso.
+- El comando corre dentro del documento activo. Si el que se guarda es ese y hay otro abierto, sale de él mientras guarda y vuelve.
+- Relee el nombre del documento y el archivo en disco; el recibo trae `antes`, `despues`, `bytes` y `modificado`.
+
+Probado en vivo con copias sintéticas:
+
+| Caso | Resultado |
+|---|---|
+| Documento activo a una ruta nueva | renombrado; el archivo de origen queda idéntico (SHA-256) |
+| Destino que ya existe, sin `sobrescribir` | rechazado |
+| La misma ruta | guardado normal |
+| Documento inactivo a una ruta nueva | renombrado; el activo no cambia |
+| Dibujo nuevo sin archivo (`Drawing2.dwg`, creado desde una plantilla) | queda con el nombre y la ruta de destino |
+| Destino abierto en la sesión como otro documento | rechazado aunque se pida `sobrescribir` |
+| Carpeta de destino inexistente | rechazado |
+
+No probado: el único documento abierto de la sesión (no puede salir de él mientras guarda) y `sobrescribir=True` sobre un archivo existente.
+
 ## Límites
 
 - Necesita al menos un dibujo abierto: sin documento el puente no puede despachar el comando. Abrir el primer dibujo de una sesión vacía exige una función en el núcleo del puente, que este módulo no toca.
-- Solo `.dwg`. No crea dibujos nuevos, no guarda, no hace «guardar como».
+- Solo `.dwg`. No crea dibujos nuevos. Guarda únicamente con `guardar_como`; cerrar nunca guarda.
 - Suprime el aviso de proxies y el de archivo en uso. Un dibujo con referencias externas o fuentes ausentes, o que pida recuperación, puede abrir otro diálogo: `eventos_dialogo` y `estado_cola` lo muestran, y hay que cerrarlo a mano.
 - Cada compilación registra también el nombre canónico del comando: en una sesión donde ya se cargó una versión, la nueva solo entra al reiniciar Civil 3D.
 

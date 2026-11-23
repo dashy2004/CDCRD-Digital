@@ -19,7 +19,7 @@ namespace Cdcrd.Documentos;
 
 public class Commands : IExtensionApplication
 {
-    internal const string Version = "0.1.0";
+    internal const string Version = "0.2.0";
     internal const string Module = "cdcrd-documentos";
     internal const string BaseName = "Cdcrd.Documentos.V1";
     internal const string BaseCommand = "CDCRDDOCUMENTOSV1";

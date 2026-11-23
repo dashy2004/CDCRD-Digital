@@ -20,7 +20,7 @@ from transporte import ReciboError
 
 MODULE = "cdcrd-documentos"
 COMMAND = "CDCRDDOCUMENTOSV1"
-ACCIONES = ("listar", "abrir", "activar", "cerrar")
+ACCIONES = ("listar", "abrir", "activar", "cerrar", "guardar_como")
 
 
 def carpeta_intercambio():
@@ -67,6 +67,12 @@ def validar(accion, datos):
         return dict(ruta=_ruta_dwg(datos.get("ruta")), solo_lectura=_booleano(datos.get("solo_lectura", False), "solo_lectura"))
     if accion == "activar":
         return dict(ruta=_documento(datos.get("ruta")))
+    if accion == "guardar_como":
+        destino = _texto(datos.get("destino"), "destino")
+        if not ntpath.isabs(destino) or not destino.lower().endswith(".dwg"):
+            raise ValueError("destino debe ser la ruta absoluta de un .dwg")
+        return dict(ruta=_documento(datos.get("ruta")), destino=destino,
+                    sobrescribir=_booleano(datos.get("sobrescribir", False), "sobrescribir"))
     out = dict(ruta=_documento(datos.get("ruta")), descartar_cambios=_booleano(datos.get("descartar_cambios", False), "descartar_cambios"))
     if datos.get("activar_despues"):
         out["activar_despues"] = _documento(datos["activar_despues"], "activar_despues")
@@ -173,3 +179,20 @@ def registrar(mcp, ok):
             return ok({"error": str(exc), "receipt": exc.receipt})
         except (ValueError, TypeError, KeyError, OSError, RuntimeError) as exc:
             return ok({"error": str(exc)})
+
+    @mcp.tool()
+    def guardar_como(pid: int, ruta: str, destino: str, sobrescribir: bool = False, confirmar: bool = False) -> str:
+        """Guarda un dibujo abierto en otra ruta y deja el documento con ese nombre, sin dialogos.
+
+        ruta nombra el documento (ruta absoluta, o nombre si aun no tiene
+        archivo, p. ej. Drawing1.dwg); destino es la ruta absoluta .dwg. A
+        diferencia de guardar_dibujo(ruta), el documento abierto pasa a
+        llamarse como el destino: no hay que cerrarlo y reabrirlo. Si destino
+        es la ruta que ya tiene, es un guardado normal. Se niega si el destino
+        existe (salvo sobrescribir=True), si esta abierto en la sesion como
+        otro documento, si la carpeta no existe o si el documento tiene un
+        comando en curso. Exige modulo 0.2.0. ESCRIBE EN DISCO.
+        """
+        if not confirmar:
+            return ok({"error": "Escribe el dibujo en disco: requiere confirmar=True"})
+        return call("guardar_como", pid, ruta=ruta, destino=destino, sobrescribir=sobrescribir)
