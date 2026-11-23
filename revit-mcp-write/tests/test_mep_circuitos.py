@@ -155,10 +155,11 @@ def test_ensayo_por_defecto_revierte():
     doc, db = modelo_electrico(luminarias(4))
     r = correr(doc, db)
     assert r["ensayo"] is True and r["confirmado"] is False
-    assert "Committed" not in doc.bitacora and doc.bitacora[-1] == "RolledBack"
+    assert r["commit_de_ensayo"] == "Committed" and r["ensayo_valido"] is True
+    assert doc.bitacora[-1] == "GroupRolledBack"
     assert doc.circuitos == [] and len(r["circuitos"]) == 1
     assert r["circuitos"][0]["carga_va"] == 200.0  # leido antes de revertir
-    assert doc.bitacora.index("Regenerate") < doc.bitacora.index("RolledBack")
+    assert doc.bitacora.index("Regenerate") < doc.bitacora.index("Committed")
 
 
 def test_confirmar_hace_commit_sin_guardar():

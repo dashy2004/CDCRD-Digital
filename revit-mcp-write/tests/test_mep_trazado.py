@@ -80,11 +80,14 @@ def test_ensayo_por_defecto_revierte_y_no_confirma():
     r = correr(doc, db)
     assert r["ensayo"] is True and r["confirmado"] is False
     assert r["estado"] == "RolledBack" and r["ids_efimeros"] is True
-    assert "Committed" not in doc.bitacora and "RolledBack" in doc.bitacora
+    # el ensayo confirma de verdad dentro de un grupo y revierte el grupo
+    assert r["commit_de_ensayo"] == "Committed" and r["ensayo_valido"] is True
+    assert doc.bitacora[0] == "GroupStart" and doc.bitacora[-1] == "GroupRolledBack"
+    assert doc.bitacora.index("Committed") < doc.bitacora.index("GroupRolledBack")
     assert set(doc.elementos) == antes
     # verificado dentro de la transaccion: hay datos aunque ya no hay obra
     assert r["resumen"]["conectado"] == 1 and r["sueltos"] == []
-    assert doc.bitacora.index("Regenerate") < doc.bitacora.index("RolledBack")
+    assert doc.bitacora.index("Regenerate") < doc.bitacora.index("Committed")
     assert doc.elementos[1001].conectores[0].IsConnected is False
 
 
@@ -283,7 +286,9 @@ def test_error_de_revit_al_confirmar_revierte():
     antes = set(doc.elementos)
     r = correr(doc, db, confirmar=True)
     assert r["confirmado"] is False and r["estado"] == "RolledBack"
-    assert r["advertencias"][0]["severidad"] == "Error"
+    assert r["advertencias"] == []
+    assert r["errores"][-1] == {"etapa": "fallo_de_revit", "elemento": 1, "tipo": "Error",
+                               "mensaje": "error sintetico", "elementos": [1]}
     assert set(doc.elementos) == antes
 
 
@@ -318,3 +323,67 @@ def test_varios_aparatos_eligen_el_tramo_de_ramal_mas_cercano():
     ramales = [f["ramal"] for f in r["conexiones"]]
     assert ramales[0] == 100 and len(set(ramales)) == 3
     assert r["resumen"] == {"conectado": 3, "sueltos": 0}
+
+
+# ------------------------------------- ensayo con Commit real y campo 'ok'
+
+def test_ensayo_detecta_el_error_que_revit_da_al_confirmar():
+    doc, db = modelo_sanitario()
+    doc.fallos = [("Error", "The pipe has been modified to be in the opposite direction")]
+    antes = set(doc.elementos)
+    r = correr(doc, db)
+    assert r["ensayo"] is True and r["confirmado"] is False
+    assert r["commit_de_ensayo"] == "RolledBack" and r["ensayo_valido"] is False
+    assert r["errores"][-1]["etapa"] == "fallo_de_revit"
+    assert "opposite direction" in r["errores"][-1]["mensaje"]
+    assert set(doc.elementos) == antes and doc.bitacora[-1] == "GroupRolledBack"
+
+
+def test_ok_es_falso_si_se_pidio_confirmar_y_no_quedo_committed():
+    from mep import ejecutar
+    doc, db = modelo_sanitario()
+    doc.fallos = [("Error", "error sintetico")]
+    r = ejecutar.correr("conectar", opciones_conectar(confirmar=True), doc, db)
+    assert r["ok"] is False and r["confirmado"] is False and r["errores"]
+    doc, db = modelo_sanitario()
+    assert ejecutar.correr("conectar", opciones_conectar(confirmar=True), doc, db)["ok"] is True
+
+
+def test_ok_sigue_verdadero_en_un_ensayo_aunque_no_sea_valido():
+    from mep import ejecutar
+    doc, db = modelo_sanitario()
+    doc.fallos = [("Error", "error sintetico")]
+    r = ejecutar.correr("conectar", opciones_conectar(), doc, db)
+    assert r["ok"] is True and r["ensayo_valido"] is False
+
+
+# --------------------------------- el grupo del ensayo se cierra siempre
+
+def test_si_la_transaccion_no_inicia_el_grupo_no_queda_abierto():
+    from mep import ejecutar
+    doc, db = modelo_sanitario()
+    doc.suelta.add("transaccion_no_inicia")
+    r = ejecutar.correr("conectar", opciones_conectar(), doc, db)
+    assert doc.grupos_abiertos == 0 and doc.bitacora[-1] == "GroupRolledBack"
+    assert r["estado_del_grupo"] == "RolledBack" and r["ensayo_revertido"] is True
+    assert r["ensayo_valido"] is False and r["commit_de_ensayo"] == "RolledBack"
+    assert r["errores"][-1]["etapa"] == "transaccion"
+    r = ejecutar.correr("conectar", opciones_conectar(confirmar=True), doc, db)
+    assert r["ok"] is False and r["estado"] == "RolledBack" and doc.grupos_abiertos == 0
+
+
+def test_ensayo_que_no_se_pudo_revertir_no_sale_ok_ni_valido():
+    from mep import ejecutar
+    doc, db = modelo_sanitario()
+    doc.suelta.add("grupo_no_revierte")
+    r = ejecutar.correr("conectar", opciones_conectar(), doc, db)
+    assert r["ok"] is False and r["ensayo"] is True
+    assert r["ensayo_revertido"] is False and r["estado_del_grupo"] == "abierto"
+    assert r["ensayo_valido"] is False and r["estado"] == "Committed"
+    assert r["commit_de_ensayo"] == "Committed"
+    assert r["errores"][-1]["etapa"] == "rollback_del_ensayo"
+
+
+def test_ensayo_normal_informa_el_grupo_revertido():
+    r = correr(*modelo_sanitario())
+    assert r["estado_del_grupo"] == "RolledBack" and r["ensayo_revertido"] is True

@@ -160,6 +160,7 @@ class Documento(object):
         self.lanza = set()           # llamadas que lanzan
         self.fallos = []             # mensajes para el preprocesador
         self.estado_commit = "Committed"
+        self.grupos_abiertos = 0     # TransactionGroup sin cerrar
         self.Title, self.PathName = "modelo_sintetico", ""
         self.IsLinked = self.IsReadOnly = self.IsModifiable = False
         self.Create = Creacion(self)
@@ -247,6 +248,8 @@ class Transaccion(object):
         self.opciones = Opciones()
 
     def Start(self):
+        if "transaccion_no_inicia" in self.doc.suelta:
+            raise RuntimeError("Starting a transaction is not permitted")
         self.iniciada, self.marca = True, len(self.doc.deshacer)
         self.doc.IsModifiable = True
         self.doc.bitacora.append("Start:%s" % self.nombre)
@@ -282,6 +285,34 @@ class Transaccion(object):
     def RollBack(self, opciones=None):
         self.doc.revertir_hasta(self.marca)
         return self._cerrar("RolledBack")
+
+
+class GrupoDeTransacciones(object):
+    """TransactionGroup: al revertirlo deshace tambien lo ya confirmado dentro."""
+
+    def __init__(self, doc, nombre=None):
+        self.doc, self.nombre = doc, nombre
+        self.iniciado = self.terminado = False
+
+    def Start(self):
+        self.iniciado, self.marca = True, len(self.doc.deshacer)
+        self.doc.bitacora.append("GroupStart")
+        self.doc.grupos_abiertos += 1
+
+    def HasStarted(self):
+        return self.iniciado
+
+    def HasEnded(self):
+        return self.terminado
+
+    def RollBack(self):
+        if "grupo_no_revierte" in self.doc.suelta:
+            raise RuntimeError("no se pudo revertir el grupo")
+        self.doc.revertir_hasta(self.marca)
+        self.terminado = True
+        self.doc.grupos_abiertos -= 1
+        self.doc.bitacora.append("GroupRolledBack")
+        return "RolledBack"
 
 
 class SubTransaccion(Transaccion):
@@ -509,7 +540,8 @@ def crear_db():
         UnitTypeId=_Nombres(), BuiltInParameter=_Nombres(),
         BuiltInCategory=_Nombres(ausentes=("OST_NoExiste",)),
         FilteredElementCollector=Colector, Transaction=Transaccion,
-        SubTransaction=SubTransaccion, IFailuresPreprocessor=object,
+        SubTransaction=SubTransaccion, TransactionGroup=GrupoDeTransacciones,
+        IFailuresPreprocessor=object,
         FailureProcessingResult=ns(Continue="Continue",
                                    ProceedWithRollBack="ProceedWithRollBack"),
         Level=Nivel,
