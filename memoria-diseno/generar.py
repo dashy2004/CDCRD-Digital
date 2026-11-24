@@ -708,7 +708,7 @@ def cap_proyecto(num):
     rows = []
     for nv in D["niveles"]:
         m = nv["meta"]
-        rows.append(["Losas — nivel %s" % nv["nombre"], "Losas.exe v%s" % m.get("version", "—"),
+        rows.append(["Losas — nivel %s" % nv["nombre"], herramienta_losas(m),
                      (nv.get("paginas") or "—") if REF else (m.get("archivo") or nv.get("fuente") or "—")])
     if D["sobrecarga"]:
         rows.insert(0, ["Cargas y espesores de losas", "Hoja de cálculo (Excel)", D.get("paginas_cargas", "—") if REF else "—"])
@@ -769,23 +769,35 @@ def cap_cargas(num):
 
 
 # ------------------------------------------------------------------ 3. losas
+def herramienta_losas(meta):
+    """Programa que produjo los resultados de un nivel, según lo que declara la fuente."""
+    if meta.get("motor"):
+        return "LosasPlus (%s)" % meta["motor"]
+    return "Losas.exe v%s (F. Perdomo)" % meta["version"] if meta.get("version") else "Losas.exe (F. Perdomo)"
+
+
 def cap_losas(num):
     h("%d  Diseño de losas" % num, cap=str(num))
-    vers = sorted({nv["meta"].get("version") for nv in D["niveles"] if nv["meta"].get("version")})
-    par("Las losas se diseñan con Losas.exe%s (F. Perdomo) por el método de Pieper-Martens. El espesor mínimo se "
-        "verifica según ACI 318-08, artículo 9.5.2.1 para losas en una dirección y 9.5.3.3 para losas en dos direcciones."
-        % (" v" + " y v".join(vers) if vers else ""))
+    programas = sorted({herramienta_losas(nv["meta"]) for nv in D["niveles"]})
+    par("Las losas se diseñan con %s por el método de Pieper-Martens." % " y ".join(programas))
+    # La verificación de espesor mínimo solo se menciona si los datos la traen.
+    if any("hcalc" in e for nv in D["niveles"] for e in nv["esp"].values()):
+        par("El espesor mínimo se verifica según ACI 318-08, artículo 9.5.2.1 para losas en una dirección y 9.5.3.3 "
+            "para losas en dos direcciones.")
     par("Para cada nivel se presenta una tabla con la geometría, la carga última, los momentos y la armadura de vano de "
         "cada losa y, a continuación, la armadura negativa sobre los apoyos. Los momentos están en ton·m/m y la armadura "
         "dispuesta es la que entrega el programa.")
     for i, nv in enumerate(D["niveles"], 1):
         m = nv["meta"]
-        h("%d.%d  Nivel %s" % (num, i, nv["nombre"]), 2)
-        kv([("Archivo de datos", m.get("archivo", "—")),
-            ("Sistema declarado en el listado", m.get("sistema", "—")),
-            ("Reglamento del programa", m.get("reglamento", "—")),
-            ("Materiales del listado", "f'c = %s kg/cm² · fy = %s ton/cm²" % (m.get("fc", "—"), m.get("fy", "—"))),
-            ("Fecha de la corrida", m.get("fecha", "—"))], w1=5.8, w2=11.4, size=9)
+        nombre_nv = nv["nombre"] if nv["nombre"].lower().startswith("nivel") else "Nivel %s" % nv["nombre"]
+        h("%d.%d  %s" % (num, i, nombre_nv), 2)
+        ficha = [("Programa", herramienta_losas(m)),
+                 ("Archivo de datos", m.get("archivo")),
+                 ("Sistema", m.get("sistema")),
+                 ("Reglamento del programa", m.get("reglamento")),
+                 ("Materiales", "f'c = %s kg/cm² · fy = %s ton/cm²" % (m.get("fc", "—"), m.get("fy", "—"))),
+                 ("Fecha de la corrida", m.get("fecha"))]
+        kv([(k_, v_) for k_, v_ in ficha if v_], w1=5.8, w2=11.4, size=9)
         if REF and m.get("archivo", "").replace(".DL", "") != m.get("sistema", ""):
             OBS.append("Losas, nivel %s: el listado declara el sistema «%s» pero el archivo de datos es «%s»."
                        % (nv["nombre"], m.get("sistema"), m.get("archivo")))

@@ -33,6 +33,26 @@ python generar.py salida\data.json "" salida\memoria.docx salida\tmp salida\imag
 Sin el paso 3 el documento se abre igual; Word actualiza el índice al aceptar el aviso de
 campos, o con clic derecho sobre el índice → *Actualizar campo*.
 
+## Uso desde LosasPlus
+
+LosasPlus ([EstructurasRD](https://github.com/dashy2004/EstructurasRD), rama
+`archive/dotnet-suite`) llama a este motor desde su botón «Generar memoria»: escribe junto
+al proyecto una carpeta `<proyecto>-memoria` con `data.json` y `memoria.json` (este último
+solo la primera vez, para no pisar lo que se haya editado), ejecuta `generar.py` y abre el
+Word. Para que lo encuentre:
+
+```powershell
+# 1. Entorno propio del motor, con sus dependencias (una sola vez)
+python -m venv .venv
+.\.venv\Scripts\python -m pip install -r requirements.txt
+
+# 2. Decirle a LosasPlus dónde está el motor (una sola vez; reiniciar LosasPlus después)
+[Environment]::SetEnvironmentVariable("MEMORIA_DISENO_DIR", (Get-Location).Path, "User")
+```
+
+Sin esa variable, LosasPlus busca una carpeta `memoria-diseno` junto a su ejecutable o en
+sus carpetas superiores; si no la encuentra, abre MemoriaPlus como antes.
+
 ## Archivos
 
 | Archivo | Qué hace |

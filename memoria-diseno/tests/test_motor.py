@@ -141,6 +141,26 @@ def test_los_avisos_de_lectura_llegan_al_documento(tmp_path):
     assert "no se pudieron leer" in texto
 
 
+def test_un_nivel_calculado_por_otro_programa_no_se_atribuye_a_losas_exe(tmp_path):
+    docx = pytest.importorskip("docx")
+    nivel = {"nombre": "N1", "meta": {"motor": "Pieper-Martens nativo", "fc": "210", "fy": "4.2"}, "esp": {}, "carga": {},
+             "mom": {"1": {"tipo": "60", "q": "1.000", "H": "20.0", "Lx": "4.000", "Ly": "5.000",
+                           "Mfx": "1.000", "Mfy": "0.800", "Msx": "1.500", "Msy": "1.200"}},
+             "ax": {}, "ay": {}, "apx": [], "apy": []}
+    (tmp_path / "data.json").write_text(json.dumps({"niveles": [nivel]}), encoding="utf-8")
+
+    r = correr(RAIZ / "generar.py", tmp_path / "data.json", "", tmp_path / "m.docx", tmp_path / "tmp", tmp_path / "img",
+               tmp_path / "memoria.json")
+
+    documento = docx.Document(str(tmp_path / "m.docx"))
+    texto = "\n".join(p.text for p in documento.paragraphs)
+    celdas = "\n".join(c.text for t in documento.tables for fila in t.rows for c in fila.cells)
+    assert r.returncode == 0, r.stderr
+    assert "LosasPlus (Pieper-Martens nativo)" in texto
+    assert "Losas.exe" not in texto + celdas
+    assert "espesor mínimo se verifica" not in texto
+
+
 def test_generar_tolera_un_data_json_sin_claves_opcionales_ni_firmantes(tmp_path):
     pytest.importorskip("docx")
     (tmp_path / "data.json").write_text("{}", encoding="utf-8")
