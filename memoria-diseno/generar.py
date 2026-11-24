@@ -1494,6 +1494,43 @@ def cap_anexo(letra):
             reserva(f["titulo"], 8.6)
 
 
+COLOR_ESTADO = {"Falta": "F4D6D2", "Parcial": "FBEBD0"}
+
+
+def cap_cruce_mivhed(letra):
+    """Anexo con el cruce del checklist de Estructura del MIVHED, si memoria.json indica el checklist."""
+    ruta = C.get("checklist_mivhed")
+    if not ruta:
+        return False
+    import cruce_mivhed as cm
+
+    if not os.path.isabs(ruta):
+        ruta = os.path.join(os.path.dirname(os.path.abspath(CFG_PATH)), ruta)
+    try:
+        cl = cm.cargar_checklist(ruta)
+    except (OSError, ValueError, cm.ErrorDeChecklist) as e:       # va después de las observaciones: se avisa aquí
+        sys.stderr.write("AVISO: no se pudo leer el checklist del MIVHED (%s); se omite el anexo.\n" % e)
+        return False
+    todas = cm.cruzar(D, C, cl)
+    filas = [f for f in todas if f["estado"] != cm.PLANOS]
+    r = cm.resumen(todas)
+    h("Anexo %s  Cruce con el checklist de Estructura del MIVHED" % letra, cap=letra)
+    par("Cruce automático de esta memoria con el checklist %s, versión %s, publicado el %s. Cada ítem se evaluó con lo "
+        "leído de los modelos, las hojas de cálculo y los datos del proyecto. No sustituye la evaluación del MIVHED ni "
+        "la del ingeniero responsable; los ítems de planos (%d) quedan fuera."
+        % (cl.get("codigo"), cl.get("version"), (cl.get("publicadoEn") or "")[:10], r[cm.PLANOS]), size=10)
+    nota("Resumen: " + " · ".join("%s %d" % (e, n) for e, n in r.items() if n and e != cm.PLANOS) + ".")
+    t = tabla(["Ítem", "Requisito", "Estado", "Nota"],
+              [[str(f["numero"]), f["requisito"], f["estado"],
+                f["nota"] + ("" if not f["motivos"] else " Motivo%s %s." % (
+                    "s" if len(f["motivos"]) > 1 else "", ", ".join(c for c, _ in f["motivos"])))] for f in filas],
+              widths=[1.1, 5.2, 1.8, 9.1], aligns=["c", "l", "c", "l"], size=8, titulo="Estado por ítem del checklist")
+    for i, f in enumerate(filas, start=1):
+        if f["estado"] in COLOR_ESTADO:
+            shade(t.rows[i].cells[2], COLOR_ESTADO[f["estado"]])
+    return True
+
+
 # ------------------------------------------------------------------ principal
 configurar()
 portada()
@@ -1517,5 +1554,6 @@ if cap_fundaciones(num + 1):
     num += 1
 n_obs = cap_observaciones(num + 1)
 cap_anexo("A")
+cap_cruce_mivhed("B" if C.get("anexo_figuras") else "A")
 doc.save(OUT)
 print("guardado", OUT, "observaciones", n_obs)

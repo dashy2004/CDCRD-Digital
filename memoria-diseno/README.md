@@ -93,6 +93,7 @@ sus carpetas superiores; si no la encuentra, abre MemoriaPlus como antes.
 | `fuentes_cargas.py` | Lee el libro de cargas y espesores de losa: cuantificación de sobrecarga y las hojas «Espesor …» y «Carga …» de cada nivel; avisa de lo que no cuadra con el listado de diseño. |
 | `fuentes_etabs.py` | Abre una copia del modelo en ETABS, corre análisis y diseño y lee sus tablas en tonf y metros. |
 | `muros_ui.py` | Pulsa *Design → Shear Wall Design → Start Design/Check* en la instancia de ETABS de la lectura (la API no tiene ese comando) y espera a que termine. |
+| `cruce_mivhed.py` | Cruza la memoria con el checklist de Estructura del MIVHED (`CHECK-ESTRUCTURA`): estado, nota y motivos de incumplimiento por ítem, en Markdown o como anexo de la memoria. |
 | `fuentes_safe.py` | Abre una copia del modelo de fundaciones en SAFE y lee presiones de suelo, punzonado y franjas. |
 | `armar_datos.py` | Junta las fuentes declaradas en un `fuentes.json` en un `data.json`. |
 | `word_pdf.ps1` | Abre el Word, actualiza el índice y exporta a PDF. |
@@ -112,6 +113,7 @@ sus carpetas superiores; si no la encuentra, abre MemoriaPlus como antes.
 | `fundaciones` | Texto y figuras del capítulo de fundaciones. |
 | `anexo_figuras` | Planos y vistas; sin `ruta` queda un espacio reservado con su rótulo. |
 | `observaciones_extra`, `observaciones_omitir` | Añadir o quitar puntos del capítulo de observaciones. |
+| `checklist_mivhed` | Ruta al JSON de checklists del corpus (`corpus-mivhed-checklists/data/mivhed-norm-checklists.json`); agrega el anexo del cruce con el checklist de Estructura. |
 
 Las rutas de imagen pueden ser absolutas o relativas a la carpeta de imágenes o a la de
 `memoria.json`.
@@ -189,6 +191,9 @@ python -m pytest tests -q
   visible. Si falla, el bloque se lee igual y la memoria dice por qué falta ese diseño. Se
   diseña siempre sobre el análisis recién corrido, también con `"diseno_guardado": true`.
 - Sin lector todavía: las dimensiones en planta de las zapatas.
+- El cruce con el MIVHED evalúa por reglas lo que el motor lee; no revisa planos (ítems 2, 3 y
+  14 a 29), no verifica derivas contra el límite del R-001 y sus estados son una ayuda para el
+  ingeniero, no la evaluación oficial. Las reglas siguen la versión 1.0-draft del checklist.
 - `generar.py` es un solo archivo largo; pendiente de dividir en módulos.
 - `word_pdf.ps1` requiere Microsoft Word en Windows.
 
