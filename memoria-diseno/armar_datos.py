@@ -5,6 +5,9 @@ Uso: python armar_datos.py fuentes.json data.json
 fuentes.json:
 {
   "niveles": [ {"nombre": "Nivel 1", "txt": "nivel-1.TXT", "dl": "nivel-1.DL"} ],
+  "cargas": {"libro": "cargas-y-espesores.xlsx"},   (opcional: sobrecarga y, por nivel, las hojas
+                                                     «Espesor <nivel>» y «Carga <nivel>»; un nivel puede
+                                                     indicar "hoja_espesor" y "hoja_carga", o "sin_hojas": true)
   "bloques_json": [ "bloque-a.json" ],     (opcional: bloques ya extraídos con el contrato del README)
   "bloques": [ {"nombre": "Bloque A", "etabs": "bloque-a.EDB", "espectro": "bloque-a-espectro.xls",
                 "art38": "bloque-a-art38.xls", "diseno_guardado": false} ],
@@ -57,6 +60,8 @@ def armar(man_path, carpeta_trabajo=None):
             data["avisos"].append("Losas, nivel %s: %d fila(s) del listado no se pudieron leer: %s."
                                   % (nombre, len(nv["sin_leer"]), " | ".join(nv["sin_leer"][:5])))
         data["niveles"].append(nv)
+    if (man.get("cargas") or {}).get("libro"):
+        _cargas(base, man, data)
     for p in man.get("bloques_json", []):
         with open(_ruta(base, p, "bloque"), encoding="utf-8") as f:
             data["bloques"].append(json.load(f))
@@ -88,6 +93,51 @@ def _fundaciones(base, trabajo, ruta):
 
 
 VERSION_LECTORES = 2          # se sube al cambiar qué tablas se leen: invalida lo guardado en _trabajo
+
+
+def _cargas(base, man, data):
+    """Sobrecarga del libro de cargas y, por nivel, sus hojas de espesor y de carga."""
+    import fuentes_cargas
+    import fuentes_excel
+
+    ruta = _ruta(base, man["cargas"]["libro"], "libro de cargas y espesores")
+    try:
+        libro = fuentes_excel.abrir(ruta)
+        bloques = fuentes_cargas.sobrecarga_de(libro)
+        data["sobrecarga"] = bloques[:2]
+        if len(bloques) != 2:
+            data["avisos"].append("Cargas: el libro trae %d bloque(s) de sobrecarga; se esperaban dos (entrepiso y techo)."
+                                  % len(bloques))
+        data["cargas_meta"] = dict(fuentes_cargas.encabezado_de(libro), archivo=os.path.basename(ruta))
+        por_nombre = {n.get("nombre"): n for n in man.get("niveles", [])}
+        for nv in data["niveles"]:
+            decl = por_nombre.get(nv["nombre"]) or {}
+            if decl.get("sin_hojas"):
+                continue
+            n_e, h_e = fuentes_cargas.hoja_del_nivel(libro, "Espesor", nv["nombre"], decl.get("hoja_espesor"))
+            n_c, h_c = fuentes_cargas.hoja_del_nivel(libro, "Carga", nv["nombre"], decl.get("hoja_carga"))
+            esp, car = fuentes_cargas.espesores_de(h_e, n_e), fuentes_cargas.cargas_de(h_c, n_c)
+            nv["esp"], nv["carga"] = esp["losas"], car["losas"]
+            nv["hojas"] = {"espesor": n_e, "carga": n_c}
+            for hoja, leidas in ((n_e, esp), (n_c, car)):
+                if leidas["declaradas"] is not None and leidas["declaradas"] != len(leidas["losas"]):
+                    data["avisos"].append("Cargas, nivel %s: la hoja «%s» declara %d losas y trae %d."
+                                          % (nv["nombre"], hoja, leidas["declaradas"], len(leidas["losas"])))
+            if len(esp["losas"]) != len(car["losas"]):
+                data["avisos"].append("Cargas, nivel %s: la hoja «%s» trae %d losas y «%s» trae %d."
+                                      % (nv["nombre"], n_e, len(esp["losas"]), n_c, len(car["losas"])))
+            d = fuentes_cargas.diferencias_de_luces(esp["losas"], nv["mom"])
+            for clave, texto in (("distintas", "tienen luces distintas en la hoja «%s» y en el listado de diseño" % n_e),
+                                 ("solo_hoja", "están en la hoja «%s» y no en el listado de diseño" % n_e),
+                                 ("solo_listado", "están en el listado de diseño y no en la hoja «%s»" % n_e)):
+                if d[clave]:
+                    data["avisos"].append("Cargas, nivel %s: %d losa(s) %s: %s%s."
+                                          % (nv["nombre"], len(d[clave]), texto, ", ".join(d[clave][:12]),
+                                             "…" if len(d[clave]) > 12 else ""))
+    except ErrorDeFuentes:
+        raise
+    except Exception as e:  # noqa: BLE001 - hoja dañada, formato inesperado: sale como mensaje, no como volcado
+        raise ErrorDeFuentes("libro de cargas: %s: %s" % (type(e).__name__, e))
 
 
 def _sello(path):

@@ -746,14 +746,16 @@ def cap_cargas(num):
     par("La carga última se obtiene con qu = 1.2·qd + 1.6·ql. El peso propio de la losa se calcula con un peso "
         "unitario del hormigón de 2.40 ton/m³.")
     sc_e, sc_t = D["sobrecarga"]
+    titulo_t = (sc_t.get("titulo") or "").strip()
+    n_techo = "Techo" if titulo_t.lower() in ("", "techo") else "Techo (%s)" % titulo_t
     h("%d.1  Terminaciones y carga viva" % num, 2)
     rows = []
-    for nombre, sc in (("Entrepiso", sc_e), ("Techo (E2)", sc_t)):
+    for nombre, sc in (("Entrepiso", sc_e), (n_techo, sc_t)):
         for p in sc["pesos"]:
             rows.append([nombre, p[0], fmt(p[1]), fmt(p[2]), fmt(p[3])])
     tabla(["Nivel", "Terminación", "Espesor (m)", "γ (ton/m³)", "w (ton/m²)"], rows,
           widths=[4, 5, 2.8, 2.8, 2.6], aligns=["l", "l", "c", "c", "c"], size=9, titulo="Peso de terminaciones")
-    rows = [["Entrepiso", v[0], fmt(v[1])] for v in sc_e["vivas"]] + [["Techo (E2)", v[0], fmt(v[1])] for v in sc_t["vivas"]]
+    rows = [["Entrepiso", v[0], fmt(v[1])] for v in sc_e["vivas"]] + [[n_techo, v[0], fmt(v[1])] for v in sc_t["vivas"]]
     tabla(["Nivel", "Uso", "ql (ton/m²)"], rows, widths=[5, 8, 4.2], aligns=["l", "l", "c"], size=9, titulo="Carga viva por uso")
     h("%d.2  Carga muerta según espesor de losa" % num, 2)
     rows = [[fmt(a[0] * 100, 0), fmt(a[2]), fmt(a[3]), fmt(b[3])] for a, b in zip(sc_e["espesores"], sc_t["espesores"])]
@@ -761,11 +763,20 @@ def cap_cargas(num):
           widths=[3.5, 4.5, 4.6, 4.6], size=9, titulo="Carga muerta total (peso propio más terminaciones)")
     h("%d.3  Cargas de diseño" % num, 2)
     rows = [["Entrepiso", r[0], fmt(r[1]), fmt(r[2]), fmt(r[3])] for r in sc_e["resumen"]]
-    rows += [["Techo (E2)", r[0], fmt(r[1]), fmt(r[2]), fmt(r[3])] for r in sc_t["resumen"]]
+    rows += [[n_techo, r[0], fmt(r[1]), fmt(r[2]), fmt(r[3])] for r in sc_t["resumen"]]
     tabla(["Nivel", "Caso", "qd (ton/m²)", "ql (ton/m²)", "qu (ton/m²)"], rows,
           widths=[4, 5.6, 2.5, 2.5, 2.6], aligns=["l", "l", "c", "c", "c"], size=9, titulo="Cargas de diseño resumidas")
     if REF:
         nota("Fuente: hoja de cuantificación de sobrecarga, páginas %s de la memoria original." % D.get("paginas_sobrecarga", "—"))
+    meta = D.get("cargas_meta") or {}
+    if meta.get("archivo"):
+        nota("Fuente: libro de cargas y espesores «%s»." % meta["archivo"])
+    portada = C.get("portada") or {}
+    palabras = [w for w in re.findall(r"\w+", ("%s %s" % (portada.get("titulo") or "", portada.get("subtitulo") or "")).lower())
+                if len(w) > 3]
+    if meta.get("proyecto") and palabras and not any(w in meta["proyecto"].lower() for w in palabras):
+        OBS.append("Cargas: el libro de cargas y espesores lleva como proyecto «%s»%s."
+                   % (meta["proyecto"], " y fecha %s" % meta["fecha"] if meta.get("fecha") else ""))
 
 
 # ------------------------------------------------------------------ 3. losas
