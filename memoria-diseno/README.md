@@ -92,6 +92,7 @@ sus carpetas superiores; si no la encuentra, abre MemoriaPlus como antes.
 | `fuentes_excel.py` | Lee las hojas de espectro, cuasiestático y Art. 38 de un bloque (`.xls` o `.xlsx`), buscándolas por sus rótulos. |
 | `fuentes_cargas.py` | Lee el libro de cargas y espesores de losa: cuantificación de sobrecarga y las hojas «Espesor …» y «Carga …» de cada nivel; avisa de lo que no cuadra con el listado de diseño. |
 | `fuentes_etabs.py` | Abre una copia del modelo en ETABS, corre análisis y diseño y lee sus tablas en tonf y metros. |
+| `muros_ui.py` | Pulsa *Design → Shear Wall Design → Start Design/Check* en la instancia de ETABS de la lectura (la API no tiene ese comando) y espera a que termine. |
 | `fuentes_safe.py` | Abre una copia del modelo de fundaciones en SAFE y lee presiones de suelo, punzonado y franjas. |
 | `armar_datos.py` | Junta las fuentes declaradas en un `fuentes.json` en un `data.json`. |
 | `word_pdf.ps1` | Abre el Word, actualiza el índice y exporta a PDF. |
@@ -158,7 +159,10 @@ bloques          lista   un elemento por modelo de ETABS   (puede ir vacía)
   nombre, paginas
   espectro, tabla_espectro, torsion, art38, cuasi          hojas de cálculo
   etabs          stories, frame, area, patterns, loadsets, mass_story, auto_seis, cases, combos,
-                 base, drift, shear, modal, col, beam, joint, msgs, unidad_long
+                 base, drift, shear, modal, col, beam, joint, msgs, unidad_long,
+                 muros (null sin pilas; si no: estado, motivo | codigo, preferencias, combinaciones,
+                        pilas {pila: secciones, niveles, L, t, dc, dc_nivel, av, cortante, estaciones,
+                        mensajes}, sin_diseno, sin_asignar, sin_pila)
 ```
 
 Un lector nuevo (ETABS o SAFE en vivo con los servidores MCP de este repositorio, una hoja
@@ -180,7 +184,11 @@ python -m pytest tests -q
 - Un modelo guardado con una versión anterior se recalcula con la instalada; el documento lo
   deja dicho en sus observaciones. `"diseno_guardado": true` conserva el diseño tal como se
   guardó.
-- Sin lector todavía: el diseño de muros de ETABS y las dimensiones en planta de las zapatas.
+- El diseño de muros se dispara por la interfaz de ETABS (UI Automation), porque ETABSv1 23
+  no tiene `StartDesign` para muros: necesita una sesión de escritorio con la ventana de ETABS
+  visible. Si falla, el bloque se lee igual y la memoria dice por qué falta ese diseño. Se
+  diseña siempre sobre el análisis recién corrido, también con `"diseno_guardado": true`.
+- Sin lector todavía: las dimensiones en planta de las zapatas.
 - `generar.py` es un solo archivo largo; pendiente de dividir en módulos.
 - `word_pdf.ps1` requiere Microsoft Word en Windows.
 

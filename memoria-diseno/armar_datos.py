@@ -92,7 +92,7 @@ def _fundaciones(base, trabajo, ruta):
         raise ErrorDeFuentes("fundaciones: %s: %s" % (type(e).__name__, e))
 
 
-VERSION_LECTORES = 3          # se sube al cambiar qué tablas se leen: invalida lo guardado en _trabajo
+VERSION_LECTORES = 4         # se sube al cambiar qué tablas se leen: invalida lo guardado en _trabajo
 
 
 def _cargas(base, man, data):
@@ -171,12 +171,17 @@ def _tablas_etabs(modelo, carpeta, diseno_guardado):
     sello = dict(_sello(modelo), diseno_guardado=bool(diseno_guardado))
     p_sello, p_tablas = os.path.join(carpeta, "sello.json"), os.path.join(carpeta, "tablas.json")
     guardadas = _leer_json(p_tablas) if _leer_json(p_sello) == sello else None
-    if guardadas:
+    if guardadas and not _muros_fallidos(guardadas):
         return guardadas
     tablas = fuentes_etabs.leer_tablas(modelo, carpeta, diseno_guardado)
     _guardar_json(p_tablas, tablas)
     _guardar_json(p_sello, sello)
     return tablas
+
+
+def _muros_fallidos(tablas):
+    """Un diseño de muros que falló (por la interfaz de ETABS) se reintenta en la corrida siguiente."""
+    return ((tablas.get("_muros") or [{}])[0]).get("estado") == "sin diseño"
 
 
 def _bloque(base, trabajo, b, i):

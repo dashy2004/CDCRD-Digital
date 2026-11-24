@@ -6,3 +6,4 @@ pillow>=10
 xlrd>=2.0            # hojas .xls
 openpyxl>=3.1        # hojas .xlsx
 comtypes>=1.4; sys_platform == "win32"   # ETABS y SAFE
+pywin32>=306; sys_platform == "win32"    # ventanas de ETABS al diseñar muros

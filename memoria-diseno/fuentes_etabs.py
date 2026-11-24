@@ -54,9 +54,16 @@ T_ASIG_AREA = "Area Assignments - Section Properties"
 T_COLUMNAS = "Concrete Column Design Summary"
 T_VIGAS = "Concrete Beam Design Summary"
 T_NUDOS = "Concrete Joint Design Summary"
+T_PILAS = "Pier Label Definitions"
+T_ASIG_PILAS = "Area Assignments - Pier Labels"
+T_MUROS = "Shear Wall Pier Design Summary"            # + « - ACI 318-19»
+T_MUROS_PREF = "Shear Wall Design Preferences"        # hay una por código: se lee la del resumen
+T_MUROS_COMBOS = "Shear Wall Design Load Combination Data"
+MSG_CORTANTE_MURO = "Shear force exceeds maximum allowed"
+PREFERENCIAS_MURO = ("Ductility", "SDC", "R", "Omega0", "Cd", "Rho", "PhiShrSeis", "PhiShrTor", "DCLimit", "RebarMat")
 
 DEFINICION = (T_PISOS, T_MATERIALES, T_CONCRETOS, T_PORTICO, T_AREA, T_PATRONES, T_CARGAS_LOSA, T_FUENTE_MASA,
-              T_CASOS, T_COMBOS, T_PROYECTO, T_PROGRAMA, T_ASIG_PORTICO, T_ASIG_AREA)
+              T_CASOS, T_COMBOS, T_PROYECTO, T_PROGRAMA, T_ASIG_PORTICO, T_ASIG_AREA, T_PILAS, T_ASIG_PILAS)
 RESULTADOS = (T_MASA, T_SISMO_AUTO, T_BASE, T_DERIVAS, T_CORTANTES, T_MODAL)
 DISENO = (T_COLUMNAS, T_VIGAS, T_NUDOS)       # el nombre real lleva el código: «... - ACI 318-19»
 OBLIGATORIAS = (T_PISOS, T_BASE, T_DERIVAS, T_CORTANTES, T_MODAL)
@@ -114,21 +121,85 @@ def _cerrar(app: Any) -> None:
         pass
 
 
+def _leer_muros(sm: Any, pid: int | None) -> Tablas:
+    """Diseña los muros por la interfaz (la API no puede) y lee su resumen.
+
+    Nunca interrumpe la lectura del bloque: si no se puede, deja el motivo en `_muros`.
+    """
+    try:
+        import muros_ui
+
+        if not _pilas_definidas(sm):
+            return {}
+        if pid is None:
+            raise muros_ui.ErrorDeMuros("no se identificó el proceso de ETABS abierto para esta lectura")
+        avisos = muros_ui.disenar_muros(pid)
+        clave, filas = _esperar_resumen_muros(sm)
+        codigo = clave[len(T_MUROS) + 3:]
+        tablas = {T_MUROS: filas, T_MUROS_COMBOS: _tabla(sm, T_MUROS_COMBOS)}
+        tablas[T_MUROS_PREF] = _tabla(sm, "%s - %s" % (T_MUROS_PREF, codigo))
+        tablas["_muros"] = [{"estado": "diseñado", "codigo": codigo, "avisos": avisos}]
+        return tablas
+    except Exception as e:  # noqa: BLE001 - los muros nunca tumban la lectura del bloque
+        motivo = str(e) if type(e).__name__ == "ErrorDeMuros" else "%s: %s" % (type(e).__name__, e)
+        return {"_muros": [{"estado": "sin diseño", "motivo": motivo}]}
+
+
+ESPERA_RESUMEN_MUROS = 120.0   # s: la tabla puede tardar en publicarse tras cerrar el progreso
+
+
+def _esperar_resumen_muros(sm: Any) -> tuple[str, list[Fila]]:
+    """La tabla de resumen debe existir y traer filas; si no, el diseño no terminó."""
+    import time
+
+    import muros_ui
+
+    fin = time.time() + ESPERA_RESUMEN_MUROS
+    while True:
+        disponibles = list(sm.DatabaseTables.GetAvailableTables()[1])
+        clave = next((k for k in disponibles if k.startswith(T_MUROS + " - ")), None)
+        filas = _tabla(sm, clave) if clave else []
+        if filas:
+            return clave, filas
+        if time.time() > fin:
+            raise muros_ui.ErrorDeMuros("ETABS no generó la tabla «%s» o vino vacía" % T_MUROS)
+        time.sleep(2)
+
+
+def _pids_o_none(muros_ui: Any) -> set[int] | None:
+    """PID de ETABS en marcha; None si no se pudieron listar (solo afecta al diseño de muros)."""
+    try:
+        return muros_ui.pids_etabs()
+    except OSError:
+        return None
+
+
+def _pilas_definidas(sm: Any) -> bool:
+    r = sm.PierLabel.GetNameList()
+    return r[-1] == 0 and int(r[0]) > 0
+
+
 def leer_tablas(modelo: str, carpeta_trabajo: str, diseno_guardado: bool = False) -> Tablas:
     """Abre una copia del modelo en una instancia propia de ETABS, corre el análisis y lee las tablas.
 
-    Con `diseno_guardado` las tablas de diseño se leen antes de correr, tal como las dejó quien
-    guardó el modelo; si no, se rediseña con los resultados del análisis recién corrido.
+    Con `diseno_guardado` las tablas de diseño de pórticos se leen antes de correr, tal como las
+    dejó quien guardó el modelo; si no, se rediseña con los resultados del análisis recién corrido.
+    Los muros siempre se diseñan después del análisis: sus resultados no se guardan en el EDB.
     """
     import comtypes.client
+    import muros_ui
 
     copia = _copiar_modelo(modelo, carpeta_trabajo)
     helper = comtypes.client.CreateObject(PROGID_HELPER)
     import comtypes.gen.ETABSv1 as ETABSv1
 
+    previos = _pids_o_none(muros_ui)
     app = helper.QueryInterface(ETABSv1.cHelper).CreateObjectProgID(PROGID_ETABS)
     try:
         _exigir(app.ApplicationStart(), "ApplicationStart")
+        ahora = _pids_o_none(muros_ui)
+        nuevos = ahora - previos if ahora is not None and previos is not None else set()
+        pid = nuevos.pop() if len(nuevos) == 1 else None
         sm = app.SapModel
         _exigir(sm.File.OpenFile(copia), "OpenFile")
         _exigir(sm.SetPresentUnits(UNIDADES_TONF_M), "SetPresentUnits")
@@ -141,6 +212,7 @@ def leer_tablas(modelo: str, carpeta_trabajo: str, diseno_guardado: bool = False
         _exigir(sm.SetPresentUnits(UNIDADES_TONF_M), "SetPresentUnits")
         disponibles = list(sm.DatabaseTables.GetAvailableTables()[1])
         tablas.update(_leer(sm, disponibles, DEFINICION + RESULTADOS + (() if diseno_guardado else DISENO)))
+        tablas.update(_leer_muros(sm, pid))
         tablas["_meta"] = [{"version": sm.GetVersion()[0], "modelo": os.path.basename(modelo),
                             "diseno": "guardado en el modelo" if diseno_guardado else "recalculado"}]
         return tablas
@@ -328,6 +400,69 @@ def _diseno(t: Tablas) -> dict[str, Any]:
             "n_col": len(cols), "n_beam": len(vigas), "n_joint": len(nudos)}
 
 
+def _muros_sin_pila(t: Tablas) -> int:
+    """Áreas con sección de muro que no tienen pila asignada: ETABS no las diseña."""
+    muros = {_txt(f.get("Name")) for f in t.get(T_AREA, []) if _txt(f.get("Type")) == "Wall"}
+    con_pila = {_txt(f.get("UniqueName")) for f in t.get(T_ASIG_PILAS, [])
+                if _txt(f.get("PierName")) not in ("", "None")}
+    return sum(1 for f in t.get(T_ASIG_AREA, [])
+               if _txt(f.get("SectProp")) in muros and _txt(f.get("UniqueName")) not in con_pila)
+
+
+def _pila(filas: list[Fila]) -> dict[str, Any]:
+    """Envolvente de las estaciones (nivel, arriba/abajo y tramo) de una pila."""
+    p: dict[str, Any] = {"secciones": sorted({_txt(f.get("PierSec")) for f in filas} - {""}),
+                         "tipos": sorted({_txt(f.get("DesignType")) for f in filas} - {""}),
+                         "niveles": len({_txt(f.get("Story")) for f in filas}), "estaciones": len(filas),
+                         "tramos": len({_txt(f.get("PierLeg")).split()[-1] for f in filas if _txt(f.get("PierLeg"))}) or 1,
+                         "L": max(_f(f.get("Length")) for f in filas), "t": max(_f(f.get("Thickness")) for f in filas),
+                         "dc": None, "dc_nivel": "", "rho_req": None, "rho_act": None, "rho_nivel": "",
+                         "av": max(_f(f.get("ShearAv")) for f in filas),
+                         "cortante": 0, "zona_borde": 0, "mensajes": {}}
+    for f in filas:
+        dc = _f(f.get("DCRatio"), None)
+        if dc is not None and (p["dc"] is None or dc > p["dc"]):
+            p["dc"], p["dc_nivel"] = dc, _txt(f.get("Story"))
+        # diseño «Uniform»: ETABS da la cuantía requerida y la actual (en %), no una relación D/C
+        req = _f(f.get("ReinfPcent"), None)
+        if req is not None and (p["rho_req"] is None or req > p["rho_req"]):
+            p["rho_req"], p["rho_act"], p["rho_nivel"] = req, _f(f.get("CurrPcent"), None), _txt(f.get("Story"))
+        if _txt(f.get("BZoneL")) or _txt(f.get("BZoneR")):
+            p["zona_borde"] += 1
+        partes = [x.strip() for m in _mensajes_completos(f) for x in m.split(";") if x.strip()]
+        if any(MSG_CORTANTE_MURO in x for x in partes):
+            p["cortante"] += 1
+        for x in partes:
+            if MSG_CORTANTE_MURO not in x:
+                p["mensajes"][x] = p["mensajes"].get(x, 0) + 1
+    return p
+
+
+def _muros(t: Tablas) -> dict[str, Any] | None:
+    """Clave `muros`: None si el modelo no tiene pilas; si no, el diseño o el motivo de que falte."""
+    pilas = sorted(_txt(f.get("Name")) for f in t.get(T_PILAS, []))
+    meta = (t.get("_muros") or [{}])[0]
+    if not pilas and not t.get(T_MUROS):
+        return None
+    filas = t.get(T_MUROS, [])
+    base = {"pilas_definidas": pilas, "sin_pila": _muros_sin_pila(t)}
+    if not filas:
+        return {**base, "estado": "sin diseño", "motivo": _txt(meta.get("motivo")) or "no se leyó el diseño de muros"}
+    por_pila: dict[str, list[Fila]] = defaultdict(list)
+    for f in filas:
+        por_pila[_txt(f.get("Pier"))].append(f)
+    pref = (t.get(T_MUROS_PREF) or [{}])[0]
+    asignadas = {_txt(f.get("PierName")) for f in t.get(T_ASIG_PILAS, [])} - {"", "None"}
+    return {**base, "estado": "diseñado", "codigo": _txt(meta.get("codigo")),
+            "avisos": list(meta.get("avisos") or []),
+            "preferencias": {k: _txt(pref.get(k)) for k in PREFERENCIAS_MURO if _txt(pref.get(k))},
+            "combinaciones": [_txt(f.get("ComboName")) for f in t.get(T_MUROS_COMBOS, [])
+                              if _txt(f.get("ComboType")) == "Strength"],
+            "pilas": {k: _pila(v) for k, v in sorted(por_pila.items())},
+            "sin_diseno": sorted((asignadas or set(pilas)) - set(por_pila)),
+            "sin_asignar": sorted(set(pilas) - asignadas) if asignadas else []}
+
+
 def etabs_de(tablas: Tablas) -> dict[str, Any]:
     """Tablas de ETABS (en tonf y metros) -> clave `etabs` de un bloque."""
     faltan = [k for k in OBLIGATORIAS if not tablas.get(k)]
@@ -345,6 +480,7 @@ def etabs_de(tablas: Tablas) -> dict[str, Any]:
         "origen_diseno": _txt(meta.get("diseno")),
         "unidad_long": "m",
         **_definicion(tablas), **_resultados(tablas), **_diseno(tablas),
+        "muros": _muros(tablas),
     }
 
 

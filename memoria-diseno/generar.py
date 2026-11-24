@@ -1145,10 +1145,106 @@ def cap_bloque(num, b, idx):
         OBS.append("%s: ETABS reporta %d nudo(s) con relación de capacidad viga/columna > 1.00 y %d con cortante en el "
                    "nudo > 1.00 (máximos %s y %s)." % (nombre, tot_bc, tot_js,
                    fmt(max(j["bc"] for j in e["joint"].values()), 3), fmt(max(j["js"] for j in e["joint"].values()), 3)))
+    muros_del_modelo(e.get("muros"), u, nombre)
     for k, v in sorted(e["msgs"].items(), key=lambda x: -x[1]):
         el, msg = k.split(": ", 1)
         if el == "viga":
             OBS.append("%s: %d estación(es) de viga con el mensaje «%s»." % (nombre, v, msg.replace(" No Message", "")))
+
+
+def _lista(nombres, maximo=8):
+    return ", ".join(nombres[:maximo]) + ("…" if len(nombres) > maximo else "")
+
+
+def muros_del_modelo(m, u, nombre):
+    """Subsección de muros: resumen del diseño de pilas de ETABS. Nada si el modelo no tiene pilas."""
+    if not m:
+        return
+    h("Muros", 3)
+    if m["estado"] != "diseñado":
+        par("No se incluye el diseño de muros: %s." % m["motivo"], size=10)
+        OBS.append("%s: falta el diseño de muros de ETABS (%s)." % (nombre, m["motivo"]))
+        return
+    p = m["preferencias"]
+    combos = m["combinaciones"]
+    par("ETABS diseña los muros por pilas con %s%s. Sistema: %s; categoría de diseño sísmico %s; R = %s, Ω₀ = %s, "
+        "Cd = %s; φ de cortante sísmico = %s. Combinaciones de diseño: %s."
+        % (m["codigo"] or "el código del modelo", " y refuerzo %s" % p["RebarMat"] if p.get("RebarMat") else "",
+           p.get("Ductility", "—"), p.get("SDC", "—"), p.get("R", "—"), p.get("Omega0", "—"), p.get("Cd", "—"),
+           p.get("PhiShrSeis", "—"), "%s…%s (%d)" % (combos[0], combos[-1], len(combos)) if combos else "—"),
+        size=10)
+    limite = _f(p.get("DCLimit")) or 1.0
+    rows, warn = [], []
+    for pila, d in m["pilas"].items():
+        verif, nivel = _verificacion_pila(d)
+        if (d["dc"] or 0) > limite or d["cortante"] or _cuantia_insuficiente(d):
+            warn.append(len(rows))
+        rows.append([pila, ", ".join(d["secciones"]) or ", ".join(d.get("tipos", [])) or "—", str(d["niveles"]),
+                     str(d.get("tramos", 1)), fmt(d["t"] * u["L"], 2), verif, nivel or "—", fmt(d["av"] * u["Avs"], 2),
+                     "%d de %d" % (d["cortante"], d["estaciones"]) if d["cortante"] else "—"])
+    tabla(["Pila", "Sección o tipo", "Niveles", "Tramos", "t (m)", "Flexocompresión", "Nivel crítico",
+           "Av/s máx. (cm²/m)", "Cortante > máx."], rows, widths=[1.7, 2.4, 1.4, 1.3, 1.1, 3.0, 1.9, 2.1, 2.3],
+          size=8.5, warn_rows=warn, titulo="Diseño de muros por pila")
+    nota("Flexocompresión: con sección de Section Designer, relación demanda/capacidad (D/C) con el armado definido, "
+         "límite %s; con refuerzo uniforme, cuantía vertical requerida frente a la colocada (ρ). Máximo entre niveles, "
+         "estaciones y tramos de la pila. Av/s: acero horizontal requerido por cortante. «Cortante > máx.»: "
+         "estaciones en que ETABS reporta que el cortante excede el máximo permitido por la sección. Las filas "
+         "sombreadas superan el límite, no alcanzan la cuantía requerida o tienen esas estaciones." % fmt(limite, 2))
+    if m["sin_diseno"]:
+        nota("Pilas asignadas sin resultado de diseño: %s." % _lista(m["sin_diseno"]))
+    if m["sin_pila"]:
+        nota("%d área(s) con sección de muro no tienen pila asignada; ETABS no las diseña." % m["sin_pila"])
+
+    con_cortante = [k for k, d in m["pilas"].items() if d["cortante"]]
+    if con_cortante:
+        n = sum(m["pilas"][k]["cortante"] for k in con_cortante)
+        tot = sum(d["estaciones"] for d in m["pilas"].values())
+        OBS.append("%s: en %d de %d estaciones de muro ETABS reporta que el cortante excede el máximo permitido "
+                   "(pilas %s)." % (nombre, n, tot, _lista(con_cortante)))
+    altas = [k for k, d in m["pilas"].items() if (d["dc"] or 0) > limite]
+    if altas:
+        OBS.append("%s: pilas con relación D/C por encima del límite de %s: %s." % (
+            nombre, fmt(limite, 2), ", ".join("%s (%s)" % (k, fmt(m["pilas"][k]["dc"], 3)) for k in altas)))
+    cortas = [k for k, d in m["pilas"].items() if _cuantia_insuficiente(d)]
+    if cortas:
+        OBS.append("%s: pilas con cuantía vertical requerida mayor que la colocada: %s." % (nombre, ", ".join(
+            "%s (%s %% frente a %s %%)" % (k, fmt(m["pilas"][k]["rho_req"], 2), fmt(m["pilas"][k]["rho_act"], 2))
+            for k in cortas)))
+    otros = {}
+    for d in m["pilas"].values():
+        for msg, v in d["mensajes"].items():
+            otros[msg] = otros.get(msg, 0) + v
+    for msg, v in sorted(otros.items(), key=lambda x: -x[1]):
+        OBS.append("%s: %d estación(es) de muro con el mensaje «%s»." % (nombre, v, msg))
+    if m["sin_diseno"]:
+        OBS.append("%s: pilas sin resultado de diseño de muros: %s." % (nombre, _lista(m["sin_diseno"])))
+    if m["sin_pila"]:
+        OBS.append("%s: %d área(s) de muro sin pila asignada no se diseñan en ETABS." % (nombre, m["sin_pila"]))
+    for aviso in m.get("avisos") or []:
+        OBS.append("%s: aviso de ETABS durante el diseño de muros: «%s»." % (nombre, aviso))
+
+
+def _verificacion_pila(d):
+    """Texto de flexocompresión de una pila y su nivel crítico, según el tipo de diseño de ETABS."""
+    partes, nivel = [], ""
+    if d.get("dc") is not None:
+        partes.append("D/C = %s" % fmt(d["dc"], 3))
+        nivel = d["dc_nivel"]
+    if d.get("rho_req") is not None:
+        partes.append("ρ req. %s %% (col. %s %%)" % (fmt(d["rho_req"], 2), fmt(d.get("rho_act"), 2)))
+        nivel = nivel or d.get("rho_nivel", "")
+    return "; ".join(partes) or "—", nivel
+
+
+def _cuantia_insuficiente(d):
+    return d.get("rho_req") is not None and d.get("rho_act") is not None and d["rho_req"] > d["rho_act"]
+
+
+def _f(v):
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return None
 
 
 MASA_MINIMA = 0.90                       # participación de masa acumulada mínima
