@@ -16,10 +16,10 @@ Para recoger cambios del paquete sin reiniciar Revit: ejecutar.recargar().
 
 import sys
 
-from . import auditoria, circuitos, trazado
+from . import auditoria, circuitos, tablero, trazado
 from .base import ErrorEntrada
 
-OPERACIONES = ("conectores", "conectar", "circuitos")
+OPERACIONES = ("conectores", "conectar", "circuitos", "tablero")
 CLAVES_CONECTORES = ("categorias", "ids", "max_elementos")
 
 
@@ -65,6 +65,8 @@ def despachar(operacion, opciones, doc, DB):
         return trazado.conectar_a_ramal(DB, doc, opciones)
     if operacion == "circuitos":
         return circuitos.crear_circuitos(DB, doc, opciones)
+    if operacion == "tablero":
+        return tablero.distribucion_del_tablero(DB, doc, opciones)
     raise ErrorEntrada("operacion desconocida: %r (use una de %s)"
                        % (operacion, OPERACIONES))
 

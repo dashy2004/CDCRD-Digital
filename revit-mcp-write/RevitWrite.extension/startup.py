@@ -618,6 +618,11 @@ try:
         """Circuitos de iluminacion. Ensayo salvo confirmar=true."""
         return mep_endpoint("circuitos", doc, request)
 
+    @api.route("/mep/tablero", methods=["POST"])
+    def mep_tablero(doc, request):
+        """Sistema de distribucion de un tablero. Lectura, o ensayo salvo confirmar=true."""
+        return mep_endpoint("tablero", doc, request)
+
     log("RevitWrite registrado: 11 endpoints en /revitwrite/")
 
 except Exception:

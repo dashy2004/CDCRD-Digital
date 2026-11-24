@@ -334,5 +334,41 @@ def revit_mep_circuitos(tablero: Any, limite_va: float,
         confirmar=confirmar, documento=documento))
 
 
+@mcp.tool()
+def revit_mep_tablero(tablero: Any, sistema: str = None, crear: dict = None,
+                      confirmar: bool = False, documento: str = None) -> dict:
+    """Lee, o crea y asigna, el sistema de distribucion de un tablero electrico.
+
+    Sin 'sistema' ni 'crear' es SOLO LECTURA: devuelve el sistema actual del
+    tablero y 'sistemas_disponibles' con sus tensiones. Un tablero sin
+    sistema asignado no admite circuitos (revit_mep_circuitos lo exige).
+
+    ENSAYO POR DEFECTO: Revit valida la compatibilidad entre el sistema y el
+    tablero al confirmar; el ensayo hace ese Commit dentro de un grupo que
+    despues se revierte, y 'ensayo_valido' dice si Revit lo acepto. Un
+    sistema incompatible da 'errores' con "Selected distribution system type
+    is invalid!", sin dialogo. Solo confirmar=True deja el cambio. Nunca
+    guarda el documento.
+
+    Todas las tensiones van en VOLTIOS, tal cual (208, 120). No las convierta
+    a unidades internas.
+
+    Args:
+        tablero: id del tablero o nombre exacto del panel.
+        sistema: nombre de un sistema de distribucion que ya existe.
+        crear: definicion de uno nuevo (excluyente con 'sistema'):
+            {"nombre", "fase": "monofasico"|"trifasico",
+             "configuracion": "estrella"|"delta" (solo trifasico),
+             "hilos": 2-4, "linea_linea_v", "linea_tierra_v",
+             "tolerancia_pct": 10}. Reutiliza los tipos de tension que ya
+            existan con ese valor y crea los que falten con +-tolerancia_pct.
+        confirmar: True hace Commit; False (defecto) es ensayo.
+        documento: titulo o ruta de un documento YA abierto; por defecto el activo.
+    """
+    return _go("/mep/tablero", "POST", _sin_nulos(
+        tablero=tablero, sistema=sistema, crear=crear, confirmar=confirmar,
+        documento=documento))
+
+
 if __name__ == "__main__":
     mcp.run()
