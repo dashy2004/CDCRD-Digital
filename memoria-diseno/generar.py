@@ -331,6 +331,13 @@ def fcap(text):
 def h(text, level=1, cap=None):
     if level == 1:
         ESTADO["cap"], ESTADO["tab"], ESTADO["fig"] = cap, 0, 0
+        ESTADO["h2"], ESTADO["h3"] = None, 0
+    elif level == 2:
+        m_ = re.match(r"^([A-Z\d]+\.\d+)\s", text)
+        ESTADO["h2"], ESTADO["h3"] = (m_.group(1) if m_ else None), 0
+    elif level == 3 and ESTADO.get("h2"):
+        ESTADO["h3"] += 1
+        text = "%s.%d  %s" % (ESTADO["h2"], ESTADO["h3"], text)
     p = doc.add_heading(text, level=level)
     if level == 1:
         p.paragraph_format.page_break_before = True
@@ -916,7 +923,7 @@ def cap_bloque(num, b, idx):
               titulo="Modificador de la constante de torsión J")
         nota("T mín.: momento torsional por debajo del cual se desprecia la torsión (φ = 0.75). Factor = T mín. / T de la "
              "corrida; es el modificador de J asignado a las vigas.")
-    else:
+    elif not torsion_del_modelo(e, u):
         par("Las fuentes leídas para este bloque no incluyen la hoja de reducción de la constante de torsión."
             if not REF else "La memoria original no trae la hoja de reducción de la constante de torsión de este bloque.")
         if REF:
@@ -939,18 +946,20 @@ def cap_bloque(num, b, idx):
                 row += ["—", "—"]
         row.append("Ok" if oks and all(o.lower() == "ok" for o in oks) else "Revisar")
         rows.append(row)
-    tabla(["Nivel", "X, caso 1", "Y, caso 1", "X, caso 2", "Y, caso 2", "Comprobación"], rows,
-          widths=[1.8, 3, 3, 3, 3, 3.4], size=9, titulo="Relación Δmáx / Δprom por nivel y dirección")
-    nota("Criterio de la hoja: relación < 1.2, Ok; entre 1.2 y 1.4, reducir Rd; > 1.4, rediseñar. Se muestra el mayor de "
+    tabla(["Nivel", "X, caso 1 (adim.)", "Y, caso 1 (adim.)", "X, caso 2 (adim.)", "Y, caso 2 (adim.)", "Comprobación"], rows,
+          widths=[1.8, 3, 3, 3, 3, 3.4], size=9, titulo="Relación Δmáx / Δprom por nivel y dirección (adimensional)")
+    nota("Δmáx y Δprom son desplazamientos laterales en las esquinas del nivel, en las mismas unidades; su cociente "
+         "no tiene unidades. Criterio de la hoja: relación < 1.2, Ok; entre 1.2 y 1.4, reducir Rd; > 1.4, rediseñar. Se muestra el mayor de "
          "los dos pares de esquinas. Máximo del bloque: %s. Los casos 1 y 2 son las dos excentricidades accidentales." % fmt(peor, 4))
 
     h("%d.4  Cortante basal cuasiestático y factor de escala" % num, 2)
     W_etabs = (e["auto_seis"].get("Qx") or {}).get("W")
+    detalle_w = peso_sismico_detallado(cu)
     kv([("Geometría declarada", "%s piso(s) · altura total %s m · planta %s × %s m"
          % (fmt(cu["pisos"], 0), fmt(cu["htotal"]), fmt(cu["dx"]), fmt(cu["dy"]))),
         ("Carga muerta", "%s ton" % fmt(cu["muerta"])),
-        ("Carga viva participante", "%s ton (φ: entrepisos %s · común %s · techo %s)"
-         % (fmt(cu["viva_part"]), fmt(cu["phi_entrepiso"]), fmt(cu["phi_comun"]), fmt(cu["phi_techo"]))),
+        ("Carga viva participante", "%s ton%s" % (fmt(cu["viva_part"]), "" if detalle_w else
+         " (φ: entrepisos %s · común %s · techo %s)" % (fmt(cu["phi_entrepiso"]), fmt(cu["phi_comun"]), fmt(cu["phi_techo"])))),
         ("Peso sísmico total W", "%s ton" % fmt(cu["total"])),
         ("Período aproximado", "Ta = Ct·H^x = %s s (Ct = %s, x = %s)" % (fmt(cu["Ta"][0] if cu["Ta"] else None, 3), fmt(cu["Ct"], 3), fmt(cu["X"], 1))),
         ("Períodos del modelo", "Tx = %s s · Ty = %s s" % (fmt(cu["Tx"], 3), fmt(cu["Ty"], 3))),
@@ -993,7 +1002,10 @@ def cap_bloque(num, b, idx):
     nota("Fuente de masa: " + " + ".join("%s·%s" % (fmt(m[1], 2), m[0]) for m in e["mass_source"]) + ". Peso equivalente = masa × g.")
     h("Secciones", 3)
     rows = []
+    en_uso_p, en_uso_a = e.get("frame_en_uso"), e.get("area_en_uso")
     for name, f in e["frame"].items():
+        if en_uso_p is not None and name not in en_uso_p:
+            continue
         A, I33 = f["A"], f["I33"]
         rect = "Rectangular" in f["shape"] and A > 0 and I33 > 0
         hh = math.sqrt(12 * I33 / A) * u["L_cm"] if rect else 0.0
@@ -1006,8 +1018,10 @@ def cap_bloque(num, b, idx):
                        % (nombre, name, fmt(bb, 0), fmt(hh, 0)))
     tabla(["Sección", "Material", "b × h (cm)", "Área (cm²)", "Modif. I33", "Modif. I22", "Modif. J"], rows,
           widths=[3, 2.4, 3, 2.6, 2.1, 2.1, 2.0], size=9, titulo="Secciones de pórtico y modificadores de rigidez")
-    nota("b × h se deduce del área y la inercia I33 reportadas. «—»: el reporte no incluye esa columna.")
-    rows = [[a["name"], a["type"], a["elem"], a["mat"], fmt(a["t"] * u["L_cm"], 1)] for a in e["area"]]
+    nota("b × h se deduce del área y la inercia I33 reportadas. «—»: el reporte no incluye esa columna."
+         + (" Solo se listan las secciones asignadas a algún elemento del modelo." if en_uso_p is not None else ""))
+    rows = [[a["name"], a["type"], a["elem"], a["mat"], fmt(a["t"] * u["L_cm"], 1)] for a in e["area"]
+            if en_uso_a is None or a["name"] in en_uso_a]
     tabla(["Sección de área", "Tipo", "Elemento", "Material", "Espesor (cm)"], rows, widths=[4, 3, 4, 3, 3.2], size=9,
           titulo="Secciones de losa y muro")
     h("Cargas", 3)
@@ -1067,7 +1081,12 @@ def cap_bloque(num, b, idx):
         last = modal[-1]
         nota("Se muestran %d de %d modos. Con todos los modos: ΣUX = %s, ΣUY = %s."
              % (min(12, len(modal)), len(modal), fmt(last[5], 4), fmt(last[6], 4)))
-        if last[5] < 0.9 or last[6] < 0.9:
+        bajas = ["Σ%s = %s %%" % (eje, fmt(v * 100, 1)) for eje, v in (("UX", last[5]), ("UY", last[6])) if v < MASA_MINIMA]
+        if bajas:
+            par("La participación de masa acumulada queda por debajo del %d %%: %s. Con los %d modos del modelo no se "
+                "alcanza el mínimo en esa dirección." % (MASA_MINIMA * 100, " y ".join(bajas), len(modal)),
+                size=9.5, bold=True, color=ALERTA, align="l")
+        if last[5] < MASA_MINIMA or last[6] < MASA_MINIMA:
             OBS.append("%s: la masa participante acumulada con los %d modos del reporte es ΣUX = %s y ΣUY = %s (referencia "
                        "usual: 90 %%)." % (nombre, len(modal), fmt(last[5], 4), fmt(last[6], 4)))
     h("Cortantes y derivas por nivel", 3)
@@ -1104,9 +1123,9 @@ def cap_bloque(num, b, idx):
         c = e["beam"][k]
         st, sect = k.split("|")
         rows.append([st, sect, str(c["n"]), fmt(c["AsTop"] * u["A_cm2"], 2), fmt(c["AsBot"] * u["A_cm2"], 2),
-                     fmt(c["Av"] * u["Avs"], 2), str(c["err"]) if c["err"] else "—"])
-    tabla(["Nivel", "Sección", "Cant.", "As sup. máx. (cm²)", "As inf. máx. (cm²)", "Av/s máx. (cm²/m)", "Con mensaje"], rows,
-          widths=[2.4, 2.8, 1.6, 2.9, 2.9, 2.7, 1.9], size=9, titulo="Acero requerido en vigas por nivel y sección")
+                     fmt(c["Av"] * u["Avs"], 2)])
+    tabla(["Nivel", "Sección", "Cant.", "As sup. máx. (cm²)", "As inf. máx. (cm²)", "Av/s máx. (cm²/m)"], rows,
+          widths=[2.8, 3.2, 2.0, 3.1, 3.1, 3.0], size=9, titulo="Acero requerido en vigas por nivel y sección")
     nota("Envolvente del acero requerido por flexión y cortante en todas las estaciones de las vigas de cada nivel y sección.")
     h("Nudos viga-columna", 3)
     rows, warn = [], []
@@ -1126,17 +1145,54 @@ def cap_bloque(num, b, idx):
         OBS.append("%s: ETABS reporta %d nudo(s) con relación de capacidad viga/columna > 1.00 y %d con cortante en el "
                    "nudo > 1.00 (máximos %s y %s)." % (nombre, tot_bc, tot_js,
                    fmt(max(j["bc"] for j in e["joint"].values()), 3), fmt(max(j["js"] for j in e["joint"].values()), 3)))
-    if e["msgs"]:
-        h("Mensajes del programa", 3)
-        rows = []
-        for k, v in sorted(e["msgs"].items(), key=lambda x: -x[1]):
-            el, msg = k.split(": ", 1)
-            msg = msg.replace(" No Message", "")
-            rows.append([{"col": "Columnas", "viga": "Vigas", "nudo": "Nudos"}.get(el, el), msg, str(v)])
-            if el == "viga":
-                OBS.append("%s: %d estación(es) de viga con el mensaje «%s»." % (nombre, v, msg))
-        tabla(["Elemento", "Mensaje de ETABS", "Estaciones"], rows, widths=[3, 11.4, 2.8], aligns=["l", "l", "c"], size=9,
-              titulo="Mensajes de diseño emitidos por ETABS")
+    for k, v in sorted(e["msgs"].items(), key=lambda x: -x[1]):
+        el, msg = k.split(": ", 1)
+        if el == "viga":
+            OBS.append("%s: %d estación(es) de viga con el mensaje «%s»." % (nombre, v, msg.replace(" No Message", "")))
+
+
+MASA_MINIMA = 0.90                       # participación de masa acumulada mínima
+ALERTA = RGBColor(0xB4, 0x23, 0x18)
+
+
+def torsion_del_modelo(e, u):
+    """Tabla del modificador de la constante de torsión J de las vigas, tomado del modelo. False si no hay datos."""
+    vigas = {k.split("|")[1] for k in e.get("beam", {})}
+    en_uso = e.get("frame_en_uso")
+    rows = []
+    for name, f in e["frame"].items():
+        if f.get("mJ") is None or name not in vigas or (en_uso is not None and name not in en_uso):
+            continue
+        A, I33 = f["A"], f["I33"]
+        rect = "Rectangular" in f["shape"] and A > 0 and I33 > 0
+        hh = math.sqrt(12 * I33 / A) * u["L_cm"] if rect else 0.0
+        rows.append([name, f["mat"], "%s × %s" % (fmt(A * u["A_cm2"] / hh, 0), fmt(hh, 0)) if rect else "—", fmt(f["mJ"], 2),
+                     "%s %%" % fmt((1 - f["mJ"]) * 100, 0)])
+    if not rows:
+        return False
+    tabla(["Sección de viga", "Material", "b × h (cm)", "Modificador de J", "Reducción"], rows,
+          widths=[4, 3, 3.4, 3.6, 3.2], size=9, titulo="Modificador de la constante de torsión J asignado en ETABS")
+    nota("Valores leídos de las secciones de viga del modelo de ETABS. El modificador multiplica la constante de "
+         "torsión J de la sección bruta; la reducción es la parte de esa rigidez que el modelo no considera.")
+    return True
+
+
+def peso_sismico_detallado(cu):
+    """Tabla del peso sísmico: carga muerta más cada carga viva por su factor de participación. False si faltan datos."""
+    vivas = [("Carga viva de entrepisos", cu.get("viva_entrepiso"), cu.get("phi_entrepiso")),
+             ("Carga viva de áreas comunes", cu.get("viva_comun"), cu.get("phi_comun")),
+             ("Carga viva de techo", cu.get("viva_techo"), cu.get("phi_techo"))]
+    if cu.get("muerta") is None or not any(v is not None for _, v, _ in vivas):
+        return False
+    rows = [["Carga muerta", fmt(cu["muerta"]), "1.00", fmt(cu["muerta"])]]
+    for rotulo, carga, phi in vivas:
+        rows.append([rotulo, fmt(carga), fmt(phi), fmt(carga * phi) if carga is not None and phi is not None else "—"])
+    rows.append(["Peso sísmico total W", "", "", fmt(cu.get("total"))])
+    tabla(["Carga", "Total del edificio (ton)", "Factor de participación φ", "Entra en W (ton)"], rows,
+          widths=[5.6, 4.0, 4.0, 3.6], aligns=["l", "c", "c", "c"], size=9, titulo="Peso sísmico: cargas muertas y vivas consideradas")
+    nota("W = carga muerta + Σ φ · carga viva. La carga muerta entra completa; de cada carga viva solo participa la "
+         "fracción φ. «—»: la hoja no trae carga para ese uso.")
+    return True
 
 
 # ------------------------------------------------------------------ fundaciones, observaciones, anexo
@@ -1147,7 +1203,7 @@ FC_RAZONABLE = (140, 700)                # kg/cm²
 TOLERANCIA_FC = 5                        # kg/cm²
 
 
-def fundaciones_del_modelo(num, S, q_adm):
+def fundaciones_del_modelo(num, S, q_adm, mostrar=None):
     """Tablas del capítulo de fundaciones a partir del modelo de SAFE (tonf y metros)."""
     h("%d.1  Modelo de fundaciones" % num, 2)
     kv([(k_, v_) for k_, v_ in [
@@ -1159,16 +1215,27 @@ def fundaciones_del_modelo(num, S, q_adm):
                              for r in S.get("resortes") or [])),
         ("Áreas apoyadas en el suelo", str(S["areas_con_resorte"]) if S.get("areas_con_resorte") else None),
         ("Patrones de carga", ", ".join(p[0] for p in S.get("patrones") or []))] if v_], w1=5.8, w2=11.4, size=9)
-    rows = [[l["name"], l["tipo"], l["mat"], fmt(l["t"] * 100, 0)] for l in S.get("losas") or []]
+    en_uso = S.get("losas_en_uso")
+    rows = [[l["name"], l["tipo"], l["mat"], fmt(l["t"] * 100, 0)] for l in S.get("losas") or []
+            if en_uso is None or l["name"] in en_uso]
     tabla(["Propiedad", "Tipo", "Material", "Espesor (cm)"], rows, widths=[4.3, 4.3, 4.3, 4.3], size=9,
           aligns=["l", "l", "c", "c"], titulo="Espesores de zapatas y losas de fundación")
 
     h("%d.2  Presiones sobre el suelo" % num, 2)
     pres = [p for p in S.get("presiones") or [] if p.get("min") is not None]
+    if mostrar:
+        faltan = [c for c in mostrar if c not in {p["combo"] for p in pres}]
+        if faltan:
+            OBS.append("Fundaciones: memoria.json pide mostrar combinaciones que el modelo no tiene: %s." % ", ".join(faltan))
+        pres = [p for p in pres if p["combo"] in mostrar]
     rows, exceden, traccion = [], [], []
     for p in pres:
         q = -p["min"]
-        terminos = " + ".join("%s %s" % (fmt(sf, 2), nombre) for nombre, sf in (S.get("combos") or {}).get(p["combo"], []))
+        if p.get("envolvente_de"):
+            m_ = p["envolvente_de"]
+            terminos = "Envolvente de %s" % (m_[0] if len(m_) == 1 else "%s a %s (%d combinaciones)" % (m_[0], m_[-1], len(m_)))
+        else:
+            terminos = " + ".join("%s %s" % (fmt(sf, 2), nombre) for nombre, sf in (S.get("combos") or {}).get(p["combo"], []))
         estado = "—" if not q_adm else ("Cumple" if q <= q_adm else "Excede")
         if q_adm and q > q_adm:
             exceden.append((p["combo"], q))
@@ -1177,7 +1244,7 @@ def fundaciones_del_modelo(num, S, q_adm):
         rows.append([p["combo"], terminos or "—", fmt(q, 2), fmt(q * TON_M2_A_KG_CM2, 2), estado])
     tabla(["Combinación", "Expresión", "q máx. (ton/m²)", "q máx. (kg/cm²)", "Frente al admisible"], rows,
           widths=[2.4, 6.6, 2.7, 2.7, 2.8], size=8.5, aligns=["l", "l", "c", "c", "c"],
-          titulo="Presión máxima de contacto por combinación de servicio")
+          titulo="Presión máxima de contacto por combinación")
     nota("Presión máxima de compresión entre todos los nudos de la malla."
          + (" Esfuerzo admisible: %s ton/m² (%s kg/cm²)." % (fmt(q_adm, 1), fmt(q_adm * TON_M2_A_KG_CM2, 2)) if q_adm
             else " No se indicó el esfuerzo admisible en memoria.json, así que no se compara."))
@@ -1235,7 +1302,7 @@ def cap_fundaciones(num):
     if F.get("texto"):
         par(F["texto"])
     if S:
-        fundaciones_del_modelo(num, S, F.get("esfuerzo_admisible_ton_m2"))
+        fundaciones_del_modelo(num, S, F.get("esfuerzo_admisible_ton_m2"), F.get("combinaciones"))
     if del_pdf:
         pdf = pymupdf.open(REF_PDF)
         n = pdf.page_count

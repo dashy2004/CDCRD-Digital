@@ -31,6 +31,7 @@ T_CONCRETOS = "Material Properties - Concrete Data"
 T_LOSAS = "Slab Property Definitions"
 T_RESORTES = "Spring Property Definitions - Area Springs"
 T_AREAS_RESORTE = "Area Assignments - Area Springs"
+T_ASIG_AREA = "Area Assignments - Section Properties"
 T_PATRONES = "Load Pattern Definitions"
 T_CASOS = "Load Case Definitions - Summary"
 T_COMBOS = "Load Combination Definitions"
@@ -41,7 +42,7 @@ T_PUNZONADO = "Concrete Slab Design - Punching Shear Data"
 T_FRANJAS = "Concrete Slab Design Summary - Flexure and Shear Data"
 R_PRESIONES = "_presiones"                 # resumen por combinación, no la tabla completa
 
-DEFINICION = (T_PROYECTO, T_PROGRAMA, T_CONCRETOS, T_LOSAS, T_RESORTES, T_AREAS_RESORTE, T_PATRONES, T_CASOS,
+DEFINICION = (T_PROYECTO, T_PROGRAMA, T_CONCRETOS, T_LOSAS, T_RESORTES, T_AREAS_RESORTE, T_ASIG_AREA, T_PATRONES, T_CASOS,
               T_COMBOS, T_COMBOS_DISENO)
 RESULTADOS = (T_BASE, T_PUNZONADO, T_FRANJAS)
 ESTADO_BIEN = "OK"
@@ -146,6 +147,26 @@ def _txt(v: Any) -> str:
     return "" if v is None else str(v).strip()
 
 
+def envolventes(tablas: Tablas, presiones: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Presión de cada combinación envolvente cuyos miembros ya se leyeron: mínimo y máximo entre ellos."""
+    leidas = {p["combo"]: p for p in presiones if p.get("min") is not None}
+    miembros: dict[str, list[str]] = {}
+    tipo: dict[str, str] = {}
+    ultimo = None
+    for f in tablas.get(T_COMBOS, []):
+        ultimo = f.get("Name") or ultimo
+        if f.get("Type"):
+            tipo[_txt(ultimo)] = _txt(f["Type"])
+        if f.get("LoadName"):
+            miembros.setdefault(_txt(ultimo), []).append(_txt(f["LoadName"]))
+    out = []
+    for nombre, lista in miembros.items():
+        if tipo.get(nombre) == "Envelope" and lista and all(m in leidas for m in lista):
+            out.append({"combo": nombre, "envolvente_de": lista, "n": leidas[lista[0]]["n"],
+                        "min": min(leidas[m]["min"] for m in lista), "max": max(leidas[m]["max"] for m in lista)})
+    return out
+
+
 def fundaciones_de(tablas: Tablas) -> dict[str, Any]:
     """Tablas de SAFE (tonf y metros) -> clave `fundaciones` de data.json."""
     if not tablas.get(T_LOSAS) or not tablas.get(R_PRESIONES):
@@ -163,6 +184,10 @@ def fundaciones_de(tablas: Tablas) -> dict[str, Any]:
     punz = tablas.get(T_PUNZONADO, [])
     ratios = [r for r in (_f(f.get("Ratio"), None) for f in punz) if r is not None]
     franjas = tablas.get(T_FRANJAS, [])
+    definidas = {_txt(f.get("Name")) for f in tablas[T_LOSAS]}
+    asignadas = tablas.get(T_ASIG_AREA, [])
+    en_uso = sorted({v for f in asignadas for v in f.values() if isinstance(v, str) and v in definidas}) \
+        if asignadas else None
     return {
         "modelo": _txt(proyecto.get("ModelName")),
         "proyecto": _txt(proyecto.get("ProjectName")),
@@ -172,6 +197,7 @@ def fundaciones_de(tablas: Tablas) -> dict[str, Any]:
         "concretos": {_txt(f.get("Material")): _f(f.get("Fc")) for f in tablas.get(T_CONCRETOS, [])},
         "losas": [{"name": _txt(f.get("Name")), "tipo": _txt(f.get("PropType")), "mat": _txt(f.get("Material")),
                    "t": _f(f.get("Thickness"))} for f in tablas[T_LOSAS]],
+        "losas_en_uso": en_uso,
         "resortes": [{"name": _txt(f.get("Name")), "k": _f(f.get("StiffU3")), "tipo": _txt(f.get("NonlinOpt3"))}
                      for f in tablas.get(T_RESORTES, [])],
         "areas_con_resorte": len(tablas.get(T_AREAS_RESORTE, [])),
@@ -181,7 +207,7 @@ def fundaciones_de(tablas: Tablas) -> dict[str, Any]:
         "combos": combos,
         "base": {_txt(f.get("OutputCase")): _f(f.get("FZ")) for f in tablas.get(T_BASE, [])
                  if _txt(f.get("CaseType")) == "LinStatic"},
-        "presiones": [dict(p) for p in tablas[R_PRESIONES]],
+        "presiones": [dict(p) for p in tablas[R_PRESIONES]] + envolventes(tablas, tablas[R_PRESIONES]),
         "punzonado": {"n": len(punz), "calculados": len(ratios), "max": max(ratios) if ratios else None,
                       "mayores_que_1": sum(1 for r in ratios if r > 1.0),
                       "sin_calcular": sum(1 for f in punz if _txt(f.get("Status")) == PUNZONADO_SIN_CALCULAR)},

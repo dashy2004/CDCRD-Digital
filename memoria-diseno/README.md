@@ -55,7 +55,13 @@ se llaman de otro modo, el nivel las indica con `"hoja_espesor"` y `"hoja_carga"
 Los modelos **nunca se abren en su sitio**: cada lector copia el archivo a `_trabajo`, arranca
 una instancia propia del programa, corre el análisis sobre la copia y la cierra. Si ETABS o
 SAFE ya están abiertos con otro trabajo, no se tocan. El esfuerzo admisible del suelo para
-comparar presiones se indica en `memoria.json` (`fundaciones.esfuerzo_admisible_ton_m2`).
+comparar presiones se indica en `memoria.json` (`fundaciones.esfuerzo_admisible_ton_m2`), y
+`fundaciones.combinaciones` limita la tabla de presiones a las combinaciones que se nombren
+(por ejemplo `["Comb2", "Envelope"]`); sin esa clave salen todas las de servicio y las
+envolventes.
+
+Las tablas de secciones del modelo solo listan las que están asignadas a algún elemento. Los
+subtítulos de tercer nivel se numeran bajo su título (4.5.1, 4.5.2…) y no entran al índice.
 
 ## Uso desde LosasPlus
 

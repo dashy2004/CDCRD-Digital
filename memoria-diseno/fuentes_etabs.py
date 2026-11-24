@@ -49,12 +49,14 @@ T_CORTANTES = "Story Forces"
 T_MODAL = "Modal Participating Mass Ratios"
 T_PROYECTO = "Project Information"
 T_PROGRAMA = "Program Control"
+T_ASIG_PORTICO = "Frame Assignments - Section Properties"
+T_ASIG_AREA = "Area Assignments - Section Properties"
 T_COLUMNAS = "Concrete Column Design Summary"
 T_VIGAS = "Concrete Beam Design Summary"
 T_NUDOS = "Concrete Joint Design Summary"
 
 DEFINICION = (T_PISOS, T_MATERIALES, T_CONCRETOS, T_PORTICO, T_AREA, T_PATRONES, T_CARGAS_LOSA, T_FUENTE_MASA,
-              T_CASOS, T_COMBOS, T_PROYECTO, T_PROGRAMA)
+              T_CASOS, T_COMBOS, T_PROYECTO, T_PROGRAMA, T_ASIG_PORTICO, T_ASIG_AREA)
 RESULTADOS = (T_MASA, T_SISMO_AUTO, T_BASE, T_DERIVAS, T_CORTANTES, T_MODAL)
 DISENO = (T_COLUMNAS, T_VIGAS, T_NUDOS)       # el nombre real lleva el código: «... - ACI 318-19»
 OBLIGATORIAS = (T_PISOS, T_BASE, T_DERIVAS, T_CORTANTES, T_MODAL)
@@ -183,6 +185,13 @@ def _mensajes(fila: Fila) -> list[str]:
     return [m[:LARGO_MENSAJE] for m in _mensajes_completos(fila)]
 
 
+def _en_uso(filas: list[Fila], definidas: set[str]) -> list[str] | None:
+    """Secciones definidas que aparecen en alguna asignación; None si no se leyó la tabla de asignaciones."""
+    if not filas:
+        return None
+    return sorted({v for f in filas for v in f.values() if isinstance(v, str) and v in definidas})
+
+
 def _definicion(t: Tablas) -> dict[str, Any]:
     patrones = [{"name": _txt(f.get("Name")), "auto": _txt(f.get("IsAuto")), "type": _txt(f.get("Type")),
                  "sw": _txt(f.get("SelfWtMult")), "autoload": _txt(f.get("AutoLoad"))} for f in t.get(T_PATRONES, [])]
@@ -201,6 +210,8 @@ def _definicion(t: Tablas) -> dict[str, Any]:
                                          "mI22": _f(f.get("I2Mod"), None)} for f in t.get(T_PORTICO, [])},
         "area": [{"name": _txt(f.get("Name")), "type": _txt(f.get("Type")), "elem": _txt(f.get("AnalType")),
                   "mat": _txt(f.get("Material")), "t": _f(f.get("TotalThick"))} for f in t.get(T_AREA, [])],
+        "frame_en_uso": _en_uso(t.get(T_ASIG_PORTICO, []), {_txt(f.get("Name")) for f in t.get(T_PORTICO, [])}),
+        "area_en_uso": _en_uso(t.get(T_ASIG_AREA, []), {_txt(f.get("Name")) for f in t.get(T_AREA, [])}),
         "patterns": patrones,
         "tiene_viento": any(p["type"].lower() == "wind" for p in patrones),
         "loadsets": [[_txt(f["Name"]), _txt(f.get("LoadPattern")), _f(f.get("LoadValue"))]

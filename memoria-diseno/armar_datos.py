@@ -92,7 +92,7 @@ def _fundaciones(base, trabajo, ruta):
         raise ErrorDeFuentes("fundaciones: %s: %s" % (type(e).__name__, e))
 
 
-VERSION_LECTORES = 2          # se sube al cambiar qué tablas se leen: invalida lo guardado en _trabajo
+VERSION_LECTORES = 3          # se sube al cambiar qué tablas se leen: invalida lo guardado en _trabajo
 
 
 def _cargas(base, man, data):

@@ -57,9 +57,31 @@ def test_fundaciones_de_arma_el_contrato():
     assert f["patrones"] == [["Dead", "Dead"]]                       # sin los patrones internos «~»
     assert f["combos"]["Comb1"] == [["Dead", 1.0], ["Live", 1.0]]    # fila de continuación
     assert f["base"] == {"Dead": 14728.39}                           # solo casos estáticos
-    assert f["presiones"] == [{"combo": "Comb1", "n": 3, "min": -27.3, "max": -0.1}]
+    assert f["presiones"] == [{"combo": "Comb1", "n": 3, "min": -27.3, "max": -0.1},
+                              {"combo": "Envelope", "envolvente_de": ["Comb1"], "n": 3, "min": -27.3, "max": -0.1}]
+    assert f["losas_en_uso"] is None                                 # no se leyó la tabla de asignaciones
     assert f["punzonado"] == {"n": 3, "calculados": 2, "max": 1.12, "mayores_que_1": 1, "sin_calcular": 1}
     assert f["franjas"] == {"n": 2, "estaciones": 3, "estados": {"OK": 2, "Fail": 1}}
+
+
+def test_la_envolvente_toma_el_minimo_y_el_maximo_de_sus_miembros_y_se_omite_si_falta_alguno():
+    t = tablas()
+    t[fs.T_COMBOS] += [{"Name": "Env2", "Type": "Envelope", "IsAuto": "No", "LoadName": "Comb1", "SF": "1"},
+                       {"Name": None, "Type": None, "IsAuto": None, "LoadName": "Comb9", "SF": "1"},
+                       {"Name": "Env3", "Type": "Envelope", "IsAuto": "No", "LoadName": "Comb1", "SF": "1"},
+                       {"Name": None, "Type": None, "IsAuto": None, "LoadName": "Comb2", "SF": "1"}]
+    leidas = [{"combo": "Comb1", "n": 3, "min": -27.3, "max": -0.1}, {"combo": "Comb2", "n": 3, "min": -31.0, "max": 0.4}]
+    env = {e["combo"]: e for e in fs.envolventes(t, leidas)}
+    assert set(env) == {"Envelope", "Env3"}                          # Env2 depende de Comb9, que no se leyó
+    assert (env["Env3"]["min"], env["Env3"]["max"], env["Env3"]["envolvente_de"]) == (-31.0, 0.4, ["Comb1", "Comb2"])
+
+
+def test_solo_las_propiedades_de_losa_asignadas_cuentan_como_en_uso():
+    t = tablas()
+    t[fs.T_LOSAS].append({"Name": "S80", "PropType": "Stiff", "Material": "C210", "Thickness": "0.8"})
+    t[fs.T_ASIG_AREA] = [{"UniqueName": "1", "SectProp": "S50"}, {"UniqueName": "2", "SectProp": "S50"}]
+    f = fs.fundaciones_de(t)
+    assert f["losas_en_uso"] == ["S50"] and len(f["losas"]) == 2
 
 
 def test_sin_presiones_o_sin_losas_falla():

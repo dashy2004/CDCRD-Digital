@@ -115,6 +115,14 @@ def _valor(hoja: Hoja, rotulo: str, numero: bool = True, n: int = 0) -> Any:
     return None
 
 
+def _segundo(hoja: Hoja, rotulo: str) -> Any:
+    """Segundo número a la derecha del rótulo (la carga que acompaña a su factor); None si no está."""
+    for r, c in _rotulos(hoja, rotulo):
+        nums = _a_la_derecha(hoja, r, c, solo_numero=True)
+        return nums[1] if len(nums) > 1 else None
+    return None
+
+
 def _hoja_con(libro: Libro, *rotulos: str) -> tuple[str, Hoja]:
     """Primera hoja que contiene todos los rótulos."""
     for nombre, hoja in libro.items():
@@ -200,6 +208,8 @@ def cuasi_de(libro: Libro) -> dict[str, Any]:
         "muerta": _valor(h, "Carga Muerta"),
         "viva_part": _valor(h, "Totales"),
         "total": _valor(h, "Carga Total de Edificio"),
+        "viva_entrepiso": _segundo(h, "Entrepisos"), "viva_comun": _segundo(h, "Común"),
+        "viva_techo": _segundo(h, "Techo"),
         "phi_entrepiso": _valor(h, "Entrepisos"),
         "phi_comun": _valor(h, "Común"),
         "phi_techo": _valor(h, "Techo"),
