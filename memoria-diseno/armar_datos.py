@@ -5,8 +5,14 @@ Uso: python armar_datos.py fuentes.json data.json
 fuentes.json:
 {
   "niveles": [ {"nombre": "Nivel 1", "txt": "nivel-1.TXT", "dl": "nivel-1.DL"} ],
-  "bloques_json": [ "bloque-a.json" ]      (opcional: bloques ya extraídos con el contrato del README)
+  "bloques_json": [ "bloque-a.json" ],     (opcional: bloques ya extraídos con el contrato del README)
+  "bloques": [ {"nombre": "Bloque A", "etabs": "bloque-a.EDB", "espectro": "bloque-a-espectro.xls",
+                "art38": "bloque-a-art38.xls", "diseno_guardado": false} ],
+  "fundaciones": {"safe": "fundaciones.FDB"}
 }
+Un bloque con "etabs" abre una COPIA del modelo en una instancia propia de ETABS (requiere ETABS
+instalado), corre el análisis y lee sus tablas en tonf y metros. Lo leído queda en la carpeta
+`_trabajo` junto al manifiesto y se reutiliza mientras el modelo no cambie.
 Las rutas relativas se resuelven contra la carpeta del manifiesto.
 Termina con código 1 si falta un archivo o el manifiesto está mal formado; los avisos de
 lectura no detienen el proceso: quedan en data.json y el generador los lleva al documento.
@@ -32,7 +38,7 @@ def _ruta(base, p, que):
     return p
 
 
-def armar(man_path):
+def armar(man_path, carpeta_trabajo=None):
     base = os.path.dirname(os.path.abspath(man_path))
     try:
         with open(man_path, encoding="utf-8") as f:
@@ -54,7 +60,94 @@ def armar(man_path):
     for p in man.get("bloques_json", []):
         with open(_ruta(base, p, "bloque"), encoding="utf-8") as f:
             data["bloques"].append(json.load(f))
+    trabajo = carpeta_trabajo or os.path.join(base, "_trabajo")
+    for i, b in enumerate(man.get("bloques", []), 1):
+        data["bloques"].append(_bloque(base, trabajo, b, i))
+    if (man.get("fundaciones") or {}).get("safe"):
+        data["fundaciones"] = _fundaciones(base, trabajo, man["fundaciones"]["safe"])
     return data
+
+
+def _fundaciones(base, trabajo, ruta):
+    """Fundaciones desde el modelo de SAFE; lo leído se reutiliza mientras el modelo no cambie."""
+    import fuentes_safe
+
+    modelo = _ruta(base, ruta, "modelo de SAFE")
+    carpeta = os.path.join(trabajo, "fundaciones")
+    sello = _sello(modelo)
+    p_sello, p_tablas = os.path.join(carpeta, "sello.json"), os.path.join(carpeta, "tablas.json")
+    try:
+        tablas = _leer_json(p_tablas) if _leer_json(p_sello) == sello else None
+        if not tablas:
+            tablas = fuentes_safe.leer_tablas(modelo, carpeta)
+            _guardar_json(p_tablas, tablas)
+            _guardar_json(p_sello, sello)
+        return fuentes_safe.fundaciones_de(tablas)
+    except Exception as e:  # noqa: BLE001 - COM, permisos: todo sale como un mensaje, no un volcado
+        raise ErrorDeFuentes("fundaciones: %s: %s" % (type(e).__name__, e))
+
+
+VERSION_LECTORES = 2          # se sube al cambiar qué tablas se leen: invalida lo guardado en _trabajo
+
+
+def _sello(path):
+    st = os.stat(path)
+    return {"archivo": os.path.abspath(path), "bytes": st.st_size, "modificado_ns": st.st_mtime_ns,
+            "lectores": VERSION_LECTORES}
+
+
+def _leer_json(path):
+    """Contenido del JSON, o None si no existe o está dañado (se trata como «no hay caché»)."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return None
+
+
+def _guardar_json(path, obj):
+    """Escritura atómica: un corte a mitad no deja un archivo truncado."""
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    tmp = path + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(obj, f, ensure_ascii=False)
+    os.replace(tmp, path)
+
+
+def _tablas_etabs(modelo, carpeta, diseno_guardado):
+    """Tablas del modelo; se reutilizan las ya leídas si el archivo no cambió (correr ETABS tarda minutos)."""
+    import fuentes_etabs
+
+    sello = dict(_sello(modelo), diseno_guardado=bool(diseno_guardado))
+    p_sello, p_tablas = os.path.join(carpeta, "sello.json"), os.path.join(carpeta, "tablas.json")
+    guardadas = _leer_json(p_tablas) if _leer_json(p_sello) == sello else None
+    if guardadas:
+        return guardadas
+    tablas = fuentes_etabs.leer_tablas(modelo, carpeta, diseno_guardado)
+    _guardar_json(p_tablas, tablas)
+    _guardar_json(p_sello, sello)
+    return tablas
+
+
+def _bloque(base, trabajo, b, i):
+    """Un bloque desde sus fuentes directas: modelo de ETABS y hojas de cálculo."""
+    import fuentes_etabs
+    import fuentes_excel
+
+    nombre = b.get("nombre") or "Bloque %d" % i
+    blk = {"nombre": nombre, "paginas": {}, "espectro": {}, "tabla_espectro": [], "torsion": [], "art38": [], "cuasi": {}}
+    try:
+        if b.get("espectro"):
+            art = _ruta(base, b["art38"], "hoja del Art. 38 de «%s»" % nombre) if b.get("art38") else None
+            blk.update(fuentes_excel.hojas_de_bloque(_ruta(base, b["espectro"], "hoja de espectro de «%s»" % nombre), art))
+        modelo = _ruta(base, b.get("etabs"), "modelo de ETABS de «%s»" % nombre)
+        carpeta = os.path.join(trabajo, "bloque-%02d-%s" % (i, "".join(c if c.isalnum() else "_" for c in nombre)))
+        blk["etabs"] = fuentes_etabs.etabs_de(_tablas_etabs(modelo, carpeta, b.get("diseno_guardado")))
+    except ErrorDeFuentes:
+        raise
+    except Exception as e:  # noqa: BLE001 - COM, hojas dañadas, permisos: todo sale como un mensaje, no un volcado
+        raise ErrorDeFuentes("%s: %s: %s" % (nombre, type(e).__name__, e))
+    return blk
 
 
 def main(argv):

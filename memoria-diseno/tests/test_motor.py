@@ -1,5 +1,6 @@
 """Pruebas del lector de Losas.exe y del motor de memorias con el sistema de demostración."""
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -14,7 +15,9 @@ import fuentes_losas  # noqa: E402
 
 
 def correr(*args):
-    return subprocess.run([sys.executable, *map(str, args)], capture_output=True, text=True, encoding="utf-8")
+    # el hijo debe escribir en UTF-8 aunque la consola de quien corre las pruebas sea cp1252
+    return subprocess.run([sys.executable, *map(str, args)], capture_output=True, text=True, encoding="utf-8",
+                          env={**os.environ, "PYTHONIOENCODING": "utf-8"})
 
 
 def test_el_listado_txt_se_lee_completo_sin_filas_perdidas():

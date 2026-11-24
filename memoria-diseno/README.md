@@ -33,6 +33,25 @@ python generar.py salida\data.json "" salida\memoria.docx salida\tmp salida\imag
 Sin el paso 3 el documento se abre igual; Word actualiza el índice al aceptar el aviso de
 campos, o con clic derecho sobre el índice → *Actualizar campo*.
 
+## Fuentes directas: ETABS, SAFE y Excel
+
+`fuentes.json` declara de dónde sale cada parte. Las rutas pueden ser absolutas o relativas
+al manifiesto:
+
+```json
+{
+  "niveles": [ {"nombre": "Nivel 1", "txt": "nivel-1.TXT", "dl": "nivel-1.DL"} ],
+  "bloques": [ {"nombre": "Bloque A", "etabs": "bloque-a.EDB",
+                "espectro": "bloque-a-espectro.xls", "art38": "bloque-a-art38.xls"} ],
+  "fundaciones": {"safe": "fundaciones.FDB"}
+}
+```
+
+Los modelos **nunca se abren en su sitio**: cada lector copia el archivo a `_trabajo`, arranca
+una instancia propia del programa, corre el análisis sobre la copia y la cierra. Si ETABS o
+SAFE ya están abiertos con otro trabajo, no se tocan. El esfuerzo admisible del suelo para
+comparar presiones se indica en `memoria.json` (`fundaciones.esfuerzo_admisible_ton_m2`).
+
 ## Uso desde LosasPlus
 
 LosasPlus ([EstructurasRD](https://github.com/dashy2004/EstructurasRD), rama
@@ -59,6 +78,9 @@ sus carpetas superiores; si no la encuentra, abre MemoriaPlus como antes.
 |---|---|
 | `generar.py` | Motor: `data.json` + `memoria.json` → Word. |
 | `fuentes_losas.py` | Lee el listado `.TXT` de Losas.exe (v5.x) y el archivo de datos `.DL`. |
+| `fuentes_excel.py` | Lee las hojas de espectro, cuasiestático y Art. 38 de un bloque (`.xls` o `.xlsx`), buscándolas por sus rótulos. |
+| `fuentes_etabs.py` | Abre una copia del modelo en ETABS, corre análisis y diseño y lee sus tablas en tonf y metros. |
+| `fuentes_safe.py` | Abre una copia del modelo de fundaciones en SAFE y lee presiones de suelo, punzonado y franjas. |
 | `armar_datos.py` | Junta las fuentes declaradas en un `fuentes.json` en un `data.json`. |
 | `word_pdf.ps1` | Abre el Word, actualiza el índice y exporta a PDF. |
 | `ejemplo/` | Sistema de demostración de 27 losas (`.TXT` y `.DL`) y su `fuentes.json`. |
@@ -140,9 +162,14 @@ python -m pytest tests -q
 
 ## Limitaciones
 
-- Lectores incluidos: solo losas (`.TXT` y `.DL`). Los capítulos de bloques de ETABS se
-  generan si `data.json` trae `bloques`, pero este paquete aún no incluye el lector que los
-  produce desde un modelo abierto.
+- Los lectores de ETABS y SAFE necesitan el programa instalado en la misma máquina (probado
+  con la versión 23.3) y tardan minutos: corren el análisis. Lo leído queda en `_trabajo` y
+  se reutiliza mientras el modelo no cambie.
+- Un modelo guardado con una versión anterior se recalcula con la instalada; el documento lo
+  deja dicho en sus observaciones. `"diseno_guardado": true` conserva el diseño tal como se
+  guardó.
+- Sin lector todavía: la hoja de cuantificación de cargas y espesores de losa, el diseño de
+  muros de ETABS y las dimensiones en planta de las zapatas.
 - `generar.py` es un solo archivo largo; pendiente de dividir en módulos.
 - `word_pdf.ps1` requiere Microsoft Word en Windows.
 

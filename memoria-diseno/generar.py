@@ -897,12 +897,19 @@ def cap_bloque(num, b, idx):
 
     h("%d.2  Reducción de la constante de torsión en vigas" % num, 2)
     rows = [[t["tipo"], fmt(t["Bw"], 0), fmt(t["H"], 0), fmt(t["hf"], 0), fmt(t["Bf"], 0), fmt(t["fc"], 0), fmt(t["Acp"], 0),
-             fmt(t["Pcp"], 0), fmt(t["Tmin"], 1), fmt(t["Tu"], 1), fmt(t["factor"], 4)] for t in b["torsion"]]
-    tabla(["Sección", "bw (cm)", "h (cm)", "hf (cm)", "bf (cm)", "f'c (kg/cm²)", "Acp (cm²)", "Pcp (cm)",
-           "T mín. (kg·cm)", "T corrida (kg·cm)", "Factor"], rows,
-          widths=[1.5, 1.2, 1.2, 1.2, 1.2, 1.6, 1.6, 1.4, 2.2, 2.4, 1.5], size=8, titulo="Modificador de la constante de torsión J")
-    nota("T mín.: momento torsional por debajo del cual se desprecia la torsión (φ = 0.75). Factor = T mín. / T de la "
-         "corrida; es el modificador de J asignado a las vigas.")
+             fmt(t["Pcp"], 0), fmt(t["Tmin"], 1), fmt(t["Tu"], 1), fmt(t["factor"], 4)] for t in b.get("torsion") or []]
+    if rows:
+        tabla(["Sección", "bw (cm)", "h (cm)", "hf (cm)", "bf (cm)", "f'c (kg/cm²)", "Acp (cm²)", "Pcp (cm)",
+               "T mín. (kg·cm)", "T corrida (kg·cm)", "Factor"], rows,
+              widths=[1.5, 1.2, 1.2, 1.2, 1.2, 1.6, 1.6, 1.4, 2.2, 2.4, 1.5], size=8,
+              titulo="Modificador de la constante de torsión J")
+        nota("T mín.: momento torsional por debajo del cual se desprecia la torsión (φ = 0.75). Factor = T mín. / T de la "
+             "corrida; es el modificador de J asignado a las vigas.")
+    else:
+        par("Las fuentes leídas para este bloque no incluyen la hoja de reducción de la constante de torsión."
+            if not REF else "La memoria original no trae la hoja de reducción de la constante de torsión de este bloque.")
+        if REF:
+            OBS.append("%s: no se encontró la hoja de reducción de la constante de torsión en vigas." % nombre)
 
     h("%d.3  Irregularidad torsional (Art. 38)" % num, 2)
     casos = {c["caso"]: {f["story"]: f for f in c["filas"]} for c in b["art38"]}
@@ -1122,17 +1129,102 @@ def cap_bloque(num, b, idx):
 
 
 # ------------------------------------------------------------------ fundaciones, observaciones, anexo
+TON_M2_A_KG_CM2 = 0.1
+TOLERANCIA_DESPEGUE = 0.01               # ton/m²: por debajo es ruido numérico
+FC_EN_NOMBRE = re.compile(r"(?<!\d)(\d{3})(?!\d)")
+FC_RAZONABLE = (140, 700)                # kg/cm²
+TOLERANCIA_FC = 5                        # kg/cm²
+
+
+def fundaciones_del_modelo(num, S, q_adm):
+    """Tablas del capítulo de fundaciones a partir del modelo de SAFE (tonf y metros)."""
+    h("%d.1  Modelo de fundaciones" % num, 2)
+    kv([(k_, v_) for k_, v_ in [
+        ("Modelo de SAFE", "%s (%s)" % (S.get("modelo") or S.get("archivo") or "—", S.get("version") or "SAFE")),
+        ("Código de diseño", S.get("codigo")),
+        ("Concretos", " · ".join("%s: f'c = %s kg/cm²" % (k_, fmt(v_ * TON_M2_A_KG_CM2, 0))
+                                 for k_, v_ in (S.get("concretos") or {}).items())),
+        ("Suelo", " · ".join("%s: k = %s ton/m³ (%s)" % (r["name"], fmt(r["k"], 0), r.get("tipo") or "lineal")
+                             for r in S.get("resortes") or [])),
+        ("Áreas apoyadas en el suelo", str(S["areas_con_resorte"]) if S.get("areas_con_resorte") else None),
+        ("Patrones de carga", ", ".join(p[0] for p in S.get("patrones") or []))] if v_], w1=5.8, w2=11.4, size=9)
+    rows = [[l["name"], l["tipo"], l["mat"], fmt(l["t"] * 100, 0)] for l in S.get("losas") or []]
+    tabla(["Propiedad", "Tipo", "Material", "Espesor (cm)"], rows, widths=[4.3, 4.3, 4.3, 4.3], size=9,
+          aligns=["l", "l", "c", "c"], titulo="Espesores de zapatas y losas de fundación")
+
+    h("%d.2  Presiones sobre el suelo" % num, 2)
+    pres = [p for p in S.get("presiones") or [] if p.get("min") is not None]
+    rows, exceden, traccion = [], [], []
+    for p in pres:
+        q = -p["min"]
+        terminos = " + ".join("%s %s" % (fmt(sf, 2), nombre) for nombre, sf in (S.get("combos") or {}).get(p["combo"], []))
+        estado = "—" if not q_adm else ("Cumple" if q <= q_adm else "Excede")
+        if q_adm and q > q_adm:
+            exceden.append((p["combo"], q))
+        if p["max"] > TOLERANCIA_DESPEGUE:
+            traccion.append(p["combo"])
+        rows.append([p["combo"], terminos or "—", fmt(q, 2), fmt(q * TON_M2_A_KG_CM2, 2), estado])
+    tabla(["Combinación", "Expresión", "q máx. (ton/m²)", "q máx. (kg/cm²)", "Frente al admisible"], rows,
+          widths=[2.4, 6.6, 2.7, 2.7, 2.8], size=8.5, aligns=["l", "l", "c", "c", "c"],
+          titulo="Presión máxima de contacto por combinación de servicio")
+    nota("Presión máxima de compresión entre todos los nudos de la malla."
+         + (" Esfuerzo admisible: %s ton/m² (%s kg/cm²)." % (fmt(q_adm, 1), fmt(q_adm * TON_M2_A_KG_CM2, 2)) if q_adm
+            else " No se indicó el esfuerzo admisible en memoria.json, así que no se compara."))
+    if exceden:
+        peor = max(exceden, key=lambda x: x[1])
+        OBS.append("Fundaciones: %d combinación(es) de servicio superan el esfuerzo admisible de %s ton/m²; la mayor es "
+                   "%s con %s ton/m² (%s kg/cm²). Verificar si a las combinaciones con sismo les corresponde un "
+                   "admisible incrementado." % (len(exceden), fmt(q_adm, 1), peor[0], fmt(peor[1], 2),
+                                                fmt(peor[1] * TON_M2_A_KG_CM2, 2)))
+    if traccion:
+        OBS.append("Fundaciones: hay presión positiva (despegue) en %d combinación(es): %s."
+                   % (len(traccion), ", ".join(traccion[:8])))
+
+    h("%d.3  Diseño de la losa de fundación" % num, 2)
+    pz, fr = S.get("punzonado") or {}, S.get("franjas") or {}
+    kv([("Puntos de punzonado", "%d · calculados: %d · sin calcular: %d"
+         % (pz.get("n", 0), pz.get("calculados", 0), pz.get("sin_calcular", 0))),
+        ("Relación máxima de punzonado", fmt(pz.get("max"), 3)),
+        ("Franjas de diseño", "%d franjas · %d estaciones" % (fr.get("n", 0), fr.get("estaciones", 0))),
+        ("Estado de las estaciones", " · ".join("%s: %d" % kv_ for kv_ in sorted((fr.get("estados") or {}).items())) or "—")],
+       w1=5.8, w2=11.4, size=9)
+    if pz.get("n") and not pz.get("calculados"):
+        OBS.append("Fundaciones: SAFE no calculó el punzonado en ninguno de los %d puntos (estado «Not Calculated»)."
+                   % pz["n"])
+    if pz.get("mayores_que_1"):
+        OBS.append("Fundaciones: %d punto(s) con relación de punzonado mayor que 1.00 (máximo %s)."
+                   % (pz["mayores_que_1"], fmt(pz.get("max"), 3)))
+    malas = {k_: v_ for k_, v_ in (fr.get("estados") or {}).items() if k_ != "OK"}
+    if malas:
+        OBS.append("Fundaciones: estaciones de franja con estado distinto de OK: %s."
+                   % ", ".join("%s (%d)" % kv_ for kv_ in sorted(malas.items())))
+    portada = C.get("portada") or {}
+    palabras = [w for w in re.findall(r"\w+", ("%s %s" % (portada.get("titulo") or "", portada.get("subtitulo") or "")).lower())
+                if len(w) > 3]
+    if S.get("proyecto") and palabras and not any(w in S["proyecto"].lower() for w in palabras):
+        OBS.append("Fundaciones: el modelo de SAFE lleva como nombre de proyecto «%s»." % S["proyecto"])
+    for nombre, fc in (S.get("concretos") or {}).items():
+        m_fc = FC_EN_NOMBRE.search(nombre)
+        if m_fc and FC_RAZONABLE[0] <= int(m_fc.group(1)) <= FC_RAZONABLE[1] \
+                and abs(int(m_fc.group(1)) - fc * TON_M2_A_KG_CM2) > TOLERANCIA_FC:
+            OBS.append("Fundaciones: el material «%s» de SAFE tiene f'c = %s kg/cm², distinto de lo que indica su nombre."
+                       % (nombre, fmt(fc * TON_M2_A_KG_CM2, 0)))
+
+
 def cap_fundaciones(num):
     from PIL import Image, ImageChops
     F = C.get("fundaciones") or {}
     del_pdf = REF and F.get("figuras_del_pdf") and PDF_OK
     if REF and F.get("figuras_del_pdf") and not PDF_OK:
         OBS.append("Fundaciones: no se encontró el PDF de referencia; sus figuras no se incluyeron.")
-    if not (F.get("texto") or F.get("figuras") or del_pdf):
+    S = D.get("fundaciones") or {}
+    if not (F.get("texto") or F.get("figuras") or del_pdf or S):
         return False
     h("%d  Fundaciones" % num, cap=str(num))
     if F.get("texto"):
         par(F["texto"])
+    if S:
+        fundaciones_del_modelo(num, S, F.get("esfuerzo_admisible_ton_m2"))
     if del_pdf:
         pdf = pymupdf.open(REF_PDF)
         n = pdf.page_count
@@ -1170,6 +1262,16 @@ def cap_observaciones(num):
         letra = b["nombre"].replace("Bloque ", "")
         if REF and not re.search(r"Bloque %s$" % re.escape(letra), m):
             OBS.append("%s: el reporte de ETABS identifica el modelo como «%s»." % (b["nombre"], m))
+        if b["etabs"].get("tiene_viento") is False:
+            OBS.append("%s: el modelo de ETABS no define ningún patrón de carga de viento." % b["nombre"])
+        sin_valor = sum(j.get("bc_sin_valor", 0) for j in b["etabs"].get("joint", {}).values())
+        if sin_valor:
+            OBS.append("%s: en %d nudo(s) ETABS indica que la relación de capacidad viga/columna excede el límite "
+                       "sin reportar su valor; el máximo de la tabla solo considera los nudos con valor."
+                       % (b["nombre"], sin_valor))
+        if b["etabs"].get("origen_diseno") == "recalculado" and b["etabs"].get("version"):
+            OBS.append("%s: análisis y diseño recalculados con %s sobre una copia del modelo; pueden diferir de los "
+                       "de la versión con que se guardó." % (b["nombre"], b["etabs"]["version"]))
     for nombre in FALTAN_IMG:
         OBS.append("No se encontró la imagen «%s» indicada en memoria.json." % nombre)
     omitir = C.get("observaciones_omitir", [])
