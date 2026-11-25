@@ -1,7 +1,7 @@
 # Herramientas locales AI + BIM + CDCRD
 
 Núcleo gratuito ejecutable en Windows, separado de las sesiones Revit/ETABS/SAFE.
-Incluye una CLI y un servidor MCP de 12 herramientas para que un cliente de IA
+Incluye una CLI y un servidor MCP de 13 herramientas para que un cliente de IA
 trabaje con archivos del repo. No incluye un modelo de IA ni una interfaz web.
 
 ## Instalación
@@ -25,6 +25,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\herramientas-locales\insta
 Para otros sistemas, desde esta carpeta: `uv sync --locked --python 3.13`,
 seguido de `uv run --frozen cdcrd-local doctor`. La instalación y las pruebas
 registradas en [VERIFICACION.md](VERIFICACION.md) corresponden a Windows.
+
+## Homologación y evidencia MIVHED
+
+El [piloto Revit–Civil 3D](HOMOLOGACION.md) compara mediciones de acceso y drenaje. El [expediente multidisciplinario](EXPEDIENTE-MIVHED.md) relaciona los esquemas del portal con evidencias por criterio.
 
 ## Catalogo y diagnostico del ecosistema
 

@@ -1,0 +1,82 @@
+[
+  {
+    "rol": "umbral",
+    "documento": "Edificio.rvt",
+    "revision": "R1",
+    "laminas": [
+      "A-01"
+    ],
+    "elemento": "PUERTA-1",
+    "punto_m": [
+      100,
+      100,
+      10.04
+    ],
+    "marco": "LOCAL-SINTETICO / DATUM-VERTICAL-ENSAYO",
+    "metodo": "Medición sintética para prueba"
+  },
+  {
+    "rol": "llegada",
+    "documento": "Terreno.dwg",
+    "revision": "R2",
+    "laminas": [
+      "C-01"
+    ],
+    "elemento": "TIN:AA/COGO:AD",
+    "punto_m": [
+      100,
+      100,
+      10.04
+    ],
+    "marco": "LOCAL-SINTETICO / DATUM-VERTICAL-ENSAYO",
+    "metodo": "Medición sintética para prueba"
+  },
+  {
+    "rol": "sumidero",
+    "documento": "Terreno.dwg",
+    "revision": "R2",
+    "laminas": [
+      "C-01"
+    ],
+    "elemento": "AB",
+    "punto_m": [
+      104,
+      103,
+      9.9
+    ],
+    "marco": "LOCAL-SINTETICO / DATUM-VERTICAL-ENSAYO",
+    "metodo": "Medición sintética para prueba"
+  },
+  {
+    "rol": "control_revit",
+    "documento": "Edificio.rvt",
+    "revision": "R1",
+    "laminas": [
+      "A-01"
+    ],
+    "elemento": "CTRL-1",
+    "punto_m": [
+      90,
+      85,
+      12
+    ],
+    "marco": "LOCAL-SINTETICO / DATUM-VERTICAL-ENSAYO",
+    "metodo": "Medición sintética para prueba"
+  },
+  {
+    "rol": "control_civil",
+    "documento": "Terreno.dwg",
+    "revision": "R2",
+    "laminas": [
+      "C-01"
+    ],
+    "elemento": "AC",
+    "punto_m": [
+      90,
+      85,
+      12
+    ],
+    "marco": "LOCAL-SINTETICO / DATUM-VERTICAL-ENSAYO",
+    "metodo": "Medición sintética para prueba"
+  }
+]

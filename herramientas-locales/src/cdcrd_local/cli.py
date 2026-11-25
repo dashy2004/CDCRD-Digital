@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 
 from .doctor import diagnose
+from .expediente_mivhed import registrar as registrar_expediente
 from .files import inspect_pdf, preview_pdf
 from .normativa import CHECKS, search, verify
 
@@ -14,6 +15,15 @@ from .normativa import CHECKS, search, verify
 def parser() -> argparse.ArgumentParser:
     cli = argparse.ArgumentParser(description="Herramientas locales AI+BIM+CDCRD")
     sub = cli.add_subparsers(dest="command", required=True)
+    registrar_expediente(sub)
+    sondeos = sub.add_parser("revisar-sondeos", help="Cotejar sondeos y litología para Civil 3D")
+    sondeos.add_argument("--ubicaciones", type=Path, required=True)
+    sondeos.add_argument("--litologia", type=Path, required=True)
+    sondeos.add_argument("--separador", choices=[",", ";", "|", "\t"], default=",")
+    acceso = sub.add_parser("homologar-acceso", help="Comparar umbral, llegada y rejilla en metros")
+    acceso.add_argument("--criterios", type=Path, required=True)
+    acceso.add_argument("--medicion", type=Path, nargs="+", required=True)
+    acceso.add_argument("--anterior", type=Path, nargs="+")
     sub.add_parser("doctor", help="Verificar dependencias sin conectar BIM vivo")
     sub.add_parser("mcp", help="Iniciar servidor MCP stdio")
     exchange = sub.add_parser("validar-intercambio",
@@ -63,6 +73,18 @@ def parser() -> argparse.ArgumentParser:
 
 
 def execute(args: argparse.Namespace) -> dict:
+    if args.command == "revisar-sondeos":
+        from .sondeos import revisar
+
+        return revisar(args.ubicaciones, args.litologia, args.separador)
+    if args.command == "homologar-acceso":
+        from . import acceso
+
+        return acceso.ejecutar(args)
+    if args.command == "expediente-mivhed":
+        from . import expediente_mivhed
+
+        return expediente_mivhed.ejecutar(args)
     if args.command == "validar-intercambio":
         from .interchange import SOURCE_OPTIONS, validate_beamng
 
@@ -115,7 +137,12 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False), file=sys.stderr)
         return 2
     print(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))
-    if args.command in ("doctor", "estado", "validar-intercambio"):
+    if args.command == "homologar-acceso":
+        return 0 if result["estado"] == "dentro_de_criterios" else 1
+    if args.command == "expediente-mivhed":
+        resumen = result["resumen"]
+        return int(bool(resumen["respuestas_invalidas"] or resumen["evidencias_incompletas"]))
+    if args.command in ("doctor", "estado", "validar-intercambio", "revisar-sondeos"):
         return 0 if result["ok"] else 1
     if args.command == "verificar":
         return result["exit_code"]

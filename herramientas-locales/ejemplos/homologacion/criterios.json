@@ -1,0 +1,8 @@
+{
+  "uso": "Piloto sintético. Umbrales de prueba sin carácter normativo.",
+  "marco": "LOCAL-SINTETICO / DATUM-VERTICAL-ENSAYO",
+  "tolerancia_xy_m": 0.01,
+  "tolerancia_z_m": 0.005,
+  "desnivel_previsto_m": 0,
+  "pendiente_min_pct": 1
+}

@@ -15,6 +15,19 @@ from .normativa import search, verify
 mcp = FastMCP("cdcrd-local")
 
 
+@mcp.tool()
+def homologar_acceso(criterios: str, mediciones: list[str],
+                     anteriores: list[str] | None = None) -> dict:
+    """Compara mediciones Revit y Civil 3D guardadas bajo el repositorio; solo lectura."""
+    from .acceso import comparar, leer_json, leer_mediciones, revisar
+
+    reglas = leer_json(input_path(criterios))
+    actuales = leer_mediciones(input_path(ruta) for ruta in mediciones)
+    if anteriores is not None:
+        return comparar(leer_mediciones(input_path(ruta) for ruta in anteriores), actuales, reglas)
+    return revisar(actuales, reglas)
+
+
 def root() -> Path:
     configured = os.environ.get("CDCRD_REPO_ROOT")
     return repository(Path(configured) if configured else None)

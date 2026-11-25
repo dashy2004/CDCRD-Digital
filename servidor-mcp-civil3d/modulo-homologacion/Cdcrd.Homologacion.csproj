@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Civil3DPath Condition="'$(Civil3DPath)' == ''">C:\Program Files\Autodesk\AutoCAD 2027</Civil3DPath>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="acdbmgd" HintPath="$(Civil3DPath)\acdbmgd.dll" Private="false" />
+    <Reference Include="acmgd" HintPath="$(Civil3DPath)\acmgd.dll" Private="false" />
+    <Reference Include="accoremgd" HintPath="$(Civil3DPath)\accoremgd.dll" Private="false" />
+    <Reference Include="AeccDbMgd" HintPath="$(Civil3DPath)\C3D\AeccDbMgd.dll" Private="false" />
+    <Reference Include="AecBaseMgd" HintPath="$(Civil3DPath)\ACA\AecBaseMgd.dll" Private="false" />
+  </ItemGroup>
+</Project>

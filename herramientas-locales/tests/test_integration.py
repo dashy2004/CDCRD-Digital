@@ -111,6 +111,9 @@ def test_cli_invokes_real_mass_participation_verifier(tmp_path, sum_uy, expected
 
 
 def test_real_mcp_stdio_search_path_boundaries_and_dxf(corpus, tmp_path):
+    ejemplos = REPO / "herramientas-locales" / "ejemplos" / "homologacion"
+    for nombre in ("criterios.json", "antes.json", "despues.json"):
+        (corpus / nombre).write_bytes((ejemplos / nombre).read_bytes())
     source = corpus / "planta.json"
     source.write_text(json.dumps({
         "name": "Planta sintética MCP",
@@ -137,7 +140,14 @@ def test_real_mcp_stdio_search_path_boundaries_and_dxf(corpus, tmp_path):
                     initialized = await session.initialize()
                     assert initialized.serverInfo.name == "cdcrd-local"
                     listed = await session.list_tools()
-                    assert len(listed.tools) == 12
+                    assert len(listed.tools) == 13
+                    acceso = await session.call_tool("homologar_acceso", {
+                        "criterios": "criterios.json", "mediciones": ["despues.json"],
+                        "anteriores": ["antes.json"],
+                    })
+                    assert not acceso.isError, acceso.content
+                    comparacion = json.loads(acceso.content[0].text)
+                    assert comparacion["cambio"] == "correccion_geometrica_releida"
                     assert {"cdcrd_buscar", "cad_generar_plano", "ifc_validar_ids"} <= {
                         tool.name for tool in listed.tools
                     }
