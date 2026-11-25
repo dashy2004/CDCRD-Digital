@@ -5,6 +5,7 @@ param(
     [Parameter(Mandatory=$true)][string]$Output,
     [Parameter(Mandatory=$true)][ValidatePattern('^[a-z][a-z0-9_]{0,47}$')][string]$LevelId,
     [string]$Python = 'python',
+    [ValidateRange(0.05, 10)][double]$SquareSize = 1.0,
     [string]$GameFolder = 'C:\Program Files (x86)\Steam\steamapps\common\BeamNG.drive',
     [string]$UserFolder = (Join-Path $env:LOCALAPPDATA 'BeamNG\BeamNG.drive\current'),
     [switch]$AutoImport
@@ -20,9 +21,10 @@ $UserFolder = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromP
 if ($Python.Contains('\') -or $Python.Contains('/')) {
     $Python = (Resolve-Path -LiteralPath $Python).ProviderPath
 }
+$squareText = $SquareSize.ToString([cultureinfo]::InvariantCulture)
 Push-Location $project
 try {
-    & $Python -m cdcrd_beamng build --snapshot $Snapshot --output $Output --level-id $LevelId
+    & $Python -m cdcrd_beamng build --snapshot $Snapshot --output $Output --level-id $LevelId --square-size $squareText
     if ($LASTEXITCODE -ne 0) { throw 'Fallo la conversion; no se instala un paquete incompleto' }
     $installArgs = @((Join-Path $project 'tools\prepare_drive.py'), '--package', $Output,
         '--user-folder', $UserFolder, '--game-folder', $GameFolder)
