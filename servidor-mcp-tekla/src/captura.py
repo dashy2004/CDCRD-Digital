@@ -105,6 +105,8 @@ def pulsar_boton(ventana: int, boton: str) -> bool:
     """Pulsa un botón de un diálogo listado por `dialogos`. Devuelve True si el diálogo se cerró."""
     import win32con
     import win32gui
+    if ventana not in [d['ventana'] for d in dialogos()]:
+        raise ValueError(f"La ventana {ventana} no es un diálogo abierto de Tekla. Vuelva a listar los diálogos.")
     hijos = []
     win32gui.EnumChildWindows(ventana, lambda c, _: hijos.append(c), None)
     for c in hijos:

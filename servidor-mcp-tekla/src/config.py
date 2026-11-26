@@ -9,7 +9,7 @@ logger = logging.getLogger('tekla_mcp_server')
 AQUI = os.path.dirname(os.path.abspath(__file__))
 
 DEFAULTS = {
-    "server": {"name": "Tekla MCP", "version": "0.1.0"},
+    "server": {"name": "Tekla MCP", "version": "0.2.0"},
     "tekla": {
         # Ruta del puente compilado; vacío = ..\puente\TeklaPuente.exe
         "exe_puente": "",
@@ -49,6 +49,6 @@ class Config:
 
     @property
     def rutasPermitidas(self) -> list[str]:
-        rutas = [str(r) for r in self.data['tekla'].get('rutas_permitidas', [])]
+        rutas = [str(r) for r in self.data['tekla'].get('rutas_permitidas', []) if str(r).strip()]
         extra = os.environ.get('TEKLA_MCP_RUTAS', '')
         return rutas + [r for r in extra.split(';') if r.strip()]

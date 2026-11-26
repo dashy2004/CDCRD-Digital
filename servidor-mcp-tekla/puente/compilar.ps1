@@ -5,14 +5,14 @@ $ErrorActionPreference = 'Stop'
 $aqui = Split-Path -Parent $MyInvocation.MyCommand.Path
 if (-not $Tekla) {
     $Tekla = Get-ChildItem 'C:\Program Files\Tekla Structures' -Directory -ErrorAction SilentlyContinue |
-        Sort-Object Name -Descending | ForEach-Object { Join-Path $_.FullName 'bin' } |
+        Sort-Object { [double]($_.Name -replace '[^0-9.]', '') } -Descending | ForEach-Object { Join-Path $_.FullName 'bin' } |
         Where-Object { Test-Path (Join-Path $_ 'Tekla.Structures.Model.dll') } | Select-Object -First 1
 }
 if (-not $Tekla) { throw 'No se encontró Tekla.Structures.Model.dll. Indique -Tekla con la carpeta bin.' }
 $fx = "$env:windir\Microsoft.NET\Framework64\v4.0.30319"
 $csc = Join-Path $fx 'csc.exe'
 if (-not (Test-Path $csc)) { throw "No se encontró csc.exe en $fx" }
-$refs = @('Tekla.Structures.dll', 'Tekla.Structures.Model.dll') | ForEach-Object {
+$refs = @('Tekla.Structures.dll', 'Tekla.Structures.Model.dll', 'Tekla.Structures.Catalogs.dll', 'Tekla.Structures.Drawing.dll') | ForEach-Object {
     $p = Join-Path $Tekla $_
     if (-not (Test-Path $p)) { $p = Join-Path $Tekla "Net48Runtime\$_" }
     if (-not (Test-Path $p)) { throw "Falta $_ en $Tekla" }

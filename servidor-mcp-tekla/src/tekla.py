@@ -20,6 +20,8 @@ TIEMPO_MAXIMO_S = 120
 ESCRITURAS = frozenset({
     'guardar', 'definir_ejes', 'crear_piezas', 'crear_placa',
     'crear_tornillos', 'crear_soldadura', 'borrar', 'informe',
+    'ajustar_extremo', 'cortar_plano', 'cortar_con_pieza', 'despuntar',
+    'componente', 'detalle', 'crear_plano', 'numerar',
 })
 CATALOGOS = ('profdb.bin', 'matdb.bin', 'screwdb.db', 'assdb.db')
 Punto = list[float]
@@ -60,9 +62,12 @@ def _aviso_dialogos() -> str:
 
 
 def _dentro_de(ruta: str, raices: list[str]) -> bool:
-    destino = os.path.normcase(os.path.abspath(ruta))
+    # realpath: una unión o enlace dentro de una carpeta permitida no abre la puerta a otra.
+    destino = os.path.normcase(os.path.realpath(ruta))
     for raiz in raices:
-        base = os.path.normcase(os.path.abspath(os.path.expandvars(raiz)))
+        if not raiz.strip():
+            continue
+        base = os.path.normcase(os.path.realpath(os.path.expandvars(raiz)))
         if destino == base or destino.startswith(base.rstrip('\\/') + os.sep):
             return True
     return False
@@ -102,6 +107,13 @@ class Tekla:
                 f"({'; '.join(self._rutas) or 'ninguna configurada'}). Añada la carpeta en "
                 "config.json → tekla.rutas_permitidas o en la variable TEKLA_MCP_RUTAS.")
 
+    def exigir_archivo_permitido(self, archivo: str) -> None:
+        """Rechaza un archivo de salida (informe, captura) fuera de las carpetas permitidas."""
+        if not _dentro_de(archivo, self._rutas):
+            raise ErrorTekla(
+                f"'{archivo}' está fuera de las carpetas permitidas para escribir "
+                f"({'; '.join(self._rutas) or 'ninguna configurada'}).")
+
     # ---------- modelo ----------
     def tekla_estado(self) -> dict:
         """Modelo abierto en Tekla Structures: nombre, ruta, versión y número de piezas."""
@@ -112,7 +124,7 @@ class Tekla:
 
         La carpeta debe estar dentro de las rutas permitidas. Requiere Tekla abierto
         con algún modelo cargado (Open API no arranca el programa). Con licencia educativa Tekla pregunta
-        antes de guardar; ceptar_licencia_educativa=True responde «Yes» a ese aviso concreto."""
+        antes de guardar; aceptar_licencia_educativa=True responde «Yes» a ese aviso concreto."""
         self._exigir_ruta_permitida(os.path.join(carpeta, nombre))
         Path(carpeta).mkdir(parents=True, exist_ok=True)
         return self._llamar_atendiendo_dialogo('crear_modelo', aceptar_licencia_educativa,
@@ -129,10 +141,13 @@ class Tekla:
             limite = time.monotonic() + TIEMPO_MAXIMO_S
             while not futuro.done() and time.monotonic() < limite:
                 time.sleep(1.0)
-                for d in captura.dialogos():
-                    if 'educational license' in d['texto'].lower() and 'Yes' in d['botones']:
-                        logger.info("Aviso de licencia educativa aceptado por indicación del usuario.")
-                        captura.pulsar_boton(d['ventana'], 'Yes')
+                try:
+                    for d in captura.dialogos():
+                        if 'educational license' in d['texto'].lower() and 'Yes' in d['botones']:
+                            logger.info("Aviso de licencia educativa aceptado por indicación del usuario.")
+                            captura.pulsar_boton(d['ventana'], 'Yes')
+                except Exception as e:  # un fallo al mirar los diálogos no debe tapar el resultado del puente
+                    logger.warning("No se pudieron atender los diálogos de Tekla: %s", e)
             return futuro.result()
 
     def tekla_copiar_catalogos(self, carpeta_origen: str) -> dict:
@@ -228,7 +243,7 @@ class Tekla:
     # ---------- consulta ----------
     def tekla_listar_piezas(self, nombre: str = '') -> dict:
         """Lista piezas (filtro opcional por nombre) con perfil, material, extremos, caja del sólido,
-        longitud en mm y peso en kg; además cuenta grupos de tornillos y soldaduras."""
+        longitud en mm y peso en kg; además los grupos de tornillos, soldaduras y componentes con su id."""
         return self._llamar('listar', nombre=nombre)
 
     def tekla_borrar(self, ids: list[int]) -> list:
@@ -248,5 +263,110 @@ class Tekla:
                             ajustar_area='true' if ajustar_area else 'false')
 
     def tekla_crear_informe(self, ids: list[int], plantilla: str, archivo: str, titulo: str = '') -> bool:
-        """Genera un informe de los objetos indicados con una plantilla del entorno (p. ej. "P_Part_List")."""
+        """Genera un informe de los objetos indicados con una plantilla del entorno (p. ej. "P_Part_List").
+
+        `archivo` relativo se guarda en la carpeta del modelo; una ruta absoluta debe estar dentro de
+        las carpetas permitidas."""
+        ruta_modelo = self._llamar('estado')['ruta']
+        self.exigir_archivo_permitido(os.path.join(ruta_modelo, archivo))
         return self._llamar('informe', ids=[int(i) for i in ids], plantilla=plantilla, archivo=archivo, titulo=titulo)
+
+    # ---------- cortes ----------
+    def tekla_ajustar_extremo(self, id_pieza: int, origen: Punto, eje_x: Punto, eje_y: Punto) -> dict:
+        """Ajusta el extremo de una pieza a un plano (alarga o recorta el extremo más cercano).
+
+        El plano pasa por `origen` y contiene los vectores `eje_x` y `eje_y`. Unidades mm."""
+        return self._llamar('ajustar_extremo', **self._plano(id_pieza, origen, eje_x, eje_y))
+
+    def tekla_cortar_plano(self, id_pieza: int, origen: Punto, eje_x: Punto, eje_y: Punto) -> dict:
+        """Corta una pieza por un plano. Se elimina el lado hacia el que apunta la normal
+        `eje_x` × `eje_y`; para quitar el otro lado, intercambie los dos ejes."""
+        return self._llamar('cortar_plano', **self._plano(id_pieza, origen, eje_x, eje_y))
+
+    @staticmethod
+    def _plano(id_pieza: int, origen: Punto, eje_x: Punto, eje_y: Punto) -> dict:
+        return dict(pieza=int(id_pieza), origen=_punto(origen, 'origen'),
+                    eje_x=_punto(eje_x, 'eje_x'), eje_y=_punto(eje_y, 'eje_y'))
+
+    def tekla_despuntar(self, id_pieza: int, minimo: Punto, maximo: Punto) -> dict:
+        """Despunte rectangular: resta a la pieza la caja [minimo, maximo], alineada con los ejes globales.
+
+        Para despuntar una secundaria contra una viga principal, la caja cubre el ala de la principal
+        más la holgura (p. ej. 13 mm) y atraviesa todo el ancho de la secundaria."""
+        a, b = _punto(minimo, 'minimo'), _punto(maximo, 'maximo')
+        if any(hi <= lo for lo, hi in zip(a, b)):
+            raise ValueError("La caja del despunte necesita maximo > minimo en los tres ejes.")
+        return self._llamar('despuntar', pieza=int(id_pieza), min=a, max=b)
+
+    def tekla_cortar_con_pieza(self, id_pieza: int, id_pieza_cortante: int) -> dict:
+        """Resta a `id_pieza` el volumen de otra pieza. La pieza cortante se elimina del modelo."""
+        if int(id_pieza) == int(id_pieza_cortante):
+            raise ValueError("La pieza cortante debe ser distinta de la pieza que se corta.")
+        return self._llamar('cortar_con_pieza', pieza=int(id_pieza), pieza_cortante=int(id_pieza_cortante))
+
+    # ---------- componentes del catálogo ----------
+    def tekla_crear_componente(self, numero: int, id_pieza_principal: int, ids_piezas_secundarias: list[int],
+                               atributos: Optional[dict] = None, archivo_atributos: str = 'standard',
+                               nombre: str = '', vector_arriba: Optional[Punto] = None,
+                               posicion: str = 'COLLISION_PLANE') -> dict:
+        """Inserta una unión del catálogo de componentes entre una pieza principal y sus secundarias
+        (p. ej. 144 placa de extremo, 146 placa de cortante, 141 angulares). Los componentes de usuario
+        llevan `numero` = -1 y su `nombre`.
+
+        `atributos` son los campos del diálogo del componente por su nombre interno; lo que no se indique
+        sale de `archivo_atributos`. Devuelve las piezas, tornillos y soldaduras que generó.
+        Use tekla_catalogo_componentes para localizar el número."""
+        if not ids_piezas_secundarias:
+            raise ValueError("Indique al menos una pieza secundaria.")
+        args = dict(numero=int(numero), nombre=nombre, pieza_principal=int(id_pieza_principal),
+                    piezas_secundarias=[int(i) for i in ids_piezas_secundarias],
+                    archivo_atributos=archivo_atributos, posicion=posicion, atributos=dict(atributos or {}))
+        if vector_arriba is not None:
+            args['vector_arriba'] = _punto(vector_arriba, 'vector_arriba')
+        return self._llamar('componente', **args)
+
+    def tekla_crear_detalle(self, numero: int, id_pieza: int, punto: Punto, atributos: Optional[dict] = None,
+                            archivo_atributos: str = 'standard', nombre: str = '',
+                            vector_arriba: Optional[Punto] = None, tipo_detalle: str = 'END') -> dict:
+        """Inserta un detalle del catálogo sobre una sola pieza en `punto` (p. ej. 1004 placa base con
+        anclajes, 1014 placa base rigidizada). `tipo_detalle`: END | INTERMEDIATE | INTERMEDIATE_REVERSE.
+
+        Los anclajes de una placa base salen del propio detalle: diámetro, norma y separaciones van en
+        `atributos` o en el archivo de atributos."""
+        args = dict(numero=int(numero), nombre=nombre, pieza=int(id_pieza), punto=_punto(punto, 'punto'),
+                    archivo_atributos=archivo_atributos, tipo_detalle=tipo_detalle,
+                    atributos=dict(atributos or {}))
+        if vector_arriba is not None:
+            args['vector_arriba'] = _punto(vector_arriba, 'vector_arriba')
+        return self._llamar('detalle', **args)
+
+    def tekla_catalogo_componentes(self, filtro: str = '') -> list:
+        """Componentes disponibles (número, nombre y título) cuyo título, nombre o número contiene `filtro`."""
+        return self._llamar('catalogo_componentes', filtro=filtro)
+
+    def tekla_normas_tornillos(self) -> list:
+        """Normas de tornillo del catálogo del modelo abierto con sus diámetros en mm.
+
+        Si solo aparecen UNDEFINED_BOLT y UNDEFINED_STUD, al modelo le falta el catálogo:
+        use tekla_copiar_catalogos."""
+        return self._llamar('normas_tornillos')
+
+    # ---------- planos ----------
+    def tekla_listar_planos(self) -> list:
+        """Planos del modelo abierto: tipo, marca, nombre, título y estado de actualización."""
+        return self._llamar('planos')
+
+    def tekla_numerar(self) -> dict:
+        """Numera todas las piezas y conjuntos del modelo (necesario antes de crear planos).
+
+        Open API no numera: el servidor escribe una macro temporal en la carpeta del modelo, la lanza
+        y la borra. Devuelve si la numeración quedó al día."""
+        return self._llamar('numerar')
+
+    def tekla_crear_plano(self, id_pieza: int, tipo: str = 'pieza', archivo_atributos: str = 'standard') -> dict:
+        """Crea el plano de una pieza (`tipo` = "pieza") o de su conjunto ("conjunto") y lo cierra guardado.
+
+        Requiere la numeración al día: use antes tekla_numerar."""
+        if tipo not in ('pieza', 'conjunto'):
+            raise ValueError("tipo debe ser 'pieza' o 'conjunto'.")
+        return self._llamar('crear_plano', pieza=int(id_pieza), tipo=tipo, archivo_atributos=archivo_atributos)

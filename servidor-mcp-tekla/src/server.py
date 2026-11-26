@@ -1,4 +1,4 @@
-# Tekla MCP - v0.1.0
+# Tekla MCP - v0.2.0
 # Servidor MCP para Tekla Structures. Mismo patrón que servidor-mcp-safe:
 # logging antes de la configuración, log junto al script, registro por bloques.
 
@@ -22,7 +22,7 @@ logger = logging.getLogger('tekla_mcp_server')
 
 from mcp.server.fastmcp import FastMCP          # noqa: E402
 from config import Config                       # noqa: E402
-from tekla import Tekla                         # noqa: E402
+from tekla import ErrorTekla, Tekla             # noqa: E402,F401
 import captura                                   # noqa: E402
 
 config = Config()
@@ -54,6 +54,23 @@ tekla_crear_placa = mcp.tool()(tekla.tekla_crear_placa)
 tekla_crear_tornillos = mcp.tool()(tekla.tekla_crear_tornillos)
 tekla_crear_soldadura = mcp.tool()(tekla.tekla_crear_soldadura)
 
+# Cortes
+tekla_ajustar_extremo = mcp.tool()(tekla.tekla_ajustar_extremo)
+tekla_cortar_plano = mcp.tool()(tekla.tekla_cortar_plano)
+tekla_despuntar = mcp.tool()(tekla.tekla_despuntar)
+tekla_cortar_con_pieza = mcp.tool()(tekla.tekla_cortar_con_pieza)
+
+# Componentes del catálogo
+tekla_crear_componente = mcp.tool()(tekla.tekla_crear_componente)
+tekla_crear_detalle = mcp.tool()(tekla.tekla_crear_detalle)
+tekla_catalogo_componentes = mcp.tool()(tekla.tekla_catalogo_componentes)
+tekla_normas_tornillos = mcp.tool()(tekla.tekla_normas_tornillos)
+
+# Planos
+tekla_numerar = mcp.tool()(tekla.tekla_numerar)
+tekla_listar_planos = mcp.tool()(tekla.tekla_listar_planos)
+tekla_crear_plano = mcp.tool()(tekla.tekla_crear_plano)
+
 # Consulta
 tekla_listar_piezas = mcp.tool()(tekla.tekla_listar_piezas)
 tekla_borrar = mcp.tool()(tekla.tekla_borrar)
@@ -70,7 +87,9 @@ def capturar_ventana(archivo: str, titulo_contiene: str = 'Tekla Structures', re
     """Guarda en PNG la ventana principal cuyo título contenga `titulo_contiene` (Tekla, ETABS, SAFE…).
 
     `region`: completa | vista | panel | cinta (pensadas para Tekla). `fraccion` = [x0, y0, x1, y1]
-    entre 0 y 1 recorta cualquier parte de la ventana. La ventana pasa al frente durante la captura."""
+    entre 0 y 1 recorta cualquier parte de la ventana. La ventana pasa al frente durante la captura.
+    `archivo` debe estar dentro de las carpetas permitidas para escribir."""
+    tekla.exigir_archivo_permitido(archivo)
     return captura.capturar(archivo, titulo_contiene, region, fraccion)
 
 
