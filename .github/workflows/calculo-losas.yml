@@ -1,0 +1,99 @@
+name: Calcular y revisar losas exportadas de Revit
+on:
+  push:
+    branches: [master, codex/revision-ia]
+    paths:
+      - .github/workflows/calculo-losas.yml
+      - herramientas/calculo_losas.py
+      - herramientas/revision_ia.py
+      - entradas-losas/proyecto.json
+      - entradas-losas/usos.json
+  workflow_dispatch:
+    inputs:
+      proyecto:
+        description: "Exportación JSON de Revit en entradas-losas/ (vacío para el ejemplo sintético)"
+        type: string
+      usos:
+        description: "JSON de usos del mismo expediente en entradas-losas/"
+        type: string
+  workflow_call:
+    inputs:
+      proyecto:
+        description: "Exportación JSON de Revit en entradas-losas/ (vacío para el ejemplo sintético)"
+        type: string
+      usos:
+        description: "JSON de usos del mismo expediente en entradas-losas/"
+        type: string
+      revision_cdcrd:
+        description: "Commit de CDCRD-Digital que contiene este flujo"
+        required: true
+        type: string
+      motor_del_cliente:
+        description: "Usar el motor-fea del commit del repositorio que llama al flujo"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  calcular:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Leer las entradas del repositorio que inicia el cálculo
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Obtener herramientas de CDCRD-Digital
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          repository: ${{ inputs.revision_cdcrd && 'dashy2004/CDCRD-Digital' || github.repository }}
+          ref: ${{ inputs.revision_cdcrd || github.sha }}
+          path: cdcrd
+          sparse-checkout: |
+            herramientas
+            datos/machine
+          persist-credentials: false
+      - name: Obtener el motor FEM de EstructurasRD
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          repository: ${{ inputs.motor_del_cliente && github.repository || 'dashy2004/EstructurasRD' }}
+          ref: ${{ inputs.motor_del_cliente && github.sha || '69d2e7288c8a799db8b0f745a28b8ff817c6d8e4' }}
+          path: motor
+          sparse-checkout: motor-fea/src
+          persist-credentials: false
+      - name: Obtener el puente y el complemento de Revit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          repository: dashy2004/CDCRD-Digital
+          ref: 8340d0e3229b7e96a6d031826b56e521e7c171b7
+          path: puente
+          sparse-checkout: |
+            puente-losas/src
+            puente-losas/ejemplo
+            plugin-losas/src
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+      - name: Preparar el escritor de Excel
+        run: python -m pip install openpyxl==3.1.5
+      - name: Calcular y preparar la revisión para IA
+        env:
+          ARCHIVO_PROYECTO: ${{ inputs.proyecto }}
+          ARCHIVO_USOS: ${{ inputs.usos }}
+          EVENTO: ${{ github.event_name }}
+          PYTHONPATH: motor/motor-fea/src:puente/puente-losas/src:puente/plugin-losas/src
+        run: |
+          opciones=()
+          if [[ "$EVENTO" == push ]]; then opciones+=(--detectar-entradas); fi
+          python cdcrd/herramientas/calculo_losas.py --puente puente --salida salida-losas \
+            --proyecto "$ARCHIVO_PROYECTO" --usos "$ARCHIVO_USOS" "${opciones[@]}"
+      - name: Publicar el informe Excel, los resultados, las huellas y la revisión
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: calculo-losas
+          path: salida-losas/
+          retention-days: 7
+          if-no-files-found: error

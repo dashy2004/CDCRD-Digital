@@ -1,0 +1,73 @@
+name: Comprobar y revisar derivas de diseño por piso
+on:
+  push:
+    branches: [master, codex/revision-ia]
+    paths:
+      - .github/workflows/derivas.yml
+      - herramientas/verificacion_deriva.py
+      - herramientas/revision_ia.py
+      - herramientas/ejemplos-ia/derivas.json
+      - datos/machine/derivas_limites.json
+      - entradas-sismo/derivas.json
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      revision_cdcrd:
+        description: "Commit de CDCRD-Digital que contiene este flujo"
+        required: true
+        type: string
+      ejemplo_del_cliente:
+        description: "Usar docs/ejemplos/derivas/prueba.json del repositorio que llama"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  comprobar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Leer las entradas del repositorio que inicia el cálculo
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Obtener herramientas de CDCRD-Digital
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          repository: ${{ inputs.revision_cdcrd && 'dashy2004/CDCRD-Digital' || github.repository }}
+          ref: ${{ inputs.revision_cdcrd || github.sha }}
+          path: cdcrd
+          sparse-checkout: |
+            herramientas
+            datos/machine
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+      - name: Probar el verificador con sus casos de referencia
+        run: python cdcrd/herramientas/verificacion_deriva.py --test
+      - name: Verificar las filas aportadas y conservar la entrada
+        env:
+          EJEMPLO_DEL_CLIENTE: ${{ inputs.ejemplo_del_cliente }}
+        run: |
+          mkdir revision-derivas
+          entrada=cdcrd/herramientas/ejemplos-ia/derivas.json
+          if [[ "$EJEMPLO_DEL_CLIENTE" == true ]]; then entrada=docs/ejemplos/derivas/prueba.json; fi
+          if [[ -f entradas-sismo/derivas.json ]]; then entrada=entradas-sismo/derivas.json; fi
+          cp -- "$entrada" revision-derivas/entrada.json
+          python cdcrd/herramientas/verificacion_deriva.py revision-derivas/entrada.json -o revision-derivas/revision.json
+      - name: Preparar la revisión aun cuando haya filas incompletas o que no cumplan
+        if: "!cancelled() && hashFiles('revision-derivas/revision.json') != ''"
+        run: >-
+          python cdcrd/herramientas/revision_ia.py --tipo derivas
+          --entrada revision-derivas/revision.json --salida "revision-derivas/Revision para IA.md"
+      - name: Publicar la revisión, el resultado y la entrada
+        if: "!cancelled() && hashFiles('revision-derivas/Revision para IA.md') != ''"
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: revision-derivas
+          path: revision-derivas/
+          retention-days: 7
+          if-no-files-found: error

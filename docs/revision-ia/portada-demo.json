@@ -1,0 +1,14 @@
+{
+  "portada": {
+    "titulo": "Sistema de demostración de 27 losas",
+    "documento": "MEMORIA DE DISEÑO",
+    "subtitulo": "Ejemplo público de CDCRD-Digital",
+    "alcance": "Resultados del listado de demostración de F. Perdomo."
+  },
+  "control": {
+    "codigo": "DEMO-27",
+    "estado": "Ejemplo de prueba",
+    "origen": "sistema_demo_27_losas.TXT y sistema_demo_27_losas.DL del ejemplo público de CDCRD-Digital",
+    "marca_de_agua": "DEMOSTRACIÓN"
+  }
+}
