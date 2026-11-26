@@ -7,12 +7,31 @@
 # Ejecutar en Windows PowerShell (5.1). No requiere Administrador.
 # ---------------------------------------------------------------------------
 
+[CmdletBinding()]
+param(
+    [string]$Config,     # por defecto, el archivo que Claude Desktop lee en este equipo
+    [string]$Python      # por defecto, el interprete real detras de py/python
+)
+
 $ErrorActionPreference = 'Stop'
 
-$cfg   = "C:\Users\emilg\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\claude_desktop_config.json"
-$src   = "C:\Users\emilg\Artificial IQ\CDCRD-Digital\servidor-mcp\src"
+# Rutas de este equipo: la configuracion de Claude Desktop y el interprete real salen
+# de las mismas funciones que usa instalar-cdcrd.ps1 (la app ha cambiado de carpeta
+# entre versiones; ver Get-RutaClaudeDesktop). Se cargan en un ambito propio (& { })
+# para que los parametros y variables del instalador no pisen los de este script.
+$instalador = Join-Path (Split-Path -Parent $PSScriptRoot) 'instalar-cdcrd.ps1'
+$equipo = & {
+    $env:CDCRD_INSTALADOR_SOLO_FUNCIONES = '1'
+    try { . $instalador } finally { Remove-Item Env:\CDCRD_INSTALADOR_SOLO_FUNCIONES }
+    $real = Get-PythonReal
+    [pscustomobject]@{ Config = Get-RutaClaudeDesktop; Python = $(if ($real) { $real.Ruta }) }
+}
+$cfg = if ($Config) { $Config } else { $equipo.Config }
+$py  = if ($Python) { $Python } else { $equipo.Python }
+if (-not $py) { throw "No se encontro Python. Instale Python 64 bits o pase -Python 'ruta'." }
+$src   = Join-Path $PSScriptRoot "src"
 $nuevo = Join-Path $src "server.py"
-$py    = "C:\Users\emilg\AppData\Local\Python\pythoncore-3.14-64\python.exe"
+Write-Host "Config de Claude Desktop: $cfg"
 
 # --- 1. Existencia -----------------------------------------------------------
 foreach ($p in @($cfg, $nuevo, $py)) {
@@ -47,8 +66,11 @@ Write-Host "[3/5] Respaldo: $bak" -ForegroundColor Green
 $j = Get-Content -LiteralPath $cfg -Raw | ConvertFrom-Json
 
 Write-Host "`n--- entrada 'fea' ANTES ---" -ForegroundColor Yellow
-$j.mcpServers.fea | ConvertTo-Json -Depth 10
+if ($j.mcpServers) { $j.mcpServers.fea | ConvertTo-Json -Depth 10 }
 
+if (-not $j.mcpServers -or -not $j.mcpServers.fea) {
+    throw "El config no tiene la entrada 'fea'. Use instalar-cdcrd.ps1 para crearla."
+}
 $j.mcpServers.fea.args = @($nuevo)
 
 # WriteAllText sin BOM: Set-Content -Encoding UTF8 en PS 5.1 escribe BOM y

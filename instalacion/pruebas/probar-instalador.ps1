@@ -96,6 +96,13 @@ try {
     Assert-Igual 'apunta al server.py del repositorio' $srv['tekla'].args[0] (Join-Path $raiz 'servidor-mcp-tekla\src\server.py')
     $d.Programas.Tekla = $null
     Assert-Igual 'sin Tekla no se ofrece' (@((Get-ServidoresMcp $d).Keys).Count) 0
+
+    # ---- 4. Ningun script de registro lleva rutas de un equipo concreto ------
+    foreach ($s in 'servidor-mcp-safe\instalar-safe.ps1', 'servidor-mcp\desplegar-v1.1.ps1', 'servidor-mcp-civil3d\registrar-mcp.ps1') {
+        $texto = Get-Content -LiteralPath (Join-Path $raiz $s) -Raw
+        Assert-Igual "$s sin rutas fijas de usuario" ($texto -match '(?i)C:\\Users\\|Claude_[a-z0-9]{8,}') $false
+        Assert-Igual "$s usa la deteccion comun" ($texto -match 'Get-RutaClaudeDesktop') $true
+    }
 }
 finally {
     if (Test-Path -LiteralPath $tmp) { Remove-Item -LiteralPath $tmp -Recurse -Force }
