@@ -98,12 +98,15 @@ def main() -> None:
                 raise ValueError("El libro generado no contiene hojas.")
         finally:
             wb.close()
+        with crudo.open("rb") as archivo:
+            resultados_sha256 = hashlib.file_digest(archivo, "sha256").hexdigest()
         lectura = {
             "alcance": titulo,
             "origen": "archivos_seleccionados" if args.proyecto else "ejemplo_sintetico",
             "panos": len(panos),
             "hojas_excel": hojas,
             "entradas_sha256": huellas,
+            "resultados_sha256": resultados_sha256,
             "revision_motor": revision_del_modulo("motor_fea"),
             "revision_complemento": revision_del_modulo("plugin_losas"),
             "revision_cdcrd": revision(Path(__file__).resolve().parent),

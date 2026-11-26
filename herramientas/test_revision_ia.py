@@ -52,12 +52,33 @@ class RevisionIATests(unittest.TestCase):
         recibo.write_bytes(b'{"panos": 1, "alcance": "Ensayo", "revision_motor": "abc"}')
         doc = self.generar("losas", recibo=recibo)
         for cadena in (r"L\|1", "0.2 | 2 | 3 | u/m", hashlib.sha256(recibo.read_bytes()).hexdigest(),
-                       recibo.read_text(), "acero_pm.json"):
+                       recibo.read_text(), "acero_pm.json", "Recibo heredado", "vínculo sin verificar"):
             self.assertIn(cadena, doc)
         self.assertIn("recibo", self.generar("losas").lower())
         recibo.write_text('{"panos":2,"alcance":"otro caso"}', encoding="utf-8")
         with self.assertRaises(ValueError):
             self.generar("losas", recibo=recibo)
+
+    def test_losas_rechaza_recibo_cruzado_con_igual_numero_de_panos(self):
+        momento = {"mfx": 2, "mfy": 3, "unidades": "u/m"}
+        datos = {"panos": [{"mark": "A", "espesor": {"h_usado_m": 0.2}}],
+                 "pieper_martens": {"losas": {"A": momento}}}
+        self.escribir(datos)
+        recibo = self.base / "lectura.json"
+        huella = hashlib.sha256(self.entrada.read_bytes()).hexdigest().upper()
+        lectura = {"panos": 1, "alcance": "Ensayo", "resultados_sha256": huella}
+        recibo.write_text(json.dumps(lectura), encoding="utf-8")
+        self.assertIn("coincide con la huella", self.generar("losas", recibo=recibo))
+        anterior = self.salida.read_bytes()
+        momento["mfx"] = 5
+        self.escribir(datos)
+        for valor in (huella, None, 1234, "", "abc"):
+            with self.subTest(valor=valor):
+                lectura["resultados_sha256"] = valor
+                recibo.write_text(json.dumps(lectura), encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, "resultados_sha256"):
+                    self.generar("losas", recibo=recibo)
+                self.assertEqual(self.salida.read_bytes(), anterior)
 
     def test_losas_exige_marcas_y_campos_sin_inventar_valores(self):
         for fila in ({"mark": "L1", "espesor": {}}, {"mark": "L2", "espesor": {"h_usado_m": 0.2}}):

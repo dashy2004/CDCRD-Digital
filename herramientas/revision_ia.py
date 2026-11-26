@@ -88,7 +88,7 @@ def _numero(valor):
     return isinstance(valor, (int, Decimal)) and not isinstance(valor, bool)
 
 
-def _losas(datos, recibo):
+def _losas(datos, recibo, huella):
     panos = _lista(datos.get("panos"), "panos", dict)
     pieper = datos.get("pieper_martens")
     if not isinstance(pieper, dict) or not isinstance(pieper.get("losas"), dict):
@@ -98,10 +98,19 @@ def _losas(datos, recibo):
     if (not panos or not all(_texto(m) for m in marcas) or len(set(marcas)) != len(marcas)
             or set(marcas) != set(pm)):
         raise ValueError("Los paños y los resultados Pieper-Martens deben coincidir por marca única.")
+    nota_recibo = "Recibo de procedencia ausente. Solicite lectura.json para contrastar las revisiones del código y las huellas de entrada."
     if recibo is not None:
         if (not _texto(recibo.get("alcance")) or type(recibo.get("panos")) is not int
                 or recibo["panos"] != len(panos)):
             raise ValueError("El alcance o la cantidad de paños del recibo de losas es incompatible.")
+        if "resultados_sha256" in recibo:
+            declarada = recibo["resultados_sha256"]
+            if not isinstance(declarada, str) or declarada.lower() != huella:
+                raise ValueError("resultados_sha256 del recibo debe coincidir con la huella SHA-256 del archivo de resultados.")
+            nota_recibo = "La huella SHA-256 del archivo de resultados coincide con la huella declarada en el recibo."
+        else:
+            nota_recibo = ("Recibo heredado sin resultados_sha256. El número de paños coincide, pero el vínculo sin verificar "
+                           "entre este recibo y estos resultados requiere cotejo con las fuentes originales.")
     lineas = ["## Resultados de losas por marca", "",
               "El espesor corresponde a panos[].espesor.h_usado_m. Los momentos y su unidad proceden de pieper_martens.losas.",
               "", "| Marca | Espesor usado (m) | Mfx | Mfy | Unidad PM |", "| --- | ---: | ---: | ---: | --- |"]
@@ -117,8 +126,7 @@ def _losas(datos, recibo):
     lineas.extend(["", "El puente aporta los resultados de elementos finitos, franja analítica de vuelos y Pieper-Martens. "
                    "El libro de Excel documenta los supuestos. Para revisar barras y separaciones, adjunte también acero_pm.json.",
                    "", "Revise geometría, cargas, bordes y combinaciones con el profesional responsable.",
-                   "", "El recibo adjunto debe contrastarse con las fuentes originales."
-                   if recibo is not None else "Recibo de procedencia ausente. Solicite lectura.json para contrastar las revisiones del código y las huellas de entrada."])
+                   "", nota_recibo])
     return lineas
 
 
@@ -181,7 +189,7 @@ def generar(tipo, entrada, salida, recibo=None, origen=None):
     datos, texto, huella = _leer(entrada)
     lectura = _leer(recibo) if recibo is not None else None
     if tipo == "losas":
-        seccion = _losas(datos, lectura[0] if lectura else None)
+        seccion = _losas(datos, lectura[0] if lectura else None, huella)
     else:
         seccion = {"derivas": _derivas, "memoria": _memoria, "expediente": _expediente}[tipo](datos)
     lineas = ["# CDCRD Digital · Revisión de evidencia", "", f"Tipo: {tipo}.",

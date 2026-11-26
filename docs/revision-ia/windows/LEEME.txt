@@ -1,0 +1,16 @@
+CDCRD-Digital | MemoriaPlus para Windows x64
+
+Extraiga toda la carpeta y abra «Abrir MemoriaPlus.cmd». En Generar, abra «Proyecto o JSON» y seleccione Ejemplo/data.json. Si desea una portada de ejemplo, elija Ejemplo/memoria.json. Pulse «Generar memoria de diseño» para guardar el Word o «Preparar revisión para IA» para guardar el Markdown. Abra el Markdown y decida con qué asistente compartirlo. La aplicación guarda el informe en el equipo.
+
+Para repetir la extracción desde el listado original, abra «Archivos», seleccione Ejemplo/fuentes.json y pulse «Extraer y guardar datos». También puede abrir «GitHub» y pegar el enlace a data.json de la guía de CDCRD-Digital. Los archivos de modelos de ETABS y SAFE requieren su aplicación CSI y una licencia.
+
+Primer uso en otro equipo
+Instale Python 3 para Windows. Abra PowerShell en la carpeta extraída y ejecute estas dos líneas. El lanzador detectará el entorno en el siguiente inicio.
+
+  py -3 -m venv .\memoria-diseno\.venv
+  .\memoria-diseno\.venv\Scripts\python.exe -m pip install -r .\memoria-diseno\requirements.txt
+
+Guía de uso y fuentes admitidas
+https://github.com/dashy2004/CDCRD-Digital/tree/codex/revision-ia/docs/revision-ia
+Ejemplo para el botón GitHub
+https://github.com/dashy2004/CDCRD-Digital/blob/codex/revision-ia/docs/revision-ia/data.json

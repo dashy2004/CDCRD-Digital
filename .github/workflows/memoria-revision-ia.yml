@@ -7,6 +7,7 @@ on:
       - .github/workflows/memoria-revision-ia.yml
       - herramientas/revision_ia.py
       - herramientas/test_revision_ia.py
+      - docs/revision-ia/windows/**
       - docs/revision-ia/portada-demo.json
       - docs/revision-ia/data.json
   workflow_dispatch:
@@ -60,5 +61,50 @@ jobs:
         with:
           name: memoria-y-revision-ia
           path: entrega/
+          retention-days: 7
+          if-no-files-found: error
+
+  escritorio:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Obtener la interfaz de MemoriaPlus
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          repository: dashy2004/EstructurasRD
+          ref: 3989d85f1f38d4de270f276ca087e1e33373ae6b
+          path: cliente
+          persist-credentials: false
+      - name: Obtener el motor de memorias de CDCRD-Digital
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: f1c22ef7b14d07c6ca2c2a197d7532f0fc49564c
+          path: motor
+          sparse-checkout: memoria-diseno
+          persist-credentials: false
+      - name: Compilar la interfaz y armar el paquete con ejemplos sintéticos
+        shell: pwsh
+        run: |
+          dotnet publish cliente/src.Memoria/MemoriaPlus.App.csproj -c Release -r win-x64 --self-contained true -p:DebugType=None -p:DebugSymbols=false -o paquete/app
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          New-Item -ItemType Directory paquete/Ejemplo,paquete/memoria-diseno | Out-Null
+          Copy-Item docs/revision-ia/windows/* paquete/
+          Copy-Item cliente/LICENSE paquete/LICENSE-MemoriaPlus.txt
+          Copy-Item LICENSE paquete/LICENSE-CDCRD.txt
+          Copy-Item motor/memoria-diseno/*.py,motor/memoria-diseno/requirements.txt,herramientas/revision_ia.py paquete/memoria-diseno/
+          Copy-Item motor/LICENSE paquete/memoria-diseno/LICENSE.txt
+          Copy-Item motor/memoria-diseno/ejemplo/*,docs/revision-ia/data.json paquete/Ejemplo/
+          Copy-Item docs/revision-ia/portada-demo.json paquete/Ejemplo/memoria.json
+          Copy-Item cliente/docs/referencia/cargas_estructurales_demo.xlsx paquete/Ejemplo/cargas-sinteticas.xlsx
+          python paquete/memoria-diseno/revision_ia.py --tipo memoria --entrada paquete/Ejemplo/data.json --salida paquete/Ejemplo/Revision-IA.md
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          if (!(Test-Path paquete/app/MemoriaPlus.exe)) { throw 'Falta el ejecutable de Windows.' }
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: MemoriaPlus-Windows-x64
+          path: paquete/
           retention-days: 7
           if-no-files-found: error

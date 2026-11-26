@@ -13,7 +13,7 @@ python herramientas/revision_ia.py --tipo derivas --entrada revision.json --sali
 python herramientas/revision_ia.py --tipo expediente --entrada expediente.json --salida Revision-expediente.md
 ```
 
-La opción `--origen` permite identificar la procedencia con una descripción. En losas, `--recibo` vincula la lectura del puente con las revisiones de los motores y las huellas de los modelos exportados. En el expediente, los estados y las referencias se interpretan por lista y criterio. Las cifras y los veredictos son los que declaró el archivo de entrada. Para revisar un hallazgo, pida al asistente que indique el campo o criterio, la fuente, la unidad cuando corresponda y qué dato falta para verificarlo. Revise el documento antes de compartirlo porque puede contener nombres y resultados del proyecto.
+La opción `--origen` permite identificar la procedencia con una descripción. En losas, `--recibo` coteja la huella del resultado con el recibo del puente. Los recibos históricos que carecen de esa huella quedan identificados como pendientes de verificación. En el expediente, los estados y las referencias se interpretan por lista y criterio. Las cifras y los veredictos son los que declaró el archivo de entrada. Para revisar un hallazgo, pida al asistente que indique el campo o criterio, la fuente, la unidad cuando corresponda y qué dato falta para verificarlo. Revise el documento antes de compartirlo porque puede contener nombres y resultados del proyecto.
 
 ## Qué ejecuta cada aplicación
 
@@ -31,3 +31,5 @@ El flujo [Memoria de diseño y revisión para IA](../../.github/workflows/memori
 Los flujos [Cálculo de losas](../../.github/workflows/calculo-losas.yml) y [Comprobación de derivas](../../.github/workflows/derivas.yml) ejecutan sus ejemplos sintéticos o las entradas convencionales de la rama. Para losas, la pareja es `entradas-losas/proyecto.json` y `entradas-losas/usos.json`. Para derivas, la entrada es `entradas-sismo/derivas.json`. Reserve los modelos y los expedientes reales para un entorno de trabajo privado autorizado.
 
 En la aplicación de escritorio, use **Generar → Preparar revisión para IA**. El paquete Windows incorpora una copia del generador de CDCRD-Digital junto al motor de la memoria. Para una instalación de desarrollo, conserve el archivo `herramientas/revision_ia.py` en el checkout de CDCRD o copie la misma versión junto a `generar.py`. [Código de MemoriaPlus en EstructurasRD](https://github.com/dashy2004/EstructurasRD/tree/codex/memoriaplus-diseno/src.Memoria)
+
+El mismo flujo ofrece el paquete de escritorio como artefacto **MemoriaPlus-Windows-x64**. En una ejecución correcta, abra **Artifacts**, descargue el archivo ZIP, extraiga su contenido y ejecute **Abrir MemoriaPlus.cmd**. [Instrucciones del paquete](windows/LEEME.txt)
