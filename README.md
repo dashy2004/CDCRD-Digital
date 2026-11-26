@@ -71,6 +71,7 @@ Pruebas sobre copias y datos hipotéticos. Capturas del área de dibujo; cada in
 | Los factores R, Cd y limites de altura de su sistema | `datos/machine/sistemas_estructurales.json` — la Tabla 11 completa (44 sistemas) |
 | Como armar el espectro de diseño de su proyecto | `datos/machine/espectro_diseno.json` + `factores_sitio.json` |
 | Las combinaciones de carga LRFD y ASD | `datos/machine/combinaciones.json` |
+| Preparar memorias, resultados y checklists para cualquier asistente de IA | [Generador de revisión de CDCRD-Digital](docs/revision-ia/) |
 | Conectar la IA con ETABS, SAFE o Revit | [ETABS](servidor-mcp/), [SAFE](servidor-mcp-safe/), [Revit](revit-mcp-tools/) + [instalacion](instalacion/INSTALACION.md) |
 | Conectar la IA con Civil 3D 2027 | [Civil 3D](servidor-mcp-civil3d/) — puente .NET 10 propio, alineamientos, corredores, superficies, redes, planos |
 | Que la IA modele un edificio en Revit desde cero y saque planos | `revit-mcp-tools/ejemplos/residencial-4n/` — receta de 30 pasos, corrida verificada |
