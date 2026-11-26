@@ -93,7 +93,7 @@ Doble backslash en todas las rutas. `command` = la ruta del paso 1, no `"python"
 
 | Problema real | Causa |
 |---|---|
-| El archivo de config no esta en `%APPDATA%\Claude` | Claude Desktop empaquetado como **MSIX** escribe en `%LOCALAPPDATA%\Packages\<paquete-Claude>\LocalCache\Roaming\Claude\`. Busque ahi antes de concluir que no existe. |
+| El archivo de config no esta en `%APPDATA%\Claude` | Claude Desktop empaquetado como **MSIX** escribe en `%LOCALAPPDATA%\Packages\<paquete-Claude>\LocalCache\Roaming\Claude\`. Busque ahi antes de concluir que no existe. Las versiones actuales lo guardan en `%LOCALAPPDATA%\Claude-Data\<paquete>\` y dejan en la carpeta MSIX un marcador `.user-data-left…`: si existe, esa carpeta ya no se lee. `instalar-cdcrd.ps1` elige la correcta. |
 | JSON roto tras editarlo | No tipear bloques multilinea en Notepad (el auto-indent los rompe). Pegar desde el portapapeles o usar Find & Replace para cambios puntuales. |
 
 ## 6. Reiniciar de verdad y verificar

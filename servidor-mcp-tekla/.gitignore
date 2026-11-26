@@ -1,0 +1,6 @@
+puente/TeklaPuente.exe
+puente/TeklaPuente.exe.config
+src/tekla_mcp.log
+__pycache__/
+.pytest_cache/
+.coverage
