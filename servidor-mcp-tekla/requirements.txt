@@ -1,0 +1,4 @@
+# Tekla MCP
+mcp>=1.10,<2
+pillow>=10
+pywin32>=306

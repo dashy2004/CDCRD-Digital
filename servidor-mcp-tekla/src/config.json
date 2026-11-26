@@ -1,0 +1,7 @@
+{
+  "server": {"name": "Tekla MCP", "version": "0.1.0"},
+  "tekla": {
+    "exe_puente": "",
+    "rutas_permitidas": ["%TEMP%\\tekla-mcp-pruebas"]
+  }
+}
