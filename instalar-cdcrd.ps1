@@ -4,8 +4,8 @@
 
 .DESCRIPTION
     Menu interactivo para Windows PowerShell que diagnostica el equipo, instala
-    las herramientas locales, conecta los servidores MCP de ETABS, SAFE, Revit y
-    Civil 3D, comprueba el corpus normativo y deja configurado el asistente de IA
+    las herramientas locales, conecta los servidores MCP de ETABS, SAFE, Revit,
+    Civil 3D y Tekla Structures, comprueba el corpus normativo y deja configurado el asistente de IA
     que el usuario ya tenga instalado.
 
     Todo lo que escribe se respalda antes y se vuelve a leer para confirmarlo.
@@ -120,14 +120,41 @@ function Find-Programa {
     return $null
 }
 
+function Get-RutaClaudeDesktop {
+    # La app de Claude ha guardado su configuracion en tres sitios segun la version:
+    #   1. %LOCALAPPDATA%\Claude-Data\<paquete>\   (versiones actuales de la Store)
+    #   2. %LOCALAPPDATA%\Packages\Claude*\LocalCache\Roaming\Claude\   (MSIX anterior)
+    #   3. %APPDATA%\Claude\   (instalador clasico)
+    # Cuando la app migra a (1) deja en (2) un marcador ".user-data-left*" y ya no lee esa
+    # carpeta: escribir ahi "funciona" pero la app nunca ve los servidores.
+    param([string]$LocalAppData = $env:LOCALAPPDATA, [string]$AppData = $env:APPDATA)
+    $nombre = 'claude_desktop_config.json'
+    if ($LocalAppData) {
+        $datos = Join-Path $LocalAppData 'Claude-Data'
+        if (Test-Path -LiteralPath $datos) {
+            $nuevo = Get-ChildItem -LiteralPath $datos -Directory -ErrorAction SilentlyContinue |
+                     Sort-Object @{ Expression = { Test-Path -LiteralPath (Join-Path $_.FullName $nombre) }; Descending = $true },
+                                 @{ Expression = { $_.LastWriteTime }; Descending = $true } |
+                     Select-Object -First 1
+            if ($nuevo) { return (Join-Path $nuevo.FullName $nombre) }
+        }
+        $paquetes = Join-Path $LocalAppData 'Packages'
+        if (Test-Path -LiteralPath $paquetes) {
+            foreach ($p in @(Get-ChildItem -LiteralPath $paquetes -Directory -Filter 'Claude*' -ErrorAction SilentlyContinue)) {
+                $carpeta = Join-Path $p.FullName 'LocalCache\Roaming\Claude'
+                if (-not (Test-Path -LiteralPath $carpeta)) { continue }
+                $abandonada = @(Get-ChildItem -LiteralPath $carpeta -Force -Filter '.user-data-left*' -ErrorAction SilentlyContinue).Count -gt 0
+                if (-not $abandonada) { return (Join-Path $carpeta $nombre) }
+            }
+        }
+    }
+    if ($AppData) { return (Join-Path $AppData (Join-Path 'Claude' $nombre)) }
+    return $nombre
+}
+
 function Get-RutasClienteIA {
-    $claudeClasico = if ($env:APPDATA) { Join-Path $env:APPDATA 'Claude\claude_desktop_config.json' } else { 'claude_desktop_config.json' }
-    $paquetes = if ($env:LOCALAPPDATA) { Join-Path $env:LOCALAPPDATA 'Packages' } else { $null }
-    $claudeMsix = $(if ($paquetes -and (Test-Path -LiteralPath $paquetes)) { Get-ChildItem -LiteralPath $paquetes -Directory -Filter 'Claude*' -ErrorAction SilentlyContinue }) |
-                  ForEach-Object { Join-Path $_.FullName 'LocalCache\Roaming\Claude\claude_desktop_config.json' } |
-                  Where-Object { Test-Path -LiteralPath (Split-Path $_ -Parent) } | Select-Object -First 1
     [pscustomobject]@{
-        'claude-desktop' = if ($claudeMsix) { $claudeMsix } else { $claudeClasico }
+        'claude-desktop' = Get-RutaClaudeDesktop
         'claude-code'    = Join-Path $script:Raiz '.mcp.json'
         'codex'          = Join-Path $HOME '.codex\config.toml'
         'cursor'         = Join-Path $HOME '.cursor\mcp.json'
@@ -202,6 +229,7 @@ function Get-Diagnostico {
             SAFE     = Find-Programa '*Computers and Structures\SAFE*'
             Revit    = Find-Programa '*Autodesk\Revit*'
             Civil3D  = Find-Programa '*Autodesk\AutoCAD*'
+            Tekla    = Find-Programa '*\Tekla Structures*'
         }
         Clientes   = [pscustomobject]$clientes
         Corpus     = [pscustomobject]@{
@@ -222,7 +250,7 @@ function Show-Diagnostico {
     Write-Estado 'Herramientas locales instaladas' $D.Locales.Instalado $(if ($D.Locales.Instalado) { $D.Locales.Python } else { 'opcion 2 del menu' })
 
     Write-Titulo 'Programas de calculo y BIM'
-    foreach ($p in 'ETABS', 'SAFE', 'Revit', 'Civil3D') {
+    foreach ($p in 'ETABS', 'SAFE', 'Revit', 'Civil3D', 'Tekla') {
         $v = $D.Programas.$p
         Write-Estado $p ($null -ne $v) $(if ($v) { $v } else { 'no instalado en este equipo' })
     }
@@ -274,7 +302,8 @@ function Get-ServidoresMcp {
             @{ nombre = 'fea';     ruta = 'servidor-mcp\src\server.py';          requiere = 'ETABS' },
             @{ nombre = 'safe';    ruta = 'servidor-mcp-safe\src\server.py';     requiere = 'SAFE' },
             @{ nombre = 'civil3d'; ruta = 'servidor-mcp-civil3d\src\server.py';  requiere = 'Civil3D' },
-            @{ nombre = 'revit';   ruta = 'revit-mcp-tools\src\server.py';       requiere = 'Revit' }
+            @{ nombre = 'revit';   ruta = 'revit-mcp-tools\src\server.py';       requiere = 'Revit' },
+            @{ nombre = 'tekla';   ruta = 'servidor-mcp-tekla\src\server.py';    requiere = 'Tekla' }
         )
         foreach ($m in $mapa) {
             $full = Join-Path $script:Raiz $m.ruta
@@ -298,6 +327,7 @@ function Install-DependenciasBim {
         'fea'     = 'servidor-mcp\requirements.txt'
         'safe'    = 'servidor-mcp-safe\requirements.txt'
         'civil3d' = 'servidor-mcp-civil3d\requirements.txt'
+        'tekla'   = 'servidor-mcp-tekla\requirements.txt'
     }
     foreach ($n in $Servidores.Keys) {
         if (-not $reqs.ContainsKey($n)) { continue }
@@ -306,6 +336,15 @@ function Install-DependenciasBim {
         Write-Linea "Instalando dependencias de $n ..." 'Cyan'
         & $D.Python.Ruta -m pip install -r $r --quiet
         Write-Estado "dependencias $n" ($LASTEXITCODE -eq 0)
+    }
+    if ($Servidores.Contains('tekla')) {
+        # El servidor de Tekla habla con Open API por un puente .NET que se compila en cada equipo.
+        $compilar = Join-Path $script:Raiz 'servidor-mcp-tekla\puente\compilar.ps1'
+        Write-Linea 'Compilando el puente de Tekla ...' 'Cyan'
+        $detalle = ''
+        try { & $compilar | Out-Null } catch { $detalle = $_.Exception.Message }
+        $exe = Join-Path $script:Raiz 'servidor-mcp-tekla\puente\TeklaPuente.exe'
+        Write-Estado 'puente de Tekla' ((Test-Path -LiteralPath $exe) -and -not $detalle) $detalle
     }
     # El fallo numero uno de la instalacion original: SDK mcp 2.x sin fastmcp.
     & $D.Python.Ruta -c "from mcp.server.fastmcp import FastMCP" 2>$null
@@ -380,6 +419,7 @@ function Set-ClientesIA {
                 default  { $hechos = Merge-JsonMcp -Ruta $ruta -Entradas $limpias }
             }
             Write-Estado "configurado $n" $true ($hechos -join ', ')
+            Write-Linea "         $ruta" 'DarkGray'
             $resultado += [pscustomobject]@{ cliente = $n; ruta = $ruta; servidores = $hechos }
         } catch {
             Write-Estado "configurado $n" $false $_.Exception.Message
@@ -453,7 +493,7 @@ function Show-Menu {
         Show-Banner
         Write-Linea '  1  Ver que hay en este equipo (diagnostico)' 'White'
         Write-Linea '  2  Instalar las herramientas locales' 'White'
-        Write-Linea '  3  Conectar ETABS, SAFE, Revit y Civil 3D' 'White'
+        Write-Linea '  3  Conectar ETABS, SAFE, Revit, Civil 3D y Tekla' 'White'
         Write-Linea '  4  Comprobar el corpus normativo' 'White'
         Write-Linea '  5  Configurar mi asistente de IA' 'White'
         Write-Linea '  6  Instalarlo todo de una vez' 'White'
@@ -490,6 +530,9 @@ function Show-Menu {
 }
 
 # ---------------------------------------------------------------- entrada
+
+# Las pruebas (instalacion\pruebas) cargan las funciones sin ejecutar ninguna accion.
+if ($env:CDCRD_INSTALADOR_SOLO_FUNCIONES -eq '1') { return }
 
 $salida = switch ($Accion) {
     'menu'        { Show-Banner; Show-Menu; $null }

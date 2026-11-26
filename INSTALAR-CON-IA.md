@@ -70,7 +70,7 @@ persona.
 ### Qué devuelve el diagnóstico
 
 `-Accion diagnostico -Json` entrega un objeto con `Python` (ruta e indicador de
-64 bits), `Uv`, `Git`, `Locales.Instalado`, `Programas` (ETABS, SAFE, Revit,
+64 bits), `Uv`, `Git`, `Locales.Instalado`, `Programas` (ETABS, SAFE, Revit, Tekla,
 Civil3D con su ruta o `null`), `Clientes` (ruta de configuración de cada cliente
 y si existe) y `Corpus`. Decida a partir de ahí; no deduzca de otra forma qué hay
 instalado.
@@ -85,13 +85,14 @@ El instalador escribe una entrada por servidor, y solo los que correspondan:
 | `fea` | ETABS está instalado | Lectura y modelado en ETABS por la OAPI |
 | `safe` | SAFE está instalado | Losas y fundaciones en SAFE |
 | `civil3d` | AutoCAD/Civil 3D está instalado | Puntos COGO, superficies, perfiles y secciones |
+| `tekla` | Tekla Structures está instalado | Piezas, placas, tornillos, despuntes, uniones del catálogo, numeración, planos y capturas |
 | `revit` | Revit está instalado | Inventario, vistas y auditoría MEP |
 
 Archivos de configuración por cliente:
 
 | Cliente | Archivo | Clave |
 |---|---|---|
-| Claude Desktop | `%APPDATA%\Claude\claude_desktop_config.json`, o `%LOCALAPPDATA%\Packages\Claude…\LocalCache\Roaming\Claude\` si está instalado como MSIX | `mcpServers` |
+| Claude Desktop | `%LOCALAPPDATA%\Claude-Data\<paquete>\claude_desktop_config.json` en las versiones actuales; antes `%LOCALAPPDATA%\Packages\Claude…\LocalCache\Roaming\Claude\` (MSIX) o `%APPDATA%\Claude\`. Si la carpeta MSIX tiene un archivo `.user-data-left…`, la app ya no la lee | `mcpServers` |
 | Claude Code | `.mcp.json` en la raíz del repositorio | `mcpServers` |
 | Codex CLI | `%USERPROFILE%\.codex\config.toml` | `[mcp_servers.<nombre>]` |
 | Cursor | `%USERPROFILE%\.cursor\mcp.json` | `mcpServers` |
