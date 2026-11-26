@@ -10,15 +10,25 @@
 #>
 [CmdletBinding()]
 param(
-  [string]$Config = (Join-Path $env:APPDATA "Claude\claude_desktop_config.json"),
+  [string]$Config,     # por defecto, el archivo que Claude Desktop lee en este equipo
   [string]$Python,
   [int]$Puerto = 8760,
   [switch]$Aplicar
 )
 
 $ErrorActionPreference = "Stop"
-$raiz = Split-Path -Parent $MyInvocation.MyCommand.Path
-$servidor = Join-Path $raiz "src\server.py"
+$aqui = Split-Path -Parent $MyInvocation.MyCommand.Path
+$servidor = Join-Path $aqui "src\server.py"
+if (-not $Config) {
+  # La app ha cambiado de carpeta entre versiones: se usa la deteccion de instalar-cdcrd.ps1,
+  # cargada en un ambito propio (& { }) para que sus parametros no pisen los de este script.
+  $instalador = Join-Path (Split-Path -Parent $aqui) 'instalar-cdcrd.ps1'
+  $Config = & {
+    $env:CDCRD_INSTALADOR_SOLO_FUNCIONES = '1'
+    try { . $instalador } finally { Remove-Item Env:\CDCRD_INSTALADOR_SOLO_FUNCIONES }
+    Get-RutaClaudeDesktop
+  }
+}
 
 if (-not (Test-Path $servidor)) { throw "No se encontro $servidor" }
 
