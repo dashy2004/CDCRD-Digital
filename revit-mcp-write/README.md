@@ -120,6 +120,7 @@ datos contrastados"**. La tabla dice lo segundo.
 | 10 | `revit_mep_conectores` | POST | ⚠️ paquete probado en un RVT sintético por código suelto; **endpoint sin corridas reales** |
 | 11 | `revit_mep_conectar` | POST | ⚠️ paquete probado en un RVT sintético por código suelto; **endpoint sin corridas reales** |
 | 12 | `revit_mep_circuitos` | POST | ⚠️ paquete probado en un RVT sintético por código suelto; **endpoint sin corridas reales** |
+| 13 | `revit_mep_tablero` | POST | ⚠️ paquete probado en un documento sintético por código suelto; **endpoint sin corridas reales** |
 
 **`revit_delete` no corrió nunca. No lo uses contra un modelo que te importe.**
 
@@ -222,8 +223,9 @@ paquete.
 | `revit_mep_conectores` | `POST /mep/conectores` | `auditar_conectores(DB, doc, categorias, ids)` | No |
 | `revit_mep_conectar` | `POST /mep/conectar` | `conectar_a_ramal(DB, doc, opciones)` | Sí, con ensayo por defecto |
 | `revit_mep_circuitos` | `POST /mep/circuitos` | `crear_circuitos(DB, doc, opciones)` | Sí, con ensayo por defecto |
+| `revit_mep_tablero` | `POST /mep/tablero` | `distribucion_del_tablero(DB, doc, opciones)` | Solo con `sistema` o `crear`; ensayo por defecto |
 
-Las tres aceptan `documento` (título o ruta de un documento **ya abierto**, también en segundo
+Las cuatro aceptan `documento` (título o ruta de un documento **ya abierto**, también en segundo
 plano; por defecto el activo). No se abren archivos y no se opera sobre vínculos.
 
 ### Contrato de las dos escrituras
@@ -384,6 +386,53 @@ revit_mep_circuitos(tablero="TA-1", limite_va=1440.0, nivel="Nivel 2",
 #                 "dentro_del_limite": true, "elementos": [..]}, ...],
 #  "sin_circuito": [{"id": 2002, "motivo": "sin_carga", "detalle": "..."}]}
 ```
+
+### `revit_mep_tablero` — sistema de distribución de un tablero
+
+Un tablero sin sistema de distribución no admite circuitos. Esta herramienta lo lee, asigna uno
+que ya existe o lo crea con sus tensiones.
+
+- Sin `sistema` ni `crear` es **solo lectura**: devuelve `sistema_anterior` y
+  `sistemas_disponibles` con sus tensiones. No abre transacción.
+- `sistema`: nombre exacto de un sistema del documento.
+- `crear`: `{"nombre", "fase": "monofasico"|"trifasico", "configuracion": "estrella"|"delta"`
+  (solo trifásico)`, "hilos": 2-4, "linea_linea_v", "linea_tierra_v", "tolerancia_pct": 10}`.
+  Reutiliza el tipo de tensión que ya tenga ese valor real y crea los que falten con
+  ±`tolerancia_pct`.
+- Revit valida la compatibilidad entre sistema y tablero **al confirmar**. El ensayo hace ese
+  `Commit` dentro de un grupo que después se revierte: `ensayo_valido: false` y `errores` con
+  `Selected distribution system type is invalid!` cuando no encajan, sin diálogo.
+
+**Las tensiones van en voltios, tal cual.** `ElectricalSetting.AddVoltageType(nombre, real,
+minimo, maximo)` guarda lo que recibe: el tipo «208» de las plantillas vale `208.0`. Pasar
+`UnitUtils.ConvertToInternalUnits(208, UnitTypeId.Volts)` crea un tipo de unos 2239 V; el sistema
+hecho con él se crea sin error y Revit lo rechaza al asignarlo al tablero. Si un documento ya
+tiene un tipo con el nombre `208 V` y otro valor, la herramienta no lo reutiliza: crea
+`208 V (voltios)`.
+
+```python
+revit_mep_tablero(tablero="TA-1")                      # lectura
+revit_mep_tablero(tablero="TA-1", sistema="120/208 Wye")   # ensayo
+revit_mep_tablero(tablero="TA-1", confirmar=True, crear={
+    "nombre": "120/208 estrella", "fase": "trifasico", "configuracion": "estrella",
+    "hilos": 4, "linea_linea_v": 208, "linea_tierra_v": 120})
+# {"confirmado": true, "estado": "Committed", "creado": true,
+#  "sistema": {"nombre": "120/208 estrella", "fase": "ThreePhase", "configuracion": "Wye",
+#              "linea_linea": {"nombre": "208", "real_v": 208.0, ...}, ...},
+#  "tensiones": [{"tension_v": 208.0, "tipo": "208", "accion": "reutilizada"}, ...]}
+```
+
+Prueba en vivo (2026-11-23, documento nuevo de la plantilla multidisciplina métrica de Autodesk,
+en memoria y cerrado sin guardar, con un tablero de 208 V de la biblioteca): lectura con 4
+sistemas; ensayo de un sistema existente válido y revertido (relectura sin sistema); ensayo y
+confirmación de uno incompatible rechazados con el mensaje de Revit y sin diálogo; ensayo y
+confirmación de `crear` reutilizando los tipos «208» y «120»; relectura del parámetro y de
+`MEPModel.DistributionSystem`; nombre repetido rechazado; `crear` de 127/220 V en el tablero de
+208 V rechazado en el ensayo sin dejar los tipos de tensión creados.
+
+Sin probar en vivo: el endpoint `/mep/tablero` y la herramienta MCP (lo probado es el paquete por
+código suelto), un tablero monofásico o en delta, y un documento con tipos de tensión mal
+creados de antemano.
 
 ### Canal de código suelto, sin reiniciar Revit
 

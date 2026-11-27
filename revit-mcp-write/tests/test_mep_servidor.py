@@ -42,3 +42,11 @@ def test_circuitos_exige_limite_y_conectores_es_post(servidor):
         "confirmar": True}
     assert servidor.llamadas[1] == ("/mep/conectores", "POST",
                                     {"ids": [1], "documento": "otro"})
+
+def test_tablero_sin_sistema_es_lectura_y_no_envia_nulos(servidor):
+    servidor.revit_mep_tablero(tablero="TA")
+    servidor.revit_mep_tablero(tablero=700, sistema="120/208 Wye", confirmar=True)
+    assert servidor.llamadas[0] == ("/mep/tablero", "POST",
+                                    {"tablero": "TA", "confirmar": False})
+    assert servidor.llamadas[1][2] == {"tablero": 700, "sistema": "120/208 Wye",
+                                       "confirmar": True}

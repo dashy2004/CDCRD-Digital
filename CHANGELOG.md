@@ -32,6 +32,9 @@ GitHub con estas mismas notas. Lo que aún no tiene versión va bajo "Sin public
 
 ### Revit
 
+- MEP: `revit_mep_tablero` lee, o crea y asigna, el sistema de distribución de un tablero
+  eléctrico, con ensayo por defecto. Las tensiones van en voltios sin convertir: pasarlas a
+  unidades internas creaba un tipo de unos 2239 V y Revit rechazaba el sistema al confirmar.
 - MEP: el ensayo de `revit_mep_conectar` y `revit_mep_circuitos` hace `Commit` real dentro
   de un `TransactionGroup` que se revierte, para ver los fallos que Revit solo evalúa al
   confirmar (`commit_de_ensayo`, `ensayo_valido`); los fallos de Revit van a `errores` con
