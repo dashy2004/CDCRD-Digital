@@ -12,3 +12,6 @@ comtypes>=1.4.0
 pydantic>=2.7
 
 # pywin32 NO es requerido por este codigo.
+
+# Libro de verificacion de pilotes (claude, 2026-11-02): openpyxl.
+openpyxl>=3.1

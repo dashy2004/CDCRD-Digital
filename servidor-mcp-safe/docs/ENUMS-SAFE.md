@@ -72,3 +72,28 @@ El XML declara claves/nombres (`tkey`, `tname`, `fkey`, `fname`) y versión; no 
 ## Advertencia sobre v0.1.0
 
 Los modelos donde se usaron `define_slab_section(..., slab_type="Footing")` o `define_soil_spring(..., compression_only=True)` con v0.1.0 deben revisarse: el código enviaba **Ribbed=3** y **Tension Only=2**. Cambiar el servidor no corrige modelos ya guardados. Claude/ingeniero debe identificar las asignaciones y verificar cualquier corrección sobre copia. Codex no modificó modelos.
+
+## Pilotes (claude, 2026-11-02): enums y firmas usadas, evidencia de typelib [T]
+
+Mismo wrapper W. Valores leídos del archivo generado, no de corrida viva.
+
+| Enum / método | Valor o firma py-> | Fuente |
+|---|---|---|
+| `eFramePropType_Circle` | 9 (I=1, Channel=2, T=3, Angle=4, DblAngle=5, Box=6, Pipe=7, Rectangular=8, Circle=9, General=10) | W:231-262 |
+| `eItemTypeElm_ObjectElm` | 0 (Element=1, GroupElm=2, SelectionElm=3) | W:130-135 |
+| `FrameObj.GetAllFrames()` | (n, Name[], PropName[], StoryName[], P1[], P2[], X1[], Y1[], Z1[], X2[], Y2[], Z2[], Angle[], Offset1X..Offset2Z[6], CardinalPoint[], ret); `CSys` opcional "Global" | W:20420 |
+| `PropFrame.GetNameList(n, names, PropType=0)` | (n, names, ret); PropType opcional | W:7491 |
+| `PropFrame.GetTypeOAPI(Name)` | (PropType, ret) | W:7643 |
+| `PropFrame.GetCircle(Name)` | (FileName, MatProp, T3, Color, notes, GUID, ret); T3 = diámetro | W:7361 |
+| `Results.JointReact(Name, ItemTypeElm)` | (n, Obj, Elm, LoadCase, StepType, StepNum, F1, F2, F3, M1, M2, M3, ret) | W:21399 |
+| `Results.FrameForce(Name, ItemTypeElm)` | (n, Obj, ObjSta, Elm, ElmSta, LoadCase, StepType, StepNum, P, V2, V3, T, M2, M3, ret) | W:21262 |
+| `Results.Setup.DeselectAllCasesAndCombosForOutput()` / `SetComboSelectedForOutput(Name, Selected=True)` / `SetCaseSelectedForOutput(Name, Selected=True)` | (ret) | W:1855-1960 |
+| `RespCombo.GetNameList()` (cCombo) | (n, names, ret) | W:17713+ |
+
+Convención de signo de `JointReact.F3` (positivo = compresión en el pilote si la reacción apunta hacia arriba) y de `FrameForce.P` (negativo = compresión, convención CSI) pendientes de confirmar en corrida viva con un caso gravitatorio.
+
+**Corrida viva 2026-11-02 [claude, Fable local], SAFE 23.3.0:** `FrameObj.GetAllFrames`, `PropFrame.GetNameList(0,[],9)` (filtra por tipo: con modelo en blanco devuelve `(0, [])` ret=0; con modelo real solo la circular), `GetTypeOAPI` (=9) y `GetCircle` (T3 = diámetro) pasan a **[H]**; `eFramePropType_Circle = 9` confirmado. Con el análisis corrido (autorizado por Emil el mismo día): `Results.Setup.DeselectAllCasesAndCombosForOutput`, `SetCaseSelectedForOutput`, `SetComboSelectedForOutput`, `Results.JointReact(Name, 0)`, `Results.FrameForce(Name, 0)`, `RespCombo.GetNameList` y `Analyze.GetCaseStatus` pasan a **[H]**. Signo confirmado con el caso Dead: `JointReact.F3 > 0` = compresión en el pilote y `FrameForce.P < 0` = compresión (misma cifra por las dos vías); `StepType` "Single Value" en casos y "Max"/"Min" en combos. Detalle en `PRUEBA-VIVA-PILOTES.md`.
+
+Para `export_pile_check_xlsx` (mismo día, [H]): `RespCombo.GetCaseList(Name)` py-> (n, CNameType[] 0=caso/1=combo, CName[], SF[], ret) y `LoadCases.GetTypeOAPI_1(Name)` py-> (CaseType, SubType, DesignType, DesignTypeOption, Auto, ret). `eLoadCaseType`: 1 LinearStatic, 2 NonlinearStatic, 3 Modal, 4 ResponseSpectrum, 5 LinearHistory, 6 NonlinearHistory, 7 LinearDynamic, 8 NonlinearDynamic, 12 PSD, 13 LinearStaticMultiStep (W:772-786). `eLoadPatternType`: 1 Dead, 2 SuperDead, 3 Live, 4 ReduceLive, 5 Quake, 6 Wind, 7 Snow, 8 Other (W:166-180). Observado en vivo: los casos `Qx(1/2)`… son CaseType 1 con DesignType 5 (sismo estático equivalente); `~LLRF` es DesignType 8 con Auto 5.
+
+Para `trial_pile_changes` (mismo día, [H] en copia): `FrameObj.Delete(Name, ItemType=0)`, `FrameObj.AddByCoord(XI, YI, ZI, XJ, YJ, ZJ, Name, PropName, UserName, CSys)` py-> (Name, ret), `PointObj.GetRestraint(Name)` py-> (Value[6], ret), `PointObj.SetRestraint(Name, Value[6], ItemType)`, `PointObj.GetSpring` / `GetSpringAssignment` y `FrameObj.GetSpringAssignment`: **devuelven ret=1 cuando no hay asignación** (no es error). `Analyze.RunAnalysis` **guarda el modelo activo en disco** antes de analizar.
