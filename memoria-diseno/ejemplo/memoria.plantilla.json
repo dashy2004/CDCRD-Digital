@@ -1,0 +1,69 @@
+{
+  "_ayuda": "Copie este archivo como memoria.json en la carpeta de salida y llénelo. Los campos vacíos se omiten; las rutas de imagen vacías dejan un espacio reservado. Quite las filas de proyecto y materiales que no apliquen.",
+  "portada": {
+    "titulo": "Nombre del proyecto",
+    "subtitulo": "Nombre del edificio",
+    "documento": "MEMORIA DE CÁLCULOS ESTRUCTURALES",
+    "alcance": "Bloques A y B · Losas · Fundaciones",
+    "imagen": "portada.png",
+    "logo": "logo.png",
+    "lugar_fecha": "Ciudad · Mes y año"
+  },
+  "responsable": {"nombre": "", "credencial": "", "contacto": "", "diseno": ""},
+  "control": {
+    "codigo": "",
+    "revision": "A",
+    "fecha": "",
+    "estado": "Borrador para revisión",
+    "origen": "Leída de los modelos de ETABS y SAFE, las hojas de cálculo y los listados de losas del expediente.",
+    "marca_de_agua": "BORRADOR"
+  },
+  "revisiones": [
+    {"rev": "A", "fecha": "", "descripcion": "Emisión para revisión del ingeniero responsable.", "elaboro": ""}
+  ],
+  "firmas": [
+    {"rol": "Elaboró", "nombre": "", "credencial": "", "imagen": ""},
+    {"rol": "Revisó", "nombre": "", "credencial": "", "imagen": ""},
+    {"rol": "Responsable del diseño estructural", "nombre": "", "credencial": "", "imagen": ""}
+  ],
+  "proyecto": [
+    ["Proyecto", ""],
+    ["Ubicación", ""],
+    ["Uso", ""],
+    ["Cantidad de niveles", ""],
+    ["Sistema estructural", ""],
+    ["Tipo de fundaciones", ""],
+    ["Parámetros de suelo", ""]
+  ],
+  "materiales": [
+    ["Concreto", "f'c =  kg/cm²"],
+    ["Barra de refuerzo corrugada (varillas)", "fy =  kg/cm²"],
+    ["Malla electrosoldada", "fy =  kg/cm²"],
+    ["Bloques de concreto", "f'b =  kg/cm²"],
+    ["Mortero en junta", "fj =  kg/cm²"],
+    ["Hormigón en cámara", "f'cm =  kg/cm²"]
+  ],
+  "normas": [
+    "R-001 Reglamento para el análisis y diseño sísmico de estructuras (2011).",
+    "R-024 Estudios geotécnicos.",
+    "R-027 Reglamento de mampostería.",
+    "R-033 Reglamento de hormigón.",
+    "ACI 318-19 (código de diseño configurado en ETABS y SAFE)."
+  ],
+  "vistas_bloque": {"Bloque A": "bloque_a.png"},
+  "fundaciones": {
+    "texto": "Las fundaciones se analizaron en SAFE con el suelo modelado como resortes de área. Los valores siguientes se leyeron del modelo del expediente, corrido sobre una copia.",
+    "esfuerzo_admisible_ton_m2": null,
+    "combinaciones": ["Comb2", "Envelope"],
+    "figuras_del_pdf": false,
+    "figuras": []
+  },
+  "anexo_figuras": [
+    {"titulo": "Planta de cimentación", "ruta": ""},
+    {"titulo": "Planta estructural de entrepiso tipo", "ruta": ""},
+    {"titulo": "Planta estructural de techo", "ruta": ""},
+    {"titulo": "Elevación / pórtico tipo", "ruta": ""}
+  ],
+  "observaciones_extra": [],
+  "observaciones_omitir": []
+}

@@ -183,6 +183,9 @@ Puede pedir a cualquiera de los dos asistentes que prepare un ejemplo, muestre
 los supuestos y compare los resultados. Las herramientas también tienen un
 procedimiento manual reproducible.
 
+Para memorias de cálculo estructural con el mismo formato en cualquier equipo:
+[memoria-diseno](memoria-diseno/) y su [guía para el asistente](memoria-diseno/AGENTS.md).
+
 ## Conservar la normativa revisada
 
 [Estado y propuesta de protección](docs/PROTECCION-NORMATIVA.md): manifiesto de

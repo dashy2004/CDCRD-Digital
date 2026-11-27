@@ -15,6 +15,21 @@ Trabaja con dos archivos:
 
 El motor no contiene datos de ningún proyecto.
 
+## Usarlo con un asistente de IA
+
+Para que el asistente genere la memoria con este motor, y no con un formato propio, en cada
+equipo se ejecuta una vez:
+
+```powershell
+.\instalar-skill.ps1
+```
+
+Crea el entorno del motor e instala en Claude la skill `memoria-de-calculo`, que se activa al
+pedir una memoria de cálculo o de diseño desde cualquier carpeta. El procedimiento y los
+criterios de formato que sigue el asistente están en [AGENTS.md](AGENTS.md); con otro
+asistente basta pedirle que lea ese archivo. Las plantillas de partida son
+`ejemplo\fuentes.plantilla.json` y `ejemplo\memoria.plantilla.json`.
+
 ## Uso
 
 ```powershell
