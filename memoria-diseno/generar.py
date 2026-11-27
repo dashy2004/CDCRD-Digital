@@ -7,6 +7,7 @@ Uso: python generar.py data.json <referencia.pdf o ""> salida.docx carpeta_tmp c
   observaciones). Se crea con campos vacíos la primera vez; los campos vacíos se omiten.
 - referencia.pdf: solo si data.json viene de una memoria ya emitida y se quieren sus figuras.
 """
+import itertools
 import json
 import math
 import os
@@ -721,8 +722,9 @@ def cap_proyecto(num):
         rows.insert(0, ["Cargas y espesores de losas", "Hoja de cálculo (Excel)", D.get("paginas_cargas", "—") if REF else "—"])
     for b in D["bloques"]:
         pg = b.get("paginas") or {}
-        rows.append(["%s — espectro, torsión, Art. 38, cuasiestático" % b["nombre"], "Hoja de cálculo (Excel)",
-                     "%d–%d y %d" % (pg["inicio"] + 1, pg["reporte"] - 1, pg["cuasi"] + 1) if REF else "—"])
+        if len(hojas_ausentes(b)) < 3 or b.get("torsion"):
+            rows.append(["%s — espectro, torsión, Art. 38, cuasiestático" % b["nombre"], "Hoja de cálculo (Excel)",
+                         "%d–%d y %d" % (pg["inicio"] + 1, pg["reporte"] - 1, pg["cuasi"] + 1) if REF else "—"])
         rows.append(["%s — análisis y diseño" % b["nombre"], b["etabs"]["version"] or "ETABS",
                      "%d–%d" % (pg["reporte"] + 1, pg["cuasi"] - 1) if REF else (b["etabs"].get("modelo") or "—")])
     if rows:
@@ -879,21 +881,14 @@ def grafico_espectro(b, idx):
     return path
 
 
-def cap_bloque(num, b, idx):
-    e, sp, cu, u = b["etabs"], b["espectro"], b["cuasi"], unidades(b["etabs"])
-    nombre = b["nombre"]
-    pg = b.get("paginas") or {}
-    h("%d  %s" % (num, nombre), cap=str(num))
-    con_masa = [s for s in e["mass_story"] if s[0] != "Base" and s[1] > 0]
-    vista = img(C["vistas_bloque"].get(nombre))
-    if vista:
-        figura(vista, 11.0, "Vista isométrica del modelo de análisis — %s" % nombre, alto_max=8.2)
-    kv([("Modelo de ETABS", "%s (%s)" % (e["modelo"], e["version"])),
-        ("Niveles definidos / con masa", "%d / %d" % (len(e["stories"]), len(con_masa))),
-        ("Elementos diseñados", "%d columnas · %d vigas · %d nudos" % (e["n_col"], e["n_beam"], e["n_joint"]))]
-       + ([("Páginas en la memoria original", "%d a %d" % (pg["inicio"], pg["cuasi"] + 1))] if REF else []))
+def hojas_ausentes(b):
+    """Nombres de las hojas de cálculo que el bloque no trae; sus secciones se omiten."""
+    return [n for n, hay in (("espectro", b["espectro"]), ("Art. 38", b["art38"]), ("cuasiestático", b["cuasi"])) if not hay]
 
-    h("%d.1  Parámetros sísmicos (R-001)" % num, 2)
+
+def bloque_parametros(titulo, b, idx):
+    sp = b["espectro"]
+    h(titulo, 2)
     kv([("Uso / ubicación", "%s · %s" % (sp["uso"], sp["ubicacion"])),
         ("Geometría declarada", "%s piso(s) · altura total %s m · planta %s × %s m"
          % (fmt(sp["pisos"], 0), fmt(sp["htotal"]), fmt(sp["dx"]), fmt(sp["dy"]))),
@@ -913,7 +908,10 @@ def cap_bloque(num, b, idx):
         nota("Sa(T = %s s) = %s m/s². La tabla T–Sa tiene %d puntos%s."
              % (fmt(pts[-1][0]), fmt(pts[-1][1]), len(pts), " y está completa en la memoria original" if REF else ""))
 
-    h("%d.2  Reducción de la constante de torsión en vigas" % num, 2)
+
+def bloque_torsion(titulo, b):
+    e, u, nombre = b["etabs"], unidades(b["etabs"]), b["nombre"]
+    h(titulo, 2)
     rows = [[t["tipo"], fmt(t["Bw"], 0), fmt(t["H"], 0), fmt(t["hf"], 0), fmt(t["Bf"], 0), fmt(t["fc"], 0), fmt(t["Acp"], 0),
              fmt(t["Pcp"], 0), fmt(t["Tmin"], 1), fmt(t["Tu"], 1), fmt(t["factor"], 4)] for t in b.get("torsion") or []]
     if rows:
@@ -929,7 +927,9 @@ def cap_bloque(num, b, idx):
         if REF:
             OBS.append("%s: no se encontró la hoja de reducción de la constante de torsión en vigas." % nombre)
 
-    h("%d.3  Irregularidad torsional (Art. 38)" % num, 2)
+
+def bloque_art38(titulo, b):
+    h(titulo, 2)
     casos = {c["caso"]: {f["story"]: f for f in c["filas"]} for c in b["art38"]}
     stories = sorted({s for c in casos.values() for s in c}, reverse=True)
     rows, peor = [], 0.0
@@ -952,7 +952,11 @@ def cap_bloque(num, b, idx):
          "no tiene unidades. Criterio de la hoja: relación < 1.2, Ok; entre 1.2 y 1.4, reducir Rd; > 1.4, rediseñar. Se muestra el mayor de "
          "los dos pares de esquinas. Máximo del bloque: %s. Los casos 1 y 2 son las dos excentricidades accidentales." % fmt(peor, 4))
 
-    h("%d.4  Cortante basal cuasiestático y factor de escala" % num, 2)
+
+def bloque_cuasi(titulo, b):
+    e, cu, nombre = b["etabs"], b["cuasi"], b["nombre"]
+    con_masa = [s for s in e["mass_story"] if s[0] != "Base" and s[1] > 0]
+    h(titulo, 2)
     W_etabs = (e["auto_seis"].get("Qx") or {}).get("W")
     detalle_w = peso_sismico_detallado(cu)
     kv([("Geometría declarada", "%s piso(s) · altura total %s m · planta %s × %s m"
@@ -990,7 +994,40 @@ def cap_bloque(num, b, idx):
                    % (nombre, fmt(cu["pisos"], 0), fmt(cu["htotal"]), len(con_masa),
                       fmt(cu["Ta"][0] if cu["Ta"] else None, 3), fmt(cu["CBX"], 3)))
 
-    h("%d.5  Modelo de análisis (ETABS)" % num, 2)
+
+def cap_bloque(num, b, idx):
+    e, sp, cu, u = b["etabs"], b["espectro"], b["cuasi"], unidades(b["etabs"])
+    nombre = b["nombre"]
+    pg = b.get("paginas") or {}
+    h("%d  %s" % (num, nombre), cap=str(num))
+    con_masa = [s for s in e["mass_story"] if s[0] != "Base" and s[1] > 0]
+    vista = img(C["vistas_bloque"].get(nombre))
+    if vista:
+        figura(vista, 11.0, "Vista isométrica del modelo de análisis — %s" % nombre, alto_max=8.2)
+    kv([("Modelo de ETABS", "%s (%s)" % (e["modelo"], e["version"])),
+        ("Niveles definidos / con masa", "%d / %d" % (len(e["stories"]), len(con_masa))),
+        ("Elementos diseñados", "%d columnas · %d vigas · %d nudos" % (e["n_col"], e["n_beam"], e["n_joint"]))]
+       + ([("Páginas en la memoria original", "%d a %d" % (pg["inicio"], pg["cuasi"] + 1))] if REF else []))
+
+    orden = itertools.count(1)
+
+    def titulo(texto):
+        return "%d.%d  %s" % (num, next(orden), texto)
+
+    faltan = hojas_ausentes(b)
+    if faltan:
+        OBS.append("%s: las fuentes no incluyen las hojas de cálculo de %s; el capítulo omite esas secciones y "
+                   "muestra solo lo leído del modelo de ETABS."
+                   % (nombre, " y ".join([", ".join(faltan[:-1])] * (len(faltan) > 1) + faltan[-1:])))
+    if sp:
+        bloque_parametros(titulo("Parámetros sísmicos (R-001)"), b, idx)
+    bloque_torsion(titulo("Reducción de la constante de torsión en vigas"), b)
+    if b["art38"]:
+        bloque_art38(titulo("Irregularidad torsional (Art. 38)"), b)
+    if cu:
+        bloque_cuasi(titulo("Cortante basal cuasiestático y factor de escala"), b)
+
+    h(titulo("Modelo de análisis (ETABS)"), 2)
     h("Niveles y masa", 3)
     mass = {s[0]: s[1] for s in e["mass_story"]}
     rows = [[name, fmt(height * u["L"]), fmt(mass.get(name, 0.0) * u["W"] / G, 2), fmt(mass.get(name, 0.0) * u["W"], 1)]
@@ -1061,7 +1098,7 @@ def cap_bloque(num, b, idx):
     if otros:
         nota("El modelo incluye además %d combinaciones %s…%s equivalentes para el diseño de muros." % (len(otros), otros[0], otros[-1]))
 
-    h("%d.6  Resultados del análisis" % num, 2)
+    h(titulo("Resultados del análisis"), 2)
     h("Reacciones en la base", 3)
     tipos = dict((c[0], c[1]) for c in e["cases"])
     rows = []
@@ -1103,7 +1140,7 @@ def cap_bloque(num, b, idx):
          "reporta ETABS (valores elásticos reducidos). «—»: el reporte no lista deriva en esa dirección."
          + (" Listados completos: páginas %d a %d de la memoria original." % (pg["reporte"] + 1, pg["cuasi"] - 1) if REF else ""))
 
-    h("%d.7  Diseño de elementos (ACI 318-19)" % num, 2)
+    h(titulo("Diseño de elementos (ACI 318-19)"), 2)
     h("Columnas", 3)
     rows, warn = [], []
     for k in sorted(e["col"], key=lambda k: (story_key(k.split("|")[0]), k.split("|")[1])):
