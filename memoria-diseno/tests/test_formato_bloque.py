@@ -112,6 +112,25 @@ def test_capitulo_de_bloque_con_el_formato_pedido(tmp_path):
     assert "por debajo del 90 %: ΣUX = 80.8 %" in texto
 
 
+def test_bloque_sin_hojas_de_calculo_omite_sus_secciones_y_lo_dice(tmp_path):
+    bloque = {**bloque_de_prueba(), "espectro": {}, "tabla_espectro": [], "art38": [], "cuasi": {}}
+
+    titulos, texto = documento(tmp_path, {"niveles": [], "bloques": [bloque]},
+                               {"portada": {"titulo": "Edificio", "subtitulo": "Prueba"}})
+
+    nombres = [t for _, t in titulos]
+    cap = next(t for t in nombres if t.endswith("Bloque A"))[0]
+    for omitida in ("Parámetros sísmicos", "Irregularidad torsional", "Cortante basal cuasiestático"):
+        assert not any(omitida in t for t in nombres)
+    # las secciones que quedan se renumeran sin huecos, con sus subtítulos
+    assert ("Heading 2", "%s.1  Reducción de la constante de torsión en vigas" % cap) in titulos
+    assert ("Heading 2", "%s.2  Modelo de análisis (ETABS)" % cap) in titulos
+    assert ("Heading 3", "%s.2.1  Niveles y masa" % cap) in titulos
+    assert ("Heading 2", "%s.4  Diseño de elementos (ACI 318-19)" % cap) in titulos
+    assert "as fuentes no incluyen las hojas de cálculo de espectro, Art. 38 y cuasiestático" in texto
+    assert "espectro, torsión, Art. 38, cuasiestático" not in texto          # no se cita una fuente que no hay
+
+
 def test_indice_sigue_en_dos_niveles():
     fuente = open(os.path.join(RAIZ, "generar.py"), encoding="utf-8").read()
     assert 'TOC \\\\o "1-2"' in fuente
