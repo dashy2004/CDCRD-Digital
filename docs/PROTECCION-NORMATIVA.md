@@ -36,8 +36,12 @@ conservan; este trabajo no modifica cláusulas, cifras ni su estado de verificac
 ## Activación recomendada por el responsable
 
 1. Hecho el 2026-10-21: CI instalada en `master` (`.github/workflows/verify.yml`).
-2. Exigir PR y los checks `normative-integrity` y `portable-tests`; bloquear force
-   push y borrado de la rama. Proteger también `.github/` y el manifiesto.
+2. Hecho el 2026-10-21: `master` protegida. Todo cambio entra por pull request con
+   `normative-integrity` y `portable-tests` en verde; sin force push ni borrado de la
+   rama; la regla también aplica a administradores. No se exige aprobación de otra
+   persona (el repositorio tiene una sola cuenta) ni que la rama esté al día con
+   `master` antes de fusionar. `.github/` y el manifiesto quedan cubiertos por la
+   exigencia de PR; su revisión por CODEOWNERS es el punto 3.
 3. Activar revisión de CODEOWNERS para contenido normativo. El archivo identifica
    al propietario `@dashy2004`. Si es el único mantenedor, debe definir un segundo
    revisor o un procedimiento explícito de excepción: no puede aprobar su propio PR.
