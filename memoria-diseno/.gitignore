@@ -1,0 +1,15 @@
+# Salidas generadas: pueden llevar datos de un proyecto real y no van al repositorio.
+salida/
+_trabajo/
+*.EDB
+*.FDB
+*.xls
+*.xlsx
+data.json
+memoria.json
+*.docx
+*.pdf
+__pycache__/
+.pytest_cache/
+*.pyc
+.venv/

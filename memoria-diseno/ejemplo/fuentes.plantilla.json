@@ -1,0 +1,16 @@
+{
+  "niveles": [
+    {"nombre": "E1", "txt": "RUTA\\Losas\\Proyecto - E1.TXT"},
+    {"nombre": "Techo", "txt": "RUTA\\Losas\\Proyecto - Techo.TXT"}
+  ],
+  "cargas": {"libro": "RUTA\\Losas\\Proyecto Losas.xlsx"},
+  "bloques": [
+    {
+      "nombre": "Bloque A",
+      "etabs": "RUTA\\Etabs\\Bloque A.EDB",
+      "espectro": "RUTA\\Calculos Excel\\Bloque A - Espectro.xls",
+      "art38": "RUTA\\Calculos Excel\\Bloque A - Art 38.xls"
+    }
+  ],
+  "fundaciones": {"safe": "RUTA\\Safe\\Fundaciones.FDB"}
+}
